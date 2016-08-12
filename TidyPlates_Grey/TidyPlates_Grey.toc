@@ -1,0 +1,9 @@
+## Interface: 70000
+## Title: Tidy Plates: Grey Theme
+## Notes: Use apostrophes wisely.
+## Title-zhTW: |cffFF6060[戰鬥]|r Tidy血條主題-時尚灰
+## Notes-zhTW: Tidy Plates - Grey Theme |n將資訊清楚的框起來。
+## Author: Binny
+## Dependencies: TidyPlates, TidyPlatesHub
+
+Grey.lua

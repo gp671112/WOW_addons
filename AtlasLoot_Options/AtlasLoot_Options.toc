@@ -1,0 +1,40 @@
+﻿## Interface: 70000
+## Author: Hegarol	
+## Version: v8.01.00
+## Dependencies: AtlasLoot
+## LoadOnDemand: 1
+## X-Curse-Packaged-Version: v8.01.00
+## X-Curse-Project-Name: AtlasLoot Enhanced
+## X-Curse-Project-ID: atlasloot-enhanced
+## X-Curse-Repository-ID: wow/atlasloot-enhanced/mainline
+
+## Title: AtlasLoot |cFF0099FF[Options]|r
+## Title-deDE: AtlasLoot |cFF0099FF[Einstellungen]|r
+
+## Notes: AtlasLoot options module
+## Notes-deDE: AtlasLoot Modul für Einstellungen
+
+## Title-zhTW: |cffB973FF[裝備]|r 副本戰利品查詢-設定
+## Notes-zhTW: AtlasLoot Enhanced - Options |n副本戰利品查詢的選項設定。
+
+## X-eMail: manager@atlasloot.net
+## X-Category: Map
+## X-License: GPL v2
+## X-Website: http://www.atlasloot.net
+
+## X-AtlasLoot-LootModule: 0
+
+ALOptions\ALOptions-1.0.xml
+
+Locales\constants.lua
+Locales\constants.cn.lua
+Locales\constants.de.lua
+Locales\constants.es.lua
+Locales\constants.fr.lua
+Locales\constants.kr.lua
+Locales\constants.mx.lua
+Locales\constants.pt.lua
+Locales\constants.ru.lua
+Locales\constants.tw.lua
+
+Core.lua

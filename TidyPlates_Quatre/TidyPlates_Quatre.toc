@@ -1,0 +1,9 @@
+## Interface: 70000
+## Title: Tidy Plates: Quatre Theme
+## Notes: It's the 4th!
+## Title-zhTW: |cffFF6060[戰鬥]|r Tidy血條主題-四方
+## Notes-zhTW: Tidy Plates - Quatre Theme |n這是第四個!
+## Author: Binny
+## Dependencies: TidyPlates, TidyPlatesHub
+
+Quatre.lua

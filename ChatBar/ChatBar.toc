@@ -1,0 +1,9 @@
+## Interface: 60100
+
+## Title: BNS's Neavo_ChatBar
+## Notes: BNS's Neavo_ChatBar
+## Title-zhTW: |cFF00FF80[聊天]|r 頻道按鈕-BNS's Neavo_ChatBar
+## Notes-zhTW: 方便選取聊天頻道的按鈕，原始插件為Neavo_ChatBar，此為修改版。
+
+
+ChatBar.lua

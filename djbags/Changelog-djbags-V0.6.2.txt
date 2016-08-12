@@ -1,0 +1,26 @@
+tag V0.6.2
+8a251996df6684f3c8dea17571374e2ae4d89e33
+Brandon Talbot <brandon.talbot@standardbank.co.za>
+2016-07-28 10:08:37 +0200
+
+Updating 0.6.2 to release
+
+
+--------------------
+
+Brandon Talbot:
+	- Fixed bank screen not closing when closing frame Fixed reagent bank not acting as receiver Added zhTW locale
+	- Fixed settings issues Removed print
+	- Fixed settings not saving
+	- Added final settings Fixed box formatting
+	- Fix up some settings Hide default bank screen
+	- Add bank and reagents
+	- Added box format (old DJBags default)
+	- Added overrides for bag keybind
+	- Further work on refactor of settings: Still outstadning: * Settings finished * Bank * linking to normal keybindings
+	- Major refactor in progress
+	* Adding locale
+	* Fixing setting to not lag
+	* Adding better tooling for efficiency
+	* Getting layout formatters working
+	* TODO: Bank, linking to UI keybinding calls

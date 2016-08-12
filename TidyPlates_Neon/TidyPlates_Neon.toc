@@ -1,0 +1,11 @@
+## Interface: 70000
+## Title: Tidy Plates: Neon Theme
+## Notes: It toasts your Eggo waffles, and butters your bread.
+## Title-zhTW: |cffFF6060[戰鬥]|r Tidy血條主題-霓虹
+## Notes-zhTW: Tidy Plates - Neon Theme |n就像剛烤好的 Eggo 奶油鬆餅一樣美味。
+## Author: Binny
+## Dependencies: TidyPlates, TidyPlatesHub
+
+Neon.lua
+
+

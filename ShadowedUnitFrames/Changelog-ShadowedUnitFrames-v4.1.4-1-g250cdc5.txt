@@ -1,2 +1,0 @@
-Hendrik Leppkes:
-	- Remove more remnants of obsolete power types

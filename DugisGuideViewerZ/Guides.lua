@@ -9,7 +9,12 @@ local BFR = BF:GetReverseLookupTable()
 
 DGV.Guides = Guides
 
+guidePercentagesCache = {}
+
 function Guides:Initialize()
+
+    guidesMainScroll = GUIUtils:CreateScrollFrame(DugisMain)
+
 	DGU = DugisGuideUser
     if DGU.RecentGuides == nil then
         DGU.RecentGuides = {}
@@ -47,25 +52,10 @@ function Guides:Initialize()
 	local L = DugisLocals
 	local crowheight
 	
-	local SCROLL_BACKGROUND = "Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\bg_home.tga"
-	local SCROLLESS_BACKGROUND = "Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\bg_currentguide.tga"
+	SCROLL_BACKGROUND = "Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\bg_home.tga"
+	SCROLLESS_BACKGROUND = "Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\bg_currentguide.tga"
 	
-	local GetCurrentGuideTypeTabInfo
-	
-	local function GetCurrentGuideLeftScrollFrame()
-		local tabInfo = GetCurrentGuideTypeTabInfo()
-		if tabInfo and tabInfo.RightFrame.firstHeading then
-			tabInfo.RightFrame.firstHeading:SetPoint("TOPLEFT", tabInfo.RightFrame.panel, "BOTTOMLEFT", -10, -8)
-			tabInfo.RightFrame.panel:Show()
-			DugisPreloadButton:ClearAllPoints()
-			DugisPreloadButton:SetParent(tabInfo.RightFrame)
-			DugisPreloadButton:SetPoint("TOPRIGHT", 0, -13)
-			DugisPreloadButton:Show()
-		end
-		return tabInfo and tabInfo.RightFrame
-	end
-	
-	local function GetCurrentGuideLeftShouldScroll()
+	function GetCurrentGuideLeftShouldScroll()
 		local tabInfo = GetCurrentGuideTypeTabInfo()
 		return tabInfo and tabInfo:RightShouldScroll()
 	end
@@ -93,32 +83,40 @@ function Guides:Initialize()
 			end
 		end
 		if not textureBase then
-			icon:SetTexture("Interface\\Icons\\achievement_bg_masterofallbgs")
+            if icon then
+                icon:SetTexture("Interface\\Icons\\achievement_bg_masterofallbgs")
+            else
+                return "Interface\\Icons\\achievement_bg_masterofallbgs"
+            end
 		else
-			icon:SetTexture("Interface\\Calendar\\Holidays\\"..textureBase.."Start")
-			icon:SetTexCoord(0, 0.7109375, 0, 0.7109375)
+            if icon then
+                icon:SetTexture("Interface\\Calendar\\Holidays\\"..textureBase.."Start")
+                icon:SetTexCoord(0, 0.7109375, 0, 0.7109375)
+            else
+                return "Interface\\Calendar\\Holidays\\"..textureBase.."Start", 0, 0.7109375, 0, 0.7109375
+            end
 		end
 	end
 	
 	local tabs = {
-		[1] = {text = "Home",		title = "Home",					LeftFrame = DGVHomeFrame, 						RightFrame = DGVSearchFrame, rightShouldScroll = true},
-		[2] = {text = "Current Guide",								LeftFrame = GetCurrentGuideLeftScrollFrame, 	RightFrame = DGVCurrentGuideFrame,	rightShouldScroll = true, leftShouldScroll = GetCurrentGuideLeftShouldScroll},
-		[3] = {text = "Settings",	title = "Settings for Dugi Guides", 											RightFrame = DGVScrollFrame3},
+		[1] = {text = "Home",		title = "Home",					LeftFrame = DGVHomeFrame, 						RightFrame = DGVSearchFrame, rightShouldScroll = false},
+		[2] = {text = "Current Guide",								LeftFrame = CreateFrame("Frame"), 	RightFrame = DGVCurrentGuideFrame,	rightShouldScroll = true, leftShouldScroll = true},
+		[3] = {text = "Settings",	title = "Settings for Dugi Guides", 											RightFrame = DGVScrollFrame3, rightShouldScroll = false},
 		[11] = {text = "Help",		title = "Help",									LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame11,	icon="Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\help-i"},
-		[5] = {text = "Leveling", 	title = "Leveling Guides", 	guidetype = "L",	LeftFrame = DGVHomeFrame, 		RightFrame = DGVScrollFrame4,	icon="Interface\\Icons\\achievement_level_100", rightShouldScroll = true},
-		[6] = {text = "Dungeons", 	title = "Dungeon Guides", 	guidetype = "I",	LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame5,	icon="Interface\\Icons\\Achievement_Dungeon_GloryoftheHERO", rightShouldScroll = true},
-		[7] = {text = "Dailies",	title = "Daily Guides",	guidetype = "D",		LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame6,	icon="Interface\\Icons\\Achievement_general_25kdailyquests", rightShouldScroll = true},
-		[8] = {text = "Events",		title = "Event Guides", 	guidetype = "E",	LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame7,	icon=SetCurrentEventIcon, rightShouldScroll = true},
-		[9] = {text = "Achievements",	title = "Achievement Guides", guidetype = "A",LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame8,	icon="Interface\\Icons\\ACHIEVEMENT_GUILDPERK_HONORABLEMENTION", rightShouldScroll = true},
-		[10] = {text = "Professions", 	title = "Profession Guides", guidetype = "P",LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame9,	icon="Interface\\Icons\\INV_Scroll_11", rightShouldScroll = true},
-		[4] = {text = "Suggest Guides", title = "Suggested Guides", 				LeftFrame = DGVHomeFrame, 		RightFrame = DGVScrollFrame10, 	icon="Interface\\Icons\\INV_Misc_Orb_01", rightShouldScroll = true},
-        [12] = {text = "Elites", 	title = "Elites Guides", guidetype = "NPC", LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame12,	icon="Interface\\Icons\\spell_shadow_deathscream", rightShouldScroll = true},
-        [13] = {text = "Mounts", 	title = "Mounts Guides", guidetype = "Mounts", LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame13,	icon="Interface\\Icons\\Ability_mount_ridingelekk", rightShouldScroll = true},
-        [14] = {text = "Pets", 	title = "Companions Guides", guidetype = "Pets", LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame14,	icon="Interface\\Icons\\Ability_racial_bearform", rightShouldScroll = true},
-        [15] = {text = "Bosses", 	title = "Bosses Guides", guidetype = "Bosses", LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame15,	icon="Interface\\Icons\\Achievement_Dungeon_ClassicDungeonMaster", rightShouldScroll = true},
+		[5] = {text = "Leveling", 	title = "Leveling Guides", 	guidetype = "L",	LeftFrame = DGVHomeFrame, 		RightFrame = DGVScrollFrame4,	icon="Interface\\Icons\\Achievement_Level_110", rightShouldScroll = false},
+		[6] = {text = "Dungeons", 	title = "Dungeon Guides", 	guidetype = "I",	LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame5,	icon="Interface\\Icons\\Achievement_Dungeon_GloryoftheHERO", rightShouldScroll = false},
+		[7] = {text = "Dailies",	title = "Daily Guides",	guidetype = "D",		LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame6,	icon="Interface\\Icons\\Achievement_general_25kdailyquests", rightShouldScroll = false},
+		[8] = {text = "Events",		title = "Event Guides", 	guidetype = "E",	LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame7,	icon=SetCurrentEventIcon, rightShouldScroll = false},
+		[9] = {text = "Achievements",	title = "Achievement Guides", guidetype = "A",LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame8,	icon="Interface\\Icons\\ACHIEVEMENT_GUILDPERK_HONORABLEMENTION", rightShouldScroll = false},
+		[10] = {text = "Professions", 	title = "Profession Guides", guidetype = "P",LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame9,	icon="Interface\\Icons\\INV_Scroll_11", rightShouldScroll = false},
+		[4] = {text = "Suggest Guides", title = "Suggested Guides", 				LeftFrame = DGVHomeFrame, 		RightFrame = DGVScrollFrame10, 	icon="Interface\\Icons\\INV_Misc_Orb_01", rightShouldScroll = false},
+        [12] = {text = "Elites", 	title = "Elites Guides", guidetype = "NPC", LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame12,	icon="Interface\\Icons\\spell_shadow_deathscream", rightShouldScroll = false},
+        [13] = {text = "Mounts", 	title = "Mounts Guides", guidetype = "Mounts", LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame13,	icon="Interface\\Icons\\Ability_mount_ridingelekk", rightShouldScroll = false},
+        [14] = {text = "Pets", 	title = "Companions Guides", guidetype = "Pets", LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame14,	icon="Interface\\Icons\\Ability_racial_bearform", rightShouldScroll = false},
+        [15] = {text = "Bosses", 	title = "Bosses Guides", guidetype = "Bosses", LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame15,	icon="Interface\\Icons\\Achievement_Dungeon_ClassicDungeonMaster", rightShouldScroll = false},
 		[16] = {text = "Clear Guide",		title = "Clear the loaded guide from the Small Frame",									LeftFrame = DGVHomeFrame,		RightFrame = DGVScrollFrame16,	icon="Interface\\Buttons\\UI-GroupLoot-Pass-Up"},		
-        [17] = {text = "Recent Guides", title = "Recent Guides", 		LeftFrame = DGVHomeFrame, 		RightFrame = DGVScrollFrame17, 	icon="Interface\\Icons\\Spell_shadow_unstableaffliction_1", rightShouldScroll = true},
-        [18] = {text = "Followers", title = "Followers", guidetype = "Followers", LeftFrame = DGVHomeFrame, 		RightFrame = DGVScrollFrame18, 	icon="Interface\\Icons\\achievement_garrisonfollower_rare", rightShouldScroll = true},
+        [17] = {text = "Recent Guides", title = "Recent Guides", 		LeftFrame = DGVHomeFrame, 		RightFrame = DGVScrollFrame17, 	icon="Interface\\Icons\\Spell_shadow_unstableaffliction_1", rightShouldScroll = false},
+        [18] = {text = "Followers", title = "Followers", guidetype = "Followers", LeftFrame = DGVHomeFrame, 		RightFrame = DGVScrollFrame18, 	icon="Interface\\Icons\\achievement_garrisonfollower_rare", rightShouldScroll = false},
         }
 	local SEARCH_TAB, SUGGEST_TAB, RECENT_TAB = 1,4,17
 	local currentGuideTabInfo = tabs[2]
@@ -138,7 +136,133 @@ function Guides:Initialize()
 	end
 	
 	local activeTabInfo, PopulateSuggestedGuides
+    local lastClickedTab = nil
+    
 	local function TabInfoActivate(self)
+    
+        DGV:AddGuideToRecentGuides(CurrentTitle)
+        
+        PopulateRecentGuides()
+        
+        if DGV:isValidGuide(CurrentTitle) and (not CurrentTitle or not GetCurrentGuideTypeTabInfo().leftShouldScroll) and self.text and self.text ~= "Current Guide" then
+            guidesMainScroll.frame:Hide()
+        else
+            guidesMainScroll.frame:Show()
+        end
+    
+        if NPCJournalFrame then
+            NPCJournalFrame.playersMounts = nil
+            NPCJournalFrame.playersPets = nil
+            NPCJournalFrame.playersFollowers = nil
+        end
+        
+        local treeData = self.treeData
+        
+        if not self.treeData and self.text == "Current Guide" then
+            if GetCurrentGuideTypeTabInfo() then
+                treeData = GetCurrentGuideTypeTabInfo().treeData
+            end
+        end        
+        
+        if treeData then
+            local wrapper = GUIUtils:SetTreeData(guidesMainScroll.frame, nil, "guideategories", 
+                treeData, nil, nil, nil, nil, 400, -30, nil, nil
+                ,function(oryginalText)
+                   if DGV.ProcessNPCLeafColor then
+                       return DGV.ProcessNPCLeafColor(oryginalText, self.guidetype)
+                   end
+                 end,
+                 function(newHeight)
+                    local newMax = newHeight - 100
+                    if newMax < 1 then
+                        newMax = 1
+                    end
+                    guidesMainScroll.scrollBar:SetMinMaxValues(1, newMax)
+                 end,
+                 function(self, delta)
+                    guidesMainScroll.scrollBar:SetValue(guidesMainScroll.scrollBar:GetValue() - delta * 44)  
+                 end)  
+
+            if DugisMain then
+                wrapper:SetParent(DugisMain)
+                wrapper:SetPoint("TOPLEFT", DugisMain, "TOPLEFT", 0, 0)
+            end
+            
+            if self.text == "Recent Guides" then
+                if recentGuidesLabel == nil then
+                    guideategorieswrapper:CreateFontString("recentGuidesLabel", "ARTWORK", "GameFontNormalLarge")
+                end
+                
+                if #DGV:GetFlatternRecentGuides() > 0 then
+                    recentGuidesLabel:Show()
+                else
+                    recentGuidesLabel:Hide()
+                end 
+                
+                recentGuidesLabel:SetText(L["Recent Guides"])
+                recentGuidesLabel:SetPoint("TOPLEFT", guideategorieswrapper, "TOPLEFT", 3, -5)
+                recentGuidesLabel:SetParent(guideategorieswrapper)
+                guideategorieswrapper.indernalDeltaX = 0
+                guideategorieswrapper.internalDeltaY = -25
+                guideategorieswrapper:UpdateTreeVisualization()
+            end	
+        end
+        
+        if self.text ~= "Recent Guides" and recentGuidesLabel then
+            recentGuidesLabel:Hide()
+        end
+    
+        guidesMainScroll.frame.content = guideategorieswrapper
+        guidesMainScroll.frame:SetScrollChild(guideategorieswrapper) 
+    
+        if guideategorieswrapper then
+            if self.text == "Current Guide" then
+            
+                guideategorieswrapper:SetWidth(347)
+                guidesMainScroll.frame:SetPoint("TOPLEFT", DugisMain, 5, -50)
+                guidesMainScroll.frame:SetWidth(400)
+            
+                guideategorieswrapper.indernalDeltaX = 0
+                guideategorieswrapper.internalDeltaY = -40
+                guideategorieswrapper:UpdateTreeVisualization()
+               
+                DugisMainLeftScrollFrame.currentGuideIcon:SetParent(guideategorieswrapper)
+                DugisMainLeftScrollFrame.currentGuideIcon:SetPoint("TOPLEFT", guideategorieswrapper, "TOPLEFT", 10, -5)
+                DugisMainLeftScrollFrame.currentGuideIcon:Show()
+                
+                DugisMainLeftScrollFrame.guideType:SetParent(guideategorieswrapper)
+                DugisMainLeftScrollFrame.guideType:SetPoint("TOPLEFT", guideategorieswrapper, "TOPLEFT", 48, -10)
+                DugisMainLeftScrollFrame.guideType:Show()
+                
+                DugisPreloadButton:ClearAllPoints()
+                DugisPreloadButton:SetParent(guideategorieswrapper)
+                DugisPreloadButton:SetPoint("TOPLEFT", 250, -10)
+                DugisPreloadButton:Show()
+                
+                guidesMainScroll.scrollBar:SetPoint("TOPLEFT", guidesMainScroll.frame, "TOPLEFT", 354, -11)
+            else
+                guideategorieswrapper:SetWidth(405)
+                if self.text == "Help" then
+                    guidesMainScroll.frame:Hide()
+                else
+                    guidesMainScroll.frame:SetParent( DugisMain)
+                    guidesMainScroll.frame:SetPoint("TOPLEFT", DugisMain, 370, -40)
+                    guidesMainScroll.frame:Show()
+                    guidesMainScroll.scrollBar:SetPoint("TOPLEFT", guidesMainScroll.frame, "TOPLEFT", 414, -21)
+                    guidesMainScroll.frame:SetWidth(600)
+                    DugisMainLeftScrollFrame.currentGuideIcon:Hide()
+                    DugisMainLeftScrollFrame.guideType:Hide()
+                    DugisPreloadButton:Hide()
+                end
+            end
+        end
+
+        SetCurrentGuideIcon()
+        
+        if  self.text == "Settings" then
+            guidesMainScroll.frame:Hide()
+        end          
+    
 		if activeTabInfo==self then return end
 		if activeTabInfo then
 			if activeTabInfo:RightShouldScroll() then
@@ -160,9 +284,6 @@ function Guides:Initialize()
 		
 		if self.text ~= "Home" then
 			DGV.Search:Hide()
-            if TreeFrame then
-                TreeFrame:Hide()
-            end            
 			DGV.Search:ClearText()
 		end
 		
@@ -173,21 +294,36 @@ function Guides:Initialize()
         if self.text == "Recent Guides" then
 			PopulateRecentGuides()
             
-            if #DGV:GetFlatternRecentGuides() > 0 then
-                _G["recentGuidesLabel"]:Show()
-            else
-                _G["recentGuidesLabel"]:Hide()
-            end        
+            if recentGuidesLabel then
+                if #DGV:GetFlatternRecentGuides() > 0 then
+                    recentGuidesLabel:Show()
+                else
+                    recentGuidesLabel:Hide()
+                end
+            end            
 		end
 		
 		if self.text == "Clear Guide" then
+            DugisGuideUser.RecentGuides = {}
+            DugisGuideUser.RecentGuides.Categories = {}
+            DugisGuideUser.RecentGuides.LastIndices = {}
+            DugisGuideUser.RecentGuides.Guides = {}
+            
+            CurrentTitle = nil
+            DugisGuideViewer.CurrentTitle = nil
+            
+            tabs[RECENT_TAB].treeData = {}
+            guideategorieswrapper:UpdateTreeVisualization()
+
 			DGV:ClearScreen()
-			CurrentTitle = nil
-			DugisGuideViewer.CurrentTitle = nil
+			
 			DugisGuideUser.CurrentQuestIndex = nil
 			CurrentQuestName = nil
 			DugisGuideViewer:RemoveAllWaypoints()			
 			DugisGuideViewer.Modules.ModelViewer.Frame:Hide()
+            
+            --HOME
+            TabInfoActivate(tabs[1])
 		end
 
 		if self.text == "Current Guide" and DGV:isValidGuide(CurrentTitle) == true then	
@@ -213,13 +349,6 @@ function Guides:Initialize()
 			DugisPreloadButton:Hide()
 		end
         	
-        if DGV.TabInfoActivateExtension then
-            local context = {
-                tabs = tabs
-            }
-            DGV.TabInfoActivateExtension(context)
-        end
-		
         if searchThread == nil then
             self.RightFrame:Show()
         end
@@ -234,7 +363,9 @@ function Guides:Initialize()
 			self.RightFrame:SetAllPoints(Main.rightFrameHost)
 		end
 		
-		Main.leftScroll:Hide()
+        if Main.leftScroll then
+            Main.leftScroll:Hide()
+        end
 
 		if self.text == "Elites" and not DGV:IsModuleRegistered("NPCDataModule") then 
 			Main.rightScroll:Hide()
@@ -262,14 +393,18 @@ function Guides:Initialize()
 			leftFrame:Show()
 			if self:LeftShouldScroll() then
 				DugisMainBorder.bg:SetTexture(SCROLL_BACKGROUND)
-				Main.leftScroll:SetScrollChild(leftFrame)
-				leftFrame:SetWidth(350)
-				Main.leftScroll.bar:SetValue(self.leftScrollHistory or 1)
-				Main.leftScroll:Show()
+                if Main.leftScroll then
+                    Main.leftScroll:SetScrollChild(leftFrame)
+                    leftFrame:SetWidth(350)
+                    Main.leftScroll.bar:SetValue(self.leftScrollHistory or 1)
+                    Main.leftScroll:Show()
+                end
 				
-				if self.text=="Current Guide" then
+				if self.text=="Current Guide" and GetCurrentGuideTypeTabInfo() then
 					self.leftScrollMax = GetCurrentGuideTypeTabInfo().rightScrollMax
-				end
+				else
+                    DugisMainBorder.bg:SetTexture(SCROLLESS_BACKGROUND)
+                end
 			else
 				DugisMainBorder.bg:SetTexture(SCROLLESS_BACKGROUND)
 				leftFrame:SetAllPoints(Main.leftFrameHost)
@@ -304,6 +439,13 @@ function Guides:Initialize()
         
         DugisGuideViewer:UpdateCurrentGuideExpanded()
         
+        if lastClickedTab ~= self.text and guideategorieswrapper then
+            guideategorieswrapper:SaveExpansionState(self.text)
+            guideategorieswrapper:LoadExpansionState(lastClickedTab)
+            guidesMainScroll.scrollBar:SetValue(0)
+        end
+        
+        lastClickedTab = self.text
 	end
 	
 	for _,tab in ipairs(tabs) do
@@ -365,6 +507,13 @@ function Guides:Initialize()
 	function DGV:SetQuestState(index, setting)
 		--self:DebugFormat("SetQuestState", "index", index, "setting", setting, "stack", debugstack(2))
 		DGU.QuestState[CurrentTitle..':'..index] = setting
+        
+        if setting == "C" then
+            local LargeFramebutton = visualRows[index].Chk
+            LargeFramebutton:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check")
+			LargeFramebutton:SetChecked(true)
+        end
+        
 		--Update visual state of potetial PRE tagged rows
         
         if duringMultiStepsChecking == false then
@@ -521,16 +670,23 @@ function Guides:Initialize()
 	end
 	
 	local function EvaluateBUFF(buff)
-		for i=1,30 do
+		if buff then 
+			buff = string.lower(buff)
+		end
+		for i=1,10 do
 			local name,_,tex = UnitBuff("player",i)
+			if name then name = string.lower(name) end
+			if tex then tex = string.lower(tex) end
 			if name and (tex:find(buff) or name:find(buff)) then return true,true end
 			local name,_,tex = UnitDebuff("player",i)
+			if name then name = string.lower(name) end
+			if tex then tex = string.lower(tex) end			
 			if name and (tex:find(buff) or name:find(buff)) then return true,true end
 		end
-	end	
+	end		
 
 	local function EvaluateTID(tid)
-		return IsQuestFlaggedCompleted(tid)
+		return IsQuestFlaggedCompleted(tid) and not DGV:GetQuestLogIndexByQID(tid)
 	end	
 	
 	local function EvaluateAYG(ayg)
@@ -544,13 +700,13 @@ function Guides:Initialize()
 	
 	local function EvaluateOID(oid)
 		local index = DGV:GetGuideIndexByQID(tonumber(oid), "A")
-		return index and DGV:GetQuestState(index) == "C"
+		return (index and DGV:GetQuestState(index) == "C") or IsQuestFlaggedCompleted(oid)
 	end		
 
 	local function EvaluatePRE(pre)
 		local index = DGV:GetGuideIndexByQID(tonumber(pre), "T")
 		--if index then DebugPrint("Debug EvaluatePRE: pre="..tonumber(pre).." DGV:GetQuestState(index)="..DGV:GetQuestState(index)) end
-		return index and DGV:GetQuestState(index) == "C"
+		return (index and DGV:GetQuestState(index) == "C") or IsQuestFlaggedCompleted(pre)
 	end
 
 	local function EvaluateREP(factionId, standingRequirement)
@@ -575,7 +731,7 @@ function Guides:Initialize()
 		local Row = GetVisualRow(i, row)
 		if Row.Opt.text==nil then
 			local optional 		= DGV:ReturnTag("O", i)
-			local pre			= DGV:ReturnTag("PRE", i)
+			local pre, pre2		= DGV:ReturnTag("PRE", i)
 			local pha			= DGV:ReturnTag("PHA", i)			
 			local rep, standing	= DGV:ReturnTag("REP", i)
 			local friend, level	= DGV:ReturnTag("FS", i)
@@ -586,6 +742,9 @@ function Guides:Initialize()
 			elseif pre then
 				Row.Opt.text = string.format(" (%s)", L["Pre-quest required"])
 				Row.Opt.pre = tonumber(pre)
+			elseif pre2 then
+				Row.Opt.text = string.format(" (%s)", L["Pre-quest required"])
+				Row.Opt.pre2 = tonumber(pre2)				
 			elseif pha then
 				Row.Opt.text = string.format(" (%s)", L["Stage required"])
 				Row.Opt.pha = tonumber(pha)				
@@ -613,6 +772,7 @@ function Guides:Initialize()
 		if (Row.Opt.optional and i~= DGU.CurrentQuestIndex and self:GetQuestState(i) ~= "C") or 
 			(Row.Opt.prof and i~= DGU.CurrentQuestIndex and self:GetQuestState(i) ~= "C") or
 			(Row.Opt.pre and not EvaluatePRE(Row.Opt.pre)) or 
+			(Row.Opt.pre2 and not EvaluatePRE(Row.Opt.pre2)) or 			
 			(Row.Opt.pha and not EvaluatePHA(Row.Opt.pha)) or
 			(Row.Opt.rep and not EvaluateREP(Row.Opt.rep, Row.Opt.standing)) or
 			(Row.Opt.friend and not EvaluateFS(Row.Opt.friend, Row.Opt.level)) then
@@ -637,7 +797,7 @@ function Guides:Initialize()
 		local qid = self.qid[i]
 		if qid then
 			local level = DGV:GetQuestLevel(qid)
-			if level then
+			if level and level > 0 then
 				color = GetQuestDifficultyColor(level)
 			end
 		end
@@ -666,7 +826,6 @@ function Guides:Initialize()
 	function DGV:SetChkToComplete(i)
 		if DGV:isValidGuide(CurrentTitle) == true and not visualRows[i].Chk:GetChecked() then
 			self:SetQuestState(i, "C")
-			visualRows[i].Chk:SetChecked(true)
 		end
 	end
 
@@ -739,7 +898,7 @@ function Guides:Initialize()
 	function DGV:SetQuestsState()
 		SuspendViewFrameUpdate()
 		local i
-		if DGU.QuestState then
+		if DGU.QuestState and visualRows and #visualRows then
 			
 			--Find all previously completed quests and check them
 			for i=1, #visualRows do			
@@ -975,7 +1134,7 @@ function Guides:Initialize()
 
 		if self:UserSetting(DGV_GUIDESUGGESTMODE) then
 			local suggestedGuide, suggestedGuideRaw = self:GetSuggestedGuide(playerLevel)
-			if not suggestedGuide and UnitLevel("player") ~= 100 then 
+			if not suggestedGuide and UnitLevel("player") ~= GetMaxPlayerLevel() then 
 				print("|cff11ff11Dugi Guides: |rPlayer level "..UnitLevel("player").." guide not installed."); return 
 			elseif not suggestedGuide then
 				return
@@ -1065,7 +1224,7 @@ function Guides:Initialize()
 		
 		if suggestedGuide then 
 			DebugPrint("#SUGGESTED:"..suggestedGuide) 
-		elseif UnitLevel("player") ~= 100 then
+		elseif UnitLevel("player") ~= GetMaxPlayerLevel() then
 			DebugPrint("#SUGGESTED: NIL")
 			print("|cff11ff11Dugi Guides: |rPlayer level "..UnitLevel("player").." guide not installed.")
 		end
@@ -1165,10 +1324,13 @@ function Guides:Initialize()
 				Worgen = "539(1-12 Worgen)", 
 				DeathKnight = "502(55-59 Death Knight)",
 				Pandaren = "808(1-12 Pandaren)",
+				DemonHunter = "1028(98-100)",
 		}
 		
 		if (engPlayerClass == "DEATHKNIGHT") then
 			guideName = startguides["DeathKnight"]
+		elseif (engPlayerClass == "DEMONHUNTER") then
+			guideName = startguides["DemonHunter"]
 		elseif (engPlayerRace == "Pandaren") and (engPlayerFaction == "Alliance") then 
 			guideName = startguides["Human"]
 		elseif (engPlayerRace == "Pandaren") and (engPlayerFaction == "Horde") then 
@@ -1329,7 +1491,7 @@ function Guides:Initialize()
 			DGV:RemoveAllWaypoints()
 			
 			if DGV:ReturnTag("PPOS", guideIndex) then
-				if WorldMapFrame:IsShown() then HideUIPanel(WorldMapFrame) end
+				if DGV.Modules.MapPreview:IsAnimating() then HideUIPanel(WorldMapFrame) end
 
 				local x, y
 				mapID, mapFloor, x, y = DGV:GetPlayerPosition()
@@ -1347,9 +1509,9 @@ function Guides:Initialize()
 					DGV:SafeSetMapQuestId(DGV.qid[guideIndex]);
 				end
 				return
-			elseif DGV:ReturnTag("POI", guideIndex) then 
+			elseif DGV:ReturnTag("POI", guideIndex) and qid and LuaUtils:DugiGetQuestWorldMapAreaID(qid) > 0 then 
 
-				if WorldMapFrame:IsShown() then HideUIPanel(WorldMapFrame) end
+				if DGV.Modules.MapPreview:IsAnimating() then HideUIPanel(WorldMapFrame) end
 				local m, f = LuaUtils:DugiGetQuestWorldMapAreaID(qid)
 				if m then LuaUtils:DugiSetMapByID(m) end --this is needed otherwise QuestPOIGetIconInfo returns nil for POI not in current map.
 				local _, posX, posY, objective = QuestPOIGetIconInfo(qid)
@@ -1644,13 +1806,13 @@ function Guides:Initialize()
 				end	
 							
 			
-				if strmatch(DGV.actions[DGU.CurrentQuestIndex], "[RFH]") and strmatch(DGV.actions[DGU.CurrentQuestIndex + 1], "[ATBhUf]") then  
+				if strmatch(DGV.actions[DGU.CurrentQuestIndex], "[RFH]") and strmatch(DGV.actions[DGU.CurrentQuestIndex + 1], "[ATBhUf]") and not DGV:ReturnTag("SID", DGU.CurrentQuestIndex) then  
 					if control <= #visualRows and strmatch(DGV.actions[control], "[ATBhUf]") then
 						return control
 					end
 				end
 	
-				if strmatch(DGV.actions[DGU.CurrentQuestIndex], "[RFH]") and strmatch(DGV.actions[DGU.CurrentQuestIndex + 1], "[CNK]") then  
+				if strmatch(DGV.actions[DGU.CurrentQuestIndex], "[RFH]") and strmatch(DGV.actions[DGU.CurrentQuestIndex + 1], "[CNK]") and not DGV:ReturnTag("SID", DGU.CurrentQuestIndex) then  
 					if control <= #visualRows and strmatch(DGV.actions[control], "[CNKBU]") and not DGV:ReturnTag("MD", DGU.CurrentQuestIndex) and not DGV:ReturnTag("MD", control) and not DGV:ReturnTag("AYG", control) then
 						return control
 					elseif control <= #visualRows and DGV:ReturnTag("U", control) and not strmatch(DGV.actions[control], "[RFH]") and not DGV:ReturnTag("MD", DGU.CurrentQuestIndex) and not DGV:ReturnTag("MD", control) then
@@ -1658,19 +1820,19 @@ function Guides:Initialize()
 					end
 				end			
 	
-				if strmatch(DGV.actions[DGU.CurrentQuestIndex], "[BhUf]") and strmatch(DGV.actions[DGU.CurrentQuestIndex + 1], "[AT]") then  
+				if strmatch(DGV.actions[DGU.CurrentQuestIndex], "[BhUf]") and strmatch(DGV.actions[DGU.CurrentQuestIndex + 1], "[AT]") and not DGV:ReturnTag("SID", DGU.CurrentQuestIndex) then  
 					if control <= #visualRows and strmatch(DGV.actions[control], "[ATBhUf]") then
 						return control
 					end
 				end
 	
-				if strmatch(DGV.actions[DGU.CurrentQuestIndex], "[AT]") or (strmatch(DGV.actions[DGU.NextQuestIndex], "[AT]") and DGV:ReturnTag("AYG", DGU.CurrentQuestIndex)) then  
+				if strmatch(DGV.actions[DGU.CurrentQuestIndex], "[AT]") or (strmatch(DGV.actions[DGU.NextQuestIndex], "[AT]") and DGV:ReturnTag("AYG", DGU.CurrentQuestIndex)) and not DGV:ReturnTag("SID", DGU.CurrentQuestIndex) then  
 					if control <= #visualRows and strmatch(DGV.actions[control], "[ATBhUf]") then
 						return control
 					end
 				end
 				
-				if strmatch(DGV.actions[DGU.CurrentQuestIndex], "[CNK]") and not DGV:ReturnTag("AYG", DGU.CurrentQuestIndex) then   
+				if strmatch(DGV.actions[DGU.CurrentQuestIndex], "[CNK]") and not DGV:ReturnTag("AYG", DGU.CurrentQuestIndex) and not DGV:ReturnTag("SID", DGU.CurrentQuestIndex) then   
 					if control <= #visualRows and strmatch(DGV.actions[control], "[CNKB]") and not DGV:ReturnTag("MD", DGU.CurrentQuestIndex) and not DGV:ReturnTag("MD", control) then
 						return control
 					elseif control <= #visualRows and DGV:ReturnTag("U", control) and not strmatch(DGV.actions[control], "[RFHU]") and not DGV:ReturnTag("MD", DGU.CurrentQuestIndex) and not DGV:ReturnTag("MD", control) then
@@ -1767,16 +1929,23 @@ function Guides:Initialize()
 		end
 	end	
 	
-	function DGV:havelootitem(qid)
+	function DGV:havelootitem(indx)
 		local havel
-		local lootitem, lootqty 	= DGV:ReturnTag("L", qid)
+		local lootitem, lootqty 	= DGV:ReturnTag("L", indx)
 		if lootitem and (GetItemCount(lootitem) >= lootqty) then havel = true else havel = false end
 		return havel
 	end
+	
+	function DGV:havecurrencyitem(indx)
+		local havec
+		local curitem, curqty 	= DGV:ReturnTag("CUR", indx)
+		if curitem and (select(2, GetCurrencyInfo(curitem)) >= curqty) then havec = true else havec = false end
+		return havec
+	end	
 
-	function DGV:haveuseitem(qid)
+	function DGV:haveuseitem(indx)
 		local haveu
-		local useitem 				= DGV:ReturnTag("U", qid)
+		local useitem 				= DGV:ReturnTag("U", indx)
 		local uinbag 				= DGV:InBag(useitem)
 		if (useitem and uinbag) then haveu = true else haveu = false end 
 		return haveu
@@ -1785,16 +1954,21 @@ function Guides:Initialize()
 	function DGV:CheckForSkip(indx) 
 		--local lootitem			 	= DGV:ReturnTag("L", indx)
 		local optional 				= DGV:ReturnTag("O", indx)
-		local pre 					= DGV:ReturnTag("PRE", indx)
+		local pre, pre2				= DGV:ReturnTag("PRE", indx)
 		local rep, standing			= DGV:ReturnTag("REP", indx)
 		local friend, level			= DGV:ReturnTag("FS", indx)		
 		local useitem 				= DGV:ReturnTag("U", indx)
 		local inlog 				= DGV:GetQuestLogIndexByQID(DGV.qid[indx])
 		local action				= DGV.actions[indx]
-		--local toohigh				= DGV:IsQuestTooHigh(indx)
+		local toohigh				= DGV:IsQuestTooHigh(indx)
 		local hasprof, _			= DGV:ReturnTag("OP", indx)
 		local pha					= DGV:ReturnTag("PHA", indx)
 		local map1, map2, map3, map4 = DGV:ReturnTag("MAP", indx)
+		local tid					= DGV:ReturnTag("TID", indx)
+		local tidInlog
+		
+		if tid then tidInlog = DGV:GetQuestLogIndexByQID(tonumber(tid)) end
+		
 		local haveuse
 		haveuse = self:haveuseitem(indx)
 		--haveloot = havelootitem(indx)
@@ -1835,13 +2009,15 @@ function Guides:Initialize()
 		elseif hasprof and not DGV:HasProfession(hasprof) then
 			return true
 		elseif optional and inmap then 
-			return false				
+			return false							
 		elseif optional and not inlog then
 			--DebugPrint("SKIP: optional and not in log.")
 			return true	
+		elseif optional and tidInlog then
+			return false			
 		--elseif optional and ((action =="A" and useitem and not haveuse) or (lootitem and not haveloot)) then
 		elseif optional and (action =="A" and useitem and not haveuse) then
-			DebugPrint("SKIP: not enough loot or no use item")
+			--DebugPrint("SKIP: not enough loot or no use item")
 			return true
 		elseif rep and not EvaluateREP(rep, standing) then
 			return true		
@@ -1851,10 +2027,12 @@ function Guides:Initialize()
 			return false				
 		elseif pre and not EvaluatePRE(pre) then
 			return true
+		elseif pre2 and not EvaluatePRE(pre2) then
+			return true			
 		elseif pha and not EvaluatePHA(pha) then 
 			return true											
-		--elseif toohigh then
-			--return true --Create more cons than pros and not really needed
+		elseif toohigh then
+			return true --Create more cons than pros and not really needed
 		else
 			return false
 		end
@@ -1871,7 +2049,7 @@ function Guides:Initialize()
 			guideIndex = DGU.CurrentQuestIndex
 		end		
 		
-		if indx == guideIndex and (action == "R" or action == "F" or action == "b" or action == "H") then
+		if indx == guideIndex and (action == "R" or action == "F" or action == "b" or action == "H") and not DGV.tags[DGU.CurrentQuestIndex]:match("(|REACH|)") then
 			local subzonetext = string.trim(GetSubZoneText()) -- returns blank if no subzone
 			local zonetext = GetZoneText() 
 			local quest = self:RemoveParen(self.quests1L[indx])
@@ -1883,7 +2061,7 @@ function Guides:Initialize()
 
 	local function CheckForWaypointLocation(indx)
 		if CurrentTitle ~= nil then 
-			if indx == DGU.CurrentQuestIndex and (DGV.actions[indx] == "R" or DGV.actions[indx] == "H") and not DGV.tags[DGU.CurrentQuestIndex]:match("(|WR|)") then 
+			if DGU.CurrentQuestIndex and indx == DGU.CurrentQuestIndex and DGV.tags[DGU.CurrentQuestIndex] and DGV.tags[DGU.CurrentQuestIndex]:match("(|REACH|)") then 
 				if DGV.DugisArrow.waypoints and #DGV.DugisArrow.waypoints==1 and 
 					DGV.DugisArrow:getFirstWaypoint()==DGV.DugisArrow:DidPlayerReachWaypoint() then
 					return true
@@ -1954,8 +2132,7 @@ function Guides:Initialize()
 			--Phasing out the global CQI
 			DGU.CurrentQuestIndex = DGV:FindNextUnchecked()
 		
-			if DGV:havelootitem(DGU.CurrentQuestIndex) == true then
-
+			if DGV:havelootitem(DGU.CurrentQuestIndex) == true or DGV:havecurrencyitem(DGU.CurrentQuestIndex) == true then
 
 				DebugPrint("#####havelootitem(DGU.CurrentQuestIndex) ")
 				DGV:SetChkToComplete(DGU.CurrentQuestIndex)
@@ -1971,11 +2148,16 @@ function Guides:Initialize()
 			end
 			self.UpdateStickyFrame( )
 
-			DGV:UpdateCompletionVisuals()			
+			if DGV:ReturnTag("AYG", DGU.CurrentQuestIndex) then 
+				DGV:UpdateCompletionVisuals(true) 
+			end			
 			
 			if (not DGV:ReturnTag("AYG", DGU.CurrentQuestIndex) and checkMoved ~= DGU.CurrentQuestIndex) or 
 				(DGV:ReturnTag("AYG", DGU.CurrentQuestIndex) and checkMoved ~= DGU.NextQuestIndex) or 
 				MoveToIndex then
+				if not DGV:ReturnTag("AYG", DGU.CurrentQuestIndex) then
+					DGV:UpdateCompletionVisuals(true) 
+				end
 				DGV:SetQuestColor(DGU.CurrentQuestIndex)
 				CurrentAction = DGV.actions[DGU.CurrentQuestIndex] 	
 				CurrentQuestName = DGV.quests1L[DGU.CurrentQuestIndex] 
@@ -1984,9 +2166,9 @@ function Guides:Initialize()
 				DGV:SetTarget(DGU.CurrentQuestIndex)
 					
 				if DGV:ReturnTag("POI", DGU.CurrentQuestIndex) then 
-					DGV:DelayAndMapCurrentObjective(1)
+					DGV:DelayAndMapCurrentObjective(0.5)
 				else				
-					DGV:MapCurrentObjective() 
+					DGV:DelayAndMapCurrentObjective(0.2) 
 					DGV:WatchQuest()
 				end
 				
@@ -2001,6 +2183,10 @@ function Guides:Initialize()
 			end
 			visualRows[DGU.CurrentQuestIndex]:SetNormalTexture("Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\highlight.tga")
 		end
+		
+		if DGV:ReturnTag("RESET", DGU.CurrentQuestIndex) then 
+			DGV:ResetButtonOnClick()
+		end			
 		
 	end
 
@@ -2023,23 +2209,23 @@ function Guides:Initialize()
 				DGV:MoveToNextQuest()   
 			end
 			self:UpdateStickyFrame( )
-			
+
 			if checkMoved ~= DGU.CurrentQuestIndex then
+				DGV:UpdateCompletionVisuals(true)
 				DGV.DoOutOfCombat(SetUseItem, DGU.CurrentQuestIndex)
 				DGV:SetTarget(DGU.CurrentQuestIndex)
-				DGV:MapCurrentObjective()
+				DGV:DelayAndMapCurrentObjective(0.2)
 
 				if DGV:IsModelDataOn() then self:ShowModel(DGU.CurrentQuestIndex) end
 			
-				DGV:UpdateSmallFrame()
+				--DGV:UpdateSmallFrame()
 				DGV:WatchQuest()
 				
 				DGV:SetPercentComplete()
 				
 				DGV:CompleteOnZoneCheck()
 			end
-			visualRows[DGU.CurrentQuestIndex]:SetNormalTexture("Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\highlight.tga")
-			DGV:UpdateCompletionVisuals()			
+			visualRows[DGU.CurrentQuestIndex]:SetNormalTexture("Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\highlight.tga")		
 	end
 
 	--Uncheck quests and start from beginning of quest progress
@@ -2170,9 +2356,31 @@ function Guides:Initialize()
 		return GuideRange-- or RawTitle
 	end
 	
+    function SetCurrentGuideIcon()
+        if CurrentTitle then
+            local guideType = DGV.gtype[CurrentTitle]
+            if guideType then
+                LuaUtils:foreach(tabs, function(tab)
+                    if tab.guidetype == guideType then
+                        if tab.icon then
+                            if type(tab.icon)=="function" then
+                                local textureName = 
+                                DugisMainLeftScrollFrame.currentGuideIcon:SetTexture(tab.icon())
+                            else
+                                DugisMainLeftScrollFrame.currentGuideIcon:SetTexture(tab.icon)
+                            end
+                        end
+                        
+                        DugisMainLeftScrollFrame.guideType:SetText(tab.text)
+                    end
+                end)
+            end
+        end
+    end
 
 	--Called from clicking on a guide title
-	function DGV:DisplayViewTab(title, skip)
+	function DGV:DisplayViewTab(title, skip, threading)
+ 
 		if not title then return end
 		if DGV.Modules.StickyFrame.Frame:IsShown() then DGV:ClearStickyFrame() end
         local rawTitle = string.gsub(title, '|c........', '')
@@ -2207,15 +2415,14 @@ function Guides:Initialize()
 			self.GuideMapID = _GetTitleMapID(CurrentTitle)
 			self.CurrentZoneName = self:GetMapNameFromID(self.GuideMapID) or title:match("(%w*)%s?%(")
 			
-			DGV:ParseRows(title, string.split("\n","\n"..self.guides[title]()))
-		
+			DGV:ParseRows(title, false, string.split("\n","\n"..self.guides[title]()))
 
 
 			if not self.preLoadMode then
 				DGV:QuestsBackgroundTranslator()
 			end
 			
-			DGV:PopulateObjectives(title)
+			DGV:PopulateObjectives(title, nil, threading)
 			
 			--if not self.preLoadMode then
 				local name = title..":1"
@@ -2236,14 +2443,18 @@ function Guides:Initialize()
 				DGV:UpdateProfessions()
 				DGV:UpdatePlayerLevels()
 				DGV:ShowViewTab()
-				DGV.DelayandMoveToNextQuest(3, true)		
-
-				DGV:SetAllPercents()
+				DGV.DelayandMoveToNextQuest(1, true)		
+				LuaUtils:Delay(3, function()
+					DGV:SetQuestsState() --Need this for OID
+				end)		
+				DGV:SetAllPercents(threading)
 				visualRows[DGU.CurrentQuestIndex]:SetNormalTexture("Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\highlight.tga")
 				DGV:AutoScroll(CurrentQuestIndex)
 			end
 		end
 		DGV:UpdateAllSIDs()
+        
+        SetCurrentGuideIcon()
 	end
 	
 	function Dugis_OnMouseWheel(self, delta)
@@ -2309,7 +2520,6 @@ function Guides:Initialize()
     
     local function OnSearchThreadEnd()
         DGVSearchFrame:Show()
-        DugisGuideViewer.SetAllHeaderStates()
         
         if not searchDelayTimer then
            DugisSearchProgressIcon:Hide()
@@ -2381,7 +2591,6 @@ function Guides:Initialize()
 		label.originalTabNum = originalTabNum
 		label.Title:SetText(label.headingTitle)
 		label:Show()
-		--SetCollapsedBehavior(label)
 		return label
 	end
     
@@ -2437,26 +2646,26 @@ function Guides:Initialize()
 				for guideNum = 1, #guideList do
 					
 					local guideName = guideList[guideNum]
-					local guideRow = GetCreateTabRow(tabNum, guideNum).Percent
+					local percentText = GetCreateTabRow(tabNum, guideNum).Percent
 					--DebugPrint("guideName="..guideName)
 					
 					--DebugPrint("tab"..tabNum.."row"..guideNum)
 					DGV:DisplayViewTab(guideName)
-					DGV:SetPercent(guideName, guideRow, guideType)
+                    DGV:SetGuidePercentageCacheValue(guideName, guideType)
 					
 					coroutine.yield()
 				end
 			end
 		end
 		
-		--DGV:SetAllPercents()
-		
 		DGV:DisplayViewTab(currentGuide)
 		
 		collectgarbage()
 		
 		self.preLoadMode = nil
-		--DugisPreloadButton:Enable()
+        if guideategorieswrapper then
+            guideategorieswrapper:UpdateTreeVisualization()
+        end
 		
 		DebugPrint("####END")
 	end
@@ -2470,7 +2679,7 @@ function Guides:Initialize()
 
 		local qComplete, QuestComplete
 		local qid 			= tonumber(questLine:match("|QID|(%d+)")) --self.qid[guideIndex]
-		local oid1, oid2	= tonumber(questLine:match("|OID|(%d+),?%s?(%d*)|"))
+		local oid1, oid2, oid3, oid4	= tonumber(questLine:match("|OID|(%d+),?%s?(%d*),?%s?(%d*),?%s?(%d*)|"))
 		local ayg			= tonumber(questLine:match("|AYG|(%d+)"))		
 		local logIndx 		= self:GetQuestLogIndexByQID(qid)
 		local action 		= questLine:match("^(%a)") --self.actions[guideIndex]
@@ -2481,10 +2690,12 @@ function Guides:Initialize()
 		
 		if logIndx then _, _, _, _, _, qComplete, _, _ = GetQuestLogTitle(logIndx) end
 		
-		if qComplete == 1 or self:QuestPartComplete(guideIndex) or (needsLoot and self:IsCompleteLootQO("QLU", nil, guideIndex)) or (not isDaily and self:HasQuestBeenTurnedIn(qid)) 
-			 or self:ProfessionCompletedAtGuideIndex(guideIndex) or self:CheckForLocation(guideIndex) or self:AchieveCompleteFromGuideIndex(guideIndex) or self:CheckForHearth(guideIndex) then QuestComplete = true else QuestComplete = nil end
+		if qComplete == 1 or self:QuestPartComplete(guideIndex) or 
+		--(needsLoot and self:IsCompleteLootQO("QLU", nil, guideIndex)) or 
+		(not isDaily and self:HasQuestBeenTurnedIn(qid)) or
+		self:ProfessionCompletedAtGuideIndex(guideIndex) or self:CheckForLocation(guideIndex) or self:AchieveCompleteFromGuideIndex(guideIndex) or self:CheckForHearth(guideIndex) then QuestComplete = true else QuestComplete = nil end
 		
-		if (action == "A" and logIndx) or (QuestComplete and action ~= "T") or (QuestComplete and action == "T" and not logIndx) or questState == "C" or ((oid1 and EvaluateOID(oid1)) or (oid2 and EvaluateOID(oid2))) or (ayg and EvaluateAYG(ayg)) then--and strmatch(action, "[NFfRBbh]") and not questPart and not needsLoot) then 
+		if (action == "A" and logIndx) or (QuestComplete and action ~= "T") or (QuestComplete and action == "T" and not logIndx) or questState == "C" or (oid1 and EvaluateOID(oid1)) or (oid2 and EvaluateOID(oid2)) or (oid3 and EvaluateOID(oid3)) or (oid4 and EvaluateOID(oid4)) or (ayg and EvaluateAYG(ayg)) then--and strmatch(action, "[NFfRBbh]") and not questPart and not needsLoot) then 
 			QuestComplete = true
 		end
 
@@ -2492,7 +2703,7 @@ function Guides:Initialize()
 	end
 
 	local percentsSet = false --takes for-ev-er and only needs to be done once
-	function DGV:SetAllPercents()
+	function DGV:SetAllPercents(threading)
 		if percentsSet then return end
 		percentsSet = true
 		local guidename, text, t, i, guideRow
@@ -2504,31 +2715,84 @@ function Guides:Initialize()
 				local gtype = tabs[t].guidetype
 				if gtype and DGV.guidelist[gtype] then
 					for i = 1, #DGV.guidelist[gtype] do --Each guide title
+                        if threading and (i % 2 == 0) then
+                            coroutine.yield()
+							LuaUtils:WaitForCombatEnd(true)
+                        end
+						
 						guidename 	= 	DGV.guidelist[gtype][i]
-						guideRow = GetCreateTabRow(t, i).Percent
-						if not guideRow:GetText() then
-							DGV:SetPercent(guidename, guideRow, gtype)
+						percentText = GetCreateTabRow(t, i).Percent
+						if not percentText:GetText() then
+							DGV:UpdatePercentText(guidename, percentText, gtype, threading)
 						end
 						--DebugPrint("guidename="..guidename.."*".."gtype"..gtype)
 					end
 				end
 			end
 		end
-		collectgarbage()
+        LuaUtils:collectgarbage(threading)
+            
 	end
     
     function DGV:ShouldShowProgess(gtype)
         return gtype ~= "NPC" and gtype ~= "Bosses" and gtype ~= "Followers" and gtype ~= "Mounts" and gtype ~= "Pets" 
     end
-
-	function DGV:SetPercent(guidename, guideRow, gtype)
+    
+    function DGV:SetGuidePercentageCacheValue(guideTitle, gtype)
+        local guidesize, unchecked, j
+        
+        guidesize 	= 	DGV:ParseRows(guideTitle, true, string.split("\n","\n"..self.guides[guideTitle]())) - 1		
+        unchecked 	=	0
+        
+        for j=1, guidesize do
+            local status = DGV:GetQuestState(j,guideTitle)
+            if not status or status == "U" then 
+                unchecked = unchecked + 1
+            end
+        end
+        
+        if unchecked == 1  then 
+            percent = 100 
+        else 
+            percent = 100 - ((unchecked / guidesize) * 100) 
+        end
+    
+        if not guidePercentagesCache[gtype] then
+            guidePercentagesCache[gtype] = {}
+        end
+        
+        guidePercentagesCache[gtype][guideTitle] = percent
+        
+        return percent
+    end
+    
+	function DGV:GetPercentText(guideTitle, gtype)
+        local percentage = nil
+        
+        if guidePercentagesCache[gtype] and guidePercentagesCache[gtype][guideTitle] then
+            percentage = guidePercentagesCache[gtype][guideTitle]
+        else
+            percentage = DGV:SetGuidePercentageCacheValue(guideTitle, gtype, percentage)
+        end
+		
+		if percentage == 0 or (not DGV:ShouldShowProgess(gtype)) then
+			return ""
+		else
+			text = string.format("%.0f",percentage)
+			local r, g, b, alpha = getColor(percentage)
+            return "|c"..LuaUtils:normalized2HexColor(r,g,b)..text.."%|r"
+		end
+	end
+    
+	function DGV:UpdatePercentText(guideTitle, percentText, gtype, threading)
+        
 		local guidesize, unchecked, j, percent
 		
-		guidesize 	= 	DGV:GetLastGuideNumRows()			
+		guidesize 	= 	DGV:ParseRows(guideTitle, true, string.split("\n","\n"..self.guides[guideTitle]())) - 1		
 		unchecked 	=	0
 		
 		for j=1, guidesize do
-			local status = DGV:GetQuestState(j,guidename)
+			local status = DGV:GetQuestState(j,guideTitle)
 			if not status or status == "U" then 
 				unchecked = unchecked + 1
 			end
@@ -2536,16 +2800,14 @@ function Guides:Initialize()
 		if unchecked == 1  then percent = 100 else percent = 100 - ((unchecked / guidesize) * 100) end
 		
 		if percent == 0 or (not DGV:ShouldShowProgess(gtype)) then
-			guideRow:SetText("")
+			percentText:SetText("")
 		else
 			text = string.format("%.0f",percent)
-			guideRow:SetText(text.."%")
-			
+			percentText:SetText(text.."%")
+            
 			red, green, blue, alpha = getColor(percent)
-			guideRow:SetTextColor(red, green, blue, alpha)
-			--DebugPrint("percent="..percent)
+			percentText:SetTextColor(red, green, blue, alpha)
 		end
-		
 	end
 	
 	local function SetCurrentGuideTabPercentComplete()
@@ -2556,14 +2818,18 @@ function Guides:Initialize()
 				local guides = gtype and DGV.guidelist[gtype]
 				if guides then
 					for i = 1, #guides do --Each guide title
-						guidename = guides[i]
-						if guidename==CurrentTitle then
-							DGV:SetPercent(guidename, GetCreateTabRow(t, i).Percent, gtype)
+						guideTitle = guides[i]
+						if guideTitle==CurrentTitle then
+                            DGV:SetGuidePercentageCacheValue(guideTitle, gtype)
 						end
 					end
 				end
 			end
 		end
+        
+        if guideategorieswrapper then
+            guideategorieswrapper:UpdateTreeVisualization()
+        end
 	end
 
 	function DGV:SetPercentComplete()
@@ -2813,7 +3079,6 @@ function Guides:Initialize()
 		[11] = {path = "Interface\\Minimap\\TRACKING\\Profession", text = "Special Note"},
 		[12] = {path = "Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\resting.tga", text = "Set Hearthstone"},
 		[13] = {path = "Interface\\Minimap\\TRACKING\\Innkeeper", text = "Use Hearthstone"},
-
 		[14] = {path = "Interface\\Minimap\\TRACKING\\FlightMaster", text = "Fly to"},
 		[15] = {path = "Interface\\Minimap\\TRACKING\\StableMaster", text = "Travel to"},
 		[16] = {path = "Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\multi_daily.tga", text = "Random Daily"},
@@ -2881,6 +3146,7 @@ function Guides:Initialize()
 		if (DGV:ReturnTag("AC", i)) then isAchievementpart = true end
 		if (DGV:ReturnTag("L", i)) then isLoot = true end
 		if (DGV:ReturnTag("U", i)) then isUse = true end
+		if (DGV:ReturnTag("SID", i)) then isQpart = true end		
 		
 		if isTooHigh and objectiveType == "A" then
 			button.tooHighTexture = self.ARTWORK_PATH.."accept_g.tga"	
@@ -3247,7 +3513,7 @@ function Guides:Initialize()
 	end
 
 	--Parse rows and fill up 3 items: Objective type (actions), Quest name, Note Tag (actions, quests, tags)
-	function DGV:ParseRows(guidetitle, rowinfo,...)
+	function DGV:ParseRows(guidetitle, infoOnly, rowinfo,...)
 
 		local i
 		local indx = 1
@@ -3256,7 +3522,7 @@ function Guides:Initialize()
 		local myFaction		= UnitFactionGroup("player")
 		local myGender
 		if UnitSex("player") == 3 then myGender = "Female" else myGender = "Male" end 
-		
+		if myClass == "DEMONHUNTER" then myClass = "DEMON" end
 		--Clear old data from tables
 		
 		--[[
@@ -3272,10 +3538,12 @@ function Guides:Initialize()
 		DGV.quests1 = {}
 		DGV.quests1L = {}
 		DGV.quests2 = {}]]
-		wipe(DGV.actions)
-		wipe(DGV.quests1)
-		wipe(DGV.quests1L)
-		wipe(DGV.quests2)
+        if not infoOnly then
+            wipe(DGV.actions)
+            wipe(DGV.quests1)
+            wipe(DGV.quests1L)
+            wipe(DGV.quests2)
+        end
 		
 		--Loop through all rows
 		for i = 1, select ("#", ...) do
@@ -3301,7 +3569,10 @@ function Guides:Initialize()
 						quest = quest:trim()
 						--Find Use items
 						local _, _, useitem = tag:find("|U|([^|]+)|") 
-						DGV.useitem[indx] = useitem
+                        
+                        if not infoOnly then
+                            DGV.useitem[indx] = useitem
+                        end
 
 						--If there is a second objective line, retrieve that
 						local quest2, questtest
@@ -3320,18 +3591,22 @@ function Guides:Initialize()
                         local sid = tag:match("|SID|(%d+)")
 						sid = tonumber(sid)
 						
-						DGV.actions[indx] = action:trim()
-						DGV.quests1[indx] = quest:trim()
-						DGV.quests1L[indx] = quest:trim()
-						DGV.quests2[indx] = quest2:trim()
-						DGV.tags[indx] = tag
-						DGV.qid[indx] = qid
-                        DGV.sid[indx] = sid
-						DGV.daily[indx] = daily
+                        if not infoOnly then
+                            DGV.actions[indx] = action:trim()
+                            DGV.quests1[indx] = quest:trim()
+                            DGV.quests1L[indx] = quest:trim()
+                            DGV.quests2[indx] = quest2:trim()
+                            DGV.tags[indx] = tag
+                            DGV.qid[indx] = qid
+                            DGV.sid[indx] = sid
+                            DGV.daily[indx] = daily
+                        end
 						indx = indx + 1
 					end
 			end
 		end
+        
+        return indx
 	end
 	
 	function DGV:InBag(itemid)
@@ -3348,7 +3623,7 @@ function Guides:Initialize()
 	end
 
 	--Fill screen with 3 items: Objective type (actions), Quest name, Note Tag (actions, quests, tags)
-	function DGV:PopulateObjectives(title, SearchMode)
+	function DGV:PopulateObjectives(title, SearchMode, threading)
 		--DGV:DebugFormat("PopulateObjectives", "stack", debugstack())
 			if not title then title = CurrentTitle end
 			local numrows = 0
@@ -3375,6 +3650,10 @@ function Guides:Initialize()
 			self:SetViewTabTitle(self:GetFormattedTitle(title))
 					
 			for i = 1 , #DGV.actions do 
+                if threading then
+                    coroutine.yield()
+					LuaUtils:WaitForCombatEnd(true)
+                end
 				
 				local dgvRowName = "DGVRow"..i
 				rowObj 	= _G[dgvRowName]
@@ -3481,8 +3760,8 @@ function Guides:Initialize()
 		
 		local Row = GetVisualRow(i)
 		
-		if (level and strmatch(self.actions[i], "[ACT]") and self:UserSetting(DGV_QUESTLEVELON)) or (level and questpart and strmatch(self.actions[i], "[NK]") and self:UserSetting(DGV_QUESTLEVELON)) then
-			if not Row.Name.levelText and DGV.Localize == 0 then
+		if (level and level > 0 and strmatch(self.actions[i], "[ACT]") and self:UserSetting(DGV_QUESTLEVELON)) or (level and level > 0 and questpart and strmatch(self.actions[i], "[NK]") and self:UserSetting(DGV_QUESTLEVELON)) then
+			if not Row.Name.levelText and DGV.Localize == 0  then
 				Row.Name.levelText = string.format("[%d] %s", level, qName)
 			end
 			qName = Row.Name.levelText
@@ -3500,6 +3779,7 @@ function Guides:Initialize()
 		if (Row.Opt.optional or
 			Row.Opt.prof or 
 			(Row.Opt.pre and not EvaluatePRE(Row.Opt.pre)) or 
+			(Row.Opt.pre2 and not EvaluatePRE(Row.Opt.pre2)) or 			
 			(Row.Opt.pha and not EvaluatePHA(Row.Opt.pha)) or 			
 			(Row.Opt.rep and not EvaluateREP(Row.Opt.rep, Row.Opt.standing))) or 
 			(Row.Opt.friend and not EvaluateFS(Row.Opt.friend, Row.Opt.level)) then
@@ -3536,32 +3816,31 @@ function Guides:Initialize()
 	end
 
 	--Update the guide level range on guide listings when difficulty is changed
-
 	function DGV:TabTextRefresh()
 		local i, GuideRow
-		
 		DGV:SetViewTabTitle(self:GetFormattedTitle(CurrentTitle))
 		
 		for i = 1, #tabs do
 			local TabInfo	= tabs[i]
-					
 
 			local gtype = TabInfo.guidetype
 			if gtype then
 				if DGV.guidelist[gtype] then
 					for j =1 , #DGV.guidelist[gtype] do  				
 						GuideRow = _G["DugisTab"..i.."Row"..j]
-						GuideRow.Title:SetText(self:GetFormattedTitle(DGV.guidelist[gtype][j]))
+                        
+                        if GuideRow then
+                            GuideRow.Title:SetText(self:GetFormattedTitle(DGV.guidelist[gtype][j]))
+                        end
 					end
 				else
 					GuideRow = _G["DugisTab"..i.."Row"..1]
-					GuideRow.Title:SetText(L["No Guide Loaded"])
+					if GuideRow and GuideRow.Title then GuideRow.Title:SetText(L["No Guide Loaded"]) end
 				end
 			end
 		end
 	end
 	
-	local ToggleCollapsed
 	Guides.rowHeadings = {}
 	if not DGU.subCategoriesExpanded then
 		DGU.subCategoriesExpanded = {}
@@ -3620,6 +3899,10 @@ function Guides:Initialize()
             
             local lastIndex = DugisGuideUser.RecentGuides.LastIndices[categoryName]
           
+            if DugisGuideUser.RecentGuides.Guides[categoryName] == nil then
+                DugisGuideUser.RecentGuides.Guides[categoryName] = {}
+            end
+            
             DugisGuideUser.RecentGuides.Guides[categoryName][lastIndex] = rawGuideTitle
             if  not InTable(DugisGuideUser.RecentGuides.Categories, categoryName) then
                 DugisGuideUser.RecentGuides.Categories[#DugisGuideUser.RecentGuides.Categories + 1] = categoryName
@@ -3629,33 +3912,21 @@ function Guides:Initialize()
 	
 	--Load a guide from a tab
 	function DugisGuideViewer_TabRow_OnEvent(self, event, ...)
-
-		if tContains(Guides.rowHeadings, self) then
-			ToggleCollapsed(self)
-			return
-		end
-		
-        local clickedType = DugisGuideViewer.gtype[self.title]
-        local metaData = DugisGuideViewer.guidemetadata[self.title]
+        local rawTitle = self:GetParent().nodeData.data.rawTitle
+        DGV:AddGuideToRecentGuides(rawTitle)
+        
+        local clickedType = DugisGuideViewer.gtype[rawTitle]
+        local metaData = DugisGuideViewer.guidemetadata[rawTitle]
         
         if clickedType == "Followers" or clickedType == "Pets" or clickedType == "Mounts" or clickedType == "Bosses" or clickedType == "NPC" then
             NPCJournalFrame:OnGuideRowClick("", metaData.objectId, clickedType)
             return
         end
         
-        local rowtitle = _G[self:GetName().."Title"]:GetText()
-		
-		if rowtitle ~= L["No Guide Loaded"] and not rowtitle:find("__") then
-			--DGV:DisplayViewTab(DGV:GetRawTitle(rowtitle))
-			--DebugPrint("rowtitle"..rowtitle.."_GetTitleName".._GetTitleName(rowtitle).."*".."titlename"..DGV:GetRawTitle(_GetTitleName(rowtitle)))
-			--DGV:DisplayViewTab(DGV:GetRawTitle(_GetTitleName(rowtitle)))
-
-			DGV:DisplayViewTab(DGV:GetRawTitle(rowtitle))
-			print("|cff11ff11Dugi Guides: |r"..DGV:GetFormattedTitle(rowtitle).."|cff11ff11 selected.|r")
-            
-            local rawGuideTitle = DGV:GetRawTitle(rowtitle)
-            DGV:AddGuideToRecentGuides(rawGuideTitle)
-		end
+        DGV:DisplayViewTab(rawTitle)
+        print("|cff11ff11Dugi Guides: |r"..DGV:GetFormattedTitle(rawTitle).."|cff11ff11 selected.|r")
+        
+        DGV:AddGuideToRecentGuides(rawTitle)
 	end	
 	
 	local _G = _G
@@ -3680,71 +3951,6 @@ function Guides:Initialize()
         tabRowsListCache[tabNum] = result
         return result
     end
-	
-	local function SetCollapsedBehavior(label)
-		local expandedKey = ((not label.originalTabNum and "") 
-			or label.originalTabNum)..label.headingTitle
-		local expanded = DGU.subCategoriesExpanded and DGU.subCategoriesExpanded[expandedKey]
-        
-        local tabRowsList = GetCachedTabRows(label.tabNum)
-		for i,row in pairs(tabRowsList) do
-			local affectShown = DGV.headings[row.title]==label.headingTitle 
-					and (not label.originalTabNum or label.originalTabNum==row.originalTabNum)
-			if not affectShown then
-				affectShown = row:GetParent()==label and row.title
-			end
-			if affectShown then
-				if expanded and (label.tabNum~=SEARCH_TAB or
-						DGV.Search:InSearchResults(DGV.headings[row.title],
-							DGV:GetFormattedTitle(row.title))) 
-				then
-					row:Show()
-				else 
-					row:Hide()
-				end
-			end
-		end
-		
-		for _,rh in ipairs(Guides.rowHeadings) do
-			if rh.anchor==label then
-				rh:SetPoint(
-					"TOP", 
-					(expanded and label.lastChild) or label, 
-					"BOTTOM", 0, -5)
-			end
-		end
-		
-		if expanded then
-			label:SetNormalTexture("Interface\\Buttons\\UI-MinusButton-Up")
-		else
-			label:SetNormalTexture("Interface\\Buttons\\UI-PlusButton-Up")
-		end
-        
-        UpdateTreeFramePosition()
-	end
-	
-	local function SetAllHeaderStates(useCorutine)
-		for _,headerLabel in ipairs(Guides.rowHeadings) do
-            if useCorutine then
-                coroutine.yield()
-            end
-
-			SetCollapsedBehavior(headerLabel)
-		end
-	end
-	
-    DGV.SetAllHeaderStates = SetAllHeaderStates
-    
-	ToggleCollapsed = function(label, event, button)
-		local expandedKey = ((not label.originalTabNum and "") 
-			or label.originalTabNum)..label.headingTitle
-		if not DGU.subCategoriesExpanded then
-			DGU.subCategoriesExpanded = {}
-		end
-		DGU.subCategoriesExpanded[expandedKey] = 
-			not DGU.subCategoriesExpanded[expandedKey]
-		SetCollapsedBehavior(label)
-	end
 	
 	local function VerifyRank(rank, minimum, maximum)
 		if minimum and rank<minimum then return end
@@ -3809,54 +4015,103 @@ function Guides:Initialize()
     local rowheight = 14
     local rowCount = 0
     local lastHeading
-    local function AddGuidesToZoneGuides(guideType, category)
-        local headingLabel = nil
+    local function GetGuides(guideType, category)
+        local result = {}
         local currentZone = GetCurrentMapAreaID() 
-        
+
         if DGV.guidelist[guideType] ~= nil then
             for _,guide in ipairs(DGV.guidelist[guideType]) do
+                
                 local zone = tonumber(guide:match("^(%d+)"))
                 if not zone then
                     zone = tonumber(DGV:GetMapIDFromName(guide:match("^(.-)%s?%(")))
                 end            
             
                 if zone == currentZone   then
-                    if not headingLabel then
-                        headingLabel = GetCreateRowHeading(SUGGEST_TAB, nil, nil, 0)
-                        headingLabel.headingTitle = category
-                        headingLabel.Title:SetText("|cffffd200"..headingLabel.headingTitle.."|r")
-                    end
-                    rowCount = rowCount +1
-                    local guideRow = GetCreateTabRow(SUGGEST_TAB, rowCount)
-                    
-                    guideRow:Show()
-                    guideRow:SetParent(headingLabel)
-                    headingLabel.lastChild = guideRow
-                    if lastHeading~=headingLabel then
-                        guideRow:SetPoint("TOPLEFT", headingLabel, "BOTTOMLEFT", 0, -5 ) 
-                    else 
-                        guideRow:SetPoint("TOPLEFT", "DugisTab"..SUGGEST_TAB.."Row"..rowCount-1, "BOTTOMLEFT", 0, yofs) 
-                    end
-                    lastHeading = headingLabel
-                    guideRow.Title:SetText(DGV:GetFormattedTitle(guide))
-                    guideRow.Title:Show()
-                    guideRow.title = guide
-                    guideRow.rawText = guide
-
-					guideRow:SetScript("OnEnter", function(self)
-						OnGuideRowMouseEnter(self)
-					end)
-					
-					guideRow:SetScript("OnLeave", function(self)
-						OnGuideRowMouseLeave(title)
-					end)					
+                     result[#result + 1] = guide
                 end
             end
         end
+        
+        return result
     end
     
+    function GetPercentageTextByNodeData(nodeData)
+         return DGV:GetPercentText(nodeData.data.rawTitle, nodeData.data.guideType)
+    end
+    
+    local headerTitle2Node = {}
+    local headerTitle3Node = {}
+    local headerL2Title2Node = {}
+    local headerL3Title2Node = {}
+    tabs[SUGGEST_TAB].treeData = {}  
 
-	PopulateSuggestedGuides = function()
+    function BeginAddingGuidesToTreeData(treeDataParent)
+        treeDataParent.treeData = {}
+        headerTitle2Node = {}
+        headerTitle3Node = {}
+        headerL2Title2Node = {}
+        headerL3Title2Node = {}
+    end    
+    
+    function AddGuideToTreeData(treeData, guideTitle, guideType)
+        local currentNode = nil
+        local currentHeading = DGV.headings[guideTitle]
+        local currentHeadingL2 = DGV.hedingsL2[guideTitle]
+        local currentHeadingL3 = DGV.hedingsL3[guideTitle]
+        
+        local currentNode = headerTitle2Node[currentHeading]
+        
+        --New node
+        --Categories Level 1
+        if not currentNode then
+            currentNode = {name=currentHeading, nodes={}, data={}}
+            headerTitle2Node[currentHeading] = currentNode
+            treeData[#treeData + 1] = currentNode
+        end
+        
+        --Categories Level 2
+        if currentHeadingL2 then
+            local key = currentHeading .. currentHeadingL2
+            
+            local currentL2Node = headerL2Title2Node[key]
+            if not currentL2Node then
+                currentL2Node = {name=currentHeadingL2, nodes={}, data={}}
+                headerL2Title2Node[key] = currentL2Node
+                currentNode.nodes[#currentNode.nodes + 1] = currentL2Node
+            end
+            
+            currentNode = currentL2Node
+        end  
+        
+        --Categories Level 3
+        if currentHeadingL3 then
+            local key = currentHeading .. currentHeadingL2 .. currentHeadingL3
+        
+            local currentL3Node = headerL3Title2Node[key]
+            if not currentL3Node then
+                currentL3Node = {name=currentHeadingL3, nodes={}, data={}}
+                headerL3Title2Node[key] = currentL3Node
+                currentNode.nodes[#currentNode.nodes + 1] = currentL3Node
+            end
+            
+            currentNode = currentL3Node
+        end
+        
+        --Leaf
+        if currentNode then
+            currentNode.nodes[#currentNode.nodes + 1] = {name=DGV:GetFormattedTitle(guideTitle)
+            , isLeaf=true
+            , onMouseEnter = OnGuideRowMouseEnter
+            , onMouseLeave = OnGuideRowMouseLeave
+            , onMouseClick = DugisGuideViewer_TabRow_OnEvent
+            , rightText = GetPercentageTextByNodeData
+            , data={rawTitle = guideTitle, guideType = guideType}}
+        end
+    
+    end
+
+	PopulateSuggestedGuides = function(threading)
         playerRace,  engPlayerRace  = UnitRace("player") 
         if engPlayerRace == "BloodElf" then
             engPlayerRace = "Blood Elf"
@@ -3868,88 +4123,47 @@ function Guides:Initialize()
         if engPlayerRace == "Scourge" then
             engPlayerRace = "Undead"
         end
-        
-		yofs = -5
-		rowheight = 14
-		rowCount = 0
-		lastHeading = nil
-		
-		for _,rh in ipairs(Guides.rowHeadings) do
-			if rh.tabNum==SUGGEST_TAB then
-				rh:ClearAllPoints()
-                local tabRowsList = GetCachedTabRows(SUGGEST_TAB)
-                for i,row in pairs(tabRowsList) do
-					row.title = nil
-					row:Hide()
-				end
-				rh:Hide()
-			end
-		end
 
-        AddGuidesToZoneGuides("I", "Current Zone")
-        AddGuidesToZoneGuides("L", "Current Zone")
+        BeginAddingGuidesToTreeData(tabs[SUGGEST_TAB])
+        
+        local iGuides = GetGuides("I", "Current Zone")
+        LuaUtils:foreach(iGuides, function(guide)
+            local isStartingZone = (string.match(DGV.headings[guide], "Starting Zones") ~= nil)
+            if not isStartingZone or (isStartingZone and string.match(guide, engPlayerRace)) then
+                AddGuideToTreeData(tabs[SUGGEST_TAB].treeData, guide, "I")
+            end
+        end)
+        
+        local lGuides = GetGuides("L", "Current Zone")
+        LuaUtils:foreach(lGuides, function(guide)
+            local isStartingZone = (string.match(DGV.headings[guide], "Starting Zones") ~= nil)
+            if not isStartingZone or (isStartingZone and string.match(guide, engPlayerRace)) then
+                AddGuideToTreeData(tabs[SUGGEST_TAB].treeData, guide, "L")
+            end
+        end)
 
 		for _,tabInfo in ipairs(tabs) do
 			if tabInfo.guidetype then
-				local headingLabel = nil
 				for guide in IterateSuggestedGuides,tabInfo.guidetype do
-					if not headingLabel then
-						headingLabel = GetCreateRowHeading(SUGGEST_TAB)
-						headingLabel.headingTitle = tabInfo.title
-						headingLabel.Title:SetText("|cffffd200"..headingLabel.headingTitle.."|r")
-					end
-					rowCount = rowCount +1
-					local guideRow = GetCreateTabRow(SUGGEST_TAB, rowCount)
+                    if threading then
+                        LuaUtils:loop(50, function()
+                            coroutine.yield()
+                        end)
+						LuaUtils:WaitForCombatEnd(true)
+                    end
+
                     local isStartingZone = (string.match(DGV.headings[guide], "Starting Zones") ~= nil)
                     if not isStartingZone or (isStartingZone and string.match(guide, engPlayerRace)) then
-                        guideRow:Show()
-                        guideRow:SetParent(headingLabel)
-                        headingLabel.lastChild = guideRow
-                        if lastHeading~=headingLabel then
-                            guideRow:SetPoint("TOPLEFT", headingLabel, "BOTTOMLEFT", 0, -5 ) 
-                        else 
-                            guideRow:SetPoint("TOPLEFT", "DugisTab"..SUGGEST_TAB.."Row"..rowCount-1, "BOTTOMLEFT", 0, yofs) 
-                        end
-                        lastHeading = headingLabel
-                        guideRow.Title:SetText(DGV:GetFormattedTitle(guide))
-                        guideRow.Title:Show()
-                        guideRow.title = guide
-                        guideRow.rawText = guide
-						
-						guideRow:SetScript("OnEnter", function(self)
-                            OnGuideRowMouseEnter(self)
-                        end)
-                        
-                        guideRow:SetScript("OnLeave", function(self)
-                            OnGuideRowMouseLeave(title)
-                        end)
+                        AddGuideToTreeData(tabs[SUGGEST_TAB].treeData, guide, tabInfo.guidetype)
                     end
 				end
 			end
 		end
-		SetAllHeaderStates()
-		local tabInfo = tabs[SUGGEST_TAB]
-		tabInfo.rightScrollMax = rowheight * rowCount +  50
 	end
     
     PopulateRecentGuides = function()
-        local playerRace,  engPlayerRace  = UnitRace("player") 
-		local yofs = -5
-		local rowheight = 14
-		local rowCount = 0
-		local lastHeading
-		
-		for _,rh in ipairs(Guides.rowHeadings) do
-			if rh.tabNum==RECENT_TAB then
-				rh:ClearAllPoints()
-                local tabRowsList = GetCachedTabRows(RECENT_TAB)
-                for i,row in pairs(tabRowsList) do
-					row.title = nil
-					row:Hide()
-				end
-				rh:Hide()
-			end
-		end
+        BeginAddingGuidesToTreeData(tabs[RECENT_TAB])
+        
 		for _,tabInfo in ipairs(tabs) do
 			if tabInfo.guidetype then
 				local headingLabel = nil
@@ -3957,45 +4171,19 @@ function Guides:Initialize()
                 local allRecentGuides = DGV:GetFlatternRecentGuides()
 				for _,guide in ipairs(allRecentGuides) do
                     if tabInfo.guidetype == DGV.gtype[guide] then
-                        if not headingLabel then
-                            headingLabel = GetCreateRowHeading(RECENT_TAB, nil, nil, -18)
-                            headingLabel.headingTitle = tabInfo.title
-                            headingLabel.Title:SetText("|cffffd200"..headingLabel.headingTitle.."|r")
+                        if threading then
+                            coroutine.yield()
+                            LuaUtils:WaitForCombatEnd(true)
                         end
-                        rowCount = rowCount +1
-                        local guideRow = GetCreateTabRow(RECENT_TAB, rowCount)
                         
-                        guideRow:Show()
-                        guideRow:SetParent(headingLabel)
-                        headingLabel.lastChild = guideRow
-                        if lastHeading~=headingLabel then
-                            guideRow:SetPoint("TOPLEFT", headingLabel, "BOTTOMLEFT", 0, -5 ) 
-                        else 
-                            guideRow:SetPoint("TOPLEFT", "DugisTab"..RECENT_TAB.."Row"..rowCount-1, "BOTTOMLEFT", 0, yofs) 
-                        end
-                        lastHeading = headingLabel
-                        guideRow.Title:SetText(DGV:GetFormattedTitle(guide))
-                        guideRow.Title:Show()
-                        guideRow.title = guide
-                        guideRow.rawText = guide
-						
-                        guideRow:SetScript("OnEnter", function(self)
-                            OnGuideRowMouseEnter(self)
-                        end)
-                        
-                        guideRow:SetScript("OnLeave", function(self)
-                            OnGuideRowMouseLeave(title)
-                        end)						
+                        AddGuideToTreeData(tabs[RECENT_TAB].treeData, guide, tabInfo.guidetype)
                     end
 				end
 			end
 		end
-		SetAllHeaderStates()
-		local tabInfo = tabs[RECENT_TAB]
-		tabInfo.rightScrollMax = rowheight * rowCount +  50
 	end
 	
-	function DGV:InitializeTabs()
+	function DGV:InitializeTabs(threading)
 		local yofs = -5
 		local rowheight = 14
 		local i, j, SettingNum, IconNum
@@ -4008,7 +4196,7 @@ function Guides:Initialize()
 		Main.settingsTab.tabInfo = tabs[3]
 		DGV:CreateSettingsTree(tabs[3].RightFrame)
 		tabs[3]:Activate()
-		PopulateSuggestedGuides()
+		PopulateSuggestedGuides(threading)
 
 		for i = 4, #tabs do
 			local selection	= DGVHomeFrame["selection"..i-3]
@@ -4055,19 +4243,7 @@ function Guides:Initialize()
 				selection.tooltip = ""
 			end	
            
-            if TabInfo.text == "Recent Guides" then 
-                if _G["recentGuidesLabel"] == nil then
-                    local recentGuidesLabel = TabInfo.RightFrame:CreateFontString("recentGuidesLabel", "ARTWORK", "GameFontNormalLarge")
-                    recentGuidesLabel:SetText(L["Recent Guides"])
-                    recentGuidesLabel:SetPoint("TOPLEFT", TabInfo.RightFrame, "TOPLEFT", 3, 0)
-                end
-                
-                if #DGV:GetFlatternRecentGuides() > 0 then
-                    _G["recentGuidesLabel"]:Show()
-                else
-                    _G["recentGuidesLabel"]:Hide()
-                end 
-			end	
+
 			
 			if TabInfo.text == "Help" then
 				--For technical support please contact:
@@ -4174,27 +4350,19 @@ function Guides:Initialize()
 				end
 			end
 			
-			
-			
-			--[[if i == SIDE_TAB_START then 
-				TabFrame.Icon:SetPoint("TOPLEFT", "DugisMainframe", "TOPRIGHT", "0", "-22" ) 
-			else
-				TabFrame.Icon:SetPoint("TOP", _G["DugisTab"..(i-1).."Icon"], "BOTTOM", "0", "-15" ) 
-			end]]
-		
-			--[[TabFrame.Title:SetText(L[TabInfo.title])
-			TabFrame.Desc:SetText(L[TabInfo.desc])		
-			TabFrame.Desc:SetWidth(500)]]
-			
             function OnGuideRowMouseEnter(self)
-                local title = self.title
+                local nodeData = self:GetParent().nodeData
+            
+                local title = nodeData.data.rawTitle
                 local heading = DugisGuideViewer.headings[title]
                 local guidetags = DugisGuideViewer.guidetags[title]
                 local gtype = DugisGuideViewer.gtype[title]
                 local formatted = DugisGuideViewer:GetFormattedTitle(title)
                 local guidemetadata = DugisGuideViewer.guidemetadata[title]
                 
-                NPCJournalFrame:OnGuideRowMouseEnter(title, guidemetadata.objectId, gtype)
+                if guidemetadata then
+                    NPCJournalFrame:OnGuideRowMouseEnter(title, guidemetadata.objectId, gtype)
+                end
                 
                 if guidemetadata then
                      if guidemetadata.description then
@@ -4235,88 +4403,23 @@ function Guides:Initialize()
 			local gtype = TabInfo.guidetype
 			if gtype then
 				if DGV.guidelist[gtype] then
-					if not TabInfo.RightFrame.panel then
-						TabInfo.RightFrame.panel = CreateFrame("Frame", nil, TabInfo.RightFrame, "DugisSelectionPanelTemplate")
-						TabInfo.RightFrame.panel:SetPoint("TOPLEFT", 10, -5)
-						if type(texture)=="function" then
-							texture(TabInfo.RightFrame.panel.icon)
-						else
-							TabInfo.RightFrame.panel.icon:SetTexture(texture)
-						end
-						TabInfo.RightFrame.panel.text:SetText(L[TabInfo.text])
-
-
-					end
-					local lastHeading
+                
+                    BeginAddingGuidesToTreeData(TabInfo)
+                    
 					for j =1 , #DGV.guidelist[gtype] do
+                        if threading then
+                            coroutine.yield()
+   							LuaUtils:WaitForCombatEnd(true)
+                        end
+                    
 						local title = DGV.guidelist[gtype][j]
-						local headingLabel = GetCreateRowHeading(i, title)
-						if not TabInfo.RightFrame.firstHeading then
-							TabInfo.RightFrame.firstHeading = headingLabel
-						end
-						GuideRow = GetCreateTabRow(i, j, title)
-						if lastHeading~=headingLabel then	
-							GuideRow:SetPoint("TOPLEFT", headingLabel, "BOTTOMLEFT", 0, "-5" ) 
-						else 
-							GuideRow:SetPoint("TOPLEFT", "DugisTab"..i.."Row"..j-1, "BOTTOMLEFT", "0", yofs) 
-						end
-						lastHeading = headingLabel
-						GuideRow.Title:SetText(self:GetFormattedTitle(title))
-						GuideRow.Title:Show()
-						GuideRow.title = title
-                        GuideRow.rawText = title
                         
-                        GuideRow:SetScript("OnEnter", function(self)
-                            OnGuideRowMouseEnter(self)
-                        end)
-                        
-                        GuideRow:SetScript("OnLeave", function(self)
-                            OnGuideRowMouseLeave(title)
-                        end)
-                        
+                        AddGuideToTreeData(TabInfo.treeData, title, gtype)
 					end
-					SetAllHeaderStates()
-					TabInfo.rightScrollMax = rowheight * #DGV.guidelist[gtype] +  50
-				else
-					GuideRow = GetCreateTabRow(i, 1)
-					GuideRow:SetPoint("TOPLEFT", TabInfo.RightFrame, "TOPLEFT", xofs, "-5" )
-					GuideRow.Title:SetText(L["No Guide Loaded"])
-					GuideRow.Title:Show()
-                    TabInfo.TitleControl = GuideRow.Title
 				end
 			end
 		end
 	end
-    
-    lastSearchHeading = nil
-    
-    
-    function UpdateTreeFramePosition()
-        --Updating Tree result frame position and visibility
-        if TreeFrame then
-            TreeFrame:ClearAllPoints()
-        end
-        
-        if not lastSearchHeading or not lastSearchHeading:IsVisible() then
-            if TreeFrame then
-                TreeFrame:SetPoint("TOPLEFT", tabs[SEARCH_TAB].RightFrame, "TOPLEFT", 5, -5)
-                TreeFrame:SetParent(tabs[SEARCH_TAB].RightFrame)
-                GUIUtils:UpdateTreeVisualization(TreeFrame)
-            end
-            return 
-        end
-    
-        local path = lastSearchHeading:GetNormalTexture():GetTexture() 
-        local isExpanded = (path == "Interface\\Buttons\\UI-MinusButton-UP")
-        
-        if isExpanded then
-            TreeFrame:SetPoint("TOPLEFT", lastSearchHeading.lastChild, "TOPLEFT", 7, -20 )
-        else
-            TreeFrame:SetPoint("TOPLEFT", lastSearchHeading, "TOPLEFT", 7, -20 )
-        end
-        
-        GUIUtils:UpdateTreeVisualization(TreeFrame)
-    end
     
 	function PopulateGlobalSearchResults()
 		local yofs = -5
@@ -4337,106 +4440,68 @@ function Guides:Initialize()
 			end
 		end
 
+        local headerTitle2Node = {}
+        tabs[SEARCH_TAB].treeData = {}
+        
         local i=1
 		for i=1,#tabs do
 			local gtype = tabs[i].guidetype
 			if gtype and DGV.guidelist[gtype] then
 				local subCat = DGV.guidelist[gtype]
 				--DGV:DebugFormat("PopulateGlobalSearchResults", "gtype", gtype)
-				local lastHeading
 				for j =1 , #subCat do
                     coroutine.yield()
 					local title = subCat[j]
-					if DGV.Search:InSearchResults(DGV.headings[title], DGV:GetFormattedTitle(title)) then
-						tabs[SEARCH_TAB]:Activate()
-						rowCount = rowCount +1
-						local headingLabel = GetCreateRowHeading(SEARCH_TAB, title, i)
-						headingLabel.Title:SetText(tabs[headingLabel.originalTabNum].text.." - "..headingLabel.headingTitle)
-						GuideRow = GetCreateTabRow(SEARCH_TAB, rowCount, title, i)
-						GuideRow:Show()
-						GuideRow:SetParent(headingLabel)
-						headingLabel.lastChild = GuideRow
-						if lastHeading~=headingLabel then
-							GuideRow:SetPoint("TOPLEFT", headingLabel, "BOTTOMLEFT", 0, "-5" ) 
-						else 
-							GuideRow:SetPoint("TOPLEFT", "DugisTab1Row"..rowCount-1, "BOTTOMLEFT", "0", yofs) 
-						end
-						lastHeading = headingLabel
-                        lastSearchHeading = headingLabel
-                        local text = DGV:GetFormattedTitle(title)
-						GuideRow.Title:SetText(text)
-						GuideRow.Title:Show()
-						GuideRow.title = title
-                        GuideRow.rawText = title
-						headingLabel.guideType = gtype
-						
-                        GuideRow:SetScript("OnEnter", function(self)
-                            OnGuideRowMouseEnter(self)
-                        end)
+					if  DGV.Search:InSearchResults(DGV.headings[title], DGV:GetFormattedTitle(title)) then
+                        local currentNode = nil
+                        local currentHeading = DGV.headings[title]
                         
-                        GuideRow:SetScript("OnLeave", function(self)
-                            OnGuideRowMouseLeave(title)
-                        end)						
+                        local currentNode = headerTitle2Node[currentHeading]
+                        
+                        --New node
+                        if not currentNode then
+                            currentNode = {name=currentHeading, nodes={}, data={}}
+                            headerTitle2Node[currentHeading] = currentNode
+                            tabs[SEARCH_TAB].treeData[#tabs[SEARCH_TAB].treeData + 1] = currentNode
+                        end
+                        
+                        if currentNode then
+                            currentNode.nodes[#currentNode.nodes + 1] = {name=DGV:GetFormattedTitle(title)
+                            , isLeaf=true
+                            , onMouseEnter = OnGuideRowMouseEnter
+                            , onMouseLeave = OnGuideRowMouseLeave
+                            , onMouseClick = DugisGuideViewer_TabRow_OnEvent
+                            , rightText = GetPercentageTextByNodeData
+                            , data={rawTitle = title, guideType = gtype}}
+                        end
 					end
 				end
 			end
 
 		end
-    
+
+        --Locations
         ---------------------------------
         --------- TREE FRAME ------------
         ---------------------------------
-        local nodes = {}
-        
         if DGV_SearchBox:GetNumLetters() > 1 then
-            if TreeFrame == nil then
-                local f = CreateFrame("Frame","TreeFrame", UIParent)
-
-                f:Show() 
-            end
-            
-            TreeFrame:SetParent(lastSearchHeading)
-            TreeFrame:SetWidth(368)
-            TreeFrame:SetHeight(64)
-            
             nodes = DGV:GetLocationsAndPortalsByText(DGV_SearchBox:GetText())
             
-            --Passing data to tree frame       
-            GUIUtils:SetTreeFrameData(TreeFrame, "MainMenu", nodes, function(self)
-                DGV:RemoveAllWaypoints()
-                local data = self.leafData.data
-                if data.isPortal == true then
-                    DGV:AddCustomWaypoint(data.x, data.y, "Portal "..data.mapName, data.mapId, data.f)      
-                else
-                    local mapId = DGV:GetMapIDFromName(data.zone)
-                    DGV:AddCustomWaypoint(data.x / 100, data.y / 100, data.subzoneName, mapId, 0)      
-                end
-				SettingsSearch_SearchBox:SetAutoFocus(false)
-				SettingsSearch_SearchBox:ClearFocus()
+            LuaUtils:foreach(nodes, function(node)
+                tabs[SEARCH_TAB].treeData[#tabs[SEARCH_TAB].treeData + 1] = node
             end)
-            
-            UpdateTreeFramePosition()
-            TreeFrame:Show() 
         else
-            if TreeFrame then
-                TreeFrame:Hide()
-            end
         end
-
+        
+        tabs[SEARCH_TAB]:Activate()
+        
 		local tabInfo = tabs[SEARCH_TAB]
 		tabInfo.rightScrollMax = rowheight * rowCount +  50
-		if tabInfo==activeTabInfo then
-			SetAllHeaderStates(true)
-		end
 
         --In case some locations/portals are found the current tab must be hidden 
         if rowCount == 0 and #nodes > 0 then
             activeTabInfo.RightFrame:Hide()
         end
-
-		--tabInfo:Activate()
-		--DGV:RestoreScrollBar(SEARCH_TAB)
-		--DGV:DebugFormat("PopulateGlobalSearchResults", "SliderMax[SEARCH_TAB]", SliderMax[SEARCH_TAB])
 	end
     
     function Guides:UpdateSearch()
@@ -4472,7 +4537,9 @@ function Guides:Initialize()
 		if not DGV.rawtitle then DGV.rawtitle = {} end
 		if not DGV.guidelist then DGV.guidelist = {} end
 		if not DGV.headings then DGV.headings = {} end
-		
+        
+		if not DGV.hedingsL2 then DGV.hedingsL2 = {} end
+		if not DGV.hedingsL3 then DGV.hedingsL3 = {} end
 
 		--DGV.queryquests = {}
 		DGV.actions = {}
@@ -4494,18 +4561,18 @@ function Guides:Initialize()
 		visualRows = DGV.visualRows
 
 		function DGV:CompleteQuest()
-			DebugPrint("Finished a quest, HookScript QuestFrameCompleteQuestButton")
+			--DebugPrint("Finished a quest, HookScript QuestFrameCompleteQuestButton")
 			local qid = DGV:GetQIDFromQuestName(GetTitleText())
 			--if qid then
 
 			--	DGU.turnedinquests[qid] = true
 			--end
 
-			if CurrentAction and qid then DebugPrint("HOOK qid is"..qid.."*".."action ="..CurrentAction.."*".."titletext="..GetTitleText()) end
+			--if CurrentAction and qid then DebugPrint("HOOK qid is"..qid.."*".."action ="..CurrentAction.."*".."titletext="..GetTitleText()) end
 
 			local acceptandcomplete 			= DGV:ReturnTag("E")
 
-			if acceptandcomplete then DebugPrint("Detected accept and complete tag") end
+			--if not acceptandcomplete then return end
 
 			if not  DGV.quests1L[DGU.CurrentQuestIndex] then return end
 			local _, _, questnoparen = DGV.quests1L[DGU.CurrentQuestIndex]:find("([^%(]*)")
@@ -4517,9 +4584,10 @@ function Guides:Initialize()
 				DGV:SetChkToComplete(DGU.CurrentQuestIndex)
 				DGV:MoveToNextQuest()
 			else
-			        DGV:CompleteQID(qid, "T")
+				DGV:CompleteQID(qid, "T") --not needed UpdateMainFrame() handles this
+				DGV:MoveToNextQuest()
 			end
-			JustTurnedInQID = qid
+			--JustTurnedInQID = qid
 		end
 
 		function DGV:ClearScreen()
@@ -4534,6 +4602,7 @@ function Guides:Initialize()
 			end
 			DugisGuideViewerActionItemFrame:Hide()
 			DugisSecureQuestButton:Hide()
+			if SmallFrameProgressBar and SmallFrameProgressBar:IsShown() then SmallFrameProgressBar:Hide() end			
 		end
 
 		function DGV:isValidGuide(title)
@@ -4579,7 +4648,7 @@ function Guides:Initialize()
 
 			local i = GetQuestLogSelection()
 			AbandonQID = select(8, GetQuestLogTitle(i))
-			DGV:DebugFormat("UpdateAbandonQID", "AbandonQID", AbandonQID)
+			--DGV:DebugFormat("UpdateAbandonQID", "AbandonQID", AbandonQID)
 		end
 		abandonQuestReaction = RegisterFunctionReaction("AbandonQuest", nil, UpdateAbandonQID)
 		
@@ -4589,23 +4658,6 @@ function Guides:Initialize()
 			local i, guideIndex
 			local setChecked = false 
 			
-			--Abandoned Quest
-			if AbandonQID and DGU.CurrentQuestIndex then
-				local logidx = self:GetQuestLogIndexByQID(AbandonQID)
-				if not logidx then --user abandoned quest but it hasn't registered yet			
-					for i =1, #visualRows do
-						if self.qid[i] == AbandonQID and strmatch(self.actions[i], "[ACTNKR]") then
-							self:ClrChk(i)
-						end
-					end
-					local nextindex = self:FindNextUnchecked()
-					if nextindex < DGU.CurrentQuestIndex then
-						self:MoveToPrevQuest()
-					end
-					AbandonQID = nil	
-				end
-			end	
-
 			--Check for all completed or user uncompleted quests in quest log 
 			for guideIndex = 1, #visualRows do
 				local qComplete, QuestComplete
@@ -4619,19 +4671,22 @@ function Guides:Initialize()
 				local reqlvl 		= self:ReturnTag("PL", guideIndex)
 				local playerLevel	= UnitLevel("player")
 				local ayg			= self:ReturnTag("AYG", guideIndex)
-				local oid1, oid2	= self:ReturnTag("OID", guideIndex)
+				local oid1, oid2, oid3, oid4	= self:ReturnTag("OID", guideIndex)
 				local tid			= self:ReturnTag("TID", guideIndex)
 				local buff			= self:ReturnTag("BUFF", guideIndex)
 				
 				if logIndx then _, _, _, _, _, qComplete, _, _ = GetQuestLogTitle(logIndx) end
 				
-				if qComplete == 1 or self:QuestPartComplete(guideIndex) or (needsLoot and self:IsCompleteLootQO("QLU", nil, guideIndex)) or (not isDaily and self:HasQuestBeenTurnedIn(qid)) 
+				if qComplete == 1 or self:QuestPartComplete(guideIndex) or 
+				--(needsLoot and self:IsCompleteLootQO("QLU", nil, guideIndex)) or 
+				(not isDaily and self:HasQuestBeenTurnedIn(qid)) 
 					 or self:ProfessionCompletedAtGuideIndex(guideIndex) or self:CheckForLocation(guideIndex) or self:AchieveCompleteFromGuideIndex(guideIndex) or self:CheckForHearth(guideIndex) then QuestComplete = true else QuestComplete = nil end
-						
-				if (action == "A" and logIndx) or (QuestComplete and action ~= "T") or (QuestComplete and action == "T" and not logIndx) or (ayg and EvaluateAYG(ayg)) or (questState == "C" and strmatch(action, "[NFfRBbh]") and not questPart and not needsLoot) or (reqlvl and reqlvl <= playerLevel and not action == "f") or (oid1 and EvaluateOID(oid1)) or (oid2 and EvaluateOID(oid2)) or (tid and EvaluateTID(tid)) or (buff and EvaluateBUFF(buff)) then  												
+								
+				if (action == "A" and logIndx) or (QuestComplete and action ~= "T") or (QuestComplete and action == "T" and not logIndx) or (ayg and EvaluateAYG(ayg)) or (questState == "C" and strmatch(action, "[NFfRBbh]") and not questPart and not needsLoot) or (reqlvl and reqlvl <= playerLevel and not action == "f") or (oid1 and EvaluateOID(oid1)) or (oid2 and EvaluateOID(oid2)) or (oid3 and EvaluateOID(oid3)) or (oid4 and EvaluateOID(oid4)) or (tid and EvaluateTID(tid)) or (buff and EvaluateBUFF(buff)) then  												
 					if not visualRows[guideIndex].Chk:GetChecked() then 
 						self:SetChkToComplete(guideIndex)
 						setChecked = true
+					
 					end 
 				end
 				guideIndex = guideIndex + 1
@@ -4643,7 +4698,30 @@ function Guides:Initialize()
 				else
 					self:MoveToNextQuest()
 				end
+			elseif self:ReturnTag("POI", guideIndex) then 
+				self:DelayAndMapCurrentObjective(0.2)				
 			end 
+			
+			--Abandoned Quest
+			if AbandonQID and DGU.CurrentQuestIndex then
+				--local logidx = self:GetQuestLogIndexByQID(AbandonQID)
+				--if not logidx then --user abandoned quest but it hasn't registered yet			
+					for i =1, #visualRows do
+						if self.qid[i] == AbandonQID and strmatch(self.actions[i], "[ACTNKR]") then
+							self:ClrChk(i)
+						end
+						local oid1, oid2, oid3, oid4	= self:ReturnTag("OID", i)
+						if tonumber(oid1) == AbandonQID or tonumber(oid2) == AbandonQID or tonumber(oid3) == AbandonQID or tonumber(oid4) == AbandonQID and strmatch(self.actions[i], "[ACTNKR]") then
+							self:ClrChk(i)
+						end
+					end
+					local nextindex = self:FindNextUnchecked()
+					if nextindex < DGU.CurrentQuestIndex then
+						self:MoveToPrevQuest()
+					end
+					AbandonQID = nil	
+				--end
+			end				
 			
 			self.UpdateStickyFrame( )
 			ResumeViewFrameUpdate()			
@@ -4726,6 +4804,7 @@ function Guides:Initialize()
 					DGV:MoveToNextQuest()
 				else --not current quest but accept by user into log
 					DGV:CompleteQID(msgqid, "A")
+					DGV:MoveToNextQuest()
 				end
 				
 				--Skip breadcrumbs if any
@@ -4752,19 +4831,24 @@ function Guides:Initialize()
 		local LOOT_PUSHED_REGEX = gsub(LOOT_ITEM_PUSHED_SELF, "%%s", "(.+)") --"You receive loot: %s."
 		function DGV:CHAT_MSG_LOOT(event, msg)			
 			if CurrentTitle ~= nil then
-				local guideIndex, itemid
-				local itemlink = string.match(msg, LOOT_SELF_REGEX) or string.match(msg, LOOT_PUSHED_REGEX)
+				local itemid
+				local guideIndex = DGU.CurrentQuestIndex
+				--local itemlink = string.match(msg, LOOT_SELF_REGEX) or string.match(msg, LOOT_PUSHED_REGEX)
 				
-				if itemlink then itemid = string.match(itemlink, "item:(%d+):")	end
+				--if itemlink then itemid = string.match(itemlink, "item:(%d+):")	end
 				
-				for guideIndex = 1, #visualRows do
+				--[[for guideIndex = 1, #visualRows do
 					if DGV:ReturnTag("L", guideIndex) then 
 						if DGV:IsCompleteLootQO("CMSG", itemid, guideIndex) then 
 							DGV:SetChkToComplete(guideIndex) 
 							DGV:MoveToNextQuest()
 						end
 					end 
-				end 
+				end]]
+				if DGV:ReturnTag("L", guideIndex) and DGV:havelootitem(guideIndex) == true then 
+					DGV:SetChkToComplete(guideIndex) 
+					DGV:MoveToNextQuest()
+				end 				
 			end
 		end
 		
@@ -4813,7 +4897,7 @@ function Guides:Initialize()
 		end
 		
 		function DGV:PLAYER_LEVEL_UP(self, level)
-            DugisCharacterCache.CalculateScore_cache_v5 = {}
+            DugisCharacterCache.CalculateScore_cache_v10 = {}
         
 			--skip quest that is grey ! or too high level, and check again on playerlevel up event to see if they can pick them up
 			if not InCombatLockdown() then		
@@ -4847,11 +4931,12 @@ function Guides:Initialize()
 		end		
         
         function DGV:PLAYER_ENTERING_WORLD()
-            DGV:UpdateAllSIDs(true)
+           DGV:UpdateAllSIDs(true)
 		end
         
         function DGV:UpdateAllSIDs(reset)
-			local _, currentStage, numStages = C_Scenario.GetInfo()
+			local name, currentStage, numStages = C_Scenario.GetInfo()
+			if not name then return end
 		--	if ( currentStage and currentStage > numStages ) then --Dungeon Complete
 		--		DGV:SetCompleteAllSID()
 		--	else 		
@@ -4865,11 +4950,29 @@ function Guides:Initialize()
 			for i = 1, #tblBonusSteps do
 				local bonusStepIndex = tblBonusSteps[i];
 				local _, _, numCriteria = C_Scenario.GetStepInfo(bonusStepIndex);
-				for criteriaIndex = 1, numCriteria do
+			  for criteriaIndex = 1, numCriteria do
 					local _, _, criteriaCompleted, _, _, _, _, _, criteriaID = C_Scenario.GetCriteriaInfoByStep(bonusStepIndex, criteriaIndex)
 					DGV:SetCompletedSID(criteriaID, criteriaCompleted, reset)
 				end	
 			end	
+			local setcheck 
+
+			for i = 1, #visualRows do
+				local guideStage = DGV:ReturnTag("STAGE", i)
+				local qid = DGV:ReturnTag("QID", i)
+				if guideStage == "" then 
+					guidestage = nil 				
+				end
+				guideStage = tonumber(guideStage)
+				if (guideStage and guideStage < currentStage) or (guideStage and currentStage == 0) then 
+					DGV:SetChkToComplete(i)
+					setcheck = true
+				elseif guideStage and guideStage > currentStage and not qid then 
+					DGV:SetChkToNotComplete(i)
+					setcheck = true
+				end
+			end
+			if setcheck then DGV:MoveToNextQuest() end
         end
         
         function DGV:SCENARIO_CRITERIA_UPDATE(eventName, criteriaId)
@@ -4899,6 +5002,8 @@ function Guides:Initialize()
 			end
 		end					
         
+        
+        --heading       Category name. It can be a table for example {"Starting Zones", "Forests", "Green Forests"} in this case "Starting Zones" is Level 1 category, "Forests" level 2 and "Green Forests" level 3 category
 		--title: 		A string describing the zone and level range
 		--nextguide: 	(Optional) The next guide to load when this guide is completed
 		--faction:		Values: Horde, Alliance or nil means both factions
@@ -4912,6 +5017,16 @@ function Guides:Initialize()
 			if class ~= nil then 
 				if class ~= myclass then return end
 			end
+            
+            local heading = heading
+            local hedingL2 = nil
+            local hedingL3 = nil
+            
+            if type(heading) == "table" then
+                hedingL3 = heading[3]
+                hedingL2 = heading[2]
+                heading = heading[1]
+            end
 			
 			if faction == myfaction or faction == nil then	
 				--DebugPrint( "Title:"..title.."nextguide:"..nextguide.."faction:"..faction.."guidetype"..guidetype)
@@ -4921,6 +5036,15 @@ function Guides:Initialize()
 				self.nextzones[title] 	= nextguide
 				self.gtype[title] 	= guidetype
 				self.headings[title] 	= heading
+                
+                if hedingL2 then
+                    self.hedingsL2[title] = hedingL2
+                end    
+                
+                if hedingL3 then
+                    self.hedingsL3[title] = hedingL3
+                end
+                
                 metadata = metadata or {}
                 self.guidemetadata[title] = metadata
 				
@@ -5002,11 +5126,19 @@ function Guides:Initialize()
 				if map4 == "" then map4 = nil end				
 				return map1, map2, map3, map4
 			elseif tag == "PRE" then
-				return tags:match("|PRE|(%d+)")
+				local pre1, pre2 = tags:match("|PRE|(%d+),?%s?(%d*)|")
+				if pre1 == "" then pre1 = nil end
+				if pre2 == "" then pre2 = nil end
+				return pre1, pre2			
 			elseif tag == "PHA" then
 				return tags:match("|PHA|(%d+)")
 			elseif tag == "OID" then
-				return tags:match("|OID|(%d+),?%s?(%d*)|")
+				local oid1, oid2, oid3, oid4 = tags:match("|OID|(%d+),?%s?(%d*),?%s?(%d*),?%s?(%d*)|")
+				if oid1 == "" then oid1 = nil end
+				if oid2 == "" then oid2 = nil end
+				if oid3 == "" then oid3 = nil end
+				if oid4 == "" then oid4 = nil end				
+				return oid1, oid2, oid3, oid4				
 			elseif tag == "AYG" then
 				return tags:match("|AYG|(%d+)")
 			elseif tag == "TID" then
@@ -5022,6 +5154,11 @@ function Guides:Initialize()
 				local _, _, lootitem, lootqty = tags:find("|L|(%d+)%s?(%d*)|")
 				lootqty = tonumber(lootqty) or 1
 				return lootitem, lootqty
+			elseif tag == "CUR" then
+				local _, _, curitem, curqty = tags:find("|CUR|(%d+)%s?(%d*)|")
+				curqty = tonumber(curqty) or 1
+				curitem = tonumber(curitem)
+				return curitem, curqty				
 			elseif tag == "P" then
 
 				local profession, professionlvl = tags:match("|P|(%w+%s?%w*)%s+(%d+)")
@@ -5085,7 +5222,14 @@ function Guides:Initialize()
 			elseif tag == "T" then 
 				if (tags:match("%(item:") or tags:match("%[[^%]]+%]") or tags:match("|T|")) and not tags:match("|U|") then 
 					return true
-				end				
+				end
+			elseif tag == "RESET" then 
+				if tags:match("|RESET|") then 
+					return true
+				end					
+			elseif tag == "STAGE" then
+				local stage = tags:match("|SID|%d+%|(%d*)|")
+				return stage
 			end
 			
 			return select(3, tags:find("|"..tag.."|([^|]*)|?"))
@@ -5113,15 +5257,15 @@ function Guides:Initialize()
 		end
 	end
 	
-	function Guides:OnModulesLoaded()
+	function Guides:OnModulesLoaded(threading)
 		NPCJournalFrame = DGV.NPCJournalFrame
-		DGV:InitializeTabs()
+		DGV:InitializeTabs(threading)
 		DGV:HideLargeWindow()	
 		DGV:ShowViewTab()
 		
 		--Load saved guide
 		if DGV:isValidGuide(CurrentTitle) == true  then
-			DGV:DisplayViewTab(CurrentTitle)		
+			DGV:DisplayViewTab(CurrentTitle, nil, threading)		
 		else --Load Default 	
 			DGV:ClearScreen()
 			if DGV.chardb.FirstTime then
@@ -5174,6 +5318,11 @@ function Guides:Initialize()
 			DGV.guidelist = nil
 			wipe(DGV.headings)
 			DGV.headings = nil
+                     
+            wipe(DGV.hedingsL2)
+			DGV.hedingsL2 = nil 
+            wipe(DGV.hedingsL3)
+			DGV.hedingsL3 = nil
 		end
 		
 		--wipe(DGV.queryquests)

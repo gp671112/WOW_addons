@@ -1,0 +1,15 @@
+tag v2.1.1
+6db55bba9e0367d4edcca1e77c756fd5817ebc91
+Ketho <sghs17@outlook.com>
+2016-10-26 05:26:48 +0200
+
+Tagging as v2.1.1
+
+
+--------------------
+
+Ketho:
+	- Update for 7.1
+	Distance indicator is now also updated when zooming while showing the Blizzard options panel
+	
+	Change close up increment behavior to 6 yards (up from 4)

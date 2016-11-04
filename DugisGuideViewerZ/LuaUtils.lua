@@ -10,6 +10,18 @@ DugisGuideUser = {
 
 DugisGuideUser.NoQuestLogUpdateTrigger = nil
 
+--Vector
+local function NormalizeVector(x, y)
+    local length = math.sqrt(x * x + y * y)
+    
+    if length == 0 then
+        return 0, 0
+    end 
+    
+    return x / length, y / length
+end
+
+
 function LuaUtils:split(pString, pPattern)
     local Table = {}
     local fpat = "(.-)" .. pPattern
@@ -79,7 +91,13 @@ end
 function LuaUtils:loop(times, func, unpackResults)
     local results = {}
     for i = 1, times do
-      results[i] = func(i)
+      local result = func(i)
+      
+      if result == "break" then
+        break
+      end
+      
+      results[i] = result
     end 
     if unpackResults ~= true then
         return results
@@ -165,6 +183,67 @@ function IsFrameVisible(frameName)
     return _G[frameName]~= nil and _G[frameName]:IsVisible()
 end
 
+local currentPlayerFacing = 0
+
+function GetPlayerFacing_dugi()
+    local result
+    if GetPlayerFacing then
+        result = GetPlayerFacing()
+    end
+    
+    if not result then
+        result = currentPlayerFacing
+    end
+
+    return result
+end
+
+local lastPlayerPositionX
+local lastPlayerPositionY
+
+local function AngleBetween(_x1, _x2, _y1, _y2)
+    local a = _x1 * _y2 - _x2 * _y1;  
+    local b = _x1 * _x2 + _y1 * _y2;
+
+    return math.atan2(a, b)
+end
+
+local function CalculateCurrentFacing()
+    if not GetPlayerMapPosition then
+        return
+    end
+    local unitX, unitY = GetPlayerMapPosition("player")
+    
+    if not unitX then
+        return
+    end
+    
+    if not lastPlayerPositionX then
+        lastPlayerPositionX, lastPlayerPositionY = unitX, unitY
+        return
+    end
+    
+    local dX = unitX - lastPlayerPositionX
+    local dY = unitY - lastPlayerPositionY
+    
+    dY = -dY
+    
+    --Player didn't move
+    if dX == 0 or dY == 0 then
+        return
+    end
+    
+    dX, dY = NormalizeVector(dX, dY)
+    
+    local angle = AngleBetween(0.0, dX, -1.0, dY) + 3.14159265358
+    
+	--Correction:
+	--angle = angle - (math.sin(angle)*0.2)
+    currentPlayerFacing = angle
+    
+    lastPlayerPositionX, lastPlayerPositionY = unitX, unitY
+end
+
 dugisThreads = {}
 
 -- threadThrottle (if == 1 then one execution per second)
@@ -207,6 +286,9 @@ function LuaUtils:CreateThread(threadName, threadFunction, onEnd, resumeAmountPe
                 end
             end
 		end
+        
+        CalculateCurrentFacing()
+        
 	end) 
 
     dugisThreads[threadName] = coroutine.create(threadFunction)
@@ -249,14 +331,22 @@ table.filter = function(t, filterIter)
   return out
 end
 
-function LuaUtils:WaitForCombatEnd()
+function LuaUtils:WaitForCombatEnd(waitForever)
     if not UnitAffectingCombat("player") then
         return
     end
     
-    for i = 1, 1000 do
-        if UnitAffectingCombat("player") then
+    if waitForever then
+        while UnitAffectingCombat("player") do
             coroutine.yield()
+            OnPlayerInCombat()
+        end
+    else
+        for i = 1, 1000 do
+            if UnitAffectingCombat("player") then
+                coroutine.yield()
+                OnPlayerInCombat()
+            end
         end
     end
 end
@@ -264,6 +354,10 @@ end
 function LuaUtils:Round(num, idp)
   local mult = 10^(idp or 0)
   return math.floor(num * mult + 0.5) / mult
+end
+
+function LuaUtils:normalized2HexColor(r,g,b)
+    return string.format("ff%02x%02x%02x", r*255, g*255, b*255)
 end
 
 --Export functions
@@ -375,22 +469,24 @@ function LuaUtils:printVariableSizeInMB(root)
     print("TOTAL", " " , total, "MB")
 end
 
---Returns cached value only in case the oryginal GetItemInfo returns nil
-GetItemInfoDugi_cache = {}
-function CacheItemInfo(itemLink, a, b, c, d, e, f, g, h, i, j, k, l, m)
-    GetItemInfoDugi_cache[itemLink] = {a, b, c, d, e, f, g, h, i, j, k, l, m}
-end
 
-function GetItemInfo_dugi(itemLink)
+
+function GetItemInfo_dugi(itemLink, threadingMode)
     local a, b, c, d, e, f, g, h, i, j, k, l, m = GetItemInfo(itemLink)
-    if not a then
-        local tableItem = GetItemInfoDugi_cache[itemLink]
-        if tableItem then
-            return unpack(GetItemInfoDugi_cache[itemLink])
+    
+    if threadingMode then
+        local counter = 0
+        while not a and counter < 1000 do
+            counter = counter + 1
+            coroutine.yield()
+            coroutine.yield()
+            a, b, c, d, e, f, g, h, i, j, k, l, m = GetItemInfo(itemLink)
+        end
+        if counter > 500 then
+           -- print(itemLink, counter)
         end
     end
     
-    GetItemInfoDugi_cache[itemLink] = {a, b, c, d, e, f, g, h, i, j, k, l, m}
     return a, b, c, d, e, f, g, h, i, j, k, l, m
 end
 
@@ -407,6 +503,44 @@ function LuaUtils:DugiSetMapByID(mapId)
 end 
 
 function LuaUtils:DugiSetMapToCurrentZone()
+	if not GetPlayerFacing() then return end
 	DugisGuideUser.NoQuestLogUpdateTrigger = true
 	SetMapToCurrentZone()
+end
+
+----Post combat loading
+local postCombatLoadQueue = {}
+function LuaUtils:PostCombatLoad(function_)
+    if UnitAffectingCombat("player")  then
+        postCombatLoadQueue[#postCombatLoadQueue + 1] = function_
+    else
+        function_(false)
+    end
+end
+
+function LuaUtils:RunPostCombatFunctions()
+    for i = #postCombatLoadQueue, 1, -1 do
+        postCombatLoadQueue[i](true)
+    end
+    
+    postCombatLoadQueue = {}
+end
+
+LuaUtils:CreateThread("dugi-post-combat-loading", function()
+    while UnitAffectingCombat("player") do
+        coroutine.yield()
+    end
+    LuaUtils:RunPostCombatFunctions()
+end)
+
+
+function LuaUtils:collectgarbage(threading)
+    if threading then
+        LuaUtils:loop(100, function()
+           coroutine.yield()
+           collectgarbage ("step" , 100)
+        end)
+    else
+        collectgarbage()
+    end
 end

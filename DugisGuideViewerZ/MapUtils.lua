@@ -6,13 +6,25 @@ DGV.mapdata = mapdata
 local GetCreateTable, InitTable = DGV.GetCreateTable, DGV.InitTable
 local _
 
+function DGV:Waypoint2MapCoordinates(waypoint)
+    local wpx, wpy, wpm, wpf = waypoint.x/100, waypoint.y/100, waypoint.map, waypoint.floor
+    local currentFloor = GetCurrentMapDungeonLevel()
+    if wpf and currentFloor~=wpf then
+        wpx, wpy = DGV:TranslateWorldMapPosition(wpm, wpf, wpx, wpy, wpm, currentFloor)
+    end
+    wpx = wpx * DugisMapOverlayFrame:GetWidth();
+    wpy = -wpy * DugisMapOverlayFrame:GetHeight();
+
+    return wpx, wpy
+end
+
 --/run DGV:ShowMapData(mapId, ...)
 function DGV:ShowMapData(mapId, ...)
 	local tbl = {}
 	local mapData = {}
 	tbl[mapId] = mapData
 	local numFloors = select("#", ...)
-	SetMapByID(mapId)
+	LuaUtils:DugiSetMapByID(mapId)
 	local _, TLx, TLy, BRx, BRy = GetCurrentMapZone();
 	if ( TLx and TLy and BRx and BRy ) then
 		if not ( TLx < BRx ) then
@@ -131,6 +143,10 @@ end
 function DGV:GetPlayerPosition()
 
     local x, y = GetPlayerMapPosition("player")
+    if x == nil then
+        x, y = 0, 0 
+    end
+    
     if x and y and x > 0 and y > 0 then
 	local map, floor = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel();
         floor = floor or self:GetDefaultFloor(map)
@@ -141,8 +157,11 @@ function DGV:GetPlayerPosition()
         return
     end
 
-    SetMapToCurrentZone()
+    LuaUtils:DugiSetMapToCurrentZone()
     local x, y = GetPlayerMapPosition("player")
+    if x == nil then
+        x, y = 0, 0 
+    end
 
     if x <= 0 and y <= 0 then
         return
@@ -155,7 +174,7 @@ end
 
 function DGV:GetPlayerMapPositionDisruptive()
 	local orig_mapId, orig_level = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
-	SetMapToCurrentZone()
+	LuaUtils:DugiSetMapToCurrentZone()
 	local DugisArrow = DGV.Modules.DugisArrow
 	local m1, f1, x1, y1 =  DGV.astrolabe:GetUnitPosition("player")
 	if not m1 or m1==0 then
@@ -164,7 +183,7 @@ function DGV:GetPlayerMapPositionDisruptive()
 			DugisArrow.pos_x, DugisArrow.pos_y
 	end
 	if orig_mapId~=m1 or orig_level~=f1 then
-		SetMapByID(orig_mapId)
+		LuaUtils:DugiSetMapByID(orig_mapId)
 		SetDungeonMapLevel(orig_level)
 	end
 	return m1, f1, x1, y1
@@ -285,14 +304,19 @@ local function getCZ(mapId)
 end
 
 function DGV:GetCZByMapId(mapId)
-	if mapId == 1052 or 
+	if getCZ(mapId) == 0 then 
+		return 10, 0
+	else
+		return getCZ(mapId)
+	end
+--[[	if mapId == 1052 or 
 	mapId == 1048 or
 	mapId == 1044 or
 	mapId == 1068
 	then
 		return 10, 0
 	end
-	return getCZ(mapId)
+	return getCZ(mapId)]]
 end
 
 function DGV.ContinentMapIterator(invariant, control)

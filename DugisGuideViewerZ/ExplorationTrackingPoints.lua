@@ -40,25 +40,28 @@ function searchAchievementWaypointsByMapName(mapName)
                zoneName = zoneName[1]
                
                local mapId = DGV:GetMapIDFromName(zoneName)
-               local localizedMapName =  GetMapNameByID(mapId)
                
-               
-               searchKey = strupper(searchKey)
-               if strupper(description):match(searchKey) or strupper(localizedMapName):match(searchKey) then
-                    local coordinates = a_coord_aId_critIndex[2]
-                    local x_y = LuaUtils:split(coordinates, ",")
-                    
-                    local key = zoneName or description
-                    
-                    local node = associativeResult[key]
-                    
-                    if not node then
-                        associativeResult[key] = {}
-                        node = associativeResult[key]
+               if mapId and tonumber(mapId) then
+                   local localizedMapName =  GetMapNameByID(mapId)
+                   
+                   
+                   searchKey = strupper(searchKey)
+                   if strupper(description):match(searchKey) or strupper(localizedMapName):match(searchKey) then
+                        local coordinates = a_coord_aId_critIndex[2]
+                        local x_y = LuaUtils:split(coordinates, ",")
+                        
+                        local key = zoneName or description
+                        
+                        local node = associativeResult[key]
+                        
+                        if not node then
+                            associativeResult[key] = {}
+                            node = associativeResult[key]
+                        end
+                        
+                        node[#node+1] = {x = x_y[1], y = x_y[2], subzoneName = description, zone = zoneName}
                     end
-                    
-                    node[#node+1] = {x = x_y[1], y = x_y[2], subzoneName = description, zone = zoneName}
-               end
+                end
            
            end
         end
@@ -1475,6 +1478,84 @@ tappend(points["TanaanJungle:0"],
 	"A:54.7,75.3:10260:3",
 	"A:37.0,69.2:10260:11",
 	"A:16.4,63.9:10260:2")
+
+tappend(points["Azsuna:0"],
+	"A:39.6,50.2:10665:9", --Faronaar
+	"A:60.6,34.9:10665:5", -- The Greenway
+	"A:41.4,39.0:10665:4", -- Llothien Highlands
+	"A:55.7,41.4:10665:3", -- Nar'thalas
+	"A:65.6,49.0:10665:7", -- Ruined Sanctum
+	"A:52.7,16.8:10665:8", -- Ley-Ruins of Zarkhenar
+	"A:65.8,27.9:10665:1", -- Felblaze Ingress
+	"A:46.8,73.1:10665:6", -- Isle of the Watchers
+	"A:48.0,13.6:10665:10", -- Lost Orchard
+	"A:53.8,58.9:10665:11", -- Oceanus Cove
+	"A:57.1,64.8:10665:2") -- Temple of Lights
+
+tappend(points["Valsharah:0"],
+	"A:42.4,58.6:10666:6", --Bradensbrook
+	"A:25.5,66.5:10666:2", -- Gloaming Reef
+	"A:54.6,73.0:10666:9", -- Lorlathil
+	"A:61.2,73.1:10666:5", -- Moonclaw Vale
+	"A:47.3,85.1:10666:10", -- Smolderhide Thicket
+	"A:47.9,69.6:10666:3", -- Thas'talah
+	"A:38.8,51.8:10666:11", -- Black Rook Hold
+	"A:44.2,30.4:10666:12", -- The Dreamgrove
+	"A:51.9,64.0:10666:8", -- Grove of Cenarius
+	"A:71.6,39.1:10666:4", -- Mistvale
+	"A:61.1,31.1:10666:9", -- Shala'nir
+	"A:54.1,55.4:10666:13") -- Temple of Elune
+
+tappend(points["Highmountain:0"],
+	"A:43.0,33.5:10667:10", --Bloodhunt Highlands
+	"A:56.9,90.0:10667:2", -- Highmountain Summit
+	"A:27.3,54.6:10667:12", -- Nightwatcher's Perch
+	"A:38.9,67.8:10667:9", --Riverbend
+	"A:43.7,8.70:10667:1", -- Shipwreck Cove
+	"A:58.7,64.7:10667:5", --Stonehoof Watch
+	"A:46.2,61.4:10667:8", --Thunder Totem
+	"A:29.3,33.4:10667:11", -- Blind Marshlands
+	"A:55.6,83.9:10667:6", --Ironhorn Enclave
+	"A:43.1,51.7:10667:14", --Pinerock Basin
+	"A:56.4,21.8:10667:7", --Rockaway Shallows
+	"A:52.6,44.8:10667:4", --Skyhorn
+	"A:35.6,63.6:10667:3", --Sylvan Falls
+	"A:35.2,45.7:10667:13") --Trueshot Lodge
+
+tappend(points["Stormheim:0"],
+	"A:47.2,44.8:10668:9", --Aggrammar's Vault
+	"A:55.6,73.6:10668:2", -- Dreadwake's Landing
+	"A:72.0,60.0:10668:1", -- Greywatch
+	"A:73.4,39.7:10668:4", -- Haustvald
+	"A:38.8,20.4:10668:15", -- Maw of Nashal
+	"A:44.9,37.0:10668:14", -- Nastrondir
+	"A:71.5,50.1:10668:13", -- The Runewood
+	"A:60.8,65.5:10668:5", -- Skold-Ashil
+	"A:51.4,57.0:10668:17", -- Talonrest
+	"A:60.4,51.1:10668:19", -- Valdisdall
+	"A:33.9,34.7:10668:6", -- Blackbeak Overlook
+	"A:75.2,54.8:10668:3", -- Dreyrgrot
+	"A:66.8,64.1:10668:7", -- Gates of Valor
+	"A:44.3,64,5:10668:8", -- Hrydshal
+	"A:80.1,59.2:10668:10", -- Morheim
+	"A:69.9,22.0:10668:11", -- Watchman's Rock
+	"A:77.8,6.70:10668:12", -- Shield's Rest
+	"A:59.1,31.2:10668:16", -- Storm's Reach
+	"A:58.0,44.4:10668:18", -- Tideskorn Harbor
+	"A:34.5,51.3:10668:20") -- Weeping Bluffs
+
+tappend(points["Suramar:0"],	
+	"A:30.4,42.3:10669:11", -- Ambervale
+	"A:19.5,45.2:10669:4", -- Falanaar
+	"A:47.3,50.4:10669:5", -- The Grand Pomenade
+	"A:38.1,22.9:10669:1", -- Moon Guard Stronghold
+	"A:37.0,45.9:10669:3", -- Ruins of Elun'eth
+	"A:42.2,35.5:10669:2", -- Tel'anor
+	"A:64.0,42.0:10669:8", -- Crimson Thicket
+	"A:34.3,74.8:10669:9", -- Felsoul Hold
+	"A:71.5,51.1:10669:10", -- Jandvik
+	"A:34.9,31.0:10669:6", -- Moonwhisper Gulch
+	"A:46.1,59.8:10669:7") -- Suramar City
 	
 --Disable atomatic addition of key/table combos
 --getmetatable(DugisWorldMapTrackingPoints).__index = nil

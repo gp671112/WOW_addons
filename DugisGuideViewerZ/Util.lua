@@ -237,11 +237,6 @@ local function AutoroutinesOnUpdate()
 		
 		local i=1
 		while true do
-            --Preventing from the case when autoroutines isalready nil
-            if autoroutines == nil or #autoroutines == 0 then
-                break
-            end
-        
 			local autoroutine = autoroutines[i]
 --autoroutine.startTime = startTime
 			if not autoroutine.interrupt then
@@ -276,23 +271,19 @@ local function AutoroutinesOnUpdate()
 				DisposeAutoroutine(autoroutine)
 				tremove(autoroutines, i)
 			end
-            
-            --Preventing from the case when autoroutines isalready nil
-            if autoroutines ~= nil then
-                if #autoroutines>0 then
-                    local now = GetTicks()
-                    if (now-startTime)>=THEORETICAL_TIME_LIMIT then
-                        return
-                    end
-                else
-                    Pool(autoroutines)
-                    autoroutines = nil
-                    return
-                end
-                if i>#autoroutines then
-                    i=1
-                end
-            end
+			if #autoroutines>0 then
+				local now = GetTicks()
+				if (now-startTime)>=THEORETICAL_TIME_LIMIT then
+					return
+				end
+			else
+				Pool(autoroutines)
+				autoroutines = nil
+				return
+			end
+			if i>#autoroutines then
+				i=1
+			end
 		end
 	end
 end
@@ -339,34 +330,8 @@ local function OnInterrupt(autoroutine, func)
 	return autoroutine
 end
 
-local autoroutinesQueue = {}
-
---Adds autoroutine to autoroutine queue.
-function QueueAutoroutine(key, func, ...)
-    local currentIndex = #autoroutinesQueue + 1
-    autoroutinesQueue[currentIndex] = {key=key, func=func, args = {...}}
-    
-    --Object used to emulate OnCompletion, OnError and OnInterrupt functions
-    local autoroutineWrapper = {}
-    
-    function autoroutineWrapper:OnCompletion(_function)
-        autoroutinesQueue[currentIndex].OnCompletion = _function
-    end
-           
-    function autoroutineWrapper:OnError(_function)
-        autoroutinesQueue[currentIndex].OnError = _function
-    end           
-    function autoroutineWrapper:OnInterrupt(_function)
-        autoroutinesQueue[currentIndex].OnInterrupt = _function
-    end
-       
-    return autoroutineWrapper
-end
-
-local function BeginDefinedAutoroutine(def, ...)
-    local key = def.key
-    local func = def.func
-    
+local function BeginAutoroutine(key, func, ...)
+--local debugTime = GetTicks()
 	local autoroutine
 	if autoroutines then
 		for _,iteratedAutoroutine in IPairs(autoroutines) do
@@ -376,24 +341,14 @@ local function BeginDefinedAutoroutine(def, ...)
 			end
 		end
 	end
-    
 	if not autoroutine then
 		autoroutine = GetCreateTable()
 		autoroutine.boundObjects = GetCreateTable()
 		autoroutine.coroutine = coroutine.create(func)
 		autoroutine.key = key
-        
-        if def.OnCompletion then
-            autoroutine.onCompletion = def.OnCompletion
-        end
-        
-        if def.OnError then
-            autoroutine.onError = def.OnError
-        end
-        if def.OnInterrupt then
-            autoroutine.onInterrupt = def.OnInterrupt
-        end
-        
+		autoroutine.OnCompletion = OnCompletion
+		autoroutine.OnError = OnError
+		autoroutine.OnInterrupt = OnInterrupt
 		InsertList(autoroutine, ...)
 		if not autoroutines then
 			autoroutines = GetCreateTable(autoroutine)
@@ -405,50 +360,6 @@ local function BeginDefinedAutoroutine(def, ...)
 	return autoroutine
 end
 
-C_Timer.NewTicker(0.2, function()
-    if not autoroutines then
-        autoroutines = GetCreateTable()
-    end
-
-    if #autoroutines == 0 then
-        if #autoroutinesQueue > 0 then
-            local def = autoroutinesQueue[1]
-            tremove(autoroutinesQueue, 1)
-            BeginDefinedAutoroutine(def, unpack(def.args))
-        end
-    end
-end) 
-  
---Begines autoroutine immediately
-local function BeginAutoroutine(key, func, ...)
-  local autoroutine
-  if autoroutines then
-      for _,iteratedAutoroutine in IPairs(autoroutines) do
-          if key==iteratedAutoroutine.key and not iteratedAutoroutine.interrupt then
-              autoroutine = iteratedAutoroutine
-              break
-          end
-      end
-  end
-  if not autoroutine then
-      autoroutine = GetCreateTable()
-      autoroutine.boundObjects = GetCreateTable()
-      autoroutine.coroutine = coroutine.create(func)
-      autoroutine.key = key
-      autoroutine.OnCompletion = OnCompletion
-      autoroutine.OnError = OnError
-      autoroutine.OnInterrupt = OnInterrupt
-      InsertList(autoroutine, ...)
-      if not autoroutines then
-          autoroutines = GetCreateTable(autoroutine)
-      else
-          Insert(autoroutines, autoroutine)
-      end
-  end
-  
-  return autoroutine
-end
-        
 DGV.BeginAutoroutine = BeginAutoroutine
 
 local invocations
@@ -722,7 +633,9 @@ end
 
 local function IntersectionReactionDispose(reaction)
 	for _,child in IPairs(reaction.children) do
-		child:Dispose()
+		if child then 
+			child:Dispose()
+		end
 	end
 	Pool(reaction.children)
 	DisposeReaction(reaction)
@@ -1001,3 +914,23 @@ local function ListContains(contains, argSelector, ...)
 	return false
 end
 DGV.ListContains = ListContains
+
+--UI
+function CreateStandardPreloader(name, parent)
+    local preloader = CreateFrame("Frame", name , parent, "DugisPreloader")
+    preloader:SetSize(171, 40)
+    preloader:SetParent(parent)
+    preloader:SetPoint("TOPLEFT", 0, 0)
+    preloader:Hide()
+
+    local animationGroup = preloader.Icon:CreateAnimationGroup()
+    animationGroup:SetLooping("REPEAT")
+    local animation = animationGroup:CreateAnimation("Rotation")
+    animation:SetDegrees(-360)
+    animation:SetDuration(1)
+    animation:SetOrder(1)
+    preloader.animationGroup = animationGroup
+    preloader.animation = animation
+    return preloader
+end
+

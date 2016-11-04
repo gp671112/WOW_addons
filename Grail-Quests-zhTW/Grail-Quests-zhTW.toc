@@ -1,0 +1,12 @@
+## Interface: 70100
+## Title: Grail |r|cff69ccf0Quests zhTW|r
+## Author: Scott M Harrison
+## Notes: Provides localized zhTW quest names to Grail
+## Title-zhTW: |cff00FFFF[任務]|r 資料庫-繁體中文語系
+## Notes-zhTW: Grail |r|cff69ccf0Quests zhTW|r |n提供任務資料庫繁體中文的任務名稱。
+## DefaultState: disabled
+## Version: 001
+## Dependencies: Grail
+## LoadOnDemand: 1
+
+Grail-Quests-zhTW.lua

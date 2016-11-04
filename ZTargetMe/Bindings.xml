@@ -1,0 +1,14 @@
+<Bindings>
+	<Binding name="切換目標提示" header="ZTARGETME" category="ADDONS">
+		ZTarget()
+	</Binding>
+	<Binding name="顯示目標提示設定選項" header="ZTARGETME" category="ADDONS">
+		OptionsOpen()
+	</Binding>
+	<Binding name="切換自動對焦" header="ZTARGETME" category="ADDONS">
+		AutoTarget()
+	</Binding>
+	<Binding name="顯示首領資訊 (近期推出™!)" header="ZTARGETME" category="ADDONS">
+		BossInfo()
+	</Binding>
+</Bindings>

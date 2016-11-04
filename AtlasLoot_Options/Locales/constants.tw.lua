@@ -30,7 +30,7 @@ AL["Content bottom bar"] = "內容下方區域"
 AL["Use content color if available."] = "使用內容顏色 (如果有的話)。"
 AL["Show background image if available."] = "顯示背景圖片 (如果有的話)。"
 AL["Content top/bottom bar"] = "內容上下方區域"
-AL["Quick Loot"] = "快速拾取"
+AL["Quick Loot"] = "額外獎勵視窗"
 
 AL["Minimap Button"] = "小地圖按鈕"
 AL["Show minimap button."] = "顯示小地圖按鈕"

@@ -1,17 +1,19 @@
-## Interface: 70000
+## Interface: 70100
 ## Title: Exorsus Raid Tools
-## Title-zhTW: |cffffd200ExRT團隊工具箱|r 
 ## Author: ykiigor
 ## Notes: Exorsus Raid Tools
 ## SavedVariables: VExRT
-## Version: 3725
+## Version: 3790
 core.lua
 Functions.lua
 embeds.xml
 ExLib.lua
+localization\localization.ru.lua
 localization\localization.en.lua
+localization\localization.de.lua
 localization\localization.cn.lua
 localization\localization.tw.lua
+localization\localization.kr.lua
 localization\localization.lua
 BlizzFix.lua
 Options.lua
@@ -34,6 +36,7 @@ Pets.lua
 Arrow.lua
 AutoLogging.lua
 LootLink.lua
+WAChecker.lua
 Bindings.lua
 Bindings.xml
 Blank.lua

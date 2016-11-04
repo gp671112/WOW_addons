@@ -37,6 +37,9 @@ local function PlaceUtilityStubs(name)
 		--DGV.RegisterQuestChains = DGV.NoOp
 		DGV.CheckForFloorChange = DGV.NoOp
 		DGV.Guide_CRITERIA_UPDATE = DGV.NoOp
+		DGV.UpdateAllSIDs = DGV.NoOp
+		DGV.PLAYER_ENTERING_WORLD = DGV.NoOp
+		DGV.SCENARIO_CRITERIA_UPDATE = DGV.NoOp			
 		function DGV:ShowLargeWindow()
 			if not DugisGuideViewer.SettingsTree then
 				DGV:CreateSettingsTree(DugisMainBorder)
@@ -219,7 +222,66 @@ local function LocalLoadModule(module)
 	end
 end
 
-local function LoadModules()
+--By default DugiGuidesIsLoading is set to true because the game is loading from the begining
+DugiGuidesIsLoading = true
+
+function DugiGuidesOnLoadingStart()
+    DugisGuideViewer:UpdateIconStatus()
+end
+
+local function DugiGuidesOnLoadingEnd()
+    DugiGuidesIsLoading = false
+    
+    ObjectiveTrackerFrame:Show()
+    DugisGuideViewer:UpdateIconStatus()
+   
+    if DugisGuideViewer.Modules.DugisWatchFrame then
+        DugisGuideViewer.Modules.DugisWatchFrame:DelayUpdate()
+        
+        LuaUtils:Delay(1, function()
+            DugisGuideViewer.Modules.DugisWatchFrame:DelayUpdate()
+        end)        
+        
+        LuaUtils:Delay(2, function()
+            DugisGuideViewer.Modules.DugisWatchFrame:DelayUpdate()
+        end)
+    end
+end
+
+local function UpdateGameLoadingProgress(threading, currentProgress)
+    if threading then
+        GamePreloader:Show()
+        GamePreloader.TexWrapper.Text:SetText("Loading Dugi Guides "..(LuaUtils:Round(currentProgress, 2) * 100).."%..")
+        
+        if currentProgress >= 0.98 then
+            GamePreloader:Hide()
+            GamePreloader.animationGroup:Stop()
+        end
+    end
+end
+
+function OnPlayerInCombat()
+    if DugiGuidesIsLoading then
+        GamePreloader:Hide()
+    end
+end
+
+local function LoadModules(threading)
+    DugiGuidesOnLoadingStart()
+    
+    if threading then
+        CreateStandardPreloader("GamePreloader", UIParent)  
+        GamePreloader:Show()
+        GamePreloader.animationGroup:Play()
+        GamePreloader.TexWrapper.Background:SetVertexColor(0,0.0,0, 0.0);
+        GamePreloader:SetPoint("TOPLEFT", UIParent, GetScreenWidth() * 0.5 -100,  -GetScreenHeight() * 0.3 + 50)
+        GamePreloader:SetWidth(225)
+        GamePreloader.TexWrapper.Text:SetWidth(220)
+    end
+
+    local progress = 0
+    UpdateGameLoadingProgress(threading, progress)
+    
 	for _, module in ipairs(DGV.Modules) do
 		if ShouldLoad(module) then
 			if not InitModule(module) then return false end
@@ -229,11 +291,31 @@ local function LoadModules()
 		end
 	end
 	for _, module in ipairs(DGV.Modules) do
-		LocalLoadModule(module)
+        if threading then
+            LuaUtils:WaitForCombatEnd(true)
+            local yields = 105
+            
+            if strmatch(module.name, "DugisGuide_") then
+                yields = 2
+            end
+            
+            LuaUtils:loop(yields, function()
+                coroutine.yield()
+            end)
+
+        end
+            if strmatch(module.name, "DugisGuide_") then
+                LocalLoadModule(module)
+            else
+                LocalLoadModule(module)
+            end
+            
+        UpdateGameLoadingProgress(threading, progress)
+        progress = progress + (0.95/#DGV.Modules)   
 	end
 	for _, module in pairs(DGV.Modules) do
 		if module.OnModulesLoaded and module.loaded and not module.Done then
-			module:OnModulesLoaded()
+            module:OnModulesLoaded(threading)
 			module.Done = true  --OnModulesLoaded gets loaded twice in a row without this
 		end
 		--TODO: move this logic to guide modules
@@ -244,7 +326,13 @@ local function LoadModules()
 				ClearModule(module)
 			end]]
 		end
+        
+        progress = progress + (0.05/#DGV.Modules)
+        UpdateGameLoadingProgress(threading, progress)
 	end
+
+    DugiGuidesOnLoadingEnd()
+
 	return true
 end
 
@@ -261,10 +349,10 @@ local function UnloadModules()
 	end
 end
 
-function DGV:ReloadModules()
+function DGV:ReloadModules(threading)
 	UnloadModules()
-	local result = LoadModules()
-	collectgarbage()
+	local result = LoadModules(threading)
+	LuaUtils:collectgarbage(threading)
 	StaticPopupDialogs.DUGIS_RELOAD_PROMPT.button2 = L["No"]
 	StaticPopupDialogs.DUGIS_RELOAD_PROMPT.data = DGV.NoOp
 	return result

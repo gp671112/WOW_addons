@@ -72,6 +72,17 @@ end
 InitFrame(questItemFrame, actionFrame)
 InitFrame(actionFrame, questItemFrame)
 
+local function UpdateHotKey()
+    local key = GetBindingKey("CLICK DugisGuideViewerActionItemFrame:LeftButton") or GetBindingKey("CLICK DugisSecureQuestButton:LeftButton")
+    if key then 
+        actionFrame.HotKey:SetText(key:sub(1,1))
+        questItemFrame.HotKey:SetText(key:sub(1,1))
+    else
+        actionFrame.HotKey:SetText("")
+        questItemFrame.HotKey:SetText("")
+    end
+end
+
 local function OnEvent(self, event)
 	if event == "PLAYER_REGEN_ENABLED" then
 		questItemFrame:Hide()
@@ -82,7 +93,10 @@ local function OnEvent(self, event)
 			actionFrame:Show()
 			texture = nil
 			local key = GetBindingKey("CLICK DugisGuideViewerActionItemFrame:LeftButton") or GetBindingKey("CLICK DugisSecureQuestButton:LeftButton")
-			if key then SetOverrideBindingClick(questItemFrame, true, key, "DugisGuideViewerActionItemFrame", "LeftButton") end
+            UpdateHotKey()
+			if key then 
+                SetOverrideBindingClick(questItemFrame, true, key, "DugisGuideViewerActionItemFrame", "LeftButton") 
+            end
 		else
 			actionFrame:SetAttribute("item1", nil)
 			actionFrame:Hide()
@@ -93,10 +107,13 @@ local function OnEvent(self, event)
 		questItemFrame:StopMovingOrSizing()
 		questItemFrame.IsMoving = false
 		questItemFrame.IsMoving = false
+	elseif event == "UPDATE_BINDINGS" then
+		UpdateHotKey()
 	end
 end
 actionFrame:SetScript("OnEvent", OnEvent)
 actionFrame:RegisterEvent("PLAYER_REGEN_DISABLED")
+actionFrame:RegisterEvent("UPDATE_BINDINGS")
 
 --frame:SetFrameStrata("LOW")
 
@@ -149,6 +166,7 @@ end
 function DGV.SetQuestItemButtonAttributes(button, logIndex)
 	button:Show()
 	local link, icon, charges = GetQuestLogSpecialItemInfo(logIndex)
+	if not link then return end
 	local useItem = DGV:GetItemIdFromLink(link)
 	local buttonName = "Dugi_ItemButton"..logIndex
 	button:SetAttribute("type1", "item")

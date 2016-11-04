@@ -1,0 +1,9 @@
+## Interface: 70100
+## Title: Z-Target Me!
+## Notes:  Uses the Action Camera to emulate The Legend of Zelda's Z-Targeting feature!
+## Title-zhTW: |cffFF7777[進階]|r 薩爾達目標提示
+## Notes-zhTW: Z-Target Me! |n模擬出薩爾達傳說的選取目標提示功能。|n|cffffd200使用方法：|r從Esc>介面>插件>目標提示，調整音量和進行設定。
+## DefaultState: disabled
+## Author: Corelyn, WyrmrestAccord-US (Horde)
+## SavedVariables: ZTMeConfig, ZTMe_Init
+ZTargetMe.xml

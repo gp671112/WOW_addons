@@ -1,0 +1,13 @@
+tag 2.0.10
+ec6925b096055aca47a6e66e44821d1b156e09e5
+Alar of Runetotem <alar@aspide.it>
+2016-10-31 17:51:25 +0100
+
+Fixed outline for bags
+Fixed itemlevel display
+
+--------------------
+
+Alar of Runetotem:
+	- Upgraded LibItemUpgradeInfo
+	- Fix: Bag shadow was not remembered

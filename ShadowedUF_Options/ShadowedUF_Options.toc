@@ -1,12 +1,10 @@
 ## Interface: 70000
 ## Title: Shadowed UF (Options)
 ## Notes: Configuration for Shadowed Unit Frames.
-## Title-zhTW: [頭像介面]Shadowed UF (選項)
-## Notes-zhTW: SUF的設置介面，指令：/suf。
 ## Author: Shadowed
 ## LoadOnDemand: true
 ## Dependencies: ShadowedUnitFrames
-## X-Curse-Packaged-Version: v4.1.4-1-g250cdc5
+## X-Curse-Packaged-Version: v4.1.10
 ## X-Curse-Project-Name: Shadowed Unit Frames
 ## X-Curse-Project-ID: shadowed-unit-frames
 ## X-Curse-Repository-ID: wow/shadowed-unit-frames/mainline

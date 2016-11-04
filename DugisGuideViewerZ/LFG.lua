@@ -98,7 +98,7 @@ function LFG:Initialize()
 	
 	-- IsInLFGDungeon()
 	function DGV:IsLFGTeleportAvailable()
-		if not IsPartyLFG() then return end
+		if not IsPartyLFG() or not QueueStatusMinimapButton:IsShown() then return end
 		for i=1, NUM_LE_LFG_CATEGORYS do
 			if IsLFGModeActive(i) then return true end
 		end

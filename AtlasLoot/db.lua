@@ -2,9 +2,7 @@ AtlasLoot.AtlasLootDBDefaults = {
 	BonusRoll = {	
 		Load = {	-- single modules can be disabled here
 			["*"] = true,
-			
 		},
-		
 	},
 	Tooltip = {	-- Core\Tooltip.lua
 		tooltip = "AtlasLootTooltip",

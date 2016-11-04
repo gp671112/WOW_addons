@@ -1,10 +1,10 @@
-﻿## Interface: 70000
+﻿## Interface: 70100
 ## Author: Hegarol	
-## Version: v8.01.00
+## Version: v8.01.06
 ## Dependencies: AtlasLoot
 ## LoadOnDemand: 1
 ## OptionalDeps: LibBabble-ItemSet-3.0
-## X-Curse-Packaged-Version: v8.01.00
+## X-Curse-Packaged-Version: v8.01.06
 ## X-Curse-Project-Name: AtlasLoot Enhanced
 ## X-Curse-Project-ID: atlasloot-enhanced
 ## X-Curse-Repository-ID: wow/atlasloot-enhanced/mainline
@@ -12,13 +12,12 @@
 ## Title: AtlasLoot |cFF0099FF[Collections]|r
 ## Title-deDE: AtlasLoot |cFF0099FF[Sammlungen]|r
 ## Title-zhCN: AtlasLoot |cFF0099FF[收集]|r
+## Title-zhTW: AtlasLoot |cFF0099FF[收藏]|r
 
 ## Notes: AtlasLoot collections loot tables (e.g. Mounts & Pets)
 ## Notes-deDE: AtlasLoot Sammlungs-Beuteverzeichnisse (z.B. Reit- und Haustiere)
 ## Notes-zhCN: AtlasLoot 《收集》物品信息
-
-## Title-zhTW: |cffB973FF[裝備]|r 副本戰利品查詢-收藏
-## Notes-zhTW: AtlasLoot Enhanced - Collections |n收藏物品資料庫。
+## Notes-zhTW: AtlasLoot 收藏物品資料庫
 
 ## X-eMail: manager@atlasloot.net
 ## X-Category: Map

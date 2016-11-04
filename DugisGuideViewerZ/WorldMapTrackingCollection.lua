@@ -125,7 +125,11 @@ function WMTCollection:Initialize()
 		end
 		
 		local function CreateIfNew(trackingType, npcId, ...)
-			if npcId then npcId = tonumber(npcId) end
+			if npcId then 
+				npcId = tonumber(npcId) 
+			else
+				return
+			end
 			if npcId and npcId == 32639 -- Traveler Tundra Alliance
 			or npcId == 32638 -- Traveler Tundra Alliance
 			or npcId == 32641 -- Traveler Tundra Horde

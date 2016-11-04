@@ -7401,7 +7401,7 @@ local function ItemIsTypeAndSubtype(item, isTypeIndex, isSubTypeIndex)
 	return isLocalized==itemLocalized
 end
 
-function StatLogic:GetSum(item, table, thrrading)
+function StatLogic:GetSum(item, table, threadingMode)
 	-- Locale check
 	if noPatternLocale then return end
 	-- Clear table values
@@ -7418,7 +7418,7 @@ function StatLogic:GetSum(item, table, thrrading)
 		return table
 	end
 	-- Check if item is in local cache
-	local name, link, rarity , ilvl, reqLv, _, armorType, _, itemType = GetItemInfo_dugi(item)
+	local name, link, rarity , ilvl, reqLv, _, armorType, _, itemType = GetItemInfo_dugi(item, threadingMode)
 	if not name then return table end
 
 	-- Initialize table
@@ -7441,7 +7441,7 @@ function StatLogic:GetSum(item, table, thrrading)
 	debugPrint("Item being analysed: "..link)
     
     local counter = 0
-    while thrrading and tip:NumLines() == 1 and counter < 100 do
+    while threadingMode and tip:NumLines() == 1 and counter < 100 do
         counter = counter + 1
         coroutine.yield()
         coroutine.yield()

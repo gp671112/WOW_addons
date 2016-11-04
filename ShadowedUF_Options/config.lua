@@ -229,7 +229,7 @@ local function setVariable(unit, moduleKey, moduleSubKey, key, value)
 end
 
 local function specialRestricted(unit, moduleKey, moduleSubKey, key)
-	if( ShadowUF.fakeUnits[unit] and ( key == "colorAggro" or key == "aggro" or moduleKey == "incHeal" or moduleKey == "healAbsorb" or moduleKey == "incAbsorb" or moduleKey == "castBar" ) ) then
+	if( ShadowUF.fakeUnits[unit] and ( key == "colorAggro" or key == "aggro" or key == "colorDispel" or moduleKey == "incHeal" or moduleKey == "healAbsorb" or moduleKey == "incAbsorb" or moduleKey == "castBar" ) ) then
 		return true
 	elseif( moduleKey == "healthBar" and unit == "player" and key == "reaction" ) then
 		return true
@@ -313,7 +313,7 @@ local function hideRestrictedOption(info)
 	elseif( ( key == "incHeal" and not ShadowUF.modules.incHeal ) or ( key == "incAbsorb" and not ShadowUF.modules.incAbsorb ) or ( key == "healAbsorb" and not ShadowUF.modules.healAbsorb ) )  then
 		return true
 	-- Non-standard units do not support color by aggro or incoming heal
-	elseif( key == "colorAggro" or key == "incHeal" or key == "incAbsorb" or key == "aggro" ) then
+	elseif( key == "colorAggro" or key == "colorDispel" or key == "incHeal" or key == "incAbsorb" or key == "aggro" ) then
 		return string.match(unit, "%w+target" )
 	-- Fall back for indicators, no variable table so it shouldn't be shown
 	elseif( info[#(info) - 1] == "indicators" ) then
@@ -2158,7 +2158,14 @@ local function loadUnitOptions()
 						name = L["Show any other auras"],
 						desc = L["Whether to show auras that do not fall into the above categories."],
 						width = "full"
-					}
+					},
+					relevant = {
+						order = 6,
+						type = "toggle",
+						name = L["Smart Friendly/Hostile Filter"],
+						desc = L["Only apply the selected filters to buffs on friendly units and debuffs on hostile units, and otherwise show all auras."],
+						width = "full"
+					},
 				}
 			},
 			display = {
@@ -4219,9 +4226,18 @@ local function loadUnitOptions()
 								desc = L["Changes the health bar to the set hostile color (Red by default) when the unit takes aggro."],
 								arg = "healthBar.colorAggro",
 								hidden = hideRestrictedOption,
-							},							
-							healthColor = {
+							},
+							colorDispel = {
 								order = 5,
+								type = "toggle",
+								name = L["Color on curable debuff"],
+								desc = L["Changes the health bar to the color of any curable debuff."],
+								arg = "healthBar.colorDispel",
+								hidden = hideRestrictedOption,
+								width = "full",
+							},
+							healthColor = {
+								order = 6,
 								type = "select",
 								name = L["Color health by"],
 								desc = L["Primary means of coloring the health bar, color on aggro and color by reaction will override this if necessary."],
@@ -4235,7 +4251,7 @@ local function loadUnitOptions()
 								arg = "healthBar.colorType",
 							},
 							reaction = {
-								order = 6,
+								order = 7,
 								type = "select",
 								name = L["Color by reaction on"],
 								desc = L["When to color the health bar by the units reaction, overriding the color health by option."],
@@ -5049,13 +5065,13 @@ end
 -- FILTER CONFIGURATION
 ---------------------
 local function loadFilterOptions()
-	local hasWhitelist, hasBlacklist, rebuildFilters
+	local hasWhitelist, hasBlacklist, hasOverridelist, rebuildFilters
 	local filterMap, spellMap = {}, {}
 
 	local manageFiltersTable = {
-		order = function(info) return info[#(info)] == "whitelists" and 1 or 2 end,
+		order = function(info) return info[#(info)] == "whitelists" and 1 or info[#(info)] == "blacklists" and 2 or 3 end,
 		type = "group",
-		name = function(info) return info[#(info)] == "whitelists" and L["Whitelists"] or L["Blacklists"] end,
+		name = function(info) return info[#(info)] == "whitelists" and L["Whitelists"] or info[#(info)] == "blacklists" and L["Blacklists"] or L["Override lists"] end,
 		args = {
 		},
 	}
@@ -5101,7 +5117,7 @@ local function loadFilterOptions()
 					add = {
 						order = 0,
 						type = "input",
-						name = L["Aura name"],
+						name = L["Aura name or spell ID"],
 						--dialogControl = "Aura_EditBox",
 						hidden = false,
 						set = function(info, value)
@@ -5128,7 +5144,7 @@ local function loadFilterOptions()
 							ShadowUF.db.profile.filters[filterType][filter] = nil
 							
 							-- Delete anything that used this filter too
-							local filterList = filterType == "whitelists" and ShadowUF.db.profile.filters.zonewhite or filterType == "blacklists" and ShadowUF.db.profile.filters.zoneblack
+							local filterList = filterType == "whitelists" and ShadowUF.db.profile.filters.zonewhite or filterType == "blacklists" and ShadowUF.db.profile.filters.zoneblack or filterType == "overridelists" and ShadowUF.db.profile.filters.zoneoverride
 							if filterList then
 								for id, filterUsed in pairs(filterList) do
 									if( filterUsed == filter ) then
@@ -5185,11 +5201,16 @@ local function loadFilterOptions()
 	local spellLabel = {
 		order = function(info) return tonumber(string.match(info[#(info)], "(%d+)")) end,
 		type = "description",
-		-- Odd I know, AceConfigDialog-3.0 expands descriptions to full width if width is nil
-		-- on the other hand we can't set width to "normal" so tricking it
-		width = "", 
+		width = "double",
 		fontSize = "medium",
-		name = function(info) return spellMap[info[#(info)]] end,
+		name = function(info)
+				local name = spellMap[info[#(info)]]
+				if tonumber(name) then
+					local spellName, _, icon = GetSpellInfo(name)
+					name = string.format("|T%s:14:14:0:0|t %s (#%i)", icon or "Interface\\Icons\\Inv_misc_questionmark", spellName or L["Unknown"], name)
+				end
+				return name
+			end,
 	}
 	
 	local spellRow = {
@@ -5203,6 +5224,8 @@ local function loadFilterOptions()
 			local filterType = info[#(info) - 3]
 			
 			ShadowUF.db.profile.filters[filterType][filter][spell] = nil
+
+			reloadUnitAuras()
 			rebuildFilters()
 		end
 	}
@@ -5248,13 +5271,13 @@ local function loadFilterOptions()
 		order = function(info) return info[#(info)] == "global" and 1 or info[#(info)] == "none" and 2 or 3 end,
 		type = "group",
 		inline = true,
-		hidden = function() return not hasWhitelist and not hasBlacklist end,
+		hidden = function() return not hasWhitelist and not hasBlacklist and not hasOverridelist end,
 		name = function(info) return AREA_NAMES[info[#(info)]] or L["Global"] end,
 		set = function(info, value)
 			local filter = filterMap[info[#(info)]]
 			local zone = info[#(info) - 1]
 			local unit = info[#(info) - 2]
-			local filterKey = ShadowUF.db.profile.filters.whitelists[filter] and "zonewhite" or "zoneblack"
+			local filterKey = ShadowUF.db.profile.filters.whitelists[filter] and "zonewhite" or ShadowUF.db.profile.filters.blacklists[filter] and "zoneblack" or "zoneoverride"
 			
 			for _, zoneConfig in pairs(zoneList) do
 				if( zone == "global" or zoneConfig == zone ) then
@@ -5283,20 +5306,20 @@ local function loadFilterOptions()
 			
 			if( unit == "global" or zone == "global" ) then 
 				local id = zone == "global" and zone .. unit or zone
-				local filterKey = ShadowUF.db.profile.filters.whitelists[filter] and "zonewhite" or "zoneblack"
+				local filterKey = ShadowUF.db.profile.filters.whitelists[filter] and "zonewhite" or ShadowUF.db.profile.filters.blacklists[filter] and "zoneblack" or "zoneoverride"
 				
 				if( info[#(info)] == "nofilter" ) then
-					return globalSettings[id .. "zonewhite"] == false and globalSettings[id .. "zoneblack"] == false
+					return globalSettings[id .. "zonewhite"] == false and globalSettings[id .. "zoneblack"] == false and globalSettings[id .. "zoneoverride"] == false
 				end
 
 				return globalSettings[id .. filterKey] == filter
 			end
 			
 			if( info[#(info)] == "nofilter" ) then
-				return not ShadowUF.db.profile.filters.zonewhite[zone .. unit] and not ShadowUF.db.profile.filters.zoneblack[zone .. unit]
+				return not ShadowUF.db.profile.filters.zonewhite[zone .. unit] and not ShadowUF.db.profile.filters.zoneblack[zone .. unit] and not ShadowUF.db.profile.filters.zoneoverride[zone .. unit]
 			end
 			
-			return ShadowUF.db.profile.filters.zonewhite[zone .. unit] == filter or ShadowUF.db.profile.filters.zoneblack[zone .. unit] == filter
+			return ShadowUF.db.profile.filters.zonewhite[zone .. unit] == filter or ShadowUF.db.profile.filters.zoneblack[zone .. unit] == filter or ShadowUF.db.profile.filters.zoneoverride[zone .. unit] == filter
 		end,
 		args = {
 			nofilter = {
@@ -5314,14 +5337,17 @@ local function loadFilterOptions()
 							if( unit == "global" ) then
 								globalSettings[zoneConfig .. "zonewhite"] = false
 								globalSettings[zoneConfig .. "zoneblack"] = false
+								globalSettings[zoneConfig .. "zoneoverride"] = false
 								
 								for _, unit in pairs(ShadowUF.unitList) do
 									ShadowUF.db.profile.filters.zonewhite[zoneConfig .. unit] = nil
 									ShadowUF.db.profile.filters.zoneblack[zoneConfig .. unit] = nil
+									ShadowUF.db.profile.filters.zoneoverride[zoneConfig .. unit] = nil
 								end
 							else
 								ShadowUF.db.profile.filters.zonewhite[zoneConfig .. unit] = nil
 								ShadowUF.db.profile.filters.zoneblack[zoneConfig .. unit] = nil
+								ShadowUF.db.profile.filters.zoneoverride[zoneConfig .. unit] = nil
 							end
 						end
 					end
@@ -5329,6 +5355,7 @@ local function loadFilterOptions()
 					if( zone == "global" ) then
 						globalSettings[zone .. unit .. "zonewhite"] = false
 						globalSettings[zone .. unit .. "zoneblack"] = false
+						globalSettings[zone .. unit .. "zoneoverride"] = false
 					end
 
 					reloadUnitAuras()
@@ -5346,17 +5373,23 @@ local function loadFilterOptions()
 				name = L["Blacklists"], -- In theory I would make this black, but as black doesn't work with a black background I'll skip that
 				hidden = function(info) return not hasBlacklist end
 			},
+			override = {
+				order = 5,
+				type = "header",
+				name = L["Override lists"], -- In theory I would make this black, but as black doesn't work with a black background I'll skip that
+				hidden = function(info) return not hasOverridelist end
+			},
 		},
 	}
 	
 	-- Toggle used for set filter zones to enable filters
 	local filterToggle = {
-		order = function(info) return ShadowUF.db.profile.filters.whitelists[filterMap[info[#(info)]]] and 2 or 4 end,
+		order = function(info) return ShadowUF.db.profile.filters.whitelists[filterMap[info[#(info)]]] and 2 or ShadowUF.db.profile.filters.blacklists[filterMap[info[#(info)]]] and 4 or 6 end,
 		type = "toggle",
 		name = function(info) return filterMap[info[#(info)]] end,
 		desc = function(info)
 			local filter = filterMap[info[#(info)]]
-			filter = ShadowUF.db.profile.filters.whitelists[filter] or ShadowUF.db.profile.filters.blacklists[filter]
+			filter = ShadowUF.db.profile.filters.whitelists[filter] or ShadowUF.db.profile.filters.blacklists[filter] or ShadowUF.db.profile.filters.overridelists[filter]
 			if( filter.buffs and filter.debuffs ) then
 				return L["Filtering both buffs and debuffs"]
 			elseif( filter.buffs ) then
@@ -5374,15 +5407,15 @@ local function loadFilterOptions()
 	local filterID, spellID = 0, 0
 	local function buildList(type)
 		local manageFiltersTable = {
-			order = type == "whitelists" and 1 or 2,
+			order = type == "whitelists" and 1 or type == "blacklists" and 2 or 3,
 			type = "group",
-			name = type == "whitelists" and L["Whitelists"] or L["Blacklists"],
+			name = type == "whitelists" and L["Whitelists"] or type == "blacklists" and L["Blacklists"] or L["Override lists"],
 			args = {
 				groups = {
 					order = 0,
 					type = "group",
 					inline = true,
-					name = function(info) return info[#(info) - 1] == "whitelists" and L["Whitelist filters"] or L["Blacklist filters"] end,
+					name = function(info) return info[#(info) - 1] == "whitelists" and L["Whitelist filters"] or info[#(info) - 1] == "blacklists" and L["Blacklist filters"] or L["Override list filters"] end,
 					args = {
 					},
 				},
@@ -5421,7 +5454,7 @@ local function loadFilterOptions()
 		end
 		
 		if( not hasFilters ) then
-			if( type == "whitelists" ) then hasWhitelist = nil else hasBlacklist = nil end
+			if( type == "whitelists" ) then hasWhitelist = nil elseif( type == "blacklists" ) then hasBlacklist = nil else hasOverridelist = nil end
 			manageFiltersTable.args.groups.args.noFilters = noFilters
 		end
 		
@@ -5435,12 +5468,14 @@ local function loadFilterOptions()
 		filterID = 0
 		hasBlacklist = true
 		hasWhitelist = true
+		hasOverridelist = true
 	
 		table.wipe(filterMap)
 		table.wipe(spellMap)
 		
 		options.args.filter.args.filters.args.whitelists = buildList("whitelists")
 		options.args.filter.args.filters.args.blacklists = buildList("blacklists")
+		options.args.filter.args.filters.args.overridelists = buildList("overridelists")
 	end
 		
 	local unitFilterSelection = {
@@ -5460,7 +5495,7 @@ local function loadFilterOptions()
 				type = "group",
 				inline = true,
 				name = L["Help"],
-				hidden = function() return hasWhitelist or hasBlacklist end,
+				hidden = function() return hasWhitelist or hasBlacklist or hasOverridelist end,
 				args = {
 					help = {
 						type = "description",
@@ -5473,7 +5508,7 @@ local function loadFilterOptions()
 				order = 0,
 				type = "header",
 				name = function(info) return (info[#(info) - 1] == "global" and L["Global"] or L.units[info[#(info) - 1]]) end,
-				hidden = function() return not hasWhitelist and not hasBlacklist end,
+				hidden = function() return not hasWhitelist and not hasBlacklist and not hasOverridelist end,
 			},
 			global = filterTable,
 			none = filterTable,
@@ -5532,7 +5567,7 @@ local function loadFilterOptions()
 								args = {
 									help = {
 										type = "description",
-										name = L["Whitelists will hide any aura not in the filter group.|nBlacklists will hide auras that are in the filter group."],
+										name = L["Whitelists will hide any aura not in the filter group.|nBlacklists will hide auras that are in the filter group.|nOverride lists will bypass any filter and always be shown."],
 										width = "full",
 									}
 								},
@@ -5587,7 +5622,16 @@ local function loadFilterOptions()
 													return ""
 												end
 											end
-											
+
+											for filter in pairs(ShadowUF.db.profile.filters.overridelists) do
+												if( string.lower(filter) == name ) then
+													addFilter.error = string.format(L["The override list \"%s\" already exists."], value)
+													addFilter.errorName = value
+													AceRegistry:NotifyChange("ShadowedUF")
+													return ""
+												end
+											end
+
 											addFilter.error = nil
 											addFilter.errorName = nil
 											return true
@@ -5598,7 +5642,7 @@ local function loadFilterOptions()
 										type = "select",
 										name = L["Filter type"],
 										set = function(info, value) addFilter[info[#(info)]] = value end,
-										values = {["whitelists"] = L["Whitelist"], ["blacklists"] = L["Blacklist"]},
+										values = {["whitelists"] = L["Whitelist"], ["blacklists"] = L["Blacklist"], ["overridelists"] = L["Override list"]},
 									},
 									add = {
 										order = 2,
@@ -6626,7 +6670,8 @@ local function loadAuraIndicatorsOptions()
 					for groupID, name in pairs(groupMap) do
 						if( not groupList[name] ) then
 							unitTable.args[tostring(groupID)] = nil
-							options.args.auraIndicators.args.auras.args[tostring(groupID)] = nil
+							options.args.auraIndicators.args.units.args.global.args.groups.args[tostring(groupID)] = nil
+							options.args.auraIndicators.args.auras.args.groups.args[tostring(groupID)] = nil
 							groupMap[groupID] = nil
 						end
 					end
@@ -7546,7 +7591,7 @@ function Config:Open()
 		loadOptions()
 		
 		AceRegistry:RegisterOptionsTable("ShadowedUF", options, true)
-		AceDialog:SetDefaultSize("ShadowedUF", 865, 550)
+		AceDialog:SetDefaultSize("ShadowedUF", 895, 570)
 		registered = true
 	end
 	

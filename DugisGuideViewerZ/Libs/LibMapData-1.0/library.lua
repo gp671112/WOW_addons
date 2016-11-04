@@ -2587,6 +2587,66 @@ do
 	
 			},	
 		}
+		mapData[1015] = { 
+			['name'] = "Azsuna",
+		}
+		mapData[1018] = { 
+			['name'] = "Valsharah",
+		}		
+		mapData[1024] = { 
+			['name'] = "Highmountain",
+		}		
+		mapData[1017] = { 
+			['name'] = "Stormheim",
+		}		
+		mapData[1033] = { 
+			['name'] = "Suramar",
+		}	
+		mapData[1080] = { 
+			['name'] = "ThunderTotem",
+		}
+		mapData[1014] = { 
+			['name'] = "DalaranL",
+		}
+		mapData[1032] = { 
+			['name'] = "VaultOfTheWardensDH",
+		}
+		mapData[1028] = { 
+			['name'] = "MardumtheShatteredAbyss",
+		}		
+		mapData[1048] = { 
+			['name'] = "EmeraldDreamway",
+		}		
+		mapData[1068] = { 
+			['name'] = "HalloftheGuardian",
+		}		
+		mapData[1035] = { 
+			['name'] = "'Skyhold'",
+		}		
+		mapData[1077] = { 
+			['name'] = "TheDreamgrove",
+		}	
+		mapData[1072] = { 
+			['name'] = "TrueshotLodge",
+		}	
+		mapData[1077] = { 
+			['name'] = "TheDreamgrove",
+		}	
+		mapData[1021] = { 
+			['name'] = "Broken Shore",
+		}			
+		mapData[1050] = { 
+			['name'] = "DreadscarRift",
+		}	
+		mapData[1040] = { 
+			['name'] = "NetherlightTemple",
+		}	
+		mapData[1057] = { 
+			['name'] = "TheMaelstromL",
+		}	
+		mapData[1044] = { 
+			['name'] = "TheWanderingIsleL",
+		}			
 	-- Dustwallow Transition patch for client that havent been patched
 	LuaUtils:DugiSetMapByID(141)
 	local dwMap = GetMapInfo()

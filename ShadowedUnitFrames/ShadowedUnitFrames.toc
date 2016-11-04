@@ -1,14 +1,12 @@
 ## Interface: 70000
 ## Title: Shadowed Unit Frames
 ## Notes: "Debug" code free since '93!
-## Title-zhTW: [頭像介面]Shadowed Unit Frames
-## Notes-zhTW: 一個清爽漂亮的頭像介面，指令：/suf。
 ## Author: Shadowed
-## Version: v4.1.4-1-g250cdc5
+## Version: v4.1.10
 ## SavedVariables: ShadowedUFDB
 ## X-Website: http://www.wowace.com/addons/shadowed-unit-frames/
-## OptionalDeps: Ace3, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets, LibDualSpec-1.0, Clique
-## X-Curse-Packaged-Version: v4.1.4-1-g250cdc5
+## OptionalDeps: Ace3, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets, LibDualSpec-1.0, LibSpellRange-1.0, Clique
+## X-Curse-Packaged-Version: v4.1.10
 ## X-Curse-Project-Name: Shadowed Unit Frames
 ## X-Curse-Project-ID: shadowed-unit-frames
 ## X-Curse-Repository-ID: wow/shadowed-unit-frames/mainline
@@ -19,9 +17,16 @@ libs\CallbackHandler-1.0\CallbackHandler-1.0\CallbackHandler-1.0.xml
 libs\LibSharedMedia-3.0\lib.xml
 libs\AceDB-3.0\AceDB-3.0.xml
 libs\LibDualSpec-1.0\LibDualSpec-1.0.lua
+libs\LibSpellRange-1.0\lib.xml
 #@end-no-lib-strip@
 
 localization\enUS.lua
+localization\deDE.lua
+localization\esES.lua
+localization\esMX.lua
+localization\frFR.lua
+localization\koKR.lua
+localization\ruRU.lua
 localization\zhCN.lua
 localization\zhTW.lua
 
@@ -62,3 +67,4 @@ modules\aurapoints.lua
 modules\priest.lua
 modules\shaman.lua
 modules\arcanecharges.lua
+

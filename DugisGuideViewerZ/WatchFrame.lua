@@ -37,8 +37,10 @@ function WF:Initialize()
     end
     ObjectiveTrackerFrameHandlerFrame:SetClampedToScreen(true)
 
+    local temporarilyNotMovableWatchFrame = false
+    
     function WF:UpdateWatchFrameMovable()
-		if DugisGuideViewer:UserSetting(DGV_MOVEWATCHFRAME) and DugisGuideViewer:UserSetting(DGV_DISABLEWATCHFRAMEMOD) then 
+		if (DugisGuideViewer:UserSetting(DGV_MOVEWATCHFRAME) and DugisGuideViewer:UserSetting(DGV_DISABLEWATCHFRAMEMOD)) or temporarilyNotMovableWatchFrame then 
         	ObjectiveTrackerFrameHandlerFrame:EnableMouse(false)
 		elseif DugisGuideViewer:UserSetting(DGV_MOVEWATCHFRAME) then
 			ObjectiveTrackerFrameHandlerFrame:EnableMouse(true)
@@ -66,16 +68,32 @@ function WF:Initialize()
 		return DugisGuideViewer:IsModuleRegistered("SmallFrame") and DGV.SmallFrame.Frame and DGV.SmallFrame.loaded and not DGV.SmallFrame.IsFloating()
 	end	
 	
+    local function GetLastWorldQuestBlock()
+        local bottomBlock = nil
+        local top = 100000
+         
+        LuaUtils:foreach(WORLD_QUEST_TRACKER_MODULE.usedBlocks, function(v, k) 
+            if (v:GetTop() and v:GetTop() < top)  or (v:GetBottom() and v:GetBottom() < top)then
+                bottomBlock = v
+                top = v:GetTop()
+            end
+        end) 
+         
+        return bottomBlock
+    end
+    
 	local function GetBottomElement()
 		if GetNumTrackedAchievements() > 0 then 
-			return ACHIEVEMENT_TRACKER_MODULE.lastBlock 
+			return ACHIEVEMENT_TRACKER_MODULE.lastBlock or (IsAnchoredOn() and DGV.SmallFrame.Frame)
 		elseif C_Scenario.GetInfo() then 
-            if ObjectiveTrackerBlocksFrame.currentBlock == nil then
-                return ACHIEVEMENT_TRACKER_MODULE.lastBlock
+            if ObjectiveTrackerBlocksFrame.QuestHeader.module.lastBlock == nil then
+                return ACHIEVEMENT_TRACKER_MODULE.lastBlock or (IsAnchoredOn() and DGV.SmallFrame.Frame)
             end
-			return ObjectiveTrackerBlocksFrame.currentBlock
-		else
-			return BONUS_OBJECTIVE_TRACKER_MODULE.lastBlock or ObjectiveTrackerBlocksFrame.currentBlock or IsAnchoredOn() and DGV.SmallFrame.Frame
+			return ObjectiveTrackerBlocksFrame.QuestHeader.module.lastBlock or (IsAnchoredOn() and DGV.SmallFrame.Frame)
+        elseif GetLastWorldQuestBlock() then
+            return GetLastWorldQuestBlock()
+        else
+			return BONUS_OBJECTIVE_TRACKER_MODULE.lastBlock or ObjectiveTrackerBlocksFrame.QuestHeader.module.lastBlock or (IsAnchoredOn() and DGV.SmallFrame.Frame) or ObjectiveTrackerBlocksFrame
 		end
 	end
 	
@@ -172,6 +190,7 @@ function WF:Initialize()
 		
 		if DGV:UserSetting(DGV_MOVEWATCHFRAME) then 
 			local shiftX = 0    
+
 			anchorY = 0
 			--if DurabilityFrame:IsShown() then
 				--anchorY = anchorY + 75
@@ -208,23 +227,21 @@ function WF:Initialize()
 		if DugisGuideViewer:IsModuleRegistered("SmallFrame") then DGV:OnWatchFrameUpdate() end
 
 		local bottomElement = GetBottomElement()
-		if bottomElement then
+		if bottomElement and bottomElement ~= ObjectiveTrackerBlocksFrame then
 			ObjectiveTrackerFrame.HeaderMenu:Show()
-		else
-            ObjectiveTrackerFrame.HeaderMenu:Hide()
         end
 
 		local anchorFrame, xOff, yOff = GetObjectiveTrackerAnchorInfo()
 		if WF:ShouldModWatchFrame()
 			and bottomElement
 		then
-			if ObjectiveTrackerFrame.collapsed then
+			if ObjectiveTrackerFrame.collapsed and not ObjectiveTrackerFrame.BlocksFrame:IsShown() then
 				WF.WatchBackground:Hide()
 				ObjectiveTrackerFrame:SetPoint("TOPRIGHT", anchorFrame, "BOTTOMRIGHT", xOff-3, yOff-13)
 				ObjectiveTrackerFrame.HeaderMenu:SetPoint("TOPRIGHT", ObjectiveTrackerFrame, -10, 0)
 				if IsAnchoredOn() then 
 					DGV.DoOutOfCombat(ItemHide, ItemHide)
-					DugisGuideUser.shownObjectives = {}
+					DugisGuideUser.shownObjectives = {}				
 				end
 			else
 				if DGV:UserSetting(DGV_WATCHFRAMEBORDER) then
@@ -260,19 +277,20 @@ function WF:Initialize()
                 local worldQuestTrackerHeight = 0
                 
                 if WORLD_QUEST_TRACKER_MODULE and WORLD_QUEST_TRACKER_MODULE.contentsHeight then
-                    worldQuestTrackerHeight = WORLD_QUEST_TRACKER_MODULE.contentsHeight
+                  --  worldQuestTrackerHeight = WORLD_QUEST_TRACKER_MODULE.contentsHeight
                 end
-                
-				WF.WatchBackground:SetPoint("BOTTOM", bottomElement, 0, -20 - worldQuestTrackerHeight)
-				WF.WatchBackground:SetPoint("LEFT", GetLeftElement(), -40, 0)
-				WF.WatchBackground:Show()
+                if bottomElement ~= ObjectiveTrackerBlocksFrame then 
+					WF.WatchBackground:SetPoint("BOTTOM", bottomElement, 0, -20 - worldQuestTrackerHeight)
+					WF.WatchBackground:SetPoint("LEFT", GetLeftElement(), -40, 0)
+					WF.WatchBackground:Show()
+				end
 				if DugisGuideUser.itemHidden and IsAnchoredOn() then 
 					DGV.Modules.SmallFrame.PopulateSmallFrame()					
 					DugisGuideUser.itemHidden = nil
 				end
 			end
 		else
-			if WF.WatchBackground then 
+			if WF.WatchBackground and not IsAnchoredOn() then 
 				WF.WatchBackground:Hide()
 			end
 			--Below is not needed I think. Otherwise it messes with nUI objective tracker frame
@@ -298,17 +316,17 @@ function WF:Initialize()
                 DugisGuideViewer.SmallFrame.Frame:SetClampedToScreen(false)
             end
         end
-		if DGV:UserSetting(DGV_SMALLFRAMETRANSITION) == L["Flash"] then 
-			LuaUtils:Delay(0.02, function() 
-				WF:PlayFlashAnimation() 
-			end)
-		end
+		if DGV:UserSetting(DGV_SMALLFRAMETRANSITION) == L["Flash"] and not WF.disabledFlash then 
+			--LuaUtils:Delay(0.02, function() 
+				--WF:PlayFlashAnimation() 
+			--end)
+		end	
 	end
 
-	local objectiveTrackerUpdateReaction, manageFramePositionsReaction
+	local objectiveTrackerUpdateReaction--, manageFramePositionsReaction
 	function WF:Load()
-		objectiveTrackerUpdateReaction = RegisterFunctionReaction("ObjectiveTracker_Update", nil, WF.DelayUpdate)
-		manageFramePositionsReaction = RegisterFunctionReaction("UIParent_ManageFramePositions", nil, WF.DelayUpdate)
+		objectiveTrackerUpdateReaction = RegisterFunctionReaction("ObjectiveTracker_Update", nil, WF.ObjectiveTrackerDelayUpdate)
+		--manageFramePositionsReaction = RegisterFunctionReaction("UIParent_ManageFramePositions", nil, WF.DelayUpdate)
 		if DugisWatchBackground and (GetNumQuestWatches() > 0 or GetNumTrackedAchievements() > 0) then 
 			WF.WatchBackground = DugisWatchBackground 
 			WF.WatchBackground:Show()
@@ -325,19 +343,20 @@ function WF:Initialize()
 			--DEFAULT_OBJECTIVE_TRACKER_MODULE.Header = header; --this taints UseQuestLogSpecialItem()
 		end
         
-		function WF:PlayFlashAnimation()
+		function WF:PlayFlashAnimation(headerAnim)
 			if header.animating then return end -- stop flash animation spam
 			if not WF.FlashFrame then
 				wf_flashGroup, flash, WF.FlashFrame = DGV:CreateFlashFrame(DugisWatchBackground)
 			end
 			
-			header.animating = true;
-			header.HeaderOpenAnim:Stop();
-			header.HeaderOpenAnim:Play();
-			
 			if WF:ShouldModWatchFrame() and DGV:UserSetting(DGV_WATCHFRAMEBORDER)
 				and DGV:UserSetting(DGV_SMALLFRAMETRANSITION) == L["Flash"]
-			then
+			then				
+				if headerAnim == true then 
+					header.animating = true;
+					header.HeaderOpenAnim:Stop();
+					header.HeaderOpenAnim:Play();
+				end 
 				--DGV:DebugFormat("PlayFlashAnimation showing", "flashGroup", flashGroup)
 				WF.FlashFrame:Show()
 				WF.FlashFrame:SetWidth(WF.WatchBackground:GetWidth() - 14)
@@ -352,7 +371,7 @@ function WF:Initialize()
 
 	function WF:Unload()
 		objectiveTrackerUpdateReaction:Dispose()
-		manageFramePositionsReaction:Dispose()
+		--manageFramePositionsReaction:Dispose()
 		if WF.FlashFrame then WF.FlashFrame:Hide() end
 		--SnapWatchFrame()
 		if WF.WatchBackground then
@@ -371,23 +390,28 @@ function WF:Initialize()
 		WatchFrameDelayFrame.func = func
 		WatchFrameDelayFrame.delay = delay
 		WatchFrameDelayFrame:Show()
+		WF:Update()	
 	end
 	
 	WatchFrameDelayFrame:SetScript("OnUpdate", function(self, elapsed)
 		self.delay = self.delay - elapsed
 		if self.delay <= 0 then
 			self:Hide()
-			WF:Update() 
+			WF:Update()	
 		end
 	end)
 	
 	function WF:DelayUpdate()
 	    if lastOnOffButtonClickedTime ~= nil and (GetTime() - lastOnOffButtonClickedTime) < 7 then
 	        WF:Update()
-	    end
-	
-		DelayandWatchFrameUpdate(0.05)
+	    end	
+		DelayandWatchFrameUpdate(0.1)
 	end	
+	
+	function WF:ObjectiveTrackerDelayUpdate()
+		if ObjectiveTrackerFrame.isUpdateDirty == true then return end
+		WF:DelayUpdate()
+	end
 	
 	if IsAddOnLoaded("DBM-Core") and DugisGuideViewer:GuideOn() and DugisGuideViewer.chardb.EssentialsMode ~= 1 then 
 		hooksecurefunc(DBM, "StartCombat", function()
@@ -397,4 +421,45 @@ function WF:Initialize()
 			DGV:OnDBMUpdate()
 		end)		
 	end
+
+    --Fix for #172 Blinking Objective Tracker bug
+    local oldSetPointFunctionBuffer = {}
+    
+    local oldSetPointFunction = ObjectiveTrackerFrame.SetPoint
+    local newSetPointFunction = function(...) 
+        oldSetPointFunctionBuffer[#oldSetPointFunctionBuffer + 1] = {...}
+    end
+    
+    local waitingForEnabledFlash = false
+    local function DisableSetPointFunctionForObjectiveTracker()
+        oldSetPointFunctionBuffer = {}
+        DugisGuideViewer.Modules.DugisWatchFrame.disabledFlash = true
+        temporarilyNotMovableWatchFrame = true
+        WF:UpdateWatchFrameMovable()
+        ObjectiveTrackerFrame.SetPoint = newSetPointFunction
+        
+        if waitingForEnabledFlash then
+            return
+        end
+        
+        waitingForEnabledFlash = true
+        LuaUtils:Delay(3, function()
+            ObjectiveTrackerFrame.SetPoint = oldSetPointFunction
+            
+            LuaUtils:foreach(oldSetPointFunctionBuffer, function(v)
+                ObjectiveTrackerFrame.SetPoint(unpack(v))
+            end)
+            
+            DugisGuideViewer.Modules.DugisWatchFrame:Update(true)
+            DugisGuideViewer.Modules.DugisWatchFrame.disabledFlash = false
+            temporarilyNotMovableWatchFrame = false
+            WF:UpdateWatchFrameMovable()
+            waitingForEnabledFlash = false
+            
+        end)
+    end
+
+    hooksecurefunc("CastShapeshiftForm", DisableSetPointFunctionForObjectiveTracker)
+    hooksecurefunc("CancelUnitBuff", DisableSetPointFunctionForObjectiveTracker)
+	
 end

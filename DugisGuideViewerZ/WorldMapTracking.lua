@@ -341,24 +341,26 @@ function WMT:Initialize()
 	function DataProviders.Battlemaster:GetNPC(trackingType, location, npc)
 		return npc
 	end
-	
---[[	function DataProviders.Achievement:ProvidesFor(trackingType)
+	--[[Comment Start for DQE	
+	function DataProviders.Achievement:ProvidesFor(trackingType)
 		return trackingType=="A"
 	end
 	
 	function DataProviders.Achievement:GetTooltipText(trackingType, location, achievementId, criteriaIndex, extraToolTip)
 		achievementId = tonumber(achievementId)
-		local tt1, _, _, _, _, _, tt2 = select(2, GetAchievementInfo(achievementId))
-		if tt2 then
-			tt2 = format("\n|cffffffff%s", tt2)
-		end
-		local tt3
-		criteriaIndex = tonumber(criteriaIndex)
-
-		local achievementNum = tonumber(GetAchievementNumCriteria(achievementId))		
-		
-		if criteriaIndex and criteriaIndex <= achievementNum then
-			tt3 = format("\n|cff9d9d9d%s", GetAchievementCriteriaInfo(achievementId, criteriaIndex))
+		local tt1, tt2, tt3
+		if achievementId then 
+			tt1, _, _, _, _, _, tt2 = select(2, GetAchievementInfo(achievementId))
+			if tt2 then
+				tt2 = format("\n|cffffffff%s", tt2)
+			end
+			criteriaIndex = tonumber(criteriaIndex)
+	
+			local achievementNum = tonumber(GetAchievementNumCriteria(achievementId))		
+			
+			if criteriaIndex and criteriaIndex <= achievementNum then
+				tt3 = format("\n|cff9d9d9d%s", GetAchievementCriteriaInfo(achievementId, criteriaIndex))
+			end
 		end
 		if extraToolTip=="" then extraToolTip=nil end
 		if extraToolTip then
@@ -368,7 +370,8 @@ function WMT:Initialize()
             end
 			extraToolTip = format("\n|cffffffff%s", extraToolTip)
 		end
-		return tt1, tt2, tt3,extraToolTip
+		if not tt1 then tt1 = L["Treasure"] end --Need to localize
+		return tt1, tt2, tt3, extraToolTip
 	end
 	
 	function DataProviders.Achievement:ShouldShow(trackingType, location, achievementId, criteriaIndex, extraToolTip, questId, ...)
@@ -378,23 +381,25 @@ function WMT:Initialize()
 		if questId and IsQuestFlaggedCompleted(questId) then return end
 
 		achievementId = tonumber(achievementId)
-		if achieveID ~= 6856 and 
-			achieveID ~= 6716 and 
-			achieveID ~= 6846 and 
-			achieveID ~= 6754 and 
-			achieveID ~= 6857 and 
-			achieveID ~= 6850 and 
-			achieveID ~= 6855 and 
-			achieveID ~= 6847 and 
-			achieveID ~= 6858 and -- Exclude lorewalker achievement 
-			DGV:UserSetting(DGV_ACCOUNTWIDEACH) then -- Account Wide Achievement setting
-			local completed = select(4, GetAchievementInfo(achievementId))
-			if completed then return end
-		end 
-		criteriaIndex = tonumber(criteriaIndex)
-		local criteriaNum = tonumber(GetAchievementNumCriteria(achievementId))
-		if criteriaIndex and criteriaIndex <= criteriaNum and select(3, GetAchievementCriteriaInfo(achievementId, criteriaIndex)) then
-			return 
+		if achievementId then 
+			if achieveID ~= 6856 and 
+				achieveID ~= 6716 and 
+				achieveID ~= 6846 and 
+				achieveID ~= 6754 and 
+				achieveID ~= 6857 and 
+				achieveID ~= 6850 and 
+				achieveID ~= 6855 and 
+				achieveID ~= 6847 and 
+				achieveID ~= 6858 and -- Exclude lorewalker achievement 
+				DGV:UserSetting(DGV_ACCOUNTWIDEACH) then -- Account Wide Achievement setting
+				local completed = select(4, GetAchievementInfo(achievementId))
+				if completed then return end
+			end 
+			criteriaIndex = tonumber(criteriaIndex)
+			local criteriaNum = tonumber(GetAchievementNumCriteria(achievementId))
+			if criteriaIndex and criteriaIndex <= criteriaNum and select(3, GetAchievementCriteriaInfo(achievementId, criteriaIndex)) then
+				return 
+			end
 		end
 		return true
 	end
@@ -463,7 +468,7 @@ function WMT:Initialize()
 				function() return DGV.chardb.RareCreatureTrackingEnabled end,
 				function(value) DGV.chardb.RareCreatureTrackingEnabled = value end
 	end
-	--]]
+	--Comment end for DQE ]]
 	local petJournalLookup = {}
 	--_G["BATTLE_PET_NAME_"..i]
 	function DGV:PopulatePetJournalLookup()
@@ -613,7 +618,13 @@ function WMT:Initialize()
 					if trackingType == "P" then
 						point.icon:SetTexture(icon)
 						point.icon:SetTexCoord(0.79687500, 0.49218750, 0.50390625, 0.65625000)
+						point:SetFrameLevel(502)
+					elseif trackingType == "A" then --make achievement higher priority 
+						point.icon:SetTexture(icon)
+						point.icon:SetTexCoord(0, 1, 0, 1)
+						point:SetFrameLevel(503)
 					else
+						point:SetFrameLevel(502)					
 						point.icon:SetTexture(icon)
 						point.icon:SetTexCoord(0, 1, 0, 1)
 					end
@@ -778,13 +789,18 @@ function WMT:Initialize()
     DugisWaypointTooltip.updateModel = function()
         npcId = DugisWaypointTooltip.npcId
     
+        if DGV:UserSetting(DGV_HIDE_MODELS_IN_WORLDMAP) then
+            return
+        end
+    
 		if not npcId then return end
         
-        
-        
-        if (DugisWaypointTooltip:GetWidth() < 190) then
-            DugisWaypointTooltip:SetWidth(190)
+        if (DugisWaypointTooltip:GetWidth() < 160) then
+            DugisWaypointTooltip:SetWidth(160)
         end
+
+		DugisWaypointTooltip:SetWidth(160) 
+		DugisWaypointTooltipTextLeft1:SetWidth(150)		
         
         local textHeight = DugisWaypointTooltip:GetHeight()
         DugisWaypointTooltip:SetHeight(DugisWaypointTooltip:GetWidth() + textHeight - 15)
@@ -819,6 +835,7 @@ function WMT:Initialize()
     end
 
 	local function point_OnEnter(self, button)
+		local flightMaster = self.args and self.args[1] == 5
 		if UIParent:IsVisible() then
 			DugisWaypointTooltip:SetParent(UIParent)
 		else
@@ -831,17 +848,25 @@ function WMT:Initialize()
 		DugisWaypointTooltip:SetFrameStrata("DIALOG")
     
         local texts = {DataProviders:GetTooltipText(self.provider, unpack(self.args))}
-	
+
 		local npcId = DataProviders:GetNPC(self.provider, unpack(self.args))
         
         if texts[1] == nil and npcId then
             texts[1] = "NPC "..npcId
         end
+		
+		if self.name and flightMaster then 
+			texts[1] = "|cffffffff"..self.name.."|r"
+		elseif flightMaster then
+			texts[1] = L["|cfff0eb20Flight location not learned|r"]
+		end		
         
 		AddTooltips(unpack(texts))
 
-        DugisWaypointTooltip.npcId = npcId
-        DugisWaypointTooltip:updateModel()
+        if not flightMaster then 
+			DugisWaypointTooltip.npcId = npcId
+	        DugisWaypointTooltip:updateModel()
+		end
 
 	end
 
@@ -878,13 +903,16 @@ function WMT:Initialize()
 			point.icon = point:CreateTexture("ARTWORK")
 			point.icon:SetAllPoints()
 			point.icon:Show()
-			point:SetFrameLevel(502) --Required for to be 1 point above the Blizzard flight master POI
+			--point:SetFrameLevel(502) --Required for to be 1 point above the Blizzard flight master POI
 		end
 		point:Hide()
 		point.args = {...}
 		point.args[1] = tonumber(point.args[1]) or point.args[1]
 		point.args[2] = tonumber(point.args[2]) or point.args[2]
 		point.provider = DataProviders:SelectProvider(...)
+		if point.args[1] == 5 and point.args[4] then --Flightmaster Zone name
+			point.name = point.args[4]
+		end
 		local icon = DataProviders:GetDetailIcon(point.provider, unpack(point.args))
 		if icon then
 			point.toolTipIcon = icon
@@ -1048,6 +1076,7 @@ function WMT:Initialize()
 					point.minimapPoint:Hide()
 					point.minimapPoint = nil
 				end
+
 				tinsert(trackingPointPool, tremove(trackingPoints, index))
 				return
 			end
@@ -1081,16 +1110,25 @@ function WMT:Initialize()
 	
 	local function AddFlightPointData()
 		local fullData = DGV.Modules.TaxiData:GetFullData()
+		local faction = UnitFactionGroup("player")
+		local characterData
+		if DugisFlightmasterDataTable then 
+			characterData = DugisFlightmasterDataTable
+		end
 		local continent, map, level = GetCurrentMapContinent(), GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
 		if fullData and fullData[continent] then
 			for npc,data in pairs(fullData[continent]) do
 				local requirements = data and data.requirements
+				local name 
+				if characterData and characterData[continent] and characterData[continent][npc] then 
+					name = characterData[continent][npc].name
+				end
 				if 
 					data.m==map and 
 					data.f==level and
 					(not requirements or DGV:CheckRequirements(strsplit(":", requirements)))
 				then
-					GetCreatePoint("5", data.coord, npc)
+					GetCreatePoint("5", data.coord, npc, name)
 				end
 			end
 		end
@@ -1276,7 +1314,9 @@ function WMT:Initialize()
 
 	local orig_MiniMapTrackingDropDown_Initialize
 	function WMT:Load()
-		
+		LuaUtils:Delay(3, function()
+            DGV:PopulatePetJournalLookup()
+        end)
 		function WMT:UpdateTrackingMap()
 			if not WMT.loaded then return end
 			local mapName, level = GetMapInfo(), GetCurrentMapDungeonLevel()
@@ -1439,7 +1479,7 @@ function WMT:Initialize()
         LuaUtils:foreach(QuestMapFrame.QuestsFrame.Contents.Headers, function(parentButton)
             if parentButton.abandonGroupButton == nil then
                 local buttonFrame = GUIUtils:AddButton(parentButton, "", 231, 6, 28, 28, 28, 28, function(self)  
-                    StaticPopupDialogs["GROUP_ABANDON_CONFIRMATION"].text = L["Abandon All "] .. GetQuestLogTitle(self.abandonGroupButton.questLogIndex) .. L[" Quests?"]
+                    StaticPopupDialogs["GROUP_ABANDON_CONFIRMATION"].text = L["Abandon All "] .. GetQuestLogTitle(self.abandonGroupButton.questLogIndex) .. L[" Quests?"] 
                     if pressedAbandonIndex == nil then
                         pressedAbandonIndex = self.abandonGroupButton.questLogIndex
                         StaticPopup_Show ("GROUP_ABANDON_CONFIRMATION")

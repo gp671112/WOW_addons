@@ -183,9 +183,11 @@ local function getFloorData(areaID, mapData, f)
 end
 local function getSystemPosition( areaID, mapData, f, x, y )
 	mapData = getFloorData(areaID, mapData, f)
-	x = x * mapData.width + mapData.xOffset;
-	y = y * mapData.height + mapData.yOffset;
-	return x, y;
+	if mapData and mapData.width then  
+		x = x * mapData.width + mapData.xOffset;
+		y = y * mapData.height + mapData.yOffset;
+		return x, y;
+	end
 end
 
 local function printError( ... )
@@ -304,6 +306,7 @@ function Astrolabe:TranslateWorldMapPosition( M, F, xPos, yPos, nM, nF )
 			if ( (M==0 or WorldMapSize[0][S]) and (nM==0 or WorldMapSize[0][nS]) ) then
 				mapData = WorldMapSize[M];
 				xPos, yPos = getSystemPosition(M, mapData, F, xPos, yPos);
+				if not xPos then return end
 				if ( M ~= 0 ) then
 					-- translate up to world map if we aren't there already
 					local cont = WorldMapSize[0][S];
@@ -341,6 +344,10 @@ end
 --*****************************************************************************
 function Astrolabe:GetUnitPosition( unit, noMapChange )
 	local x, y = GetPlayerMapPosition(unit);
+    if x == nil then
+        x, y = 0, 0 
+    end
+    
 	if ( x <= 0 and y <= 0 ) then
 		if ( noMapChange ) then
 			-- no valid position on the current map, and we aren't allowed
@@ -350,6 +357,10 @@ function Astrolabe:GetUnitPosition( unit, noMapChange )
 		local lastMapID, lastFloor = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel();
 		LuaUtils:DugiSetMapToCurrentZone();
 		x, y = GetPlayerMapPosition(unit);
+        if x == nil then
+            x, y = 0, 0 
+        end
+        
 		if ( x <= 0 and y <= 0 ) then
 			-- attempt to zoom out once - logic copied from WorldMapZoomOutButton_OnClick()
 				if ( ZoomOut() ) then
@@ -360,6 +371,10 @@ function Astrolabe:GetUnitPosition( unit, noMapChange )
 					SetMapZoom(WORLDMAP_WORLD_ID);
 				end
 			x, y = GetPlayerMapPosition(unit);
+            if x == nil then
+                x, y = 0, 0 
+            end
+            
 			if ( x <= 0 and y <= 0 ) then
 				-- we are in an instance without a map or otherwise off map
 				return;
@@ -386,6 +401,10 @@ end
 --*****************************************************************************
 function Astrolabe:GetCurrentPlayerPosition()
 	local x, y = GetPlayerMapPosition("player");
+    if x == nil then
+        x, y = 0, 0 
+    end
+    
 	if ( x <= 0 and y <= 0 ) then
 		if ( self.WorldMapVisible ) then
 			-- we know there is a visible world map, so don't cause 
@@ -394,6 +413,10 @@ function Astrolabe:GetCurrentPlayerPosition()
 		end
 		LuaUtils:DugiSetMapToCurrentZone();
 		x, y = GetPlayerMapPosition("player");
+        if x == nil then
+            x, y = 0, 0 
+        end
+        
 		if ( x <= 0 and y <= 0 ) then
 			-- attempt to zoom out once - logic copied from WorldMapZoomOutButton_OnClick()
 				if ( ZoomOut() ) then
@@ -404,6 +427,10 @@ function Astrolabe:GetCurrentPlayerPosition()
 					SetMapZoom(WORLDMAP_WORLD_ID);
 				end
 			x, y = GetPlayerMapPosition("player");
+            if x == nil then
+                x, y = 0, 0 
+            end
+            
 			if ( x <= 0 and y <= 0 ) then
 				-- we are in an instance without a map or otherwise off map
 				return;
@@ -482,7 +509,7 @@ end
 local minimapRotationEnabled = false;
 local minimapShape = false;
 
-local minimapRotationOffset = GetPlayerFacing();
+local minimapRotationOffset = GetPlayerFacing_dugi();
 
 
 local function placeIconOnMinimap( minimap, minimapZoom, mapWidth, mapHeight, icon, dist, xDist, yDist, edgeRangeMultiplier )
@@ -603,7 +630,7 @@ function Astrolabe:PlaceIconOnMinimap( icon, mapID, mapFloor, xPos, yPos )
 	
 	minimapRotationEnabled = GetCVar("rotateMinimap") ~= "0"
 	if ( minimapRotationEnabled ) then
-		minimapRotationOffset = GetPlayerFacing();
+		minimapRotationOffset = GetPlayerFacing_dugi();
 	end
 	
 	-- check Minimap Shape
@@ -712,7 +739,7 @@ do
 				
 				minimapRotationEnabled = GetCVar("rotateMinimap") ~= "0"
 				if ( minimapRotationEnabled ) then
-					minimapRotationOffset = GetPlayerFacing();
+					minimapRotationOffset = GetPlayerFacing_dugi();
 				end
 				
 				-- check current frame rate
@@ -840,7 +867,7 @@ do
 				local Minimap = Astrolabe.Minimap;
 				minimapRotationEnabled = GetCVar("rotateMinimap") ~= "0"
 				if ( minimapRotationEnabled ) then
-					minimapRotationOffset = GetPlayerFacing();
+					minimapRotationOffset = GetPlayerFacing_dugi();
 				end
 				
 				-- check current frame rate
@@ -1967,6 +1994,20 @@ WorldMapSize = {
 		["originSystem"] = 646,
 		["xOffset"] = -3052.08325195313,
 		["width"] = 5099.99987792969,
+		[1] = {
+			["height"] = 237.08329772949,
+			["microName"] = "TwilightDepths",
+			["width"] = 355.62493181229,
+			["xOffset"] = -2.8129200935364,
+			["yOffset"] = -160,
+		},
+		[2] = {
+			["height"] = 520,
+			["microName"] = "TwilightDepths",
+			["width"] = 780,
+			["xOffset"] = -252.5,
+			["yOffset"] = -350,
+		},		
 	},
 	[768] = {
 		{
@@ -3298,6 +3339,37 @@ WorldMapSize = {
 		["xOffset"] = -3439.58325195313,
 		["width"] = 3145.83325195313,
 	},
+	[679] = {
+		{
+			["yOffset"] = 980,
+			["microName"] = "EmberstoneMine",
+			["height"] = 280,
+			["xOffset"] = -1140,
+			["width"] = 420,
+			["floorName"] = "Emberstone Mine",
+		}, -- [1]
+		{
+			["microName"] = "GreymaneManor",
+			["height"] = 166.97998046875,
+			["yOffset"] = 1500.0100097656,
+			["xOffset"] = -2710.2348632813,
+			["width"] = 250.4697265625,
+		}, -- [2]
+		{
+			["microName"] = "GreymaneManor",
+			["height"] = 186.97998046875,
+			["yOffset"] = 1480.0100097656,
+			["xOffset"] = -2725.2348632813,
+			["width"] = 280.4697265625,
+		}, -- [3]		
+		["firstFloor"] = 1,
+		["system"] = 654,
+		["yOffset"] = 533.333312988281,
+		["height"] = 2097.91668701172,
+		["originSystem"] = 654,
+		["xOffset"] = -3439.58325195313,
+		["width"] = 3145.83325195313,
+	},	
 	[806] = {
 		["firstFloor"] = 0,
 		["system"] = 870,
@@ -3321,15 +3393,6 @@ WorldMapSize = {
 		["originSystem"] = 1135,
 		["xOffset"] = -1632.5,
 		["width"] = 1532.5,
-	},
-	[679] = {
-		["firstFloor"] = 1,
-		["system"] = 654,
-		["yOffset"] = 533.333312988281,
-		["height"] = 2097.91668701172,
-		["originSystem"] = 654,
-		["xOffset"] = -3439.58325195313,
-		["width"] = 3145.83325195313,
 	},
 	[807] = {
 		["firstFloor"] = 0,
@@ -5541,8 +5604,12 @@ WorldMapSize = {
 	},
 	[751] = {
 		["firstFloor"] = 0,
-		["originSystem"] = -1,
-		["system"] = -1,
+		["system"] = 730,
+		["yOffset"] = -1370.83325195313,
+		["height"] = 1033.33325195313,
+		["originSystem"] = 730,
+		["xOffset"] = -1556.25,
+		["width"] = 1550,
 	},
 	[879] = {
 		["firstFloor"] = 0,
@@ -6090,7 +6157,7 @@ WorldMapSize = {
 			["xOffset"] = -1868.75,
 			["yOffset"] = -2150,
 		},
-	}
+	},
 --[[	[32] = {
 		[21] = {
 			["microName"] = "Dalaran",
@@ -6107,6 +6174,32 @@ WorldMapSize = {
 		["originSystem"] = 0,
 		["system"] = 0,
 	},]]	
+	[1021] = { -- Broken Shore
+		[1] = {
+			["floorName"] = "The Heart of Acherus",
+			["height"] = 311.65991210938,
+			["microName"] = "Acherus",
+			["width"] = 467.49401855469,
+			["xOffset"] = -1286.25,
+			["yOffset"] = 1349.1700439453,
+		},
+		[2] = {
+			["floorName"] = "Hall of Command",
+			["height"] = 311.65991210938,
+			["microName"] = "Acherus",
+			["width"] = 467.49401855469,
+			["xOffset"] = -1286.25,
+			["yOffset"] = 1349.1700439453,
+		},
+	},	
+	[1046] = {
+		[1] = {
+			["width"] = 1900,
+			["height"] = 1266.669921875,
+			["xOffset"] = -5439.580078125,
+			["yOffset"] = 2806.25
+		},
+	},		
 }
 
 MicroDungeonSize = {

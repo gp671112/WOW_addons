@@ -55,7 +55,7 @@ function Taxi:Initialize()
 		route.parentRoute = parentRoute
 		route.currentBest = currentBest
 		route.builder = builder
-		return route:BindToAutoroutineLifetime(PoolRoute)
+		return route
 	end
 	
 	local function IsBestEstimate(route, otherRoute, ...)
@@ -117,6 +117,7 @@ function Taxi:Initialize()
 	end]]
 	
 	local function GetAngle(x1, y1, x2, y2, x3, y3)
+		if not x1 then return end
 		local ax = x1 - x2
 		local ay = y1 - y2
 		
@@ -125,8 +126,9 @@ function Taxi:Initialize()
 		
 		local aLen = math.sqrt(ax^2 + ay^2)
 		local bLen = math.sqrt(bx^2 + by^2)
-		
+
 		local dotProduct = ax * bx + ay * by
+		if aLen == 0 or bLen == 0 then return math.acos(0) end
 		return math.acos(dotProduct / (aLen * bLen))
 	end
 	
@@ -168,11 +170,25 @@ function Taxi:Initialize()
 			local reqType, req = select(i, ...)
 			if reqType=="lvl" then
 				pass = pass and UnitLevel("player")>=tonumber(req)
+			elseif reqType=="passlvl" then
+				local faction
+				for i=requirementsStart,select("#", ...),2 do
+					local arg1, arg2 = select(i, ...)
+					if arg1=="fac" then 
+						faction = arg2
+						break
+					end
+				end
+				pass = UnitLevel("player")>=tonumber(req) and UnitFactionGroup("player")==faction			
 			elseif reqType=="qid" then
+				local passqid = false
 				local qids = GetCreateTable(strsplit(",", req))
 				for _,v in ipairs(qids) do
-					pass = pass and IsQuestFlaggedCompleted(tonumber(v))
+					if IsQuestFlaggedCompleted(tonumber(v)) then
+						passqid = true
+					end
 				end
+				pass = passqid 
 				tPool(qids)
 			elseif reqType=="nqid" then
 				if IsQuestFlaggedCompleted(tonumber(req)) then return end
@@ -195,6 +211,13 @@ function Taxi:Initialize()
 				pass = pass and select(2, UnitClass("player"))==req
 			elseif reqType=="map" then
 				pass = pass and pm==tonumber(req)
+			elseif reqType=="spell" then
+				local spellName = GetSpellInfo(req)
+				if spellName then 
+					pass = GetSpellBookItemInfo(spellName)
+				else 
+					pass = false
+				end				
 			end
 		end
 		if pass then return ... end
@@ -341,6 +364,7 @@ function Taxi:Initialize()
 					dataTbl[1], dataTbl[2], m2, f2, x2, y2, m1, f1 or 0, mTrans, fTrans or 0, ...))
 				if #(recursiveResult)==0 then
 					tPool(recursiveResult)
+					recursiveResult = nil
 				else
 					resultX,resultY,_,resultBreadCrumb = select(3,unpack(dataTbl))
 					break
@@ -352,6 +376,7 @@ function Taxi:Initialize()
 				tPool(dataTbl)
 			end
 			tPool(distTable)
+			if not recursiveResult then return end
 			if not resultY or #(recursiveResult)<4 then
 				tPool(recursiveResult)
 				return
@@ -591,15 +616,15 @@ function Taxi:Initialize()
 		
 		local contData = (TaxiDataCollection.ZoneTransData or TaxiData.ZoneTransData)[c]
 		
-		if m1 == 678 or 
-		m1 == 611 or
-		m1 == 1052 or
-		m1 == 903 or
-		m1 == 1039 or
-		m1 == 1068
-		then 
-			contData = TaxiData.ZoneTransData[10] --hack to force use InstanceTransData
-		end 
+--[[		if m1 == 678 or 
+			m1 == 611 or
+			m1 == 1052 or
+			m1 == 903 or
+			m1 == 1039 or			
+			m1 == 1068
+			then 
+				contData = TaxiData.ZoneTransData[10] --hack to force use InstanceTransData
+			end 		]]
 		
 		if not DirectRouteEvaluatesBest(best, parentRoute, dist, movementSpeed) then
 			return
@@ -635,15 +660,15 @@ function Taxi:Initialize()
 		if route.grounded then
 			local contData = (TaxiDataCollection.ZoneTransData or TaxiData.ZoneTransData)[route[1]]
 			local _, m1, f1, x1, y1 = unpack(route)
-			if m1 == 678 or 
+--[[		if m1 == 678 or 
 			m1 == 611 or
 			m1 == 1052 or
 			m1 == 903 or
-			m1 == 1039 or
+			m1 == 1039 or			
 			m1 == 1068
 			then 
 				contData = TaxiData.ZoneTransData[10] --hack to force use InstanceTransData
-			end 		
+			end 		]]
 			route.estimate = SumDistances(m1, f1, x1, y1,
 					BacktrackCharacterPath(contData, 
 						m1, f1, x1, y1, nil, nil, select(6, unpack(route))))
@@ -668,7 +693,7 @@ function Taxi:Initialize()
 		if route.grounded then
 			local _, m1, f1, x1, y1 = unpack(route)
 			local m2, f2, x2, y2 = select(6, route:Unpack())
-			if m1 == 678 or 
+--[[		if m1 == 678 or 
 			m1 == 611 or
 			m1 == 1052 or
 			m1 == 903 or
@@ -676,7 +701,7 @@ function Taxi:Initialize()
 			m1 == 1068
 			then 
 				contData = TaxiData.ZoneTransData[10] --hack to force use InstanceTransData
-			end 		
+			end 		]]
 			local walkRoute = AddCharacterPoints(description,
 					BacktrackCharacterPath(contData, 
 						m1, f1, x1, y1, nil, nil, m2, f2, x2, y2))
@@ -700,6 +725,7 @@ function Taxi:Initialize()
 	end
 
 	function RouteBuilders.FlightHop:Build(continent, npc1, npc2)
+		if not npc1 or not npc2 then return end	
 		local fullData = TaxiData:GetFullData()
 		local npcTbl1, npcTbl2 = fullData[continent][npc1], fullData[continent][npc2]
 		local npc1x,npc1y = DGV:UnpackXY(npcTbl1.coord)
@@ -715,6 +741,7 @@ function Taxi:Initialize()
 		route.distance = dist
 		route.builder = self
 		route.movementSpeed = GetFlightPathMultiplier()*baseSpeed
+
 		route.npc2 = npc2
 		return route
 	end
@@ -778,25 +805,27 @@ function Taxi:Initialize()
 	local function ValidatePath(c, isRoot, ...)
 		local fullData = TaxiData:GetFullData()
 		for i=1,select("#",...) do
-			local id = tonumber((select(i,...)))
-			--	DGV:DebugFormat("ValidatePath", "id", id, "DugisFlightmasterDataTable[c]~=nil", DugisFlightmasterDataTable[c]~=nil, "(select(i,...))", (select(i,...)))
-			if not id or
-				not fullData[c] or
-				not fullData[c][id]
-			then
-				return
-			end
-			local DugisArrow = DGV.Modules.DugisArrow
-			local cPlayer = DGV:GetCZByMapId(DGV.Modules.DugisArrow.map)
-			if (not DugisFlightmasterDataTable or
-				not DugisFlightmasterDataTable[c]) and
-				(cPlayer==c or isRoot) 
-			then return true end
-			if not DugisFlightmasterDataTable or
-				not DugisFlightmasterDataTable[c] or
-				not DugisFlightmasterDataTable[c][id]
-			then
-				return
+			if c ~= 8 or (i == 1 or i==select("#",...)) then
+				local id = tonumber((select(i,...)))
+				--	DGV:DebugFormat("ValidatePath", "id", id, "DugisFlightmasterDataTable[c]~=nil", DugisFlightmasterDataTable[c]~=nil, "(select(i,...))", (select(i,...)))
+				if not id or
+					not fullData[c] or
+					not fullData[c][id]
+				then
+					return
+				end
+				local DugisArrow = DGV.Modules.DugisArrow
+				local cPlayer = DGV:GetCZByMapId(DGV.Modules.DugisArrow.map)
+				if (not DugisFlightmasterDataTable or
+					not DugisFlightmasterDataTable[c]) and
+					(cPlayer==c or isRoot) 
+				then return true end
+				if not DugisFlightmasterDataTable or
+					not DugisFlightmasterDataTable[c] or
+					not DugisFlightmasterDataTable[c][id]
+				then
+					return
+				end
 			end
 		end
 		return true
@@ -871,9 +900,15 @@ function Taxi:Initialize()
 							else
 								for _, hops in ipairs(data) do
 									local hopMatch = strmatch(hops, format(":%d$",endId))
+if startId==96813 and endId==95688 then
+DGV:DebugFormat("FlightMasterRouteBuildSelector", "hopMatch", hopMatch)
+end
 									if hopMatch then
 										hopTable = GetCreateTable(strsplit(":", hops))
 										if not ValidatePath(c, isRoot, startId, unpack(hopTable)) then
+if startId==96813 and endId==95688 then
+DGV:DebugFormat("FlightMasterRouteBuildSelector validate failed", "args", {c, isRoot, startId, unpack(hopTable)})
+end
 											tPool(hopTable)
 											hopTable = nil
 										end
@@ -882,6 +917,9 @@ function Taxi:Initialize()
 								end
 							end
 							if hopTable then
+if startId==96813 and endId==95688 then
+DGV:DebugFormat("FlightMasterRouteBuildSelector hopTable")
+end
 								tail = tailRoutes[endId]
 								if not tail or (not head and tail~="nilTail") then
 									local mStart,fStart,xStart,yStart,
@@ -1191,7 +1229,6 @@ function Taxi:Initialize()
 	local itemRubySlippers = 28585
 	local itemEtherealPortal = 54452
 	local spellAstralRecall = 556
-	local itemDalaranHearthstone = 140192
 	function RouteBuilders.BoundTeleport:Build(best, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2)
 		--DGV:DebugFormat("BoundTeleport:Build", "m1", m1, "f1", f1,"x1", x1, "y1", y1, "m2", m2, "f2", f2, "x2",  x2, "y2", y2)
 		local mBound,fBound,xBound,yBound = GetUsefulBindLocation()
@@ -1253,10 +1290,8 @@ function Taxi:Initialize()
 	local innkeepersDaughterCast = 3
 	local loadConstant = 5
 	local penaltyConstant = 20
-	local dalaranHearthCast = 5
 	function RouteBuilders.BoundTeleport:Estimate(route)
 		local cast = (route.item == itemInnkeepersDaughter and innkeepersDaughterCast) or 
-			(route.item == itemDalaranHearthstone and dalaranHearthCast) or
 			hearthCast
 		local tailEst = (route.tail and route.tail.builder:Estimate(route.tail)) or 0
 		return tailEst + cast + loadConstant + penaltyConstant
@@ -1376,6 +1411,15 @@ function Taxi:Initialize()
 	function RouteBuilders.UnboundTeleport:Estimate(route)
 		--DGV:DebugFormat("UnboundTeleport:Estimate ORG", "route.spell", route.spell)
 		local est = route.estimate
+		if route.spell == 193753 then  --Exception for Dreamwalk
+			local start, duration, enabled = GetSpellCooldown(route.spell)
+			local cdLeft = 12 
+			if start > 0 then 
+				cdLeft = cdLeft + start + duration - GetTime()
+			end
+			route.estimate = cdLeft
+			return route.estimate
+		end		
 		if not est then
 			local tailEst = (route.tail and route.tail.builder:Estimate(route.tail)) or 0
 			est = tailEst + 10 + loadConstant + ubtPenalty
@@ -1383,6 +1427,13 @@ function Taxi:Initialize()
 				route.estimate = est
 			end
 		end
+		if route.item == 140192 then --Dalaran hearthstone
+			est = est + 10
+		elseif route.item == 50977 then -- DK Deathgate
+			est = est + 15
+		elseif route.item == 141605 then -- Flightmaster Whistle
+			est = est + 15			
+		end		
 		return est
 	end
 
@@ -1403,7 +1454,7 @@ function Taxi:Initialize()
 	end
 	
 	function DGV:UNIT_SPELLCAST_START(event, unit, spellName, spellRank, lineIdCounter, spellId)
-		if unit=="player" and spellId==126892 then
+		if unit=="player" and (spellId==126892 or spellId==50977 or spellId==193753) then
 			if not DugisGuideUser.ZenPilgrimageReturnPoint then DugisGuideUser.ZenPilgrimageReturnPoint = {} end
 			pt = DugisGuideUser.ZenPilgrimageReturnPoint
 			pt.m, pt.f, pt.x, pt.y = DGV:GetPlayerMapPositionDisruptive()
@@ -1420,17 +1471,32 @@ function Taxi:Initialize()
 	end
 	
 	function RouteBuilders.ZenPilgrimageReturn:Build(best, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2)
-		if not UnitBuff("player", GetSpellInfo(126895)) 
+		local class = select(2, UnitClass("player"))
+		local currentMap = GetCurrentMapAreaID()
+		local currentFloor = GetCurrentMapDungeonLevel()
+		local subzone = GetSubZoneText()
+		local ebonHold = DugisGuideViewer:localize("Acherus: The Ebon Hold", "ZONE")
+ 		local inClassHall = subzone == ebonHold or (currentMap == 1021 and (currentFloor == 1 or currentFloor == 2)) or currentMap == 1048
+
+		if (class == "MONK" and not UnitBuff("player", GetSpellInfo(126895)))
 			or not DugisGuideUser.ZenPilgrimageReturnPoint 
 			or not DugisGuideUser.ZenPilgrimageReturnPoint.m 
+			or (class == "DEATHKNIGHT" and not inClassHall)
+			or (class == "DRUID" and not inClassHall)
+			or (class ~= "MONK" and class ~= "DEATHKNIGHT" and class ~= "DRUID")
 		then return end
 		
 		local route = GetCreateRoute(self, best, parentRoute)
 		route.builder = self
 		local pt = DugisGuideUser.ZenPilgrimageReturnPoint
 		route.m, route.f, route.x, route.y = pt.m, pt.f, pt.x, pt.y
-		route.spell = 126895
-		
+		if class == "MONK" then 
+			route.spell = 126895
+		elseif class =="DEATHKNIGHT" then
+			route.spell = 50977
+		elseif class =="DRUID" then
+			route.spell = 193753
+		end
 		
 		route.tail = Taxi:GetBestRoute(route,
 			pt.m, pt.f, pt.x, pt.y, m2, f2, x2, y2, 
@@ -1459,6 +1525,7 @@ function Taxi:Initialize()
 			or GetItemCount(141605)==0
 			or GetItemCooldown(141605)~=0
 			or IsIndoors()
+			or GetZoneText()==DugisGuideViewer:localize("Dalaran") --doesn't work in Dalaran 
 		then return end
 		local route = RouteBuilders.FlightMasterWhistle:Build(
 			best, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2)
@@ -1472,10 +1539,12 @@ function Taxi:Initialize()
 		route.builder = self
 		local fullData = TaxiData:GetFullData()
 		local t = DugisFlightmasterDataTable
+		if not t or not t[8] or IsInInstance() then return end
 		local headDistances,headNPCs = GetDistances(m1, f1, x1, y1, t[8], fullData[8])
 		local startDist = headDistances[1]
 		local startId = headNPCs[startDist]
 		local data = t[8][startId]
+		if not data then return end
 		tPool(headDistances)
 		tPool(headNPCs)
 		route.m, route.f, route.x, route.y = data.m, data.f, DGV:UnpackXY(data.coord)

@@ -40,6 +40,8 @@ local ITEM_BONUS_PRESET = {
 	["LegionHCDungeonTitanforged"]= { 1726, 1552 },
 	["LegionMDungeon"] 		= { 1727 },
 	["LegionMDungeonTitanforged"]	= { 1727, 1552 },
+	["LegionMDungeon2"]		= { 3452 },
+	["LegionMDungeon2Titanforged"]		= { 3452, 1552 },
 	-- Raids
 	["LFR"]					= { 451 },
 	["SoOWarforged"]		= { 448 },
@@ -53,7 +55,7 @@ local ITEM_BONUS_PRESET = {
 	["MythicRaid"] 			= { 567 },
 	["MythicRaidWarforged"]	= { 567, 562 },
 	["LegionLFR"] 						= { 3379 },
-	["LegionLFRTitanforged"] 			= { 3379 },
+	["LegionLFRTitanforged"] 			= { 3379, 1552 },
 	["LegionRaid"]						= { 1807 },
 	["LegionRaidTitanforged"]			= { 1552 },
 	["LegionHeroicRaid"] 				= { 1805 },

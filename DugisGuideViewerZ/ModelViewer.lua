@@ -80,7 +80,8 @@ function MV:Initialize()
 			MV.Frame.model.title:SetText(DGV:GetLocalizedNPC(modelId))
 			
 			DebugPrint("[MV] Error: Display Id missing from db try SetCreature")
-			if not MV.Frame.model:GetModel() then
+            --GetModel is missing. More info: http://eu.battle.net/wow/en/forum/topic/17612062455
+			if not MV.Frame.model:GetModelFileID() then
 				DebugPrint("[MV] Error: SetCreature failed")
 				failed = true
 			else
@@ -145,7 +146,7 @@ function MV:Initialize()
         if not MV.slideshowOn then return end
 		self:SetAlpha(1)
         
-        if #MV.data.models > 1 then
+        if MV.data and MV.data.models and #MV.data.models > 1 then
             if (GetTime() - MV.lastModelPageChangeTime) > MV.slideshowIntervalSec then
                 ToggleModelPage()
             end
@@ -245,8 +246,8 @@ function MV:Initialize()
             --JU            
 			--MV.Frame:SetUserPlaced(true)
 			MV.Frame.model = CreateFrame("PlayerModel", "DugisGuideViewer_ModelViewer_Model", MV.Frame, "ModelWithControlsTemplate")
-			MV.Frame.model:SetSize(149, 200)
-			MV.Frame.model:SetPoint("CENTER", 2, -3)	
+			MV.Frame.model:SetSize(145, 195)
+			MV.Frame.model:SetPoint("CENTER", 0, 0)	
 			MV.Frame.model:EnableMouseWheel(true)
 			MV.Frame.model:SetScript("OnMouseWheel", function(self, delta) MV:OnMouseWheel(self, delta ) end)
 			MV.Frame.model:HookScript("OnUpdate", On_Model_OnUpdate)
@@ -416,7 +417,7 @@ function MV:Initialize()
 	end
     
     function MV:SetModel(modelId)
-        RemoveAllModels()
+		RemoveAllModels()
 		AddModel(modelId, "NPC")
         MV:ShowCurrentModel( )	
         ToggleModelPage(true)

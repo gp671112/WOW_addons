@@ -1,0 +1,237 @@
+2016-10-25  Tercio  <Tercio>
+
+[722c192b9c84] [tip]
+* Plater.toc, libs/DF/fw.lua, libs/DF/panel.lua:
+
+- toc and framework update.
+
+
+2016-09-25  Tercio  <Tercio>
+
+[eeb21e59c549]
+* Plater.lua, libs/DF/fw.lua:
+
+- added health amount text option for enemy npc.
+
+
+2016-09-04  Tercio  <Tercio>
+
+[24fc374871ac]
+* Plater.lua:
+
+- fixed an issue where sometimes the addon stop to show enemy bars in Suramar.
+- fixed a problem with aura settings triggering an errror while changing the buff size.
+
+
+2016-09-03  Tercio  <Tercio>
+
+[2898b5c60787]
+* Plater.lua:
+
+- added '/plater debug' slash command.
+
+
+[893152d5419c]
+* Plater.lua:
+
+- fixed an issue with some debuffs not showing on manual aura track.
+
+
+2016-09-01  Tercio  <Tercio>
+
+[ecbdc9cbf4d2]
+* Plater.lua, libs/DF/cooltip.lua, libs/DF/fw.lua, libs/DF/panel.lua:
+
+- disabling some auto on/off things.
+
+
+2016-08-27  Tercio  <Tercio>
+
+[9390233e694a]
+* Plater.lua, libs/DF/colors.lua, libs/DF/cooltip.lua, libs/DF/fw.lua, libs/DF/panel.lua, libs/DF/textentry.lua:
+
+- fix for manual debuffs spell override.
+
+
+2016-08-11  Tercio  <Tercio>
+
+[3fe79650ff58]
+* Plater.lua:
+
+- fix for ticket #9, cc icon not showing.
+
+
+[391336fffac4]
+* Plater.lua, libs/DF/auras.lua, libs/DF/cooltip.lua, libs/DF/cooltip.xml, libs/DF/fw.lua:
+
+- fix for tickets.
+
+
+2016-08-07  Tercio  <Tercio>
+
+[946e41625baa]
+* Plater.lua:
+
+- possible fix for name cutoff when showing inside the bar.
+
+
+[edc5a87381b5]
+* Plater.lua:
+
+- possible fix for name cutoff when showing inside the bar.
+
+
+[61ea140473fc]
+* Plater.lua:
+
+- unit reaction swap.
+
+
+2016-08-06  Tercio  <Tercio>
+
+[a600faee91b5]
+* Plater.lua, libs/DF/cooltip.lua, libs/DF/fw.lua:
+
+- framework update to v33 (adds shadow to option panel tooltips).
+- added castbar color option.
+
+
+[58c0bd0ab7f1]
+* Plater.lua:
+
+- refresh the cache before apply the new profile settings.
+- make sure we refresh the cache after all addons being loaded for sharedmedia stuff.
+
+
+2016-08-05  Tercio  <Tercio>
+
+[07e0c3b12bc9]
+* Plater.lua:
+
+- new method to anchor the personal bar.
+- cache textures for speed improvements.
+
+
+[0517e5c9387e]
+* Plater.lua:
+
+- no debug lines please.
+
+
+[34688854af46]
+* Plater.lua:
+
+- fix for player buffs when aura is on manual mode.
+
+
+2016-08-04  Tercio  <Tercio>
+
+[c4758a3a41b9]
+* Plater.lua, images/platebackground.blp, images/platetexture.blp, libs/DF/cooltip.lua, libs/DF/fw.lua:
+
+- more updates.
+
+
+2016-08-02  Tercio  <Tercio>
+
+[26443f00cb3e]
+* Plater.lua:
+
+- more updates.
+
+
+2016-07-31  Tercio  <Tercio>
+
+[fd44953a7209]
+* Plater.lua, libs/DF/fw.lua, libs/DF/panel.lua:
+
+- r18
+
+
+2016-07-30  Tercio  <Tercio>
+
+[41e19e9ac177]
+* Plater.lua, libs/DF/dropdown.lua, libs/DF/dropdown.xml, libs/DF/fw.lua, libs/DF/panel.lua:
+
+- r17
+
+
+2016-07-26  Tercio  <Tercio>
+
+[a5f696969d3f]
+* Plater.lua, libs/DF/auras.lua, libs/DF/fw.lua, libs/DF/load.xml, libs/DF/normal_bar.lua, libs/DF/panel.lua:
+
+- fix for mouseover macros.
+
+
+2016-07-20  Tercio  <Tercio>
+
+[c1e240d38f11]
+* Plater.lua, libs/DF/fw.lua, libs/DF/normal_bar.lua:
+
+- framework update.
+- more visibility when the player is in combat and options is disabled.
+- added more CVar options.
+
+
+2016-07-19  Tercio  <Tercio>
+
+[84cbd769a455]
+* Plater.lua:
+
+- weakup packpager
+
+
+[ffeeadc683c2]
+* Plater.lua:
+
+...
+
+
+[374d2e7a13a2]
+* Plater.lua:
+
+- fix for friend list.
+
+
+[93790b3065c3]
+* Plater.lua, libs/DF/fw.lua:
+
+- 7.0.3
+
+
+2016-07-17  Tercio  <Tercio>
+
+[03e5e49779e7]
+* Plater.lua, libs/DF/button.lua, libs/DF/button.xml, libs/DF/fw.lua, libs/DF/load.xml, libs/DF/math.lua, libs/DF/panel.lua:
+
+- framework update.
+- added profile settings.
+- added an option for highlight on mouse over.
+- added an option for highlight the current target.
+- added an option for nameplate distance.
+- added an option for nameplate anchor position.
+- the options panel has more security against options which cannor be changed in combat.
+
+
+2016-07-11  Tercio  <Tercio>
+
+[de36769ebde9]
+* Plater.lua, libs/DF/button.lua, libs/DF/cooltip.lua, libs/DF/dropdown.lua, libs/DF/dropdown.xml, libs/DF/fw.lua, libs/DF/label.lua, libs/DF/normal_bar.lua, libs/DF/panel.lua, libs/DF/picture.lua, libs/DF/slider.lua, libs/DF/split_bar.lua, libs/DF/textentry.lua:
+
+- big framework update.
+- when in battleground or arena, the addon will always use in combat sizes.
+- added optiosn to customize debuff's icon size.
+- added debuff timer.
+- texts can now be sized up to 99 (was limited to 32).
+
+
+2016-07-04  Tercio  <Tercio>
+
+[06778ba728e8]
+* Plater.lua:
+
+- added an option to change the personal bar Y position.
+- added an option to regulate the alpha for mobs not in combat with the player.
+
+

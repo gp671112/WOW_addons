@@ -14,8 +14,20 @@ function Target:Initialize()
 	--Updates target button's size
 	local function UpdateTargetButtonSize()
 		local DGV_TargetButtonSize = 23 + (DGV:GetDB(DGV_TARGETBUTTONSCALE) * 3);
-		Target.Frame:SetSize(DGV_TargetButtonSize, DGV_TargetButtonSize)
+		Target.Frame:SetSize(25, 25)
+        
+        local scale = (DugisGuideViewer:UserSetting(DGV_TARGETBUTTONSCALE)-1)/10 + 1
+        Target.Frame:SetScale(scale)
 	end
+    
+    local function UpdateHotKey()
+        local key = GetBindingKey("CLICK DugisGuideViewer_TargetFrame:RightButton")
+        if key then 
+            Target.Frame.HotKey:SetText(key:sub(1,1))
+        else
+            Target.Frame.HotKey:SetText("")
+        end
+    end
 
 	--Make target macro
 	local function OnEvent(self, event)
@@ -61,6 +73,8 @@ function Target:Initialize()
 		elseif event == "PLAYER_REGEN_DISABLED" then
 			Target.Frame:StopMovingOrSizing()
 			Target.Frame.IsMoving = false
+		elseif event == "UPDATE_BINDINGS" then
+            UpdateHotKey()
 		end
 	end
     
@@ -115,7 +129,7 @@ function Target:Initialize()
 		modelFrame:ClearModel()
 		if mv and mv.npcDB and mv.npcDB[npcId] then
 			modelFrame:SetDisplayInfo(mv.npcDB[npcId])
-		else
+		elseif npcId then
 			modelFrame:SetCreature(npcId)
 		end
         
@@ -140,6 +154,8 @@ function Target:Initialize()
         end)
         SetModel(Target.npcIds[1])
         GameTooltip:Show()     
+        GameTooltip:SetWidth(180)  
+        GameTooltipTextLeft1:SetWidth(160)
     end
     
 	function Target:HideTooltip( )
@@ -150,7 +166,9 @@ function Target:Initialize()
     
 	function Target:CreateFrame( )
 		if Target.Frame then return end
-		Target.Frame = CreateFrame("Button", "DugisGuideViewer_TargetFrame", UIParent, "SecureActionButtonTemplate")
+		Target.Frame = CreateFrame("Button", "DugisGuideViewer_TargetFrame", UIParent, "DugisTargetButtonTemplate")
+        Target.Frame:RegisterEvent("UPDATE_BINDINGS")
+        
 		Target.Frame:SetClampedToScreen(true);
 		--Target.Frame:SetFrameStrata("LOW");
 		UpdateTargetButtonSize()
@@ -167,6 +185,8 @@ function Target:Initialize()
 		Target.Frame:RegisterForDrag("LeftButton")
 		Target.Frame:SetMovable(true)
 		Target.Frame:SetUserPlaced(true)
+        
+        UpdateHotKey()
         
         Target.Frame:SetScript("OnEnter", function()    
 			if DGV:UserSetting(DGV_TARGETTOOLTIP) then 

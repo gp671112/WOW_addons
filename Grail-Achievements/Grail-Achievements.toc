@@ -1,0 +1,12 @@
+## Interface: 70100
+## Title: Grail |r|cff69ccf0Achievements|r
+## Author: Scott M Harrison
+## Notes: Provides achievement information to Grail
+## Title-zhTW: |cff00FFFF[任務]|r 資料庫-成就
+## Notes-zhTW: Grail |r|cff69ccf0Achievements|r |n成就任務資訊。
+## DefaultState: disabled
+## Version: 011
+## Dependencies: Grail
+## LoadOnDemand: 1
+
+Grail-Achievements.lua

@@ -7,6 +7,7 @@ local QuestPOIFrame
 local astrolabe = DongleStub("Astrolabe-1.0-Dugi")
 local lastWaypoint
 local scanning 
+local IsLegionPatch = select(4, GetBuildInfo()) >= 70100
 
 function QuestPOI:Initialize()
 	local L = DugisLocals
@@ -20,7 +21,7 @@ function QuestPOI:Initialize()
 
 	--WatchFrameLines
 	--WorldMapPOIFrame
-	function DGV:IterateQuestPOIs(delegate, parent, numericPoiType)
+	function DGV:IterateQuestPOIs(delegate, parent, numericPoiType, poiType)
 		if not parent then parent=WorldMapPOIFrame end
 		if not numericPoiType then numericPoiType=QUEST_POI_NUMERIC end
 		local numEntries = QuestMapUpdateAllQuests()
@@ -47,9 +48,17 @@ function QuestPOI:Initialize()
 				end
 			end
 		end
+        
+        if poiType == "WorldQuest" then
+            LuaUtils:foreach(allWorldQuestButtons, function(button)
+                delegate(button)
+            end)
+        end
+        
 		return false
 	end	
-
+--/run DugisGuideViewer.Modules.QuestPOI:ObjectivesChanged()
+--/dump DugisGuideViewer.Modules.DugisArrow:getFinalWaypoint()
 	function QuestPOI:ObjectivesChanged()
 		if DGV:UserSetting(DGV_SHOWCORPSEARROW) and UnitIsDeadOrGhost("player") then 
 			local desc = L["My Corpse"]
@@ -60,12 +69,13 @@ function QuestPOI:Initialize()
 			end 
 			return
 		end
-	
+		local waypoint = DGV.Modules.DugisArrow:getFinalWaypoint()
+		
 		if not DGV:GetDB(DGV_WAYPOINTSON) or 
 		DGV.chardb.EssentialsMode ~= 1 or  
 		not DugisGuideViewer.GuideOn() or
 		(DGV.Tomtomloaded and TomTom.profile.poi.setClosest == true) or
-		(DGV.Modules.DugisArrow:getNumWaypoints() > 0 and not DGV.Modules.DugisArrow:GetFirstWaypointQuestId()) then
+		(waypoint and not waypoint.questId) then
 			if lastWaypoint then lastWaypoint = nil end
 			return
 		end   
@@ -75,7 +85,7 @@ function QuestPOI:Initialize()
 		else
 			scanning = true
 		end
-	
+
 		local map = GetCurrentMapAreaID()
 		local floor = GetCurrentMapDungeonLevel()
 		--local floors = astrolabe:GetNumFloors(map)
@@ -88,10 +98,10 @@ function QuestPOI:Initialize()
 			return
 		end
 	
-		local cvar = GetCVarBool("questPOI")
-		SetCVar("questPOI", 1)
+		--local cvar = GetCVarBool("questPOI")
+		--SetCVar("questPOI", 1)
 	
-		local closest
+--[[	local closest
 		local closestdist = math.huge
 		local watchIndex = 1
 		while true do
@@ -112,35 +122,82 @@ function QuestPOI:Initialize()
 				if dist < closestdist then
 					closest = watchIndex
 					closestdist = dist
+					print(closest)
 				end
 			end
 			watchIndex = watchIndex + 1
+		end]]
+		
+		local trackedQuestID = GetSuperTrackedQuestID();
+		
+		local worldQuestID
+		
+		if IsLegionPatch then 
+			if QuestUtils_IsQuestWorldQuest(trackedQuestID) then 
+				worldQuestID = trackedQuestID
+				trackedQuestID = nil
+			end			
+		else
+			if QuestMapFrame_IsQuestWorldQuest(trackedQuestID) then 
+				worldQuestID = trackedQuestID
+				trackedQuestID = nil
+			end					
 		end
 
-		if closest then
-			local questIndex = GetQuestIndexForWatch(closest)
+		if trackedQuestID then
+			local questIndex = GetQuestLogIndexByID(trackedQuestID)
+			local isWatched = IsQuestWatched(questIndex)
+			if not isWatched then 
+				trackedQuestID = nil
+			end
+		end	
+			
+		if worldQuestID then
+			--reset = true
+			local title = C_TaskQuest.GetQuestInfoByQuestID(worldQuestID);
+			_, map = C_TaskQuest.GetQuestZoneID(worldQuestID)
+			if GetCurrentMapAreaID() ~= map then return end
+			--LuaUtils:DugiSetMapByID(map)
+			--floor = GetCurrentMapDungeonLevel()
+			local x, y = C_TaskQuest.GetQuestLocation(worldQuestID)
+			
+			if title then 
+				title = "|cffffd200"..title.."|r"..L[" (World Quest)"]
+			end
+			
+			if x and lastWaypoint ~= x and x > 0 and title then
+				DGV:RemoveAllWaypoints()
+				DGV:AddCustomWaypoint(x, y, title, map, floor, worldQuestID)		
+				lastWaypoint = x
+			end	
+		elseif trackedQuestID then --if closest
+			--local questIndex = GetQuestIndexForWatch(closest)
+			local questIndex = GetQuestLogIndexByID(trackedQuestID)
 			local title = GetQuestLogTitle(questIndex)
-			local qid = select(8, GetQuestLogTitle(questIndex))
-			local completed, x, y, objective = QuestPOIGetIconInfo(qid)	
+			--local qid = select(8, GetQuestLogTitle(questIndex))
+			local completed, x, y, objective = QuestPOIGetIconInfo(trackedQuestID)	
 	
-			if completed then
+			if completed and title then
 				title = L["Turn in"].." |cffffd200'"..title.."'|r"
-			else 
+			elseif title then
 				title = "|cffffd200"..title.."|r"
 			end
 
-			if lastWaypoint ~= x and x then
+			if lastWaypoint ~= x and x and title then
 				DGV:RemoveAllWaypoints()
-				DGV:AddCustomWaypoint(x, y, title, map, floor, qid)		
+				DGV:AddCustomWaypoint(x, y, title, map, floor, trackedQuestID)		
 				lastWaypoint = x
-				DGV:SafeSetMapQuestId(qid)
+				--DGV:SafeSetMapQuestId(qid)
 			end
 		else
+			if DugisSecureQuestButton then
+				DugisGuideViewer.DoOutOfCombat(DugisSecureQuestButton.Hide, DugisSecureQuestButton)
+			end		
 			DGV:RemoveAllWaypoints()
 			lastWaypoint = nil
 		end
 	
-		SetCVar("questPOI", cvar and 1 or 0)
+		--SetCVar("questPOI", cvar and 1 or 0)
 		scanning = false
 	end
 	
@@ -181,19 +238,94 @@ local function onPOIClick(self)
 			(not WorldMapFrame:IsShown() or DGV.MapPreview:IsAnimating())
 			and DGV:GetDB(DGV_MAPPREVIEWDURATION)~=0 and not DGV.carboniteloaded
 
-		if self then
+		if self and not self.landmarkType then
 			DGV.DugisArrow:QuestPOIWaypoint(self, true)
+		else
+			DGV.DugisArrow:LandMarkPOIWaypoint(self, true)
 		end
 	end
 end
 
-hooksecurefunc("TaskPOI_OnClick", function(self)
-    onPOIClick(self)
-end)
+local CurrentMap
 
+--hooksecurefunc("TaskPOI_OnClick", function(self) --not needed already triggered with hooksecurefunc "WorldMap_SetupWorldQuestButton"
+--    onPOIClick(self)
+--end)
 
 hooksecurefunc("QuestPOIButton_OnClick", function(self)
     onPOIClick(self)
+end)
+
+hooksecurefunc("WorldMapPOI_OnClick", function(self)
+	if CurrentMap ~= GetCurrentMapAreaID() then return end
+	onPOIClick(self)
+end)
+
+hooksecurefunc("WorldMapPOI_OnEnter", function(...) --Need this because the waypoint is inaccurate if user click on Landmark outside currentmap
+	CurrentMap = GetCurrentMapAreaID()
+end)
+
+allWorldQuestButtons = {}
+
+hooksecurefunc("WorldMap_SetupWorldQuestButton", function(button, worldQuestType, rarity, isElite, tradeskillLineIndex, inProgress, selected, isCriteria, isSpellTarget)
+    if not button.alreadyHooked then
+        allWorldQuestButtons[#allWorldQuestButtons + 1] = button
+    
+        button:HookScript("OnClick", function(self)
+            if self.questID then
+				if IsLegionPatch then 
+					if QuestUtils_IsQuestWorldQuest(self.questID) then
+						self.worldQuest = true
+					end
+				else
+					if QuestMapFrame_IsQuestWorldQuest(self.questID) then
+						self.worldQuest = true
+					end								
+				end
+                onPOIClick(self)
+            end
+        end)
+    end
+    
+    --Support for WorldQuestTracker
+    if WorldQuestTrackerWorldMapPOI then
+		if WQTrackerDB then 
+			if WQTrackerDB.profiles.Default.enable_doubletap and DGV:UserSetting(DGV_MANUALWAYPOINT) then
+				WQTrackerDB.profiles.Default.enable_doubletap = false
+				print("|cff11ff11" .. "Dugi: Disabled WorldQuestTracker's \"Auto World Map\" option, this needs to be off for Dugi waypoint.")
+			end	
+		end	
+        LuaUtils:foreach({WorldMapPOIFrame:GetChildren()}, function(poi)
+            if not poi.wasHoockedByDugi then
+                if poi.worldQuest and poi.timeBlipRed then
+                    poi:HookScript("OnClick", function(self)
+                        onPOIClick(self)
+                    end)
+                end
+
+                poi.wasHoockedByDugi = true
+            end
+        end)
+        
+        LuaUtils:loop(10000, function(index) 
+            local rowName = "WorldQuestTracker_Tracker"..index
+            local row = _G[rowName]
+            if row then 
+                if not row.wasHoockedByDugi then
+                    row.IconButton:HookScript("OnClick", function(self)
+                        onPOIClick(self:GetParent())
+                    end)
+                    
+                    row.wasHoockedByDugi = true
+                end
+            else
+                return "break"
+            end
+        end)
+        
+    end
+    
+    button.alreadyHooked = true
 end)
 
 LuaUtils:Delay(1, function()

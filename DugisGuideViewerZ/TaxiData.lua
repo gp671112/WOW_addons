@@ -27511,7 +27511,7 @@ function TaxiData:Initialize()
 			},
 			["23:20"] = {
 				[23] = "36.2,97.23",
-				requirements = "cls:PALADIN",
+				--requirements = "cls:PALADIN",
 			},
 			[480] = {
 				[462] = 3086544408,
@@ -27818,6 +27818,16 @@ function TaxiData:Initialize()
 			["767:2"] = {
 				["767:1"] = "51.0,53.0-767:1:48.9,82.1|50.0,90.1-767:1:50.0,39.7",
 			},
+			[640] ={
+				["640:1"] = "62.78,78.04-640:1:40.43,14.38",
+			},
+			["640:1"] ={
+				[640] = "40.43,14.38-640:0:62.78,78.04",
+				["640:2"] = "73.95,79.27-640:2:65.61,72.72",
+			},
+			["640:2"] ={
+				["640:1"] = "65.61,72.72-640:1:73.95,79.27",
+			},
 		}, -- [5]
 		{
 			[807] = {
@@ -27857,6 +27867,16 @@ function TaxiData:Initialize()
 				["809:21"] = "30.9,75.9-809:21:34.3,76.1", -- Crypt of Korune
 				[809] = "52.2,11.6-809:0:33.1,26.6" -- Ruins of Korune
 			},
+			[903] = {
+				[811] = "53.8,87.0-811:0:61.5,18.8|26.8,80.7-811:0:59.1,17.9|77.4,69.0-811:0:63.5,17.0",  -- main / west / east
+			},			
+			["903:1"] = {
+				[811] = "53.8,87.0-811:0:61.5,18.8|26.8,80.7-811:0:59.1,17.9|77.4,69.0-811:0:63.5,17.0",  -- main / west / east
+				["903:2"] = "22.1,54.4-903:2:27.8,80.6|36.6,21.7-903:2:38.3,36.6|77.5,42.6-903:2:74.4,70.3|58.0,18.5-903:2:55.8,30.0" -- west staircase / west hall / east staircase / east hall
+ 			},
+			["903:2"] = {						
+				["903:1"] = "51.28,76.12|27.8,80.6-903:1:22.1,54.4|38.3,36.6-903:1:36.6,21.7|74.4,70.3-903:1:77.5,42.6|55.8,30.0-903:1:58.0,18.5" -- balcony jump / west staircase / west hall / east staircase / east hall
+			},				
 			[811] = {
 				[809] = 1886394282,
 				[903] = 2637705065,
@@ -28035,10 +28055,10 @@ function TaxiData:Initialize()
 				["941:9"] = "65.4,17.5-941:9:27.6,19.3", --Snowfall Alcove
 				["941:7"] = "46.0,33.4-941:7:33.2,51.5", --Grulloc's Grotto
 				["941:6"] = "63.3,65.7-941:6:24.6,58.6", --The Hunter's Hall
-				["941:1"] = "20.9,41.9-941:1:0.5,68.3", --Bladespire Citadel	
+				["941:1"] = "20.9,41.9-941:1:0.5,68.3|23.9,35.1", --Bladespire Citadel	
 			},
 			["941:1"] = {
-				[941] = "0.5,68.3-941:0:20.9,41.9",
+				[941] = "0.5,68.3-941:0:20.9,41.9|16.7,33.08",
 				["941:2"] = "55.3,25.8-941:2:55.7,18.7", --Bladespire Citadel				
 			},
 			["941:2"] = {
@@ -28136,16 +28156,16 @@ function TaxiData:Initialize()
 			},
 			[971] = {
 				["971:24"] = "66.8,42.6-971:24:67.9,63.6", --Lunarfall Excavation
-				[947] = "16.18,29.14|62.86,91.31-947:0:32.27,23.16",
+				[947] = "62.86,91.31-947:0:32.27,23.16",
 			},
 			[973] = {
-				[947] = "16.18,29.14|62.86,91.31-947:0:32.27,23.16",
+				[947] = "62.86,91.31-947:0:32.27,23.16",
 			},	
 			[974] = {
-				[947] = "16.18,29.14|62.86,91.31-947:0:32.27,23.16",
+				[947] = "62.86,91.31-947:0:32.27,23.16",
 			},
 			[975] = {
-				[947] = "16.18,29.14|62.86,91.31-947:0:32.27,23.16",
+				[947] = "62.86,91.31-947:0:32.27,23.16",
 			},								
 			["971:24"] = {
 				[971] = "67.9,63.6-971:0:66.8,42.6", --Lunarfall Excavation
@@ -28165,9 +28185,29 @@ function TaxiData:Initialize()
 				["1033:23"] = "35.70,82.27-1033:23:25.39,89.84",
 				["1033:32"] = "22.85,35.76-1033:32:49.58,66.94",
 				["1033:36"] = "41.62,38.99-1033:36:20.25,33.24",
+				["1033:37"] = "35.70,24.30-1033:37:49.28,88.09",
+				["1033:38"] = "24.35,19.43-1033:38:63.53,87.13",
+				["1033:35"] = "59.37,43.03-1033:35:55.25,89.33",		
+				["1033:34"] = "65.95,42.06-1033:34:56.37,86.81",	
+				["1033:24"] = "34.54,84.24-1033:24:41.94,25.50",													
+			},
+			["1033:38"] = {
+				[1033] = "63.53,87.13-1033:0:24.35,19.43",
+			},
+			["1033:35"] = {
+				[1033] = "55.25,89.33-1033:0:59.37,43.03",
+			},
+			["1033:34"] = {
+				[1033] = "56.37,86.81-1033:0:65.95,42.06",
+			},
+			["1033:24"] = {
+				[1033] = "41.94,25.50-1033:0:34.54,84.24",
+			},												
+			["1033:37"] = {
+				[1033] = "49.28,88.09-1033:0:35.70,24.30",
 			},
 			["1033:23"] = { --Felsoul Hold
-				[1033] = "25.39,89.84-1033:00:35.70,82.27",
+				[1033] = "25.39,89.84-1033:0:35.70,82.27",
 			},			
 			["1033:32"] = { --Falanaar Tunnels
 				[1033] = "49.58,66.94-1033:0:22.85,35.76",
@@ -28194,7 +28234,7 @@ function TaxiData:Initialize()
 				["1024:16"] = "41.56,46.90-1024:16:52.69,88.76|38.93,43.21-1024:16:32.66,60.74",
 				["1024:29"] = "44.73,72.22-1024:29:23.51,42.65",
 				["1024:31"] = "42.56,25.42-1024:31:20.96,78.85",
-				["1024:30"] = "47.36,84.5-1024:30:20.96,78.85",
+				["1024:30"] = "47.66,84.15-1024:30:42.18,90.39",
 			},
 			["1024:5"] = { --Bitestone Enclave
 				[1024] = "17.60,27.90-1024:0:41.39,72.51",
@@ -28218,7 +28258,7 @@ function TaxiData:Initialize()
 			},		
 			["1024:30"] = { --Neltharion's Vault floor 2
 				["1024:29"] = "45.36,16.75-1024:29:49.79,86.56",
-				[1024] = "42.18,90.39-1024:0:42.56,25.42",m
+				[1024] = "42.18,90.39-1024:0:47.66,84.15",
 			},				
 			["1024:31"] = { --Stonedark Grotto
 				[1024] = "20.96,78.85-1024:0:47.36,84.56",
@@ -28287,7 +28327,7 @@ function TaxiData:Initialize()
 				[1024] = "69.85,28.12-1024:0:26.06,62.98",
 				["1018:13"] = "40.50,44.95-1018:13:38.05,87.16",
 				["1018:14"] = "50.00,85.54-1018:14:66.87,25.82",
-				[1077] = "45.17,33.75",
+				[1077] = "45.17,33.75|39.53,18.80",
 			},
 			["1018:13"] ={ --Darkpens
 				[1018] = "38.05,87.16-1018:0:40.50,44.95",
@@ -28300,7 +28340,7 @@ function TaxiData:Initialize()
 				["1018:14"] = "26.19,61.88-1018:14:33.96,58.58|76.66,56.56-1018:14:61.13,47.06",	
 			},
 			[1077] = { --Dreamgrove Druid Only
-				[1018] = "76.08,93.59",
+				[1018] = "76.08,93.59|40.93,0.00",
 				requirements = "cls:DRUID",
 			},
 			["1021:1"] = {  -- Ebon Hold Death Knight only
@@ -28309,19 +28349,57 @@ function TaxiData:Initialize()
 			["1021:2"] = {  -- Ebon Hold Death Knight only
 				["1021:1"] = "33.34,35.63"			
 			},
+			["1042:2"] = { --Maw of Souls Broken Isle
+				["1042:3"] = "89.50,52.91",
+			},
+			["1042:3"] = {
+				["1042:2"] = "88.10,58.26",
+			},
+			["1041:1"] = { --Hall of Valor
+				["1041:2"] = "38.86,75.04-1041:2:68.83,27.40",
+			},
+			["1041:2"] = { --Hall of Valor
+				["1041:1"] = "68.83,27.40-1041:2:38.86,75.04",
+				["1041:3"] = "47.75,72.16-1041:3:51.32,7.05",
+			},
+			["1041:3"] = { --Hall of Valor
+				["1041:2"] = "51.32,7.05-1041:2:47.75,72.16",
+			},			
 		},-- [8]		
 		{
 		},-- [9]	
-		{		
-			[903] = {
-				[811] = "53.8,87.0-811:0:61.5,18.8|26.8,80.7-811:0:59.1,17.9|77.4,69.0-811:0:63.5,17.0",  -- main / west / east
+		{			
+			["1045:1"] = { --Vault of the Wardens
+				["1045:2"] = "24.37,18.20-1045:2:46.75,48.16",
+			},
+			["1045:2"] = { --Vault of the Wardens
+				["1045:1"] = "46.75,48.16-1045:1:24.37,18.20",
+				["1045:3"] = "34.17,48.43-1045:3:52.28,18.21",
+			},
+			["1045:3"] = { --Vault of the Wardens
+				["1045:2"] = "52.28,18.21-1045:2:34.17,48.43",
 			},			
-			["903:1"] = {
-				[811] = "53.8,87.0-811:0:61.5,18.8|26.8,80.7-811:0:59.1,17.9|77.4,69.0-811:0:63.5,17.0",  -- main / west / east
-				["903:2"] = "22.1,54.4-903:2:27.8,80.6|36.6,21.7-903:2:38.3,36.6|77.5,42.6-903:2:74.4,70.3|58.0,18.5-903:2:55.8,30.0" -- west staircase / west hall / east staircase / east hall
- 			},
-			["903:2"] = {						
-				["903:1"] = "51.28,76.12|27.8,80.6-903:1:22.1,54.4|38.3,36.6-903:1:36.6,21.7|74.4,70.3-903:1:77.5,42.6|55.8,30.0-903:1:58.0,18.5" -- balcony jump / west staircase / west hall / east staircase / east hall
+			["1081:1"] = { --Black Rook Hold Broken Isle
+				["1081:2"] = "65.31,87.54-1081:2:20.38,31.85",
+			},
+			["1081:2"] = {
+				["1081:1"] = "20.38,31.85-1081:1:65.31,87.54",
+				["1081:3"] = "47.82,29.46-1081:3:72.42,76.93",				
+			},			
+			["1081:3"] = {
+				["1081:2"] = "72.42,76.93-1081:2:47.82,29.46",
+				["1081:4"] = "39.23,57.99-1081:4:38.03,73.37",
+			},	
+			["1081:4"] = {
+				["1081:3"] = "38.03,73.37-1081:3:39.23,57.99",
+				["1081:5"] = "47.94,64.81-1081:5:52.42,43.71",
+			},					
+			["1081:5"] = {
+				["1081:4"] = "52.42,43.71-1081:4:47.94,64.81",
+				["1081:6"] = "59.59,65.93-1081:6:66.71,68.23",
+			},
+			["1081:6"] = {
+				["1081:5"] = "66.71,68.23-1081:5:59.59,65.93",
 			},			
 			[611] = {
 				[678] = "65.81,21.16-678:0:67.33,42.46|29.02,75.75-678:0:54.62,60.95|23.29,62.42-678:0:51.71,55.42",
@@ -28363,6 +28441,34 @@ function TaxiData:Initialize()
 			["1039:3"] ={
 				["1039:1"] = "51.81,84.32",
 			},
+			[1028] ={ 
+				["1028:1"] = "63.69,53.85-1028:1:48.63,16.66",
+			},
+			["1028:1"] ={
+				[1028] = "48.63,16.66-1028:0:63.69,53.85",
+			},
+			["1028:2"] ={
+				[1028] = "57.60,85.10",
+			},
+			[1028] ={
+				["1028:2"] = "64.30,24.77",
+			},
+			[1091] ={
+				[1092] = "73.30,52.63-1092:0:33.95,44.65",
+			},
+			[1092] ={
+				[1091] = "33.95,44.65-1091:0:73.30,52.63",
+			},
+			["1087:1"] ={ --Court of Stars
+				["1087:2"] = "63.36,65.91-1087:2:38.42,40.67",
+			},
+			["1087:2"] ={
+				["1087:1"] = "38.42,40.67-1087:1:63.36,65.913",				
+				["1087:3"] = "47.80,39.54-1087:3:54.76,53.74",
+			},
+			["1087:3"] ={
+				["1087:2"] = "54.76,53.74-1087:2:47.80,39.54",
+			},		
 		},-- [10]
 	}
 	
@@ -28388,9 +28494,9 @@ function TaxiData:Initialize()
 			[3567] = "3567:321:2:2073797938", --Orgrimmar
 			[3566] = "3566:362:0:954018606:fac:Horde", --Thunder Bluff
 			[18960] = "18960:241:0:2416595707", --Moonglade
-			[63353] = "3567:321:2:2073797938", --Shroud of Cooperation (Orgrimmar)
-			[63207] = "3567:321:2:2073797938", --Wrap of Unity (Orgrimmar)
-			[65274] = "3567:321:2:2073797938", --Cloak of Coordination (Orgrimmar)
+			[63353] = "89158:321:2:2073797938", --Shroud of Cooperation (Orgrimmar)
+			[63207] = "89158:321:2:2073797938", --Wrap of Unity (Orgrimmar)
+			[65274] = "89158:321:2:2073797938", --Cloak of Coordination (Orgrimmar)
 			[18984] = "23442:281:0:2560458565", --Dimensional Ripper - Everlook
 			[18986] = "23441:161:0:2243577666", --Ultrasafe Transporter: Gadgetzan
 			[147787] = "147787:321:1:49.96,37.74", -- Astral Fixation Glyph Horde			
@@ -28404,9 +28510,9 @@ function TaxiData:Initialize()
 			[88344] = "88344:709:0:2362231206:fac:Horde", --Tol Barad (Horde)
 			[3563] = "3563:382:0:3632736717:fac:Horde", --Undercity
 			[50977] = "50977:23:0:3595665426:nqid:39757", --Death Gate
-			[63352] = "3561:301:0:2129976708", --Shroud of Cooperation (Stormwind)
-			[63206] = "3561:301:0:2129976708", --Wrap of Unity (Stormwind)
-			[65360] = "3561:301:0:2129976708", --Cloak of Coordination (Stormwind)
+			[63352] = "89157:301:0:2129976708", --Shroud of Cooperation (Stormwind)
+			[63206] = "89157:301:0:2129976708", --Wrap of Unity (Stormwind)
+			[65360] = "89157:301:0:2129976708", --Cloak of Coordination (Stormwind)
 			[50287] = "71436:673:0:1760214267", --Boots of the Bay
 			[63379] = "88342:709:0:3164314613", --Baradin's Wardens Tabard
 			[63378] = "88344:709:0:2362231206", --Hellscream's Reach Tabard
@@ -28458,12 +28564,12 @@ function TaxiData:Initialize()
 		}, --Draenor
 		{
 			[140192] = "222695:1014:10:60.72,44.76",--Dalaran Hearthstone
-			[50977] = "50977:1021:2:27.43,30.44:qid:39757:lvl:100", --Death Gate Death Knight Order Hall
+			[50977] = "50977:1021:2:27.43,30.44:qid:39757", --Death Gate Death Knight Order Hall
 		}, --Broken Isle
 		{
 		}, --Reserve
 		{
-			[193753] = "193753:1048:0:35.33,53.15", --Emerald Dreamway			
+			[193753] = "193753:1048:0:35.33,53.15", --Dreamwalk Emerald Dreamway			
 			[126892] = "126892:1044:0:51.46,48.65:qid:40236", --Zen Pilgrimage Legion
 			[193759] = "193759:1068:1:57.63,86.13", -- Teleport: Hall of Guardian
 		}, --Instances
@@ -28477,16 +28583,16 @@ function TaxiData:Initialize()
 			":41:0:2366366369:41:0:1180925002:fac:Alliance", --Darnassus -Ruth'eran Village
 			":41:0:1180925002:41:0:2366366369:fac:Alliance",
 
-			":321:1:2099405507:720:0:2357680044:qid:28112:fac:Horde", -- Orgrimmar - Uldum
-			":321:1:2193449478:606:0:2726706133:qid:25316:fac:Horde", -- Orgrimmar - Mount Hyjal
-			":606:0:2726444692:321:1:2153275645:qid:25316:fac:Horde", -- Mount Hyjal - Orgrimmar
+			":321:1:2099405507:720:0:2357680044:fac:Horde:passlvl:90", -- Orgrimmar - Uldum 
+			":321:1:2193449478:606:0:2726706133:qid:25316:fac:Horde:passlvl:90", -- Orgrimmar - Mount Hyjal 
+			":606:0:2726444692:321:1:2153275645:qid:25316:fac:Horde:passlvl:90", -- Mount Hyjal - Orgrimmar 
 		}, -- Kalimdor
 		{
 			":301:0:3144429320:709:0:3164314613:lvl:85:fac:Alliance", --Earthshrine Portals - Stormwind - Tol Barad
 			":709:0:3231225522:301:0:3152031439:lvl:85:fac:Alliance", --Tol Barad - Stormwind
-			":301:0:3148098344:614:0:2392504928:qid:14482:fac:Alliance", --Stormwind - Vash'jir
-			":301:0:3235981837:700:0:3413624609:qid:27545:fac:Alliance", --Stormwind - Twilight Highlands
-			":700:0:3413624609:301:0:3228510985:qid:27545:fac:Alliance", --Twilight Highlands - Stormwind
+			":301:0:3148098344:614:0:2392504928:qid:14482:fac:Alliance:passlvl:90", --Stormwind - Vash'jir 
+			":301:0:3235981837:700:0:3413624609:qid:27545:fac:Alliance:passlvl:90", --Stormwind - Twilight Highlands 
+			":700:0:3413624609:301:0:3228510985:qid:27545:fac:Alliance:passlvl:90", --Twilight Highlands - Stormwind 
 
 			":20:0:2553392291:480:0:2174102044:fac:Horde", --Tirisfal Glades - Silvermoon City
 			":480:0:2174102044:20:0:2553392291:fac:Horde", -- Silvermoon City - Tirisfal Glades
@@ -28544,18 +28650,29 @@ function TaxiData:Initialize()
 		{	
 			":1033:0:36.12,45.74:1033:23:52.35,36.76:qid:41575",--Shal'Aran > Felsoul Hold
 			":1033:23:53.54,36.71:1033:0:36.40,45.09:qid:41575",--Felsoul Hold > Shal'Aran 
-			":1033:0:36.35,44.92:1033:0:36.31,46.89:qid:40956",--Shal'Aran > Ruins of Elune'eth
-			":1033:0:36.11,47.24:1033:0:36.40,45.09:qid:40956",--Ruins of Elune'eth > Shal'Aran 
+			--":1033:0:36.35,44.92:1033:0:36.31,46.89:qid:40956",--Shal'Aran > Ruins of Elune'eth
+			--":1033:0:36.11,47.24:1033:0:36.40,45.09:qid:40956",--Ruins of Elune'eth > Shal'Aran 
 			":1033:0:36.17,45.04:1033:0:43.61,79.10:qid:43811",-- Shal'Aran  > Lunastre Estate
 			":1033:0:43.69,79.24:1033:0:36.40,45.09:qid:43811",--Lunastre Estate > Shal'Aran 			
 			":1033:0:35.90,45.55:1033:32:41.37,15.05:qid:42230",--Shal'Aran > Falanaar			
-			":1033:32:40.93,13.76:1033:0:36.40,45.09:qid:42230",--Falanaar > Shal'Aran 			
+			":1033:32:40.93,13.76:1033:0:36.40,45.09:qid:42230",--Falanaar > Shal'Aran 		
+			":1033:0:43.40,60.63:1033:0:36.70,44.67:qid:43813",--Sanctum of Order > Shal'Aran 		
+			":1033:0:36.70,44.67:1033:0:43.40,60.63:qid:43813",--Shal'Aran > Sanctum of Order
+			":1033:0:36.01,45.25:1033:0:30.79,10.87:qid:43808",--Shal'Aran > Moon Guard Stronghold
+			":1033:0:30.83,11.02:1033:0:36.40,45.09:qid:43808",--Moon Guard Stronghold > Shal'Aran
+			":1033:0:36.48,44.75:1033:0:47.45,81.97:qid:42487", --Shal'Aran to The Waning Crescent
+			":1033:0:47.73,81.38:1033:0:36.40,45.09:qid:42487",	--The Waning Crescent to Shal'Aran
+			":1033:0:36.92,44.66:1033:0:42.17,35.38:qid:43809",	--Shal'Aran to Tel'anor
+			":1033:0:42.03,35.24:1033:0:36.40,45.09:qid:43809",	--Tel'anor to Shal'Aran
+			":1033:0:36.95,45.00:1033:0:64.09,60.80:qid:44084",	--Shal'Aran to Twilight Vineyards
+			":1033:0:64.00,60.43:1033:0:36.40,45.09:qid:44084",	--Twilight Vineyards to Shal'Aran								
 			
 			--":1014:10:49.40,47.58:1014:12:63.39,23.87",--Dalaran Legion > Dalaran Chamber of Guardian
 			--":1014:12:64.85,21.11:1014:10:49.04,48.03",--Dalaran Chamber of Guardian > Dalaran Chamber of Guardian
-			":1048:0:45.52,23.93:1077:0:51.60,35.07:cls:DRUID:qid:39718", --Emerald Dreamway > Dreamgrove			
-			":1072:0:48.68,43.36:1014:10:60.89,44.75:cls:HUNTER:lvl00", --Trueshot Lodge > Dalaran Legion		
-			":1077:0:56.63,43.03:1014:10:60.89,44.75:cls:DRUID:qid:39718", --Dreamgrove > Dalaran Legion
+			":1072:0:48.68,43.36:1014:10:60.89,44.75:cls:HUNTER:qid:40959", --Trueshot Lodge > Dalaran Legion		
+			":1077:0:56.63,43.03:1014:10:60.89,44.75:cls:DRUID:qid:40653", --Dreamgrove > Dalaran Legion	
+			":1021:2:24.97,33.76:1014:10:60.89,44.75:cls:DEATHKNIGHT", --Ebon Hold Legion > Dalaran Legion
+			":1017:0:30.08,40.71:1014:10:60.89,44.75", --Stormheim > Dalaran Legion
 		}, --Broken Isles
 		{
 		}, --Reserve
@@ -28566,8 +28683,8 @@ function TaxiData:Initialize()
 	TaxiData.StaticPortalData = 
 	{
 		{
-			":301:0:3231790199:720:0:2357680044:qid:28112:fac:Alliance", --Stormwind - Uldumn
-			":301:0:3271962584:606:0:2726771682:qid:25316:fac:Alliance", --Stormwind - Hyjal
+			":301:0:3231790199:720:0:2357680044:qid:28112:fac:Alliance:passlvl:90", --Stormwind - Uldum 
+			":301:0:3271962584:606:0:2726771682:qid:25316:fac:Alliance:passlvl:90", --Stormwind - Hyjal 
 			":811:4:3039579669:471:0:2045286692:fac:Alliance", -- Shrine of Two Moons (Vale of Eternal Blossom) > Exodar
 			":811:4:3315494796:381:0:1866975591:fac:Alliance", -- Shrine of Two Moons (Vale of Eternal Blossom) > Darnassus 
 
@@ -28576,12 +28693,10 @@ function TaxiData:Initialize()
 
 			":504:1:2378907982:321:2:2073797938:fac:Horde", --Dalaran - Orgrimmar
 			":481:0:2441641203:321:2:2073797938:fac:Horde", --Shattrath - Orgrimmar			
-			":640:0:2187364330:321:1:2153275645:qid:27203:fac:Horde", -- Deepholm - Orgrimmar
+			":640:0:2187364330:321:1:2153275645:qid:27203:fac:Horde:passlvl:90", -- Deepholm - Orgrimmar 
 			":709:0:2418199529:321:1:2153275645:lvl:85:fac:Horde", -- Tol Barad - Orgrimmar
-			":700:0:3159001355:321:1:2153275645:qid:26830:fac:Horde", -- Twilight Highlands - Orgrimmar
-			":806:0:1224680418:321:1:2948491323:lvl:85:qid:29690:fac:Horde", -- Jade Forest > Orgrimmar (req level 85 and QID 29690)
-			":811:2:3161283759:362:0:954018606:fac:Horde", -- Shrine of Two Moons (Vale of Eternal Blossom) > Thunder Bluff 
-			":811:2:3151523164:321:1:2948491323:fac:Horde", -- Shrine of Two Moons (Vale of Eternal Blossom) > Orgrimmar
+			":700:0:3159001355:321:1:2153275645:qid:26830:fac:Horde:passlvl:90", -- Twilight Highlands - Orgrimmar 
+			":806:0:1224680418:321:1:2948491323:lvl:85:qid:29690:fac:Horde:passlvl:90", -- Jade Forest > Orgrimmar (req level 85 and QID 29690)
 			":903:2:3161283759:362:0:954018606:fac:Horde", -- Shrine of Two Moons (Vale of Eternal Blossom) > Thunder Bluff 
 			":903:2:3151523164:321:1:2948491323:fac:Horde", -- Shrine of Two Moons (Vale of Eternal Blossom) > Orgrimmar			
 			":809:0:2084401036:321:1:2948491323:fac:Horde", -- Shrine of the Ox > Orgrimmar
@@ -28600,9 +28715,10 @@ function TaxiData:Initialize()
 			":1014:10:56.91,22.05:362:0:22.21,16.87:fac:Horde",--Dalaran Legion > Thunderbluff			
 			":1014:12:38.59,79.66:161:17:54.60,28.30",--Dalaran > Caverns of Time
 			
-			":1048:0:53.05,52.56:606:0:59.29,25.83:cls:DRUID:lvl:100",--Emerald Dreamway > Mount Hyjal
-			":1048:0:26.12,79.59:241:0:67.59,60.19:cls:DRUID:lvl:100",--Emerald Dreamway > Moonglade		
-			":1048:0:23.57,38.88:13:0:41.26,63.90:cls:DRUID:lvl:100",--Emerald Dreamway > Feralas				
+			":1048:0:53.05,52.56:606:0:59.29,25.83:cls:DRUID:qid:40645",--Emerald Dreamway > Mount Hyjal
+			":1048:0:26.12,79.59:241:0:67.59,60.19:cls:DRUID:qid:40645",--Emerald Dreamway > Moonglade		
+			":1048:0:23.57,38.88:13:0:41.26,63.90:cls:DRUID:qid:40645",--Emerald Dreamway > Feralas		
+			":32:21:58.22,27.41:321:2:48.28,64.53:fac:Horde", --Dalaran Deadwind Pass > Orgrimmar					
 		}, --Kalimdor
 		{
 			":504:1:1696505856:301:0:2129976708:fac:Alliance", --Dalaran - Stormwind
@@ -28611,20 +28727,18 @@ function TaxiData:Initialize()
 			":465:0:89.22,51.00:301:0:49.59,86.53:fac:Alliance", --Hellfire Peninsula by Dark Portal - Stormwind
 			":465:0:3806758706:301:0:2129976708:fac:Alliance", --Hellfire Peninsula  below steps - Stormwind
 			
-			":640:0:2083949011:301:0:3197841138:qid:27203:fac:Alliance", --Deepholm - Stormwind
-			":606:0:2688891702:301:0:3197841138:qid:25316:fac:Alliance", --Hyjal - Stormwind
-			":806:0:1985796596:301:0:2909154183:lvl:85:qid:31732:fac:Alliance", -- Jade Forest > Stormwind City (req level 85 and QID 31732)
+			":640:0:2083949011:301:0:3197841138:qid:27203:fac:Alliance:passlvl:90", --Deepholm - Stormwind 
+			":606:0:2688891702:301:0:3197841138:qid:25316:fac:Alliance:passlvl:90", --Hyjal - Stormwind 
+			":806:0:1985796596:301:0:2909154183:lvl:85:qid:31732:fac:Alliance:passlvl:90", -- Jade Forest > Stormwind City (req level 85 and QID 31732)
 			":811:4:3068615786:301:0:2129976708:fac:Alliance", -- Shrine of Two Moons (Vale of Eternal Blossom) > Stormwind City
 			":811:4:3181996224:341:0:1095636371:fac:Alliance", -- Shrine of Two Moons (Vale of Eternal Blossom) > Ironforge 
 			":809:0:2103078662:301:0:2909154183:fac:Alliance", -- Shrine of the Ox > Stormwind City
 
 			":321:2:44.82,68.03:19:0:72.68,49.37:lvl:90:fac:Horde", --Orgrimmar > Blasted Lands
 			
-			":321:1:2114215292:614:0:2206309382:qid:25924:fac:Horde", -- Orgrimmar - Vash'jir
+			":321:1:2114215292:614:0:2206309382:qid:25924:fac:Horde:passlvl:90", -- Orgrimmar - Vash'jir 
 			":321:1:2036032665:709:0:2395589879:lvl:85:fac:Horde", -- Orgrimmar - Tol Barad
-			":321:1:2157012196:700:0:3162474671:qid:26830:fac:Horde", -- Orgrimmar - Twilight Highlands
-			":811:2:3188030255:382:0:3632736717:fac:Horde", -- Shrine of Two Moons (Vale of Eternal Blossom) > Undercity
-			":811:2:3255207587:480:0:2502242627:fac:Horde", -- Shrine of Two Moons (Vale of Eternal Blossom) > Silvermoon 
+			":321:1:2157012196:700:0:3162474671:qid:26830:fac:Horde:passlvl:90", -- Orgrimmar - Twilight Highlands 
 			":903:2:3188030255:382:0:3632736717:fac:Horde", -- Shrine of Two Moons (Vale of Eternal Blossom) > Undercity
 			":903:2:3255207587:480:0:2502242627:fac:Horde", -- Shrine of Two Moons (Vale of Eternal Blossom) > Silvermoon 
 			--":465:0:3839328398:19:0:2363198085:lvl:58",--Dark Portal - you can't go back to Azeroth this way anymore in patch 6.0.2
@@ -28641,14 +28755,17 @@ function TaxiData:Initialize()
 			":1014:12:32.04,71.84:32:0:47.24,75.40",-- Dalaran > Karazhan
 			":1014:12:28.80,77.39:24:0:30.91,36.34",--Dalaran > Dalaran Crater			
 			
-			":1048:0:50.27,65.20:26:0:62.48,23.50:cls:DRUID:lvl:100", --Emerald Dreamway > Hinterlands
-			":1048:0:39.81,68.92:34:0:46.59,37.06:cls:DRUID:lvl:100", --Emerald Dreamway > Duskwood	
+			":1048:0:50.27,65.20:26:0:62.48,23.50:cls:DRUID:qid:40645", --Emerald Dreamway > Hinterlands
+			":1048:0:39.81,68.92:34:0:46.59,37.06:cls:DRUID:qid:40645", --Emerald Dreamway > Duskwood	
 			
-			":1014:10:32.67,69.76:23:20:38.63,62.61:cls:PALADIN", --Dalaran Legion > Paladin Order Hall
+			":1014:10:32.67,69.76:23:20:38.63,62.61:cls:PALADIN:fac:Alliance:qid:38576", --Dalaran Legion > Paladin Order Hall
+			":1014:10:61.92,13.49:23:20:39.42,61.46:cls:PALADIN:fac:Horde:qid:38576", --Dalaran Legion > Paladin Order Hall			
+			":32:21:38.82,64.2:301:0:49.59,86.53:fac:Alliance", --Dalaran Deadwind Pass > Stormwind
+			":301:0:80.25,34.83:32:21:72.60,46.05:qid:40718:fac:Alliance:nqid:44663",--Stormwind > Dalaran Legion
+			":321:2:36.32,71.14:32:21:72.60,46.05:qid:40718:fac:Horde:nqid:44184",--Orgrimmar Cleft of Shadow > Dalaran Legion				
 		}, --Eastern Kingdom
 		{
 			":19:0:2363198085:465:0:3839328398:lvl:58:nqid:36881",--Blasted Lands Dark Portal > Hellfire Peninsula (not available after level 90 or completing qid 36881)			
-			":811:2:2734854841:481:0:2276621818:fac:Horde", -- Shrine of Two Moons (Vale of Eternal Blossom) > Shattrath 
 			":903:2:2734854841:481:0:2276621818:fac:Horde", -- Shrine of Two Moons (Vale of Eternal Blossom) > Shattrath 			
 			":811:4:2938734527:481:0:2276621818:fac:Alliance", -- Shrine of Two Moons (Vale of Eternal Blossom) > Shattrath 
 
@@ -28665,21 +28782,20 @@ function TaxiData:Initialize()
 			":1014:12:35.59,85.21:481:0:53.01,49.21",--Dalaran > Shattrath			
 		}, --Outland
 		{
-			":811:2:2648137077:504:1:2401859529:fac:Horde", -- Shrine of Two Moons (Vale of Eternal Blossom) > Dalaran 
 			":811:4:2660459684:504:1:2401859529:fac:Alliance", -- Shrine of Two Moons (Vale of Eternal Blossom) > Dalaran 
 			":201:0:2164593732:493:0:1729483743:qid:12548",--Scholazar Waygate
 			
 			":1014:12:30.93,84.15:488:0:59.72,52.88",--Dalaran > Wyrmrest Temple			
 			
-			":1048:0:31.76,26.62:490:0:50.43,29.75:cls:DRUID:lvl:100",--Emerald Dreamway > Grizzly Hills	
+			":1048:0:31.76,26.62:490:0:50.43,29.75:cls:DRUID:qid:40645",--Emerald Dreamway > Grizzly Hills	
 		}, --Northrend
 		{
-			":301:0:3143512645:640:0:2092992794:qid:27203:fac:Alliance", --Stormwind - Deepholm
-			":321:1:2183552263:640:0:2172946312:qid:27203:fac:Horde", -- Orgrimmar - Deepholm 
+			":301:0:3143512645:640:0:2092992794:qid:27203:fac:Alliance:passlvl:90", --Stormwind - Deepholm 
+			":321:1:2183552263:640:0:2172946312:qid:27203:fac:Horde:passlvl:90", -- Orgrimmar - Deepholm  
 		}, --Maelstrom
 		{
-			":321:1:2948491323:806:0:1224680418:lvl:85:qid:29690:fac:Horde", -- Orgrimmar > Jade Forest (req level 85 and QID 29690)
-			":301:0:2952866787:806:0:1983502790:lvl:85:qid:31732:fac:Alliance", -- Stormwind City > Jade Forest (req level 85 and QID 31732)
+			":321:1:2948491323:806:0:1224680418:lvl:85:qid:29690:fac:Horde:passlvl:90", -- Orgrimmar > Jade Forest (req level 85 and QID 29690)
+			":301:0:2952866787:806:0:1983502790:lvl:85:qid:31732:fac:Alliance:passlvl:90", -- Stormwind City > Jade Forest (req level 85 and QID 31732)
 			
 			":1014:10:36.55,66.88:811:0:86.30,61.05:fac:Alliance",--Dalaran Legion > Vale of Eternal Blossoms
 			":1014:10:55.03,25.63:811:0:62.50,21.82:fac:Horde",--Dalaran Legion > Vale of Eternal Blossoms			
@@ -28694,20 +28810,28 @@ function TaxiData:Initialize()
 			":301:0:80.25,34.83:1014:10:60.92,44.73:qid:44663:fac:Alliance",--Stormwind > Dalaran Legion
 			":321:2:36.32,71.14:1014:10:60.92,44.73:qid:44184:fac:Horde",--Orgrimmar Cleft of Shadow > Dalaran Legion		
 			":1044:0:52.40,57.17:1014:10:60.92,44.73:cls:MONK", --Monk Order Hall > Dalaran Legion
-			":1068:1:57.31,90.12:1014:10:60.92,44.73:cls:MAGE", --Mage Order Hall > Dalaran Legion
-			":23:20:37.79,63.84:1014:10:33.20,68.89:cls:PALADIN", --Paladin Order Hall > Dalaran Legion
+			
+			":1068:1:57.31,90.12:1014:10:60.92,44.73:cls:MAGE", --Mage Order Hall > Dalaran Legion			
+			":1068:1:55.10,39.97:1015:0:57.91,15.11:spell:223413:cls:MAGE", --Mage Order Hall > Azsuna (Teleporation Nexus)
+			":1068:1:56.64,44.37:1024:0:31.40,63.80:spell:223413:cls:MAGE", --Mage Order Hall > Highmountain (Teleporation Nexus)
+			":1068:1:66.84,46.01:1018:0:51.30,56.10:spell:223413:cls:MAGE", --Mage Order Hall > Val'shara (Teleporation Nexus)
+			":1068:1:67.09,41.96:1017:0:31.34,60.51:spell:223413:cls:MAGE", --Mage Order Hall > Stormheim (Teleporation Nexus)						
+			
+			":23:20:37.79,63.84:1014:10:33.20,68.89:cls:PALADIN:fac:Alliance:qid:38576", --Paladin Order Hall > Dalaran Legion
+			":23:20:37.79,63.84:1014:10:61.27,14.82:cls:PALADIN:fac:Horde:qid:38576", --Paladin Order Hall > Dalaran Legion
+			":1048:0:45.52,23.93:1077:0:51.60,35.07:cls:DRUID:qid:40645", --Emerald Dreamway > Dreamgrove			
 		}, -- Broken Isles
 		{
 		}, -- Reserve
 		{
-			":606:0:59.07,26.10:1048:0:51.59,51.88:cls:DRUID:lvl:100", --Mount Hyjal > Emerald Dreamway 
-			":606:0:59.07,26.10:1048:0:51.59,51.88:cls:DRUID:lvl:100",--Mount Hyjal > Emerald Dreamway 
-			":26:0:62.32,22.79:1048:0:49.42,62.50:cls:DRUID:lvl:100",-- Hinterlands > Emerald Dreamway
-			":34:0:46.56,35.86:1048:0:38.84,66.00:cls:DRUID:lvl:100",--Duskwood > Emerald Dreamway
-			":1077:0:55.43,22.41:1048:0:45.10,26.48:cls:DRUID:lvl:100",--Dreamgrove > Emerald Dreamway
-			":490:0:50.35,29.32:1048:0:32.40,29.53:cls:DRUID:lvl:100",--Grizzly Hills > Emerald Dreamway
-			":241:0:67.96,60.23:1048:0:26.31,77.76:cls:DRUID:lvl:100",--Moonglade > Emerald Dreamway
-			":13:0:51.31,10.68:1048:0:26.31,77.76:cls:DRUID:lvl:100",--Feralas > Emerald Dreamway
+			":606:0:59.07,26.10:1048:0:51.59,51.88:cls:DRUID:qid:40645", --Mount Hyjal > Emerald Dreamway 
+			":606:0:59.07,26.10:1048:0:51.59,51.88:cls:DRUID:qid:40645",--Mount Hyjal > Emerald Dreamway 
+			":26:0:62.32,22.79:1048:0:49.42,62.50:cls:DRUID:qid:40645",-- Hinterlands > Emerald Dreamway
+			":34:0:46.56,35.86:1048:0:38.84,66.00:cls:DRUID:qid:40645",--Duskwood > Emerald Dreamway
+			":1077:0:55.43,22.41:1048:0:45.10,26.48:cls:DRUID:qid:40645",--Dreamgrove > Emerald Dreamway
+			":490:0:50.35,29.32:1048:0:32.40,29.53:cls:DRUID:qid:40645",--Grizzly Hills > Emerald Dreamway
+			":241:0:67.96,60.23:1048:0:26.31,77.76:cls:DRUID:qid:40645",--Moonglade > Emerald Dreamway
+			":13:0:51.31,10.68:1048:0:26.31,77.76:cls:DRUID:qid:40645",--Feralas > Emerald Dreamway
 		}, -- Instances
 	}
 	
@@ -28872,12 +28996,32 @@ function TaxiData:Initialize()
 		[897] = "858:0:38.92,35.02:897:1:34.28,89.45",
 		[896] = "809:0:59.57,39.25:896:1:75.22,74.09",
 		[930] = "928:0:63.62,32.25:930:1:31.16,25.92",
-	
+		--Legion Order Halls
 		[1052] = "1014:10:97.96,69.27:1052:1:59.31,91.30:cls:DEMONHUNTER", --Dalaran <-> Mardum
-		[1035] = "1014:10:75.18,47.16:1035:1:58.30,24.88:cls:WARRIOR", --Dalaran <-> Skyhold
+		[1035] = "1014:10:75.18,47.16:1035:1:58.34,24.98:cls:WARRIOR:qid:42815", --Dalaran <-> Skyhold
+		[1035] = "1017:1:60.18,52.23:1035:1:58.34,24.98:cls:WARRIOR:qid:39803",	-- Stormheim: Jump to Skyhold	
+		[1035] = "1015:1:47.58,28.08:1035:1:58.34,24.98:cls:WARRIOR:qid:38443",	-- Azsuna: Jump to Skyhold
+		[1035] = "1018:1:54.71,74.89:1035:1:58.34,24.98:cls:WARRIOR:qid:38384",	-- Val'sharah: Jump to Skyhold
+		[1035] = "1080:1:39.73,42.11:1035:1:58.34,24.98:cls:WARRIOR:qid:38907",	-- Highmountain: Jump to Skyhold
+		[1035] = "1033:1:33.08,48.20:1035:1:58.34,24.98:cls:WARRIOR:qid:42229",	-- Suramar: Jump to Skyhold
 		[1057] = "1014:10:67.13,48.17:1057:0:29.92,51.96:cls:SHAMAN", --Dalaran <-> Maelstrom
+		[1070] = "1057:0:26.71,41.32:1070:1:53.59,16.00:cls:SHAMAN:qid:43002",	-- Portal to Vortex Pinnacle
+		[1071] = "1057:0:31.08,61.02:1071:0:25.02,92.64:cls:SHAMAN:qid:42208",	-- Portal to the Firelands		
 		[1050] = "1014:11:27.90,44.48:1050:0:75.37,38.11:cls:WARLOCK", --Dalaran Underbelly <-> Dreadscar Rift
-		[1040] = "1014:10:39.48,57.31:1040:1:49.80,80.71:cls:PRIEST", --Dalaran <-> Halls of Shadow 
+		[1040] = "1014:10:39.48,57.31:1040:1:49.80,80.71:cls:PRIEST:fac:Alliance", --Dalaran <-> Halls of Shadow 
+		[1040] = "1014:10:63.00,17.70:1040:1:49.80,80.71:cls:PRIEST:fac:Horde", --Dalaran <-> Halls of Shadow 		
+		[1054] = "1014:10:67.22,69.48:1054:1:50.69,83.17",
+		--Legion dungeons
+		[1066] = "1014:10:67.50,69.78:1066:1:50.93,82.09", -- The Violet Hold
+		[1081] = "1018:0:37.15,50.24:1081:1:29.21,6.35", -- Black Rook Hold
+		[1067] = "1018:0:59.03,31.18:1067:0:36.54,13.50", -- Darkheart Thicket
+		[1065] = "1024:0:49.56,68.63:1065:0:96.66,39.22", -- Netfal Lair
+		[1079] = "1033:0:41.11,61.67:1079:1:48.01,20.07", -- The Arcway
+		[1041] = "1017:0:72.64,70.52:1041:2:47.71,7.56", -- Hall of Valor
+		[1046] = "1015:0:61.15,41.13:1046:1:47.12,87.89", -- Eye of Azshara
+		[1042] = "1017:0:52.54,45.25:1042:1:47.18,81.20", -- Maw of Souls
+		[1045] = "1015:0:48.07,82.13:1045:1:69.38,77.47", -- Vault of the Wardens
+		[1087] = "1033:0:50.99,65.59:1087:1:10.20,69.30", -- Court of Stars		
 	}
 	
 	function TaxiData:GetLookupTable()

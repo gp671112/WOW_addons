@@ -219,6 +219,9 @@ DugisWorldMapTrackingPoints = {
 },
 ["ValeofEternalBlossoms"] = {
 },
+["Suramar:0"] = {
+"7:36.4,46.8:97140:Shal'Aran",
+},
 ["Alliance"] = {
 ["ColdridgeValley:0"] = {
 	"8:2667205117", -- [1]

@@ -157,7 +157,7 @@
 				<OnClick> DugisGuideViewer.Modules.ModelViewer:ModelButton_OnClick(self, button, down); </OnClick>
 					<OnEnter>
 						GameTooltip:SetOwner( self, "ANCHOR_TOPLEFT")
-						GameTooltip:AddLine("Show / Hide Model Viewer", 1, 1, 1, 1, true)
+						GameTooltip:AddLine("顯示/隱藏模組預覽", 1, 1, 1, 1, true)
 						GameTooltip:Show()
 						GameTooltip:ClearAllPoints()
 					</OnEnter>
@@ -411,10 +411,18 @@
                     self.expanded = true
                 end
                 
-                GUIUtils:UpdateTreeVisualization(self.TreeFrame)
+                self.TreeFrame:UpdateTreeVisualization()
                 
                 if self.TreeFrame.onNodeClick then
                     self.TreeFrame.onNodeClick()
+                end
+                
+                if self.extraOnClickFunction then
+                    self:extraOnClickFunction()
+                end       
+                
+                if self.onLeafClickFunction then
+                    self:onLeafClickFunction()
                 end
 			</OnClick>
         </Scripts>
@@ -440,25 +448,46 @@
         <HighlightFont style="GameFontHighlightLeft"/>
         <DisabledFont style="GameFontHighlightLeft"/>
     </Button>
-	<Button name="DugisGuideTreeLeafTemplate" virtual="true">
+    <Frame name="DugisGuideTreeLeafTemplate" enableMouse='true' virtual="true" visible ="true">
         <Size x="400" y="16"/>
-		<HighlightTexture alphaMode ="ADD" file ="Interface\FriendsFrame\UI-FriendsFrame-HighlightBar">
-            <Size x="400" y="16"/>
-            <Anchors>
-                <Anchor point="CENTER" x="-15" y="0"/>
-            </Anchors>
-            <TexCoords left="0" right="1" top="0" bottom="1"/>
-        </HighlightTexture>
-        <ButtonText name="$parentText" nonspacewrap="true" parentKey="Text">
-            <Size x="0" y="10"/>
-            <Anchors>
-                <Anchor point="LEFT" x="0" y="0"/>
-            </Anchors> 
-        </ButtonText>
-        <NormalFont style="GameFontHighlightLeft"/>
-        <HighlightFont style="GameFontHighlightLeft"/>
-        <DisabledFont style="GameFontHighlightLeft"/>
-    </Button>
+        <Frames>
+            <Button parentKey="Button"  enableMouse='true' virtual="true"  visible ="true">
+                <Size x="400" y="16"/>
+                <HighlightTexture parentKey="highlight" alphaMode ="ADD" file ="Interface\FriendsFrame\UI-FriendsFrame-HighlightBar">
+                    <Size x="400" y="16"/>
+             
+                    <TexCoords left="0" right="1" top="0" bottom="1"/>
+                </HighlightTexture>
+                <ButtonText name="$parentText" nonspacewrap="true"  Text="EEEE" visible ="true" parentKey="Text">
+                    <Size x="0" y="0"/>
+                    <Anchors>
+                        <Anchor point="LEFT" x="0" y="0"/>
+                    </Anchors> 
+                </ButtonText>        
+                <NormalFont style="GameFontHighlightLeft"/>
+                <HighlightFont style="GameFontHighlightLeft"/>
+                <DisabledFont style="GameFontHighlightLeft"/>
+            </Button>
+
+            
+        </Frames>
+            <Layers>
+                <Layer level="BACKGROUND">
+                    <FontString  parentKey="TextRight" inherits="GameFontHighlight" visible ="true" wraponspaces="false" justifyH="RIGHT" text=""> 
+                        <Size>
+                        <AbsDimension x="505" y="14"/>
+                        </Size>
+                        <Anchors>
+                        <Anchor point="RIGHT">
+                            <Offset>
+                                <AbsDimension x="-25" y="0"/>
+                            </Offset>
+                        </Anchor>
+                        </Anchors>
+                    </FontString>
+                </Layer>  
+            </Layers>                
+    </Frame>
 	<Button name="DugisOnOffButton" parent = "UIParent"  movable="true" enableMouse='true' frameStrata="MEDIUM" >
 		<Size x="32" y="32"/>
 		<NormalTexture file ="Interface\AddOns\DugisGuideViewerZ\Artwork\iconbutton.tga"/>
@@ -812,17 +841,17 @@
 			</Layer>
 		</Layers>
 		<Frames>
-			<Button name='$parentYesButton' inherits='UIPanelButtonTemplate' text = 'Go'>
+			<Button name='$parentYesButton' inherits='UIPanelButtonTemplate' text = '出發'>
 				<Size> <AbsDimension x='55' y='23'/> </Size>
 				<Anchors> <Anchor point='LEFT' relativeTo="$parentGuideTitle" relativePoint="right" ><Offset><AbsDimension x="5"/></Offset></Anchor> </Anchors>
 				<Scripts> <OnClick> DugisGuideViewer:SuggestButtonOnClick() </OnClick> </Scripts>
 			</Button>
-			<Button name='$parentCompleteYesButton' parentKey="CompleteYesButton" inherits='UIPanelButtonTemplate' text = 'Complete'>
+			<Button name='$parentCompleteYesButton' parentKey="CompleteYesButton" inherits='UIPanelButtonTemplate' text = '完成'>
 				<Size> <AbsDimension x='95' y='23'/> </Size>
 				<Anchors> <Anchor point='TOPRIGHT' relativeTo="$parentTitle2" relativePoint="bottom"><Offset><AbsDimension x="-5"/></Offset></Anchor> </Anchors>
 				<Scripts> <OnClick> DugisGuideViewer:CompleteCurrentQuest() </OnClick> </Scripts>
 			</Button>
-			<Button name='$parentNoButton' inherits='UIPanelButtonTemplate' text = 'Not Now'>
+			<Button name='$parentNoButton' inherits='UIPanelButtonTemplate' text = '不是現在'>
 				<Size> <AbsDimension x='95' y='23'/> </Size>
 				<Anchors> <Anchor point='LEFT' relativeTo="$parentCompleteYesButton" relativePoint="right"><Offset><AbsDimension x="5"/></Offset></Anchor> </Anchors>
 				<Scripts> <OnClick> self:GetParent():Hide() </OnClick> </Scripts>
@@ -1336,7 +1365,7 @@
                     <OnClick>DugisGuideViewer_Close_ButtonClick();</OnClick>
                 </Scripts> 
             </Button>
-			<Frame name="DugisMain">
+			<Frame name="DugisMain"  clipChildren = "true">
 				<Anchors>
 					<Anchor point="TOPLEFT" x="10" y="-12"/>
 					<Anchor point="BOTTOMRIGHT" x="-8" y="8"/>
@@ -1612,17 +1641,17 @@
 						<Size x="350" y="356"/>
 					</Frame>	  
                     
-					<Button name="$parentHomeTab" inherits="TopTabTemplate" text="Home" parentKey="homeTab">
+					<Button name="$parentHomeTab" inherits="TopTabTemplate" frameLevel="100" text="Home" parentKey="homeTab">
 						<Anchors>
 							<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" x="20" y="-40"/>
 						</Anchors>
 					</Button>
-					<Button name="$parentCurrentGuideTab" inherits="TopTabTemplate" text="Current Guide" parentKey="currentGuideTab">
+					<Button name="$parentCurrentGuideTab" inherits="TopTabTemplate" frameLevel="101"  text="Current Guide" parentKey="currentGuideTab">
 						<Anchors>
 							<Anchor point="BOTTOMLEFT" relativeTo="$parentHomeTab" relativePoint="BOTTOMRIGHT" x="32" y="0"/>
 						</Anchors>
 					</Button>
-					<CheckButton name="$parentSettingsTab" inherits="UIPanelSquareButton" parentKey="settingsTab">
+					<CheckButton name="$parentSettingsTab" inherits="UIPanelSquareButton" frameLevel="102"  parentKey="settingsTab">
 						<Size x="30" y="30"/>
 						<Anchors>
 							<Anchor point="BOTTOMLEFT" relativeTo="$parentCurrentGuideTab" relativePoint="BOTTOMRIGHT" x="18" y="0"/>
@@ -1680,31 +1709,53 @@
 						</Anchors>
 					</Frame>
 					
-					<ScrollFrame name="$parentLeftScrollFrame" parentKey="leftScroll" inherits="UIPanelScrollFrameCodeTemplate" visible="false">
-						<Anchors>
-							<Anchor point="TOPLEFT" relativeTo="$parentLeftFrameHost"/>
-							<Anchor point="BOTTOMRIGHT" relativeTo="$parentLeftFrameHost"/>
+                    
+                    
+                    <Frame name ="CurrentGuideTabContent"  movable ="true" visible="true"> 
+						<Size x="350" y="356"/>
+                        
+                        <Frames>
+                            <ScrollFrame name="DugisMainLeftScrollFrame" parentKey="leftScroll" inherits="UIPanelScrollFrameCodeTemplate" visible="true">
+                                <Frames>
+                                    <Slider name="$parentScrollBar" inherits="MinimalScrollBarTemplate" parentKey="bar">
+                                        <Anchors>
+                                            <Anchor point="TOPRIGHT" x="25" y="-14"/>
+                                            <Anchor point="BOTTOMRIGHT" x="25" y="20"/>
+                                        </Anchors>
+                                        <Scripts>
+                                            <OnLoad>
+                                                self.trackBG:SetVertexColor(0.2, 0.13, 0.08, 0);
+                                            </OnLoad>		
+                                        </Scripts>
+                                    </Slider>
+                                </Frames>
+                                <Scripts>
+                                    <OnMouseWheel>
+                                        Dugis_OnMouseWheel(self, delta);
+                                    </OnMouseWheel>
+                                </Scripts>
+                                <Layers>
+                                    <Layer level="ARTWORK" >
+                                        <Texture file="Interface\Buttons\UI-OptionsButton" parentKey="currentGuideIcon">
+                                            <Size x="32" y="32"/>
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT" x="23" y="10"/>
+                                            </Anchors>
+                                        </Texture>
+                                        <FontString parentKey="guideType" inherits="QuestFont_Super_Huge" justifyH="LEFT" hidden="false" text="">
+                                            <Anchors>
+                                                <Anchor point="TOPLEFT" x="48" y="-10"/>
+                                            </Anchors>
+                                            <Color r="0.961" g="0.824" b="0.412"/>
+                                        </FontString>                            
+                                    </Layer>
+                                </Layers>
+                                
+                            </ScrollFrame>
+                        </Frames>
+					</Frame>    
+                    
 
-						</Anchors>
-						<Frames>
-							<Slider name="$parentScrollBar" inherits="MinimalScrollBarTemplate" parentKey="bar">
-								<Anchors>
-									<Anchor point="TOPRIGHT" x="25" y="-14"/>
-									<Anchor point="BOTTOMRIGHT" x="25" y="20"/>
-								</Anchors>
-								<Scripts>
-									<OnLoad>
-										self.trackBG:SetVertexColor(0.2, 0.13, 0.08, 0);
-									</OnLoad>		
-								</Scripts>
-							</Slider>
-						</Frames>
-						<Scripts>
-							<OnMouseWheel>
-								Dugis_OnMouseWheel(self, delta);
-							</OnMouseWheel>
-						</Scripts>
-					</ScrollFrame>
 					
 					<Frame name="$parentRightFrameHost" parentKey="rightFrameHost">
 						<Anchors>
@@ -1740,7 +1791,7 @@
 						</Scripts>
 					</ScrollFrame>
 					
-					<Button name="DugisResetButton" inherits="UIPanelButtonTemplate" text="Reset" hidden="false">
+					<Button name="DugisResetButton" inherits="UIPanelButtonTemplate"  frameLevel="100" text="Reset" hidden="false">
 						<Size>
 							<AbsDimension x="70" y="23"/>
 						</Size>
@@ -1755,7 +1806,7 @@
 							<OnClick>DugisGuideViewer.ResetButtonOnClick()</OnClick>
 						</Scripts> 
 					</Button>
-					<Button name="DugisReloadButton" inherits="UIPanelButtonTemplate" text="Reload" hidden="false">
+					<Button name="DugisReloadButton" inherits="UIPanelButtonTemplate"  frameLevel="101" text="Reload" hidden="false">
 						<Size>
 							<AbsDimension x="70" y="23"/>
 						</Size>
@@ -1806,7 +1857,7 @@
                         <DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Disabled"/>
                         <HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
                     </Button>
-					<Button name = "DugisPreloadButton" inherits="UIPanelButtonTemplate" text = "Preload" hidden="true">
+					<Button name = "DugisPreloadButton" inherits="UIPanelButtonTemplate" text = "預先載入" hidden="true">
 						 <Size>
 							<AbsDimension x="95" y="23"/>
 						</Size>
@@ -1888,7 +1939,7 @@
 		<Size x="26" y="26"/>
         <Layers>
             <Layer level="ARTWORK">
-                <FontString parentKey="HotKey" inherits="NumberFontNormalSmallGray" justifyH="LEFT" text="RANGE_INDICATOR">
+                <FontString parentKey="HotKey" inherits="NumberFontNormalSmallGray" justifyH="LEFT" text="">
                     <Size x="29" y="10"/>
                     <Anchors>
                         <Anchor point="TOPRIGHT" x="16" y="-2"/>
@@ -1940,6 +1991,19 @@
         </NormalTexture>
         <PushedTexture file="Interface\Buttons\UI-Quickslot-Depress"/>
         <HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD"/>     
+	</Button>
+    
+    <Button name="DugisTargetButtonTemplate" inherits="SecureActionButtonTemplate" virtual='true'>
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString parentKey="HotKey" inherits="NumberFontNormalSmallGray" justifyH="LEFT" text="">
+                    <Size x="29" y="10"/>
+                    <Anchors>
+                        <Anchor point="TOPRIGHT" x="16" y="-2"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
 	</Button>
 	
 	<Button name="DugisSecureQuestButton" inherits="DugisSecureQuestButtonTemplate" parent="UIParent">
@@ -2523,7 +2587,7 @@
             <Frame setAllPoints="true" parentKey="TexWrapper" visible="false">
                 <Layers>
                     <Layer level="BACKGROUND">
-                        <Texture>
+                        <Texture parentKey="Background">
                             <Anchors>
                                 <Anchor point="LEFT" relativeTo="$parent">
                                     <Offset>
@@ -2550,7 +2614,7 @@
                         </Texture>
                     </Layer>
                     <Layer level="ARTWORK">
-                        <FontString parentKey="Text" wordwrap="false" wraponspaces="true"  inherits="GameFontNormal" justifyH="LEFT"  visible="false" text="Searching...">
+                        <FontString parentKey="Text" wordwrap="false" wraponspaces="true"  inherits="GameFontNormal" justifyH="LEFT"  visible="false" text="Preparing 2%..">
                             <Size x="159" y="40"/>
                             <Anchors>
                                 <Anchor point="TOPLEFT" x="5" y="-2"/>

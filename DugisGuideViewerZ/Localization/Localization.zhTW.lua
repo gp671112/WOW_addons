@@ -4,12 +4,13 @@ if ( GetLocale() == "zhTW" ) then
 	PART_TEXT = "單方面",
 	
 --自行加入的翻譯	
-	["Dugi Guides"] = "Dugi 任務高手",
+	["Dugi Guides"] = "Dugi 任務高手", -- BINDING_HEADER_DUGI 要加上 L[]
 	["Dugi Guides Off"] = "Dugi 任務高手 已停用",
 	["Dugi Guides On"] = "Dugi 任務高手 已啟用",
 	["|cff11ff11Dugi Guides: |rNew character detected. Wiping settings."] = "|cff11ff11Dugi 任務高手: |r偵測到新角色，重置設定。",
-	["Auto Watch Local Quests"] = "自動追蹤顯示本地任務",
-	["Automatically remove non-local (not in current map) quests and add local quest to the objective tracker. This will trigger during a zone change event"] = "自動移除非本地 (不是目前所在地圖) 的任務，將本地任務新增至任務追蹤清單。更換區域時會執行這個動作。",
+	["Auto Track Local Quest"] = "自動追蹤本地任務",
+	["Automatically remove non-local (not in current map) quest and track local quest to the objective tracker. This will trigger when you accept a quest or during a zone change event"] = "自動移除非本地 (不是目前所在地圖) 的任務，將本地任務新增至任務目標清單。當你接受任務或更換區域時會執行這個動作。",
+	["Auto Loot Quest Item"] = "自動選擇任務獎勵",
 	["Abandon Quests Button"] = "放棄多項任務按鈕",
 	["Mass abandon quests button in your quest log to automatically abandon all quests by their category or zone"]= "在任務列表，區域名稱的右方加入放棄多項任務的按鈕，方便自動放棄整個分類或區域的任務。",
 	["Auto Select Flight Path"] = "自動選擇飛行路線",
@@ -68,6 +69,8 @@ if ( GetLocale() == "zhTW" ) then
 	["Unlock Arrow"] = "解除鎖定箭頭",
 	["Arrow Scale"] = "箭頭大小",
 	["Text Scale"] = "文字大小",
+	
+	-- Libs\menu.lua
 	["Close Menu"] = "關閉選單",
 	
 	-- WorldMapTracking.lua
@@ -77,6 +80,7 @@ if ( GetLocale() == "zhTW" ) then
 	["No"] = "否",
 	["Abandon All "] = "是否確定要放棄 '",
 	[" Quests?"] = "' 的所有任務?",
+	["|cfff0eb20Flight location not learned|r"] = "|cfff0eb20尚未發現這個飛行鳥點|r",
 	
 	-- TaxiDB.lua
 	["DG: Flight master data updated!"] = "任務高手: 飛行管理員資料已經更新!",
@@ -86,7 +90,19 @@ if ( GetLocale() == "zhTW" ) then
 	["|cffffd200Player:|r %s"] = "|cffffd200玩家:|r %s",
 	["|cffffd200Cursor:|r ---"] = "|cffffd200游標:|r ---",
 	["|cffffd200Cursor:|r %s"] = "|cffffd200游標:|r %s",
+	-- 座標改為 150 和 -150
 	
+	-- DugisGuideViewer.xml
+	["Show / Hide Model Viewer"] = "顯示/隱藏模組預覽",
+	["Preload"] = "預先載入",
+	["Reset Ban List"] = "重置忽略清單",
+	["Go"] = "出發",
+	["Complete"] = "完成",
+	["Not Now"] = "不是現在",
+	
+	
+	-- DugisGuideViewer.lua
+	["|cff11ff11" .. "Dugi: Disabled WorldQuestTracker's \"Auto World Map\" option, this needs to be off for Dugi waypoint."] = "|cff11ff11" .. "任務高手: 已停用世界任務追蹤插件的 \"自動世界地圖\" 選項，必須停用才能使用任務高手的路線導引功能。",
 	["|cff11ff11/dugi way xx xx - |rPlace waypoint in current zone."] = "|cff11ff11/dugi way xx xx - |r在目前的地區建立路線導引。",
 	["|cff11ff11/dugi fix - |rReset all Saved Variable setting."] = "|cff11ff11/dugi fix - |r重置所有已儲存的變數設定。",
 	["|cff11ff11/dugi reset - |rReset all frame position."] = "|cff11ff11/dugi reset - |r重置所有框架位置。",
@@ -111,6 +127,10 @@ if ( GetLocale() == "zhTW" ) then
 	["Ignore Daily Quest Items"] = "忽略每日任務物品",
 	["Don't suggest to replace quest items for completing daily quest"] = "不要建議替換每日任務所需要的物品。",
 	["Demon Hunter"] = "惡魔獵人",
+	["|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|tWaypoint Reached Sound"] = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|t到達目的地音效",
+	["Plays a ping sound upon reaching each waypoint"] = "到達每一個路線導引終點時播放音效",
+	["Hide Model Preview in World Map"] = "隱藏世界地圖中的模組預覽",
+	
 	
 ---
   ["|TInterface\\AddOns\\DugisGuideViewerZ\\Artwork\\UpgradeArrow:0|t|cff1eff00+%d%%|r upgrade over %s with %s"] = "|TInterface\\AddOns\\DugisGuideViewerZ\\Artwork\\UpgradeArrow:0|t|cff1eff00+%d%%|r 更新 %s 為 %s",
@@ -136,7 +156,7 @@ if ( GetLocale() == "zhTW" ) then
   ["Automatically maintain the best item for each slot as player level, active spec and inventory changes occur."] = "各部位自動保持裝備最佳物品，根據玩家等級、目前專精和背包內容。",
   ["Auto Equip Smart Set"] = "自動裝備智慧型套裝 (含建議更換裝備)",
   ["Allow movement of the watch frame, not available if other incompatible addons are loaded."] = "允許移動觀察框架，如果使用其它不相容的插件則無法移動。", 
-  ["Add a border for the Objective Tracker Frame"] = "替任務追蹤清單加上外框",
+  ["Add a border for the Objective Tracker Frame"] = "替任務目標清單加上外框",
   ["Active Talent Specialization"] = "已啟用的專精",
   ["Add"] = "新增",  
 	["Account Wide Achievement"] = "帳號共通成就",
@@ -144,12 +164,12 @@ if ( GetLocale() == "zhTW" ) then
 	["Alchemy"] = "煉金術",
 	["All Available Quests"] = "所有可用的任務",
 	["All Tracked Quests"] = "所有已追蹤的任務",
-	["Allow a fixed Anchored Small Frame that will integrate with the Objective Tracker"] = "允許使用固定錨點小框架，會和任務追蹤清單整合",
+	["Allow a fixed Anchored Small Frame that will integrate with the Objective Tracker"] = "允許使用固定錨點小框架，會和任務目標清單整合",
 	["Allow status frame to show all currently relevant quests."] = "允許使用狀態框架，來顯示目前所有相關的任務。",
 	["Allows model viewer to function"] = "允許使用模組檢視器",
 	["Alternative Leveling Guides:"] = "替代的升級指引:",
 	["Always"] = "總是",
-	["Amount of time the Map Preview should remain in view (zero to disable).  Enabling this feature will automatically set the world map to windowed mode on reload."] = "地圖預覽顯示的時間 (0代表停用)，啟用這功能將在重新載入時自動將世界地圖設為視窗模式。",
+	["Amount of time the Map Preview should remain in view (zero to disable).  Enabling this feature will automatically set the world map to windowed mode on reload."] = "地圖預覽顯示的時間 ( 0 代表停用)，啟用這功能將在重新載入時自動將世界地圖設為視窗模式。",
 	["Anchored Small Frame"] = "小框架錨點",
 	["Ant Trail Color"] = "螞蟻路徑顏色",
 	["Apply Memory Settings"] = "允許記憶體設定",
@@ -163,7 +183,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Automatic Waypoints"] = "自動指引", 
 	["Automatically accept and turn in quests from NPCs. Disable with shift"] = "自動從NPC接受和交回任務。按住Shift鍵可停用此功能。",
 	["Automatically loot quest items."] = "自動選擇任務獎勵物品。",
-	["Automatically map waypoints from the Small Frame or from the Objective Tracker in essential mode"] = "自動加入路線導引，從小框架或基本模式中的任務追蹤清單。",
+	["Automatically map waypoints from the Small Frame or from the Objective Tracker in essential mode"] = "自動加入路線導引，從小框架或基本模式中的任務目標清單。",
 	["Automatically sell grey quality items to merchant NPCs"] = "自動賣垃圾品質物品給NPC商人。",
 
 --Bb
@@ -200,9 +220,8 @@ if ( GetLocale() == "zhTW" ) then
 	["Customize Target Macro"] = "自訂目標巨集",
 --Dd
   ["Determines how gear should be scored, in order of greatest to least importance."] = "決定裝備評分，按最好的順序來分配重要性。",
-  ["Dugi Guides"] = "Dugi任務高手",
   ["Duration (%.1fs)"] = "預覽時間 (%.1fs)",
-  ["Disable Blizzard's Automatic Quest Tracking feature and use Dugi Automatic Quest Matching feature which will sync your Objective tracker with the current guide"] = "禁用內建自動任務追蹤功能並且使用Dugi自動任務配合將與目前指引同步到你的任務追蹤清單",
+  ["Disable Blizzard's Automatic Quest Tracking feature and use Dugi Automatic Quest Matching feature which will sync your Objective tracker with the current guide"] = "禁用內建自動任務追蹤功能並且使用Dugi自動任務配合將與目前指引同步到你的任務目標清單",
   ["Dugi Smart Set"] = "Dugi智慧型套裝",
   ["Do above for remaining %d items"] = "剩下的%d件物品都相同",
   ["Determines which scoring configuration should be used to equip gear with Dugi Smart Set."] = "裝備Dugi智慧型套裝時要使用哪種評分設定。",
@@ -253,7 +272,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Fixed Width Small Frame"] = "固定寬度小框架",
 	["Flash"] = "閃爍",  
 	["Floating Item Button"] = "可移動的物品按鈕",
-	["Floating Small Frame won't adjust size horizontally and remain the same width as the Objective Tracker."] = "可任意移動的小框架和任務追蹤清單的寬度相同，無法調整水平大小。",
+	["Floating Small Frame won't adjust size horizontally and remain the same width as the Objective Tracker."] = "可任意移動的小框架和任務目標清單的寬度相同，無法調整水平大小。",
 	["Fly to"] = "飛到",
 	["Frames"] = "框架",
 --Gg
@@ -290,15 +309,15 @@ if ( GetLocale() == "zhTW" ) then
   ["Ignore Cooking Items"] = "忽略烹飪物品",
   ["Ignore Fishing Items"] = "忽略釣魚物品",
   ["Inactive Talent Specialization"] = "未啟用的專精",
-	["Increases the width of the Objective tracker"] = "增加任務追蹤清單寬度。",
+	["Increases the width of the Objective tracker"] = "增加任務目標清單寬度。",
 	["Inscription"] = "銘文學",	
 --Jj
 	["Jewelcrafting"] = "珠寶設計",	
 --Ll
   ["Lock model viewer frame into place"] = "鎖定模組檢視框架到位置。",
   ["Lock Model Frame"] = "鎖定模組框架",
-  ["Lock the objective tracker frame."] = "鎖定任務追蹤清單框架。",
-  ["Lock Objective Tracker"] = "鎖定任務追蹤清單",
+  ["Lock the objective tracker frame."] = "鎖定任務目標清單框架。",
+  ["Lock Objective Tracker"] = "鎖定任務目標清單",
 	["Leatherworking"] = "製皮",
 	["Left"] = "左",
 	["Leveling Mode"] = "升級模式",
@@ -313,7 +332,7 @@ if ( GetLocale() == "zhTW" ) then
   ["Minimal"] = "最小",
   ["Map Ping"] = "地圖延遲",
   ["My Corpse"] = "我的屍體",
-  ["Move Objective Tracker"] = "移動任務追蹤清單",
+  ["Move Objective Tracker"] = "移動任務目標清單",
   ["Manual Waypoints"] = "手動增加路線導引",
   ["Mage"] = "法師",
   ["Monk"] = "武僧",
@@ -347,9 +366,9 @@ if ( GetLocale() == "zhTW" ) then
   ["Or leave slot empty:"] = "或是留下插槽空的:",
   ["Or keep equipped item:"] = "或是保留已裝備物品:",
   ["OK"] = "確認",
-  ["Objective Tracker Frame Border"] = "任務追蹤清單框架邊框",
+  ["Objective Tracker Frame Border"] = "任務目標清單框架邊框",
 	["OnePixel"] = "1像素",
-	["OR complete Quests in Log first"] = "或是先完成在紀錄中的任務",
+	["OR complete Quests in Log first"] = "或是先完成在記錄中的任務",
 	["Orc Female"] = "女獸人",
 	["Orc Male"] = "男獸人",
 	["Other"] = "其它",
@@ -483,7 +502,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Watch Frame Border"] = "觀察框架邊框",
 	["Waypoints"] = "路線導引",
 	["War Drums"] = "戰爭打鼓",
-	["Wider Objective Tracker"] = "較寬的任務追蹤清單",
+	["Wider Objective Tracker"] = "較寬的任務目標清單",
 	["Window Close"] = "視窗關閉",
 	["Window Open"] = "視窗開啟",
 	["Wood"] = "木頭",

@@ -137,7 +137,7 @@ function TaxiDB:Initialize()
 	TaxiDB.routeToRecalculate = {}
 	function DGV:TAXIMAP_OPENED()
 		--if WorldMapFrame:IsShown() then HideUIPanel(WorldMapFrame) end
-		SetMapToCurrentZone()
+		LuaUtils:DugiSetMapToCurrentZone()
 		local cont = GetCurrentMapContinent()
 		local recalulateRoute = false
 		if not DugisFlightmasterDataTable then 
@@ -154,17 +154,29 @@ function TaxiDB:Initialize()
 		if not key then return end
 		local direct = {}
 		local indirect = {}
+		local fullData = DGV.Modules.TaxiData:GetFullData()
 		for i=1,NumTaxiNodes() do
 			local x,y = TaxiNodePosition(i)
 			local nodeType = TaxiNodeGetType(i)
+			local name = TaxiNodeName(i)
 			
 			local npc = DGV.Modules.TaxiData:GetLookupTable()[cont][DGV:PackXY(x,y)]
 			if npc and not DugisFlightmasterDataTable[cont][npc] and nodeType=="REACHABLE" then
 				DugisFlightmasterDataTable[cont][npc] = {}
 			end
-			
+					
 			if DugisFlightmasterDataTable[cont][npc] and nodeType~="REACHABLE" then 
 				DugisFlightmasterDataTable[cont][npc] = nil
+			end
+			
+			if DugisFlightmasterDataTable[cont][npc] and not DugisFlightmasterDataTable[cont][npc].m and fullData and fullData[cont] then
+				DugisFlightmasterDataTable[cont][npc].m = fullData[cont][npc] and fullData[cont][npc].m
+				DugisFlightmasterDataTable[cont][npc].f = fullData[cont][npc] and fullData[cont][npc].f
+				DugisFlightmasterDataTable[cont][npc].coord = fullData[cont][npc] and fullData[cont][npc].coord
+			end			
+			
+			if name and DugisFlightmasterDataTable[cont][npc] and not DugisFlightmasterDataTable[cont][npc].name then
+				DugisFlightmasterDataTable[cont][npc].name = name
 			end
 			
 			if nodeType=="CURRENT" then
@@ -186,7 +198,6 @@ function TaxiDB:Initialize()
 			end
 		end
 
-		local fullData = DGV.Modules.TaxiData:GetFullData()
 		local globalData = fullData[cont] and fullData[cont][key]
 		if not DugisFlightmasterDataTable[cont][key] or
 			not DugisFlightmasterDataTable[cont][key].m
@@ -220,7 +231,7 @@ function TaxiDB:Initialize()
 		if recalulateRoute or (DGV:IsModuleLoaded("Guides") and DGV.actions[DugisGuideUser.CurrentQuestIndex] == "f") then
 			CloseTaxiMap()
 			PlaySoundFile("sound\\interface\\magicclick.ogg")
-			UIErrorsFrame:AddMessage(L["DG: Flight master data updated!"],1,1,0,1)
+			UIErrorsFrame:AddMessage(L["DG: Flight master data updated!"],1,1,0,1)			
 			if recalulateRoute then
 				DGV:RemoveAllWaypoints()	
 				DGV.Modules.DugisArrow:VisitFlightmaster(key)

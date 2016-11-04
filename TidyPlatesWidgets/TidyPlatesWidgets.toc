@@ -1,9 +1,0 @@
-## Interface: 70000
-## Title: Tidy Plates Widgets
-## Notes: Library of Widgets
-## Title-zhTW: |cffFF6060[戰鬥]|r Tidy血條-小套件
-## Notes-zhTW: Tidy Plates Widgets |n小套件庫。
-## Dependencies: TidyPlates
-## SavedVariables: TidyPlatesWidgetData
-
-Widgets.xml

@@ -1,0 +1,29 @@
+## Interface: 70100
+## Title: ItemLevelDisplay
+## Notes: Displays item's levels in paperdoll and optionally bags
+## Notes-itIT: Mostra il livello degli items nella schermata del personaggio e opzionalmente nelle borse
+## Author: Alar of Runetotem
+## Version: 2.0.10 7.1.0
+## X-Revision: a150432
+## eMail: alar@aspide.it
+## RequiredDeps:
+## OptionalDeps: LibInit,LibItemUpgradeInfo-1.0
+## X-Embeds:
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: dbILD
+## SavedVariablesPerCharacter: localdbILD
+## X-ID: ILD
+## X-Database: dbILD
+## X-Category: Bags and Inventory
+## X-License: GPL v3
+## X-eMail: alar@aspide.it
+## X-Date: 2016-10-30T18:50:55Z
+## X-Curse-Packaged-Version: 2.0.10
+## X-Curse-Project-Name: ItemLevelDisplay
+## X-Curse-Project-ID: itemleveldisplay
+## X-Curse-Repository-ID: wow/itemleveldisplay/mainline
+embeds.xml
+localization.lua
+ItemLevelDisplay.lua
+RelNotes.lua

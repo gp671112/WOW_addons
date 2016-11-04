@@ -185,7 +185,7 @@ end)
 			-- Draw Trails To Each Objective
 			for index, objective in ipairs(DGV.DugisArrow.waypoints) do
 				local new_x, new_y = DugisGuideViewer:TranslateWorldMapPosition(objective.map, objective.floor, objective.x/100, objective.y/100, m, f)
-				if new_x ~= last_x and new_y ~= last_y then
+				if not (new_x == last_x and new_y == last_y) then
 					local x1, y1, x2, y2 = Ants:ClampLine(last_x, last_y, new_x, new_y)
 					last_x, last_y = new_x, new_y
 
@@ -196,6 +196,7 @@ end)
 
 					if x1 --[[and x1~=x2 and y1~=y2]] then
 						local len = math.sqrt((x1-x2)*(x1-x2)*16/9+(y1-y2)*(y1-y2))
+						if len == 0 then len = 0.0000001 end 
 						local interval = .025/len
 						local p = remainder*interval
 
@@ -223,6 +224,7 @@ end)
 
 							if mx2 then
 								local mlen = math.sqrt( (mx1-mx2)*(mx1-mx2) + (my1-my2)*(my1-my2) )
+								if mlen == 0 then mlen = 0.000001 end 
 								local mm_interval = 15/mlen
 								local mm_p = mm_remainder*mm_interval
 								while mm_p < 1 do

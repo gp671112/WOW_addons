@@ -145,7 +145,7 @@ end
 --local LastGuideNumRows = 0
 local Debug = 0 --Print Debug Messages
 local Localize = 0	--Print Localization Error messages
-local SettingsRevision = 8
+local SettingsRevision = 10
 
 DugisGuideViewer.Debug = Debug and Debug>0 and 1 or nil
 DugisGuideViewer.ARTWORK_PATH = "Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\"
@@ -254,6 +254,11 @@ local function LoadSettings()
 	DGV_INCLUDE_RAIDS_MYTHIC = 77
     
     DGV_GEARS_FROM_QUEST_GUIDES = 78
+	
+	DGV_AUTO_QUEST_TRACK = 79
+	DGV_WAYPOINT_PING = 80
+    
+    DGV_HIDE_MODELS_IN_WORLDMAP = 81
     
 
     
@@ -262,6 +267,7 @@ local function LoadSettings()
 	DGV_SHOWTOOLTIP = 201
 	DGV_RECORDSIZE = 202
 	DGV_MAPPREVIEWDURATION = 203
+
 	DGV_SMALLFRAMEFONTSIZE = 204
 	DGV_TARGETBUTTONSCALE = 205
 	DGV_ITEMBUTTONSCALE = 206
@@ -306,7 +312,7 @@ local function LoadSettings()
 					SettingsRevision = 0,
 					WatchFrameSnapped = true,
 					GuideOn = true,
-					sz = 78, --Num check boxes
+					sz = 81, --Num check boxes
 					[DGV_QUESTLEVELON]			= { category = "Other",	text = "Display Quest Level", 	checked = false,	tooltip = "Show the quest level on the large and small frames", module = "Guides"},
 					[DGV_QUESTCOLORON] 		= { category = "Other",	text = "Color Code Quest", 	checked = true,		tooltip = "Color code quest against your character's level", module = "Guides"},
 					[DGV_LOCKSMALLFRAME] 		= { category = "Frames",	text = "Lock Small Frame", 	checked = false,	tooltip = "Lock small frame into place", module = "SmallFrame"},
@@ -325,12 +331,13 @@ local function LoadSettings()
 					[DGV_AUTOQUESTACCEPT] 		= { category = "Questing",	text = "Auto Quest Accept",	checked = false,	tooltip = "Automatically accept quests from NPCs. Disable with shift",},
 					[DGV_AUTOQUESTACCEPTALL]	= { category = "Questing",	text = "Only Quests in Current Guide",	checked = true,	tooltip = "Auto quest accept feature will only accept quests in current guide", indent = true, module = "Guides"},							
 					[DGV_AUTOQUESTTURNIN]	= { category = "Questing",	text = "Auto Quest Turn in",	checked = false,	tooltip = "Automatically turn in quests from NPCs. Disable with shift"},							
-					[DGV_AUTOSELL]         		= { category = "Other",		text = "Auto Sell Greys",    	checked = false,    	tooltip = "Automatically sell grey quality items to merchant NPCs",},
-					[DGV_AUTOREPAIR]			= { category = "Other",		text = "Auto Repair",    		checked = false,    tooltip = "Automatically repair all damaged equipment at repair NPC",},
+					[DGV_AUTOSELL]         		= { category = "Other",		text = "Auto Sell Greys",    	checked = false,    	tooltip = "Automatically sell grey quality items to merchant NPCs", module = "Guides"},
+					[DGV_AUTOREPAIR]			= { category = "Other",		text = "Auto Repair",    		checked = false,    tooltip = "Automatically repair all damaged equipment at repair NPC", module = "Guides"},
 					[DGV_AUTOFLIGHTPATHSELECT]			= { category = "Waypoints",	showOnRightColumn = true,	text = "Auto Select Flight Path",	checked = false,	tooltip = "Automatically select the suggested flight path after opening the flightmaster map",},
 					[DGV_USETAXISYSTEM]			= { category = "Waypoints",	showOnRightColumn = true,	text = "Use Taxi System",	checked = true,	tooltip = "Taxi system will find the fastest route to get to your destination with the use of portals, teleports, vehicles etc. Disabling this option will give you a direct waypoint instead.",},
-					[DGV_AUTOREPAIRGUILD]		= { category = "Other",		text = "Use Guild Bank",    	checked = false,   	tooltip = "Use guild funds when repairing automatically", indent=true,},
-					[DGV_GUIDESUGGESTMODE] 		= { category = "Questing",	text = "Guide Suggest Mode",	checked = true,		tooltip = "Suggest guides for your player on level up", module = "Guides"},
+					[DGV_AUTOREPAIRGUILD]		= { category = "Other",		text = "Use Guild Bank",    	checked = false,   	tooltip = "Use guild funds when repairing automatically", indent=true, module = "Guides"},
+					[DGV_AUTO_QUEST_TRACK] 		= { category = "Questing",	text = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|tAuto Quest Tracking",	checked = true,		tooltip = "Automatically add quest to the Objective Tracker on accept or objective update", module = "Guides", indent=false},
+					[DGV_GUIDESUGGESTMODE] 		= { category = "Questing",	text = "Guide Suggest Mode",	showOnRightColumn = true, checked = true,		tooltip = "Suggest guides for your player on level up", module = "Guides", indent=false,},
 					[DGV_SMALLFRAMEBORDER] 		= { category = "Borders",	text = "Small Frame Border",	checked = true,		tooltip = "Use the same border that is selected for the large frame", module = "SmallFrame"},
 					[DGV_WATCHFRAMEBORDER] 		= { category = "Borders",	text = "Objective Tracker Frame Border",	checked = false,		tooltip = "Add a border for the Objective Tracker Frame", module = "DugisWatchFrame"},
 					[DGV_REMOVEMAPFOG]     		= { category = "Maps",		text = "Remove Map Fog",  	checked = true,    	tooltip = "View undiscovered areas of the world map, type /reload in your chat box after change of settings",},
@@ -345,14 +352,15 @@ local function LoadSettings()
 					[DGV_DISPLAYMAPCOORDINATES] 	= { category = "Maps",		text = "Map Coordinates",  	checked = true,    	tooltip = "Show Player and Mouse coordinates at the bottom of the map.",},
 					[DGV_WORLDMAPTRACKING] 		= { category = "Maps",		text = "World Map Tracking",  	checked = true,    	tooltip = "Add minimap tracking icons on the world map.",},
 					[DGV_DISPLAYUNCOLLECTEDPETSONLY] 		= { category = "Maps",		text = "Hide Collected Pets",  	checked = true,    	tooltip = "Hide collected pets in world map tracking with Extra Tracking Module", module = "Guides"},
-					[DGV_BLINKMINIMAPICONS] 		= { category = "Maps",		text = "Blink Minimap Resource Nodes",  	checked = true,    	tooltip = "Resource nodes for gathering profession will blink in your minimap to make it easier to notice"},
+					[DGV_BLINKMINIMAPICONS] 		= { category = "Maps",		text = "Blink Minimap Resource Nodes",  	checked = false,    	tooltip = "Resource nodes for gathering profession will blink in your minimap to make it easier to notice"},
+					[DGV_HIDE_MODELS_IN_WORLDMAP] 		= { category = "Maps",		text = "Hide Model Preview in World Map",  	checked = false,    	tooltip = "Hide Model Preview in World Map"},
 					[DGV_ENABLEMODELDB]		= { category = "Hide",	text = "Model Database",	checked = true,		tooltip = "Allows model viewer to function", module = "NpcsF"},
 					[DGV_ENABLENPCNAMEDB]		= { category = "Memory",	text = "NPC Name Database",	checked = true,		tooltip = "Provides localized NPC names. Required for target button.", module = "Disabled"},
 					[DGV_ENABLEQUESTLEVELDB]		= { category = "Memory",	text = "Quest Level Database",	checked = true,		tooltip = "Shows minimum level required for quests.\n\nAlso used for color coding the quests.", module = "ReqLevel"},
 					[DGV_UNLOADMODULES]		= { category = "Memory",	text = "Unload Modules",	checked = false,	tooltip = "Unloading modules will allow the addon to run on low memory setting in Essential Mode but will require a UI reload to return back to normal. ", module = "Guides"},
 					[DGV_MAPPREVIEWHIDEBORDER]	= { category = "Map Preview",	text = "Hide Border",		checked = true,		tooltip = "Hides the minimized map border when map preview is on.",},
-					[DGV_AUTOQUESTITEMLOOT]	= { category = "Questing",	text = "Auto Quest Item Loot",	checked = true,		tooltip = "Automatically loot quest items.",},
-					[DGV_ACCOUNTWIDEACH]		= { category = "Other",text = "Account Wide Achievement",	checked = true,		tooltip = "Detects account wide achievements completion.", module = "Guides"},
+					[DGV_AUTOQUESTITEMLOOT]	= { category = "Questing",	text = "Auto Loot Quest Item",	checked = true,		tooltip = "Automatically loot quest items.",},
+					[DGV_ACCOUNTWIDEACH]		= { category = "Other",text = "Account Wide Achievement",	checked = false,		tooltip = "Detects account wide achievements completion.", module = "Guides"},
 					[DGV_EMBEDDEDTOOLTIP]		= { category = "Display",	text = "Embedded Tooltip",	checked = true,	tooltip = "Displays tooltip information under guide step", module = "Guides"},
 					[DGV_FIXEDWIDTHSMALL]		= { category = "Display",	text = "Fixed Width Small Frame",	checked = true,	tooltip = "Floating Small Frame won't adjust size horizontally and remain the same width as the Objective Tracker.", module = "Guides"},
 					[DGV_OBJECTIVECOUNTER]		= { category = "Display",	text = "Show Quest Objectives",	checked = true,		tooltip = "Display quest objectives in small/anchored frame instead of the watch frame", module = "Guides"},
@@ -369,14 +377,15 @@ local function LoadSettings()
 					[DGV_FISHINGPOLE]			= { category = "Gear Set",		text = "Ignore Fishing Items", checked = true, tooltip = "Don't suggest to replace fishing pole or items with +fishing stats if equipped", module = "GearAdvisor"},					
 					[DGV_COOKINGITEM]			= { category = "Gear Set",		text = "Ignore Cooking Items", checked = true, tooltip = "Don't suggest to replace items with +cooking stats if equipped", module = "GearAdvisor"},
 					[DGV_DAILYITEM]			= { category = "Gear Set",		text = "Ignore Daily Quest Items", checked = true, tooltip = "Don't suggest to replace quest items for completing daily quest", module = "GearAdvisor"},
-					[DGV_WATCHLOCALQUEST]			= { category = "Questing",		text = "Auto Watch Local Quests", checked = false, tooltip = "Automatically remove non-local (not in current map) quests and add local quest to the objective tracker. This will trigger during a zone change event"},
+					[DGV_WATCHLOCALQUEST]			= { category = "Questing",		text = "Auto Track Local Quest", checked = false, tooltip = "Automatically remove non-local (not in current map) quest and track local quest to the objective tracker. This will trigger when you accept a quest or during a zone change event"},
 					[DGV_TARGETBUTTONCUSTOM]	= { category = "Target",	text = "Customize Macro",		checked = false,	tooltip = "Customize Target Macro", module = "Target", indent = true, editBox = "",},
 					[DGV_TARGETTOOLTIP]			= { category = "Target",		text = "Target Button Tooltip", checked = true, tooltip = "Display a tooltip for the target button to display the target name and model", indent = true, module = "Target"},						
+					[DGV_WAYPOINT_PING]			= { category = "Waypoints",		text = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|tWaypoint Reached Sound", checked = true, tooltip = "Plays a ping sound upon reaching each waypoint", showOnRightColumn = true},													
 
 					[DGV_GAWINCRITERIACUSTOM] = {category = "Gear Scoring", text = L["Loot Suggestion Priority"], tooltip = "Determines how gear should be scored, in order of greatest to least importance.", module = "GearAdvisor",
 						options = {
 							"Active Talent Specialization",
-							"Inactive Talent Specialization",
+							--"Inactive Talent Specialization", --Secondary spec removed in Legion
 							"Highest Vendor Price"
 						}
 					},
@@ -405,6 +414,7 @@ local function LoadSettings()
 					},
 					[DGV_SMALLFRAMETRANSITION] 	= { category = "Borders",		text = "Small Frame Effect",	checked = "Flash", module = "SmallFrame",
 						options = {
+							{	text = "None", },
 							{	text = "Flash", },
 							{	text = "Scroll", },
 						}
@@ -554,7 +564,7 @@ local function LoadSettings()
                     [DGV_TARGETBUTTONSCALE]	    = {	category = "Target",	text = "Target Button Size (%.1f)", checked = 1, module = "Target", tooltip = "Size of the target button." },
 					[DGV_ITEMBUTTONSCALE]	    = {	category = "Questing",	text = "Item Button Size (%.1f)",showOnRightColumn = true, checked = 1, tooltip = "Size of the item button." },
                     [DGV_SHOWQUESTABANDONBUTTON]			= { category = "Questing",	showOnRightColumn = true,	text = "Abandon Quests Button",	checked = true,	tooltip = "Mass abandon quests button in your quest log to automatically abandon all quests by their category or zone",},
-                    [DGV_SUGGESTTRINKET]			= { category = "Gear Set",	showOnRightColumn = true,	text = "Suggest Trinkets",	checked = true,	tooltip = "A trinket is scored by its stats and item level but not the 'use' or special effect which can make the trinket suggestion inaccurate.\n\nUnticking this setting will disable the trinkets suggestion.",},					
+                    [DGV_SUGGESTTRINKET]			= { category = "Gear Set",	showOnRightColumn = true,	text = "Suggest Trinkets",	checked = false,	tooltip = "A trinket is scored by its stats and item level but not the 'use' or special effect which can make the trinket suggestion inaccurate.\n\nUnticking this setting will disable the trinkets suggestion.",},					
                     
                     [DGV_ENABLEDGEARFINDER]			= { category = "Gear Finder",	showOnRightColumn = false,	text = "Enabled Gear Finder",	checked = true,	tooltip = "Gear Finder",},					
                       
@@ -614,6 +624,8 @@ local function Dugi_Fix()
 	DugisGuideViewer:ClearScreen()
 	DugisGuideViewer.chardb.QuestRecordTable.framePositions = {}
 	DugisGuideUser.SkipSaveFramesPosition = true	
+    DugisGuideUser.userCustomWeights_v2 = nil
+	DugisCharacterCache.CalculateScore_cache_v10 = {}
 end
 
 local function ResetDB()
@@ -656,12 +668,13 @@ function DugisGuideViewer:OnInitialize()
 	self:RegisterEvent("PET_BATTLE_OPENING_START")
 	self:RegisterEvent("QUEST_WATCH_LIST_CHANGED")
 	self:RegisterEvent("GARRISON_MISSION_NPC_OPENED")
+	self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 	
 	CATEGORY_TREE = { 
 
 		{ value = "Search Locations", 	text = L["Search Locations"], 	icon = nil },
-		{ value = "Questing", 	text = L["Questing"], 	icon = nil },
-		{ value = "Waypoints", 	text = L["Waypoints"], icon = nil },
+		{ value = "Questing", 	text = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|t"..L["Questing"], 	icon = nil },
+		{ value = "Waypoints", 	text = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|t"..L["Waypoints"], icon = nil },
 		{ value = "Display", 	text = L["Display"], 	icon = nil },
 		{ value = "Borders", 	text = L["Borders"], 	icon = nil },
 		{ value = "Frames", 	text = L["Frames"], 	icon = nil },
@@ -671,9 +684,9 @@ function DugisGuideViewer:OnInitialize()
 		{ value = "Tooltip", 	text = L["Tooltip"], 	icon = nil },
 		{ value = "Gear Set",		text = L["Gear Set"],		icon = nil },		
 		{ value = "Gear Scoring",		text = L["Gear Scoring"],		icon = nil },
-		{ value = "Gear Finder",		text = L["Gear Finder"].."|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|t",		icon = nil },
+		{ value = "Gear Finder",		text = L["Gear Finder"],		icon = nil },
 		{ value = "Memory", 	text = L["Memory"], 	icon = nil },
-		{ value = "Other", 		text = L["Other"], 	icon = nil },
+		-- { value = "Other", 		text = L["Other"], 	icon = nil },
 		{ value = "Profiles", 	text = L["Profiles"] },
 	}
 
@@ -721,6 +734,7 @@ function DugisGuideViewer:initAnts()
 	DugisGuideViewer.outfitterloaded = nil
 	DugisGuideViewer.arkinventoryloaded = nil
 	DugisGuideViewer.zygorloaded = nil
+	DugisGuideViewer.wqtloaded = nil	
 
 	for addon=1, GetNumAddOns() do
 		local name, _, _, enabled = GetAddOnInfo(addon)
@@ -739,7 +753,16 @@ function DugisGuideViewer:initAnts()
 		elseif name == "Outfitter" and loaded then DugisGuideViewer.outfitterloaded = true
 		elseif name == "Wholly" and loaded then DugisGuideViewer.whollyloaded = true
 		elseif name == "ArkInventory" and loaded then DugisGuideViewer.arkinventoryloaded = true 
-		elseif name == "ZygorGuidesViewer" and loaded then DugisGuideViewer.zygorloaded = true end
+		elseif name == "ZygorGuidesViewer" and loaded then DugisGuideViewer.zygorloaded = true
+		elseif name == "WorldQuestTracker" and loaded then 
+			DugisGuideViewer.wqtloaded = true 
+			if WQTrackerDB then 
+				if WQTrackerDB.profiles.Default.enable_doubletap then
+					WQTrackerDB.profiles.Default.enable_doubletap = false
+					print(L["|cff11ff11" .. "Dugi: Disabled WorldQuestTracker's \"Auto World Map\" option, this needs to be off for Dugi waypoint."])
+				end
+			end
+		end	
 	end
 	
 	--if DugisGuideViewer.tomtomloaded then TomTom.profile.persistence.cleardistance = 0 end
@@ -819,7 +842,14 @@ function DugisGuideViewer:OnLoad()
 	DugisGuideViewer:SetMemoryOptions()
 
 	DugisGuideViewer:SetEssentialsOnCancelReload()
-	DugisGuideViewer.chardb.GuideOn = DugisGuideViewer:GuideOn() and DugisGuideViewer:ReloadModules()
+    DugiGuidesOnLoadingStart()
+
+LuaUtils:PostCombatLoad(function(threading)
+    if not DugisGuideViewer:GuideOn() then
+        DugiGuidesIsLoading = false
+    end
+
+	DugisGuideViewer.chardb.GuideOn = DugisGuideViewer:GuideOn() and DugisGuideViewer:ReloadModules(threading)
 	DugisGuideViewer:SettingFrameChkOnClick(_, true)
 	
 	if ((DugisGuideViewer.carboniteloaded and Nx.Quest) or DugisGuideViewer.sexymaploaded or DugisGuideViewer.nuiloaded or DugisGuideViewer.elvuiloaded or DugisGuideViewer.tukuiloaded or DugisGuideViewer.shestakuiloaded) then 
@@ -830,7 +860,7 @@ function DugisGuideViewer:OnLoad()
 		DugisGuideViewer:UpdateCompletionVisuals()
 	end
 
-	collectgarbage()
+    LuaUtils:collectgarbage(threading)
 	DugisGuideViewer:UpdateIconStatus()
 	--if DugisGuideViewer.GuideOn and DugisGuideViewer.chardb.EssentialsMode ~= 1 then DelayandMoveToNextQuest(3) end
 	if DugisGuideViewer:IsModuleLoaded("DugisWatchFrame") and self:UserSetting(DGV_DISABLEWATCHFRAMEMOD) then
@@ -850,6 +880,9 @@ function DugisGuideViewer:OnLoad()
         DugisOnOffButton:ClearAllPoints();
         DugisOnOffButton:SetPoint("TOPLEFT", "Minimap", "TOPLEFT", -13, -20)
     end
+end)
+    
+
 end
 
 function DugisGuideViewer:SetMemoryOptions()
@@ -1364,7 +1397,7 @@ local function GetSettingsCategoryFrame(category, parent)
     
     
     local function UpdateSettingsSearchHeight()
-        local _max = SettingsSearchTreeFrame.height - 200
+        local _max = SettingsSearchScroll.frame.wrapper.height
         
         if _max < 1 then
             _max = 1
@@ -1391,9 +1424,6 @@ local function GetSettingsCategoryFrame(category, parent)
             
         end
         
-        if SettingsSearchTreeFrame == nil then
-            CreateFrame("Frame", "SettingsSearchTreeFrame", SettingsSearchScroll.frame)
-        end
         
         if not SettingsSearch_SearchBox then
             CreateFrame("EditBox", "SettingsSearch_SearchBox", frame, "InputBoxTemplate")
@@ -1409,9 +1439,13 @@ local function GetSettingsCategoryFrame(category, parent)
                 local nodes = DugisGuideViewer:GetLocationsAndPortalsByText(SettingsSearch_SearchBox:GetText())
                 
                 --Passing data to tree frame       
-                GUIUtils:SetTreeFrameData(SettingsSearchTreeFrame, "SettingMenu", nodes, function(self)
+                GUIUtils:SetTreeData(SettingsSearchScroll.frame, nil, "SettingMenu", nodes, nil, nil, function(self)
+                    UpdateSettingsSearchHeight()
+
+                end, function(self)
+                    
                     DugisGuideViewer:RemoveAllWaypoints()
-                    local data = self.leafData.data
+                    local data = self.nodeData.data
                     if data.isPortal == true then
                         DugisGuideViewer:AddCustomWaypoint(data.x, data.y, "Portal " .. data.mapName, data.mapId, data.f)      
                     else
@@ -1422,40 +1456,29 @@ local function GetSettingsCategoryFrame(category, parent)
 					SettingsSearch_SearchBox:ClearFocus()
                 end)  
                 
-                GUIUtils:UpdateTreeVisualization(SettingsSearchTreeFrame)
-                
                 UpdateSettingsSearchHeight()
+                SettingsSearchScroll.frame.wrapper:UpdateTreeVisualization()
                 
-                if SettingsSearchTreeFrame.height > 200 then
+                if  SettingsSearchScroll.frame.wrapper.height > 200 then
                     SettingsSearchScroll.scrollBar:Show()
                 else
                     SettingsSearchScroll.scrollBar:Hide()
                 end
-                SettingsSearchTreeFrame:Show() 
+
+                SettingsSearchScroll.frame.wrapper:SetWidth(368)
+                SettingsSearchScroll.frame.wrapper:SetHeight(64)
+ 
+                SettingsSearchScroll.frame:SetHeight(291)
+                SettingsSearchScroll.scrollBar:SetHeight(261)
+                
+                SettingsSearchScroll.frame.content =SettingsSearchScroll.frame.wrapper
+                SettingsSearchScroll.frame:SetScrollChild(SettingsSearchScroll.frame.wrapper)  
             else
-                if SettingsSearchTreeFrame then
-                    SettingsSearchTreeFrame:Hide()
-                end
             end
         end)
         SettingsSearch_SearchBox:Show()
         
-        SettingsSearchTreeFrame:Show() 
-        SettingsSearchTreeFrame:SetParent(SettingsSearchScroll.frame)
-        SettingsSearchTreeFrame:SetWidth(368)
-        SettingsSearchTreeFrame:SetHeight(64)
-        
-        SettingsSearchTreeFrame.onNodeClick = function()
-            UpdateSettingsSearchHeight()
-        end
-        
-        SettingsSearchScroll.frame:SetHeight(291)
-        SettingsSearchScroll.scrollBar:SetHeight(261)
-        
-        SettingsSearchTreeFrame:SetPoint("TOPLEFT", SettingsSearchScroll.frame, "TOPLEFT", 0, 0)
-         
-        SettingsSearchScroll.frame.content = SettingsSearchTreeFrame
-        SettingsSearchScroll.frame:SetScrollChild(SettingsSearchTreeFrame)             
+          
     end
     
     if category == "Gear Scoring" and not DugisGearWeightsClassDropdownLabel then
@@ -1669,6 +1692,14 @@ local function GetSettingsCategoryFrame(category, parent)
 		ChkBox:Disable() 
 		ChkBox.Text:SetTextColor(0.5, 0.5, 0.5) 		
 	end	
+	
+	if DugisGuideViewer.mapsterloaded and SettingsDB[DGV_REMOVEMAPFOG].category==category  then
+		local ChkBox = _G["DGV.ChkBox"..DGV_REMOVEMAPFOG]		
+
+		ChkBox:SetChecked(false)
+		ChkBox:Disable() 
+		ChkBox.Text:SetTextColor(0.5, 0.5, 0.5) 		
+	end		
 
 	if ((DugisGuideViewer.carboniteloaded and Nx.Quest) or DugisGuideViewer.sexymaploaded or DugisGuideViewer.nuiloaded or DugisGuideViewer.elvuiloaded or DugisGuideViewer.tukuiloaded or DugisGuideViewer.shestakuiloaded) and SettingsDB[DGV_MOVEWATCHFRAME].category==category then
 		DugisGuideViewer:SetDB(false, DGV_MOVEWATCHFRAME)
@@ -2047,7 +2078,7 @@ local function GetSettingsCategoryFrame(category, parent)
 				DugisGuideViewer.DoOutOfCombat(SetUseItemByQID, questId)
 			end
 		end)
-		top = -92
+		top = -112
 		slider:SetPoint("TOPLEFT", frame, "TOPLEFT", 325, top)
 		top = top-30-slider:GetHeight()
 	end
@@ -2357,7 +2388,7 @@ end
 function DugisGuideViewer:QUEST_ACCEPTED(self, event, qid)
 	if not DugisGuideViewer:IsModuleLoaded("Guides") or not DugisGuideViewer:GuideOn() then return end
 	local logindex = DugisGuideViewer:GetQuestLogIndexByQID(qid)
-	if ( AUTO_QUEST_WATCH == "0" and GetNumQuestWatches() < MAX_WATCHABLE_QUESTS and DugisGuideViewer:UserSetting(DGV_ENABLEQW)) then
+	if ( AUTO_QUEST_WATCH == "0" and GetNumQuestWatches() < MAX_WATCHABLE_QUESTS and (DugisGuideViewer:UserSetting(DGV_ENABLEQW) or DugisGuideViewer:UserSetting(DGV_AUTO_QUEST_TRACK))) then
 		if DugisGuideViewer.chardb.EssentialsMode ~= 1 then 
 			if DugisGuideViewer:UserSetting(DGV_OBJECTIVECOUNTER) and qid and not DugisGuideUser.removedQuests[qid] then 
 
@@ -2365,8 +2396,8 @@ function DugisGuideViewer:QUEST_ACCEPTED(self, event, qid)
 				DugisGuideViewer.Modules.DugisWatchFrame:DelayUpdate()
 			end
 		elseif DugisGuideViewer.chardb.EssentialsMode == 1 then
-			AddQuestWatch(logindex);
-			DugisGuideViewer.Modules.DugisWatchFrame:DelayUpdate()
+			--AddQuestWatch(logindex);
+			--DugisGuideViewer.Modules.DugisWatchFrame:DelayUpdate()
 		end
 	end
 	DugisGuideViewer:UpdateMainFrame()
@@ -2377,15 +2408,15 @@ function DugisGuideViewer:QUEST_WATCH_UPDATE(arg1, arg2, arg3, arg4)
 
 
 	local qid = DugisGuideViewer:GetQIDByLogIndex(arg2)
-	if ( AUTO_QUEST_WATCH == "0" and GetNumQuestLeaderBoards(arg2) > 0 and GetNumQuestWatches() < MAX_WATCHABLE_QUESTS and DugisGuideViewer:UserSetting(DGV_ENABLEQW)) then
+	if ( AUTO_QUEST_WATCH == "0" and GetNumQuestLeaderBoards(arg2) > 0 and GetNumQuestWatches() < MAX_WATCHABLE_QUESTS and (DugisGuideViewer:UserSetting(DGV_ENABLEQW) or DugisGuideViewer:UserSetting(DGV_AUTO_QUEST_TRACK))) then
 		if DugisGuideViewer.chardb.EssentialsMode ~= 1 then 
 			if DugisGuideViewer:UserSetting(DGV_OBJECTIVECOUNTER) and qid and not DugisGuideUser.removedQuests[qid] then 
 				AddQuestWatch(arg2,MAX_QUEST_WATCH_TIME);
 				DugisGuideViewer.Modules.DugisWatchFrame:DelayUpdate();
 			end
 		elseif DugisGuideViewer.chardb.EssentialsMode == 1 then
-			AddQuestWatch(arg2,MAX_QUEST_WATCH_TIME);
-			DugisGuideViewer.Modules.DugisWatchFrame:DelayUpdate()
+			--AddQuestWatch(arg2,MAX_QUEST_WATCH_TIME);
+			--DugisGuideViewer.Modules.DugisWatchFrame:DelayUpdate()
 		end
 	end
 end
@@ -2407,26 +2438,32 @@ function DugisGuideViewer:RefreshQuestWatch()
 		if AUTO_QUEST_WATCH == "1" then
            -- JU this settings is not available anymore
            -- if InterfaceOptionsObjectivesPanelAutoQuestTracking then
-           -- SetCVar("autoQuestWatch", 0, InterfaceOptionsObjectivesPanelAutoQuestTracking.event)
-                AUTO_QUEST_WATCH = "0"
+           SetCVar("autoQuestWatch", 0)
+           AUTO_QUEST_WATCH = "0"
            -- InterfaceOptionsObjectivesPanelAutoQuestTracking:SetChecked(false)
            -- InterfaceOptionsPanel_CheckButton_Update(InterfaceOptionsObjectivesPanelAutoQuestTracking)
            -- end
 		end
 		if DugisGuideViewer.chardb.EssentialsMode ~= 1 then 
-			DugisGuideViewer:WatchQuest() 
-		end
+			DugisGuideViewer:WatchQuest()
+		end 			
+	elseif self:UserSetting(DGV_AUTO_QUEST_TRACK) and DugisGuideViewer.GuideOn() and AUTO_QUEST_WATCH == "0" then
+		SetCVar("autoQuestWatch", 1)
+		AUTO_QUEST_WATCH = "1"
+	elseif not self:UserSetting(DGV_AUTO_QUEST_TRACK) and DugisGuideViewer.GuideOn() and AUTO_QUEST_WATCH == "1" then
+		SetCVar("autoQuestWatch", 0)
+		AUTO_QUEST_WATCH = "0"		
 	end
 	
-	if self:UserSetting(DGV_ENABLEQW) and DugisGuideViewer.chardb.EssentialsMode == 1 and AUTO_QUEST_WATCH == "0" then
+--	if self:UserSetting(DGV_ENABLEQW) and DugisGuideViewer.chardb.EssentialsMode == 1 and AUTO_QUEST_WATCH == "0" then
         -- JU this settings is not available anymore
         -- if InterfaceOptionsObjectivesPanelAutoQuestTracking then
-        -- SetCVar("autoQuestWatch", 1, InterfaceOptionsObjectivesPanelAutoQuestTracking.event)
-            AUTO_QUEST_WATCH = "1"
+--        SetCVar("autoQuestWatch", 1)
+--        AUTO_QUEST_WATCH = "1"
         --    InterfaceOptionsObjectivesPanelAutoQuestTracking:SetChecked(true)
         --    InterfaceOptionsPanel_CheckButton_Update(InterfaceOptionsObjectivesPanelAutoQuestTracking)
         -- end
-	end
+--	end
 end 
 
 --Large Frame Border Dropdown
@@ -2498,6 +2535,7 @@ function DugisGuideViewer.SmallFrameDockingDropdown_OnClick(button)
 	DugisGuideViewer:SetDB(button.value, DGV_SMALLFRAMEDOCKING)
 	DugisGuideViewer.Modules.SmallFrame:SetDockingMode()
 end
+
 
 -- 
 -- Database
@@ -2684,7 +2722,7 @@ function DugisGuideViewer:SettingFrameChkOnClick(box, skip)
         DGV_INCLUDE_RAIDS_MYTHIC,
         DGV_GEARS_FROM_QUEST_GUIDES
     }) then
-        GearFinderSettingsChanged = true
+        OnGearFinderSettingsChanged()
 	end
 	
 	if not self:UserSetting(DGV_ENABLENPCNAMEDB) then
@@ -2808,7 +2846,7 @@ function DugisGuideViewer:SettingFrameChkOnClick(box, skip)
     
     --OnObjectiveTracker_Update on DGV_MULTISTEPMODE and DGV_ANCHOREDSMALLFRAME and DGV_EMBEDDEDTOOLTIP and DGV_OBJECTIVECOUNTER
 	if boxindex == DGV_MULTISTEPMODE or boxindex ==  DGV_ANCHOREDSMALLFRAME or boxindex == DGV_EMBEDDEDTOOLTIP or boxindex == DGV_OBJECTIVECOUNTER then
-		DugisGuideViewer.Modules.DugisWatchFrame:DelayUpdate()
+		DugisGuideViewer.Modules.DugisWatchFrame:Update()
 		DugisGuideViewer.Modules.ModelViewer:Finalize()
 	end    
     
@@ -2868,6 +2906,20 @@ function DugisGuideViewer:SettingFrameChkOnClick(box, skip)
 	if self:UserSetting(DGV_BLINKMINIMAPICONS) and not DugisGuideViewer.zygorloaded then
 		StartMinimapTicker()
 	end 
+	
+	if boxindex == DGV_WATCHLOCALQUEST then
+		DugisGuideViewer:WatchLocalQuest()
+	end
+	
+	if boxindex == DGV_AUTO_QUEST_TRACK then
+		if self:UserSetting(DGV_AUTO_QUEST_TRACK) and AUTO_QUEST_WATCH == "0" then
+			SetCVar("autoQuestWatch", 1)
+			AUTO_QUEST_WATCH = "1"
+		elseif not self:UserSetting(DGV_AUTO_QUEST_TRACK) and AUTO_QUEST_WATCH == "1" then
+			SetCVar("autoQuestWatch", 0)
+			AUTO_QUEST_WATCH = "0"
+		end
+	end
 end
 
 function DugisGuideViewer:SettingsTooltip_OnEnter(chk, event)
@@ -2936,7 +2988,7 @@ SlashCmdList["DG"] = function(msg)
 	elseif msg  == "off" then
 		DugisGuideViewer:TurnOff()
 		DugisGuideViewer:UpdateIconStatus()
-	elseif msg  == "" or  msg  == "config" then
+	elseif msg  == "" or "config" then
 		ToggleConfig()
 	elseif msg  == "reset" then 	--"/dg reset" command
 		print(L["|cff11ff11" .. "Dugi: Frame Reset"] )
@@ -2955,7 +3007,7 @@ SlashCmdList["DG"] = function(msg)
 	elseif string.find(msg, "dgr ")==1 then
 		DugisGuideViewer:RecordNote(string.sub(msg, 5))	
 	elseif string.find(msg, "way ")==1 then
-		local x,y,zone = string.sub(msg, 5):match("%s*([%d.]+)[,%s]+([%d.]+)%s*(.*)")
+		local x,y,zone = string.sub(msg, 5):match("%s*([%d.]+)[,%s?]+([%d.]+)%s*(.*)")
 		if zone == "" then zone = GetCurrentMapAreaID() end
 		if x and y then
 			DugisGuideViewer:AddManualWaypoint(tonumber(x)/100, tonumber(y)/100, zone)
@@ -3067,12 +3119,14 @@ function DugisGuideViewer:TurnOnEssentials()
 	end
 	DugisGuideViewer:CreateSettingsTree(DugisMainBorder)
 	if DugisGuideViewer.Modules.Target.Frame then DugisGuideViewer.Modules.Target.Frame:Hide() end
+	if DugisGuideViewer.Modules.ModelViewer.Frame then DugisGuideViewer.Modules.ModelViewer.Frame:Hide() end
 	DugisGuideViewer.Modules.QuestPOI:ObjectivesChangedDelay(3)
+	if DugisGuideViewer_ModelViewer and DugisGuideViewer_ModelViewer:IsShown() then DugisGuideViewer_ModelViewer:Hide() end
 end
 
 function DugisGuideViewer:TurnOff()
 	if not DugisGuideViewer:GuideOn() then return end
-	print("|cff11ff11" .. "Dugi Guides Off" )
+	print(L["|cff11ff11" .. "Dugi Guides Off"] )
 	DugisGuideViewer.chardb.GuideOn = false
 	DugisGuideViewer.eventFrame:UnregisterAllEvents()
 	DugisGuideViewer:HideLargeWindow()
@@ -3091,8 +3145,7 @@ end
 
 function DugisGuideViewer:TurnOn()
 	if DugisGuideViewer:GuideOn() then return end
-	if WorldMapFrame:IsShown() then HideUIPanel(WorldMapFrame) end
-	print("|cff11ff11" .. "Dugi Guides On" )
+	print(L["|cff11ff11" .. "Dugi Guides On"] )
 	if not DugisGuideViewer:IsModuleRegistered("Guides") then
 		DugisGuideViewer.chardb.EssentialsMode = 1
 	end
@@ -3222,18 +3275,21 @@ function DugisGuideViewer:Button_OnEnter(frame)
 		rowNum = tonumber(rowNum)
 	end
 	if not rowNum then return end
-	id = self.visualRows[rowNum].Button.tag_id
-	tagType = self.visualRows[rowNum].Button.tagType
-	GameTooltip:SetOwner(frame, "ANCHOR_LEFT")
-	if tagType == "item" then
-	  	GameTooltip:SetItemByID(id)
-	elseif tagType == "spell" then
-		GameTooltip:SetSpellByID(id)
-	elseif tagType == "aid" then
-		GameTooltip:SetAchievementByID(id)
-	elseif tagType == "qid" then
-		GameTooltip:SetHyperlink(("quest:%s"):format(tostring(id)))	
-	end
+    
+    if self.visualRows and self.visualRows[rowNum] and self.visualRows[rowNum].Button then
+        id = self.visualRows[rowNum].Button.tag_id
+        tagType = self.visualRows[rowNum].Button.tagType
+        GameTooltip:SetOwner(frame, "ANCHOR_LEFT")
+        if tagType == "item" then
+            GameTooltip:SetItemByID(id)
+        elseif tagType == "spell" then
+            GameTooltip:SetSpellByID(id)
+        elseif tagType == "aid" then
+            GameTooltip:SetAchievementByID(id)
+        elseif tagType == "qid" then
+            GameTooltip:SetHyperlink(("quest:%s"):format(tostring(id)))	
+        end
+    end
 end
 
 function DugisGuideViewer:HideLargeWindow()	
@@ -3380,16 +3436,24 @@ function DugisGuideViewer:PLAYER_LOGIN()
         if CollectionsJournal:IsShown() and self:UserSetting(DGV_JOURNALFRAME) and DugisGuideViewer:IsModuleRegistered("PetDataModule") then
              PetJournalParentShowEvent()
         end
+    end)    
+	
+	hooksecurefunc("ToggleWorldMap", function() 
+		DugisGuideViewer:WatchLocalQuest()
     end)
-    
-
-    
 end
 
 function DugisGuideViewer:GARRISON_MISSION_NPC_OPENED( )
 	if DugisGuideViewer:IsModuleRegistered("FollowerDataModule") then
 	    FollowerJournalParentShowEvent()
 	end
+end
+
+function DugisGuideViewer:ACTIVE_TALENT_GROUP_CHANGED( )
+    if GetSpecialization_dugis then
+        self.Modules.GearAdvisor.playerClass = select(2,UnitClass("player"))
+        self.Modules.GearAdvisor.playerSpec = GetSpecialization_dugis()
+    end
 end
 
 function DugisGuideViewer:PLAYER_LOGOUT( )
@@ -3455,6 +3519,7 @@ function DugisGuideViewer:UNIT_QUEST_LOG_CHANGED()
 end 
 
 function DugisGuideViewer.QUEST_LOG_UPDATE(func)
+	DugisGuideViewer:UpdateRecord()
 	if DugiQuestLogDelayFrame:IsShown() then return end
 	DugiQuestLogDelayFrame.func = func
 	DugiQuestLogDelayFrame.delay = 1
@@ -3475,7 +3540,6 @@ DugiQuestLogDelayFrame:SetScript("OnUpdate", function(self, elapsed)
 end)
 
 function DugisGuideViewer:Dugi_QUEST_LOG_UPDATE()
-	DugisGuideViewer:UpdateRecord()
 	--PATCH: If I call OnLoad from PLAYER_LOGIN, 
 	--GetNumQuestLogEntries == 0 when it is not.
 	--Value seems to be stable after initial QLU event
@@ -3562,6 +3626,12 @@ function DugisGuideViewer:UpdateIconStatus()
 	if DugisGuideViewer.LDB then
 		DugisGuideViewer.LDB:SetIconStatus(icon)
 	end
+
+--[[    if DugiGuidesIsLoading then
+        DugisOnOffButton:Hide()
+    elseif DugisGuideViewer:UserSetting(DGV_SHOWONOFF) then
+        DugisOnOffButton:Show()
+    end]]
 end
 
 function DugisGuideViewer:GetQuestLogIndexByQID(qid)
@@ -3573,15 +3643,23 @@ function DugisGuideViewer:GetQuestLogIndexByQID(qid)
 end
 
 function DugisGuideViewer:WatchLocalQuest()
-	if not DugisGuideViewer:UserSetting(DGV_WATCHLOCALQUEST) then return end
-	local i
+	if not DugisGuideViewer:UserSetting(DGV_WATCHLOCALQUEST) or
+	(DugisGuideViewer:UserSetting(DGV_ENABLEQW) and DugisGuideViewer:IsModuleLoaded("Guides")) then 
+		return 
+	end
+	local i, changes
 	for i=1,GetNumQuestLogEntries() do
 		local hasLocalPOI = select(12, GetQuestLogTitle(i))
 		if hasLocalPOI and not IsQuestWatched(i) then 
 			AddQuestWatch(i)
+			changes = true
 		elseif not hasLocalPOI and IsQuestWatched(i) then
 			RemoveQuestWatch(i)
+			changes = true
 		end
+	end
+	if changes then 
+		QuestSuperTracking_ChooseClosestQuest()
 	end
 end
 
@@ -3723,9 +3801,9 @@ function DugisGuideViewer:CreateFlashFrame(parent)
 	return flashGroup, flash, frame
 end
 
-function DugisGuideViewer:UpdateCompletionVisuals()
+function DugisGuideViewer:UpdateCompletionVisuals(headerAnim)
 	if DugisGuideViewer:IsModuleRegistered("SmallFrame") and DugisGuideViewer:IsModuleRegistered("DugisWatchFrame") and DugisGuideViewer:GuideOn() then 
-		DugisGuideViewer:UpdateSmallFrame()
+		DugisGuideViewer:UpdateSmallFrame(headerAnim)
 		DugisGuideViewer.Modules.DugisWatchFrame:DelayUpdate()
 	end
 end
@@ -3789,9 +3867,12 @@ function DugisGuideViewer:UpdateCurrentGuideExpanded()
         if highlightedRowTexture then
             highlightedRowTexture:SetTexCoord(0, 2, 0, 1)
         end
+        
+        guidesMainScroll.frame:Show()
     else
         DugisMainBorder.bg:SetTexture(SCROLLESS_BACKGROUND)
         DugisMainLeftScrollFrame:Hide()
+        guidesMainScroll.frame:Hide()
         DugisMainRightFrameHost:SetPoint("TOPLEFT", DugisMain, 8, -44)
         DugisMainLeftScrollFrame:Hide()
         CurrentGuideExpandButton:SetNormalTexture("Interface\\Buttons\\UI-SpellbookIcon-NextPage-Up");
@@ -3915,19 +3996,34 @@ function DugisGuideViewer:isLearnedSpell(spellIdToCheck)
     return isLearned
 end
 
---Returns structure for SetTreeFrameData
+--Returns structure for SetTreeData
 function DugisGuideViewer:GetLocationsAndPortalsByText(text)
     local nodes = {}
+    
+    local onClickFunction = function(node)
+            DugisGuideViewer:RemoveAllWaypoints()
+            local data = node.nodeData.data
+            if data.isPortal == true then
+                DugisGuideViewer:AddCustomWaypoint(data.x, data.y, "Portal " .. data.mapName, data.mapId, data.f)      
+            else
+                local mapId = DugisGuideViewer:GetMapIDFromName(data.zone)
+                DugisGuideViewer:AddCustomWaypoint(data.x / 100, data.y / 100, data.subzoneName, mapId, 0)      
+            end
+            SettingsSearch_SearchBox:SetAutoFocus(false)
+            SettingsSearch_SearchBox:ClearFocus()            
+        end
     
     local achevementsByLocation = searchAchievementWaypointsByMapName(text)   
     LuaUtils:foreach(achevementsByLocation, function(coordinates, areaName)
         local mapId = self:GetMapIDFromName(areaName)
         local localizedMapName =  GetMapNameByID(mapId)
         
-        nodes[#nodes+1] = {nodeName = DugisLocals["Locations in"].. " " .. (localizedMapName or areaName), leafs = {}}
+        nodes[#nodes+1] = {name = DugisLocals["Locations in"].. " " .. (localizedMapName or areaName), nodes = {}}
         LuaUtils:foreach(coordinates, function(value)
-            local leafs = nodes[#nodes].leafs
-            leafs[#leafs + 1] = {name = value.subzoneName or "", data = value}
+            local nodes = nodes[#nodes].nodes
+            nodes[#nodes + 1] = {name = value.subzoneName or "", data = value, isLeaf = true, shownWaypointMark = true,
+                onMouseClick = onClickFunction
+            }
         end)
     end)
     
@@ -3945,12 +4041,13 @@ function DugisGuideViewer:GetLocationsAndPortalsByText(text)
        
        if strupper(mapName):match(searchKey) then
            if not portalNodeAlreadyAdded then
-               nodes[#nodes+1] = {nodeName = DugisLocals["Instance Portal"], leafs = {}}
+               nodes[#nodes+1] = {name = DugisLocals["Instance Portal"], nodes = {}}
            end
            portalNodeAlreadyAdded = true
            
-           local leafs = nodes[#nodes].leafs
-           leafs[#leafs + 1] = {name = mapName, data = {mapName = mapName, x=xPort, y=yPort, mapId = mapId, f = fPort, isPortal = true}}
+           local nodes = nodes[#nodes].nodes
+           nodes[#nodes + 1] = {name = mapName, isLeaf = true, data = {mapName = mapName, x=xPort, y=yPort, mapId = mapId, f = fPort, isPortal = true}
+           , shownWaypointMark = true, onMouseClick = onClickFunction}
        end
     end
     

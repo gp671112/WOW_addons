@@ -239,26 +239,25 @@ local function LoadSettings()
 	DGV_DISPLAYGUIDESPROGRESS = 63	
 	DGV_DISPLAYGUIDESPROGRESSTEXT = 64	
 	DGV_AUTOQUESTITEMLOOT = 65
-	DGV_DISPLAYUNCOLLECTEDPETSONLY = 66
-	DGV_DAILYITEM = 67
-	DGV_BLINKMINIMAPICONS = 68
-    DGV_ENABLEDGEARFINDER = 69
-	DGV_INCLUDE_DUNG_NORMAL = 70
-	DGV_INCLUDE_DUNG_HEROIC = 71
-	DGV_INCLUDE_DUNG_MYTHIC = 72
-	DGV_INCLUDE_DUNG_TIMEWALKING = 73
+	DGV_DAILYITEM = 66
+	DGV_BLINKMINIMAPICONS = 67
+    DGV_ENABLEDGEARFINDER = 68
+	DGV_INCLUDE_DUNG_NORMAL = 69
+	DGV_INCLUDE_DUNG_HEROIC = 70
+	DGV_INCLUDE_DUNG_MYTHIC = 71
+	DGV_INCLUDE_DUNG_TIMEWALKING = 72
     
-	DGV_INCLUDE_RAIDS_RAIDFINDER = 74
-	DGV_INCLUDE_RAIDS_NORMAL = 75
-	DGV_INCLUDE_RAIDS_HEROIC = 76
-	DGV_INCLUDE_RAIDS_MYTHIC = 77
+	DGV_INCLUDE_RAIDS_RAIDFINDER = 73
+	DGV_INCLUDE_RAIDS_NORMAL = 74
+	DGV_INCLUDE_RAIDS_HEROIC = 75
+	DGV_INCLUDE_RAIDS_MYTHIC = 76
     
-    DGV_GEARS_FROM_QUEST_GUIDES = 78
+    DGV_GEARS_FROM_QUEST_GUIDES = 77
 	
-	DGV_AUTO_QUEST_TRACK = 79
-	DGV_WAYPOINT_PING = 80
+	DGV_AUTO_QUEST_TRACK = 78
+	DGV_WAYPOINT_PING = 79
     
-    DGV_HIDE_MODELS_IN_WORLDMAP = 81
+    DGV_HIDE_MODELS_IN_WORLDMAP = 80
     
 
     
@@ -312,7 +311,7 @@ local function LoadSettings()
 					SettingsRevision = 0,
 					WatchFrameSnapped = true,
 					GuideOn = true,
-					sz = 81, --Num check boxes
+					sz = 80, --Num check boxes
 					[DGV_QUESTLEVELON]			= { category = "Other",	text = "Display Quest Level", 	checked = false,	tooltip = "Show the quest level on the large and small frames", module = "Guides"},
 					[DGV_QUESTCOLORON] 		= { category = "Other",	text = "Color Code Quest", 	checked = true,		tooltip = "Color code quest against your character's level", module = "Guides"},
 					[DGV_LOCKSMALLFRAME] 		= { category = "Frames",	text = "Lock Small Frame", 	checked = false,	tooltip = "Lock small frame into place", module = "SmallFrame"},
@@ -331,15 +330,15 @@ local function LoadSettings()
 					[DGV_AUTOQUESTACCEPT] 		= { category = "Questing",	text = "Auto Quest Accept",	checked = false,	tooltip = "Automatically accept quests from NPCs. Disable with shift",},
 					[DGV_AUTOQUESTACCEPTALL]	= { category = "Questing",	text = "Only Quests in Current Guide",	checked = true,	tooltip = "Auto quest accept feature will only accept quests in current guide", indent = true, module = "Guides"},							
 					[DGV_AUTOQUESTTURNIN]	= { category = "Questing",	text = "Auto Quest Turn in",	checked = false,	tooltip = "Automatically turn in quests from NPCs. Disable with shift"},							
-					[DGV_AUTOSELL]         		= { category = "Other",		text = "Auto Sell Greys",    	checked = false,    	tooltip = "Automatically sell grey quality items to merchant NPCs", module = "Guides"},
-					[DGV_AUTOREPAIR]			= { category = "Other",		text = "Auto Repair",    		checked = false,    tooltip = "Automatically repair all damaged equipment at repair NPC", module = "Guides"},
+					[DGV_AUTOSELL]         		= { category = "Other",		text = "Auto Sell Greys",    	checked = true,    	tooltip = "Automatically sell grey quality items to merchant NPCs",},
+					[DGV_AUTOREPAIR]			= { category = "Other",		text = "Auto Repair",    		checked = false,    tooltip = "Automatically repair all damaged equipment at repair NPC",},
 					[DGV_AUTOFLIGHTPATHSELECT]			= { category = "Waypoints",	showOnRightColumn = true,	text = "Auto Select Flight Path",	checked = false,	tooltip = "Automatically select the suggested flight path after opening the flightmaster map",},
 					[DGV_USETAXISYSTEM]			= { category = "Waypoints",	showOnRightColumn = true,	text = "Use Taxi System",	checked = true,	tooltip = "Taxi system will find the fastest route to get to your destination with the use of portals, teleports, vehicles etc. Disabling this option will give you a direct waypoint instead.",},
-					[DGV_AUTOREPAIRGUILD]		= { category = "Other",		text = "Use Guild Bank",    	checked = false,   	tooltip = "Use guild funds when repairing automatically", indent=true, module = "Guides"},
+					[DGV_AUTOREPAIRGUILD]		= { category = "Other",		text = "Use Guild Bank",    	checked = false,   	tooltip = "Use guild funds when repairing automatically", indent=true,},
 					[DGV_AUTO_QUEST_TRACK] 		= { category = "Questing",	text = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|tAuto Quest Tracking",	checked = true,		tooltip = "Automatically add quest to the Objective Tracker on accept or objective update", module = "Guides", indent=false},
 					[DGV_GUIDESUGGESTMODE] 		= { category = "Questing",	text = "Guide Suggest Mode",	showOnRightColumn = true, checked = true,		tooltip = "Suggest guides for your player on level up", module = "Guides", indent=false,},
 					[DGV_SMALLFRAMEBORDER] 		= { category = "Borders",	text = "Small Frame Border",	checked = true,		tooltip = "Use the same border that is selected for the large frame", module = "SmallFrame"},
-					[DGV_WATCHFRAMEBORDER] 		= { category = "Borders",	text = "Objective Tracker Frame Border",	checked = false,		tooltip = "Add a border for the Objective Tracker Frame", module = "DugisWatchFrame"},
+					[DGV_WATCHFRAMEBORDER] 		= { category = "Borders",	text = "Objective Tracker Frame Border",	checked = true,		tooltip = "Add a border for the Objective Tracker Frame", module = "DugisWatchFrame"},
 					[DGV_REMOVEMAPFOG]     		= { category = "Maps",		text = "Remove Map Fog",  	checked = true,    	tooltip = "View undiscovered areas of the world map, type /reload in your chat box after change of settings",},
 					[DGV_HIGHLIGHTSTEPONENTER]	= { category = "Tooltip",	text = "Highlight Guide Steps",	checked = true,	tooltip = "Guide step text color intensifies when moused over", module = "SmallFrame"},
 					[DGV_DISPLAYCOORDINATES]	= { category = "Tooltip",	text = "Tooltip Coordinates",	checked = false,	tooltip = "Show destination coordinates in the status frame tooltip", module = "Guides"},
@@ -351,8 +350,7 @@ local function LoadSettings()
 					--[DGV_AUTOSTICK] 		= { category = "Other",		text = "Auto Stick", 		checked = true,		tooltip = "This feature will automatically add 'as you go...' step into sticky frame",},
 					[DGV_DISPLAYMAPCOORDINATES] 	= { category = "Maps",		text = "Map Coordinates",  	checked = true,    	tooltip = "Show Player and Mouse coordinates at the bottom of the map.",},
 					[DGV_WORLDMAPTRACKING] 		= { category = "Maps",		text = "World Map Tracking",  	checked = true,    	tooltip = "Add minimap tracking icons on the world map.",},
-					[DGV_DISPLAYUNCOLLECTEDPETSONLY] 		= { category = "Maps",		text = "Hide Collected Pets",  	checked = true,    	tooltip = "Hide collected pets in world map tracking with Extra Tracking Module", module = "Guides"},
-					[DGV_BLINKMINIMAPICONS] 		= { category = "Maps",		text = "Blink Minimap Resource Nodes",  	checked = false,    	tooltip = "Resource nodes for gathering profession will blink in your minimap to make it easier to notice"},
+					[DGV_BLINKMINIMAPICONS] 		= { category = "Maps",		text = "Blink Minimap Resource Nodes",  	checked = false,    	tooltip = "Resource nodes for gathering profession will blink in your minimap to make it easier to notice", module = "Disabled"},
 					[DGV_HIDE_MODELS_IN_WORLDMAP] 		= { category = "Maps",		text = "Hide Model Preview in World Map",  	checked = false,    	tooltip = "Hide Model Preview in World Map"},
 					[DGV_ENABLEMODELDB]		= { category = "Hide",	text = "Model Database",	checked = true,		tooltip = "Allows model viewer to function", module = "NpcsF"},
 					[DGV_ENABLENPCNAMEDB]		= { category = "Memory",	text = "NPC Name Database",	checked = true,		tooltip = "Provides localized NPC names. Required for target button.", module = "Disabled"},
@@ -382,7 +380,7 @@ local function LoadSettings()
 					[DGV_TARGETTOOLTIP]			= { category = "Target",		text = "Target Button Tooltip", checked = true, tooltip = "Display a tooltip for the target button to display the target name and model", indent = true, module = "Target"},						
 					[DGV_WAYPOINT_PING]			= { category = "Waypoints",		text = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|tWaypoint Reached Sound", checked = true, tooltip = "Plays a ping sound upon reaching each waypoint", showOnRightColumn = true},													
 
-					[DGV_GAWINCRITERIACUSTOM] = {category = "Gear Scoring", text = L["Loot Suggestion Priority"], tooltip = "Determines how gear should be scored, in order of greatest to least importance.", module = "GearAdvisor",
+					[DGV_GAWINCRITERIACUSTOM] = {category = "Gear Scoring", text = "Loot Suggestion Priority", tooltip = "Determines how gear should be scored, in order of greatest to least importance.", module = "GearAdvisor",
 						options = {
 							"Active Talent Specialization",
 							--"Inactive Talent Specialization", --Secondary spec removed in Legion
@@ -686,7 +684,7 @@ function DugisGuideViewer:OnInitialize()
 		{ value = "Gear Scoring",		text = L["Gear Scoring"],		icon = nil },
 		{ value = "Gear Finder",		text = L["Gear Finder"],		icon = nil },
 		{ value = "Memory", 	text = L["Memory"], 	icon = nil },
-		-- { value = "Other", 		text = L["Other"], 	icon = nil },
+		{ value = "Other", 		text = L["Other"], 	icon = nil },
 		{ value = "Profiles", 	text = L["Profiles"] },
 	}
 
@@ -759,7 +757,7 @@ function DugisGuideViewer:initAnts()
 			if WQTrackerDB then 
 				if WQTrackerDB.profiles.Default.enable_doubletap then
 					WQTrackerDB.profiles.Default.enable_doubletap = false
-					print(L["|cff11ff11" .. "Dugi: Disabled WorldQuestTracker's \"Auto World Map\" option, this needs to be off for Dugi waypoint."])
+					print("|cff11ff11" .. "Dugi: Disabled WorldQuestTracker's \"Auto World Map\" option, this needs to be off for Dugi waypoint.")
 				end
 			end
 		end	
@@ -2126,9 +2124,9 @@ local function GetSettingsCategoryFrame(category, parent)
 		DGV_MapPreviewSlider:SetValue(DugisGuideViewer:GetDB(DGV_MAPPREVIEWDURATION) or 1)
 	end
 	
-	if SettingsDB[DGV_BLINKMINIMAPICONS].category==category and DugisGuideViewer.zygorloaded then
-		Disable(_G["DGV.ChkBox"..DGV_BLINKMINIMAPICONS])
-	end
+	--if SettingsDB[DGV_BLINKMINIMAPICONS].category==category and DugisGuideViewer.zygorloaded then
+		--Disable(_G["DGV.ChkBox"..DGV_BLINKMINIMAPICONS])
+	--end
 	
 	return frame
 end
@@ -2903,8 +2901,8 @@ function DugisGuideViewer:SettingFrameChkOnClick(box, skip)
 		DugisGuideViewer.Modules.DugisWatchFrame:UpdateWatchFrameMovable()
 	end   
 	
-	if self:UserSetting(DGV_BLINKMINIMAPICONS) and not DugisGuideViewer.zygorloaded then
-		StartMinimapTicker()
+	if self:UserSetting(DGV_BLINKMINIMAPICONS) then
+		--StartMinimapTicker()
 	end 
 	
 	if boxindex == DGV_WATCHLOCALQUEST then
@@ -2972,29 +2970,27 @@ local function ToggleConfig()
 end
 
 SLASH_DG1 = "/dugi"
-SLASH_DG2 = "/任務"
-SLASH_DG3 = "/任務高手"
 SlashCmdList["DG"] = function(msg)	
-	if msg == "help" then 				-- "/dg" command
-		print(L["|cff11ff11/dugi way xx xx - |rPlace waypoint in current zone."])
-		print(L["|cff11ff11/dugi fix - |rReset all Saved Variable setting."])
-		print(L["|cff11ff11/dugi reset - |rReset all frame position."])
-		print(L["|cff11ff11/dugi on - |rEnable Dugi Addon."])
-		print(L["|cff11ff11/dugi off - |rDisable Dugi Addon."])
-		print(L["|cff11ff11/dugi config - |rDisplay settings menu."])
+	if msg == "" then 				-- "/dg" command
+		print("|cff11ff11/dugi way xx xx - |rPlace waypoint in current zone.")
+		print("|cff11ff11/dugi fix - |rReset all Saved Variable setting.")
+		print("|cff11ff11/dugi reset - |rReset all frame position.")
+		print("|cff11ff11/dugi on - |rEnable Dugi Addon.")
+		print("|cff11ff11/dugi off - |rDisable Dugi Addon.")
+		print("|cff11ff11/dugi config - |rDisplay settings menu.")
 	elseif msg  == "on" then
 		DugisGuideViewer:TurnOn()
 		DugisGuideViewer:UpdateIconStatus()
 	elseif msg  == "off" then
 		DugisGuideViewer:TurnOff()
 		DugisGuideViewer:UpdateIconStatus()
-	elseif msg  == "" or "config" then
+	elseif msg  == "config" then
 		ToggleConfig()
 	elseif msg  == "reset" then 	--"/dg reset" command
-		print(L["|cff11ff11" .. "Dugi: Frame Reset"] )
+		print("|cff11ff11" .. "Dugi: Frame Reset" )
 		DugisGuideViewer:InitFramePositions()
 	elseif msg == "fix" then
-		print(L["|cff11ff11" .. "Dugi: Cleared Saved Variables"] )
+		print("|cff11ff11" .. "Dugi: Cleared Saved Variables" )
 		ResetDB()
 		DugisGuideViewer:InitFramePositions()
 		DugisGuideViewer:ShowReloadUi()
@@ -3126,7 +3122,7 @@ end
 
 function DugisGuideViewer:TurnOff()
 	if not DugisGuideViewer:GuideOn() then return end
-	print(L["|cff11ff11" .. "Dugi Guides Off"] )
+	print("|cff11ff11" .. "Dugi Guides Off" )
 	DugisGuideViewer.chardb.GuideOn = false
 	DugisGuideViewer.eventFrame:UnregisterAllEvents()
 	DugisGuideViewer:HideLargeWindow()
@@ -3145,7 +3141,7 @@ end
 
 function DugisGuideViewer:TurnOn()
 	if DugisGuideViewer:GuideOn() then return end
-	print(L["|cff11ff11" .. "Dugi Guides On"] )
+	print("|cff11ff11" .. "Dugi Guides On" )
 	if not DugisGuideViewer:IsModuleRegistered("Guides") then
 		DugisGuideViewer.chardb.EssentialsMode = 1
 	end
@@ -3554,7 +3550,8 @@ function DugisGuideViewer:Dugi_QUEST_LOG_UPDATE()
 		lastCompletedLogQuests, completedLogQuests = completedLogQuests, lastCompletedLogQuests
 		wipe(completedLogQuests)
 		for i=1,GetNumQuestLogEntries() do
-			local link = GetQuestLink(i)
+            local _, _, _, _, _, _, _, id = GetQuestLogTitle(i)
+			local link = GetQuestLink(id)
 			local qid = link and tonumber(link:match("|Hquest:(%d+):"))
 			if qid then
 				local title, _, _, _, _, questFinished = GetQuestLogTitle(i)
@@ -4062,5 +4059,4 @@ if LIB_UIDROPDOWNMENU_MAXLEVELS then
         end
     end
 end
-    
     

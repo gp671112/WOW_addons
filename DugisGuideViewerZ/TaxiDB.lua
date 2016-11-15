@@ -231,7 +231,7 @@ function TaxiDB:Initialize()
 		if recalulateRoute or (DGV:IsModuleLoaded("Guides") and DGV.actions[DugisGuideUser.CurrentQuestIndex] == "f") then
 			CloseTaxiMap()
 			PlaySoundFile("sound\\interface\\magicclick.ogg")
-			UIErrorsFrame:AddMessage(L["DG: Flight master data updated!"],1,1,0,1)			
+			UIErrorsFrame:AddMessage("DG: Flight master data updated!",1,1,0,1)			
 			if recalulateRoute then
 				DGV:RemoveAllWaypoints()	
 				DGV.Modules.DugisArrow:VisitFlightmaster(key)

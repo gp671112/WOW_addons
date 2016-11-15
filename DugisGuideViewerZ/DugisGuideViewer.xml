@@ -157,7 +157,7 @@
 				<OnClick> DugisGuideViewer.Modules.ModelViewer:ModelButton_OnClick(self, button, down); </OnClick>
 					<OnEnter>
 						GameTooltip:SetOwner( self, "ANCHOR_TOPLEFT")
-						GameTooltip:AddLine("顯示/隱藏模組預覽", 1, 1, 1, 1, true)
+						GameTooltip:AddLine("Show / Hide Model Viewer", 1, 1, 1, 1, true)
 						GameTooltip:Show()
 						GameTooltip:ClearAllPoints()
 					</OnEnter>
@@ -647,7 +647,7 @@
 					</Anchor>
 				</Anchors>
 			</Button>
-			<Button name="$parentOKButton" inherits="UIPanelButtonTemplate" text ="OKAY">
+			<Button name="$parentOKButton" inherits="UIPanelButtonTemplate" text ="Okay">
 				<Size>
 					<AbsDimension x='75' y='23'/>
 				</Size>
@@ -664,7 +664,7 @@
 					</OnClick> 
 				</Scripts>
 			</Button>
-			<Button name="$parentCancelButton" inherits="UIPanelButtonTemplate" text ="CANCEL">
+			<Button name="$parentCancelButton" inherits="UIPanelButtonTemplate" text ="Cancel">
 				<Size>
 					<AbsDimension x='75' y='23'/>
 				</Size>
@@ -684,7 +684,7 @@
 					</OnClick> 
 				</Scripts>
 			</Button>
-			<Button name="$parentResetBanButton" inherits="UIPanelButtonTemplate" text ="重置忽略清單">
+			<Button name="$parentResetBanButton" inherits="UIPanelButtonTemplate" text ="Reset Ban List">
 				<Size>
 					<AbsDimension x='115' y='23'/>
 				</Size>
@@ -841,17 +841,17 @@
 			</Layer>
 		</Layers>
 		<Frames>
-			<Button name='$parentYesButton' inherits='UIPanelButtonTemplate' text = '出發'>
+			<Button name='$parentYesButton' inherits='UIPanelButtonTemplate' text = 'Go'>
 				<Size> <AbsDimension x='55' y='23'/> </Size>
 				<Anchors> <Anchor point='LEFT' relativeTo="$parentGuideTitle" relativePoint="right" ><Offset><AbsDimension x="5"/></Offset></Anchor> </Anchors>
 				<Scripts> <OnClick> DugisGuideViewer:SuggestButtonOnClick() </OnClick> </Scripts>
 			</Button>
-			<Button name='$parentCompleteYesButton' parentKey="CompleteYesButton" inherits='UIPanelButtonTemplate' text = '完成'>
+			<Button name='$parentCompleteYesButton' parentKey="CompleteYesButton" inherits='UIPanelButtonTemplate' text = 'Complete'>
 				<Size> <AbsDimension x='95' y='23'/> </Size>
 				<Anchors> <Anchor point='TOPRIGHT' relativeTo="$parentTitle2" relativePoint="bottom"><Offset><AbsDimension x="-5"/></Offset></Anchor> </Anchors>
 				<Scripts> <OnClick> DugisGuideViewer:CompleteCurrentQuest() </OnClick> </Scripts>
 			</Button>
-			<Button name='$parentNoButton' inherits='UIPanelButtonTemplate' text = '不是現在'>
+			<Button name='$parentNoButton' inherits='UIPanelButtonTemplate' text = 'Not Now'>
 				<Size> <AbsDimension x='95' y='23'/> </Size>
 				<Anchors> <Anchor point='LEFT' relativeTo="$parentCompleteYesButton" relativePoint="right"><Offset><AbsDimension x="5"/></Offset></Anchor> </Anchors>
 				<Scripts> <OnClick> self:GetParent():Hide() </OnClick> </Scripts>
@@ -1857,7 +1857,7 @@
                         <DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Disabled"/>
                         <HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
                     </Button>
-					<Button name = "DugisPreloadButton" inherits="UIPanelButtonTemplate" text = "預先載入" hidden="true">
+					<Button name = "DugisPreloadButton" inherits="UIPanelButtonTemplate" text = "Preload" hidden="true">
 						 <Size>
 							<AbsDimension x="95" y="23"/>
 						</Size>

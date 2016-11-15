@@ -1790,17 +1790,17 @@ function MapOverlays:Initialize()
 					then
 						local _, _, x, y  = DugisGuideViewer.astrolabe:GetUnitPosition("player", true)
 						if not x or not y then
-							MOD.CoordsFrame.Player:SetText("|cffffd200玩家:|r ---")
+							MOD.CoordsFrame.Player:SetText("|cffffd200Player:|r ---")
 						else
-							MOD.CoordsFrame.Player:SetFormattedText("|cffffd200玩家:|r %s", formatCoords:format(x*100, y*100))
+							MOD.CoordsFrame.Player:SetFormattedText("|cffffd200Player:|r %s", formatCoords:format(x*100, y*100))
 						end
 
 						if WorldMapButton:GetLeft() then --prevents error on early load
 							local cX, cY = MOD:GetCurrentCursorPosition(WorldMapButton)
 							if not cX or not cY then
-								MOD.CoordsFrame.Cursor:SetText("|cffffd200游標:|r ---")
+								MOD.CoordsFrame.Cursor:SetText("|cffffd200Cursor:|r ---")
 							else
-								MOD.CoordsFrame.Cursor:SetFormattedText("|cffffd200游標:|r %s", formatCoords:format(cX*100, cY*100))
+								MOD.CoordsFrame.Cursor:SetFormattedText("|cffffd200Cursor:|r %s", formatCoords:format(cX*100, cY*100))
 							end
 						end
 					else
@@ -1825,9 +1825,9 @@ function MapOverlays:Initialize()
 					
 			if WORLDMAP_SETTINGS.size == WORLDMAP_WINDOWED_SIZE then
 				MOD.CoordsFrame.Player:SetPoint("TOPLEFT", WorldMapFrame, "BOTTOMLEFT", 4, -5)
-				MOD.CoordsFrame.Cursor:SetPoint("TOPLEFT", WorldMapFrame, "BOTTOMLEFT", 150, -5)
+				MOD.CoordsFrame.Cursor:SetPoint("TOPLEFT", WorldMapFrame, "BOTTOMLEFT", 120, -5)
 			else
-				MOD.CoordsFrame.Player:SetPoint("TOPLEFT", WorldMapPositioningGuide, "BOTTOM", -150, 20)
+				MOD.CoordsFrame.Player:SetPoint("TOPLEFT", WorldMapPositioningGuide, "BOTTOM", -120, 20)
 				MOD.CoordsFrame.Cursor:SetPoint("TOPLEFT", WorldMapPositioningGuide, "BOTTOM", 20, 20)
 			end
 			OverrideMapOverlays()

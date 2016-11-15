@@ -46,31 +46,31 @@ DugisGuideViewer.defaultLevelingSpec = {
 }
 
 local weightIdentifier2weightLabelMap = {
-    ["AGI"] = L["Agility"]
-    ,["AP"] = L["Attack Power"]
-    ,["ARMOR"] = L["Armor"]
+    ["AGI"] = "Agility"
+    ,["AP"] = "Attack Power"
+    ,["ARMOR"] = "Armor"
 --    ,["BONUS_ARMOR"] = "Bonus Armor"
-    ,["AVOIDANCE_RATING"] = L["Avoidance"]
-    ,["DPS"] = L["DPS"]
-    ,["DPS|MAIN"] = L["DPS - Main"]
-    ,["DPS|OFF"] = L["DPS - Off"]
-    ,["INT"] = L["Intellect"]
-    ,["LEECH_RATING"] = L["Leech"]
-    ,["MASTERY_RATING"] = L["Mastery"]
-    ,["MELEE_CRIT_RATING"] = L["Critical Rating"]
-    ,["MELEE_HASTE_RATING"] = L["Haste Rating"]
+    ,["AVOIDANCE_RATING"] = "Avoidance"
+    ,["DPS"] = "DPS"
+    ,["DPS|MAIN"] = "DPS - Main"
+    ,["DPS|OFF"] = "DPS - Off"
+    ,["INT"] = "Intellect"
+    ,["LEECH_RATING"] = "Leech"
+    ,["MASTERY_RATING"] = "Mastery"
+    ,["MELEE_CRIT_RATING"] = "Critical Rating"
+    ,["MELEE_HASTE_RATING"] = "Haste Rating"
 --    ,["MULTISTRIKE_RATING"] = "Multistrike"
-    ,["RANGED_CRIT_RATING"] = L["Critical Rating"]
-    ,["RANGED_HASTE_RATING"] = L["Haste Rating"]
-    ,["SPELL_CRIT_RATING"] = L["Critical Rating"]
-    ,["SPELL_HASTE_RATING"] = L["Haste Rating"]
-    ,["SPELL_POWER"] = L["Spell Power"]
-    ,["SPELL_DMG"] = L["Spell Power"]
+    ,["RANGED_CRIT_RATING"] = "Critical Rating"
+    ,["RANGED_HASTE_RATING"] = "Haste Rating"
+    ,["SPELL_CRIT_RATING"] = "Critical Rating"
+    ,["SPELL_HASTE_RATING"] = "Haste Rating"
+    ,["SPELL_POWER"] = "Spell Power"
+    ,["SPELL_DMG"] = "Spell Power"
 --    ,["SPI"] = "Spirit"
-    ,["STA"] = L["Stamina"]
-    ,["STR"] = L["Strength"]
-    ,["VERSATILITY_RATING"] = L["Versatility"]
-    ,["XP_BONUS"] = L["XP Bonus"]
+    ,["STA"] = "Stamina"
+    ,["STR"] = "Strength"
+    ,["VERSATILITY_RATING"] = "Versatility"
+    ,["XP_BONUS"] = "XP Bonus"
 }
 
 function GA:Initialize()

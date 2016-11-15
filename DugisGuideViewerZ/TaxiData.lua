@@ -28665,7 +28665,11 @@ function TaxiData:Initialize()
 			":1033:0:36.92,44.66:1033:0:42.17,35.38:qid:43809",	--Shal'Aran to Tel'anor
 			":1033:0:42.03,35.24:1033:0:36.40,45.09:qid:43809",	--Tel'anor to Shal'Aran
 			":1033:0:36.95,45.00:1033:0:64.09,60.80:qid:44084",	--Shal'Aran to Twilight Vineyards
-			":1033:0:64.00,60.43:1033:0:36.40,45.09:qid:44084",	--Twilight Vineyards to Shal'Aran								
+			":1033:0:64.00,60.43:1033:0:36.40,45.09:qid:44084",	--Twilight Vineyards to Shal'Aran			
+			":1033:0:36.48,44.75:1033:0:47.45,81.97:qid:42487:nqid:38649", --Shal'Aran to The Waning Crescent
+			":1033:0:47.73,81.38:1033:0:36.40,45.09:qid:42487:nqid:38649", --The Waning Crescent to Shal'Aran
+			":1033:0:36.49,44.75:1033:0:52.04,78.87:qid:42889", --Shal'Aran to Evermoon Terrace
+			":1033:0:51.98,78.75:1033:0:36.40,45.09:qid:42889", --Evermoon Terrace to Shal'Aran							
 			
 			--":1014:10:49.40,47.58:1014:12:63.39,23.87",--Dalaran Legion > Dalaran Chamber of Guardian
 			--":1014:12:64.85,21.11:1014:10:49.04,48.03",--Dalaran Chamber of Guardian > Dalaran Chamber of Guardian

@@ -1,10 +1,7 @@
 ## Interface: 70100
-## Title: Dugi Questing Essential |cffffffff4.043|r
+## Title: Dugi Questing Essential |cffffffff4.045|r
 ## Notes: Questing Addon Copyright 2010-2016 UltimateWoWGuide.com
-## Title-zhTW: |cff00FFFF[任務]|r Dugi任務高手
-## Notes-zhTW: Dugi Questing Essential |n帶你做任務和升級! |n|cffffd200使用方法：|r點任務追蹤清單中，任務標題左方的數字圓圈，開始導航這個任務。|n滑鼠右鍵點一下DG圓形小按鈕，或輸入 /任務，或 /dugi 開啟設定。|n|cffFF2D2D特別注意：|r這個插件的記憶體使用量較大。電腦較慢，或不需要使用時請勿載入。|n版權所有(c) 2010-2016 UltimateWoWGuide.com
-## DefaultState: disabled
-## Version: 4.043
+## Version: 4.045
 ## X-Website: http://www.ultimatewowguide.com/
 ## X-Email: support@ultimatewowguide.com
 ## X-Category: Quest
@@ -19,6 +16,13 @@ Libs\Load.xml
 
 # Localization
 Localization\Localization.enUS.lua
+Localization\Localization.esMX.lua
+Localization\Localization.deDE.lua
+Localization\Localization.frFR.lua
+Localization\Localization.itIT.lua
+Localization\Localization.koKR.lua
+Localization\Localization.ptBR.lua
+Localization\Localization.ruRU.lua
 Localization\Localization.zhTW.lua
 Localization\LibBabble-SubZone-3.0\Lib.xml
 Localization\LibBabble-Class-3.0\Lib.xml

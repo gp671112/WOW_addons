@@ -18,6 +18,10 @@ function DGV:Waypoint2MapCoordinates(waypoint)
     return wpx, wpy
 end
 
+function DGV:IsPlayerPosAvailable()
+    return GetPlayerMapPosition("player")
+end
+
 --/run DGV:ShowMapData(mapId, ...)
 function DGV:ShowMapData(mapId, ...)
 	local tbl = {}

@@ -1,0 +1,13 @@
+## Interface: 70100
+## Title: ClassSpecStats
+## Notes: Displays classes and specialisation dependent stat priorities provided by icy-veins.com
+## Author: Reglohpri
+## Version: 1.03
+## X-Curse-Packaged-Version: r5
+## X-Curse-Project-Name: ClassSpecStats
+## X-Curse-Project-ID: classspecstats
+## X-Curse-Repository-ID: wow/classspecstats/mainline
+
+locale.lua
+ClassSpecStats.lua
+stats.lua

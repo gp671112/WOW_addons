@@ -725,7 +725,7 @@ function Taxi:Initialize()
 	end
 
 	function RouteBuilders.FlightHop:Build(continent, npc1, npc2)
-		if not npc1 or not npc2 then return end	
+		if not npc1 or not npc2 then return end	--quick fix for Stormheim taxi bug
 		local fullData = TaxiData:GetFullData()
 		local npcTbl1, npcTbl2 = fullData[continent][npc1], fullData[continent][npc2]
 		local npc1x,npc1y = DGV:UnpackXY(npcTbl1.coord)

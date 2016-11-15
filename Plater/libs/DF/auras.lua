@@ -90,30 +90,30 @@ function DF:CreateAuraConfigPanel (parent, name, db, method_change_callback, opt
 		if (method == 0x1) then
 			f_auto:Show()
 			f_manual:Hide()
-			f.desc_label.text = "Auras are being tracked automatically, the addon controls what to show. You may entry an aura to ignore.\nCast spells to fill the Buff and Buff available boxes."
+			f.desc_label.text = "光環會自動被監控，由插件來控制要顯示哪些，你也可以將不要監控的光環加入到忽略清單。\n施放法術技能，會將增益和減益效果填入可選擇的清單中。"
 			f.desc_label:SetPoint ("topleft", f.tracking_method, "topright", 10, 8)
 		elseif (method == 0x2) then
 			f_auto:Hide()
 			f_manual:Show()
-			f.desc_label.text = "Auras are being tracked manually, the addon only check for auras you entered below."
+			f.desc_label.text = "光環由手動的方式來監控，插件只會檢查在下方輸入的光環是否正確。"
 			f.desc_label:SetPoint ("topleft", f.tracking_method, "topright", 10, 1)
 		end
 	end
 	
 	local tracking_options = function()
 		return {
-			{label = "Automatic", value = 0x1, onclick = on_select_tracking_option, desc = "Show all your auras by default, you can exclude those you don't want to show."},
-			{label = "Manual", value = 0x2, onclick = on_select_tracking_option, desc = "Do not show any aura by default, you need to manually add each aura you want to track."},
+			{label = "自動", value = 0x1, onclick = on_select_tracking_option, desc = "預設顯示所有你施放的光環，不想顯示的可以另外排除。"},
+			{label = "手動", value = 0x2, onclick = on_select_tracking_option, desc = "預設不顯示任何光環，需要手動加入每一個想要監控的光環。"},
 		}
 	end
 	
-	local tracking_method_label = self:CreateLabel (f, "Tracking Aura Method:", 12, "orange")
+	local tracking_method_label = self:CreateLabel (f, "光環監控方式:", 12, "orange")
 	local tracking_method = self:CreateDropDown (f, tracking_options, f.db.aura_tracker.track_method, 120, 20, "dropdown_tracking_method", _, self:GetTemplate ("dropdown", "OPTIONS_DROPDOWN_TEMPLATE"))
 	
 	tracking_method_label:SetPoint ("topleft", f, "topleft", 10, -10)
 	tracking_method:SetPoint ("left", tracking_method_label, "right", 2, 0)
 	tracking_method:SetFrameStrata ("tooltip")
-	tracking_method.tooltip = "Choose which aura tracking method you want to use."
+	tracking_method.tooltip = "選擇想要使用的光環監控方式。"
 	f.tracking_method = tracking_method
 	
 	f.desc_label = self:CreateLabel (f, "", 10, "silver")
@@ -128,7 +128,7 @@ function DF:CreateAuraConfigPanel (parent, name, db, method_change_callback, opt
 	
 	local width, height, row_height = options.width, options.height, options.row_height
 	
-	local buff_ignored = self:CreateSimpleListBox (f_auto, "$parentBuffIgnored", "Buffs Ignored", "The list is empty, select a spell from the buff list to ignore it.", f.db.aura_tracker.buff_banned, 
+	local buff_ignored = self:CreateSimpleListBox (f_auto, "$parentBuffIgnored", "忽略的增益效果", "清單是空的，請從增益效果清單選擇要忽略的法術技能。", f.db.aura_tracker.buff_banned, 
 	function (spellid)
 		f.db.aura_tracker.buff_banned [spellid] = nil;
 	end, 
@@ -138,10 +138,10 @@ function DF:CreateAuraConfigPanel (parent, name, db, method_change_callback, opt
 		height = height, 
 		row_height = row_height,
 		width = width, 
-		onenter = function(self, capsule, value) GameTooltip:SetOwner (self, "ANCHOR_RIGHT"); GameTooltip:SetSpellByID(value); GameTooltip:AddLine (" "); GameTooltip:AddLine ("Click to un-ignore this aura", .2, 1, .2); GameTooltip:Show() end, 
+		onenter = function(self, capsule, value) GameTooltip:SetOwner (self, "ANCHOR_RIGHT"); GameTooltip:SetSpellByID(value); GameTooltip:AddLine (" "); GameTooltip:AddLine ("點一下取消忽略這個光環", .2, 1, .2); GameTooltip:Show() end, 
 	})
 
-	local buff_available = self:CreateSimpleListBox (f_auto, "$parentBuffAvailable", "Buffs Available", "The list is empty, cast spells to fill it", ALL_BUFFS, function (spellid)
+	local buff_available = self:CreateSimpleListBox (f_auto, "$parentBuffAvailable", "可選擇的增益效果", "清單是空的，請施放法術技能讓它顯示在這裡。", ALL_BUFFS, function (spellid)
 		f.db.aura_tracker.buff_banned [spellid] = true; buff_ignored:Refresh()
 	end, 
 	{
@@ -150,10 +150,10 @@ function DF:CreateAuraConfigPanel (parent, name, db, method_change_callback, opt
 		height = height, 
 		row_height = row_height,
 		width = width, 
-		onenter = function(self, capsule, value) GameTooltip:SetOwner (self, "ANCHOR_RIGHT"); GameTooltip:SetSpellByID(value); GameTooltip:AddLine (" "); GameTooltip:AddLine ("Click to ignore this aura", .2, 1, .2); GameTooltip:Show() end, 
+		onenter = function(self, capsule, value) GameTooltip:SetOwner (self, "ANCHOR_RIGHT"); GameTooltip:SetSpellByID(value); GameTooltip:AddLine (" "); GameTooltip:AddLine ("點一下忽略這個光環", .2, 1, .2); GameTooltip:Show() end, 
 	})
 	
-	local debuff_ignored = self:CreateSimpleListBox (f_auto, "$parentDebuffIgnored", "Debuffs Ignored", "The list is empty, select a spell from the debuff list to ignore it.", f.db.aura_tracker.debuff_banned, function (spellid)
+	local debuff_ignored = self:CreateSimpleListBox (f_auto, "$parentDebuffIgnored", "忽略的減益效果", "清單是空的，請從減益效果清單選擇要忽略的法術技能。", f.db.aura_tracker.debuff_banned, function (spellid)
 		f.db.aura_tracker.debuff_banned [spellid] = nil;
 	end, 
 	{
@@ -162,10 +162,10 @@ function DF:CreateAuraConfigPanel (parent, name, db, method_change_callback, opt
 		height = height, 
 		row_height = row_height,
 		width = width, 
-		onenter = function(self, capsule, value) GameTooltip:SetOwner (self, "ANCHOR_RIGHT"); GameTooltip:SetSpellByID(value); GameTooltip:AddLine (" "); GameTooltip:AddLine ("Click to un-ignore this aura", .2, 1, .2); GameTooltip:Show() end, 
+		onenter = function(self, capsule, value) GameTooltip:SetOwner (self, "ANCHOR_RIGHT"); GameTooltip:SetSpellByID(value); GameTooltip:AddLine (" "); GameTooltip:AddLine ("點一下取消忽略這個光環", .2, 1, .2); GameTooltip:Show() end, 
 	})
 	
-	local debuff_available = self:CreateSimpleListBox (f_auto, "$parentDebuffAvailable", "Debuffs Available", "The list is empty, cast spells to fill it", ALL_DEBUFFS, function (spellid)
+	local debuff_available = self:CreateSimpleListBox (f_auto, "$parentDebuffAvailable", "可選擇的減益效果", "清單是空的，請施放法術技能讓它顯示在這裡。", ALL_DEBUFFS, function (spellid)
 		f.db.aura_tracker.debuff_banned [spellid] = true; debuff_ignored:Refresh()
 	end, {
 		icon = function(spellid) return select (3, GetSpellInfo (spellid)) end, 
@@ -173,7 +173,7 @@ function DF:CreateAuraConfigPanel (parent, name, db, method_change_callback, opt
 		height = height, 
 		row_height = row_height,
 		width = width, 
-		onenter = function(self, capsule, value) GameTooltip:SetOwner (self, "ANCHOR_RIGHT"); GameTooltip:SetSpellByID(value); GameTooltip:AddLine (" "); GameTooltip:AddLine ("Click to ignore this aura", .2, 1, .2); GameTooltip:Show() end, 
+		onenter = function(self, capsule, value) GameTooltip:SetOwner (self, "ANCHOR_RIGHT"); GameTooltip:SetSpellByID(value); GameTooltip:AddLine (" "); GameTooltip:AddLine ("點一下忽略這個光環", .2, 1, .2); GameTooltip:Show() end, 
 	})
 	
 	--como ira preencher ela no inicio e como ficara o lance dos profiles
@@ -250,7 +250,7 @@ function DF:CreateAuraConfigPanel (parent, name, db, method_change_callback, opt
 			GameTooltip:SetOwner (self, "ANCHOR_RIGHT");
 			GameTooltip:SetSpellByID (spellid)
 			GameTooltip:AddLine (" ")
-			GameTooltip:AddLine ("Click to untrack this aura", .2, 1, .2)
+			GameTooltip:AddLine ("點一下取消監控這個光環", .2, 1, .2)
 			GameTooltip:Show()
 		end
 	end
@@ -335,18 +335,18 @@ function DF:CreateAuraConfigPanel (parent, name, db, method_change_callback, opt
 	f.buffs_added = buffs_added
 	f.debuffs_added = debuffs_added
 	
-	local buffs_added_name = DF:CreateLabel (buffs_added, "Buffs", 12, "silver")
+	local buffs_added_name = DF:CreateLabel (buffs_added, "增益效果", 12, "silver")
 	buffs_added_name:SetTemplate (DF:GetTemplate ("font", "OPTIONS_FONT_TEMPLATE"))
 	buffs_added_name:SetPoint ("bottomleft", buffs_added, "topleft", 0, 2)
 	buffs_added.Title = buffs_added_name
-	local debuffs_added_name = DF:CreateLabel (debuffs_added, "Debuffs", 12, "silver")
+	local debuffs_added_name = DF:CreateLabel (debuffs_added, "減益效果", 12, "silver")
 	debuffs_added_name:SetTemplate (DF:GetTemplate ("font", "OPTIONS_FONT_TEMPLATE"))
 	debuffs_added_name:SetPoint ("bottomleft", debuffs_added, "topleft", 0, 2)
 	debuffs_added.Title = debuffs_added_name
 	
 	-->  build the text entry to type the spellname
-	local new_buff_string = self:CreateLabel (f_manual, "Add Buff")
-	local new_debuff_string = self:CreateLabel (f_manual, "Add Debuff")
+	local new_buff_string = self:CreateLabel (f_manual, "加入增益效果")
+	local new_debuff_string = self:CreateLabel (f_manual, "加入減益效果")
 	
 	local new_buff_entry = self:CreateTextEntry (f_manual, function()end, 200, 20, "NewBuffTextBox", _, _, options_dropdown_template)
 	local new_debuff_entry = self:CreateTextEntry (f_manual, function()end, 200, 20, "NewDebuffTextBox", _, _, options_dropdown_template)
@@ -376,7 +376,7 @@ function DF:CreateAuraConfigPanel (parent, name, db, method_change_callback, opt
 			
 			buffs_added:Refresh()
 		end
-	end, 100, 20, "Add Buff", nil, nil, nil, nil, nil, nil, DF:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"))
+	end, 100, 20, "加入增益效果", nil, nil, nil, nil, nil, nil, DF:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"))
 	local add_debuff_button = self:CreateButton (f_manual, function()
 		local text = new_debuff_entry.text
 		new_debuff_entry:SetText ("")
@@ -395,9 +395,9 @@ function DF:CreateAuraConfigPanel (parent, name, db, method_change_callback, opt
 			end
 			debuffs_added:Refresh()
 		end
-	end, 100, 20, "Add Debuff", nil, nil, nil, nil, nil, nil, DF:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"))
+	end, 100, 20, "加入減益效果", nil, nil, nil, nil, nil, nil, DF:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"))
 	
-	local multiple_spells_label = DF:CreateLabel (buffs_added, "You can add multiple auras at once by separating them with ';'.\nExample: Fireball; Frostbolt; Flamestrike", 10, "gray")
+	local multiple_spells_label = DF:CreateLabel (buffs_added, "可以一次輸入多個光環，使用分號 ';' 作為分隔。\n例如: 月火術; 日炎術; 星光閃焰", 10, "gray")
 	multiple_spells_label:SetSize (350, 60)
 	multiple_spells_label:SetJustifyV ("top")
 	
@@ -412,7 +412,7 @@ function DF:CreateAuraConfigPanel (parent, name, db, method_change_callback, opt
 		export_box:SetFocus (true)
 		export_box:HighlightText()
 		
-	end, 120, 20, "Export Buffs", nil, nil, nil, nil, nil, nil, DF:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"))
+	end, 120, 20, "匯出增益效果", nil, nil, nil, nil, nil, nil, DF:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"))
 	
 	local export_debuff_button = self:CreateButton (f_manual, function()
 		local str = ""
@@ -423,7 +423,7 @@ function DF:CreateAuraConfigPanel (parent, name, db, method_change_callback, opt
 		export_box:SetFocus (true)
 		export_box:HighlightText()
 		
-	end, 120, 20, "Export Debuffs", nil, nil, nil, nil, nil, nil, DF:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"))
+	end, 120, 20, "匯出減益效果", nil, nil, nil, nil, nil, nil, DF:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"))
 	
 	multiple_spells_label:SetPoint ("topleft", f_manual, "topleft", 480, -120)
 	
@@ -434,12 +434,12 @@ function DF:CreateAuraConfigPanel (parent, name, db, method_change_callback, opt
 	new_buff_string:SetPoint ("topleft", f_manual, "topleft", 480, -40)
 	new_buff_entry:SetPoint ("topleft", new_buff_string, "bottomleft", 0, -2)
 	add_buff_button:SetPoint ("left", new_buff_entry, "right", 2, 0)
-	add_buff_button.tooltip = "Add the aura to be tracked.\n\nClick an aura on the list to remove it."
+	add_buff_button.tooltip = "加入要監控的光環。\n\n點一下清單中的光環將它移除。"
 	
 	new_debuff_string:SetPoint ("topleft", f_manual, "topleft", 480, -80)
 	new_debuff_entry:SetPoint ("topleft", new_debuff_string, "bottomleft", 0, -2)
 	add_debuff_button:SetPoint ("left", new_debuff_entry, "right", 2, 0)
-	add_debuff_button.tooltip = "Add the aura to be tracked.\n\nClick an aura on the list to remove it."
+	add_debuff_button.tooltip = "加入要監控的光環。\n\n點一下清單中的光環將它移除。"
 	
 	buffs_added:Refresh()
 	debuffs_added:Refresh()

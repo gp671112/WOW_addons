@@ -341,7 +341,7 @@ function WMT:Initialize()
 	function DataProviders.Battlemaster:GetNPC(trackingType, location, npc)
 		return npc
 	end
-	--[[Comment Start for DQE	
+	--Comment Start for DQE	
 	function DataProviders.Achievement:ProvidesFor(trackingType)
 		return trackingType=="A"
 	end
@@ -422,9 +422,11 @@ function WMT:Initialize()
 	end
 	
 	function DataProviders.Achievement:GetCustomTrackingInfo()
-		return "Track Achievements", "Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\AchievementIcon",
-				function() return DGV.chardb.AchievementTrackingEnabled end,
-				function(value) DGV.chardb.AchievementTrackingEnabled = value end
+        if DugisGuideViewer.ExtendedTrackingPointsExists then
+            return "Track Achievements", "Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\AchievementIcon",
+                    function() return DGV.chardb.AchievementTrackingEnabled end,
+                    function(value) DGV.chardb.AchievementTrackingEnabled = value end
+        end
 	end
 	
 	function DataProviders.RareCreature:ProvidesFor(trackingType)
@@ -464,11 +466,13 @@ function WMT:Initialize()
 	end
 	
 	function DataProviders.RareCreature:GetCustomTrackingInfo()
-		return "Track Rare Creatures", "Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\BossIcon",
-				function() return DGV.chardb.RareCreatureTrackingEnabled end,
-				function(value) DGV.chardb.RareCreatureTrackingEnabled = value end
+        if DugisGuideViewer.ExtendedTrackingPointsExists then
+            return "Track Rare Creatures", "Interface\\AddOns\\DugisGuideViewerZ\\Artwork\\BossIcon",
+                    function() return DGV.chardb.RareCreatureTrackingEnabled end,
+                    function(value) DGV.chardb.RareCreatureTrackingEnabled = value end
+        end
 	end
-	--Comment end for DQE ]]
+	--Comment end for DQE
 	local petJournalLookup = {}
 	--_G["BATTLE_PET_NAME_"..i]
 	function DGV:PopulatePetJournalLookup()
@@ -530,22 +534,54 @@ function WMT:Initialize()
 		end
 		return speciesName, nil, familyType, collected, extraToolTip -- no flavorText for now. 
 	end
-	
+		
+    local function getPetTypeFilters()
+        if not DugisGuideViewer.chardb["petTypeFilters"] then
+            DugisGuideViewer.chardb["petTypeFilters"] = {
+                Humanoid     = true,
+                Dragon       = true,
+                Flying       = true,
+                Undead       = true,
+                Critter      = true,
+                Magical      = true,
+                Elemental    = true,
+                Beast        = true,
+                Aquatic      = true,
+                Mechanical   = true
+            }              
+        end     
+        return DugisGuideViewer.chardb["petTypeFilters"]
+    end
+    
+    if DugisGuideViewer.chardb["showCollectedPets"] == nil then
+        DugisGuideViewer.chardb["showCollectedPets"] = true
+    end 
+    
+    if DugisGuideViewer.chardb["showNotCollectedPets"] == nil then
+        DugisGuideViewer.chardb["showNotCollectedPets"] = true
+    end
+
 	function DataProviders.PetBattles:ShouldShow(trackingType, location, speciesID, ...)
 		ValidateNumber(speciesID, trackingType, location, speciesID, ...)
         
-        if DGV:UserSetting(DGV_DISPLAYUNCOLLECTEDPETSONLY) == true then   
             local value = petJournalLookup[tonumber(speciesID)]
             if not value then
                 return false
             end
             
-            local _, _, _, _, collected = strsplit(":", value)
+            local _, _, petType = C_PetJournal.GetPetInfoBySpeciesID(speciesID)
+            petType = _G['BATTLE_PET_NAME_' .. petType]
             
-            return tonumber(collected)==0 
-        else
-            return true
-        end            
+            local _, _, _, _, collected = strsplit(":", value)
+            collected = tonumber(collected)~=0 
+            
+            if (DugisGuideViewer.chardb["showCollectedPets"] and collected) or (DugisGuideViewer.chardb["showNotCollectedPets"] and not collected) then
+                if petType and getPetTypeFilters()[petType] then
+                    return true
+                end
+            end  
+
+            return false
 	end
 	
 	function DataProviders.PetBattles:IsTrackingEnabled()
@@ -858,7 +894,7 @@ function WMT:Initialize()
 		if self.name and flightMaster then 
 			texts[1] = "|cffffffff"..self.name.."|r"
 		elseif flightMaster then
-			texts[1] = L["|cfff0eb20Flight location not learned|r"]
+			texts[1] = "|cfff0eb20Flight location not learned|r"
 		end		
         
 		AddTooltips(unpack(texts))
@@ -1298,6 +1334,40 @@ function WMT:Initialize()
 				UpdateCurrentMapVersion()
 			end
 		end)
+          
+    local trackPetsItemMenuList = 4000
+    if DugisGuideViewer.ExtendedTrackingPointsExists then
+        dugiOrg_UIDropDownMenu_AddButton = UIDropDownMenu_AddButton
+        
+        UIDropDownMenu_AddButton = function(...)
+            local info = ...
+            
+            local isTrackPetsItem = info.icon and info.icon:match("tracking_wildpet") and info.func == MiniMapTracking_SetTracking --[[id]]
+            if isTrackPetsItem then
+                info.text = info.text.."|TInterface\\AddOns\\DugisGuideViewerZ\\Artwork\\PetBattleIcon:20:20:5:0|t"
+                info.icon = nil
+                info.isNotRadio = true
+                info.hasArrow = true
+                info.isNotRadio = true
+                info.menuList = trackPetsItemMenuList
+                info.keepShownOnClick = true
+            end
+            
+            local result = dugiOrg_UIDropDownMenu_AddButton(...)
+            
+            if isTrackPetsItem then
+                local index = _G["DropDownList1"].numButtons
+                local frameName = _G["DropDownList1"]:GetName()
+                local arrow = _G[frameName.."Button"..index.."ExpandArrow"]
+                if arrow then
+                    arrow:ClearAllPoints()
+                    arrow:SetPoint("RIGHT",4 , 0)
+                end
+            end
+            
+            return result
+        end
+    end
 		
 	function DGV:MINIMAP_UPDATE_TRACKING()
 		WMT:UpdateTrackingMap()
@@ -1325,6 +1395,12 @@ function WMT:Initialize()
 			AddPointData(DugisWorldMapTrackingPoints[UnitFactionGroup("player")][mapName..":"..level]);
 			AddPointData(DugisWorldMapTrackingPoints[mapName])
 			AddPointData(DugisWorldMapTrackingPoints[mapName..":"..level])
+            
+            --Using map ID
+            local mapId = ""..GetCurrentMapAreaID()
+            AddPointData(DugisWorldMapTrackingPoints[mapId])
+            AddPointData(DugisWorldMapTrackingPoints[mapId..":"..level])
+            
 			if not trackingPoints[1] then
 				local nsMapName = UnspecifyMapName(mapName)
 				if nsMapName then
@@ -1349,8 +1425,87 @@ function WMT:Initialize()
 				trackingStates[id] = active
 			end
 		end]]
+        
+        local function GetPetFilterMenuCheckboxes()
+            local result = {}
+            
+            for i=1, UIDROPDOWNMENU_MAXBUTTONS do
+                local button = _G["DropDownList"..UIDROPDOWNMENU_MENU_LEVEL.."Button"..i];
+                local name = button:GetName()
+                
+                if button.arg1 == "pet-type" then
+                    result[#result + 1] = _G[name.."Check"]
+                    _G[name.."Check"].arg1 = button.arg1
+                    _G[name.."Check"].arg2 = button.arg2
+                end
+            end
+            
+            return result
+        end
+        
+        local function PetFilterMenuItemClicked(item)
+            local menuType = item.arg1
+            local petType = item.arg2
+            
+            if petType then
+                getPetTypeFilters()[petType] = not getPetTypeFilters()[petType]
+            end
+            
+            if menuType == "check-all" then
+                LuaUtils:foreach(GetPetFilterMenuCheckboxes(), function(item)
+                    if item.arg1 == "pet-type" then
+                        getPetTypeFilters()[item.arg2] = true
+                    end
+                end)
+            end
+            
+            if menuType == "uncheck-all" then
+                LuaUtils:foreach(GetPetFilterMenuCheckboxes(), function(item)
+                    if item.arg1 == "pet-type" then
+                        getPetTypeFilters()[item.arg2] = false
+                    end
+                end)
+            end  
+            
+            if menuType == "collected" then
+                DugisGuideViewer.chardb["showCollectedPets"] = not DugisGuideViewer.chardb["showCollectedPets"]
+            end
+            
+            if menuType == "not-collected" then
+                DugisGuideViewer.chardb["showNotCollectedPets"] = not DugisGuideViewer.chardb["showNotCollectedPets"]
+            end
+            
+            UpdateTrackingFilters()
+            UIDropDownMenu_Refresh(MiniMapTrackingDropDown)
+        end
+        
+        local function AddPetFilterItemToMenu(level, name, menuType, petType, checkable, icon)
+            local info = Lib_UIDropDownMenu_CreateInfo();
+            info.func = PetFilterMenuItemClicked
+            info.text = name
+            info.icon = icon
+            info.arg1 = menuType
+            info.arg2 = petType
+            info.notCheckable = not checkable
+            info.keepShownOnClick = true
+            info.isNotRadio = true
+            
+            if petType then
+                info.checked = function(button) return getPetTypeFilters()[button.arg2] end
+            end
+            
+            if menuType == "collected" then
+                info.checked = function() return DugisGuideViewer.chardb["showCollectedPets"] end
+            end           
+            if menuType == "not-collected" then
+                info.checked = function() return DugisGuideViewer.chardb["showNotCollectedPets"] end
+            end
+            
+            UIDropDownMenu_AddButton(info, level)
+        end
+        
 		orig_MiniMapTrackingDropDown_Initialize = MiniMapTrackingDropDown.initialize
-		MiniMapTrackingDropDown.initialize = function(self, level)
+		MiniMapTrackingDropDown.initialize = function(self, level, menuList)       
 			if not WorldMapButton:IsVisible() then SetMapToCurrentZone() end
 			if level==1 then
 				local info;
@@ -1369,11 +1524,37 @@ function WMT:Initialize()
 				info.tCoordTop = 0;
 				info.tCoordBottom = 1;]]
 				UIDropDownMenu_AddButton(info, level)
-			end
+
+			else
+
+            end
 			if level>=2 then
 				Get_FindNearestDropDown_Initialize(2, L["Find Nearest"])(info, level)
 			end
-			orig_MiniMapTrackingDropDown_Initialize(self, level)
+			
+            orig_MiniMapTrackingDropDown_Initialize(self, level)
+            
+            if menuList == trackPetsItemMenuList and DugisGuideViewer.ExtendedTrackingPointsExists then
+                AddPetFilterItemToMenu(level, "Check All",    "check-all")
+                AddPetFilterItemToMenu(level, "Uncheck All",  "uncheck-all")
+
+                local iconPathDir = [[Interface\ICONS\Pet_Type_]]
+                --iconPathDir = [[Interface\TARGETINGFRAME\PetBadge-]]
+
+                AddPetFilterItemToMenu(level, "Collected",         "collected",      nil, true)     
+                AddPetFilterItemToMenu(level, "Not Collected",     "not-collected",  nil, true)     
+                AddPetFilterItemToMenu(level, "Humanoid",          "pet-type",        "Humanoid"   , true, iconPathDir.."Humanoid")     
+                AddPetFilterItemToMenu(level, "Dragon",            "pet-type",        "Dragon"     , true, iconPathDir.."Dragon")     
+                AddPetFilterItemToMenu(level, "Flying",            "pet-type",        "Flying"     , true, iconPathDir.."Flying")     
+                AddPetFilterItemToMenu(level, "Undead",            "pet-type",        "Undead"     , true, iconPathDir.."Undead")     
+                AddPetFilterItemToMenu(level, "Critter",           "pet-type",        "Critter"    , true, iconPathDir.."Critter")     
+                AddPetFilterItemToMenu(level, "Magical",           "pet-type",        "Magical"    , true, iconPathDir.."Magical")     
+                AddPetFilterItemToMenu(level, "Elemental",         "pet-type",        "Elemental"  , true, iconPathDir.."Elemental")     
+                AddPetFilterItemToMenu(level, "Beast",             "pet-type",        "Beast"      , true, iconPathDir.."Beast")     
+                AddPetFilterItemToMenu(level, "Aquatic",           "pet-type",        "Aquatic"    , true, iconPathDir.."Water")     
+                AddPetFilterItemToMenu(level, "Mechanical",        "pet-type",        "Mechanical" , true, iconPathDir.."Mechanical")     
+            end            
+  
 			if level==2 and UIDROPDOWNMENU_MENU_VALUE==2 then --put class trainer back
 				local name, texture, active= GetTrackingInfo(4);
 				local info = Lib_UIDropDownMenu_CreateInfo();
@@ -1446,9 +1627,9 @@ function WMT:Initialize()
 
     local pressedAbandonIndex = nil
     StaticPopupDialogs["GROUP_ABANDON_CONFIRMATION"] = {
-        text = L["Abandon All Quests?"],
-        button1 = L["Yes"],
-        button2 = L["No"],
+        text = "Abandon All Quests?",
+        button1 = "Yes",
+        button2 = "No",
         OnHide = function()
             pressedAbandonIndex = nil
         end,
@@ -1479,7 +1660,7 @@ function WMT:Initialize()
         LuaUtils:foreach(QuestMapFrame.QuestsFrame.Contents.Headers, function(parentButton)
             if parentButton.abandonGroupButton == nil then
                 local buttonFrame = GUIUtils:AddButton(parentButton, "", 231, 6, 28, 28, 28, 28, function(self)  
-                    StaticPopupDialogs["GROUP_ABANDON_CONFIRMATION"].text = L["Abandon All "] .. GetQuestLogTitle(self.abandonGroupButton.questLogIndex) .. L[" Quests?"] 
+                    StaticPopupDialogs["GROUP_ABANDON_CONFIRMATION"].text = "Abandon All " .. GetQuestLogTitle(self.abandonGroupButton.questLogIndex) .. " Quests?" 
                     if pressedAbandonIndex == nil then
                         pressedAbandonIndex = self.abandonGroupButton.questLogIndex
                         StaticPopup_Show ("GROUP_ABANDON_CONFIRMATION")
@@ -1498,3 +1679,123 @@ function WMT:Initialize()
         end)   
     end)
 end
+
+
+local AceGUI = LibStub("AceGUI-3.0")
+
+local speciesData = {}
+local exportResults = {}
+local exportNavigationIndex = 1
+local onePageResultsAmount = 2000 --Pets / page
+
+function DugisGuideViewer:ShowResults()
+    if not exportTextEditor then
+        exportTextEditor = AceGUI:Create("MultiLineEditBox")
+        exportTextEditor.frame:SetParent(UIParent)
+        exportTextEditor.frame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 250, -80)
+        exportTextEditor.frame:SetWidth(470)
+        exportTextEditor.frame:SetHeight(470)
+        exportTextEditor.frame:Show()
+    end
+    
+    exportTextEditor:SetText(exportResults[exportNavigationIndex] or "No more results.")
+    
+    exportTextEditor.label:SetText("Pets from "..((exportNavigationIndex -1) * onePageResultsAmount).." to "..((exportNavigationIndex * onePageResultsAmount))..". Press 'Next results' to see next results.") 
+    exportTextEditor.button:SetScript("OnClick", function()
+        exportNavigationIndex = exportNavigationIndex + 1
+        DugisGuideViewer:ShowResults()
+    end) 
+    
+    exportTextEditor.button:SetText("Next results")
+    exportTextEditor.button:SetWidth(200)
+    
+    exportTextEditor.button:Enable()
+end
+
+--/run DugisGuideViewer:ExportPets()
+function DugisGuideViewer:ExportPets(optimized)
+    exportNavigationIndex = 1
+    
+    if not DataExport then
+        DataExport = {}
+    end
+
+    local zoneKey_Level2PetInfos = {}
+
+    LuaUtils:foreach(speciesData, function(pets, zoneId)
+        LuaUtils:foreach(pets, function(pet, petId)
+            LuaUtils:foreach(pet, function(points, floor_)
+                for xText, yText in gmatch(points, '(%w%w)(%w%w)') do 
+                    local x, y = tonumber(xText, 36) / 10, tonumber(yText, 36) / 10
+                    
+                    local dugiKey = ""..zoneId..":"..floor_
+                    
+                    if not  zoneKey_Level2PetInfos[dugiKey] then
+                        zoneKey_Level2PetInfos[dugiKey] = {}
+                    end
+                    
+                    local petInfos =  zoneKey_Level2PetInfos[dugiKey]
+                   
+                    local speciesName, speciesIcon, petType, companionID, tooltipSource, tooltipDescription, isWild, canBattle, isTradeable, isUnique, obtainable, creatureDisplayID 
+                    = C_PetJournal.GetPetInfoBySpeciesID(petId)
+                   
+                    petType = _G['BATTLE_PET_NAME_' .. petType]
+                   
+                    petInfos[#petInfos + 1] = {x = x, y = y, xText =xText, yText = yText,   petId = petId, category = "", petName = speciesName, petType = petType}
+                end
+            end)
+        end)
+    end)
+    
+    --Exporting to Dugi format;
+    local counter = 0
+    LuaUtils:foreach(zoneKey_Level2PetInfos, function(petInfos, zoneId_Level)
+    
+        local zoneIdLevel = LuaUtils:split(zoneId_Level, ":")
+        local zoneId = zoneIdLevel[1]
+        local zoneName = DugisGuideViewer:GetMapNameFromID(zoneId)
+        
+    
+        local result = "\n--"..zoneName.."\nsafeTappend(\""..zoneId_Level.."\", {"
+        
+        local lastPetId = -1
+        for i = 1, #petInfos do
+            local petInfo = petInfos[i]
+            counter = counter + 1
+            
+            local comma = ","
+            
+            if i == #petInfos then
+               comma = ""
+            end
+            
+            if lastPetId == petInfo.petId then
+                if optimized then
+                    --todo: Implement extra specialization for the same pet
+                    --result = result..petInfo.xText..petInfo.yText -- Extra optimized
+                    --result = result.."\n\"*"..petInfo.x..","..petInfo.y.."\","
+                else
+                    result = result.."\n\"P:"..petInfo.x..","..petInfo.y..":"..petInfo.petId..":"..petInfo.category .."\""..comma --.."  -- ↑"
+                end
+            else
+                result = result.."\n--"..petInfo.petName.."/"..petInfo.petType..":\n\"P:"..petInfo.x..","..petInfo.y..":"..petInfo.petId..":"..petInfo.category .."\""..comma--.."  -- "..petInfo.petName.."/"..petInfo.petType
+            end
+            
+            lastPetId = petInfo.petId
+
+        end
+        
+        result = result.."\n})\n"
+        
+        local exportResultIndex = math.floor(counter / onePageResultsAmount) + 1
+        
+        if exportResults[exportResultIndex] == nil then
+            exportResults[exportResultIndex] = ""
+        end
+        
+        exportResults[exportResultIndex] = exportResults[exportResultIndex]..result
+    end)
+    
+    DugisGuideViewer:ShowResults()
+end
+

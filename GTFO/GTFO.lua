@@ -201,21 +201,6 @@ function GTFO_OnEvent(self, event, ...)
 			GTFO_ChatPrint(string.format(GTFOLocal.Loading_LoadedSuspended, GTFO.Version));
 		end
 		
-		-- Recount Integration
-		if (IsAddOnLoaded("Recount")) then
-			GTFO.Recount = GTFO_Recount();
-			GTFO.DataLogging = true;
-		else
-			GTFO_Recount = nil;
-			GTFO_RecordRecount = nil;
-		end
-		if (IsAddOnLoaded("Skada")) then
-			GTFO.Skada = GTFO_Skada();
-			GTFO.DataLogging = true;
-		else
-			GTFO_Skada = nil;
-		end
-		
 		GTFO.Users[UnitName("player")] = GTFO.VersionNumber;
 		GTFO_GetSounds();
 		GTFO.CanTank = GTFO_CanTankCheck("player");

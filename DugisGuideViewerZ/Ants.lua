@@ -155,6 +155,12 @@ end)
 
 		local self = Ants
 		local index, objective
+        
+        if DGV:IsPlayerPosAvailable() then
+            DGV.DugisArrow.minimap_overlay:Show()
+        else
+            DGV.DugisArrow.minimap_overlay:Hide()
+        end
 
 		if DGV.DugisArrow.waypoints and not DugisGuideViewer.carboniteloaded then
 

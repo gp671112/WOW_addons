@@ -1,0 +1,46 @@
+﻿## Interface: 70100
+#@non-debug@
+## Title: Atlas |r|cFF0099FF[Class Order Halls]|r
+## Title-deDE: Atlas |r|cFF0099FF[Klassenordenshallen]|r
+## Title-esES: Atlas |r|cFF0099FF[Class Order Halls]|r
+## Title-esMX: Atlas |r|cFF0099FF[Class Order Halls]|r
+## Title-frFR: Atlas |r|cFF0099FF[Class Order Halls]|r
+## Title-itIT: Atlas |r|cFF0099FF[Class Order Halls]|r
+## Title-koKR: Atlas |r|cFF0099FF[Class Order Halls]|r
+## Title-ptBR: Atlas |r|cFF0099FF[Class Order Halls]|r
+## Title-ruRU: Atlas |r|cFF0099FF[Class Order Halls]|r
+## Title-zhCN: Atlas |r|cFF0099FF[职业大厅]|r
+## Title-zhTW: |r|cFF0099FF[地圖]|rAtlas 職業大廳地圖
+## Notes: Map of Class Order Halls
+## Notes-deDE: Karten der Klassenordenshallen
+## Notes-esES: Map of Class Order Halls
+## Notes-esMX: Map of Class Order Halls
+## Notes-frFR: Map of Class Order Halls
+## Notes-itIT: Map of Class Order Halls
+## Notes-koKR: Map of Class Order Halls
+## Notes-ptBR: Map of Class Order Halls
+## Notes-ruRU: Map of Class Order Halls
+## Notes-zhCN: 职业大厅地图
+## Notes-zhTW: Atlas 職業大廳地圖
+#@end-non-debug@
+#@debug@
+# ## Title: Atlas |r|cFF0099FF[Class Order Halls]|r
+# ## Title-zhTW: |r|cFF0099FF[地圖]|rAtlas 職業大廳地圖
+# ## Notes: Map of Class Order Halls
+# ## Notes-zhTW: Atlas 職業大廳地圖
+#@end-debug@
+## Version: 1.35.00
+## Author: arith
+## X-Date: 2016-10-27T05:12:44Z
+## X-Email: atlas.addon at gmail.com
+## X-Website: http://www.atlasmod.com
+## X-Category: Map
+## RequiredDeps: Atlas
+## X-Curse-Packaged-Version: v1.35.00
+## X-Curse-Project-Name: Atlas Class Order Halls
+## X-Curse-Project-ID: atlas-classorderhalls
+## X-Curse-Repository-ID: wow/atlas-classorderhalls/mainline
+
+Locale\Locales.xml
+Atlas_ClassOrderHalls.lua
+Atlas_ClassOrderHalls_DB.lua

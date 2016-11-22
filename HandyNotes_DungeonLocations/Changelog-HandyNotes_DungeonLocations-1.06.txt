@@ -1,0 +1,56 @@
+------------------------------------------------------------------------
+r17 | caliaha | 2016-11-13 01:40:05 +0000 (Sun, 13 Nov 2016) | 1 line
+Changed paths:
+   A /tags/1.06 (from /trunk:16)
+
+Added Black Rook Hold, made db variable local instead of global
+------------------------------------------------------------------------
+r16 | caliaha | 2016-11-13 01:35:14 +0000 (Sun, 13 Nov 2016) | 1 line
+Changed paths:
+   M /trunk/HandyNotes_DungeonLocations.lua
+
+Added Black Rook Hold, made db variable local instead of global
+------------------------------------------------------------------------
+r14 | caliaha | 2016-11-01 01:54:56 +0000 (Tue, 01 Nov 2016) | 1 line
+Changed paths:
+   M /trunk/HandyNotes_DungeonLocations.lua
+
+Added Return to Karazhan and also added legion dungeons/raids to continent map for consistency.
+------------------------------------------------------------------------
+r12 | caliaha | 2016-10-26 19:11:38 +0000 (Wed, 26 Oct 2016) | 1 line
+Changed paths:
+   M /trunk/HandyNotes_DungeonLocations.lua
+   M /trunk/HandyNotes_DungeonLocations.toc
+
+TOC Bump
+------------------------------------------------------------------------
+r10 | caliaha | 2016-10-17 20:36:17 +0000 (Mon, 17 Oct 2016) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+
+Change to .pkgmeta
+------------------------------------------------------------------------
+r9 | caliaha | 2016-10-17 20:31:43 +0000 (Mon, 17 Oct 2016) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/HandyNotes_DungeonLocations.lua
+   A /trunk/misc
+   A /trunk/misc/wowcoords.pl
+   A /trunk/misc/zonelist.txt
+
+Added Throne of Tides, Baradin Hold, Blackwing Descent.  More node tweaks.
+------------------------------------------------------------------------
+r7 | caliaha | 2016-10-16 03:57:56 +0000 (Sun, 16 Oct 2016) | 1 line
+Changed paths:
+   M /trunk/HandyNotes_DungeonLocations.lua
+
+Added The Steamvault, Karazhan, Razorfen Kraul, Razorfen Downs.  Slight node location tweaks.
+------------------------------------------------------------------------
+r5 | caliaha | 2016-10-15 04:10:00 +0000 (Sat, 15 Oct 2016) | 1 line
+Changed paths:
+   A /trunk/.pkgmeta
+   M /trunk/HandyNotes_DungeonLocations.lua
+   M /trunk/HandyNotes_DungeonLocations.toc
+
+Add tomtom waypoint support and fixed continent toggle option
+------------------------------------------------------------------------

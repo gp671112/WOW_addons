@@ -1,0 +1,132 @@
+$Id: ChangeLog.txt 83 2016-11-14 18:24:14Z arith $
+Atlas, a World of Warcraft instance map browser
+Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+
+==============
+= Change Log =
+==============
+
+v1.35.06 (Nov. 15, 2016)
+------------------------
+- Added Kraxa and Ultanok to Neltharion's Lair
+- Changed The Arcway and Court of Stars to mythic only
+- Localization update:
+  Simplified Chinese
+
+v1.35.05 (Nov. 09, 2016)
+------------------------
+- Map revamped:
+  - Halls of Valor - Map A & B
+  - The Nighthold - Map C
+  - Vault of the Wardens
+- Added Grimoira to Vault of the Wardens
+- Localization update:
+  Traditional Chinese
+
+v1.35.04 (Oct. 29, 2016)
+------------------------
+- Fixed boss link in the Emerald Nightmare:
+  Il'gynoth, Elerethe Renferal, and Ursoc
+
+v1.35.03 (Oct. 28, 2016)
+------------------------
+- Added Xavius to the Emerald Nightmare
+- Added dungeon level info to the Emerald Nightmare maps so that switching 
+  between Atlas and World Map will work well
+- Added minimum gear level to the Emerald Nightmare and the Nighthold
+
+v1.35.02 (Oct. 28, 2016)
+------------------------
+- Added Gul'dan to the Nighthold
+
+v1.35.01 (Oct. 27, 2016)
+------------------------
+- Added Trial of Valor
+- Localization update:
+  - German (pas06)
+
+v1.35.00 (Oct. 27, 2016)
+------------------------
+- Toc update to support WoW 7.1.0
+- Added Ly'leth Lunastre to locale section in Court of Stars
+- Translation update: 
+  - Korean (wooyekim)
+  - Simplified Chinese (ananhaid)
+
+v1.34.08 (Oct. 07, 2016)
+------------------------
+- Translation added (NPC only): 
+  - French
+  - Spanish
+  - Italian
+  - Portuguese
+  - German
+  - Russian
+  - Traditional Chinese
+  
+v1.34.07 (Oct. 03, 2016)
+------------------------
+- Localization update:
+  - German (pas06)
+  
+v1.34.06 (Sep. 28, 2016)
+------------------------
+- Added world quest bosses to the following maps:
+  - Darkheart Thicket
+  - Court of Stars
+  - Eye of Azshara
+  - Halls of Valor
+  - Neltharion's Lair
+  - The Arcway
+
+v1.34.05 (Sep. 27, 2016)
+------------------------
+- Fine-tuned Vault of the Wardens's MapC with better color background
+- Added quest item and NPC to Vault of the Wardens's MapC
+- Fine-tuned Black Rook Hold's marker positions; added 5 elite bosses 
+  (3 of them are part of world quests)
+- Translation added:
+  - German (pas06)
+
+v1.34.04 (Sep. 26, 2016)
+------------------------
+- Revamped Fenryr's map (Fields of the Eternal Hunt, Halls of Valor)
+- Added Fenryr's spawn points in Halls of Valor
+- Translation added:
+  - German (pas06)
+
+v1.34.03 (Sep. 23, 2016)
+------------------------
+- Fixed Ursoc's JournalEncounter ID
+- Corrected Maw of Souls 2nd map's mapID. 
+- Added dungeon level to below dungeon / raid:
+  - Maw of Souls
+  - The Nighthold
+  - Black Rook Hold
+  - Vault of the Wardens
+  - Court of Stars
+- Translation added:
+  - Traditional Chinese
+  
+v1.34.02 (Sep. 20, 2016)
+------------------------
+- Added the entrance map for the Arcway
+- Added the entrance map for the Nighthold
+- Translation added:
+  - German (pas06)
+
+v1.34.01 (Sep. 09, 2016)
+------------------------
+- Moved main map data from core Atlas into individual module's DB
+- Added quest item to Eye of Azshara map
+- Added exit and NPC locations to Neltharion's Lair map
+- Excluded the source PSD of Darkheart Thicket's large map images from official package
+
+v1.34.00 (Aug. 31, 2016)
+------------------------
+- Initial version for WoW Legion
+- Translation added:
+  - Brazilian Portuguese (Markllan)
+  - German (pas06)
+  - Simplified Chinese (ananhaid)
+  - Traditional Chinese (arith)

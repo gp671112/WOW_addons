@@ -1,0 +1,20 @@
+## Interface: 70100
+## Title: HandyNotes_SuramarTelemancy
+## Notes: Teleporters in Suramar? Sure, why not?
+## Title-zhTW: |cFF0099FF[地圖]|r |cFF9966FF[HandyNotes_蘇拉瑪爾傳送點]|r
+## Notes-zhTW: 提供蘇拉瑪爾的各個傳送點位置
+## Author: Kemayo
+## Version: 1
+## DefaultState: enabled
+## X-Category: Achievements
+## X-eMail: kemayo @ gmail DOT com
+## SavedVariables: HandyNotes_SuramarTelemancyDB
+## RequiredDeps: HandyNotes
+## X-Curse-Packaged-Version: v3-1-g4dc3f65
+## X-Curse-Project-Name: HandyNotes: Suramar Telemancy
+## X-Curse-Project-ID: handynotes_suramartelemancy
+## X-Curse-Repository-ID: wow/handynotes_suramartelemancy/mainline
+
+handler.lua
+config.lua
+nodes.lua

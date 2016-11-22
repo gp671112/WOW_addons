@@ -1,0 +1,85 @@
+$Id: ChangeLog.txt 57 2016-10-27 05:12:44Z arith $
+Atlas, a World of Warcraft instance map browser
+Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+
+==============
+= Change Log =
+==============
+
+v1.35.00 (Oct. 27, 2016)
+------------------------
+- Toc update to support WoW 7.1.0
+- Added Great Eagle to Hunter's class hall
+- Revamped Mage class hall's map to split into two levels; 
+  also added transportation nodes in Mage's class hall
+- Added Champion Armaments to Priest class hall
+- Localization update:
+  - German (pas06)
+
+v1.34.09 (Oct. 18, 2016)
+------------------------
+- Added more NPCs to hunter's class hall
+- Localization update:
+  - Simplified Chinese (ananhaid)
+
+v1.34.08 (Oct. 07, 2016)
+------------------------
+- Translation added (NPC only): 
+  - French
+  - Spanish
+  - Italian
+  - Portuguese
+
+v1.34.07 (Oct. 07, 2016)
+------------------------
+- Re-organized the class halls' description order by putting artifact power and scouting map as the leading item
+- Added description to highlight the artificat power
+- Added more NPCs to priest's class hall
+- Added Haklang Ulfsson <Armaments Requisitioner> to warrior's class hall
+- Translation added: 
+  - Russian
+
+v1.34.06 (Oct. 03, 2016)
+------------------------
+- Localization update:
+  - German (pas06)
+
+v1.34.05 (Sep. 28, 2016)
+------------------------
+- Added few more NPCs to Druid map
+- Localization update:
+  - German (MrGnaah)
+
+v1.34.04 (Sep. 20, 2016)
+------------------------
+- Corrected the NPCs' positions in Druid map
+- Localization update:
+  - German (pas06)
+  - Simplified Chinese (ananhaid)
+
+v1.34.03 (Sep. 13, 2016)
+------------------------
+- Added a few more NPCs to mage map
+
+v1.34.02 (Sep. 09, 2016)
+------------------------
+- Added 2nd recruiter, Arena of Glory, travel destinations, and recruiter's description to warriro map
+- Added few more NPCs to demon hunter and mage maps
+- Corrected Mage map's NPC coordinates
+- Translation update: 
+  - German (pas06)
+
+v1.34.01 (Sep. 06, 2016)
+------------------------
+- Mage map updated: added a few more NPCs' location
+- Warrior map updated: added a few more NPCs' location
+- Translation update: 
+  - German (pas06)
+
+v1.34.00 (Aug. 31, 2016)
+------------------------
+- Initial version for WoW Legion
+- Localization available:
+  - German (pas06)
+  - Simplified Chinese (ananhaid)
+  - Traditional Chinese (arith)

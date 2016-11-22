@@ -67,11 +67,12 @@ local GetGossipText, GetRewardText, GetQuestText = GetGossipText, GetRewardText,
 local GetItemInfo, GetContainerNumSlots, GetContainerItemLink, EquipItemByName = GetItemInfo, GetContainerNumSlots, GetContainerItemLink, EquipItemByName;
 local InCombatLockdown, GetInventorySlotInfo, GetInventoryItemLink = InCombatLockdown, GetInventorySlotInfo, GetInventoryItemLink;
 local GetQuestCurrencyInfo, GetMaxRewardCurrencies, GetRewardTitle = GetQuestCurrencyInfo, GetMaxRewardCurrencies, GetRewardTitle;
-local GarrisonFollowerPortrait_Set, GetFollowerInfo = GarrisonFollowerPortrait_Set, C_Garrison.GetFollowerInfo;
+local GetFollowerInfo = C_Garrison.GetFollowerInfo;
 local GetQuestMoneyToGet, GetMoney, GetNumQuestCurrencies = GetQuestMoneyToGet, GetMoney, GetNumQuestCurrencies;
 local GetSuggestedGroupNum = GetSuggestedGroupNum;
 local UnitIsDead = UnitIsDead;
 local QuestIsFromAreaTrigger, QuestGetAutoAccept = QuestIsFromAreaTrigger, QuestGetAutoAccept;
+local BreakUpLargeNumbers = BreakUpLargeNumbers;
 -- UI
 local Storyline_NPCFrameChatOption1, Storyline_NPCFrameChatOption2, Storyline_NPCFrameChatOption3 = Storyline_NPCFrameChatOption1, Storyline_NPCFrameChatOption2, Storyline_NPCFrameChatOption3;
 local Storyline_NPCFrameObjectives, Storyline_NPCFrameObjectivesNo, Storyline_NPCFrameObjectivesYes = Storyline_NPCFrameObjectives, Storyline_NPCFrameObjectivesNo, Storyline_NPCFrameObjectivesYes;
@@ -236,8 +237,11 @@ local function acceptQuest()
 	elseif QuestGetAutoAccept() then
 		AcknowledgeAutoAcceptQuest();
 		PlayAutoAcceptQuestSound();
+		Storyline_API.layout.hideStorylineFrame();
 	else
 		AcceptQuest();
+		-- Some quests do not automatically close the UI. Weird. TODO Look where the issue is here
+		Storyline_API.layout.hideStorylineFrame();
 	end
 end
 
@@ -363,11 +367,116 @@ local function decorateSkillPointButton(button, texture, name, count, tt, ttsub)
 	button:SetScript("OnClick", nil);
 end
 
+local function decorateSpellButton(button, texture, name, rewardSpellIndex)
+	button.Icon:SetTexture(texture);
+	button.Name:SetText(name);
+	button.Count:Hide();
+	button.rewardSpellIndex = rewardSpellIndex;
+	button:SetScript("OnEnter", function(self)
+		GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
+		if ( QuestInfoFrame.questLog ) then
+			GameTooltip:SetQuestLogRewardSpell(self.rewardSpellIndex);
+		else
+			GameTooltip:SetQuestRewardSpell(self.rewardSpellIndex);
+		end
+	end);
+	button:SetScript("OnClick", function(self)
+		if ( IsModifiedClick("CHATLINK") ) then
+			if ( QuestInfoFrame.questLog ) then
+				ChatEdit_InsertLink(GetQuestLogSpellLink(self.rewardSpellIndex));
+			else
+				ChatEdit_InsertLink(GetQuestSpellLink(self.rewardSpellIndex));
+			end
+		end
+	end);
+end
+
+local function decorateFollowerButton(button, followerID)
+	local followerInfo = C_Garrison.GetFollowerInfo(followerID);
+	button.Name:SetText(followerInfo.name);
+	button.Icon:SetTexture(followerInfo.portraitIconID or "Interface\\Garrison\\Portraits\\FollowerPortrait_NoPortrait");
+
+	local showILevelOnFollower = followerInfo.followerTypeID and GarrisonFollowerOptions[followerInfo.followerTypeID].showILevelOnFollower or false;
+	local hideLevelOnFollower = followerInfo.isTroop or (followerInfo.quality < GarrisonFollowerOptions[followerInfo.followerTypeID].minQualityLevelToShowLevel);
+
+	if (hideLevelOnFollower) then
+		button.Count:Hide();
+	elseif showILevelOnFollower then
+		button.Count:Show();
+		button.Count:SetText(followerInfo.iLevel);
+	else
+		button.Count:Show();
+		button.Count:SetText(followerInfo.level);
+	end
+
+	button.ID = followerID;
+
+	button:SetScript("OnEnter", function(self)
+		GarrisonFollowerTooltip:ClearAllPoints();
+		GarrisonFollowerTooltip:SetPoint("BOTTOMLEFT", self, "TOPRIGHT");
+		local link = C_Garrison.GetFollowerLinkByID(self.ID);
+		local _, garrisonFollowerID, quality, level, itemLevel, ability1, ability2, ability3, ability4, trait1, trait2, trait3, trait4, spec1 = strsplit(":", link);
+
+		GarrisonFollowerTooltip_Show(tonumber(garrisonFollowerID), false, tonumber(quality), tonumber(level), 0, 0, tonumber(itemLevel), tonumber(spec1), tonumber(ability1), tonumber(ability2), tonumber(ability3), tonumber(ability4), tonumber(trait1), tonumber(trait2), tonumber(trait3), tonumber(trait4));
+	end);
+
+	button:SetScript("OnLeave", function(self)
+		GarrisonFollowerTooltip:Hide();
+	end)
+end
+
+local function dispatchSpellButtonDecorator(button, buttonInfo)
+	if buttonInfo.garrFollowerID then
+		debug("Spell reward is a follower.");
+		decorateFollowerButton(button, buttonInfo.garrFollowerID)
+	elseif button.spellBucketType == QUEST_INFO_SPELL_REWARD_ORDERING.QUEST_SPELL_REWARD_TYPE_AURA then
+		debug("Spell reward is aura.");
+		decorateSpellButton(button, buttonInfo.icon, buttonInfo.text, buttonInfo.rewardSpellIndex);
+	end
+end
+
 --*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 -- EVENT PART
 --*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 local displayBuilder = {};
+
+local statusBar = Storyline_NPCFriendshipStatusBar;
+local GetFriendshipReputation = GetFriendshipReputation;
+
+local customReputationColors = {
+	[1391545] = { -- Arcane thirst of the Nightfallen
+		r = .227,
+		g = .203,
+		b = .745
+	},
+	["DEFAULT"] = {
+		r = .709,
+		g = .396,
+		b = .031
+	}
+}
+
+local function updateNPCFrienshipSatusBar()
+	local id, rep, maxRep, name, text, texture, reaction, threshold, nextThreshold = GetFriendshipReputation();
+	if ( id and id > 0 ) then
+		if ( not nextThreshold ) then
+			threshold, nextThreshold, rep = 0, 1, 1;
+		end
+
+		statusBar.icon:SetTexture(texture or "Interface\\Common\\friendship-heart");
+
+		-- Nice touch: we will recolor the status bar for some specific rep, because its prettier :3
+		local statusBarColor = customReputationColors[texture] or customReputationColors["DEFAULT"];
+		statusBar:SetStatusBarColor(statusBarColor.r, statusBarColor.g, statusBarColor.b);
+
+		statusBar:SetMinMaxValues(threshold, nextThreshold);
+		statusBar:SetValue(rep);
+		statusBar:Show();
+	else
+		statusBar:Hide();
+	end
+end
 
 eventHandlers["GOSSIP_SHOW"] = function()
 	local hasGossip, hasAvailable, hasActive = GetNumGossipOptions() > 0, GetNumGossipAvailableQuests() > 0, GetNumGossipActiveQuests() > 0;
@@ -446,6 +555,8 @@ eventHandlers["GOSSIP_SHOW"] = function()
 		keyBinding = keyBinding + 1;
 	end
 
+	updateNPCFrienshipSatusBar();
+
 end
 
 eventHandlers["QUEST_GREETING"] = function()
@@ -500,6 +611,8 @@ eventHandlers["QUEST_GREETING"] = function()
 		end
 		keyBinding = keyBinding + 1;
 	end
+
+	updateNPCFrienshipSatusBar();
 end
 
 eventHandlers["QUEST_DETAIL"] = function()
@@ -535,6 +648,8 @@ eventHandlers["QUEST_DETAIL"] = function()
 		local _, icon = GetQuestItemInfo("required", 1);
 		Storyline_NPCFrameObjectivesImage:SetTexture(icon);
 	end
+
+	updateNPCFrienshipSatusBar();
 end
 
 eventHandlers["QUEST_PROGRESS"] = function()
@@ -625,6 +740,8 @@ eventHandlers["QUEST_PROGRESS"] = function()
 				decorateCurrencyButton(button, buttonInfo.index, buttonInfo.rewardType, buttonInfo.icon, buttonInfo.text, buttonInfo.count);
 			elseif buttonInfo.type == "item" then
 				decorateItemButton(button, buttonInfo.index, buttonInfo.rewardType, buttonInfo.icon, buttonInfo.text, buttonInfo.count, buttonInfo.isUsable);
+			elseif buttonInfo.type == "spell" then
+				dispatchSpellButtonDecorator(button, buttonInfo);
 			else
 				decorateStandardButton(button, buttonInfo.icon, buttonInfo.text, buttonInfo.tooltipTitle, buttonInfo.tooltipSub, buttonInfo.isNotUsable);
 			end
@@ -634,6 +751,16 @@ eventHandlers["QUEST_PROGRESS"] = function()
 	end
 
 	Storyline_NPCFrameObjectivesContent:SetHeight(contentHeight);
+
+	updateNPCFrienshipSatusBar();
+end
+
+local function AddSpellToBucket(spellBuckets, type, rewardSpellIndex)
+	if not spellBuckets[type] then
+		spellBuckets[type] = {};
+	end
+
+	table.insert(spellBuckets[type], rewardSpellIndex);
 end
 
 eventHandlers["QUEST_COMPLETE"] = function(eventInfo)
@@ -653,7 +780,7 @@ eventHandlers["QUEST_COMPLETE"] = function(eventInfo)
 	if xp > 0 then
 		bestIcon = "Interface\\ICONS\\xp_icon";
 		tinsert(displayBuilder, {
-			text = xp .. " " .. XP,
+			text = BreakUpLargeNumbers(xp) .. " " .. XP,
 			icon = bestIcon,
 			tooltipTitle = ERR_QUEST_REWARD_EXP_I:format(xp)
 		});
@@ -717,6 +844,63 @@ eventHandlers["QUEST_COMPLETE"] = function(eventInfo)
 		end
 	end
 
+	-- Spells
+	local numSpellRewards = GetNumRewardSpells();
+	local numQuestSpellRewards = 0;
+
+	for rewardSpellIndex = 1, numSpellRewards do
+		local texture, name, isTradeskillSpell, isSpellLearned, hideSpellLearnText, isBoostSpell, garrFollowerID, spellID = GetRewardSpell(rewardSpellIndex);
+		local knownSpell = IsSpellKnownOrOverridesKnown(spellID);
+
+		-- only allow the spell reward if user can learn it
+		if ( texture and not knownSpell and (not isBoostSpell or IsCharacterNewlyBoosted()) and (not garrFollowerID or not C_Garrison.IsFollowerCollected(garrFollowerID)) ) then
+			numQuestSpellRewards = numQuestSpellRewards + 1;
+		end
+	end
+
+	-- Setup spell rewards
+	if ( numQuestSpellRewards > 0 ) then
+		local spellBuckets = {};
+
+		for rewardSpellIndex = 1, numSpellRewards do
+			local texture, name, isTradeskillSpell, isSpellLearned, hideSpellLearnText, isBoostSpell, garrFollowerID, spellID = GetRewardSpell(rewardSpellIndex);
+			local knownSpell = IsSpellKnownOrOverridesKnown(spellID);
+			if texture and not knownSpell and (not isBoostSpell or IsCharacterNewlyBoosted()) and (not garrFollowerID or not C_Garrison.IsFollowerCollected(garrFollowerID)) then
+				if ( isTradeskillSpell ) then
+					AddSpellToBucket(spellBuckets, QUEST_SPELL_REWARD_TYPE_TRADESKILL_SPELL, rewardSpellIndex);
+				elseif ( isBoostSpell ) then
+					AddSpellToBucket(spellBuckets, QUEST_SPELL_REWARD_TYPE_ABILITY, rewardSpellIndex);
+				elseif ( garrFollowerID ) then
+					AddSpellToBucket(spellBuckets, QUEST_SPELL_REWARD_TYPE_FOLLOWER, rewardSpellIndex);
+				elseif ( not isSpellLearned ) then
+					AddSpellToBucket(spellBuckets, QUEST_SPELL_REWARD_TYPE_AURA, rewardSpellIndex);
+				else
+					AddSpellToBucket(spellBuckets, QUEST_SPELL_REWARD_TYPE_SPELL, rewardSpellIndex);
+				end
+			end
+		end
+
+		for orderIndex, spellBucketType in ipairs(QUEST_INFO_SPELL_REWARD_ORDERING) do
+			local spellBucket = spellBuckets[spellBucketType];
+			if spellBucket then
+				for i, rewardSpellIndex in ipairs(spellBucket) do
+					local texture, name, isTradeskillSpell, isSpellLearned, _, isBoostSpell, garrFollowerID = GetRewardSpell(rewardSpellIndex);
+					bestIcon = texture;
+					tinsert(displayBuilder, {
+						text = name,
+						icon = texture,
+						type = "spell",
+						garrFollowerID = garrFollowerID,
+						rewardSpellIndex = rewardSpellIndex,
+						spellBucketType = spellBucketType,
+						isUsable = true,
+					});
+				end
+			end
+		end
+	end
+
+
 	-- Item reward
 	if GetNumQuestChoices() == 1 or GetNumQuestRewards() > 0 then
 		if GetNumQuestChoices() == 1 then
@@ -761,6 +945,8 @@ eventHandlers["QUEST_COMPLETE"] = function(eventInfo)
 		placeOnGrid(button, Storyline_NPCFrameRewards.Content.RewardText1);
 		if buttonInfo.type == "currency" then
 			decorateCurrencyButton(button, buttonInfo.index, "reward", buttonInfo.icon, buttonInfo.text, buttonInfo.count);
+		elseif buttonInfo.type == "spell" then
+			dispatchSpellButtonDecorator(button, buttonInfo);
 		elseif buttonInfo.type == "item" then
 			decorateItemButton(button, buttonInfo.index, buttonInfo.rewardType, buttonInfo.icon, buttonInfo.text, buttonInfo.count, buttonInfo.isUsable);
 		elseif buttonInfo.type == "skillpoint" then
@@ -822,59 +1008,13 @@ eventHandlers["QUEST_COMPLETE"] = function(eventInfo)
 		contentHeight = contentHeight + gridHeight;
 	end
 
-	-- TODO GetRewardSpell removed in Legion. Look for what they are using now and adapt this
-	--[[local texture, name, isTradeskillSpell, isSpellLearned, hideSpellLearnText, isBoostSpell, garrFollowerID = GetRewardSpell();
-	local spellReward = texture and (not isBoostSpell or IsCharacterNewlyBoosted()) and (not garrFollowerID or not C_Garrison.IsFollowerCollected(garrFollowerID));
-
-	if spellReward then
-
-		if isTradeskillSpell then
-			Storyline_NPCFrameRewards.Content.RewardTextSpell:SetText(REWARD_TRADESKILL_SPELL);
-		elseif isBoostSpell then
-			Storyline_NPCFrameRewards.Content.RewardTextSpell:SetText(REWARD_ABILITY);
-		elseif garrFollowerID then
-			Storyline_NPCFrameRewards.Content.RewardTextSpell:SetText(REWARD_FOLLOWER);
-		elseif not isSpellLearned then
-			Storyline_NPCFrameRewards.Content.RewardTextSpell:SetText(REWARD_AURA);
-		else
-			Storyline_NPCFrameRewards.Content.RewardTextSpell:SetText(REWARD_SPELL);
-		end
-
-		Storyline_NPCFrameRewards.Content.RewardTextSpell:Show();
-		Storyline_NPCFrameRewards.Content.RewardTextSpell:SetPoint("TOP", previousForChoice, "BOTTOM", 0, -5);
-		contentHeight = contentHeight + 18;
-		previousForChoice = Storyline_NPCFrameRewards.Content.RewardTextSpell;
-
-		if garrFollowerID then
-			local questItem = Storyline_NPCFrameRewards.Content.FollowerFrame;
-			questItem:SetPoint("TOP", previousForChoice, "BOTTOM", 0, -5);
-			questItem:Show();
-			questItem.ID = garrFollowerID;
-			local followerInfo = GetFollowerInfo(garrFollowerID);
-			questItem.Name:SetText(followerInfo.name);
-			questItem.PortraitFrame.Level:SetText(followerInfo.level);
-			questItem.Class:SetAtlas(followerInfo.classAtlas);
-			local color = ITEM_QUALITY_COLORS[followerInfo.quality];
-			questItem.PortraitFrame.PortraitRingQuality:SetVertexColor(color.r, color.g, color.b);
-			questItem.PortraitFrame.LevelBorder:SetVertexColor(color.r, color.g, color.b);
-			GarrisonFollowerPortrait_Set(questItem.PortraitFrame.Portrait, followerInfo.portraitIconID);
-			contentHeight = contentHeight + 70;
-			previousForChoice = questItem;
-		else
-			local questItem = Storyline_NPCFrameRewards.Content.SpellFrame;
-			questItem:Show();
-			questItem.Icon:SetTexture(texture);
-			questItem.Name:SetText(name);
-			contentHeight = contentHeight + 40;
-			previousForChoice = questItem;
-		end
-	end]]
-
 	showQuestPortraitFrame();
 
 	Storyline_NPCFrameRewardsItemIcon:SetTexture(bestIcon);
 	contentHeight = contentHeight + Storyline_NPCFrameRewards.Content.Title:GetHeight() + 15;
 	Storyline_NPCFrameRewards.Content:SetHeight(contentHeight);
+
+	updateNPCFrienshipSatusBar();
 end
 
 local function handleEventSpecifics(event, texts, textIndex, eventInfo)
@@ -937,6 +1077,8 @@ local function refreshRewards(...)
 
 		if buttonInfo.type == "currency" then
 			decorateCurrencyButton(button, buttonInfo.index, "reward", buttonInfo.icon, buttonInfo.text, buttonInfo.count);
+		elseif buttonInfo.type == "spell" then
+			dispatchSpellButtonDecorator(button, buttonInfo);
 		elseif buttonInfo.type == "item" then
 			decorateItemButton(button, buttonInfo.index, buttonInfo.rewardType, buttonInfo.icon, buttonInfo.text, buttonInfo.count, buttonInfo.isUsable);
 		elseif buttonInfo.type == "skillpoint" then
@@ -960,13 +1102,14 @@ local function playText(textIndex, targetModel)
 
 	if text:byte() == 60 or not UnitExists("npc") or UnitIsUnit("player", "npc") or UnitIsDead("npc") then -- Emote if begins with <
 		local color = colorCodeFloat(ChatTypeInfo["MONSTER_EMOTE"].r, ChatTypeInfo["MONSTER_EMOTE"].g, ChatTypeInfo["MONSTER_EMOTE"].b);
-		local finalText = text:gsub("<", color .. "<");
-		finalText = finalText:gsub(">", ">|r");
-		if not UnitExists("npc") or UnitIsUnit("player", "npc") or UnitIsDead("npc") then
-			Storyline_NPCFrameChatText:SetText(color .. finalText);
-		else
-			Storyline_NPCFrameChatText:SetText(finalText);
-		end
+
+		-- Blizzard is now coloring part of the text in some cases.
+	    -- We will look for colosing color tags and add an opening color tag for our color right after it
+		local displayedText = text:gsub("|r", "|r" .. color)
+		displayedText = displayedText:gsub("<", color .. "<");
+		displayedText = displayedText:gsub(">", ">|r");
+
+		Storyline_NPCFrameChatText:SetText(displayedText);
 	else
 		Storyline_NPCFrameChatText:SetText(text);
 		text:gsub("[%.%?%!]+", function(finder)

@@ -19,25 +19,7 @@ local InCombatLockdown, DoOutOfCombat = InCombatLockdown, DGV.DoOutOfCombat
 local BeginAutoroutine, InterruptAutoroutine, YieldAutoroutine, GetRunningAutoroutine, RegisterReaction, RegisterMemberFunctionReaction, tPool, DebugPrint = 
 	DGV.BeginAutoroutine, DGV.InterruptAutoroutine, DGV.YieldAutoroutine, DGV.GetRunningAutoroutine, DGV.RegisterReaction, DGV.RegisterMemberFunctionReaction, DGV.tPool, DGV.DebugPrint
 
-    
-local isSetMapByIDInProgress = false
-    
-local function isBrokerWorldQuestsInstalled()
-    return Broker_WorldQuests ~= nil
-end
-
-if isBrokerWorldQuestsInstalled() then
-    SetMapByID_original = SetMapByID
-    
-    --Replacing the original function in order to detect when SetMapByID is in progress. If SetMapByID is invoked then WORLD_MAP_UPDATE event is triggered. 
-    --BrokerWorldQuests is using SetMapByID a lot which is causing triggering WORLD_MAP_UPDATE
-    function SetMapByID(id)
-        isSetMapByIDInProgress = true
-        SetMapByID_original(id)
-        isSetMapByIDInProgress = false
-    end   
-end 
-    
+        
 local function CreateArrowFrame()
 	if not DugisArrowFrame then
 		CreateFrame("Button", "DugisArrowFrame", UIParent)
@@ -2353,8 +2335,7 @@ function DugisArrow:Initialize()
 			local isContinent = (DGV:GetCZByMapId(m))==0 and not IsInInstance()
 			if isContinent then return end
             
-            local messedUpBy_BrokerWorldQuests = isBrokerWorldQuestsInstalled() and isSetMapByIDInProgress
-			local changed = ((m~=lastM or f~=lastF) and messedUpBy_BrokerWorldQuests == false)
+			local changed = (m~=lastM or f~=lastF)
             
 			lastM,lastF = m,f
 			return changed

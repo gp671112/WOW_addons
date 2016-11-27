@@ -1462,12 +1462,16 @@ local function GetSettingsCategoryFrame(category, parent)
                 else
                     SettingsSearchScroll.scrollBar:Hide()
                 end
+                 
+                SettingsSearchScroll.scrollBar:SetPoint("TOPLEFT", SettingsSearchScroll.scrollBar:GetParent(), "TOPLEFT", 562, -17)
 
-                SettingsSearchScroll.frame.wrapper:SetWidth(368)
+                SettingsSearchScroll.frame.wrapper:SetWidth(423)
+                SettingsSearchScroll.frame:SetWidth(608)
                 SettingsSearchScroll.frame.wrapper:SetHeight(64)
  
                 SettingsSearchScroll.frame:SetHeight(291)
-                SettingsSearchScroll.scrollBar:SetHeight(261)
+                SettingsSearchScroll.scrollBar:SetHeight(256)
+                SettingsSearchScroll.scrollBar:SetFrameLevel(100)
                 
                 SettingsSearchScroll.frame.content =SettingsSearchScroll.frame.wrapper
                 SettingsSearchScroll.frame:SetScrollChild(SettingsSearchScroll.frame.wrapper)  

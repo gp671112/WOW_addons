@@ -1,4 +1,4 @@
-﻿if ( GetLocale() == "ptBR" ) then
+if ( GetLocale() == "ptBR" ) then
 	DugisLocals = {
     PART_TEXT = "Parte",
     ["|cffff4500This quest is not listed in your current guide"] = "|cffff4500Esta Miss\195\163o n\195\163o esta listado no seu guia atual",

@@ -1,4 +1,4 @@
-﻿
+
 local localized
 local loc = GetLocale()
 

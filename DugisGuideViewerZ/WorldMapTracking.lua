@@ -1337,36 +1337,24 @@ function WMT:Initialize()
           
     local trackPetsItemMenuList = 4000
     if DugisGuideViewer.ExtendedTrackingPointsExists then
-        dugiOrg_UIDropDownMenu_AddButton = UIDropDownMenu_AddButton
         
-        UIDropDownMenu_AddButton = function(...)
-            local info = ...
-            
-            local isTrackPetsItem = info.icon and info.icon:match("tracking_wildpet") and info.func == MiniMapTracking_SetTracking --[[id]]
+        hooksecurefunc("UIDropDownMenu_AddButton", function(info, level, ...)
+            local isTrackPetsItem = info.icon and info.icon:match("tracking_wildpet")
             if isTrackPetsItem then
-                info.text = info.text.."|TInterface\\AddOns\\DugisGuideViewerZ\\Artwork\\PetBattleIcon:20:20:5:0|t"
+                local info = Lib_UIDropDownMenu_CreateInfo();
+            
+                info.text = "Tracked Pets |TInterface\\AddOns\\DugisGuideViewerZ\\Artwork\\PetBattleIcon:20:20:5:0|t"
                 info.icon = nil
                 info.isNotRadio = true
                 info.hasArrow = true
+                info.notCheckable = true
                 info.isNotRadio = true
                 info.menuList = trackPetsItemMenuList
                 info.keepShownOnClick = true
+                UIDropDownMenu_AddButton(info, level)
             end
-            
-            local result = dugiOrg_UIDropDownMenu_AddButton(...)
-            
-            if isTrackPetsItem then
-                local index = _G["DropDownList1"].numButtons
-                local frameName = _G["DropDownList1"]:GetName()
-                local arrow = _G[frameName.."Button"..index.."ExpandArrow"]
-                if arrow then
-                    arrow:ClearAllPoints()
-                    arrow:SetPoint("RIGHT",4 , 0)
-                end
-            end
-            
-            return result
-        end
+        
+        end)
     end
 		
 	function DGV:MINIMAP_UPDATE_TRACKING()

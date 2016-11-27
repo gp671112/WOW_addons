@@ -1,2 +1,2 @@
-﻿PatternLocale.enGB = PatternLocale.enUS
+PatternLocale.enGB = PatternLocale.enUS
 DisplayLocale.enGB = DisplayLocale.enUS

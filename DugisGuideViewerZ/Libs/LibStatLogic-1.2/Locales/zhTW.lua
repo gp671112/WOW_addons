@@ -1,4 +1,4 @@
-﻿-- zhTW localization by CuteMiyu, Ryuji
+-- zhTW localization by CuteMiyu, Ryuji
 
 if GetLocale() ~= 'zhTW' then return end
 

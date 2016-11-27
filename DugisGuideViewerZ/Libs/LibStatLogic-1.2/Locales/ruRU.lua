@@ -1,4 +1,4 @@
-﻿-- ruRU localization by Gezz
+-- ruRU localization by Gezz
 
 if GetLocale() ~= 'ruRU' then return end
 

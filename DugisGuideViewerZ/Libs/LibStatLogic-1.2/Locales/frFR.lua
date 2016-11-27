@@ -1,4 +1,4 @@
-﻿-- frFR localization by Tixu
+-- frFR localization by Tixu
 
 if GetLocale() ~= 'frFR' then return end
 

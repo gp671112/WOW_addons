@@ -88,6 +88,17 @@ function LuaUtils:foreach(items, func)
     end 
 end
 
+function LuaUtils:indexOf(item, table)
+    local result = nil
+    LuaUtils:foreach(table, function(value, index)
+        if value == item then
+            result = index
+        end
+    end)
+    
+    return result
+end
+
 function LuaUtils:loop(times, func, unpackResults)
     local results = {}
     for i = 1, times do
@@ -532,7 +543,6 @@ LuaUtils:CreateThread("dugi-post-combat-loading", function()
     end
     LuaUtils:RunPostCombatFunctions()
 end)
-
 
 function LuaUtils:collectgarbage(threading)
     if threading then

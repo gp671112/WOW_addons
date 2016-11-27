@@ -1,4 +1,4 @@
-﻿--Include LibStatLogic's enUS.lua file before any other locales, and before LibStatLogic.lua itself.
+--Include LibStatLogic's enUS.lua file before any other locales, and before LibStatLogic.lua itself.
 PatternLocale = {};
 DisplayLocale = {};
 

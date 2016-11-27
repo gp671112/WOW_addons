@@ -1,4 +1,4 @@
-﻿-- deDE localization by Gailly, Dleh, cremor
+-- deDE localization by Gailly, Dleh, cremor
 
 if GetLocale() ~= 'deDE' then return end
 

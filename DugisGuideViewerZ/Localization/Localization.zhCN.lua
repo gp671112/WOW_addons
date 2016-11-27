@@ -1,4 +1,4 @@
-﻿if ( GetLocale() == "zhCN" ) then 
+if ( GetLocale() == "zhCN" ) then 
 	DugisLocals = {	
 
 	PART_TEXT = "單方面",

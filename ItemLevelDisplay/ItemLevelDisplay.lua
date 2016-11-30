@@ -96,7 +96,7 @@ local bagPositionScheme={
 local outlineScheme={
 	[""]=L["No shadow"],
 	["OUTLINE"]=L["Light shadow"],
-	["OUTLINE,THICKOUTLINE"]=L["Strong shadow"]
+	["THICKOUTLINE"]=L["Strong shadow"]
 }
 local class2sort={}
 local function classList(self)
@@ -397,9 +397,9 @@ function addon:ApplyBAGS(value)
 		local modname="ILD-" .. name
 		local module=ace:GetAddon(modname,true)
 		if value then
-			if module then self:Print("Enabling",name) module:Enable() end
+			if module then self:Print(L["Enabling"],name) module:Enable() end
 		else
-			if module then self:Print("Disabling",name) module:Disable() end
+			if module then self:Print(L["Disabling"],name) module:Disable() end
 		end
 	end
 end
@@ -623,7 +623,26 @@ function addon:realinspectCheck (...)
 	for  slotId,data in pairs(islots) do
 		local itemlink=GetInventoryItemLink("target",slotId)
 		if (itemlink) then
-			self:paintButton(data.frame,slotId,itemlink,average,never)
+			if I:IsArtifact(itemlink) then
+					local ilvl=I:GetUpgradedItemLevel(itemlink)
+					if slotId==INVSLOT_OFFHAND then
+							local mainilvl=I:GetUpgradedItemLevel(GetInventoryItemLink("player",INVSLOT_MAINHAND))
+							if ilvl < mainilvl then
+									itemlink=GetInventoryItemLink("target",INVSLOT_MAINHAND)
+							end
+					else
+							local offhand=GetInventoryItemLink("target",INVSLOT_OFFHAND)
+							if (offhand) then
+									local offilvl=I:GetUpgradedItemLevel(offhand)
+									if ilvl < offilvl then
+											itemlink=offhand
+									end
+							end
+					end
+					self:paintButton(data.frame,slotId,itemlink,average,self:Is("DEATHKNIGHT") and data.enchantable or never)
+			else
+					self:paintButton(data.frame,slotId,itemlink,average,data.enchantable)
+			end
 		else
 			self:paintButton(data.frame,slotId)
 		end
@@ -709,11 +728,11 @@ function addon:OnInitialized()
 	self:AddToggle('SHOWUSELESSILEVEL',false,L['Show iLevel on shirt and tabard']).width='full'
 
 	self:AddLabel(L['Appearance'],L['Change colors and appearance'])
-	self:AddSelect('CORNER',"br",positionScheme,L['Level text aligned to'],L['Position']).width="full"
+	self:AddSelect('CORNER',"bc",positionScheme,L['Level text aligned to'],L['Position']).width="full"
 	self:AddSelect('COLORSCHEME',"qual",colorScheme,L['Colorize level text by'],	L['Choose a color scheme']	).width="full"
 	self:AddSelect('FONT',"Fritz Quadrata TT",LSM:HashTable('font'),L["Choose a font"]).dialogControl="LSM30_Font"
 	self:AddRange('FONTSIZE',11,9,15,L["Choose a font size"])
-	self:AddSelect('FONTOUTLINE',outlineScheme[1],outlineScheme,L["Choose a shadow"])
+	self:AddSelect('FONTOUTLINE',"THICKOUTLINE",outlineScheme,L["Choose a shadow"])
 
 	self:AddLabel(L['Bags'],L['Manages itemlevel in bags'])
 	self:AddToggle('BAGS',true,L["Show iLevel in bags"],L['Will have full effect on NEXT reload'])
@@ -721,7 +740,7 @@ function addon:OnInitialized()
 	self:AddSelect('BAGSCORNER',"tr",bagPositionScheme,L['Level text aligned to'],L['Position']).width="full"
 	self:AddSelect('BAGSFONT',"Fritz Quadrata TT",LSM:HashTable('font'),L["Choose a font"]).dialogControl="LSM30_Font"
 	self:AddRange('BAGSFONTSIZE',11,9,15,L["Choose a font size"])
-	self:AddSelect('BAGSFONTOUTLINE',outlineScheme[1],outlineScheme,L["Choose a shadow"])
+	self:AddSelect('BAGSFONTOUTLINE',"THICKOUTLINE",outlineScheme,L["Choose a shadow"])
 	local default, classes=classList(self)
 	self:AddMultiSelect("CLASSES",default,classes,L['Only show iLevel for selected classes'])
 	self:AddOpenCmd('showinfo',"cmdInfo",L["Debug info"],L["Show raw item info.Please post the screenshot to Curse Forum"]).width="full"
@@ -826,7 +845,7 @@ function addon:switchProfile(fromPanel)
 	wininfo:SetWidth(500)
 	wininfo:SetHeight(180)
 	wininfo:SetLayout('Flow')
-	wininfo:SetTitle('ItemLevelDisplay')
+	wininfo:SetTitle(L['ItemLevelDisplay'])
 	wininfo:SetUserData("currentprofile",self.db:GetCurrentProfile())
 	wininfo:SetUserData("newprofile",self.db:GetCurrentProfile())
 	wininfo:SetStatusText("")
@@ -846,10 +865,10 @@ function addon:switchProfile(fromPanel)
 	local g=gui:Create("Dropdown")
 	g:SetList({Default=L["Common profile for all characters"],character=L["Per character profile"]},{'Default','character'})
 	local profile=self.db:GetCurrentProfile()
-	if (profile=='Default') then
-		g:SetValue('Default')
-	else
+	if (profile=='character') then
 		g:SetValue('character')
+	else
+		g:SetValue('Default')
 	end
 	g:SetFullWidth(true)
 	g:SetCallback('OnValueChanged',function(widget,method,key)
@@ -892,8 +911,8 @@ end
 function addon:cmdInfo()
 	local gui=LibStub("AceGUI-3.0")
 	wininfo=gui:Create("Frame")
-	wininfo:SetTitle("Please post this screenshot to curse, thanks")
-	wininfo:SetStatusText("Add the expected ilevel for upgraded items")
+	wininfo:SetTitle(L["Please post this screenshot to curse, thanks"])
+	wininfo:SetStatusText(L["Add the expected ilevel for upgraded items"])
 	local rehide=true
 	if (not CharacterFrame:IsShown()) then
 		ToggleCharacter("PaperDollFrame")
@@ -936,8 +955,8 @@ end
 function addon:cmdProfiles()
 	local gui=LibStub("AceGUI-3.0")
 	wininfo=gui:Create("Frame")
-	wininfo:SetTitle("Please post this screenshot to curse, thanks")
-	wininfo:SetStatusText("Add the expected ilevel for upgraded items")
+	wininfo:SetTitle(L["Please post this screenshot to curse, thanks"])
+	wininfo:SetStatusText(L["Add the expected ilevel for upgraded items"])
 	wipe(profiles)
 	profiles=self.db:GetProfiles(profiles)
 	for index,name in pairs(profiles) do
@@ -965,26 +984,3 @@ function addon:getEnchantLevel()
 	return 0
 end
 _G.ILD=addon
---@do-not-package@
-_G.SLASH_IBAGS1="/ibags"
-SlashCmdList['IBAGS'] = function(args,chatframe)
-	addon:Print("ibags:")
-	local choosen=tonumber(args) or nil
-	if type(choosen)=="number" then
-		choosen=choosen+1
-		for i=1,#baggers do
-			if i==choosen then
-				EnableAddOn(baggers[i])
-			else
-				DisableAddOn(baggers[i])
-			end
-			ReloadUI()
-		end
-	else
-		for i=1,#baggers do
-			pp(format("%d. %s",i-1,baggers[i]))
-		end
-	end
-end
---@do-not-package@
-

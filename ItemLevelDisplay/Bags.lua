@@ -56,7 +56,7 @@ local frameLayers=setmetatable({},
 	end
 })
 function module:OnInitialize()
-	self:Print("Loaded",me)
+	-- self:Print("Loaded",me)
 	self:SetEnabledState(addon:GetBoolean('BAGS'))
 	corner = addon:GetVar("BAGSCORNER")
 	local a,b,c=fontObject:GetFont()
@@ -100,11 +100,11 @@ function module:GetItemInfo(itemlink,index)
 end
 function module:OnEnable()
 	if not addon:GetBoolean("BAGS") then return end
-	if (not addon.db.global.silent) then self:Print(VIDEO_OPTIONS_ENABLED) end
+	-- if (not addon.db.global.silent) then self:Print(VIDEO_OPTIONS_ENABLED) end
 	self:OnEnabled()
 end
 function module:OnDisable()
-	if (not addon.db.global.silent) then self:Print(VIDEO_OPTIONS_DISABLED) end
+	-- if (not addon.db.global.silent) then self:Print(VIDEO_OPTIONS_DISABLED) end
 	self:BagHide()
 	self:UnhookAll()
 	self:UnregisterAllEvents()

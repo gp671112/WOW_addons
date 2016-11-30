@@ -19,7 +19,7 @@ local strconcat=strconcat
 local tostring=tostring
 local _G=_G -- Unmodified env
 local dprint=function() end
---[===[@debug@
+--@debug@
 LoadAddOn("LibDebug")
 LoadAddOn("Blizzard_DebugTools")
 if LibDebug then
@@ -28,7 +28,7 @@ if LibDebug then
 	dprint=print
 	setfenv(1,_G)
 end
---@end-debug@]===]
+--@end-debug@
 --GAME_LOCALE="itIT"
 local me, ns = ...
 local LibStub=LibStub
@@ -36,17 +36,17 @@ local obj,old=LibStub:NewLibrary(MAJOR_VERSION,MINOR_VERSION)
 local upgrading
 if obj then
 	upgrading=old
---[===[@debug@
+--@debug@
 	if old then
 		dprint(strconcat("Upgrading ",MAJOR_VERSION,'.',old,' to',MINOR_VERSION,' from ',__FILE__))
 	else
 		dprint(strconcat("Loading ",MAJOR_VERSION,'.',MINOR_VERSION,' from ',__FILE__))
 	end
---@end-debug@]===]
+--@end-debug@
 else
---[===[@debug@
+--@debug@
 	dprint(strconcat("Equal or newer ",MAJOR_VERSION,' already loaded from ',__FILE__))
---@end-debug@]===]
+--@end-debug@
 	return
 end
 local lib=obj --#Lib
@@ -119,21 +119,21 @@ lib.coroutines=lib.coroutines or setmetatable({},{__index=function(t,k) rawset(t
 local new, del, copy, cached, stats
 do
 	local pool = lib.pool
---[===[@debug@
+--@debug@
 	local newcount, delcount,createdcount,cached = 0,0,0
---@end-debug@]===]
+--@end-debug@
 	function new()
---[===[@debug@
+--@debug@
 		newcount = newcount + 1
---@end-debug@]===]
+--@end-debug@
 		local t = next(pool)
 		if t then
 			pool[t] = nil
 			return t
 		else
---[===[@debug@
+--@debug@
 			createdcount = createdcount + 1
---@end-debug@]===]
+--@end-debug@
 			return {}
 		end
 	end
@@ -145,9 +145,9 @@ do
 		return c
 	end
 	function del(t)
---[===[@debug@
+--@debug@
 		delcount = delcount + 1
---@end-debug@]===]
+--@end-debug@
 		wipe(t)
 		pool[t] = true
 	end
@@ -158,19 +158,19 @@ do
 		end
 		return n
 	end
---[===[@debug@
+--@debug@
 	function stats()
 		print("Created:",createdcount)
 		print("Aquired:",newcount)
 		print("Released:",delcount)
 		print("Cached:",cached())
 	end
---@end-debug@]===]
---@non-debug@
+--@end-debug@
+--[===[@non-debug@
 	function stats()
 		return
 	end
---@end-non-debug@
+--@end-non-debug@]===]
 end
 --- Create a new AceAddon-3.0 addon.
 -- Any library you specified will be embeded, and the addon will be scheduled for
@@ -631,7 +631,7 @@ local function loadOptionsTable(self)
 				func="Gui",
 				guiHidden=true,
 			},
---[===[@debug@
+--@debug@
 			help = {
 				name="HELP",
 				desc="Show help",
@@ -647,7 +647,7 @@ local function loadOptionsTable(self)
 				guiHidden=true,
 				cmdHidden=true,
 			},
---@end-debug@]===]
+--@end-debug@
 			silent = {
 				name="SILENT",
 				desc="Eliminates startup messages",
@@ -739,10 +739,10 @@ local function PurgeProfiles(info,...)
 	for k,v in pairs(db.sv.profileKeys) do
 		used[v]=true
 	end
---[===[@debug@
+--@debug@
 	DevTools_Dump(profiles)
 	DevTools_Dump(used)
---@end-debug@]===]
+--@end-debug@
 	for _,v in ipairs(profiles) do
 		if not used[v] then
 			db:DeleteProfile(v)
@@ -801,6 +801,7 @@ function lib:OnInitialize(...)
 	end
 	if self.db then
 		self.db:RegisterDefaults(self.DbDefaults)
+		--[[
 		if (not self.db.global.silent) then
 			self:Print(format("Version %s %s loaded (%s)",
 				self:Colorize(options.version,'green'),
@@ -808,6 +809,7 @@ function lib:OnInitialize(...)
 				"Disable message with /" .. strlower(options.ID) .. " silent")
 			)
 		end
+		--]]
 		self:SetEnabledState(self:GetBoolean("Active"))
 	else
 		self.db=setmetatable({},{
@@ -845,10 +847,17 @@ function lib:OnInitialize(...)
 	end
 	if (type(self.LoadHelp)=="function") then self:LoadHelp() end
 	local main=options.name
+	-- 選項分類轉換為中文名稱
+	local mainLoc = main
+	if main == "ItemLevelDisplay" then
+		mainLoc = "裝備-物品等級"
+	elseif main== "GarrisonCommander" then
+		mainLoc = "任務-職業大廳和要塞"
+	end
 	BuildHelp(self)
 	if AceConfig and not options.nogui then
 		AceConfig:RegisterOptionsTable(main,self.OptionsTable,{main,strlower(options.ID)})
-		self.CfgDlg=AceConfigDialog:AddToBlizOptions(main,main )
+		self.CfgDlg=AceConfigDialog:AddToBlizOptions(main,mainLoc )
 		if (not ignoreProfile and not options.noswitch) then
 			if (AceDBOptions) then
 				local profileOpts=AceDBOptions:GetOptionsTable(self.db)
@@ -871,13 +880,13 @@ function lib:OnInitialize(...)
 				local profile=main..PROFILE
 			end
 			AceConfig:RegisterOptionsTable(main .. PROFILE,self.ProfileOpts)
-			AceConfigDialog:AddToBlizOptions(main .. PROFILE,titles.PROFILE,main)
+			AceConfigDialog:AddToBlizOptions(main .. PROFILE,titles.PROFILE,mainLoc)
 		end
 	else
 		self.OptionsTable.args.gui=nil
 	end
 	if (self.help[RELNOTES]~='') then
-		self.CfgRel=AceConfigDialog:AddToBlizOptions(main..RELNOTES,titles.RELNOTES,main)
+		self.CfgRel=AceConfigDialog:AddToBlizOptions(main..RELNOTES,titles.RELNOTES,mainLoc)
 	end
 	if AceDB then
 		self:UpdateVersion()
@@ -2048,181 +2057,512 @@ end
 -- To avoid clash between versions, localization is versioned on major and minor
 -- Lua strings are immutable so having more copies of the same string does not waist a noticeable slice of memory
 local me=MAJOR_VERSION .. MINOR_VERSION
-
+--@do-not-package@
+-- Actual translations for test purpose
+-- This part will NOT be packaged at all
 do
 	local L=l:NewLocale(me,"enUS",true,true)
-	L["Configuration"] = true
-L["Description"] = true
-L["Libraries"] = true
-L["Profile"] = true
-L["Purge1"] = "Delete unused profiles"
-L["Purge2"] = "Deletes all profiles that are not used by a character"
-L["Purge_Desc"] = "You can delete all unused profiles with just one click"
-L["Release Notes"] = true
-L["Toggles"] = true
-L["UseDefault1"] = "Switch all characters to \"%s\" profile"
-L["UseDefault2"] = "Uses the \"%s\" profiles for all your toons"
-L["UseDefault_Desc"] = "You can force all your characters to use the \"%s\" profile in order to manage a single configuration"
-
+	L["Configuration"] = "Configuration"
+	L["Description"] = "Description"
+	L["Libraries"] = "Libraries"
+	L["Purge1"] = "Delete unused profiles"
+	L["Purge2"] = "Deletes all profiles that are not used by a character"
+	L["Purge_Desc"] = "You can delete all unused profiles with just one click"
+	L["Release Notes"] = "Release Notes"
+	L["Toggles"] = "Toggles"
+	L["UseDefault1"] = "Switch all characters to \"%s\" profile"
+	L["UseDefault2"] = "Uses the \"%s\" profiles for all your toons"
+	L["UseDefault_Desc"] = "You can force all your characters to use the \"%s\" profile in order to manage a single configuration"
 	L=l:NewLocale(me,"ptBR")
 	if (L) then
-	L["Configuration"] = "configura\195\167\195\163o" -- Needs review
-L["Description"] = "Descri\195\167\195\163o" -- Needs review
-L["Libraries"] = "bibliotecas" -- Needs review
-L["Profile"] = "Perfil" -- Needs review
-L["Purge1"] = "Excluir perfis n\195\163o utilizados" -- Needs review
-L["Purge2"] = "Exclui todos os perfis que n\195\163o s\195\163o utilizados por um personagem" -- Needs review
-L["Purge_Desc"] = "Voc\195\170 pode apagar todos os perfis n\195\163o utilizados com apenas um clique" -- Needs review
-L["Release Notes"] = "Notas de Lan\195\167amento" -- Needs review
-L["Toggles"] = "Alterna" -- Needs review
-L["UseDefault1"] = "Mudar todos os caracteres para \"% s\" perfil" -- Needs review
-L["UseDefault2"] = "Usa a \"% s\" perfis para todos os seus personagens" -- Needs review
-L["UseDefault_Desc"] = "Voc\195\170 pode for\195\167ar todos os seus personagens para usar a \"% s\" perfil a fim de gerir uma \195\186nica configura\195\167\195\163o" -- Needs review
-
+	L["Configuration"] = "configura\195\167\195\163o"
+	L["Description"] = "Descri\195\167\195\163o"
+	L["Libraries"] = "bibliotecas"
+	L["Release Notes"] = "Notas de Lan\195\167amento"
+	L["Toggles"] = "Alterna"
 	end
 	L=l:NewLocale(me,"frFR")
 	if (L) then
-	L["Configuration"] = "configuration" -- Needs review
-L["Description"] = "description" -- Needs review
-L["Libraries"] = "biblioth\195\168ques" -- Needs review
-L["Profile"] = "Profil" -- Needs review
-L["Purge1"] = "Supprimer les profils inutilis\195\169s" -- Needs review
-L["Purge2"] = "Supprime tous les profils qui ne sont pas utilis\195\169s par un caract\195\168re" -- Needs review
-L["Purge_Desc"] = "Vous pouvez supprimer tous les profils inutilis\195\169s en un seul clic" -- Needs review
-L["Release Notes"] = "notes de version" -- Needs review
-L["Toggles"] = "Bascule" -- Needs review
-L["UseDefault1"] = "Mettez tous les caract\195\168res au profil \"%s\"" -- Needs review
-L["UseDefault2"] = "Utilise les profils du \"%s\" pour tous vos personnages" -- Needs review
-L["UseDefault_Desc"] = "Vous pouvez forcer tous vos personnages \195\160 utiliser le profil du \"%s\" dans le but de g\195\169rer une configuration unique" -- Needs review
-
+	L["Configuration"] = "configuration"
+	L["Description"] = "description"
+	L["Libraries"] = "biblioth\195\168ques"
+	L["Release Notes"] = "notes de version"
+	L["Toggles"] = "Bascule"
 	end
 	L=l:NewLocale(me,"deDE")
 	if (L) then
 	L["Configuration"] = "Konfiguration"
-L["Description"] = "Beschreibung"
-L["Libraries"] = "Bibliotheken"
-L["Profile"] = "Profil"
-L["Purge1"] = "L\195\182schen Sie nicht ben\195\182tigte Profile"
-L["Purge2"] = "L\195\182scht alle Profile, die nicht von einem Charakter benutzt werden"
-L["Purge_Desc"] = "Sie k\195\182nnen mit nur einem Klick alle nicht verwendeten Profile l\195\182schen"
-L["Release Notes"] = "Versionshinweise"
-L["Toggles"] = "Schaltet" -- Needs review
-L["UseDefault1"] = "Alle Charaktere auf das Profil \"%s\" umschalten"
-L["UseDefault2"] = "Verwendet die Profile \"%s\" f\195\188r alle Toons"
-L["UseDefault_Desc"] = "Sie k\195\182nnen alle Ihre Charaktere dazu zwingen, das Profil \"%s\" zu verwenden, um eine einzelne Konfiguration zu verwalten"
-
+	L["Description"] = "Beschreibung"
+	L["Libraries"] = "Bibliotheken"
+	L["Release Notes"] = "Release Notes"
+	L["Toggles"] = "Schaltet"
+	end
+	L=l:NewLocale(me,"koKR")
+	if (L) then
+	L["Configuration"] = "\234\181\172\236\132\177"
+	L["Description"] = "\236\132\164\235\170\133"
+	L["Libraries"] = "\235\157\188\236\157\180\235\184\140\235\159\172\235\166\172"
+	L["Release Notes"] = "\235\166\180\235\166\172\236\138\164 \235\133\184\237\138\184"
+	L["Toggles"] = "\236\160\132\237\153\152"
+	end
+	L=l:NewLocale(me,"esMX")
+	if (L) then
+	L["Configuration"] = "Configuraci\195\179n"
+	L["Description"] = "Descripci\195\179n"
+	L["Libraries"] = "Bibliotecas"
+	L["Release Notes"] = "Notas de la versi\195\179n"
+	L["Toggles"] = "Alterna"
+	end
+	L=l:NewLocale(me,"ruRU")
+	if (L) then
+	L["Configuration"] = "\208\154\208\190\208\189\209\132\208\184\208\179\209\131\209\128\208\176\209\134\208\184\209\143"
+	L["Description"] = "\208\158\208\191\208\184\209\129\208\176\208\189\208\184\208\181"
+	L["Libraries"] = "\208\145\208\184\208\177\208\187\208\184\208\190\209\130\208\181\208\186\208\184"
+	L["Release Notes"] = "\208\159\209\128\208\184\208\188\208\181\209\135\208\176\208\189\208\184\209\143 \208\186 \208\178\209\139\208\191\209\131\209\129\208\186\209\131"
+	L["Toggles"] = "\208\159\208\181\209\128\208\181\208\186\208\187\209\142\209\135\208\181\208\189\208\184\208\181"
+	end
+	L=l:NewLocale(me,"zhCN")
+	if (L) then
+	L["Configuration"] = "\233\133\141\231\189\174"
+	L["Description"] = "\232\175\180\230\152\142"
+	L["Libraries"] = "\229\155\190\228\185\166\233\166\134"
+	L["Release Notes"] = "\229\143\145\232\161\140\232\175\180\230\152\142"
+	L["Toggles"] = "\229\136\135\230\141\162"
+	end
+	L=l:NewLocale(me,"esES")
+	if (L) then
+	L["Configuration"] = "Configuraci\195\179n"
+	L["Description"] = "Descripci\195\179n"
+	L["Libraries"] = "Bibliotecas"
+	L["Release Notes"] = "Notas de la versi\195\179n"
+	L["Toggles"] = "Alterna"
+	end
+	L=l:NewLocale(me,"zhTW")
+	if (L) then
+	L["Configuration"] = "設定"
+	L["Description"] = "說明"
+	L["Libraries"] = "函式庫"
+	L["Purge1"] = "刪除未使用的設定檔"
+	L["Purge2"] = "刪除所有未被任何一個角色使用的設定檔"
+	L["Purge_Desc"] = "點一下便可刪除所有未使用的設定檔"
+	L["Release Notes"] = "說明"
+	L["Toggles"] = "切換"
+	L["UseDefault1"] = "所有角色都切換成使用 \"%s\" 設定檔"
+	L["UseDefault2"] = "所有分身都用 \"%s\" 設定檔"
+	L["UseDefault_Desc"] = "強制讓你的所有角色都使用 \"%s\" 設定檔，以方便統一管理單一設定。"
 	end
 	L=l:NewLocale(me,"itIT")
 	if (L) then
 	L["Configuration"] = "Configurazione"
-L["Description"] = "Descrizione"
-L["Libraries"] = "Librerie"
-L["Profile"] = "Profilo"
-L["Purge1"] = "Cancella i profili inutilizzati"
-L["Purge2"] = "Cancella tutti i profili che non sono usati da un personaggio"
-L["Purge_Desc"] = "Puoi cancellare tutti i profili inutilizzati con un singolo click"
-L["Release Notes"] = "Note di rilascio"
-L["Toggles"] = "Interruttori"
-L["UseDefault1"] = "Imposta il profilo \"%s\" su tutti i personaggi"
-L["UseDefault2"] = "Usa il profilo '%s\" per tutti i personaggi"
-L["UseDefault_Desc"] = "Puoi far usare a tutti i tuoi personaggi il profilo \"%s\""
-
+	L["Description"] = "Descrizione"
+	L["Libraries"] = "Librerie"
+	L["Purge1"] = "Cancella i profili inutilizzati"
+	L["Purge2"] = "Cancella tutti i profili che non sono usati da un personaggio"
+	L["Purge_Desc"] = "Puoi cancellare tutti i profili inutilizzati con un singolo click"
+	L["Release Notes"] = "Note di rilascio"
+	L["Toggles"] = "Interruttori"
+	L["UseDefault1"] = "Imposta il profilo \"%s\" su tutti i personaggi"
+	L["UseDefault2"] = "Usa il profilo '%s\" per tutti i personaggi"
+	L["UseDefault_Desc"] = "Puoi far usare a tutti i tuoi personaggi il profilo \"%s\""
+	end
+end
+L=LibStub("AceLocale-3.0"):GetLocale(me,true)
+if true then return end
+--@end-do-not-package@
+do
+	local L=l:NewLocale(me,"enUS",true,true)
+L["Appearance"] = true
+L["Assume Buckle on waist"] = true
+L["Bottom Left"] = true
+L["Bottom Right"] = true
+L["Change colors and appearance"] = true
+L["Choose a color scheme"] = true
+L["Choose profile"] = true
+L["Choose what is shown"] = true
+L["Colorize level text by"] = true
+L["Common profile for all characters"] = true
+L["Current profile is: "] = true
+L["Debug info"] = true
+L["E"] = true
+L["Gem frame position"] = true
+L["itemlevel (green best)"] = true
+L["itemlevel (red best)"] = true
+L["Level text aligned to"] = true
+L["none (plain white)"] = true
+L["Options"] = true
+L["Per character profile"] = true
+L["Please, choose between global or per character profile"] = true
+L["Position"] = true
+L["quality"] = true
+L["Show raw item info.Please post the screenshot to Curse Forum"] = true
+L["Shows missing enchants"] = true
+L["Shows number of empty socket"] = true
+L["Shows total number of gems"] = true
+L["Switch between global and per character profile"] = true
+L["Top Left"] = true
+L["Top Right"] = true
+L["Total compatible gems/Total sockets"] = true
+L["You can change this decision on a per character basis in configuration panel."] = true
+L["You can now choose if you want all your character share the same configuration or not."] = true
+	L=l:NewLocale(me,"ptBR")
+	if (L) then
+L["Appearance"] = "apar\\234ncia"
+L["Assume Buckle on waist"] = "Suponha Curvatura na cintura"
+L["Bottom Left"] = "inferior Esquerda"
+L["Bottom Right"] = "inferior direito"
+L["Change colors and appearance"] = "Mude cores e apar\\234ncia"
+L["Choose a color scheme"] = "Escolha um esquema de cores"
+L["Choose profile"] = "Escolha perfil"
+L["Choose what is shown"] = "Escolha o que \\233 mostrado"
+L["Colorize level text by"] = "Colorize texto de n\\237vel por"
+L["Common profile for all characters"] = "Perfil comum para todos os caracteres"
+L["Current profile is: "] = "Perfil atual \\233:"
+L["Debug info"] = "informa\\231\\245es de depura\\231\\227o"
+L["E"] = true
+L["Gem frame position"] = "Gem posi\\231\\227o do quadro"
+L["itemlevel (green best)"] = "itemlevel (verde mais)"
+L["itemlevel (red best)"] = "itemlevel (vermelha melhor)"
+L["Level text aligned to"] = "N\\237vel texto alinhado \\224"
+L["none (plain white)"] = "nenhum (branco liso)"
+L["Options"] = "op\\231\\245es"
+L["Per character profile"] = "Por perfil do personagem"
+L["Please, choose between global or per character profile"] = "Por favor, escolha entre o global ou por perfil de personagem"
+L["Position"] = "posi\\231\\227o"
+L["quality"] = "qualidade"
+L["Show raw item info.Please post the screenshot to Curse Forum"] = "Mostrar item de mat\\233ria-info.Please postar a imagem para amaldi\\231oar Forum"
+L["Shows missing enchants"] = "Mostra encanta desaparecidas"
+L["Shows number of empty socket"] = "Mostra o n\\250mero de soquete vazio"
+L["Shows total number of gems"] = "Mostra o n\\250mero total de gemas"
+L["Switch between global and per character profile"] = "Alternar entre global e por perfil de personagem"
+L["Top Left"] = "Top Esquerda"
+L["Top Right"] = true
+L["Total compatible gems/Total sockets"] = "Total de gemas compat\\237veis / Total soquetes"
+L["You can change this decision on a per character basis in configuration panel."] = "Voc\\234 pode alterar essa decis\\227o com base no painel de configura\\231\\227o por personagem."
+L["You can now choose if you want all your character share the same configuration or not."] = "Agora voc\\234 pode escolher se voc\\234 quer toda a sua quota de car\\225ter a mesma configura\\231\\227o ou n\\227o."
+	end
+	L=l:NewLocale(me,"frFR")
+	if (L) then
+L["Appearance"] = "apparition"
+L["Assume Buckle on waist"] = "Supposons Boucle sur la taille"
+L["Bottom Left"] = "En bas \\224 gauche"
+L["Bottom Right"] = "En bas \\224 droite"
+L["Change colors and appearance"] = "Changer les couleurs et l'apparence"
+L["Choose a color scheme"] = "Choisissez un jeu de couleurs"
+L["Choose profile"] = "Choisissez profil"
+L["Choose what is shown"] = "Choisissez ce qui est montr\\233"
+L["Colorize level text by"] = "Colorier texte de niveau par"
+L["Common profile for all characters"] = "Profil commun pour tous les caract\\232res"
+L["Current profile is: "] = "Profil actuel est:"
+L["Debug info"] = "informations de d\\233bogage"
+L["E"] = true
+L["Gem frame position"] = "Position du cadre Gem"
+L["itemlevel (green best)"] = "itemlevel (vert meilleur)"
+L["itemlevel (red best)"] = "itemlevel (rouge meilleur)"
+L["Level text aligned to"] = "Niveau de texte align\\233 \\224"
+L["none (plain white)"] = "aucune (de couleur blanche)"
+L["Options"] = "options de"
+L["Per character profile"] = "Par profil des personnages"
+L["Please, choose between global or per character profile"] = "S'il vous pla\\238t, choisir entre global ou par fiche de personnage"
+L["Position"] = "position"
+L["quality"] = "qualit\\233"
+L["Show raw item info.Please post the screenshot to Curse Forum"] = "Voir l'article brut info.Please poster la capture d'\\233cran pour maudire Forum"
+L["Shows missing enchants"] = "Affiche enchante manquantes"
+L["Shows number of empty socket"] = "Affiche le num\\233ro de vide prise"
+L["Shows total number of gems"] = "Affiche le nombre total de gemmes"
+L["Switch between global and per character profile"] = "Basculer entre global et par profil de personnage"
+L["Top Left"] = "En haut \\224 gauche"
+L["Top Right"] = "En haut \\224 droite"
+L["Total compatible gems/Total sockets"] = "Total des gemmes compatibles / Total prises"
+L["You can change this decision on a per character basis in configuration panel."] = "Vous pouvez modifier cette d\\233cision sur une base par caract\\232re dans le panneau de configuration."
+L["You can now choose if you want all your character share the same configuration or not."] = "Vous pouvez maintenant choisir si vous voulez que tous vos parts de caract\\232re la m\\234me configuration ou pas."
+	end
+	L=l:NewLocale(me,"deDE")
+	if (L) then
+L["Appearance"] = "Aussehen"
+L["Assume Buckle on waist"] = "Angenommen, Schnalle an der Taille"
+L["Bottom Left"] = "Unten links"
+L["Bottom Right"] = "Unten rechts"
+L["Change colors and appearance"] = "Farben und Aussehen \\228ndern"
+L["Choose a color scheme"] = "W\\228hle ein Farbschema"
+L["Choose profile"] = "W\\228hle ein Profil"
+L["Choose what is shown"] = "W\\228hle, was gezeigt wird"
+L["Colorize level text by"] = "Stufentext f\\228rben nach"
+L["Common profile for all characters"] = "Gemeinsames Profil f\\252r alle Charaktere"
+L["Current profile is: "] = "Aktuelles Profil:"
+L["Debug info"] = "Debug-Informationen"
+L["E"] = true
+L["Gem frame position"] = "Edelst.-Rahmenposition"
+L["itemlevel (green best)"] = "Gegenstandsstufe (gr\\252n am besten)"
+L["itemlevel (red best)"] = "Gegenstandsstufe (rot am besten)"
+L["Level text aligned to"] = "Stufentext ausgerichtet an"
+L["none (plain white)"] = "keine (einfache wei\\223e)"
+L["Options"] = "Optionen"
+L["Per character profile"] = "Profil pro Charakter"
+L["Please, choose between global or per character profile"] = "Bitte w\\228hle zwischen globalem und charakterspezifischem Profil"
+L["Position"] = true
+L["quality"] = "Qualit\\228t"
+L["Show raw item info.Please post the screenshot to Curse Forum"] = "Zeige unbearbeitete Gegenstandsinfo. Bitte poste den Screenshot im Curse-Forum"
+L["Shows missing enchants"] = "Zeigt fehlende Verzauberungen"
+L["Shows number of empty socket"] = "Zeigt die Anzahl der leeren Sockel"
+L["Shows total number of gems"] = "Zeigt Gesamtzahl der Edelsteine"
+L["Switch between global and per character profile"] = "Zwischen globalem und charakterspezifischem Profil wechseln"
+L["Top Left"] = "Oben links"
+L["Top Right"] = "Oben rechts"
+L["Total compatible gems/Total sockets"] = "Alle kompatiblen Edelsteine \\8203\\8203/ Gesamtsockel"
+L["You can change this decision on a per character basis in configuration panel."] = "Sie k\\246nnen diese Entscheidung pro Charakter im Konfigurationsmen\\252 \\228ndern."
+L["You can now choose if you want all your character share the same configuration or not."] = "Sie k\\246nnen nun w\\228hlen, ob all Ihre Charaktere die gleichen Konfiguration verwenden oder nicht."
+	end
+	L=l:NewLocale(me,"itIT")
+	if (L) then
+L["Appearance"] = "Aspetto"
+L["Assume Buckle on waist"] = "Considera che la cintura abbia una borchia"
+L["Bottom Left"] = "In basso a sinistra"
+L["Bottom Right"] = "In basso a destra"
+L["Change colors and appearance"] = "Cambia colori e aspetto"
+L["Choose a color scheme"] = "Scegli uno schema colori"
+L["Choose profile"] = "Scegli un profilo"
+L["Choose what is shown"] = "Scegli le informazioni mostrate"
+L["Colorize level text by"] = "Colora le informazioni sul livello in base a"
+L["Common profile for all characters"] = "Profilo unico per tutti i personaggi"
+L["Current profile is: "] = "Il profilo corrente \\232:"
+L["Debug info"] = "Stampa informazioni per il debug"
+L["E"] = true
+L["Gem frame position"] = "Posizione delle informazioni sulle gemme"
+L["itemlevel (green best)"] = "itemlevel (in verde i migliori)"
+L["itemlevel (red best)"] = "itemlevel (in rosso i migliori)"
+L["Level text aligned to"] = "Posizione del livello nello slot"
+L["none (plain white)"] = "nessun colore"
+L["Options"] = "Opzioni"
+L["Per character profile"] = "Profilo specifico per personaggio"
+L["Please, choose between global or per character profile"] = "Per favore, scegli fra usare un profilo globale o uno specifico del personaggio"
+L["Position"] = "Posizione"
+L["quality"] = "qualit\\224"
+L["Show raw item info.Please post the screenshot to Curse Forum"] = "Mostra le informazioni grezze sugli oggetti, per favore posta questo screenshot nel forum di Curse"
+L["Shows missing enchants"] = "Segnala dove mancano incantamenti"
+L["Shows number of empty socket"] = "Mostra il numero di incavi vuoti"
+L["Shows total number of gems"] = "Mostra il numero totale delle gemme"
+L["Switch between global and per character profile"] = "Passa da profilo globale a profilo per personaggio e viceversa"
+L["Top Left"] = "In alto a sinistra"
+L["Top Right"] = "In alto a destra"
+L["Total compatible gems/Total sockets"] = "Numero gemme compatibili/Numero incavi"
+L["You can change this decision on a per character basis in configuration panel."] = "Potrai cambiare questa decisone dal pannello di configurazione"
+L["You can now choose if you want all your character share the same configuration or not."] = "Adesso \\232 possibile scegliere fra una configurazione globale e uno specifica per personaggio"
 	end
 	L=l:NewLocale(me,"koKR")
 	if (L) then
-	L["Configuration"] = "\234\181\172\236\132\177" -- Needs review
-L["Description"] = "\236\132\164\235\170\133" -- Needs review
-L["Libraries"] = "\235\157\188\236\157\180\235\184\140\235\159\172\235\166\172" -- Needs review
-L["Profile"] = "\236\156\164\234\179\189" -- Needs review
-L["Purge1"] = "\236\130\172\236\154\169\237\149\152\236\167\128 \236\149\138\235\138\148 \237\148\132\235\161\156\237\149\132\236\157\132 \236\130\173\236\160\156" -- Needs review
-L["Purge2"] = "\235\172\184\236\158\144\234\176\128 \236\130\172\236\154\169\235\144\152\236\167\128 \236\149\138\236\157\128 \235\170\168\235\147\160 \237\148\132\235\161\156\237\140\140\236\157\188\236\157\132 \236\130\173\236\160\156\237\149\169\235\139\136\235\139\164" -- Needs review
-L["Purge_Desc"] = "\235\139\185\236\139\160\236\157\128 \237\149\156 \235\178\136\236\157\152 \237\129\180\235\166\173\236\156\188\235\161\156 \235\170\168\235\147\160 \236\130\172\236\154\169\235\144\152\236\167\128 \236\149\138\236\157\128 \237\148\132\235\161\156\237\149\132\236\157\132 \236\130\173\236\160\156\237\149\160 \236\136\152 \236\158\136\236\138\181\235\139\136\235\139\164" -- Needs review
-L["Release Notes"] = "\235\166\180\235\166\172\236\138\164 \235\133\184\237\138\184" -- Needs review
-L["Toggles"] = "\236\160\132\237\153\152" -- Needs review
-L["UseDefault1"] = "\"%s\"\237\148\132\235\161\156\237\149\132\236\151\144 \235\170\168\235\147\160 \235\172\184\236\158\144\235\165\188 \236\160\132\237\153\152" -- Needs review
-L["UseDefault2"] = "\235\170\168\235\147\160 \235\172\184\236\158\144\236\151\144 \235\140\128\237\149\180 \"%s\"\237\148\132\235\161\156\237\140\140\236\157\188\236\157\132 \236\130\172\236\154\169\237\149\152\236\151\172" -- Needs review
-L["UseDefault_Desc"] = "\235\139\168\236\157\188 \234\181\172\236\132\177\236\157\132 \234\180\128\235\166\172\237\149\152\234\184\176 \236\156\132\237\149\180 \"% s\"\237\148\132\235\161\156\237\140\140\236\157\188\236\157\132 \236\130\172\236\154\169\237\149\152\236\151\172 \235\170\168\235\147\160 \235\172\184\236\158\144\235\165\188 \234\176\149\236\160\156" -- Needs review
-
+L["Appearance"] = "\\50808\\54805"
+L["Assume Buckle on waist"] = "\\54728\\47532\\46944\\50640 \\51412\\49632 \\44032\\51221"
+L["Bottom Left"] = "\\50812\\51901 \\50500\\47000"
+L["Bottom Right"] = "\\50724\\47480\\51901 \\50500\\47000"
+L["Change colors and appearance"] = "\\49353\\49345\\44284 \\50808\\54805 \\48320\\44221"
+L["Choose a color scheme"] = "\\49353\\49345\\51012 \\49440\\53469"
+L["Choose profile"] = "\\54532\\47196\\54596 \\49440\\53469"
+L["Choose what is shown"] = "\\47924\\50631\\51012 \\54364\\49884\\54624\\51648 \\49440\\53469"
+L["Colorize level text by"] = "\\47112\\48296 \\53581\\49828\\53944 \\49353\\49345 \\51077\\55176\\44592"
+L["Common profile for all characters"] = "\\47784\\46304 \\52880\\47533\\53552\\50640 \\51068\\48152 \\54532\\47196\\54596 \\49324\\50857"
+L["Current profile is: "] = "\\54788\\51116 \\54532\\47196\\54596\\51008 \\45796\\51020\\44284 \\44057\\49845\\45768\\45796:"
+L["Debug info"] = "\\46356\\48260\\44536 \\51221\\48372"
+L["E"] = true
+L["Gem frame position"] = "\\48372\\49437 \\54532\\47112\\51076 \\50948\\52824"
+L["itemlevel (green best)"] = "\\50500\\51060\\53596\\47112\\48296 (\\45433\\49353 \\52572\\49345)"
+L["itemlevel (red best)"] = "\\50500\\51060\\53596\\47112\\48296 (\\51201\\49353 \\52572\\49345)"
+L["Level text aligned to"] = "\\47112\\48296 \\53581\\49828\\53944 \\51221\\47148"
+L["none (plain white)"] = "\\50630\\51020 (\\51068\\48152 \\55152\\49353)"
+L["Options"] = "\\50741\\49496"
+L["Per character profile"] = "\\52880\\47533\\53552 \\48324 \\54532\\47196\\54596"
+L["Please, choose between global or per character profile"] = "\\51204\\50669 \\54532\\47196\\54596 \\46608\\45716 \\52880\\47533\\53552 \\48324 \\54532\\47196\\54596 \\51473 \\49440\\53469\\54644\\51452\\49464\\50836"
+L["Position"] = "\\50948\\52824"
+L["quality"] = "\\54408\\51656"
+L["Show raw item info.Please post the screenshot to Curse Forum"] = "\\48120\\51089\\46041 \\50500\\51060\\53596 \\51221\\48372 \\48372\\44592.Curse \\54252\\47100\\50640 \\49828\\53356\\47536\\49399\\51012 \\50732\\47140\\51452\\49464\\50836"
+L["Shows missing enchants"] = "\\45572\\46973 \\46108 \\47560\\48277 \\48512\\50668\\47484 \\54364\\49884\\54633\\45768\\45796"
+L["Shows number of empty socket"] = "\\48712 \\48372\\49437 \\54856\\51032 \\44079\\49688\\47484 \\54364\\49884\\54633\\45768\\45796"
+L["Shows total number of gems"] = "\\48372\\49437\\51032 \\51204\\52404 \\44079\\49688 \\54364\\49884"
+L["Switch between global and per character profile"] = "\\51204\\50669 \\54532\\47196\\54596\\44284 \\52880\\47533\\53552 \\48324 \\54532\\47196\\54596 \\48320\\44221\\54616\\44592"
+L["Top Left"] = "\\50812\\51901 \\50948"
+L["Top Right"] = "\\50724\\47480\\51901 \\50948"
+L["Total compatible gems/Total sockets"] = "\\51204\\52404 \\54840\\54872 \\48372\\49437 / \\51204\\52404 \\48372\\49437\\54856"
+L["You can change this decision on a per character basis in configuration panel."] = "\\52880\\47533\\53552 \\48324 \\49444\\51221 \\54056\\45328\\50640\\49436 \\51060 \\49444\\51221\\51012 \\48320\\44221\\54624 \\49688 \\51080\\49845\\45768\\45796."
+L["You can now choose if you want all your character share the same configuration or not."] = "\\47784\\46304 \\52880\\47533\\53552\\44032 \\44057\\51008 \\49444\\51221\\51012 \\44277\\50976\\54624\\51648 \\49440\\53469\\54624 \\49688 \\51080\\49845\\45768\\45796."
 	end
 	L=l:NewLocale(me,"esMX")
 	if (L) then
-	L["Configuration"] = "Configuraci\195\179n," -- Needs review
-L["Description"] = "Descripci\195\179n," -- Needs review
-L["Libraries"] = "bibliotecas," -- Needs review
-L["Profile"] = "Perfil," -- Needs review
-L["Purge1"] = "Eliminar los perfiles no utilizados" -- Needs review
-L["Purge2"] = "Elimina todos los perfiles que no sean utilizadas por un personaje" -- Needs review
-L["Purge_Desc"] = "Puede eliminar todos los perfiles utilizados con s\195\179lo un clic" -- Needs review
-L["Release Notes"] = "Notas de la versi\195\179n" -- Needs review
-L["Toggles"] = "Alterna" -- Needs review
-L["UseDefault1"] = "Cambiar todos los caracteres de perfil \"%s\"" -- Needs review
-L["UseDefault2"] = "Utiliza los perfiles de la \"%s\" para todos sus caracteres" -- Needs review
-L["UseDefault_Desc"] = "Puede forzar a todos tus personajes para usar el perfil \"%s\" con el fin de administrar una sola configuraci\195\179n" -- Needs review
-
+L["Appearance"] = "Apariencia"
+L["Assume Buckle on waist"] = "Supongamos Hebilla en la cintura"
+L["Bottom Left"] = "Abajo a la izquierda"
+L["Bottom Right"] = "Abajo a la derecha"
+L["Change colors and appearance"] = "Cambie los colores y la apariencia"
+L["Choose a color scheme"] = "Elegir un esquema de color"
+L["Choose profile"] = "Elija el perfil"
+L["Choose what is shown"] = "Elija lo que se muestra"
+L["Colorize level text by"] = "Colorear texto de nivel por"
+L["Common profile for all characters"] = "Perfil com\\250n para todos los personajes"
+L["Current profile is: "] = "Perfil actual es:"
+L["Debug info"] = "info de depuraci\\243n"
+L["E"] = true
+L["Gem frame position"] = "Posici\\243n del marco de la gema"
+L["itemlevel (green best)"] = "itemlevel (verde mejor)"
+L["itemlevel (red best)"] = "itemlevel (rojo mejor)"
+L["Level text aligned to"] = "Nivel texto alineado a"
+L["none (plain white)"] = "ninguno (blanco normal)"
+L["Options"] = "Opciones"
+L["Per character profile"] = "Por perfil de personaje"
+L["Please, choose between global or per character profile"] = "Por favor, elija entre lo global o por cada perfil de personaje"
+L["Position"] = "posici\\243n"
+L["quality"] = "calidad"
+L["Show raw item info.Please post the screenshot to Curse Forum"] = "Mostrar elemento prima info.Please publicar la pantalla para maldecir Foro"
+L["Shows missing enchants"] = "Muestra encantamientos desaparecidos"
+L["Shows number of empty socket"] = "Muestra el n\\250mero de z\\243calo vac\\237o"
+L["Shows total number of gems"] = "Muestra el n\\250mero total de gemas"
+L["Switch between global and per character profile"] = "Cambie entre global y por perfil del personaje"
+L["Top Left"] = "Arriba a la izquierda"
+L["Top Right"] = "Arriba a la derecha"
+L["Total compatible gems/Total sockets"] = "Total de gemas compatibles / sockets totales"
+L["You can change this decision on a per character basis in configuration panel."] = "Usted puede cambiar esta decisi\\243n en funci\\243n de cada personaje en el panel de configuraci\\243n."
+L["You can now choose if you want all your character share the same configuration or not."] = "Ahora puede elegir si desea que todo su parte el car\\225cter de la misma configuraci\\243n o no."
 	end
 	L=l:NewLocale(me,"ruRU")
 	if (L) then
-	L["Configuration"] = "\208\154\208\190\208\189\209\132\208\184\208\179\209\131\209\128\208\176\209\134\208\184\209\143," -- Needs review
-L["Description"] = "\208\158\208\191\208\184\209\129\208\176\208\189\208\184\208\181," -- Needs review
-L["Libraries"] = "\208\145\208\184\208\177\208\187\208\184\208\190\209\130\208\181\208\186\208\184," -- Needs review
-L["Profile"] = "\208\159\209\128\208\190\209\132\208\184\208\187\209\140," -- Needs review
-L["Purge1"] = "\208\163\208\180\208\176\208\187\208\181\208\189\208\184\208\181 \208\189\208\181\208\184\209\129\208\191\208\190\208\187\209\140\208\183\209\131\208\181\208\188\209\139\209\133 \208\191\209\128\208\190\209\132\208\184\208\187\208\181\208\185" -- Needs review
-L["Purge2"] = "\208\163\208\180\208\176\208\187\209\143\208\181\209\130 \208\178\209\129\208\181 \208\191\209\128\208\190\209\132\208\184\208\187\208\184, \208\186\208\190\209\130\208\190\209\128\209\139\208\181 \208\189\208\181 \208\184\209\129\208\191\208\190\208\187\209\140\208\183\209\131\209\142\209\130\209\129\209\143 \208\191\208\181\209\128\209\129\208\190\208\189\208\176\208\182\208\181\208\188" -- Needs review
-L["Purge_Desc"] = "\208\156\208\190\208\182\208\189\208\190 \209\131\208\180\208\176\208\187\208\184\209\130\209\140 \208\178\209\129\208\181 \208\189\208\181\208\184\209\129\208\191\208\190\208\187\209\140\208\183\209\131\208\181\208\188\209\139\208\181 \208\191\209\128\208\190\209\132\208\184\208\187\208\184 \209\129 \208\191\208\190\208\188\208\190\209\137\209\140\209\142 \208\178\209\129\208\181\208\179\208\190 \208\190\208\180\208\189\208\190\208\179\208\190 \208\186\208\187\208\184\208\186\208\176" -- Needs review
-L["Release Notes"] = "\208\159\209\128\208\184\208\188\208\181\209\135\208\176\208\189\208\184\209\143 \208\186 \208\178\209\139\208\191\209\131\209\129\208\186\209\131" -- Needs review
-L["Toggles"] = "\208\146\208\186\208\187\209\142\209\135\208\181\208\189\208\184\208\181 \208\184\208\187\208\184 \208\178\209\139\208\186\208\187\209\142\209\135\208\181\208\189\208\184\208\181" -- Needs review
-L["UseDefault1"] = "\208\146\208\186\208\187\209\142\209\135\208\184\209\130\208\181 \208\178\209\129\208\181 \209\129\208\184\208\188\208\178\208\190\208\187\209\139 \"%s\" \208\191\209\128\208\190\209\132\208\184\208\187\209\140" -- Needs review
-L["UseDefault2"] = "\208\152\209\129\208\191\208\190\208\187\209\140\208\183\209\131\208\181\209\130 \"%s\" \208\191\209\128\208\190\209\132\208\184\208\187\208\184 \208\180\208\187\209\143 \208\178\209\129\208\181\209\133 \208\178\208\176\209\136\208\184\209\133 \208\191\208\181\209\128\209\129\208\190\208\189\208\176\208\182\208\181\208\185" -- Needs review
-L["UseDefault_Desc"] = "\208\146\209\139 \208\188\208\190\208\182\208\181\209\130\208\181 \208\183\208\176\209\129\209\130\208\176\208\178\208\184\209\130\209\140 \208\178\209\129\208\181 \209\129\208\184\208\188\208\178\208\190\208\187\209\139 \208\184\209\129\208\191\208\190\208\187\209\140\208\183\208\190\208\178\208\176\209\130\209\140 \"%s\" \208\191\209\128\208\190\209\132\208\184\208\187\209\140 \208\180\208\187\209\143 \209\130\208\190\208\179\208\190, \209\135\209\130\208\190\208\177\209\139 \209\131\208\191\209\128\208\176\208\178\208\187\209\143\209\130\209\140 \208\190\208\180\208\189\208\190\208\185 \208\186\208\190\208\189\209\132\208\184\208\179\209\131\209\128\208\176\209\134\208\184\208\184" -- Needs review
-
+L["Appearance"] = "\\1042\\1085\\1077\\1096\\1085\\1080\\1081 \\1074\\1080\\1076"
+L["Assume Buckle on waist"] = "\\1055\\1088\\1077\\1076\\1087\\1086\\1083\\1086\\1078\\1080\\1084, \\1055\\1088\\1103\\1078\\1082\\1072 \\1085\\1072 \\1090\\1072\\1083\\1080\\1080"
+L["Bottom Left"] = "\\1042\\1085\\1080\\1079\\1091 \\1089\\1083\\1077\\1074\\1072"
+L["Bottom Right"] = "\\1053\\1080\\1078\\1085\\1080\\1081 \\1087\\1088\\1072\\1074\\1099\\1081"
+L["Change colors and appearance"] = "\\1048\\1079\\1084\\1077\\1085\\1077\\1085\\1080\\1077 \\1094\\1074\\1077\\1090\\1072 \\1080 \\1074\\1085\\1077\\1096\\1085\\1080\\1081 \\1074\\1080\\1076"
+L["Choose a color scheme"] = "\\1042\\1099\\1073\\1077\\1088\\1080\\1090\\1077 \\1094\\1074\\1077\\1090\\1086\\1074\\1091\\1102 \\1089\\1093\\1077\\1084\\1091"
+L["Choose profile"] = "\\1042\\1099\\1073\\1088\\1072\\1090\\1100 \\1087\\1088\\1086\\1092\\1080\\1083\\1100"
+L["Choose what is shown"] = "\\1042\\1099\\1073\\1077\\1088\\1080\\1090\\1077 \\1090\\1086, \\1095\\1090\\1086 \\1087\\1086\\1082\\1072\\1079\\1072\\1085\\1086"
+L["Colorize level text by"] = "\\1056\\1072\\1089\\1082\\1088\\1072\\1089\\1080\\1090\\1100 \\1090\\1077\\1082\\1089\\1090 \\1091\\1088\\1086\\1074\\1085\\1103 \\1087\\1086"
+L["Common profile for all characters"] = "\\1054\\1073\\1097\\1080\\1077 \\1087\\1088\\1086\\1092\\1080\\1083\\1100 \\1076\\1083\\1103 \\1074\\1089\\1077\\1093 \\1087\\1077\\1088\\1089\\1086\\1085\\1072\\1078\\1077\\1081"
+L["Current profile is: "] = "\\1058\\1077\\1082\\1091\\1097\\1080\\1081 \\1087\\1088\\1086\\1092\\1080\\1083\\1100:"
+L["Debug info"] = "\\1080\\1085\\1092\\1086\\1088\\1084\\1072\\1094\\1080\\1103 Debug"
+L["E"] = true
+L["Gem frame position"] = "Gem \\1087\\1086\\1083\\1086\\1078\\1077\\1085\\1080\\1103 \\1088\\1072\\1084\\1082\\1080"
+L["itemlevel (green best)"] = "itemlevel (\\1079\\1077\\1083\\1077\\1085\\1099\\1081 \\1083\\1091\\1095\\1096\\1077)"
+L["itemlevel (red best)"] = "itemlevel (\\1082\\1088\\1072\\1089\\1085\\1099\\1081 \\1083\\1091\\1095\\1096\\1077)"
+L["Level text aligned to"] = "\\1058\\1077\\1082\\1089\\1090 \\1059\\1088\\1086\\1074\\1077\\1085\\1100 \\1074\\1099\\1088\\1072\\1074\\1085\\1080\\1074\\1072\\1077\\1090\\1089\\1103"
+L["none (plain white)"] = "\\1085\\1077\\1090 (\\1087\\1088\\1086\\1089\\1090\\1086\\1081 \\1073\\1077\\1083\\1099\\1081)"
+L["Options"] = "\\1054\\1087\\1094\\1080\\1080"
+L["Per character profile"] = "\\1047\\1072 \\1087\\1088\\1086\\1092\\1080\\1083\\1077 \\1087\\1077\\1088\\1089\\1086\\1085\\1072\\1078\\1072"
+L["Please, choose between global or per character profile"] = "\\1055\\1086\\1078\\1072\\1083\\1091\\1081\\1089\\1090\\1072, \\1074\\1099\\1073\\1080\\1088\\1072\\1090\\1100 \\1084\\1077\\1078\\1076\\1091 \\1075\\1083\\1086\\1073\\1072\\1083\\1100\\1085\\1099\\1084\\1080 \\1080\\1083\\1080 \\1079\\1072 \\1087\\1088\\1086\\1092\\1080\\1083\\1077 \\1087\\1077\\1088\\1089\\1086\\1085\\1072\\1078\\1072"
+L["Position"] = "\\1055\\1086\\1083\\1086\\1078\\1077\\1085\\1080\\1077"
+L["quality"] = "\\1082\\1072\\1095\\1077\\1089\\1090\\1074\\1086"
+L["Show raw item info.Please post the screenshot to Curse Forum"] = "\\1055\\1086\\1082\\1072\\1079\\1072\\1090\\1100 \\1089\\1099\\1088\\1086\\1081 \\1087\\1091\\1085\\1082\\1090 info.Please \\1088\\1072\\1079\\1084\\1077\\1089\\1090\\1080\\1090\\1100 \\1089\\1082\\1088\\1080\\1085\\1096\\1086\\1090 \\1087\\1088\\1086\\1082\\1083\\1080\\1085\\1072\\1090\\1100 \\1092\\1086\\1088\\1091\\1084"
+L["Shows missing enchants"] = "\\1055\\1086\\1082\\1072\\1079\\1099\\1074\\1072\\1090\\1100 \\1086\\1090\\1089\\1091\\1090\\1089\\1090\\1074\\1091\\1102\\1097\\1080\\1077 \\1086\\1095\\1072\\1088\\1086\\1074\\1099\\1074\\1072\\1077\\1090"
+L["Shows number of empty socket"] = "\\1055\\1086\\1082\\1072\\1079\\1099\\1074\\1072\\1077\\1090 \\1082\\1086\\1083\\1080\\1095\\1077\\1089\\1090\\1074\\1086 \\1087\\1091\\1089\\1090\\1086\\1077 \\1075\\1085\\1077\\1079\\1076\\1086"
+L["Shows total number of gems"] = "\\1055\\1086\\1082\\1072\\1079\\1099\\1074\\1072\\1077\\1090 \\1086\\1073\\1097\\1077\\1077 \\1082\\1086\\1083\\1080\\1095\\1077\\1089\\1090\\1074\\1086 \\1076\\1088\\1072\\1075\\1086\\1094\\1077\\1085\\1085\\1099\\1093 \\1082\\1072\\1084\\1085\\1077\\1081"
+L["Switch between global and per character profile"] = "\\1055\\1077\\1088\\1077\\1082\\1083\\1102\\1095\\1077\\1085\\1080\\1077 \\1084\\1077\\1078\\1076\\1091 \\1075\\1083\\1086\\1073\\1072\\1083\\1100\\1085\\1099\\1084 \\1080 \\1079\\1072 \\1087\\1088\\1086\\1092\\1080\\1083\\1077 \\1087\\1077\\1088\\1089\\1086\\1085\\1072\\1078\\1072"
+L["Top Left"] = "\\1042\\1074\\1077\\1088\\1093\\1091 \\1089\\1083\\1077\\1074\\1072"
+L["Top Right"] = "\\1042\\1074\\1077\\1088\\1093\\1091 \\1089\\1087\\1088\\1072\\1074\\1072"
+L["Total compatible gems/Total sockets"] = "\\1042\\1089\\1077\\1075\\1086 \\1089\\1086\\1074\\1084\\1077\\1089\\1090\\1080\\1084\\1099\\1077 \\1076\\1088\\1072\\1075\\1086\\1094\\1077\\1085\\1085\\1099\\1077 \\1082\\1072\\1084\\1085\\1080 / \\1042\\1089\\1077\\1075\\1086 \\1088\\1086\\1079\\1077\\1090\\1082\\1080"
+L["You can change this decision on a per character basis in configuration panel."] = "\\1042\\1099 \\1084\\1086\\1078\\1077\\1090\\1077 \\1080\\1079\\1084\\1077\\1085\\1080\\1090\\1100 \\1101\\1090\\1086 \\1088\\1077\\1096\\1077\\1085\\1080\\1077 \\1085\\1072 \\1085\\1072 \\1089\\1080\\1084\\1074\\1086\\1083 \\1086\\1089\\1085\\1086\\1074\\1077 \\1074 \\1087\\1072\\1085\\1077\\1083\\1080 \\1082\\1086\\1085\\1092\\1080\\1075\\1091\\1088\\1072\\1094\\1080\\1080."
+L["You can now choose if you want all your character share the same configuration or not."] = "\\1058\\1077\\1087\\1077\\1088\\1100 \\1074\\1099 \\1084\\1086\\1078\\1077\\1090\\1077 \\1074\\1099\\1073\\1088\\1072\\1090\\1100, \\1077\\1089\\1083\\1080 \\1074\\1099 \\1093\\1086\\1090\\1080\\1090\\1077, \\1095\\1090\\1086\\1073\\1099 \\1074\\1089\\1077 \\1089\\1074\\1086\\1102 \\1076\\1086\\1083\\1102 \\1093\\1072\\1088\\1072\\1082\\1090\\1077\\1088 \\1080 \\1090\\1091 \\1078\\1077 \\1082\\1086\\1085\\1092\\1080\\1075\\1091\\1088\\1072\\1094\\1080\\1102 \\1080\\1083\\1080 \\1085\\1077\\1090."
 	end
 	L=l:NewLocale(me,"zhCN")
 	if (L) then
-	L["Configuration"] = "\231\187\132\230\128\129\239\188\140" -- Needs review
-L["Description"] = "\230\143\143\232\191\176\239\188\140" -- Needs review
-L["Libraries"] = "\229\155\190\228\185\166\233\166\134\239\188\140" -- Needs review
-L["Profile"] = "\228\184\170\228\186\186\232\181\132\230\150\153\239\188\140" -- Needs review
-L["Purge1"] = "\229\136\160\233\153\164\230\156\170\228\189\191\231\148\168\231\154\132\233\133\141\231\189\174\230\150\135\228\187\182" -- Needs review
-L["Purge2"] = "\229\136\160\233\153\164\230\156\170\228\189\191\231\148\168\231\154\132\229\173\151\231\172\166\230\137\128\230\156\137\233\133\141\231\189\174\230\150\135\228\187\182" -- Needs review
-L["Purge_Desc"] = "\230\130\168\229\143\175\228\187\165\229\136\160\233\153\164\230\137\128\230\156\137\230\156\170\228\189\191\231\148\168\231\154\132\233\133\141\231\189\174\230\150\135\228\187\182\239\188\140\229\143\170\233\156\128\231\130\185\229\135\187\228\184\128\228\184\139" -- Needs review
-L["Release Notes"] = "\229\143\145\232\161\140\232\175\180\230\152\142" -- Needs review
-L["Toggles"] = "\229\136\135\230\141\162" -- Needs review
-L["UseDefault1"] = "\228\186\164\230\141\162\230\156\186\231\154\132\230\137\128\230\156\137\229\173\151\231\172\166\226\128\156\239\188\133s\226\128\157\231\154\132\228\184\170\228\186\186\232\181\132\230\150\153" -- Needs review
-L["UseDefault2"] = "\228\189\191\231\148\168\226\128\156\239\188\133s\226\128\157\230\155\178\231\186\191\231\154\132\230\137\128\230\156\137\232\167\146\232\137\178" -- Needs review
-L["UseDefault_Desc"] = "\230\130\168\229\143\175\228\187\165\229\188\186\229\136\182\230\137\128\230\156\137\232\167\146\232\137\178\228\189\191\231\148\168\226\128\156\239\188\133s\226\128\157\231\154\132\228\184\170\228\186\186\232\181\132\230\150\153\239\188\140\228\187\165\231\174\161\231\144\134\228\184\128\228\184\170\229\141\149\228\184\128\231\154\132\233\133\141\231\189\174" -- Needs review
-
+L["Appearance"] = "\\22806\\35266"
+L["Assume Buckle on waist"] = "\\20551\\35774\\26377\\33136\\24102\\25187\\25554\\27133"
+L["Bottom Left"] = "\\24038\\19979"
+L["Bottom Right"] = "\\21491\\19979"
+L["Change colors and appearance"] = "\\25913\\21464\\39068\\33394\\21450\\22806\\35266"
+L["Choose a color scheme"] = "\\36873\\25321\\19968\\31181\\33394\\24425\\26041\\26696"
+L["Choose profile"] = "\\36873\\25321\\37197\\32622\\25991\\20214"
+L["Choose what is shown"] = "\\36873\\25321\\26174\\31034\\21738\\20123"
+L["Colorize level text by"] = "\\31561\\32423\\25991\\23383\\30528\\33394\\25353\\29031"
+L["Common profile for all characters"] = "\\25152\\26377\\35282\\33394\\20849\\29992\\37197\\32622"
+L["Current profile is: "] = "\\24403\\21069\\37197\\32622\\25991\\20214\\65306"
+L["Debug info"] = "\\35843\\35797\\20449\\24687"
+L["E"] = true
+L["Gem frame position"] = "\\23453\\30707\\32479\\35745\\31383\\21475\\20301\\32622"
+L["itemlevel (green best)"] = "\\29289\\21697\\31561\\32423\\65288\\32511\\33394\\26368\\20339\\65289"
+L["itemlevel (red best)"] = "\\29289\\21697\\31561\\32423\\65288\\32418\\33394\\26368\\20339\\65289"
+L["Level text aligned to"] = "\\25991\\26412\\27700\\24179\\23545\\40784"
+L["none (plain white)"] = "\\26080\\65288\\32431\\30333\\33394\\65289"
+L["Options"] = "\\36873\\39033"
+L["Per character profile"] = "\\27599\\20010\\35282\\33394\\29420\\31435\\37197\\32622"
+L["Please, choose between global or per character profile"] = "\\35831\\36873\\25321\\20351\\29992\\20840\\23616\\20844\\29992\\37197\\32622\\25110\\27599\\20010\\35282\\33394\\29420\\31435\\37197\\32622"
+L["Position"] = "\\20301\\32622"
+L["quality"] = "\\21697\\36136"
+L["Show raw item info.Please post the screenshot to Curse Forum"] = "\\26174\\31034\\21407\\22987\\29289\\21697\\20449\\24687. \\35831\\25552\\20132\\25130\\22270\\21040Curse\\35770\\22363"
+L["Shows missing enchants"] = "\\26174\\31034\\20002\\22833\\30340\\38468\\39764"
+L["Shows number of empty socket"] = "\\26174\\31034\\31354\\30340\\25554\\27133\\25968"
+L["Shows total number of gems"] = "\\26174\\31034\\23453\\30707\\24635\\25968"
+L["Switch between global and per character profile"] = "\\20999\\25442\\20351\\29992\\20840\\23616\\20844\\29992\\37197\\32622\\25110\\27599\\20010\\35282\\33394\\29420\\31435\\37197\\32622"
+L["Top Left"] = "\\24038\\19978"
+L["Top Right"] = "\\21491\\19978"
+L["Total compatible gems/Total sockets"] = "\\24635\\20860\\23481\\23453\\30707\\25968/\\24635\\25554\\27133\\25968"
+L["You can change this decision on a per character basis in configuration panel."] = "\\24744\\20173\\28982\\21487\\20197\\22522\\20110\\27599\\20010\\35282\\33394\\22312\\30028\\38754\\37197\\32622\\38754\\26495\\20013\\20877\\27425\\26356\\25913\\36825\\19968\\36873\\39033\\12290"
+L["You can now choose if you want all your character share the same configuration or not."] = "\\24744\\29616\\22312\\21487\\20197\\36873\\25321\\65292\\26159\\21542\\24819\\35201\\25152\\26377\\30340\\35282\\33394\\20849\\29992\\30456\\21516\\37197\\32622\\12290"
 	end
 	L=l:NewLocale(me,"esES")
 	if (L) then
-	L["Configuration"] = "Configuraci\195\179n," -- Needs review
-L["Description"] = "Descripci\195\179n," -- Needs review
-L["Libraries"] = "bibliotecas," -- Needs review
-L["Profile"] = "Perfil," -- Needs review
-L["Purge1"] = "Eliminar los perfiles no utilizados" -- Needs review
-L["Purge2"] = "Elimina todos los perfiles que no sean utilizadas por un personaje" -- Needs review
-L["Purge_Desc"] = "Puede eliminar todos los perfiles utilizados con s\195\179lo un clic" -- Needs review
-L["Release Notes"] = "Notas de la versi\195\179n" -- Needs review
-L["Toggles"] = "Alterna" -- Needs review
-L["UseDefault1"] = "Cambiar todos los caracteres de perfil \"%s\"" -- Needs review
-L["UseDefault2"] = "Utiliza los perfiles de la \"%s\" para todos sus caracteres" -- Needs review
-L["UseDefault_Desc"] = "Puede forzar a todos tus personajes para usar el perfil \"%s\" con el fin de administrar una sola configuraci\195\179n" -- Needs review
-
+L["Appearance"] = "Apariencia"
+L["Assume Buckle on waist"] = "Supongamos Hebilla en la cintura"
+L["Bottom Left"] = "Abajo a la izquierda"
+L["Bottom Right"] = "Abajo a la derecha"
+L["Change colors and appearance"] = "Cambie los colores y la apariencia"
+L["Choose a color scheme"] = "Elegir un esquema de color"
+L["Choose profile"] = "Elija el perfil"
+L["Choose what is shown"] = "Elija lo que se muestra"
+L["Colorize level text by"] = "Colorear texto de nivel por"
+L["Common profile for all characters"] = "Perfil com\\250n para todos los personajes"
+L["Current profile is: "] = "Perfil actual es:"
+L["Debug info"] = "info de depuraci\\243n"
+L["E"] = true
+L["Gem frame position"] = "Posici\\243n del marco de la gema"
+L["itemlevel (green best)"] = "itemlevel (verde mejor)"
+L["itemlevel (red best)"] = "itemlevel (rojo mejor)"
+L["Level text aligned to"] = "Nivel texto alineado a"
+L["none (plain white)"] = "ninguno (blanco normal)"
+L["Options"] = "Opciones"
+L["Per character profile"] = "Por perfil de personaje"
+L["Please, choose between global or per character profile"] = "Por favor, elija entre lo global o por cada perfil de personaje"
+L["Position"] = "posici\\243n"
+L["quality"] = "calidad"
+L["Show raw item info.Please post the screenshot to Curse Forum"] = "Mostrar elemento prima info.Please publicar la pantalla para maldecir Foro"
+L["Shows missing enchants"] = "Muestra encantamientos desaparecidos"
+L["Shows number of empty socket"] = "Muestra el n\\250mero de z\\243calo vac\\237o"
+L["Shows total number of gems"] = "Muestra el n\\250mero total de gemas"
+L["Switch between global and per character profile"] = "Cambie entre global y por perfil del personaje"
+L["Top Left"] = "Arriba a la izquierda"
+L["Top Right"] = "Arriba a la derecha"
+L["Total compatible gems/Total sockets"] = "Total de gemas compatibles / sockets totales"
+L["You can change this decision on a per character basis in configuration panel."] = "Usted puede cambiar esta decisi\\243n en funci\\243n de cada personaje en el panel de configuraci\\243n."
+L["You can now choose if you want all your character share the same configuration or not."] = "Ahora puede elegir si desea que todo su parte el car\\225cter de la misma configuraci\\243n o no."
 	end
 	L=l:NewLocale(me,"zhTW")
 	if (L) then
-	L["Configuration"] = "\231\181\132\230\133\139\239\188\140" -- Needs review
-L["Description"] = "\230\143\143\232\191\176\239\188\140" -- Needs review
-L["Libraries"] = "\229\156\150\230\155\184\233\164\168\239\188\140" -- Needs review
-L["Profile"] = "\229\128\139\228\186\186\232\179\135\230\150\153\239\188\140" -- Needs review
-L["Purge1"] = "\229\136\170\233\153\164\230\156\170\228\189\191\231\148\168\231\154\132\233\133\141\231\189\174\230\150\135\228\187\182" -- Needs review
-L["Purge2"] = "\229\136\170\233\153\164\230\156\170\228\189\191\231\148\168\231\154\132\229\173\151\231\172\166\230\137\128\230\156\137\233\133\141\231\189\174\230\150\135\228\187\182" -- Needs review
-L["Purge_Desc"] = "\230\130\168\229\143\175\228\187\165\229\136\170\233\153\164\230\137\128\230\156\137\230\156\170\228\189\191\231\148\168\231\154\132\233\133\141\231\189\174\230\150\135\228\187\182\239\188\140\229\143\170\233\156\128\233\187\158\230\147\138\228\184\128\228\184\139" -- Needs review
-L["Release Notes"] = "\231\153\188\232\161\140\232\170\170\230\152\142" -- Needs review
-L["Toggles"] = "\229\136\135\230\143\155" -- Needs review
-L["UseDefault1"] = "\228\186\164\230\143\155\230\169\159\231\154\132\230\137\128\230\156\137\229\173\151\231\172\166\226\128\156\239\188\133s\226\128\157\231\154\132\229\128\139\228\186\186\232\179\135\230\150\153" -- Needs review
-L["UseDefault2"] = "\228\189\191\231\148\168\226\128\156\239\188\133s\226\128\157\230\155\178\231\183\154\231\154\132\230\137\128\230\156\137\232\167\146\232\137\178" -- Needs review
-L["UseDefault_Desc"] = "\230\130\168\229\143\175\228\187\165\229\188\183\229\136\182\230\137\128\230\156\137\232\167\146\232\137\178\228\189\191\231\148\168\226\128\156\239\188\133s\226\128\157\231\154\132\229\128\139\228\186\186\232\179\135\230\150\153\239\188\140\228\187\165\231\174\161\231\144\134\228\184\128\229\128\139\229\150\174\228\184\128\231\154\132\233\133\141\231\189\174" -- Needs review
-
+L["Appearance"] = "\\22806\\35264"
+L["Assume Buckle on waist"] = "\\20551\\35373\\25187\\22312\\33136\\38291"
+L["Bottom Left"] = "\\24038\\19979"
+L["Bottom Right"] = "\\21491\\19979"
+L["Change colors and appearance"] = "\\25913\\35722\\38991\\33394\\21450\\22806\\35264"
+L["Choose a color scheme"] = "\\36984\\25799\\19968\\20491\\33879\\33394\\26041\\26696"
+L["Choose profile"] = "\\36984\\25799\\35373\\23450\\27284"
+L["Choose what is shown"] = "\\36984\\25799\\39023\\31034\\20123\\20160\\40636"
+L["Colorize level text by"] = "\\33879\\33394\\31561\\32026\\25991\\23383\\20381\\25818"
+L["Common profile for all characters"] = "\\25152\\26377\\35282\\33394\\36890\\29992\\30340\\35373\\23450\\27284"
+L["Current profile is: "] = "\\30446\\21069\\30340\\35373\\23450\\27284\\26159\\65306"
+L["Debug info"] = "\\38500\\37679\\36039\\35338"
+L["E"] = true
+L["Gem frame position"] = "\\29664\\23542\\26694\\26550\\20301\\32622"
+L["itemlevel (green best)"] = "\\29289\\21697\\31561\\32026(\\32160\\33394\\26368\\20339)"
+L["itemlevel (red best)"] = "\\29289\\21697\\31561\\32026(\\32005\\33394\\26368\\20339)"
+L["Level text aligned to"] = "\\31561\\32026\\25991\\23383\\23565\\40778"
+L["none (plain white)"] = "\\28961\\65288\\32020\\30333\\33394\\65289"
+L["Options"] = "\\36984\\38917"
+L["Per character profile"] = "\\20491\\21029\\35282\\33394\\35373\\23450\\27284"
+L["Please, choose between global or per character profile"] = "\\35531\\22312\\20840\\23616\\33287\\20491\\21029\\35282\\33394\\30340\\35373\\23450\\27284\\20013\\36984\\25799"
+L["Position"] = "\\20301\\32622"
+L["quality"] = "\\21697\\36074"
+L["Show raw item info.Please post the screenshot to Curse Forum"] = "\\39023\\31034\\26410\\32147\\21152\\24037\\30340\\29289\\21697\\36039\\35338\\12290\\35531\\36028\\27492\\25847\\22294\\21040Curse\\35342\\35542\\21312"
+L["Shows missing enchants"] = "\\39023\\31034\\32570\\23569\\30340\\38468\\39764"
+L["Shows number of empty socket"] = "\\39023\\31034\\31354\\30340\\25554\\27133\\25976"
+L["Shows total number of gems"] = "\\39023\\31034\\29664\\23542\\32317\\25976\\37327"
+L["Switch between global and per character profile"] = "\\22312\\20840\\23616\\33287\\20491\\21029\\35282\\33394\\35373\\23450\\27284\\20013\\20999\\25563"
+L["Top Left"] = "\\24038\\19978"
+L["Top Right"] = "\\21491\\19978"
+L["Total compatible gems/Total sockets"] = "\\32317\\30456\\23481\\23542\\30707/\\32317\\25554\\24231"
+L["You can change this decision on a per character basis in configuration panel."] = "\\20320\\21487\\20197\\22312\\37197\\32622\\38754\\26495\\22522\\26044\\20491\\21029\\35282\\33394\\25913\\35722\\27492\\27770\\23450\\12290"
+L["You can now choose if you want all your character share the same configuration or not."] = "\\29694\\22312\\20320\\21487\\20197\\36984\\25799\\26159\\21542\\35201\\25152\\26377\\35282\\33394\\20849\\20139\\30456\\21516\\30340\\37197\\32622\\12290"
 	end
 end
 L=LibStub("AceLocale-3.0"):GetLocale(me,true)

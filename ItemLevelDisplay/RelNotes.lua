@@ -32,6 +32,9 @@ Bags management is implemented via separated addon!! (ILD-<bagmanager name>)
 * ILD-Onebag3: Onebag3 (with bank)
 
 ]])
+self:RelNotes(2,0,12,[[
+Fix: Correct itemlevel for artifacts hopefully shown in inspect window, too
+]])
 self:RelNotes(2,0,10,[[
 Fix: Bag shadow was not remembered
 Fix: Upgraded Item level library

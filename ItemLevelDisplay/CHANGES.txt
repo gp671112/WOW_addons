@@ -1,0 +1,12 @@
+tag 971159811967eaabc644f802e6f788943b3e5174 2.0.12
+Author:	Alar of Runetotem <alar@aspide.it>
+Date:	Thu Nov 24 11:02:11 2016 +0100
+
+2.0.12
+
+commit b9427be15f36e2e62ff5606ecd8e2fe55431eaf7
+Author: Alar of Runetotem <alar@aspide.it>
+Date:   Thu Nov 24 10:58:46 2016 +0100
+
+    Notes
+

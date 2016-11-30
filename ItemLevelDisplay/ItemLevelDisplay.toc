@@ -1,10 +1,11 @@
 ## Interface: 70100
 ## Title: ItemLevelDisplay
 ## Notes: Displays item's levels in paperdoll and optionally bags
-## Notes-itIT: Mostra il livello degli items nella schermata del personaggio e opzionalmente nelle borse
+## Title-zhTW: |cffB973FF[裝備]|r 物品等級-角色資訊
+## Notes-zhTW: ItemLevelDisplay |n在角色資訊的裝備欄中顯示物品等級。|n|cffffd200使用方法：|r從Esc>介面>插件>裝備-物品等級，進行設定。
 ## Author: Alar of Runetotem
-## Version: 2.0.10 7.1.0
-## X-Revision: a150432
+## Version: 2.0.12 7.1.0
+## X-Revision: b9427be
 ## eMail: alar@aspide.it
 ## RequiredDeps:
 ## OptionalDeps: LibInit,LibItemUpgradeInfo-1.0
@@ -18,11 +19,7 @@
 ## X-Category: Bags and Inventory
 ## X-License: GPL v3
 ## X-eMail: alar@aspide.it
-## X-Date: 2016-10-30T18:50:55Z
-## X-Curse-Packaged-Version: 2.0.10
-## X-Curse-Project-Name: ItemLevelDisplay
-## X-Curse-Project-ID: itemleveldisplay
-## X-Curse-Repository-ID: wow/itemleveldisplay/mainline
+## X-Date: 2016-11-24T15:58:46Z
 embeds.xml
 localization.lua
 ItemLevelDisplay.lua

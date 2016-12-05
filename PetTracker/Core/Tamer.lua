@@ -45,8 +45,8 @@ end
 function Tamer:Display()
 	if GetAddOnEnableState(UnitName('player'), 'PetTracker_Journal') >= 2 then
 		CollectionsJournal_LoadUI()
-		ShowUIPanel(CollectionsJournal)
-		PetTrackerTamerJournal.Tab:GetScript('OnClick')(PetTrackerTamerJournal.Tab)
+		ShowUIPanel(CollectionsJournal) -- this here causes taint for sure
+		PetTrackerTamerJournal.PanelTab:GetScript('OnClick')(PetTrackerTamerJournal.PanelTab)
 		PetTrackerTamerJournal:SetTamer(self)
 	end
 end

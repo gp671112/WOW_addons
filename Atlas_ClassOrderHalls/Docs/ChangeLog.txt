@@ -1,10 +1,21 @@
-$Id: ChangeLog.txt 57 2016-10-27 05:12:44Z arith $
+$Id: ChangeLog.txt 62 2016-11-29 05:21:07Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 
 ==============
 = Change Log =
 ==============
+
+v1.35.02 (Nov. 29, 2016)
+------------------------
+- Rouge map revamped
+- Added NPC to Warlock and Rogue's halls
+
+v1.35.01 (Nov. 26, 2016)
+------------------------
+- Added NPC to hunter and demon hunter's halls
+- Added classification icon to NPCs
+- Fixed Warrior hall map's POI info
 
 v1.35.00 (Oct. 27, 2016)
 ------------------------

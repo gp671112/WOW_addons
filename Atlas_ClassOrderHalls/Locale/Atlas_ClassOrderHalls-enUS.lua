@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_ClassOrderHalls-enUS.lua 56 2016-10-25 16:39:31Z arith $
+-- $Id: Atlas_ClassOrderHalls-enUS.lua 62 2016-11-29 05:21:07Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -38,7 +38,7 @@ if L then
 	L["Entrance"] = "Entrance";
 	L["Ramp to lower floor"] = "Ramp to lower floor";
 	L["Ramp to top floor"] = "Ramp to top floor";
-	L["Champion Armaments"] = "Champion Armaments";
+	L["Champion Armaments"] = "Champion Armaments"; -- Quest: 44228
 
 	-- //////////////////////////
 	-- Death Knight
@@ -52,6 +52,8 @@ if L then
 	L["Grand Master Siegesmith Corvus"] = "Grand Master Siegesmith Corvus"; -- 97072
 	L["Soul Forge"] = "Soul Forge";
 	L["Lady Alistra <Death Knight Trainer>"] = "Lady Alistra <Death Knight Trainer>"; -- 93509
+	L["Dead Collector Bane <Champion Armaments>"] = "Dead Collector Bane <Champion Armaments>"; -- 110410
+	L["Archivist Zubashi <Class Hall Upgrades>"] = "Archivist Zubashi <Class Hall Upgrades>"; -- 97485
 
 	-- //////////////////////////
 	-- Demon Hunter
@@ -64,7 +66,7 @@ if L then
 	L["Falara Nightsong <Illidari Provisioner>"] = "Falara Nightsong <Illidari Provisioner>"; -- 112407
 	L["Jace Darkweaver <Illidari>"] = "Jace Darkweaver <Illidari>"; -- 98646
 	L["Vahu the Weathered <Illidari Researcher>"] = "Vahu the Weathered <Illidari Researcher>"; -- 111736
-	L["Empowered Nether Crucible"] = "Empowered Nether Crucible";
+	L["Empowered Nether Crucible"] = "Empowered Nether Crucible"; -- Object: 250677
 	L["Cursed Forge of the Nathrezim"] = "Cursed Forge of the Nathrezim";
 	L["Asha Ravensong <Illidari>"] = "Asha Ravensong <Illidari>"; -- 108326
 	L["Izal Whitemoon <Illidari Trainer>"] = "Izal Whitemoon <Illidari Trainer>"; -- 109965
@@ -73,6 +75,7 @@ if L then
 	L["Loramus Thalipedes <Class Hall Upgrades>"] = "Loramus Thalipedes <Class Hall Upgrades>"; -- 110599
 	L["Belath Dawnblade <Illidari>"] = "Belath Dawnblade <Illidari>"; -- 108782
 	L["Ariana Fireheart <Illidari>"] = "Ariana Fireheart <Illidari>"; -- 103760
+	L["Slitesh <Armaments Requisitioner>"] = "Slitesh <Armaments Requisitioner>"; -- 110433
 
 	-- //////////////////////////
 	-- Druid
@@ -108,7 +111,9 @@ if L then
 	L["Survivalist Bahn <Class Hall Upgrades>"] = "Survivalist Bahn <Class Hall Upgrades>"; -- 108050
 	L["Sampson <Recruiter>"] = "Sampson <Recruiter>"; -- 106446
 	L["Pan the Kind Hand <Stable Master>"] = "Pan the Kind Hand <Stable Master>"; -- 100661
-	L["Great Eagle"] = "Great Eagle";
+	L["Great Eagle"] = "Great Eagle"; -- 108552
+	L["Ogdrul <The Seeker>"] = "Ogdrul <The Seeker>"; -- 113688
+	L["Image of Mimiron"] = "Image of Mimiron"; -- 110424
 
 	-- //////////////////////////
 	-- Mage
@@ -141,6 +146,7 @@ if L then
 	L["Lorewalker Cho <Head Archivist>"] = "Lorewalker Cho <Head Archivist>"; -- 106942
 	L["Transportation Mandala"] = "Transportation Mandala";
 	L["Lao Li the Quiet <Monk Trainer>"] = "Lao Li the Quiet <Monk Trainer>"; -- 101757
+	L["Number Nine Jia <Class Hall Upgrades>"] = "Number Nine Jia <Class Hall Upgrades>"; -- 98939
 
 	-- //////////////////////////
 	-- Paladin
@@ -151,6 +157,9 @@ if L then
 	L["Vindicator Baatun <Paladin Trainer>"] = "Vindicator Baatun <Paladin Trainer>"; -- 92316
 	L["Altar of Ancient Kings"] = "Altar of Ancient Kings";
 	L["Eadric the Pure <Quartermaster>"] = "Eadric the Pure <Quartermaster>"; -- 100196
+	L["Kristoff <Armaments Requisitioner>"] = "Kristoff <Armaments Requisitioner>"; -- 110434
+	L["Brandur Ironhammer <Paladin Trainer>"] = "Brandur Ironhammer <Paladin Trainer>"; -- 92314
+	L["Sir Alamande Graythorn <Class Hall Upgrades>"] = "Sir Alamande Graythorn <Class Hall Upgrades>"; -- 109901
 
 	-- //////////////////////////
 	-- Priest
@@ -181,6 +190,11 @@ if L then
 	L["Nikki the Gossip <Tales fo Adventure and Profit>"] = "Nikki the Gossip <Tales fo Adventure and Profit>"; -- 98092
 	L["Loren the Fence <Rogue Trainer>"] = "Loren the Fence <Rogue Trainer>"; -- 105989
 	L["Kelsey Steelspark <Quartermaster>"] = "Kelsey Steelspark <Quartermaster>"; -- 105986
+	L["Lonika Stillblade <Rogue Academy Proprietor>"] = "Lonika Stillblade <Rogue Academy Proprietor>"; -- 105979
+	L["Night-Stalker Ku'nanji <Rogue Trainer>"] = "Night-Stalker Ku'nanji <Rogue Trainer>"; -- 105991
+	L["Winstone Wolfe <The Wolf>"] = "Winstone Wolfe <The Wolf>"; -- 105998
+	L["Lorena Belle <Master Smuggler>"] = "Lorena Belle <Master Smuggler>"; -- 109609
+	L["Yancey Grillsen <Bloodsail Recruiter>"] = "Yancey Grillsen <Bloodsail Recruiter>"; -- 106083
 
 	-- //////////////////////////
 	-- Shaman
@@ -193,6 +207,7 @@ if L then
 	L["Gorma Windspeaker <Keeper of Legends>"] = "Gorma Windspeaker <Keeper of Legends>"; -- 111739
 	L["Tribemother Torra <Shaman Trainer>"] = "Tribemother Torra <Shaman Trainer>"; -- 111922
 	L["Advisor Sevel <The Earthen Ring>"] = "Advisor Sevel <The Earthen Ring>"; -- 96746
+	L["Journeyman Goldmine <Class Hall Upgrades>"] = "Journeyman Goldmine <Class Hall Upgrades>"; -- 112199
 
 	-- //////////////////////////
 	-- Warlock
@@ -208,6 +223,9 @@ if L then
 	L["Gigi Gigavoid <Black Harvest Quartermaster>"] = "Gigi Gigavoid <Black Harvest Quartermaster>"; -- 112434
 	L["Mile Raitheborne <Head Archivist>"] = "Mile Raitheborne <Head Archivist>"; -- 111740
 	L["Jared <Recruiter>"] = "Jared <Recruiter>"; -- 106217
+	L["Imp Mother Dyala <Recruiter>"] = "Imp Mother Dyala <Recruiter>"; -- 106216
+	L["Archivist Melinda <Class Hall Upgrades>"] = "Archivist Melinda <Class Hall Upgrades>"; -- 108018
+	L["Murr"] = "Murr"; -- 110408
 
 	-- //////////////////////////
 	-- Warrior

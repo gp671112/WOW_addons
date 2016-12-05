@@ -3,7 +3,7 @@
 ## Notes: Load on demand options and tutorial.
 ## Author: Jaliborc (João Cardoso)
 ## X-Category: Battle Pets
-## Version: 7.1.1
+## Version: 7.1.3
 
 ## Dependencies: PetTracker
 ## LoadOnDemand: 1

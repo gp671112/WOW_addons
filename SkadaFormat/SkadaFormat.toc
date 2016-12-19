@@ -1,6 +1,0 @@
-## Interface: 70000
-## Author: somebody
-## Title: Skada中文單位
-## Dependencies: Skada
-## X-Part-Of: Skada
-SkadaFormat.lua

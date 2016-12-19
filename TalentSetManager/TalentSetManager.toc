@@ -1,0 +1,21 @@
+## Interface: 70100
+## Title: Talent Set Manager
+## Author: Jadya EU - Well of Eternity
+## Notes: Allows you to store and learn entire sets of talents
+## eMail: n_rhygar@yahoo.it
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariables: TalentSetManager_Options
+## SavedVariablesPerCharacter: TalentSetManager_Saves
+## X-Curse-Packaged-Version: v1.1.4
+## X-Curse-Project-Name: Talent Set Manager
+## X-Curse-Project-ID: talent-set-manager
+## X-Curse-Repository-ID: wow/talent-set-manager/mainline
+libs\libs.xml
+localization.lua
+TalentSetManager.lua
+components.xml
+ldb.lua
+macro.lua
+help.lua
+options.lua

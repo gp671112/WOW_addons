@@ -1871,7 +1871,9 @@
                                 </Frames>
                                 <Scripts>
                                     <OnMouseWheel>
-                                        Dugis_OnMouseWheel(self, delta);
+                                        if Dugis_OnMouseWheel then
+                                            Dugis_OnMouseWheel(self, delta);
+                                        end
                                     </OnMouseWheel>
                                 </Scripts>
                                 <Layers>
@@ -1926,7 +1928,9 @@
 						</Frames>
 						<Scripts>
 							<OnMouseWheel>
-								Dugis_OnMouseWheel(self, delta);
+                                if Dugis_OnMouseWheel then
+                                    Dugis_OnMouseWheel(self, delta);
+                                end
 							</OnMouseWheel>
 						</Scripts>
 					</ScrollFrame>
@@ -2057,7 +2061,9 @@
 				</ScrollChild>
 				<Scripts>
 					<OnMouseWheel>
-						Dugis_OnMouseWheel(self, delta);
+                        if Dugis_OnMouseWheel then
+                            Dugis_OnMouseWheel(self, delta);
+                        end
 					</OnMouseWheel>
 				</Scripts>
 			</ScrollFrame>

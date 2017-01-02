@@ -19,12 +19,12 @@ function Corpse:Initialize()
 	
 		local function GetCorpsePositionDisruptive()
 			local orig_mapId, orig_level = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
-			SetMapToCurrentZone()
+			LuaUtils:DugiSetMapToCurrentZone()
 			local corpseX, corpseY = GetCorpseMapPosition()
 			local m1, f1, x1, y1 =  DGV.astrolabe:GetUnitPosition("player")
 			if corpseX and corpseX~=0 then
 				if orig_mapId~=m1 or orig_level~=f1 then
-					SetMapByID(orig_mapId)
+					LuaUtils:DugiSetMapByID(orig_mapId)
 					SetDungeonMapLevel(orig_level)
 				end
 				return m1, f1, corpseX, corpseY
@@ -32,17 +32,17 @@ function Corpse:Initialize()
 			local c = DGV:GetCZByMapId(GetCurrentMapAreaID())
 			if c then
 				for mapID in DGV.ContinentMapIterator,c do
-					SetMapByID(mapID)
+					LuaUtils:DugiSetMapByID(mapID)
 					corpseX, corpseY = GetCorpseMapPosition()
 					if corpseX and corpseX~=0 then
 						local corpseFloor = GetCurrentMapDungeonLevel()
-						SetMapByID(orig_mapId)
+						LuaUtils:DugiSetMapByID(orig_mapId)
 						SetDungeonMapLevel(orig_level)
 						return mapID, corpseFloor, corpseX, corpseY
 					end
 				end
 			end
-			SetMapByID(orig_mapId)
+			LuaUtils:DugiSetMapByID(orig_mapId)
 			SetDungeonMapLevel(orig_level)
 		end
 		

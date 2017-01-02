@@ -2983,7 +2983,7 @@ function GA:Initialize()
 		end
 
 		function GetNumEquipmentSets()
-            if isCalledByBag_nonAddon() then
+            if shouldUseOriginalEquipmentFunctions() then
                 return orig_GetNumEquipmentSets()
             end
 
@@ -3044,7 +3044,7 @@ function GA:Initialize()
 		-- numMissing - Number of items missing from the set (current bags) (number)
 		-- numIgnored - Number of ignored slots (number)
 		function GetEquipmentSetInfo(index)
-            if isCalledByBag_nonAddon() then
+            if shouldUseOriginalEquipmentFunctions() then
                 return orig_GetEquipmentSetInfo(index)
             end
 
@@ -3086,7 +3086,7 @@ function GA:Initialize()
 		-- numMissing - Number of items missing from the set (current bags) (number)
 		-- numIgnored - Number of ignored slots (number)
 		function GetEquipmentSetInfoByName(name)
-            if isCalledByBag_nonAddon() then
+            if shouldUseOriginalEquipmentFunctions() then
                 return orig_GetEquipmentSetInfoByName(name)
             end
 
@@ -3151,10 +3151,11 @@ function GA:Initialize()
 		end
 
         --Underscore in the function name is used to avoid detecting "Bagnon" in the stacktrace the test function name
-        function isCalledByBag_nonAddon()
+        function shouldUseOriginalEquipmentFunctions()
             local stack = debugstack()
             local isCalledByBagnonAddon = (string.find(stack, "Bagnon") ~= nil)
-            return  isCalledByBagnonAddon
+            local isCalledCargBags_NivayaAddon = (string.find(stack, "Nivaya") ~= nil)
+            return  isCalledByBagnonAddon or isCalledCargBags_NivayaAddon
         end
 
 		-- Returns a table listing the items in an equipment set
@@ -3167,7 +3168,7 @@ function GA:Initialize()
 		-- itemIDs - A table listing the itemIDs of the set's contents, keyed by inventoryID (table)
 		--EQUIPMENT_SET_IGNORED_SLOT
 		function GetEquipmentSetItemIDs(name)
-            if isCalledByBag_nonAddon() then
+            if shouldUseOriginalEquipmentFunctions() then
                 return orig_GetEquipmentSetItemIDs(name)
             end
 

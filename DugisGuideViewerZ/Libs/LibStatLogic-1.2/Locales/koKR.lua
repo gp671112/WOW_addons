@@ -1,4 +1,4 @@
--- koKR localization by fenlis, 7destiny, slowhand
+﻿-- koKR localization by fenlis, 7destiny, slowhand
 
 if GetLocale() ~= 'koKR' then return end
 

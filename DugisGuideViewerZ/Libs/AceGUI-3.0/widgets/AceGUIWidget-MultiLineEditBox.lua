@@ -347,6 +347,7 @@ local function Constructor()
 
 	local widget = {
 		button      = button,
+		cancelButton      = cancelButton,
 		editBox     = editBox,
 		frame       = frame,
 		label       = label,

@@ -1162,3 +1162,17 @@ Change Log:
 4.41.2
 * Updated for patch 7.1
 
+4.41.3
+* Added Legion spells for The Broken Isles (world)
+* Added Legion spells for Trial of Valor
+
+4.41.4
+* Fixed Wrath spells for Halls of Valor
+* Added Legion spells for The Broken Isles (world)
+* Added Legion spells for Trial of Valor
+* Added Legion spells for Return to Karazhan
+
+4.41.5
+* Added Legion spells for The Broken Isles (world)
+* Added Legion spells for Black Rook Hold
+

@@ -118,6 +118,7 @@ function Search:Initialize()
 		local searchBox = DGV_SearchBox
 		if not searchBox then
 			searchBox = CreateFrame("EditBox", "DGV_SearchBox", DugisMain, "InputBoxTemplate")
+            searchBox:SetFrameLevel(102)
 		end
 		searchBox:SetAutoFocus(false)
 		searchBox:SetSize("100", "25")

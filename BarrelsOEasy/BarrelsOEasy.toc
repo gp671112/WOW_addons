@@ -1,0 +1,16 @@
+## Interface: 70000
+## Title: Barrels o' Easy
+## Notes: Marks the Barrels o' Fun Barrels
+## Title-zhTW: |cFF9ACD32[任務/成就]|r桶樂會助手
+## Notes-zhTW: Barrels o' Easy|n滑鼠移至桶上自動上標，幫助你選擇桶子，無腦完成任務。
+## Version: 1.0.0
+## X-Curse-Packaged-Version: v1.0.0
+## X-Curse-Project-Name: BarrelsOEasy
+## X-Curse-Project-ID: barrelsoeasy
+## X-Curse-Repository-ID: wow/barrelsoeasy/mainline
+
+## Author: seraph1m
+## eMail: none
+## X-email: none
+
+BarrelsOEasy.lua

@@ -249,7 +249,11 @@ function TaxiDB:Initialize()
 		end
 		HighlightFlightmasterDestination()
 	end
-	
+    
+    hooksecurefunc("TaxiNodeOnButtonLeave", function()
+        HighlightFlightmasterDestination()
+    end)
+    
 	function TaxiDB:GetPackedPlayerLocation()
 		local mapId,level = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
 		local coord = GetCoord()

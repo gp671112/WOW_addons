@@ -93,7 +93,7 @@ function WF:Initialize()
         elseif GetLastWorldQuestBlock() then
             return GetLastWorldQuestBlock()
         else
-			return BONUS_OBJECTIVE_TRACKER_MODULE.lastBlock or ObjectiveTrackerBlocksFrame.QuestHeader.module.lastBlock or (IsAnchoredOn() and DGV.SmallFrame.Frame) or ObjectiveTrackerBlocksFrame
+			return BONUS_OBJECTIVE_TRACKER_MODULE.firstBlock or ObjectiveTrackerBlocksFrame.QuestHeader.module.lastBlock or (IsAnchoredOn() and DGV.SmallFrame.Frame) or ObjectiveTrackerBlocksFrame
 		end
 	end
 	

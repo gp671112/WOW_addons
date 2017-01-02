@@ -1,4 +1,4 @@
--- zhCN localization by iceburn
+﻿-- zhCN localization by iceburn
 
 if GetLocale() ~= 'zhCN' then return end
 

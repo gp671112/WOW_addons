@@ -213,7 +213,12 @@ GetCreateTable = function(...)
 end
 DGV.GetCreateTable = GetCreateTable
 
+--Default time limit
 local THEORETICAL_TIME_LIMIT = 20 --100 seems to work w/o "script too long", but tanks FPS
+
+local functionKey2TimeLimit = {}
+functionKey2TimeLimit["RecalculateRoutes"] = 10
+
 local function GetTicks()
   return debugprofilestop()
 end
@@ -273,7 +278,14 @@ local function AutoroutinesOnUpdate()
 			end
 			if #autoroutines>0 then
 				local now = GetTicks()
-				if (now-startTime)>=THEORETICAL_TIME_LIMIT then
+                
+                local timeLimit = THEORETICAL_TIME_LIMIT
+                
+                if autoroutine.key and functionKey2TimeLimit[autoroutine.key] then
+                    timeLimit = functionKey2TimeLimit[autoroutine.key]
+                end
+                
+				if (now-startTime)>=timeLimit then
 					return
 				end
 			else
@@ -864,7 +876,19 @@ DGV.TryGetCacheReaction = TryGetCacheReaction
 DGV.eventFrame:HookScript("OnEvent", function(self, event, ...)
 	TryInvokeReactions(event, event, ...)
 end)
+
+local runInTheNextFrameQueue = {}
+function RunInTheNextFrame(function_)
+    runInTheNextFrameQueue[#runInTheNextFrameQueue + 1] = function_
+end
+
 DGV.eventFrame:HookScript("OnUpdate", function(self)
+    while #runInTheNextFrameQueue > 0 do
+        local functionToRun = runInTheNextFrameQueue[1]
+        table.remove(runInTheNextFrameQueue, 1)
+        functionToRun()
+    end
+
 	AutoroutinesOnUpdate()
 	InvocationsOnUpdate()
 	if reactions and reactions["time"] then

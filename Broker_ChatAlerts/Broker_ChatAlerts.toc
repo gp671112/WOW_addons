@@ -1,0 +1,23 @@
+﻿## Interface: 70000
+## Title: Broker: |cffffffffChatAlerts|r
+## Version: 1.3 r023
+## Author: tritium
+## X-Credits: Sid67 (For the original Fubar - ChatAlertsFu)
+## X-Category: Chat
+## OptionalDeps: Ace3, SCT, MikScrollingBattleText, Parrot
+## Notes: Toggles sound and text popups for incoming chat, loot and system messages.
+## SavedVariables: BrokerChatAlerts_DB
+
+## X-Embeds: Ace3
+#@no-lib-strip@
+embeds.xml
+#@end-no-lib-strip@
+
+Locales\locales.xml
+
+Utilities.lua
+Broker_ChatAlerts.lua
+Options.lua
+Tooltip.lua
+MinimapButton.lua
+DataBroker.lua

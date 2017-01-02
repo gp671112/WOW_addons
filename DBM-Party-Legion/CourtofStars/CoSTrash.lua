@@ -1,7 +1,7 @@
-local mod	= DBM:NewMod("CoSTrash", "DBM-Party-Legion", 7, 800)
+local mod	= DBM:NewMod("CoSTrash", "DBM-Party-Legion", 7)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 15398 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 15587 $"):sub(12, -3))
 --mod:SetModelID(47785)
 mod:SetZone()
 
@@ -98,63 +98,91 @@ function mod:SPELL_AURA_APPLIED(args)
 end
 
 do
+	local hintTranslations = {
+		["gloves"] = L.Gloves,
+		["no gloves"] = L.NoGloves,
+		["cape"] = L.Cape,
+		["no cape"] = L.Nocape,
+		["light vest"] = L.LightVest,
+		["dark vest"] = L.DarkVest,
+		["female"] = L.Female,
+		["male"] = L.Male,
+		["short sleeves"] = L.ShortSleeve,
+		["long sleeves"] = L.LongSleeve,
+		["potions"] = L.Potions,
+		["no potion"] = L.NoPotions,
+		["book"] = L.Book,
+		["pouch"] = L.Pouch
+	}
 	local hints = {}
 	local clues = {
-		["There's a rumor that the spy always wears gloves."] = "手套",
-		["I heard the spy carefully hides their hands."] = "手套",
-		["I heard the spy always dons gloves."] = "手套",
-		["Someone said the spy wears gloves to cover obvious scars."] = "手套",
-		["There's a rumor that the spy never has gloves on."] = "無手套",
-		["You know... I found an extra pair of gloves in the back room. The spy is likely to be bare handed somewhere around here."] = "無手套",
-		["I heard the spy dislikes wearing gloves."] = "無手套",
-		["I heard the spy avoids having gloves on, in case some quick actions are needed"] = "無手套",
-		["Someone mentioned the spy came in earlier wearing a cape."] = "斗篷",
-		["聽說這個間諜很喜歡穿斗篷。"] = "斗篷",
-		["I heard the spy dislikes capes and refuses to wear one."] = "沒有斗篷",
-		["我聽說間諜過來這裡之前把斗篷忘在皇宮了。"] = "沒有斗篷",
-		["I heard the spy carries a magical pouch around at all times."] = "魔法小包",
-		["我朋友說間諜喜歡黃金，所以腰帶上的隨身包裝滿黃金。"] = "金錢包",
-		["那位間諜特別喜歡淺顏色的外衣。"] = "淺色外衣",
-		["我剛聽說那個間諜今晚會穿著淺色的外衣。"] = "淺色外衣",
-		["People are saying the spy is not wearing a darker vest tonight."] = "淺色外衣",
-		["The spy definitely prefers darker clothing."] = "深色外衣",
-		["I heard the spy's vest is a dark, rich shade this very night."] = "深色外衣",
-		["The spy enjoys darker colored vests... like the night."] = "深色外衣",
-		["Rumor has it the spy is avoiding light colored clothing to try and blend in more."] = "深色外衣",
-		["They say that the spy is here and she's quite the sight to behold."] = "女性",
-		["I hear some woman has been constantly asking about the district..."] = "女性",
-		["Someone's been saying that our new guest isn't male."] = "女性",
-		["They say that the spy is here and she's quite the sight to behold."] = "女性",
-		["有人看到她和艾莉珊德一起走進來。"] = "女性",
-		["我剛聽人家說間諜是男的。"] = "男性",
-		["I heard the spy is here and he's very good looking."] = "男性",
-		["A guest said she saw him entering the manor alongside the Grand Magistrix."] = "男性",
-		["One of the musicians said he would not stop asking questions about the district."] = "男性",
-		["I heard the spy wears short sleeves to keep their arms unencumbered."] = "短袖",
-		["Someone told me the spy hates wearing long sleeves."] = "短袖",
-		["A friend of mine said she saw the outfit the spy was wearing. It did not have long sleeves."] = "短袖",
-		["聽說今晚那個間諜穿了長袖衣服。"] = "長袖",
-		["剛剛有人說，間諜今晚為了能遮住手臂，才穿長袖的。"] = "長袖",
-		["我剛剛碰巧看到那個間諜今晚穿著長袖衣服。"] = "長袖",
-		["A friend of mine mentioned the spy has long sleeves on."] = "長袖",
-		["I heard the spy enjoys the cool air and is not wearing long sleeves tonight."] = "短袖",
-		["I heard the spy brought along potions, I wonder why?"] = "藥袋",
-		["I didn't tell you this... but the spy is masquerading as an alchemist and carrying potions at the belt."] = "藥袋",
-		["I'm pretty sure the spy has potions at the belt."] = "藥袋",
-		["I heard the spy always has a book of written secrets at the belt."] = "書籍",
-		["Rumor has is the spy loves to read and always carries around at least one book."] = "書籍",
-		["I heard the spy's belt pouch is filled with gold to show off extravagance."] = "金錢包",
-		["我聽說那位間諜總是帶著一個魔法小包"] = "魔法小包",
-		["I heard the spy's belt pouch is lined with fancy threading."] = "金錢包",
-		["I heared the spy is not carrying any potions around."] = "無藥袋",
-		["A musician told me she saw the spy throw away their last potion and no longer has any left."] = "無藥袋"
+		[L.Gloves1] = "gloves",
+		[L.Gloves2] = "gloves",
+		[L.Gloves3] = "gloves",
+		[L.Gloves4] = "gloves",
+		
+		[L.NoGloves1] = "no gloves",
+		[L.NoGloves2] = "no gloves",
+		[L.NoGloves3] = "no gloves",
+		[L.NoGloves4] = "no gloves",
+		
+		[L.Cape1] = "cape",
+		[L.Cape2] = "cape",
+		
+		[L.NoCape1] = "no cape",
+		[L.NoCape2] = "no cape",
+		
+		[L.LightVest1] = "light vest",
+		[L.LightVest2] = "light vest",
+		[L.LightVest3] = "light vest",
+		
+		[L.DarkVest1] = "dark vest",
+		[L.DarkVest2] = "dark vest",
+		[L.DarkVest3] = "dark vest",
+		[L.DarkVest4] = "dark vest",
+		
+		[L.Female1] = "female",
+		[L.Female2] = "female",
+		[L.Female3] = "female",
+		[L.Female4] = "female",
+		
+		[L.Male1] = "male",
+		[L.Male2] = "male",
+		[L.Male3] = "male",
+		[L.Male4] = "male",
+		
+		[L.ShortSleeve1] = "short sleeves",
+		[L.ShortSleeve2] = "short sleeves",
+		[L.ShortSleeve3] = "short sleeves",
+		[L.ShortSleeve4] = "short sleeves",
+		
+		[L.LongSleeve1] = "long sleeves",
+		[L.LongSleeve2] = "long sleeves",
+		[L.LongSleeve3] = "long sleeves",
+		[L.LongSleeve4] = "long sleeves",
+		
+		[L.Potions1] = "potions",
+		[L.Potions2] = "potions",
+		[L.Potions3] = "potions",
+		[L.Potions4] = "potions",
+		
+		[L.NoPotions1] = "no potion",
+		[L.NoPotions2] = "no potion",
+		
+		[L.Book1] = "book",
+		[L.Book2] = "book",
+		
+		[L.Pouch1] = "pouch",
+		[L.Pouch2] = "pouch",
+		[L.Pouch3] = "pouch",
+		[L.Pouch4] = "pouch"
 	}
 
 	local function updateInfoFrame()
 		local lines = {}
 
 		for hint, j in pairs(hints) do
-			lines[hint] = ""
+			lines[hintTranslations[hint]] = ""
 		end
 		
 		return lines
@@ -187,7 +215,7 @@ do
 				local clue = clues[GetGossipText()]
 				if clue and not hints[clue] then
 					CloseGossip()
-					SendChatMessage(clue, "PARTY")
+					SendChatMessage(hintTranslations[clue], "PARTY")
 					hints[clue] = true
 					self:SendSync("CoS", clue)
 					DBM.InfoFrame:Show(5, "function", updateInfoFrame)

@@ -1,4 +1,4 @@
-if ( GetLocale() == "ruRU" ) then
+﻿if ( GetLocale() == "ruRU" ) then
 
 DugisLocals = {
 	PART_TEXT = "\208\167\208\176\209\129\209\130\209\140",

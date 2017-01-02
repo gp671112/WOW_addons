@@ -4017,7 +4017,14 @@ function DugisGuideViewer:GetLocationsAndPortalsByText(text)
     local achevementsByLocation = searchAchievementWaypointsByMapName(text)   
     LuaUtils:foreach(achevementsByLocation, function(coordinates, areaName)
         local mapId = self:GetMapIDFromName(areaName)
-        local localizedMapName =  GetMapNameByID(mapId)
+        
+        local localizedMapName
+        
+        if tonumber(mapId) then
+            localizedMapName =  GetMapNameByID(mapId)
+        else
+            localizedMapName =  mapId
+        end
         
         nodes[#nodes+1] = {name = DugisLocals["Locations in"].. " " .. (localizedMapName or areaName), nodes = {}}
         LuaUtils:foreach(coordinates, function(value)
@@ -4063,4 +4070,3 @@ if LIB_UIDROPDOWNMENU_MAXLEVELS then
         end
     end
 end
-    

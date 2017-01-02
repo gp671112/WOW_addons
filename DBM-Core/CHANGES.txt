@@ -1,0 +1,32 @@
+Changes since tag 7.1.6
+
+commit 43c7c71c97edce38ddc0b561156693c950662f0e
+Author: subversion <svn@deadlybossmods.com>
+Date:   Tue Dec 27 23:28:46 2016 +0100
+
+    Omega via svn r15615:
+    Update drugon timers
+    Filter boss from snow plow warning. Improve timer start code for snow plow
+    Fixed snow crash warning to appropriately say it?\226?\128?\153s to dodge a shockwave not run away from boss.
+
+commit 46c7404fbc449a54acc7f313cba35366bb0fce2d
+Author: subversion <svn@deadlybossmods.com>
+Date:   Tue Dec 27 20:55:13 2016 +0100
+
+    Omega via svn r15614:
+    Update version check
+
+commit acadd172bdf5548c3f08de75be2a0e19dad14ae0
+Author: subversion <svn@deadlybossmods.com>
+Date:   Tue Dec 27 20:22:37 2016 +0100
+
+    Omega via svn r15613:
+    Fix greench error
+
+commit de03f82c71ba94d59bf8ef49586fa876c05f945d
+Author: subversion <svn@deadlybossmods.com>
+Date:   Tue Dec 27 11:28:06 2016 +0100
+
+    tandanu via svn r15612:
+    increment alpha version
+

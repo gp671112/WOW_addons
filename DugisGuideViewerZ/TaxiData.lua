@@ -28648,6 +28648,8 @@ function TaxiData:Initialize()
 			":946:30:52.35,55.17:945:0:57.53,60.32:qid:38562:fac:Alliance", -- Lion's Watch Portal from Talador after completing Garrison Campaign: Onslaught at Auchindoun			
 		}, -- Draenor
 		{	
+			":1033:0:36.75,45.05:1033:0:54.46,69.43:qid:44740",--Shal'Aran > Astravar Harbor
+			":1033:0:54.46,69.43:1033:0:36.75,45.05:qid:44740",--Astravar Harbor > Shal'Aran
 			":1033:0:36.12,45.74:1033:23:52.35,36.76:qid:41575",--Shal'Aran > Felsoul Hold
 			":1033:23:53.54,36.71:1033:0:36.40,45.09:qid:41575",--Felsoul Hold > Shal'Aran 
 			--":1033:0:36.35,44.92:1033:0:36.31,46.89:qid:40956",--Shal'Aran > Ruins of Elune'eth

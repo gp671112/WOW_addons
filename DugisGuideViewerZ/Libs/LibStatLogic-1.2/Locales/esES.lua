@@ -1,4 +1,4 @@
--- esES localization by Kaie Estirpe de las Sombras from Minahonda
+﻿-- esES localization by Kaie Estirpe de las Sombras from Minahonda
 
 if GetLocale() ~= 'esES' and GetLocale() ~= 'esMX' then return end
 

@@ -1,4 +1,4 @@
-if GetLocale()~="deDE" then return end
+﻿if GetLocale()~="deDE" then return end
 local DGV = DugisGuideViewer
 if not DGV then return end
 local NPC = DGV:RegisterModule("NPC")

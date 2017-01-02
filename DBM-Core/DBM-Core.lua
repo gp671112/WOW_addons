@@ -41,9 +41,9 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = tonumber(("$Revision: 15418 $"):sub(12, -3)),
-	DisplayVersion = "7.1.1 BNS", -- the string that is shown as version
-	ReleaseRevision = 15418 -- the revision of the latest stable version that is available
+	Revision = tonumber(("$Revision: 15615 $"):sub(12, -3)),
+	DisplayVersion = "7.1.6 BNS", -- the string that is shown as version
+	ReleaseRevision = 15615 -- the revision of the latest stable version that is available
 }
 DBM.HighestRelease = DBM.ReleaseRevision --Updated if newer version is detected, used by update nags to reflect critical fixes user is missing on boss pulls
 
@@ -275,7 +275,6 @@ DBM.DefaultOptions = {
 	NewsMessageShown = 4,
 	MoviesSeen = {},
 	MovieFilter = "AfterFirst",
-	TalkingHeadFilter = "Never",
 	LastRevision = 0,
 	FilterSayAndYell = false,
 	DebugMode = false,
@@ -418,10 +417,10 @@ local targetMonitor = nil
 local statusWhisperDisabled = false
 local wowVersionString, _, _, wowTOC = GetBuildInfo()
 local dbmToc = 0
-local isTalkingHeadLoaded = false
-local talkingHeadUnregistered = false
+local UpdateChestTimer
+local breakTimerStart
 
-local fakeBWVersion, fakeBWHash = 21, "93b8dd3"
+local fakeBWVersion, fakeBWHash = 31, "df1c3cd"
 local versionQueryString, versionResponseString = "Q^%d^%s", "V^%d^%s"
 
 local enableIcons = true -- set to false when a raid leader or a promoted player has a newer version of DBM
@@ -1060,9 +1059,16 @@ do
 		noDelay = false
 		--Check if voice pack missing
 		local activeVP = self.Options.ChosenVoicePack
-		if (activeVP ~= "None" and not self.VoiceVersions[activeVP]) or (self.VoiceVersions[activeVP] and self.VoiceVersions[activeVP] == 0) then--A voice pack is selected that does not belong
-			self.Options.ChosenVoicePack = "None"--Set ChosenVoicePack back to None
-			self:AddMsg(DBM_CORE_VOICE_MISSING)
+		if activeVP ~= "None" then
+			if not self.VoiceVersions[activeVP] or (self.VoiceVersions[activeVP] and self.VoiceVersions[activeVP] == 0) then--A voice pack is selected that does not belong
+				self.Options.ChosenVoicePack = "None"--Set ChosenVoicePack back to None
+				self:AddMsg(DBM_CORE_VOICE_MISSING)
+			end
+		else
+			if #self.Voices > 1 then
+				--At least one voice pack installed but activeVP set to "None"
+				self:AddMsg(DBM_CORE_VOICE_DISABLED)
+			end
 		end
 		--Check if any of countdown sounds are using missing voice pack
 		local voice1 = self.Options.CountdownVoice
@@ -1071,13 +1077,6 @@ do
 		if voice1 == "None" then--Migrate to new setting
 			self.Options.CountdownVoice = self.DefaultOptions.CountdownVoice
 			self.Options.DontPlayCountdowns = true
-		end
-		if voice1 == "Yike" then--Migration for CN Users
-			if self.VoiceVersions["Yike"] then
-				self.Options.CountdownVoice = "VP:Yike"
-			else
-				self.Options.CountdownVoice = self.DefaultOptions.CountdownVoice--Defaults
-			end
 		end
 		local found1, found2, found3 = false, false, false
 		for i = 1, #self.Counts do
@@ -1112,17 +1111,10 @@ do
 			local elapsed = time() - tonumber(startTime)
 			local remaining = timer - elapsed
 			if remaining > 0 then
-				SendAddonMessage("D4", "BTR3\t"..remaining, "WHISPER", playerName)
+				breakTimerStart(DBM, remaining, playerName)
 			else--It must have ended while we were offline, kill variable.
 				self.Options.tempBreak2 = nil
 			end
-		end
-		if TalkingHeadFrame and not talkingHeadUnregistered and (self.Options.TalkingHeadFilter == "Always" or self.Options.TalkingHeadFilter == "CombatOnly" and InCombatLockdown() or self.Options.TalkingHeadFilter == "BossCombatOnly" and IsEncounterInProgress()) then
-			TalkingHeadFrame:UnregisterAllEvents()
-			--TalkingHeadFrame_CloseImmediately()--Calling this crashes wow apparently
-			isTalkingHeadLoaded = true--it laoded before DBM, so this secondary check just checks if frame exists and sets loaded = true
-			talkingHeadUnregistered = true
-			self:Debug("TalkingHead has been unregistered", 2)
 		end
 	end
 
@@ -1280,9 +1272,6 @@ do
 				"UPDATE_BATTLEFIELD_STATUS",
 				"CINEMATIC_START",
 				"PLAYER_LEVEL_UP",
-				"CHALLENGE_MODE_START",
-				"CHALLENGE_MODE_RESET",
-				"CHALLENGE_MODE_COMPLETED",
 				"PLAYER_SPECIALIZATION_CHANGED",
 				"PARTY_INVITE_REQUEST",
 				"LOADING_SCREEN_DISABLED",
@@ -1297,17 +1286,6 @@ do
 				healthCombatInitialized = true
 			end)
 			self:Schedule(10, runDelayedFunctions, self)
-		end
-		if modname == "Blizzard_TalkingHeadUI" and not isTalkingHeadLoaded then
-			isTalkingHeadLoaded = true
-			if not isLoaded then return end--DBM isn't loaded yet, options won't exist yet
-			self:Debug("Blizzard_TalkingHeadUI has been loaded", 2)
-			if self.Options.TalkingHeadFilter == "Always" or self.Options.TalkingHeadFilter == "CombatOnly" and InCombatLockdown() or self.Options.TalkingHeadFilter == "BossCombatOnly" and IsEncounterInProgress() then
-				TalkingHeadFrame:UnregisterAllEvents()
-				--TalkingHeadFrame_CloseImmediately()--Calling this crashes wow apparently
-				talkingHeadUnregistered = true
-				self:Debug("TalkingHead has been unregistered", 2)
-			end
 		end
 	end
 end
@@ -3557,14 +3535,6 @@ function DBM:PLAYER_REGEN_ENABLED()
 		guiRequested = false
 		self:LoadGUI()
 	end
-	if self.Options.TalkingHeadFilter == "CombatOnly" and talkingHeadUnregistered then
-		TalkingHeadFrame:RegisterEvent("TALKINGHEAD_REQUESTED")
-		TalkingHeadFrame:RegisterEvent("TALKINGHEAD_CLOSE")
-		TalkingHeadFrame:RegisterEvent("SOUNDKIT_FINISHED")
-		TalkingHeadFrame:RegisterEvent("LOADING_SCREEN_ENABLED")
-		talkingHeadUnregistered = false
-		self:Debug("TalkingHead has been restored")
-	end
 end
 
 function DBM:UPDATE_BATTLEFIELD_STATUS()
@@ -3595,22 +3565,6 @@ function DBM:SCENARIO_CRITERIA_UPDATE()
 		end
 	end
 end
-
---REFACTOR IN LEGION
-function DBM:CHALLENGE_MODE_START(mapID)
-	self:Debug("CHALLENGE_MODE_START fired for mapID "..mapID)
-end
-
-function DBM:CHALLENGE_MODE_RESET()
-	self.Bars:CancelBar(PLAYER_DIFFICULTY6.."+")
-	self:Debug("CHALLENGE_MODE_RESET fired")
-end
-
-function DBM:CHALLENGE_MODE_COMPLETED()
-	self.Bars:CancelBar(PLAYER_DIFFICULTY6.."+")
-	self:Debug("CHALLENGE_MODE_COMPLETED fired for mapID "..LastInstanceMapID)
-end
---REFACTOR IN LEGION
 
 --------------------------------
 --  Load Boss Mods on Demand  --
@@ -3830,7 +3784,7 @@ do
 			self:Debug(uId.." changed targets to "..targetName)
 		end
 		--Active BossUnitTargetScanner
-		if targetMonitor and UnitExists(uId.."target") then
+		if targetMonitor and UnitExists(uId.."target") and UnitPlayerOrPetInRaid(uId.."target") then
 			self:Debug("targetMonitor exists, target exists", 2)
 			local modId, unitId, returnFunc = string.split("\t", targetMonitor)
 			self:Debug("targetMonitor: "..modId..", "..unitId..", "..returnFunc, 2)
@@ -4073,41 +4027,7 @@ do
 		end
 	end
 
-	local function breakTimerStart(self, timer, sender)
-		self.Options.tempBreak2 = timer.."/"..time()
-		if not self.Options.DontShowPT2 then
-			self.Bars:CreateBar(timer, DBM_CORE_TIMER_BREAK, "Interface\\Icons\\Spell_Holy_BorrowedTime")
-			fireEvent("DBM_TimerStart", "break", DBM_CORE_TIMER_BREAK, timer, "Interface\\Icons\\Spell_Holy_BorrowedTime")
-		end
-		if not self.Options.DontPlayPTCountdown then
-			dummyMod2.countdown:Start(timer)
-		end
-		if not self.Options.DontShowPTCountdownText then
-			local threshold = DBM.Options.PTCountThreshold
-			if timer > threshold then
-				self:Schedule(timer-threshold, countDownTextDelay, threshold)
-			else
-				TimerTracker_OnEvent(TimerTracker, "START_TIMER", 2, timer, timer)
-			end
-		end
-		if not self.Options.DontShowPTText then
-			dummyMod2.text:Show(DBM_CORE_BREAK_START:format(strFromTime(timer), sender))
-			if timer/60 > 10 then dummyMod2.text:Schedule(timer - 10*60, DBM_CORE_BREAK_MIN:format(10)) end
-			if timer/60 > 5 then dummyMod2.text:Schedule(timer - 5*60, DBM_CORE_BREAK_MIN:format(5)) end
-			if timer/60 > 2 then dummyMod2.text:Schedule(timer - 2*60, DBM_CORE_BREAK_MIN:format(2)) end
-			if timer/60 > 1 then dummyMod2.text:Schedule(timer - 1*60, DBM_CORE_BREAK_MIN:format(1)) end
-			dummyMod2.text:Schedule(timer, DBM_CORE_ANNOUNCE_BREAK_OVER)
-		end
-		C_TimerAfter(timer, function() self.Options.tempBreak2 = nil end)
-	end
-
-	syncHandlers["BT"] = function(sender, timer)
-		if DBM.Options.DontShowUserTimers then return end
-		timer = tonumber(timer or 0)
-		if timer > 3600 then return end
-		if (DBM:GetRaidRank(sender) == 0 and IsInGroup()) or select(2, IsInInstance()) == "pvp" or IsEncounterInProgress() then
-			return
-		end
+	function breakTimerStart(self, timer, sender)
 		if not dummyMod2 then
 			local threshold = DBM.Options.PTCountThreshold
 			local adjustedThreshold = 5
@@ -4128,13 +4048,45 @@ do
 		if not DBM.Options.DontPlayPTCountdown then
 			dummyMod2.countdown:Cancel()
 		end
-		if not DBM.Options.DontShowPTCountdownText then
-			DBM:Unschedule(countDownTextDelay)
-			TimerTracker_OnEvent(TimerTracker, "PLAYER_ENTERING_WORLD")--easiest way to nil out timers on TimerTracker frame. This frame just has no actual star/stop functions
-		end
 		dummyMod2.text:Cancel()
 		DBM.Options.tempBreak2 = nil
 		if timer == 0 then return end--"/dbm break 0" will strictly be used to cancel the break timer (which is why we let above part of code run but not below)
+		self.Options.tempBreak2 = timer.."/"..time()
+		if not self.Options.DontShowPT2 then
+			self.Bars:CreateBar(timer, DBM_CORE_TIMER_BREAK, "Interface\\Icons\\Spell_Holy_BorrowedTime")
+			fireEvent("DBM_TimerStart", "break", DBM_CORE_TIMER_BREAK, timer, "Interface\\Icons\\Spell_Holy_BorrowedTime")
+		end
+		if not self.Options.DontPlayPTCountdown then
+			dummyMod2.countdown:Start(timer)
+		end
+		if not self.Options.DontShowPTText then
+			local hour, minute = GetGameTime()
+			minute = minute+(timer/60)
+			if minute >= 60 then
+				hour = hour + 1
+				minute = minute - 60
+			end
+			minute = floor(minute)
+			if minute < 10 then
+				minute = tostring(0 .. minute)
+			end
+			dummyMod2.text:Show(DBM_CORE_BREAK_START:format(strFromTime(timer).." ("..hour..":"..minute..")", sender))
+			if timer/60 > 10 then dummyMod2.text:Schedule(timer - 10*60, DBM_CORE_BREAK_MIN:format(10)) end
+			if timer/60 > 5 then dummyMod2.text:Schedule(timer - 5*60, DBM_CORE_BREAK_MIN:format(5)) end
+			if timer/60 > 2 then dummyMod2.text:Schedule(timer - 2*60, DBM_CORE_BREAK_MIN:format(2)) end
+			if timer/60 > 1 then dummyMod2.text:Schedule(timer - 1*60, DBM_CORE_BREAK_MIN:format(1)) end
+			dummyMod2.text:Schedule(timer, DBM_CORE_ANNOUNCE_BREAK_OVER:format(hour..":"..minute))
+		end
+		C_TimerAfter(timer, function() self.Options.tempBreak2 = nil end)
+	end
+
+	syncHandlers["BT"] = function(sender, timer)
+		if DBM.Options.DontShowUserTimers then return end
+		timer = tonumber(timer or 0)
+		if timer > 3600 then return end
+		if (DBM:GetRaidRank(sender) == 0 and IsInGroup()) or select(2, IsInInstance()) == "pvp" or IsEncounterInProgress() then
+			return
+		end
 		breakTimerStart(DBM, timer, sender)
 	end
 	
@@ -4145,12 +4097,6 @@ do
 		DBM:Unschedule(DBM.RequestTimers)--IF we got BTR3 sync, then we know immediately RequestTimers was successful, so abort others
 		if #inCombat >= 1 then return end
 		if DBM.Bars:GetBar(DBM_CORE_TIMER_BREAK) then return end--Already recovered. Prevent duplicate recovery
-		if not dummyMod2 then
-			dummyMod2 = DBM:NewMod("BreakTimerCountdownDummy")
-			DBM:GetModLocalization("BreakTimerCountdownDummy"):SetGeneralLocalization{ name = DBM_CORE_MINIMAP_TOOLTIP_HEADER }
-			dummyMod2.countdown = dummyMod2:NewCountdown(0, 0, nil, nil, nil, true)
-			dummyMod2.text = dummyMod2:NewAnnounce("%s", 1, "Interface\\Icons\\Spell_Holy_BorrowedTime")
-		end
 		breakTimerStart(DBM, timer, sender)
 	end
 
@@ -5109,12 +5055,10 @@ do
 				path = "Interface\\AddOns\\DBM-VP"..voice.."\\checkhp.ogg"
 			end
 			self:PlaySoundFile(path)
-		end
-		if self.Options.TalkingHeadFilter == "CombatOnly" and not talkingHeadUnregistered and isTalkingHeadLoaded then
-			TalkingHeadFrame:UnregisterAllEvents()
-			--TalkingHeadFrame_CloseImmediately()--Calling this crashes wow apparently
-			talkingHeadUnregistered = true
-			self:Debug("TalkingHead has been unregistered", 2)
+			if UnitHealthMax("player") ~= 0 then
+				local health = UnitHealth("player") / UnitHealthMax("player") * 100
+				self:AddMsg(DBM_CORE_AFK_WARNING:format(health))
+			end
 		end
 	end
 
@@ -5184,7 +5128,8 @@ do
 			if not v.combatInfo then return end
 			if v.noEEDetection then return end
 			if v.respawnTime and success == 0 and self.Options.ShowRespawn and not self.Options.DontShowBossTimers then--No special hacks needed for bad wrath ENCOUNTER_END. Only mods that define respawnTime have a timer, since variable per boss.
-				self.Bars:CreateBar(v.respawnTime, DBM_CORE_TIMER_RESPAWN, "Interface\\Icons\\Spell_Holy_BorrowedTime")
+				local name = string.split(",", name)
+				self.Bars:CreateBar(v.respawnTime, DBM_CORE_TIMER_RESPAWN:format(name), "Interface\\Icons\\Spell_Holy_BorrowedTime")
 			end
 			if v.multiEncounterPullDetection then
 				for _, eId in ipairs(v.multiEncounterPullDetection) do
@@ -5521,22 +5466,10 @@ do
 			--process global options
 			self:HideBlizzardEvents(1)
 			self:StartLogging(0, nil)
-			if self.Options.HideObjectivesFrame and mod.addon.type ~= "SCENARIO" and GetNumTrackedAchievements() == 0 then
+			if self.Options.HideObjectivesFrame and mod.addon.type ~= "SCENARIO" and GetNumTrackedAchievements() == 0 and difficultyIndex ~= 8 then
 				if ObjectiveTrackerFrame:IsVisible() then
 					ObjectiveTrackerFrame:Hide()
 					watchFrameRestore = true
-				end
-				--When hiding objectives frame in Mythic+, start our own timer to show time remaining during boss fight
-				if difficultyIndex == 8 then
-					local _, elapsedTime = GetWorldElapsedTime(1)--Should always be 1, with only one world state timer active.
-					local _, _, maxTime = C_ChallengeMode.GetMapInfo(LastInstanceMapID);
-					local remaining = (maxTime or 0) - (elapsedTime or 0)
-					if remaining and remaining > 0 then--No remaining, already failed timer, do nothing
-						self.Bars:CreateBar(remaining, PLAYER_DIFFICULTY6.."+")
-					end
-					--Maybe do more with this later
-					--local threeChests = maxTime * 0.6
-					--local twoChests = maxTime * 0.8;
 				end
 			end
 			fireEvent("pull", mod, delay, synced, startHp)
@@ -5711,6 +5644,7 @@ do
 			end
 			if self.Options.AFKHealthWarning and UnitIsUnit(uId, "player") and (health < 85) and not IsEncounterInProgress() and UnitIsAFK("player") and self:AntiSpam(5, "AFK") then--You are afk and losing health, some griever is trying to kill you while you are afk/tabbed out.
 				self:PlaySoundFile("Sound\\Creature\\CThun\\CThunYouWillDIe.ogg")--So fire an alert sound to save yourself from this person's behavior.
+				self:AddMsg(DBM_CORE_AFK_WARNING:format(health))
 			end
 		end
 	end
@@ -5831,9 +5765,9 @@ do
 					else
 						if difficultyIndex == 8 then--Mythic+/Challenge Mode
 							--TODO, figure out how to get current mythic plus rank, compare to our best rank.
-							local currentMPRank = 0--0 is temp, until know api to call to get actual rank
+							local currentMPRank = C_ChallengeMode.GetActiveKeystoneInfo() or 0
 							local bestMPRank = mod.stats.challengeBestRank or 0
-							if mod.stats.challengeBestRank > currentMPRank then--Don't save stats at all
+							if mod.stats.challengeBestRank > currentMPRank then--Don't save time stats at all
 								--DO nothing
 							elseif mod.stats.challengeBestRank < currentMPRank then--Update best time and best rank, even if best time is lower (for a lower rank)
 								mod.stats.challengeBestRank = currentMPRank--Update best rank
@@ -5956,10 +5890,9 @@ do
 				self:Unschedule(loopCRTimer)
 				self.BossHealth:Hide()
 				self.Arrow:Hide(true)
-				if self.Options.HideObjectivesFrame and watchFrameRestore and not scenario then
+				if watchFrameRestore then
 					ObjectiveTrackerFrame:Show()
 					watchFrameRestore = false
-					self.Bars:CancelBar(PLAYER_DIFFICULTY6.."+")
 				end
 				if tooltipsHidden then
 					--Better or cleaner way?
@@ -6044,7 +5977,7 @@ do
 	local autoTLog = false
 	
 	local function isCurrentContent()
-		if LastInstanceMapID == 1520 or LastInstanceMapID == 1530 or LastInstanceMapID == 1220 then--Legion
+		if LastInstanceMapID == 1520 or LastInstanceMapID == 1530 or LastInstanceMapID == 1220 or LastInstanceMapID == 1648 then--Legion
 			return true
 		end
 		return false
@@ -6198,6 +6131,7 @@ function DBM:UNIT_DIED(args)
 	if self.Options.AFKHealthWarning and GUID == UnitGUID("player") and not IsEncounterInProgress() and UnitIsAFK("player") and self:AntiSpam(5, "AFK") then--You are afk and losing health, some griever is trying to kill you while you are afk/tabbed out.
 		self:FlashClientIcon()
 		self:PlaySoundFile("Sound\\Creature\\CThun\\CThunYouWillDIe.ogg")--So fire an alert sound to save yourself from this person's behavior.
+		self:AddMsg(DBM_CORE_AFK_WARNING:format(0))
 	end
 end
 DBM.UNIT_DESTROYED = DBM.UNIT_DIED
@@ -6406,12 +6340,12 @@ do
 		if month == 4 and day == 1 then--April 1st
 			self:Schedule(180 + math.random(0, 300) , self.AprilFools, self)
 		end
-		if GetLocale() == "ptBR" or GetLocale() == "frFR" or GetLocale() == "itIT" then
+		if GetLocale() == "ptBR" or GetLocale() == "frFR" or GetLocale() == "itIT" or GetLocale() == "esES" or GetLocale() == "ruRU" then
 			C_TimerAfter(10, function() if self.Options.HelpMessageVersion < 4 then self.Options.HelpMessageVersion = 4 self:AddMsg(DBM_CORE_NEED_LOCALS) end end)
 		end
 		C_TimerAfter(20, function() if not self.Options.ForumsMessageShown then self.Options.ForumsMessageShown = self.ReleaseRevision self:AddMsg(DBM_FORUMS_MESSAGE) end end)
 		C_TimerAfter(30, function() if not self.Options.SettingsMessageShown then self.Options.SettingsMessageShown = true self:AddMsg(DBM_HOW_TO_USE_MOD) end end)
-		C_TimerAfter(40, function() if self.Options.NewsMessageShown < 7 then self.Options.NewsMessageShown = 7 self:AddMsg(DBM_CORE_WHATS_NEW_LINK) end end)
+		C_TimerAfter(40, function() if self.Options.NewsMessageShown < 8 then self.Options.NewsMessageShown = 8 self:AddMsg(DBM_CORE_WHATS_NEW_LINK) end end)
 		if type(RegisterAddonMessagePrefix) == "function" then
 			if not RegisterAddonMessagePrefix("D4") then -- main prefix for DBM4
 				self:AddMsg("Error: unable to register DBM addon message prefix (reached client side addon message filter limit), synchronization will be unavailable") -- TODO: confirm that this actually means that the syncs won't show up
@@ -6619,12 +6553,6 @@ do
 			if self.Options.HideGuildChallengeUpdates or custom then
 				AlertFrame:UnregisterEvent("GUILD_CHALLENGE_COMPLETED")
 			end
-			if self.Options.TalkingHeadFilter == "CombatOnly" and not talkingHeadUnregistered and isTalkingHeadLoaded then
-				TalkingHeadFrame:UnregisterAllEvents()
-				--TalkingHeadFrame_CloseImmediately()--Calling this crashes wow apparently
-				talkingHeadUnregistered = true
-				self:Debug("TalkingHead has been unregistered", 2)
-			end
 		elseif toggle == 0 and blizzEventsUnregistered then
 			blizzEventsUnregistered = false
 			if self.Options.HideQuestTooltips then
@@ -6641,14 +6569,6 @@ do
 			end
 			if self.Options.HideGuildChallengeUpdates then
 				AlertFrame:RegisterEvent("GUILD_CHALLENGE_COMPLETED")
-			end
-			if self.Options.TalkingHeadFilter == "BossCombatOnly" and talkingHeadUnregistered then
-				TalkingHeadFrame:RegisterEvent("TALKINGHEAD_REQUESTED")
-				TalkingHeadFrame:RegisterEvent("TALKINGHEAD_CLOSE")
-				TalkingHeadFrame:RegisterEvent("SOUNDKIT_FINISHED")
-				TalkingHeadFrame:RegisterEvent("LOADING_SCREEN_ENABLED")
-				talkingHeadUnregistered = false
-				self:Debug("TalkingHead has been restored")
 			end
 		end
 	end
@@ -6812,18 +6732,6 @@ end
 
 function DBM:GetTOC()
 	return wowTOC
-end
-
-function DBM:TalkingHeadStatus()
-	return talkingHeadUnregistered, isTalkingHeadLoaded
-end
-
-function DBM:SetTalkingHeadState(disabled)
-	if disabled then
-		talkingHeadUnregistered = true
-	else
-		talkingHeadUnregistered = false
-	end
 end
 
 function DBM:FlashClientIcon()
@@ -10288,6 +10196,17 @@ do
 			return self:NewCastTimer(timer / 1000, spellId, ...)
 		end
 		return newTimer(self, "cast", timer, ...)
+	end
+	
+	function bossModPrototype:NewCastSourceTimer(timer, ...)
+		if tonumber(timer) and timer > 1000 then -- hehe :) best hack in DBM. This makes the first argument optional, so we can omit it to use the cast time from the spell id ;)
+			local spellId = timer
+			timer = select(4, GetSpellInfo(spellId)) or 1000 -- GetSpellInfo takes YOUR spell haste into account...WTF?
+			local spellHaste = select(4, GetSpellInfo(53142)) / 10000 -- 53142 = Dalaran Portal, should have 10000 ms cast time
+			timer = timer / spellHaste -- calculate the real cast time of the spell...
+			return self:NewCastSourceTimer(timer / 1000, spellId, ...)
+		end
+		return newTimer(self, "castsource", timer, ...)
 	end
 
 	function bossModPrototype:NewCDTimer(...)

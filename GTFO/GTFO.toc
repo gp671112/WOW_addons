@@ -4,13 +4,9 @@
 ## Title-zhTW: |cFFFF0080[危險警報]|rGTFO
 ## Notes-zhTW: 危險警報，請移開你的位置！
 ## Author: Zensunim of Dragonblight
-## Version: 4.41.2
+## Version: 4.41.5
 ## DefaultState: Enabled
 ## SavedVariables: GTFOData
-## X-Curse-Packaged-Version: 4.41.2
-## X-Curse-Project-Name: GTFO
-## X-Curse-Project-ID: gtfo
-## X-Curse-Repository-ID: wow/gtfo/mainline
 Localization\enUS.lua
 Localization\zhCN.lua
 Localization\zhTW.lua

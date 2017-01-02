@@ -1,2 +1,2 @@
-PatternLocale.esMX = PatternLocale.esES
+﻿PatternLocale.esMX = PatternLocale.esES
 DisplayLocale.esMX = DisplayLocale.esES

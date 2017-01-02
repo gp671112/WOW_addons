@@ -5,30 +5,20 @@ local L
 ---------------
 L= DBM:GetModLocalization(1819)
 
-L:SetWarningLocalization({
-})
-
-L:SetTimerLocalization({
-})
-
-L:SetOptionLocalization({
-})
-
-L:SetMiscLocalization({
-})
-
----------------------------
--- Guarm --
----------------------------
-L= DBM:GetModLocalization(1830)
-
 ---------------------------
 -- Helya --
 ---------------------------
 L= DBM:GetModLocalization(1829)
 
+L:SetTimerLocalization({
+	OrbsTimerText		= "Next Orbs (%d-%s)"
+})
+
 L:SetMiscLocalization({
-	phaseThree =	"Your efforts are for naught, mortals! Odyn will NEVER be free!"
+	phaseThree		= "Your efforts are for naught, mortals! Odyn will NEVER be free!",
+	near			= "near",
+	far				= "far",
+	multiple		= "Multiple"
 })
 
 -------------

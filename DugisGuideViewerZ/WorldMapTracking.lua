@@ -1201,6 +1201,11 @@ function WMT:Initialize()
 				x, y, DataProviders:GetTooltipText(nil, unpack(nearest, 3)),
 				map, level)
 		end
+        
+        DropDownList1.showTimer = 1
+        Lib_DropDownList1.showTimer = 1
+        Lib_HideDropDownMenu(1)
+        Lib_HideDropDownMenu(2)
 	end
 
 	local function IterateDropdownLevel(level)
@@ -1214,107 +1219,7 @@ function WMT:Initialize()
 		end
 	end
 
-	local function Get_FindNearestDropDown_Initialize(baseLevel, value)
-		return function (self, level)
-			if level==baseLevel and UIDROPDOWNMENU_MENU_VALUE==value then
-				for point in DGV.IterateAllFindNearestPoints() do
-					local button
-					local found = false
-					local trackingType = point[3]
-					local name, texture = GetTrackingInfo(trackingType)
-					if name then
-						for button in IterateDropdownLevel(level) do
-							if name==button.value then
-								found = true
-								break;
-							end
-						end
-						if not found then
-							local info;
-							info = Lib_UIDropDownMenu_CreateInfo();
-							info.text = name
-							info.func = FindNearest;
-							info.icon = texture;
-							info.arg1 = trackingType;
-							info.isNotRadio = true;
-							info.notCheckable = true
-							info.keepShownOnClick = true;
-							info.tCoordLeft = 0;
-							info.tCoordRight = 1;
-							info.tCoordTop = 0;
-							info.tCoordBottom = 1;
 
-							if trackingType==10 then
-								info.icon = nil;
-								info.func =  nil;
-								info.notCheckable = true;
-								info.keepShownOnClick = false;
-								info.hasArrow = true;
-							end
-							--if trackingType~=5 then --skip flightmaster for now
-								UIDropDownMenu_AddButton(info, level)
-							--end
-						end
-					end
-				end
-			end
-
-			if level==baseLevel+1 then
-				for point in DGV.IterateAllFindNearestPoints() do
-					local trackingType, _, _, spell = unpack(point, 3)
-					if trackingType==10 then
-						local button
-						local found = false
-						for button in IterateDropdownLevel(level) do
-							if spell==button.arg1 then
-								found = true
-								break;
-							end
-						end
-						if not found then
-							local info;
-							info = Lib_UIDropDownMenu_CreateInfo();
-							info.text = professionTable[spell];
-							--info.checked = MiniMapTrackingDropDown_IsNoTrackingActive;
-							info.func = FindNearest;
-							info.notCheckable = true
-							info.icon = select(2, GetTrackingInfo(10));
-							info.arg1 = spell;
-							info.isNotRadio = true;
-							info.keepShownOnClick = false;
-							UIDropDownMenu_AddButton(info, level);
-						end
-					end
-				end
-			end
-		end
-	end
-
-	--[[function WMT:ShowMenu(frame)
-		local menu = DugisGuideViewer.ArrowMenu:CreateMenu()
-		DugisGuideViewer.ArrowMenu:CreateMenuTitle(menu, L["World Map Tracking"])
-		
-		local filters = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, L["Set Tracking Filters..."])
-		filters:SetFunction(function () ToggleDropDownMenu(1, nil, WorldMapTrackingDropDown, menu, 0, -5); end)
-			
-		--DGV:DebugFormat("ShowMenu", "menu:GetName", menu:GetName())
-		if not WorldMapTrackingDropDown then
-			CreateFrame("Frame", "WorldMapTrackingDropDown", UIParent, "Lib_UIDropDownMenuTemplate")
-		end
-		Lib_UIDropDownMenu_Initialize(WorldMapTrackingDropDown, TrackingDropDown_Initialize, "MENU")
-		
-		local nearest = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, L["Find Nearest..."])
-		nearest:SetFunction(function () ToggleDropDownMenu(1, nil, FindNearestDropDown, menu, 0, -5); end)
-	
-		if not FindNearestDropDown then
-			CreateFrame("Frame", "FindNearestDropDown", UIParent, "Lib_UIDropDownMenuTemplate")
-		end
-		Lib_UIDropDownMenu_Initialize(FindNearestDropDown, Get_FindNearestDropDown_Initialize(1), "MENU")
-
-		menu:ShowAtCursor()
-		
-		return true
-	end]]
 	
 	local function UpdateCurrentMapVersion()
 		local currentMapName = GetMapInfo()
@@ -1335,27 +1240,7 @@ function WMT:Initialize()
 			end
 		end)
           
-    local trackPetsItemMenuList = 4000
-    if DugisGuideViewer.ExtendedTrackingPointsExists then
-        
-        hooksecurefunc("UIDropDownMenu_AddButton", function(info, level, ...)
-            local isTrackPetsItem = info.icon and info.icon:match("tracking_wildpet")
-            if isTrackPetsItem then
-                local info = Lib_UIDropDownMenu_CreateInfo();
-            
-                info.text = "Tracked Pets |TInterface\\AddOns\\DugisGuideViewerZ\\Artwork\\PetBattleIcon:20:20:5:0|t"
-                info.icon = nil
-                info.isNotRadio = true
-                info.hasArrow = true
-                info.notCheckable = true
-                info.isNotRadio = true
-                info.menuList = trackPetsItemMenuList
-                info.keepShownOnClick = true
-                UIDropDownMenu_AddButton(info, level)
-            end
-        
-        end)
-    end
+
 		
 	function DGV:MINIMAP_UPDATE_TRACKING()
 		WMT:UpdateTrackingMap()
@@ -1370,7 +1255,6 @@ function WMT:Initialize()
 		end
 	end
 
-	local orig_MiniMapTrackingDropDown_Initialize
 	function WMT:Load()
 		LuaUtils:Delay(3, function()
             DGV:PopulatePetJournalLookup()
@@ -1406,30 +1290,65 @@ function WMT:Initialize()
 		end
 	
 		DGV:RegisterEvent("TRAINER_SHOW")
-		--[[if not trackingStates then
-			trackingStates = {}
-			local id, name, texture, active, category;
-			for id, name, texture, active, category in IterateTrackingTypes() do
-				trackingStates[id] = active
-			end
-		end]]
         
-        local function GetPetFilterMenuCheckboxes()
-            local result = {}
+        local function HasMinimapMenuPetTrackingOption()
+            local result = false
             
-            for i=1, UIDROPDOWNMENU_MAXBUTTONS do
-                local button = _G["DropDownList"..UIDROPDOWNMENU_MENU_LEVEL.."Button"..i];
-                local name = button:GetName()
+            LuaUtils:loop(_G["DropDownList1"].numButtons, function(buttonIndex)
+                local buttonIcon = _G["DropDownList1Button"..buttonIndex.."Icon"]
+                local button = _G["DropDownList1Button"..buttonIndex]
+                local text = _G["DropDownList1Button"..buttonIndex.."NormalText"]
                 
-                if button.arg1 == "pet-type" then
-                    result[#result + 1] = _G[name.."Check"]
-                    _G[name.."Check"].arg1 = button.arg1
-                    _G[name.."Check"].arg2 = button.arg2
-                end
-            end
+                if DropDownList1:IsVisible() and button:IsShown() and buttonIcon and buttonIcon:IsVisible() and buttonIcon:GetTexture():match("tracking_wildpet") then
+                    result = true
+                end 
+            end)
             
             return result
+        end        
+       
+        local function IsShowMinimapMenu()
+            local result = 0
+            
+            LuaUtils:loop(_G["DropDownList1"].numButtons, function(buttonIndex)
+                local button = _G["DropDownList1Button"..buttonIndex]
+                
+                if button:GetText() == MINIMAP_TRACKING_NONE then
+                    result = result + 1
+                end 
+                
+                if button:GetText() == TOWNSFOLK_TRACKING_TEXT then
+                    result = result + 1
+                end
+            end)
+            
+            return result == 2
         end
+
+        local moved = false
+        local allTrackingPoints = nil
+        
+        local function GetAllTrackingPoints()
+            local result = {}
+            for point in DGV.IterateAllFindNearestPoints() do  
+                result[#result + 1] = point
+            end            
+            return result
+        end
+        
+        --Type identifier, type icon postfix
+        local allPetTypes = {
+            {"Humanoid"   , "Humanoid"     },
+            {"Dragon"     , "Dragon"       },
+            {"Flying"     , "Flying"       },
+            {"Undead"     , "Undead"       },
+            {"Critter"    , "Critter"      },
+            {"Magical"    , "Magical"      },
+            {"Elemental"  , "Elemental"    },
+            {"Beast"      , "Beast"        },
+            {"Aquatic"    , "Water"        },
+            {"Mechanical" , "Mechanical"   },
+        }
         
         local function PetFilterMenuItemClicked(item)
             local menuType = item.arg1
@@ -1440,18 +1359,14 @@ function WMT:Initialize()
             end
             
             if menuType == "check-all" then
-                LuaUtils:foreach(GetPetFilterMenuCheckboxes(), function(item)
-                    if item.arg1 == "pet-type" then
-                        getPetTypeFilters()[item.arg2] = true
-                    end
+                LuaUtils:foreach(allPetTypes, function(itemType)
+                    getPetTypeFilters()[itemType[1]] = true
                 end)
             end
             
             if menuType == "uncheck-all" then
-                LuaUtils:foreach(GetPetFilterMenuCheckboxes(), function(item)
-                    if item.arg1 == "pet-type" then
-                        getPetTypeFilters()[item.arg2] = false
-                    end
+                LuaUtils:foreach(allPetTypes, function(itemType)
+                    getPetTypeFilters()[itemType[1]] = false
                 end)
             end  
             
@@ -1464,139 +1379,201 @@ function WMT:Initialize()
             end
             
             UpdateTrackingFilters()
-            UIDropDownMenu_Refresh(MiniMapTrackingDropDown)
-        end
+            Lib_UIDropDownMenu_Refresh(MinimapExtraMenuFrame)
+        end        
+
+        DropDownList1:HookScript("OnShow", function()
+            if not IsShowMinimapMenu() then
+                return
+            end
+            
+            if not MinimapExtraMenuFrame then
+                extraMenuFrame = CreateFrame("Frame", "MinimapExtraMenuFrame", UIParent, "UIDropDownMenuTemplate")
+            end
         
-        local function AddPetFilterItemToMenu(level, name, menuType, petType, checkable, icon)
-            local info = Lib_UIDropDownMenu_CreateInfo();
-            info.func = PetFilterMenuItemClicked
-            info.text = name
-            info.icon = icon
-            info.arg1 = menuType
-            info.arg2 = petType
-            info.notCheckable = not checkable
-            info.keepShownOnClick = true
-            info.isNotRadio = true
+            if allTrackingPoints == nil then
+                allTrackingPoints =  GetAllTrackingPoints()
+            end
+
+            local nearestOptions = {} 
+            local petsOptions = {} 
+            local menu = {
+                { text = "Dugi Guides", isTitle = true, isNotRadio = true, notCheckable = true
+                },
+                { text = "Find nearest", hasArrow = true, isNotRadio = true, notCheckable = true,
+                    menuList = nearestOptions
+                }
+            }
             
-            if petType then
-                info.checked = function(button) return getPetTypeFilters()[button.arg2] end
+            if DugisGuideViewer.ExtendedTrackingPointsExists and HasMinimapMenuPetTrackingOption() then
+                menu[#menu + 1] = { text = "Tracked Pets |TInterface\\AddOns\\DugisGuideViewerZ\\Artwork\\PetBattleIcon:20:20:5:0|t", hasArrow = true, isNotRadio = true, notCheckable = true,
+                    menuList = petsOptions
+                }
             end
             
-            if menuType == "collected" then
-                info.checked = function() return DugisGuideViewer.chardb["showCollectedPets"] end
-            end           
-            if menuType == "not-collected" then
-                info.checked = function() return DugisGuideViewer.chardb["showNotCollectedPets"] end
+            local function AddPetFilterItemToMenu(name, menuType, petType, checkable, icon)
+                local info = {}
+                info.func = PetFilterMenuItemClicked
+                info.text = name
+                info.icon = icon
+                info.arg1 = menuType
+                info.arg2 = petType
+                info.notCheckable = not checkable
+                info.keepShownOnClick = true
+                info.isNotRadio = true
+                
+                if petType then
+                    info.checked = function(button) return getPetTypeFilters()[button.arg2] end
+                end
+                
+                if menuType == "collected" then
+                    info.checked = function() return DugisGuideViewer.chardb["showCollectedPets"] end
+                end           
+                if menuType == "not-collected" then
+                    info.checked = function() return DugisGuideViewer.chardb["showNotCollectedPets"] end
+                end
+                
+                petsOptions[#petsOptions + 1] = info
             end
             
-            UIDropDownMenu_AddButton(info, level)
-        end
-        
-		orig_MiniMapTrackingDropDown_Initialize = MiniMapTrackingDropDown.initialize
-		MiniMapTrackingDropDown.initialize = function(self, level, menuList)       
-			if not WorldMapButton:IsVisible() then SetMapToCurrentZone() end
-			if level==1 then
-				local info;
-				info = Lib_UIDropDownMenu_CreateInfo();
-				info.text = L["Find Nearest"]
-				info.icon = nil;
-				info.arg1 = nil;
-				info.isNotRadio = true;
-				info.func =  nil;
-				info.notCheckable = true;
-				info.keepShownOnClick = false;
-				info.hasArrow = true;
-				info.isNotRadio = true;
-				--[[info.tCoordLeft = 0;
-				info.tCoordRight = 1;
-				info.tCoordTop = 0;
-				info.tCoordBottom = 1;]]
-				UIDropDownMenu_AddButton(info, level)
+            AddPetFilterItemToMenu("Check All",    "check-all")
+            AddPetFilterItemToMenu("Uncheck All",  "uncheck-all")
 
-			else
+            local iconPathDir = [[Interface\ICONS\Pet_Type_]]
 
-            end
-			if level>=2 then
-				Get_FindNearestDropDown_Initialize(2, L["Find Nearest"])(info, level)
-			end
-			
-            orig_MiniMapTrackingDropDown_Initialize(self, level)
+            AddPetFilterItemToMenu("Collected",         "collected",      nil, true)     
+            AddPetFilterItemToMenu("Not Collected",     "not-collected",  nil, true)  
+
+            LuaUtils:foreach(allPetTypes, function(petType)
+                local petTypeName = petType[1]
+                local petTypeIcon = petType[2]
+                AddPetFilterItemToMenu(petTypeName, "pet-type", petTypeName, true, iconPathDir..petTypeIcon) 
+            end)
+
+            local added = {}
+            LuaUtils:foreach(allTrackingPoints, function(point)
+                local button
+                local found = false
+                local trackingType = point[3]
+                local name, texture = GetTrackingInfo(trackingType)
+                if name and not added[name] then
+                    added[name] = true
+                    
+                    local info;
+                    info = {}
+                    info.text = name
+                    info.func = FindNearest;
+                    info.icon = texture;
+                    info.arg1 = trackingType;
+                    info.isNotRadio = true;
+                    info.notCheckable = true
+                    info.keepShownOnClick = true;
+                    info.tCoordLeft = 0;
+                    info.tCoordRight = 1;
+                    info.tCoordTop = 0;
+                    info.tCoordBottom = 1;
+
+                    if trackingType==10 then
+                        info.icon = nil;
+                        info.func =  nil;
+                        info.notCheckable = true;
+                        info.keepShownOnClick = false;
+                        info.hasArrow = true;
+                                
+                        info.menuList = {}
+                        local added1 = {}
+                                
+                         LuaUtils:foreach(allTrackingPoints, function(point1)
+                            local trackingType, _, _, spell = unpack(point1, 3)
+                            if trackingType==10 and spell and not added1[spell] then
+                                added1[spell] = true
+                                
+                                local info1;
+                                info1 = {};
+                                info1.text = professionTable[spell];
+                                info1.func = FindNearest;
+                                info1.notCheckable = true
+                                info1.icon = select(2, GetTrackingInfo(10));
+                                info1.arg1 = spell;
+                                info1.isNotRadio = true;
+                                info1.keepShownOnClick = false;
+                                
+                                info.menuList[#info.menuList + 1]  = info1
+                            end
+                        end)
+                        
+                    end
+                    
+                    nearestOptions[#nearestOptions + 1]  = info
+                end
+            end)
             
-            if menuList == trackPetsItemMenuList and DugisGuideViewer.ExtendedTrackingPointsExists then
-                AddPetFilterItemToMenu(level, "Check All",    "check-all")
-                AddPetFilterItemToMenu(level, "Uncheck All",  "uncheck-all")
+            local added = {}
+            
+            for providerKey,provider in DataProviders.IterateProviders do
+                if provider.GetCustomTrackingInfo then
+                    local text, icon, configAccessor, configMutator =  provider:GetCustomTrackingInfo()
+                    if text then
+                    
+                        local option = {}
+                        local info;
+                        option.text = L[text]
+                        option.icon = icon
+                        option.arg1 = nil;
+                        option.checked = configAccessor
+                        option.isNotRadio = true;
+                        option.func =  function(arg1, arg2, arg3, enabled)
+                            configMutator(enabled)
+                            WMT:UpdateTrackingMap()
+                        end;
+                        option.notCheckable = false;
+                        option.keepShownOnClick = true;
+                        option.hasArrow = false;
+                        
+                        menu[#menu + 1] = option
+                        
+                    end
+                end
+            end
 
-                local iconPathDir = [[Interface\ICONS\Pet_Type_]]
-                --iconPathDir = [[Interface\TARGETINGFRAME\PetBadge-]]
+            MinimapExtraMenuFrame.point = "TOPRIGHT"
+            MinimapExtraMenuFrame.relativePoint = "BOTTOMRIGHT"
+            
+            Lib_EasyMenu(menu, MinimapExtraMenuFrame, DropDownList1, 0 , 0, "MENU");
+            
+            if not hooked then
+                hooked = true
+            
+                Lib_DropDownList1:HookScript("OnEnter", function()
+                    DropDownList1.showTimer = 10000
+                end)            
+                
+                DropDownList1:HookScript("OnEnter", function()
+                    Lib_DropDownList1.showTimer = 10000
+                end)
+            
+                DropDownList1:HookScript("OnHide", function()
+                   if Lib_DropDownList1:IsShown() then
+                       Lib_HideDropDownMenu(1)
+                       Lib_HideDropDownMenu(2)
+                   end
+                   
+                   allTrackingPoints = nil
+                end)
+                
+                Lib_DropDownList1:HookScript("OnHide", function()
+                    DropDownList1.showTimer = 0.1
+                end)
+                
+            end
+        end)
 
-                AddPetFilterItemToMenu(level, "Collected",         "collected",      nil, true)     
-                AddPetFilterItemToMenu(level, "Not Collected",     "not-collected",  nil, true)     
-                AddPetFilterItemToMenu(level, "Humanoid",          "pet-type",        "Humanoid"   , true, iconPathDir.."Humanoid")     
-                AddPetFilterItemToMenu(level, "Dragon",            "pet-type",        "Dragon"     , true, iconPathDir.."Dragon")     
-                AddPetFilterItemToMenu(level, "Flying",            "pet-type",        "Flying"     , true, iconPathDir.."Flying")     
-                AddPetFilterItemToMenu(level, "Undead",            "pet-type",        "Undead"     , true, iconPathDir.."Undead")     
-                AddPetFilterItemToMenu(level, "Critter",           "pet-type",        "Critter"    , true, iconPathDir.."Critter")     
-                AddPetFilterItemToMenu(level, "Magical",           "pet-type",        "Magical"    , true, iconPathDir.."Magical")     
-                AddPetFilterItemToMenu(level, "Elemental",         "pet-type",        "Elemental"  , true, iconPathDir.."Elemental")     
-                AddPetFilterItemToMenu(level, "Beast",             "pet-type",        "Beast"      , true, iconPathDir.."Beast")     
-                AddPetFilterItemToMenu(level, "Aquatic",           "pet-type",        "Aquatic"    , true, iconPathDir.."Water")     
-                AddPetFilterItemToMenu(level, "Mechanical",        "pet-type",        "Mechanical" , true, iconPathDir.."Mechanical")     
-            end            
-  
-			if level==2 and UIDROPDOWNMENU_MENU_VALUE==2 then --put class trainer back
-				local name, texture, active= GetTrackingInfo(4);
-				local info = Lib_UIDropDownMenu_CreateInfo();
-				info.text = name;
-				info.checked = DGV.chardb.ClassTrainerTrackingEnabled
-				info.func = 
-				function(self, id, unused, on)
-					DGV.chardb.ClassTrainerTrackingEnabled=on
-					WMT:UpdateTrackingMap()
-				end
-				info.icon = texture;
-				--info.arg1 = id;
-				info.isNotRadio = true;
-				info.keepShownOnClick = true;
-				info.tCoordLeft = 0;
-				info.tCoordRight = 1;
-				info.tCoordTop = 0;
-				info.tCoordBottom = 1;
-				UIDropDownMenu_AddButton(info, level)
-			end
-			if level==1 then
-				for providerKey,provider in DataProviders.IterateProviders do
-					if provider.GetCustomTrackingInfo then
-						local text, icon, configAccessor, configMutator =  provider:GetCustomTrackingInfo()
-						if text then
-							local info;
-							info = Lib_UIDropDownMenu_CreateInfo();
-							info.text = L[text]
-							info.icon = icon
-							info.arg1 = nil;
-							info.checked = configAccessor
-							info.isNotRadio = true;
-							info.func =  function(arg1, arg2, arg3, enabled)
-								configMutator(enabled)
-								WMT:UpdateTrackingMap()
-							end;
-							info.notCheckable = false;
-							info.keepShownOnClick = true;
-							info.hasArrow = false;
-							UIDropDownMenu_AddButton(info, level)
-						end
-					end
-				end
-			end
-		end
-		--DGV:RegisterEvent("WORLD_MAP_UPDATE")
 		DGV:RegisterEvent("PET_JOURNAL_LIST_UPDATE")
 		DGV:RegisterEvent("MINIMAP_UPDATE_TRACKING")
 		WMT:UpdateTrackingMap()
 	end
 	
 	function WMT:Unload()
-		MiniMapTrackingDropDown.initialize = orig_MiniMapTrackingDropDown_Initialize
-		--DGV:UnregisterEvent("WORLD_MAP_UPDATE")
 		DGV:UnregisterEvent("PET_JOURNAL_LIST_UPDATE")
 		DGV:UnregisterEvent("TRAINER_SHOW")
 		DGV:UnregisterEvent("MINIMAP_UPDATE_TRACKING")

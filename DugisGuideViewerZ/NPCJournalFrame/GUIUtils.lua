@@ -558,7 +558,12 @@ function GUIUtils:CreateHintFrame(x, y, width, height, hintTexture)
     return window
 end
 
-function GUIUtils:CreateScrollFrame(parent)
+local scrollFrames = {}
+function GUIUtils:CreateScrollFrame(parent, name)
+    if name and scrollFrames[name] then
+        return scrollFrames[name]
+    end
+    
     local scrollFrame = {}
     scrollFrame.frame = CreateFrame("ScrollFrame", nil, parent)
     scrollFrame.frame:SetWidth(288) 
@@ -571,7 +576,7 @@ function GUIUtils:CreateScrollFrame(parent)
 
     scrollFrame.scrollBar = CreateFrame("Slider", nil, scrollFrame.frame, "UIPanelScrollBarTemplate")
     scrollFrame.scrollBar:SetPoint("TOPLEFT", parent, "TOPLEFT", 302, -61)
-    scrollFrame.scrollBar:SetWidth(10) 
+    scrollFrame.scrollBar:SetWidth(14) 
     scrollFrame.scrollBar:SetHeight(309)
     scrollFrame.scrollBar:SetMinMaxValues(1, 400)
     scrollFrame.scrollBar:SetValueStep(1)
@@ -581,6 +586,10 @@ function GUIUtils:CreateScrollFrame(parent)
     function (self, value)
         self:GetParent():SetVerticalScroll(value)
     end)
+    
+    if name then
+        scrollFrames[name] = scrollFrame
+    end
     
     return scrollFrame
 end
@@ -834,7 +843,13 @@ local nodeIndex = 1
 local treeVisualizationContainer = {}
 local treeExpantionStates = {}
 
-function GUIUtils:SetTreeData(targetTreeFrame, wrapper, treePrefix, nodes, parentVisualNode, reqLevel, onNodeClickFunction, onLeafClickFunction, x, y, indernalDeltaX, internalDeltaY, nodeTextProcessor, onHeightChangedFunction, onMouseWheel)
+function GUIUtils:SetTreeData(targetTreeFrame, wrapper, treePrefix, nodes, parentVisualNode, reqLevel
+, onNodeClickFunction, onLeafClickFunction, x, y, indernalDeltaX, internalDeltaY
+, nodeTextProcessor, onHeightChangedFunction, onMouseWheel, iconSize, nodeHeight, onDragFunction
+, noScrollMode, columnWidth, nodeTextX)
+
+    local isRoot = false
+    
     if wrapper == nil then
         wrapper = _G[treePrefix.."wrapper"]
         
@@ -849,8 +864,10 @@ function GUIUtils:SetTreeData(targetTreeFrame, wrapper, treePrefix, nodes, paren
         wrapper:Show()
         wrapper:SetPoint("TOPLEFT", targetTreeFrame, "TOPLEFT", x, y)
         wrapper:SetWidth(990)
-        wrapper:SetHeight(900)  
-    
+        wrapper:SetHeight(900) 
+
+        isRoot = true
+        
         wrapper:EnableMouse(true)
         wrapper:EnableMouseWheel(true)
         wrapper:SetScript("OnMouseWheel", onMouseWheel)
@@ -858,6 +875,13 @@ function GUIUtils:SetTreeData(targetTreeFrame, wrapper, treePrefix, nodes, paren
     
     wrapper.indernalDeltaX = indernalDeltaX or 0        
     wrapper.internalDeltaY = internalDeltaY or 0  
+    wrapper.nodeTextX = nodeTextX
+    
+    wrapper.noScrollMode = noScrollMode
+    wrapper.columnWidth = columnWidth 
+    
+    wrapper.iconSize = iconSize 
+    wrapper.nodeHeight = nodeHeight 
     
     wrapper:SetBackdropColor(0.0, 0.0, 0.2,1);
     wrapper.onHeightChangedFunction = onHeightChangedFunction
@@ -947,36 +971,46 @@ function GUIUtils:SetTreeData(targetTreeFrame, wrapper, treePrefix, nodes, paren
             parentVisualNode.visualNodes[#parentVisualNode.visualNodes + 1] = visualNode
             
             visualNode.extraOnClickFunction = onNodeClickFunction
+            visualNode.onDragFunction = onDragFunction
             
             if nodeData.nodes then
-                GUIUtils:SetTreeData(targetTreeFrame, wrapper, treePrefix, nodeData.nodes, visualNode, reqLevel, onNodeClickFunction, onLeafClickFunction, x, y, wrapper.indernalDeltaX, wrapper.internalDeltaY, nodeTextProcessor, onHeightChangedFunction, onMouseWheel)
+                GUIUtils:SetTreeData(targetTreeFrame, wrapper, treePrefix, nodeData.nodes, visualNode
+                , reqLevel, onNodeClickFunction, onLeafClickFunction, x, y, wrapper.indernalDeltaX
+                , wrapper.internalDeltaY, nodeTextProcessor, onHeightChangedFunction, onMouseWheel,
+                iconSize, nodeHeight, onDragFunction, noScrollMode, columnWidth, nodeTextX)
             end
         end
     end)  
         
-    local function UpdateSubTree(visualNodes, visualParentNode, currentYOffset, wrapper, level)
+    local totalIndex = 0
+    local function UpdateSubTree(visualNodes, visualParentNode, currentYOffset, wrapper, level, columnDeltaX, noScrollMode, columnWidth)
+    
+        
+        columnDeltaX = columnDeltaX or 0
+    
         if level == nil then
             level = 0
+            totalIndex = 1
         else
             level = level + 1
         end
     
-        local localOffset = 0
-        LuaUtils:foreach(visualNodes, function(visualNode)
+        local localYOffset = 0
+        LuaUtils:foreach(visualNodes, function(visualNode, index)
         
-            local x = 15 * level
-            
+            local x = 15 * level + columnDeltaX
+
             if visualNode.nodeData.isLeaf then
                 if visualParentNode == nil or visualParentNode.expanded then
                     
                     visualNode:SetPoint("TOPLEFT", wrapper, "TOPLEFT", x + wrapper.indernalDeltaX, -currentYOffset - 2 + wrapper.internalDeltaY)
-                    localOffset = localOffset + 20
+                    localYOffset = localYOffset + 20
                     currentYOffset = currentYOffset + 20
                     visualNode:Show()
                     visualNode.Button:SetPoint("TOPLEFT", visualNode, "TOPLEFT", 0, 0)
                     visualNode.Button:Show()
-                    visualNode:SetWidth(wrapper:GetWidth() - x)
-                    visualNode.Button:SetWidth(wrapper:GetWidth() - x)
+                    visualNode:SetWidth(columnWidth or (wrapper:GetWidth() - x))
+                    visualNode.Button:SetWidth(columnWidth or (wrapper:GetWidth() - x))
                     visualNode.Button.highlight:SetWidth(wrapper:GetWidth() - x)
                 else
                     visualNode:Hide()
@@ -995,30 +1029,68 @@ function GUIUtils:SetTreeData(targetTreeFrame, wrapper, treePrefix, nodes, paren
                 end
                 
             else
-                visualNode:SetWidth(wrapper:GetWidth() - x)
+                visualNode:SetWidth(columnWidth or (wrapper:GetWidth() - x))
+                visualNode.Title:SetWidth(columnWidth or (wrapper:GetWidth() - x))
+            
+                if visualNode.nodeData.expandedByDefault then
+                   visualNode.expanded = true
+                end
+            
+                if visualNode.nodeData.disabledMouse then
+                   visualNode:EnableMouse(false)
+                else
+                   visualNode:EnableMouse(true)
+                end
             
                 if visualParentNode == nil or visualParentNode.expanded then
                     visualNode:SetPoint("TOPLEFT", wrapper, "TOPLEFT", x + wrapper.indernalDeltaX, -currentYOffset - 2 + wrapper.internalDeltaY)
-                    localOffset = localOffset + 20
-                    currentYOffset = currentYOffset + 20
+                    localYOffset = localYOffset + (wrapper.nodeHeight or 20)
+                    currentYOffset = currentYOffset + (wrapper.nodeHeight or 20)
                     visualNode:Show()
                 else
                     visualNode:Hide()
                 end
                 
-                if visualNode.expanded or not visualNode.visualNodes then
-                    visualNode:SetNormalTexture("Interface\\Buttons\\UI-MinusButton-Up")
+                
+                if visualNode.nodeData.icon then
+                    visualNode:SetNormalTexture(visualNode.nodeData.icon)
                 else
-                    visualNode:SetNormalTexture("Interface\\Buttons\\UI-PlusButton-Up")
-                end  
+                    if visualNode.expanded or not visualNode.visualNodes then
+                        visualNode:SetNormalTexture("Interface\\Buttons\\UI-MinusButton-Up")
+                    else
+                        visualNode:SetNormalTexture("Interface\\Buttons\\UI-PlusButton-Up")
+                    end  
+                end
+                                
+                visualNode.Title:SetPoint("TOPLEFT", visualNode, "TOPLEFT", visualNode.nodeData.nodeTextX or wrapper.nodeTextX or 20, wrapper.nodeTextY or visualNode.nodeData.nodeTextY or -3)
+
+                local iconSize = visualNode.nodeData.iconSize or wrapper.iconSize or 16
+                if iconSize then
+                    visualNode.highlight:SetWidth(iconSize)
+                    visualNode.highlight:SetHeight(iconSize)
+                    visualNode.normal:SetWidth(iconSize)
+                    visualNode.normal:SetHeight(iconSize)
+                end
                 
                 if visualNode.visualNodes and visualNode.expanded then
-                    local off = UpdateSubTree(visualNode.visualNodes, visualNode, currentYOffset, wrapper, level)
-                    localOffset = localOffset + off
+                    local off = UpdateSubTree(visualNode.visualNodes, visualNode, currentYOffset, wrapper, level, columnDeltaX, noScrollMode, columnWidth)
+                    localYOffset = localYOffset + off
                     currentYOffset = currentYOffset + off
                 end
                 
-            end  
+                if visualNode.nodeData.textColor then
+                    local color = visualNode.nodeData.textColor
+                    visualNode.Title:SetTextColor(color.r, color.g, color.b)
+                end
+            end 
+
+            if totalIndex >= 11 and noScrollMode and level == 0 then
+                currentYOffset = 0
+                localYOffset = 0
+                --40 is columns space
+                columnDeltaX = columnDeltaX + columnWidth + 40
+                totalIndex = 0
+            end
             
             if visualNode.nodeData.onMouseEnter then
                 visualNode.Button:SetScript("OnEnter", visualNode.nodeData.onMouseEnter)
@@ -1032,9 +1104,13 @@ function GUIUtils:SetTreeData(targetTreeFrame, wrapper, treePrefix, nodes, paren
                 visualNode.Button:SetScript("OnClick", visualNode.nodeData.onMouseClick)
             end
             
+            
+            if level == 0 then
+                totalIndex = totalIndex + 1
+            end
         end)
         
-        return localOffset, currentYOffset
+        return localYOffset, currentYOffset
     end
         
         
@@ -1053,12 +1129,13 @@ function GUIUtils:SetTreeData(targetTreeFrame, wrapper, treePrefix, nodes, paren
                 visualNode:Hide()
                 visualNode:ClearAllPoints()
             end)
-            self.height = select(2, UpdateSubTree(self.visualNodes, nil, 0, wrapper))
+                                                    -- visualNodes, visualParentNode, currentYOffset, wrapper, level, columnDeltaX, noScrollMode,         columnWidth
+            self.height = select(2, UpdateSubTree(self.visualNodes, nil,              0,              wrapper, nil,   nil,          self.noScrollMode, self.columnWidth))
             
             self:SetHeight(self.height + 200)
             
             if self.onHeightChangedFunction then
-                self.onHeightChangedFunction(self.height)
+                self:onHeightChangedFunction(self.height)
             end
         end
     end
@@ -1146,3 +1223,59 @@ function TestTree3()
     )
 end
 
+function SetScrollableTreeFrame(parent, name, data, x, y, nodesOffsetY, width, height, onNodeClick, iconSize, nodeHeight, onDragFunction, noScrollMode, columnWidth, nodeTextX)
+    local scrollFrame = GUIUtils:CreateScrollFrame(parent, "scrollFrame" .. name)
+   
+    scrollFrame.scrollBar:SetPoint("TOPLEFT", parent, "TOPLEFT", 322, -110)
+    
+    scrollFrame.frame:SetPoint("TOPLEFT", parent, "TOPLEFT", x, y)
+    scrollFrame.scrollBar:SetFrameLevel(100)
+    
+    local wrapper = GUIUtils:SetTreeData(scrollFrame.frame, nil, name, 
+        data, nil, nil, onNodeClick, nil, 0, 0, 0, nodesOffsetY
+        ,function(oryginalText)
+           return oryginalText
+         end,
+         function(self, newHeight)
+            local newMax = newHeight - 100
+            if newMax < 1 then
+                newMax = 1
+            end
+            scrollFrame.scrollBar:SetMinMaxValues(1, newMax)
+            
+            if newHeight < scrollFrame.frame:GetHeight() then
+                scrollFrame.scrollBar:Hide()
+            else
+                scrollFrame.scrollBar:Show()
+            end
+            
+         end,
+         function(self, delta)
+            scrollFrame.scrollBar:SetValue(scrollFrame.scrollBar:GetValue() - delta * 44)  
+
+         end,
+         iconSize, nodeHeight, onDragFunction, noScrollMode, columnWidth, nodeTextX)  
+
+    scrollFrame.wrapper = wrapper
+         
+    scrollFrame.frame:SetWidth(width)
+    scrollFrame.frame:SetHeight(height)
+    
+    scrollFrame.frame.content = wrapper
+    scrollFrame.frame:SetScrollChild(wrapper) 
+    scrollFrame.scrollBar:SetHeight(265)
+    
+    return scrollFrame
+end
+
+--Function for debug purposes
+function GUIUtils:HighlightFrame(frame, color)
+    if not frame.isDebugging then
+        local tex = frame:CreateTexture("BACKGROUND")
+        tex:SetColorTexture(unpack(color or {0, 1, 0}))
+        tex:SetAllPoints()
+        tex:SetAlpha(0.1)
+        tex:Show()
+        frame.isDebugging = true
+    end
+end

@@ -1,4 +1,4 @@
--- deDE localization by Gailly, Dleh, cremor
+﻿-- deDE localization by Gailly, Dleh, cremor
 
 if GetLocale() ~= 'deDE' then return end
 
@@ -346,8 +346,8 @@ PatternLocale.deDE = { -- {{{
 		-- Exclude
 		["Sek"] = false,
 		["bis"] = false,
-		["Erhöht die erhaltene Erfahrung%"] = false, -- Heirlooms  e.g. /sl analyze 42984  Preened Ironfeather Shoulders
-		["Durch das Töten von Monstern und das Abschließen von Quests erhaltene Erfahrung% erhöht"] = false, -- Heirlooms  e.g. /sl analyze 62040  Ancient Bloodmoon Cloak
+		["Erhöht die erhaltene Erfahrung%"] = {"XP_BONUS"}, -- Heirlooms e.g. /sl analyze 42984 Preened Ironfeather Shoulders
+		["Durch das Töten von Monstern und das Abschließen von Quests erhaltene Erfahrung% erhöht"] = {"XP_BONUS"}, -- Heirlooms e.g. /sl analyze 62040 Ancient Bloodmoon Cloak
 	},
 } -- }}}
 

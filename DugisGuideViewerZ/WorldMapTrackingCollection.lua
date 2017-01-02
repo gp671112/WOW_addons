@@ -158,7 +158,7 @@ function WMTCollection:Initialize()
 			then return end
 			local x,y = GetCoords()
 			local mapName, level = GetMapInfo(), GetCurrentMapDungeonLevel()
-			if not PointExists(mapName, level, trackingType, x, y, ...) then
+			if x and not PointExists(mapName, level, trackingType, x, y, ...) then
 				local mapKey = mapName..":"..level
 				if not collectedPoints[playerFaction][mapKey] then
 					collectedPoints[playerFaction][mapKey] = {}

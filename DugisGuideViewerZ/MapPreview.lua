@@ -37,6 +37,7 @@ function MP:Initialize()
 		delegate(MapsterOptionsButton, GetNextIndex())
 		delegate(Mapster_CoordsFrame, GetNextIndex())
 		delegate(TomTomWorldFrame, GetNextIndex())
+		delegate(WorldQuestTrackerDoubleTapFrame, GetNextIndex())
         
         local poiIndex = 1
         while _G["WorldMapFramePOI"..poiIndex] do 
@@ -253,7 +254,7 @@ function MP:Initialize()
                     poi:SetAlpha(1)
                 end
 				--DGV:DebugFormat("FadeInMap hide non waypoint pois", "waypoint qid", DGV.DugisArrow.waypoints[1].questId, "id", id)
-				if DugisGuideViewer:GetDB(DGV_MAPPREVIEWPOIS)=="All Tracked Quests" or poi.worldQuest then
+				if DugisGuideViewer:GetDB(DGV_MAPPREVIEWPOIS)=="All Tracked Quests" then
 					if id and not IsQuestWatchedDugi(poi) and parentIsMap then
 						poi:Hide()
                         if poi.worldQuest then
@@ -569,10 +570,17 @@ function MP:Initialize()
 	end)
 
 	hooksecurefunc("WorldMapFrame_UpdateMap", function()
-		if MP.IsAnimating and MP:IsAnimating() then
-			if not InCombatLockdown() then WorldMapBlobFrame:Hide() end			
-			HideNonWaypointPOIs()
-		end
+        if MP.IsAnimating and MP:IsAnimating() then
+            if not InCombatLockdown() then WorldMapBlobFrame:Hide() end			
+            HideNonWaypointPOIs()
+        end
+    
+        RunInTheNextFrame(function()
+            if MP.IsAnimating and MP:IsAnimating() then
+                if not InCombatLockdown() then WorldMapBlobFrame:Hide() end			
+                HideNonWaypointPOIs()
+            end
+        end)
 	end)
 
 	hooksecurefunc("QuestLogPopupDetailFrame_Show", function()

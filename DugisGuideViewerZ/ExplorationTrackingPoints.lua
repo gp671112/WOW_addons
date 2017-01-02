@@ -26,46 +26,57 @@ function searchAchievementWaypointsByMapName(mapName)
     local associativeResult = {}
     for zoneNameKey, _table in pairs(points) do
         for i = 1, #_table do
-           local achevementData = _table[i]
-           local a_coord_aId_critIndex = LuaUtils:split(achevementData, ":")
-           local achievementId = tonumber(a_coord_aId_critIndex[3])
-           local criteriaIndex = tonumber(a_coord_aId_critIndex[4])
-           
-           if achievementId and criteriaIndex then
-               
-               local description, type, completed, quantity, requiredQuantity, characterName, flags, assetID, quantityString, criteriaID 
-               = GetAchievementCriteriaInfo(achievementId, criteriaIndex)
-               
-               local zoneName = LuaUtils:split(zoneNameKey, ":")
-               zoneName = zoneName[1]
-               
-               local mapId = DGV:GetMapIDFromName(zoneName)
-               
-               if mapId and tonumber(mapId) then
-                   local localizedMapName =  GetMapNameByID(mapId)
-                   
-                   
-                   searchKey = strupper(searchKey)
-                   if strupper(description):match(searchKey) or strupper(localizedMapName):match(searchKey) then
-                        local coordinates = a_coord_aId_critIndex[2]
-                        local x_y = LuaUtils:split(coordinates, ",")
-                        
-                        local key = zoneName or description
-                        
-                        local node = associativeResult[key]
-                        
-                        if not node then
-                            associativeResult[key] = {}
-                            node = associativeResult[key]
-                        end
-                        
-                        node[#node+1] = {x = x_y[1], y = x_y[2], subzoneName = description, zone = zoneName}
-                    end
+            local achevementData = _table[i]
+            local a_coord_aId_critIndex_customLabel = LuaUtils:split(achevementData, ":")
+            local achievementIdORLabel = a_coord_aId_critIndex_customLabel[3]
+            local criteriaIndex = tonumber(a_coord_aId_critIndex_customLabel[4])
+
+            local description
+            local localizedMapName
+            local zoneName
+            local customLabel
+            local localizedCustomLabel
+            searchKey = strupper(searchKey)
+            
+            zoneName = LuaUtils:split(zoneNameKey, ":")
+            zoneName = zoneName[1]
+
+            local mapId = DGV:GetMapIDFromName(zoneName)
+
+            if mapId and tonumber(mapId) then
+                localizedMapName =  GetMapNameByID(mapId)
+            end
+            
+            if tonumber(achievementIdORLabel) and criteriaIndex then
+                description = GetAchievementCriteriaInfo(tonumber(achievementIdORLabel), criteriaIndex)
+            end
+            
+            if not tonumber(achievementIdORLabel) then
+                customLabel = achievementIdORLabel
+                localizedCustomLabel = DugisGuideViewer:localize(achievementIdORLabel, "ZONE")
+            end
+
+            if (description and strupper(description):match(searchKey))
+            or (localizedMapName and strupper(localizedMapName):match(searchKey)) 
+            or (customLabel and strupper(customLabel):match(searchKey)) 
+            or (localizedCustomLabel and strupper(localizedCustomLabel):match(searchKey)) then
+                local coordinates = a_coord_aId_critIndex_customLabel[2]
+                local x_y = LuaUtils:split(coordinates, ",")
+
+                local key = zoneName or description or "other places"
+                
+                local nodes = associativeResult[key]
+
+                if not nodes then
+                    associativeResult[key] = {}
+                    nodes = associativeResult[key]
                 end
-           
-           end
+                
+                nodes[#nodes+1] = {x = x_y[1], y = x_y[2], subzoneName = description or localizedCustomLabel or customLabel or "?", zone = zoneName or "defaut"}
+            end
         end
     end
+    
     return associativeResult
 end
 ----- Formatting -----
@@ -358,10 +369,10 @@ tappend(points["StranglethornJungle:0"],
 	"A:57.00,21.00:781:11",	--"Exploration Eastern Kingdom"
 	"A:42.00,41.00:781:10",	--"Exploration Eastern Kingdom"
 	"A:46.00,53.00:781:3",	--"Exploration Eastern Kingdom"
-	"A:65.00,50.00 :781:12",	--"Exploration Eastern Kingdom"
+	"A:65.00,50.00:781:12",	--"Exploration Eastern Kingdom"
 	"A:51.00,33.00:781:9",	--"Exploration Eastern Kingdom"
 	"A:34.00,36.00:781:6",	--"Exploration Eastern Kingdom"
-	"A:29.00,42.00 :781:7",	--"Exploration Eastern Kingdom"
+	"A:29.00,42.00:781:7",	--"Exploration Eastern Kingdom"
 	"A:25.00,21.00:781:2",	--"Exploration Eastern Kingdom"
 	"A:67.00,32.00:781:8"	--"Exploration Eastern Kingdom"
 )
@@ -1369,100 +1380,100 @@ tappend(points["TimelessIsle:0"])--achievements
 tappend(points["TimelessIsle:0"])--Gonna Need a Bigger Bag                                                                
 tappend(points["TimelessIsle:0"]) --rares/battle pets                                                                      
 tappend(points["FrostfireRidge:0"],
-	"A:31.9,21.9:8937:6::",	--Explore
-	"A:21.6,56.1:8937:15::",	--Explore
-	"A:24.1,56.1:8937:1::",	--Explore
-	"A:24.1,46.6:8937:5::",	--Explore
-	"A:33.5,22.9:8937:2::",	--Explore
-	"A:37.6,13.2:8937:13::",	--Explore
-	"A:47.7,48.1:8937:14::",	--Explore
-	"A:53.7,52.2:8937:8::",	--Explore
-	"A:60.3,59.4:8937:4::",	--Explore
-	"A:59.4,30.1:8937:11::",	--Explore
-	"A:66.2,49.2:8937:7::",	--Explore
-	"A:83.2,59.3:8937:9::",	--Explore
-	"A:82.9,61.0:8937:3::",	--Explore
-	"A:75.5,63.1:8937:10::",	--Explore
-	"A:46.0,54.8:8937:12::")	--Explore
+	"A:31.9,21.9:8937:6",	--Explore
+	"A:21.6,56.1:8937:15",	--Explore
+	"A:24.1,56.1:8937:1",	--Explore
+	"A:24.1,46.6:8937:5",	--Explore
+	"A:33.5,22.9:8937:2",	--Explore
+	"A:37.6,13.2:8937:13",	--Explore
+	"A:47.7,48.1:8937:14",	--Explore
+	"A:53.7,52.2:8937:8",	--Explore
+	"A:60.3,59.4:8937:4",	--Explore
+	"A:59.4,30.1:8937:11",	--Explore
+	"A:66.2,49.2:8937:7",	--Explore
+	"A:83.2,59.3:8937:9",	--Explore
+	"A:82.9,61.0:8937:3",	--Explore
+	"A:75.5,63.1:8937:10",	--Explore
+	"A:46.0,54.8:8937:12")	--Explore
 tappend(points["Gorgrond:0"],
-	"A:38.1,75.1:8939:5::",	--Explore
-	"A:42.3,73.9:8939:2::",	--Explore
-	"A:45.8,77.4:8939:1::",	--Explore
-	"A:51.2,71.2:8939:12::",	--Explore
-	"A:48.9,69.4:8939:4::",	--Explore
-	"A:44.0,62.1:8939:8::",	--Explore
-	"A:43.7,30.9:8939:14::",	--Explore
-	"A:44.3,19.5:8939:13::",	--Explore
-	"A:54.8,33.5:8939:3::",	--Explore
-	"A:57.9,32.0:8939:6::",	--Explore
-	"A:59.2,53.2:8939:10::",	--Explore
-	"A:52.8,60.0:8939:9::",	--Explore
-	"A:41.6,76.2:8939:7::",	--Explore
-	"A:42.6,65.4:8939:11::")	--Explore
+	"A:38.1,75.1:8939:5",	--Explore
+	"A:42.3,73.9:8939:2",	--Explore
+	"A:45.8,77.4:8939:1",	--Explore
+	"A:51.2,71.2:8939:12",	--Explore
+	"A:48.9,69.4:8939:4",	--Explore
+	"A:44.0,62.1:8939:8",	--Explore
+	"A:43.7,30.9:8939:14",	--Explore
+	"A:44.3,19.5:8939:13",	--Explore
+	"A:54.8,33.5:8939:3",	--Explore
+	"A:57.9,32.0:8939:6",	--Explore
+	"A:59.2,53.2:8939:10",	--Explore
+	"A:52.8,60.0:8939:9",	--Explore
+	"A:41.6,76.2:8939:7",	--Explore
+	"A:42.6,65.4:8939:11")	--Explore
 tappend(points["NagrandDraenor:0"],
-	"A:86.4,66.2:8942:8::",	--Explore
-	"A:85.2,51.3:8942:4::",	--Explore
-	"A:83.6,32.1:8942:14::",	--Explore
-	"A:85.5,27.2:8942:15::",	--Explore
-	"A:67.0,48.6:8942:13::",	--Explore
-	"A:72.6,67.6:8942:3::",	--Explore
-	"A:69.2,64.3:8942:11::",	--Explore
-	"A:52.5,67.6:8942:10::",	--Explore
-	"A:42.3,74.5:8942:6::",	--Explore
-	"A:40.8,55.6:8942:1::",	--Explore
-	"A:52.7,47.2:8942:7::",	--Explore
-	"A:50.3,19.3:8942:2::",	--Explore
-	"A:55.1,19.6:8942:12::",	--Explore
-	"A:44.9,33.4:8942:9::",	--Explore
-	"A:36.2,33.9:8942:5::")	--Explore
+	"A:86.4,66.2:8942:8",	--Explore
+	"A:85.2,51.3:8942:4",	--Explore
+	"A:83.6,32.1:8942:14:",	--Explore
+	"A:85.5,27.2:8942:15",	--Explore
+	"A:67.0,48.6:8942:13",	--Explore
+	"A:72.6,67.6:8942:3",	--Explore
+	"A:69.2,64.3:8942:11",	--Explore
+	"A:52.5,67.6:8942:10",	--Explore
+	"A:42.3,74.5:8942:6",	--Explore
+	"A:40.8,55.6:8942:1",	--Explore
+	"A:52.7,47.2:8942:7",	--Explore
+	"A:50.3,19.3:8942:2",	--Explore
+	"A:55.1,19.6:8942:12",	--Explore
+	"A:44.9,33.4:8942:9",	--Explore
+	"A:36.2,33.9:8942:5")	--Explore
  
 tappend(points["ShadowmoonValleyDR:0"],
-	"A:68.5,46.6:8938:7::",	--Explore
-	"A:27.4,20.5:8938:6::",	--Explore
-	"A:28.0,29.0:8938:1::",	--Explore
-	"A:36.3,25.1:8938:5::",	--Explore
-	"A:43.3,35.5:8938:4::",	--Explore
-	"A:55.4,33.2:8938:3::",	--Explore
-	"A:39.7,56.7:8938:8::",	--Explore
-	"A:48.9,69.4:8938:10::",	--Explore
-	"A:51.5,68.9:8938:9::",	--Explore
-	"A:55.6,82.4:8938:2::",	--Explore
-	"A:42.6,83.6:8938:11::")	--Explore
+	"A:68.5,46.6:8938:7",	--Explore
+	"A:27.4,20.5:8938:6",	--Explore
+	"A:28.0,29.0:8938:1",	--Explore
+	"A:36.3,25.1:8938:5",	--Explore
+	"A:43.3,35.5:8938:4",	--Explore
+	"A:55.4,33.2:8938:3",	--Explore
+	"A:39.7,56.7:8938:8",	--Explore
+	"A:48.9,69.4:8938:10",	--Explore
+	"A:51.5,68.9:8938:9",	--Explore
+	"A:55.6,82.4:8938:2",	--Explore
+	"A:42.6,83.6:8938:11")	--Explore
 tappend(points["garrisonsmvalliance:0"])
 tappend(points["SpiresOfArak:0"],
-	"A:43.7,17.8:8941:1::",	--Explore
-	"A:50.8,32.6:8941:9::",	--Explore
-	"A:47.1,40.8:8941:17::",	--Explore
-	"A:45.3,31.6:8941:6::",	--Explore
-	"A:31.0,38.1:8941:3::",	--Explore
-	"A:39.3,48.3:8941:12::",	--Explore
-	"A:41.3,58.2:8941:7::",	--Explore
-	"A:48.9,61.3:8941:16::",	--Explore
-	"A:56.9,86.9:8941:4::",	--Explore
-	"A:61.3,72.3:8941:14::",	--Explore
-	"A:62.2,58.2:8941:5::",	--Explore
-	"A:53.7,54.4:8941:15::",	--Explore
-	"A:62.3,44.6:8941:10::",	--Explore
-	"A:73.5,42.0:8941:13::",	--Explore
-	"A:67.1,28.1:8941:2::",	--Explore
-	"A:31.1,28.7:8941:11::",	--Explore
-	"A:48.0,52.7:8941:8::")	--Explore
+	"A:43.7,17.8:8941:1",	--Explore
+	"A:50.8,32.6:8941:9",	--Explore
+	"A:47.1,40.8:8941:17",	--Explore
+	"A:45.3,31.6:8941:6",	--Explore
+	"A:31.0,38.1:8941:3",	--Explore
+	"A:39.3,48.3:8941:12",	--Explore
+	"A:41.3,58.2:8941:7",	--Explore
+	"A:48.9,61.3:8941:16",	--Explore
+	"A:56.9,86.9:8941:4",	--Explore
+	"A:61.3,72.3:8941:14",	--Explore
+	"A:62.2,58.2:8941:5",	--Explore
+	"A:53.7,54.4:8941:15",	--Explore
+	"A:62.3,44.6:8941:10",	--Explore
+	"A:73.5,42.0:8941:13",	--Explore
+	"A:67.1,28.1:8941:2",	--Explore
+	"A:31.1,28.7:8941:11",	--Explore
+	"A:48.0,52.7:8941:8")	--Explore
 tappend(points["Talador:0"],
-	"A:68.4,1.9:8940:8::",	--Explore
-	"A:68.9,20.7:8940:5::",	--Explore
-	"A:78.7,27.8:8940:15::",	--Explore
-	"A:75.6,40.9:8940:1::",	--Explore
-	"A:65.3,48.4:8940:3::",	--Explore
-	"A:64.6,40.7:8940:14::",	--Explore
-	"A:60.4,20.9:8940:9::",	--Explore
-	"A:49.2,35.0:8940:11::",	--Explore
-	"A:52.1,60.8:8940:2::",	--Explore
-	"A:45.2,59.1:8940:4::",	--Explore
-	"A:36.5,71.2:8940:7::",	--Explore
-	"A:48.8,86.7:8940:12::",	--Explore
-	"A:63.8,69.8:8940:6::",	--Explore
-	"A:30.3,32.7:8940:13::",	--Explore
-	"A:73.6,62.9:8940:10::")	--Explore
+	"A:68.4,1.9:8940:8",	--Explore
+	"A:68.9,20.7:8940:5:",	--Explore
+	"A:78.7,27.8:8940:15",	--Explore
+	"A:75.6,40.9:8940:1",	--Explore
+	"A:65.3,48.4:8940:3",	--Explore
+	"A:64.6,40.7:8940:14",	--Explore
+	"A:60.4,20.9:8940:9",	--Explore
+	"A:49.2,35.0:8940:11",	--Explore
+	"A:52.1,60.8:8940:2",	--Explore
+	"A:45.2,59.1:8940:4",	--Explore
+	"A:36.5,71.2:8940:7",	--Explore
+	"A:48.8,86.7:8940:12",	--Explore
+	"A:63.8,69.8:8940:6",	--Explore
+	"A:30.3,32.7:8940:13",	--Explore
+	"A:73.6,62.9:8940:10")	--Explore
 tappend(points["TanaanJungle:0"],
 	"A:73.4,71.1:10260:1",
 	"A:23.3,48.9:10260:14",

@@ -1,13 +1,13 @@
 local mod	= DBM:NewMod(1667, "DBM-EmeraldNightmare", nil, 768)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 15412 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 15543 $"):sub(12, -3))
 mod:SetCreatureID(100497)
 mod:SetEncounterID(1841)
 mod:SetZone()
 mod:SetUsedIcons(6, 4)
-mod:SetHotfixNoticeRev(15296)
-mod.respawnTime = 40
+mod:SetHotfixNoticeRev(15348)
+mod.respawnTime = 39
 
 mod:RegisterCombat("combat")
 
@@ -41,7 +41,7 @@ local specWarnOverwhelmOther		= mod:NewSpecialWarningTaunt(197943, nil, nil, nil
 local timerFocusedGazeCD			= mod:NewNextCountTimer(40, 198006, nil, nil, nil, 3)
 local timerRendFleshCD				= mod:NewNextCountTimer(20, 197942, nil, "Tank", nil, 5, nil, DBM_CORE_TANK_ICON)
 local timerOverwhelmCD				= mod:NewNextTimer(10, 197943, nil, "Tank", nil, 5, nil, DBM_CORE_TANK_ICON)
-local timerRoaringCacophonyCD		= mod:NewNextCountTimer(30, 197969, nil, nil, nil, 2)
+local timerRoaringCacophonyCD		= mod:NewNextCountTimer(30, 197969, nil, nil, nil, 2, nil, DBM_CORE_HEALER_ICON)
 
 local berserkTimer					= mod:NewBerserkTimer(300)
 
@@ -247,7 +247,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		warnOverwhelm:Show(args.destName, args.amount or 1)
 		if not args:IsPlayer() then--Overwhelm Applied to someone that isn't you
 			--Taunting is safe now because your rend flesh will vanish (or is already gone), and not be cast again, before next overwhelm
-			local rendCooldown = timerRendFleshCD:GetRemaining() or 0
+			local rendCooldown = timerRendFleshCD:GetRemaining(self.vb.rendCount+1) or 0
 			local _, _, _, _, _, _, expireTime = UnitDebuff("player", GetSpellInfo(204859))
 			if rendCooldown > 10 and (not expireTime or expireTime and expireTime-GetTime() < 10) then
 				specWarnOverwhelmOther:Show(args.destName)

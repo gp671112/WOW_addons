@@ -98,6 +98,11 @@ function TaxiDB:Initialize()
                                         if i == pinSlot then
                                             pin.Icon:SetTexture("Interface\\TaxiFrame\\UI-Taxi-Icon-Red")
                                         end
+                                        
+                                        pin:HookScript("OnLeave", function()
+                                            HighlightFlightmasterDestination()
+                                        end)
+                                        
                                     end
                                 else
                                     local btn = _G["TaxiButton"..i]
@@ -231,7 +236,7 @@ function TaxiDB:Initialize()
 		if recalulateRoute or (DGV:IsModuleLoaded("Guides") and DGV.actions[DugisGuideUser.CurrentQuestIndex] == "f") then
 			CloseTaxiMap()
 			PlaySoundFile("sound\\interface\\magicclick.ogg")
-			UIErrorsFrame:AddMessage("DG: Flight master data updated!",1,1,0,1)			
+			UIErrorsFrame:AddMessage(L["DG: Flight master data updated!"],1,1,0,1)			
 			if recalulateRoute then
 				DGV:RemoveAllWaypoints()	
 				DGV.Modules.DugisArrow:VisitFlightmaster(key)

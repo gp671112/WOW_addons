@@ -9,7 +9,7 @@
 ## Version: 7.0.1
 ## Notes: http://bbs.ngacn.cc/read.php?tid=8257352
 ## X-DBM-Voice: 1
-## X-DBM-Voice-Name: guozi(果紫)
+## X-DBM-Voice-Name: guozi(果紫·国语版)
 ## X-DBM-Voice-ShortName: guozi
 ## X-DBM-Voice-Version: 6
 ## X-DBM-Voice-HasCount: 1

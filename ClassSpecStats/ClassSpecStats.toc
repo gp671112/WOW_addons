@@ -1,12 +1,10 @@
 ## Interface: 70100
 ## Title: ClassSpecStats
 ## Notes: Displays classes and specialisation dependent stat priorities provided by icy-veins.com
+## Title-zhTW: |cffB973FF[裝備]|r 屬性選擇建議
+## Notes-zhTW: ClassSpecStats |n根據職業和專精，在角色資訊視窗上方顯示裝備屬性選擇優先順序的建議。|n資料來源：icy-veins.com
 ## Author: Reglohpri
-## Version: 1.03
-## X-Curse-Packaged-Version: r5
-## X-Curse-Project-Name: ClassSpecStats
-## X-Curse-Project-ID: classspecstats
-## X-Curse-Repository-ID: wow/classspecstats/mainline
+## Version: 1.10
 
 locale.lua
 ClassSpecStats.lua

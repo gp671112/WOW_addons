@@ -352,7 +352,7 @@ local function Menu_ShowAtCursor(self, auto_release)
 
   -- Add a 'Close Menu' item to the end of the menu, if it's not there already
   if not self.close_item then
-    self.close_item = ArrowMenu:CreateMenuItem(self, "Close Menu")
+    self.close_item = ArrowMenu:CreateMenuItem(self, "關閉選單")
     self.close_item:SetFunction( function() self:DoHide() end )
   end
 

@@ -1072,6 +1072,12 @@ function GUIUtils:SetTreeData(targetTreeFrame, wrapper, treePrefix, nodes, paren
                     visualNode.normal:SetHeight(iconSize)
                 end
                 
+                local iconDY = visualNode.nodeData.iconDY or 0
+                local iconDX = visualNode.nodeData.iconDX or 0
+                
+                visualNode.highlight:SetPoint("TOPLEFT", visualNode, "TOPLEFT", iconDX, iconDY)
+                visualNode.normal:SetPoint("TOPLEFT", visualNode, "TOPLEFT", iconDX, iconDY)
+                
                 if visualNode.visualNodes and visualNode.expanded then
                     local off = UpdateSubTree(visualNode.visualNodes, visualNode, currentYOffset, wrapper, level, columnDeltaX, noScrollMode, columnWidth)
                     localYOffset = localYOffset + off

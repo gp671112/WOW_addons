@@ -260,7 +260,7 @@ function DugisArrow:Initialize()
     
 	local function WayFrame_OnClick(self, button)
 		local menu = DugisGuideViewer.ArrowMenu:CreateMenu("wayframe_menu")
-		DugisGuideViewer.ArrowMenu:CreateMenuTitle(menu, "Dugi Arrow")
+		DugisGuideViewer.ArrowMenu:CreateMenuTitle(menu, L["Dugi Arrow"])
 
 		DugisArrow:PopulateMenu(menu)
 
@@ -358,9 +358,9 @@ function DugisArrow:Initialize()
 		local point = self.point
 		local menu = DugisGuideViewer.ArrowMenu:CreateMenu("point_menu")
 		DugisGuideViewer.ArrowMenu:CreateMenuTitle(menu, point.desc)
-		local remove = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, "Remove Waypoint")
+		local remove = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, L["Remove Waypoint"])
 		remove:SetFunction(function () DugisArrow:SetNextWaypoint(point)  end)
-		local removeAll = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, "Remove All Waypoints")
+		local removeAll = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, L["Remove All Waypoints"])
 		removeAll:SetFunction(function () DugisGuideViewer:RemoveAllWaypoints()  end)
 		menu:ShowAtCursor()
 	end
@@ -376,7 +376,7 @@ function DugisArrow:Initialize()
 		if DugisGuideViewer.WrongInstanceFloor then
 			DugisArrowTooltip:SetParent(self)
 			DugisArrowTooltip:SetOwner(self, "ANCHOR_CURSOR")
-			DugisArrowTooltip:AddLine("Waypoint is on a different floor")
+			DugisArrowTooltip:AddLine(L["Waypoint is on a different floor"])
 			DugisArrowTooltip:Show()
 		end
 	end
@@ -1143,15 +1143,15 @@ function DugisArrow:Initialize()
 			local mdist = dist * 0.9144
 			if GetLocale() == "enUS" then
 				if dist > 9999 then
-					text = math.floor(0.5 + dist/1760).." mil"
+					text = math.floor(0.5 + dist/1760)..L[" mil"]
 				else
-					text = math.floor(0.5 + dist).." yd"
+					text = math.floor(0.5 + dist)..L[" yd"]
 				end
 			else
 				if mdist > 9999 then
-					text = math.floor(0.5 + mdist/1000).." km"
+					text = math.floor(0.5 + mdist/1000)..L[" km"]
 				else
-					text = math.floor(0.5 + mdist).." m"
+					text = math.floor(0.5 + mdist)..L[" m"]
 				end
 			end
 
@@ -1368,20 +1368,20 @@ function DugisArrow:Initialize()
 	end
 
 	function DugisArrow:PopulateMenu(menu)
-		local remove = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, "Remove Waypoint")
+		local remove = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, L["Remove Waypoint"])
 		remove:SetFunction(function () DugisArrow:ClearArrow() end)
 
-		local removeAll = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, "Remove All Waypoints")
+		local removeAll = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, L["Remove All Waypoints"])
 		removeAll:SetFunction(function () DugisGuideViewer:RemoveAllWaypoints()  end)
 
-		local lock = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, not DugisArrow:GetSetting("arrow_locked") and "Lock Arrow" or "Unlock Arrow")
+		local lock = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, not DugisArrow:GetSetting("arrow_locked") and L["Lock Arrow"] or L["Unlock Arrow"])
 		local ltex = DugisGuideViewer.ArrowMenu:CreateIconTexture(item, 10)
 		lock:SetFunction(function () local arrow_locked = not DugisArrow:GetSetting("arrow_locked"); DugisArrow:SetSetting("arrow_locked", arrow_locked); end)
 		lock:AddTexture(ltex, true)
 		lock:AddTexture(spacer(), false)
 		ltex:SetVertexColor(1, 1, 1, DugisArrow:GetSetting("arrow_locked") and 1 or 0)
 
-		local scale = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, "Arrow Scale")
+		local scale = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, L["Arrow Scale"])
 		local scale_menu = DugisGuideViewer.ArrowMenu:CreateMenu("scale_menu")
 		scale:SetSubmenu(scale_menu)
 
@@ -1399,7 +1399,7 @@ function DugisArrow:Initialize()
 			it:AddTexture(icon)
 		end
 
-		local tscale = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, "Text Scale")
+		local tscale = DugisGuideViewer.ArrowMenu:CreateMenuItem(menu, L["Text Scale"])
 		local tscale_menu = DugisGuideViewer.ArrowMenu:CreateMenu("tscale_menu")
 		tscale:SetSubmenu(tscale_menu)
 		tscale:AddTexture(spacer(), true)
@@ -1567,12 +1567,12 @@ function DugisArrow:Initialize()
 			if not waypoint.isWTag or waypoint.isRouteWaypoint or removeMe then 
 				DugisArrow:RemoveWaypoint(waypoint)				
 				if DugisGuideViewer:UserSetting(DGV_WAYPOINT_PING) then PlaySoundFile("sound\\interface\\magicclick.ogg") end
-				UIErrorsFrame:AddMessage("Waypoint reached.",1,1,1,1)
+				UIErrorsFrame:AddMessage(L["Waypoint reached."],1,1,1,1)
 			elseif DugisArrow:DidPlayerReachWaypoint() ~= DugisArrow:getFinalWaypoint() then		
 				DugisArrow:RemoveWaypoint(waypoint)	
 				DugisArrow:AddWaypoint(waypoint.map, waypoint.floor, waypoint.x, waypoint.y, waypoint.desc, waypoint.guideIndex, waypoint.questId, false, waypoint.isWTag)  --creates problems with recalculation, revisit later. 
 				if DugisGuideViewer:UserSetting(DGV_WAYPOINT_PING) then PlaySoundFile("sound\\interface\\magicclick.ogg") end
-				UIErrorsFrame:AddMessage("Waypoint reached.",1,1,1,1)				
+				UIErrorsFrame:AddMessage(L["Waypoint reached."],1,1,1,1)				
 			end
 
 			firstWaypoint = DugisArrow:getFirstWaypoint()
@@ -1602,7 +1602,7 @@ function DugisArrow:Initialize()
 		for _, waypoint in pairs(DugisArrow.waypoints) do
 			dist = DugisGuideViewer:GetDistanceFromPlayer(waypoint.map, waypoint.floor, waypoint.x, waypoint.y)
 			--if dist then DebugPrint("dist="..dist) end
-			if waypoint.isWTag then minimumdist = 90 end
+			if waypoint.isWTag then minimumdist = 30 end
 			
 			if dist and dist < minimumdist and 
 				not waypoint.flightMasterID and 

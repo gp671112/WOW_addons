@@ -254,7 +254,7 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	Gloves1		= "There's a rumor that the spy always wears gloves.",
+    Gloves1		= "有傳聞說那個間諜一直戴著手套。",
 	Gloves2		= "聽說那個間諜習慣把手藏起來。",
 	Gloves3		= "我聽說那個間諜總是戴著手套。",
 	Gloves4		= "有人說那位間諜總是穿著手套，因為手上有明顯的疤痕。",
@@ -271,35 +271,35 @@ L:SetMiscLocalization({
 	LightVest3	= "人家說那個間諜今晚絕對不會穿深色外衣。",
 	DarkVest1	= "間諜絕對比較喜歡深色衣服。",
 	DarkVest2	= "聽說今晚那個間諜的外衣顏色很深。",
-	DarkVest3	= "間諜喜歡顏色比較深的外衣...就像夜晚一樣。",
+	DarkVest3	= "間諜喜歡顏色比較深的外衣…就像夜晚一樣。",
 	DarkVest4	= "有個說法是那位間諜為了混入人群，特別避免淺色的衣著。",
 	Female1		= "他們說間諜混進來了，而且她非常美貌。",
 	Female2		= "聽說有個女人一直在打探這個地區的事情…",
-	Female3		= "Someone's been saying that our new guest isn't male.",
+	Female3		= "有人說間諜是女的。",
 	Female4		= "有人看到她和艾莉珊德一起走進來。",
 	Male1		= "我剛聽人家說間諜是男的。",
-	Male2		= "I heard the spy is here and he's very good looking.",
+	Male2		= "",
 	Male3		= "剛剛有人說看到他和大博學者一起走進去。",
 	Male4		= "有個樂手說他一直在問關於這個地區的問題。",
-	ShortSleave1= "我剛聽說那個間諜今晚穿短袖，這樣動作比較靈活。",
-	ShortSleave2= "Someone told me the spy hates wearing long sleeves.",
-	ShortSleave3= "我朋友剛剛告訴我，她看到了，間諜沒穿長袖。",
-	ShortSleave4= "聽說那個間諜喜歡今晚涼爽的天氣，所以不穿長袖。",
-	LongSleave1 = "聽說今晚那個間諜穿了長袖衣服。",
-	LongSleave2 = "剛剛有人說，間諜今晚為了能遮住手臂，才穿長袖的。",
-	LongSleave3 = "我剛剛碰巧看到那個間諜今晚穿著長袖衣服。",
-	LongSleave4 = "A friend of mine mentioned the spy has long sleeves on.",
+	ShortSleave1   = "我剛聽說那個間諜今晚穿短袖，這樣動作比較靈活。",
+	ShortSleave2   = "",
+	ShortSleave3   = "我朋友剛剛告訴我，她看到了，間諜沒穿長袖。",
+	ShortSleave4   = "聽說那個間諜喜歡今晚涼爽的天氣，所以不穿長袖。",
+	LongSleave1    = "聽說今晚那個間諜穿了長袖衣服。",
+	LongSleave2    = "剛剛有人說，間諜今晚為了能遮住手臂，才穿長袖的。",
+	LongSleave3    = "我剛剛碰巧看到那個間諜今晚穿著長袖衣服。",
+	LongSleave4    = "我朋友跟我說，那位間諜穿著長袖。",
 	Potions1	= "聽說那個間諜帶了藥水…以防萬一。",
 	Potions2	= "別說是我講的…那個間諜現在偽裝成鍊金師了，腰帶上繫著藥水瓶。",
-	Potions3	= "I'm pretty sure the spy has potions at the belt.",
-	Potions4	= "I heard the spy brought along some potions... just in case.",
+	Potions3	= "",
+	Potions4	= "",
 	NoPotions1	= "我聽說那個間諜什麼藥水都沒帶。",
-	NoPotions2	= "A musician told me she saw the spy throw away their last potion and no longer has any left.",
+	NoPotions2	= "有個樂手告訴我，她看到間諜把最後一瓶藥水丟了，所以現在身上應該沒有藥水。",
 	Book1		= "我聽說那個間諜在腰帶上掛著一本書，裡面寫滿了各種秘密。",
 	Book2		= "聽說那個間諜是喜歡讀書的人，不管到哪裡都會帶著一本書。",
 	Pouch1		= "我聽說那位間諜總是帶著一個魔法小包。",
 	Pouch2		= "我朋友說間諜喜歡黃金，所以腰帶上的隨身包裝滿黃金。",
-	Pouch3		= "I heard the spy's belt pouch is filled with gold to show off extravagance.",
+	Pouch3		= "",
 	Pouch4		= "我聽說那名間諜的腰帶上有個口袋，口袋的刺繡非常精緻。",
 	--
 	Gloves		= "手套",
@@ -316,7 +316,7 @@ L:SetMiscLocalization({
 	NoPotions	= "無藥水瓶",
 	Book		= "書本",
 	Pouch		= "腰袋"
-})
+}) 
 
 -----------------------
 -- <<<The Maw of Souls>>> --

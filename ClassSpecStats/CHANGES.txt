@@ -1,0 +1,90 @@
+------------------------------------------------------------------------
+r12 | reglohpri | 2016-11-19 12:36:21 -0600 (Sat, 19 Nov 2016) | 1 line
+Changed paths:
+   M /trunk/ClassSpecStats.lua
+   M /trunk/ClassSpecStats.toc
+
+Bugfix: Intelligence were not tranlated for Chinese and Korean localizations
+------------------------------------------------------------------------
+r11 | (no author) | 2016-11-18 07:51:55 -0600 (Fri, 18 Nov 2016) | 1 line
+Changed paths:
+   M /trunk/ClassSpecStats.toc
+   M /trunk/stats.lua
+
+tested then new repository 
+------------------------------------------------------------------------
+r10 | reglohpri | 2016-11-13 10:39:45 -0600 (Sun, 13 Nov 2016) | 1 line
+Changed paths:
+   M /trunk/ClassSpecStats.lua
+   M /trunk/ClassSpecStats.toc
+   M /trunk/stats.lua
+
+Stat Priorities for Demon Hunter (Tank) updated
+------------------------------------------------------------------------
+r9 | reglohpri | 2016-11-09 07:33:15 -0600 (Wed, 09 Nov 2016) | 1 line
+Changed paths:
+   M /trunk/ClassSpecStats.lua
+
+Stat Priorities for Hunter updated
+------------------------------------------------------------------------
+r8 | reglohpri | 2016-11-09 07:29:36 -0600 (Wed, 09 Nov 2016) | 1 line
+Changed paths:
+   M /trunk/ClassSpecStats.toc
+   M /trunk/stats.lua
+
+Stat Priorities for Hunter updated
+------------------------------------------------------------------------
+r7 | reglohpri | 2016-11-07 12:03:23 -0600 (Mon, 07 Nov 2016) | 1 line
+Changed paths:
+   M /trunk/ClassSpecStats.toc
+   M /trunk/locale.lua
+
+Localization for Chinese
+------------------------------------------------------------------------
+r6 | reglohpri | 2016-11-06 10:15:52 -0600 (Sun, 06 Nov 2016) | 1 line
+Changed paths:
+   M /trunk/ClassSpecStats.toc
+   M /trunk/locale.lua
+
+Localization for Korean
+------------------------------------------------------------------------
+r5 | reglohpri | 2016-11-05 16:32:51 -0500 (Sat, 05 Nov 2016) | 1 line
+Changed paths:
+   M /trunk/ClassSpecStats.lua
+   M /trunk/ClassSpecStats.toc
+
+Bugfix: Translation error between Standard and Stamina
+------------------------------------------------------------------------
+r4 | reglohpri | 2016-11-05 11:01:52 -0500 (Sat, 05 Nov 2016) | 1 line
+Changed paths:
+   M /trunk/ClassSpecStats.lua
+   M /trunk/ClassSpecStats.toc
+   M /trunk/stats.lua
+
+Stat Priorities for Rogue updated
+------------------------------------------------------------------------
+r3 | reglohpri | 2016-11-01 11:04:53 -0500 (Tue, 01 Nov 2016) | 1 line
+Changed paths:
+   M /trunk/ClassSpecStats.toc
+   M /trunk/stats.lua
+
+Stat Priorities updated 
+------------------------------------------------------------------------
+r2 | reglohpri | 2016-10-28 13:09:36 -0500 (Fri, 28 Oct 2016) | 1 line
+Changed paths:
+   A /trunk/ClassSpecStats.lua
+   A /trunk/ClassSpecStats.toc
+   A /trunk/locale.lua
+   A /trunk/stats.lua
+
+First Release
+------------------------------------------------------------------------
+r1 | svn | 2016-10-28 12:49:30 -0500 (Fri, 28 Oct 2016) | 1 line
+Changed paths:
+   A /branches
+   A /tags
+   A /trunk
+
+classspecstats/mainline: Initial Import
+------------------------------------------------------------------------
+

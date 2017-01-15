@@ -2,13 +2,18 @@ ExplorationTrackingPoints = {}
 ExplorationTrackingPoints["Alliance"] = {}
 ExplorationTrackingPoints["Horde"] = {}
 --Allow atomatic addition of key/table combos
-setmetatable(ExplorationTrackingPoints,
-{
-	__index = function(t,i)
-		t[i] = {}
-		return t[i]
-	end,
-})
+
+LuaUtils:foreach({ExplorationTrackingPoints, ExplorationTrackingPoints.Alliance, ExplorationTrackingPoints.Horde}, function(v, k)
+    setmetatable(v,
+    {
+        __index = function(t,i)
+            t[i] = {}
+            return t[i]
+        end,
+    })
+end)
+
+
 local tappend = DugisGuideViewer.TableAppend
 local points = ExplorationTrackingPoints
 local DGV = DugisGuideViewer
@@ -24,7 +29,20 @@ local DGV = DugisGuideViewer
 function searchAchievementWaypointsByMapName(mapName)
     local searchKey = mapName
     local associativeResult = {}
-    for zoneNameKey, _table in pairs(points) do
+    
+    local englishFaction = UnitFactionGroup("player")
+    
+    local searchTable = LuaUtils:clone(points)
+    
+    if englishFaction == "Horde" then
+        searchTable = LuaUtils:MergeTables(searchTable, points.Horde)
+    end
+    
+    if englishFaction == "Alliance" then
+        searchTable = LuaUtils:MergeTables(searchTable, points.Alliance)
+    end
+    
+    for zoneNameKey, _table in pairs(searchTable) do
         for i = 1, #_table do
             local achevementData = _table[i]
             local a_coord_aId_critIndex_customLabel = LuaUtils:split(achevementData, ":")

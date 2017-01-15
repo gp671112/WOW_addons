@@ -325,6 +325,20 @@ function LuaUtils:clone(orig)
     return copy
 end
 
+function LuaUtils:MergeTables(t1, t2)
+    local result = {}
+    
+    LuaUtils:foreach(t2, function(v, k)
+        result[k] = v
+    end)
+    
+    LuaUtils:foreach(t1, function(v, k)
+        result[k] = v
+    end)    
+       
+    return result
+end
+
 function LuaUtils:Delay(timeSec, function_)
     C_Timer.After(timeSec, function_)
 end

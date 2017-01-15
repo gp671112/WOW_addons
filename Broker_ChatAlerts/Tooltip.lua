@@ -146,7 +146,7 @@ function Tooltip:Draw()
 	
 	-- module header
 	local lineNum = tooltip:AddHeader(" ")
-	tooltip:SetCell(lineNum, 1, NS:Colorize("White", Addon.FULLNAME ), "CENTER", tooltip:GetColumnCount())
+	tooltip:SetCell(lineNum, 1, NS:Colorize("White", L[Addon.FULLNAME] ), "CENTER", tooltip:GetColumnCount())
 	tooltip:AddLine(" ")
 	
 	-- events header

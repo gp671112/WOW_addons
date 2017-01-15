@@ -11,6 +11,11 @@ L= DBM:GetModLocalization(1819)
 ---------------------------
 L= DBM:GetModLocalization(1830)
 
+L:SetOptionLocalization({
+	YellActualRaidIcon		= "更改所有DBM泡沫大喊為喊玩家的圖標設置而非匹配的顏色 (需要團長權限)",
+	FilterSameColor			= "如果跟玩家現有的顏色匹配則不要設置圖標、大喊或給予泡沫的特別警告"
+})
+
 ---------------------------
 -- Helya --
 ---------------------------

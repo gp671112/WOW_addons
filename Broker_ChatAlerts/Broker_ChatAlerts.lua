@@ -388,7 +388,8 @@ function Addon:TriggerAction(action, ...)
 
 	if action == "menu" then
 		-- open options menu
-		InterfaceOptionsFrame_OpenToCategory(self.FULLNAME)
+		InterfaceOptionsFrame_OpenToCategory(L[self.FULLNAME])
+		InterfaceOptionsFrame_OpenToCategory(L[self.FULLNAME])
 	elseif action == "debug" then
 		if args[1] == "on" then
 			self:Output("debug mode turned on")

@@ -1,26 +1,28 @@
 local x = {}
+x["Version"] = "|cFFFAFA44裝備屬性選擇建議:|cFF00EA00 2017.1.12|r"
+
 --[[ Deathknight Blood]]
-x[250] = "平衡: Str > Haste > Crit >= Vers > Mast \n 輸出: Str > Haste Crit > Vers > Mast \n 生存: Str > Haste > Vers > Mast > Crit "
+x[250] = "平衡 (推薦): Str > Haste > Vers >= Crit > Mast \n 最大輸出: Str > Haste > Crit > Vers > Mast \n 生存能力: Str > Haste > Vers > Mast > Crit "
 --[[ Deathknight Frost]]
-x[251] = "Str > Haste 20% > Crit 25% > Vers > (Crit >= Haste 30%) > \n Mast > Haste"
+x[251] = "滅體抹殺: Str > Haste 20% > Crit 25% > Vers > (Crit >= Haste 30%) > Mast > Haste\n 辛德拉苟莎之息: Str > Crit 25% > Haste 20% > Crit > Haste = Mast > Vers"
 --[[ Deathknight Unholy]]
-x[252] = "暗影爪襲: Str > Haste > Mast > Crit > Vers \n 鞭撻者: Str > Crit > Haste 20% > Mast > Vers"
+x[252] = "高精通 (搭配天賦2*3**21): Str > Mast > Haste > Crit >= Vers \n 高致命: Str > Crit > Haste > Mast > Vers"
 
 --[[ Druid Balance]]
-x[102] = "一般: Haste > Int > Crit > Vers >= Mast"
+x[102] = "Haste > Mast > Int > Crit = Vers\n (加速不要超過精通的兩倍，精通也不要超過其他屬性的兩倍。)"
 --[[ Druid Feral]]
-x[103] =  "基本: Agi > Mast > Crit > Vers > Haste"
+x[103] =  "Agi > Mast >= Crit > Vers > Haste"
 --[[ Druid Guardian]]
 x[104] = "Vers >= Mast > Haste > Agi > Crit"
 --[[ Druid Restoration]]
-x[105] = "團隊: Int > Haste > Crit > Mast > Vers \n 地城: Int > Haste > Mast > Crit > Vers"
+x[105] = "補團隊: Int > Haste > Crit > Mast > Vers \n 補坦/傳奇+: Int > Haste > Mast > Crit > Vers"
 
 --[[ Hunter Beastmaster]]
 x[253] = "Agi > Mast > Haste > Crit > Vers"
 --[[ Hunter Marksmanship]]
-x[254] = "Mast > Agi > Haste > Crit > Vers"
+x[254] = "Haste 低於 9% > Mast > Agi > Crit > Haste 高於 9% > Vers"
 --[[ Hunter Survival]]
-x[255] = "Agi > Haste > Vers > Crit > Mast"
+x[255] = "Agi > Vers > Crit = Haste = Mast"
 
 --[[ Mage Arcane]]
 x[62] = "Int > Mast >= Crit > Vers > Haste"
@@ -30,56 +32,56 @@ x[63] = "Crit > Int > Mast > Vers > Haste"
 x[64] = "Int > Haste > Crit > Vers > Mast"
 
 --[[ Monk Brewmaster]]
-x[268] = "Haste to 30% > Crit = Mast > Agi > Vers"
+x[268] = "Haste 30% > Crit > Mast > Vers"
 --[[ Monk Mistweaver]]
-x[270] = "基本: Int > Vers > Crit > Haste = Mast \n Fist: Int > Vers > Haste > Crit > Mast \n 地城: Int > Haste > Mast > Vers > Crit"
+x[270] = "標準: Int > Vers > Crit > Haste = Mast \n 攻擊補血: Int > Vers > Haste >= Crit > Mast \n 傳奇+: Int > Haste > Mast > Vers > Crit"
 --[[ Monk Windwalker]]
-x[269] = "Agi > Mast > Vers >= Crit > Haste"
+x[269] = "單目標: Agi > Mast > Crit > Vers > Haste \n 多目標: Agi > Mast > Haste > Crit > Vers"
 
 --[[ Paladin Holy]]
 x[65] = "Int > Crit > Vers > Mast > Haste"
 --[[ Paladin Protection]]
-x[66] = "生存: Haste > Vers > Mast > Crit > Stam \n 輸出: Haste > Crit > Mast > Vers > Stam"
+x[66] = "生存能力: Haste > Vers > Mast > Crit \n 最大輸出: Haste > Crit > Mast > Vers"
 --[[ Paladin Retribution]]
-x[70] = "Str > Haste to 22% > Crit = Vers > Mast"
+x[70] = "Str > Haste 至少 20% > Crit = Vers > Mast"
 
 --[[ Priest Discipline]]
 x[256] = "Int > Haste > Crit > Mast > Vers"
 --[[ Priest Holy]]
 x[257] = "Int > Mast > Crit > Haste > Vers"
 --[[ Priest Shadow]]
-x[258] = "平衡/瘋狂: Haste > Crit > Mast > Int > Vers \n 虛無/心靈鑽刺: Crit > Haste > Mast > Int > Vers"
+x[258] = "Crit > Haste > Mast > Int > Vers"
 
 --[[ Rogue Assassination]]
-x[259] = "基本: Agi > Mast > Crit > Vers > Haste \n 放血: Agi > Crit >= Vers > Mast > Haste"
+x[259] = "標準: Agi > Mast > Crit = Vers > Haste \n 放血: Agi > Crit = Vers > Mast > Haste"
 --[[ Rogue Outlaw]]
 x[260] = "Agi > Vers > Crit > Mast > Haste"
 --[[ Rogue Subtlety]]
-x[261] = "Agi > Vers > Mast > Crit > Haste"
+x[261] = "Agi > Mast > Vers > Crit > Haste"
 
 --[[ Shaman Elemental]]
-x[262] = "Int > Crit > Haste > Vers > Mast"
+x[262] = "冰怒: Int > Crit = Mast > Haste > Vers \n 卓越術: Int > Mast 86.5% > Crit > Haste > Vers \n 傳奇+/聚雷針: Int > Haste > Crit > Mast > Vers"
 --[[ Shaman Enhancement]]
-x[263] = "Agi > Mast > Haste > Vers > Crit"
+x[263] = "Agi > Mast > Haste > Crit > Vers"
 --[[ Shaman Restoration]]
 x[264] = "Int > Mast > Crit > Haste > Vers"
 
 --[[ Warlock Affliction]]
-x[265] = "Mast > Int > Haste > Crit > Vers"
+x[265] = "Mast > Crit >= Haste > Int > Vers"
 --[[ Warlock Demonology]]
 x[266] = "Haste > Int > Crit > Mast > Vers"
 --[[ Warlock Destruction]]
 x[267] = "Int > Haste > Crit > Vers > Mast"
 
 --[[ Warrior Arms]]
-x[71] = "Mast > Str > Vers > Haste > Crit"
+x[71] = "Mast > Haste > Vers > Str > Crit"
 --[[ Warrior Fury]]
-x[72] = "Str > Haste to 50% > Mast > Vers > Crit > Haste 50%+"
+x[72] = "Haste 30% > Mast > Haste > Str > Vers > Crit"
 --[[ Warrior Protection]]
-x[73] = "Str > Haste 30% > Vers >= Mast > Crit > Stam"
+x[73] = "Str > Haste 30% > Mast > Vers > Crit"
 
 --[[ Demon Hunter Havoc]]
-x[577] = "Agi > Crit > Vers > Haste > Mast"
+x[577] = "Crit > Mast > Agi > Haste > Vers"
 --[[ Demon Hunter Vengeance]]
-x[581] = "生存: Agi > Vers > Haste > Mast > Crit \n 輸出: Agi > Mast = Crit >= Vers >= Haste \n 地城: Agi > Mast > Crit > Vers > Haste"
+x[581] = "生存能力: Agi > Vers > Haste = Mast > Crit \n 最大輸出: Agi > Crit >= Vers >= Mast >= Haste \n 5人副本: Agi > Mast > Vers => Haste > Crit"
 stats_Table = x

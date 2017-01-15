@@ -894,7 +894,7 @@ function WMT:Initialize()
 		if self.name and flightMaster then 
 			texts[1] = "|cffffffff"..self.name.."|r"
 		elseif flightMaster then
-			texts[1] = "|cfff0eb20Flight location not learned|r"
+			texts[1] = L["|cfff0eb20Flight location not learned|r"]
 		end		
         
 		AddTooltips(unpack(texts))
@@ -1592,9 +1592,9 @@ function WMT:Initialize()
 
     local pressedAbandonIndex = nil
     StaticPopupDialogs["GROUP_ABANDON_CONFIRMATION"] = {
-        text = "Abandon All Quests?",
-        button1 = "Yes",
-        button2 = "No",
+        text = L["Abandon All Quests?"],
+        button1 = L["Yes"],
+        button2 = L["No"],
         OnHide = function()
             pressedAbandonIndex = nil
         end,
@@ -1625,7 +1625,7 @@ function WMT:Initialize()
         LuaUtils:foreach(QuestMapFrame.QuestsFrame.Contents.Headers, function(parentButton)
             if parentButton.abandonGroupButton == nil then
                 local buttonFrame = GUIUtils:AddButton(parentButton, "", 231, 6, 28, 28, 28, 28, function(self)  
-                    StaticPopupDialogs["GROUP_ABANDON_CONFIRMATION"].text = "Abandon All " .. GetQuestLogTitle(self.abandonGroupButton.questLogIndex) .. " Quests?" 
+                    StaticPopupDialogs["GROUP_ABANDON_CONFIRMATION"].text = L["Abandon All "] .. GetQuestLogTitle(self.abandonGroupButton.questLogIndex) .. L[" Quests?"] 
                     if pressedAbandonIndex == nil then
                         pressedAbandonIndex = self.abandonGroupButton.questLogIndex
                         StaticPopup_Show ("GROUP_ABANDON_CONFIRMATION")

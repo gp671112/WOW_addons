@@ -1,15 +1,11 @@
 ## Interface: 70100
 ## Title: HandyNotes_DungeonLocations
-## Version: 1.06
+## Version: 1.09
 ## Notes: Shows locations of old world dungeon and raid entrances
-## Title-zhTW: |cFF00FF40[地圖]|r |cFF9966FF[HandyNotes]|r 副本位置
+## Title-zhTW: |cFF008844[地圖]|r|cFF9966FF[HandyNotes]|r 副本位置
 ## Notes-zhTW: 在地圖上顯示副本入口位置。
 ## Author: Bartruby of Cairne
 ## RequiredDeps: HandyNotes
 ## SavedVariables: HandyNotes_DungeonLocationsDB
-## X-Curse-Packaged-Version: 1.06
-## X-Curse-Project-Name: HandyNotes_DungeonLocations
-## X-Curse-Project-ID: handynotes_dungeonlocations
-## X-Curse-Repository-ID: wow/handynotes_dungeonlocations/mainline
 
 HandyNotes_DungeonLocations.lua

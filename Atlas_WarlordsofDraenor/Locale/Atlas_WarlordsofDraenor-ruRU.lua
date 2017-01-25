@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_WarlordsofDraenor-ruRU.lua 33 2016-09-05 14:53:54Z arith $
+-- $Id: Atlas_WarlordsofDraenor-ruRU.lua 38 2017-01-16 09:27:19Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -36,11 +36,6 @@ L["HM"] = "ВМ"
 L["ID"] = "ЖД"
 L["SBG"] = "НПЛ"
 L["SR"] = "НП"
--- L["Train Ride"] = ""
 L["UBRS"] = "ВЧГ"
--- L["ToC/Description"] = ""
--- L["ToC/Title"] = ""
-
-
 
 end

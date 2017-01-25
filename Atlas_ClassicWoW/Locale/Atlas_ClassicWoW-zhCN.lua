@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_ClassicWoW-zhCN.lua 13 2016-09-05 14:36:53Z arith $
+-- $Id: Atlas_ClassicWoW-zhCN.lua 18 2017-01-16 10:57:05Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -31,10 +31,10 @@ local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas_ClassicWoW", "zhCN", false);
 
 if L then
+L["\"Ambassador\" Dagg'thol"] = "“大使”达戈索尔"
 L["Abandonded Mole Machine"] = "被弃用的挖掘机"
 L["Acride <Scarshield Legion>"] = "阿克莱德 <裂盾军团>"
 L["Altar of Blood"] = "血之祭坛"
-L["\"Ambassador\" Dagg'thol"] = "“大使”达戈索尔"
 L["Amnennar's Phylactery"] = "亚门纳尔的护命匣"
 L["Ancient Equine Spirit"] = "上古圣马之魂"
 L["Ancient Treasure"] = "古代宝藏"
@@ -46,8 +46,8 @@ L["AQ40"] = "AQ40"
 L["Archmage Angela Dosantos <Brotherhood of the Light>"] = "大法师安吉拉·杜萨图斯 <圣光兄弟会>"
 L["Arygos"] = "亚雷戈斯"
 L["Auld Stonespire"] = "奥尔德·石塔 "
-L["Baelog's Chest"] = "巴尔洛戈的箱子"
 L["B.E Barechus <S.A.F.E.>"] = "“坏脾气”巴拉克斯 <S.A.F.E.>"
+L["Baelog's Chest"] = "巴尔洛戈的箱子"
 L["BFD"] = "BFD"
 L["Blastmaster Emi Shortfuse"] = "爆破专家艾米·短线"
 L["BRD"] = "BRD"
@@ -79,10 +79,10 @@ L["Elder Farwhisper"] = "远风长者"
 L["Elder Mistwalker"] = "迷雾长者"
 L["Elder Morndeep"] = "黎明长者"
 L["Elder Splitrock"] = "碎石长者"
-L["Elders' Square Postbox"] = "长者广场邮箱"
 L["Elder Starsong"] = "星歌长者"
 L["Elder Stonefort"] = "石墙长者"
 L["Elder Wildmane"] = "蛮鬃长者"
+L["Elders' Square Postbox"] = "长者广场邮箱"
 L["Estulan <The Highborne>"] = "埃斯图兰 <上层精灵>"
 L["Face <S.A.F.E.>"] = "费斯 <S.A.F.E.>"
 L["Falrin Treeshaper"] = "法尔林·树影"
@@ -102,8 +102,8 @@ L["Invoker Xorenth"] = "祈求者克索伦斯"
 L["Ironbark the Redeemed"] = "赎罪的埃隆巴克"
 L["Jalinda Sprig <Morgan's Militia>"] = "加琳达 <摩根民兵团>"
 L["Je'neu Sancrea <The Earthen Ring>"] = "耶努萨克雷 <大地之环>"
-L["Kandrostrasz <Brood of Alexstrasza>"] = "坎多斯特拉兹 <阿莱克丝塔萨的后裔>"
 L["Kand Sandseeker <Explorer's League>"] = "坎德·沙寻者 <探险者协会>"
+L["Kandrostrasz <Brood of Alexstrasza>"] = "坎多斯特拉兹 <阿莱克丝塔萨的后裔>"
 L["Kevin Dawson <Morgan's Militia>"] = "凯文·达森 <摩根民兵团>"
 L["Kherrah"] = "柯尔拉"
 L["King's Square Postbox"] = "国王广场邮箱"
@@ -179,8 +179,8 @@ L["The Shadowforge Lock"] = "暗炉之锁"
 L["The Sparklematic 5200"] = "超级清洁器5200型"
 L["The Vault"] = "黑色宝库"
 L["Thunderheart <Kargath Expeditionary Force>"] = "桑德哈特 <卡加斯远征军>"
-L["Tinkee Steamboil"] = "丁奇·斯迪波尔"
 L["Tink Sprocketwhistle <Engineering Supplies>"] = "丁克·铁哨 <工程学供应商>"
+L["Tinkee Steamboil"] = "丁奇·斯迪波尔"
 L["Torben Zapblast <Teleportation Specialist>"] = "托尔本·光爆 <传送专家>"
 L["Tran'rek"] = "特兰雷克"
 L["Ulda"] = "Ulda"
@@ -194,8 +194,4 @@ L["Weegli Blastfuse"] = "维格利"
 L["Yuka Screwspigot <Engineering Supplies>"] = "尤卡·斯库比格特 <工程学供应商>"
 L["Zeya"] = "泽雅"
 L["ZF"] = "ZF"
-L["ToC/Description"] = "经典旧世副本地图"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[经典旧世]|r"
-
-
 end

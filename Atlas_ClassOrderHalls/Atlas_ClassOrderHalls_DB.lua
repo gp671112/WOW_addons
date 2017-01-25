@@ -1,10 +1,10 @@
--- $Id: Atlas_ClassOrderHalls_DB.lua 62 2016-11-29 05:21:07Z arith $
+-- $Id: Atlas_ClassOrderHalls_DB.lua 76 2017-01-24 09:07:56Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -33,11 +33,17 @@ local myDB = {
 		{  1, 10001, 21, 288 }; -- Flight Master
 		{  2, 10002, 152, 366 }; -- Siouxsie the Banshee <Mission Specialist>
 		{  3, 10003, 147, 391 }; -- Illanna Dreadmoore <Ebon Blade Archivist>
-		{  4, 10004, 243, 443 }; -- Lord Thorval
-		{  5, 10005, 327, 177 }; -- Training Dummies
-		{  6, 10006, 290, 115 }; -- Quartermaster Ozorg <Rare Goods Vendor>
-		{  7, 10007, 393, 210 }; -- Grand Master Siegesmith Corvus
-		{  8, 10008, 396, 153 }; -- Lady Alistra <Death Knight Trainer>
+		{  4, 10004, 135, 378 }; -- Archivist Zubashi <Class Hall Upgrades>
+		{  5, 10005, 243, 443 }; -- Lord Thorval
+		{  6, 10006,  94, 465 }; -- Dark Summoner Marogh <Risen Horde Recruiter>
+		{  7, 10007, 206, 277 }; -- Amal'thazad
+		{  8, 10008, 327, 177 }; -- Training Dummies
+		{  9, 10009, 290, 115 }; -- Quartermaster Ozorg <Rare Goods Vendor>
+		{ 10, 10010, 396, 153 }; -- Lady Alistra <Death Knight Trainer>
+		{ 11, 10011, 393, 210 }; -- Grand Master Siegesmith Corvus
+		{ 12, 10012, 352, 250 }; -- Korgaz Deadaxe <Ebon Soldier Recruiter>
+		{ 13, 10013, 241, 197 }; -- Salanar the Horseman
+		{ 14, 10014, 331, 90  };-- Dead Collector Bane <Champion Armaments>
 	};
 	CH_DemonHunter = {
 		{ "A", 10101, 122, 416 }; -- Illidari Gateway
@@ -92,14 +98,15 @@ local myDB = {
 		{ 5, 10005, 210, 318 }; -- Outfitter Reynolds <Unseen Path>
 		{ 6, 10006, 199, 308 }; -- Tactician Tinderfell <Unseen Path>
 		{ 7, 10007, 208, 302 }; -- Image of Mimiron
-		{ 8, 10009, 252, 338 }; -- Holt Thunderhorn <Lore and Legends>
+		{ 8, 10008, 252, 338 }; -- Holt Thunderhorn <Lore and Legends>
 		{ 8, 10009, 273, 318 }; -- Training Dummies
 		{ 9, 10009, 207, 291 }; -- Training Dummies
 		{ 9, 10009, 188, 306 }; -- Training Dummies
 		{ 10, 10010, 202, 277 }; -- Lenara <Recruiter>
-		{ 11, 10011, 289, 322 }; -- Survivalist Bahn <Class Hall Upgrades>
+		{ 11, 10011, 290, 326 }; -- Survivalist Bahn <Class Hall Upgrades>
 		{ 12, 10012, 283, 257 }; -- Sampson <Recruiter>
 		{ 13, 10013, 324, 471 }; -- Ogdrul <The Seeker>
+		{ 14, 10014, 289, 314 }; -- Berger the Steadfast <Champion Armaments>
 	};
 	CH_Mage = {
 		{  1, 10001, 408, 129 }; -- Forge of the Guardian
@@ -125,33 +132,44 @@ local myDB = {
 		{ 12, 10012, 286, 362 }; -- Archmage Melis <Mistress of Flame>
 		{ 13, 10013,  58, 343 }; -- Training Dummies
 		{ 14, 10014,  77, 259 }; -- Grand Conjurer Mimic
+		{ 15, 10015, 296, 330 }; -- Minuette <Armament Summoner>
 		{  "A", 10200, 164, 350 }; -- Connection
 		{  "B", 10200, 104, 353 }; -- Connection
 		{  "B", 10200, 224, 353 }; -- Connection
 	};
 	CH_Monk = {
-		{ "A", 10101, 264, 332 }; -- Portal to Dalaran
-		{ "B", 10102, 233, 310 }; -- Portal to Peak of Serenity
-		{ "C", 10103, 272, 243 }; -- Transportation Mandala
-		{ "C", 10103, 228, 243 }; -- Transportation Mandala
-		{ 1, 10001, 237, 346 }; -- Caydori Brightstar <Purveyor of Rare Goods>
-		{ 2, 10002, 268, 358 }; -- Master Hsu <Mission Master>
-		{ 3, 10003, 291, 333 }; -- Elder Xang <Monk Trainer>
-		{ 4, 10004, 250, 253 }; -- Iron-Body Ponshu <Senior Master Ox>
-		{ 5, 10005, 189, 247 }; -- Lorewalker Cho <Head Archivist>
-		{ 6, 10006, 283, 321 }; -- Training Dummies
-		{ 6, 10006, 278, 282 }; -- Training Dummies
-		{ 6, 10006, 229, 283 }; -- Training Dummies
+		{ "A", 10101, 270, 332 }; -- Portal to Dalaran
+		{ "B", 10102, 226, 301 }; -- Portal to Peak of Serenity
+		{ "C", 10103, 281, 204 }; -- Transportation Mandala
+		{ "C", 10103, 220, 204 }; -- Transportation Mandala
+		{ 1, 10001, 224, 362 }; -- Caydori Brightstar <Purveyor of Rare Goods>
+		{ 2, 10002, 278, 377 }; -- Master Hsu <Mission Master>
+		{ 3, 10003, 284, 367 }; -- Tianji <Ox Troop Trainer>
+		{ 4, 10004, 273, 344 }; -- High Elder Cloudfall
+		{ 5, 10005, 302, 339 }; -- Gin Lai <Tiger Troop Trainer>
+		{ 6, 10006, 313, 332 }; -- Elder Xang <Monk Trainer>
+		{ 7, 10007, 296, 324 }; -- Training Dummies
+		{ 7, 10007, 286, 256 }; -- Training Dummies
+		{ 7, 10007, 222, 258 }; -- Training Dummies
+		{ 8, 10008, 250, 211 }; -- Iron-Body Ponshu <Senior Master Ox>
+		{ 9, 10009, 160, 203 }; -- Lorewalker Cho <Head Archivist>
 	};
 	CH_Paladin = {
 		{ "A", 10101, 102, 472 }; -- Entrance
 		{ "A", 10102, 75, 327 }; -- Portal to Dalaran
-		{ 1, 10001, 75, 293 }; -- Sister Elda <Keeper of the Ancient Tomes>
-		{ 2, 10002, 106, 315 }; -- Eadric the Pure <Quartermaster>
-		{ 3, 10003, 192, 397 }; -- Lord Grayson Shadowbreaker <Mission Specialist>
-		{ 4, 10004, 183, 245 }; -- Katherine the Pure <Paladin Trainer>
-		{ 5, 10005, 229, 294 }; -- Vindicator Baatun <Paladin Trainer>
-		{ 6, 10006, 353, 114 }; -- Altar of Ancient Kings
+		{ 1, 10001,  75, 293 }; -- Sister Elda <Keeper of the Ancient Tomes>
+		{ 2, 10002,  96, 289 }; -- Sir Alamande Graythorn <Class Hall Upgrades>
+		{ 3, 10003, 106, 315 }; -- Eadric the Pure <Quartermaster>
+		{ 4, 10004, 121, 341 };-- Lord Irulon Trueblade
+		{ 5, 10005, 172, 370 }; -- Lord Maxwell Tyrosus
+		{ 6, 10006, 192, 397 }; -- Lord Grayson Shadowbreaker <Mission Specialist>
+		{ 7, 10007, 199, 291 }; -- Commander Ansela <Silver Hand Recruiter>
+		{ 8, 10008, 183, 245 }; -- Katherine the Pure <Paladin Trainer>
+		{ 9, 10009, 205, 251 }; -- Kristoff <Armaments Requisitioner>
+		{ 10, 10010, 229, 294 }; -- Vindicator Baatun <Paladin Trainer>
+		{ 11, 10011, 246, 200 }; -- Commander Born <Silver Hand Officer Recruiter>
+		{ 12, 10012, 342, 140 }; -- Valgar Highforge <Grand Smith of the Order>
+		{ 13, 10013, 353, 114 }; -- Altar of Ancient Kings
 	};
 	CH_Priest = {
 		{ "A", 10101, 250, 374 }; -- Portal to Dalaran
@@ -176,29 +194,44 @@ local myDB = {
 		{ "C", 10103, 120, 114 }; -- Tanks for Everything
 		{ "D", 10104, 130, 196 }; -- Tunnel of Woe
 		{ 1, 10001, 294, 218 }; -- Madam Gosu <Black Market Liaison>
-		{ 2, 10002, 184, 343 }; -- Lord Jorach Ravenholdt
-		{ 3, 10003, 168, 303 }; -- Filius Sparkstache <Archivist>
-		{ 4, 10004, 212, 308 }; -- Winstone Wolfe <The Wolf>
-		{ 5, 10005, 124, 310 }; -- Marin Noggenfogger <Baron of Gadgetzan>
-		{ 6, 10006, 104, 274 }; -- Crucible of the Uncrowned
-		{ 7, 10007, 121, 248 }; -- Lorena Belle <Master Smuggler>
-		{ 8, 10008, 162, 212 }; -- Nikki the Gossip <Tales fo Adventure and Profit>
-		{ 9, 10009, 134, 136 }; -- Lonika Stillblade <Rogue Academy Proprietor>
-		{ 10, 10010,  97, 116 }; -- Rouge Trainers
-		{ 11, 10011,  90, 139 }; -- Training Dummies
-		{ 12, 10012, 108, 174 }; -- Kelsey Steelspark <Quartermaster>
-		{ 13, 10013, 229, 195 }; -- Yancey Grillsen <Bloodsail Recruiter>
+		{ 2, 10002, 268, 190 }; -- Jenri <Spymaster>
+		{ 3, 10003, 184, 343 }; -- Lord Jorach Ravenholdt
+		{ 4, 10004, 177, 327 }; -- Valeera Sanguinar
+		{ 5, 10005, 192, 319 }; -- Garona Halforcen
+		{ 6, 10006, 168, 303 }; -- Filius Sparkstache <Archivist>
+		{ 7, 10007, 212, 308 }; -- Winstone Wolfe <The Wolf>
+		{ 8, 10008, 124, 310 }; -- Marin Noggenfogger <Baron of Gadgetzan>
+		{ 9, 10009, 104, 274 }; -- Crucible of the Uncrowned
+		{ 10, 10010, 121, 248 }; -- Lorena Belle <Master Smuggler>
+		{ 11, 10011, 162, 212 }; -- Nikki the Gossip <Tales fo Adventure and Profit>
+		{ 12, 10012, 134, 136 }; -- Lonika Stillblade <Rogue Academy Proprietor>
+		{ 13, 10013,  74, 121 }; -- Loren the Fence <Rogue Trainer>
+		{ 14, 10014,  90, 139 }; -- Training Dummies
+		{ 15, 10015, 108, 174 }; -- Kelsey Steelspark <Quartermaster>
+		{ 16, 10016, 229, 195 }; -- Yancey Grillsen <Bloodsail Recruiter>
+		{ 17, 10017, 393, 256 }; -- Mal <Weapons Smuggler>
 	};
 	CH_Shaman = {
 		{ "A", 10101, 240, 233 }; -- Portal to Dalaran
+		{ "B", 10102, 217, 175 }; -- Vortex Pinnacle Portal (Mistral Essence)
 		{ 1, 10001, 298, 349 }; -- Training Dummies
 		{ 2, 10002, 291, 369 }; -- Aggra <Shaman Trainer>
 		{ 3, 10003, 244, 361 }; -- Elementalist Janai <Earthen Ring>
-		{ 4, 10004, 204, 224 }; -- Puzzlemaster Lo <The Earthen Ring>
-		{ 5, 10005, 249, 275 }; -- Flamesmith Lanying <Earthen Ring Quartermaster>
-		{ 6, 10006, 272, 271 }; -- Advisor Sevel <The Earthen Ring>
-		{ 7, 10007, 262, 218 }; -- Gorma Windspeaker <Keeper of Legends>
-		{ 8, 10008, 254, 120 }; -- Tribemother Torra <Shaman Trainer>
+		{ 4, 10004, 272, 271 }; -- Advisor Sevel <The Earthen Ring>
+		{ 5, 10005, 268, 259 }; -- Journeyman Goldmine <Class Hall Upgrades>
+		{ 6, 10006, 248, 278 }; -- Flamesmith Lanying <Earthen Ring Quartermaster>
+		{ 7, 10007, 250, 263 }; -- Summoner Morn <Elemental Summoner>
+		{ 8, 10008, 204, 224 }; -- Puzzlemaster Lo <The Earthen Ring>
+		{ 9, 10009, 262, 218 }; -- Gorma Windspeaker <Keeper of Legends>
+		{ 10, 10010, 293, 200 }; -- Ancient Elemental Altar
+		{ 11, 10011, 273, 184 }; -- Gavan Grayfeather <Ears of the Maelstrom>
+		{ 12, 10012, 236, 182 }; -- Felinda Frye <Earthwarden Recruiter>
+-- 		{ 12, 10012, 228, 176 }; -- Mackay Firebeard <The Earthen Ring>
+		{ 13, 10013, 221, 190 }; -- Orono <The Earthen Ring>
+		{ 14, 10014, 254, 148 }; -- Bath'rah the Windwatcher <The Earthen Ring>
+		{ 15, 10015, 254, 120 }; -- Tribemother Torra <Shaman Trainer>
+		{ 16, 10016, 259, 104 }; -- Morgl the Oracle <The Earthen Ring>
+		{ 17, 10017, 293, 124 }; -- Neptulon
 	};
 	CH_Warlock = {
 		{ "A", 10101, 482, 273 }; -- Portal to Dalaran

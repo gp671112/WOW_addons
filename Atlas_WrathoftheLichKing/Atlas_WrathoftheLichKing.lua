@@ -1,8 +1,8 @@
- -- $Id: Atlas_WrathoftheLichKing.lua 15 2016-09-05 14:46:17Z arith $
+ -- $Id: Atlas_WrathoftheLichKing.lua 20 2017-01-16 10:23:29Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -230,8 +230,10 @@ local myMaps = {
 		Acronym = L["IC"];
 		PlayerLimit = "10/25";
 		WorldMapID = "604";
+		DungeonLevel = "1";
 		JournalInstanceID = "758";
 		Module = "Atlas_WrathoftheLichKing";
+		NextMap = "IcecrownCitadelB";
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["The Ashen Verdict"] };
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..ALC["Elevator"], 10002 };
@@ -255,8 +257,11 @@ local myMaps = {
 		Acronym = L["IC"];
 		PlayerLimit = "10/25";
 		WorldMapID = "604";
+		DungeonLevel = "5";
 		JournalInstanceID = "758";
 		Module = "Atlas_WrathoftheLichKing";
+		PrevMap = "IcecrownCitadelA";
+		NextMap = "IcecrownCitadelC";
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["The Ashen Verdict"] };
 		{ BLUE.." C) "..L["From previous map"], 10001 };
 		{ BLUE.." D-H) "..ALC["Connection"], 10002 };
@@ -287,8 +292,10 @@ local myMaps = {
 		Acronym = L["IC"];
 		PlayerLimit = "10/25";
 		WorldMapID = "604";
+		DungeonLevel = "7";
 		JournalInstanceID = "758";
 		Module = "Atlas_WrathoftheLichKing";
+		PrevMap = "IcecrownCitadelB";
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["The Ashen Verdict"] };
 		{ BLUE.." I) "..L["From previous map"], 10001 };
 		{ WHIT.."16) "..Atlas_GetBossName("The Lich King", 1636), 1636 };
@@ -517,8 +524,10 @@ local myMaps = {
 		Acronym = L["Uldu"];
 		PlayerLimit = "10/25";
 		WorldMapID = "529";
+		DungeonLevel = "1";
 		JournalInstanceID = "759";
 		Module = "Atlas_WrathoftheLichKing";
+		NextMap = "UlduarB";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..BZ["The Antechamber"], 10002 };
 		{ ORNG.." A') "..L["Tower of Life"], 10003 };
@@ -542,8 +551,11 @@ local myMaps = {
 		Acronym = L["Uldu"];
 		PlayerLimit = "10/25";
 		WorldMapID = "529";
+		DungeonLevel = "2";
 		JournalInstanceID = "759";
 		Module = "Atlas_WrathoftheLichKing";
+		PrevMap = "UlduarA";
+		NextMap = "UlduarC";
 		{ BLUE.." B) "..L["The Siege"], 10001 };
 		{ BLUE.." C) "..L["The Keepers"], 10002 };
 		--{ WHIT.." 5) "..Atlas_GetBossName("Assembly of Iron")..ALC["L-Parenthesis"]..ALC["Optional"]..ALC["R-Parenthesis"], 10003 };
@@ -565,8 +577,11 @@ local myMaps = {
 		Acronym = L["Uldu"];
 		PlayerLimit = "10/25";
 		WorldMapID = "529";
+		DungeonLevel = "3";
 		JournalInstanceID = "759";
 		Module = "Atlas_WrathoftheLichKing";
+		PrevMap = "UlduarB";
+		NextMap = "UlduarD";
 		{ BLUE.." C) "..BZ["The Antechamber"], 10001 };
 		{ BLUE.." D) "..BZ["The Spark of Imagination"], 10002 };
 		{ BLUE.." E) "..BZ["The Descent into Madness"], 10003 };
@@ -589,8 +604,11 @@ local myMaps = {
 		Acronym = L["Uldu"];
 		PlayerLimit = "10/25";
 		WorldMapID = "529";
+		DungeonLevel = "5";
 		JournalInstanceID = "759";
 		Module = "Atlas_WrathoftheLichKing";
+		PrevMap = "UlduarC";
+		NextMap = "UlduarE";
 		{ BLUE.." D) "..L["The Keepers"], 10001 };
 		{ WHIT.."15) "..Atlas_GetBossName("Mimiron", 1647), 1647 };
 		{ GREN.." 9') "..BZ["The Spark of Imagination"]..ALC["L-Parenthesis"]..ALC["Teleporter"]..ALC["R-Parenthesis"], 10003 };
@@ -603,8 +621,10 @@ local myMaps = {
 		Acronym = L["Uldu"];
 		PlayerLimit = "10/25";
 		WorldMapID = "529";
+		DungeonLevel = "4";
 		JournalInstanceID = "759";
 		Module = "Atlas_WrathoftheLichKing";
+		PrevMap = "UlduarD";
 		{ BLUE.." E) "..L["The Keepers"], 10001 };
 		{ WHIT.."16) "..Atlas_GetBossName("General Vezax", 1648), 1648 };
 		{ WHIT.."17) "..Atlas_GetBossName("Yogg-Saron", 1649), 1649 };

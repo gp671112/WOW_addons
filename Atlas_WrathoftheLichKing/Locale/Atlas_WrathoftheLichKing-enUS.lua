@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_WrathoftheLichKing-enUS.lua 15 2016-09-05 14:46:17Z arith $
+-- $Id: Atlas_WrathoftheLichKing-enUS.lua 20 2017-01-16 10:23:29Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -119,8 +119,8 @@ L["The Captain's Chest"] = "The Captain's Chest"
 L["The Culling of Stratholme"] = "The Culling of Stratholme"
 L["The Keepers"] = "The Keepers"
 L["The Siege"] = "The Siege"
-L["Tol'mar"] = "Tol'mar"
 L["To next map"] = "To next map"
+L["Tol'mar"] = "Tol'mar"
 L["Tower of Flame"] = "Tower of Flame"
 L["Tower of Frost"] = "Tower of Frost"
 L["Tower of Life"] = "Tower of Life"
@@ -128,8 +128,8 @@ L["Tower of Storms"] = "Tower of Storms"
 L["Tribunal Chest"] = "Tribunal Chest"
 L["UK, Keep"] = "UK, Keep"
 L["Uldu"] = "Uldu"
-L["Upper Spire"] = "Upper Spire"
 L["UP, Pinn"] = "UP, Pinn"
+L["Upper Spire"] = "Upper Spire"
 L["Verdisa"] = "Verdisa"
 L["VH"] = "VH"
 L["VoA"] = "VoA"
@@ -137,9 +137,6 @@ L["Warmage Kaitlyn"] = "Warmage Kaitlyn"
 L["Watcher Gashra"] = "Watcher Gashra"
 L["Watcher Narjil"] = "Watcher Narjil"
 L["Watcher Silthik"] = "Watcher Silthik"
-L["ToC/Description"] = "Wrath of the Lich King Instances' Maps"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[Wrath of the Lich King]|r"
-
 --************************************************
 -- Zone Names, Acronyms, and Common Strings
 --************************************************

@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_Cataclysm-deDE.lua 11 2016-09-05 14:50:29Z arith $
+-- $Id: Atlas_Cataclysm-deDE.lua 16 2017-01-16 09:55:01Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -137,8 +137,4 @@ L["Zanzil's Cauldron of Frostburn Formula"] = "Zanzils Kessel des frierenden Fle
 L["Zanzil's Cauldron of Toxic Torment"] = "Zanzils Kessel der giftigen Grausamkeit"
 L["ZG"] = "ZG"
 L["Zungam"] = "Zungam"
-L["ToC/Description"] = "Karten der Instanzen aus Cataclysm"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[Cataclysm]|r"
-
-
 end

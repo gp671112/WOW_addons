@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_MistsofPandaria-zhCN.lua 10 2016-09-05 14:52:18Z arith $
+-- $Id: Atlas_MistsofPandaria-zhCN.lua 15 2017-01-16 09:41:12Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -43,11 +43,10 @@ L["Flesh'rok the Diseased <Primordial Saurok Horror>"] = "感染者弗赖什鲁�
 L["Focused Eye"] = "聚焦之眼"
 L["Forbidden Rites and other Rituals Necromantic"] = "禁忌咒文及其他死灵仪式"
 L["GSS"] = "GSS"
--- L["Halls"] = ""
 L["HoF"] = "HoF"
 L["Hooded Crusader"] = "蒙面的十字军战士"
-L["Instructor Chillheart's Phylactery"] = "指导者寒心的护命匣"
 L["In the Shadow of the Light"] = "光明下的阴影"
+L["Instructor Chillheart's Phylactery"] = "指导者寒心的护命匣"
 L["Kel'Thuzad's Deep Knowledge"] = "克尔苏加德的深层知识"
 L["Master Windstrong"] = "风涌大师"
 L["Monara <The Last Queen>"] = "莫纳拉 <末代皇后>"
@@ -60,10 +59,8 @@ L["Professor Slate"] = "斯雷特教授"
 L["Reinforced Archery Target"] = "强固箭靶"
 L["Rocky Horror"] = "岩石恐魔"
 L["SB"] = "SB"
--- L["Scholo"] = ""
 L["Shado-Master Chum Kiu"] = "影踪大师楚秋"
 L["Sinan the Dreamer"] = "梦想家思南"
--- L["SM"] = ""
 L["SNT"] = "SNT"
 L["SoO"] = "SoO"
 L["SPM"] = "SPM"
@@ -74,9 +71,6 @@ L["TJS"] = "TJS"
 L["ToT"] = "ToT"
 L["Unblinking Eye"] = "不眠之眼"
 L["Zao'cho <The Emperor's Shield>"] = "曹卓 <皇帝之盾>"
-L["ToC/Description"] = "熊猫人之谜副本地图"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[熊猫人之谜]|r"
-
 
 --************************************************
 -- Zone Names, Acronyms, and Common Strings

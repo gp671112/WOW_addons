@@ -5,6 +5,7 @@ ns.defaults = {
         icon_scale = 1.5,
         icon_alpha = 1.0,
         entrances = true,
+		upcoming = false,
     },
 }
 
@@ -53,6 +54,12 @@ ns.options = {
                     name = "顯示入口",
                     desc = "顯示傳送點入口的圖標，以及傳送點的位置",
                     order = 0,
+                },
+				upcoming = {
+                    type = "toggle",
+                    name = "顯示即將到來的傳送點",
+                    desc = "顯示即將到來的傳送點，因為你不在正確的任務階段所以還無法啟用。",
+                    order = 10,
                 },
             },
         },

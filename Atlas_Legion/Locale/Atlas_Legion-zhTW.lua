@@ -1,10 +1,8 @@
-﻿-- $Id: Atlas_Legion-zhTW.lua 80 2016-11-09 11:29:40Z arith $
+-- $Id: Atlas_Legion-zhTW.lua 91 2017-01-21 20:09:46Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
-	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -28,11 +26,10 @@ local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas_Legion", "zhTW", false);
 
 if L then
--- L["Ancient Widow"] = ""
--- L["Arcanist Malrodi"] = ""
+L["Arcanist Malrodi"] = "秘法師瑪洛蒂"
 L["Archmage Galeorn"] = "大法師加里恩"
 L["Arthfael"] = "阿斯菲爾"
-L["Braxas the Fleshcarver"] = "Braxas the Fleshcarver"
+L["Braxas the Fleshcarver"] = "『刻肉者』布拉薩斯"
 L["Crate of Corks"] = "一箱木栓"
 L["Dantalionax"] = "丹塔利翁斯"
 L["Drelanim Whisperwind"] = "蕾拉妮·語風"
@@ -43,36 +40,26 @@ L["Fenryr's eastern spawn point"] = "芬里爾的東邊出現點"
 L["Fenryr's western spawn point"] = "芬里爾的西邊出現點"
 L["Gom Crabbar"] = "戈姆·蟹巴"
 L["Grimoira"] = "葛摩菈"
+L["Jaggen-Ra"] = "迦耿拉"
 L["Kalyndras <Rook's Quartermaster>"] = "卡林達斯 <玄鴉堡軍需官>"
 L["King Bjorn"] = "畢雍王"
 L["King Haldor"] = "海多爾王"
 L["King Ranulf"] = "拉努夫王"
 L["King Tor"] = "托爾王"
 L["Kraxa <Mother of Gnashers>"] = "夸克薩 <銳齒蜥之母>"
--- L["Kudzilla"] = ""
+L["Kudzilla"] = "庫吉拉"
 L["Lady Velandras Ravencrest"] = "維蘭卓絲·黑雨女士"
--- L["Ly'leth Lunastre"] = ""
+L["Ly'leth Lunastre"] = "黎利斯·路納斯特"
 L["Malfurion Stormrage"] = "瑪法里恩·怒風"
 L["Mushroom Merchant"] = "蘑菇商人"
--- L["Nightmare Watcher"] = ""
+L["Mythana"] = "秘薩納"
 L["Portal to Shal'Aran"] = "沙亞蘭傳送門"
 L["Put a Cork in It"] = "塞進木栓"
--- L["Rage Rot"] = ""
--- L["Ragoul"] = ""
 L["Requires Skaggldrynk"] = "需要斯卡格藥劑"
--- L["Shellmaw"] = ""
--- L["Sludge Face"] = ""
 L["Spiritwalker Ebonhorn"] = "靈行者黯角"
 L["Teleport to Moonglade"] = "傳送到月光林地"
 L["Teleport to Tichondrius / Grand Magistrix Elisande"] = "傳送到提克迪奧斯／大博學者艾莉珊德處"
--- L["The Rat King"] = ""
--- L["Ultanok"] = ""
--- L["Understone Lasher"] = ""
--- L["Velimar"] = ""
+L["Ultanok"] = "烏塔諾克"
 L["Volynd Stormbringer"] = "沃林德風暴召喚者"
-L["ToC/Description"] = "軍臨天下副本地圖模組"
-L["ToC/Title"] = "|r|cFF0099FF[地圖]|rAtlas 軍臨天下"
-
-
 
 end

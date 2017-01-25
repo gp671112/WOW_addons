@@ -1,10 +1,10 @@
-<!-- $Id: Atlas.xml 116 2016-10-28 14:18:43Z arith $ -->
+<!-- $Id: Atlas.xml 153 2017-01-24 07:18:21Z arith $ -->
 <!--
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
-	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
+	Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -234,10 +234,10 @@
 				</Anchors>
 				<Scripts>
 					<OnVerticalScroll>
-						FauxScrollFrame_OnVerticalScroll(self, offset, 15, AtlasScrollBar_Update); 
+						FauxScrollFrame_OnVerticalScroll(self, offset, 15, Atlas_ScrollBar_Update); 
 					</OnVerticalScroll>
 					<OnShow>
-						AtlasScrollBar_Update()
+						Atlas_ScrollBar_Update()
 					</OnShow>
 				</Scripts>
 			</ScrollFrame>
@@ -494,7 +494,7 @@
 					</Layer>
 				</Layers>
 			</Button>
-			<Button name="$parentAdventureJournalMapButton" hidden="true">
+			<Button name="$parentNextMapButton" parentKey="NextMap" hidden="true">
 				<Size x="32" y="32"/>
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="$parent">
@@ -504,10 +504,48 @@
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnClick function="AtlasFrameAdventureJournalMapButton_OnClick" />
+					<OnClick>
+						PlaySound("igMainMenuOptionCheckBoxOn");
+						AtlasPrevNextMap_OnClick(self);
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Up"/>
+				<PushedTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Down"/>
+				<DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Disabled"/>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+			</Button>
+			<Button name="$parentPrevMapButton" parentKey="PrevMap" hidden="true">
+				<Size x="32" y="32"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent">>
+						<Offset>
+							<AbsDimension x="13" y="-599"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("igMainMenuOptionCheckBoxOn");
+						AtlasPrevNextMap_OnClick(self);
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Up"/>
+				<PushedTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Down"/>
+				<DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Disabled"/>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+			</Button>
+			<Button name="$parentAdventureJournalMapButton" parentKey="AdventureJournalMap" hidden="true">
+				<Size x="32" y="32"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentNextMapButton" relativePoint="TOPLEFT" x="-24" y="0"/>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AtlasFrameAdventureJournalMapButton_OnClick(self);
+					</OnClick>
 					<OnEnter>
 						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
-						GameTooltip:SetText(ATLAS_OPEN_WOWMAP_WINDOW, nil, nil, nil, nil, 1);
+						GameTooltip:SetText(ATLAS_OPEN_WOWMAP_WINDOW, nil, nil, nil, nil, false);
 					</OnEnter>
 					<OnLeave>
 						GameTooltip:Hide();
@@ -522,7 +560,7 @@
 					</Anchors>
 				</HighlightTexture>
 			</Button>
-			<Button name="$parentAdventureJournalButton" hidden="true" toplevel="true">
+			<Button name="$parentAdventureJournalButton" parentKey="AdventureJournal" hidden="true" toplevel="true">
 				<Size>
 					<AbsDimension x="32" y="32" />
 				</Size>
@@ -833,7 +871,7 @@
 				<PushedTexture file="Interface\Buttons\UI-Panel-SmallerButton-Down"/>
 				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
 			</Button>
-			<Button name="$parentAdventureJournalMapButton" hidden="true">
+			<Button name="$parentAdventureJournalMapButton" parentKey="AdventureJournalMap" hidden="true">
 				<Size x="32" y="32"/>
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent">
@@ -843,10 +881,12 @@
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnClick function="AtlasFrameAdventureJournalMapButton_OnClick" />
+					<OnClick>
+						AtlasFrameAdventureJournalMapButton_OnClick(self);
+					</OnClick>
 					<OnEnter>
 						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
-						GameTooltip:SetText(ATLAS_OPEN_WOWMAP_WINDOW, nil, nil, nil, nil, 1);
+						GameTooltip:SetText(ATLAS_OPEN_WOWMAP_WINDOW, nil, nil, nil, nil, false);
 					</OnEnter>
 					<OnLeave>
 						GameTooltip:Hide();
@@ -861,7 +901,7 @@
 					</Anchors>
 				</HighlightTexture>
 			</Button>
-			<Button name="$parentAdventureJournalButton" hidden="true" toplevel="true">
+			<Button name="$parentAdventureJournalButton" parentKey="AdventureJournal" hidden="true" toplevel="true">
 				<Size>
 					<AbsDimension x="32" y="32" />
 				</Size>
@@ -1339,7 +1379,7 @@
 					</Anchor>
 				</Anchors>
 			</Button>
-			<Button name="$parentAdventureJournalMapButton" hidden="true">
+			<Button name="$parentNextMapButton" parentKey="NextMap" hidden="true">
 				<Size x="32" y="32"/>
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="$parent">
@@ -1349,10 +1389,48 @@
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnClick function="AtlasFrameAdventureJournalMapButton_OnClick" />
+					<OnClick>
+						PlaySound("igMainMenuOptionCheckBoxOn");
+						AtlasPrevNextMap_OnClick(self);
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Up"/>
+				<PushedTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Down"/>
+				<DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Disabled"/>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+			</Button>
+			<Button name="$parentPrevMapButton" parentKey="PrevMap" hidden="true">
+				<Size x="32" y="32"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent">>
+						<Offset>
+							<AbsDimension x="13" y="-599"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("igMainMenuOptionCheckBoxOn");
+						AtlasPrevNextMap_OnClick(self);
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Up"/>
+				<PushedTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Down"/>
+				<DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Disabled"/>
+				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
+			</Button>
+			<Button name="$parentAdventureJournalMapButton" parentKey="AdventureJournalMap" hidden="true">
+				<Size x="32" y="32"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentNextMapButton" relativePoint="TOPLEFT" x="-24" y="0"/>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						AtlasFrameAdventureJournalMapButton_OnClick(self);
+					</OnClick>
 					<OnEnter>
 						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
-						GameTooltip:SetText(ATLAS_OPEN_WOWMAP_WINDOW, nil, nil, nil, nil, 1);
+						GameTooltip:SetText(ATLAS_OPEN_WOWMAP_WINDOW, nil, nil, nil, nil, false);
 					</OnEnter>
 					<OnLeave>
 						GameTooltip:Hide();
@@ -1367,7 +1445,7 @@
 					</Anchors>
 				</HighlightTexture>
 			</Button>
-			<Button name="$parentAdventureJournalButton" hidden="true" toplevel="true">
+			<Button name="$parentAdventureJournalButton" parentKey="AdventureJournal" hidden="true" toplevel="true">
 				<Size>
 					<AbsDimension x="32" y="32" />
 				</Size>

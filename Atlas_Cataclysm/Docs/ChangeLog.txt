@@ -1,13 +1,19 @@
-$Id: ChangeLog.txt 14 2016-10-27 05:00:50Z arith $
+$Id: ChangeLog.txt 16 2017-01-16 09:55:01Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 ==============
 = Change Log =
 ==============
 
+v1.36.00 (Jan. 16, 2017)
+------------------------
+- Added to support quick map switching by clicking the Next or 
+  Previous map button
+
+  
 v1.35.00 (Oct. 27, 2016)
 ------------------------
 - Toc update to support WoW 7.1.0

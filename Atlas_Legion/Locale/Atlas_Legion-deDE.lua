@@ -1,10 +1,8 @@
-﻿-- $Id: Atlas_Legion-deDE.lua 37 2016-09-05 14:55:07Z arith $
+-- $Id: Atlas_Legion-deDE.lua 87 2017-01-16 09:16:53Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
-	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -29,12 +27,13 @@ local L = AceLocale:NewLocale("Atlas_Legion", "deDE", false);
 
 if L then
 L["Ancient Widow"] = "Uralte Witwe"
--- L["Arcanist Malrodi"] = ""
-L["Archmage Galeorn"] = "Erzmagier Galeorn" -- Needs review
+L["Arcanist Malrodi"] = "Arkanistin Malrodi"
+L["Archmage Galeorn"] = "Erzmagier Galeorn"
 L["Arthfael"] = "Arthfael"
 L["Braxas the Fleshcarver"] = "Braxas der Fleischschnitzer"
 L["Crate of Corks"] = "Kiste mit Korken"
 L["Dantalionax"] = "Dantalionax"
+L["Dread Captain Thedon"] = "Schreckenskapitän Thedon"
 L["Drelanim Whisperwind"] = "Drelanim Wisperwind"
 L["Earlnoc the Beastbreaker"] = "Earlnoc der Bestienbrecher"
 L["Echoing Horn of the Damned"] = "Hallendes Horn der Verdammten"
@@ -43,6 +42,7 @@ L["Fenryr's eastern spawn point"] = "Fenrys östlicher Erscheinungspunkt"
 L["Fenryr's western spawn point"] = "Fenrys westlicher Erscheinungspunkt"
 L["Gom Crabbar"] = "Gom Krabbar"
 L["Grimoira"] = "Grimoira"
+L["Jaggen-Ra"] = "Jaggen-Ra"
 L["Kalyndras <Rook's Quartermaster>"] = "Kalyndras <Rüstmeister der Rabenwehr>"
 L["King Bjorn"] = "König Björn"
 L["King Haldor"] = "König Haldor"
@@ -61,17 +61,12 @@ L["Rage Rot"] = "Zornfäule"
 L["Ragoul"] = "Ragoul"
 L["Requires Skaggldrynk"] = "Erfordert Skaggldrynk"
 L["Shellmaw"] = "Panzermaul <Panzerschlund>"
--- L["Sludge Face"] = ""
+L["Sludge Face"] = "Schlickfratze"
 L["Spiritwalker Ebonhorn"] = "Geistwandler Ebenhorn"
 L["Teleport to Moonglade"] = "Teleport zur Mondlichtung"
 L["Teleport to Tichondrius / Grand Magistrix Elisande"] = "Teleportieren zu Tichondrius / Großmagistrix Elisande"
--- L["The Rat King"] = ""
--- L["Ultanok"] = ""
+L["Ultanok"] = "Ultanok"
 L["Understone Lasher"] = "Peitscher des Tiefgesteins"
--- L["Velimar"] = ""
+L["Velimar"] = "Velimar"
 L["Volynd Stormbringer"] = "Volynd Sturmbringer"
-L["ToC/Description"] = "Karten der Instanzen aus Legion"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[Legion]|r"
-
-
 end

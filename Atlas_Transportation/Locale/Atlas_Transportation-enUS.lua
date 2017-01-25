@@ -1,10 +1,10 @@
--- $Id: Atlas_Transportation-enUS.lua 59 2016-11-09 10:16:14Z arith $
+-- $Id: Atlas_Transportation-enUS.lua 71 2017-01-24 14:23:35Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail.com>
 
 	This file is part of Atlas.
 
@@ -54,6 +54,8 @@ if L then
 	L["Portal to Sanctum of Light"] 	= "Portal to Sanctum of Light"; -- Paladin
 	L["Connection to the Hall of Shadows"] 	= "Connection to the Hall of Shadows"; -- Rogue
 	L["Aludane Whitecloud <Flight Master>"] = "Aludane Whitecloud <Flight Master>"; -- 96813
+	-- Achievement Type
+	L["Exploration"]	= "Exploration";
 	-- Others
 	L["Portal to Dalaran"] = "Portal to Dalaran";
 	L["The Bogpaddle Bullet"] = "The Bogpaddle Bullet";

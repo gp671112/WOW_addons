@@ -1,10 +1,10 @@
--- $Id: Atlas.lua 122 2016-11-14 18:08:09Z arith $
+-- $Id: Atlas.lua 155 2017-01-24 14:21:05Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
-	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
+	Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -28,13 +28,15 @@ local _G = getfenv(0);
 local pairs = _G.pairs;
 local math = _G.math;
 local table = _G.table;
-local string = _G.string
-local select = _G.select
-local type = _G.type
+local string = _G.string;
+local select = _G.select;
+local type = _G.type;
+local bit = _G.bit;
 
 local L = LibStub("AceLocale-3.0"):GetLocale("Atlas");
 local BZ = Atlas_GetLocaleLibBabble("LibBabble-SubZone-3.0");
 local LibDialog = LibStub("LibDialog-1.0");
+local addon = LibStub("AceAddon-3.0"):NewAddon("Atlas", "AceConsole-3.0")
 
 -- Turn ON / OFF Atlas debug mode
 local Atlas_DebugMode = false;
@@ -47,9 +49,29 @@ end
 -- Adopted from EncounterJournal
 local EJ_HTYPE_OVERVIEW = 3;
 
-local function EncounterJournal_CheckForOverview(rootSectionID)
+local function Atlas_EncounterJournal_CheckForOverview(rootSectionID)
 	return select(3,EJ_GetSectionInfo(rootSectionID)) == EJ_HTYPE_OVERVIEW;
 end
+
+-- Priority list for *not my spec*
+local overviewPriorities = {
+	[1] = "DAMAGER",
+	[2] = "HEALER",
+	[3] = "TANK",
+}
+
+local flagsByRole = {
+	["DAMAGER"] = 1,
+	["HEALER"] = 2,
+	["TANK"] = 0,
+}
+
+local rolesByFlag = {
+	[0] = "TANK",
+	[1] = "DAMAGER",
+	[2] = "HEALER"
+}
+
 
 -- Initialization
 ATLAS_VERSION = GetAddOnMetadata("Atlas", "Version");
@@ -66,6 +88,7 @@ ATLAS_PLUGINS = {};
 ATLAS_PLUGIN_DATA = {};
 AtlasMaps_NPC_DB = {};
 ATLAS_SMALLFRAME_SELECTED = false;
+local ATLAS_DROPDOWN_WIDTH = 190;
 
 local GREN = "|cff66cc33";
 local ATLAS_MAP_NPC_NUM = 0;
@@ -131,27 +154,27 @@ local ATLAS_TAXI_TCOORDS = {
 };
 
 local DefaultAtlasOptions = {
-	["AtlasVersion"] = ATLAS_OLDEST_VERSION_SAME_SETTINGS;
-	["AtlasAlpha"] = 1.0;			-- Atlas frame's transparency
-	["AtlasLocked"] = false;		-- Lock Atlas frame position
-	["AtlasAutoSelect"] = false;		-- Auto select map
-	["AtlasButtonPosition"] = 26;		-- Minimap button position
-	["AtlasButtonRadius"] = 78;		-- Minimap button radius
-	["AtlasButtonShown"] = true;		-- Show / hide Atlas button
-	["AtlasRightClick"] = false;		-- Right click to open world map
-	["AtlasType"] = 1;			-- Default or last selected map type (category)
-	["AtlasZone"] = 1;			-- Default or last selected map / zone
-	["AtlasAcronyms"] = true;		-- Show dungeon's acronyms
-	["AtlasScale"] = 1.0;			-- Atlas frame scale
-	["AtlasClamped"] = true;		-- Clamp to WoW window
-	["AtlasSortBy"] = 1;			-- Maps sorting type, 1: CONTINENT; 2: LEVEL; 3: PARTYSIZE; 4: EXPANSION; 5: TYPE
-	["AtlasCtrl"] = false;			-- Press ctrl and mouse over to show full description text
-	["AtlasBossDesc"] = true;		-- Toggle to show boss description or not
-	["AtlasBossDescScale"] = 0.9;		-- The boss description GameToolTip scale
-	["AtlasDontShowInfo"] = false; 		-- Atlas latest information
-	["AtlasDontShowInfo_12201"] = false;
-	["AtlasCheckModule"] = true;		-- Check if there is missing module / plugin
-	["AtlasColoringDropDown"] = true;	-- Coloring dungeon dropdown list with difficulty colors
+	["AtlasVersion"] = ATLAS_OLDEST_VERSION_SAME_SETTINGS,
+	["AtlasAlpha"] = 1.0,			-- Atlas frame's transparency
+	["AtlasLocked"] = false,		-- Lock Atlas frame position
+	["AtlasAutoSelect"] = false,		-- Auto select map
+	-- ["AtlasButtonPosition"] = 26,		-- Minimap button position
+	-- ["AtlasButtonRadius"] = 78,		-- Minimap button radius
+	["AtlasButtonShown"] = true,		-- Show / hide Atlas button
+	["AtlasRightClick"] = false,		-- Right click to open world map
+	["AtlasType"] = 1,			-- Default or last selected map type (category)
+	["AtlasZone"] = 1,			-- Default or last selected map / zone
+	["AtlasAcronyms"] = true,		-- Show dungeon's acronyms
+	["AtlasScale"] = 1.0,			-- Atlas frame scale
+	["AtlasClamped"] = true,		-- Clamp to WoW window
+	["AtlasSortBy"] = 1,			-- Maps sorting type, 1: CONTINENT, 2: LEVEL, 3: PARTYSIZE, 4: EXPANSION, 5: TYPE
+	["AtlasCtrl"] = false,			-- Press ctrl and mouse over to show full description text
+	["AtlasBossDesc"] = true,		-- Toggle to show boss description or not
+	["AtlasBossDescScale"] = 0.9,		-- The boss description GameToolTip scale
+	["AtlasDontShowInfo"] = false, 		-- Atlas latest information
+	["AtlasDontShowInfo_12201"] = false,
+	["AtlasCheckModule"] = true,		-- Check if there is missing module / plugin
+	["AtlasColoringDropDown"] = true,	-- Coloring dungeon dropdown list with difficulty colors
 };
 
 -- Code by Grayhoof (SCT)
@@ -172,8 +195,17 @@ function Atlas_FreshOptions()
 	AtlasOptions = Atlas_CloneTable(DefaultAtlasOptions);
 end
 
+-- function to check if user has all the options parameter, 
+-- if not (due to some might be newly added), then add it with default value
+local function Atlas_UpdateOptions(player_options)
+	for k, v in pairs(DefaultAtlasOptions) do
+		if (player_options[k] == nil) then
+			player_options[k] = v;
+		end
+	end
+end
 
--- Below to temporary create a table to store the core map's data
+-- Below to temporarily create a table to store the core map's data
 -- in order to identify the dropdown's zoneID is belonging to the
 -- core Atlas or plugins
 local Atlas_CoreMapsKey = {};
@@ -208,7 +240,121 @@ function Atlas_RegisterPlugin(name, myCategory, myData)
 	Atlas_Refresh();
 end
 
+local function Atlas_BossButtonCleanUp(button)
+	button:SetID(0);
+	button.encounterID = nil;
+	button.instanceID = nil;
+	button.overviewDescription = nil;
+	button.roleOverview = nil;
+	button.achievementID = nil;
+	button.tooltiptitle = nil;
+	button.tooltiptext = nil;
+	button.link = nil;
+	button.displayInfo = nil;
+	if (button.bgImage) then button.bgImage:SetTexture(nil); end
+	if (button.TaxiImage) then button.TaxiImage:SetTexture(nil); end
+end
+
+local function Atlas_BossButtonUpdate(button, encounterID, instanceID, b_iconImage)
+	button:SetID(encounterID);
+	button.encounterID = encounterID;
+	button.instanceID = instanceID or nil;
+
+	local ejbossname, description, _, rootSectionID, link = EJ_GetEncounterInfo(encounterID);
+	if (ejbossname) then
+		button.tooltiptitle = ejbossname;
+		button.tooltiptext = description;
+		button.link = link;
+		if (Atlas_EncounterJournal_CheckForOverview(rootSectionID)) then
+			-- title, description, depth, abilityIcon, displayInfo, 
+			-- siblingID, nextSectionID, filteredByDifficulty, link, 
+			-- startsOpen, flag1, flag2, flag3, flag4 = EJ_GetSectionInfo(sectionID)
+			local _, overviewDescription, _, _, _, _, nextSectionID = EJ_GetSectionInfo(rootSectionID);
+			button.overviewDescription = overviewDescription or nil;
+
+			local spec, role;
+
+			spec = GetSpecialization();
+			if (spec) then
+				role = GetSpecializationRole(spec);
+			else
+				role = "DAMAGER";
+			end
+
+			local title, description, siblingID, filteredByDifficulty, flag1;
+			local i = 1;
+			while nextSectionID do
+				title, description, _, _, _, siblingID, _, filteredByDifficulty, _, _, flag1 = EJ_GetSectionInfo(nextSectionID);
+				if (role == rolesByFlag[flag1]) then
+					description = string.gsub(description, "$bullet;", "- ");
+					button.roleOverview = "|cffffffff"..title.."|r".."\n"..description;
+					break;
+				end
+				i = i + 1;
+				nextSectionID = siblingID;
+			end
+		end
+		
+		if (b_iconImage) then
+			local _, _, _, displayInfo, iconImage = EJ_GetCreatureInfo(1, encounterID);
+			button.displayInfo = displayInfo;
+			if ( iconImage ) then
+				SetPortraitTexture(button.bgImage, displayInfo);
+			end
+		end
+	end
+end
+
+local function Atlas_AchievementButtonUpdate(button, achievementID)
+	button.achievementID = achievementID;
+	button.link = GetAchievementLink(achievementID) or nil;
+	-- id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievementID or categoryID, index)
+	local _, name, _, completed, month, day, year, description, _, _, _, _, _, earnedBy = GetAchievementInfo(achievementID);
+	button.tooltiptitle = name;
+	local tooltiptext = description;
+	local numCriteria = GetAchievementNumCriteria(achievementID);
+	if (numCriteria and numCriteria > 0) then
+		for i = 1, numCriteria do
+			-- criteriaString, criteriaType, completed, quantity, reqQuantity, charName, flags, assetID, quantityString, criteriaID, eligible =  GetAchievementCriteriaInfo(achievementID, criteriaIndex)
+			local criteriaString, criteriaType, criteriaCompleted, quantity, reqQuantity, _, flags, assetID, quantityString = GetAchievementCriteriaInfo(achievementID, i);
+			if (criteriaType == CRITERIA_TYPE_ACHIEVEMENT and assetID) then
+				local _, aname, _, acompleted = GetAchievementInfo(assetID);
+				if (acompleted) then
+					tooltiptext = tooltiptext.."\n|CFFFFFFFF - "..aname;
+				else
+					tooltiptext = tooltiptext.."\n|CFF808080 - "..aname;
+				end
+			--elseif (criteriaString == "" or reqQuantity > 1) then
+			elseif (bit.band(flags, EVALUATION_TREE_FLAG_PROGRESS_BAR) == EVALUATION_TREE_FLAG_PROGRESS_BAR) then
+				if (quantity >= reqQuantity) then
+					tooltiptext = tooltiptext.."\n|CFFFFFFFF - "..quantityString;
+				else
+					tooltiptext = tooltiptext.."\n|CFF808080 - "..quantityString;
+				end
+			else
+				if (criteriaCompleted) then
+					tooltiptext = tooltiptext.."\n|CFFFFFFFF - "..criteriaString;
+				else
+					tooltiptext = tooltiptext.."\n|CFF808080 - "..criteriaString;
+				end
+			end
+		end
+	end
+	if (completed) then
+		name = "      |CFFFFFFFF"..name;
+		tooltiptext = tooltiptext.."\n|CFF00FF00"..format(ACHIEVEMENT_TOOLTIP_COMPLETE, earnedBy, month, day, year);
+	else
+		name = "      |CFF808080"..name;
+	end
+	button.Text:SetText(name);
+	button.tooltiptext = tooltiptext;
+end
+
 function Atlas_Search(text)
+	local zoneID = ATLAS_DROPDOWNS[AtlasOptions.AtlasType][AtlasOptions.AtlasZone];
+	local mapdata = AtlasMaps;
+	local base = mapdata[zoneID];
+
 	local data = nil;
 
 	if (ATLAS_SEARCH_METHOD == nil) then
@@ -222,9 +368,9 @@ function Atlas_Search(text)
 	while ( data[i] ~= nil ) do
 		ATLAS_SCROLL_LIST[i] = data[i][1];
 		if (data[i][2] ~= nil) then
-			ATLAS_SCROLL_ID[i] = data[i][2];
+			ATLAS_SCROLL_ID[i] = { data[i][2], base.JournalInstanceID or nil};
 		else
-			ATLAS_SCROLL_ID[i] = 0;
+			ATLAS_SCROLL_ID[i] = { 0, nil };
 		end
 		i = i + 1;
 	end
@@ -234,10 +380,10 @@ end
 
 function Atlas_SearchAndRefresh(text)
 	Atlas_Search(text);
-	AtlasScrollBar_Update();
+	Atlas_ScrollBar_Update();
 end
 
-local function Process_Deprecated()
+local function Atlas_Process_Deprecated()
 	-- List of deprecated Atlas modules.
 	-- First value is the addon name
 	-- Second value is the version
@@ -275,7 +421,13 @@ local function Process_Deprecated()
 	-- Check for outdated modules, build a list of them, then disable them and tell the player
 	local OldList = {};
 	for k, v in pairs(Deprecated_List) do
+		-- name, title, notes, loadable, reason, security, newVersion = GetAddOnInfo(index or "name")
+		--    loadable : Boolean - Indicates if the AddOn is loaded or eligible to be loaded, true if it is, false if it is not.
 		local loadable = select(4, GetAddOnInfo(v[1]));
+		-- GetAddOnEnableState("character", index): 
+		--	0: addon is disabled
+		--	1: partially enabled (only when querying all characters)
+		-- 	2: fully enabled
 		local enabled = GetAddOnEnableState(UnitName("player"), GetAddOnInfo(v[1]))
 		if ( (enabled > 0) and loadable ) then
 			local oldVersion = true;			
@@ -308,25 +460,6 @@ local function Process_Deprecated()
 	end
 end
 
--- Called when the Atlas frame is first loaded
--- We CANNOT assume that data in other files is available yet!
-function Atlas_OnLoad(self)
-
-	Process_Deprecated();
-
-	-- Register the Atlas frame for the following events
-	self:RegisterEvent("PLAYER_LOGIN");
-	self:RegisterEvent("ADDON_LOADED");
-
-	-- Allows Atlas to be closed with the Escape key
-	tinsert(UISpecialFrames, "AtlasFrame");
-	tinsert(UISpecialFrames, "AtlasFrameLarge");
-	tinsert(UISpecialFrames, "AtlasFrameSmall");
-	
-	-- Dragging involves some special registration
-	self:RegisterForDrag("LeftButton");
-end
-
 -- Removal of articles in map names (for proper alphabetic sorting)
 -- For example: "The Deadmines" will become "Deadmines"
 -- Thus it will be sorted under D and not under T
@@ -356,10 +489,30 @@ local function Atlas_SortZonesAlpha(a, b)
 	return aa < bb;
 end
 
+-- Called when the Atlas frame is first loaded
+-- We CANNOT assume that data in other files is available yet!
+function Atlas_OnLoad(self)
+
+	Atlas_Process_Deprecated();
+
+	-- Register the Atlas frame for the following events
+	self:RegisterEvent("PLAYER_LOGIN");
+	self:RegisterEvent("ADDON_LOADED");
+	self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED");
+
+	-- Allows Atlas to be closed with the Escape key
+	tinsert(UISpecialFrames, "AtlasFrame");
+	tinsert(UISpecialFrames, "AtlasFrameLarge");
+	tinsert(UISpecialFrames, "AtlasFrameSmall");
+	
+	-- Dragging involves some special registration
+	self:RegisterForDrag("LeftButton");
+end
+
 -- Main Atlas event handler
 function Atlas_OnEvent(self, event, ...)
 	local arg1 = ...;
-	if(event=="ADDON_LOADED" and (arg1=="Atlas" or arg1=="Blizzard_EncounterJournal")) then
+	if (event=="ADDON_LOADED" and (arg1=="Atlas" or arg1=="Blizzard_EncounterJournal")) then
 		--Blizzard_EncounterJournal
 		if (IsAddOnLoaded("Blizzard_EncounterJournal") and IsAddOnLoaded("Atlas")) then
 			Atlas_EncounterJournal_Binding();
@@ -370,6 +523,16 @@ function Atlas_OnEvent(self, event, ...)
 		Atlas_Init();
 	end
 	
+end
+
+--Called whenever the Atlas frame is displayed
+function Atlas_OnShow()
+	if (AtlasOptions.AtlasAutoSelect) then
+		Atlas_AutoSelect();
+	end
+	-- Sneakiness
+	AtlasFrameDropDownType_OnShow();
+	AtlasFrameDropDown_OnShow();
 end
 
 function Atlas_PopulateDropdowns()
@@ -408,6 +571,7 @@ function Atlas_PopulateDropdowns()
 	end
 end
 
+--[[
 function Atlas_EnableMissing_Modules(list)
 	local addon;
 	print("Number: "..table.getn(list));
@@ -419,6 +583,7 @@ function Atlas_EnableMissing_Modules(list)
 	
 	ReloadUI();
 end
+]]
 
 -- Detect if not all modules / plugins are installed
 local function Atlas_Check_Modules()
@@ -479,7 +644,7 @@ local function Atlas_Check_Modules()
 end
 
 -- Function to pop up a window to show the latest addon information
-function Atlas_ShowInfo()
+local function Atlas_ShowInfo()
 	if (AtlasOptions["AtlasDontShowInfo_12201"]) then
 		return;
 	else
@@ -500,11 +665,15 @@ end
 ATLAS_OLD_TYPE = false;
 ATLAS_OLD_ZONE = false;
 
-function Atlas_InitOptions()
+local function Atlas_InitOptions()
+	local profile = addon.db.profile;
 	-- Init saved vars for a new install
 	if ( AtlasOptions == nil ) then
 		Atlas_FreshOptions();
 	end
+
+	Atlas_UpdateOptions(AtlasOptions);
+--[[
 	-- Init the newly added "AtlasBossDescScale" and don't bother user to reset everything
 	-- Can be removed after 1.21.0 release
 	if (AtlasOptions["AtlasBossDescScale"] == nil) then
@@ -525,17 +694,21 @@ function Atlas_InitOptions()
 	if (AtlasOptions["AtlasColoringDropDown"] == nil) then
 		AtlasOptions["AtlasColoringDropDown"] = true;
 	end
+]]
 	
 	--saved options version check
 	if (AtlasOptions["AtlasVersion"] ~= ATLAS_OLDEST_VERSION_SAME_SETTINGS) then
 		Atlas_FreshOptions();
+	end
+	
+	if (profile.dropdowns == nil) then
+		profile.dropdowns = {};
 	end
 end
 
 -- Initializes everything relating to saved variables and data in other lua files
 -- This should be called ONLY when we're sure our variables are in memory
 function Atlas_Init()
-
 	-- Make the Atlas window go all the way to the edge of the screen, exactly
 	AtlasFrame:SetClampRectInsets(12, 0, -12, 0);
 	AtlasFrameLarge:SetClampRectInsets(12, 0, -12, 0);
@@ -561,7 +734,7 @@ function Atlas_Init()
 	AtlasFrameLarge:SetClampedToScreen(AtlasOptions.AtlasClamped);
 	AtlasFrameSmall:SetClampedToScreen(AtlasOptions.AtlasClamped);
 	--AtlasButton_UpdatePosition();
-	AtlasOptions_Init();
+	--AtlasOptions_Init();
 	
 	-- Make an LDB object
 	LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject("Atlas", {
@@ -721,6 +894,7 @@ function Atlas_Clear_NPC_Button()
 	end
 end
 ]]
+
 local function Atlas_CheckInstanceHasGearLevel()
 	local zoneID = ATLAS_DROPDOWNS[AtlasOptions.AtlasType][AtlasOptions.AtlasZone];
 	if (not zoneID) then
@@ -751,21 +925,74 @@ local function Atlas_CheckInstanceHasGearLevel()
 	return iLFGhasGearInfo;
 end
 
-function Atlas_MapRefresh()
-	local zoneID = ATLAS_DROPDOWNS[AtlasOptions.AtlasType][AtlasOptions.AtlasZone];
-	local _;
+local function round(num, idp)
+	local mult = 10 ^ (idp or 0);
+	return math.floor(num * mult + 0.5) / mult;
+end
+
+-- Calculate the dungeon difficulty based on the dungeon's level and player's level
+-- Codes adopted from FastQuest_Classic
+local function Atlas_DungeonDifficultyColor(minRecLevel)
+	local lDiff = minRecLevel - UnitLevel("player");
+	local color;
+	if (lDiff >= 0) then
+		for i= 1.00, 0.10, -0.10 do
+			color = {r = 1.00, g = i, b = 0.00};
+			if ((i/0.10)==(10-lDiff)) then return color; end
+		end
+	elseif ( -lDiff < GetQuestGreenRange() ) then
+		for i= 0.90, 0.10, -0.10 do
+			color = {r = i, g = 1.00, b = 0.00};
+			if ((9-i/0.10)==(-1*lDiff)) then return color; end
+		end
+	elseif ( -lDiff == GetQuestGreenRange() ) then
+		color = {r = 0.50, g = 1.00, b = 0.50};
+	else
+		--color = {r = 0.75, g = 0.75, b = 0.75};
+		color = {r = 1.00, g = 1.00, b = 1.00};
+	end
+	return color;
+end
+
+local function Atlas_GearItemLevelDiff(minGearLevel)
+	local lDiff = minGearLevel - GetAverageItemLevel();
+	local color;
+	
+	if (lDiff >= 0) then
+		for i= 1.00, 0.10, -0.10 do
+			color = {r = 1.00, g = i, b = 0.00};
+			if ( (i/0.10)==round(((100-lDiff)/10),0) ) then return color; end
+		end
+	elseif (-lDiff < 100) then
+		for i= 0.90, 0.10, -0.10 do
+			color = {r = i, g = 1.00, b = 0.00};
+			if ((9-i/0.10)==round(((-1*lDiff)/10),0) ) then return color; end
+		end
+	elseif (-lDiff == 100) then
+		color = {r = 0.50, g = 1.00, b = 0.50};
+	else
+		color = {r = 1.00, g = 1.00, b = 1.00};
+	end
+	
+	return color;
+end
+
+
+function Atlas_MapRefresh(mapID)
+	local zoneID = mapID or ATLAS_DROPDOWNS[AtlasOptions.AtlasType][AtlasOptions.AtlasZone];
 	local data = AtlasMaps;
 	local base = data[zoneID];
+	local _;
 	local typeID, subtypeID, minLevel, maxLevel, minRecLevel, maxRecLevel, maxPlayers, minGearLevel;
 	local typeIDH, subtypeIDH, minLevelH, maxLevelH, minRecLevelH, maxRecLevelH, maxPlayersH, minGearLevelH;
 	local typeIDM, subtypeIDM, minLevelM, maxLevelM, minRecLevelM, maxRecLevelM, maxPlayersM, minGearLevelM;
 	local _RED = "|cffcc3333";
 	local WHIT = "|cffffffff";
 	local colortag, dungeon_difficulty;
-	local icontext_heroic = " \124TInterface\\EncounterJournal\\UI-EJ-HeroicTextIcon:0:0\124t";
-	local icontext_mythic = " \124TInterface\\AddOns\\Atlas\\Images\\\UI-EJ-MythicTextIcon:0:0\124t";
-	local icontext_dungeon = "\124TInterface\\MINIMAP\\Dungeon:0:0\124t";
-	local icontext_raid = "\124TInterface\\MINIMAP\\Raid:0:0\124t";
+	local icontext_heroic 	= " |TInterface\\EncounterJournal\\UI-EJ-HeroicTextIcon:0:0|t";
+	local icontext_mythic 	= " |TInterface\\AddOns\\Atlas\\Images\\\UI-EJ-MythicTextIcon:0:0|t";
+	local icontext_dungeon 	= "|TInterface\\MINIMAP\\Dungeon:0:0|t";
+	local icontext_raid 	= "|TInterface\\MINIMAP\\Raid:0:0|t";
 	local icontext_instance;
 	
 	if (base.DungeonID) then
@@ -833,7 +1060,7 @@ function Atlas_MapRefresh()
 	if (minLevel or minLevelH or minLevelM) then
 		local tmp_LR = L["ATLAS_STRING_LEVELRANGE"]..L["Colon"];
 		if (minLevel) then 
-			dungeon_difficulty = Atlas_DungeonDifficulty(minLevel);
+			dungeon_difficulty = Atlas_DungeonDifficultyColor(minLevel);
 			colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
 			if (minLevel ~= maxLevel) then
 				tmp_LR = tmp_LR..colortag..minLevel.."-"..maxLevel..icontext_instance;
@@ -842,7 +1069,7 @@ function Atlas_MapRefresh()
 			end
 		end
 		if (minLevelH) then
-			dungeon_difficulty = Atlas_DungeonDifficulty(minLevelH);
+			dungeon_difficulty = Atlas_DungeonDifficultyColor(minLevelH);
 			colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
 			local slash;
 			if (minLevel) then
@@ -857,7 +1084,7 @@ function Atlas_MapRefresh()
 			end
 		end
 		if (minLevelM) then
-			dungeon_difficulty = Atlas_DungeonDifficulty(minLevelM);
+			dungeon_difficulty = Atlas_DungeonDifficultyColor(minLevelM);
 			colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
 			local slash;
 			if (minLevelH) then
@@ -882,7 +1109,7 @@ function Atlas_MapRefresh()
 	if (minRecLevel or minRecLevelH or minRecLevelM) then
 		local tmp_RLR = L["ATLAS_STRING_RECLEVELRANGE"]..L["Colon"];
 		if (minRecLevel) then 
-			dungeon_difficulty = Atlas_DungeonDifficulty(minRecLevel);
+			dungeon_difficulty = Atlas_DungeonDifficultyColor(minRecLevel);
 			colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
 			if (minRecLevel ~= maxRecLevel) then
 				tmp_RLR = tmp_RLR..colortag..minRecLevel.."-"..maxRecLevel..icontext_instance;
@@ -891,7 +1118,7 @@ function Atlas_MapRefresh()
 			end
 		end
 		if (minRecLevelH) then
-			dungeon_difficulty = Atlas_DungeonDifficulty(minRecLevelH);
+			dungeon_difficulty = Atlas_DungeonDifficultyColor(minRecLevelH);
 			colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
 			local slash;
 			if (minRecLevel) then
@@ -906,7 +1133,7 @@ function Atlas_MapRefresh()
 			end
 		end
 		if (minRecLevelM) then
-			dungeon_difficulty = Atlas_DungeonDifficulty(minRecLevelM);
+			dungeon_difficulty = Atlas_DungeonDifficultyColor(minRecLevelM);
 			colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
 			local slash;
 			if (minRecLevelH) then
@@ -931,12 +1158,12 @@ function Atlas_MapRefresh()
 	if (minLevel or minLevelH or minLevelM) then
 		tML = L["ATLAS_STRING_MINLEVEL"]..L["Colon"];
 		if (minLevel) then 
-			dungeon_difficulty = Atlas_DungeonDifficulty(minLevel);
+			dungeon_difficulty = Atlas_DungeonDifficultyColor(minLevel);
 			colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
 			tML = tML..colortag..minLevel..icontext_instance;
 		end
 		if (minLevelH) then
-			dungeon_difficulty = Atlas_DungeonDifficulty(minLevelH);
+			dungeon_difficulty = Atlas_DungeonDifficultyColor(minLevelH);
 			colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
 			local slash;
 			if (minLevel) then
@@ -947,7 +1174,7 @@ function Atlas_MapRefresh()
 			tML = tML..slash..colortag..minLevelH..icontext_heroic;
 		end
 		if (minLevelM) then
-			dungeon_difficulty = Atlas_DungeonDifficulty(minLevelM);
+			dungeon_difficulty = Atlas_DungeonDifficultyColor(minLevelM);
 			colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
 			local slash;
 			if (minLevelH) then
@@ -1042,6 +1269,9 @@ function Atlas_MapRefresh()
 
 	-- Check if Journal Encounter Instance is available
 	if (base.JournalInstanceID) then
+		AtlasFrame.AdventureJournal.instanceID = base.JournalInstanceID;
+		AtlasFrameLarge.AdventureJournal.instanceID = base.JournalInstanceID;
+		AtlasFrameSmall.AdventureJournal.instanceID = base.JournalInstanceID;
 		AtlasFrameAdventureJournalButton:Show();
 		AtlasFrameLargeAdventureJournalButton:Show();
 		AtlasFrameSmallAdventureJournalButton:Show();
@@ -1055,6 +1285,9 @@ function Atlas_MapRefresh()
 
 	-- Check if WorldMap ID is available, if so, show the map button
 	if (base.WorldMapID) then
+		AtlasFrame.AdventureJournalMap.mapID = base.WorldMapID;
+		AtlasFrameLarge.AdventureJournalMap.mapID = base.WorldMapID;
+		AtlasFrameSmall.AdventureJournalMap.mapID = base.WorldMapID;
 		AtlasFrameAdventureJournalMapButton:Show();
 		AtlasFrameLargeAdventureJournalMapButton:Show();
 		AtlasFrameSmallAdventureJournalMapButton:Show();
@@ -1062,6 +1295,13 @@ function Atlas_MapRefresh()
 		AtlasFrameAdventureJournalMapButton:Hide();
 		AtlasFrameLargeAdventureJournalMapButton:Hide();
 		AtlasFrameSmallAdventureJournalMapButton:Hide();
+	end
+
+	-- Check if DungeonLevel ID is available
+	if (base.DungeonLevel) then
+		AtlasFrame.AdventureJournalMap.dungeonLevel = base.DungeonLevel;
+		AtlasFrameLarge.AdventureJournalMap.dungeonLevel = base.DungeonLevel;
+		AtlasFrameSmall.AdventureJournalMap.dungeonLevel = base.DungeonLevel;
 	end
 
 	if (base.LargeMap) then
@@ -1162,8 +1402,8 @@ end
 -- Refreshes the Atlas frame, usually because a new map needs to be displayed
 -- The zoneID variable represents the internal name used for each map, ex: "BlackfathomDeeps"
 -- Also responsible for updating all the text when a map is changed
-function Atlas_Refresh()
-	local zoneID = ATLAS_DROPDOWNS[AtlasOptions.AtlasType][AtlasOptions.AtlasZone];
+function Atlas_Refresh(mapID)
+	local zoneID = mapID or ATLAS_DROPDOWNS[AtlasOptions.AtlasType][AtlasOptions.AtlasZone];
 	if (not zoneID) then
 		return;
 	end
@@ -1181,13 +1421,16 @@ function Atlas_Refresh()
 		end
 	end
 	
+	if (AtlasEJLootFrame:IsShown()) then
+		AtlasEJLootFrame:Hide();
+	end
 	Atlas_MapRefresh();
 	
 	ATLAS_DATA = base;
 	ATLAS_SEARCH_METHOD = data.Search;
 
 	if ( data.Search == nil ) then
-		ATLAS_SEARCH_METHOD = AtlasSimpleSearch;
+		ATLAS_SEARCH_METHOD = Atlas_SimpleSearch;
 	end
 	
 	if ( data.Search ~= false ) then
@@ -1216,24 +1459,26 @@ function Atlas_Refresh()
 		end
 	end
 
-	AtlasScrollBar_Update();
+	Atlas_ScrollBar_Update();
 
 	-- Deal with the switch to entrance/instance button here
 	-- Only display if appropriate
 	-- See if we should display the button or not, and decide what it should say
 	local matchFound = {};
-	local sayEntrance;
+	local isEntrance = false;
 	for k, v in pairs(Atlas_EntToInstMatches) do
 		if (k == zoneID) then
 			matchFound = v;
-			sayEntrance = false;
+			isEntrance = false;
+			break;
 		end
 	end
 	if (not matchFound[1]) then
 		for k, v in pairs(Atlas_InstToEntMatches) do
 			if (k == zoneID) then
 				matchFound = v;
-				sayEntrance = true;
+				isEntrance = true;
+				break;
 			end
 		end
 	end
@@ -1242,7 +1487,8 @@ function Atlas_Refresh()
 		for k, v in pairs(Atlas_MapSeries) do
 			if (k == zoneID) then
 				matchFound = v;
-				sayEntrance = false;
+				isEntrance = false;
+				break;
 			end
 		end
 	end
@@ -1254,7 +1500,7 @@ function Atlas_Refresh()
 			table.insert(ATLAS_INST_ENT_DROPDOWN, v);
 		end
 		table.sort(ATLAS_INST_ENT_DROPDOWN, AtlasSwitchDD_Sort);
-		if (sayEntrance) then
+		if (isEntrance) then
 			AtlasSwitchButton:SetText(ATLAS_ENTRANCE_BUTTON);
 		else
 			AtlasSwitchButton:SetText(ATLAS_INSTANCE_BUTTON);
@@ -1265,15 +1511,36 @@ function Atlas_Refresh()
 		AtlasSwitchButton:Hide();
 	end
 
-	if (TitanPanelButton_UpdateButton) then
-		TitanPanelButton_UpdateButton("Atlas");
+	-- Handle the Prev / Next Map buttons' showing or hiding
+	if (base.NextMap) then
+		AtlasFrame.NextMap:Show();
+		AtlasFrame.NextMap.mapID = base.NextMap;
+
+		AtlasFrameSmall.NextMap:Show();
+		AtlasFrameSmall.NextMap.mapID = base.NextMap;
+	else
+		AtlasFrame.NextMap:Hide();
+		AtlasFrameSmall.NextMap:Hide();
 	end
+	if (base.PrevMap) then
+		AtlasFrame.PrevMap:Show();
+		AtlasFrame.PrevMap.mapID = base.PrevMap;
+
+		AtlasFrameSmall.PrevMap:Show();
+		AtlasFrameSmall.PrevMap.mapID = base.PrevMap;
+	else
+		AtlasFrame.PrevMap:Hide();
+		AtlasFrameSmall.PrevMap:Hide();
+	end
+	
 end
 
 -- Add boss / NPC button here so that we can add GameTooltip
 function AtlasMap_AddNPCButton()
 	local zoneID = ATLAS_DROPDOWNS[AtlasOptions.AtlasType][AtlasOptions.AtlasZone];
 	local t = AtlasMaps_NPC_DB[zoneID];
+	local data = AtlasMaps;
+	local base = data[zoneID];
 	local i = 1;
 	local bossindex = 1;
 	local buttonindex = 1;
@@ -1288,70 +1555,33 @@ function AtlasMap_AddNPCButton()
 			local info_x 		= t[i][3];
 			local info_y 		= t[i][4];
 			local info_colortag	= t[i][7];
+			
+			if (info_x == nil) then info_x = -18; end
+			if (info_y == nil) then info_y = -18; end
 
 			if (info_id < 10000) then
 				bossbutton = _G["AtlasMapBossButton"..bossindex];
 				if (not bossbutton) then
 					bossbutton = CreateFrame("Button", "AtlasMapBossButton"..bossindex, AtlasFrame, "AtlasFrameBossButtonTemplate");
 				end
+				Atlas_BossButtonCleanUp(bossbutton);
+				Atlas_BossButtonUpdate(bossbutton, info_id, base.JournalInstanceID, true);
+				
 				bossbuttonS = _G["AtlasMapBossButtonS"..bossindexS];
 				if (not bossbuttonS) then
 					bossbuttonS = CreateFrame("Button", "AtlasMapBossButtonS"..bossindexS, AtlasFrameSmall, "AtlasFrameBossButtonTemplate");
 				end
-
-				encounterID = info_id;
-				ejbossname, description, _, rootSectionID = EJ_GetEncounterInfo(encounterID); 
-				if (ejbossname) then 
-					bossbutton.tooltipTitle = ejbossname; 
-					bossbuttonS.tooltipTitle = ejbossname; 
-				else
-					bossbutton.tooltipTitle = nil; 
-					bossbuttonS.tooltipTitle = nil; 
-				end
-				if (encounterID) then
-					bossbutton.encounterID = encounterID;
-					bossbuttonS.encounterID = encounterID;
-				else
-					bossbutton.encounterID = nil;
-					bossbuttonS.encounterID = nil;
-				end
-				if (description) then 
-					bossbutton.tooltipText = description; 
-					bossbuttonS.tooltipText = description; 
-				else
-					bossbutton.tooltipText = nil; 
-					bossbuttonS.tooltipText = nil; 
-				end
-				if (ejbossname and EncounterJournal_CheckForOverview(rootSectionID)) then
-					local _, overviewDescription = EJ_GetSectionInfo(rootSectionID);
-					if (overviewDescription) then
-						bossbutton.overviewDescription = overviewDescription;
-						bossbuttonS.overviewDescription = overviewDescription;
-					else
-						bossbutton.overviewDescription = nil;
-						bossbuttonS.overviewDescription = nil;
-					end
-				end
-
-				_, _, _, displayInfo, iconImage = EJ_GetCreatureInfo(1, encounterID);
-				bossbutton.displayInfo = displayInfo;
-				if ( encounterID and iconImage ) then
-					SetPortraitTexture(bossbutton.bgImage, displayInfo);
-					SetPortraitTexture(bossbuttonS.bgImage, displayInfo);
-				else 
-					bossbutton.bgImage:SetTexture(nil);
-					bossbuttonS.bgImage:SetTexture(nil);
-				end
+				Atlas_BossButtonCleanUp(bossbuttonS);
+				Atlas_BossButtonUpdate(bossbuttonS, info_id, base.JournalInstanceID, true);
+				
 				bossbutton:ClearAllPoints();
 				--bossbutton:SetWidth(20);
 				--bossbutton:SetHeight(20);
 				bossbutton:SetPoint("TOPLEFT", "AtlasFrame", "TOPLEFT", info_x + 18-15, -info_y - 82+15);
-				bossbutton:SetID(info_id);
 				bossbutton:Show();
 
 				bossbuttonS:ClearAllPoints();
 				bossbuttonS:SetPoint("TOPLEFT", "AtlasFrameSmall", "TOPLEFT", info_x + 18-15, -info_y - 82+15);
-				bossbuttonS:SetID(info_id);
 				bossbuttonS:Show();
 
 				bossindex = bossindex + 1;
@@ -1372,8 +1602,8 @@ function AtlasMap_AddNPCButton()
 						tip_title = v[1];
 						local _, endpos = strfind(tip_title, ") ");
 						if (endpos) then
-							button.tooltipTitle = strsub(tip_title, endpos+1);
-							buttonS.tooltipTitle = strsub(tip_title, endpos+1);
+							button.tooltiptitle = strsub(tip_title, endpos+1);
+							buttonS.tooltiptitle = strsub(tip_title, endpos+1);
 						end
 					end
 				end
@@ -1438,6 +1668,8 @@ end
 function AtlasMap_AddNPCButtonLarge()
 	local zoneID = ATLAS_DROPDOWNS[AtlasOptions.AtlasType][AtlasOptions.AtlasZone];
 	local t = AtlasMaps_NPC_DB[zoneID];
+	local data = AtlasMaps;
+	local base = data[zoneID];
 	local i = 1;
 	local bossindex = 1;
 	local buttonindex = 1;
@@ -1456,43 +1688,10 @@ function AtlasMap_AddNPCButtonLarge()
 				if (not bossbutton) then
 					bossbutton = CreateFrame("Button", "AtlasMapBossButtonL"..bossindex, AtlasFrameLarge, "AtlasFrameBossButtonTemplate");
 				end
-
-				encounterID = info_id;
-				ejbossname, description, _, rootSectionID = EJ_GetEncounterInfo(encounterID); 
-				if (ejbossname) then 
-					bossbutton.tooltipTitle = ejbossname; 
-				else
-					bossbutton.tooltipTitle = nil; 
-				end
-				if (encounterID) then
-					bossbutton.encounterID = encounterID;
-				else
-					bossbutton.encounterID = nil;
-				end
-				if (description) then 
-					bossbutton.tooltipText = description; 
-				else
-					bossbutton.tooltipText = nil; 
-				end
-				if (ejbossname and EncounterJournal_CheckForOverview(rootSectionID)) then
-					local _, overviewDescription = EJ_GetSectionInfo(rootSectionID);
-					if (overviewDescription) then
-						bossbutton.overviewDescription = overviewDescription;
-					else
-						bossbutton.overviewDescription = nil;
-					end
-				end
-
-				_, _, _, displayInfo, iconImage = EJ_GetCreatureInfo(1, encounterID);
-				bossbutton.displayInfo = displayInfo;
-				if ( encounterID and iconImage ) then
-					SetPortraitTexture(bossbutton.bgImage, displayInfo);
-				else 
-					bossbutton.bgImage:SetTexture(nil);
-				end
+				Atlas_BossButtonCleanUp(bossbutton);
+				Atlas_BossButtonUpdate(bossbutton, info_id, base.JournalInstanceID, true);
 				bossbutton:ClearAllPoints();
 				bossbutton:SetPoint("TOPLEFT", "AtlasFrameLarge", "TOPLEFT", info_x, -info_y - 82+15);
-				bossbutton:SetID(info_id);
 				bossbutton:Show();
 
 				bossindex = bossindex + 1;
@@ -1515,7 +1714,7 @@ function AtlasMap_AddNPCButtonLarge()
 						tip_title = v[1];
 						local _, endpos = strfind(tip_title, ") ");
 						if (endpos) then
-							button.tooltipTitle = strsub(tip_title, endpos+1);
+							button.tooltiptitle = strsub(tip_title, endpos+1);
 						end
 					end
 				end
@@ -1593,93 +1792,16 @@ function AtlasMap_AddNPCButtonLarge()
 	end
 end
 
--- Calculate the dungeon difficulty based on the dungeon's level and player's level
--- Codes adopted from FastQuest_Classic
-function Atlas_DungeonDifficulty(minRecLevel)
-	local lDiff = minRecLevel - UnitLevel("player");
-	local color;
-	if (lDiff >= 0) then
-		for i= 1.00, 0.10, -0.10 do
-			color = {r = 1.00, g = i, b = 0.00};
-			if ((i/0.10)==(10-lDiff)) then return color; end
-		end
-	elseif ( -lDiff < GetQuestGreenRange() ) then
-		for i= 0.90, 0.10, -0.10 do
-			color = {r = i, g = 1.00, b = 0.00};
-			if ((9-i/0.10)==(-1*lDiff)) then return color; end
-		end
-	elseif ( -lDiff == GetQuestGreenRange() ) then
-		color = {r = 0.50, g = 1.00, b = 0.50};
-	else
-		--color = {r = 0.75, g = 0.75, b = 0.75};
-		color = {r = 1.00, g = 1.00, b = 1.00};
-	end
-	return color;
-end
+function AtlasPrevNextMap_OnClick(self)
+	local mapID = self.mapID;
+	if not mapID then return; end
 
-local function round(num, idp)
-	local mult = 10 ^ (idp or 0);
-	return math.floor(num * mult + 0.5) / mult;
-end
-
-function Atlas_GearItemLevelDiff(minGearLevel)
-	local lDiff = minGearLevel - GetAverageItemLevel();
-	local color;
-	
-	if (lDiff >= 0) then
-		for i= 1.00, 0.10, -0.10 do
-			color = {r = 1.00, g = i, b = 0.00};
-			if ( (i/0.10)==round(((100-lDiff)/10),0) ) then return color; end
-		end
-	elseif (-lDiff < 100) then
-		for i= 0.90, 0.10, -0.10 do
-			color = {r = i, g = 1.00, b = 0.00};
-			if ((9-i/0.10)==round(((-1*lDiff)/10),0) ) then return color; end
-		end
-	elseif (-lDiff == 100) then
-		color = {r = 0.50, g = 1.00, b = 0.50};
-	else
-		color = {r = 1.00, g = 1.00, b = 1.00};
-	end
-	
-	return color;
-end
-
--- When the switch button is clicked
--- We can basically assume that there's a match
--- Find it, set it, then update menus and the maps
-function AtlasSwitchButton_OnClick()
-	local zoneID = ATLAS_DROPDOWNS[AtlasOptions.AtlasType][AtlasOptions.AtlasZone];
-	if (getn(ATLAS_INST_ENT_DROPDOWN) == 1) then
-		-- One link, so we can just go there right away
-		AtlasSwitchDD_Set(1);
-	else
-		-- More than one link, so it's dropdown menu time
-		Lib_ToggleDropDownMenu(1, nil, AtlasSwitchDD, "AtlasSwitchButton", 0, 0);
-	end
-end
-
-function AtlasSwitchDD_OnLoad()
-	local info;
-	for k, v in pairs(ATLAS_INST_ENT_DROPDOWN) do
-		info = {
-			text = AtlasMaps[v].ZoneName[1];
-			func = AtlasSwitchDD_OnClick;
-		};
-		Lib_UIDropDownMenu_AddButton(info);
-	end
-end
-
-function AtlasSwitchDD_OnClick(self)
-	AtlasSwitchDD_Set(self:GetID());
-end
-
-function AtlasSwitchDD_Set(index)
 	for k, v in pairs(ATLAS_DROPDOWNS) do
 		for k2, v2 in pairs(v) do
-			if (v2 == ATLAS_INST_ENT_DROPDOWN[index]) then
+			if (v2 == mapID) then
 				AtlasOptions.AtlasType = k;
 				AtlasOptions.AtlasZone = k2;
+				break;
 			end
 		end
 	end
@@ -1688,139 +1810,10 @@ function AtlasSwitchDD_Set(index)
 	Atlas_Refresh();
 end
 
-function AtlasSwitchDD_Sort(a, b)
-	local aa = AtlasMaps[a].ZoneName[1];
-	local bb = AtlasMaps[b].ZoneName[1];
-	return aa < bb;
-end
-
--- Function used to initialize the map type dropdown menu
--- Cycle through Atlas_MapTypes to populate the dropdown
-function AtlasFrameDropDownType_Initialize()
-	local info;
-	local catName = Atlas_DropDownLayouts_Order[AtlasOptions.AtlasSortBy];
-	local subcatOrder = Atlas_DropDownLayouts_Order[catName];
-	for i = 1, getn(subcatOrder), 1 do
-		info = {
-			text = subcatOrder[i];
-			func = AtlasFrameDropDownType_OnClick;
-		};
-		Lib_UIDropDownMenu_AddButton(info);
-	end
-	for i = 1, getn(Atlas_MapTypes), 1 do
-		info = {
-			text = Atlas_MapTypes[i];
-			func = AtlasFrameDropDownType_OnClick;
-		};
-		Lib_UIDropDownMenu_AddButton(info);
-	end
-end
-
--- Called whenever the map type dropdown menu is shown
-function AtlasFrameDropDownType_OnShow()
-	Lib_UIDropDownMenu_Initialize(AtlasFrameDropDownType, AtlasFrameDropDownType_Initialize);
-	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameDropDownType, AtlasOptions.AtlasType);
-	Lib_UIDropDownMenu_SetWidth(AtlasFrameDropDownType, 190);
-
-	Lib_UIDropDownMenu_Initialize(AtlasFrameLargeDropDownType, AtlasFrameDropDownType_Initialize);
-	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameLargeDropDownType, AtlasOptions.AtlasType);
-	Lib_UIDropDownMenu_SetWidth(AtlasFrameLargeDropDownType, 190);
-
-	Lib_UIDropDownMenu_Initialize(AtlasFrameSmallDropDownType, AtlasFrameDropDownType_Initialize);
-	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameSmallDropDownType, AtlasOptions.AtlasType);
-	Lib_UIDropDownMenu_SetWidth(AtlasFrameSmallDropDownType, 190);
-end
-
--- Called whenever an item in the map type dropdown menu is clicked
--- Sets the main dropdown menu contents to reflect the category of map selected
-function AtlasFrameDropDownType_OnClick(self)
-	local thisID = self:GetID();
-	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameDropDownType, thisID);
-	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameLargeDropDownType, thisID);
-	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameSmallDropDownType, thisID);
-
-	AtlasOptions.AtlasType = thisID;
-	AtlasOptions.AtlasZone = 1;
-	AtlasFrameDropDown_OnShow();
-	Atlas_Refresh();
-end
-
--- Function used to initialize the main dropdown menu
--- Looks at the status of AtlasType to determine how to populate the list
-function AtlasFrameDropDown_Initialize()
-	local info;
-	local colortag;
-	for k, v in pairs(ATLAS_DROPDOWNS[AtlasOptions.AtlasType]) do
-		
-		if (AtlasOptions["AtlasColoringDropDown"] and AtlasMaps[v].DungeonID) then
-			local _, _, _, minLevel, _, _, minRecLevel = GetLFGDungeonInfo(AtlasMaps[v].DungeonID);
-			if (minRecLevel == 0) then 
-				minRecLevel = minLevel;
-			end
-			local dungeon_difficulty = Atlas_DungeonDifficulty(minRecLevel);
-			colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
-		elseif (AtlasOptions["AtlasColoringDropDown"] and AtlasMaps[v].DungeonHeroicID) then
-			local _, _, _, minLevelH, _, _, minRecLevelH = GetLFGDungeonInfo(AtlasMaps[v].DungeonHeroicID);
-			if (minRecLevelH == 0) then 
-				minRecLevelH = minLevelH;
-			end
-			local dungeon_difficulty = Atlas_DungeonDifficulty(minRecLevelH);
-			colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
-		elseif (AtlasOptions["AtlasColoringDropDown"] and AtlasMaps[v].DungeonMythicID) then
-			local _, _, _, minLevelM, _, _, minRecLevelM = GetLFGDungeonInfo(AtlasMaps[v].DungeonMythicID);
-			if (minRecLevelM == 0) then 
-				minRecLevelM = minLevelM;
-			end
-			local dungeon_difficulty = Atlas_DungeonDifficulty(minRecLevelM);
-			colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
-		elseif (AtlasOptions["AtlasColoringDropDown"] and AtlasMaps[v].MinLevel) then
-			if (type(AtlasMaps[v].MinLevel) == number) then
-				local dungeon_difficulty = Atlas_DungeonDifficulty(AtlasMaps[v].MinLevel);
-				colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
-			else
-				colortag = ""
-			end
-		else
-			colortag = ""
-		end
-		info = {
-			text = colortag..AtlasMaps[v].ZoneName[1];
-			func = AtlasFrameDropDown_OnClick;
-		};
-		Lib_UIDropDownMenu_AddButton(info);
-	end
-end
-
--- Called whenever the main dropdown menu is shown
-function AtlasFrameDropDown_OnShow()
-	Lib_UIDropDownMenu_Initialize(AtlasFrameDropDown, AtlasFrameDropDown_Initialize);
-	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameDropDown, AtlasOptions.AtlasZone);
-	Lib_UIDropDownMenu_SetWidth(AtlasFrameDropDown, 190);
-
-	Lib_UIDropDownMenu_Initialize(AtlasFrameLargeDropDown, AtlasFrameDropDown_Initialize);
-	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameLargeDropDown, AtlasOptions.AtlasZone);
-	Lib_UIDropDownMenu_SetWidth(AtlasFrameLargeDropDown, 190);
-
-	Lib_UIDropDownMenu_Initialize(AtlasFrameSmallDropDown, AtlasFrameDropDown_Initialize);
-	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameSmallDropDown, AtlasOptions.AtlasZone);
-	Lib_UIDropDownMenu_SetWidth(AtlasFrameSmallDropDown, 190);
-end
-
--- Called whenever an item in the main dropdown menu is clicked
--- Sets the newly selected map as current and refreshes the frame
-function AtlasFrameDropDown_OnClick(self)
-	local i = self:GetID();
-	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameDropDown, i);
-	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameLargeDropDown, i);
-	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameSmallDropDown, i);
-
-	AtlasOptions.AtlasZone = i;
-	Atlas_Refresh();
-end
 
 -- Modifies the value of GetRealZoneText to account for some naming conventions
 -- Always use this function instead of GetRealZoneText within Atlas
-function Atlas_GetFixedZoneText()
+local function Atlas_GetFixedZoneText()
 	local currentZone = GetRealZoneText();
 	if (AtlasZoneSubstitutions[currentZone]) then
 		return AtlasZoneSubstitutions[currentZone];
@@ -1936,36 +1929,38 @@ function Atlas_AutoSelect()
 	debug("Nothing changed because no match was found.");
 end
 
---Called whenever the Atlas frame is displayed
-function Atlas_OnShow()
-	if (AtlasOptions.AtlasAutoSelect) then
-		Atlas_AutoSelect();
-	end
-	-- Sneakiness
-	AtlasFrameDropDownType_OnShow();
-	AtlasFrameDropDown_OnShow();
-end
-
-
-function AtlasScrollBar_Update()
+function Atlas_ScrollBar_Update()
 	GameTooltip:Hide();
 	local lineplusoffset;
 	FauxScrollFrame_Update(AtlasScrollBar,ATLAS_CUR_LINES,ATLAS_NUM_LINES,15);
 	for i = 1, ATLAS_NUM_LINES do
+		local button = _G["AtlasEntry"..i];
+		if button then Atlas_BossButtonCleanUp(button); end
+		
 		lineplusoffset = i + FauxScrollFrame_GetOffset(AtlasScrollBar);
 		if (lineplusoffset <= ATLAS_CUR_LINES) then
 			_G["AtlasEntry"..i.."_Text"]:SetText(ATLAS_SCROLL_LIST[lineplusoffset]);
 			if (ATLAS_SCROLL_ID[lineplusoffset]) then
-				_G["AtlasEntry"..i]:SetID(ATLAS_SCROLL_ID[lineplusoffset]);
+				if (type(ATLAS_SCROLL_ID[lineplusoffset][1]) == "number") then
+					local id = ATLAS_SCROLL_ID[lineplusoffset][1];
+					Atlas_BossButtonUpdate(button, ATLAS_SCROLL_ID[lineplusoffset][1], ATLAS_SCROLL_ID[lineplusoffset][2]);
+				elseif (type(ATLAS_SCROLL_ID[lineplusoffset][1]) == "string") then
+					local spos, epos = strfind(ATLAS_SCROLL_ID[lineplusoffset][1], "ac=");
+					if (spos) then
+						local achievementID = strsub(ATLAS_SCROLL_ID[lineplusoffset][1], epos+1);
+						achievementID = tonumber(achievementID);
+						Atlas_AchievementButtonUpdate(button, achievementID);
+					end
+				end
 			end
-			_G["AtlasEntry"..i]:Show();
-		elseif (_G["AtlasEntry"..i]) then
-			_G["AtlasEntry"..i]:Hide();
+			button:Show();
+		elseif (button) then
+			button:Hide();
 		end
 	end
 end
 
-function AtlasSimpleSearch(data, text)
+function Atlas_SimpleSearch(data, text)
 	if (string.trim(text or "") == "") then
 		return data
 	end
@@ -1996,7 +1991,18 @@ function AtlasSimpleSearch(data, text)
 	return new;
 end
 
+local function Atlas_OpenAchievement(achievementID)
+	if not achievementID then return; end
+	
+	if not IsAddOnLoaded("Blizzard_AchievementUI") then
+		LoadAddOn("Blizzard_AchievementUI")
+	end
+	ShowUIPanel(AchievementFrame)
+	AchievementFrame_SelectAchievement(achievementID)
+end
+
 function AtlasEntryTemplate_OnUpdate(self)
+	if (AtlasEJLootFrame:IsShown()) then return; end
 	if (MouseIsOver(self)) then
 		if (IsControlKeyDown() and AtlasOptions.AtlasCtrl) then
 			if (not GameTooltip:IsShown()) then
@@ -2016,37 +2022,235 @@ function AtlasEntryTemplate_OnUpdate(self)
 				end
 			end
 		else
-			local id = self:GetID();
-			if (id > 0 and id < 10000) then
-				local ejbossname, description, _, rootSectionID;
-
-				ejbossname, description, _, rootSectionID = EJ_GetEncounterInfo(id); 
-				if (ejbossname) then
-					GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
-					GameTooltip:SetBackdropColor(0, 0, 0, 1 * AtlasOptions["AtlasAlpha"]);
-					GameTooltip:SetText(ejbossname, 1, 1, 1, nil, 1);
-					if (description) then GameTooltip:AddLine(description, nil, nil, nil, 1); end
-					if (ejbossname and EncounterJournal_CheckForOverview(rootSectionID)) then
-						local _, overviewDescription = EJ_GetSectionInfo(rootSectionID);
-						GameTooltip:AddLine("\n"..OVERVIEW, 1, 1, 1, 1)
-						GameTooltip:AddLine(overviewDescription, nil, nil, nil, 1);
-						local disabled = not C_AdventureJournal.CanBeShown();
-						if (not disabled) then
-							GameTooltip:AddLine(ATLAS_OPEN_ADVENTURE, 0.5, 0.5, 1, true);
-						end
-					end
-					GameTooltip:SetScale(AtlasOptions["AtlasBossDescScale"] * AtlasOptions["AtlasScale"]);
-					GameTooltip:Show();
+			if (self.tooltiptitle) then
+				GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
+				GameTooltip:SetBackdropColor(0, 0, 0, 1 * AtlasOptions["AtlasAlpha"]);
+				GameTooltip:SetText(self.tooltiptitle, 1, 1, 1, 1);
+				if (self.tooltiptext) then 
+					GameTooltip:AddLine(self.tooltiptext, nil, nil, nil, 1); 
 				end
-			end
+				if (self.overviewDescription) then
+					GameTooltip:AddLine("\n"..OVERVIEW, 1, 1, 1, 1)
+					GameTooltip:AddLine(self.overviewDescription, nil, nil, nil, 1);
+					if (self.roleOverview) then
+						GameTooltip:AddLine("\n"..self.roleOverview, nil, nil, nil, 1);
+					end
+				end
+				if (self.encounterID) then
+					local disabled = not C_AdventureJournal.CanBeShown();
+					if (not disabled) then
+						GameTooltip:AddLine(ATLAS_OPEN_ADVENTURE, 0.5, 0.5, 1, true);
+					end
+				end
+				GameTooltip:SetScale(AtlasOptions["AtlasBossDescScale"] * AtlasOptions["AtlasScale"]);
+				GameTooltip:Show();
+			end			
 		end
 	end
 end
 
-function AtlasEntry_OnClick(self)
-	local encounterID = self:GetID();
-	
-	Atlas_AdventureJournal_EncounterButton_OnClick(encounterID);
+function AtlasEntry_OnClick(self, button)
+	if (IsShiftKeyDown() and self.link) then
+		if (IsModifiedClick("CHATLINK") and ChatEdit_GetActiveWindow()) then
+			ChatEdit_InsertLink(self.link);
+		end
+	elseif (self.instanceID and self.encounterID) then
+		Atlas_AdventureJournal_EncounterButton_OnClick(self.instanceID, self.encounterID);
+	elseif (self.achievementID) then
+		Atlas_OpenAchievement(self.achievementID);
+	end
+end
+
+-- When the switch button is clicked, we can basically assume that there's a match
+-- Find it, set it, then update menus and the maps
+function AtlasSwitchButton_OnClick()
+	local zoneID = ATLAS_DROPDOWNS[AtlasOptions.AtlasType][AtlasOptions.AtlasZone];
+	if (getn(ATLAS_INST_ENT_DROPDOWN) == 1) then
+		-- One link, so we can just go there right away
+		AtlasSwitchDD_Set(1);
+	else
+		-- More than one link, so it's dropdown menu time
+		Lib_ToggleDropDownMenu(1, nil, AtlasSwitchDD, "AtlasSwitchButton", 0, 0);
+	end
+end
+
+function AtlasSwitchDD_OnLoad()
+	for k, v in pairs(ATLAS_INST_ENT_DROPDOWN) do
+		local info = Lib_UIDropDownMenu_CreateInfo();
+		info = {
+			text = AtlasMaps[v].ZoneName[1];
+			func = AtlasSwitchDD_OnClick;
+		};
+		Lib_UIDropDownMenu_AddButton(info);
+	end
+end
+
+function AtlasSwitchDD_OnClick(self)
+	AtlasSwitchDD_Set(self:GetID());
+end
+
+function AtlasSwitchDD_Set(index)
+	for k, v in pairs(ATLAS_DROPDOWNS) do
+		for k2, v2 in pairs(v) do
+			if (v2 == ATLAS_INST_ENT_DROPDOWN[index]) then
+				AtlasOptions.AtlasType = k;
+				AtlasOptions.AtlasZone = k2;
+				break;
+			end
+		end
+	end
+	AtlasFrameDropDownType_OnShow();
+	AtlasFrameDropDown_OnShow();
+	Atlas_Refresh();
+end
+
+function AtlasSwitchDD_Sort(a, b)
+	local aa = AtlasMaps[a].ZoneName[1];
+	local bb = AtlasMaps[b].ZoneName[1];
+	return aa < bb;
+end
+
+-- Function used to initialize the map type dropdown menu
+-- Cycle through Atlas_MapTypes to populate the dropdown
+function AtlasFrameDropDownType_Initialize()
+	local catName = Atlas_DropDownLayouts_Order[AtlasOptions.AtlasSortBy];
+	local subcatOrder = Atlas_DropDownLayouts_Order[catName];
+	for i = 1, getn(subcatOrder), 1 do
+		local info = Lib_UIDropDownMenu_CreateInfo();
+		info = {
+			text = subcatOrder[i];
+			func = AtlasFrameDropDownType_OnClick;
+		};
+		Lib_UIDropDownMenu_AddButton(info);
+	end
+	for i = 1, getn(Atlas_MapTypes), 1 do
+		local info = Lib_UIDropDownMenu_CreateInfo();
+		info = {
+			text = Atlas_MapTypes[i];
+			func = AtlasFrameDropDownType_OnClick;
+		};
+		Lib_UIDropDownMenu_AddButton(info);
+	end
+end
+
+-- Called whenever the map type dropdown menu is shown
+function AtlasFrameDropDownType_OnShow()
+	Lib_UIDropDownMenu_Initialize(AtlasFrameDropDownType, AtlasFrameDropDownType_Initialize);
+	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameDropDownType, AtlasOptions.AtlasType);
+	Lib_UIDropDownMenu_SetWidth(AtlasFrameDropDownType, ATLAS_DROPDOWN_WIDTH);
+
+	Lib_UIDropDownMenu_Initialize(AtlasFrameLargeDropDownType, AtlasFrameDropDownType_Initialize);
+	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameLargeDropDownType, AtlasOptions.AtlasType);
+	Lib_UIDropDownMenu_SetWidth(AtlasFrameLargeDropDownType, ATLAS_DROPDOWN_WIDTH);
+
+	Lib_UIDropDownMenu_Initialize(AtlasFrameSmallDropDownType, AtlasFrameDropDownType_Initialize);
+	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameSmallDropDownType, AtlasOptions.AtlasType);
+	Lib_UIDropDownMenu_SetWidth(AtlasFrameSmallDropDownType, ATLAS_DROPDOWN_WIDTH);
+end
+
+-- Called whenever an item in the map type dropdown menu is clicked
+-- Sets the main dropdown menu contents to reflect the category of map selected
+function AtlasFrameDropDownType_OnClick(self)
+	local typeID = self:GetID();
+	local catName = Atlas_DropDownLayouts_Order[AtlasOptions.AtlasSortBy];
+	local subcatOrder = Atlas_DropDownLayouts_Order[catName];
+	local profile = addon.db.profile;
+
+	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameDropDownType, typeID);
+	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameLargeDropDownType, typeID);
+	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameSmallDropDownType, typeID);
+
+	AtlasOptions.AtlasType = typeID;
+	local dropdowns_catKey = subcatOrder[typeID] or Atlas_MapTypes[typeID - #subcatOrder];
+	if (profile.dropdowns[dropdowns_catKey]) then
+		AtlasOptions.AtlasZone = profile.dropdowns[dropdowns_catKey];
+	else
+		AtlasOptions.AtlasZone = 1;
+	end
+	AtlasFrameDropDown_OnShow();
+	Atlas_Refresh();
+end
+
+-- Function used to initialize the main dropdown menu
+-- Looks at the status of AtlasType to determine how to populate the list
+function AtlasFrameDropDown_Initialize()
+	local colortag;
+	for k, v in pairs(ATLAS_DROPDOWNS[AtlasOptions.AtlasType]) do
+		local info = Lib_UIDropDownMenu_CreateInfo();
+		
+		if (AtlasOptions["AtlasColoringDropDown"] and AtlasMaps[v].DungeonID) then
+			local _, _, _, minLevel, _, _, minRecLevel = GetLFGDungeonInfo(AtlasMaps[v].DungeonID);
+			if (minRecLevel == 0) then 
+				minRecLevel = minLevel;
+			end
+			local dungeon_difficulty = Atlas_DungeonDifficultyColor(minRecLevel);
+			colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
+		elseif (AtlasOptions["AtlasColoringDropDown"] and AtlasMaps[v].DungeonHeroicID) then
+			local _, _, _, minLevelH, _, _, minRecLevelH = GetLFGDungeonInfo(AtlasMaps[v].DungeonHeroicID);
+			if (minRecLevelH == 0) then 
+				minRecLevelH = minLevelH;
+			end
+			local dungeon_difficulty = Atlas_DungeonDifficultyColor(minRecLevelH);
+			colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
+		elseif (AtlasOptions["AtlasColoringDropDown"] and AtlasMaps[v].DungeonMythicID) then
+			local _, _, _, minLevelM, _, _, minRecLevelM = GetLFGDungeonInfo(AtlasMaps[v].DungeonMythicID);
+			if (minRecLevelM == 0) then 
+				minRecLevelM = minLevelM;
+			end
+			local dungeon_difficulty = Atlas_DungeonDifficultyColor(minRecLevelM);
+			colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
+		elseif (AtlasOptions["AtlasColoringDropDown"] and AtlasMaps[v].MinLevel) then
+			if (type(AtlasMaps[v].MinLevel) == number) then
+				local dungeon_difficulty = Atlas_DungeonDifficultyColor(AtlasMaps[v].MinLevel);
+				colortag = string.format("|cff%02x%02x%02x", dungeon_difficulty.r * 255, dungeon_difficulty.g * 255, dungeon_difficulty.b * 255);
+			else
+				colortag = ""
+			end
+		else
+			colortag = ""
+		end
+		info = {
+			text = colortag..AtlasMaps[v].ZoneName[1];
+			func = AtlasFrameDropDown_OnClick;
+		};
+		Lib_UIDropDownMenu_AddButton(info);
+	end
+end
+
+-- Called whenever the main dropdown menu is shown
+function AtlasFrameDropDown_OnShow()
+	Lib_UIDropDownMenu_Initialize(AtlasFrameDropDown, AtlasFrameDropDown_Initialize);
+	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameDropDown, AtlasOptions.AtlasZone);
+	Lib_UIDropDownMenu_SetWidth(AtlasFrameDropDown, ATLAS_DROPDOWN_WIDTH);
+
+	Lib_UIDropDownMenu_Initialize(AtlasFrameLargeDropDown, AtlasFrameDropDown_Initialize);
+	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameLargeDropDown, AtlasOptions.AtlasZone);
+	Lib_UIDropDownMenu_SetWidth(AtlasFrameLargeDropDown, ATLAS_DROPDOWN_WIDTH);
+
+	Lib_UIDropDownMenu_Initialize(AtlasFrameSmallDropDown, AtlasFrameDropDown_Initialize);
+	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameSmallDropDown, AtlasOptions.AtlasZone);
+	Lib_UIDropDownMenu_SetWidth(AtlasFrameSmallDropDown, ATLAS_DROPDOWN_WIDTH);
+end
+
+-- Called whenever an item in the main dropdown menu is clicked
+-- Sets the newly selected map as current and refreshes the frame
+function AtlasFrameDropDown_OnClick(self)
+	local mapID = self:GetID();
+	local catName = Atlas_DropDownLayouts_Order[AtlasOptions.AtlasSortBy];
+	local subcatOrder = Atlas_DropDownLayouts_Order[catName];
+	local profile = addon.db.profile;
+
+	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameDropDown, mapID);
+	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameLargeDropDown, mapID);
+	Lib_UIDropDownMenu_SetSelectedID(AtlasFrameSmallDropDown, mapID);
+
+	AtlasOptions.AtlasZone = mapID;
+	if (AtlasOptions.AtlasType > #subcatOrder) then
+		profile.dropdowns[Atlas_MapTypes[AtlasOptions.AtlasType - #subcatOrder]] = mapID;
+	else
+		profile.dropdowns[subcatOrder[AtlasOptions.AtlasType]] = mapID;
+	end
+	Atlas_Refresh();
 end
 
 function AtlasFrame_ToggleWindowSize()

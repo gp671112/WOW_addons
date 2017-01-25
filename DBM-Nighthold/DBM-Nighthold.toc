@@ -1,4 +1,4 @@
-﻿## Interface: 70100
+## Interface: 70100
 ## X-Min-Interface: 70000
 ## Title:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff69ccf0The Nighthold|r
 ## Title-zhCN:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff69ccf0暗夜要塞|r
@@ -28,3 +28,4 @@ Telarn.lua
 Etraeus.lua
 Elisande.lua
 Guldan.lua
+NightholdTrash.lua

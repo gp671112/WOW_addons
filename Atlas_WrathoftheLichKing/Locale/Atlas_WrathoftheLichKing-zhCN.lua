@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_WrathoftheLichKing-zhCN.lua 15 2016-09-05 14:46:17Z arith $
+-- $Id: Atlas_WrathoftheLichKing-zhCN.lua 20 2017-01-16 10:23:29Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -122,8 +122,8 @@ L["The Captain's Chest"] = "队长的箱子"
 L["The Culling of Stratholme"] = "净化斯坦索姆"
 L["The Keepers"] = "守护者"
 L["The Siege"] = "攻城区域"
-L["Tol'mar"] = "托玛尔"
 L["To next map"] = "到下一个地图"
+L["Tol'mar"] = "托玛尔"
 L["Tower of Flame"] = "烈焰之塔"
 L["Tower of Frost"] = "冰霜之塔"
 L["Tower of Life"] = "生命之塔"
@@ -131,8 +131,8 @@ L["Tower of Storms"] = "风暴之塔"
 L["Tribunal Chest"] = "远古法庭宝箱"
 L["UK, Keep"] = "UK, Keep"
 L["Uldu"] = "Uldu"
-L["Upper Spire"] = "上层之塔"
 L["UP, Pinn"] = "UP, Pinn"
+L["Upper Spire"] = "上层之塔"
 L["Verdisa"] = "沃尔蒂萨"
 L["VH"] = "VH"
 L["VoA"] = "VoA"
@@ -140,8 +140,4 @@ L["Warmage Kaitlyn"] = "战斗法师凯特琳"
 L["Watcher Gashra"] = "看守者加什拉"
 L["Watcher Narjil"] = "看守者纳尔伊"
 L["Watcher Silthik"] = "看守者希尔希克"
-L["ToC/Description"] = "巫妖王之怒副本地图"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[巫妖王之怒]|r"
-
-
 end

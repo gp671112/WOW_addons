@@ -1,8 +1,8 @@
--- $Id: Atlas_WarlordsofDraenor_DB.lua 31 2016-08-29 07:14:21Z arith $
+-- $Id: Atlas_WarlordsofDraenor_DB.lua 38 2017-01-16 09:27:19Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 

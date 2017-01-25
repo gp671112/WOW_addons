@@ -1,10 +1,8 @@
-﻿-- $Id: Atlas_Legion-enUS.lua 81 2016-11-09 14:17:42Z arith $
+-- $Id: Atlas_Legion-enUS.lua 91 2017-01-21 20:09:46Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
-	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -46,12 +44,15 @@ if L then
 	-- Darkheart Thicket
 	L["Rage Rot"] = "Rage Rot"; -- 101660
 	L["Kudzilla"] = "Kudzilla"; -- 99362
+	L["Mythana"] = "Mythana"; -- 101641
 
 	-- Eye of Azshara
 	L["Crate of Corks"] = "Crate of Corks"; -- Alchemy quest - Put a Cork in It (39331)
 	L["Put a Cork in It"] = "Put a Cork in It";
 	L["Shellmaw"] = "Shellmaw"; -- 91788
 	L["Gom Crabbar"] = "Gom Crabbar"; -- 101411
+	L["Jaggen-Ra"] = "Jaggen-Ra"; -- 101467
+	L["Dread Captain Thedon"] = "Dread Captain Thedon"; -- 108543
 
 	-- Halls of Valor
 	L["Fenryr's western spawn point"] = "Fenryr's western spawn point";

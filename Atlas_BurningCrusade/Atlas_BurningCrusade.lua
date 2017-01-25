@@ -1,8 +1,8 @@
--- $Id: Atlas_BurningCrusade.lua 17 2016-11-15 14:58:46Z arith $
+-- $Id: Atlas_BurningCrusade.lua 20 2017-01-16 10:36:39Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -159,8 +159,10 @@ local myMaps = {
 		Acronym = L["BT"];
 		PlayerLimit = "25";
 		WorldMapID = "796";
+		DungeonLevel = "1";
 		JournalInstanceID = "751";
 		Module = "Atlas_BurningCrusade";
+		NextMap = "BlackTempleBasement";
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Ashtongue Deathsworn"] };
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..L["Towards Reliquary of Souls"], 10002 };
@@ -182,8 +184,11 @@ local myMaps = {
 		Acronym = L["BT"];
 		PlayerLimit = "25";
 		WorldMapID = "796";
+		DungeonLevel = "4";
 		JournalInstanceID = "751";
 		Module = "Atlas_BurningCrusade";
+		PrevMap = "BlackTempleStart";
+		NextMap = "BlackTempleTop";
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Ashtongue Deathsworn"] };
 		{ BLUE.." B) "..ALC["Entrance"], 10001 };
 		{ BLUE.." C) "..ALC["Entrance"], 10002 };
@@ -201,8 +206,10 @@ local myMaps = {
 		Acronym = L["BT"];
 		PlayerLimit = "25";
 		WorldMapID = "796";
+		DungeonLevel = "8";
 		JournalInstanceID = "751";
 		Module = "Atlas_BurningCrusade";
+		PrevMap = "BlackTempleBasement";
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Ashtongue Deathsworn"] };
 		{ BLUE.." D) "..ALC["Entrance"], 10001 };
 		{ BLUE.." E) "..ALC["Connection"], 10002 };
@@ -578,6 +585,7 @@ local myMaps = {
 		WorldMapID = "799";
 		JournalInstanceID = "745";
 		Module = "Atlas_BurningCrusade";
+		NextMap = "KarazhanStart";
 		{ BLUE.." A) "..BZ["Karazhan"]..ALC["L-Parenthesis"]..ALC["Front"]..ALC["R-Parenthesis"], 10001 };
 		{ BLUE.." B) "..BZ["Karazhan"]..ALC["L-Parenthesis"]..ALC["Back"]..ALC["R-Parenthesis"], 10002 };
 		{ GREN.." 1') "..L["Archmage Leryda"], 10003 };
@@ -598,6 +606,8 @@ local myMaps = {
 		WorldMapID = "799";
 		JournalInstanceID = "745";
 		Module = "Atlas_BurningCrusade";
+		PrevMap = "KarazhanEnt";
+		NextMap = "KarazhanEnd";
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["The Violet Eye"] };
 		{ BLUE.." A) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Front"]..ALC["R-Parenthesis"], 10001 };
 		{ BLUE.." B-J) "..ALC["Connection"], 10002 };
@@ -650,6 +660,7 @@ local myMaps = {
 		WorldMapID = "799";
 		JournalInstanceID = "745";
 		Module = "Atlas_BurningCrusade";
+		PrevMap = "KarazhanStart";
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["The Violet Eye"] };
 		{ BLUE.." I) "..L["Path to the Broken Stairs"], 10001 };
 		{ BLUE.." J) "..L["Broken Stairs"], 10002 };

@@ -15,9 +15,9 @@
 # ## Notes: Map of Class Order Halls
 # ## Notes-zhTW: Atlas 職業大廳地圖
 #@end-debug@
-## Version: 1.35.02
+## Version: 1.37.00
 ## Author: arith
-## X-Date: 2016-11-29T5:21:07Z
+## X-Date: 2017-01-24T9:07:56Z
 ## X-Email: atlas.addon at gmail.com
 ## X-Website: http://www.atlasmod.com
 ## X-Category: Map

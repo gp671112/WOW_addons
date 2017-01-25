@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_Cataclysm-frFR.lua 11 2016-09-05 14:50:29Z arith $
+-- $Id: Atlas_Cataclysm-frFR.lua 16 2017-01-16 09:55:01Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -62,7 +62,6 @@ L["Earthwarden Yrsa <The Earthen Ring>"] = "Garde-terre Yrsa <Le Cercle terrestr
 L["Eulinda <Reagents>"] = "Eulinda <Composants>"
 L["Farseer Tooranu <The Earthen Ring>"] = "Long-voyant Tooranu <Cercle terrestre>"
 L["Fenstalker"] = "Traquetourbe"
--- L["Finkle Einhorn"] = ""
 L["FL"] = "FL"
 L["Forest Frogs"] = "Grenouilles forestière"
 L["Gazakroth"] = "Gazakroth"
@@ -137,8 +136,4 @@ L["Zanzil's Cauldron of Frostburn Formula"] = "Chaudron de formule de brûlure d
 L["Zanzil's Cauldron of Toxic Torment"] = "Chaudron de tourment toxique de Zanzil"
 L["ZG"] = "ZG"
 L["Zungam"] = "Zungam"
--- L["ToC/Description"] = ""
--- L["ToC/Title"] = ""
-
-
 end

@@ -1,0 +1,16 @@
+tag cbde0fe92aae2be2d3442f074aa8bbaf06acdf37 7.1.0.8
+Author:	James D. Callahan III <jcallahan@curse.com>
+Date:	Wed Jan 4 19:49:19 2017 -0600
+
+commit 28b85d66e9b1065a44f3d5daa4eba4bb36f83982
+Author: sidji <codeguide@gmx.net>
+Date:   Wed Jan 4 17:33:19 2017 +0100
+
+    added missing digsites and races
+
+commit 28b85d66e9b1065a44f3d5daa4eba4bb36f83982
+Author: sidji <codeguide@gmx.net>
+Date:   Wed Jan 4 17:33:19 2017 +0100
+
+    added missing digsites and races
+

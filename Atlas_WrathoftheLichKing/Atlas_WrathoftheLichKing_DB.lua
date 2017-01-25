@@ -1,8 +1,8 @@
- -- $Id: Atlas_WrathoftheLichKing_DB.lua 13 2016-08-16 15:13:43Z arith $
+ -- $Id: Atlas_WrathoftheLichKing_DB.lua 20 2017-01-16 10:23:29Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -238,7 +238,7 @@ local myDB = {
 	};
 	TrialOfTheChampion = {
 		{ "A", 10001, 115, 251 };
-		
+		{   1, 834, 266, 249 };
 	};
 	TrialOfTheCrusader = {
 		{ "A", 10001, 277, 314 };

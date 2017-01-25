@@ -1,8 +1,8 @@
--- $Id: Atlas_BurningCrusade_DB.lua 17 2016-11-15 14:58:46Z arith $
+-- $Id: Atlas_BurningCrusade_DB.lua 20 2017-01-16 10:36:39Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 

@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_BurningCrusade-enUS.lua 12 2016-09-05 14:43:26Z arith $
+-- $Id: Atlas_BurningCrusade-enUS.lua 20 2017-01-16 10:36:39Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -28,6 +28,8 @@ local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas_BurningCrusade", "enUS", true, true);
 
 if L then
+L["\"Captain\" Kaftiz"] = "\"Captain\" Kaftiz"
+L["\"Slim\" <Shady Dealer>"] = "\"Slim\" <Shady Dealer>"
 L["Abbendis"] = "Abbendis"
 L["AC"] = "AC"
 L["Advance Scout Chadwick"] = "Advance Scout Chadwick"
@@ -44,8 +46,8 @@ L["Auch"] = "Auch"
 L["Avatar of the Martyred"] = "Avatar of the Martyred"
 L["Barkeep Kelly <Bartender>"] = "Barkeep Kelly <Bartender>"
 L["Barnes <The Stage Manager>"] = "Barnes <The Stage Manager>"
-L["Baroness Dorothea Millstipe"] = "Baroness Dorothea Millstipe"
 L["Baron Rafe Dreuger"] = "Baron Rafe Dreuger"
+L["Baroness Dorothea Millstipe"] = "Baroness Dorothea Millstipe"
 L["Bennett <The Sergeant at Arms>"] = "Bennett <The Sergeant at Arms>"
 L["Berthold <The Doorman>"] = "Berthold <The Doorman>"
 L["BF"] = "BF"
@@ -58,7 +60,6 @@ L["Calliard <The Nightman>"] = "Calliard <The Nightman>"
 L["Captain Alina"] = "Captain Alina"
 L["Captain Boneshatter"] = "Captain Boneshatter"
 L["Captain Edward Hanes"] = "Captain Edward Hanes"
-L["\"Captain\" Kaftiz"] = "\"Captain\" Kaftiz"
 L["Captain Sanders"] = "Captain Sanders"
 L["Caza'rez"] = "Caza'rez"
 L["Charred Bone Fragment"] = "Charred Bone Fragment"
@@ -98,8 +99,8 @@ L["Gradav <The Warlock>"] = "Gradav <The Warlock>"
 L["Greatfather Aldrimus"] = "Greatfather Aldrimus"
 L["Guerrero"] = "Guerrero"
 L["Gunny"] = "Gunny"
-L["Ha'lei"] = "Ha'lei"
 L["Hal McAllister"] = "Hal McAllister"
+L["Ha'lei"] = "Ha'lei"
 L["Hastings <The Caretaker>"] = "Hastings <The Caretaker>"
 L["HC"] = "HC"
 L["Helcular"] = "Helcular"
@@ -141,8 +142,8 @@ L["Mortog Steamhead"] = "Mortog Steamhead"
 L["MT"] = "MT"
 L["Mysterious Bookshelf"] = "Mysterious Bookshelf"
 L["Nahuud"] = "Nahuud"
-L["Nathanos Marris"] = "Nathanos Marris"
 L["Nat Pagle"] = "Nat Pagle"
+L["Nathanos Marris"] = "Nathanos Marris"
 L["Naturalist Bite"] = "Naturalist Bite"
 L["Nexus-Prince Haramad"] = "Nexus-Prince Haramad"
 L["Okuno <Ashtongue Deathsworn Quartermaster>"] = "Okuno <Ashtongue Deathsworn Quartermaster>"
@@ -180,7 +181,6 @@ L["Shadow Lord Xiraxis"] = "Shadow Lord Xiraxis"
 L["Shattered Hand Executioner"] = "Shattered Hand Executioner"
 L["Skar'this the Heretic"] = "Skar'this the Heretic"
 L["SL"] = "SL"
-L["\"Slim\" <Shady Dealer>"] = "\"Slim\" <Shady Dealer>"
 L["Sliver <Garaxxas' Pet>"] = "Sliver <Garaxxas' Pet>"
 L["Southshore Inn"] = "Southshore Inn"
 L["SP"] = "SP"
@@ -229,9 +229,6 @@ L["Young Blanchy"] = "Young Blanchy"
 L["Ythyar"] = "Ythyar"
 L["Zelfan"] = "Zelfan"
 L["Zixil <Aspiring Merchant>"] = "Zixil <Aspiring Merchant>"
-L["ToC/Description"] = "Burning Crusade Instances' Maps"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[Burning Crusade]|r"
-
 --************************************************
 -- Zone Names, Acronyms, and Common Strings
 --************************************************

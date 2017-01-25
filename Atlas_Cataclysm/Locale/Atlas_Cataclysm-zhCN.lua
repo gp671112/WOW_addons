@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_Cataclysm-zhCN.lua 11 2016-09-05 14:50:29Z arith $
+-- $Id: Atlas_Cataclysm-zhCN.lua 16 2017-01-16 09:55:01Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -61,7 +61,6 @@ L["Earthwarden Yrsa <The Earthen Ring>"] = "大地看守者伊尔萨 <大地之�
 L["Eulinda <Reagents>"] = "尤琳达 <材料商>"
 L["Farseer Tooranu <The Earthen Ring>"] = "先知图拉努 <大地之环>"
 L["Fenstalker"] = "沼泽猎手"
--- L["Finkle Einhorn"] = ""
 L["FL"] = "FL"
 L["Forest Frogs"] = "森林蛙"
 L["Gazakroth"] = "卡扎克洛斯"
@@ -104,7 +103,6 @@ L["Packleader Ivar Bloodfang"] = "狼群首领伊瓦·血牙"
 L["Quartermaster Lewis <Quartermaster>"] = "军需官刘易斯 <军需官>"
 L["Relissa"] = "蕾莉莎"
 L["Rosa"] = "洛莎"
--- L["SFK"] = ""
 L["Slinky Sharpshiv"] = "史莉琪·剃刀"
 L["Slither"] = "滑行者"
 L["The Map of Zul'Aman"] = "祖阿曼地图"
@@ -118,7 +116,6 @@ L["ToTT"] = "ToTT"
 L["TSC"] = "TSC"
 L["TWT"] = "TWT"
 L["Tyllan"] = "泰兰"
--- L["VC"] = ""
 L["Vehini <Assault Provisions>"] = "维希尼 <前线供应商>"
 L["Velastrasza"] = "瓦莱斯塔萨"
 L["Vend-O-Tron D-Luxe"] = "售货机器人豪华版"
@@ -136,8 +133,4 @@ L["Zanzil's Cauldron of Frostburn Formula"] = "赞吉尔的霜灼药方坩埚"
 L["Zanzil's Cauldron of Toxic Torment"] = "赞吉尔的剧毒折磨坩埚"
 L["ZG"] = "ZG"
 L["Zungam"] = "苏加姆"
-L["ToC/Description"] = "大地的裂变副本地图"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[大地的裂变]|r"
-
-
 end

@@ -1,6 +1,6 @@
 --[[
 Things to do
- Lump close dungeon/raids into one, (nexus/oculus/eoe)
+ Lump close dungeon/raids into one, (nexus/oculus/eoe) (DONE)
  Maybe implement lockout info on tooltip (Don't know if I want too, better addons for tracking it exist)
 ]]--
 
@@ -10,8 +10,10 @@ local HandyNotes = LibStub("AceAddon-3.0"):GetAddon("HandyNotes", true)
 if not HandyNotes then return end
 
 local iconDefault = "Interface\\Icons\\TRADE_ARCHAEOLOGY_CHESTOFTINYGLASSANIMALS"
-local iconDungeon = "Interface\\Addons\\HandyNotes_DungeonLocations\\dungeon.tga"
-local iconRaid = "Interface\\Addons\\HandyNotes_DungeonLocations\\raid.tga"
+--local iconDungeon = "Interface\\Addons\\HandyNotes_DungeonLocations\\dungeon.tga"
+--local iconRaid = "Interface\\Addons\\HandyNotes_DungeonLocations\\raid.tga"
+local iconDungeon = "Interface\\MINIMAP\\Dungeon"
+local iconRaid = "Interface\\MINIMAP\\Raid"
 local iconMerged = "Interface\\Addons\\HandyNotes_DungeonLocations\\merged.tga"
 
 local db
@@ -19,6 +21,8 @@ local mapToContinent = { }
 local nodes = { }
 local minimap = { } -- For nodes that need precise minimap locations but would look wrong on zone or continent maps
 --local lockouts = { }
+
+local MERGED_DUNGEONS = 5 -- Where extra dungeon/raids ids start for merging
 
 if (DEBUG) then
  HNDL_NODES = nodes
@@ -37,7 +41,7 @@ local internalNodes = {  -- List of zones to be excluded from continent map
  ["WailingCavernsBarrens"] = true,
 }
 
--- [COORD] = { Dungeonname/ID, Type(Dungeon/Raid/Merged), hideOnContinent(Bool), other dungeons }
+-- [COORD] = { Dungeonname/ID, Type(Dungeon/Raid/Merged), hideOnContinent(Bool), nil placeholder for id later, other dungeons }
 -- VANILLA
 nodes["AhnQirajTheFallenKingdom"] = {
  [59001430] = { 743, "Raid", true }, -- Ruins of Ahn'Qiraj Silithus 36509410, World 42308650
@@ -54,7 +58,7 @@ nodes["Barrens"] = {
 [42106660] = { 240, "Dungeon" }, -- Wailing Caverns
 }
 nodes["BurningSteppes"] = {
- [20303260] = { 66, "Merged", true, 228, 229, 559, 741, 742 }, -- Blackrock mountain dungeons and raids
+ [20303260] = { 66, "Merged", true, nil, 228, 229, 559, 741, 742 }, -- Blackrock mountain dungeons and raids
  [23202630] = { 73, "Raid", true }, -- Blackwind Descent
 }
 nodes["DeadwindPass"] = {
@@ -80,7 +84,7 @@ nodes["Orgrimmar"] = {
  [52405800] = { 226, "Dungeon" }, -- Ragefire Chasm Cleft of Shadow 70104880
 }
 nodes["SearingGorge"] = {
- [41708580] = { 66, "Merged", true, 228, 229, 559, 741, 742 },
+ [41708580] = { 66, "Merged", true, nil, 228, 229, 559, 741, 742 },
  [43508120] = { 73, "Raid", true }, -- Blackwind Descent
 }
 nodes["Silithus"] = {
@@ -106,7 +110,7 @@ nodes["SwampOfSorrows"] = {
  [69505250] = { 237, "Dungeon" }, -- The Temple of Atal'hakkar
 }
 nodes["Tanaris"] = {
- [65604870] = { 279, "Merged", false, 255, 251, 750, 184, 185, 186, 187 },
+ [65604870] = { 279, "Merged", false, nil, 255, 251, 750, 184, 185, 186, 187 },
  --[[[61006210] = { "The Culling of Stratholme", "Dungeon" },  --65604870 May look more accurate and merge all CoT dungeons/raids
  [57006230] = { "The Black Morass", "Dungeon" },
  [54605880] = { 185, "Dungeon" }, -- Well of Eternity
@@ -134,10 +138,10 @@ nodes["Westfall"] = {
 
 -- Vanilla Continent, For things that should be shown or merged only at the continent level
  nodes["Azeroth"] = {
-  [46603050] = { 311, "Dungeon", false, 316 }, -- Scarlet Halls/Monastery
-  [47316942] = { 66, "Merged", false, 73, 228, 229, 559, 741, 742 }, -- Blackrock mount instances, merged in blackwind descent at continent level
+  [46603050] = { 311, "Dungeon", false, nil, 316 }, -- Scarlet Halls/Monastery
+  [47316942] = { 66, "Merged", false, nil, 73, 228, 229, 559, 741, 742 }, -- Blackrock mount instances, merged in blackwind descent at continent level
   --[38307750] = { 63, "Dungeon" }, -- Deadmines 43707320,
-  [49508190] = { 745, "Merged", false, 860 }, -- Karazhan/Return to Karazhan
+  [49508190] = { 745, "Merged", false, nil, 860 }, -- Karazhan/Return to Karazhan
  }
 
 -- Vanilla Subzone maps
@@ -163,9 +167,9 @@ nodes["DeadminesWestfall"] = {
  [25505090] = { 63, "Dungeon" }, -- Deadmines
 }
 nodes["MaraudonOutside"] = {
- [52102390] = { 232, "Dungeon", false, "Purple Entrance" }, -- Maraudon 30205450 
- [78605600] = { 232, "Dungeon", false, "Orange Entrance" }, -- Maraudon 36006430
- [44307680] = { 232, "Dungeon", false, "Earth Song Falls Entrance" },  -- Maraudon
+ [52102390] = { 232, "Dungeon", false, nil, "Purple Entrance" }, -- Maraudon 30205450 
+ [78605600] = { 232, "Dungeon", false, nil, "Orange Entrance" }, -- Maraudon 36006430
+ [44307680] = { 232, "Dungeon", false, nil, "Earth Song Falls Entrance" },  -- Maraudon
 }
 nodes["NewTinkertownStart"] = {
  [31703450] = { 231, "Dungeon" }, -- Gnomeregan
@@ -190,7 +194,7 @@ nodes["Hellfire"] = {
  --[47605360] = { 248, "Dungeon" }, -- Hellfire Ramparts World 56805310 Stone 48405240 World 57005280
  --[47505200] = { 259, "Dungeon" }, -- The Shattered Halls World 56705270
  --[46005180] = { 256, "Dungeon" }, -- The Blood Furnace World 56305260
- [47205220] = { 248, "Merged", false, 256, 259, 747 }, -- Hellfire Ramparts, The Blood Furnace, The Shattered Halls, Magtheridon's Lair
+ [47205220] = { 248, "Merged", false, nil, 256, 259, 747 }, -- Hellfire Ramparts, The Blood Furnace, The Shattered Halls, Magtheridon's Lair
 }
 nodes["Netherstorm"] = {
  [71705500] = { 257, "Dungeon" }, -- The Botanica
@@ -215,7 +219,7 @@ nodes["Zangarmarsh"] = {
  --[54203450] = { 262, "Dungeon" }, -- Underbog World 35804330
  --[48903570] = { 260, "Dungeon" }, -- Slave Pens World 34204370
  --[51903280] = { 748, "Raid" }, -- Serpentshrine Cavern World 35104280
- [50204100] = { 260, "Merged", false, 261, 262, 748 }, -- Merged Location
+ [50204100] = { 260, "Merged", false, nil, 261, 262, 748 }, -- Merged Location
 }
 minimap["Hellfire"] = {
  [47605360] = { 248, "Dungeon" }, -- Hellfire Ramparts World 56805310 Stone 48405240 World 57005280
@@ -232,7 +236,7 @@ minimap["Zangarmarsh"] = {
 
 -- NORTHREND (16 Dungeons, 9 Raids)
 nodes["BoreanTundra"] = {
- [27602660] = { 282, "Merged", false, 756, 281 },
+ [27602660] = { 282, "Merged", false, nil, 756, 281 },
  -- Oculus same as eye of eternity
  --[27502610] = { "The Nexus", "Dungeon" },
 }
@@ -252,9 +256,9 @@ nodes["HowlingFjord"] = {
  [57204660] = { 286, "Dungeon" }, -- Utgarde Pinnacle
 }
 nodes["IcecrownGlacier"] = { 
- [54409070] = { 276, "Dungeon", false, 278, 280 }, -- The Forge of Souls, Halls of Reflection, Pit of Saron
- [74202040] = { 284, "Dungeon" }, -- Trial of the Champion
- [75202180] = { 757, "Raid" }, -- Trial of the Crusader
+ [54409070] = { 276, "Dungeon", false, nil, 278, 280 }, -- The Forge of Souls, Halls of Reflection, Pit of Saron
+ [74202040] = { 284, "Dungeon", true }, -- Trial of the Champion
+ [75202180] = { 757, "Raid", true }, -- Trial of the Crusader
  [53808720] = { 758, "Raid" }, -- Icecrown Citadel
 }
 nodes["LakeWintergrasp"] = {
@@ -282,9 +286,10 @@ minimap["IcecrownGlacier"] = {
 }
 
 -- NORTHREND CONTINENT, For things that should be shown or merged only at the continent level
---[[nodes["Northrend"] = {
+nodes["Northrend"] = {
  --[80407600] = { 285, "Dungeon", false, 286 }, -- Utgarde Keep, Utgarde Pinnacle CONTINENT MERGE Location is slightly incorrect
-}]]--
+ [47501750] = { 757, "Merged", false, nil, 284 }, -- Trial of the Crusader and Trial of the Champion
+}
 
 -- CATACLYSM
 nodes["Deepholm"] = {
@@ -372,15 +377,38 @@ nodes["TanaanJungle"] = {
  [45605360] = { 669, "Raid" }, -- Hellfire Citadel
 }
 
--- Legion Dungeons/Raids for continent map for consistency
+-- Legion Dungeons/Raids for minimap and continent map for consistency
+minimap["Azsuna"] = {
+ [61204110] = { 716, "Dungeon", true },
+ [48308030] = { 707, "Dungeon", true },
+}
+minimap["Highmountain"] = {
+ [49606860] = { 767, "Dungeon", true },
+}
+minimap["Stormheim"] = {
+ [71107280] = { 861, "Raid", true },
+ [72707050] = { 721, "Dungeon", true },
+ [52504530] = { 727, "Dungeon", true },
+}
+minimap["Suramar"] = {
+ [41106170] = { 726, "Dungeon", true },
+ [50806550] = { 800, "Dungeon", true },
+ [44105980] = { 786, "Raid", true },
+}
+minimap["Valsharah"] = {
+ [37205020] = { 740, "Dungeon", true },
+ [59003120] = { 762, "Dungeon", true },
+ [56303680] = { 768, "Raid", true },
+}
+
 nodes["BrokenIsles"] = {
  [38805780] = { 716, "Dungeon" }, -- Eye of Azshara
  [34207210] = { 707, "Dungeon" }, -- Vault of the Wardens
  [47302810] = { 767, "Dungeon" }, -- Neltharion's Lair
  [59003060] = { 727, "Dungeon" }, -- Maw of Souls
- [35402850] = { 762, "Merged", false, 768}, -- The Emerald Nightmare 35102910
- [65003870] = { 721, "Merged", false, 861 }, -- Halls of Valor/Trial of Valor Unmerged: 65203840 64703900
- [46704780] = { 726, "Merged", false, 786 }, -- The Arcway/The Nighthold
+ [35402850] = { 762, "Merged", false, nil, 768}, -- The Emerald Nightmare 35102910
+ [65003870] = { 721, "Merged", false, nil, 861 }, -- Halls of Valor/Trial of Valor Unmerged: 65203840 64703900
+ [46704780] = { 726, "Merged", false, nil, 786 }, -- The Arcway/The Nighthold
  [49104970] = { 800, "Dungeon" }, -- Court of Stars
  [29403300] = { 740, "Dungeon" }, -- Black Rook Hold
 }
@@ -498,72 +526,91 @@ local function setWaypoint(mapFile, coord)
 end
 
 function pluginHandler:OnClick(button, pressed, mapFile, coord)
- if button == "RightButton" and db.tomtom and TomTom then
+ if (not pressed) then return end
+ if (button == "RightButton" and db.tomtom and TomTom) then
   setWaypoint(mapFile, coord)
+  return
+ end
+ if (button == "LeftButton" and db.journal) then
+  if (not EncounterJournal_OpenJournal) then
+   UIParentLoadAddOn('Blizzard_EncounterJournal')
+  end
+  local dungeonID = nodes[mapFile][coord][4]
+  local name, _, _, _, _, _, _, link = EJ_GetInstanceInfo(dungeonID)
+  local difficulty = string.match(link, 'journal:.-:.-:(.-)|h') 
+  if (not dungeonID or not difficulty) then return end
+  EncounterJournal_OpenJournal(difficulty, dungeonID)
  end
 end
 
 local defaults = {
  profile = {
-  zoneScale = 2,
+  zoneScale = 3,
   zoneAlpha = 1,
-  continentScale = 2,
+  continentScale = 3,
   continentAlpha = 1,
   continent = true,
   tomtom = true,
+  journal = true,
  },
 }
 
 local options = {
  type = "group",
- name = "DungeonLocations",
- desc = "Locations of dungeon and raid entrances.",
+ name = "副本入口",
+ desc = "5人副本和團隊副本的入口位置。",
  get = function(info) return db[info[#info]] end,
  set = function(info, v) db[info[#info]] = v HandyNotes:SendMessage("HandyNotes_NotifyUpdate", "DungeonLocations") end,
  args = {
   desc = {
-   name = "These settings control the look and feel of the icon.",
+   name = "這些設定控制圖示的外觀及風格。",
    type = "description",
    order = 0,
   },
   zoneScale = {
    type = "range",
-   name = "區域縮放",
-   desc = "顯示在區域地圖的圖示尺寸",
+   name = "區域地圖圖示縮放",
+   desc = "區域地圖顯示的圖示大小",
    min = 0.2, max = 12, step = 0.1,
    order = 10,
   },
   zoneAlpha = {
    type = "range",
-   name = "區域透明度",
-   desc = "顯示在區域地圖的圖示透明度",
+   name = "區域地圖圖示透明度",
+   desc = "區域地圖顯示的圖示透明度",
    min = 0, max = 1, step = 0.01,
    order = 20,
   },
   continentScale = {
    type = "range",
-   name = "大陸縮放",
-   desc = "顯示在大陸地圖的圖示尺寸",
+   name = "大地圖圖示縮放",
+   desc = "大陸地圖顯示的圖示大小",
    min = 0.2, max = 12, step = 0.1,
    order = 10,
   },
   continentAlpha = {
    type = "range",
-   name = "大陸透明度",
-   desc = "顯示在大陸地圖的圖示透明度",
+   name = "大地圖圖示透明度",
+   desc = "大陸地圖顯示的圖示透明度",
    min = 0, max = 1, step = 0.01,
    order = 20,
   },
   continent = {
    type = "toggle",
-   name = "在大陸顯示",
-   desc = "在大陸地圖顯示圖示",
+   name = "大地圖顯示圖示",
+   desc = "在大陸地圖中顯示圖示",
    order = 1,
   },
   tomtom = {
    type = "toggle",
-   name = "啟用TomTom整合",
-   desc = "允許右鍵點擊建立TomTom路徑點",
+   name = "啟用 TomTom 整合",
+   desc = "允許使用滑鼠右鍵建立 TomTom 路線導引",
+   order = 2,
+  },
+  journal = {
+   type = "toggle",
+   name = "啟用冒險日誌整合",
+   desc = "允許使用滑鼠左鍵點擊開啟冒險日誌的5人副本或團隊",
    order = 2,
   },
  },
@@ -590,8 +637,9 @@ function Addon:PLAYER_LOGIN()
     u[1] = name
    end ]]--
    --if (u[2] == "Merged") then
-   local n = 4 -- Start of merged dungeons/raids
+   local n = MERGED_DUNGEONS
    local newName = EJ_GetInstanceInfo(u[1])
+   u[4] = u[1]
    while(u[n]) do
 	if (type(u[n]) == "number") then
 	 local name = EJ_GetInstanceInfo(u[n])
@@ -609,6 +657,7 @@ function Addon:PLAYER_LOGIN()
  for i,v in pairs(minimap) do
   for j,u in pairs(v) do
    if (type(u[1]) == "number") then -- Added because since some nodes are connected to the node table they were being changed before this and this function was then messing it up
+    u[4] = u[1]
     u[1] = EJ_GetInstanceInfo(u[1])
    end
   end

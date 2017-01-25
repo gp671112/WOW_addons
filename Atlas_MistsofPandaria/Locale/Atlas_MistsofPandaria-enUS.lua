@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_MistsofPandaria-enUS.lua 10 2016-09-05 14:52:18Z arith $
+-- $Id: Atlas_MistsofPandaria-enUS.lua 15 2017-01-16 09:41:12Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -43,8 +43,8 @@ L["GSS"] = "GSS"
 L["Halls"] = "Halls"
 L["HoF"] = "HoF"
 L["Hooded Crusader"] = "Hooded Crusader"
-L["Instructor Chillheart's Phylactery"] = "Instructor Chillheart's Phylactery"
 L["In the Shadow of the Light"] = "In the Shadow of the Light"
+L["Instructor Chillheart's Phylactery"] = "Instructor Chillheart's Phylactery"
 L["Kel'Thuzad's Deep Knowledge"] = "Kel'Thuzad's Deep Knowledge"
 L["Master Windstrong"] = "Master Windstrong"
 L["Monara <The Last Queen>"] = "Monara <The Last Queen>"
@@ -71,9 +71,5 @@ L["TJS"] = "TJS"
 L["ToT"] = "ToT"
 L["Unblinking Eye"] = "Unblinking Eye"
 L["Zao'cho <The Emperor's Shield>"] = "Zao'cho <The Emperor's Shield>"
-L["ToC/Description"] = "Mists of Pandaria Instances' Maps"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[Mists of Pandaria]|r"
-
-
 
 end

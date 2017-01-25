@@ -1,8 +1,8 @@
--- $Id: Atlas_MistsofPandaria_DB.lua 6 2016-05-11 10:06:58Z arith $
+-- $Id: Atlas_MistsofPandaria_DB.lua 15 2017-01-16 09:41:12Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 

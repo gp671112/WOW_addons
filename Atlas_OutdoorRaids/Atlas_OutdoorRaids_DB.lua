@@ -1,8 +1,8 @@
--- $Id: Atlas_OutdoorRaids_DB.lua 18 2016-08-16 15:12:56Z arith $
+-- $Id: Atlas_OutdoorRaids_DB.lua 25 2017-01-19 07:42:24Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -43,7 +43,7 @@ local myDB = {
 		{  5, 1763, 149, 159, 363, 209 }; -- Shar'thos
 		{  6, 1789, 274, 150, 525, 201 }; -- Drugon the Frostblood
 		{  7, 1795, 249,  22, 492, 39 }; -- Flotsam
---		{  8, 1790,  }; -- Ana-Mouz
+		{  8, 1790, 217, 261, 457, 342 }; -- Ana-Mouz
 		{  9, 1756, 405,  98, 689, 132 }; -- The Soultakers
 		{ 10, 1749, 323, 133, 605, 177 }; -- Nithogg
 		{ 11, 1783, 180, 232, 412, 310 }; -- Na'zak the Fiend

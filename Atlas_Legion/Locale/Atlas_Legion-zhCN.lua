@@ -1,10 +1,8 @@
-﻿-- $Id: Atlas_Legion-zhCN.lua 37 2016-09-05 14:55:07Z arith $
+-- $Id: Atlas_Legion-zhCN.lua 87 2017-01-16 09:16:53Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
-	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -31,7 +29,6 @@ L["Ancient Widow"] = "老寡妇"
 L["Arcanist Malrodi"] = "奥术师玛洛迪"
 L["Archmage Galeorn"] = "大法师加里昂"
 L["Arthfael"] = "阿斯法尔"
--- L["Braxas the Fleshcarver"] = ""
 L["Crate of Corks"] = "一箱木塞"
 L["Dantalionax"] = "丹塔利纳克斯"
 L["Drelanim Whisperwind"] = "德兰妮·语风"
@@ -56,7 +53,6 @@ L["Mushroom Merchant"] = "蘑菇商"
 L["Nightmare Watcher"] = "梦魇监视者"
 L["Portal to Shal'Aran"] = "传送到沙尔艾兰"
 L["Put a Cork in It"] = "实用木塞"
--- L["Rage Rot"] = ""
 L["Ragoul"] = "拉古尔"
 L["Requires Skaggldrynk"] = "需要隐形饮剂"
 L["Shellmaw"] = "甲喉"
@@ -69,7 +65,4 @@ L["Ultanok"] = "乌塔诺克"
 L["Understone Lasher"] = "顶石鞭笞者"
 L["Velimar"] = "威利玛"
 L["Volynd Stormbringer"] = "沃伦德·风暴使者"
-L["ToC/Description"] = "军团再临副本地图"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[军团再临]|r"
-
 end

@@ -1,10 +1,36 @@
-$Id: ChangeLog.txt 62 2016-11-29 05:21:07Z arith $
+$Id: ChangeLog.txt 76 2017-01-24 09:07:56Z arith $
 Atlas, a World of Warcraft instance map browser
-Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 ==============
 = Change Log =
 ==============
+
+v1.37.00 (Jan. 24, 2017)
+------------------------
+- Added class halls' achievements
+
+v1.35.05 (Dec. 27, 2016)
+------------------------
+- Added Armaments Requisitioner to Paladin and Deathnight's halls
+
+v1.35.04 (Dec. 19, 2016)
+------------------------
+- Added a few more NPCs in the following class halls:
+  - Hunter
+  - Mage
+  - Paladin
+  - Rogue
+- Added more NPCs to Shaman's class hall and also fixed the indication 
+  of artifact power
+- Monk's class hall map revamped and added more NPCs
+- Localization update:
+  - Simplified Chinese (arith)
+
+v1.35.03 (Dec. 05, 2016)
+------------------------
+- Paladin map revamped
+- Added NPC to Paladin's hall
 
 v1.35.02 (Nov. 29, 2016)
 ------------------------

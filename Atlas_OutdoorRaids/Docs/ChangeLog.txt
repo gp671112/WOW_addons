@@ -1,12 +1,22 @@
-$Id: ChangeLog.txt 23 2016-10-27 05:08:10Z arith $
+$Id: ChangeLog.txt 27 2017-01-24 07:20:30Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 ==============
 = Change Log =
 ==============
+
+v1.37.00 (Jan. 24, 2017)
+------------------------
+- Added instance's achievements
+- Translation update:
+  - Spanish (Lawghter)
+
+v1.36.00 (Jan. 19, 2017)
+------------------------
+- Added Ana-Mouz's location in Broken Isles
 
 v1.35.00 (Oct. 27, 2016)
 ------------------------

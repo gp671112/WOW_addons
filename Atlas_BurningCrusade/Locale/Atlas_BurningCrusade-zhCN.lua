@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_BurningCrusade-zhCN.lua 12 2016-09-05 14:43:26Z arith $
+-- $Id: Atlas_BurningCrusade-zhCN.lua 20 2017-01-16 10:36:39Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -31,6 +31,8 @@ local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas_BurningCrusade", "zhCN", false);
 
 if L then
+L["\"Captain\" Kaftiz"] = "“上尉”卡弗提兹"
+L["\"Slim\" <Shady Dealer>"] = "“瘦子” <毒药商>"
 L["Abbendis"] = "阿比迪斯"
 L["AC"] = "AC"
 L["Advance Scout Chadwick"] = "高级斥候卡德维克"
@@ -47,8 +49,8 @@ L["Auch"] = "Auch"
 L["Avatar of the Martyred"] = "殉难者的化身"
 L["Barkeep Kelly <Bartender>"] = "酒吧招待凯利 <调酒师>"
 L["Barnes <The Stage Manager>"] = "巴内斯 <舞台管理员>"
-L["Baroness Dorothea Millstipe"] = "杜萝希·米尔斯提女伯爵"
 L["Baron Rafe Dreuger"] = "拉弗·杜格尔男爵"
+L["Baroness Dorothea Millstipe"] = "杜萝希·米尔斯提女伯爵"
 L["Bennett <The Sergeant at Arms>"] = "本内特 <警卫>"
 L["Berthold <The Doorman>"] = "伯特霍德 <门卫>"
 L["BF"] = "BF"
@@ -61,7 +63,6 @@ L["Calliard <The Nightman>"] = "卡利亚德 <清洁工>"
 L["Captain Alina"] = "奥琳娜上尉"
 L["Captain Boneshatter"] = "沙塔·碎骨上尉"
 L["Captain Edward Hanes"] = "爱德华·汉斯"
-L["\"Captain\" Kaftiz"] = "“上尉”卡弗提兹"
 L["Captain Sanders"] = "杉德尔船长"
 L["Caza'rez"] = "卡萨雷兹"
 L["Charred Bone Fragment"] = "焦骨碎块"
@@ -101,8 +102,8 @@ L["Gradav <The Warlock>"] = "格拉达夫 <术士>"
 L["Greatfather Aldrimus"] = "奥德里姆斯宗父"
 L["Guerrero"] = "古雷罗"
 L["Gunny"] = "冈尼"
-L["Ha'lei"] = "哈雷"
 L["Hal McAllister"] = "哈尔·马克奥里斯特"
+L["Ha'lei"] = "哈雷"
 L["Hastings <The Caretaker>"] = "哈斯汀斯 <看管者>"
 L["HC"] = "HC"
 L["Helcular"] = "赫尔库拉"
@@ -144,8 +145,8 @@ L["Mortog Steamhead"] = "莫尔托格"
 L["MT"] = "MT"
 L["Mysterious Bookshelf"] = "神秘的书架"
 L["Nahuud"] = "纳霍德"
-L["Nathanos Marris"] = "纳萨诺斯·玛瑞斯"
 L["Nat Pagle"] = "纳特·帕格"
+L["Nathanos Marris"] = "纳萨诺斯·玛瑞斯"
 L["Naturalist Bite"] = "博学者拜特"
 L["Nexus-Prince Haramad"] = "节点亲王哈拉迈德"
 L["Okuno <Ashtongue Deathsworn Quartermaster>"] = "沃库诺 <灰舌死誓者军需官>"
@@ -183,7 +184,6 @@ L["Shadow Lord Xiraxis"] = "暗影领主希拉卡希斯"
 L["Shattered Hand Executioner"] = "碎手斩杀者"
 L["Skar'this the Heretic"] = "异教徒斯卡希斯"
 L["SL"] = "SL"
-L["\"Slim\" <Shady Dealer>"] = "“瘦子” <毒药商>"
 L["Sliver <Garaxxas' Pet>"] = "脆皮 <贾拉克萨斯的宠物>"
 L["Southshore Inn"] = "南海镇旅馆"
 L["SP"] = "SP"
@@ -232,8 +232,4 @@ L["Young Blanchy"] = "小马布兰契"
 L["Ythyar"] = "伊萨尔"
 L["Zelfan"] = "扎尔凡"
 L["Zixil <Aspiring Merchant>"] = "吉克希尔 <有抱负的商人>"
-L["ToC/Description"] = "燃烧的远征副本地图"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[燃烧的远征]|r"
-
-
 end

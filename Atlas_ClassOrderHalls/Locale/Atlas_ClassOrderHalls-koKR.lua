@@ -1,10 +1,10 @@
--- $Id: Atlas_ClassOrderHalls-koKR.lua 18 2016-08-31 14:42:09Z arith $
+-- $Id: Atlas_ClassOrderHalls-koKR.lua 76 2017-01-24 09:07:56Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 

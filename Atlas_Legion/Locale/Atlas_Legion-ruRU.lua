@@ -1,10 +1,8 @@
-﻿-- $Id: Atlas_Legion-ruRU.lua 37 2016-09-05 14:55:07Z arith $
+-- $Id: Atlas_Legion-ruRU.lua 87 2017-01-16 09:16:53Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
-	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -29,18 +27,10 @@ local L = AceLocale:NewLocale("Atlas_Legion", "ruRU", false);
 
 if L then
 L["Ancient Widow"] = "Древняя вдова"
--- L["Arcanist Malrodi"] = ""
--- L["Archmage Galeorn"] = ""
 L["Arthfael"] = "Артфаэль"
 L["Braxas the Fleshcarver"] = "Браксас Плотерез"
--- L["Crate of Corks"] = ""
--- L["Dantalionax"] = ""
 L["Drelanim Whisperwind"] = "Дреланим Шелест Ветра"
 L["Earlnoc the Beastbreaker"] = "Эрлнок Зверобой"
--- L["Echoing Horn of the Damned"] = ""
--- L["Fel-Ravaged Tome"] = ""
--- L["Fenryr's eastern spawn point"] = ""
--- L["Fenryr's western spawn point"] = ""
 L["Gom Crabbar"] = "Гом Краббар <Огромная клешня>"
 L["Grimoira"] = "Гримуара"
 L["Kalyndras <Rook's Quartermaster>"] = "Калиндрас <Интендант Ладьи>"
@@ -52,25 +42,12 @@ L["Kraxa <Mother of Gnashers>"] = "Кракса <Мать костеглодо�
 L["Kudzilla"] = "Кудзилла"
 L["Lady Velandras Ravencrest"] = "Леди Веландра Гребень Ворона"
 L["Ly'leth Lunastre"] = "Ли'лет Лунарх"
--- L["Malfurion Stormrage"] = ""
 L["Mushroom Merchant"] = "Продавец грибов"
--- L["Nightmare Watcher"] = ""
--- L["Portal to Shal'Aran"] = ""
--- L["Put a Cork in It"] = ""
 L["Rage Rot"] = "Яростная гниль"
 L["Ragoul"] = "Рагул"
--- L["Requires Skaggldrynk"] = ""
 L["Shellmaw"] = "Хищная раковина <Хищник в раковине>"
--- L["Sludge Face"] = ""
 L["Spiritwalker Ebonhorn"] = "Духостранник Смоляной Рог"
--- L["Teleport to Moonglade"] = ""
--- L["Teleport to Tichondrius / Grand Magistrix Elisande"] = ""
--- L["The Rat King"] = ""
--- L["Ultanok"] = ""
 L["Understone Lasher"] = "Плеточник из Подкаменного разлома"
 L["Velimar"] = "Велимар"
 L["Volynd Stormbringer"] = "Волинд Вестник Шторма"
--- L["ToC/Description"] = ""
--- L["ToC/Title"] = ""
-
 end

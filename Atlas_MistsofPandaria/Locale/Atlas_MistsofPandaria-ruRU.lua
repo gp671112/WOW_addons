@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_MistsofPandaria-ruRU.lua 10 2016-09-05 14:52:18Z arith $
+-- $Id: Atlas_MistsofPandaria-ruRU.lua 15 2017-01-16 09:41:12Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -43,8 +43,8 @@ L["GSS"] = "ВЗС"
 L["Halls"] = "ЗАо"
 L["HoF"] = "СС"
 L["Hooded Crusader"] = "Рыцарь в капюшоне"
-L["Instructor Chillheart's Phylactery"] = "Филактерия инструктора Ледяное Сердце"
 L["In the Shadow of the Light"] = "В тени света"
+L["Instructor Chillheart's Phylactery"] = "Филактерия инструктора Ледяное Сердце"
 L["Kel'Thuzad's Deep Knowledge"] = "Сокровенное знание Кел'Тузада"
 L["Master Windstrong"] = "Мастер Порывистый Ветер"
 L["Monara <The Last Queen>"] = "Монара <Последняя королева>"
@@ -71,9 +71,5 @@ L["TJS"] = "ХНЗ"
 L["ToT"] = "ЗМ"
 L["Unblinking Eye"] = "Немигающий глаз"
 L["Zao'cho <The Emperor's Shield>"] = "Зао'чо <Щит императора>"
--- L["ToC/Description"] = ""
--- L["ToC/Title"] = ""
-
-
 
 end

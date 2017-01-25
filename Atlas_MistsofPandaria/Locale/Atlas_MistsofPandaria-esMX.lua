@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_MistsofPandaria-esMX.lua 10 2016-09-05 14:52:18Z arith $
+-- $Id: Atlas_MistsofPandaria-esMX.lua 15 2017-01-16 09:41:12Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -43,8 +43,8 @@ L["GSS"] = "GSS"
 L["Halls"] = "Salas"
 L["HoF"] = "HoF"
 L["Hooded Crusader"] = "Cruzada encapuchada"
-L["Instructor Chillheart's Phylactery"] = "Filacteria de la instructora Corazón Álgido"
 L["In the Shadow of the Light"] = "A la sombra de la Luz"
+L["Instructor Chillheart's Phylactery"] = "Filacteria de la instructora Corazón Álgido"
 L["Kel'Thuzad's Deep Knowledge"] = "Saber profundo de Kel'Thuzad"
 L["Master Windstrong"] = "Maestro Viento Impetuoso"
 L["Monara <The Last Queen>"] = "Monara <La Última Reina>"
@@ -71,9 +71,6 @@ L["TJS"] = "TJS"
 L["ToT"] = "ToT"
 L["Unblinking Eye"] = "Ojo imperturbable"
 L["Zao'cho <The Emperor's Shield>"] = "Zao'cho <El escudo del Emperador>"
--- L["ToC/Description"] = ""
--- L["ToC/Title"] = ""
-
 --************************************************
 -- Zone Names, Acronyms, and Common Strings
 --************************************************

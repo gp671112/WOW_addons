@@ -1,13 +1,34 @@
-$Id: ChangeLog.txt 60 2016-11-11 05:19:19Z arith $
+$Id: ChangeLog.txt 71 2017-01-24 14:23:35Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail.com>
 
 ==============
 = Change Log =
 ==============
 
+v1.37.01 (Jan. 24, 2017)
+------------------------
+- Added continent maps' achievements (exploration and missions)
+
+v1.37.00 (Jan. 23, 2017)
+------------------------
+- Added Hunter's taxi nodes in Suramar
+- Translation update:
+  - Korean (netaras)
+
+v1.36.01 (Jan. 03, 2017)
+------------------------
+- Added Astravar Harbor in Suramar
+
+v1.36.00 (Jan. 01, 2017)
+------------------------
+- Added Evermoon Terrace, this is available after the Waning Crescent is destroyed
+- Translation update:
+  - Korean (netaras)
+  - German (pas06)
+  
 v1.35.01 (Nov. 11, 2016)
 ------------------------
 - Map revamped:

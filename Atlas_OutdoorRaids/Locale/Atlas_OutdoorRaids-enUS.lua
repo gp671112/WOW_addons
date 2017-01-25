@@ -1,10 +1,10 @@
--- $Id: Atlas_OutdoorRaids-enUS.lua 15 2016-07-25 14:23:32Z arith $
+-- $Id: Atlas_OutdoorRaids-enUS.lua 25 2017-01-19 07:42:24Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -30,7 +30,6 @@ local L = AceLocale:NewLocale("Atlas_OutdoorRaids", "enUS", true);
 --    local L = AceLocale:NewLocale("Atlas_OutdoorRaids", "deDE", false);
 
 if L then
-
 L["Ancient Skull Pile"] = "Ancient Skull Pile"
 L["Broken Isles World Bosses"] = "Broken Isles World Bosses"
 L["Darkscreecher Akkarai"] = "Darkscreecher Akkarai"
@@ -46,15 +45,12 @@ L["Sahaak <Keeper of Scrolls>"] = "Sahaak <Keeper of Scrolls>"
 L["Severin <Skyguard Medic>"] = "Severin <Skyguard Medic>"
 L["Skull Pile"] = "Skull Pile"
 L["Sky Commander Adaris"] = "Sky Commander Adaris"
+L["Sky Sergeant Doryn"] = "Sky Sergeant Doryn"
 L["Skyguard Handler Deesak"] = "Skyguard Handler Deesak"
 L["Skyguard Prisoner"] = "Skyguard Prisoner"
-L["Sky Sergeant Doryn"] = "Sky Sergeant Doryn"
 L["Talonpriest Ishaal"] = "Talonpriest Ishaal"
 L["Talonpriest Skizzik"] = "Talonpriest Skizzik"
 L["Talonpriest Zellek"] = "Talonpriest Zellek"
 L["Terokk"] = "Terokk"
 L["Vakkiz the Windrager"] = "Vakkiz the Windrager"
-L["ToC/Description"] = "Maps for Outdoor Raid Encounters"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[Outdoor Raids]|r"
-
 end

@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_MistsofPandaria-zhTW.lua 10 2016-09-05 14:52:18Z arith $
+-- $Id: Atlas_MistsofPandaria-zhTW.lua 15 2017-01-16 09:41:12Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -43,8 +43,8 @@ L["GSS"] = "GSS"
 L["Halls"] = "Halls/大廳"
 L["HoF"] = "HoF"
 L["Hooded Crusader"] = "戴頭罩的十字軍"
-L["Instructor Chillheart's Phylactery"] = "講師冷心的骨匣"
 L["In the Shadow of the Light"] = "在聖光的陰影之中"
+L["Instructor Chillheart's Phylactery"] = "講師冷心的骨匣"
 L["Kel'Thuzad's Deep Knowledge"] = "科爾蘇加德的深層知識"
 L["Master Windstrong"] = "風強大師"
 L["Monara <The Last Queen>"] = "魔娜菈 <魔古的末代皇后>"
@@ -71,9 +71,5 @@ L["TJS"] = "TJS"
 L["ToT"] = "ToT"
 L["Unblinking Eye"] = "堅定無畏之眼"
 L["Zao'cho <The Emperor's Shield>"] = "趙仇 <帝王之盾>"
-L["ToC/Description"] = "潘達利亞之謎副本地圖模組"
-L["ToC/Title"] = "|r|cFF0099FF[地圖]|rAtlas 潘達利亞之謎"
-
-
 
 end

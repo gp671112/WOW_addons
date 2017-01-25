@@ -1,10 +1,10 @@
- -- $Id: Atlas_OutdoorRaids-itIT.lua 13 2016-07-19 13:56:42Z arith $
+ -- $Id: Atlas_OutdoorRaids-itIT.lua 25 2017-01-19 07:42:24Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -29,7 +29,6 @@ local L = AceLocale:NewLocale("Atlas_OutdoorRaids", "frFR", false);
 
 if L then
 L["Ancient Skull Pile"] = "Ancienne pile de crânes"
--- L["Broken Isles World Bosses"] = ""
 L["Darkscreecher Akkarai"] = "Akkarai le Hurle-sombre"
 L["Draenor World Bosses"] = "Boss de Monde de Draenor"
 L["Gezzarak the Huntress"] = "Gezzarak la Chasseresse"
@@ -43,15 +42,12 @@ L["Sahaak <Keeper of Scrolls>"] = "Sahaak <Gardiens des parchemins>"
 L["Severin <Skyguard Medic>"] = "Séverin <Infirmier de la Garde-ciel>"
 L["Skull Pile"] = "Pile de crânes"
 L["Sky Commander Adaris"] = "Commandant Adaris de la Garde-ciel"
+L["Sky Sergeant Doryn"] = "Sergent Doryn de la Garde-ciel"
 L["Skyguard Handler Deesak"] = "Dresseur Deesak de la Garde-ciel"
 L["Skyguard Prisoner"] = "Prisonnier de la Garde-ciel"
-L["Sky Sergeant Doryn"] = "Sergent Doryn de la Garde-ciel"
 L["Talonpriest Ishaal"] = "Prêtre de la serre Ishaal"
 L["Talonpriest Skizzik"] = "Prêtre de la serre Skizzik"
 L["Talonpriest Zellek"] = "Prêtre de la serre Zellek"
 L["Terokk"] = "Terokk"
 L["Vakkiz the Windrager"] = "Vakkiz le Ragevent"
-L["ToC/Description"] = "Rencontres de Raid" -- Needs review
--- L["ToC/Title"] = ""
-
 end

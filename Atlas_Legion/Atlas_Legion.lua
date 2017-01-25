@@ -1,8 +1,8 @@
--- $Id: Atlas_Legion.lua 82 2016-11-14 08:58:45Z arith $
+-- $Id: Atlas_Legion.lua 95 2017-01-24 05:52:33Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -61,7 +61,14 @@ local myMaps = {
 		{ WHIT.." 6) "..Atlas_GetBossName("Anub'esset", 1696), 1696 };
 		{ WHIT.." 7) "..Atlas_GetBossName("Sael'orn", 1697), 1697 };
 		{ WHIT.." 8) "..Atlas_GetBossName("Fel Lord Betrug", 1711), 1711 };
-		
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "You're Just Making It WORSE!", "ac=10553" };
+		{ "I Made a Food", "ac=10554" };
+		{ "Assault on Violet Hold", "ac=10798" };
+		{ "Heroic: Assault on Violet Hold", "ac=10799" };
+		{ "Mythic: Assault on Violet Hold", "ac=10800" };
+		{ "Mythic: Assault on Violet Hold Guild Run", "ac=10860" };
 	};
 	BlackRookHoldA = {
 		ZoneName = { BZ["Black Rook Hold"]..ALC["MapA"] };
@@ -74,11 +81,20 @@ local myMaps = {
 		JournalInstanceID = "740";
 		Module = "Atlas_Legion";
 		LargeMap = "BlackRookHold1_";
+		NextMap = "BlackRookHoldB";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..ALC["Connection"], 10002 };
 		{ WHIT.." 1) "..Atlas_GetBossName("The Amalgam of Souls", 1518), 1518 };
 		{ ORNG.." 1) "..L["Lady Velandras Ravencrest"], 10003 };
 		{ ORNG.." 2) "..L["Ancient Widow"], 10004 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Black Rook Moan", "ac=10710" };
+		{ "You Used to Scrawl Me In Your Fel Tome", "ac=10709" };
+		{ "Black Rook Hold", "ac=10804" };
+		{ "Heroic: Black Rook Hold", "ac=10805" };
+		{ "Mythic: Black Rook Hold", "ac=10806" };
+		{ "Mythic: Black Rook Hold Guild Run", "ac=10862" };
 	};
 	BlackRookHoldB = {
 		ZoneName = { BZ["Black Rook Hold"]..ALC["MapB"] };
@@ -91,11 +107,21 @@ local myMaps = {
 		JournalInstanceID = "740";
 		Module = "Atlas_Legion";
 		LargeMap = "BlackRookHold2_";
+		PrevMap = "BlackRookHoldA";
+		NextMap = "BlackRookHoldC";
 		{ BLUE.." B-G) "..ALC["Connection"], 10001 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Illysanna Ravencrest", 1653), 1653 };
 		{ ORNG.." 3) "..L["Archmage Galeorn"], 10002 };
 		{ ORNG.." 4) "..L["Kalyndras <Rook's Quartermaster>"], 10003 };
 		{ ORNG.." 5) "..L["Braxas the Fleshcarver"], 10004 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Adds? More Like Bads", "ac=10711" };
+		{ "You Used to Scrawl Me In Your Fel Tome", "ac=10709" };
+		{ "Black Rook Hold", "ac=10804" };
+		{ "Heroic: Black Rook Hold", "ac=10805" };
+		{ "Mythic: Black Rook Hold", "ac=10806" };
+		{ "Mythic: Black Rook Hold Guild Run", "ac=10862" };
 	};
 	BlackRookHoldC = {
 		ZoneName = { BZ["Black Rook Hold"]..ALC["MapC"] };
@@ -107,10 +133,18 @@ local myMaps = {
 		DungeonLevel = "4";
 		JournalInstanceID = "740";
 		Module = "Atlas_Legion";
+		PrevMap = "BlackRookHoldB";
 		{ BLUE.." F-G) "..ALC["Connection"], 10001 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Smashspite the Hateful", 1664), 1664 };
 		{ WHIT.." 4) "..Atlas_GetBossName("Lord Kur'talos Ravencrest", 1672), 1672 };
 		{ INDENT..WHIT..L["Dantalionax"] };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "You Used to Scrawl Me In Your Fel Tome", "ac=10709" };
+		{ "Black Rook Hold", "ac=10804" };
+		{ "Heroic: Black Rook Hold", "ac=10805" };
+		{ "Mythic: Black Rook Hold", "ac=10806" };
+		{ "Mythic: Black Rook Hold Guild Run", "ac=10862" };
 	};
 	CourtofStarsA = {
 		ZoneName = { BZ["Court of Stars"]..ALC["MapA"] };
@@ -122,6 +156,7 @@ local myMaps = {
 		DungeonLevel = "1";
 		JournalInstanceID = "800";
 		Module = "Atlas_Legion";
+		NextMap = "CourtofStarsB";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B-C) "..ALC["Connection"], 10002 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Patrol Captain Gerdo", 1718), 1718 };
@@ -130,6 +165,12 @@ local myMaps = {
 		{ GREN.." 1) "..L["Ly'leth Lunastre"], 10003 };
 		{ ORNG.." 1) "..L["Arcanist Malrodi"], 10004 };
 		{ ORNG.." 2) "..L["Velimar"], 10005 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Waiting for Gerdo", "ac=10610" };
+		{ "Dropping Some Eaves", "ac=10611" };
+		{ "Mythic: Court of Stars", "ac=10816" };
+		{ "Mythic: Court of Stars Guild Run", "ac=10865" };
 	};
 	CourtofStarsB = {
 		ZoneName = { BZ["Court of Stars"]..ALC["MapB"] };
@@ -141,6 +182,7 @@ local myMaps = {
 		DungeonLevel = "2";
 		JournalInstanceID = "800";
 		Module = "Atlas_Legion";
+		PrevMap = "CourtofStarsA";
 		{ BLUE.." B-C) "..ALC["Connection"], 10002 };
 	};
 	DarkheartThicket = {
@@ -159,8 +201,17 @@ local myMaps = {
 		{ WHIT.." 2) "..Atlas_GetBossName("Oakheart", 1655), 1655 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Dresaron", 1656), 1656 };
 		{ WHIT.." 4) "..Atlas_GetBossName("Shade of Xavius", 1657), 1657 };
-		{ ORNG.." 1) "..L["Rage Rot"], 10003 };
-		{ ORNG.." 2) "..L["Kudzilla"], 10004 };
+		{ ORNG.." 1) "..L["Rage Rot"], 101660 };
+		{ ORNG.." 2) "..L["Mythana"], 101641 };
+		{ ORNG.." 3) "..L["Kudzilla"], 99362 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Egg-cellent!", "ac=10766" };
+		{ "Burning Down the House", "ac=10769" };
+		{ "Darkheart Thicket", "ac=10783" };
+		{ "Heroic: Darkheart Thicket", "ac=10784" };
+		{ "Mythic: Darkheart Thicket", "ac=10785" };
+		{ "Mythic: Darkheart Thicket Guild Run", "ac=10857" };
 	};
 	EyeofAzshara = {
 		ZoneName = { BZ["Eye of Azshara"] };
@@ -174,13 +225,24 @@ local myMaps = {
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Warlord Parjesh", 1480), 1480 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Lady Hatecoil", 1490), 1490 };
-		{ WHIT.." 3) "..Atlas_GetBossName("King Deepbeard", 1491), 1491 };
-		{ WHIT.." 4) "..Atlas_GetBossName("Serpentrix", 1479), 1479 };
+		{ WHIT.." 3) "..Atlas_GetBossName("Serpentrix", 1479), 1479 };
+		{ WHIT.." 4) "..Atlas_GetBossName("King Deepbeard", 1491), 1491 };
 		{ WHIT.." 5) "..Atlas_GetBossName("Wrath of Azshara", 1492), 1492 };
 		{ GREN.."1') "..L["Crate of Corks"], 10002 };
 		{ INDENT..GREY..QUESTS_COLON..L["Put a Cork in It"] };
-		{ ORNG.." 1) "..L["Shellmaw"], 10003 };
-		{ ORNG.." 2) "..L["Gom Crabbar"], 10004 };
+		{ ORNG.." 1) "..L["Shellmaw"], 91788 };
+		{ ORNG.." 2) "..L["Dread Captain Thedon"], 108543 };
+		{ ORNG.." 2) "..L["Gom Crabbar"], 101411 };
+		{ ORNG.." 3) "..L["Jaggen-Ra"], 101467 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "But You Say He's Just a Friend", "ac=10456" };
+		{ "Stay Salty", "ac=10457" };
+		{ "Ready for Raiding V", "ac=10458" };
+		{ "Eye of Azshara", "ac=10780" };
+		{ "Heroic: Eye of Azshara", "ac=10781" };
+		{ "Mythic: Eye of Azshara", "ac=10782" };
+		{ "Mythic: Eye of Azshara Guild Run", "ac=10856" };
 	};
 	HallsofValorA = { 
 		ZoneName = { BZ["Halls of Valor"]..ALC["MapA"] };
@@ -192,12 +254,19 @@ local myMaps = {
 		DungeonLevel = "2";
 		JournalInstanceID = "721";
 		Module = "Atlas_Legion";
+		NextMap = "HallsofValorB";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..ALC["Portal"], 10002 };
 		{ BLUE.." C) "..ALC["Connection"], 10003 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Hymdall", 1485), 1485 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Hyrja", 1486), 1486 };
 		{ ORNG.." 1) "..L["Volynd Stormbringer"], 10004 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Halls of Valor", "ac=10786" };
+		{ "Heroic: Halls of Valor", "ac=10788" };
+		{ "Mythic: Halls of Valor", "ac=10789" };
+		{ "Mythic: Halls of Valor Guild Run", "ac=10858" };
 	};
 	HallsofValorB = { 
 		ZoneName = { BZ["Halls of Valor"]..ALC["MapB"] };
@@ -209,12 +278,20 @@ local myMaps = {
 		DungeonLevel = "1";
 		JournalInstanceID = "721";
 		Module = "Atlas_Legion";
+		PrevMap = "HallsofValorA";
+		NextMap = "HallsofValorC";
 		{ BLUE.." B) "..ALC["Portal"], 10002 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Fenryr", 1487), 1487 };
 		{ INDENT..WHIT.." 3') "..L["Fenryr's western spawn point"], 10003 };
 		{ INDENT..WHIT.." 3'') "..L["Fenryr's eastern spawn point"], 10004 };
 		{ ORNG.." 2) "..L["Arthfael"], 10005 };
 		{ ORNG.." 3) "..L["Earlnoc the Beastbreaker"], 10006 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Halls of Valor", "ac=10786" };
+		{ "Heroic: Halls of Valor", "ac=10788" };
+		{ "Mythic: Halls of Valor", "ac=10789" };
+		{ "Mythic: Halls of Valor Guild Run", "ac=10858" };
 	};
 	HallsofValorC = { 
 		ZoneName = { BZ["Halls of Valor"]..ALC["MapC"] };
@@ -226,6 +303,7 @@ local myMaps = {
 		DungeonLevel = "3";
 		JournalInstanceID = "721";
 		Module = "Atlas_Legion";
+		PrevMap = "HallsofValorB";
 		{ BLUE.." C) "..ALC["Connection"], 10003 };
 		{ WHIT.." 4) "..Atlas_GetBossName("God-King Skovald", 1488), 1488 };
 		{ WHIT.." 5) "..Atlas_GetBossName("Odyn", 1489), 1489 };
@@ -233,6 +311,14 @@ local myMaps = {
 		{ ORNG.." 2) "..L["King Bjorn"], 10005 };
 		{ ORNG.." 3) "..L["King Haldor"], 10006 };
 		{ ORNG.." 4) "..L["King Ranulf"], 10007 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "I Got What You Mead", "ac=10542" };
+		{ "Halls of Valor", "ac=10786" };
+		{ "Surge Protector", "ac=10543" };
+		{ "Heroic: Halls of Valor", "ac=10788" };
+		{ "Mythic: Halls of Valor", "ac=10789" };
+		{ "Mythic: Halls of Valor Guild Run", "ac=10858" };
 	};
 	MawofSoulsA = {
 		ZoneName = { BZ["Maw of Souls"]..ALC["MapA"] };
@@ -244,9 +330,18 @@ local myMaps = {
 		DungeonLevel = "1";
 		JournalInstanceID = "727";
 		Module = "Atlas_Legion";
+		NextMap = "MawofSoulsB";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..ALC["Transport"]..ALC["Hyphen"]..L["Echoing Horn of the Damned"], 10002 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Ymiron, the Fallen King", 1502), 1502 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Helheim Hath No Fury", "ac=10411" };
+		{ "Instant Karma", "ac=10413" };
+		{ "Maw of Souls", "ac=10807" };
+		{ "Heroic: Maw of Souls", "ac=10808" };
+		{ "Mythic: Maw of Souls", "ac=10809" };
+		{ "Mythic: Maw of Souls Guild Run", "ac=10863" };
 	};
 	MawofSoulsB = {
 		ZoneName = { BZ["Maw of Souls"]..ALC["MapB"] };
@@ -258,9 +353,19 @@ local myMaps = {
 		DungeonLevel = "3";
 		JournalInstanceID = "727";
 		Module = "Atlas_Legion";
+		PrevMap = "MawofSoulsA";
 		{ BLUE.." B-C) "..ALC["Connection"], 10001 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Harbaron", 1512), 1512 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Helya", 1663), 1663 };		
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Helheim Hath No Fury", "ac=10411" };
+		{ "Poor Unfortunate Souls", "ac=10412" };
+		{ "Instant Karma", "ac=10413" };
+		{ "Maw of Souls", "ac=10807" };
+		{ "Heroic: Maw of Souls", "ac=10808" };
+		{ "Mythic: Maw of Souls", "ac=10809" };
+		{ "Mythic: Maw of Souls Guild Run", "ac=10863" };
 	};
 	NeltharionsLair = {
 		ZoneName = { BZ["Neltharion's Lair"] };
@@ -283,6 +388,14 @@ local myMaps = {
 		{ ORNG.." 2) "..L["Understone Lasher"], 103597 };
 		{ ORNG.." 3) "..L["Ragoul"], 103199 };
 		{ ORNG.." 4) "..L["Kraxa <Mother of Gnashers>"], 103271 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Got to Ketchum All", "ac=10996" };
+		{ "Can't Eat Just One", "ac=10875" };
+		{ "Neltharion's Lair", "ac=10795" };
+		{ "Heroic: Neltharion's Lair", "ac=10796" };
+		{ "Mythic: Neltharion's Lair", "ac=10797" };
+		{ "Mythic: Neltharion's Lair Guild Run", "ac=10859" };
 	};
 --[[
 	ReturntoKarazhan = {
@@ -315,6 +428,7 @@ local myMaps = {
 		--Acronym = "";
 		JournalInstanceID = "726";
 		Module = "Atlas_Legion";
+		NextMap = "TheArcway";
 		{ BLUE.." A) "..BZ["The Grand Promenade"], 10001 };
 		{ BLUE.." B) "..BZ["Terrace of Order"], 10002 };
 		{ BLUE.." C) "..BZ["The Arcway"], 10003 };
@@ -332,6 +446,7 @@ local myMaps = {
 		WorldMapID = "1079";
 		JournalInstanceID = "726";
 		Module = "Atlas_Legion";
+		PrevMap = "TheArcwayEnt";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Ivanyr", 1497), 1497 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Corstilax", 1498), 1498 };
@@ -340,6 +455,13 @@ local myMaps = {
 		{ WHIT.." 5) "..Atlas_GetBossName("Advisor Vandros", 1501), 1501 };
 		{ ORNG.." 1) "..L["The Rat King"], 10002 };
 		{ ORNG.." 2) "..L["Sludge Face"], 10003 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Arcanic Cling", "ac=10773" };
+		{ "Clean House", "ac=10775" };
+		{ "No Time to Waste", "ac=10776" };
+		{ "Mythic: The Arcway", "ac=10813" };
+		{ "Mythic: The Arcway Guild Run", "ac=10864" };
 	};
 	TheEmeraldNightmareA = {
 		ZoneName = { BZ["The Emerald Nightmare"]..ALC["MapA"] };
@@ -354,10 +476,17 @@ local myMaps = {
 		PlayerLimit = "10-30";
 		MinGearLevel = "825";
 		Module = "Atlas_Legion";
+		NextMap = "TheEmeraldNightmareB";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..ALC["Connection"], 10002 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Nythendra", 1703), 1703 };
 		{ GREN.." 1') "..L["Nightmare Watcher"], 10003 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Darkbough", "ac=10818" };
+		{ "Buggy Fight", "ac=10555" };
+		{ "Mythic: Nythendra", "ac=10821" };
+		{ "The Emerald Nightmare Guild Run", "ac=10866" };
 	};
 	TheEmeraldNightmareB = {
 		ZoneName = { BZ["The Emerald Nightmare"]..ALC["MapB"] };
@@ -372,6 +501,8 @@ local myMaps = {
 		PlayerLimit = "10-30";
 		MinGearLevel = "825";
 		Module = "Atlas_Legion";
+		PrevMap = "TheEmeraldNightmareA";
+		NextMap = "TheEmeraldNightmareC";
 		{ BLUE.." B) "..ALC["Connection"], 10002 };
 		{ BLUE.." C) "..ALC["Portal"]..ALC["Colon"]..BZ["Un'Goro Crater"], 10003 };
 		{ BLUE.." D) "..ALC["Portal"]..ALC["Colon"]..BZ["Mulgore"], 10004 };
@@ -393,8 +524,16 @@ local myMaps = {
 		PlayerLimit = "10-30";
 		MinGearLevel = "825";
 		Module = "Atlas_Legion";
+		PrevMap = "TheEmeraldNightmareB";
+		NextMap = "TheEmeraldNightmareD";
 		{ BLUE.." C) "..ALC["Portal"], 10003 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Il'gynoth, Heart of Corruption", 1738), 1738 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Darkbough", "ac=10818" };
+		{ "Took the Red Eye Down", "ac=10830" };
+		{ "Mythic: Il'gynoth", "ac=10823" };
+		{ "The Emerald Nightmare Guild Run", "ac=10866" };
 	};
 	TheEmeraldNightmareD = {
 		ZoneName = { BZ["The Emerald Nightmare"]..ALC["MapD"] };
@@ -409,8 +548,16 @@ local myMaps = {
 		PlayerLimit = "10-30";
 		MinGearLevel = "825";
 		Module = "Atlas_Legion";
+		PrevMap = "TheEmeraldNightmareC";
+		NextMap = "TheEmeraldNightmareE";
 		{ BLUE.." D) "..ALC["Portal"], 10004 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Elerethe Renferal", 1744), 1744 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Darkbough", "ac=10818" };
+		{ "Webbing Crashers", "ac=10771" };
+		{ "Mythic: Elerethe Renferal", "ac=10822" };
+		{ "The Emerald Nightmare Guild Run", "ac=10866" };
 	};
 	TheEmeraldNightmareE = {
 		ZoneName = { BZ["The Emerald Nightmare"]..ALC["MapE"] };
@@ -425,8 +572,16 @@ local myMaps = {
 		PlayerLimit = "10-30";
 		MinGearLevel = "825";
 		Module = "Atlas_Legion";
+		PrevMap = "TheEmeraldNightmareD";
+		NextMap = "TheEmeraldNightmareF";
 		{ BLUE.." E) "..ALC["Portal"], 10005 };
 		{ WHIT.." 4) "..Atlas_GetBossName("Ursoc", 1667), 1667 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Tormented Guardians", "ac=10819" };
+		{ "Scare Bear", "ac=10753" };
+		{ "Mythic: Ursoc", "ac=10824" };
+		{ "The Emerald Nightmare Guild Run", "ac=10866" };
 	};
 	TheEmeraldNightmareF = {
 		ZoneName = { BZ["The Emerald Nightmare"]..ALC["MapF"] };
@@ -441,8 +596,16 @@ local myMaps = {
 		PlayerLimit = "10-30";
 		MinGearLevel = "825";
 		Module = "Atlas_Legion";
+		PrevMap = "TheEmeraldNightmareE";
+		NextMap = "TheEmeraldNightmareG";
 		{ BLUE.." F) "..ALC["Portal"], 10006 };
 		{ WHIT.." 5) "..Atlas_GetBossName("Dragons of Nightmare", 1704), 1704 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Tormented Guardians", "ac=10819" };
+		{ "Imagined Dragons World Tour", "ac=10663" };
+		{ "Mythic: Dragons of Nightmare", "ac=10825" };
+		{ "The Emerald Nightmare Guild Run", "ac=10866" };
 	};
 	TheEmeraldNightmareG = {
 		ZoneName = { BZ["The Emerald Nightmare"]..ALC["MapG"] };
@@ -457,8 +620,17 @@ local myMaps = {
 		PlayerLimit = "10-30";
 		MinGearLevel = "825";
 		Module = "Atlas_Legion";
+		PrevMap = "TheEmeraldNightmareF";
+		NextMap = "TheEmeraldNightmareH";
 		{ BLUE.." G) "..ALC["Portal"], 10007 };
 		{ WHIT.." 6) "..Atlas_GetBossName("Cenarius", 1750), 1750 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Tormented Guardians", "ac=10819" };
+		{ "Use the Force(s)", "ac=10772" };
+		{ "I Attack the Darkness", "ac=10755" };
+		{ "Mythic: Cenarius", "ac=10826" };
+		{ "The Emerald Nightmare Guild Run", "ac=10866" };
 	};
 	TheEmeraldNightmareH = {
 		ZoneName = { BZ["The Emerald Nightmare"]..ALC["MapH"] };
@@ -473,7 +645,16 @@ local myMaps = {
 		PlayerLimit = "10-30";
 		MinGearLevel = "825";
 		Module = "Atlas_Legion";
+		PrevMap = "TheEmeraldNightmareG";
 		{ WHIT.." 7) "..Atlas_GetBossName("Xavius", 1726), 1726 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Rift of Aln", "ac=10820" };
+		{ "Ahead of the Curve: Xavius", "ac=11194" };
+		{ "Cutting Edge: Xavius", "ac=11191" };
+		{ "Mythic: Xavius", "ac=10827" };
+		{ "Mythic: Xavius Guild Run", "ac=11238" };
+		{ "The Emerald Nightmare Guild Run", "ac=10866" };
 	};
 	TheNightholdEnt = {
 		ZoneName = { BZ["The Nighthold"]..ALC["L-Parenthesis"]..ALC["Entrance"]..ALC["R-Parenthesis"] };
@@ -484,6 +665,7 @@ local myMaps = {
 		JournalInstanceID = "786";
 		PlayerLimit = "10-30";
 		Module = "Atlas_Legion";
+		NextMap = "TheNightholdA";
 		{ BLUE.." A) "..BZ["The Grand Promenade"], 10001 };
 		{ BLUE.." B) "..BZ["Terrace of Order"], 10002 };
 		{ BLUE.." C) "..BZ["The Arcway"], 10003 };
@@ -505,11 +687,19 @@ local myMaps = {
 		PlayerLimit = "10-30";
 		MinGearLevel = "835";
 		Module = "Atlas_Legion";
+		PrevMap = "TheNightholdEnt";
+		NextMap = "TheNightholdB";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..ALC["Connection"], 10002 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Skorpyron", 1706), 1706 };
 		{ GREN.." 1') "..L["Palace Watcher"], 10003 }; 
 		{ GREY..INDENT..L["Teleport to Tichondrius / Grand Magistrix Elisande"] };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Cage Rematch", "ac=10678" };
+		{ "Arcing Aqueducts", "ac=10829" };
+		{ "Mythic: Skorpyron", "ac=10840" };
+		{ "The Nighthold Guild Run", "ac=10868" };
 	};
 	TheNightholdB = {
 		ZoneName = { BZ["The Nighthold"]..ALC["MapB"] };
@@ -524,9 +714,19 @@ local myMaps = {
 		PlayerLimit = "10-30";
 		MinGearLevel = "835";
 		Module = "Atlas_Legion";
+		PrevMap = "TheNightholdA";
+		NextMap = "TheNightholdC";
 		{ BLUE.." B-D) "..ALC["Connection"], 10001 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Chronomatic Anomaly", 1725)..ALC["L-Parenthesis"]..ALC["Wanders"]..ALC["R-Parenthesis"], 1725 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Trilliax", 1731), 1731 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Grand Opening", "ac=10697" };
+		{ "Gluten Free", "ac=10742" };
+		{ "Arcing Aqueducts", "ac=10829" };
+		{ "Mythic: Chronomatic Anomaly", "ac=10842" };
+		{ "Mythic: Trilliax", "ac=10843" };
+		{ "The Nighthold Guild Run", "ac=10868" };
 	};
 	TheNightholdC = {
 		ZoneName = { BZ["The Nighthold"]..ALC["MapC"] };
@@ -541,10 +741,23 @@ local myMaps = {
 		PlayerLimit = "10-30";
 		MinGearLevel = "835";
 		Module = "Atlas_Legion";
+		PrevMap = "TheNightholdB";
+		NextMap = "TheNightholdD";
 		{ BLUE.." D-H) "..ALC["Connection"], 10001 };
 		{ WHIT.." 4) "..Atlas_GetBossName("Spellblade Aluriel", 1751)..ALC["L-Parenthesis"]..ALC["Wanders"]..ALC["R-Parenthesis"], 1751 };
 		{ WHIT.." 6) "..Atlas_GetBossName("Krosus", 1713), 1713 };
 		{ WHIT.." 7) "..Atlas_GetBossName("High Botanist Tel'arn", 1761), 1761 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "A Change In Scenery", "ac=10817" };
+		{ "Burning Bridges", "ac=10575" };
+		{ "Fruit of All Evil", "ac=10754" };
+		{ "Nightspire", "ac=10838" };
+		{ "Royal Athenaeum", "ac=10837" };
+		{ "Mythic: Spellblade Aluriel", "ac=10844" };
+		{ "Mythic: Krosus", "ac=10848" };
+		{ "Mythic: High Botanist Tel'arn", "ac=10846" };
+		{ "The Nighthold Guild Run", "ac=10868" };
 	};
 	TheNightholdD = {
 		ZoneName = { BZ["The Nighthold"]..ALC["MapD"] };
@@ -559,8 +772,16 @@ local myMaps = {
 		PlayerLimit = "10-30";
 		MinGearLevel = "835";
 		Module = "Atlas_Legion";
+		PrevMap = "TheNightholdC";
+		NextMap = "TheNightholdE";
 		{ BLUE.." E) "..ALC["Connection"], 10001 };
 		{ WHIT.." 5) "..Atlas_GetBossName("Tichondrius", 1762), 1762 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Not For You", "ac=10704" };
+		{ "Nightspire", "ac=10838" };
+		{ "Mythic: Tichondrius", "ac=10847" };
+		{ "The Nighthold Guild Run", "ac=10868" };
 	};
 	TheNightholdE = {
 		ZoneName = { BZ["The Nighthold"]..ALC["MapE"] };
@@ -575,8 +796,16 @@ local myMaps = {
 		PlayerLimit = "10-30";
 		MinGearLevel = "835";
 		Module = "Atlas_Legion";
+		PrevMap = "TheNightholdD";
+		NextMap = "TheNightholdF";
 		{ BLUE.." E-G) "..ALC["Connection"], 10001 };
 		{ WHIT.." 8) "..Atlas_GetBossName("Star Augur Etraeus", 1732), 1732 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Elementalry!", "ac=10851" };
+		{ "Royal Athenaeum", "ac=10837" };
+		{ "Mythic: Star Augur Etraeus", "ac=10845" };
+		{ "The Nighthold Guild Run", "ac=10868" };
 	};
 	TheNightholdF = {
 		ZoneName = { BZ["The Nighthold"]..ALC["MapF"] };
@@ -591,8 +820,16 @@ local myMaps = {
 		PlayerLimit = "10-30";
 		MinGearLevel = "835";
 		Module = "Atlas_Legion";
+		PrevMap = "TheNightholdE";
+		NextMap = "TheNightholdG";
 		{ BLUE.." H) "..ALC["Portal"], 10001 };
 		{ WHIT.." 9) "..Atlas_GetBossName("Grand Magistrix Elisande", 1743), 1743 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Infinitesimal", "ac=10699" };
+		{ "Nightspire", "ac=10838" };
+		{ "Mythic: Grand Magistrix Elisande", "ac=10849" };
+		{ "The Nighthold Guild Run", "ac=10868" };
 	};
 	TheNightholdG = {
 		ZoneName = { BZ["The Nighthold"]..ALC["MapG"] };
@@ -607,7 +844,17 @@ local myMaps = {
 		PlayerLimit = "10-30";
 		MinGearLevel = "835";
 		Module = "Atlas_Legion";
+		PrevMap = "TheNightholdF";
 		{ WHIT.." 10) "..Atlas_GetBossName("Gul'dan", 1737), 1737 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Betrayer's Rise", "ac=10839" };
+		{ "I've Got My Eyes On You", "ac=10696" };
+		{ "Mythic: Gul'dan", "ac=10850" };
+		{ "Mythic: Gul'dan Guild Run", "ac=11239" };
+		{ "The Nighthold Guild Run", "ac=10868" };
+		{ "Cutting Edge: Gul'dan", "ac=11192" };
+		{ "Ahead of the Curve: Gul'dan", "ac=11195" };
 	};
 	TrialofValorA = { 
 		ZoneName = { BZ["Trial of Valor"]..ALC["MapA"] };
@@ -618,10 +865,18 @@ local myMaps = {
 		DungeonLevel = "2";
 		JournalInstanceID = "861";
 		Module = "Atlas_Legion";
+		NextMap = "TrialofValorB";
 		{ BLUE.." A) "..ALC["Entrance"], 10101 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Hymdall", 1485), 10001 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Hyrja", 1486), 10002 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Odyn", 1819), 1819 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "You Runed Everything!", "ac=11337" };
+		{ "Mythic: Odyn", "ac=11396" };
+		{ "Trial of Valor", "ac=11394" };
+		{ "Trial of Valor Guild Run", "ac=11403" };
+		{ "Heroic: Trial of Valor", "ac=11426" };
 	};
 	TrialofValorB = { 
 		ZoneName = { BZ["Trial of Valor"]..ALC["MapB"] };
@@ -632,9 +887,24 @@ local myMaps = {
 		DungeonLevel = "3";
 		JournalInstanceID = "861";
 		Module = "Atlas_Legion";
+		PrevMap = "TrialofValorA";
 		{ BLUE.." A) "..ALC["Entrance"], 10101 };
 		{ WHIT.." 4) "..Atlas_GetBossName("Guarm", 1830), 1830 };
 		{ WHIT.." 5) "..Atlas_GetBossName("Helya", 1829), 1829 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Cutting Edge: Helya", "ac=11580" };
+		{ "Ahead of the Curve: Helya", "ac=11581" };
+		{ "Patient Zero", "ac=11377" };
+		{ "The Chosen", "ac=11387" };
+		{ "Boneafide Tri Tip", "ac=11386" };
+		{ "Mythic: Guarm", "ac=11397" };
+		{ "Mythic: Helya", "ac=11398" };
+		{ "Realm First! Helya", "ac=11405" };
+		{ "Mythic: Helya Guild Run", "ac=11404" };
+		{ "Trial of Valor", "ac=11394" };
+		{ "Trial of Valor Guild Run", "ac=11403" };
+		{ "Heroic: Trial of Valor", "ac=11426" };
 	};
 	VaultoftheWardensA = {
 		ZoneName = { BZ["Vault of the Wardens"]..ALC["MapA"] };
@@ -646,10 +916,17 @@ local myMaps = {
 		DungeonLevel = "1";
 		JournalInstanceID = "707";
 		Module = "Atlas_Legion";
+		NextMap = "VaultoftheWardensB";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..ALC["Connection"], 10002 };
 		{ BLUE.." C) "..ALC["Elevator"], 10003 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Tirathon Saltheril", 1467), 1467 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Vault of the Wardens", "ac=10801" };
+		{ "Heroic: Vault of the Wardens", "ac=10802" };
+		{ "Mythic: Vault of the Wardens", "ac=10803" };
+		{ "Mythic: Vault of the Wardens Guild Run", "ac=10861" };
 	};
 	VaultoftheWardensB = {
 		ZoneName = { BZ["Vault of the Wardens"]..ALC["MapB"] };
@@ -661,12 +938,21 @@ local myMaps = {
 		DungeonLevel = "2";
 		JournalInstanceID = "707";
 		Module = "Atlas_Legion";
+		PrevMap = "VaultoftheWardensA";
+		NextMap = "VaultoftheWardensC";
 		{ BLUE.." C-D) "..ALC["Elevator"], 10003 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Inquisitor Tormentorum", 1695), 1695 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Ash'golm", 1468), 1468 };
 		{ WHIT.." 4) "..Atlas_GetBossName("Glazer", 1469), 1469 };
 		{ ORNG.." 1) "..L["Grimoira"], 105824 };
 		{ INDENT..GREY..ALC["L-Parenthesis"]..L["Requires Skaggldrynk"]..ALC["R-Parenthesis"] };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "I Ain't Even Cold", "ac=10679" };
+		{ "Vault of the Wardens", "ac=10801" };
+		{ "Heroic: Vault of the Wardens", "ac=10802" };
+		{ "Mythic: Vault of the Wardens", "ac=10803" };
+		{ "Mythic: Vault of the Wardens Guild Run", "ac=10861" };
 	};
 	VaultoftheWardensC = {
 		ZoneName = { BZ["Vault of the Wardens"]..ALC["MapC"] };
@@ -678,10 +964,19 @@ local myMaps = {
 		DungeonLevel = "3";
 		JournalInstanceID = "707";
 		Module = "Atlas_Legion";
+		PrevMap = "VaultoftheWardensB";
 		{ BLUE.." D) "..ALC["Elevator"], 10004 };
 		{ WHIT.." 5) "..Atlas_GetBossName("Cordana Felsong", 1470), 1470 };
 		{ GREN.." 1') "..L["Fel-Ravaged Tome"], 10005};
 		{ GREN.." 2') "..L["Drelanim Whisperwind"], 10006 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Who's Afraid of the Dark?", "ac=10680" };
+		{ "A Specter, Illuminated", "ac=10707" };
+		{ "Vault of the Wardens", "ac=10801" };
+		{ "Heroic: Vault of the Wardens", "ac=10802" };
+		{ "Mythic: Vault of the Wardens", "ac=10803" };
+		{ "Mythic: Vault of the Wardens Guild Run", "ac=10861" };
 	};
 };
 

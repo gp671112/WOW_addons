@@ -1,8 +1,8 @@
--- $Id: Atlas_ClassicWoW.lua 12 2016-09-05 14:35:48Z arith $
+-- $Id: Atlas_ClassicWoW.lua 18 2017-01-16 10:57:05Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -55,6 +55,7 @@ local myMaps = {
 		WorldMapID = "688";
 		JournalInstanceID = "227";
 		Module = "Atlas_ClassicWoW";
+		NextMap = "BlackfathomDeeps";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..BZ["Blackfathom Deeps"], 10002 };
 	};
@@ -66,6 +67,7 @@ local myMaps = {
 		WorldMapID = "688";
 		JournalInstanceID = "227";
 		Module = "Atlas_ClassicWoW";
+		PrevMap = "BlackfathomDeepsEnt";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ GREN..INDENT..L["Je'neu Sancrea <The Earthen Ring>"] };
 		{ GREN..INDENT..L["Sentinel Aluwyn"]..ALC["L-Parenthesis"]..FACTION_ALLIANCE..ALC["R-Parenthesis"] };
@@ -96,6 +98,7 @@ local myMaps = {
 		WorldMapID = "699";
 		JournalInstanceID = "230";
 		Module = "Atlas_ClassicWoW";
+		NextMap = "DireMaulEast";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..BZ["Dire Maul"]..ALC["L-Parenthesis"]..ALC["East"]..ALC["R-Parenthesis"], 10002 };
 		{ BLUE.." C) "..BZ["Dire Maul"]..ALC["L-Parenthesis"]..ALC["North"]..ALC["R-Parenthesis"], 10003 };
@@ -110,8 +113,11 @@ local myMaps = {
 		DungeonID = "34";
 		Acronym = L["DM"];
 		WorldMapID = "699";
+		DungeonLevel = "6";
 		JournalInstanceID = "230";
 		Module = "Atlas_ClassicWoW";
+		PrevMap = "DireMaulEnt";
+		NextMap = "DireMaulNorth";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ GREN..INDENT..L["\"Ambassador\" Dagg'thol"] };
 		{ GREN..INDENT..L["Furgus Warpwood"] };
@@ -134,8 +140,11 @@ local myMaps = {
 		DungeonID = "36";
 		Acronym = L["DM"];
 		WorldMapID = "699";
+		DungeonLevel = "1";
 		JournalInstanceID = "230";
 		Module = "Atlas_ClassicWoW";
+		PrevMap = "DireMaulEast";
+		NextMap = "DireMaulWest";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ GREN..INDENT..L["Druid of the Talon"]..ALC["L-Parenthesis"]..FACTION_ALLIANCE..ALC["R-Parenthesis"] };
 		{ GREN..INDENT..L["Stonemaul Ogre"]..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] };
@@ -154,8 +163,10 @@ local myMaps = {
 		DungeonID = "38";
 		Acronym = L["DM"];
 		WorldMapID = "699";
+		DungeonLevel = "4";
 		JournalInstanceID = "230";
 		Module = "Atlas_ClassicWoW";
+		PrevMap = "DireMaulNorth";
 		{ ORNG..ALC["Key"]..ALC["Colon"]..ALIL["J'eevee's Jar"]..ALC["L-Parenthesis"]..Atlas_GetBossName("Lord Hel'nurath")..ALC["R-Parenthesis"] };
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B-E) "..ALC["Connection"], 10002 };
@@ -190,6 +201,7 @@ local myMaps = {
 		WorldMapID = "750";
 		JournalInstanceID = "232";
 		Module = "Atlas_ClassicWoW";
+		NextMap = "Maraudon";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ ORNG..INDENT..L["Cursed Centaur"]..ALC["L-Parenthesis"]..ALC["Rare"]..ALC["Comma"]..ALC["Wanders"]..ALC["R-Parenthesis"] };
 		{ WHIT..INDENT..L["The Nameless Prophet"]..ALC["L-Parenthesis"]..ALC["Lower"]..ALC["R-Parenthesis"] };
@@ -208,6 +220,7 @@ local myMaps = {
 		WorldMapID = "750";
 		JournalInstanceID = "232";
 		Module = "Atlas_ClassicWoW";
+		PrevMap = "MaraudonEnt";
 		{ BLUE.." A) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Orange"]..ALC["R-Parenthesis"], 10001 };
 		{ BLUE.." B) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Purple"]..ALC["R-Parenthesis"], 10002 };
 		{ BLUE.." C) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Portal"]..ALC["R-Parenthesis"], 10003 };
@@ -348,6 +361,7 @@ local myMaps = {
 		WorldMapID = "749";
 		JournalInstanceID = "240";
 		Module = "Atlas_ClassicWoW";
+		NextMap = "WailingCaverns";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..BZ["Wailing Caverns"], 10002 };
 		{ ORNG.." 1) "..Atlas_GetBossName("Trigore the Lasher")..ALC["L-Parenthesis"]..ALC["Rare"]..ALC["R-Parenthesis"], 10003 };
@@ -359,8 +373,10 @@ local myMaps = {
 		DungeonID = "1";
 		Acronym = L["WC"];
 		WorldMapID = "749";
+		DungeonLevel = "1";
 		JournalInstanceID = "240";
 		Module = "Atlas_ClassicWoW";
+		PrevMap = "WailingCavernsEnt";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Lady Anacondra", 474), 474 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Lord Pythas", 476), 476 };
@@ -525,6 +541,7 @@ local myMaps = {
 		WorldMapID = "691";
 		JournalInstanceID = "231";
 		Module = "Atlas_ClassicWoW";
+		NextMap = "Gnomeregan";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ GREN..INDENT..ALC["Meeting Stone"] };
 		{ BLUE.." B) "..BZ["Gnomeregan"]..ALC["L-Parenthesis"]..ALC["Front"]..ALC["R-Parenthesis"], 10002 };
@@ -541,6 +558,7 @@ local myMaps = {
 		WorldMapID = "691";
 		JournalInstanceID = "231";
 		Module = "Atlas_ClassicWoW";
+		PrevMap = "GnomereganEnt";
 		{ BLUE.." A) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Front"]..ALC["R-Parenthesis"], 10001 };
 		{ BLUE.." B) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Back"]..ALC["R-Parenthesis"], 10002 };
 		{ BLUE.." C-F) "..ALC["Connection"], 10003 };
@@ -622,8 +640,10 @@ local myMaps = {
 		DungeonID = "40";
 		Acronym = L["Strat"];
 		WorldMapID = "765";
+		DungeonLevel = "1";
 		JournalInstanceID = "236";
 		Module = "Atlas_ClassicWoW";
+		NextMap = "StratholmeGauntlet";
 		{ BLUE.." A) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Front"]..ALC["R-Parenthesis"], 10001 };
 		{ GREN..INDENT..L["Crusade Commander Eligor Dawnbringer <Brotherhood of the Light>"] };
 		{ GREN..INDENT..L["Master Craftsman Wilhelm <Brotherhood of the Light>"] };
@@ -652,8 +672,10 @@ local myMaps = {
 		DungeonID = "274";
 		Acronym = L["Strat"];
 		WorldMapID = "765";
+		DungeonLevel = "2";
 		JournalInstanceID = "236";
 		Module = "Atlas_ClassicWoW";
+		PrevMap = "StratholmeCrusader";
 		{ BLUE.." A) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Front"]..ALC["R-Parenthesis"], 10001 };
 		{ GREN..INDENT..L["Packmaster Stonebruiser <Brotherhood of the Light>"] };
 		{ WHIT.." 1) "..Atlas_GetBossName("Baroness Anastari", 451), 451 };
@@ -693,6 +715,7 @@ local myMaps = {
 		WorldMapID = "687";
 		JournalInstanceID = "237";
 		Module = "Atlas_ClassicWoW";
+		NextMap = "TheSunkenTemple";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ GREN..INDENT..ALC["Meeting Stone"] };
 		{ GREN..INDENT..L["Lord Itharius"] };
@@ -710,6 +733,7 @@ local myMaps = {
 		WorldMapID = "687";
 		JournalInstanceID = "237";
 		Module = "Atlas_ClassicWoW";
+		PrevMap = "TheSunkenTempleEnt";
 		{ ORNG..ALC["AKA"]..ALC["Colon"]..BZ["The Temple of Atal'Hakkar"] };
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Avatar of Hakkar", 457), 457 };
@@ -731,6 +755,7 @@ local myMaps = {
 		WorldMapID = "692";
 		JournalInstanceID = "239";
 		Module = "Atlas_ClassicWoW";
+		NextMap = "Uldaman";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..BZ["Uldaman"], 10002 };
 	};
@@ -742,6 +767,7 @@ local myMaps = {
 		WorldMapID = "692";
 		JournalInstanceID = "239";
 		Module = "Atlas_ClassicWoW";
+		PrevMap = "UldamanEnt";
 		{ BLUE.." A) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Front"]..ALC["R-Parenthesis"], 10001 };
 		{ BLUE.." B) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Back"]..ALC["R-Parenthesis"], 10002 };
 		{ BLUE.." C) "..ALC["Connection"], 10003 };

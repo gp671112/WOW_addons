@@ -1,0 +1,8 @@
+Changes since tag v5
+
+commit 506deb1fd66fc78a05d6db5dc92a4603aa2a0715
+Author: David Lynch <kemayo@gmail.com>
+Date:   Tue Nov 29 14:31:25 2016 -0600
+
+    Option to show upcoming nodes
+

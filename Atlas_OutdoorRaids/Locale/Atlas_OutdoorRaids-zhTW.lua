@@ -1,10 +1,10 @@
--- $Id: Atlas_OutdoorRaids-zhTW.lua 15 2016-07-25 14:23:32Z arith $
+-- $Id: Atlas_OutdoorRaids-zhTW.lua 25 2017-01-19 07:42:24Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -28,7 +28,6 @@ local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas_OutdoorRaids", "zhTW", false);
 
 if L then
-
 L["Ancient Skull Pile"] = "古老的顱骨堆"
 L["Broken Isles World Bosses"] = "破碎群島世界首領"
 L["Darkscreecher Akkarai"] = "黑暗尖叫者阿卡萊"
@@ -44,15 +43,12 @@ L["Sahaak <Keeper of Scrolls>"] = "撒哈克 <卷軸看守者>"
 L["Severin <Skyguard Medic>"] = "瑟弗林 <禦天者醫療員>"
 L["Skull Pile"] = "顱骨堆"
 L["Sky Commander Adaris"] = "天空指揮官艾德瑞斯"
+L["Sky Sergeant Doryn"] = "天空士官多林"
 L["Skyguard Handler Deesak"] = "禦天者管理者迪塞克"
 L["Skyguard Prisoner"] = "禦天者囚犯"
-L["Sky Sergeant Doryn"] = "天空士官多林"
 L["Talonpriest Ishaal"] = "魔爪祭司艾夏歐"
 L["Talonpriest Skizzik"] = "魔爪祭司史奇吉克"
 L["Talonpriest Zellek"] = "魔爪祭司札列克"
 L["Terokk"] = "泰洛克"
 L["Vakkiz the Windrager"] = "『風怒者』瓦奇茲"
-L["ToC/Description"] = "Atlas 戶外首領地圖插件"
-L["ToC/Title"] = "|r|cFF0099FF[地圖]|rAtlas 戶外首領地圖"
-
 end

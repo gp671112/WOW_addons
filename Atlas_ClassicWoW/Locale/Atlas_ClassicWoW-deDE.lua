@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_ClassicWoW-deDE.lua 13 2016-09-05 14:36:53Z arith $
+-- $Id: Atlas_ClassicWoW-deDE.lua 18 2017-01-16 10:57:05Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -28,10 +28,10 @@ local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas_ClassicWoW", "deDE", false);
 
 if L then
+L["\"Ambassador\" Dagg'thol"] = "\"Botschafter\" Dagg'thol"
 L["Abandonded Mole Machine"] = "Verlassene Maulwurfmaschine"
 L["Acride <Scarshield Legion>"] = "Acride <Schmetterschildlegion>"
 L["Altar of Blood"] = "Altar des Blutes"
-L["\"Ambassador\" Dagg'thol"] = "\"Botschafter\" Dagg'thol"
 L["Amnennar's Phylactery"] = "Amnennars Phylakterium"
 L["Ancient Equine Spirit"] = "Uralter Pferdegeist"
 L["Ancient Treasure"] = "Antiker Schatz"
@@ -43,8 +43,8 @@ L["AQ40"] = "AQ40"
 L["Archmage Angela Dosantos <Brotherhood of the Light>"] = "Erzmagierin Angela Dosantos <Bruderschaft des Lichts>"
 L["Arygos"] = "Arygos"
 L["Auld Stonespire"] = "Auld Steinkeil"
-L["Baelog's Chest"] = "Baelogs Truhe"
 L["B.E Barechus <S.A.F.E.>"] = "Bi'ay Bäräkuss <S.I.C.H.E.R.>"
+L["Baelog's Chest"] = "Baelogs Truhe"
 L["BFD"] = "BFT"
 L["Blastmaster Emi Shortfuse"] = "Sprengmeisterin Emi Schnellzünd"
 L["BRD"] = "BRT"
@@ -76,10 +76,10 @@ L["Elder Farwhisper"] = "Urahne Fernwisper"
 L["Elder Mistwalker"] = "Urahnin Nebelgänger"
 L["Elder Morndeep"] = "Urahne Schwermut"
 L["Elder Splitrock"] = "Urahne Splitterfels"
-L["Elders' Square Postbox"] = "Briefkasten am Ältestenplatz"
 L["Elder Starsong"] = "Urahnin Sternensang"
 L["Elder Stonefort"] = "Urahne Steinwehr"
 L["Elder Wildmane"] = "Urahnin Wildmähne"
+L["Elders' Square Postbox"] = "Briefkasten am Ältestenplatz"
 L["Estulan <The Highborne>"] = "Estulan <Die Hochgeborenen>"
 L["Face <S.A.F.E.>"] = "Fähs <S.I.C.H.E.R.>"
 L["Falrin Treeshaper"] = "Falrin Rankenweber"
@@ -99,8 +99,8 @@ L["Invoker Xorenth"] = "Herbeirufer Xorenth"
 L["Ironbark the Redeemed"] = "Eisenborke der Erlöste"
 L["Jalinda Sprig <Morgan's Militia>"] = "Jalinda Sprig <Morgans Miliz>"
 L["Je'neu Sancrea <The Earthen Ring>"] = "Je'neu Sancrea <Der Irdene Ring>"
-L["Kandrostrasz <Brood of Alexstrasza>"] = "Kandrostrasz <Brut Alexstraszas>"
 L["Kand Sandseeker <Explorer's League>"] = "Kand Sandsucher <Forscherliga>"
+L["Kandrostrasz <Brood of Alexstrasza>"] = "Kandrostrasz <Brut Alexstraszas>"
 L["Kevin Dawson <Morgan's Militia>"] = "Kevin Dawson <Morgans Miliz>"
 L["Kherrah"] = "Kherrah"
 L["King's Square Postbox"] = "Briefkasten am Königsplatz"
@@ -176,8 +176,8 @@ L["The Shadowforge Lock"] = "Das Schloss der Schattenschmiede"
 L["The Sparklematic 5200"] = "Der Funkelmat 5200"
 L["The Vault"] = "Der Tresorraum"
 L["Thunderheart <Kargath Expeditionary Force>"] = "Donnerherz <Expeditionskorps von Kargath>"
-L["Tinkee Steamboil"] = "Tinkee Kesseldampf"
 L["Tink Sprocketwhistle <Engineering Supplies>"] = "Tink Sprosspfiff <Ingenieursbedarf>"
+L["Tinkee Steamboil"] = "Tinkee Kesseldampf"
 L["Torben Zapblast <Teleportation Specialist>"] = "Torben Zischknall <Teleportationsspezialist>"
 L["Tran'rek"] = "Tran'rek"
 L["Ulda"] = "Ulda"
@@ -191,9 +191,5 @@ L["Weegli Blastfuse"] = "Weegli Lunte"
 L["Yuka Screwspigot <Engineering Supplies>"] = "Yuka Schraubstutz <Ingenieursbedarf>"
 L["Zeya"] = "Zeya"
 L["ZF"] = "ZF"
-L["ToC/Description"] = "Karten der Instanzen aus Classic-WoW"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[Classic-WoW]|r"
-
-
 
 end

@@ -1,8 +1,8 @@
--- $Id: Atlas_Cataclysm.lua 11 2016-09-05 14:50:29Z arith $
+-- $Id: Atlas_Cataclysm.lua 16 2017-01-16 09:55:01Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -108,6 +108,7 @@ local myMaps = {
 		WorldMapID = "824";
 		JournalInstanceID = "187";
 		Module = "Atlas_Cataclysm";
+		NextMap = "CoTDragonSoulB";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..ALC["Portal"], 10002 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Morchok", 311), 311 };
@@ -125,6 +126,8 @@ local myMaps = {
 		WorldMapID = "824";
 		JournalInstanceID = "187";
 		Module = "Atlas_Cataclysm";
+		PrevMap = "CoTDragonSoulA";
+		NextMap = "CoTDragonSoulC";
 		{ BLUE.." C-E) "..ALC["Portal"], 10001 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Warlord Zon'ozz", 324), 324 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Yor'sahj the Unsleeping", 325), 325 };
@@ -140,6 +143,7 @@ local myMaps = {
 		WorldMapID = "824";
 		JournalInstanceID = "187";
 		Module = "Atlas_Cataclysm";
+		PrevMap = "CoTDragonSoulB";
 		{ WHIT.." 6) "..Atlas_GetBossName("Warmaster Blackhorn", 332), 332 };
 		{ WHIT.." 7) "..Atlas_GetBossName("Spine of Deathwing", 318), 318 };
 		{ WHIT.." 8) "..Atlas_GetBossName("Madness of Deathwing", 333), 333 };
@@ -339,6 +343,7 @@ local myMaps = {
 		WorldMapID = "756";
 		JournalInstanceID = "63";
 		Module = "Atlas_Cataclysm";
+		NextMap = "TheDeadmines";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ GREN..INDENT..ALC["Meeting Stone"] };
 		{ BLUE.." B) "..BZ["The Deadmines"], 10002 };
@@ -355,6 +360,7 @@ local myMaps = {
 		WorldMapID = "756";
 		JournalInstanceID = "63";
 		Module = "Atlas_Cataclysm";
+		PrevMap = "TheDeadminesEnt";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..ALC["Exit"], 10002 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Glubtok", 89), 89 };

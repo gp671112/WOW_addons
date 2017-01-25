@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_OutdoorRaids-zhCN.lua 13 2016-07-19 13:56:42Z arith $
+-- $Id: Atlas_OutdoorRaids-zhCN.lua 25 2017-01-19 07:42:24Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -46,15 +46,12 @@ L["Sahaak <Keeper of Scrolls>"] = "萨哈克 <卷轴保管者>"
 L["Severin <Skyguard Medic>"] = "瑟维里 <天空卫队医师>"
 L["Skull Pile"] = "颅骨堆"
 L["Sky Commander Adaris"] = "空军指挥官阿达利斯"
+L["Sky Sergeant Doryn"] = "空军上尉杜尔因"
 L["Skyguard Handler Deesak"] = "天空卫队训练师德萨克"
 L["Skyguard Prisoner"] = "天空卫队囚犯"
-L["Sky Sergeant Doryn"] = "空军上尉杜尔因"
 L["Talonpriest Ishaal"] = "鸦爪祭司伊沙尔"
 L["Talonpriest Skizzik"] = "鸦爪祭司斯卡基克"
 L["Talonpriest Zellek"] = "鸦爪祭司塞尔利克"
 L["Terokk"] = "泰罗克"
 L["Vakkiz the Windrager"] = "风怒者瓦克奇斯"
-L["ToC/Description"] = "户外团队战斗地图"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[户外团队]|r"
-
 end

@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_ClassicWoW-ruRU.lua 13 2016-09-05 14:36:53Z arith $
+-- $Id: Atlas_ClassicWoW-ruRU.lua 18 2017-01-16 10:57:05Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -28,10 +28,10 @@ local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas_ClassicWoW", "ruRU", false);
 
 if L then
+L["\"Ambassador\" Dagg'thol"] = "\"Посланник\"Дагг'тол"
 L["Abandonded Mole Machine"] = "Брошенная буровая установка"
 L["Acride <Scarshield Legion>"] = "Секретный агент <Легион Изрубленного Щита>"
 L["Altar of Blood"] = "Алтарь крови"
-L["\"Ambassador\" Dagg'thol"] = "\"Посланник\"Дагг'тол"
 L["Amnennar's Phylactery"] = "Филактерия Амненнара"
 L["Ancient Equine Spirit"] = "Дух древнего коня"
 L["Ancient Treasure"] = "Древнее сокровище"
@@ -43,8 +43,8 @@ L["AQ40"] = "АКУ40"
 L["Archmage Angela Dosantos <Brotherhood of the Light>"] = "Верховный маг Анджела Досантос <Братство Света>"
 L["Arygos"] = "Аригос"
 L["Auld Stonespire"] = "Ольд Каменное Копье"
-L["Baelog's Chest"] = "Сундук Бейлога"
 L["B.E Barechus <S.A.F.E.>"] = "Б.Е. Барекус <С.П.А.С.>"
+L["Baelog's Chest"] = "Сундук Бейлога"
 L["BFD"] = "НП"
 L["Blastmaster Emi Shortfuse"] = "Взрывник Ими Фитилюшка"
 L["BRD"] = "ГЧГ"
@@ -76,10 +76,10 @@ L["Elder Farwhisper"] = "Старейшина Тихий Шепот"
 L["Elder Mistwalker"] = "Старейшина Странник Туманов "
 L["Elder Morndeep"] = "Старейшина Рассветень"
 L["Elder Splitrock"] = "Старейшина Камнепад"
-L["Elders' Square Postbox"] = "Ключ от почтового ящика на Площади старейшины"
 L["Elder Starsong"] = "Старейшина Звездная Песня"
 L["Elder Stonefort"] = "Старейшина Камнеград"
 L["Elder Wildmane"] = "Старейшина Дикая Грива "
+L["Elders' Square Postbox"] = "Ключ от почтового ящика на Площади старейшины"
 L["Estulan <The Highborne>"] = "Эстулан <Высокорожденный>"
 L["Face <S.A.F.E.>"] = "Физий <С.П.А.С.>"
 L["Falrin Treeshaper"] = "Фалрин Садовник"
@@ -99,8 +99,8 @@ L["Invoker Xorenth"] = "Заклинатель Ксорент"
 L["Ironbark the Redeemed"] = "Железная Кора - отмщенный"
 L["Jalinda Sprig <Morgan's Militia>"] = "Джалинда Тирлипунька"
 L["Je'neu Sancrea <The Earthen Ring>"] = "Дже'неу Санкри <Служители Земли>"
-L["Kandrostrasz <Brood of Alexstrasza>"] = "Кандострас <Племя Алекстразы>"
 L["Kand Sandseeker <Explorer's League>"] = "Канд Искатель Песков <Лига исследователей>"
+L["Kandrostrasz <Brood of Alexstrasza>"] = "Кандострас <Племя Алекстразы>"
 L["Kevin Dawson <Morgan's Militia>"] = "Кевин Доусон <Отряд Морганы>"
 L["Kherrah"] = "Керра"
 L["King's Square Postbox"] = "Ключ от почтового ящика на Королевской площали"
@@ -176,8 +176,8 @@ L["The Shadowforge Lock"] = "Замок Тенегорна"
 L["The Sparklematic 5200"] = "Чистер 5200!"
 L["The Vault"] = "Подземелье"
 L["Thunderheart <Kargath Expeditionary Force>"] = "Громосерд <Каргатский экспедиционный корпус>"
-L["Tinkee Steamboil"] = "Тинки Кипеллер"
 L["Tink Sprocketwhistle <Engineering Supplies>"] = "Звяк Пружиносвист <Инженерные материалы>"
+L["Tinkee Steamboil"] = "Тинки Кипеллер"
 L["Torben Zapblast <Teleportation Specialist>"] = "Торбен Запрыгуль <Мастер телепортации>"
 L["Tran'rek"] = "Тран'рек"
 L["Ulda"] = "Ульд"
@@ -191,9 +191,5 @@ L["Weegli Blastfuse"] = "Вигиль Фитиль"
 L["Yuka Screwspigot <Engineering Supplies>"] = "Юка Крутипроб"
 L["Zeya"] = "Зейя"
 L["ZF"] = "ЗФ"
--- L["ToC/Description"] = ""
--- L["ToC/Title"] = ""
-
-
 
 end

@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_WrathoftheLichKing-frFR.lua 15 2016-09-05 14:46:17Z arith $
+-- $Id: Atlas_WrathoftheLichKing-frFR.lua 20 2017-01-16 10:23:29Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -119,8 +119,8 @@ L["The Captain's Chest"] = "Le coffre du capitaine"
 L["The Culling of Stratholme"] = "L'Épuration de Stratholme"
 L["The Keepers"] = "Les Gardiens"
 L["The Siege"] = "Le Siège"
-L["Tol'mar"] = "Tol'mar"
 L["To next map"] = "Vers la carte suivante"
+L["Tol'mar"] = "Tol'mar"
 L["Tower of Flame"] = "Tour des flammes"
 L["Tower of Frost"] = "Tour du givre"
 L["Tower of Life"] = "Tour de la vie"
@@ -128,8 +128,8 @@ L["Tower of Storms"] = "Tour des tempêtes"
 L["Tribunal Chest"] = "Coffre du tribunal"
 L["UK, Keep"] = "UK, Keep"
 L["Uldu"] = "Uldu"
-L["Upper Spire"] = "Flèche supérieure"
 L["UP, Pinn"] = "UP, Pinn"
+L["Upper Spire"] = "Flèche supérieure"
 L["Verdisa"] = "Verdisa"
 L["VH"] = "VH"
 L["VoA"] = "Archa"
@@ -137,8 +137,4 @@ L["Warmage Kaitlyn"] = "Mage de guerre Kaitlyn"
 L["Watcher Gashra"] = "Gardien Gashra"
 L["Watcher Narjil"] = "Gardien Narjil"
 L["Watcher Silthik"] = "Gardien Silthik"
--- L["ToC/Description"] = ""
--- L["ToC/Title"] = ""
-
-
 end

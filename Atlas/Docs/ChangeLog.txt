@@ -1,13 +1,81 @@
-$Id: ChangeLog.txt 123 2016-11-16 08:20:49Z arith $
+$Id: ChangeLog.txt 155 2017-01-24 14:21:05Z arith $
 Atlas, a World of Warcraft instance map browser
-Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
-Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
+Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
+Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+
+==============
+Known Issues:
+==============
+- User might see the boss loots are not fully loaded and showing item info 
+  is retrieving. If that's the case, user will need to close and open the
+  loot window again.
 
 ==============
 = Change Log =
 ==============
 
+v1.37.02 (Jan. 24, 2017)
+------------------------
+- Fixed the achievement criteria's displaying issue
+
+v1.37.01 (Jan. 24, 2017)
+------------------------
+- Clicking on achievement showing in instance's legend panel will now open
+  corresponding achievement within Blizzard's Achievement window
+
+v1.37.00 (Jan. 22, 2017)
+------------------------
+- Added to support in showing achievement info
+- Fixed the issue for old raids which the boss does not have overview information
+  in Adventure Journal but while previously browsing new dungeon / raid and then
+  old raid, the boss is still showing the overview info from wrong boss when 
+  mouse hover the boss button
+- Enhanced tooltip handling
+- Added boss overview's - character role's section details
+
+v1.36.04 (Jan. 20, 2017)
+------------------------
+- Remove Highmaul from Outland when categorize map with continent
+- New feature: Now Atlas will remember your last map selected from each category.
+  For example: You select Legion - Neltharion's Lair; 
+  and then Transportation - Broken Isles;
+  and then Outdoor Raids - Broken Isles;
+  now when you change to Legion again, it will by-default select Neltharion's Lair
+
+v1.36.03 (Jan. 16, 2017)
+------------------------
+- Added to support quick map switching by clicking the Next or 
+  Previous map button
+
+v1.36.02 (Jan. 05, 2017)
+------------------------
+- Fixed the issue that left-click on boss name in right-side legend panel 
+  won't open adventure journal
+- Translation update:
+  - Korean
+
+v1.36.01 (Jan. 01, 2017)
+------------------------
+- Enhanced Adventure Journal features' integration / linking:
+  - setup instanceID, encounterID, mapID, dungeonLevel info to be passed 
+    from AtlasMap or buttons instead of re-retrieve them from map data 
+    while calling encounter journal related functions
+- Fixed to call Atlas_EncounterJournal_SetLootButton() inside 
+  Atlas_EncounterJournal_LootCallback()
+- Disable EJ_LOOT_DATA_RECIEVED event as it seems to be impact to the official
+  Adventure Journal
+
+v1.36.00 (Dec. 28, 2016)
+------------------------
+- Library updated: NoTaint_UIDropDownMenu
+- Slightly enhanced the usage of UIDropDownMenu to better prevent from UI taint
+- Added boss loots (adopted from Adventure Journal).
+  You can right-click on the boss icon showing in Atlas window to see the boss drops
+- Translation update:
+  - Korean
+  - Simplified Chinese
+  
 v1.35.04 (Nov. 16, 2016)
 ------------------------
 - Enhanced Journal Encounter related codes to prevent from trying to open 

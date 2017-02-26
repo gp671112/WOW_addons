@@ -1,4 +1,4 @@
--- $Id: AtlasOptions.lua 142 2017-01-19 16:08:50Z arith $
+-- $Id: AtlasOptions.lua 158 2017-02-07 06:35:15Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -24,6 +24,25 @@
 
 --]]
 
+local function AtlasOptions_ResetDropdowns()
+	AtlasOptions.AtlasZone = 1;
+	AtlasOptions.AtlasType = 1;
+	Atlas_PopulateDropdowns();
+	Atlas_Refresh();
+	AtlasFrameDropDownType_OnShow();
+	AtlasFrameDropDown_OnShow();
+end
+
+--[[
+function AtlasOptions_Reset()
+	Atlas_FreshOptions();
+	--AtlasOptions_ResetPosition(); --also calls AtlasOptions_Init()
+	AtlasOptions_ResetDropdowns(); --also calls Atlas_Refresh()
+	AtlasButton_Init();
+	Atlas_UpdateLock();
+end
+]]
+
 -- Show the Atlas Options
 function AtlasOptions_Toggle()
 	if InterfaceOptionsFrame:IsVisible() then
@@ -34,35 +53,38 @@ function AtlasOptions_Toggle()
 	end
 end
 
+function AtlasOptions_ToggleWorldMapButton()
+	AtlasOptions.AtlasWorldMapButtonShown = not AtlasOptions.AtlasWorldMapButtonShown;
+	if (AtlasOptions.AtlasWorldMapButtonShown) then
+		AtlasToggleFromWorldMap:Show();
+	else
+		AtlasToggleFromWorldMap:Hide();
+	end
+end
 
-function AtlasOptions_AutoSelectToggle()
+function AtlasOptions_ToggleAutoSelect()
 	AtlasOptions.AtlasAutoSelect = not AtlasOptions.AtlasAutoSelect;
 end
 
-
-function AtlasOptions_RightClickToggle()
+function AtlasOptions_ToggleRightClick()
 	AtlasOptions.AtlasRightClick = not AtlasOptions.AtlasRightClick;
 end
 
-
-function AtlasOptions_AcronymsToggle()
+function AtlasOptions_ToggleAcronyms()
 	AtlasOptions.AtlasAcronyms = not AtlasOptions.AtlasAcronyms;
 	Atlas_Refresh();
 end
 
-
-function AtlasOptions_ClampedToggle()
+function AtlasOptions_ToggleClamped()
 	AtlasOptions.AtlasClamped = not AtlasOptions.AtlasClamped;
 	AtlasFrame:SetClampedToScreen(AtlasOptions.AtlasClamped);
 	Atlas_Refresh();
 end
 
-
-function AtlasOptions_CtrlToggle()
+function AtlasOptions_ToggleCtrl()
 	AtlasOptions.AtlasCtrl = not AtlasOptions.AtlasCtrl;
 	Atlas_Refresh();
 end
-
 
 function AtlasOptions_ToggleLock()
 	AtlasOptions.AtlasLocked = not AtlasOptions.AtlasLocked;
@@ -70,12 +92,10 @@ function AtlasOptions_ToggleLock()
 	Atlas_Refresh();
 end
 
-
 function AtlasOptions_ToggleBossDesc()
 	AtlasOptions.AtlasBossDesc = not AtlasOptions.AtlasBossDesc;
 	Atlas_Refresh();
 end
-
 
 function AtlasOptions_ToggleCheckModule()
 	AtlasOptions.AtlasCheckModule = not AtlasOptions.AtlasCheckModule;
@@ -89,25 +109,6 @@ function AtlasOptions_ToggleColoringDropDown()
 end
 ]]
 
-local function AtlasReset_Dropdowns()
-	AtlasOptions.AtlasZone = 1;
-	AtlasOptions.AtlasType = 1;
-	Atlas_PopulateDropdowns();
-	Atlas_Refresh();
-	AtlasFrameDropDownType_OnShow();
-	AtlasFrameDropDown_OnShow();
-end
-
-
-function AtlasOptions_Reset()
-	Atlas_FreshOptions();
-	--AtlasOptions_ResetPosition(); --also calls AtlasOptions_Init()
-	AtlasReset_Dropdowns(); --also calls Atlas_Refresh()
-	AtlasButton_Init();
-	Atlas_UpdateLock();
-end
-
-
 function AtlasOptions_OnLoad(panel)
 	panel.name = "Atlas";
 	panel.default = AtlasOptions_Reset;
@@ -119,6 +120,7 @@ end
 
 function AtlasOptions_OnShow(self)
 	AtlasOptionsFrameToggleButton:SetChecked(AtlasOptions.AtlasButtonShown);
+	AtlasOptionsFrameToggleWorldMapButton:SetChecked(AtlasOptions.AtlasWorldMapButtonShown);
 	AtlasOptionsFrameAutoSelect:SetChecked(AtlasOptions.AtlasAutoSelect);
 	AtlasOptionsFrameRightClick:SetChecked(AtlasOptions.AtlasRightClick);
 	AtlasOptionsFrameAcronyms:SetChecked(AtlasOptions.AtlasAcronyms);
@@ -143,7 +145,6 @@ function AtlasOptions_OnShow(self)
 	Lib_UIDropDownMenu_SetWidth(AtlasOptionsFrameDropDownCats, 160);
 end
 
-
 function AtlasOptions_SetupSlider(self, text, mymin, mymax, step)
 	self:SetMinMaxValues(mymin, mymax);
 	--_G[self:GetName().."Low"]:SetText(mymin);
@@ -151,17 +152,14 @@ function AtlasOptions_SetupSlider(self, text, mymin, mymax, step)
 	self:SetValueStep(step);
 end
 
-
 local function round(num, idp)
    local mult = 10 ^ (idp or 0);
    return math.floor(num * mult + 0.5) / mult;
 end
 
-
 function AtlasOptions_UpdateSlider(self, text)
 	_G[self:GetName().."Text"]:SetText("|cffffd200"..text.." ("..round(self:GetValue(), 3)..")");
 end
-
 
 function AtlasOptionsFrameDropDownCats_Initialize()
 	for i = 1, getn(Atlas_DropDownLayouts_Order) do
@@ -182,7 +180,7 @@ function AtlasOptionsFrameDropDownCats_OnClick(self)
 	local thisID = self:GetID();
 	Lib_UIDropDownMenu_SetSelectedID(AtlasOptionsFrameDropDownCats, thisID);
 	AtlasOptions.AtlasSortBy = thisID;
-	AtlasReset_Dropdowns();
+	AtlasOptions_ResetDropdowns();
 end
 
 function AtlasOptions_OnMouseWheel(self, delta)
@@ -192,3 +190,4 @@ function AtlasOptions_OnMouseWheel(self, delta)
 		self:SetValue(self:GetValue() - self:GetValueStep())
 	end
 end
+

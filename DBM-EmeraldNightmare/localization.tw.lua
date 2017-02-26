@@ -24,10 +24,10 @@ L:SetMiscLocalization({
 L= DBM:GetModLocalization(1738)
 
 L:SetOptionLocalization({
-	SetIconOnlyOnce2		= "為每個軟泥設置團隊圖示直到有一個軟泥爆炸時停用(實驗中)",
-	InfoFrameBehavior	= "在戰鬥中顯示訊息框架",
-	Fixates				= "顯示中了鎖定的玩家",
-	Adds				= "顯示小怪數量和類型"
+	SetIconOnlyOnce2			= "為每個軟泥設置團隊圖示直到有一個軟泥爆炸時停用(實驗中)",
+	InfoFrameBehavior			= "在戰鬥中顯示訊息框架",
+	Fixates								= "顯示中了鎖定的玩家",
+	Adds								= "顯示小怪數量和類型"
 })
 
 ---------------------------
@@ -36,20 +36,16 @@ L:SetOptionLocalization({
 L= DBM:GetModLocalization(1744)
 
 L:SetWarningLocalization({
-	warnWebOfPain		= ">%s<與>%s<連接",--Only this needs localizing
-	specWarnWebofPain	= "你與>%s<連接了",--Only this needs localizing
+	warnWebOfPain				= ">%s<與>%s<連接",--Only this needs localizing
+	specWarnWebofPain		= "你與>%s<連接了",--Only this needs localizing
 })
 
 L:SetOptionLocalization({
-	WebConfiguration	= "為痛苦蛛網設定HUD/箭頭選項",
-	Disabled			= "停用",
-	Arrow				= "當你中招時只顯示傳統箭頭",
-	HudSelf				= "只有你中招時顯示HUD連線",
-	HudAll				= "為所有中招的目標顯示HUD連線"
-})
-
-L:SetMiscLocalization({
-	MapMessage			= "註：此模組的箭頭/HUD選項能夠在介面中設定。而這些選項在7.1失效。"
+	WebConfiguration			= "為痛苦蛛網設定HUD/箭頭選項",
+	Disabled							= "停用",
+	Arrow								= "當你中招時只顯示傳統箭頭",
+	HudSelf							= "只有你中招時顯示HUD連線",
+	HudAll								= "為所有中招的目標顯示HUD連線"
 })
 
 ---------------------------
@@ -62,7 +58,7 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	SoakersText		=	"傷害分擔: %s"
+	SoakersText			=	"傷害分擔: %s"
 })
 
 ---------------------------
@@ -76,8 +72,8 @@ L= DBM:GetModLocalization(1704)
 L= DBM:GetModLocalization(1750)
 
 L:SetMiscLocalization({
-	BrambleYell			= "刺藤在" .. UnitName("player") .. "附近!",
-	BrambleMessage		= "註：DBM無法偵測刺藤鎖定誰。警告會提示首領丟出的第一個目標，在這之後不能偵測刺藤鎖定其他目標。"
+	BrambleYell					= "刺藤在" .. UnitName("player") .. "附近!",
+	BrambleMessage			= "註：DBM無法偵測刺藤鎖定誰。警告會提示首領丟出的第一個目標，在這之後不能偵測刺藤鎖定其他目標。"
 })
 
 ------------------

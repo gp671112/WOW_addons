@@ -1,4 +1,4 @@
-<!-- $Id: AtlasOptions.xml 142 2017-01-19 16:08:50Z arith $ -->
+<!-- $Id: AtlasOptions.xml 158 2017-02-07 06:35:15Z arith $ -->
 <!--
 
 	Atlas, a World of Warcraft instance map browser
@@ -42,10 +42,7 @@
 			</Layer>
 		</Layers>
 		<Frames>
-			<CheckButton name="$ParentToggleButton" inherits="InterfaceOptionsSmallCheckButtonTemplate">
-				<Size>
-					<AbsDimension x = "25" y = "25"/>
-				</Size>
+			<CheckButton name="$parentToggleButton" inherits="InterfaceOptionsSmallCheckButtonTemplate">
 				<Anchors>
 					<Anchor point="TOPLEFT">
 						<Offset>
@@ -53,9 +50,6 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<HitRectInsets>
-					<AbsInset left = "4" right = "4" top = "4" bottom = "6"/>
-				</HitRectInsets>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(ATLAS_OPTIONS_SHOWBUT);
@@ -72,26 +66,37 @@
 					</OnLeave>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="$ParentAutoSelect" inherits="InterfaceOptionsSmallCheckButtonTemplate">
-				<Size>
-					<AbsDimension x = "25" y = "25"/>
-				</Size>
+			<CheckButton name="$parentToggleWorldMapButton" inherits="InterfaceOptionsSmallCheckButtonTemplate">
 				<Anchors>
-					<Anchor point="TOPLEFT">
+					<Anchor point="TOPLEFT" relativeTo="$parentToggleButton">>
 						<Offset>
-							<AbsDimension x="15" y="-60"/>
+							<AbsDimension x="300" y="0"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<HitRectInsets>
-					<AbsInset left = "4" right = "4" top = "4" bottom = "6"/>
-				</HitRectInsets>
+				<Scripts>
+					<OnLoad>
+						_G[self:GetName().."Text"]:SetText(ATLAS_OPTIONS_SHOWWMBUT);
+					</OnLoad>
+					<OnClick>
+						AtlasOptions_ToggleWorldMapButton();
+					</OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="$parentAutoSelect" inherits="InterfaceOptionsSmallCheckButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentToggleButton">>
+						<Offset>
+							<AbsDimension x="0" y="-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(ATLAS_OPTIONS_AUTOSEL);
 					</OnLoad>
 					<OnClick>
-						AtlasOptions_AutoSelectToggle();
+						AtlasOptions_ToggleAutoSelect();
 					</OnClick>
 					<OnEnter>
 						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
@@ -102,26 +107,20 @@
 					</OnLeave>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="$ParentRightClick" inherits="InterfaceOptionsSmallCheckButtonTemplate">
-				<Size>
-					<AbsDimension x = "25" y = "25"/>
-				</Size>
+			<CheckButton name="$parentRightClick" inherits="InterfaceOptionsSmallCheckButtonTemplate">
 				<Anchors>
-					<Anchor point="TOPLEFT">
+					<Anchor point="TOPLEFT" relativeTo="$parentAutoSelect">>
 						<Offset>
-							<AbsDimension x="15" y="-80"/>
+							<AbsDimension x="0" y="-20"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<HitRectInsets>
-					<AbsInset left = "4" right = "4" top = "4" bottom = "6"/>
-				</HitRectInsets>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(ATLAS_OPTIONS_RCLICK);
 					</OnLoad>
 					<OnClick>
-						AtlasOptions_RightClickToggle();
+						AtlasOptions_ToggleRightClick();
 					</OnClick>
 					<OnEnter>
 						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
@@ -132,26 +131,20 @@
 					</OnLeave>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="$ParentAcronyms" inherits="InterfaceOptionsSmallCheckButtonTemplate">
-				<Size>
-					<AbsDimension x = "25" y = "25"/>
-				</Size>
+			<CheckButton name="$parentAcronyms" inherits="InterfaceOptionsSmallCheckButtonTemplate">
 				<Anchors>
-					<Anchor point="TOPLEFT">
+					<Anchor point="TOPLEFT" relativeTo="$parentRightClick">>
 						<Offset>
-							<AbsDimension x="15" y="-100"/>
+							<AbsDimension x="0" y="-20"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<HitRectInsets>
-					<AbsInset left = "4" right = "4" top = "4" bottom = "6"/>
-				</HitRectInsets>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(ATLAS_OPTIONS_ACRONYMS);
 					</OnLoad>
 					<OnClick>
-						AtlasOptions_AcronymsToggle();
+						AtlasOptions_ToggleAcronyms();
 					</OnClick>
 					<OnEnter>
 						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
@@ -162,26 +155,20 @@
 					</OnLeave>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="$ParentClamped" inherits="InterfaceOptionsSmallCheckButtonTemplate">
-				<Size>
-					<AbsDimension x = "25" y = "25"/>
-				</Size>
+			<CheckButton name="$parentClamped" inherits="InterfaceOptionsSmallCheckButtonTemplate">
 				<Anchors>
-					<Anchor point="TOPLEFT">
+					<Anchor point="TOPLEFT" relativeTo="$parentAcronyms">>
 						<Offset>
-							<AbsDimension x="15" y="-120"/>
+							<AbsDimension x="0" y="-20"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<HitRectInsets>
-					<AbsInset left = "4" right = "4" top = "4" bottom = "6"/>
-				</HitRectInsets>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(ATLAS_OPTIONS_CLAMPED);
 					</OnLoad>
 					<OnClick>
-						AtlasOptions_ClampedToggle();
+						AtlasOptions_ToggleClamped();
 					</OnClick>
 					<OnEnter>
 						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
@@ -192,26 +179,20 @@
 					</OnLeave>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="$ParentCtrl" inherits="InterfaceOptionsSmallCheckButtonTemplate">
-				<Size>
-					<AbsDimension x = "25" y = "25"/>
-				</Size>
+			<CheckButton name="$parentCtrl" inherits="InterfaceOptionsSmallCheckButtonTemplate">
 				<Anchors>
-					<Anchor point="TOPLEFT">
+					<Anchor point="TOPLEFT" relativeTo="$parentClamped">>
 						<Offset>
-							<AbsDimension x="15" y="-140"/>
+							<AbsDimension x="0" y="-20"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<HitRectInsets>
-					<AbsInset left = "4" right = "4" top = "4" bottom = "6"/>
-				</HitRectInsets>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(ATLAS_OPTIONS_CTRL);
 					</OnLoad>
 					<OnClick>
-						AtlasOptions_CtrlToggle();
+						AtlasOptions_ToggleCtrl();
 					</OnClick>
 					<OnEnter>
 						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
@@ -222,20 +203,14 @@
 					</OnLeave>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="$ParentLock" inherits="InterfaceOptionsSmallCheckButtonTemplate">
-				<Size>
-					<AbsDimension x = "25" y = "25"/>
-				</Size>
+			<CheckButton name="$parentLock" inherits="InterfaceOptionsSmallCheckButtonTemplate">
 				<Anchors>
-					<Anchor point="TOPLEFT">
+					<Anchor point="TOPLEFT" relativeTo="$parentCtrl">>
 						<Offset>
-							<AbsDimension x="15" y="-160"/>
+							<AbsDimension x="0" y="-20"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<HitRectInsets>
-					<AbsInset left = "4" right = "4" top = "4" bottom = "6"/>
-				</HitRectInsets>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(ATLAS_OPTIONS_LOCK);
@@ -252,20 +227,14 @@
 					</OnLeave>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="$ParentBossDesc" inherits="InterfaceOptionsSmallCheckButtonTemplate">
-				<Size>
-					<AbsDimension x = "25" y = "25"/>
-				</Size>
+			<CheckButton name="$parentBossDesc" inherits="InterfaceOptionsSmallCheckButtonTemplate">
 				<Anchors>
-					<Anchor point="TOPLEFT">
+					<Anchor point="TOPLEFT" relativeTo="$parentLock">>
 						<Offset>
-							<AbsDimension x="15" y="-180"/>
+							<AbsDimension x="0" y="-20"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<HitRectInsets>
-					<AbsInset left = "4" right = "4" top = "4" bottom = "6"/>
-				</HitRectInsets>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(ATLAS_OPTIONS_BOSS_DESC);
@@ -282,20 +251,14 @@
 					</OnLeave>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="$ParentCheckModule" inherits="InterfaceOptionsSmallCheckButtonTemplate">
-				<Size>
-					<AbsDimension x = "25" y = "25"/>
-				</Size>
+			<CheckButton name="$parentCheckModule" inherits="InterfaceOptionsSmallCheckButtonTemplate">
 				<Anchors>
-					<Anchor point="TOPLEFT">
+					<Anchor point="TOPLEFT" relativeTo="$parentBossDesc">>
 						<Offset>
-							<AbsDimension x="15" y="-200"/>
+							<AbsDimension x="0" y="-20"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<HitRectInsets>
-					<AbsInset left = "4" right = "4" top = "4" bottom = "6"/>
-				</HitRectInsets>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(ATLAS_OPTIONS_CHECKMODULE);
@@ -312,20 +275,14 @@
 					</OnLeave>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="$ParentColoringDropdown" inherits="InterfaceOptionsSmallCheckButtonTemplate">
-				<Size>
-					<AbsDimension x = "25" y = "25"/>
-				</Size>
+			<CheckButton name="$parentColoringDropdown" inherits="InterfaceOptionsSmallCheckButtonTemplate">
 				<Anchors>
-					<Anchor point="TOPLEFT">
+					<Anchor point="TOPLEFT" relativeTo="$parentCheckModule">>
 						<Offset>
-							<AbsDimension x="15" y="-220"/>
+							<AbsDimension x="0" y="-20"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-				<HitRectInsets>
-					<AbsInset left = "4" right = "4" top = "4" bottom = "6"/>
-				</HitRectInsets>
 				<Scripts>
 					<OnLoad>
 						_G[self:GetName().."Text"]:SetText(ATLAS_OPTIONS_COLORINGDROPDOWN);
@@ -348,7 +305,14 @@
 					</OnLeave>
 				</Scripts>
 			</CheckButton>
-			<Frame name="$ParentDropDownCats" inherits="Lib_UIDropDownMenuTemplate">
+			<Frame name="$parentDropDownCats" inherits="Lib_UIDropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentColoringDropdown">>
+						<Offset>
+							<AbsDimension x="0" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
 				<Layers>
 					<Layer level="BACKGROUND">
 						<FontString name="$parentLabel" inherits="GameFontNormalSmall" text="ATLAS_OPTIONS_CATDD">
@@ -362,22 +326,15 @@
 						</FontString>
 					</Layer>
 				</Layers>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="1" y="-260"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
 			</Frame>
-			<Slider name="$ParentSliderAlpha" inherits="OptionsSliderTemplate">
+			<Slider name="$parentSliderAlpha" inherits="OptionsSliderTemplate">
 				<Size>
 					<AbsDimension x="360" y="16"/>
 				</Size>
 				<Anchors>
-					<Anchor point="TOP">
+					<Anchor point="TOPLEFT" relativeTo="$parentDropDownCats">>
 						<Offset>
-							<AbsDimension x="0" y="-325" />
+							<AbsDimension x="115" y="-60"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -398,14 +355,14 @@
 					</OnMouseWheel>
 				</Scripts>
 			</Slider>
-			<Slider name="$ParentSliderScale" inherits="OptionsSliderTemplate">
+			<Slider name="$parentSliderScale" inherits="OptionsSliderTemplate">
 				<Size>
 					<AbsDimension x="360" y="16"/>
 				</Size>
 				<Anchors>
-					<Anchor point="TOP">
+					<Anchor point="TOPLEFT" relativeTo="$parentSliderAlpha">>
 						<Offset>
-							<AbsDimension x="0" y="-360" />
+							<AbsDimension x="0" y="-35"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -426,14 +383,14 @@
 					</OnMouseWheel>
 				</Scripts>
 			</Slider>
-			<Slider name="$ParentSliderBossDescScale" inherits="OptionsSliderTemplate">
+			<Slider name="$parentSliderBossDescScale" inherits="OptionsSliderTemplate">
 				<Size>
 					<AbsDimension x="360" y="16"/>
 				</Size>
 				<Anchors>
-					<Anchor point="TOP">
+					<Anchor point="TOPLEFT" relativeTo="$parentSliderScale">>
 						<Offset>
-							<AbsDimension x="0" y="-395" />
+							<AbsDimension x="0" y="-35"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -454,7 +411,7 @@
 				</Scripts>
 			</Slider>
 <!--
-			<Button name="$ParentResetPosition" inherits="UIPanelButtonTemplate" text="ATLAS_OPTIONS_RESETPOS">
+			<Button name="$parentResetPosition" inherits="UIPanelButtonTemplate" text="ATLAS_OPTIONS_RESETPOS">
 				<Size>
 					<AbsDimension x="160" y="32"/>
 				</Size>

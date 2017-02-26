@@ -106,7 +106,7 @@ BCM.modules[#BCM.modules+1] = function()
 	InterfaceOptions_AddCategory(bcm)
 	local bcmTitle = bcm:CreateFontString(nil, "ARTWORK", "GameFontNormalHuge")
 	bcmTitle:SetPoint("CENTER", bcm, "TOP", 0, -30)
-	bcmTitle:SetText(name.." v7.1.1") --wowace magic, replaced with tag version
+	bcmTitle:SetText(name.." v7.1.8") --wowace magic, replaced with tag version
 	local bcmDesc = bcm:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
 	bcmDesc:SetPoint("CENTER")
 	bcmDesc:SetText(BCM.CORE)

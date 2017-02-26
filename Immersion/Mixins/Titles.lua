@@ -5,10 +5,17 @@ local NORMAL_QUEST_DISPLAY = NORMAL_QUEST_DISPLAY:gsub(0, 'f')
 local TRIVIAL_QUEST_DISPLAY = TRIVIAL_QUEST_DISPLAY:gsub(0, 'f')
 local IGNORED_QUEST_DISPLAY = IGNORED_QUEST_DISPLAY:gsub(0, 'f')
 
+-- Priority
+local P_COMPLETE_QUEST = 1
+local P_AVAILABLE_QUEST = 2
+local P_AVAILABLE_GOSSIP = 3
+local P_INCOMPLETE_QUEST = 4
+
 ----------------------------------
 -- Display
 ----------------------------------
 function Titles:AdjustHeight(newHeight)
+	self.offset = 0
 	self:SetScript('OnUpdate', function(self)
 		local height = self:GetHeight()
 		local diff = newHeight - height
@@ -18,7 +25,32 @@ function Titles:AdjustHeight(newHeight)
 		else
 			self:SetHeight(height + ( diff / 10 ) )
 		end
+		self:OnUpdateOffset()
 	end)
+end
+
+function Titles:OnUpdateOffset()
+	local anchor, relativeRegion, relativeKey, x, y = self:GetPoint()
+	local offset = self.offset or 0
+	local diff = ( y - offset )
+	if (offset == 0) or abs( y - offset ) < 0.3 then
+		self:SetPoint(anchor, relativeRegion, relativeKey, x, offset)
+		if self:GetScript('OnUpdate') == self.OnUpdateOffset then
+			self:SetScript('OnUpdate', nil)
+		end
+	else
+		self:SetPoint(anchor, relativeRegion, relativeKey, x, offset + (diff / 10))
+	end
+end
+
+function Titles:OnMouseWheel(delta)
+	self.offset = self.offset and self.offset + (-delta * 40) or (-delta * 40)
+	self:SetScript('OnUpdate', self.OnUpdateOffset)
+end
+
+function Titles:ResetPosition()
+	self.offset = 0
+	self:SetScript('OnUpdate', self.OnUpdateOffset)
 end
 
 function Titles:OnEvent(event, ...)
@@ -34,6 +66,7 @@ function Titles:OnHide()
 		button:UnlockHighlight()
 		button:Hide()
 	end
+	self:ResetPosition()
 	self.numActive = 0
 	self.idx = 1
 end
@@ -99,6 +132,7 @@ function Titles:UpdateAvailableQuests(...)
 					( isRepeatable and 'DailyActiveQuestIcon' ) or
 					( 'AvailableQuestIcon' )
 		button:SetGossipQuestIcon(icon, qType and 0.5)
+		button:SetPriority(P_AVAILABLE_QUEST)
 		----------------------------------
 		button:SetID(titleIndex)
 		button.type = 'Available'
@@ -125,6 +159,7 @@ function Titles:UpdateActiveQuests(...)
 					( isComplete and 'ActiveQuestIcon' ) or
 					( 'InCompleteQuestIcon' )
 		button:SetGossipQuestIcon(icon, qType and 0.5)
+		button:SetPriority(isComplete and P_COMPLETE_QUEST or P_INCOMPLETE_QUEST)
 		----------------------------------
 		button:SetID(titleIndex)
 		button.type = 'Active'
@@ -142,6 +177,7 @@ function Titles:UpdateGossipOptions(...)
 		----------------------------------
 		button:SetText(titleText)
 		button:SetGossipIcon(icon)
+		button:SetPriority(P_AVAILABLE_GOSSIP)
 		----------------------------------
 		button:SetID(titleIndex)
 		button.type = 'Gossip'
@@ -192,6 +228,7 @@ function Titles:UpdateActiveGreetingQuests(numActiveQuests)
 					( isComplete and 'ActiveQuestIcon') or
 					( 'InCompleteQuestIcon' )
 		button:SetGossipQuestIcon(icon, qType and 0.75)
+		button:SetPriority(isComplete and P_COMPLETE_QUEST or P_INCOMPLETE_QUEST)
 		----------------------------------
 		button:SetID(i)
 		button.type = 'ActiveQuest'
@@ -216,6 +253,7 @@ function Titles:UpdateAvailableGreetingQuests(numAvailableQuests)
 					( isRepeatable and 'DailyActiveQuestIcon' ) or
 					( 'AvailableQuestIcon' )
 		button:SetGossipQuestIcon(icon, qType and 0.5)
+		button:SetPriority(P_AVAILABLE_QUEST)
 		----------------------------------
 		button:SetID(i)
 		button.type = 'AvailableQuest'

@@ -1,4 +1,4 @@
--- $Id: Atlas-enUS.lua 140 2017-01-16 08:56:14Z arith $
+-- $Id: Atlas-enUS.lua 158 2017-02-07 06:35:15Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -164,8 +164,8 @@ L["ATLAS_OPTIONS_CHECKMODULE"] = "Remind me for missing module(s) / plug-in(s)."
 L["ATLAS_OPTIONS_CHECKMODULE_TIP"] = "Enable to perform checking if any missing Atlas module / plug-in after WoW loaded."
 L["ATLAS_OPTIONS_CLAMPED"] = "Clamp window to screen"
 L["ATLAS_OPTIONS_CLAMPED_TIP"] = "Clamp Atlas window to screen, disable to allow Atlas window can be dragged outside the game screen."
-L["ATLAS_OPTIONS_COLORINGDROPDOWN"] = "Show dungeon dropdown in colors"
-L["ATLAS_OPTIONS_COLORINGDROPDOWN_TIP"] = "Based on the dungeon's recommended minimul level and player's level, to show the dungeon with difficulty colors."
+L["ATLAS_OPTIONS_COLORINGDROPDOWN"] = "Show instance dropdown in colors"
+L["ATLAS_OPTIONS_COLORINGDROPDOWN_TIP"] = "Based on the instance's recommended minimul level and player's level, to show the instance with difficulty colors."
 L["ATLAS_OPTIONS_CTRL"] = "Hold down Control for tooltips"
 L["ATLAS_OPTIONS_CTRL_TIP"] = "Enable to show tooltips text while hold down control key and mouse over the map info. Useful when the text is too long to be displayed in the window."
 L["ATLAS_OPTIONS_DONTSHOWAGAIN"] = "Don't show the same information again."
@@ -177,6 +177,7 @@ L["ATLAS_OPTIONS_RESETPOS"] = "Reset Position"
 L["ATLAS_OPTIONS_SCALE"] = "Atlas Frame Scale"
 L["ATLAS_OPTIONS_SHOWBUT"] = "Show Button on Minimap"
 L["ATLAS_OPTIONS_SHOWBUT_TIP"] = "Show Atlas button around the minimap."
+L["ATLAS_OPTIONS_SHOWWMBUT"] = "Show Button on World Map window."
 L["ATLAS_OPTIONS_TRANS"] = "Transparency"
 L["ATLAS_SEARCH_UNAVAIL"] = "Search Unavailable"
 L["ATLAS_SLASH"] = "/atlas"
@@ -246,7 +247,7 @@ L["MapG"] = " [G]"
 L["MapH"] = " [H]"
 L["MapI"] = " [I]"
 L["MapJ"] = " [J]"
-L["MapsNotFound"] = [=[Current selected dungeon does not have a 
+L["MapsNotFound"] = [=[The current selected instance does not have a 
 corresponding map image associated with. 
 
 Please make sure you have installed 

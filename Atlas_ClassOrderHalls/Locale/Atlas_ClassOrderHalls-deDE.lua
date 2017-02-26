@@ -60,6 +60,7 @@ L["Caydori Brightstar <Purveyor of Rare Goods>"] = "Caydori Sternenlicht <Liefer
 L["Celadine the Fatekeeper <Dreamgrove Researcher>"] = "Celadine die Schicksalswächterin <Forscherin des Hains der Träume>"
 L["Champion Armaments"] = "Waffen für Champions"
 L["Chronicler Elrianne <Class Hall Upgrades>"] = "Chronistin Elrianne <Aufwertungen der Klassenordenshalle>"
+L["Class Hall"] = "Klassenhalle"
 L["Class Order Hall Maps"] = "Klassenordenshallenkarten"
 L["Command Map"] = "Schlachtkarte"
 L["Commander Ansela <Silver Hand Recruiter>"] = "Kommandantin Ansela <Rekrutierer der Silbernen Hand>"

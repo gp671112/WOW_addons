@@ -1,5 +1,5 @@
 local _, L = ...
-local TEMPLATE, NPC, TalkBox = {}, {}, {}
+local NPC, TalkBox = {}, {}
 local frame, GetTime = L.frame, GetTime
 
 ----------------------------------
@@ -8,7 +8,10 @@ local frame, GetTime = L.frame, GetTime
 function NPC:OnEvent(event, ...)
 	self:ResetElements()
 	if self[event] then
-		self[event](self, ...)
+		if event:match('QUEST') then
+			CloseGossip()
+		end
+		event = self[event](self, ...) or event
 	end
 	self.TalkBox.lastEvent = event
 	self.lastEvent = event
@@ -22,14 +25,11 @@ function NPC:GOSSIP_SHOW(...)
 	if self:IsGossipAvailable() then
 		self:PlayIntro('GOSSIP_SHOW')
 		self:UpdateTalkingHead(GetUnitName('npc'), GetGossipText(), 'GossipGossip')
-		NPCFriendshipStatusBar_Update(self.TalkBox)
-		NPCFriendshipStatusBar:ClearAllPoints()
-		NPCFriendshipStatusBar:SetStatusBarColor(0.5, 0.7, 1)
-		NPCFriendshipStatusBar:SetPoint('TOPLEFT', self.TalkBox, 'TOPLEFT', 32, 0)
 	end
 end
 
 function NPC:GOSSIP_CLOSED(...)
+	CloseGossip()
 	self:PlayOutro()
 end
 
@@ -42,22 +42,13 @@ function NPC:QUEST_PROGRESS(...) -- special case, doesn't use QuestInfo
 	self:PlayIntro('QUEST_PROGRESS')
 	self:UpdateTalkingHead(GetTitleText(), GetProgressText(), IsQuestCompletable() and 'ActiveQuest' or 'IncompleteQuest')
 	local elements = self.TalkBox.Elements
-	local textColor, titleTextColor = GetMaterialTextColors('Stone')
-	elements.Progress.ReqText:SetTextColor(unpack(titleTextColor))
-	elements.Progress.MoneyText:SetTextColor(unpack(textColor))
-	elements:Show()
-	elements:SetHeight(1)
-	elements.Progress:Show()
-	elements:AdjustToChildren()
-	for _, child in pairs({elements.Progress:GetChildren()}) do
-		if child:IsVisible() then
-			-- add some padding to get the backdrop to wrap the frame properly.
-			local height = elements.Progress:GetHeight() + 90
-			elements:SetSize(364, height)
-			elements.Progress:SetHeight(height)
-			self.TalkBox:SetExtraOffset(height - 16)
-			return -- something was visible, break out.
-		end
+	local hasItems = elements:ShowProgress('Stone')
+	elements:UpdateBoundaries()
+	if hasItems then
+		local width, height = elements.Progress:GetSize()
+		-- Extra: 32 padding + 8 offset from talkbox + 8 px bottom offset
+		self.TalkBox:SetExtraOffset(height + 48) 
+		return
 	end
 	self:ResetElements()
 end
@@ -65,17 +56,36 @@ end
 function NPC:QUEST_COMPLETE(...)
 	self:PlayIntro('QUEST_COMPLETE')
 	self:UpdateTalkingHead(GetTitleText(), GetRewardText(), 'ActiveQuest')
-	self:AddQuestInfo(TEMPLATE.QUEST_REWARD)
+	self:AddQuestInfo('QUEST_REWARD')
 end
 
 function NPC:QUEST_FINISHED(...)
+	CloseQuest()
 	self:PlayOutro()
 end
 
 function NPC:QUEST_DETAIL(...)
+	local questStartItemID = ...
+	if ( QuestIsFromAdventureMap() ) or
+		( QuestGetAutoAccept() and QuestIsFromAreaTrigger()) or
+		(questStartItemID ~= nil and questStartItemID ~= 0) then
+		self:PlayOutro()
+		return
+	end
 	self:PlayIntro('QUEST_DETAIL')
 	self:UpdateTalkingHead(GetTitleText(), GetQuestText(), 'AvailableQuest')
-	self:AddQuestInfo(TEMPLATE.QUEST_DETAIL, QuestFrameAcceptButton)
+	self:AddQuestInfo('QUEST_DETAIL', QuestFrameAcceptButton)
+end
+
+
+function NPC:QUEST_ITEM_UPDATE()
+	local questEvent = (self.lastEvent ~= 'QUEST_ITEM_UPDATE') and self.lastEvent or self.questEvent
+	self.questEvent = questEvent
+
+	if questEvent and self[questEvent] then
+		self[questEvent](self)
+		return questEvent
+	end
 end
 
 ----------------------------------
@@ -84,34 +94,19 @@ end
 function NPC:AddQuestInfo(template, acceptButton)
 	local elements = self.TalkBox.Elements
 	local content = elements.Content
-	QuestInfo_Display(template, content, QuestFrameAcceptButton, 'Stone')
-	local elementsTable = template.elements
-	local height, lastFrame = 0
-	for i = 1, #elementsTable, 3 do -- a wonderfully confusing vanilla relic
-		local shownFrame, bottomShownFrame = elementsTable[i]()
-		if ( shownFrame ) then
-			shownFrame:SetParent(content)
-			height = height + shownFrame:GetHeight() + abs(elementsTable[i+2])
-			if ( lastFrame ) then
-				shownFrame:SetPoint('TOPLEFT', lastFrame, 'BOTTOMLEFT', elementsTable[i+1], elementsTable[i+2])
-			else
-				shownFrame:SetPoint('TOPLEFT', content, 'TOPLEFT', elementsTable[i+1] + 32, elementsTable[i+2] - 16)	
-			end
-			shownFrame:Show()
-			elements.Active[#elements.Active + 1] = shownFrame
-			lastFrame = bottomShownFrame or shownFrame
-		end
-	end
+	local height = elements:Display(template, acceptButton, 'Stone')
+
 	-- hacky fix to stop a content frame that only contains a spacer from showing.
 	if height > 20 then
-		elements:SetSize(570, height + 32)
 		elements:Show()
 		content:Show()
+		elements:UpdateBoundaries()
 	else
 		elements:Hide()
 		content:Hide()
-	end
-	self.TalkBox:SetExtraOffset(height)
+	end 
+	-- Extra: 32 px padding 
+	self.TalkBox:SetExtraOffset(height + 32)
 	self.TalkBox.NameFrame.FadeIn:Play()
 end
 
@@ -128,6 +123,24 @@ function NPC:IsGossipAvailable()
 		end
 	end
 	return true
+end
+
+function NPC:SelectBestOption()
+	local titles = self.TitleButtons.Buttons
+	local numActive = self.TitleButtons.numActive
+	if numActive > 1 then
+		local button = titles[1]
+		if button then
+			for i=2, numActive do
+				local title = titles[i]
+				button = button:ComparePriority(title)
+			end
+			button.Hilite:SetAlpha(1)
+			button:Click()
+			button:OnLeave()
+			PlaySound("igQuestListSelect")
+		end
+	end
 end
 
 function NPC:ResetElements()
@@ -148,10 +161,11 @@ function NPC:UpdateTalkingHead(title, text, npcType)
 	elseif ( UnitExists('npc') and not UnitIsUnit('npc', 'player') and not UnitIsDead('npc') ) then
 		unit = 'npc'
 	else
-		unit = 'player'
+		unit = npcType
 	end
 	local talkBox = self.TalkBox
 	talkBox:SetExtraOffset(0)
+	talkBox.StatusBar:Show()
 	talkBox.MainFrame.Indicator:SetTexture('Interface\\GossipFrame\\' .. npcType .. 'Icon')
 	talkBox.MainFrame.Model:SetUnit(unit)
 	talkBox.NameFrame.Name:SetText(title)
@@ -169,18 +183,14 @@ function NPC:PlayIntro(event)
 	else
 		self:EnableKeyboard(true)
 		local box = self.TalkBox
-		-- Handles the case of gossip -> gossip
-		if self.lastEvent ~= event then
-			self:FadeIn(nil, isShown)
-			local point = L.Get('boxpoint')
-			local x, y = L.Get('boxoffsetX'), L.Get('boxoffsetY')
-			box:ClearAllPoints()
-			if not isShown then
-				box:SetPoint(point, UIParent, point, -x, -y)
-			end
-			box:SetOffset(box.offsetX or x, box.offsetY or y)
-
+		self:FadeIn(nil, isShown)
+		local point = L('boxpoint')
+		local x, y = L('boxoffsetX'), L('boxoffsetY')
+		box:ClearAllPoints()
+		if not isShown then
+			box:SetPoint(point, UIParent, point, -x, -y)
 		end
+		box:SetOffset(box.offsetX or x, box.offsetY or y)
 	end
 end
 
@@ -211,8 +221,10 @@ local inputs = {
 			CloseGossip()
 		elseif self.lastEvent == 'GOSSIP_SHOW' and numActive == 1 then
 			SelectGossipOption(1)
+		elseif (self.lastEvent == 'GOSSIP_SHOW' or self.lastEvent == 'QUEST_GREETING') and numActive > 1 then
+			self:SelectBestOption()
 		else
-			self.TalkBox:Click('LeftButton')
+			self.TalkBox:Click(L('flipshortcuts') and 'RightButton' or 'LeftButton')
 		end
 	end,
 	reset = function(self)
@@ -267,9 +279,9 @@ end
 -- TalkBox button
 ----------------------------------
 function TalkBox:SetOffset(x, y)
-	local point = L.Get('boxpoint')
-	x = x or L.Get('boxoffsetX')
-	y = y or L.Get('boxoffsetY')
+	local point = L('boxpoint')
+	x = x or L('boxoffsetX')
+	y = y or L('boxoffsetY')
 
 	self.offsetX = x
 	self.offsetY = y
@@ -283,6 +295,11 @@ function TalkBox:SetOffset(x, y)
 	local parent = UIParent
 	local comp = isVert and y or x
 	local func = self[point]
+
+	if not evaluator then
+		self:SetPoint(point, parent, x, y)
+		return
+	end
 
 	self:SetScript('OnUpdate', function(self)
 		local offset = (evaluator(self) or 0) - (evaluator(parent) or 0)
@@ -301,9 +318,9 @@ end
 function TalkBox:OnEnter()
 	-- Highlight the button when it can be clicked
 	if 	( ( self.lastEvent == 'QUEST_COMPLETE' ) and
-		not (QuestInfoFrame.itemChoice == 0 and GetNumQuestChoices() > 1) ) or
+		not (self.Elements.itemChoice == 0 and GetNumQuestChoices() > 1) ) or
 		( self.lastEvent == 'QUEST_DETAIL' ) or
-		( IsQuestCompletable() ) then
+		( self.lastEvent ~= 'GOSSIP_SHOW' and IsQuestCompletable() ) then
 		L.UIFrameFadeIn(self.Hilite, 0.15, self.Hilite:GetAlpha(), 1)
 	end
 end
@@ -313,17 +330,17 @@ function TalkBox:OnLeave()
 end
 
 function TalkBox:OnClick(button)
+	if L('flipshortcuts') then
+		button = button == 'LeftButton' and 'RightButton' or 'LeftButton'
+	end
 	if button == 'LeftButton' then
 		-- Complete quest
 		if self.lastEvent == 'QUEST_COMPLETE' then
-			-- check if multiple items to choose between and none chosen
-			if not (QuestInfoFrame.itemChoice == 0 and GetNumQuestChoices() > 1) then
-				QuestFrameCompleteQuestButton:Click()
-			end
+			self.Elements:CompleteQuest()
 		-- Accept quest
 		elseif self.lastEvent == 'QUEST_DETAIL' then
 			QuestFrameAcceptButton:Click()
-		-- Progress quest (why are these functions named like this?)
+		-- Progress quest to completion
 		elseif IsQuestCompletable() then
 			CompleteQuest()
 		end
@@ -338,8 +355,8 @@ function TalkBox:OnClick(button)
 end
 
 function TalkBox:SetExtraOffset(newOffset)
-	local currX = ( self.offsetX or L.Get('boxoffsetX') )
-	local currY = ( self.offsetY or L.Get('boxoffsetY') )
+	local currX = ( self.offsetX or L('boxoffsetX') )
+	local currY = ( self.offsetY or L('boxoffsetY') )
 	self.extraY = newOffset
 	self:SetOffset(currX, currY)
 end
@@ -349,28 +366,3 @@ end
 ----------------------------------
 L.Mixin(frame, NPC)
 L.Mixin(frame.TalkBox, TalkBox)
-
-----------------------------------
--- Quest templates
-----------------------------------
-TEMPLATE.QUEST_DETAIL = { questLog = nil, chooseItems = nil, contentWidth = 450,
-	canHaveSealMaterial = nil, sealXOffset = 160, sealYOffset = -6,
-	elements = {
-		QuestInfo_ShowObjectivesHeader, 0, -15,	
-		QuestInfo_ShowObjectivesText, 0, -5,
-		QuestInfo_ShowSpecialObjectives, 0, -10,
-		QuestInfo_ShowGroupSize, 0, -10,
-		QuestInfo_ShowRewards, 0, -15,
-		QuestInfo_ShowSpacer, 0, -15,
-	}
-}
-
-TEMPLATE.QUEST_REWARD = { questLog = nil, chooseItems = true, contentWidth = 450,
-	canHaveSealMaterial = nil, sealXOffset = 160, sealYOffset = -6,
-	elements = {
-	--	QuestInfo_ShowTitle, 5, -10,
-	--	QuestInfo_ShowRewardText, 0, -5,
-		QuestInfo_ShowRewards, 0, -10,
-		QuestInfo_ShowSpacer, 0, -10
-	}
-}

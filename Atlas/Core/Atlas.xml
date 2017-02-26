@@ -1,4 +1,4 @@
-<!-- $Id: Atlas.xml 153 2017-01-24 07:18:21Z arith $ -->
+<!-- $Id: Atlas.xml 158 2017-02-07 06:35:15Z arith $ -->
 <!--
 
 	Atlas, a World of Warcraft instance map browser
@@ -26,12 +26,6 @@
 
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
-	<Script file="AtlasIngameLocales.lua"/>
-	<Script file="AtlasMapsAssociation.lua"/>
-	<Script file="AtlasJournalEncounter.lua"/>
-	<Script file="AtlasMaps.lua"/>
-	<Script file="AtlasMaps_NPC_DB.lua"/>
-	<Script file="AtlasDropDown.lua"/>
 	<Script file="Atlas.lua"/>
 
 
@@ -1764,7 +1758,7 @@
 		</Scripts>
 	</Frame>
 
-	<Button name="AtlasToggleFromWorldMap" toplevel="true" parent="WorldMapFrame" frameLevel="10">
+	<Button name="AtlasToggleFromWorldMap" toplevel="true" parent="WorldMapFrame" frameLevel="10" hidden="true">
 		<Size>
 			<AbsDimension x="32" y="32" />
 		</Size>

@@ -1,4 +1,4 @@
--- $Id: Atlas.lua 155 2017-01-24 14:21:05Z arith $
+-- $Id: Atlas.lua 158 2017-02-07 06:35:15Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -24,79 +24,36 @@
 
 --]]
 
+-- ----------------------------------------------------------------------------
+-- Localized Lua globals.
+-- ----------------------------------------------------------------------------
+-- Functions
 local _G = getfenv(0);
 local pairs = _G.pairs;
-local math = _G.math;
-local table = _G.table;
-local string = _G.string;
 local select = _G.select;
 local type = _G.type;
+-- Libraries
 local bit = _G.bit;
+local string = _G.string;
+local table = _G.table;
+local math = _G.math;
 
-local L = LibStub("AceLocale-3.0"):GetLocale("Atlas");
+-- ----------------------------------------------------------------------------
+-- AddOn namespace.
+-- ----------------------------------------------------------------------------
+local FOLDER_NAME, private = ...
+
+local LibStub = _G.LibStub
+local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name);
 local BZ = Atlas_GetLocaleLibBabble("LibBabble-SubZone-3.0");
 local LibDialog = LibStub("LibDialog-1.0");
-local addon = LibStub("AceAddon-3.0"):NewAddon("Atlas", "AceConsole-3.0")
+local addon = LibStub("AceAddon-3.0"):NewAddon(private.addon_name, "AceConsole-3.0")
+addon.constants = private.constants
+addon.constants.addon_name = private.addon_name
+addon.Name = FOLDER_NAME
+_G.Atlas = addon
 
--- Turn ON / OFF Atlas debug mode
-local Atlas_DebugMode = false;
-local function debug(info)
-	if (Atlas_DebugMode) then
-		DEFAULT_CHAT_FRAME:AddMessage("[Atlas] "..info);
-	end
-end
-
--- Adopted from EncounterJournal
-local EJ_HTYPE_OVERVIEW = 3;
-
-local function Atlas_EncounterJournal_CheckForOverview(rootSectionID)
-	return select(3,EJ_GetSectionInfo(rootSectionID)) == EJ_HTYPE_OVERVIEW;
-end
-
--- Priority list for *not my spec*
-local overviewPriorities = {
-	[1] = "DAMAGER",
-	[2] = "HEALER",
-	[3] = "TANK",
-}
-
-local flagsByRole = {
-	["DAMAGER"] = 1,
-	["HEALER"] = 2,
-	["TANK"] = 0,
-}
-
-local rolesByFlag = {
-	[0] = "TANK",
-	[1] = "DAMAGER",
-	[2] = "HEALER"
-}
-
-
--- Initialization
-ATLAS_VERSION = GetAddOnMetadata("Atlas", "Version");
-ATLAS_PLAYER_FACTION = UnitFactionGroup("player");
-ATLAS_DROPDOWNS = {};
-ATLAS_INST_ENT_DROPDOWN = {};
-ATLAS_NUM_LINES = 26;
-ATLAS_CUR_LINES = 0;
-ATLAS_SCROLL_LIST = {};
-ATLAS_SCROLL_ID = {};
-ATLAS_DATA = {};
-ATLAS_SEARCH_METHOD = nil;
-ATLAS_PLUGINS = {};
-ATLAS_PLUGIN_DATA = {};
-AtlasMaps_NPC_DB = {};
-ATLAS_SMALLFRAME_SELECTED = false;
-local ATLAS_DROPDOWN_WIDTH = 190;
-
-local GREN = "|cff66cc33";
-local ATLAS_MAP_NPC_NUM = 0;
-local ATLAS_LARGEMAP_NPC_NUM = 0;
-ATLAS_GAMETOOLTIP_ORIGINAL_SCALE = GameTooltip:GetScale();
-
--- Only update this version number when the options have been revised and a force update is needed.
-ATLAS_OLDEST_VERSION_SAME_SETTINGS = "1.24.00"; 
+-- local ATLAS_MAP_NPC_NUM = 0;
 
 local ATLAS_LETTER_MARKS_TCOORDS = {
 	["Atlas_Letter_Blue_A"] 	= {0.00000000, 0.15625000, 0.00000000, 0.15625000},
@@ -153,29 +110,39 @@ local ATLAS_TAXI_TCOORDS = {
 	["TaxiAlliance"] 	= {0.62500000, 0.93750000, 0.00000000, 0.31250000},
 };
 
-local DefaultAtlasOptions = {
-	["AtlasVersion"] = ATLAS_OLDEST_VERSION_SAME_SETTINGS,
-	["AtlasAlpha"] = 1.0,			-- Atlas frame's transparency
-	["AtlasLocked"] = false,		-- Lock Atlas frame position
-	["AtlasAutoSelect"] = false,		-- Auto select map
-	-- ["AtlasButtonPosition"] = 26,		-- Minimap button position
-	-- ["AtlasButtonRadius"] = 78,		-- Minimap button radius
-	["AtlasButtonShown"] = true,		-- Show / hide Atlas button
-	["AtlasRightClick"] = false,		-- Right click to open world map
-	["AtlasType"] = 1,			-- Default or last selected map type (category)
-	["AtlasZone"] = 1,			-- Default or last selected map / zone
-	["AtlasAcronyms"] = true,		-- Show dungeon's acronyms
-	["AtlasScale"] = 1.0,			-- Atlas frame scale
-	["AtlasClamped"] = true,		-- Clamp to WoW window
-	["AtlasSortBy"] = 1,			-- Maps sorting type, 1: CONTINENT, 2: LEVEL, 3: PARTYSIZE, 4: EXPANSION, 5: TYPE
-	["AtlasCtrl"] = false,			-- Press ctrl and mouse over to show full description text
-	["AtlasBossDesc"] = true,		-- Toggle to show boss description or not
-	["AtlasBossDescScale"] = 0.9,		-- The boss description GameToolTip scale
-	["AtlasDontShowInfo"] = false, 		-- Atlas latest information
-	["AtlasDontShowInfo_12201"] = false,
-	["AtlasCheckModule"] = true,		-- Check if there is missing module / plugin
-	["AtlasColoringDropDown"] = true,	-- Coloring dungeon dropdown list with difficulty colors
-};
+-- Adopted from EncounterJournal
+local EJ_HTYPE_OVERVIEW = 3;
+
+local function Atlas_EncounterJournal_CheckForOverview(rootSectionID)
+	return select(3,EJ_GetSectionInfo(rootSectionID)) == EJ_HTYPE_OVERVIEW;
+end
+
+-- Priority list for *not my spec*
+local overviewPriorities = {
+	[1] = "DAMAGER",
+	[2] = "HEALER",
+	[3] = "TANK",
+}
+
+local flagsByRole = {
+	["DAMAGER"] = 1,
+	["HEALER"] = 2,
+	["TANK"] = 0,
+}
+
+local rolesByFlag = {
+	[0] = "TANK",
+	[1] = "DAMAGER",
+	[2] = "HEALER"
+}
+
+-- Turn ON / OFF Atlas debug mode
+local Atlas_DebugMode = false;
+local function debug(info)
+	if (Atlas_DebugMode) then
+		DEFAULT_CHAT_FRAME:AddMessage(L["ATLAS_TITLE"]..L["Colon"]..info);
+	end
+end
 
 -- Code by Grayhoof (SCT)
 local function Atlas_CloneTable(tablein)	-- Return a copy of the table tablein
@@ -192,13 +159,13 @@ local function Atlas_CloneTable(tablein)	-- Return a copy of the table tablein
 end
 
 function Atlas_FreshOptions()
-	AtlasOptions = Atlas_CloneTable(DefaultAtlasOptions);
+	AtlasOptions = Atlas_CloneTable(addon.constants.defaultoptions);
 end
 
 -- function to check if user has all the options parameter, 
 -- if not (due to some might be newly added), then add it with default value
 local function Atlas_UpdateOptions(player_options)
-	for k, v in pairs(DefaultAtlasOptions) do
+	for k, v in pairs(addon.constants.defaultoptions) do
 		if (player_options[k] == nil) then
 			player_options[k] = v;
 		end
@@ -215,11 +182,10 @@ for kc, vc in pairs(AtlasMaps) do
 	Atlas_CoreMapsKey_Index = Atlas_CoreMapsKey_Index + 1;
 end
 
-Atlas_MapTypes = {};
 function Atlas_RegisterPlugin(name, myCategory, myData)
 	ATLAS_PLUGINS[name] = {};
 	local i = getn(Atlas_MapTypes) + 1;
-	Atlas_MapTypes[i] = GREN..myCategory; -- Plugin category name to be added with green color, and then added to array
+	Atlas_MapTypes[i] = ATLAS_PLUGINS_COLOR..myCategory; -- Plugin category name to be added with green color, and then added to array
 	
 	for k, v in pairs(myData) do
 		table.insert(ATLAS_PLUGINS[name], k);
@@ -305,51 +271,6 @@ local function Atlas_BossButtonUpdate(button, encounterID, instanceID, b_iconIma
 	end
 end
 
-local function Atlas_AchievementButtonUpdate(button, achievementID)
-	button.achievementID = achievementID;
-	button.link = GetAchievementLink(achievementID) or nil;
-	-- id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievementID or categoryID, index)
-	local _, name, _, completed, month, day, year, description, _, _, _, _, _, earnedBy = GetAchievementInfo(achievementID);
-	button.tooltiptitle = name;
-	local tooltiptext = description;
-	local numCriteria = GetAchievementNumCriteria(achievementID);
-	if (numCriteria and numCriteria > 0) then
-		for i = 1, numCriteria do
-			-- criteriaString, criteriaType, completed, quantity, reqQuantity, charName, flags, assetID, quantityString, criteriaID, eligible =  GetAchievementCriteriaInfo(achievementID, criteriaIndex)
-			local criteriaString, criteriaType, criteriaCompleted, quantity, reqQuantity, _, flags, assetID, quantityString = GetAchievementCriteriaInfo(achievementID, i);
-			if (criteriaType == CRITERIA_TYPE_ACHIEVEMENT and assetID) then
-				local _, aname, _, acompleted = GetAchievementInfo(assetID);
-				if (acompleted) then
-					tooltiptext = tooltiptext.."\n|CFFFFFFFF - "..aname;
-				else
-					tooltiptext = tooltiptext.."\n|CFF808080 - "..aname;
-				end
-			--elseif (criteriaString == "" or reqQuantity > 1) then
-			elseif (bit.band(flags, EVALUATION_TREE_FLAG_PROGRESS_BAR) == EVALUATION_TREE_FLAG_PROGRESS_BAR) then
-				if (quantity >= reqQuantity) then
-					tooltiptext = tooltiptext.."\n|CFFFFFFFF - "..quantityString;
-				else
-					tooltiptext = tooltiptext.."\n|CFF808080 - "..quantityString;
-				end
-			else
-				if (criteriaCompleted) then
-					tooltiptext = tooltiptext.."\n|CFFFFFFFF - "..criteriaString;
-				else
-					tooltiptext = tooltiptext.."\n|CFF808080 - "..criteriaString;
-				end
-			end
-		end
-	end
-	if (completed) then
-		name = "      |CFFFFFFFF"..name;
-		tooltiptext = tooltiptext.."\n|CFF00FF00"..format(ACHIEVEMENT_TOOLTIP_COMPLETE, earnedBy, month, day, year);
-	else
-		name = "      |CFF808080"..name;
-	end
-	button.Text:SetText(name);
-	button.tooltiptext = tooltiptext;
-end
-
 function Atlas_Search(text)
 	local zoneID = ATLAS_DROPDOWNS[AtlasOptions.AtlasType][AtlasOptions.AtlasZone];
 	local mapdata = AtlasMaps;
@@ -381,6 +302,104 @@ end
 function Atlas_SearchAndRefresh(text)
 	Atlas_Search(text);
 	Atlas_ScrollBar_Update();
+end
+
+function Atlas_ScrollBar_Update()
+	GameTooltip:Hide();
+	local lineplusoffset;
+	FauxScrollFrame_Update(AtlasScrollBar,ATLAS_CUR_LINES,ATLAS_NUM_LINES,15);
+	for i = 1, ATLAS_NUM_LINES do
+		local button = _G["AtlasEntry"..i];
+		if button then Atlas_BossButtonCleanUp(button); end
+		
+		lineplusoffset = i + FauxScrollFrame_GetOffset(AtlasScrollBar);
+		if (lineplusoffset <= ATLAS_CUR_LINES) then
+			_G["AtlasEntry"..i.."_Text"]:SetText(ATLAS_SCROLL_LIST[lineplusoffset]);
+			if (ATLAS_SCROLL_ID[lineplusoffset]) then
+				if (type(ATLAS_SCROLL_ID[lineplusoffset][1]) == "number") then
+					local id = ATLAS_SCROLL_ID[lineplusoffset][1];
+					Atlas_BossButtonUpdate(button, ATLAS_SCROLL_ID[lineplusoffset][1], ATLAS_SCROLL_ID[lineplusoffset][2]);
+				elseif (type(ATLAS_SCROLL_ID[lineplusoffset][1]) == "string") then
+					local spos, epos = strfind(ATLAS_SCROLL_ID[lineplusoffset][1], "ac=");
+					if (spos) then
+						local achievementID = strsub(ATLAS_SCROLL_ID[lineplusoffset][1], epos+1);
+						achievementID = tonumber(achievementID);
+						Atlas_AchievementButtonUpdate(button, achievementID);
+					end
+				end
+			end
+			button:Show();
+		elseif (button) then
+			button:Hide();
+		end
+	end
+end
+
+function Atlas_SimpleSearch(data, text)
+	if (string.trim(text or "") == "") then
+		return data
+	end
+	local new = {}; -- Create a new table
+	local i, v, n;
+	local search_text = string.lower(text);
+	search_text = search_text:gsub("([%^%$%(%)%%%.%[%]%+%-%?])", "%%%1");
+	search_text = search_text:gsub("%*", ".*");
+	local match;
+
+	i, v = next(data, nil); -- The i is an index of data, v = data[i]
+	n = i;
+	while i do
+		if ( type(i) == "number" ) then
+			if ( string.gmatch ) then 
+				match = string.gmatch(string.lower(data[i][1]), search_text)();
+			else 
+				match = string.gfind(string.lower(data[i][1]), search_text)(); 
+			end
+			if ( match ) then
+				new[n] = {};
+				new[n][1] = data[i][1];
+				n = n + 1;
+			end
+		end
+		i, v = next(data, i); -- Get next index
+	end
+	return new;
+end
+
+function Atlas_PopulateDropdowns()
+	local i = 1;
+	local catName = Atlas_DropDownLayouts_Order[AtlasOptions.AtlasSortBy];
+	local subcatOrder = Atlas_DropDownLayouts_Order[catName];
+	for n = 1, getn(subcatOrder), 1 do
+		local subcatItems = Atlas_DropDownLayouts[catName][subcatOrder[n]];
+
+		ATLAS_DROPDOWNS[n] = {};
+
+		for k,v in pairs(subcatItems) do
+			table.insert(ATLAS_DROPDOWNS[n], v);
+		end
+
+		table.sort(ATLAS_DROPDOWNS[n], Atlas_SortZonesAlpha);
+
+		i = n + 1;
+	end
+	
+	if (ATLAS_PLUGIN_DATA) then
+		for ka, va in pairs(ATLAS_PLUGIN_DATA) do
+
+			ATLAS_DROPDOWNS[i] = {};
+
+			for kb,vb in pairs(va) do
+				if (type(vb) == "table") then
+					table.insert(ATLAS_DROPDOWNS[i], kb);
+				end
+			end
+
+			table.sort(ATLAS_DROPDOWNS[i], Atlas_SortZonesAlpha);
+
+			i = i + 1;
+		end	
+	end
 end
 
 local function Atlas_Process_Deprecated()
@@ -468,11 +487,11 @@ local function Atlas_SanitizeName(text)
    if (AtlasSortIgnore) then
 	   for _, v in pairs(AtlasSortIgnore) do
 		   local match; 
-           if (string.gmatch) then 
-                match = string.gmatch(text, v)();
-           else 
-                match = string.gfind(text, v)(); 
-           end
+		   if (string.gmatch) then 
+			match = string.gmatch(text, v)();
+		   else 
+			match = string.gfind(text, v)(); 
+		   end
 		   if (match) and ((string.len(text) - string.len(match)) <= 4) then
 			   return match;
 		   end
@@ -533,42 +552,6 @@ function Atlas_OnShow()
 	-- Sneakiness
 	AtlasFrameDropDownType_OnShow();
 	AtlasFrameDropDown_OnShow();
-end
-
-function Atlas_PopulateDropdowns()
-	local i = 1;
-	local catName = Atlas_DropDownLayouts_Order[AtlasOptions.AtlasSortBy];
-	local subcatOrder = Atlas_DropDownLayouts_Order[catName];
-	for n = 1, getn(subcatOrder), 1 do
-		local subcatItems = Atlas_DropDownLayouts[catName][subcatOrder[n]];
-
-		ATLAS_DROPDOWNS[n] = {};
-
-		for k,v in pairs(subcatItems) do
-			table.insert(ATLAS_DROPDOWNS[n], v);
-		end
-
-		table.sort(ATLAS_DROPDOWNS[n], Atlas_SortZonesAlpha);
-
-		i = n + 1;
-	end
-	
-	if (ATLAS_PLUGIN_DATA) then
-		for ka, va in pairs(ATLAS_PLUGIN_DATA) do
-
-			ATLAS_DROPDOWNS[i] = {};
-
-			for kb,vb in pairs(va) do
-				if (type(vb) == "table") then
-					table.insert(ATLAS_DROPDOWNS[i], kb);
-				end
-			end
-
-			table.sort(ATLAS_DROPDOWNS[i], Atlas_SortZonesAlpha);
-
-			i = i + 1;
-		end	
-	end
 end
 
 --[[
@@ -760,6 +743,13 @@ function Atlas_Init()
 	if (AtlasOptions["AtlasDontShowInfo_12201"]) then
 		Atlas_ShowInfo();
 	end
+
+	if (AtlasOptions.AtlasWorldMapButtonShown) then
+		AtlasToggleFromWorldMap:Show();
+	else
+		AtlasToggleFromWorldMap:Hide();
+	end
+
 end
 
 -- Simple function to toggle the Atlas frame's lock status and update it's appearance
@@ -976,7 +966,6 @@ local function Atlas_GearItemLevelDiff(minGearLevel)
 	
 	return color;
 end
-
 
 function Atlas_MapRefresh(mapID)
 	local zoneID = mapID or ATLAS_DROPDOWNS[AtlasOptions.AtlasType][AtlasOptions.AtlasZone];
@@ -1398,7 +1387,6 @@ function Atlas_MapRefresh(mapID)
 	end
 end
 
-
 -- Refreshes the Atlas frame, usually because a new map needs to be displayed
 -- The zoneID variable represents the internal name used for each map, ex: "BlackfathomDeeps"
 -- Also responsible for updating all the text when a map is changed
@@ -1810,7 +1798,6 @@ function AtlasPrevNextMap_OnClick(self)
 	Atlas_Refresh();
 end
 
-
 -- Modifies the value of GetRealZoneText to account for some naming conventions
 -- Always use this function instead of GetRealZoneText within Atlas
 local function Atlas_GetFixedZoneText()
@@ -1820,186 +1807,6 @@ local function Atlas_GetFixedZoneText()
 	end
 	return currentZone;
 end 
-
--- Checks the player's current location against all Atlas maps
--- If a match is found display that map right away
--- update for Outland zones contributed by Drahcir
--- 3/23/08 now takes SubZones into account as well
-function Atlas_AutoSelect()
-	local currentZone = Atlas_GetFixedZoneText();
-	local currentSubZone = GetSubZoneText();
-	local zoneID = ATLAS_DROPDOWNS[AtlasOptions.AtlasType][AtlasOptions.AtlasZone];
---[[
-	local factionGroup = UnitFactionGroup("player");
-	if ( factionGroup and factionGroup ~= "Neutral" ) then
-		if ( factionGroup == "Alliance" ) then
-			
-		elseif ( factionGroup == "Horde" ) then
-			
-		end
-	end
-]]
-	debug("Using auto-select to open the best map.");
-
-	-- Check if the current zone is defined in AssocDefaults table
-	-- If yes, means there could be multiple maps for this zone
-	-- And we will choose a proper one to be the default one.
-	debug("currentZone: "..currentZone..", currentSubZone: "..currentSubZone);
-	if (Atlas_AssocDefaults[currentZone]) then
-		debug("currentZone: "..currentZone.." matched the one defined in Atlas_AssocDefaults{}.");
-		local selected_map;
-		if (Atlas_SubZoneData[currentZone]) then
-			for k_instance_map, v_instance_map in pairs(Atlas_SubZoneData[currentZone]) do
-				for k_subzone, v_subzone in pairs(Atlas_SubZoneData[currentZone][k_instance_map]) do
-					if (v_subzone == currentSubZone) then
-						selected_map = k_instance_map;
-						debug("currentSubZone: "..currentSubZone.." matched found, now we will use map: \""..selected_map.."\" for instance: "..currentZone);
-						break;
-					end
-				end
-			end
-		end
-		if (not selected_map) then
-			debug("No subzone matched, now checking if we should specify a default map.");
-			if (currentZone == Atlas_SubZoneAssoc[zoneID]) then
-				debug("You're in the same instance as the former map. Doing nothing.");
-				return;
-			else
-				selected_map = Atlas_AssocDefaults[currentZone];
-				debug("We will use the map: "..selected_map.." for the current zone: "..currentZone..".");
-			end
-		end
-		debug("Selecting the map...");
-		for k_DropDownType, v_DropDownType in pairs(ATLAS_DROPDOWNS) do
-			for k_DropDownZone, v_DropDownZone in pairs(v_DropDownType) do         
-				if (selected_map == v_DropDownZone) then
-					AtlasOptions.AtlasType = k_DropDownType;
-					AtlasOptions.AtlasZone = k_DropDownZone;
-					Atlas_Refresh();
-					debug("Map selected! Type: "..k_DropDownType..", Zone: "..k_DropDownZone..", "..zoneID);
-					return;
-				end
-			end
-		end
-	else
-		debug("SubZone data isn't relevant here. Checking if it's outdoor zone.");
-		if (Atlas_OutdoorZoneToAtlas[currentZone]) then
-			debug("This world zone "..currentZone.." is associated with a map.");
-			for k_DropDownType, v_DropDownType in pairs(ATLAS_DROPDOWNS) do
-				for k_DropDownZone, v_DropDownZone in pairs(v_DropDownType) do         
-					if (Atlas_OutdoorZoneToAtlas[currentZone] == v_DropDownZone) then
-						AtlasOptions.AtlasType = k_DropDownType;
-						AtlasOptions.AtlasZone = k_DropDownZone;
-						Atlas_Refresh();
-						debug("Map changed to the associated map: "..zoneID);
-						return;
-					end
-				end
-			end
-			debug("Checking if instance/entrance pair can be found.");
-		elseif (Atlas_InstToEntMatches[zoneID]) then
-			for ka, va in pairs(Atlas_InstToEntMatches[zoneID]) do
-				if (currentZone == AtlasMaps[va].ZoneName[1]) then
-					debug("Instance/entrance pair found. Doing nothing.");
-					return;
-				end
-			end
-		elseif (Atlas_EntToInstMatches[zoneID]) then
-			for ka, va in pairs(Atlas_EntToInstMatches[zoneID]) do
-				if (currentZone == AtlasMaps[va].ZoneName[1]) then
-					debug("Instance/entrance pair found. Doing nothing.");
-					return;
-				end
-			end
-		end
-		debug("Searching through all maps for a ZoneName match.");
-		for k_DropDownType, v_DropDownType in pairs(ATLAS_DROPDOWNS) do
-			for k_DropDownZone, v_DropDownZone in pairs(v_DropDownType) do         
-				-- Compare the currentZone to the new substr of ZoneName
-				if (currentZone == strsub(AtlasMaps[v_DropDownZone].ZoneName[1], strlen(AtlasMaps[v_DropDownZone].ZoneName[1]) - strlen(currentZone) + 1)) then
-					AtlasOptions.AtlasType = k_DropDownType;
-					AtlasOptions.AtlasZone = k_DropDownZone;
-					Atlas_Refresh();
-					debug("Found a match. Map has been changed.");
-					return;
-				end
-			end
-		end
-	end
-	debug("Nothing changed because no match was found.");
-end
-
-function Atlas_ScrollBar_Update()
-	GameTooltip:Hide();
-	local lineplusoffset;
-	FauxScrollFrame_Update(AtlasScrollBar,ATLAS_CUR_LINES,ATLAS_NUM_LINES,15);
-	for i = 1, ATLAS_NUM_LINES do
-		local button = _G["AtlasEntry"..i];
-		if button then Atlas_BossButtonCleanUp(button); end
-		
-		lineplusoffset = i + FauxScrollFrame_GetOffset(AtlasScrollBar);
-		if (lineplusoffset <= ATLAS_CUR_LINES) then
-			_G["AtlasEntry"..i.."_Text"]:SetText(ATLAS_SCROLL_LIST[lineplusoffset]);
-			if (ATLAS_SCROLL_ID[lineplusoffset]) then
-				if (type(ATLAS_SCROLL_ID[lineplusoffset][1]) == "number") then
-					local id = ATLAS_SCROLL_ID[lineplusoffset][1];
-					Atlas_BossButtonUpdate(button, ATLAS_SCROLL_ID[lineplusoffset][1], ATLAS_SCROLL_ID[lineplusoffset][2]);
-				elseif (type(ATLAS_SCROLL_ID[lineplusoffset][1]) == "string") then
-					local spos, epos = strfind(ATLAS_SCROLL_ID[lineplusoffset][1], "ac=");
-					if (spos) then
-						local achievementID = strsub(ATLAS_SCROLL_ID[lineplusoffset][1], epos+1);
-						achievementID = tonumber(achievementID);
-						Atlas_AchievementButtonUpdate(button, achievementID);
-					end
-				end
-			end
-			button:Show();
-		elseif (button) then
-			button:Hide();
-		end
-	end
-end
-
-function Atlas_SimpleSearch(data, text)
-	if (string.trim(text or "") == "") then
-		return data
-	end
-	local new = {}; -- Create a new table
-	local i, v, n;
-	local search_text = string.lower(text);
-	search_text = search_text:gsub("([%^%$%(%)%%%.%[%]%+%-%?])", "%%%1");
-	search_text = search_text:gsub("%*", ".*");
-	local match;
-
-	i, v = next(data, nil); -- The i is an index of data, v = data[i]
-	n = i;
-	while i do
-		if ( type(i) == "number" ) then
-			if ( string.gmatch ) then 
-				match = string.gmatch(string.lower(data[i][1]), search_text)();
-			else 
-				match = string.gfind(string.lower(data[i][1]), search_text)(); 
-			end
-			if ( match ) then
-				new[n] = {};
-				new[n][1] = data[i][1];
-				n = n + 1;
-			end
-		end
-		i, v = next(data, i); -- Get next index
-	end
-	return new;
-end
-
-local function Atlas_OpenAchievement(achievementID)
-	if not achievementID then return; end
-	
-	if not IsAddOnLoaded("Blizzard_AchievementUI") then
-		LoadAddOn("Blizzard_AchievementUI")
-	end
-	ShowUIPanel(AchievementFrame)
-	AchievementFrame_SelectAchievement(achievementID)
-end
 
 function AtlasEntryTemplate_OnUpdate(self)
 	if (AtlasEJLootFrame:IsShown()) then return; end
@@ -2295,6 +2102,114 @@ function AtlasToggleFromEncounterJournal_OnClick(self)
 	Atlas_AutoSelect_from_EncounterJournal();
 	ToggleFrame(EncounterJournal);
 	Atlas_Toggle();
+end
+
+-- Checks the player's current location against all Atlas maps
+-- If a match is found display that map right away
+-- update for Outland zones contributed by Drahcir
+-- 3/23/08 now takes SubZones into account as well
+function Atlas_AutoSelect()
+	local currentZone = Atlas_GetFixedZoneText();
+	local currentSubZone = GetSubZoneText();
+	local zoneID = ATLAS_DROPDOWNS[AtlasOptions.AtlasType][AtlasOptions.AtlasZone];
+--[[
+	local factionGroup = UnitFactionGroup("player");
+	if ( factionGroup and factionGroup ~= "Neutral" ) then
+		if ( factionGroup == "Alliance" ) then
+			
+		elseif ( factionGroup == "Horde" ) then
+			
+		end
+	end
+]]
+	debug("Using auto-select to open the best map.");
+
+	-- Check if the current zone is defined in AssocDefaults table
+	-- If yes, means there could be multiple maps for this zone
+	-- And we will choose a proper one to be the default one.
+	debug("currentZone: "..currentZone..", currentSubZone: "..currentSubZone);
+	if (Atlas_AssocDefaults[currentZone]) then
+		debug("currentZone: "..currentZone.." matched the one defined in Atlas_AssocDefaults{}.");
+		local selected_map;
+		if (Atlas_SubZoneData[currentZone]) then
+			for k_instance_map, v_instance_map in pairs(Atlas_SubZoneData[currentZone]) do
+				for k_subzone, v_subzone in pairs(Atlas_SubZoneData[currentZone][k_instance_map]) do
+					if (v_subzone == currentSubZone) then
+						selected_map = k_instance_map;
+						debug("currentSubZone: "..currentSubZone.." matched found, now we will use map: \""..selected_map.."\" for instance: "..currentZone);
+						break;
+					end
+				end
+			end
+		end
+		if (not selected_map) then
+			debug("No subzone matched, now checking if we should specify a default map.");
+			if (currentZone == Atlas_SubZoneAssoc[zoneID]) then
+				debug("You're in the same instance as the former map. Doing nothing.");
+				return;
+			else
+				selected_map = Atlas_AssocDefaults[currentZone];
+				debug("We will use the map: "..selected_map.." for the current zone: "..currentZone..".");
+			end
+		end
+		debug("Selecting the map...");
+		for k_DropDownType, v_DropDownType in pairs(ATLAS_DROPDOWNS) do
+			for k_DropDownZone, v_DropDownZone in pairs(v_DropDownType) do         
+				if (selected_map == v_DropDownZone) then
+					AtlasOptions.AtlasType = k_DropDownType;
+					AtlasOptions.AtlasZone = k_DropDownZone;
+					Atlas_Refresh();
+					debug("Map selected! Type: "..k_DropDownType..", Zone: "..k_DropDownZone..", "..zoneID);
+					return;
+				end
+			end
+		end
+	else
+		debug("SubZone data isn't relevant here. Checking if it's outdoor zone.");
+		if (Atlas_OutdoorZoneToAtlas[currentZone]) then
+			debug("This world zone "..currentZone.." is associated with a map.");
+			for k_DropDownType, v_DropDownType in pairs(ATLAS_DROPDOWNS) do
+				for k_DropDownZone, v_DropDownZone in pairs(v_DropDownType) do         
+					if (Atlas_OutdoorZoneToAtlas[currentZone] == v_DropDownZone) then
+						AtlasOptions.AtlasType = k_DropDownType;
+						AtlasOptions.AtlasZone = k_DropDownZone;
+						Atlas_Refresh();
+						debug("Map changed to the associated map: "..zoneID);
+						return;
+					end
+				end
+			end
+			debug("Checking if instance/entrance pair can be found.");
+		elseif (Atlas_InstToEntMatches[zoneID]) then
+			for ka, va in pairs(Atlas_InstToEntMatches[zoneID]) do
+				if (currentZone == AtlasMaps[va].ZoneName[1]) then
+					debug("Instance/entrance pair found. Doing nothing.");
+					return;
+				end
+			end
+		elseif (Atlas_EntToInstMatches[zoneID]) then
+			for ka, va in pairs(Atlas_EntToInstMatches[zoneID]) do
+				if (currentZone == AtlasMaps[va].ZoneName[1]) then
+					debug("Instance/entrance pair found. Doing nothing.");
+					return;
+				end
+			end
+		end
+		debug("Searching through all maps for a ZoneName match.");
+		for k_DropDownType, v_DropDownType in pairs(ATLAS_DROPDOWNS) do
+			for k_DropDownZone, v_DropDownZone in pairs(v_DropDownType) do         
+				-- Compare the currentZone to the new substr of ZoneName
+				if (currentZone == strsub(AtlasMaps[v_DropDownZone].ZoneName[1], strlen(AtlasMaps[v_DropDownZone].ZoneName[1]) - strlen(currentZone) + 1)) then
+					AtlasOptions.AtlasType = k_DropDownType;
+					AtlasOptions.AtlasZone = k_DropDownZone;
+					Atlas_Refresh();
+					debug("Found a match. Map has been changed.");
+					return;
+				end
+			end
+		end
+	end
+	debug("Nothing changed because no match was found.");
 end
 
 function Atlas_AutoSelect_from_WorldMap()

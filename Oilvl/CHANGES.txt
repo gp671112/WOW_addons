@@ -1,9 +1,10 @@
 ------------------------------------------------------------------------
-r649 | olzenkhaw | 2017-01-08 19:01:07 -0600 (Sun, 08 Jan 2017) | 1 line
+r691 | olzenkhaw | 2017-02-17 17:36:37 -0600 (Fri, 17 Feb 2017) | 1 line
 Changed paths:
    M /trunk/Oilvl.lua
    M /trunk/Oilvl.toc
+   M /trunk/OilvlPlayer.lua
 
-v6.4.0 - Show The Nighthold tier pcs bonus (2 or 4) in OiLvL window and Minimap button tooltip.
+v6.4.21 - fix a bug
 ------------------------------------------------------------------------
 

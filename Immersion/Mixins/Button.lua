@@ -15,7 +15,7 @@ function Button:OnClick(button, down)
 end
 
 function Button:OnShow()
-	self.Counter:SetShown(L.Get('enablenumbers'))
+	self.Counter:SetShown(L('enablenumbers'))
  	local id = self.idx or 1
 	C_Timer.After(id * 0.025, function()
 		L.UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
@@ -24,6 +24,11 @@ end
 
 function Button:OnHide()
 	self:SetAlpha(0)
+end
+
+function Button:OnScaleFinished()
+	-- Force a text/height update after scaling
+	self:SetText(self:GetText())
 end
 
 function Button:SetFormattedText(...)
@@ -59,6 +64,17 @@ function Button:SetGossipIcon(texture, vertex)
 	vertex = vertex or 1
 	self.Icon:SetTexture(([[Interface\GossipFrame\%sGossipIcon]]):format(texture or ''))
 	self.Icon:SetVertexColor(vertex, vertex, vertex)
+end
+
+function Button:SetPriority(val)
+	self.priority = val
+end
+
+function Button:ComparePriority(otherButton)
+	if otherButton and (otherButton.priority or 5) < (self.priority or 5) then
+		return otherButton
+	end
+	return self
 end
 
 function Button:Init(id)

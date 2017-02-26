@@ -241,9 +241,11 @@ L["MapG"] = " [7]"
 L["MapH"] = " [8]"
 L["MapI"] = " [9]"
 L["MapJ"] = " [10]"
-L["MapsNotFound"] = [=[目前的副本找不到對應的地圖影像檔。
+L["MapsNotFound"] = [=[目前的副本找不到對應的
+地圖影像檔。
 
-請確認您是否有安裝 Atlas 相關的副本地圖模組。]=]
+請確認您是否有安裝 Atlas 
+相關的副本地圖模組。]=]
 L["Meeting Stone"] = "集合石"
 L["Middle"] = "中間"
 L["Midsummer Festival"] = "仲夏節慶"

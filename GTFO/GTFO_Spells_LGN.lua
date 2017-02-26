@@ -297,6 +297,23 @@ GTFO.SpellID["219032"] = {
   tankSound = 2;
 };
 
+GTFO.SpellID["216476"] = {
+  --desc = "Blizzard (Humongris)";
+  sound = 1;
+};
+
+GTFO.SpellID["215921"] = {
+  --desc = "Guardian Nova (Guardian Orb)";
+  sound = 1;
+};
+
+GTFO.SpellID["202704"] = {
+  --desc = "Defiled Consecration (Eredar Enforcer)";
+  sound = 1;
+};
+
+
+
 -- **********
 -- * Mardum *
 -- **********
@@ -338,6 +355,11 @@ GTFO.SpellID["197243"] = {
 
 GTFO.SpellID["197609"] = {
   --desc = "Demon's Blood (Brood Queen Tyranna)";
+  sound = 1;
+};
+
+GTFO.SpellID["224679"] = {
+  --desc = "Condensed Fel Energy (Vizuul the Twisted)";
   sound = 1;
 };
 
@@ -826,6 +848,11 @@ GTFO.SpellID["221866"] = {
   tankSound = 0;
 };
 
+GTFO.SpellID["198245"] = {
+  --desc = "Brutal Haymaker (Smashspite the Hateful)";
+  sound = 1;
+};
+
 -- *************************
 -- * The Emerald Nightmare *
 -- *************************
@@ -933,20 +960,15 @@ GTFO.SpellID["211634"] = {
 -- *************
 
 -- TODO: Volatile Fragment (Skorpyron)
--- TODO: Sterilize (Trilliax) -- FF Damage
 -- TODO: Arcing Bonds (Trilliax) -- FF Damage
 -- TODO: Fel Stomp (Spellblade Aluriel)
 -- TODO: Flames of Argus (Tichondrius)
--- TODO: Tainted Blood (Tichondrius) -- non-tank?  avoidable and not instant death?
 -- TODO: Ring of Shadows (Tichondrius)
 -- TODO: Isolated Rage (Krosus)
 -- TODO: Call of Night (High Botanist Tel'arn) -- when marked and not standing by someone unmarked
 -- TODO: Collapse of Night (High Botanist Tel'arn) -- when marked and not standing by someone unmarked
 -- TODO: Solar Collapse (High Botanist Tel'arn) -- Any ticks avoidable?
 -- TODO: Frigid Pulse (Star Augur Etaeus)
--- TODO: Slow Time (Grand Magistrix Elisande)
--- TODO: Arcanetic Ring (Grand Magistrix Elisande)
--- TODO: Desolate Ground (Gul'dan)
 -- TODO: Flames of Sargeras (Gul'dan) -- FF 
 
 GTFO.SpellID["204744"] = {
@@ -959,6 +981,11 @@ GTFO.SpellID["211659"] = {
   sound = 1;
   tankSound = 0;
   test = true;
+};
+
+GTFO.SpellID["230254"] = {
+  --desc = "Coalesced Soul (Ariadne)";
+  sound = 1;
 };
 
 GTFO.SpellID["230488"] = {
@@ -979,12 +1006,19 @@ GTFO.SpellID["226205"] = {
 GTFO.SpellID["223718"] = {
   --desc = "Bursting Slime (Sludgerax)";
   sound = 1;
-  test = true;
+  negatingDebuffSpellID = 234585; -- Oozing Rush
 };
 
 GTFO.SpellID["206488"] = {
-	--desc = "Arcane Seepage (Trilliax)";
+  --desc = "Arcane Seepage (Trilliax)";
   sound = 1;
+};
+
+GTFO.SpellID["208501"] = {
+  --desc = "Sterilize (Trilliax)";
+  sound = 4;
+  ignoreSelfInflicted = true;
+  negatingDebuffSpellID = 208499; -- Sterilize
 };
 
 GTFO.SpellID["224572"] = {
@@ -1012,12 +1046,6 @@ GTFO.SpellID["213278"] = {
   sound = 1;
 };
 
-GTFO.SpellID["219950"] = {
-  --desc = "Controlled Chaos (High Botanist Tel'arn)";
-  sound = 1;
-  test = true;
-};
-
 GTFO.SpellID["213624"] = {
   --desc = "Mark of Frost (Spellblade Aluriel)";
   sound = 4;
@@ -1027,7 +1055,6 @@ GTFO.SpellID["213624"] = {
 GTFO.SpellID["213520"] = {
   --desc = "Arcane Orb (Spellblade Aluriel)";
   sound = 1;
-  test = true;
 };
 
 GTFO.SpellID["212494"] = {
@@ -1036,20 +1063,85 @@ GTFO.SpellID["212494"] = {
   tankSound = 0;
 };
 
+GTFO.SpellID["222111"] = {
+  --desc = "Roiling Flame";
+  sound = 1;
+};
+
+GTFO.SpellID["225856"] = {
+  --desc = "Poison Brambles (Shal'dorei Naturalist)";
+  sound = 1;
+};
+
 GTFO.SpellID["216027"] = {
   --desc = "Nether Zone (Tichondrius)";
+  sound = 1;
+};
+
+GTFO.SpellID["224978"] = {
+  --desc = "Infinite Abyss (Abyss Watcher)";
+  sound = 1;
+};
+
+GTFO.SpellID["224984"] = {
+  --desc = "Fel Glare (Abyss Watcher)";
+  sound = 1;
+  negatingDebuffSpellID = 224982; -- Fel Glare
+};
+
+GTFO.SpellID["213534"] = {
+  --desc = "Echoes of the Void (Tichondrius)";
   sound = 1;
 };
 
 GTFO.SpellID["206398"] = {
   --desc = "Felflame (Star Augur Etaeus)";
   sound = 1;
-  tankSound = 0; -- Possibly only if too many stacks
+  negatingDebuffSpellID = 214167; -- Gravitational Pull
   applicationOnly = true;
+};
+
+GTFO.SpellID["206921"] = {
+  --desc = "Iceburst (Star Augur Etraeus)";
+  sound = 1;
+  tankSound = 0;
+};
+
+GTFO.SpellID["224561"] = {
+  --desc = "Celestial Brand (Astrologer Jarin)";
+  sound = 4;
+  negatingDebuffSpellID = 224560; -- Celestial Brand
+  test = true;
 };
 
 GTFO.SpellID["209433"] = {
   --desc = "Spanning Singularity (Grand Magistrix Elisande)";
+  sound = 1;
+  affirmingDebuffSpellID = 209166; -- Fast Time
+};
+
+GTFO.SpellID["208659"] = {
+  --desc = "Arcanetic Ring (Grand Magistrix Elisande)";
+  sound = 1;
+};
+
+GTFO.SpellID["206515"] = {
+  --desc = "Fel Efflux (Gul'dan)";
+  sound = 1;
+};
+
+GTFO.SpellID["217770"] = {
+  --desc = "Gaze of Vethriz (Gul'dan)";
+  sound = 1;
+};
+
+GTFO.SpellID["209191"] = {
+  --desc = "Empowered Liquid Hellfire (Gul'dan)";
+  sound = 1;
+};
+
+GTFO.SpellID["221781"] = {
+  --desc = "Desolate Ground (Gul'dan)";
   sound = 1;
 };
 

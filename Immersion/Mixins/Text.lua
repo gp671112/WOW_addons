@@ -6,33 +6,54 @@ local LINE_FEED_CODE = string.char(10)
 local CARRIAGE_RETURN_CODE = string.char(13)
 local WEIRD_LINE_BREAK = LINE_FEED_CODE .. CARRIAGE_RETURN_CODE .. LINE_FEED_CODE
 
+local DELAY_DIVISOR
+local MAX_UNTIL_SPLIT = 200
+
 Timer.Texts = {}
 L.TextMixin = {}
 
 local Text = L.TextMixin
 
 function Text:SetText(text)
+	DELAY_DIVISOR = L('delaydivisor')
 	self:StopTexts()
 	self.storedText = text
 	if text then
 		local strings, delays = {}, {}
 		local timeToFinish = 0
-		text = text:gsub(LINE_FEED_CODE .. '+', '\n')
-		text = text:gsub(WEIRD_LINE_BREAK, '\n')
+		text = text:gsub(LINE_FEED_CODE .. '+', '\n'):gsub(WEIRD_LINE_BREAK, '\n')
 		for i, str in pairs({strsplit('\n', text)}) do
-			local length = str:len()
-			if length ~= 0 then
-				local delay = (length / 15 ) + 2
-				timeToFinish = timeToFinish + delay
-				delays[ #strings + 1] = delay
-				strings[ #strings + 1 ] = str
-			end
+			timeToFinish = timeToFinish + self:AddString(str, strings, delays)
 		end
 		self.numTexts = #strings
 		self.timeToFinish = timeToFinish
 		self.timeStarted = GetTime()
 		self:QueueTexts(strings, delays)
 	end
+end
+
+function Text:AddString(str, strings, delays)
+	local length, delay, force = str:len(), 0
+	if length > MAX_UNTIL_SPLIT then
+		local new = str:gsub('%.%s+', '.\n'):gsub('%.%.%.\n', '...\n...'):gsub('%!%s+', '!\n'):gsub('%?%s+', '?\n')
+		--[[ If the string is unchanged, this will recurse infinitely, therefore
+			force the long string to be shown. This safeguard is probably meaningless,
+			as it requires 200+ chars without any punctuation. ]]
+		if ( new == str ) then
+			force = true
+		else
+			for i, short in pairs({strsplit('\n', new)}) do
+				delay = delay + self:AddString(short, strings, delays)
+			end
+			return delay
+		end
+	end
+	if ( length ~= 0 or force ) then
+		delay = (length / ( DELAY_DIVISOR or 15) ) + 2
+		delays[ #strings + 1] = delay
+		strings[ #strings + 1 ] = str
+	end
+	return delay
 end
 
 function Text:QueueTexts(strings, delays)
@@ -78,7 +99,12 @@ end
 
 function Text:GetNumTexts() return self.numTexts or 0 end
 
-function Text:OnFinished() end
+function Text:OnFinished()
+	self.strings = nil
+	self.delays = nil
+	self.timeToFinish = nil
+	self.timeStarted = nil
+end
 
 function Text:ForceNext()
 	if self.delays and self.strings then
@@ -87,7 +113,7 @@ function Text:ForceNext()
 		if self.strings[1] then
 			self:SetNext(self.strings[1])
 		else
-			Timer:RemoveText(self)
+			self:StopProgression()
 			self:RepeatTexts()
 		end
 		if not self.strings[2] then
@@ -96,13 +122,14 @@ function Text:ForceNext()
 	end
 end
 
-function Text:StopTexts()
+function Text:StopProgression()
 	Timer:RemoveText(self)
-	self.strings = nil
-	self.delays = nil
+end
+
+function Text:StopTexts()
 	self.numTexts = nil
-	self.timeToFinish = nil
-	self.timeStarted = nil
+	self:StopProgression()
+	self:OnFinished()
 	self:SetNext()
 end
 
@@ -170,7 +197,8 @@ end
 
 function Timer:OnUpdate(elapsed)
 	for text in self:GetTexts() do
-		if next(text.strings) and next(text.delays) then
+		if 	( text.strings and text.delays ) and
+		 	( next(text.strings) and next(text.delays) ) then
 			if not text:GetText() then
 				text:SetNext(text.strings[1])
 			end

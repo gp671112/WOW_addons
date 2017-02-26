@@ -5,7 +5,7 @@
 
 ## Dependencies: PetTracker
 ## X-Category: Battle Pets
-## Version: 7.1.3
+## Version: 7.1.4
 
 ..\PetTracker\Combat\StatusBar.xml
 

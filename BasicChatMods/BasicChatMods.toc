@@ -1,17 +1,15 @@
 ## Interface: 70100
 ## Title: BasicChatMods
 ## Author: Funkydude
-## Version: v7.1.1
+## Version: v7.1.8
 ## Notes: Basic Chat Mods
 ## Title-zhTW: |cFF00FF80[聊天增強]|rBasicChatMods
-## Notes-zhTW: Basic Chat Mods
-## Notes-zhCN: Basic Chat Mods
 ## SavedVariables: bcmDB
 
 ## X-Credits: Rabbit & Ammo (SimpleChatMods)
 ## X-Category: Chat/Communication
 ## X-License: All Rights Reserved: You are free to fork and modify on GitHub, please ask us about anything else.
-## X-Curse-Project-ID: basic-chat-mods
+## X-Curse-Project-ID: 13504
 ## X-WoWI-ID: 11290
 
 ## OptionalDeps: LibChatAnims

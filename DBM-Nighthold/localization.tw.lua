@@ -6,10 +6,6 @@ local L
 ---------------
 L= DBM:GetModLocalization(1706)
 
-L:SetMiscLocalization({
-	NoDebuff	= "無%s"
-})
-
 ---------------------------
 -- Chronomatic Anomaly --
 ---------------------------
@@ -36,7 +32,7 @@ L:SetOptionLocalization({
 
 L:SetMiscLocalization({
 	First					= "第一",
-	Second				= "第二",
+	Second			= "第二",
 	Third				= "第三",
 	Adds1				= "手下們！都進來！",
 	Adds2				= "讓這些笨蛋見識真正的戰鬥！"
@@ -70,7 +66,7 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	RadarMessage				= "使用雷達找到無減益的夥伴加上HUD去閃避減益。未來希望能加強此功能並提供更多選項。"
+	RadarMessage				= "使用雷達找到無減益的隊友加上HUD去閃避減益。未來希望能加強此功能並提供更多選項。"
 })
 
 ------------------
@@ -89,24 +85,29 @@ L:SetOptionLocalization({
 L= DBM:GetModLocalization(1743)
 
 L:SetTimerLocalization({
-	timerFastTimeBubble		= "加快區域(%d)",
+	timerFastTimeBubble			= "加快區域(%d)",
 	timerSlowTimeBubble		= "遲緩區域(%d)"
 })
 
 L:SetOptionLocalization({
-	timerFastTimeBubble		= "為$spell:209166區域顯示計時器",
+	timerFastTimeBubble			= "為$spell:209166區域顯示計時器",
 	timerSlowTimeBubble		= "為$spell:209165區域顯示計時器"
 })
 
 L:SetMiscLocalization({
 	noCLEU4EchoRings			= "時間的浪潮會粉碎你！",
 	noCLEU4EchoOrbs			= "你會發現時光有時很不穩定。"
+	prePullRP								= "我預見了你的到來。命運的絲線帶你來到這裡。你竭盡全力，想阻止燃燒軍團。"
 })
 
 ------------------
 -- Gul'dan --
 ------------------
 L= DBM:GetModLocalization(1737)
+
+L:SetMiscLocalization({
+	mythicPhase3		= "Time to return the demon hunter's soul to his body... and deny the Legion's master a host!"
+})
 
 -------------
 --  Trash  --

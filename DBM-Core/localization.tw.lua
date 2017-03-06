@@ -245,16 +245,22 @@ DBM_ERROR_NO_PERMISSION				= "無權進行此操作。"
 
 DBM_CORE_BOSSHEALTH_HIDE_FRAME		= "關閉血量框架"
 
-DBM_CORE_UNKNOWN			= "未知"
+--Common Locals
+DBM_NEXT							= "下一次%s"
+DBM_COOLDOWN						= "%s冷卻"
+DBM_CORE_UNKNOWN					= "未知"
 DBM_CORE_LEFT						= "左"
-DBM_CORE_RIGHT					= "右"
+DBM_CORE_RIGHT						= "右"
 DBM_CORE_BACK						= "後"
-DBM_CORE_MIDDLE					= "中"
-DBM_CORE_FRONT					= "前"
-DBM_CORE_INTERMISSION		= "中場時間"
+DBM_CORE_MIDDLE						= "中"
+DBM_CORE_FRONT						= "前"
+DBM_CORE_INTERMISSION				= "中場時間"
 DBM_CORE_ORB						= "球"
 DBM_CHEST							= "獎勵箱"
 DBM_NO_DEBUFF						= "沒有%s"
+DBM_ALLY							= "隊友"
+DBM_ADDS							= "小怪"
+--Common Locals end
 
 DBM_CORE_BREAK_USAGE				= "休息時間不可以長過60分鐘。請確定您輸入的時間是分鐘而不是秒。"
 DBM_CORE_BREAK_START				= "現在開始休息-你有%s分鐘! (由 %s 發送)"

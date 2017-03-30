@@ -1,4 +1,4 @@
--- $Id: Atlas-zhTW.lua 140 2017-01-16 08:56:14Z arith $
+-- $Id: Atlas-zhTW.lua 189 2017-03-27 12:20:49Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -28,16 +28,16 @@ local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas", "zhTW", false);
 
 if ( GetLocale() == "zhTW" ) then
--- Define the leading strings to be ignored while sorting
--- Ex: The Stockade
-AtlasSortIgnore = {};
+	-- Define the leading strings to be ignored while sorting
+	-- Ex: The Stockade
+	AtlasSortIgnore = {};
 
--- Syntax: ["real_zone_name"] = "localized map zone name"
-AtlasZoneSubstitutions = {
-	["安其拉"] = "安其拉：安其拉神廟";
-	["卡拉贊"] = "卡拉贊 - 1.開始";
-	["悲傷沼澤"] = "沉沒的神廟";
-};
+	-- Syntax: ["real_zone_name"] = "localized map zone name"
+	AtlasZoneSubstitutions = {
+		["安其拉"] = "安其拉：安其拉神廟";
+		["卡拉贊"] = "卡拉贊 - 1.開始";
+		["悲傷沼澤"] = "沉沒的神廟";
+	};
 end
 
 
@@ -53,9 +53,12 @@ L["Arcane Container"] = "秘法容器"
 L["Arms Warrior"] = "武戰"
 L["ATLAS_BUTTON_CLOSE"] = "關閉"
 L["ATLAS_CLICK_TO_OPEN"] = "按下以開啟 Atlas 地圖視窗。"
+L["ATLAS_CLOSE_ATLASLOOT_WINDOW"] = "右鍵點擊以關閉 AtlasLoot 視窗。"
 L["ATLAS_COLLAPSE_BUTTON"] = "按下以收起 Atlas 的地圖說明窗格。"
 L["ATLAS_DDL_CONTINENT"] = "依不同大陸分類"
 L["ATLAS_DDL_CONTINENT_BROKENISLES"] = "破碎群島副本"
+L["ATLAS_DDL_CONTINENT_BROKENISLES1"] = "破碎群島地城"
+L["ATLAS_DDL_CONTINENT_BROKENISLES2"] = "破碎群島團隊副本"
 L["ATLAS_DDL_CONTINENT_DEEPHOLM"] = "地深之源副本"
 L["ATLAS_DDL_CONTINENT_DRAENOR"] = "德拉諾副本"
 L["ATLAS_DDL_CONTINENT_EASTERN"] = "東部王國副本"
@@ -67,6 +70,8 @@ L["ATLAS_DDL_EXPANSION"] = "依資料片分類"
 L["ATLAS_DDL_EXPANSION_BC"] = "燃燒的遠征副本"
 L["ATLAS_DDL_EXPANSION_CATA"] = "浩劫與重生副本"
 L["ATLAS_DDL_EXPANSION_LEGION"] = "軍臨天下副本"
+L["ATLAS_DDL_EXPANSION_LEGION1"] = "軍臨天下地城"
+L["ATLAS_DDL_EXPANSION_LEGION2"] = "軍臨天下團隊副本"
 L["ATLAS_DDL_EXPANSION_MOP"] = "潘達利亞之謎副本"
 L["ATLAS_DDL_EXPANSION_OLD_AO"] = "舊世界副本 1/2"
 L["ATLAS_DDL_EXPANSION_OLD_PZ"] = "舊世界副本 2/2"
@@ -76,6 +81,8 @@ L["ATLAS_DDL_LEVEL"] = "依等級分類"
 L["ATLAS_DDL_LEVEL_100PLUS"] = "副本等級大於 100"
 L["ATLAS_DDL_LEVEL_100TO110"] = "副本等級介於 100-110"
 L["ATLAS_DDL_LEVEL_110PLUS"] = "副本等級大於 110"
+L["ATLAS_DDL_LEVEL_110PLUS1"] = "副本等級大於 1/2"
+L["ATLAS_DDL_LEVEL_110PLUS2"] = "副本等級大於 2/2"
 L["ATLAS_DDL_LEVEL_45TO60"] = "副本等級介於 45-60"
 L["ATLAS_DDL_LEVEL_60TO70"] = "副本等級介於 60-70"
 L["ATLAS_DDL_LEVEL_70TO80"] = "副本等級介於 70-80"
@@ -84,10 +91,20 @@ L["ATLAS_DDL_LEVEL_85TO90"] = "副本等級介於 85-90"
 L["ATLAS_DDL_LEVEL_90TO100"] = "副本等級介於 90-100"
 L["ATLAS_DDL_LEVEL_UNDER45"] = "副本等級低於 45"
 L["ATLAS_DDL_PARTYSIZE"] = "依隊伍人數分類"
+L["ATLAS_DDL_PARTYSIZE_10_1"] = "10 人團隊副本 1/3"
+L["ATLAS_DDL_PARTYSIZE_10_2"] = "10 人團隊副本 2/3"
+L["ATLAS_DDL_PARTYSIZE_10_3"] = "10 人團隊副本 3/3"
 L["ATLAS_DDL_PARTYSIZE_10_AN"] = "10 人副本 1/2"
 L["ATLAS_DDL_PARTYSIZE_10_OZ"] = "10 人副本 2/2"
+L["ATLAS_DDL_PARTYSIZE_20TO40_1"] = "20-40 人團隊副本 1/3"
+L["ATLAS_DDL_PARTYSIZE_20TO40_2"] = "20-40 人團隊副本 2/3"
+L["ATLAS_DDL_PARTYSIZE_20TO40_3"] = "20-40 人團隊副本 3/3"
 L["ATLAS_DDL_PARTYSIZE_20TO40AH"] = "20-40 人副本 1/2"
 L["ATLAS_DDL_PARTYSIZE_20TO40IZ"] = "20-40 人副本 2/2"
+L["ATLAS_DDL_PARTYSIZE_5_1"] = "5 人地城 1/4"
+L["ATLAS_DDL_PARTYSIZE_5_2"] = "5 人地城 2/4"
+L["ATLAS_DDL_PARTYSIZE_5_3"] = "5 人地城 3/4"
+L["ATLAS_DDL_PARTYSIZE_5_4"] = "5 人地城 4/4"
 L["ATLAS_DDL_PARTYSIZE_5_AE"] = "5 人副本 1/3"
 L["ATLAS_DDL_PARTYSIZE_5_FS"] = "5 人副本 2/3"
 L["ATLAS_DDL_PARTYSIZE_5_TZ"] = "5 人副本 3/3"
@@ -141,8 +158,10 @@ L["ATLAS_MISSING_MODULE"] = [=[Atlas 已偵測到遺失的模組／插件。
 
 以下是遺失的模組／插件列表：
 ]=]
+L["ATLAS_OPEN_ACHIEVEMENT"] = "按下以開啟成就細節。"
 L["ATLAS_OPEN_ADDON_LIST"] = "開啟插件列表"
 L["ATLAS_OPEN_ADVENTURE"] = "按下以開啟冒險指南視窗。"
+L["ATLAS_OPEN_ATLASLOOT_WINDOW"] = "按下以開啟 AtlasLoot 視窗。"
 L["ATLAS_OPEN_WOWMAP_WINDOW"] = "按下以開啟冒險指南地圖視窗。"
 L["ATLAS_OPTIONS_ACRONYMS"] = "顯示副本縮寫"
 L["ATLAS_OPTIONS_ACRONYMS_TIP"] = "在地圖的詳盡敘述中顯示副本的縮寫"
@@ -172,7 +191,9 @@ L["ATLAS_OPTIONS_RESETPOS"] = "重設位置"
 L["ATLAS_OPTIONS_SCALE"] = "Atlas 視窗大小比率"
 L["ATLAS_OPTIONS_SHOWBUT"] = "在小地圖旁顯示 Atlas 按鈕"
 L["ATLAS_OPTIONS_SHOWBUT_TIP"] = "在小地圖旁顯示 Atlas 按鈕"
+L["ATLAS_OPTIONS_SHOWWMBUT"] = "在世界地圖上顯示 Atlas 按鈕"
 L["ATLAS_OPTIONS_TRANS"] = "透明度"
+L["ATLAS_ROPEN_ATLASLOOT_WINDOW"] = "右鍵點擊以開啟 AtlasLoot 視窗。"
 L["ATLAS_SEARCH_UNAVAIL"] = "搜尋功能停用"
 L["ATLAS_SLASH"] = "/atlas"
 L["ATLAS_SLASH_OPTIONS"] = "options"
@@ -260,6 +281,7 @@ L["Orb of Command"] = "命令寶珠"
 L["Outside"] = "戶外"
 L["Period"] = "。"
 L["Portal"] = "傳送門"
+L["Portal to %s"] = "到%s的傳送門"
 L["PossibleMissingModule"] = "遺失的地圖應是來自以下的模組："
 L["Protection Warrior"] = "防戰"
 L["Purple"] = "紫"
@@ -279,6 +301,8 @@ L["Slash"] = "／"
 L["Soridormi <The Scale of Sands>"] = "索芮朵蜜 <流沙之鱗>"
 L["South"] = "南"
 L["Spawn Point"] = "生成點"
+L["Stairs"] = "階梯"
+L["Stairs to %s"] = "通往%s的階梯"
 L["Start"] = "開始"
 L["Steward of Time <Keepers of Time>"] = "時間服務員 <時光守望者>"
 L["Summon"] = "召喚"
@@ -291,6 +315,7 @@ L["Transport"] = "傳送"
 L["Tunnel"] = "通道"
 L["Underwater"] = "水下"
 L["Upper"] = "上層"
+L["Upper floor"] = "上層"
 L["Varies"] = "多處"
 L["Wanders"] = "徘徊"
 L["Wave 10"] = "第 10 波"

@@ -1,4 +1,4 @@
--- $Id: Atlas_BurningCrusade_DB.lua 20 2017-01-16 10:36:39Z arith $
+-- $Id: Atlas_BurningCrusade_DB.lua 26 2017-03-24 10:00:09Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -286,12 +286,14 @@ local myDB = {
 	KarazhanEnt = {
 		{ "A", 10001, 279, 289 }; -- Karazhan, Front
 		{ "B", 10002, 327, 192 }; -- Karazhan, Back
-		{ "1'", 10003, 290, 304 }; -- Archmage Leryda
-		{ "2'", 10004, 300, 355 }; -- Stairs to Underground Pond
-		{ "3'", 10005, 325, 365 }; -- Stairs to Underground Well
+		{ "C", 10003, 266, 220 }; -- Return to Karazhan
+		{ "1'", 18255, 290, 304 }; -- Archmage Leryda
+		{ "2'", 10004, 300, 355 }; -- Stairs to The Master's Cellar
+		{ "3'", 10005, 325, 365 }; -- Stairs to The Master's Cellar
 		{ "4'", 10006, 226, 364 }; -- Charred Bone Fragment
 		{ "5'", 10007, 274, 315 }; -- Meeting Stone
 		{ "6'", 10008, 94, 288 }; -- Graveyard
+		{ "7'", 66255, 93, 328 }; -- Lydia Accoste
 	};
 	MagistersTerrace = {
 		{ 1, 530, 210, 123 }; -- Selin Fireheart

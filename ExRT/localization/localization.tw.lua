@@ -4,7 +4,7 @@ if ExRT.locale ~= "zhTW" then
 	return
 end	
 
--- 10:33 12.01.2017
+-- 2017/03/04 15:07
 
 local L = ExRT.L	
 local PH = ExRT.L
@@ -388,17 +388,17 @@ L.cd2BlackBack = "背景透明度"
 L.cd2StatusOffline = "(離線)"			
 L.cd2StatusDead = "(死亡)"			
 L.cd2InspectHaste = "%+(%d+) 加速"			
-L.cd2InspectHasteGem = "NOT USABLE IN THIS LOCALE"			
+L.cd2InspectHasteGem = "不適用於本地"			
 L.cd2InspectMastery = "%+(%d+) 精通"			
-L.cd2InspectMasteryGem = "NOT USABLE IN THIS LOCALE"			
+L.cd2InspectMasteryGem = "不適用於本地"			
 L.cd2InspectCrit = "%+(%d+) 致命一擊"			
-L.cd2InspectCritGem = "NOT USABLE IN THIS LOCALE"			
+L.cd2InspectCritGem = "不適用於本地"			
 L.cd2InspectCritGemLegendary = "%+%]%](%d+) 致命一擊,"			
 L.cd2InspectSpirit = "%+(%d+) 精神"			
 L.cd2InspectInt = "%+(%d+) 智力"			
-L.cd2InspectIntGem = "NOT USABLE IN THIS LOCALE" -- Legendary			
+L.cd2InspectIntGem = "不適用於本地" -- Legendary			
 L.cd2InspectStr = "%+(%d+) 力量"			
-L.cd2InspectStrGem = "NOT USABLE IN THIS LOCALE"			
+L.cd2InspectStrGem = "不適用於本地"			
 L.cd2InspectAgi = "%+(%d+) 敏捷"			
 L.cd2InspectSpd = "%+(%d+) 法術能量"			
 L.cd2InspectAll = "%+(%d+) 所有屬性"			
@@ -407,9 +407,9 @@ PH.cd2OtherSetIconToolip = "滑鼠指向顯示法術說明"
 PH.cd2OtherSetLineClick = "點擊發送冷卻訊息至頻道"			
 L.cd2InspectLeech = "%+(%d+) 汲取"			
 L.cd2InspectMultistrike = "%+(%d+) 雙擊"			
-L.cd2InspectMultistrikeGem = "NOT USABLE IN THIS LOCALE"			
+L.cd2InspectMultistrikeGem = "不適用於本地"			
 L.cd2InspectVersatility = "%+(%d+) 臨機應變"			
-L.cd2InspectVersatilityGem = "NOT USABLE IN THIS LOCALE"			
+L.cd2InspectVersatilityGem = "不適用於本地"			
 L.cd2InspectBonusArmor = "%+(%d+) 額外護甲值"			
 L.cd2InspectAvoidance = "%+(%d+) 迴避"			
 L.cd2InspectSpeed = "%+(%d+) 速度"			
@@ -806,7 +806,7 @@ PH.InspectViewerHideInRaid = "隱藏不在團隊裡的玩家"
 L.InspectViewerColorizeNoValorUpgrade = "高亮未完成勇氣點數升級的裝備"	
 PH.InspectViewerNoExRTAddon = "該玩家尚未安裝ExRT"		
 			
-L.CoinsSpoilsOfPandariaWinTrigger = "System resetting. Don't turn the power off, or the whole thing will probably explode."			
+L.CoinsSpoilsOfPandariaWinTrigger = "重置系統，請不要關閉電源。"			
 PH.CoinsEmpty = "目前沒有資料"			
 PH.CoinsHelp = "團隊使用獎勵硬幣記錄"			
 L.CoinsClear = "清除所有資料"			
@@ -814,7 +814,7 @@ L.CoinsClearPopUp = "所有資料都將被清空，你確定嗎？"
 PH.CoinsShowMessage = "當隊友使用獎勵硬幣顯示訊息"			
 PH.CoinsMessage = "%s 使用了獎勵硬幣"			
 			
-L.ChatwindowName = "報告 - Exorsus Raid Tools"			
+L.ChatwindowName = "團隊助手報告"			
 L.ChatwindowChatSelf = "自己"			
 L.ChatwindowChatSay = "說"			
 L.ChatwindowChatParty = "小隊"			
@@ -827,7 +827,7 @@ L.ChatwindowChatOfficer = "幹部"
 L.ChatwindowChannel = "自訂頻道"			
 L.ChatwindowNameEB = "名稱(密語)"			
 L.ChatwindowSend = "傳送"			
-PH.ChatwindowHelp = ""			
+PH.ChatwindowHelp = "聊天視窗幫助"			
 			
 PH.ArrowTextLeft = "/rt arrow X Y\n/rt range NAME\n/rt arrowbuff BUFF\n\n/rt arrowplayer NAME\n/rt arrowthis\n/rt arrowhide\n\n|cFFFFFFFF* 箭頭追縱玩家只作用於小隊或團隊成員|r"			
 PH.ArrowTextRight = "- 箭頭指向座標 X Y (由 0 至 100)\n- 顯示玩家\"NAME\"與自己的距離\n- 箭頭指向擁有\"BUFF\"光環的目標\n*(可以用光環名稱或法術ID)\n- 箭頭指向玩家\"NAME\"\n- 箭頭指向你的當前位置\n- 隱藏箭頭"			

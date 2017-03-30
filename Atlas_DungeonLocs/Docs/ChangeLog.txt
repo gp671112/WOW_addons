@@ -1,12 +1,29 @@
-ˇ$Id: ChangeLog.txt 34 2016-10-27 05:06:30Z arith $
+ˇ$Id: ChangeLog.txt 42 2017-03-27 08:45:38Z arith $
 Atlas, a World of Warcraft instance map browser
-Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
-Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbertat gmail dot com>
+Copyright 2010 - Lothaer <lothayerat gmail dot com>, Atlas Team
+Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 ==============
 = Change Log =
 ==============
+
+v1.39.00 (Mar. 27, 2017)
+------------------------
+- Toc update to support WoW 7.2
+
+
+v1.38.01 (Mar. 22, 2017)
+------------------------
+- Added the location of the new dungeon - Cathedral of Eternal Night (7.2)
+- Added the location of the new raid - Tomb of Sargeras (7.2)
+
+
+v1.38.00 (Mar. 16, 2017)
+------------------------
+- Translation update:
+  - Korean (netaras)
+
 
 v1.35.00 (Oct. 27, 2016)
 ------------------------

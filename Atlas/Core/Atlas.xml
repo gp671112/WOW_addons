@@ -1,4 +1,4 @@
-<!-- $Id: Atlas.xml 158 2017-02-07 06:35:15Z arith $ -->
+<!-- $Id: Atlas.xml 166 2017-03-08 06:21:40Z arith $ -->
 <!--
 
 	Atlas, a World of Warcraft instance map browser
@@ -41,103 +41,14 @@
  			</Anchor>
  		</Anchors>
 		<Frames>
-			<Button name="$parentCloseButton" inherits="UIPanelCloseButton">
-				<Anchors>
-					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
-						<Offset>
-							<AbsDimension x="5" y="-7"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-			</Button>
-			<Button name="$parentLockButton">
-				<Size>
-					<AbsDimension x="32" y="32"/>
-				</Size>
-				<Anchors>
-					<Anchor point="RIGHT" relativeTo="$parentCloseButton" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="10" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
-						GameTooltip:SetText(ATLAS_OPTIONS_LOCK_TIP, nil, nil, nil, nil, 1);
-					</OnEnter>
-					<OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
-					<OnClick>
-						Atlas_ToggleLock();
-					</OnClick>
-				</Scripts>
+			<Button name="$parentCloseButton" inherits="AtlasFrameCloseButtonTemplate"/>
+			<Button name="$parentLockButton" inherits="AtlasFrameLockButtonTemplate">
 				<NormalTexture name="AtlasLockNorm"/>
 				<PushedTexture name="AtlasLockPush"/>
-				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" AlphaMode="ADD"/>
 			</Button>
-			<Button name="$parentOptionsButton" inherits="UIPanelButtonTemplate" text="ATLAS_OPTIONS_BUTTON">
-				<Size>
-					<AbsDimension x="80" y="20"/>
-				</Size>
-				<Anchors>
-					<Anchor point="RIGHT" relativeTo="$parentLockButton" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="6" y="1"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						AtlasOptions_Toggle();
-					</OnClick>
-				</Scripts>
-			</Button>
-			<Button name="$parentDropDownType" inherits="Lib_UIDropDownMenuTemplate">
-				<Layers>
-					<Layer level="BACKGROUND">
-						<FontString name="$parentLabel" inherits="GameFontNormalSmall" text="ATLAS_STRING_SELECT_CAT">
-							<Anchors>
-								<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
-									<Offset>
-										<AbsDimension x="21" y="0"/>
-									</Offset>
-								</Anchor>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="60" y="-50"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-			</Button>
-			<Button name="$parentDropDown" inherits="Lib_UIDropDownMenuTemplate">
-				<Layers>
-					<Layer level="BACKGROUND">
-						<FontString name="$parentLabel" inherits="GameFontNormalSmall" text="ATLAS_STRING_SELECT_MAP">
-							<Anchors>
-								<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
-									<Offset>
-										<AbsDimension x="21" y="0"/>
-									</Offset>
-								</Anchor>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parentDropDownType" relativePoint="RIGHT">
-						<Offset>
-							<AbsDimension x="0" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-			</Button>
+			<Button name="$parentOptionsButton" inherits="AtlasFrameOptionsButtonTemplate"/>
+			<Button name="$parentDropDownType" inherits="AtlasFrameDropDownTypeTemplate"/>
+			<Button name="$parentDropDown" inherits="AtlasFrameDropDownTemplate"/>
 			<EditBox name="AtlasSearchEditBox" inherits="InputBoxTemplate" letters="80">
 				<Size>
 					<AbsDimension x="150" y="32"/>
@@ -463,155 +374,14 @@
 					</OnLeave>
 				</Scripts>
 			</Frame>
-			<Button name="$parentMapZoneName" parentKey="ZoneName">
-				<Size>
-					<AbsDimension x="100" y="60"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOP" relativeTo="$parent" relativePoint="TOPLEFT">
-						<Offset>
-							<AbsDimension x="272" y="-88"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Layers>
-					<Layer level="ARTWORK">
-						<FontString name="$parent_Text" parentKey="Text" inherits="AtlasSubZoneTextFont" justifyH="CENTER" justifyV="BOTTOM">
-							<Anchors>
-								<Anchor point="TOP">
-									<Offset>
-										<AbsDimension x="0" y="0"/>
-									</Offset>
-								</Anchor>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-			</Button>
-			<Button name="$parentNextMapButton" parentKey="NextMap" hidden="true">
-				<Size x="32" y="32"/>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parent">
-						<Offset>
-							<AbsDimension x="502" y="-599"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						PlaySound("igMainMenuOptionCheckBoxOn");
-						AtlasPrevNextMap_OnClick(self);
-					</OnClick>
-				</Scripts>
-				<NormalTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Up"/>
-				<PushedTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Down"/>
-				<DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Disabled"/>
-				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
-			</Button>
-			<Button name="$parentPrevMapButton" parentKey="PrevMap" hidden="true">
-				<Size x="32" y="32"/>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parent">>
-						<Offset>
-							<AbsDimension x="13" y="-599"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						PlaySound("igMainMenuOptionCheckBoxOn");
-						AtlasPrevNextMap_OnClick(self);
-					</OnClick>
-				</Scripts>
-				<NormalTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Up"/>
-				<PushedTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Down"/>
-				<DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Disabled"/>
-				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
-			</Button>
-			<Button name="$parentAdventureJournalMapButton" parentKey="AdventureJournalMap" hidden="true">
-				<Size x="32" y="32"/>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentNextMapButton" relativePoint="TOPLEFT" x="-24" y="0"/>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						AtlasFrameAdventureJournalMapButton_OnClick(self);
-					</OnClick>
-					<OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
-						GameTooltip:SetText(ATLAS_OPEN_WOWMAP_WINDOW, nil, nil, nil, nil, false);
-					</OnEnter>
-					<OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
-				</Scripts>
-				<NormalTexture file="Interface\AddOns\Atlas\Images\UI-WorldMap-Icon"/>
-				<PushedTexture file="Interface\AddOns\Atlas\Images\UI-WorldMap-Icon"/>
-				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD" setAllPoints="true">
-					<Size x="48" y="48"/>
-					<Anchors>
-						<Anchor point="CENTER"/>
-					</Anchors>
-				</HighlightTexture>
-			</Button>
-			<Button name="$parentAdventureJournalButton" parentKey="AdventureJournal" hidden="true" toplevel="true">
-				<Size>
-					<AbsDimension x="32" y="32" />
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentAdventureJournalMapButton" relativePoint="TOPLEFT" x="-24" y="0"/>
-				</Anchors>
-				<NormalTexture file="Interface\AddOns\Atlas\Images\UI-EJ-PortraitIcon"/>
-				<PushedTexture file="Interface\AddOns\Atlas\Images\UI-EJ-PortraitIcon"/>
-				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD" setAllPoints="true">
-					<Size x="48" y="48"/>
-					<Anchors>
-						<Anchor point="CENTER"/>
-					</Anchors>
-				</HighlightTexture>
-				<Scripts>
-					<OnEnter>
-						AtlasFrameAdventureJournalButton_OnEnter(self);
-					</OnEnter>
-					<OnClick>
-						Atlas_AdventureJournalButton_OnClick(self);
-					</OnClick>
-					<OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
-				</Scripts>
-			</Button>
-			<Button name="$parentSizeUpButton" hidden="true">
-				<Size x="32" y="32"/>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parent" x="505" y="-76"/>
-				</Anchors>
-				<Scripts>
-					<OnClick function="AtlasFrame_ToggleWindowSize" />
-				</Scripts>
-				<NormalTexture file="Interface\Buttons\UI-Panel-BiggerButton-Up"/>
-				<PushedTexture file="Interface\Buttons\UI-Panel-BiggerButton-Down"/>
-				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
-			</Button>
-			<Button name="$parentCollapseButton">
-				<Size x="32" y="32"/>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parent" x="505" y="-570"/>
-				</Anchors>
-				<Scripts>
-					<OnClick function="AtlasFrame_ToggleLegendPanel" />
-					<OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
-						GameTooltip:SetText(ATLAS_COLLAPSE_BUTTON, nil, nil, nil, nil, 1);
-					</OnEnter>
-					<OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
-				</Scripts>
-				<NormalTexture file="Interface\AddOns\Atlas\Images\UI-Panel-CollapseButton-Up"/>
-				<PushedTexture file="Interface\AddOns\Atlas\Images\UI-Panel-CollapseButton-Up"/>
-				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
-			</Button>
+			<Button name="$parentMapZoneName" parentKey="ZoneName" inherits="AtlasFrameMapZoneNameTemplate"/>
+			<Button name="$parentNextMapButton" parentKey="NextMap" inherits="AtlasFrameNextMapButtonTemplate"/>
+			<Button name="$parentPrevMapButton" parentKey="PrevMap" inherits="AtlasFramePrevMapButtonTemplate"/>
+			<Button name="$parentAdventureJournalMapButton" parentKey="AdventureJournalMap" inherits="AtlasFrameAdventureJournalMapButtonTemplate"/>
+			<Button name="$parentAdventureJournalButton" parentKey="AdventureJournal" inherits="AtlasFrameAdventureJournalButtonTemplate"/>
+			<Button name="$parentAtlasLootButton" parentKey="AtlasLoot" inherits="AtlasFrameAtlasLootButtonTemplate"/>
+			<Button name="$parentSizeUpButton" inherits="AtlasFrameSizeUpButtonTemplate"/>
+			<Button name="$parentCollapseButton" inherits="AtlasFrameCollapseButtonTemplate"/>
 			<Frame name="$parentMapFrame" parentKey="MapFrame">
 				<Size x="512" y="512"/>
 				<Anchors>
@@ -756,115 +526,17 @@
  			</Anchor>
  		</Anchors>
 		<Frames>
-			<Button name="$parentCloseButton" inherits="UIPanelCloseButton">
-				<Anchors>
-					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
-						<Offset>
-							<AbsDimension x="5" y="-7"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-			</Button>
-			<Button name="$parentLockButton">
-				<Size>
-					<AbsDimension x="32" y="32"/>
-				</Size>
-				<Anchors>
-					<Anchor point="RIGHT" relativeTo="$parentCloseButton" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="10" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
-						GameTooltip:SetText(ATLAS_OPTIONS_LOCK_TIP, nil, nil, nil, nil, 1);
-					</OnEnter>
-					<OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
-					<OnClick>
-						Atlas_ToggleLock();
-					</OnClick>
-				</Scripts>
+			<Button name="$parentCloseButton" inherits="AtlasFrameCloseButtonTemplate"/>
+			<Button name="$parentLockButton" inherits="AtlasFrameLockButtonTemplate">
 				<NormalTexture name="AtlasLockLargeNorm"/>
 				<PushedTexture name="AtlasLockLargePush"/>
-				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" AlphaMode="ADD"/>
 			</Button>
-			<Button name="$parentOptionsButton" inherits="UIPanelButtonTemplate" text="ATLAS_OPTIONS_BUTTON">
-				<Size>
-					<AbsDimension x="80" y="20"/>
-				</Size>
-				<Anchors>
-					<Anchor point="RIGHT" relativeTo="$parentLockButton" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="6" y="1"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						AtlasOptions_Toggle();
-					</OnClick>
-				</Scripts>
-			</Button>
-			<Button name="$parentDropDownType" inherits="Lib_UIDropDownMenuTemplate">
-				<Layers>
-					<Layer level="BACKGROUND">
-						<FontString name="$parentLabel" inherits="GameFontNormalSmall" text="ATLAS_STRING_SELECT_CAT">
-							<Anchors>
-								<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
-									<Offset>
-										<AbsDimension x="21" y="0"/>
-									</Offset>
-								</Anchor>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="60" y="-50"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-			</Button>
-			<Button name="$parentDropDown" inherits="Lib_UIDropDownMenuTemplate">
-				<Layers>
-					<Layer level="BACKGROUND">
-						<FontString name="$parentLabel" inherits="GameFontNormalSmall" text="ATLAS_STRING_SELECT_MAP">
-							<Anchors>
-								<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
-									<Offset>
-										<AbsDimension x="21" y="0"/>
-									</Offset>
-								</Anchor>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parentDropDownType" relativePoint="RIGHT">
-						<Offset>
-							<AbsDimension x="0" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-			</Button>
-			<Button name="$parentSizeDownButton">
-				<Size x="32" y="32"/>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPRIGHT" x="-28" y="-77"/>
-				</Anchors>
-				<Scripts>
-					<OnClick function="AtlasFrame_ToggleWindowSize" />
-				</Scripts>
-				<NormalTexture file="Interface\Buttons\UI-Panel-SmallerButton-Up"/>
-				<PushedTexture file="Interface\Buttons\UI-Panel-SmallerButton-Down"/>
-				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
-			</Button>
+			<Button name="$parentOptionsButton" inherits="AtlasFrameOptionsButtonTemplate"/>
+			<Button name="$parentDropDownType" inherits="AtlasFrameDropDownTypeTemplate"/>
+			<Button name="$parentDropDown" inherits="AtlasFrameDropDownTemplate"/>
+			<Button name="$parentSizeDownButton" inherits="AtlasFrameSizeDownButtonTemplate"/>
+			<Button name="$parentNextMapButton" parentKey="NextMap" inherits="AtlasFrameNextMapButtonTemplate"/>
+			<Button name="$parentPrevMapButton" parentKey="PrevMap" inherits="AtlasFramePrevMapButtonTemplate"/>
 			<Button name="$parentAdventureJournalMapButton" parentKey="AdventureJournalMap" hidden="true">
 				<Size x="32" y="32"/>
 				<Anchors>
@@ -922,6 +594,7 @@
 					</OnLeave>
 				</Scripts>
 			</Button>
+			<Button name="$parentAtlasLootButton" parentKey="AtlasLoot" inherits="AtlasFrameAtlasLootButtonTemplate"/>
 <!--			<Button name="$parentLetterB">
 				<Size>
 					<AbsDimension x="20" y="20"/>
@@ -1276,252 +949,22 @@
  			</Anchor>
  		</Anchors>
 		<Frames>
-			<Button name="$parentCloseButton" inherits="UIPanelCloseButton">
-				<Anchors>
-					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
-						<Offset>
-							<AbsDimension x="5" y="-7"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-			</Button>
-			<Button name="$parentLockButton">
-				<Size>
-					<AbsDimension x="32" y="32"/>
-				</Size>
-				<Anchors>
-					<Anchor point="RIGHT" relativeTo="$parentCloseButton" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="10" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
-						GameTooltip:SetText(ATLAS_OPTIONS_LOCK_TIP, nil, nil, nil, nil, 1);
-					</OnEnter>
-					<OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
-					<OnClick>
-						Atlas_ToggleLock();
-					</OnClick>
-				</Scripts>
+			<Button name="$parentCloseButton" inherits="AtlasFrameCloseButtonTemplate"/>
+			<Button name="$parentLockButton" inherits="AtlasFrameLockButtonTemplate">
 				<NormalTexture name="AtlasLockSmallNorm"/>
 				<PushedTexture name="AtlasLockSmallPush"/>
-				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" AlphaMode="ADD"/>
 			</Button>
-			<Button name="$parentOptionsButton" inherits="UIPanelButtonTemplate" text="ATLAS_OPTIONS_BUTTON">
-				<Size>
-					<AbsDimension x="80" y="20"/>
-				</Size>
-				<Anchors>
-					<Anchor point="RIGHT" relativeTo="$parentLockButton" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="6" y="1"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						AtlasOptions_Toggle();
-					</OnClick>
-				</Scripts>
-			</Button>
-			<Button name="$parentDropDownType" inherits="Lib_UIDropDownMenuTemplate">
-				<Layers>
-					<Layer level="BACKGROUND">
-						<FontString name="$parentLabel" inherits="GameFontNormalSmall" text="ATLAS_STRING_SELECT_CAT">
-							<Anchors>
-								<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
-									<Offset>
-										<AbsDimension x="21" y="0"/>
-									</Offset>
-								</Anchor>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-				<Anchors>
-					<Anchor point="TOPLEFT">
-						<Offset>
-							<AbsDimension x="60" y="-50"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-			</Button>
-			<Button name="$parentDropDown" inherits="Lib_UIDropDownMenuTemplate">
-				<Layers>
-					<Layer level="BACKGROUND">
-						<FontString name="$parentLabel" inherits="GameFontNormalSmall" text="ATLAS_STRING_SELECT_MAP">
-							<Anchors>
-								<Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
-									<Offset>
-										<AbsDimension x="21" y="0"/>
-									</Offset>
-								</Anchor>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parentDropDownType" relativePoint="RIGHT">
-						<Offset>
-							<AbsDimension x="0" y="0"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-			</Button>
-			<Button name="$parentNextMapButton" parentKey="NextMap" hidden="true">
-				<Size x="32" y="32"/>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parent">
-						<Offset>
-							<AbsDimension x="502" y="-599"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						PlaySound("igMainMenuOptionCheckBoxOn");
-						AtlasPrevNextMap_OnClick(self);
-					</OnClick>
-				</Scripts>
-				<NormalTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Up"/>
-				<PushedTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Down"/>
-				<DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Disabled"/>
-				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
-			</Button>
-			<Button name="$parentPrevMapButton" parentKey="PrevMap" hidden="true">
-				<Size x="32" y="32"/>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parent">>
-						<Offset>
-							<AbsDimension x="13" y="-599"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						PlaySound("igMainMenuOptionCheckBoxOn");
-						AtlasPrevNextMap_OnClick(self);
-					</OnClick>
-				</Scripts>
-				<NormalTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Up"/>
-				<PushedTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Down"/>
-				<DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Disabled"/>
-				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
-			</Button>
-			<Button name="$parentAdventureJournalMapButton" parentKey="AdventureJournalMap" hidden="true">
-				<Size x="32" y="32"/>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentNextMapButton" relativePoint="TOPLEFT" x="-24" y="0"/>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						AtlasFrameAdventureJournalMapButton_OnClick(self);
-					</OnClick>
-					<OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
-						GameTooltip:SetText(ATLAS_OPEN_WOWMAP_WINDOW, nil, nil, nil, nil, false);
-					</OnEnter>
-					<OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
-				</Scripts>
-				<NormalTexture file="Interface\AddOns\Atlas\Images\UI-WorldMap-Icon"/>
-				<PushedTexture file="Interface\AddOns\Atlas\Images\UI-WorldMap-Icon"/>
-				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD" setAllPoints="true">
-					<Size x="48" y="48"/>
-					<Anchors>
-						<Anchor point="CENTER"/>
-					</Anchors>
-				</HighlightTexture>
-			</Button>
-			<Button name="$parentAdventureJournalButton" parentKey="AdventureJournal" hidden="true" toplevel="true">
-				<Size>
-					<AbsDimension x="32" y="32" />
-				</Size>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parentAdventureJournalMapButton" relativePoint="TOPLEFT" x="-24" y="0"/>
-				</Anchors>
-				<NormalTexture file="Interface\AddOns\Atlas\Images\UI-EJ-PortraitIcon"/>
-				<PushedTexture file="Interface\AddOns\Atlas\Images\UI-EJ-PortraitIcon"/>
-				<HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD" setAllPoints="true">
-					<Size x="48" y="48"/>
-					<Anchors>
-						<Anchor point="CENTER"/>
-					</Anchors>
-				</HighlightTexture>
-				<Scripts>
-					<OnEnter>
-						AtlasFrameAdventureJournalButton_OnEnter(self);
-					</OnEnter>
-					<OnClick>
-						Atlas_AdventureJournalButton_OnClick(self);
-					</OnClick>
-					<OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
-				</Scripts>
-			</Button>
-			<Button name="$parentExpandButton">
-				<Size x="32" y="32"/>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parent" x="505" y="-570"/>
-				</Anchors>
-				<Scripts>
-					<OnClick function="AtlasFrame_ToggleLegendPanel" />
-					<OnEnter>
-						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
-						GameTooltip:SetText(ATLAS_EXPAND_BUTTON, nil, nil, nil, nil, 1);
-					</OnEnter>
-					<OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
-				</Scripts>
-				<NormalTexture file="Interface\AddOns\Atlas\Images\UI-Panel-ExpandButton-Up"/>
-				<PushedTexture file="Interface\AddOns\Atlas\Images\UI-Panel-ExpandButton-Up"/>
-				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
-			</Button>
-			<Button name="$parentSizeUpButton" hidden="true">
-				<Size x="32" y="32"/>
-				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="$parent" x="505" y="-76"/>
-				</Anchors>
-				<Scripts>
-					<OnClick function="AtlasFrame_ToggleWindowSize" />
-				</Scripts>
-				<NormalTexture file="Interface\Buttons\UI-Panel-BiggerButton-Up"/>
-				<PushedTexture file="Interface\Buttons\UI-Panel-BiggerButton-Down"/>
-				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
-			</Button>
-			<Button name="$parentMapZoneName" parentKey="ZoneName">
-				<Size>
-					<AbsDimension x="100" y="60"/>
-				</Size>
-				<Anchors>
-					<Anchor point="TOP" relativeTo="$parent" relativePoint="TOPLEFT">
-						<Offset>
-							<AbsDimension x="272" y="-88"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Layers>
-					<Layer level="ARTWORK">
-						<FontString name="$parent_Text" parentKey="Text" inherits="AtlasSubZoneTextFont" justifyH="CENTER" justifyV="BOTTOM">
-							<Anchors>
-								<Anchor point="TOP">
-									<Offset>
-										<AbsDimension x="0" y="0"/>
-									</Offset>
-								</Anchor>
-							</Anchors>
-						</FontString>
-					</Layer>
-				</Layers>
-			</Button>
+			<Button name="$parentOptionsButton" inherits="AtlasFrameOptionsButtonTemplate"/>
+			<Button name="$parentDropDownType" inherits="AtlasFrameDropDownTypeTemplate"/>
+			<Button name="$parentDropDown" inherits="AtlasFrameDropDownTemplate"/>
+			<Button name="$parentNextMapButton" parentKey="NextMap" inherits="AtlasFrameNextMapButtonTemplate"/>
+			<Button name="$parentPrevMapButton" parentKey="PrevMap" inherits="AtlasFramePrevMapButtonTemplate"/>
+			<Button name="$parentAdventureJournalMapButton" parentKey="AdventureJournalMap" inherits="AtlasFrameAdventureJournalMapButtonTemplate"/>
+			<Button name="$parentAdventureJournalButton" parentKey="AdventureJournal" inherits="AtlasFrameAdventureJournalButtonTemplate"/>
+			<Button name="$parentAtlasLootButton" parentKey="AtlasLoot" inherits="AtlasFrameAtlasLootButtonTemplate"/>
+			<Button name="$parentExpandButton" inherits="AtlasFrameExpandButtonTemplate"/>
+			<Button name="$parentSizeUpButton" inherits="AtlasFrameSizeUpButtonTemplate"/>
+			<Button name="$parentMapZoneName" parentKey="ZoneName" inherits="AtlasFrameMapZoneNameTemplate"/>
 			<Frame name="$parentMapFrame" parentKey="MapFrame">
 				<Size x="512" y="512"/>
 				<Anchors>

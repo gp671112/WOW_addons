@@ -1,10 +1,19 @@
-$Id: ChangeLog.txt 95 2017-01-24 05:52:33Z arith $
+$Id: ChangeLog.txt 100 2017-03-27 12:20:42Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 ==============
 = Change Log =
 ==============
+
+v1.39.00 (Mar. 28, 2017)
+------------------------
+- Toc update to support WoW 7.2
+- Added WoW 7.2 new dungeon and raid's map data (Cathedral of Eternal Night & Tomb of Sargeras)
+
+v1.38.00 (Mar. 24, 2017)
+------------------------
+- Added maps of Return to Karazhan
 
 v1.37.01 (Jan. 24, 2017)
 ------------------------

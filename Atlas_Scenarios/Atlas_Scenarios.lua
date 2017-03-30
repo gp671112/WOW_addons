@@ -1,8 +1,8 @@
--- $Id: Atlas_Scenarios.lua 29 2016-09-23 10:55:20Z arith $
+-- $Id: Atlas_Scenarios.lua 36 2017-03-20 15:19:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2012 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2012 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -67,10 +67,11 @@ local function Atlas_GetScenarioNameByID(scID)
 end
 
 local function Atlas_GetScenarioStepNameByID(scID, stID, isfinal)
+	if (not (scID and stID)) then return; end
 	if (isfinal) then
 		return L["Final Stage"]..ALC["Hyphen"]..Scenario:GetScenarioStepNameByID(scID, stID);
 	else
-		return L["Stage "..stID]..ALC["Hyphen"]..Scenario:GetScenarioStepNameByID(scID, stID);
+		return format(L["Stage %d"], stID)..ALC["Hyphen"]..Scenario:GetScenarioStepNameByID(scID, stID);
 	end
 end
 
@@ -256,11 +257,11 @@ local myData = {
 		{ BLUE.." B) "..L["Defence Point"] };
 		{ INDENT..YELL.."- "..SS(63, 2) };
 		{ INDENT..INDENT..GREY..SD(63, 2) };
-		{ INDENT..YELL.."- "..L["Stage 3"]..ALC["Hyphen"]..L["The Yaungol attack!"] };
-		{ INDENT..INDENT..GREY..L["Stop the Bataari invasion on Binan Village."] };
-		{ BLUE.." C) "..L["Final Stage"] };
-		{ INDENT..YELL.."- "..SS(63, 3, true) };
+		{ INDENT..YELL.."- "..SS(63, 3) };
 		{ INDENT..INDENT..GREY..SD(63, 3) };
+		{ BLUE.." C) "..L["Final Stage"] };
+		{ INDENT..YELL.."- "..SS(63, 4, true) };
+		{ INDENT..INDENT..GREY..SD(63, 4) };
 	};
 	SC_CryptofForgottenKings = {
 		ZoneName = { SN(39) }; -- Crypt of Forgotten Kings
@@ -661,6 +662,36 @@ local myData = {
 		{ INDENT..INDENT..GREY..SD(897, 3) };
 		{ INDENT..YELL..SS(897, 4, true) };
 		{ INDENT..INDENT..GREY..SD(897, 4) };
+	};
+	SC_AssaultonBrokenShore = {
+		ZoneName = { GREN..SN(1280) }; -- The Assault on Broken Shore
+		Location = { BZ["Broken Shore"]..ALC["Comma"]..BZ["Broken Isles"] };
+		LevelRange = "110";
+		MinLevel = "110";
+		WorldMapID = "1021";
+		LargeMap = "SC_AssaultonBrokenShore";
+		{ YELL.."- "..SS(1280, 1) }; -- Into the Fray
+		{ INDENT..GREY..SD(1280, 1) }; -- Reach the Broken Shore
+		{ INDENT..BLUE.." A) "..L["Landing point"], 10001 };
+		{ YELL.."- "..SS(1280, 2) }; -- Vanguard of the Assault
+		{ INDENT..GREY..SD(1280, 2) }; -- Secure the beach
+		{ YELL.."- "..SS(1280, 3) }; -- Might of the Legion
+		{ INDENT..GREY..SD(1280, 3) }; -- Defeat Lord Kalgorath
+		{ INDENT..WHIT.." 1) "..L["Lord Kalgorath"], 116291 };
+		{ YELL.."- "..SS(1280, 4) }; -- Rifts of Chaos
+		{ INDENT..GREY..SD(1280, 4) }; -- Close the portals and defeat Dread Commander Arganoth's forces
+		{ INDENT..BLUE.." B) "..L["Stage area"], 10002 };
+		{ YELL.."- "..SS(1280, 5) }; -- The Doomguard's Command
+		{ INDENT..GREY..SD(1280, 5) }; -- Defeat Dread Commander Arganoth
+		{ INDENT..WHIT.." 2) "..L["Dread Commander Arganoth"], 90705 };
+		{ YELL.."- "..SS(1280, 6) }; -- Gateway to Ruin
+		{ INDENT..GREY..SD(1280, 6) }; -- Take the Demonic Gateway to the base of the command ship.
+		{ INDENT..BLUE.." C) "..L["Demonic Gateway"], 10003 };
+		{ YELL.."- "..SS(1280, 7) }; -- Pillar of Fire
+		{ INDENT..GREY..SD(1280, 7) }; -- Place Arcane Bombs in Mephistroth's command ship.
+		{ INDENT..BLUE.." D) "..L["Command ship"], 10004 };
+		{ YELL.."- "..SS(1280, 8, true) }; -- Mephistroth
+		{ INDENT..GREY..SD(1280, 8) }; -- Defeat Mephistroth.
 	};
 };
 

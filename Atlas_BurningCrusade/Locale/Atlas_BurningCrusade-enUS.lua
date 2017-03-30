@@ -1,4 +1,4 @@
--- $Id: Atlas_BurningCrusade-enUS.lua 20 2017-01-16 10:36:39Z arith $
+-- $Id: Atlas_BurningCrusade-enUS.lua 26 2017-03-24 10:00:09Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -37,9 +37,7 @@ L["Aged Dalaran Wizard"] = "Aged Dalaran Wizard"
 L["Aluyen <Reagents>"] = "Aluyen <Reagents>"
 L["Ambassador Pax'ivi"] = "Ambassador Pax'ivi"
 L["Apoko"] = "Apoko"
-L["Apprentice Darius"] = "Apprentice Darius"
 L["Arca"] = "Arca"
-L["Archmage Alturus"] = "Archmage Alturus"
 L["Archmage Leryda"] = "Archmage Leryda"
 L["Artificer Morphalius"] = "Artificer Morphalius"
 L["Auch"] = "Auch"
@@ -128,6 +126,7 @@ L["Landing Spot"] = "Landing Spot"
 L["Little Jimmy Vishas"] = "Little Jimmy Vishas"
 L["Lord Crispin Ference"] = "Lord Crispin Ference"
 L["Lord Robin Daris"] = "Lord Robin Daris"
+L["Lydia Accoste"] = "Lydia Accoste"
 L["Madrigosa"] = "Madrigosa"
 L["Mag"] = "Mag"
 L["Magistrate Henry Maleb"] = "Magistrate Henry Maleb"
@@ -190,8 +189,6 @@ L["Spirit of Udalo"] = "Spirit of Udalo"
 L["Spy Grik'tha"] = "Spy Grik'tha"
 L["Spy To'gun"] = "Spy To'gun"
 L["SSC"] = "SSC"
-L["Stairs to Underground Pond"] = "Stairs to Underground Pond"
-L["Stairs to Underground Well"] = "Stairs to Underground Well"
 L["Stalvan Mistmantle"] = "Stalvan Mistmantle"
 L["Steps and path to the Blood Furnace"] = "Steps and path to the Blood Furnace"
 L["Stone Guard Stok'ton"] = "Stone Guard Stok'ton"
@@ -429,12 +426,13 @@ L["Zixil <Aspiring Merchant>"] = "Zixil <Aspiring Merchant>"
 	L["Drisella"] = "Drisella";
 
 	--Karazhan (Entrance)
-	L["Archmage Leryda"] = "Archmage Leryda";
-	L["Archmage Alturus"] = "Archmage Alturus";
-	L["Apprentice Darius"] = "Apprentice Darius";
-	L["Stairs to Underground Pond"] = "Stairs to Underground Pond";
-	L["Stairs to Underground Well"] = "Stairs to Underground Well";
+	--L["Archmage Leryda"] = "Archmage Leryda";
+	--L["Archmage Alturus"] = "Archmage Alturus";
+	--L["Apprentice Darius"] = "Apprentice Darius";
+	--L["Stairs to Underground Pond"] = "Stairs to Underground Pond";
+	--L["Stairs to Underground Well"] = "Stairs to Underground Well";
 	L["Charred Bone Fragment"] = "Charred Bone Fragment";
+	L["Lydia Accoste"] = "Lydia Accoste";
 
 	--Karazhan Start
 	L["Baroness Dorothea Millstipe"] = "Baroness Dorothea Millstipe";

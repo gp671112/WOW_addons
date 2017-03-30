@@ -1,6 +1,6 @@
 --[[
 Name: Lib-Scenarios
-Revision: $Rev: 4 $
+Revision: $Rev: 10 $
 Maintainers: Arith
 Website: https://wow.curseforge.com/addons/lib-scenarios/
 Dependencies: None
@@ -18,6 +18,20 @@ stpName = lib:GetScenarioStepNameByID(53, 1);
 stpDesc = lib:GetScenarioStepDescByID(53, 1); 
 
 ]]
+-- ----------------------------------------------------------------------------
+-- Localized Lua globals.
+-- ----------------------------------------------------------------------------
+-- Functions
+local _G = getfenv(0);
+local pairs = _G.pairs;
+-- Libraries
+local string = _G.string;
+local tostring = _G.tostring;
+local tonumber = _G.tonumber;
+local match = string.match;
+-- ----------------------------------------------------------------------------
+-- AddOn namespace.
+-- ----------------------------------------------------------------------------
 
 local MAJOR_VERSION = "Lib-Scenarios";
 local MINOR_VERSION = 90000 + tonumber(("$Rev: 2$"):match("%d+"));
@@ -25,7 +39,7 @@ local MINOR_VERSION = 90000 + tonumber(("$Rev: 2$"):match("%d+"));
 local lib = LibStub:NewLibrary(MAJOR_VERSION, MINOR_VERSION);
 if not lib then return end
 
-local LANGS = {
+local LANGSINDEX = {
 	["enUS"] =  1;  
 	["deDE"] =  2;  
 	["esES"] =  3;  
@@ -39,35 +53,26 @@ local LANGS = {
 	["zhTW"] = 11;
 };
 
-local GAME_LOCALE = GetLocale();
-
 local function CheckLang(lang)
-	if ( lang == "enUS" or
-	lang == "deDE" or
-	lang == "esES" or
-	lang == "esMX" or
-	lang == "frFR" or
-	lang == "itIT" or
-	lang == "koKR" or
-	lang == "ptBR" or
-	lang == "ruRU" or
-	lang == "zhCN" or
-	lang == "zhTW") then
-		return true;
-	else
-		return false;
+	local found = false;
+	
+	for k, v in pairs(LANGSINDEX) do
+		if (lang == k) then
+			found = true;
+			break;
+		end
 	end
+	return found;
 end
 
 --[[
 To get the scenario name by given the scenario ID
 ]]
 function lib:GetScenarioNameByID(scID, lang)
+	if not scID then return; end
+
 	local key = tostring(scID);
 	
-	if (not key) then 
-		return nil;
-	end
 	if (lang) then
 		if ( CheckLang(lang) == false ) then
 			return nil
@@ -77,7 +82,7 @@ function lib:GetScenarioNameByID(scID, lang)
 	end
 
 	if (LibScenariosNames[key]) then
-		return LibScenariosNames[key][LANGS[lang]];
+		return LibScenariosNames[key][LANGSINDEX[lang]];
 	else
 		return nil;
 	end
@@ -87,15 +92,11 @@ end
 To get the scenario step-name by given the scenario ID and step ID
 ]]
 function lib:GetScenarioStepNameByID(scID, stID, lang)
+	if (not (scID and stID)) then return; end
+
 	local key = tostring(scID);
 	
-	if (not key) then 
-		return nil;
-	end
 	if (not LibScenariosStepsDB[key]) then
-		return nil;
-	end
-	if (not stID) then
 		return nil;
 	end
 	if (not LibScenariosStepsDB[key][stID]) then
@@ -109,22 +110,18 @@ function lib:GetScenarioStepNameByID(scID, stID, lang)
 		lang = GetLocale();
 	end
 
-	return LibScenariosStepsDB[key][stID][LANGS[lang]];
+	return LibScenariosStepsDB[key][stID][LANGSINDEX[lang]];
 end
 
 --[[
 To get the scenario step-description by given the scenario ID and step ID
 ]]
 function lib:GetScenarioStepDescByID(scID, stID, lang)
+	if (not (scID and stID)) then return; end
+
 	local key = tostring(scID);
 	
-	if (not key) then 
-		return nil;
-	end
 	if (not LibScenariosDescriptionsDB[key]) then
-		return nil;
-	end
-	if (not stID) then
 		return nil;
 	end
 	if (not LibScenariosDescriptionsDB[key][stID]) then
@@ -138,29 +135,60 @@ function lib:GetScenarioStepDescByID(scID, stID, lang)
 		lang = GetLocale();
 	end
 
-	return LibScenariosDescriptionsDB[key][stID][LANGS[lang]];
+	return LibScenariosDescriptionsDB[key][stID][LANGSINDEX[lang]];
 end
 
 --[[
 To get the number of steps from specified scenario
 ]]
 function lib:GetNumberScenarioSteps(scID)
+	if not scID then return; end
 	local key = tostring(scID);
 
-	if (not key) then 
-		return nil;
-	end
 	if (not LibScenariosStepsDB[key]) then
 		return nil;
 	else
 		return getn(LibScenariosStepsDB[key]);
 	end
-	
 end
 
 --[[
+To get the scenario step ID of specified scenario-step
+]]
+function lib:GetScenarioStepID(scID, stID)
+	if (not (scID and stID)) then return; end
+	local key = tostring(scID);
+
+	if (not LibScenariosStepIDDB[key]) then
+		return nil;
+	else
+		return LibScenariosStepIDDB[key][stID][1];
+	end
+end
+
+--[[
+To get the scenario step's criteria-tree ID of specified scenario-step
+]]
+function lib:GetScenarioStepCriteriaTreeID(scID, stID)
+	if (not (scID and stID)) then return; end
+	local key = tostring(scID);
+
+	if (not LibScenariosStepIDDB[key]) then
+		return nil;
+	else
+		return LibScenariosStepIDDB[key][stID][2];
+	end
+end
+
+
+-- /////////////// Dev Only /////////////////////////////
+-- local LibScenariosStepsTempDB = {}
+-- local LibScenariosDescriptionsTempDB = {}
+-- local StepIDTempDB = {}
+
 -- below was only used for new database conversion
-function Convert_StepsTempDB()
+--[[
+function lib:Convert_StepsTempDB()
 	for k, v in ipairs(LibScenariosStepsTempDB) do
 		local scID, stID, st, enUS, deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW = v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8], v[9], v[10], v[11], v[12], v[13], v[14], v[15];
 		local num = tonumber(st);
@@ -175,7 +203,7 @@ function Convert_StepsTempDB()
 	end
 end
 
-function Convert_DescTempDB()
+function lib:Convert_DescTempDB()
 	for k, v in ipairs(LibScenariosDescriptionsTempDB) do
 		local scID, stID, st, enUS, deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW = v[1], v[2], v[3], v[4], v[5], v[6], v[7], v[8], v[9], v[10], v[11], v[12], v[13], v[14], v[15];
 		local num = tonumber(st);
@@ -189,4 +217,21 @@ function Convert_DescTempDB()
 		ScenariosDB.Desc[scID][num] = { enUS, deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW };
 	end
 end
+
+function Convert_StepIDTempDB()
+	for k, v in ipairs(StepIDTempDB) do
+		local scID, st, stID, criID = v[1], v[2], v[3], v[4];
+		local num = tonumber(st);
+		num = num +1;
+		--st = tostring(num);
+		
+		if (ScenariosDB == nil) then ScenariosDB = { }; end
+		if (ScenariosDB.StepsID == nil) then ScenariosDB.StepsID = { }; end
+		if (ScenariosDB.StepsID[scID] == nil) then ScenariosDB.StepsID[scID] = { }; end
+		if (ScenariosDB.StepsID[scID][num] == nil) then ScenariosDB.StepsID[scID][num] = { }; end
+		ScenariosDB.StepsID[scID][num] = { tonumber(stID), tonumber(criID) };
+	end
+end
+
 ]]
+

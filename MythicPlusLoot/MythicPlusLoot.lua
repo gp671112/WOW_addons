@@ -23,7 +23,7 @@ frame:SetScript("OnEvent",function(self,event,...)
 
             iLvlFrm.text = iLvlFrm:CreateFontString(nil, "MEDIUM", "GameFontHighlightLarge");
             iLvlFrm.text:SetAllPoints(iLvlFrm);
-			iLvlFrm.text:SetFont("Fonts\\bLEI00D.TTF",30);
+			iLvlFrm.text:SetFont("Fonts\\FRIZQT__.TTF",30);
             iLvlFrm.text:SetPoint("CENTER",0,0);
             iLvlFrm.text:SetTextColor(1,0,1,1);
             iLvlFrm:SetScript("OnUpdate",function(self,elaps)		
@@ -130,52 +130,38 @@ GameTooltip:HookScript("OnTooltipCleared", OnTooltipCleared)
 hooksecurefunc("ChatFrame_OnHyperlinkShow",SetHyperlink_Hook)
 
 function MythicLootItemLevel(mlvl)	
-	if (mlvl == "2" or mlvl == "3") then
-		return "845"
-	elseif (mlvl == "4" or mlvl == "5") then
-		return "850"
-	elseif (mlvl == "6" or mlvl == "7") then
-		return "855"
-	elseif (mlvl == "8" or mlvl == "9") then
-		return "860"
-	elseif (mlvl == "10" or mlvl == "11") then
+	if (mlvl == "1") then
 		return "865"
-	elseif (mlvl == "12") then
+	elseif (mlvl == "2" or mlvl == "3") then
 		return "870"
-	elseif (mlvl == "13") then
+	elseif (mlvl == "4" or mlvl == "5") then
 		return "875"
-	elseif (mlvl == "14") then
+	elseif (mlvl == "6" or mlvl == "7") then
 		return "880"
-	else
+	elseif (mlvl == "8" or mlvl == "9") then
 		return "885"
+	else
+		return "890"
 	end
 end
 
 function MythicWeeklyLootItemLevel(mlvl)
-	if (mlvl == "0") then
+	if (mlvl == "0" or mlvl == "1") then
 		return ""
 	elseif (mlvl == "2") then
-		return "850"
-	elseif (mlvl == "3") then
-		return "855"
-	elseif (mlvl == "4") then
-		return "860"
-	elseif (mlvl == "5" or mlvl == "6") then
-		return "865"
-	elseif (mlvl == "7" or mlvl == "8") then
-		return "870"
-	elseif (mlvl == "9") then
 		return "875"
-	elseif (mlvl == "10" or mlvl == "11") then
+	elseif (mlvl == "3") then
 		return "880"
-	elseif (mlvl == "12") then
+	elseif (mlvl == "4") then
 		return "885"
-	elseif (mlvl == "13") then
+	elseif (mlvl == "5" or mlvl == "6") then
 		return "890"
-	elseif (mlvl == "14") then
+	elseif (mlvl == "7" or mlvl == "8") then
 		return "895"
-	else
+	elseif (mlvl == "9") then
 		return "900"
+	else
+		return "905"
 	end
 end
 
@@ -183,17 +169,17 @@ function MythicPlusLoot:OnInitialize()
 		-- Called when the addon is loaded
 
 		-- Print a message to the chat frame
-		self:Print(L["MythicPlusLoot: Loaded"])
+		--self:Print(L["MythicPlusLoot: Loaded"])
 end
 
 function MythicPlusLoot:OnEnable()
 		-- Called when the addon is enabled
 
 		-- Print a message to the chat frame		
-		self:Print(L["MythicPlusLoot: Enabled"])
+		--self:Print(L["MythicPlusLoot: Enabled"])
 end
 
 function MythicPlusLoot:OnDisable()
 		-- Called when the addon is disabled
-		self:Print(L["MythicPlusLoot: Disabled"])
+		--self:Print(L["MythicPlusLoot: Disabled"])
 end

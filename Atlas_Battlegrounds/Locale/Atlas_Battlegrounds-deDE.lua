@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_Battlegrounds-deDE.lua 1538 2016-08-07 15:57:11Z arith $
+-- $Id: Atlas_Battlegrounds-deDE.lua 1538 2016-08-07 15:57:11Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -32,7 +32,6 @@ local L = AceLocale:NewLocale("Atlas_Battlegrounds", "deDE", false);
 -- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 if L then
-
 L["2nd Lieutenant Wansworth <Baradin's Wardens>"] = "Unterleutnant Wansworth <Wächter von Baradin>"
 L["AB"] = "AB"
 L["Aldraan <Blade Merchant>"] = "Aldraan <Klingenhändler>"
@@ -66,8 +65,8 @@ L["Drillmaster Razgoth <Hellscream's Reach>"] = "Drillmeister Razgoth <Höllschr
 L["Dun Baldar North Bunker"] = "Nordbunker von Dun Baldar"
 L["Dun Baldar South Bunker"] = "Südbunker von Dun Baldar"
 L["East Beacon"] = "Östliches Leuchtsignal"
-L["Eastern Crater"] = "Östlicher Krater"
 L["East Frostwolf Tower"] = "Östlicher Frostwolfturm"
+L["Eastern Crater"] = "Östlicher Krater"
 L["Eastspark Vihecale Workshop"] = "Fahrzeugwerkstatt Ostfunk"
 L["Embelar <Food & Drink>"] = "Embelar <Speis & Trank>"
 L["EotS"] = "Auge"
@@ -144,8 +143,8 @@ L["Twinspire Graveyard"] = "Friedhof der Zwillingsspitze"
 L["Vanndar Stormpike <Stormpike General>"] = "Vanndar Sturmlanze <General der Sturmlanzen>"
 L["Vipore's Beacon"] = "Vipores Signal"
 L["West Beacon"] = "Westliches Leuchtsignal"
-L["Western Crater"] = "Westlicher Krater"
 L["West Frostwolf Tower"] = "Westlicher Frostwolfturm"
+L["Western Crater"] = "Westlicher Krater"
 L["Westspark Vihecale Workshop"] = "Fahrzeugwerkstatt Westfunk"
 L["Wildhammer Longhouse"] = "Langhaus der Wildhämmer"
 L["Wing Commander Guse"] = "Schwadronskommandant Guse"
@@ -157,7 +156,4 @@ L["Wing Commander Vipore"] = "Schwadronskommandant Vipore"
 L["Wintergrasp Graveyard"] = "Friedhof der Festung"
 L["WSG"] = "WS"
 L["Wyvern Camp"] = "Flügeldrachenlager"
-L["ToC/Description"] = "Schlachtfeldkarten"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[Schlachtfelder]|r"
-
 end

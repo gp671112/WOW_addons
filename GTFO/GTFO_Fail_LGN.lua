@@ -346,7 +346,6 @@ GTFO.SpellID["204042"] = {
   sound = 3;
 };
 
-
 -- **********
 -- * Mardum *
 -- **********
@@ -1017,6 +1016,12 @@ GTFO.SpellID["198781"] = {
   sound = 3;
 };
 
+GTFO.SpellID["200914"] = {
+  --desc = "Indigestion (Wyrmtongue Scavenger)";
+  sound = 3;
+  tankSound = 0;
+}
+
 
 -- *************************
 -- * The Emerald Nightmare *
@@ -1372,6 +1377,12 @@ GTFO.SpellID["152987"] = {
 GTFO.SpellID["224440"] = {
   --desc = "Crushing Stomp (Gilded Guardian)";
   sound = 3;
+};
+
+GTFO.SpellID["231006"] = {
+  --desc = "Carve (Flightmaster Volnath)";
+  sound = 3;
+  tankSound = 0;
 };
 
 --- ******************

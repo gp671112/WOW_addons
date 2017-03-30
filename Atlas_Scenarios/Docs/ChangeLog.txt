@@ -1,10 +1,22 @@
-$Id: ChangeLog.txt 34 2016-10-27 05:10:53Z arith $
+$Id: ChangeLog.txt 39 2017-03-27 08:43:24Z arith $
 Atlas, a World of Warcraft instance map browser
-Copyright 2012 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+Copyright 2012 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 ==============
 = Change Log =
 ==============
+
+v1.39.00 (Mar. 27, 2017)
+------------------------
+- Toc update to support WoW 7.2
+- Library update - Lib-Scenarios
+
+
+v1.38.00 (Mar. 20, 2017)
+------------------------
+- Added The Assault on Broken Shore scenario (7.2)
+- Corrected Brewmoon Festival scenario's step description
+
 
 v1.35.00 (Oct. 27, 2016)
 ------------------------

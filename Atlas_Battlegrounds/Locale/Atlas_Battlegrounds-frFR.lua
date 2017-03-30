@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_Battlegrounds-frFR.lua 1538 2016-08-07 15:57:11Z arith $
+-- $Id: Atlas_Battlegrounds-frFR.lua 1538 2016-08-07 15:57:11Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -50,7 +50,6 @@ L["Broken Temple Vihecal Workshop"] = "Atelier du temple Brisé"
 L["Captain Balinda Stonehearth <Stormpike Captain>"] = "Capitaine Balinda Gîtepierre <Capitaine Foudrepique>"
 L["Captain Galvangar <Frostwolf Captain>"] = "Capitaine Galvangar <Capitaine Loup-de-givre>"
 L["Cendrii <Food & Drink>"] = "Cendrii <Nourriture & boissons>"
--- L["Center Mine"] = ""
 L["Center Point (Maximum Points)"] = "Center Point (Maximum Points)"
 L["Chief Researcher Amereldine"] = "Directrice de recherches Amereldine"
 L["Chief Researcher Kartos"] = "Directeur de recherches Kartos"
@@ -65,8 +64,8 @@ L["Drillmaster Razgoth <Hellscream's Reach>"] = "Maître de manœuvre Razgoth <P
 L["Dun Baldar North Bunker"] = "Bunker Nord de Dun Baldar"
 L["Dun Baldar South Bunker"] = "Bunker Sud de Dun Baldar"
 L["East Beacon"] = "Balise Est"
-L["Eastern Crater"] = "Cratère Est"
 L["East Frostwolf Tower"] = "Tour Loup-de-givre orientale"
+L["Eastern Crater"] = "Cratère Est"
 L["Eastspark Vihecale Workshop"] = "Atelier de l'Estincelle"
 L["Embelar <Food & Drink>"] = "Embelar <Nourriture & boissons>"
 L["EotS"] = "EotS/L'Œil"
@@ -143,8 +142,8 @@ L["Twinspire Graveyard"] = "Cimetière des flèches jumelles"
 L["Vanndar Stormpike <Stormpike General>"] = "Vanndar Foudrepique <Général foudrepique>"
 L["Vipore's Beacon"] = "Balise de Vipore"
 L["West Beacon"] = "Balise Ouest"
-L["Western Crater"] = "Cratère Ouest"
 L["West Frostwolf Tower"] = "Tour Loup-de-givre occidentale"
+L["Western Crater"] = "Cratère Ouest"
 L["Westspark Vihecale Workshop"] = "Atelier de l'Ouestincelle"
 L["Wildhammer Longhouse"] = "Bastion des Marteaux-hardis"
 L["Wing Commander Guse"] = "Chef d'escadrille Guse"
@@ -156,7 +155,4 @@ L["Wing Commander Vipore"] = "Chef d'escadrille Vipore"
 L["Wintergrasp Graveyard"] = "Cimetière du Joud-d'hiver"
 L["WSG"] = "WSG/Goulet"
 L["Wyvern Camp"] = "Camp de la wyverne"
-L["ToC/Description"] = "Cartes de champs de bataille"
--- L["ToC/Title"] = ""
-
 end

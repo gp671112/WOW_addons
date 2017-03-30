@@ -1,4 +1,4 @@
--- $Id: AtlasJournalEncounter.lua 140 2017-01-16 08:56:14Z arith $
+-- $Id: AtlasJournalEncounter.lua 180 2017-03-21 07:36:07Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -158,26 +158,6 @@ function Atlas_GetBossName(bossname, encounterID, creatureIndex)
 	return bossname;
 end
 
-function Atlas_EncounterJournal_Binding()
-	local button = _G["AtlasToggleFromEncounterJournal"];
-	if (not button) then
-		button = CreateFrame("Button","AtlasToggleFromEncounterJournal", EncounterJournal);
-		button:SetWidth(32);
-		button:SetHeight(32);
-		
-		button:SetPoint("TOPRIGHT", EncounterJournalCloseButton, -23, 0, "TOPRIGHT"); 
-		button:SetNormalTexture("Interface\\AddOns\\Atlas\\Images\\AtlasButton-Up");
-		button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight", "ADD");
-
-		button:SetScript("OnEnter", function(self)
-			GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
-			GameTooltip:SetText(L["ATLAS_CLICK_TO_OPEN"], nil, nil, nil, nil, 1);
-		end);
-		button:SetScript("OnLeave", function(self) GameTooltip:Hide(); end);
-		button:SetScript("OnClick",AtlasToggleFromEncounterJournal_OnClick);
-	end
-end
-
 function AtlasFrameAdventureJournalMapButton_OnClick(frame)
 	local mapID = frame.mapID;
 	local dungeonLevel = frame.dungeonLevel;
@@ -195,6 +175,63 @@ function AtlasFrameAdventureJournalMapButton_OnClick(frame)
 	end
 	if (dungeonLevel) then
 		SetDungeonMapLevel(dungeonLevel);
+	end
+end
+
+local function AtlasToggleFromEncounterJournal_OnClick(self)
+	Atlas_AutoSelect_from_EncounterJournal();
+	ToggleFrame(EncounterJournal);
+	Atlas_Toggle();
+end
+
+local function AtlasToggleFromEncounterJournal_OnShow(self)
+	local ElvUI = select(4, GetAddOnInfo("ElvUI"));
+
+	if (not ElvUI) then return; end
+	local ElvUI_BZSkin = false;
+
+	if (ElvUI and ElvPrivateDB) then
+		local profileKey;
+		if ElvPrivateDB.profileKeys then
+			profileKey = ElvPrivateDB.profileKeys[UnitName("player")..' - '..GetRealmName()];
+		end
+
+		if profileKey and ElvPrivateDB.profiles and ElvPrivateDB.profiles[profileKey] then
+			if (ElvPrivateDB.profiles[profileKey]["skins"]["blizzard"]["enable"] and ElvPrivateDB.profiles[profileKey]["skins"]["blizzard"]["encounterjournal"]) then
+				ElvUI_BZSkin = true;
+			end
+		end
+	end
+	
+	if (ElvUI_BZSkin) then
+		local button = _G["AtlasToggleFromEncounterJournal"];
+		if (button) then
+			button:SetNormalTexture("Interface\\WorldMap\\WorldMap-Icon");
+			button:SetWidth(16);
+			button:SetHeight(16);
+			button:SetPoint("TOPRIGHT", EncounterJournalCloseButton, -28, -6, "TOPRIGHT"); 
+		end
+	end
+end
+
+function Atlas_EncounterJournal_Binding()
+	local button = _G["AtlasToggleFromEncounterJournal"];
+	if (not button) then
+		button = CreateFrame("Button","AtlasToggleFromEncounterJournal", EncounterJournal);
+		button:SetWidth(32);
+		button:SetHeight(32);
+		
+		button:SetPoint("TOPRIGHT", EncounterJournalCloseButton, -23, 0, "TOPRIGHT"); 
+		button:SetNormalTexture("Interface\\AddOns\\Atlas\\Images\\AtlasButton-Up");
+		button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight", "ADD");
+
+		button:SetScript("OnEnter", function(self)
+			GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
+			GameTooltip:SetText(L["ATLAS_CLICK_TO_OPEN"], nil, nil, nil, nil, 1);
+		end);
+		button:SetScript("OnLeave", function(self) GameTooltip:Hide(); end);
+		button:SetScript("OnClick",AtlasToggleFromEncounterJournal_OnClick);
+		button:SetScript("OnShow",AtlasToggleFromEncounterJournal_OnShow);
 	end
 end
 

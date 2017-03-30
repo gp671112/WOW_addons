@@ -16,6 +16,7 @@ function NPC:OnEvent(event, ...)
 	self.TalkBox.lastEvent = event
 	self.lastEvent = event
 	self.timeStamp = GetTime()
+	self:UpdateItems()
 end
 
 ----------------------------------
@@ -74,7 +75,7 @@ function NPC:QUEST_DETAIL(...)
 	end
 	self:PlayIntro('QUEST_DETAIL')
 	self:UpdateTalkingHead(GetTitleText(), GetQuestText(), 'AvailableQuest')
-	self:AddQuestInfo('QUEST_DETAIL', QuestFrameAcceptButton)
+	self:AddQuestInfo('QUEST_DETAIL')
 end
 
 
@@ -89,12 +90,12 @@ function NPC:QUEST_ITEM_UPDATE()
 end
 
 ----------------------------------
--- Content handlers
+-- Content handler (gossip & quest)
 ----------------------------------
-function NPC:AddQuestInfo(template, acceptButton)
+function NPC:AddQuestInfo(template)
 	local elements = self.TalkBox.Elements
 	local content = elements.Content
-	local height = elements:Display(template, acceptButton, 'Stone')
+	local height = elements:Display(template, 'Stone')
 
 	-- hacky fix to stop a content frame that only contains a spacer from showing.
 	if height > 20 then
@@ -144,6 +145,7 @@ function NPC:SelectBestOption()
 end
 
 function NPC:ResetElements()
+	self.Inspector:Hide()
 	local elements = self.TalkBox.Elements
 	for _, frame in pairs(elements.Active) do
 		frame:Hide()
@@ -172,6 +174,120 @@ function NPC:UpdateTalkingHead(title, text, npcType)
 	talkBox.TextFrame.Text:SetText(text)
 end
 
+
+----------------------------------
+-- Content handler (items)
+----------------------------------
+function NPC:SetItemTooltip(tooltip, item)
+	local objType = item.objectType
+	if objType == 'item' then
+		tooltip:SetQuestItem(item.type, item:GetID())
+	elseif objType == 'currency' then
+		tooltip:SetQuestCurrency(item.type, item:GetID())
+	end
+	tooltip.Icon.Texture:SetTexture(item.itemTexture or item.Icon:GetTexture())
+end
+
+function NPC:GetItemColumn(owner, id)
+	local columns = owner and owner.Columns
+	if columns and id then
+		local column = columns[id]
+		local anchor = columns[id - 1]
+		if not column then
+			column = CreateFrame('Frame', nil, owner)
+			column:SetSize(1, 1) -- set size to make sure children are drawn
+			column:SetFrameStrata("FULLSCREEN_DIALOG")
+			L.Mixin(column, L.AdjustToChildren)
+			columns[id] = column
+		end
+		if anchor then
+			column:SetPoint('TOPLEFT', anchor, 'TOPRIGHT', 30, 0)
+		else
+			column:SetPoint('TOPLEFT', owner, 0, -30)
+		end
+		column:Show()
+		return column
+	end
+end
+
+function NPC:ShowItems()
+	local inspector = self.Inspector
+	local items, hasChoice, hasExtra = inspector.Items
+	local extras, choices = inspector.Extras, inspector.Choices
+	inspector:Show()
+	for id, item in pairs(items) do
+		local tooltip = inspector.tooltipFramePool:Acquire()
+		local owner = item.type == 'choice' and choices or extras
+		local columnID = ( id % 3 == 0 ) and 3 or ( id % 3 )
+		local column = self:GetItemColumn(owner, columnID)
+
+		hasChoice = hasChoice or item.type == 'choice'
+		hasExtra = hasExtra or item.type ~= 'choice'
+
+		tooltip:SetParent(column)
+		tooltip:SetOwner(column, "ANCHOR_NONE")
+		tooltip.owner = owner
+
+		-- Mixin the tooltip button functions
+		L.Mixin(tooltip.Button, L.TooltipMixin)
+		tooltip.Button:SetReferences(item, inspector)
+
+		self:SetItemTooltip(tooltip, item, inspector)
+
+		-- Readjust tooltip size to fit the icon
+		local width, height = tooltip:GetSize()
+		tooltip:SetSize(width + 30, height + 4)
+
+		-- Anchor the tooltip to the column
+		tooltip:SetPoint('TOP', column.lastItem or column, column.lastItem and 'BOTTOM' or 'TOP', 0, 0)
+		column.lastItem = tooltip
+	end
+
+	-- Text display:
+	local elements = self.TalkBox.Elements
+	local progress = elements.Progress
+	local rewardsFrame = elements.Content.RewardsFrame
+	-- Choice text:
+	if rewardsFrame.ItemChooseText:IsVisible() then
+		choices.Text:Show()
+		choices.Text:SetText(rewardsFrame.ItemChooseText:GetText())
+	else
+		choices.Text:Hide()
+	end
+	-- Extra text:
+	if progress.ReqText:IsVisible() then
+		extras.Text:Show()
+		extras.Text:SetText(progress.ReqText:GetText())
+	elseif rewardsFrame.ItemReceiveText:IsVisible() and hasExtra then
+		extras.Text:Show()
+		extras.Text:SetText(rewardsFrame.ItemReceiveText:GetText())
+	else
+		extras.Text:Hide()
+	end
+	inspector:AdjustToChildren()
+end
+
+function NPC:UpdateItems()
+	local items, numItems = self:GetItems()
+	self.hasItems = numItems > 0
+end
+
+function NPC:GetItems()
+	local items = self.Inspector.Items
+	wipe(items)
+	for _, item in pairs(self.TalkBox.Elements.Content.RewardsFrame.Buttons) do
+		if item:IsVisible() then
+			items[#items + 1] = item
+		end
+	end
+	for _, item in pairs(self.TalkBox.Elements.Progress.Buttons) do
+		if item:IsVisible() then
+			items[#items + 1] = item
+		end
+	end
+	return items, #items
+end
+
 ----------------------------------
 -- Animation players
 ----------------------------------
@@ -187,7 +303,7 @@ function NPC:PlayIntro(event)
 		local point = L('boxpoint')
 		local x, y = L('boxoffsetX'), L('boxoffsetY')
 		box:ClearAllPoints()
-		if not isShown then
+		if not isShown and not L('disableflyin') then
 			box:SetPoint(point, UIParent, point, -x, -y)
 		end
 		box:SetOffset(box.offsetX or x, box.offsetY or y)
@@ -230,13 +346,6 @@ local inputs = {
 	reset = function(self)
 		self.TalkBox.TextFrame.Text:RepeatTexts()
 	end,
-	ignore = function(self)
-		if CanIgnoreQuest() then
-			IgnoreQuest()
-		elseif IsQuestIgnored() then
-			UnignoreQuest()
-		end
-	end,
 	goodbye = function(self)
 		CloseGossip()
 		CloseQuest()
@@ -256,6 +365,10 @@ function NPC:OnKeyDown(button)
 	if button == 'ESCAPE' then
 		self:ForceClose()
 		return
+	elseif button:match(L('inspect')) and self.hasItems then
+		self:SetPropagateKeyboardInput(false)
+		self:ShowItems()
+		return
 	end
 	local input
 	for action, func in pairs(inputs) do
@@ -272,6 +385,12 @@ function NPC:OnKeyDown(button)
 		self:SetPropagateKeyboardInput(false)
 	else
 		self:SetPropagateKeyboardInput(true)
+	end
+end
+
+function NPC:OnKeyUp(button)
+	if button:match(L('inspect')) and self.Inspector:IsVisible() then
+		self.Inspector:Hide()
 	end
 end
 
@@ -339,7 +458,7 @@ function TalkBox:OnClick(button)
 			self.Elements:CompleteQuest()
 		-- Accept quest
 		elseif self.lastEvent == 'QUEST_DETAIL' then
-			QuestFrameAcceptButton:Click()
+			self.Elements:AcceptQuest()
 		-- Progress quest to completion
 		elseif IsQuestCompletable() then
 			CompleteQuest()
@@ -352,6 +471,14 @@ function TalkBox:OnClick(button)
 			text:RepeatTexts()
 		end
 	end
+end
+
+function TalkBox:Dim()
+	L.UIFrameFadeOut(self, 0.15, self:GetAlpha(), 0.05)
+end
+
+function TalkBox:Undim()
+	L.UIFrameFadeIn(self, 0.15, self:GetAlpha(), 1)
 end
 
 function TalkBox:SetExtraOffset(newOffset)

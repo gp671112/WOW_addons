@@ -1,4 +1,4 @@
--- $Id: Atlas_Legion-enUS.lua 91 2017-01-21 20:09:46Z arith $
+-- $Id: Atlas_Legion-enUS.lua 102 2017-03-27 14:46:14Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -28,6 +28,8 @@ local L = AceLocale:NewLocale("Atlas_Legion", "enUS", true, true);
 if L then
 	-- Assault on VioletHold
 
+	-- Cathedral of Eternal Night
+
 	-- Court of Stars
 	L["Ly'leth Lunastre"] = "Ly'leth Lunastre"; -- 106468
 	L["Arcanist Malrodi"] = "Arcanist Malrodi"; -- 108796
@@ -47,8 +49,8 @@ if L then
 	L["Mythana"] = "Mythana"; -- 101641
 
 	-- Eye of Azshara
-	L["Crate of Corks"] = "Crate of Corks"; -- Alchemy quest - Put a Cork in It (39331)
-	L["Put a Cork in It"] = "Put a Cork in It";
+	L["Crate of Corks"] = "Crate of Corks"; -- object=248930, Alchemy quest - Put a Cork in It (39331)
+	L["Put a Cork in It"] = "Put a Cork in It"; -- quest=39331
 	L["Shellmaw"] = "Shellmaw"; -- 91788
 	L["Gom Crabbar"] = "Gom Crabbar"; -- 101411
 	L["Jaggen-Ra"] = "Jaggen-Ra"; -- 101467
@@ -77,6 +79,15 @@ if L then
 	L["Echoing Horn of the Damned"] = "Echoing Horn of the Damned";
 
 	-- Return to Karazhan
+	L["Mage Darius"] = "Mage Darius";
+	L["Charred Bone Fragment"] = "Charred Bone Fragment";
+	L["Archmage Leryda"] = "Archmage Leryda";
+	L["Lydia Accoste"] = "Lydia Accoste";
+	L["Barnes"] = "Barnes"; -- 114339
+	L["Soul Fragment"] = "Soul Fragment";
+	L["Koren"] = "Koren"; -- 114815
+	L["Medivh's Footlocker"] = "Medivh's Footlocker"; -- object: 266826
+	L["Archmage Khadgar"] = "Archmage Khadgar"; -- 115497
 	
 	-- The Arcway
 	L["Portal to Shal'Aran"] = "Portal to Shal'Aran";

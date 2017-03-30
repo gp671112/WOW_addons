@@ -1,4 +1,4 @@
--- $Id: Atlas_Legion_DB.lua 91 2017-01-21 20:09:46Z arith $
+-- $Id: Atlas_Legion_DB.lua 100 2017-03-27 12:20:42Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -69,6 +69,28 @@ local myDB = {
 		{ "G", 10001, 203, 191 }; -- Connection
 		{  3, 1664, 351, 60 }; -- Smashspite the Hateful
 		{  4, 1672, 158, 171 }; -- Lord Kur'talos Ravencrest
+	};
+	CathedralofEternalNightA = {
+		{ "A", 10001, 249, 487 }; -- Entrance
+		{ "B", 10002, 249, 106 }; -- Stairs
+	};
+	CathedralofEternalNightB = {
+		{ "B", 10001, 249, 89 }; -- Stairs
+		{ "C", 10001, 249, 390 }; -- Stairs
+		{ 1, 1905, 342, 250 }; -- Agronox
+	};
+	CathedralofEternalNightC = {
+		{ "C", 10001, 130, 385 }; -- Stairs
+		{ "D", 10001, 130, 141 }; -- Stairs
+		{ "D", 10001, 372, 123 }; -- Stairs
+		{ "E", 10001, 372, 361 }; -- Stairs
+		{ 2, 1906, 130, 249 }; -- Thrashbite the Scornful
+	};
+	CathedralofEternalNightD = {
+		{ "E", 10001, 250, 442 }; -- Stairs
+		{ "1'", 129207, 250, 251 }; -- Aegis of Aggramar
+		{ 3, 1904, 235, 205 }; -- Domatrax
+		{ 4, 1878, 264, 205 }; -- Mephistroth
 	};
 	CourtofStarsA = {
 		{ "A", 10001, 198, 377 }; -- Entrance
@@ -160,6 +182,111 @@ local myDB = {
 		{  2, 103597, 284, 381 }; -- Understone Lasher
 		{  3, 103199, 165, 376 }; -- Ragoul
 		{  4, 103271, 221,  89 }; -- Kraxa <Mother of Gnashers>
+	};
+	ReturntoKarazhanEnt = {
+		{ "A", 10001, 279, 289 }; -- Karazhan, Front
+		{ "B", 10002, 327, 192 }; -- Karazhan, Back
+		{ "C", 10003, 266, 220 }; -- Return to Karazhan
+		{ "1'", 18255, 290, 304 }; -- Archmage Leryda
+		{ "2'", 10004, 300, 355 }; -- Stairs to The Master's Cellar
+		{ "3'", 10005, 325, 365 }; -- Stairs to The Master's Cellar
+		{ "4'", 10006, 226, 364 }; -- Charred Bone Fragment
+		{ "5'", 10007, 274, 315 }; -- Meeting Stone
+		{ "6'", 10008, 94, 288 }; -- Graveyard
+		{ "7'", 66255, 93, 328 }; -- Lydia Accoste
+	};
+	ReturntoKarazhanA = {
+		{ "A", 10001, 346, 348 }; -- Entrance
+		{ "B", 10002, 210, 84 }; -- Connection
+		{ "C", 10002, 434, 418 }; -- Connection
+	};
+	ReturntoKarazhanB = {
+		{ "B", 10001, 341, 165 }; -- Connection
+		{ "D", 10001, 447, 289 }; -- Connection
+		{ 1, 1820, 150, 218 }; -- Opera Hall: Wikket
+		{ 2, 1826, 147, 247 }; -- Opera Hall: Westfall Story
+		{ 3, 1827, 141, 277 }; -- Opera Hall: Beautiful Beast
+		{ "1'", 114339, 172, 250 }; -- Barnes
+		{ "2'", 10002, 241, 259 }; -- Soul Fragment
+	};
+	ReturntoKarazhanC = {
+		{ "D", 10001, 23, 216 }; -- Connection
+		{ "E", 10001, 270, 268 }; -- Connection
+		{ "F", 10001, 33, 152 }; -- Connection
+		{ 4, 1825, 410, 289 }; -- Maiden of Virtue
+		{ "3'", 10002, 397, 117 }; -- Soul Fragment
+	};
+	ReturntoKarazhanD = {
+		{ "E", 10001, 352, 99 }; -- Connection
+		{ "H", 10001, 278, 249 }; -- Connection
+		{ "G", 10001, 170, 436 }; -- Connection
+		{ 5, 1837, 142, 177 }; -- Moroes
+		{ "4'", 10002, 118, 172 };
+	};
+	ReturntoKarazhanE = {
+		{ "F", 10001, 116, 15 }; -- Connection
+		{ "G", 10001, 111, 456 }; -- Connection
+		{ "H", 10001, 231, 304 }; -- Connection
+		{ "I", 10002, 431, 63 }; -- Connection
+		{ 6, 1835, 158, 416 }; -- Attumen the Huntsman
+		{ "5'", 114815, 154, 359 }; -- Koren
+		{ "6'", 10003, 418, 58 }; -- Soul Fragment
+	};
+	ReturntoKarazhanF = {
+		{ "C", 10001, 349, 162 }; -- Connection
+		{ "J", 10003, 275, 398 }; -- Portal
+		{ 7, 1836, 249, 363 }; -- The Curator
+		{ "7'", 10002, 229, 401 }; -- Soul Fragment
+	};
+	ReturntoKarazhanG = {
+		{ "J", 10001, 56, 102 }; -- Portal
+		{ "K", 10002, 449, 342 }; -- Portal
+		{ 8, 1817, 451, 250 }; -- Shade of Medivh
+	};
+	ReturntoKarazhanH = {
+		{ "K", 10001, 22, 334 }; -- Entrance
+		{ 9, 1818, 83, 107 }; -- Mana Devourer
+		{ "8'", 266826, 27, 251 }; -- Medivh's Footlocker
+	};
+	ReturntoKarazhanI = {
+		{ "L", 10001, 21, 41 }; -- Entrance
+		{ "M", 10002, 192, 487 }; -- Connection
+		{ "N", 10003, 14, 60 }; -- Portal
+	};
+	ReturntoKarazhanJ = {
+		{ "M", 10001, 282, 271 }; -- Connection
+		{ 10, 1838, 248, 291 }; -- Viz'aduum the Watcher
+		{ "9'", 115497, 196, 375 }; -- Archmage Khadgar
+	};
+	TombofSargerasA = {
+		{ "A", 10001, 200, 492 }; -- Entrance
+		{ "B", 10002, 283, 263 }; -- Connection
+		{ 1, 1862, 202, 297 }; -- Goroth
+		{ 2, 1867, 200, 26}; -- Demonic Inquisition
+	};
+	TombofSargerasB = {
+		{ "B", 10001, 159, 323 }; -- Connection
+		{ "C", 10001, 303, 492 }; -- Connection
+		{ 4, 1903, 250, 288 }; -- Sisters of the Moon
+		{ 6, 1896, 304, 100 }; -- The Desolate Host
+	};
+	TombofSargerasC = {
+		{ "C", 10001, 313, 230 }; -- Connection
+		{ "D", 10001, 373, 281 }; -- Connection
+		{ 3, 1856, 195, 267 }; -- Harjatan
+	};
+	TombofSargerasD = {
+		{ "D", 10001, 79, 101 }; -- Connection
+		{ 5, 1861, 235, 231 }; -- Mistress Sassz'ine
+	};
+	TombofSargerasE = {
+		{ 7, 1897, 250, 157 }; -- Maiden of Vigilance
+	};
+	TombofSargerasF = {
+		{ 8, 1873, 250, 182 }; -- Fallen Avatar
+	};
+	TombofSargerasG = {
+		{ 9, 1898, 378, 249 };
 	};
 	TheArcwayEnt = {
 		{ " A", 10001, 280, 107 }; -- The Grand Promenade

@@ -11,6 +11,12 @@ L= DBM:GetModLocalization(1706)
 ---------------------------
 L= DBM:GetModLocalization(1725)
 
+L:SetOptionLocalization({
+	InfoFrameBehavior	= "設置此戰鬥訊息框架的顯示方式",
+	TimeRelease				= "顯示中了定時釋放的玩家",
+	TimeBomb				= "顯示中了定時炸彈的玩家"
+})
+
 ---------------------------
 -- Trilliax --
 ---------------------------
@@ -26,13 +32,9 @@ L= DBM:GetModLocalization(1751)
 ------------------
 L= DBM:GetModLocalization(1762)
 
-L:SetOptionLocalization({
-	HUDSeekerLines		= "為覓腐蟲群顯示HUD線條"
-})
-
 L:SetMiscLocalization({
 	First					= "第一",
-	Second			= "第二",
+	Second				= "第二",
 	Third				= "第三",
 	Adds1				= "手下們！都進來！",
 	Adds2				= "讓這些笨蛋見識真正的戰鬥！"
@@ -62,11 +64,11 @@ L:SetWarningLocalization({
 })
 
 L:SetOptionLocalization({
-	warnStarLow				= "特別警告：當電漿球血量變低時(~25%)"
+	warnStarLow				= "為電漿球血量變低時(25%)顯示特別警告"
 })
 
 L:SetMiscLocalization({
-	RadarMessage				= "使用雷達找到無減益的隊友加上HUD去閃避減益。未來希望能加強此功能並提供更多選項。"
+	RadarMessage			= "使用雷達找到無減益的夥伴加上HUD去閃避減益。未來希望能加強此功能並提供更多選項。"
 })
 
 ------------------
@@ -74,30 +76,25 @@ L:SetMiscLocalization({
 ------------------
 L= DBM:GetModLocalization(1732)
 
-L:SetOptionLocalization({
-	ShowCustomNPAuraTextures	= "如果你中了星之記號則在名條上顯示自訂的綠/紅圖示材質而不是星之記號減益",
-	FilterOtherSigns						= "過濾與你無關的星之記號點名。"
-})
-
 ------------------
 -- Grand Magistrix Elisande --
 ------------------
 L= DBM:GetModLocalization(1743)
 
 L:SetTimerLocalization({
-	timerFastTimeBubble			= "加快區域(%d)",
+	timerFastTimeBubble		= "加快區域(%d)",
 	timerSlowTimeBubble		= "遲緩區域(%d)"
 })
 
 L:SetOptionLocalization({
-	timerFastTimeBubble			= "為$spell:209166區域顯示計時器",
+	timerFastTimeBubble		= "為$spell:209166區域顯示計時器",
 	timerSlowTimeBubble		= "為$spell:209165區域顯示計時器"
 })
 
 L:SetMiscLocalization({
 	noCLEU4EchoRings			= "時間的浪潮會粉碎你！",
-	noCLEU4EchoOrbs			= "你會發現時光有時很不穩定。"
-	prePullRP								= "我預見了你的到來。命運的絲線帶你來到這裡。你竭盡全力，想阻止燃燒軍團。"
+	noCLEU4EchoOrbs			= "你會發現時光有時很不穩定。",
+	prePullRP							= "我預見了你的到來。命運的絲線帶你來到這裡。你竭盡全力，想阻止燃燒軍團。"
 })
 
 ------------------
@@ -106,7 +103,8 @@ L:SetMiscLocalization({
 L= DBM:GetModLocalization(1737)
 
 L:SetMiscLocalization({
-	mythicPhase3		= "Time to return the demon hunter's soul to his body... and deny the Legion's master a host!"
+	mythicPhase3		= "把靈魂送回惡魔獵人的體內...別讓燃燒軍團的主宰占用!",
+	prePullRP				= "啊，很好，英雄們來了。真有毅力，真有自信。不過你們的傲慢會害死你們！"
 })
 
 -------------

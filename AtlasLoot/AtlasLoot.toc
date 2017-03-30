@@ -1,6 +1,6 @@
 ﻿## Interface: 70100
 ## Author: Hegarol
-## Version: v8.01.09
+## Version: v8.02.24
 ## SavedVariables: AtlasLootDB
 ## SavedVariablesPerCharacter: AtlasLootCharDB
 ## OptionalDeps: 
@@ -57,8 +57,11 @@ Core\ItemInfo.lua
 Core\TooltipScan.lua
 Core\EncounterJournal.lua
 Core\ItemQuery.lua
+Data\BonusID_re.lua
 Core\ItemString.lua
 Core\MapPOI.lua
+Core\AtlasIntegration.lua
+Core\WorldMapIntegration.xml
 
 MiniMapButton.lua
 

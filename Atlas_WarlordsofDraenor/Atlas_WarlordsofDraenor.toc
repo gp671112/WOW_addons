@@ -1,4 +1,4 @@
-## Interface: 70100
+## Interface: 70200
 #@non-debug@
 ## Title: Atlas |r|cFF0099FF[Warlords of Draenor]|r
 ## Title-deDE: Atlas |r|cFF0099FF[Warlords of Draenor]|r
@@ -16,9 +16,9 @@
 # ## Notes: Warlords of Draenor Dungeon Maps
 # ## Notes-zhTW: 德拉諾之霸副本地圖模組
 #@end-debug@
-## Version: 1.37.00
+## Version: 1.39.00
 ## Author: arith, Dynaletik, dubcat
-## X-Date: 2017-01-22T14:16:30Z
+## X-Date: 2017-03-27T8:38:48Z
 ## X-Email: atlas.addon at gmail dot com
 ## X-Website: http://www.atlasmod.com
 ## X-Category: Map

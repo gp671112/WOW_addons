@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt 71 2017-01-24 14:23:35Z arith $
+$Id: ChangeLog.txt 84 2017-03-30 05:09:59Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
@@ -7,6 +7,32 @@ Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail.com>
 ==============
 = Change Log =
 ==============
+
+v1.39.02 (Mar. 30, 2017)
+------------------------
+- Added Warrior's new jumping destination - Deliverance Point, Broken Shore
+
+v1.39.01 (Mar. 28, 2017)
+------------------------
+- Fixed node number for Windrunner's Sanctuary, Chamber of the Guardian, 
+  Greyfang Enclave, and Portal to Dalaran in Broken Isles Maps
+- Translation update:
+  - Simplified Chinese (ananhaid)
+
+v1.39.00 (Mar. 27, 2017)
+------------------------
+- Toc update to support WoW 7.2
+
+v1.38.01 (Mar. 22, 2017)
+------------------------
+- Updated Broken Isles maps for taxi nodes in the Broken Shore (7.2)
+- Added Broken Isles' large map
+- Added Surarma's large map
+
+v1.38.00 (Mar. 16, 2017)
+------------------------
+- Translation update:
+  - Korean (netaras)
 
 v1.37.01 (Jan. 24, 2017)
 ------------------------

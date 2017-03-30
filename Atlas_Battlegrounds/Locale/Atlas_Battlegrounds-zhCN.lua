@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_Battlegrounds-zhCN.lua 1538 2016-08-07 15:57:11Z arith $
+-- $Id: Atlas_Battlegrounds-zhCN.lua 1538 2016-08-07 15:57:11Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -68,8 +68,8 @@ L["Drillmaster Razgoth <Hellscream's Reach>"] = "拉斯格斯教官 <地狱咆�
 L["Dun Baldar North Bunker"] = "丹巴达尔北部碉堡"
 L["Dun Baldar South Bunker"] = "丹巴达尔南部碉堡"
 L["East Beacon"] = "东部灯塔"
-L["Eastern Crater"] = "东部平原"
 L["East Frostwolf Tower"] = "东部霜狼哨塔"
+L["Eastern Crater"] = "东部平原"
 L["Eastspark Vihecale Workshop"] = "东部火花车间"
 L["Embelar <Food & Drink>"] = "艾比拉尔 <餐饮供应商>"
 L["EotS"] = "EotS"
@@ -146,8 +146,8 @@ L["Twinspire Graveyard"] = "双塔墓地"
 L["Vanndar Stormpike <Stormpike General>"] = "范达尔·雷矛 <雷矛将军>"
 L["Vipore's Beacon"] = "维波里的信号灯"
 L["West Beacon"] = "西部灯塔"
-L["Western Crater"] = "西部平原"
 L["West Frostwolf Tower"] = "西部霜狼哨塔"
+L["Western Crater"] = "西部平原"
 L["Westspark Vihecale Workshop"] = "西部火花车间"
 L["Wildhammer Longhouse"] = "蛮锤要塞"
 L["Wing Commander Guse"] = "空军指挥官古斯"
@@ -159,7 +159,4 @@ L["Wing Commander Vipore"] = "空军指挥官维波里"
 L["Wintergrasp Graveyard"] = "冬拥湖墓地"
 L["WSG"] = "WSG"
 L["Wyvern Camp"] = "双足飞龙营地"
-L["ToC/Description"] = "战场地图"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[战场]|r"
-
 end

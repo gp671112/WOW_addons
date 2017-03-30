@@ -30,7 +30,7 @@ if ( GetLocale() == "zhTW" ) then
 	["A trinket is scored by its stats and item level but not the 'use' or special effect which can make the trinket suggestion inaccurate.\n\nUnticking this setting will disable the trinkets suggestion."] = "飾品是根據屬性和等級評分，而不是使用或觸發的特效，因此飾品的建議不是那麼精準。\n\n停用這個設定將會停用飾品的建議。",
 	["Display All Stats"] = "顯示所有屬性",
 	["Display unused stats for gear scoring"] = "顯示裝備評分未用到的屬性",
-	["Reset Scores"] = "重置屬性點數",
+	["Reset Scores"] = "重置分數",
 	
 	-- GearAdvisor.lua
 	["Agility"] = "敏捷",
@@ -55,6 +55,7 @@ if ( GetLocale() == "zhTW" ) then
 	["XP Bonus"] = "經驗值加成",
 	
 	-- arrow.lua
+	["Waypoint arrow not available. Click here to check the world map"] = "無法使用箭頭導引，點一下查看世界地圖。",
 	["Waypoint reached."] = "到達目的地。",
 	[" mil"] = " 里",
 	[" yd"] = " 碼",
@@ -80,7 +81,7 @@ if ( GetLocale() == "zhTW" ) then
 	["No"] = "否",
 	["Abandon All "] = "是否確定要放棄 '",
 	[" Quests?"] = "' 的所有任務?",
-	["|cfff0eb20Flight location not learned|r"] = "|cfff0eb20尚未發現這個飛行鳥點|r",
+	["|cfff0eb20Flight location not learned|r"] = "|cfff0eb20尚未開啟這個飛行鳥點|r",
 	
 	-- TaxiDB.lua
 	["DG: Flight master data updated!"] = "任務高手: 飛行管理員資料已經更新!",
@@ -111,11 +112,15 @@ if ( GetLocale() == "zhTW" ) then
 	["|cff11ff11/dugi config - |rDisplay settings menu."] = "|cff11ff11/dugi config - |r開啟設定選項。",
 	["|cff11ff11" .. "Dugi: Frame Reset"] = "|cff11ff11" .. "Dugi: 已經重置框架",
 	["|cff11ff11" .. "Dugi: Cleared Saved Variables"] = "|cff11ff11" .. "Dugi: 已經清除儲存的變數",
-	["|cff11ff11" .. "Dugi Guides Off"] = "|cff11ff11" .. "已經停用 Dugi 任務高手",
-	["|cff11ff11" .. "Dugi Guides On"] = "|cff11ff11" .. "已經啟用 Dugi 任務高手",
+	["|cff11ff11" .. "Dugi Guides Off"] = "|cff11ff11" .. "Dugi 任務高手 已啟用",
+	["|cff11ff11" .. "Dugi Guides On"] = "|cff11ff11" .. "Dugi 任務高手 已停用",
+	["|cff11ff11Auto Mount is ON|r"] = "|cff11ff11自動坐騎 已啟用|r",
+	["|cff11ff11Auto Mount is OFF|r"] = "|cff11ff11自動坐騎 已停用|r",
 		
 	["Search Locations"] = "搜尋地名",
-	-- ["Locations in"] = "位於",
+	["Locations in"] = "位於",
+	["Instance Portal"] = "副本入口",
+	["Portal "] = "入口/傳送門 ",
 	["Auto Quest Turn in"] = "自動交回任務",
 	["Automatically turn in quests from NPCs. Disable with shift"] = "自動和NPC交回任務。按住Shift鍵可停用此功能。",
 	["Automatically accept quests from NPCs. Disable with shift"] = "自動和NPC接受任務。按住Shift鍵可停用此功能。",
@@ -130,6 +135,29 @@ if ( GetLocale() == "zhTW" ) then
 	["|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|tWaypoint Reached Sound"] = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|t到達目的地音效",
 	["Plays a ping sound upon reaching each waypoint"] = "到達每一個路線導引終點時播放音效",
 	["Hide Model Preview in World Map"] = "隱藏世界地圖中的模組預覽",
+	["|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|tDisable suggestions if the highlighted\nsets are equipped:"] = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|t已裝備下方選取 (亮起來) 的\n　套裝設定時停用建議裝備：",
+	
+	["Import Scores"] = "匯入分數",
+	["Paste below scores from another addon and press Import."] = "貼上來自其他插件的屬性權重分數，\n然後按下匯入。",
+	["Import"] = "匯入",
+	["Cancel"] = "取消",
+	
+	["Auto Mount"] = "自動坐騎",
+	["|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|tEnabled auto mount"] = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|t啟用自動坐騎",
+	["Automatically mounts the fastest available mount."] = "自動騎乘可以使用的最快速坐騎。",
+	["Prefered mount in flyable areas"] = "可飛行區域的偏好坐騎",
+	["Prefered mount in non-flyable areas"] = "不可飛行區域的偏好坐騎",
+	["Prefered mount in water"]  = "水中的偏好坐騎",
+	["Key Bindings"] = "按鍵設定",
+	["Delay After Spell (%.1f)"] = "施法結束後 %.1f 秒自動召喚",
+	["Don't mount"] = "不要召喚坐騎",
+	["Random Favorite "] = "隨機召喚最喜愛的",
+	["Random Favorite"] = "隨機召喚最喜愛的坐騎",
+	["None"] = "無",
+	["Ground"] = "陸地坐騎",
+	["Flying"] = "飛行座騎",
+	["Aquatic"] = "水中坐騎",
+	
 	
 	
 ---
@@ -180,7 +208,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Auto Quest Item Loot"] = "自動選擇任務獎勵",
 	["Auto Sell Greys"] = "自動賣垃圾",
 	["Auto Stick"] = "自動放置",
-	["Automatic Waypoints"] = "自動指引", 
+	["Automatic Waypoints"] = "自動導航", 
 	["Automatically accept and turn in quests from NPCs. Disable with shift"] = "自動從NPC接受和交回任務。按住Shift鍵可停用此功能。",
 	["Automatically loot quest items."] = "自動選擇任務獎勵物品。",
 	["Automatically map waypoints from the Small Frame or from the Objective Tracker in essential mode"] = "自動加入路線導引，從小框架或基本模式中的任務目標清單。",
@@ -378,7 +406,7 @@ if ( GetLocale() == "zhTW" ) then
   ["Paladin"] = "聖騎士",
 	["Pandaren Female"] = "女熊貓人",
 	["Pandaren Male"] = "男熊貓人",
-	["Preload"] = "預載",
+	["Preload"] = "預先載入",
 	["Preview Quest Objectives"] = "預覽任務目標",
 	["Profiles"] = "設定檔",
 	["Provides localized NPC names. Required for target button."] = "提供本地化NPC名稱，目標按鈕需要使用。",
@@ -396,7 +424,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Recommended Preset Settings"] = "推薦預先設定",
 	["Red"] = "紅色",
 	["Reload"] = "重新載入",
-	["Remove Map Fog"] = "移除地圖迷霧",
+	["Remove Map Fog"] = "顯示未探索區域",
 	["Reset Frames Position"] = "重置框架位置",
 	["Reset Profile"] = "重置設定檔",
 	["Reset"] = "重置",

@@ -84,6 +84,9 @@ AL["OK"] = true
 AL["Setup"] = true
 AL["Welcome to Atlasloot Enhanced. Please take a moment to set your preferences."] = true
 
+--Core\WorldMapIntegration.lua
+AL["Click to open AtlasLoot window"] = true;
+
 --GUI\GUI.lua
 AL["AtlasLoot Modules"] = true
 AL["Custom Modules"] = true
@@ -98,6 +101,9 @@ AL["Shows items for all %s specializations."] = true
 AL["Required module %s is currently disabled."] = true
 AL["Required module %s is not installed."] = true
 AL["/al togglebg - Toggle the background image on loottables."] = true
+AL["Click to open WoW instance map."] = true
+AL["Click to open Atlas instance map."] = true
+AL["Right-click to close Atlas window."] = true
 
 --GUI\SoundFrame.lua
 AL["Add sound into chat"] = true
@@ -206,6 +212,7 @@ AL["Primal Trader"] = true
 AL["Replica available at Darkmoon Faire"] = true
 AL["Tabards"] = true
 AL["Tier Sets"] = true
+AL["Tier Sets - per Class"] = true
 AL["Tier %d Sets"] = true
 AL["Timewalking Dungeon Event"] = true
 AL["Unobtainable Tabards"] = true
@@ -251,6 +258,7 @@ AL["Necklaces"] = true
 AL["Nerubian"] = true
 AL["Night Elf"] = true
 AL["Off-Hands"] = true
+AL["Old Remedies"] = true
 AL["Ogre"] = true
 AL["Orange Gems"] = true
 AL["Orc"] = true

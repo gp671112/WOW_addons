@@ -1,4 +1,4 @@
--- $Id: Atlas_OutdoorRaids.lua 27 2017-01-24 07:20:30Z arith $
+-- $Id: Atlas_OutdoorRaids.lua 31 2017-03-29 15:10:34Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -42,6 +42,10 @@ local INDENT = "      ";
 
 local myCategory = L["Outdoor Raid Encounters"];
 
+local function sBF(key)
+	return BF[key] and BF[key] or key;
+end
+
 local myData = {
 	OR_DoomLordKazzak = {
 		ZoneName = { Atlas_GetBossName("Doom Lord Kazzak") };
@@ -69,6 +73,7 @@ local myData = {
 		JournalInstanceID = "822";
 		WorldMapID = "1007";
 		LargeMap = "OR_BrokenIsles";
+		Module = "Atlas_Legion";
 		{ WHIT.." 1) "..Atlas_GetBossName("Calamir", 1774), 1774 };				-- (Azsuna)
 		{ WHIT.." 2) "..Atlas_GetBossName("Withered J'im", 1796), 1796 };			-- (Azsuna)
 		{ WHIT.." 3) "..Atlas_GetBossName("Levantus", 1769), 1769 };				-- (Azsuna)
@@ -83,6 +88,11 @@ local myData = {
 		{ INDENT..WHIT..Atlas_GetBossName("Reaver Jdorn", 1756, 3), 1756 };
 		{ WHIT.."10) "..Atlas_GetBossName("Nithogg", 1749), 1749 };				-- (Stormheim)
 		{ WHIT.."11) "..Atlas_GetBossName("Na'zak the Fiend", 1783), 1783 };			-- (Suramar)
+		{ WHIT.."12) "..Atlas_GetBossName("Brutallus", 1883), 1883 };
+		{ WHIT.."13) "..Atlas_GetBossName("Malificus", 1884), 1884 };
+		{ INDENT..ORNG..ALC["L-Parenthesis"]..sBF("Armies of Legionfall")..ALC["R-Parenthesis"] };
+		{ WHIT.."14) "..Atlas_GetBossName("Si'vash", 1885), 1885 };
+		{ WHIT.."15) "..Atlas_GetBossName("Apocron", 1956), 1956 };
 		{ "" };
 		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
 		{ "Unleashed Monstrosities", "ac=11160" };
@@ -95,6 +105,7 @@ local myData = {
 		JournalInstanceID = "557";
 		WorldMapID = "962";
 		LargeMap = "OR_Draenor";
+		Module = "Atlas_WarlordsofDraenor";
 		{ WHIT.." 1) "..Atlas_GetBossName("Drov the Ruiner", 1291), 1291 };
 		{ WHIT..INDENT..Atlas_GetBossName("Frenzied Rumbler", 1291, 2), 1291 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Tarlna the Ageless", 1211), 1211 };
@@ -116,6 +127,7 @@ local myData = {
 		JournalInstanceID = "322";
 		WorldMapID = "862";
 		LargeMap = "OR_Pandaria";
+		Module = "Atlas_Pandaria";
 		{ WHIT.." 1) "..Atlas_GetBossName("Nalak, The Storm Lord", 814), 814 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Oondasta", 826), 826 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Sha of Anger", 691), 691 };
@@ -123,7 +135,7 @@ local myData = {
 		{ WHIT..INDENT..Atlas_GetBossName("Galleon", 725, 1), 725 };
 		{ WHIT..INDENT..Atlas_GetBossName("Chief Salyis", 725, 2), 725 };
 		{ WHIT.." 5) "..Atlas_GetBossName("Ordos, Fire-God of the Yaungol", 861), 861 };
-		{ WHIT.." 6) "..BF["The August Celestials"] };
+		{ WHIT.." 6) "..sBF("The August Celestials") };
 		{ WHIT..INDENT..Atlas_GetBossName("Chi-Ji, The Red Crane", 857), 857 };
 		{ WHIT..INDENT..Atlas_GetBossName("Niuzao, The Black Ox", 859), 859 };
 		{ WHIT..INDENT..Atlas_GetBossName("Xuen, The White Tiger", 860), 860 };

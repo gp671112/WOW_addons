@@ -3,5 +3,6 @@
 	<Script file="Lib-ScenariosNamesDB.lua" />
 	<Script file="Lib-ScenariosStepsDB.lua" />
 	<Script file="Lib-ScenariosStepsDescriptionsDB.lua" />
+	<Script file="Lib-ScenariosStepIDDB.lua" />
 	<Script file="Lib-Scenarios.lua" />
 </Ui>

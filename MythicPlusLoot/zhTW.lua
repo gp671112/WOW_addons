@@ -11,8 +11,8 @@ L["MythicPlusLoot does not have any function command."] = "MythicPlusLoot 沒有
 L["This shows the level of the item you'll find in this week's chest."] = "顯示每週寶箱可以開到的獎勵物品等級。"
 L["Weekly Chest Reward"] = "每週寶箱獎勵"
 
-L["Loot Item Level: "] = "戰利品等級: "
-L["Weekly Chest Item Level: "] = "每週寶箱物品等級: "
+L["Loot Item Level: "] = "戰利品等級："
+L["Weekly Chest Item Level: "] = "每週寶箱物品等級："
 
 
 

@@ -14,6 +14,7 @@ L["!!Main Addon Description"] = "为冷却、增益/减益及其他各个方面�
 L["ABSORBAMT"] = "护盾吸收量"
 L["ABSORBAMT_DESC"] = "检测单位上的护盾的吸收总量."
 L["ACTIVE"] = "%d 作用中"
+L["ADDONSETTINGS_DESC"] = "配置所有通用插件的设置。"
 L["AIR"] = "空气图腾"
 L["ALLOWCOMM"] = "允许图标导入"
 L["ALLOWCOMM_DESC"] = "允许另一个TellMeWhen使用者给你发送数据."
@@ -207,6 +208,9 @@ L["CLEU_COMBATLOG_OBJECT_TYPE_PET"] = "单位类型:宠物"
 L["CLEU_COMBATLOG_OBJECT_TYPE_PET_DESC"] = "勾选以排除宠物. 宠物是指那些会保护操控者并且可以直接被控制的单位."
 L["CLEU_COMBATLOG_OBJECT_TYPE_PLAYER"] = "单位类型:玩家角色"
 L["CLEU_COMBATLOG_OBJECT_TYPE_PLAYER_DESC"] = "勾选以排除玩家角色."
+L["CLEU_CONDITIONS_DESC"] = [=[配置每个单元必须通过的条件，以便进行检查。
+
+这些条件仅在输入要检查的单位，并且所有输入的单位均为单位ID时可用 - 不能在这些条件下使用名称。]=]
 L["CLEU_CONDITIONS_DEST"] = "目标条件"
 L["CLEU_CONDITIONS_SOURCE"] = "来源条件"
 L["CLEU_DAMAGE_SHIELD"] = "伤害护盾"
@@ -419,10 +423,15 @@ L["COLOR_MSQ_COLOR_DESC"] = "勾选此项将使用Masque皮肤中设置的边框
 L["COLOR_MSQ_ONLY"] = "使用Masque边框颜色(仅边框)"
 L["COLOR_MSQ_ONLY_DESC"] = "勾选此项将仅对图标边框使用Masque皮肤中设置的边框颜色进行着色(假如你在皮肤设置中有使用边框的话).图标不会被着色."
 L["COLOR_OVERRIDE_GLOBAL"] = "覆盖全局颜色"
+L["COLOR_OVERRIDE_GLOBAL_DESC"] = "检查以配置独立于全局定义颜色的颜色。"
 L["COLOR_OVERRIDE_GROUP"] = "覆盖分组颜色"
+L["COLOR_OVERRIDE_GROUP_DESC"] = "检查以配置与为图标组指定的颜色无关的颜色。"
+L["COLOR_USECLASS"] = "使用职业颜色"
+L["COLOR_USECLASS_DESC"] = "勾选使用所检测单位的职业颜色来给进度条上色。"
 L["COLORPICKER_BRIGHTNESS"] = "亮度"
 L["COLORPICKER_BRIGHTNESS_DESC"] = "设置颜色的亮度(有时也称为值)"
 L["COLORPICKER_DESATURATE"] = "减小饱和度"
+L["COLORPICKER_DESATURATE_DESC"] = "在应用颜色之前对纹理去饱和，允许您重新着色纹理，而不是着色。"
 L["COLORPICKER_HUE"] = "色度"
 L["COLORPICKER_HUE_DESC"] = "设置颜色的色度"
 L["COLORPICKER_ICON"] = "预览"
@@ -571,12 +580,19 @@ L["CONDITIONPANEL_INSTANCETYPE_LEGACY"] = "%s(神话难度)"
 L["CONDITIONPANEL_INSTANCETYPE_NONE"] = "野外"
 L["CONDITIONPANEL_INTERRUPTIBLE"] = "可打断"
 L["CONDITIONPANEL_ITEMRANGE"] = "单位在物品范围内"
+L["CONDITIONPANEL_LASTCAST"] = "最后使用的技能"
+L["CONDITIONPANEL_LASTCAST_ISNTSPELL"] = "不匹配"
+L["CONDITIONPANEL_LASTCAST_ISSPELL"] = "匹配"
 L["CONDITIONPANEL_LESS"] = "小于"
 L["CONDITIONPANEL_LESSEQUAL"] = "小于或等于"
 L["CONDITIONPANEL_LEVEL"] = "单位等级"
 L["CONDITIONPANEL_LOC_CONTINENT"] = "大陆"
 L["CONDITIONPANEL_LOC_SUBZONE"] = "子地区"
+L["CONDITIONPANEL_LOC_SUBZONE_BOXDESC"] = "输入您要检查的子区域。 用分号分隔多个子区域。"
+L["CONDITIONPANEL_LOC_SUBZONE_DESC"] = "检查您当前的子区域。 请注意：有时，您可能不在子区域。"
+L["CONDITIONPANEL_LOC_SUBZONE_LABEL"] = "输入子区域进行检查"
 L["CONDITIONPANEL_LOC_ZONE"] = "地区"
+L["CONDITIONPANEL_LOC_ZONE_DESC"] = "输入您要检查的区域。 用分号分隔多个区域。"
 L["CONDITIONPANEL_LOC_ZONE_LABEL"] = "输入用于检测的区域"
 L["CONDITIONPANEL_MANAUSABLE"] = "法术可用(魔法值/能量/等是否够用.)"
 L["CONDITIONPANEL_MANAUSABLE_DESC"] = [=[如果一个法术的可用基于你的主要能量（法力、能量、怒气、符能、集中值等）。
@@ -600,9 +616,13 @@ L["CONDITIONPANEL_OLD"] = "<|cffff1300旧版本|r>"
 L["CONDITIONPANEL_OLD_DESC"] = "<|cffff1300旧版本|r> - 此条件有新版本可用。"
 L["CONDITIONPANEL_OPERATOR"] = "运算符"
 L["CONDITIONPANEL_OR"] = "或者"
+L["CONDITIONPANEL_OVERLAYED"] = "法术激活边框"
+L["CONDITIONPANEL_OVERLAYED_DESC"] = "检测一个法术是否有激活边框效果（就是在你动作条有黄色的边边的技能）。"
 L["CONDITIONPANEL_OVERRBAR"] = "动作条效果"
 L["CONDITIONPANEL_OVERRBAR_DESC"] = "检测你主要动作条上的一些动画效果，不包含宠物战斗。"
 L["CONDITIONPANEL_PERCENT"] = "(百分比)"
+L["CONDITIONPANEL_PERCENTOFCURHP"] = "当前生命值百分比"
+L["CONDITIONPANEL_PERCENTOFMAXHP"] = "最大生命百分比"
 L["CONDITIONPANEL_PETMODE"] = "宠物攻击模式"
 L["CONDITIONPANEL_PETMODE_DESC"] = "检查当前宠物的攻击模式."
 L["CONDITIONPANEL_PETMODE_NONE"] = "没有宠物"
@@ -626,6 +646,8 @@ L["CONDITIONPANEL_RUNESLOCK"] = "符文锁定数量"
 L["CONDITIONPANEL_RUNESLOCK_DESC"] = "使用此条件仅在特定数量的符文被锁定时显示图标（等待恢复）。"
 L["CONDITIONPANEL_RUNESRECH"] = "恢复中符文数量"
 L["CONDITIONPANEL_RUNESRECH_DESC"] = "使用此条件仅在特定数量的符文正在恢复时显示图标。"
+L["CONDITIONPANEL_SPELLCOST"] = "施法所需能量"
+L["CONDITIONPANEL_SPELLCOST_DESC"] = "检测施法所需能量。像是法力值、怒气、能量等等。"
 L["CONDITIONPANEL_SPELLRANGE"] = "单位在法术范围内"
 L["CONDITIONPANEL_SWIMMING"] = "在游泳中"
 L["CONDITIONPANEL_THREAT_RAW"] = "单位威胁值 - 原始"
@@ -713,6 +735,7 @@ L["DT_DOC_gsub"] = [=[提供给力的Lua函数string.gsub来处理DogTags输出�
 替换当前值在匹配模式中的所有实例，可使用可选参数限制替换数目。]=]
 L["DT_DOC_IsShown"] = "返回一个图标是否显示."
 L["DT_DOC_LocType"] = "返回图标所显示的失去控制的效果类型.(此标签仅可用于图标类型%s)"
+L["DT_DOC_MaxDuration"] = "返回当前图标的最大持续时间。 这个持续时间是指刚开始时的持续时间，不是当前剩余的持续时间。"
 L["DT_DOC_Name"] = "返回单位的名称.这是一个由DogTag提供的默认[Name]标签的加强版本."
 L["DT_DOC_Opacity"] = "返回一个图标的不透明度. 返回值为0到1之间的数字."
 L["DT_DOC_PreviousUnit"] = "返回图标检测过的上一个单位或单位名称(相对于与当前检查单位来讲).和[Name]标签一起使用效果更佳."
@@ -768,9 +791,11 @@ L["ERROR_NOTINITIALIZED_OPT_NO_ACTION"] = "如果插件初始化失败，TellMeW
 L["ERRORS_FRAME"] = "错误框架"
 L["ERRORS_FRAME_DESC"] = "输出文字到系统的错误框架,就是显示%q那个位置."
 L["EVENT_CATEGORY_CHANGED"] = "数据已改变"
+L["EVENT_CATEGORY_CHARGES"] = "充能"
 L["EVENT_CATEGORY_CLICK"] = "交互"
 L["EVENT_CATEGORY_CONDITION"] = "条件"
 L["EVENT_CATEGORY_MISC"] = "其他"
+L["EVENT_CATEGORY_STACKS"] = "叠加层数"
 L["EVENT_CATEGORY_TIMER"] = "计时器"
 L["EVENT_CATEGORY_VISIBILITY"] = "显示方式"
 L["EVENT_FREQUENCY"] = "触发频率"
@@ -879,9 +904,13 @@ L["GENERICTOTEM"] = "图腾 %d"
 L["GLOBAL_GROUP_GENERIC_DESC"] = "|cff00c300共用分组|r是指在你这个魔兽世界帐号中的TellMeWhen配置文件的所有角色都可共同使用的分组。"
 L["GLYPHTOCHECK"] = "要检测的雕文"
 L["GROUP"] = "分组"
+L["GROUP_UNAVAILABLE"] = "|TInterface/PaperDollInfoFrame/UI-GearManager-LeaveItem-Transparent:20|t 由于其过度限制的规范/角色设置，此组无法显示。"
 L["GROUPCONDITIONS"] = "分组条件"
 L["GROUPCONDITIONS_DESC"] = "设置条件进行微调,以便更好的显示这个分组."
 L["GROUPICON"] = "分组:%s ，图标:%s"
+L["GROUPSELECT_TOOLTIP"] = [=[|cff7fffff点击|r 来编辑。
+
+|cff7fffff点击拖拽|r 重新排序或更改域。]=]
 L["GROUPSETTINGS_DESC"] = "设置此分组。"
 L["GUIDCONFLICT_DESC_PART1"] = [=[TellMeWhen检测到下列的对象拥有相同的全局唯一标识符（GUID）。如果你从它们其中之一调用数据可能会发生料想不到问题（例如：将它们之中的一个加入到整合图标中）。
 
@@ -904,6 +933,13 @@ L["HELP_CNDT_ANDOR_FIRSTSEE"] = [=[你可以选择两个条件都需要通过,�
 L["HELP_CNDT_PARENTHESES_FIRSTSEE"] = [=[你可以组合多个条件执行复杂的检测功能,尤其是连同%q选项一起使用.
 
 |cff7fffff点击|r括号将条件组合在一起,以达到你需要的检测效果(左右括号中间的条件就是一个条件组合).]=]
+L["HELP_COOLDOWN_VOIDBOLT"] = [=[看起来你是想检测|TInterface/Icons/ability_ironmaidens_convulsiveshadows:20|t %s的冷却时间。
+
+非常不幸的是暴雪的机制使它无法正常被监测到。
+
+你需要检测的是 |T1386548:20|t %s 的冷却时间。
+
+请添加一个条件检测增益 %s ，如果你仅仅是想检测 %s 是否可以使用的话。]=]
 L["HELP_EXPORT_DOCOPY_MAC"] = "按下|cff7fffffCMD+C|r复制"
 L["HELP_EXPORT_DOCOPY_WIN"] = "按下|cff7fffffCTRL+C|r复制"
 L["HELP_EXPORT_MULTIPLE_COMM"] = "导出的数据包括主要数据所需要的额外数据。想要知道包含了哪些内容，请导出相同数据到字符串后在导入菜单的“来自字符串”查看即可。"
@@ -973,6 +1009,10 @@ L["ICONALPHAPANEL_FAKEHIDDEN_DESC"] = [=[使该图标一直被隐藏,但图标�
 L["ICONCONDITIONS_DESC"] = "设置条件进行微调,以便更好的显示图标."
 L["ICONGROUP"] = "图标: %s (分组: %s)"
 L["ICONMENU_ABSENT"] = "不存在"
+L["ICONMENU_ABSENTEACH"] = "没有施法的单位"
+L["ICONMENU_ABSENTEACH_DESC"] = [=[设置单位没有任何施法时的图标透明度。
+
+如果此选项未设置成隐藏并且检测到有一个单位存在时，%s选项不会运作。]=]
 L["ICONMENU_ABSENTONALL"] = "全都缺少"
 L["ICONMENU_ABSENTONALL_DESC"] = "设置在检测的所有单位中不存在任何一个用于检测的增益/减益时的图标透明度."
 L["ICONMENU_ABSENTONANY"] = "任一缺少"
@@ -981,6 +1021,7 @@ L["ICONMENU_ADDMETA"] = "添加到'整合图标'"
 L["ICONMENU_ALLOWGCD"] = "允许公共冷却"
 L["ICONMENU_ALLOWGCD_DESC"] = "勾选此项允许冷却时钟显示公共冷却,而不是忽略它."
 L["ICONMENU_ALLSPELLS"] = "所有法术技能可用"
+L["ICONMENU_ALLSPELLS_DESC"] = "当此图标正在跟踪的所有法术准备好在特定单位上时，此状态处于活动状态。"
 L["ICONMENU_ANCHORTO"] = "附着到 %s"
 L["ICONMENU_ANCHORTO_DESC"] = [=[附着%s到%s,无论%s如何移动,%s都会跟随它一起移动.
 
@@ -992,6 +1033,7 @@ L["ICONMENU_ANCHORTO_UIPARENT_DESC"] = [=[让%s重新附着到你的屏幕(UIPar
 
 分组选项中有更为详细的附着设置.]=]
 L["ICONMENU_ANYSPELLS"] = "任意法术技能可用"
+L["ICONMENU_ANYSPELLS_DESC"] = "当被该图标跟踪的法术中的至少一个准备好在特定单元上时，该状态是活动的。"
 L["ICONMENU_APPENDCONDT"] = "添加到'图标显示'条件"
 L["ICONMENU_BAR_COLOR_BACKDROP"] = "背景颜色/透明度"
 L["ICONMENU_BAR_COLOR_BACKDROP_DESC"] = "设置计量条后的背景颜色和透明度。"
@@ -1078,6 +1120,7 @@ L["ICONMENU_CTRLGROUP_DESC"] = [=[启用此选项让这个图标控制整个分�
 
 当你需要快速定制分组的布局、样式或者排列选项，可以选择使用它控制分组。]=]
 L["ICONMENU_CTRLGROUP_UNAVAILABLE_DESC"] = "当前图标类型不能控制整个分组。"
+L["ICONMENU_CTRLGROUP_UNAVAILABLEID_DESC"] = "只有组中的第一个图标（图标ID 1）可以是组控制器。"
 L["ICONMENU_CUSTOMTEX"] = "自定义图标材质"
 L["ICONMENU_CUSTOMTEX_DESC"] = [=[你可以使用下列方法更改这个图标的显示材质：
 
@@ -1138,6 +1181,21 @@ L["ICONMENU_FRIEND"] = "友好单位"
 L["ICONMENU_GROUPUNIT_DESC"] = [=[Group是TellMeWhen中一个特殊的单位，用于你在团队时检测团队成员，或你在队伍时检测队伍成员。
 
 如果你在一个团队中,它不会检查重复的单位(实际上可检测的单位有"player;party;raid",某些时候队伍成员可能会被检测两次，但是它不会。)]=]
+L["ICONMENU_GUARDIAN"] = "守护者"
+L["ICONMENU_GUARDIAN_CHOOSENAME_DESC"] = [=[输入你需要监视的守护者名字或者NPC ID。
+
+你可以利用分号(;)输入多个单位。]=]
+L["ICONMENU_GUARDIAN_DESC"] = [=[检测你当前使用的守护者。 像是术士的小鬼等等。
+
+此图标类型最好使用一个分组控制器。]=]
+L["ICONMENU_GUARDIAN_DUR"] = "用于显示持续时间的单位"
+L["ICONMENU_GUARDIAN_DUR_EITHER"] = "增效优先"
+L["ICONMENU_GUARDIAN_DUR_EITHER_DESC"] = "如果存在增效，则优先显示增效的持续时间。否则将显示守护者的持续时间。"
+L["ICONMENU_GUARDIAN_DUR_EMPOWER"] = "仅增效"
+L["ICONMENU_GUARDIAN_DUR_GUARDIAN"] = "仅守护者"
+L["ICONMENU_GUARDIAN_EMPOWERED"] = "增效"
+L["ICONMENU_GUARDIAN_TRIGGER"] = "触发自：%s"
+L["ICONMENU_GUARDIAN_UNEMPOWERED"] = "未增效"
 L["ICONMENU_HIDENOUNITS"] = "无单位时隐藏"
 L["ICONMENU_HIDENOUNITS_DESC"] = "勾选此项可在单位不存在时致使图标检测的所有单位都无效的情况下隐藏该图标(包括单位条件的设置在内)."
 L["ICONMENU_HIDEUNEQUIPPED"] = "装备栏缺少武器时隐藏"
@@ -1196,11 +1254,15 @@ L["ICONMENU_MOUSEOVER"] = "鼠标悬停目标"
 L["ICONMENU_MOUSEOVERTARGET"] = "鼠标悬停目标的目标"
 L["ICONMENU_MOVEHERE"] = "移动到此"
 L["ICONMENU_NAMEPLATE"] = "姓名板"
+L["ICONMENU_NOPOCKETWATCH"] = "未知时显示透明材质"
+L["ICONMENU_NOPOCKETWATCH_DESC"] = "勾选此项使用透明材质代替时钟材质。"
 L["ICONMENU_NOTCOUNTING"] = "未倒数"
 L["ICONMENU_NOTREADY"] = "没有准备好"
 L["ICONMENU_OFFS"] = "偏移"
 L["ICONMENU_ONCOOLDOWN"] = "冷却中"
 L["ICONMENU_ONFAIL"] = "在无效时"
+L["ICONMENU_ONLYACTIVATIONOVERLAY"] = "需要激活边框"
+L["ICONMENU_ONLYACTIVATIONOVERLAY_DESC"] = "此选项为检测系统默认提示技能可用时的黄色发光边框所需的必要选项。"
 L["ICONMENU_ONLYBAGS"] = "只在背包中存在时"
 L["ICONMENU_ONLYBAGS_DESC"] = "勾选此项当物品在背包中(或者已装备)时显示图标,如果启用'已装备的物品',此选项会被强制启用。"
 L["ICONMENU_ONLYEQPPD"] = "只在已装备时"
@@ -1215,10 +1277,15 @@ L["ICONMENU_ONLYMINE"] = "仅检测自己施放的"
 L["ICONMENU_ONLYMINE_DESC"] = "勾选此项让该图标只显示你施放的增益或减益"
 L["ICONMENU_ONLYSEEN"] = "仅显示施放过的法术"
 L["ICONMENU_ONLYSEEN_ALL"] = "允许所有法术"
+L["ICONMENU_ONLYSEEN_ALL_DESC"] = "选中此项以允许为所有检查的单元显示所有功能。"
 L["ICONMENU_ONLYSEEN_CLASS"] = "仅单位职业法术、技能"
+L["ICONMENU_ONLYSEEN_CLASS_DESC"] = [=[选中此项，只有在已知该单元的类具有该能力时，才允许该图标显示能力。
+
+已知的类法术在建议列表中用蓝色或粉红色突出显示。]=]
 L["ICONMENU_ONLYSEEN_DESC"] = "选择此项可以让图标只显示某单位至少施放过一次的法术冷却.如果你想在同一个图标中检测来自不同职业的法术那么应该勾上它."
 L["ICONMENU_ONLYSEEN_HEADER"] = "法术筛选"
 L["ICONMENU_ONSUCCEED"] = "在通过时"
+L["ICONMENU_OO_F"] = "在 %s 之外"
 L["ICONMENU_OOPOWER"] = "没有能量"
 L["ICONMENU_OORANGE"] = "超出范围"
 L["ICONMENU_PETTARGET"] = "宠物的目标"
@@ -1235,6 +1302,8 @@ L["ICONMENU_REACTIVE_DESC"] = [=[检测触发性技能的可用情况.
 
 触发性的技能指类似 %s, %s 和 %s 这些只能在某种特定条件下使用的技能.]=]
 L["ICONMENU_READY"] = "准备"
+L["ICONMENU_REVERSEBARS"] = "翻转进度条"
+L["ICONMENU_REVERSEBARS_DESC"] = "翻转进度条为从左到右走。"
 L["ICONMENU_RUNES"] = "符文冷却"
 L["ICONMENU_RUNES_CHARGES"] = "不可用符文充能"
 L["ICONMENU_RUNES_CHARGES_DESC"] = "启用此项,在一个符文获得额外充能并显示为可用时,让图标依然显示成符文正在冷却状态(显示为冷却时钟)."
@@ -1278,6 +1347,10 @@ L["ICONMENU_SHOWWHEN_OPACITY_GENERIC_DESC"] = "设置此图标在这个图标状
 L["ICONMENU_SHOWWHEN_OPACITYWHEN_WRAP"] = "在%s|r时的不透明度"
 L["ICONMENU_SHOWWHENNONE"] = "没有结果时显示"
 L["ICONMENU_SHOWWHENNONE_DESC"] = "勾选此项允许在单位没有被检测到递减时显示图标."
+L["ICONMENU_SHRINKGROUP"] = "收缩分组"
+L["ICONMENU_SHRINKGROUP_DESC"] = [=[如果启用此项，分组将会动态调整可见图标的位置，使其变得不会狗啃骨头一样难看。
+
+结合上面的图标排列以及布局方向一同使用，你就可以创建一个动态居中的分组。]=]
 L["ICONMENU_SORT_STACKS_ASC"] = "叠加数量升序"
 L["ICONMENU_SORT_STACKS_ASC_DESC"] = "勾选此项优先显示叠加数量最低的法术。"
 L["ICONMENU_SORT_STACKS_DESC"] = "叠加数量降序"
@@ -1310,6 +1383,12 @@ L["ICONMENU_SPLIT_NOCOMBAT_DESC"] = "战斗中不能创建新的分组。请在�
 L["ICONMENU_STACKS_MAX_DESC"] = "允许图标显示的最大叠加数量,高于此数值图标将被隐藏."
 L["ICONMENU_STACKS_MIN_DESC"] = "显示图标所需的最低叠加数量,低于此数值图标将被隐藏."
 L["ICONMENU_STATECOLOR"] = "图标色彩和材质"
+L["ICONMENU_STATECOLOR_DESC"] = [=[将图标纹理的色调设置为此图标状态。
+
+白色是正常的。 任何其他颜色会使纹理的颜色。
+
+在此状态下，还可以覆盖图标上显示的纹理。]=]
+L["ICONMENU_STATUE"] = "武僧雕像"
 L["ICONMENU_STEALABLE"] = "仅可法术吸取"
 L["ICONMENU_STEALABLE_DESC"] = "勾选此项仅显示能被“法术吸取”的增益，非常适合跟驱散类型中的魔法搭配使用。"
 L["ICONMENU_SUCCEED2"] = "条件通过"
@@ -1355,6 +1434,7 @@ L["ICONMENU_UNITS"] = "单位"
 L["ICONMENU_UNITSTOWATCH"] = "监视的单位"
 L["ICONMENU_UNITSUCCEED"] = "单位条件通过"
 L["ICONMENU_UNUSABLE"] = "不可用"
+L["ICONMENU_UNUSABLE_DESC"] = "当上述状态也不激活时，该状态是活动的。 不透明度为0％的状态将永远不会被激活。"
 L["ICONMENU_USABLE"] = "可用"
 L["ICONMENU_USEACTIVATIONOVERLAY"] = "检测激活边框"
 L["ICONMENU_USEACTIVATIONOVERLAY_DESC"] = "检测系统默认提示技能可用时的黄色发光边框."
@@ -1458,6 +1538,8 @@ L["ITEMTOCHECK"] = "要检测的物品"
 L["ITEMTOCOMP1"] = "进行比较的第一个物品"
 L["ITEMTOCOMP2"] = "进行比较的第二个物品"
 L["LAYOUTDIRECTION"] = "布局方向"
+L["LAYOUTDIRECTION_PRIMARY_DESC"] = "使图标的主要布局方向沿 %s 方向展开。"
+L["LAYOUTDIRECTION_SECONDARY_DESC"] = "使连续的行/列图标沿 %s 方向展开。"
 L["LDB_TOOLTIP1"] = "|cff7fffff左键点击|r 锁定或解锁分组"
 L["LDB_TOOLTIP2"] = "|cff7fffff右键点击|r 显示主选项"
 L["LEFT"] = "左"
@@ -1521,6 +1603,7 @@ L["METAPANEL_DOWN"] = "往下移动"
 L["METAPANEL_REMOVE"] = "移除此图标"
 L["METAPANEL_REMOVE_DESC"] = "点击从整合图标检测列表中移除该图标."
 L["METAPANEL_UP"] = "往上移动"
+L["minus"] = "仆从"
 L["MISCELLANEOUS"] = "其他"
 L["MiscHelpfulBuffs"] = "其他增益"
 L["MODTIMER_PATTERN"] = "允许Lua匹配模式"
@@ -1620,6 +1703,7 @@ L["rare"] = "稀有"
 L["rareelite"] = "稀有精英"
 L["REACTIVECNDT_DESC"] = "此条件仅检测技能的触发/激活情况,并非它的冷却."
 L["REDO"] = "恢复"
+L["REDO_DESC"] = "重做上次对这些设置所做的更改。"
 L["ReducedHealing"] = "治疗效果降低"
 L["REQFAILED_ALPHA"] = "无效时的不透明度"
 L["RESET_ICON"] = "重置"
@@ -1628,6 +1712,7 @@ L["RESIZE"] = "调整大小"
 L["RESIZE_GROUP_CLOBBERWARN"] = "当你使用|cff7fffff右键点击并拖拽|r缩小分组时，部分图标将会临时保存设置，在你使用|cff7fffff右键点击并拖拽|r放大分组时会恢复，但是在你登出或者重新加载UI后临时保存的数据将会丢失。"
 L["RESIZE_TOOLTIP"] = "|cff7fffff点击并拖拽|r以改变大小"
 L["RESIZE_TOOLTIP_CHANGEDIMS"] = "|cff7fffff鼠标右键点击并拖拽|r来更改分组的行跟列的数量。"
+L["RESIZE_TOOLTIP_IEEXTRA"] = "在主选项启用缩放。"
 L["RESIZE_TOOLTIP_SCALEX_SIZEY"] = "|cff7fffff点击并拖拽|r来改变尺寸"
 L["RESIZE_TOOLTIP_SCALEXY"] = [=[|cff7fffff点击同时拖曳|r快速调整尺寸
 |cff7fffff按住CTRL|r微调尺寸]=]
@@ -1638,6 +1723,7 @@ L["Rooted"] = "被缠绕"
 L["RUNEOFPOWER"] = "符文%d"
 L["RUNES"] = "要检测的符文"
 L["RUNSPEED"] = "单位奔跑速度"
+L["RUNSPEED_DESC"] = "这是指单位的最大运行速度，而不管单位是否正在移动。"
 L["SAFESETUP_COMPLETE"] = "安全&慢速设置完成."
 L["SAFESETUP_FAILED"] = "安全&慢速设置失败:%s"
 L["SAFESETUP_TRIGGERED"] = "正在进行安全&慢速设置..."
@@ -1695,6 +1781,10 @@ L["SOUND_EVENT_ONALPHAINC"] = "在透明度百分比增加时"
 L["SOUND_EVENT_ONALPHAINC_DESC"] = [=[当图标的不透明度提高时触发此事件.
 
 注意:不透明度在提高前如果为0%不会触发此事件(如果有需要请使用"在显示时").]=]
+L["SOUND_EVENT_ONCHARGEGAINED"] = "在充能获取时"
+L["SOUND_EVENT_ONCHARGEGAINED_DESC"] = "此事件在一个被检测的充能类型技能获取一次充能时触发。"
+L["SOUND_EVENT_ONCHARGELOST"] = "在充能使用时"
+L["SOUND_EVENT_ONCHARGELOST_DESC"] = "此事件在一个被检测的充能类型技能使用一次充能时触发。"
 L["SOUND_EVENT_ONCLEU"] = "在战斗事件发生时"
 L["SOUND_EVENT_ONCLEU_DESC"] = "此事件在图标处理一个战斗事件时触发."
 L["SOUND_EVENT_ONCONDITION"] = "在设置的条件通过时"
@@ -1727,6 +1817,8 @@ L["SOUND_EVENT_ONSTACK"] = "在叠加数量改变时"
 L["SOUND_EVENT_ONSTACK_DESC"] = [=[此事件在图标所检测的法术/物品等的叠加数量发生改变时触发.
 
 包括逐渐降低的%s图标.]=]
+L["SOUND_EVENT_ONSTACKDEC"] = "在叠加数量减少时"
+L["SOUND_EVENT_ONSTACKINC"] = "在叠加数量增加时"
 L["SOUND_EVENT_ONSTART"] = "在开始时"
 L["SOUND_EVENT_ONSTART_DESC"] = "当冷却开始,增益/减益开始作用,等相似的情况下触发此事件."
 L["SOUND_EVENT_ONUIERROR"] = "在战斗错误事件发生时"
@@ -1810,6 +1902,7 @@ L["SUG_INSERTNAME_INTERFERE"] = [=[%s插入名称。
 L["SUG_INSERTTEXTSUB"] = "%s插入标签"
 L["SUG_INSERTTUNITID"] = "%s插入单位ID"
 L["SUG_MISC"] = "杂项"
+L["SUG_MODULE_FRAME_LIKELYADDON"] = "猜测来源：%s"
 L["SUG_NPCAURAS"] = "已知NPC的增益/减益"
 L["SUG_OTHEREQUIVS"] = "其他同类型"
 L["SUG_PATTERNMATCH_FISHINGLURE"] = "鱼饵%（%+%d+钓鱼技能%）"
@@ -1910,7 +2003,9 @@ L["TEXTLAYOUTS_NOEDIT_DESC"] = [=[这个文字显示样式是TellMeWhen默认的
 
 如果你想更改的话,请克隆一份此文字显示样式的副本.]=]
 L["TEXTLAYOUTS_POINT2"] = "文字位置"
+L["TEXTLAYOUTS_POINT2_DESC"] = "将 %s 的文本显示到锚定目标。"
 L["TEXTLAYOUTS_POSITIONSETTINGS"] = "位置设定"
+L["TEXTLAYOUTS_RELATIVEPOINT2_DESC"] = "将文本显示到 %s 的锚定目标。"
 L["TEXTLAYOUTS_RELATIVETO_DESC"] = "文字将依附的对象"
 L["TEXTLAYOUTS_RENAME"] = "重命名显示样式"
 L["TEXTLAYOUTS_RENAME_DESC"] = "为此文字显示样式修改一个与其用途相符的名称,让你可以轻松的找到它."
@@ -1932,6 +2027,9 @@ L["TEXTLAYOUTS_SKINAS_COUNT"] = "叠加数量"
 L["TEXTLAYOUTS_SKINAS_DESC"] = "选择你想让这些显示文字使用的Masque皮肤."
 L["TEXTLAYOUTS_SKINAS_HOTKEY"] = "绑定/标签"
 L["TEXTLAYOUTS_SKINAS_NONE"] = "无"
+L["TEXTLAYOUTS_SKINAS_SKINNEDINFO"] = [=[此文本显示皮肤由Masque设置。 
+
+因此，当此布局用于由Masque设置外观的TellMeWhen图标时，下面的设置不会有任何效果。]=]
 L["TEXTLAYOUTS_STRING_COPYMENU"] = "复制"
 L["TEXTLAYOUTS_STRING_COPYMENU_DESC"] = [=[点击打开一个此配置文件中所有的已使用显示文字列表,你可以将它们加入到这个文字显示方案中.
 ]=]
@@ -1945,10 +2043,10 @@ L["TEXTLAYOUTS_UNNAMED"] = "<未命名>"
 L["TEXTLAYOUTS_USEDBY_HEADER"] = "以下角色配置在他们的图标中使用了此显示样式："
 L["TEXTLAYOUTS_USEDBY_NONE"] = "此魔兽世界帐号中的TellMeWhen配置文件中没有使用这个显示样式。"
 L["TEXTMANIP"] = "文字处理"
-L["Tier11Interrupts"] = "T11副本可打断的施法"
-L["Tier12Interrupts"] = "T12副本可打断法术"
 L["TOOLTIPSCAN"] = "法术效果变量"
 L["TOOLTIPSCAN_DESC"] = "此条件类型允许你检测某一单位的某个法术效果提示信息上的第一个变量(数字).数字是由暴雪API所提供,跟你在法术效果的提示信息中看到的数字可能会不同(像是服务器已经在线修正,客户端依然显示错误的数字这种情况),同时也不保证一定能够从法术效果获取一个数字,不过在大多数实际情况下都能检测到正确的数字."
+L["TOOLTIPSCAN2"] = "提示信息数字 #%d"
+L["TOOLTIPSCAN2_DESC"] = "此条件类型将允许你检测一个在技能提示信息面板上找到的数字。"
 L["TOP"] = "上"
 L["TOPLEFT"] = "左上"
 L["TOPRIGHT"] = "右上"
@@ -1957,14 +2055,23 @@ L["TREEf"] = "专精：%s"
 L["TRUE"] = "是"
 L["UIPANEL_ADDGROUP2"] = "新建 %s 分组"
 L["UIPANEL_ADDGROUP2_DESC"] = "|cff7fffff点击|r 新建 %s 分组."
+L["UIPANEL_ALLOWSCALEIE"] = "允许图标编辑器缩放"
+L["UIPANEL_ALLOWSCALEIE_DESC"] = [=[默认情况下图标编辑器不允许拖放更改尺寸，以便让布局比较清新以及完美。
+
+如果你不介意这个或者有特别的原因，那么请启用它。]=]
 L["UIPANEL_ANCHORNUM"] = "描点 %d"
 L["UIPANEL_BAR_BORDERBAR"] = "进度条边框"
 L["UIPANEL_BAR_BORDERBAR_DESC"] = "设置进度条边框."
 L["UIPANEL_BAR_BORDERCOLOR"] = "边框颜色"
 L["UIPANEL_BAR_BORDERCOLOR_DESC"] = "改变图标和进度条边框颜色."
 L["UIPANEL_BAR_BORDERICON"] = "图标边框"
+L["UIPANEL_BAR_BORDERICON_DESC"] = "在纹理，冷却时钟和其他类似组件周围设置边框。"
+L["UIPANEL_BAR_FLIP"] = "翻转图标"
+L["UIPANEL_BAR_FLIP_DESC"] = "将纹理，冷却时钟和其他类似的组件放置在图标的另一侧。"
+L["UIPANEL_BAR_PADDING"] = "填充"
 L["UIPANEL_BAR_PADDING_DESC"] = "设置图标和计时条间距."
 L["UIPANEL_BAR_SHOWICON"] = "显示图标"
+L["UIPANEL_BAR_SHOWICON_DESC"] = "禁用此设置可隐藏纹理，冷却时钟和其他类似组件。"
 L["UIPANEL_BARTEXTURE"] = "计量条材质"
 L["UIPANEL_COLUMNS"] = "列"
 L["UIPANEL_COMBATCONFIG"] = "允许在战斗中进行设置"
@@ -1976,6 +2083,7 @@ L["UIPANEL_COMBATCONFIG_DESC"] = [=[启用这个选项就可以在战斗中对Te
 
 |cff7fffff需要重新加载UI|cffff5959才能生效.|r]=]
 L["UIPANEL_DELGROUP"] = "删除该分组"
+L["UIPANEL_DIMENSIONS"] = "尺寸"
 L["UIPANEL_DRAWEDGE"] = "高亮计时器指针"
 L["UIPANEL_DRAWEDGE_DESC"] = "高亮冷却计时器的指针来改善可视性"
 L["UIPANEL_EFFTHRESHOLD"] = "增益效率閥值"
@@ -2025,11 +2133,18 @@ L["UIPANEL_GROUPNAME"] = "重命名此分组"
 L["UIPANEL_GROUPRESET"] = "重置位置"
 L["UIPANEL_GROUPS"] = "分组"
 L["UIPANEL_GROUPS_DROPDOWN"] = "选择/创建分组"
+L["UIPANEL_GROUPS_DROPDOWN_DESC"] = [=[使用此菜单加载要配置的其他组，或创建新组。
+
+您也可以|cff7fffff右键点击|r在屏幕上的图标加载该图标的组。]=]
 L["UIPANEL_GROUPS_GLOBAL"] = "|cff00c300共用|r分组"
 L["UIPANEL_GROUPSORT"] = "图标排列"
 L["UIPANEL_GROUPSORT_ADD"] = "增加优先级"
 L["UIPANEL_GROUPSORT_ADD_DESC"] = "为分组新增一个图标优先级排序."
 L["UIPANEL_GROUPSORT_ADD_NOMORE"] = "无可用优先级"
+L["UIPANEL_GROUPSORT_ALLDESC"] = [=[|cff7fffff点击|r更改此排序优先级的方向。
+|cff7fffff点击并拖动|r重新排列。
+
+拖动到底部删除。]=]
 L["UIPANEL_GROUPSORT_alpha"] = "不透明度"
 L["UIPANEL_GROUPSORT_alpha_1"] = "透明靠前"
 L["UIPANEL_GROUPSORT_alpha_-1"] = "不透明靠前"
@@ -2041,11 +2156,13 @@ L["UIPANEL_GROUPSORT_duration_DESC"] = "分组将根据图标剩余的持续时�
 L["UIPANEL_GROUPSORT_fakehidden"] = "%s"
 L["UIPANEL_GROUPSORT_fakehidden_1"] = "总是隐藏靠后"
 L["UIPANEL_GROUPSORT_fakehidden_-1"] = "总是隐藏靠前"
+L["UIPANEL_GROUPSORT_fakehidden_DESC"] = "按 %q 设置的状态对组进行排序。"
 L["UIPANEL_GROUPSORT_id"] = "图标ID"
 L["UIPANEL_GROUPSORT_id_1"] = "低IDs靠前"
 L["UIPANEL_GROUPSORT_id_-1"] = "高IDs靠前"
 L["UIPANEL_GROUPSORT_id_DESC"] = "分组将根据图标ID数字来排列."
 L["UIPANEL_GROUPSORT_PRESETS"] = "选择预设值..."
+L["UIPANEL_GROUPSORT_PRESETS_DESC"] = "从预设排序优先级列表中选择以应用于此图标。"
 L["UIPANEL_GROUPSORT_shown"] = "显示"
 L["UIPANEL_GROUPSORT_shown_1"] = "隐藏的图标靠前"
 L["UIPANEL_GROUPSORT_shown_-1"] = "显示的图标靠前"
@@ -2057,7 +2174,11 @@ L["UIPANEL_GROUPSORT_stacks_DESC"] = "分组将根据每个图标的叠加数量
 L["UIPANEL_GROUPSORT_value"] = "数值"
 L["UIPANEL_GROUPSORT_value_1"] = "低数值靠前"
 L["UIPANEL_GROUPSORT_value_-1"] = "高数值靠前"
+L["UIPANEL_GROUPSORT_value_DESC"] = "按进度条值对组进行排序。 这是 %s 图标类型提供的值。"
 L["UIPANEL_GROUPSORT_valuep"] = "百分比数值"
+L["UIPANEL_GROUPSORT_valuep_1"] = "低值％优先"
+L["UIPANEL_GROUPSORT_valuep_-1"] = "高值％优先"
+L["UIPANEL_GROUPSORT_valuep_DESC"] = "按进度条值百分比对组进行排序。 这是 %s 图标类型提供的值。"
 L["UIPANEL_GROUPTYPE"] = "分组显示方式"
 L["UIPANEL_GROUPTYPE_BAR"] = "计时条"
 L["UIPANEL_GROUPTYPE_BAR_DESC"] = "分组使用图标+进度条的方式来显示."
@@ -2075,6 +2196,7 @@ L["UIPANEL_ICONSPACING_DESC"] = "同组图标之间的间隔距离"
 L["UIPANEL_ICONSPACINGX"] = "图标横向间隔"
 L["UIPANEL_ICONSPACINGY"] = "图标纵向间隔"
 L["UIPANEL_LEVEL"] = "框体优先级"
+L["UIPANEL_LEVEL_DESC"] = "在组的层次内，应该绘制的等级。"
 L["UIPANEL_LOCK"] = "锁定位置"
 L["UIPANEL_LOCK_DESC"] = "锁定该组,禁止移动或改变比例."
 L["UIPANEL_LOCKUNLOCK"] = "锁定/解锁插件"
@@ -2082,11 +2204,14 @@ L["UIPANEL_MAINOPT"] = "主选项"
 L["UIPANEL_ONLYINCOMBAT"] = "仅在战斗中显示"
 L["UIPANEL_PERFORMANCE"] = "性能"
 L["UIPANEL_POINT"] = "附着点"
+L["UIPANEL_POINT2_DESC"] = "将组的 %s 锚定到锚定目标。"
 L["UIPANEL_POSITION"] = "位置"
 L["UIPANEL_PRIMARYSPEC"] = "主天赋"
 L["UIPANEL_PROFILES"] = "配置文件"
 L["UIPANEL_PTSINTAL"] = "天赋使用点数(非天赋树)"
+L["UIPANEL_PVPTALENTLEARNED"] = "已学荣誉天赋"
 L["UIPANEL_RELATIVEPOINT"] = "附着位置"
+L["UIPANEL_RELATIVEPOINT2_DESC"] = "将组锚到 %s 的锚定目标的。"
 L["UIPANEL_RELATIVETO"] = "附着框体"
 L["UIPANEL_RELATIVETO_DESC"] = [=[输入'/framestack'来观察当前鼠标指针所在框体的提示信息,以便寻找需要输入文本框的框体名称.
 
@@ -2096,11 +2221,13 @@ L["UIPANEL_ROLE_DESC"] = "勾选此项允许在你当前专精可以担任这个
 L["UIPANEL_ROWS"] = "行"
 L["UIPANEL_SCALE"] = "比例"
 L["UIPANEL_SECONDARYSPEC"] = "副天赋"
+L["UIPANEL_SHOWCONFIGWARNING"] = "显示设置模式警告"
 L["UIPANEL_SPEC"] = "双天赋"
 L["UIPANEL_SPECIALIZATION"] = "天赋类型"
 L["UIPANEL_SPECIALIZATIONROLE"] = "专精职责"
 L["UIPANEL_SPECIALIZATIONROLE_DESC"] = "检测你当前专精所能满足的职责（坦克，治疗，伤害输出）。"
 L["UIPANEL_STRATA"] = "框体层级"
+L["UIPANEL_STRATA_DESC"] = "应该绘制组的UI的层。"
 L["UIPANEL_SUBTEXT2"] = [=[图标在锁定后开始工作.
 在解除锁定时,你可以移动图标分组(或更改大小),右键点击图标打开设置页面.
 
@@ -2113,7 +2240,11 @@ L["UIPANEL_TOOLTIP_ROWS"] = "设置在本组中的图标行数"
 L["UIPANEL_TOOLTIP_UPDATEINTERVAL"] = "设置图标显示/隐藏,透明度,条件等的更新频率(秒).0为最快.低端电脑请自重,设置数值过低会使帧数明显降低."
 L["UIPANEL_TREE_DESC"] = "勾选来允许该组在某个天赋树激活时显示，或者不勾选让它在天赋树没激活时隐藏。"
 L["UIPANEL_UPDATEINTERVAL"] = "更新间隔"
+L["UIPANEL_USE_PROFILE"] = "使用个人档设置"
 L["UIPANEL_WARNINVALIDS"] = "提示无效的图标"
+L["UIPANEL_WARNINVALIDS_DESC"] = [=[如果勾选此项， TellMeWhen会在检测到你的图标存在无效的设置时警告你。
+
+非常推荐开启这个选项，某些错误的设置可能会让你的电脑变得非常卡。]=]
 L["UNDO"] = "撤消"
 L["UNDO_DESC"] = "取消最后所做的更改操作。"
 L["UNITCONDITIONS"] = "单位条件"

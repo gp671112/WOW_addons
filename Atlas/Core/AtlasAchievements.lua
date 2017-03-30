@@ -1,4 +1,4 @@
--- $Id: AtlasAchievements.lua 158 2017-02-07 06:35:15Z arith $
+-- $Id: AtlasAchievements.lua 166 2017-03-08 06:21:40Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -80,7 +80,7 @@ function Atlas_AchievementButtonUpdate(button, achievementID)
 		name = "      |CFF808080"..name;
 	end
 	button.Text:SetText(name);
-	button.tooltiptext = tooltiptext;
+	button.tooltiptext = tooltiptext.."\n|CFF8080FF"..L["ATLAS_OPEN_ACHIEVEMENT"].."|R";
 end
 
 function Atlas_OpenAchievement(achievementID)

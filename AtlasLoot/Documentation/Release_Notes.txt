@@ -5,7 +5,76 @@ This mod is distributed under Version 2 of the GPL.  A copy of the GPL is includ
 
 Patch Notes
 
-v8.01.09 (Jan. 11, 2016)
+v8.02.24 (Mar. 21, 2017)
+- enhanced AtlasLoot buttton's handling on WorldMap when ElvUI is enabled but skin is disable on WorldMap
+
+v8.02.23 (Mar. 20, 2017)
+- handling AtlasLoot button's style on WorldMap when ElvUI is enabled
+- translation update:
+  - German
+  
+v8.02.22 (Mar. 17, 2017)
+- handling HandyNotes_WorldMapButton's position
+
+v8.02.21 (Mar. 16, 2017)
+- library update
+  - LibBabble-ItemSet-3.0
+
+v8.02.20 (Mar. 15, 2017)
+- added tier sets per class
+- translation update:
+  - Korean, Simplified Chinese
+
+v8.02.12 (Mar. 15, 2017)
+- added WorldMap button style, now you can toggle it to show on title bar
+- translation update:
+  - Korean, Simplified Chinese, German
+- fixed the issue with auto-select's pre-load module which will causing error while the 1st time open AL with class-filter enabled
+## information for Devs
+- move auto-selection codes to AtlasLoot.lua
+
+v8.02.11 (Mar. 13, 2017)
+- added option to toggle WorldMap button
+- enhanced auto-select's performance by pre-loading all instances' module during addon's loading stage
+- added right-click to close Atlas window
+
+v8.02.10 (Mar. 10, 2017)
+- added WorldMap integration
+- added auto-select feature while in instance
+
+v8.02.01 (Mar. 09, 2017)
+- set default module and map to be Legion and Legion instance
+- translation update:
+  - German, Korean, Simplified Chinese
+
+v8.02.00 (Mar. 03, 2017)
+- added Atlas integration, now you can quickly open the Atlas instance map 
+  while browsing the instance loots within AtlasLoot
+- replace local gold / silver icon with the WoW built-in ones
+- added map button's tooltip
+- translation update:
+  - Korean, Simplified Chinese, Traditional Chinese
+
+v8.01.20 (Mar. 01, 2017)
+- added non-passive first-aid items/spells from Legion expansion
+- added new cooking skills from Legion expansion
+- World Events - Argent Tournament Heirloom data revision (Kakjens)
+- added item Dark Lupine Wraps to Lord Walden in Shadowfang Keep
+- added item Blindwatcher's Chain to Baron Silverlaine in Shadowfang Keep
+- translation update:
+  - Korean, German, Traditional Chinese
+
+v8.01.10 (Feb. 28, 2017)
+- updated class icons
+- added Legion legendary items
+- added T19 gear items 
+- translation update:
+  Korean, Traditional Chinese, Simplified Chinese, French
+## information for Devs
+- fix some small bugs
+- ADD "addDifficultyBonus" for PreSets, should make the bonusID things much easier
+
+v8.01.09 (Jan. 11, 2017)
 - added ACs to 'Trial of Valor'
 - migrate minimap button to use LibDBIcon
 - added slash command description to localization table;
@@ -166,7 +235,7 @@ v8.00.10 (Jun. 24, 2015)
 v8.00.00 (May 21, 2015)
 Compatible with Patch 6.0.3.
 
-v7.07.03 (May xx, 2014)
+v7.07.03 (May 26, 2014)
 Added Patch 5.4.8 items.
 Added Timeless Isle Rare mobs.
 

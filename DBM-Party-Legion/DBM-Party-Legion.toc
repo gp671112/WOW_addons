@@ -1,5 +1,5 @@
-## Interface: 70100
-## X-Min-Interface: 70100
+## Interface: 70200
+## X-Min-Interface: 70200
 ## Title:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff69ccf0Party-Legion|r
 ## Title-zhTW:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff69ccf0隊伍首領-軍臨天下|r
 ## Title-zhCN:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff69ccf0队伍首领(军团再临)|r
@@ -91,7 +91,7 @@ ReturnToKarazhan\Vizaduum.lua
 ReturnToKarazhan\Nightbane.lua
 ReturnToKarazhan\RTKTrash.lua
 CathedralofEternalNight\Agronox.lua
-CathedralofEternalNight\Trashbite.lua
+CathedralofEternalNight\Thrashbite.lua
 CathedralofEternalNight\Domatrax.lua
 CathedralofEternalNight\Mephistroth.lua
 CathedralofEternalNight\CoENTrash.lua

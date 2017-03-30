@@ -23,8 +23,8 @@ GTFO = {
 		TrivialDamagePercent = 2; -- Minimum % of HP lost required for an alert to be trivial
 		SoundOverrides = { }; -- Override table for GTFO sounds
 	};
-	Version = "4.42.6"; -- Version number (text format)
-	VersionNumber = 44205; -- Numeric version number for checking out-of-date clients
+	Version = "4.42.7"; -- Version number (text format)
+	VersionNumber = 44207; -- Numeric version number for checking out-of-date clients
 	DataLogging = nil; -- Indicate whether or not the addon needs to run the datalogging function (for hooking)
 	DataCode = "4"; -- Saved Variable versioning, change this value to force a reset to default
 	CanTank = nil; -- The active character is capable of tanking
@@ -163,44 +163,6 @@ function GTFO_OnEvent(self, event, ...)
 		GTFO_RenderOptions();
 		GTFO_SaveSettings();
 		GTFO_AddEvent("RefreshOptions", .1, function() GTFO_RefreshOptions(); end);
-
-		-- Power Auras Integration
-		if (IsAddOnLoaded("PowerAuras")) then
-			local PowaAurasEnabled
-			if (PowaAuras_GlobalTrigger) then
-				PowaAurasEnabled = PowaAuras_GlobalTrigger()
-			end
-			-- Power Auras 5.x
-			if (PowaAuras and PowaAuras.MarkAuras) then
-				GTFO.PowerAuras = true;
-			-- Power Auras 4.24.2+
-			elseif (PowaAurasEnabled) then
-				GTFO.PowerAuras = true;
-			-- Power Auras 4.x
-			elseif (PowaAuras and PowaAuras.AurasByType) then
-				if (PowaAuras.AurasByType.GTFOHigh) then
-					GTFO.PowerAuras = true;
-				else
-					GTFO_ChatPrint(GTFOLocal.Loading_PowerAurasOutOfDate);
-				end
-			else
-				GTFO_ChatPrint(GTFOLocal.Loading_PowerAurasOutOfDate);
-			end
-		end
-		if (IsAddOnLoaded("WeakAuras")) then
-			GTFO.WeakAuras = true;
-		else
-			GTFO_DisplayAura_WeakAuras = nil;
-		end
-		if not (GTFO.PowerAuras) then
-				GTFO_DisplayAura_PowerAuras = nil
-		end
-		if (GTFO.Settings.Active) then
-			--GTFO_ChatPrint(string.format(GTFOLocal.Loading_Loaded, GTFO.Version));
-		else
-			GTFO_ChatPrint(string.format(GTFOLocal.Loading_LoadedSuspended, GTFO.Version));
-		end
-
 		GTFO.Users[UnitName("player")] = GTFO.VersionNumber;
 		GTFO_GetSounds();
 		GTFO.CanTank = GTFO_CanTankCheck("player");

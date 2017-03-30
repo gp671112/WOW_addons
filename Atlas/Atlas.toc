@@ -1,10 +1,10 @@
-## Interface: 70100
+## Interface: 70200
 #@non-debug@
 ## Title: Atlas
 ## Title-deDE: Atlas
 ## Title-esES: Atlas
 ## Title-esMX: Atlas
-## Title-frFR: Titre
+## Title-frFR: Atlas
 ## Title-koKR: Atlas
 ## Title-ptBR: Atlas
 ## Title-ruRU: Atlas
@@ -46,11 +46,11 @@
 # ## Notes-zhTW: Atlas 地圖集主程式
 #@end-debug@
 ## Author: arith, dubcat
-## Version: 1.37.03
+## Version: 1.39.00
 ## OptionalDeps: Ace3, LibBabble-Boss-3.0, LibBabble-SubZone-3.0, LibBabble-Faction-3.0, LibDataBroker-1.1, LibAboutPanel, CallbackHandler-1.0, LibDBIcon-1.0, LibDialog-1.0
 ## X-Category: Map
 ## X-Credits: Dan Gilbert, Lothaer, Dynaletik
-## X-Date: 2017-02-08T9:12:59Z
+## X-Date: 2017-03-27T13:19:44Z
 ## X-Donate: http://pledgie.com/campaigns/14729
 ## X-Email: atlas.addon at gmail dot com
 ## X-Feedback: http://www.atlasmod.com/phpBB3/
@@ -72,6 +72,7 @@ Core\AtlasMaps.lua
 Core\AtlasMaps_NPC_DB.lua
 Core\AtlasDropDown.lua
 Core\AtlasAchievements.lua
+Core\AtlasLootIntegration.lua
 Core\Atlas.xml
 Core\AtlasOptions.xml
 Core\AtlasButton.lua

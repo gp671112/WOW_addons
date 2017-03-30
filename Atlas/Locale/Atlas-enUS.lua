@@ -1,4 +1,4 @@
--- $Id: Atlas-enUS.lua 158 2017-02-07 06:35:15Z arith $
+-- $Id: Atlas-enUS.lua 189 2017-03-27 12:20:49Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -31,16 +31,16 @@ local L = AceLocale:NewLocale("Atlas", "enUS", true, true);
 
 -- Atlas English Localization
 --if ( GetLocale() ==	"enUS" ) then
--- Define the leading strings to be ignored while sorting
--- Ex: The Stockade
-AtlasSortIgnore = {"the (.+)"};
+	-- Define the leading strings to be ignored while sorting
+	-- Ex: The Stockade
+	AtlasSortIgnore = {"the (.+)", "The (.+)"};
 
--- Syntax: ["real_zone_name"] = "localized map zone name"
-AtlasZoneSubstitutions = {
-	["Ahn'Qiraj"] = "Temple of Ahn'Qiraj";
-	["The Temple of Atal'Hakkar"] = "Sunken Temple";
---	["Throne of Tides"] = "The Abyssal Maw: Throne of the Tides";
-};
+	-- Syntax: ["real_zone_name"] = "localized map zone name"
+	AtlasZoneSubstitutions = {
+		["Ahn'Qiraj"] = "Temple of Ahn'Qiraj";
+		["The Temple of Atal'Hakkar"] = "Sunken Temple";
+	--	["Throne of Tides"] = "The Abyssal Maw: Throne of the Tides";
+	};
 --end
 
 
@@ -56,9 +56,12 @@ L["Arcane Container"] = "Arcane Container"
 L["Arms Warrior"] = "Arms Warrior"
 L["ATLAS_BUTTON_CLOSE"] = "Close"
 L["ATLAS_CLICK_TO_OPEN"] = "Click to open Atlas map window."
+L["ATLAS_CLOSE_ATLASLOOT_WINDOW"] = "Right-click to close AtlasLoot window."
 L["ATLAS_COLLAPSE_BUTTON"] = "Click to close Atlas' legend panel."
 L["ATLAS_DDL_CONTINENT"] = "Continent"
 L["ATLAS_DDL_CONTINENT_BROKENISLES"] = "Broken Isles Instances"
+L["ATLAS_DDL_CONTINENT_BROKENISLES1"] = "Broken Isles Dungeons"
+L["ATLAS_DDL_CONTINENT_BROKENISLES2"] = "Broken Isles Raids"
 L["ATLAS_DDL_CONTINENT_DEEPHOLM"] = "Deepholm Instances"
 L["ATLAS_DDL_CONTINENT_DRAENOR"] = "Draenor Instances"
 L["ATLAS_DDL_CONTINENT_EASTERN"] = "Eastern Kingdoms Instances"
@@ -70,6 +73,8 @@ L["ATLAS_DDL_EXPANSION"] = "Expansion"
 L["ATLAS_DDL_EXPANSION_BC"] = "Burning Crusade Instances"
 L["ATLAS_DDL_EXPANSION_CATA"] = "Cataclysm Instances"
 L["ATLAS_DDL_EXPANSION_LEGION"] = "Legion Instances"
+L["ATLAS_DDL_EXPANSION_LEGION1"] = "Legion Dungeons"
+L["ATLAS_DDL_EXPANSION_LEGION2"] = "Legion Raids"
 L["ATLAS_DDL_EXPANSION_MOP"] = "Mists of Pandaria Instances"
 L["ATLAS_DDL_EXPANSION_OLD_AO"] = "Old World Instances A-O"
 L["ATLAS_DDL_EXPANSION_OLD_PZ"] = "Old World Instances P-Z"
@@ -79,6 +84,8 @@ L["ATLAS_DDL_LEVEL"] = "Level"
 L["ATLAS_DDL_LEVEL_100PLUS"] = "Instances Level 100+"
 L["ATLAS_DDL_LEVEL_100TO110"] = "Instances Level 100-110"
 L["ATLAS_DDL_LEVEL_110PLUS"] = "Instances Level 110+"
+L["ATLAS_DDL_LEVEL_110PLUS1"] = "Instances Level 110+ 1/2"
+L["ATLAS_DDL_LEVEL_110PLUS2"] = "Instances Level 110+ 2/2"
 L["ATLAS_DDL_LEVEL_45TO60"] = "Instances Level 45-60"
 L["ATLAS_DDL_LEVEL_60TO70"] = "Instances Level 60-70"
 L["ATLAS_DDL_LEVEL_70TO80"] = "Instances Level 70-80"
@@ -87,10 +94,20 @@ L["ATLAS_DDL_LEVEL_85TO90"] = "Instances Level 85-90"
 L["ATLAS_DDL_LEVEL_90TO100"] = "Instances Level 90-100"
 L["ATLAS_DDL_LEVEL_UNDER45"] = "Instances Under Level 45"
 L["ATLAS_DDL_PARTYSIZE"] = "Party Size"
+L["ATLAS_DDL_PARTYSIZE_10_1"] = "Instances for 10 Players 1/3"
+L["ATLAS_DDL_PARTYSIZE_10_2"] = "Instances for 10 Players 2/3"
+L["ATLAS_DDL_PARTYSIZE_10_3"] = "Instances for 10 Players 3/3"
 L["ATLAS_DDL_PARTYSIZE_10_AN"] = "Instances for 10 Players A-N"
 L["ATLAS_DDL_PARTYSIZE_10_OZ"] = "Instances for 10 Players O-Z"
+L["ATLAS_DDL_PARTYSIZE_20TO40_1"] = "Instances for 20-40 Players 1/3"
+L["ATLAS_DDL_PARTYSIZE_20TO40_2"] = "Instances for 20-40 Players 2/3"
+L["ATLAS_DDL_PARTYSIZE_20TO40_3"] = "Instances for 20-40 Players 3/3"
 L["ATLAS_DDL_PARTYSIZE_20TO40AH"] = "Instances for 20-40 Players A-H"
 L["ATLAS_DDL_PARTYSIZE_20TO40IZ"] = "Instances for 20-40 Players I-Z"
+L["ATLAS_DDL_PARTYSIZE_5_1"] = "Instances for 5 Players 1/4"
+L["ATLAS_DDL_PARTYSIZE_5_2"] = "Instances for 5 Players 2/4"
+L["ATLAS_DDL_PARTYSIZE_5_3"] = "Instances for 5 Players 3/4"
+L["ATLAS_DDL_PARTYSIZE_5_4"] = "Instances for 5 Players 4/4"
 L["ATLAS_DDL_PARTYSIZE_5_AE"] = "Instances for 5 Players A-E"
 L["ATLAS_DDL_PARTYSIZE_5_FS"] = "Instances for 5 Players F-S"
 L["ATLAS_DDL_PARTYSIZE_5_TZ"] = "Instances for 5 Players T-Z"
@@ -146,8 +163,10 @@ If you are sure that you don't need those "missing" module(s) / plugin(s) and do
 
 List of missing module(s) / plugin(s): 
 ]=]
+L["ATLAS_OPEN_ACHIEVEMENT"] = "Click to open achievement details."
 L["ATLAS_OPEN_ADDON_LIST"] = "Open addon list"
 L["ATLAS_OPEN_ADVENTURE"] = "Click to open Adventure Journal window."
+L["ATLAS_OPEN_ATLASLOOT_WINDOW"] = "Click to open AtlasLoot window."
 L["ATLAS_OPEN_WOWMAP_WINDOW"] = "Click to open Adventure Journal Map window."
 L["ATLAS_OPTIONS_ACRONYMS"] = "Display Acronyms"
 L["ATLAS_OPTIONS_ACRONYMS_TIP"] = "Display the instance's acronym in the map details."
@@ -179,6 +198,7 @@ L["ATLAS_OPTIONS_SHOWBUT"] = "Show Button on Minimap"
 L["ATLAS_OPTIONS_SHOWBUT_TIP"] = "Show Atlas button around the minimap."
 L["ATLAS_OPTIONS_SHOWWMBUT"] = "Show Button on World Map window."
 L["ATLAS_OPTIONS_TRANS"] = "Transparency"
+L["ATLAS_ROPEN_ATLASLOOT_WINDOW"] = "Right-click to open AtlasLoot window."
 L["ATLAS_SEARCH_UNAVAIL"] = "Search Unavailable"
 L["ATLAS_SLASH"] = "/atlas"
 L["ATLAS_SLASH_OPTIONS"] = "options"
@@ -266,6 +286,7 @@ L["Orb of Command"] = "Orb of Command"
 L["Outside"] = "Outside"
 L["Period"] = ". "
 L["Portal"] = "Portal"
+L["Portal to %s"] = "Portal to %s"
 L["PossibleMissingModule"] = "It is likely this map is from this module: "
 L["Protection Warrior"] = "Protection Warrior"
 L["Purple"] = "Purple"
@@ -279,12 +300,14 @@ L["R-Parenthesis"] = ") "
 L["R-SBracket"] = "]"
 L["Scarshield Quartermaster <Scarshield Legion>"] = "Scarshield Quartermaster <Scarshield Legion>"
 L["Second Stop"] = "Second Stop"
-L["Semicolon"] = "; "
+L["Semicolon"] = " "
 L["Shadow Priest"] = "Shadow Priest"
 L["Slash"] = " / "
 L["Soridormi <The Scale of Sands>"] = "Soridormi <The Scale of Sands>"
 L["South"] = "South"
 L["Spawn Point"] = "Spawn Point"
+L["Stairs"] = "Stairs"
+L["Stairs to %s"] = "Stairs to %s"
 L["Start"] = "Start"
 L["Steward of Time <Keepers of Time>"] = "Steward of Time <Keepers of Time>"
 L["Summon"] = "Summon"
@@ -297,6 +320,7 @@ L["Transport"] = "Transport"
 L["Tunnel"] = "Tunnel"
 L["Underwater"] = "Underwater"
 L["Upper"] = "Upper"
+L["Upper floor"] = "Upper floor"
 L["Varies"] = "Varies"
 L["Wanders"] = "Wanders"
 L["Wave 10"] = "Wave 10"

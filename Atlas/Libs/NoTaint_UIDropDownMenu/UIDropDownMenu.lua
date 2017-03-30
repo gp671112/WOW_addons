@@ -78,7 +78,7 @@ function Lib_UIDropDownMenu_Initialize(frame, initFunction, displayMode, level, 
 	
 	-- Set the initialize function and call it.  The initFunction populates the dropdown list.
 	if ( initFunction ) then
-		frame.initialize = initFunction;
+		Lib_UIDropDownMenu_SetInitializeFunction(frame, initFunction);
 		initFunction(frame, level, frame.menuList);
 	end
 
@@ -109,6 +109,10 @@ function Lib_UIDropDownMenu_Initialize(frame, initFunction, displayMode, level, 
 		frame.displayMode = "MENU";
 	end
 
+end
+
+function Lib_UIDropDownMenu_SetInitializeFunction(frame, initFunction)
+	frame.initialize = initFunction;
 end
 
 function Lib_UIDropDownMenu_RefreshDropDownSize(self)
@@ -262,12 +266,12 @@ function Lib_UIDropDownMenu_AddSeparator(info, level)
 	info.tSizeY = 8;
 	info.tFitDropDownSizeX = true;
 	info.iconInfo = { tCoordLeft = info.tCoordLeft,
-							tCoordRight = info.tCoordRight,
-							tCoordTop = info.tCoordTop,
-							tCoordBottom = info.tCoordBottom,
-							tSizeX = info.tSizeX,
-							tSizeY = info.tSizeY,
-							tFitDropDownSizeX = info.tFitDropDownSizeX };
+			tCoordRight = info.tCoordRight,
+			tCoordTop = info.tCoordTop,
+			tCoordBottom = info.tCoordBottom,
+			tSizeX = info.tSizeX,
+			tSizeY = info.tSizeY,
+			tFitDropDownSizeX = info.tFitDropDownSizeX };
 
 	Lib_UIDropDownMenu_AddButton(info, level);
 end
@@ -936,7 +940,7 @@ function Lib_ToggleDropDownMenu(level, value, dropDownFrame, anchorName, xOffset
 			end
 			listFrame:ClearAllPoints();
 			-- If this is a dropdown button, not the arrow anchor it to itself
-			if ( strsub(button:GetParent():GetName(), 0,12) == "Lib_DropDownList" and strlen(button:GetParent():GetName()) == 13 ) then
+			if ( strsub(button:GetParent():GetName(), 0,16) == "Lib_DropDownList" and strlen(button:GetParent():GetName()) == 17 ) then
 				anchorFrame = button;
 			else
 				anchorFrame = button:GetParent();

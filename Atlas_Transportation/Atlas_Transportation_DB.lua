@@ -1,4 +1,4 @@
--- $Id: Atlas_Transportation_DB.lua 67 2017-01-23 07:58:23Z arith $
+-- $Id: Atlas_Transportation_DB.lua 81 2017-03-28 09:47:09Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -85,157 +85,44 @@ local myDB = {
 		{ 26, 10026,  66,  66 }; -- Frostwall Garrison
 		{ 27, 10027, 313, 299 }; -- Dalaran
 	};
-	TransSuramar = {
-		{ "A", 10001, 155, 248 }; -- Ruins of Elune'eth
-		{ "B", 10002, 209, 175 }; -- Tel'anor
-		{ "C", 10003,  24, 142 }; -- Falanaar
-		{ "D", 10004, 103,  23 }; -- Moonfall Overlook
-		{ "E", 10005, 182, 428 }; -- Felsoul Hold
-		{ "F", 10006, 242, 357 }; -- Sanctum of Order
-		{ "G", 10007, 220, 450 }; -- Lunastre Estate
-		{ "H", 10008, 263, 464 }; -- The Waning Crescent
-		{ "I", 10009, 414, 329 }; -- Twilight Vineyards
-		{ "J", 10010, 301, 445 }; -- Evermoon Terrace
-		{ "K", 10011, 326, 388 }; -- Astravar Harbor
-		{ "1", 10101,  58, 156 }; -- Irongrove Retreat
-		{ "2", 10102, 134, 263 }; -- Meredil
-		{ "3", 10103, 414, 216 }; -- Crimson Thicket
-		{ "4", 10104, 472, 401 }; -- Eastern Suramar
-		{ "5", 10105, 200, 474 }; -- Western Suramar
+	TransAllianceStormwindCity = {
+		{ "A", 10001,  54, 273, 248, 372, "Orange" }; -- Rut'theran Village
+		{ "B", 10002,  24, 140, 216, 203, "Orange" }; -- Valiance Keep
+		{ "A", 10003, 228, 418, 466, 553, "Purple" }; -- The Stair of Destiny
+		{ "B", 10004, 237, 406, 477, 540, "Purple" }; -- Fuselight-by-the-Sea
+		{ "C", 10005, 358, 103, 635, 155, "Purple" }; -- Paw'Don Village
+		{ "D", 10006, 389, 111, 671, 163, "Purple" }; -- Baradin Base Camp
+		{ "E", 10007, 395,  99, 677, 149, "Purple" }; -- Darkbreak Cove
+		{ "F", 10008, 408,  96, 691, 151, "Purple" }; -- Highbank
+		{ "G", 10009, 415, 109, 704, 163, "Purple" }; -- Nordrassil
+		{ "H", 10010, 411, 119, 699, 181, "Purple" }; -- Ramkahen
+		{ "I", 10011, 399, 120, 686, 182, "Purple" }; -- Temple of Earth
+		{ "J", 10012, 487, 182, 794, 260, "Purple" }; -- Stormshield
+		{ "K", 10013, 441, 169, 736, 240, "Purple" }; -- Dalaran
+		{ "1", 10014, 353, 178, 624, 250, "White" }; -- Ironforge
+		{ "2", 10015, 374, 346, 656, 464, "White" }; -- Stormwind City
 	};
-	TransDalaran = {
-		{ "A", 10014, 184, 279 }; -- Greyfang Enclave
-		{ "B", 10015, 262, 145 }; -- Windrunner's Sanctuary
-		{ "C", 10016, 234, 221 }; -- Chamber of the Guardian
-		{ "1", 10013, 335, 232 }; -- Aludane Whitecloud <Flight Master>
-		{ "A", 10001, 463, 288 }; -- Illidari Gateway
-		{ "A", 10002, 345, 200 }; -- Talua <Eagle Keeper>
-		{ "A", 10003, 288, 113 }; -- Portal to Sanctum of Light
-		{ "B", 10004, 152, 294 }; -- Portal to Sanctum of Light
-		{ "A", 10005, 296, 125 }; -- Portal to Netherlight Temple
-		{ "B", 10006, 188, 254 }; -- Portal to Netherlight Temple
-		{ "A", 10007, 242, 292 }; -- Glorious Goods
-		{ "B", 10008, 256, 174 }; -- One More Glass
-		{ "C", 10009, 210, 162 }; -- Tanks for Everything
-		{ "A", 10010, 319, 222 }; -- Portal to the Maelstrom
-		{ "A", 10011, 155, 204 }; -- Portal to Dreadscar Rift
-		{ "A", 10012, 354, 217 }; -- Jump to Skyhold
-	};
-	TransAllianceBrokenIsles = {
-		{ "A", 10038, 230, 357 }; -- Greyfang Enclave
-		{ "B", 10039, 237, 349 }; -- Chamber of the Guardian
-		{ "C", 10040, 290, 133 }; -- Portal to Dalaran
-		{ "1", 10001, 249, 341 }; -- Krasus' Landing
-		{ "2", 10002, 151, 378 }; -- Watchers' Aerie
-		{ "3", 10003, 144, 363 }; -- Wardens' Redoubt
-		{ "4", 10004, 165, 336 }; -- Shackle's Den
-		{ "5", 10005, 130, 303 }; -- Illidari Stand
-		{ "6", 10006, 98, 314 }; -- Illidari Perch
-		{ "7", 10007, 191, 275 }; -- Felblaze Ingress
-		{ "8", 10008, 138, 266 }; -- Azurewing Repose
-		{ "9", 10009, 116, 238 }; -- Challiane's Terrace
-		{ "10", 10010, 222, 450 }; -- Eye of Azshara
-		{ "11", 10011, 147, 197 }; -- Lorlathil
-		{ "12", 10012, 75, 185 }; -- Gloaming Reef
-		{ "13", 10013, 117, 175 }; -- Bradensbrook
-		{ "14", 10014, 149, 177 }; -- Garden of the Moon
-		{ "15", 10015, 183, 163 }; -- Starsong Refuge
-		{ "16", 10016, 246, 164 }; -- Obsidian Overlook
-		{ "17", 10017, 277, 164 }; -- Ironhorn Enclave
-		{ "18", 10018, 210, 126 }; -- Sylvan Falls
-		{ "19", 10019, 244, 116 }; -- Thunder Totem
-		{ "20", 10020, 283, 121 }; -- Stonehoof Watch
-		{ "21", 10021, 224, 97 }; -- Nesingwary
-		{ "22", 10022, 263, 84 }; -- Skyhorn
-		{ "23", 10023, 191, 68 }; -- Felbane Camp
-		{ "24", 10024, 217, 67 }; -- The Witchwood
-		{ "25", 10025, 279, 51 }; -- Prepfoot
-		{ "26", 10026, 228, 12 }; -- Shipwreck Cove
-		{ "27", 10027, 297, 152 }; -- Skyfire Triage Camp (A)
-		{ "28", 10028, 318, 176 }; -- Lorna's Watch (A)
-		{ "29", 10029, 344, 127 }; -- Stormtorn Foothills
-		{ "30", 10030, 369, 154 }; -- Valdisdall
-		{ "31", 10031, 404, 171 }; -- Greywatch (A)
-		{ "32", 10032, 442, 83 }; -- Shield's Rest
-		{ "33", 10033, 353, 223 }; -- Hafr Fjall
-		{ "34", 10034, 205, 198 }; -- Irongrove Retreat
-		{ "35", 10035, 225, 227 }; -- Meredil
-		{ "36", 10036, 291, 212 }; -- Crimson Thicket
-		{ "37", 10037, 301, 321 }; -- Illidari Camp
-		{ "1", 10100, 110, 112 }; -- The Dreamgrove
-		{ "2", 10101, 193, 91}; -- Trueshot Lodge
-		{ "3", 10102, 387, 365 }; -- Acherus: The Ebon Hold
-		{ "1", 10201, 169, 245 }; -- Ley-Ruins of Zarkhenar
-		{ "2", 10202, 193, 118 }; -- Sylvan Falls
-		{ "3", 10203, 298, 170 }; -- Weeping Bluffs
-		{ "4", 10204, 139, 172 }; -- Temple of Elune
-		{ "5", 10205, 226, 238 }; -- Meredil
-		{ "1", 10301, 123, 104 }; -- The Dreamgrove
-		{ "2", 10302,  77, 301 }; -- Faronaar
-		{ "3", 10303, 156, 371 }; -- Isle of the Watchers
-		{ "4", 10304, 247, 282 }; -- Western Suramar
-		{ "5", 10305, 316, 260 }; -- Eastern Suramar
-		{ "6", 10306, 312, 204 }; -- Thorim's Peak
-		{ "7", 10307, 333, 131 }; -- Nastrondir
-		{ "8", 10308, 275, 130 }; -- Eastern Highmountain
-	};
-	TransHordeBrokenIsles = {
-		{ "A", 10038, 239, 336 }; -- Windrunner's Sanctuary
-		{ "B", 10039, 237, 348 }; -- Chamber of the Guardian
-		{ "C", 10040, 290, 133 }; -- Portal to Dalaran
-		{ "1", 10001, 249, 342 }; -- Krasus' Landing
-		{ "2", 10002, 151, 378 }; -- Watchers' Aerie
-		{ "3", 10003, 144, 363 }; -- Wardens' Redoubt
-		{ "4", 10004, 165, 336 }; -- Shackle's Den
-		{ "5", 10005, 130, 303 }; -- Illidari Stand
-		{ "6", 10006, 98, 314 }; -- Illidari Perch
-		{ "7", 10007, 191, 275 }; -- Felblaze Ingress
-		{ "8", 10008, 138, 266 }; -- Azurewing Repose
-		{ "9", 10009, 116, 238 }; -- Challiane's Terrace
-		{ "10", 10010, 222, 450 }; -- Eye of Azshara
-		{ "11", 10011, 147, 197 }; -- Lorlathil
-		{ "12", 10012, 75, 185 }; -- Gloaming Reef
-		{ "13", 10013, 117, 175 }; -- Bradensbrook
-		{ "14", 10014, 149, 177 }; -- Garden of the Moon
-		{ "15", 10015, 183, 163 }; -- Starsong Refuge
-		{ "16", 10016, 246, 164 }; -- Obsidian Overlook
-		{ "17", 10017, 277, 164 }; -- Ironhorn Enclave
-		{ "18", 10018, 210, 126 }; -- Sylvan Falls
-		{ "19", 10019, 244, 116 }; -- Thunder Totem
-		{ "20", 10020, 283, 121 }; -- Stonehoof Watch
-		{ "21", 10021, 224, 97 }; -- Nesingwary
-		{ "22", 10022, 263, 84 }; -- Skyhorn
-		{ "23", 10023, 191, 68 }; -- Felbane Camp
-		{ "24", 10024, 217, 67 }; -- The Witchwood
-		{ "25", 10025, 279, 51 }; -- Prepfoot
-		{ "26", 10026, 228, 12 }; -- Shipwreck Cove
-		{ "27", 10027, 311, 122 }; -- Forsaken Foothold (H)
-		{ "28", 10028, 327, 169 }; -- Cullen's Post (H)
-		{ "29", 10029, 344, 127 }; -- Stormtorn Foothills
-		{ "30", 10030, 369, 154 }; -- Valdisdall
-		{ "31", 10031, 355, 191 }; -- Dreadwake's Landing (H)
-		{ "32", 10032, 442, 83 }; -- Shield's Rest
-		{ "33", 10033, 353, 223 }; -- Hafr Fjall
-		{ "34", 10034, 205, 198 }; -- Irongrove Retreat
-		{ "35", 10035, 225, 227 }; -- Meredil
-		{ "36", 10036, 291, 212 }; -- Crimson Thicket
-		{ "37", 10037, 301, 321 }; -- Illidari Camp
-		{ "1", 10100, 110, 112 }; -- The Dreamgrove
-		{ "2", 10101, 193, 91}; -- Trueshot Lodge
-		{ "3", 10102, 387, 365 }; -- Acherus: The Ebon Hold
-		{ "1", 10201, 169, 245 }; -- Ley-Ruins of Zarkhenar
-		{ "2", 10202, 193, 118 }; -- Sylvan Falls
-		{ "3", 10203, 298, 170 }; -- Weeping Bluffs
-		{ "4", 10204, 139, 172 }; -- Temple of Elune
-		{ "5", 10205, 226, 238 }; -- Meredil
-		{ "1", 10301, 123, 104 }; -- The Dreamgrove
-		{ "2", 10302,  77, 301 }; -- Faronaar
-		{ "3", 10303, 156, 371 }; -- Isle of the Watchers
-		{ "4", 10304, 247, 282 }; -- Western Suramar
-		{ "5", 10305, 316, 260 }; -- Eastern Suramar
-		{ "6", 10306, 312, 204 }; -- Thorim's Peak
-		{ "7", 10307, 333, 131 }; -- Nastrondir
-		{ "8", 10308, 275, 130 }; -- Eastern Highmountain
+	TransHordeOrgrimmar = {
+		{ "A", 10001, 198, 321, 462, 414, "Purple"}; -- Shattered Landing
+		{ "B", 10002, 177, 308, 436, 396, "Purple"}; -- The Stair of Destiny
+		{ "B", 10002, 117, 352, 361, 445, "Purple"}; -- The Stair of Destiny
+		{ "C", 10003, 201, 224, 462, 288, "Purple"}; -- Hellscream's Grasp
+		{ "D", 10004, 209, 215, 475, 280, "Purple"}; -- Ramkahen
+		{ "E", 10005, 211, 202, 476, 264, "Purple"}; -- Vashj'ir
+		{ "F", 10006, 221, 200, 493, 264, "Purple"}; -- Temple of Earth
+		{ "G", 10007, 227, 211, 497, 278, "Purple"}; -- Nordrassil
+		{ "H", 10008, 219, 222, 486, 283, "Purple"}; -- Dragonmaw Port
+		{ "I", 10009, 341, 224, 643, 293, "Purple"}; -- Honeydew Village
+		{ "J", 10010, 198, 362, 463, 461, "Purple"}; -- Warspear
+		{ "K", 10016, 188, 326, 451, 424, "Purple"}; -- Dalaran
+		{ "A", 10011, 170, 329, 426, 424, "Orange" }; -- Thunder Bluff
+		{ "B", 10012, 182, 322, 440, 410, "Orange" }; -- Warsong Hold
+		{ "C", 10013, 224, 292, 492, 375, "Orange" }; -- Undercity
+		{ "D", 10014, 232, 279, 506, 355, "Orange" }; -- Grom'gol Base Camp
+		{ "1", 10015, 212, 308, 481, 393, "White" }; -- Wind Rider Master
+		{ "A", 10017,  17, 362, 226, 463, "Blue" }; -- Northern Barrens
+		{ "B", 10018, 221, 471, 486, 604, "Blue" }; -- Durota
+		{ "C", 10019, 399,  27, 711,  44, "Blue" }; -- Azshara
 	};
 	TransAllianceDraenor = {
 		{ "A", 10052, 278, 259 }; -- Khadgar's Tower
@@ -364,44 +251,161 @@ local myDB = {
 		{ "D", 10004, 313, 91 };
 		{ "E", 10005, 289, 202 };
 	};
-	TransAllianceStormwindCity = {
-		{ "A", 10001,  54, 273, 248, 372, "Orange" }; -- Rut'theran Village
-		{ "B", 10002,  24, 140, 216, 203, "Orange" }; -- Valiance Keep
-		{ "A", 10003, 228, 418, 466, 553, "Purple" }; -- The Stair of Destiny
-		{ "B", 10004, 237, 406, 477, 540, "Purple" }; -- Fuselight-by-the-Sea
-		{ "C", 10005, 358, 103, 635, 155, "Purple" }; -- Paw'Don Village
-		{ "D", 10006, 389, 111, 671, 163, "Purple" }; -- Baradin Base Camp
-		{ "E", 10007, 395,  99, 677, 149, "Purple" }; -- Darkbreak Cove
-		{ "F", 10008, 408,  96, 691, 151, "Purple" }; -- Highbank
-		{ "G", 10009, 415, 109, 704, 163, "Purple" }; -- Nordrassil
-		{ "H", 10010, 411, 119, 699, 181, "Purple" }; -- Ramkahen
-		{ "I", 10011, 399, 120, 686, 182, "Purple" }; -- Temple of Earth
-		{ "J", 10012, 487, 182, 794, 260, "Purple" }; -- Stormshield
-		{ "K", 10013, 441, 169, 736, 240, "Purple" }; -- Dalaran
-		{ "1", 10014, 353, 178, 624, 250, "White" }; -- Ironforge
-		{ "2", 10015, 374, 346, 656, 464, "White" }; -- Stormwind City
+	TransAllianceBrokenIsles = {
+		{  "A", 10040, 230, 357, 432, 463, "Purple" }; -- Greyfang Enclave
+		{  "B", 10041, 237, 349, 441, 452, "Purple" }; -- Chamber of the Guardian
+		{  "C", 10042, 290, 133, 512, 170, "Purple" }; -- Portal to Dalaran
+		{  "1", 10001, 249, 341, 454, 447, "TaxiNeutral" }; -- Krasus' Landing
+		{  "2", 10002, 151, 378, 324, 497, "TaxiNeutral" }; -- Watchers' Aerie
+		{  "3", 10003, 144, 363, 319, 477, "TaxiNeutral" }; -- Wardens' Redoubt
+		{  "4", 10004, 165, 336, 348, 439, "TaxiNeutral" }; -- Shackle's Den
+		{  "5", 10005, 130, 303, 297, 398, "TaxiNeutral" }; -- Illidari Stand
+		{  "6", 10006,  98, 314, 255, 413, "TaxiNeutral" }; -- Illidari Perch
+		{  "7", 10007, 191, 275, 380, 358, "TaxiNeutral" }; -- Felblaze Ingress
+		{  "8", 10008, 138, 266, 307, 349, "TaxiNeutral" }; -- Azurewing Repose
+		{  "9", 10009, 116, 238, 279, 307, "TaxiNeutral" }; -- Challiane's Terrace
+		{ "10", 10010, 222, 450, 419, 587, "TaxiNeutral" }; -- Eye of Azshara
+		{ "11", 10011, 147, 197, 327, 260, "TaxiNeutral" }; -- Lorlathil
+		{ "12", 10012,  75, 185, 223, 240, "TaxiNeutral" }; -- Gloaming Reef
+		{ "13", 10013, 117, 175, 280, 226, "TaxiNeutral" }; -- Bradensbrook
+		{ "14", 10014, 149, 177, 327, 226, "TaxiNeutral" }; -- Garden of the Moon
+		{ "15", 10015, 183, 163, 368, 209, "TaxiNeutral" }; -- Starsong Refuge
+		{ "16", 10016, 246, 164, 453, 209, "TaxiNeutral" }; -- Obsidian Overlook
+		{ "17", 10017, 277, 164, 503, 211, "TaxiNeutral" }; -- Ironhorn Enclave
+		{ "18", 10018, 210, 126, 408, 162, "TaxiNeutral" }; -- Sylvan Falls
+		{ "19", 10019, 244, 116, 449, 145, "TaxiNeutral" }; -- Thunder Totem
+		{ "20", 10020, 283, 121, 504, 158, "TaxiNeutral" }; -- Stonehoof Watch
+		{ "21", 10021, 224,  97, 421, 119, "TaxiNeutral" }; -- Nesingwary
+		{ "22", 10022, 263,  84, 479, 106, "TaxiNeutral" }; -- Skyhorn
+		{ "23", 10023, 191,  68, 379,  81, "TaxiNeutral" }; -- Felbane Camp
+		{ "24", 10024, 217,  67, 414,  81, "TaxiNeutral" }; -- The Witchwood
+		{ "25", 10025, 279,  51, 496,  57, "TaxiNeutral" }; -- Prepfoot
+		{ "26", 10026, 228,  12, 429,  17, "TaxiNeutral" }; -- Shipwreck Cove
+		{ "27", 10027, 297, 152, 522, 194, "TaxiAlliance" }; -- Skyfire Triage Camp (A)
+		{ "28", 10028, 318, 176, 542, 227, "TaxiAlliance" }; -- Lorna's Watch (A)
+		{ "29", 10029, 344, 127, 588, 163, "TaxiNeutral" }; -- Stormtorn Foothills
+		{ "30", 10030, 369, 154, 620, 198, "TaxiNeutral" }; -- Valdisdall
+		{ "31", 10031, 404, 171, 664, 219, "TaxiAlliance" }; -- Greywatch (A)
+		{ "32", 10032, 442,  83, 717, 107, "TaxiNeutral" }; -- Shield's Rest
+		{ "33", 10033, 353, 223, 600, 289, "TaxiNeutral" }; -- Hafr Fjall
+		{ "34", 10034, 205, 198, 405, 255, "TaxiNeutral" }; -- Irongrove Retreat
+		{ "35", 10035, 225, 227, 433, 284, "TaxiNeutral" }; -- Meredil
+		{ "36", 10036, 291, 212, 521, 282, "TaxiNeutral" }; -- Crimson Thicket
+		{ "37", 10037, 295, 368, 523, 481, "TaxiNeutral" }; -- Deliverance Point
+		{ "38", 10038, 341, 351, 577, 458, "TaxiNeutral" }; -- Aalgen Point
+		{ "39", 10039, 304, 322, 533, 424, "TaxiNeutral" }; -- Vengeance Point
+		{  "1", 10100, 110, 112, 276, 146, "DRUID" }; -- The Dreamgrove
+		{  "2", 10101, 193,  91, 400, 119, "HUNTER" }; -- Trueshot Lodge
+		{  "3", 10102, 387, 365, 646, 483, "DEATHKNIGHT" }; -- Acherus: The Ebon Hold
+		{  "1", 10201, 169, 245, 350, 321, "MAGE" }; -- Ley-Ruins of Zarkhenar
+		{  "2", 10202, 193, 118, 387, 151, "MAGE" }; -- Sylvan Falls
+		{  "3", 10203, 298, 170, 522, 220, "MAGE" }; -- Weeping Bluffs
+		{  "4", 10204, 139, 172, 313, 219, "MAGE" }; -- Temple of Elune
+		{  "5", 10205, 226, 238, 433, 291, "MAGE" }; -- Meredil
+		{  "1", 10301, 123, 104, 288, 127, "HUNTER" }; -- The Dreamgrove
+		{  "2", 10302,  77, 301, 228, 394, "HUNTER" }; -- Faronaar
+		{  "3", 10303, 156, 371, 332, 484, "HUNTER" }; -- Isle of the Watchers
+		{  "4", 10304, 247, 282, 451, 363, "HUNTER" }; -- Western Suramar
+		{  "5", 10305, 316, 260, 545, 340, "HUNTER" }; -- Eastern Suramar
+		{  "6", 10306, 312, 204, 538, 263, "HUNTER" }; -- Thorim's Peak
+		{  "7", 10307, 333, 131, 572, 165, "HUNTER" }; -- Nastrondir
+		{  "8", 10308, 275, 130, 489, 168, "HUNTER" }; -- Eastern Highmountain
 	};
-	TransHordeOrgrimmar = {
-		{ "A", 10001, 198, 321, 462, 414, "Purple"}; -- Shattered Landing
-		{ "B", 10002, 177, 308, 436, 396, "Purple"}; -- The Stair of Destiny
-		{ "B", 10002, 117, 352, 361, 445, "Purple"}; -- The Stair of Destiny
-		{ "C", 10003, 201, 224, 462, 288, "Purple"}; -- Hellscream's Grasp
-		{ "D", 10004, 209, 215, 475, 280, "Purple"}; -- Ramkahen
-		{ "E", 10005, 211, 202, 476, 264, "Purple"}; -- Vashj'ir
-		{ "F", 10006, 221, 200, 493, 264, "Purple"}; -- Temple of Earth
-		{ "G", 10007, 227, 211, 497, 278, "Purple"}; -- Nordrassil
-		{ "H", 10008, 219, 222, 486, 283, "Purple"}; -- Dragonmaw Port
-		{ "I", 10009, 341, 224, 643, 293, "Purple"}; -- Honeydew Village
-		{ "J", 10010, 198, 362, 463, 461, "Purple"}; -- Warspear
-		{ "K", 10016, 188, 326, 451, 424, "Purple"}; -- Dalaran
-		{ "A", 10011, 170, 329, 426, 424, "Orange" }; -- Thunder Bluff
-		{ "B", 10012, 182, 322, 440, 410, "Orange" }; -- Warsong Hold
-		{ "C", 10013, 224, 292, 492, 375, "Orange" }; -- Undercity
-		{ "D", 10014, 232, 279, 506, 355, "Orange" }; -- Grom'gol Base Camp
-		{ "1", 10015, 212, 308, 481, 393, "White" }; -- Wind Rider Master
-		{ "A", 10017,  17, 362, 226, 463, "Blue" }; -- Northern Barrens
-		{ "B", 10018, 221, 471, 486, 604, "Blue" }; -- Durota
-		{ "C", 10019, 399,  27, 711,  44, "Blue" }; -- Azshara
+	TransHordeBrokenIsles = {
+		{ "A", 10040, 239, 336, 445, 442, "Purple" }; -- Windrunner's Sanctuary
+		{ "B", 10041, 237, 348, 442, 458, "Purple" }; -- Chamber of the Guardian
+		{  "C", 10042, 290, 133, 512, 170, "Purple" }; -- Portal to Dalaran
+		{  "1", 10001, 249, 341, 454, 447, "TaxiNeutral" }; -- Krasus' Landing
+		{  "2", 10002, 151, 378, 324, 497, "TaxiNeutral" }; -- Watchers' Aerie
+		{  "3", 10003, 144, 363, 319, 477, "TaxiNeutral" }; -- Wardens' Redoubt
+		{  "4", 10004, 165, 336, 348, 439, "TaxiNeutral" }; -- Shackle's Den
+		{  "5", 10005, 130, 303, 297, 398, "TaxiNeutral" }; -- Illidari Stand
+		{  "6", 10006,  98, 314, 255, 413, "TaxiNeutral" }; -- Illidari Perch
+		{  "7", 10007, 191, 275, 380, 358, "TaxiNeutral" }; -- Felblaze Ingress
+		{  "8", 10008, 138, 266, 307, 349, "TaxiNeutral" }; -- Azurewing Repose
+		{  "9", 10009, 116, 238, 279, 307, "TaxiNeutral" }; -- Challiane's Terrace
+		{ "10", 10010, 222, 450, 419, 587, "TaxiNeutral" }; -- Eye of Azshara
+		{ "11", 10011, 147, 197, 327, 260, "TaxiNeutral" }; -- Lorlathil
+		{ "12", 10012,  75, 185, 223, 240, "TaxiNeutral" }; -- Gloaming Reef
+		{ "13", 10013, 117, 175, 280, 226, "TaxiNeutral" }; -- Bradensbrook
+		{ "14", 10014, 149, 177, 327, 226, "TaxiNeutral" }; -- Garden of the Moon
+		{ "15", 10015, 183, 163, 368, 209, "TaxiNeutral" }; -- Starsong Refuge
+		{ "16", 10016, 246, 164, 453, 209, "TaxiNeutral" }; -- Obsidian Overlook
+		{ "17", 10017, 277, 164, 503, 211, "TaxiNeutral" }; -- Ironhorn Enclave
+		{ "18", 10018, 210, 126, 408, 162, "TaxiNeutral" }; -- Sylvan Falls
+		{ "19", 10019, 244, 116, 449, 145, "TaxiNeutral" }; -- Thunder Totem
+		{ "20", 10020, 283, 121, 504, 158, "TaxiNeutral" }; -- Stonehoof Watch
+		{ "21", 10021, 224,  97, 421, 119, "TaxiNeutral" }; -- Nesingwary
+		{ "22", 10022, 263,  84, 479, 106, "TaxiNeutral" }; -- Skyhorn
+		{ "23", 10023, 191,  68, 379,  81, "TaxiNeutral" }; -- Felbane Camp
+		{ "24", 10024, 217,  67, 414,  81, "TaxiNeutral" }; -- The Witchwood
+		{ "25", 10025, 279,  51, 496,  57, "TaxiNeutral" }; -- Prepfoot
+		{ "26", 10026, 228,  12, 429,  17, "TaxiNeutral" }; -- Shipwreck Cove
+		{ "27", 10027, 311, 122, 535, 153, "TaxiHorde" }; -- Forsaken Foothold (H)
+		{ "28", 10028, 327, 169, 560, 219, "TaxiHorde" }; -- Cullen's Post (H)
+		{ "29", 10029, 344, 127, 588, 163, "TaxiNeutral" }; -- Stormtorn Foothills
+		{ "30", 10030, 369, 154, 620, 198, "TaxiNeutral" }; -- Valdisdall
+		{ "31", 10031, 355, 191, 599, 249, "TaxiHorde" }; -- Dreadwake's Landing (H)
+		{ "32", 10032, 442,  83, 717, 107, "TaxiNeutral" }; -- Shield's Rest
+		{ "33", 10033, 353, 223, 600, 289, "TaxiNeutral" }; -- Hafr Fjall
+		{ "34", 10034, 205, 198, 405, 255, "TaxiNeutral" }; -- Irongrove Retreat
+		{ "35", 10035, 225, 227, 433, 284, "TaxiNeutral" }; -- Meredil
+		{ "36", 10036, 291, 212, 521, 282, "TaxiNeutral" }; -- Crimson Thicket
+		{ "37", 10037, 295, 368, 523, 481, "TaxiNeutral" }; -- Deliverance Point
+		{ "38", 10038, 341, 351, 577, 458, "TaxiNeutral" }; -- Aalgen Point
+		{ "39", 10039, 304, 322, 533, 424, "TaxiNeutral" }; -- Vengeance Point
+		{  "1", 10100, 110, 112, 276, 146, "DRUID" }; -- The Dreamgrove
+		{  "2", 10101, 193,  91, 400, 119, "HUNTER" }; -- Trueshot Lodge
+		{  "3", 10102, 387, 365, 646, 483, "DEATHKNIGHT" }; -- Acherus: The Ebon Hold
+		{  "1", 10201, 169, 245, 350, 321, "MAGE" }; -- Ley-Ruins of Zarkhenar
+		{  "2", 10202, 193, 118, 387, 151, "MAGE" }; -- Sylvan Falls
+		{  "3", 10203, 298, 170, 522, 220, "MAGE" }; -- Weeping Bluffs
+		{  "4", 10204, 139, 172, 313, 219, "MAGE" }; -- Temple of Elune
+		{  "5", 10205, 226, 238, 433, 291, "MAGE" }; -- Meredil
+		{  "1", 10301, 123, 104, 288, 127, "HUNTER" }; -- The Dreamgrove
+		{  "2", 10302,  77, 301, 228, 394, "HUNTER" }; -- Faronaar
+		{  "3", 10303, 156, 371, 332, 484, "HUNTER" }; -- Isle of the Watchers
+		{  "4", 10304, 247, 282, 451, 363, "HUNTER" }; -- Western Suramar
+		{  "5", 10305, 316, 260, 545, 340, "HUNTER" }; -- Eastern Suramar
+		{  "6", 10306, 312, 204, 538, 263, "HUNTER" }; -- Thorim's Peak
+		{  "7", 10307, 333, 131, 572, 165, "HUNTER" }; -- Nastrondir
+		{  "8", 10308, 275, 130, 489, 168, "HUNTER" }; -- Eastern Highmountain
+	};
+	TransSuramar = {
+		{ "A", 10001, 155, 248, 288, 292, "Purple" }; -- Ruins of Elune'eth
+		{ "B", 10002, 209, 175, 351, 209, "Purple" }; -- Tel'anor
+		{ "C", 10003,  24, 142, 142, 177, "Purple" }; -- Falanaar
+		{ "D", 10004, 103,  23, 231,  34, "Purple" }; -- Moonfall Overlook
+		{ "E", 10005, 182, 428, 319, 499, "Purple" }; -- Felsoul Hold
+		{ "F", 10006, 242, 357, 387, 412, "Purple" }; -- Sanctum of Order
+		{ "G", 10007, 220, 450, 362, 515, "Purple" }; -- Lunastre Estate
+		{ "H", 10008, 263, 464, 412, 535, "Purple" }; -- The Waning Crescent
+		{ "I", 10009, 414, 329, 588, 389, "Purple" }; -- Twilight Vineyards
+		{ "J", 10010, 301, 445, 458, 517, "Purple" }; -- Evermoon Terrace
+		{ "K", 10011, 326, 388, 482, 453, "Purple" }; -- Astravar Harbor
+		{ "1", 10101,  58, 156, 179, 184, "TaxiNeutral" }; -- Irongrove Retreat
+		{ "2", 10102, 134, 263, 264, 308, "TaxiNeutral" }; -- Meredil
+		{ "3", 10103, 414, 216, 583, 252, "TaxiNeutral" }; -- Crimson Thicket
+		{ "4", 10104, 472, 401, 648, 462, "TaxiNeutral" }; -- Eastern Suramar
+		{ "5", 10105, 200, 474, 349, 543, "TaxiNeutral" }; -- Western Suramar
+	};
+	TransDalaran = {
+		{ "A", 10014, 184, 279 }; -- Greyfang Enclave
+		{ "B", 10015, 262, 145 }; -- Windrunner's Sanctuary
+		{ "C", 10016, 234, 221 }; -- Chamber of the Guardian
+		{ "1", 10013, 335, 232 }; -- Aludane Whitecloud <Flight Master>
+		{ "A", 10001, 463, 288 }; -- Illidari Gateway
+		{ "A", 10002, 345, 200 }; -- Talua <Eagle Keeper>
+		{ "A", 10003, 288, 113 }; -- Portal to Sanctum of Light
+		{ "B", 10004, 152, 294 }; -- Portal to Sanctum of Light
+		{ "A", 10005, 296, 125 }; -- Portal to Netherlight Temple
+		{ "B", 10006, 188, 254 }; -- Portal to Netherlight Temple
+		{ "A", 10007, 242, 292 }; -- Glorious Goods
+		{ "B", 10008, 256, 174 }; -- One More Glass
+		{ "C", 10009, 210, 162 }; -- Tanks for Everything
+		{ "A", 10010, 319, 222 }; -- Portal to the Maelstrom
+		{ "A", 10011, 155, 204 }; -- Portal to Dreadscar Rift
+		{ "A", 10012, 354, 217 }; -- Jump to Skyhold
 	};
 	TransEmeraldDreamway = {
 		{ "A", 10001, 234, 147 }; -- The Dreamgrove

@@ -50,8 +50,10 @@ L.ScalerMixin = {
 L.AdjustToChildren = {		
 	IterateChildren = function(self)
 		local regions = {self:GetChildren()}
-		for _, v in pairs({self:GetRegions()}) do
-			regions[#regions + 1] = v
+		if not self.ignoreRegions then
+			for _, v in pairs({self:GetRegions()}) do
+				regions[#regions + 1] = v
+			end
 		end
 		return pairs(regions)
 	end,
@@ -71,7 +73,7 @@ L.AdjustToChildren = {
 		end
 		local top, bottom, left, right
 		for _, child in self:IterateChildren() do
-			if child:IsVisible() then
+			if child:IsShown() then
 				local childTop, childBottom = child:GetTop(), child:GetBottom()
 				local childLeft, childRight = child:GetLeft(), child:GetRight()
 				if (childTop) and (not top or childTop > top) then

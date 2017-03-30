@@ -1,4 +1,4 @@
--- $Id: Atlas_OutdoorRaids_DB.lua 25 2017-01-19 07:42:24Z arith $
+-- $Id: Atlas_OutdoorRaids_DB.lua 31 2017-03-29 15:10:34Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -47,6 +47,10 @@ local myDB = {
 		{  9, 1756, 405,  98, 689, 132 }; -- The Soultakers
 		{ 10, 1749, 323, 133, 605, 177 }; -- Nithogg
 		{ 11, 1783, 180, 232, 412, 310 }; -- Na'zak the Fiend
+		-- { 12, 1883, }; -- Brutallus
+		{ 13, 1884, 312, 335, 580, 438 }; -- Malificus
+		-- { 14, 1885, }; -- Si'vash
+		-- { 15, 1956, }; -- Apocron
 	};
 	OR_Draenor = {
 		{ 1, 1291, 271, 119, 517, 153 }; -- Drov the Ruiner

@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_Battlegrounds-esMX.lua 1538 2016-08-07 15:57:11Z arith $
+-- $Id: Atlas_Battlegrounds-esMX.lua 1538 2016-08-07 15:57:11Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -72,8 +72,8 @@ L["Drillmaster Razgoth <Hellscream's Reach>"] = "Maestro de maniobras Razgoth <M
 L["Dun Baldar North Bunker"] = "Búnker Norte de Dun Baldar"
 L["Dun Baldar South Bunker"] = "Búnker Sur de Dun Baldar"
 L["East Beacon"] = "Baliza Oriental"
-L["Eastern Crater"] = "Cráter del este"
 L["East Frostwolf Tower"] = "Torre Lobo Gélido Este"
+L["Eastern Crater"] = "Cráter del este"
 L["Eastspark Vihecale Workshop"] = "Taller Chispa Oriental"
 L["Embelar <Food & Drink>"] = "Embelar <Alimentos y bebidas>"
 L["EotS"] = "OT"
@@ -150,8 +150,8 @@ L["Twinspire Graveyard"] = "Cementerio de las Agujas Gemelas"
 L["Vanndar Stormpike <Stormpike General>"] = "Vanndar Pico Tormenta <General Pico Tormenta>"
 L["Vipore's Beacon"] = "Señal de Vipore"
 L["West Beacon"] = "Baliza Occidental"
-L["Western Crater"] = "Cráter occidental"
 L["West Frostwolf Tower"] = "Torre Lobo Gélido Oeste"
+L["Western Crater"] = "Cráter occidental"
 L["Westspark Vihecale Workshop"] = "Taller Chispa Occidental"
 L["Wildhammer Longhouse"] = "Casa Martillo Salvaje"
 L["Wing Commander Guse"] = "Comandante del aire Guse"
@@ -163,7 +163,4 @@ L["Wing Commander Vipore"] = "Comandante del aire Vipore"
 L["Wintergrasp Graveyard"] = "Cementerio Conquista del Invierno"
 L["WSG"] = "GGG"
 L["Wyvern Camp"] = "Campamento Dracoleón"
-L["ToC/Description"] = "Mapas de Campo de Batalla"
--- L["ToC/Title"] = ""
-
 end

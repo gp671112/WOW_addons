@@ -1,10 +1,10 @@
--- $Id: Atlas_DungeonLocs_DB.lua 30 2016-10-04 16:06:47Z arith $
+-- $Id: Atlas_DungeonLocs_DB.lua 39 2017-03-21 17:31:38Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
-	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbertat gmail dot com>
+	Copyright 2010 - Lothaer <lothayerat gmail dot com>, Atlas Team
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -145,6 +145,8 @@ local myDB = {
 		{ "10", 10010, 235, 259, 491, 342, "Dungeon" }; -- The Arcway
 		{ "11", 10011, 255, 256, 515, 343, "Dungeon" }; -- Court of Stars
 		{ "12", 10012, 245, 244, 512, 320, "Raid" }; -- The Nighthold
+		{ "13", 10013, 317, 317, 587, 414, "Dungeon" }; -- Cathedral of Eternal Night
+		{ "14", 10014, 321, 330, 587, 429, "Raid" }; -- Tomb of Sargeras
 		{ "1",  10101, 106, 213, 318, 289, "PvP" }; 
 		{ "2",  10102,  97, 156, 308, 217, "PvP" }; 
 		{ "3",  10103, 121, 170, 336, 230, "PvP" }; 

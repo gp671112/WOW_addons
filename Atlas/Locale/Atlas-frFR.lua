@@ -1,4 +1,4 @@
--- $Id: Atlas-frFR.lua 140 2017-01-16 08:56:14Z arith $
+-- $Id: Atlas-frFR.lua 174 2017-03-16 05:47:17Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -32,8 +32,8 @@ local L = AceLocale:NewLocale("Atlas", "frFR", false);
 -- Atlas French Localization
 -- Sur un travail de Wysiwyg, Khiria, Trasher entre 2007 et 2014
 -- Many thanks to all contributors!
--- $Date: 2017-01-16 02:56:14 -0600 (Mon, 16 Jan 2017) $
--- $Revision: 140 $
+-- $Date: 2017-03-16 00:47:17 -0500 (Thu, 16 Mar 2017) $
+-- $Revision: 174 $
 
 if ( GetLocale() == "frFR" ) then
 -- Define the leading strings to be ignored while sorting
@@ -63,6 +63,7 @@ L["Arazmodu <The Scale of Sands>"] = "Arazmodu <La Balance des sables>"
 L["Arcane Container"] = "Récipient arcanique"
 L["Arms Warrior"] = "Guerrier Armes"
 L["ATLAS_BUTTON_CLOSE"] = "Fermer"
+L["ATLAS_CLICK_TO_OPEN"] = "Cliquez pour ouvrir la fenêtre de carte Atlas."
 L["ATLAS_DDL_CONTINENT"] = "Continent"
 L["ATLAS_DDL_CONTINENT_BROKENISLES"] = "Instances Îles Brisées"
 L["ATLAS_DDL_CONTINENT_DEEPHOLM"] = "Instances du Tréfonds"
@@ -145,6 +146,7 @@ Clic-Droit pour les options d'Atlas.
 Clic-Gauche et glisser pour déplacer ce bouton.
 |cff6666ffhttp://www.atlasmod.com/|cffffffff]=]
 L["ATLAS_MISSING_MODULE"] = "Atlas a détecté des module(s)/plug-in(s) manquant : "
+L["ATLAS_OPEN_ADDON_LIST"] = "Ouvrir la liste des addons"
 L["ATLAS_OPEN_ADVENTURE"] = "Cliquer pour ouvrir la fenêtre du Guilde de l'aventurier"
 L["ATLAS_OPTIONS_ACRONYMS"] = "Afficher les acronymes VO/VF"
 L["ATLAS_OPTIONS_ACRONYMS_TIP"] = "Afficher les acronymes de l'instance dans les détails de la carte"

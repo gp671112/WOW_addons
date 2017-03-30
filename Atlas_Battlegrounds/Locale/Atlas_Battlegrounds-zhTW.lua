@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_Battlegrounds-zhTW.lua 1538 2016-08-07 15:57:11Z arith $
+-- $Id: Atlas_Battlegrounds-zhTW.lua 1538 2016-08-07 15:57:11Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -32,7 +32,6 @@ local L = AceLocale:NewLocale("Atlas_Battlegrounds", "zhTW", false);
 -- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 if L then
-
 L["2nd Lieutenant Wansworth <Baradin's Wardens>"] = "第二中尉文斯沃斯 <巴拉丁鐵衛>"
 L["AB"] = "AB/阿拉希"
 L["Aldraan <Blade Merchant>"] = "阿爾德蘭 <劍刃武器商>"
@@ -66,8 +65,8 @@ L["Drillmaster Razgoth <Hellscream's Reach>"] = "訓練員拉茲苟斯 <地獄�
 L["Dun Baldar North Bunker"] = "丹巴達爾北部碉堡"
 L["Dun Baldar South Bunker"] = "丹巴達爾南部碉堡"
 L["East Beacon"] = "東部哨塔"
-L["Eastern Crater"] = "東部凹地"
 L["East Frostwolf Tower"] = "東部霜狼哨塔"
+L["Eastern Crater"] = "東部凹地"
 L["Eastspark Vihecale Workshop"] = "東炫載具工坊"
 L["Embelar <Food & Drink>"] = "安畢拉爾 <食物和飲料>"
 L["EotS"] = "EotS/暴風"
@@ -144,8 +143,8 @@ L["Twinspire Graveyard"] = "雙塔墓地"
 L["Vanndar Stormpike <Stormpike General>"] = "范達爾·雷矛 <雷矛將軍>"
 L["Vipore's Beacon"] = "維波里的信號燈"
 L["West Beacon"] = "西部哨塔"
-L["Western Crater"] = "西部凹地"
 L["West Frostwolf Tower"] = "西部霜狼哨塔"
+L["Western Crater"] = "西部凹地"
 L["Westspark Vihecale Workshop"] = "西炫載具工坊"
 L["Wildhammer Longhouse"] = "蠻錘長屋"
 L["Wing Commander Guse"] = "空軍指揮官古斯"
@@ -157,7 +156,4 @@ L["Wing Commander Vipore"] = "空軍指揮官維波里"
 L["Wintergrasp Graveyard"] = "堡壘墓地"
 L["WSG"] = "WSG/戰歌"
 L["Wyvern Camp"] = "雙足翼龍營地"
-L["ToC/Description"] = "Atlas 戰場地圖插件"
-L["ToC/Title"] = "|r|cFF0099FF[地圖]|rAtlas 戰場地圖"
-
 end

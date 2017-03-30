@@ -1,4 +1,4 @@
--- $Id: AtlasMapsAssociation.lua 140 2017-01-16 08:56:14Z arith $
+-- $Id: AtlasMapsAssociation.lua 189 2017-03-27 12:20:49Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -50,7 +50,7 @@ Atlas_AssocDefaults = {
 	[BZ["Hellfire Citadel"]] =		"HellfireA";
 	[BZ["Highmaul"]] =			"HighmaulA";
 	[BZ["Icecrown Citadel"]] =		"IcecrownCitadelA";
-	[BZ["Karazhan"]] =			"KarazhanStart";
+	--[BZ["Karazhan"]] =			"KarazhanStart";
 	[BZ["Shado-Pan Monastery"]] =		"ShadoPanMonasteryA";
 	[BZ["Siege of Niuzao Temple"]] =	"SiegeofNiuzaoTempleA";
 	[BZ["Siege of Orgrimmar"]] =		"SiegeofOrgrimmarA";
@@ -70,6 +70,8 @@ Atlas_AssocDefaults = {
 	[BZ["The Nighthold"]] = 		"TheNightholdC";
 	[BZ["Vault of the Wardens"]] = 		"VaultoftheWardensA";
 	[BZ["Trial of Valor"]] = 		"TrialofValorA";
+	[BZ["Karazhan"]] =			"ReturntoKarazhanEnt"; -- not sure if we should use "Return to Karazhan"
+	[BZ["Cathedral of Eternal Night"]]	= "CathedralofEternalNightA";
 };
 
 --[[
@@ -653,7 +655,60 @@ Atlas_SubZoneData = {
 			BZ["Vault of the Betrayer"],
 		},
 	},
+	[BZ["Cathedral of Eternal Night"]] = {
+		["CathedralofEternalNightA"] = {
+			BZ["Hall of the Moon"],
+		},
+		["CathedralofEternalNightB"] = {
+			BZ["Twilight Grove"],
+		},
+		["CathedralofEternalNightC"] = {
+			BZ["The Emerald Archives"],
+			BZ["Path of Illumination"],
+		},
+		["CathedralofEternalNightD"] = {
+			BZ["Sacristy of Elune"],
+		},
+--			BZ["Chapel of Tranquil Song"],
+--			BZ["Chapel of Moonlight"],
+--			BZ["Chapel of Sentinels"],
+--			BZ["Chapel of Tears"],
+	},
 
+	[BZ["Tomb of Sargeras"]] = {
+		["TombofSargerasA"] = {
+			BZ["Conclave of Torment"],
+			BZ["Chamber of the Moon"],
+			BZ["Apostate's Reach"],
+			BZ["The Breach"],
+		},
+		["TombofSargerasB"] = {
+			BZ["Terrace of the Moon"],
+			BZ["Befouled Sanctum"],
+			BZ["Wailing Halls"],
+		},
+		["TombofSargerasC"] = {
+			BZ["Lair of Harjatan"],
+			BZ["The Collapse"],
+			BZ["The Abyssal Approach"],
+		},
+		["TombofSargerasD"] = {
+			BZ["The Abyssal Throne"],
+		},
+		["TombofSargerasE"] = {
+			BZ["The Guardian's Sanctum"],
+		},
+		["TombofSargerasF"] = {
+			BZ["Chamber of the Avatar"],
+		},
+		["TombofSargerasG"] = {
+			BZ["The Twisting Nether"],
+		},
+--			BZ["Sunken Stair"],
+--			BZ["Belac's Cells"],
+--			BZ["Forgotten Approach"],
+
+	},
 --	[BZ["Trial of Valor"]] = {
 --		["TrialofValorA"] = {
 --		
@@ -699,7 +754,7 @@ Atlas_OutdoorZoneToAtlas = {
 	[BZ["Hellfire Peninsula"]] = 		"HellfireCitadelEnt";
 	[BZ["Nagrand"]] =		 	"HighmaulA";
 	[BZ["Icecrown"]] = 			"IcecrownEnt";
-	[BZ["Deadwind Pass"]] = 		"KarazhanEnt";
+	--[BZ["Deadwind Pass"]] = 		"KarazhanEnt";
 	[BZ["Desolace"]] = 			"MaraudonEnt";
 	[BZ["Kun-Lai Summit"]] = 		"MoguShanVaults";
 	[BZ["Orgrimmar"]] = 			"RagefireChasm";
@@ -743,6 +798,8 @@ Atlas_OutdoorZoneToAtlas = {
 	[BZ["Highmountain"]] = 			"NeltharionsLair";
 	[BZ["Stormheim"]] = 			"HallsofValorA";
 	[BZ["Suramar"]] = 			"TheNightholdA";
+	[BZ["Deadwind Pass"]] = 		"ReturntoKarazhanEnt";
+	[BZ["Broken Shore"]] = 			"CathedralofEternalNightA";
 };
 
 -- Yes, the following two tables are redundant, but they're both here in case there's ever more than one entrance map for an instance
@@ -757,7 +814,7 @@ Atlas_EntToInstMatches = {
 	["GnomereganEnt"] =			{"Gnomeregan"};
 	["HellfireCitadelEnt"] = 		{"HCBloodFurnace", "HCHellfireRamparts", "HCMagtheridonsLair", "HCTheShatteredHalls"};
 	["IcecrownEnt"] =			{"FHHallsOfReflection", "FHPitOfSaron", "FHTheForgeOfSouls", "IcecrownCitadelA", "IcecrownCitadelB", "IcecrownCitadelC"};
-	["KarazhanEnt"] =			{"KarazhanStart","KarazhanEnd"};
+	["KarazhanEnt"] =			{"KarazhanStart","KarazhanEnd","ReturntoKarazhanA", "ReturntoKarazhanB", "ReturntoKarazhanC", "ReturntoKarazhanD", "ReturntoKarazhanE", "ReturntoKarazhanF", "ReturntoKarazhanG", "ReturntoKarazhanH", "ReturntoKarazhanI", "ReturntoKarazhanJ"};
 	["MaraudonEnt"] =			{"Maraudon"};
 	["ScarletMonasteryEnt"] =		{"ScarletHalls","ScarletMonastery"};
 	["TempestKeepEnt"] = 			{"TempestKeepArcatraz", "TempestKeepBotanica", "TempestKeepMechanar", "TempestKeepTheEye"};
@@ -769,6 +826,7 @@ Atlas_EntToInstMatches = {
 	-- Legion
 	["TheArcwayEnt"] = 			{"TheArcway"};
  	["TheNightholdEnt"] = 			{"TheNightholdA", "TheNightholdB", "TheNightholdC", "TheNightholdD", "TheNightholdE", "TheNightholdF"--[[, "TheNightholdG" ]] };
+	["ReturntoKarazhanEnt"] =		{"KarazhanStart","KarazhanEnd","ReturntoKarazhanA", "ReturntoKarazhanB", "ReturntoKarazhanC", "ReturntoKarazhanD", "ReturntoKarazhanE", "ReturntoKarazhanF", "ReturntoKarazhanG", "ReturntoKarazhanH", "ReturntoKarazhanI", "ReturntoKarazhanJ"};
 };
 
 -- Instance maps to entrance maps
@@ -843,6 +901,16 @@ Atlas_InstToEntMatches = {
 	["TheNightholdE"] = 			{"TheNightholdEnt"};
 	["TheNightholdF"] = 			{"TheNightholdEnt"};
 	["TheNightholdG"] = 			{"TheNightholdEnt"};
+	["ReturntoKarazhanA"] = 		{"ReturntoKarazhanEnt"};
+	["ReturntoKarazhanB"] = 		{"ReturntoKarazhanEnt"};
+	["ReturntoKarazhanC"] = 		{"ReturntoKarazhanEnt"};
+	["ReturntoKarazhanD"] = 		{"ReturntoKarazhanEnt"};
+	["ReturntoKarazhanE"] = 		{"ReturntoKarazhanEnt"};
+	["ReturntoKarazhanF"] = 		{"ReturntoKarazhanEnt"};
+	["ReturntoKarazhanG"] = 		{"ReturntoKarazhanEnt"};
+	["ReturntoKarazhanH"] = 		{"ReturntoKarazhanEnt"};
+	["ReturntoKarazhanI"] = 		{"ReturntoKarazhanEnt"};
+	["ReturntoKarazhanJ"] = 		{"ReturntoKarazhanEnt"};
 };
 
 -- Defines the instance which have multiple maps
@@ -906,6 +974,27 @@ Atlas_MapSeries = {
 	["VaultoftheWardensA"] = 		{"VaultoftheWardensA", "VaultoftheWardensB", "VaultoftheWardensC" };
 	["VaultoftheWardensB"] = 		{"VaultoftheWardensA", "VaultoftheWardensB", "VaultoftheWardensC" };
 	["VaultoftheWardensC"] = 		{"VaultoftheWardensA", "VaultoftheWardensB", "VaultoftheWardensC" };
+	["ReturntoKarazhanA"] = 		{"ReturntoKarazhanA", "ReturntoKarazhanB", "ReturntoKarazhanC", "ReturntoKarazhanD", "ReturntoKarazhanE", "ReturntoKarazhanF", "ReturntoKarazhanG", "ReturntoKarazhanH", "ReturntoKarazhanI", "ReturntoKarazhanJ" };
+	["ReturntoKarazhanB"] = 		{"ReturntoKarazhanA", "ReturntoKarazhanB", "ReturntoKarazhanC", "ReturntoKarazhanD", "ReturntoKarazhanE", "ReturntoKarazhanF", "ReturntoKarazhanG", "ReturntoKarazhanH", "ReturntoKarazhanI", "ReturntoKarazhanJ" };
+	["ReturntoKarazhanC"] = 		{"ReturntoKarazhanA", "ReturntoKarazhanB", "ReturntoKarazhanC", "ReturntoKarazhanD", "ReturntoKarazhanE", "ReturntoKarazhanF", "ReturntoKarazhanG", "ReturntoKarazhanH", "ReturntoKarazhanI", "ReturntoKarazhanJ" };
+	["ReturntoKarazhanD"] = 		{"ReturntoKarazhanA", "ReturntoKarazhanB", "ReturntoKarazhanC", "ReturntoKarazhanD", "ReturntoKarazhanE", "ReturntoKarazhanF", "ReturntoKarazhanG", "ReturntoKarazhanH", "ReturntoKarazhanI", "ReturntoKarazhanJ" };
+	["ReturntoKarazhanE"] = 		{"ReturntoKarazhanA", "ReturntoKarazhanB", "ReturntoKarazhanC", "ReturntoKarazhanD", "ReturntoKarazhanE", "ReturntoKarazhanF", "ReturntoKarazhanG", "ReturntoKarazhanH", "ReturntoKarazhanI", "ReturntoKarazhanJ" };
+	["ReturntoKarazhanF"] = 		{"ReturntoKarazhanA", "ReturntoKarazhanB", "ReturntoKarazhanC", "ReturntoKarazhanD", "ReturntoKarazhanE", "ReturntoKarazhanF", "ReturntoKarazhanG", "ReturntoKarazhanH", "ReturntoKarazhanI", "ReturntoKarazhanJ" };
+	["ReturntoKarazhanG"] = 		{"ReturntoKarazhanA", "ReturntoKarazhanB", "ReturntoKarazhanC", "ReturntoKarazhanD", "ReturntoKarazhanE", "ReturntoKarazhanF", "ReturntoKarazhanG", "ReturntoKarazhanH", "ReturntoKarazhanI", "ReturntoKarazhanJ" };
+	["ReturntoKarazhanH"] = 		{"ReturntoKarazhanA", "ReturntoKarazhanB", "ReturntoKarazhanC", "ReturntoKarazhanD", "ReturntoKarazhanE", "ReturntoKarazhanF", "ReturntoKarazhanG", "ReturntoKarazhanH", "ReturntoKarazhanI", "ReturntoKarazhanJ" };
+	["ReturntoKarazhanI"] = 		{"ReturntoKarazhanA", "ReturntoKarazhanB", "ReturntoKarazhanC", "ReturntoKarazhanD", "ReturntoKarazhanE", "ReturntoKarazhanF", "ReturntoKarazhanG", "ReturntoKarazhanH", "ReturntoKarazhanI", "ReturntoKarazhanJ" };
+	["ReturntoKarazhanJ"] = 		{"ReturntoKarazhanA", "ReturntoKarazhanB", "ReturntoKarazhanC", "ReturntoKarazhanD", "ReturntoKarazhanE", "ReturntoKarazhanF", "ReturntoKarazhanG", "ReturntoKarazhanH", "ReturntoKarazhanI", "ReturntoKarazhanJ" };
+	["CathedralofEternalNightA"] = 		{"CathedralofEternalNightA", "CathedralofEternalNightB", "CathedralofEternalNightC", "CathedralofEternalNightD" };
+	["CathedralofEternalNightB"] = 		{"CathedralofEternalNightA", "CathedralofEternalNightB", "CathedralofEternalNightC", "CathedralofEternalNightD" };
+	["CathedralofEternalNightC"] = 		{"CathedralofEternalNightA", "CathedralofEternalNightB", "CathedralofEternalNightC", "CathedralofEternalNightD" };
+	["CathedralofEternalNightD"] = 		{"CathedralofEternalNightA", "CathedralofEternalNightB", "CathedralofEternalNightC", "CathedralofEternalNightD" };
+	["TombofSargerasA"] = 			{"TombofSargerasA", "TombofSargerasB", "TombofSargerasC", "TombofSargerasD", "TombofSargerasE", "TombofSargerasF", "TombofSargerasG" };
+	["TombofSargerasB"] = 			{"TombofSargerasA", "TombofSargerasB", "TombofSargerasC", "TombofSargerasD", "TombofSargerasE", "TombofSargerasF", "TombofSargerasG" };
+	["TombofSargerasC"] = 			{"TombofSargerasA", "TombofSargerasB", "TombofSargerasC", "TombofSargerasD", "TombofSargerasE", "TombofSargerasF", "TombofSargerasG" };
+	["TombofSargerasD"] = 			{"TombofSargerasA", "TombofSargerasB", "TombofSargerasC", "TombofSargerasD", "TombofSargerasE", "TombofSargerasF", "TombofSargerasG" };
+	["TombofSargerasE"] = 			{"TombofSargerasA", "TombofSargerasB", "TombofSargerasC", "TombofSargerasD", "TombofSargerasE", "TombofSargerasF", "TombofSargerasG" };
+	["TombofSargerasF"] = 			{"TombofSargerasA", "TombofSargerasB", "TombofSargerasC", "TombofSargerasD", "TombofSargerasE", "TombofSargerasF", "TombofSargerasG" };
+	["TombofSargerasG"] = 			{"TombofSargerasA", "TombofSargerasB", "TombofSargerasC", "TombofSargerasD", "TombofSargerasE", "TombofSargerasF", "TombofSargerasG" };
 };
 
 -- Links maps together that are part of the same instance
@@ -990,4 +1079,25 @@ Atlas_SubZoneAssoc = {
 	["VaultoftheWardensA"] = 		BZ["Vault of the Wardens"];
 	["VaultoftheWardensB"] = 		BZ["Vault of the Wardens"];
 	["VaultoftheWardensC"] = 		BZ["Vault of the Wardens"];
+	["ReturntoKarazhanA"] = 		BZ["Return to Karazhan"];
+	["ReturntoKarazhanB"] = 		BZ["Return to Karazhan"];
+	["ReturntoKarazhanC"] = 		BZ["Return to Karazhan"];
+	["ReturntoKarazhanD"] = 		BZ["Return to Karazhan"];
+	["ReturntoKarazhanE"] = 		BZ["Return to Karazhan"];
+	["ReturntoKarazhanF"] = 		BZ["Return to Karazhan"];
+	["ReturntoKarazhanG"] = 		BZ["Return to Karazhan"];
+	["ReturntoKarazhanH"] = 		BZ["Return to Karazhan"];
+	["ReturntoKarazhanI"] = 		BZ["Return to Karazhan"];
+	["ReturntoKarazhanJ"] = 		BZ["Return to Karazhan"];
+	["CathedralofEternalNightA"] = 		BZ["Cathedral of Eternal Night"];
+	["CathedralofEternalNightB"] = 		BZ["Cathedral of Eternal Night"];
+	["CathedralofEternalNightC"] = 		BZ["Cathedral of Eternal Night"];
+	["CathedralofEternalNightD"] = 		BZ["Cathedral of Eternal Night"];
+	["TombofSargerasA"] = 			BZ["Tomb of Sargeras"];
+	["TombofSargerasB"] = 			BZ["Tomb of Sargeras"];
+	["TombofSargerasC"] = 			BZ["Tomb of Sargeras"];
+	["TombofSargerasD"] = 			BZ["Tomb of Sargeras"];
+	["TombofSargerasE"] = 			BZ["Tomb of Sargeras"];
+	["TombofSargerasF"] = 			BZ["Tomb of Sargeras"];
+	["TombofSargerasG"] = 			BZ["Tomb of Sargeras"];
 };

@@ -55,7 +55,7 @@ local function CreateArrowFrame()
             DugisArrowTooltipTextLeft1:SetFont(filename, 11)
                 
             DugisArrowTooltip:SetOwner(DugisArrowFrame, "ANCHOR_TOPLEFT")
-            DugisArrowTooltip:AddLine("Waypoint arrow not available. Click here to check the world map", 1, 1, 1, 1, true)
+            DugisArrowTooltip:AddLine(L["Waypoint arrow not available. Click here to check the world map"], 1, 1, 1, 1, true)
 
             DugisArrowTooltip:Show()
             DugisArrowTooltip:ClearAllPoints()
@@ -873,7 +873,15 @@ function DugisArrow:Initialize()
 		if not poiButton then return end
 		local posX, posY 
 		for i=1, GetNumMapLandmarks() do 
-			local landmarkType, name, description, textureIndex, x, y = GetMapLandmarkInfo(i)
+			local landmarkType, name, description, textureIndex, x, y 
+            
+            if GetMapLandmarkInfo then
+                landmarkType, name, description, textureIndex, x, y = GetMapLandmarkInfo(i)
+            else
+                --For 7.2.0
+                landmarkType, name, description, textureIndex, x, y = C_WorldMap.GetMapLandmarkInfo(i)
+            end
+            
 			if name == poiButton.name then 
 				posX = x
 				posY = y
@@ -887,7 +895,7 @@ function DugisArrow:Initialize()
 		end
 	end	
 
-	function DugisArrow:OnQuestLogChanged()
+	function DugisArrow:OnQuestLogChanged(isInThread)
 		if DugisGuideViewer.wqtloaded then return end
 		local wp = DugisArrow:getFirstWaypoint()
 		if not wp or wp.guideIndex or not wp.questId then return end
@@ -909,7 +917,7 @@ function DugisArrow:Initialize()
 				return
 			end
 		end
-		DugisArrow:SetNextWaypoint(wp)
+		DugisArrow:SetNextWaypoint(wp, isInThread)
 	end
 	
     local disabledClicksDugisArrow = false
@@ -1551,7 +1559,9 @@ function DugisArrow:Initialize()
 	end	
 
 	local maxsetnext = 0
-	function DugisArrow:SetNextWaypoint(removeMe)
+	function DugisArrow:SetNextWaypoint(removeMe, isInThread)
+        LuaUtils:Yield(isInThread)
+        
 		if maxsetnext > 30 then return end --Stops endless loop if 2 waypoints are very close together with |LOOP| tag which can crash the game
 		maxsetnext = maxsetnext + 1
 			
@@ -1587,9 +1597,9 @@ function DugisArrow:Initialize()
 			end
 			
 			if waypoint and not waypoint.isWTag and DugisArrow:DidPlayerReachWaypoint() and not removeMe and not waypoint.isRouteWaypoint then
-				DugisArrow:SetNextWaypoint()
+				DugisArrow:SetNextWaypoint(isInThread)
 			elseif waypoint and waypoint.isWTag and DugisArrow:DidPlayerReachWaypoint() and (DugisArrow:DidPlayerReachWaypoint() ~= DugisArrow:getFinalWaypoint()) and not removeMe and not waypoint.isRouteWaypoint then
-				DugisArrow:SetNextWaypoint()
+				DugisArrow:SetNextWaypoint(isInThread)
 			end				
 		end
 		maxsetnext = 0
@@ -2136,6 +2146,10 @@ function DugisArrow:Initialize()
 	end
 	
 	function DGV:UNIT_SPELLCAST_SUCCEEDED(event, unit, spellName, spellRank, lineIdCounter, spellId)
+        if unit == "player" then
+            DugisGuideViewer:OnCastingSpell(spellId)
+        end
+    
 		if unit=="player" and DugisArrow.waypoints then
 			--DGV:DebugFormat("UNIT_SPELLCAST_SUCCEEDED", "spellName", spellName, "spellId", spellId)
 			for _, waypoint in pairs(DugisArrow.waypoints) do

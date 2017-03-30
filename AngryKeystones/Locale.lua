@@ -42,6 +42,7 @@ langs.enUS = {
 	scheduleMissingKeystone = "Requires a level 7+ Mythic Keystone in your inventory to display.",
 	config_exclusiveTracker = "Hide quest and achievement trackers during Mythic Keystone dungeons (requires Reload UI to take effect)",
 	config_hideTalkingHead = "Hide Talking Head dialog during a Mythic Keystone dungeon",
+	config_resetPopup = "Show popup to reset instances upon leaving a completed Mythic Keystone dungeon",
 }
 langs.enGB = langs.enUS
 
@@ -110,6 +111,7 @@ langs.zhTW = {
 	scheduleMissingKeystone = "你需要一把7級以上的鑰石來啟用此項功能。",
 	config_exclusiveTracker = "在副本中隱藏成就和任務追蹤（重載插件後生效）",
 	config_hideTalkingHead = "在傳奇鑰石副本中隱藏NPC事件對話視窗",
+	config_resetPopup = "在完成傳奇鑰石副本後顯示彈出視窗以重置副本",
 }
 
 function Locale:Get(key)
@@ -272,10 +274,158 @@ rumors.zhCN = {
 	["我敢肯定，那个密探的腰带上挂着药水。"]="potion",
 	["我听说那个密探随身带着药水，这是为什么呢？"]="potion",
 	["可别说是我告诉你的……那个密探伪装成了炼金师，腰带上挂着药水。"]="potion",
+	["我听说那个密探买了一些药水……以防万一。"]="potion",
 	["我听说那个密探的腰包上绣着精美的丝线。"]="coinpurse",
 	["一个朋友说，那个密探喜欢黄金，所以在腰包里装满了金币。"]="coinpurse",
 	["我听说那个密探的腰包里装满了摆阔用的金币。"]="coinpurse",
 	["我听说那个密探总是带着一个魔法袋。"]="coinpurse",
+}
+
+clues.koKR = {
+	male = MALE,
+	female = FEMALE,
+	lightVest = "밝은색 조끼",
+	darkVest = "어두운색 조끼",
+	shortSleeves = "짧은 소매",
+	longSleeves = "긴 소매",
+	cloak = "망토 있음",
+	noCloak = "망토 없음",
+	gloves = "장갑 있음",
+	noGloves = "장갑 없음",
+	noPotion = "물약 없음",
+	book = "책",
+	coinpurse = "금화 주머니",
+	potion = "물약",
+}
+
+rumors.koKR = {
+	["첩자가 여성이 아니라는 얘기를 들었습니다."]="male",
+	["첩자가 나타났다고 합니다. 그 남자는 대단히 호감형이라고도 하더군요."]="male",
+	["한 남자가 대마법학자와 나란히 저택에 들어오는 걸 봤다는 얘기가 있더군요."]="male",
+	["한 연주자가 말하길, 그 남자가 끊임없이 그 지구에 관한 질문을 늘어놨다고 합니다."]="male",
+	["그 불청객은 남자가 아니라는 말을 들었습니다."]="female",
+	["아까 한 방문객이 그녀와 엘리산드가 함께 도착하는 걸 보았답니다."]="female",
+	["첩자가 나타났다고 합니다. 그 여자는 아주 미인이라고도 하더군요."]="female",
+	["어떤 여자가 귀족 지구에 관해 계속 묻고 다닌다고 하던데..."]="female",
+	["그자는 첩자인데도 밝은색 조끼를 즐겨 입는다고 합니다."]="lightVest",
+	["오늘 밤 파티에 그 첩자는 밝은색 조끼를 입고 올 거라는 말을 들었습니다."]="lightVest",
+	["사람들이 그러는데, 오늘 밤 그 첩자는 어두운 색 조끼를 입지 않았다고 합니다."]="lightVest",
+	["그 첩자는 분명 어두운 옷을 선호합니다."]="darkVest",
+	["오늘 밤 그 첩자는 어둡고 짙은 색의 조끼를 입었다고 합니다."]="darkVest",
+	["그 첩자는 어두운 색 조끼를 즐겨 입어요... 밤과 같은 색이죠."]="darkVest",
+	["소문에 그 첩자는 눈에 띄지 않으려고 밝은색 옷은 피한다더군요."]="darkVest",
+	["그 첩자는 소매가 긴 옷을 입는 걸 정말 싫어한다고 합니다."]="shortSleeves",
+	["그 첩자는 팔을 빠르게 움직이려고 짧은 소매 옷만 고집한다고 합니다."]="shortSleeves",
+	["그 첩자는 시원한 걸 좋아해서 오늘 밤 짧은 소매를 입고 왔다고 들었습니다."]="shortSleeves",
+	["제 친구가 그 첩자가 입은 옷을 봤는데, 긴 소매는 아니었다는군요!"]="shortSleeves",
+	["오늘 밤 첩자는 긴 소매 옷을 입었다고 하더군요."]="longSleeves",
+	["제 친구 말로는, 첩자가 긴 소매 옷을 입었다고 합니다."]="longSleeves",
+	["오늘 밤 그 첩자는 소매가 긴 옷을 입었다고 들었어요."]="longSleeves",
+	["초저녁에 첩자를 언뜻 보았는데... 긴 소매 옷을 입었던 것 같습니다."]="longSleeves",
+	["그 첩자가 망토를 걸친 모습을 봤다는 사람이 있었습니다."]="cloak",
+	["그 첩자는 망토를 즐겨 입는다고 들었습니다."]="cloak",
+	["제가 듣기로는 그 첩자가 궁전에 망토를 벗어두고 여기 왔다고 합니다."]="noCloak",
+	["그 첩자는 망토를 싫어해서 절대로 입지 않는다고 합니다."]="noCloak",
+	["그 첩자는 항상 장갑을 낀다고 하더군요."]="gloves",
+	["제가 듣기로는, 그 첩자는 항상 신경 써서 손을 가린다고 합니다."]="gloves",
+	["그 첩자는 손에 있는 선명한 흉터를 가리려고 장갑을 낀다고 합니다."]="gloves",
+	["그 첩자는 항상 장갑을 낀다고 들었습니다."]="gloves",
+	["안쪽 방에서 장갑 한 켤레를 발견했습니다. 첩자는 분명히 이 주변에 장갑을 끼지 않은 사람중 하나일 거에요."]="noGloves",
+	["그 첩자는 장갑을 끼는 일이 없다고 하더군요."]="noGloves",
+	["그 첩자는 장갑을 끼지 않는답니다. 위급한 순간에 걸리적거려서 그렇겠지요."]="noGloves",
+	["그 첩자는 장갑을 끼는 걸 싫어한다고 들었습니다."]="noGloves",
+	["소문을 들어 보니, 그 첩자는 독서를 좋아해서 항상 책을 가지고 다닌다고 합니다."]="book",
+	["그 첩자의 허리띠 주머니에는 비밀이 잔뜩 적힌 책이 담겨 있다고 합니다."]="book",
+	["한 연주자가 그 첩자가 마지막 물약을 버리는 걸 봤다고 합니다. 그러니 더는 물약이 없겠죠."]="noPotion",
+	["그 첩자는 물약을 가지고 다니지 않는다고 합니다."]="noPotion",
+	["그 첩자는 허리띠에 물약을 매달고 있을 게 분명합니다. 있는 게 분명해요."]="potion",
+	["그 첩자는 물약을 가지고 다닌데요. 이유가 뭘까요?"]="potion",
+	["그 첩자는 만약을 대비해... 물약 몇 개를 가져왔다고 합니다."]="potion",
+	["이 얘기를 깜빡할 뻔했네요... 그 첩자는 연금술사로 가장해 허리띠에 물약을 달고 다닌다고 합니다."]="potion",
+	["그 첩자는 허리띠 주머니도 휘황찬란한 자수로 꾸며져 있다고 합니다."]="coinpurse",
+	["제 친구가 말하길, 그 첩자는 금을 너무 좋아해서 허리띠 주머니에도 금이 가득 들어 있다고 합니다."]="coinpurse",
+	["그 첩자는 어찌나 사치스러운지 허리띠에 달린 주머니에 금화를 잔뜩 넣어서 다닌다고 합니다."]="coinpurse",
+	["그 첩자는 마법의 주머니를 항상 가지고 다닌다고 들었습니다."]="coinpurse",
+}
+
+clues.deDE = {
+	male = MALE,
+	female = FEMALE,
+	lightVest = "Helle Weste",
+	darkVest = "Dunkle Weste",
+	shortSleeves = "Kurze Ärmel",
+	longSleeves = "Lange Ärmel",
+	cloak = "Umhang",
+	noCloak = "Kein Umhang",
+	gloves = "Handschuhe",
+	noGloves = "Keine Handschuhe",
+	noPotion = "Kein Fläschchen",
+	book = "Buch",
+	coinpurse = "Geldbeutel",
+	potion = "Fläschchen",
+}
+
+rumors.deDE = {
+	["Irgendwo habe ich gehört, dass der Spion nicht weiblich ist."]="male",
+	["Ich hörte, dass der Spion ein äußerst gutaussehender Herr ist."]="male",
+	["Ein Gast sagte, sie sah, wie ein Herr an der Seite der Großmagistrix das Anwesen betreten hat."]="male",
+	["Einer der Musiker sagte, er stellte unablässig Fragen über den Bezirk."]="male",
+
+	["Jemand hat behauptet, dass unser neuester Gast nicht männlich ist."]="female",
+	["Ein Gast hat beobachtet, wie sie und Elisande vorhin gemeinsam eingetroffen sind."]="female",
+	["Man sagt, die Spionin wäre hier und sie wäre eine wahre Augenweide."]="female",
+	["Wie ich höre, hat eine Frau sich ständig nach diesem Bezirk erkundigt..."]="female",
+
+	["Der Spion bevorzugt auf jeden Fall Westen mit hellen Farben."]="lightVest",
+	["Wie ich hörte, trägt der Spion auf der Party heute Abend eine helle Weste."]="lightVest",
+	["Die Leute sagen, dass der Spion heute Abend keine dunkle Weste trägt."]="lightVest",
+
+	["Der Spion bevorzugt auf alle Fälle dunkle Kleidung."]="darkVest",
+	["Ich hörte, dass die Weste des Spions heute Abend von dunkler, kräftiger Farbe ist."]="darkVest",
+	["Dem Spion gefallen Westen mit dunklen Farben... dunkel wie die Nacht."]="darkVest",
+	["Gerüchten zufolge vermeidet der Spion es, helle Kleidung zu tragen, damit er nicht so auffällt."]="darkVest",
+
+	["Jemand sagte mir, dass der Spion lange Ärmel hasst."]="shortSleeves",
+	["Mir ist zu Ohren gekommen, dass der Spion kurze Ärmel trägt, damit er seine Arme ungehindert bewegen kann."]="shortSleeves",
+	["Man hat mir zugetragen, dass der Spion die kühle Luft mag und deshalb heute Abend keine langen Ärmel trägt."]="shortSleeves",
+	["Eine meiner Freundinnen sagte, dass sie die Kleidung des Spions gesehen hat. Er trägt keine langen Ärmel."]="shortSleeves",
+
+	["Wie ich höre, trägt der Spion heute Abend Kleidung mit langen Ärmeln."]="longSleeves",
+	["Einer meiner Freunde erwähnte, dass der Spion lange Ärmel trägt."]="longSleeves",
+	["Jemand sagte, dass der Spion heute Abend seine Arme mit langen Ärmeln bedeckt."]="longSleeves",
+	["Ich habe am frühen Abend einen kurzen Blick auf die langen Ärmel des Spions erhascht."]="longSleeves",
+
+	["Jemand erwähnte, dass der Spion vorhin hier hereinkam und einen Umhang trug."]="cloak",
+	["Mir ist zu Ohren gekommen, dass der Spion gerne Umhänge trägt."]="cloak",
+
+	["Ich hörte, dass der Spion seinen Umhang im Palast gelassen hat, bevor er hierhergekommen ist."]="noCloak",
+	["Ich hörte, dass der Spion keine Umhänge mag und sich weigert, einen zu tragen."]="noCloak",
+
+	["Einem Gerücht zufolge trägt der Spion immer Handschuhe."]="gloves",
+	["Wie ich hörte, verbirgt der Spion sorgfältig die Hände."]="gloves",
+	["Jemand behauptete, dass der Spion Handschuhe trägt, um sichtbare Narben zu verbergen."]="gloves",
+	["Ich hörte, dass der Spion immer Handschuhe anlegt."]="gloves",
+
+	["Wisst Ihr... Ich habe ein zusätzliches Paar Handschuhe im Hinterzimmer gefunden. Wahrscheinlich ist der Spion hier irgendwo mit bloßen Händen unterwegs."]="noGloves",
+	["Es gibt Gerüchte, dass der Spion niemals Handschuhe trägt."]="noGloves",
+	["Ich hörte, dass der Spion es vermeidet, Handschuhe zu tragen, falls er schnell handeln muss."]="noGloves",
+	["Mir ist zu Ohren gekommen, dass der Spion ungern Handschuhe trägt."]="noGloves",
+
+	["Gerüchte zufolge liest der Spion gerne und trägt immer mindestens ein Buch bei sich."]="book",
+	["Ich hörte, dass der Spion immer ein Buch mit niedergeschriebenen Geheimnissen am Gürtel trägt."]="book",
+
+	["Eine Musikerin erzählte mir, dass sie gesehen hat, wie der Spion seinen letzten Trank wegwarf und jetzt keinen mehr übrig hat."]="noPotion",
+	["Wie ich hörte, hat der Spion keine Tränke bei sich."]="noPotion",
+
+	["Ich bin mir ziemlich sicher, dass der Spion Tränke am Gürtel trägt."]="potion",
+	["Ich hörte, dass der Spion Tränke mitgebracht hat... Ich frage mich wieso?"]="potion",
+	["Wie ich hörte, hat der Spion einige Tränke mitgebracht... für alle Fälle."]="potion",
+	["Von mir habt Ihr das nicht... aber der Spion verkleidet sich als Alchemist und trägt Tränke an seinem Gürtel."]="potion",
+
+	["Ich hörte, dass der Gürtelbeutel des Spions mit ausgefallenem Garn gesäumt wurde."]="coinpurse",
+	["Ein Freund behauptet, dass der Spion Gold liebt und einen Gürtelbeutel voll davon hat."]="coinpurse",
+	["Mir ist zu Ohren gekommen, dass der Gürtelbeutel des Spions mit Gold gefüllt ist, um besonders extravagant zu erscheinen."]="coinpurse",
+	["Ich hörte, dass der Spion immer einen magischen Beutel mit sich herumträgt."]="coinpurse",
 }
 
 function Locale:HasRumors()

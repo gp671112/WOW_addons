@@ -1,8 +1,8 @@
-﻿-- $Id: Atlas_ScenariosDB.lua 27 2016-08-31 06:44:19Z arith $
+-- $Id: Atlas_ScenariosDB.lua 36 2017-03-20 15:19:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2012 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2012 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -41,6 +41,14 @@ local myDB = {
 		{ "2", 10012, 362, 108, 558, 103, "Red" }; -- Gul'dan
 		{ "H", 10013, 390, 135, 596, 149, "Blue" }; -- Horde's final stop
 		{ "H", 10013, 427, 137, 632, 158, "Blue" }; -- Horde's final stop
+	};
+	SC_AssaultonBrokenShore = {
+		{ "A", 10001, 417, 314, 560, 463, "Blue" }; 
+		{ "B", 10002, 415, 144, 567, 298, "Blue" }; 
+		{ "C", 10003, 385, 148, 528, 292, "Blue" }; 
+		{ "D", 10004, 332,  96, 474, 247, "Blue" }; 
+		{ "1", 116291, 193, 296, 337, 447, "White" };
+		{ "2", 90705,  400, 160, 541, 312, "White" };
 	};
 };
 

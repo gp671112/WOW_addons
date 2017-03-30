@@ -1,0 +1,19 @@
+------------------------------------------------------------------------
+r629 | arkayenro | 2017-03-28 18:16:30 -0500 (Tue, 28 Mar 2017) | 4 lines
+Changed paths:
+   M /trunk/ArkInventory.lua
+   M /trunk/ArkInventory.toc
+   M /trunk/ArkInventoryStorage.lua
+   M /trunk/ArkInventoryTooltip.lua
+   M /trunk/Modules/ArkInventoryConfig/ArkInventoryConfig.toc
+   M /trunk/Modules/ArkInventoryRules/ArkInventoryRules.toc
+   M /trunk/Modules/ArkInventoryRules_Example/ArkInventoryRules_Example.toc
+   M /trunk/Modules/ArkInventorySearch/ArkInventorySearch.toc
+   M /trunk/VersionHistory.txt
+
+*3.07.25 (29-MAR-2017)*
+ * changed - toc updated to 70200
+ * added - keystone item class to stop error message (still needs work to integrate fully)
+
+------------------------------------------------------------------------
+

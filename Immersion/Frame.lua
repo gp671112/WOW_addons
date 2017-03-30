@@ -8,6 +8,8 @@ local _, L = ...
 local frame = _G[ _ .. 'Frame' ]
 local talkbox = frame.TalkBox
 local titles = frame.TitleButtons
+local inspector = frame.Inspector
+local _Mixin = L.Mixin
 L.frame = frame
 
 ----------------------------------
@@ -45,8 +47,10 @@ for _, event in pairs({
 	'QUEST_GREETING',	-- Show quest options, why is this a thing again?
 	'QUEST_IGNORED',	-- Hide when using ignore binding?
 	'QUEST_PROGRESS',	-- Hide when going from gossip -> active quest
-	'QUEST_LOG_UPDATE',	-- If quest changes while interacting
+--	'QUEST_LOG_UPDATE',	-- If quest changes while interacting
 }) do titles:RegisterEvent(event) end
+
+titles:RegisterUnitEvent('UNIT_QUEST_LOG_CHANGED', 'player')
 
 ----------------------------------
 -- Load SavedVaribles
@@ -81,9 +85,13 @@ frame.ADDON_LOADED = function(self, name)
 		self:SetFrameStrata(L('strata'))
 		talkbox:SetFrameStrata(L('strata'))
 
+		L.ToggleIgnoreFrame(Minimap, not L('hideminimap'))
+		L.ToggleIgnoreFrame(MinimapCluster, not L('hideminimap'))
+		L.ToggleIgnoreFrame(ObjectiveTrackerFrame, not L('hidetracker'))
+
 		-- Register options table
 		LibStub('AceConfigRegistry-3.0'):RegisterOptionsTable(_, L.options)
-		L.config = LibStub('AceConfigDialog-3.0'):AddToBlizOptions(_)
+		L.config = LibStub('AceConfigDialog-3.0'):AddToBlizOptions(_,L['Immersion'])
 
 		-- Slash handler
 		_G['SLASH_' .. _:upper() .. '1'] = '/' .. _:lower()
@@ -91,7 +99,7 @@ frame.ADDON_LOADED = function(self, name)
 
 		local logo = CreateFrame('Frame', nil, L.config)
 		logo:SetFrameLevel(4)
-		logo:SetSize(100, 100)
+		logo:SetSize(80, 80)
 		logo:SetPoint('BOTTOMRIGHT', -16, 16)
 		logo:SetBackdrop({bgFile = ('Interface\\AddOns\\%s\\Textures\\Logo'):format(_)})
 	end
@@ -113,20 +121,26 @@ talkbox.Hilite:SetBackdrop(L.Backdrops.GOSSIP_HILITE)
 ----------------------------------
 -- Initiate titlebuttons
 ----------------------------------
-L.Mixin(titles, L.TitlesMixin)
+_Mixin(titles, L.TitlesMixin)
 
 ----------------------------------
 -- Initiate elements
 ----------------------------------
-L.Mixin(talkbox.Elements, L.ElementsMixin)
+_Mixin(talkbox.Elements, L.ElementsMixin)
 
 ----------------------------------
 -- Set up dynamically sized frames
 ----------------------------------
-L.Mixin(talkbox.Elements, L.AdjustToChildren)
-L.Mixin(talkbox.Elements.Content, L.AdjustToChildren)
-L.Mixin(talkbox.Elements.Progress, L.AdjustToChildren)
-L.Mixin(talkbox.Elements.Content.RewardsFrame, L.AdjustToChildren)
+do
+	local AdjustToChildren = L.AdjustToChildren
+	_Mixin(talkbox.Elements, AdjustToChildren)
+	_Mixin(talkbox.Elements.Content, AdjustToChildren)
+	_Mixin(talkbox.Elements.Progress, AdjustToChildren)
+	_Mixin(talkbox.Elements.Content.RewardsFrame, AdjustToChildren)
+	_Mixin(inspector, AdjustToChildren)
+	_Mixin(inspector.Extras, AdjustToChildren)
+	_Mixin(inspector.Choices, AdjustToChildren)
+end
 
 ----------------------------------
 -- Set this point here
@@ -142,7 +156,7 @@ name:SetPoint('TOPLEFT', talkbox.PortraitFrame.Portrait, 'TOPRIGHT', 2, -19)
 ----------------------------------
 local model = talkbox.MainFrame.Model
 model:SetLight(unpack(L.ModelMixin.LightValues))
-L.Mixin(model, L.ModelMixin)
+_Mixin(model, L.ModelMixin)
 
 ----------------------------------
 -- Main text things
@@ -202,14 +216,26 @@ talkbox.TextFrame.SpeechProgress:SetFont('Fonts\\MORPHEUS.ttf', 16, '')
 local ignoreFrames = {
 	[frame] = true,
 	[talkbox] = true,
+	[inspector] = true,
 	[GameTooltip] = true,
 	[StaticPopup1] = true,
 	[StaticPopup2] = true,
 	[StaticPopup3] = true,
 	[StaticPopup4] = true,
+	[SubZoneTextFrame] = true,
+	[OverrideActionBar] = true,
 	[ShoppingTooltip1] = true,
 	[ShoppingTooltip2] = true,
 }
+
+local hideFrames = {
+	[Minimap] = true,
+	[MinimapCluster] = true,
+}
+
+function L.ToggleIgnoreFrame(frame, ignore)
+	ignoreFrames[frame] = ignore
+end
 
 local function GetUIFrames()
 	local frames = {}
@@ -238,7 +264,10 @@ frame.FadeIn = function(self, fadeTime, stopPlay)
 	if L('hideui') and not self.fadeFrames then
 		local frames = GetUIFrames()
 		for frame in pairs(frames) do
-			L.UIFrameFadeOut(frame, fadeTime or 0.2, frame:GetAlpha(), 0)
+			L.UIFrameFadeOut(frame, fadeTime or 0.2, frame:GetAlpha(), 0, hideFrames[frame] and {
+				finishedFunc = frame.Hide,
+				finishedArg1 = frame,
+			})
 		end
 		self.fadeFrames = frames
 
@@ -250,9 +279,15 @@ frame.FadeIn = function(self, fadeTime, stopPlay)
 				if self.fadeFrames then
 					for frame, origAlpha in pairs(self.fadeFrames) do
 						if frame:IsMouseOver() and frame:IsMouseEnabled() then
+							if hideFrames[frame] then
+								frame:Show()
+							end
 							L.UIFrameFadeIn(frame, 0.2, frame:GetAlpha(), origAlpha)
 						elseif frame:GetAlpha() > 0.1 then
-							L.UIFrameFadeOut(frame, 0.2, frame:GetAlpha(), 0) 
+							L.UIFrameFadeOut(frame, 0.2, frame:GetAlpha(), 0, hideFrames[frame] and {
+								finishedFunc = frame.Hide,
+								finishedArg1 = frame,
+							}) 
 						end
 					end
 				else
@@ -271,6 +306,9 @@ frame.FadeOut = function(self, fadeTime)
 	})
 	if self.fadeFrames then
 		for frame, origAlpha in pairs(self.fadeFrames) do
+			if hideFrames[frame] then
+				frame:Show()
+			end
 			L.UIFrameFadeIn(frame, fadeTime or 0.5, frame:GetAlpha(), origAlpha)
 		end
 		self.fadeFrames = nil

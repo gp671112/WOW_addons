@@ -1,4 +1,4 @@
-## Interface: 70100
+## Interface: 70200
 #@non-debug@
 ## Title: Atlas |r|cFF0099FF[Legion]|r
 ## Title-deDE: Atlas |r|cFF0099FF[Legion]|r
@@ -21,9 +21,9 @@
 # ## Notes-zhCN: 军团再临副本地图
 # ## Notes-zhTW: 軍臨天下副本地圖模組
 #@end-debug@
-## Version: 1.37.01
+## Version: 1.39.00
 ## Author: arith
-## X-Date: 2017-01-24T5:52:33Z
+## X-Date: 2017-03-27T15:44:20Z
 ## X-Email: atlas.addon at gmail dot com
 ## X-Website: http://www.atlasmod.com
 ## X-Category: Map

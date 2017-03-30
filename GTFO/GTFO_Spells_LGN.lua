@@ -312,6 +312,20 @@ GTFO.SpellID["202704"] = {
   sound = 1;
 };
 
+GTFO.SpellID["217907"] = {
+  --desc = "Wrathful Flames (Calamir)";
+  sound = 1;
+};
+
+GTFO.SpellID["242873"] = {
+  --desc = "The Felstorm";
+  sound = 1;
+};
+
+GTFO.SpellID["239085"] = {
+  --desc = "Shadow Conduit (Lord Kalgorath)";
+  sound = 1;
+};
 
 
 -- **********
@@ -386,6 +400,12 @@ GTFO.SpellID["191853"] = {
   --desc = "Furious Flames (Tirathon Saltheril)";
   sound = 1;
 };
+
+GTFO.SpellID["216319"] = {
+  --desc = "A Mother's Love (Grimoira)";
+  sound = 1;
+};
+
 
 -- ********************
 -- * The Broken Shore *
@@ -1142,6 +1162,11 @@ GTFO.SpellID["209191"] = {
 
 GTFO.SpellID["221781"] = {
   --desc = "Desolate Ground (Gul'dan)";
+  sound = 1;
+};
+
+GTFO.SpellID["231008"] = {
+  --desc = "Explosive Trap (Flightmaster Volnath)";
   sound = 1;
 };
 

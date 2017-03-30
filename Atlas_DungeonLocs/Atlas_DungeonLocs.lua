@@ -1,10 +1,10 @@
--- $Id: Atlas_DungeonLocs.lua 32 2016-10-19 08:30:21Z arith $
+-- $Id: Atlas_DungeonLocs.lua 39 2017-03-21 17:31:38Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
-	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbertat gmail dot com>
+	Copyright 2010 - Lothaer <lothayerat gmail dot com>, Atlas Team
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -266,6 +266,8 @@ local myData = {
 		{ WHIT.."11) "..BZ["Court of Stars"]..ALC["Comma"].._RED..BZ["Suramar"]..GREY.." (50.4, 65.9)", 10011 };
 		{ WHIT.."12) "..BZ["The Nighthold"]..ALC["Comma"].._RED..BZ["Suramar"]..GREY.." (44.1, 59.8)", 10012 };
 		{ INDENT..GREY..ALC["L-Parenthesis"]..L["Raid entrance is inside the Sanctum Depths of Sanctum of Order"]..ALC["R-Parenthesis"].." (45.9, 64.5)" };
+		{ WHIT.."13) "..BZ["Cathedral of Eternal Night"]..ALC["Comma"].._RED..BZ["Broken Shore"]..GREY.." (63.1, 18.5)", 10013 };
+		{ WHIT.."14) "..BZ["Tomb of Sargeras"]..ALC["Comma"].._RED..BZ["Broken Shore"]..GREY.." (63.8, 21.1)", 10014 };
 		{ "" };
 		{ GREN.." 1) "..BZ["Darkfollow's Spire"]..GREY..ALC["Comma"].._RED..BZ["Val'sharah"]..GREY.." (37.7, 73.2)", 10101 };
 		{ GREN.." 2) "..BZ["Starstalker's Point"]..GREY..ALC["Comma"].._RED..BZ["Val'sharah"]..GREY.." (33.6, 40.7)", 10102 };

@@ -1,10 +1,10 @@
--- $Id: Atlas_DungeonLocs-ruRU.lua 12 2016-07-13 09:16:38Z arith $
+-- $Id: Atlas_DungeonLocs-ruRU.lua 39 2017-03-21 17:31:38Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
-	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbertat gmail dot com>
+	Copyright 2010 - Lothaer <lothayerat gmail dot com>, Atlas Team
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -28,7 +28,7 @@
 
 -- Atlas Data  (Russian)
 -- Compiled by StingerSoft
--- stingersoft@gmail.com
+-- stingersoftat gmail dot com
 -- Last Update: $Date: 2015-03-01 15:44:40 +0800 (週日, 01 三月 2015) $
 
 --]]
@@ -42,7 +42,4 @@ L["Dungeon Locations"] = "Расположение подземелий"
 L["Green"] = "Зелёный"
 L["Instances"] = "Подземелья"
 L["White"] = "Белый"
-L["ToC/Description"] = "Карты расположений подземелий"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[Расп. подземелий]|r"
-
 end

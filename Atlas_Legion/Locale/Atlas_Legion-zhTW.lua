@@ -1,4 +1,4 @@
--- $Id: Atlas_Legion-zhTW.lua 91 2017-01-21 20:09:46Z arith $
+-- $Id: Atlas_Legion-zhTW.lua 102 2017-03-27 14:46:14Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -28,8 +28,12 @@ local L = AceLocale:NewLocale("Atlas_Legion", "zhTW", false);
 if L then
 L["Arcanist Malrodi"] = "秘法師瑪洛蒂"
 L["Archmage Galeorn"] = "大法師加里恩"
+L["Archmage Khadgar"] = "大法師卡德加"
+L["Archmage Leryda"] = "大法師利瑞達"
 L["Arthfael"] = "阿斯菲爾"
+L["Barnes"] = "巴奈斯"
 L["Braxas the Fleshcarver"] = "『刻肉者』布拉薩斯"
+L["Charred Bone Fragment"] = "燒焦的白骨碎片"
 L["Crate of Corks"] = "一箱木栓"
 L["Dantalionax"] = "丹塔利翁斯"
 L["Drelanim Whisperwind"] = "蕾拉妮·語風"
@@ -46,15 +50,19 @@ L["King Bjorn"] = "畢雍王"
 L["King Haldor"] = "海多爾王"
 L["King Ranulf"] = "拉努夫王"
 L["King Tor"] = "托爾王"
+L["Koren"] = "卡爾侖"
 L["Kraxa <Mother of Gnashers>"] = "夸克薩 <銳齒蜥之母>"
 L["Kudzilla"] = "庫吉拉"
 L["Lady Velandras Ravencrest"] = "維蘭卓絲·黑雨女士"
+L["Lydia Accoste"] = "黎蒂雅·艾柯斯塔"
 L["Ly'leth Lunastre"] = "黎利斯·路納斯特"
+L["Mage Darius"] = "法師達瑞亞斯"
 L["Malfurion Stormrage"] = "瑪法里恩·怒風"
 L["Mushroom Merchant"] = "蘑菇商人"
 L["Mythana"] = "秘薩納"
 L["Portal to Shal'Aran"] = "沙亞蘭傳送門"
 L["Put a Cork in It"] = "塞進木栓"
+L["Rage Rot"] = "怒朽"
 L["Requires Skaggldrynk"] = "需要斯卡格藥劑"
 L["Spiritwalker Ebonhorn"] = "靈行者黯角"
 L["Teleport to Moonglade"] = "傳送到月光林地"

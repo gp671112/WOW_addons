@@ -1,4 +1,4 @@
-﻿-- $Id: Atlas_Battlegrounds-ruRU.lua 1538 2016-08-07 15:57:11Z arith $
+-- $Id: Atlas_Battlegrounds-ruRU.lua 1538 2016-08-07 15:57:11Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -74,8 +74,8 @@ L["Drillmaster Razgoth <Hellscream's Reach>"] = "Военный инструкт
 L["Dun Baldar North Bunker"] = "Северный Оплот Дун Болдара"
 L["Dun Baldar South Bunker"] = "Южный Оплот Дун Болдара"
 L["East Beacon"] = "Восточный Маяк"
-L["Eastern Crater"] = "Восточный Кратер"
 L["East Frostwolf Tower"] = "Восточная башня Северного Волка"
+L["Eastern Crater"] = "Восточный Кратер"
 L["Eastspark Vihecale Workshop"] = "Мастерской в Восточном парке"
 L["Embelar <Food & Drink>"] = "Янталар <Еда и напитки>"
 L["EotS"] = "Око"
@@ -141,7 +141,7 @@ L["Sunken Ring Graveyard"] = "Кладбище Затопленного Круг
 L["Sunken Ring Vihecal Workshop"] = "Мастерской в Затопленном Круге"
 L["Svalbrad Farmountain <Trade Goods>"] = "Свальбрад Дальногор <Хозяйственные товары>"
 L["The Docks"] = "Причал"
-L["The Hangar"] = "Ангар\009"
+L["The Hangar"] = [=[Ангар	]=]
 L["The Quarry"] = "Каменоломня"
 L["The Refinery"] = "Нефтезавод"
 L["The Silithyst Must Flow"] = "The Silithyst Must Flow"
@@ -152,8 +152,8 @@ L["Twinspire Graveyard"] = "Кладбище Двух Башен"
 L["Vanndar Stormpike <Stormpike General>"] = "Вандар Грозовая Вершина <Генерал клана Грозовой Вершины>"
 L["Vipore's Beacon"] = "Маяк Сквороца"
 L["West Beacon"] = "Западный Маяк"
-L["Western Crater"] = "Западный Кратер"
 L["West Frostwolf Tower"] = "Западная башня Северного Волка"
+L["Western Crater"] = "Западный Кратер"
 L["Westspark Vihecale Workshop"] = "Мастерская в Западном парке"
 L["Wildhammer Longhouse"] = "Клан Громового Молота"
 L["Wing Commander Guse"] = "Командир звена Смуггл"
@@ -165,7 +165,4 @@ L["Wing Commander Vipore"] = "Командир звена Сквороц"
 L["Wintergrasp Graveyard"] = "Кладбище Озера Ледяных Оков"
 L["WSG"] = "УПВ"
 L["Wyvern Camp"] = "Гнездо виверн"
-L["ToC/Description"] = "Карты Полей Сражений"
-L["ToC/Title"] = "Atlas |r|cFF0099FF[Поля Сражений]|r"
-
 end

@@ -1,17501 +1,2298 @@
--- $Id: Lib-ScenariosStepsDB.lua 2 2016-08-29 06:50:16Z arith $
+-- $Id: Lib-ScenariosStepsDB.lua 10 2017-03-20 14:37:52Z arith $
 --[[
-LibScenariosStepsTempDB = {
---	{ "Scenario ID", "Step ID", "Steps", "enUS", "deDE", "esES", "esMX", "frFR", "itIT", "koKR", "ptBR", "ruRU", "zhCN", "zhTW" };
-	{ "15", "24", "0", "Escort Brewmaster Bo", "Eskortiert Braumeister Bo", "Escolta al maestro cervecero Bo", "Escolta al maestro cervecero Bo", "Escorter le maître brasseur Bo", "Scorta il Mastro Birraio Bo", "양조사 보 호위", "Escolte o Mestre Cervejeiro Bô", "Сопровождение хмелевара Бо", "护送珀酒仙", "護送釀酒大師阿波" };
-	{ "15", "25", "1", "Fill the Brewing Cauldron", "Füllt den Braukessel", "Llena el caldero de fermentación", "Llena el caldero de fermentación", "Remplir le chaudron de brassage", "Riempi il Tino di Fermentazione", "양조 가마솥 채우기", "Encha o Caldeirão de Brassagem", "Наполнение хмелеваренного котла", "装满酿酒大锅", "倒滿釀酒鍋" };
-	{ "15", "26", "2", "Defeat Captain Ook", "Bezwingt Kapitän Uuk", "Derrota al capitán Ook.", "Derrota al capitán Ook.", "Vaincre le capitaine Ouk", "Sconfiggi Capitan Gancino", "선장 우끼 처치", "Derrote o Capitão Fedô", "Победа над капитаном Уком", "击败乌克头领", "殺死烏克船長" };
+LibScenariosStepsTempDB = { --{ "Scenario ID", "Step ID", "Steps", "enUS", "deDE", "esES", "esMX", "frFR", "itIT", "koKR", "ptBR", "ruRU", "zhCN", "zhTW" };
+{ "15", "24", "0", "Escort Brewmaster Bo", "Eskortiert Braumeister Bo", "Escolta al maestro cervecero Bo", "Escolta al maestro cervecero Bo", "Escorter le maître brasseur Bo", "Scorta il Mastro Birraio Bo", "양조사 보 호위", "Escolte o Mestre Cervejeiro Bô", "Сопровождение хмелевара Бо", "护送珀酒仙", "護送釀酒大師阿波" };
+{ "15", "25", "1", "Fill the Brewing Cauldron", "Füllt den Braukessel", "Llena el caldero de fermentación", "Llena el caldero de fermentación", "Remplir le chaudron de brassage", "Riempi il Tino di Fermentazione", "양조 가마솥 채우기", "Encha o Caldeirão de Brassagem", "Наполнение хмелеваренного котла", "装满酿酒大锅", "倒滿釀酒鍋" };
+{ "15", "26", "2", "Defeat Captain Ook", "Bezwingt Kapitän Uuk", "Derrota al capitán Ook.", "Derrota al capitán Ook.", "Vaincre le capitaine Ouk", "Sconfiggi Capitan Gancino", "선장 우끼 처치", "Derrote o Capitão Fedô", "Победа над капитаном Уком", "击败乌克头领", "殺死烏克船長" };
 };
 ]]
 
-LibScenariosStepsDB = {
-	["53"] = {
-		{
-			"Scarlet Monastery", -- [1]
-			"Scharlachrotes Kloster", -- [2]
-			"Monasterio Escarlata", -- [3]
-			"Monasterio Escarlata", -- [4]
-			"Monastère Écarlate", -- [5]
-			"Monastero Scarlatto", -- [6]
-			"붉은십자군 수도원", -- [7]
-			"Monastério Escarlate", -- [8]
-			"Монастырь Алого ордена", -- [9]
-			"血色修道院", -- [10]
-			"血色修道院", -- [11]
-		}, -- [1]
-	},
-	["63"] = {
-		{
-			"The Brewmoon Festival!", -- [1]
-			"Das Braumondfest!", -- [2]
-			"El Festival de la Cerveza Lunar", -- [3]
-			"El Festival de la Cerveza Lunar", -- [4]
-			"Le festival de Brasse-Lune", -- [5]
-			"Festival di Birraluna", -- [6]
-			"맥주달 축제", -- [7]
-			"Festival da Cerveja da Lua!", -- [8]
-			"Фестиваль Хмельнолуния!", -- [9]
-			"酿月祭", -- [10]
-			"酒月節", -- [11]
-		}, -- [1]
-		{
-			"The Scouts Report.", -- [1]
-			"Berichte der Späher", -- [2]
-			"El informe de los exploradores", -- [3]
-			"El informe de los exploradores", -- [4]
-			"Le rapport des éclaireurs", -- [5]
-			"Rapporto degli esploratori", -- [6]
-			"정찰병의 보고", -- [7]
-			"O Relatório do Batedor", -- [8]
-			"Результаты разведки", -- [9]
-			"斥候来报。", -- [10]
-			"偵察報告", -- [11]
-		}, -- [2]
-		{
-			"The Yaungol attack!", -- [1]
-			"Die Yaungol greifen an!", -- [2]
-			"¡El ataque yaungol!", -- [3]
-			"¡El ataque yaungol!", -- [4]
-			"L’attaque yaungole !", -- [5]
-			"Attacco degli Yaungol", -- [6]
-			"야운골이 공격한다!", -- [7]
-			"O Ataque dos Yaungóis!", -- [8]
-			"Атака яунголов!", -- [9]
-			"野牛人入侵！", -- [10]
-			"揚古入侵！", -- [11]
-		}, -- [3]
-		{
-			"Warbringer Qobi", -- [1]
-			"Kriegshetzer Qobi", -- [2]
-			"Belisario Qobi", -- [3]
-			"Belisario Qobi", -- [4]
-			"Porteguerre Qobi", -- [5]
-			"Araldo della Guerra Qobi", -- [6]
-			"전쟁인도자 코비", -- [7]
-			"Armipotente Qobi", -- [8]
-			"Воитель Коби", -- [9]
-			"战争使者虬碧", -- [10]
-			"戰爭使者闊畢", -- [11]
-		}, -- [4]
-	},
-	["537"] = {
-		{
-			"Stormstout Brewery", -- [1]
-			"Brauerei Sturmbräu", -- [2]
-			"Cervecería del Trueno", -- [3]
-			"Cervecería del Trueno", -- [4]
-			"Brasserie Brune d’Orage", -- [5]
-			"Birrificio Triplo Malto", -- [6]
-			"스톰스타우트 양조장", -- [7]
-			"Cervejaria Malte do Trovão", -- [8]
-			"Хмелеварня Буйных Портеров", -- [9]
-			"风暴烈酒酿造厂", -- [10]
-			"風暴烈酒酒坊", -- [11]
-		}, -- [1]
-	},
-	["637"] = {
-		{
-			"Disable the Ziggurats", -- [1]
-			"Deaktiviert die Ziggurats", -- [2]
-			"Desactiva los zigurats", -- [3]
-			"Desactiva los zigurats.", -- [4]
-			"Désactiver les ziggourats", -- [5]
-			"Disattiva le Ziggurat", -- [6]
-			"지구라트 정지", -- [7]
-			"Desative os Zigurates", -- [8]
-			"Отключите зиккураты", -- [9]
-			"关闭通灵塔", -- [10]
-			"關閉通靈塔", -- [11]
-		}, -- [1]
-		{
-			"The Slaughterhouse", -- [1]
-			"Das Schlachthaus", -- [2]
-			"El Degolladero", -- [3]
-			"El Matadero", -- [4]
-			"L’abattoir", -- [5]
-			"Mattatoio", -- [6]
-			"도살장", -- [7]
-			"O Abatedouro", -- [8]
-			"Бойня", -- [9]
-			"屠宰房", -- [10]
-			"屠宰房", -- [11]
-		}, -- [2]
-		{
-			"Ramstein the Gorger", -- [1]
-			"Ramstein der Verschlinger", -- [2]
-			"Ramstein el Empachador", -- [3]
-			"Ramstein el Empachador", -- [4]
-			"Ramstein Grandgosier", -- [5]
-			"Sconfiggi Ramstein il Bramacarne", -- [6]
-			"먹보 람스타인", -- [7]
-			"Ramstein, o Devorador", -- [8]
-			"Рамштайн Ненасытный", -- [9]
-			"吞咽者拉姆斯登", -- [10]
-			"『暴食者』拉姆斯登", -- [11]
-		}, -- [3]
-		{
-			"Lord Aurius Rivendare", -- [1]
-			"Baron Aurius Totenschwur", -- [2]
-			"Lord Aurius Osahendido", -- [3]
-			"Lord Aurius Osahendido", -- [4]
-			"Seigneur Aurius Vaillefendre", -- [5]
-			"Ser Aurius Fieramorte", -- [6]
-			"군주 아우리우스 리븐데어", -- [7]
-			"Lorde Aurius Rivendare", -- [8]
-			"Лорд Аурий Ривендер", -- [9]
-			"奥里克斯·瑞文戴尔领主", -- [10]
-			"奧里爾斯·瑞文戴爾領主", -- [11]
-		}, -- [4]
-		{
-			"Magistrate Barthilas defeated", -- [1]
-			"Magistrat Barthilas bezwungen", -- [2]
-			"Magistrado Barthilas derrotado", -- [3]
-			"Magistrado Barthilas derrotado.", -- [4]
-			"Magistrat Barthilas vaincu", -- [5]
-			"Sconfiggi il Magistrato Barthilas", -- [6]
-			"집정관 발실라스 처치", -- [7]
-			"Magistrado Barthilas derrotado", -- [8]
-			"Мировой судья Бартилас повержен", -- [9]
-			"击败巴瑟拉斯镇长", -- [10]
-			"擊敗巴瑟拉斯鎮長", -- [11]
-		}, -- [5]
-	},
-	["940"] = {
-		{
-			"Hunting the Hunters", -- [1]
-			"Jagd auf die Jäger", -- [2]
-			"Cazar a los cazadores", -- [3]
-			"Cazar a los cazadores", -- [4]
-			"La chasse aux chasseurs", -- [5]
-			"Caccia ai cacciatori", -- [6]
-			"사냥꾼 사냥", -- [7]
-			"Caçando os caçadores", -- [8]
-			"Охота на охотников", -- [9]
-			"猎杀猎人", -- [10]
-			"獵殺獵人", -- [11]
-		}, -- [1]
-		{
-			"Scout the Path", -- [1]
-			"Späht den Pfad aus", -- [2]
-			"Explorar el camino", -- [3]
-			"Explora el camino", -- [4]
-			"Explorer le chemin", -- [5]
-			"Esplorare la via", -- [6]
-			"길목 정찰", -- [7]
-			"Faça reconhecimento da trilha", -- [8]
-			"Разведка пути", -- [9]
-			"侦察道路", -- [10]
-			"偵察路徑", -- [11]
-		}, -- [2]
-		{
-			"Breaching the Defenses", -- [1]
-			"Durchbrechen der Verteidigung", -- [2]
-			"Traspasar las defensas", -- [3]
-			"Traspasando las defensas", -- [4]
-			"Faille défensive", -- [5]
-			"Sfondare le difese", -- [6]
-			"불의 벽을 넘어", -- [7]
-			"O romper das defesas", -- [8]
-			"Брешь в обороне", -- [9]
-			"突破防御", -- [10]
-			"突破防線", -- [11]
-		}, -- [3]
-		{
-			"The Search Continues", -- [1]
-			"Die Suche geht weiter", -- [2]
-			"La búsqueda continúa", -- [3]
-			"La búsqueda continúa", -- [4]
-			"La recherche continue", -- [5]
-			"La ricerca continua", -- [6]
-			"계속되는 수색", -- [7]
-			"A busca continua", -- [8]
-			"Поиски продолжаются", -- [9]
-			"继续搜寻", -- [10]
-			"繼續搜尋", -- [11]
-		}, -- [4]
-		{
-			"End of the Inquisition", -- [1]
-			"Das Ende der Inquisition", -- [2]
-			"El fin de la Inquisición", -- [3]
-			"El fin de la Inquisición", -- [4]
-			"La fin de l’inquisition", -- [5]
-			"Fine dell'Inquisizione", -- [6]
-			"심문관의 최후", -- [7]
-			"Fim da Inquisição", -- [8]
-			"С инквизицией покончено", -- [9]
-			"结束审判", -- [10]
-			"審判終結", -- [11]
-		}, -- [5]
-		{
-			"Back to the Prisoner", -- [1]
-			"Zurück zum Gefangenen", -- [2]
-			"Volver con el prisionero", -- [3]
-			"De vuelta al prisionero", -- [4]
-			"Retour à la geôle", -- [5]
-			"Ritorno dal prigioniero", -- [6]
-			"죄수 해방", -- [7]
-			"De volta ao prisioneiro", -- [8]
-			"Возвращение к пленнику", -- [9]
-			"返回监狱", -- [10]
-			"回去找囚犯", -- [11]
-		}, -- [6]
-		{
-			"Sieging the Citadel", -- [1]
-			"Belagerung der Zitadelle", -- [2]
-			"Asediar la ciudadela", -- [3]
-			"Asedio a la ciudadela", -- [4]
-			"Le siège de la citadelle", -- [5]
-			"Assedio alla cittadella", -- [6]
-			"성채 포위", -- [7]
-			"Cerco à cidadela", -- [8]
-			"Осада цитадели", -- [9]
-			"围攻城堡", -- [10]
-			"圍攻城塞", -- [11]
-		}, -- [7]
-		{
-			"Into the Depths", -- [1]
-			"In die Tiefen", -- [2]
-			"En las profundidades", -- [3]
-			"En las profundidades", -- [4]
-			"Dans les profondeurs", -- [5]
-			"Negli abissi", -- [6]
-			"깊숙한 곳으로", -- [7]
-			"Nas profundezas", -- [8]
-			"В глубины", -- [9]
-			"进入深渊", -- [10]
-			"邁入深淵", -- [11]
-		}, -- [8]
-		{
-			"The Fleshripper", -- [1]
-			"Der Fleischreißer", -- [2]
-			"El Desgarracarnes", -- [3]
-			"El Desgarrador", -- [4]
-			"Le Déchire-chair", -- [5]
-			"Lo Squartacarne", -- [6]
-			"살점분리자", -- [7]
-			"O Ripa-carne", -- [8]
-			"Раздиратель Плоти", -- [9]
-			"裂肉者", -- [10]
-			"裂肉狂魔", -- [11]
-		}, -- [9]
-		{
-			"The Maw of the Damned", -- [1]
-			"Der Schlund der Verdammten", -- [2]
-			"La Fauce del Maldito", -- [3]
-			"La Fauce de los Malditos", -- [4]
-			"Gueule-du-Damné", -- [5]
-			"Il Morso del Dannato", -- [6]
-			"저주받은 자의 아귀", -- [7]
-			"A Gorja dos Condenados", -- [8]
-			"Проклятый Пожиратель", -- [9]
-			"诅咒之喉", -- [10]
-			"遭譴者之顎", -- [11]
-		}, -- [10]
-		{
-			"The Call of Icecrown", -- [1]
-			"Der Ruf der Eiskronenzitadelle", -- [2]
-			"La llamada de Corona de Hielo", -- [3]
-			"El llamado de Corona de Hielo", -- [4]
-			"L’appel de la Couronne de glace", -- [5]
-			"Chiamata della Corona di Ghiaccio", -- [6]
-			"얼음왕관의 부름", -- [7]
-			"O chamado da Coroa de Gelo", -- [8]
-			"Зов Ледяной Короны", -- [9]
-			"冰冠的召唤", -- [10]
-			"寒冰皇冠的呼喚", -- [11]
-		}, -- [11]
-	},
-	["237"] = {
-		{
-			"Select a Trial", -- [1]
-			"Wählt eine Prüfung", -- [2]
-			"Elige una prueba", -- [3]
-			"Elige una prueba", -- [4]
-			"Choisir une épreuve", -- [5]
-			"Scegli una prova", -- [6]
-			"시험 선택", -- [7]
-			"Escolha um teste", -- [8]
-			"Выбор испытания", -- [9]
-			"选择试炼", -- [10]
-			"選擇一項試煉", -- [11]
-		}, -- [1]
-	},
-	["640"] = {
-		{
-			"The Temple of Atal'hakkar", -- [1]
-			"Der Tempel von Atal'Hakkar", -- [2]
-			"El Templo de Atal'Hakkar", -- [3]
-			"El Templo de Atal'Hakkar", -- [4]
-			"Le temple d’Atal’Hakkar", -- [5]
-			"Tempio di Atal'Hakkar", -- [6]
-			"아탈학카르 신전", -- [7]
-			"O Templo de Atal'hakkar", -- [8]
-			"Храм Атал'Хаккара", -- [9]
-			"阿塔哈卡神庙", -- [10]
-			"阿塔哈卡神廟", -- [11]
-		}, -- [1]
-	},
-	["651"] = {
-		{
-			"Scarlet Halls", -- [1]
-			"Die Scharlachroten Hallen", -- [2]
-			"Cámaras Escarlata", -- [3]
-			"Cámaras Escarlata", -- [4]
-			"Salles Écarlates", -- [5]
-			"Sale Scarlatte", -- [6]
-			"붉은십자군 전당", -- [7]
-			"Salões Escarlates", -- [8]
-			"Залы Алого ордена", -- [9]
-			"血色大厅", -- [10]
-			"血色大廳", -- [11]
-		}, -- [1]
-		{
-			"Armsmaster Harlan defeated", -- [1]
-			"Waffenmeister Harlan bezwungen", -- [2]
-			"Maestro de armas Harlan derrotado", -- [3]
-			"Maestro de armas Harlan derrotado", -- [4]
-			"Maître d’armes Harlan vaincu", -- [5]
-			"Sconfiggi il Maestro d'Armi Harlan", -- [6]
-			"무기전문가 할란 처치", -- [7]
-			"Mestre Armeiro Harlan derrotado", -- [8]
-			"Воитель Гарлан повержен", -- [9]
-			"击败武器大师哈兰", -- [10]
-			"擊敗武器大師哈倫", -- [11]
-		}, -- [2]
-	},
-	["959"] = {
-		{
-			"Defend Kharanos", -- [1]
-			"Verteidigt Kharanos", -- [2]
-			"Defiende Kharanos", -- [3]
-			"Defiende Kharanos", -- [4]
-			"La défense de Kharanos", -- [5]
-			"Difendere Kharanos", -- [6]
-			"카라노스 방어", -- [7]
-			"Defenda Kharanos", -- [8]
-			"Оборона Караноса", -- [9]
-			"保卫卡拉诺斯", -- [10]
-			"守禦卡拉諾斯", -- [11]
-		}, -- [1]
-		{
-			"Defeat the Demon Commander", -- [1]
-			"Bezwingt den Dämonenkommandanten", -- [2]
-			"Derrota al comandante demoníaco", -- [3]
-			"Derrota al Comandante demoníaco", -- [4]
-			"Terrasser le commandant démon", -- [5]
-			"Sconfiggere il comandante demoniaco", -- [6]
-			"악마 사령관 처치", -- [7]
-			"Derrotar o Demônio Comandante", -- [8]
-			"Победа над командиром демонов", -- [9]
-			"击败恶魔指挥官", -- [10]
-			"擊敗惡魔指揮官", -- [11]
-		}, -- [2]
-		{
-			"Repel the Legion Forces", -- [1]
-			"Schlagt die Streitkräfte der Legion zurück", -- [2]
-			"Rechaza a los ejércitos de la Legión", -- [3]
-			"Repele a las fuerzas de la Legión", -- [4]
-			"Repousser les troupes de la Légion", -- [5]
-			"Respingere le forze della Legione", -- [6]
-			"군단 격퇴", -- [7]
-			"Rechaçar as forças da Legião", -- [8]
-			"Отражение натиска Легиона", -- [9]
-			"击退燃烧军团的部队", -- [10]
-			"擊退燃燒軍團", -- [11]
-		}, -- [3]
-		{
-			"Defeat the Demon Lord", -- [1]
-			"Bezwingt den Dämonenfürsten", -- [2]
-			"Derrota al señor demoníaco", -- [3]
-			"Derrota al Señor demoníaco", -- [4]
-			"Terrasser le seigneur démon", -- [5]
-			"Sconfiggere il Signore dei Demoni", -- [6]
-			"악마 군주 처치", -- [7]
-			"Derrotar o lorde-demônio", -- [8]
-			"Смерть повелителю демонов", -- [9]
-			"击败恶魔领主", -- [10]
-			"擊敗惡魔領主", -- [11]
-		}, -- [4]
-	},
-	["636"] = {
-		{
-			"The Dreadlord Balnazzar", -- [1]
-			"Der Schreckenslord Balnazzar", -- [2]
-			"El Señor del Terror Balnazzar", -- [3]
-			"El Señor del Terror Balnazzar", -- [4]
-			"Le Seigneur de l’effroi Balnazzar", -- [5]
-			"Signore del Terrore Balnazzar", -- [6]
-			"공포의 군주 발나자르", -- [7]
-			"O Senhor do Medo Balnazzar", -- [8]
-			"Повелитель Ужаса Бальназар", -- [9]
-			"恐惧魔王巴纳扎尔", -- [10]
-			"驚懼領主巴納札爾", -- [11]
-		}, -- [1]
-		{
-			"The Unforgiven defeated", -- [1]
-			"Den Unverziehenen bezwungen", -- [2]
-			"La Imperdonable derrotada", -- [3]
-			"La Imperdonable derrotada.", -- [4]
-			"Le Condamné vaincu", -- [5]
-			"Sconfiggi L'Implacabile", -- [6]
-			"용서받지 못한 자 처치", -- [7]
-			"O Imperdoável derrotado", -- [8]
-			"Непрощенный повержен", -- [9]
-			"击败不可宽恕者", -- [10]
-			"擊敗不可寬恕者", -- [11]
-		}, -- [2]
-		{
-			"Hearthsinger Forresten defeated", -- [1]
-			"Herdsinger Forresten bezwungen", -- [2]
-			"Cantachimeneas Forresten derrotado", -- [3]
-			"Cantachimeneas Forresten derrotado.", -- [4]
-			"Chanteloge Forrestin vaincu", -- [5]
-			"Sconfiggi Forresten il Cantastorie", -- [6]
-			"하스싱어 포레스턴 처치", -- [7]
-			"Cantalar Forresten derrotado", -- [8]
-			"Певчий Форрестен повержен", -- [9]
-			"击败弗雷斯特恩", -- [10]
-			"擊敗爐邊歌手弗瑞斯坦", -- [11]
-		}, -- [3]
-		{
-			"Timmy the Cruel defeated", -- [1]
-			"Timmy den Grausamen bezwungen", -- [2]
-			"Timmy el Cruel derrotado", -- [3]
-			"Timmy el Cruel derrotado.", -- [4]
-			"Timmy le Cruel vaincu", -- [5]
-			"Sconfiggi Timmy il Crudele", -- [6]
-			"잔혹한 티미 처치", -- [7]
-			"Tico, o Cruel derrotado", -- [8]
-			"Тимми Беспощадный повержен", -- [9]
-			"击败悲惨的提米", -- [10]
-			"擊敗殘忍的提米", -- [11]
-		}, -- [4]
-		{
-			"Postmaster Malown defeated", -- [1]
-			"Postmeister Malown bezwungen", -- [2]
-			"Jefe de correos Gassol derrotado", -- [3]
-			"Jefe de correos Gassol derrotado.", -- [4]
-			"Postier Malown vaincu", -- [5]
-			"Sconfiggi il Postino Malown", -- [6]
-			"우체국장 말로운 처치", -- [7]
-			"Chefe do Correio Malown derrotado", -- [8]
-			"Почтальон Мэлоун повержен", -- [9]
-			"击败邮差马龙", -- [10]
-			"擊敗郵政局長瑪羅恩", -- [11]
-		}, -- [5]
-		{
-			"Commander Malor defeated", -- [1]
-			"Kommandant Malor bezwungen", -- [2]
-			"Comandante Malor derrotado", -- [3]
-			"Comandante Malor derrotado.", -- [4]
-			"Commandant Malor vaincu", -- [5]
-			"Sconfiggi il Comandante Malor", -- [6]
-			"사령관 말로 처치", -- [7]
-			"Comandante Malor derrotado", -- [8]
-			"Командир Малор повержен", -- [9]
-			"击败指挥官玛洛尔", -- [10]
-			"已擊敗指揮官瑪洛爾", -- [11]
-		}, -- [6]
-		{
-			"Willey Hopebreaker defeated", -- [1]
-			"Willey Hoffnungsbrecher bezwungen", -- [2]
-			"Willey Rompeesperanzas derrotado", -- [3]
-			"Willey Rompeesperanzas derrotado.", -- [4]
-			"Willey Mutilespoir vaincu", -- [5]
-			"Sconfiggi Willey Frangifede", -- [6]
-			"윌리 호프브레이커 처치", -- [7]
-			"Gualter Quebrafé derrotado", -- [8]
-			"Вилли Разбивающий Надежды повержен", -- [9]
-			"击败希望破坏者威利", -- [10]
-			"擊敗威利‧希望破除者", -- [11]
-		}, -- [7]
-		{
-			"Instructor Galford defeated", -- [1]
-			"Instrukteur Galford bezwungen", -- [2]
-			"Instructor Galford derrotado", -- [3]
-			"Instructor Galford derrotado.", -- [4]
-			"Instructeur Galford vaincu", -- [5]
-			"Sconfiggi l'Istruttore Galford", -- [6]
-			"교관 갈포드 처치", -- [7]
-			"Instrutor Galford derrotado", -- [8]
-			"Инструктор Галфорд повержен", -- [9]
-			"击败档案管理员加尔福特", -- [10]
-			"擊敗古卷管理者加爾福特", -- [11]
-		}, -- [8]
-	},
-	["536"] = {
-		{
-			"Mogu'shan Palace", -- [1]
-			"Mogu'shanpalast", -- [2]
-			"Palacio Mogu'shan", -- [3]
-			"Palacio Mogu'shan", -- [4]
-			"Palais Mogu’shan", -- [5]
-			"Palazzo Mogu'shan", -- [6]
-			"모구샨 궁전", -- [7]
-			"Palácio Mogu'shan", -- [8]
-			"Дворец Могу'шан", -- [9]
-			"魔古山宫殿", -- [10]
-			"魔古山宮", -- [11]
-		}, -- [1]
-	},
-	["736"] = {
-		{
-			"A Gladiator's Welcome", -- [1]
-			"Heimkehr des Gladiators", -- [2]
-			"Una bienvenida de gladiador", -- [3]
-			"Una bienvenida de Gladiador", -- [4]
-			"Un accueil de gladiateur", -- [5]
-			"Un gladiatorio benvenuto", -- [6]
-			"검투사의 환영", -- [7]
-			"Boas-vindas ao Gladiador", -- [8]
-			"Добро пожаловать в гладиаторы", -- [9]
-			"角斗士的欢迎", -- [10]
-			"歡迎鬥士入場", -- [11]
-		}, -- [1]
-		{
-			"My Name is Gladiator", -- [1]
-			"Mein Name ist Gladiator", -- [2]
-			"Mi nombre es Gladiador", -- [3]
-			"Me llamo Gladiador", -- [4]
-			"Mon nom est Gladiateur", -- [5]
-			"Il mio nome è Gladiatore", -- [6]
-			"진정한 검투사", -- [7]
-			"Meu nome é Gladiador", -- [8]
-			"Меня зовут Гладиатор", -- [9]
-			"我的名字是角斗士", -- [10]
-			"我的名字叫鬥士", -- [11]
-		}, -- [2]
-		{
-			"Fight, Kill, Salute", -- [1]
-			"Kampf, Sieg, Gruß", -- [2]
-			"¡Luchar, matar, saludar!", -- [3]
-			"Luchar, matar, rendir pleitesía", -- [4]
-			"Morituri te salutant", -- [5]
-			"Combattere, uccidere, rendere onore", -- [6]
-			"싸워라, 죽여라, 경례하라", -- [7]
-			"Lutar, matar, saudar", -- [8]
-			"Кровь, смерть, триумф", -- [9]
-			"战斗！杀戮！欢呼！", -- [10]
-			"戰鬥、殺戮，致敬！", -- [11]
-		}, -- [3]
-	},
-	["52"] = {
-		{
-			"Scarlet Halls", -- [1]
-			"Scharlachrote Hallen", -- [2]
-			"Cámaras Escarlata", -- [3]
-			"Cámaras Escarlata", -- [4]
-			"Salles Écarlates", -- [5]
-			"Sale Scarlatte", -- [6]
-			"붉은십자군 전당", -- [7]
-			"Salões Escarlate", -- [8]
-			"Залы Алого ордена", -- [9]
-			"血色大厅", -- [10]
-			"血色大廳", -- [11]
-		}, -- [1]
-	},
-	["72"] = {
-		{
-			"To the Waterline!", -- [1]
-			"Ein Schlag ins Wasser!", -- [2]
-			"¡A la línea de flotación!", -- [3]
-			"¡A la línea de flotación!", -- [4]
-			"Sur la ligne de flottaison !", -- [5]
-			"Alla linea di galleggiamento!", -- [6]
-			"해안선을 확보하라!", -- [7]
-			"Antes mesmo de levantar âncora!", -- [8]
-			"До ватерлинии!", -- [9]
-			"沉下去吧！", -- [10]
-			"前往水岸!", -- [11]
-		}, -- [1]
-		{
-			"The Blastmaster", -- [1]
-			"Der Sprengmeister", -- [2]
-			"El maestro destructor", -- [3]
-			"El maestro destructor", -- [4]
-			"Le maître-dynamiteur", -- [5]
-			"Lo Scoppiomastro", -- [6]
-			"폭발물전문가", -- [7]
-			"O Perito em Explosivos", -- [8]
-			"Подрывник", -- [9]
-			"爆破大师", -- [10]
-			"爆破專家", -- [11]
-		}, -- [2]
-		{
-			"Gryphon, Down", -- [1]
-			"Greif am Boden", -- [2]
-			"Grifo derribado", -- [3]
-			"Grifo derribado", -- [4]
-			"Un griffon, fon, fon", -- [5]
-			"A cuccia, Grifone!", -- [6]
-			"그리핀이 추락했다", -- [7]
-			"Grifo voando, um perigo", -- [8]
-			"Конец грифонам", -- [9]
-			"狮鹫坠落", -- [10]
-			"獅鷲獸墜落", -- [11]
-		}, -- [3]
-		{
-			"Tanks for Nothing!", -- [1]
-			"Das wird 'ne hübsche Überraschung", -- [2]
-			"¡Tanques para nada!", -- [3]
-			"¡Tanques para nada!", -- [4]
-			"Arrête ton char !", -- [5]
-			"Occhio ai carri!", -- [6]
-			"전차를 파괴하라!", -- [7]
-			"Tanque Cheio e Tanque Vazio", -- [8]
-			"Танкобойня", -- [9]
-			"让坦克见鬼去吧！", -- [10]
-			"消失吧，坦克!", -- [11]
-		}, -- [4]
-		{
-			"Fly, Spy!", -- [1]
-			"Auf der Flucht!", -- [2]
-			"¡Vuela, espía!", -- [3]
-			"¡Vuela, espía!", -- [4]
-			"Espionnage aérien !", -- [5]
-			"Vola, spia, vola!", -- [6]
-			"날아라, 첩자!", -- [7]
-			"Sai da prisão, espião!", -- [8]
-			"Лети, шпион!", -- [9]
-			"自由了！", -- [10]
-			"飛吧，間諜!", -- [11]
-		}, -- [5]
-	},
-	["647"] = {
-		{
-			"Blackthorn's Lieutenants", -- [1]
-			"Schwarzdorns Leutnants", -- [2]
-			"Los tenientes de Espina Negra", -- [3]
-			"Tenientes de Espina Negra", -- [4]
-			"Les lieutenants de Noirépine", -- [5]
-			"Luogotenenti di Spinanera", -- [6]
-			"블랙쏜의 부관들", -- [7]
-			"Tenentes de Abrunhal", -- [8]
-			"Приспешники Черношипа", -- [9]
-			"布莱克松的党羽", -- [10]
-			"黑棘的副官", -- [11]
-		}, -- [1]
-		{
-			"Death Speaker Blackthorn", -- [1]
-			"Todessprecher Schwarzdorn", -- [2]
-			"Portavoz de la muerte Espina Negra", -- [3]
-			"Portavoz de la muerte Espina Negra", -- [4]
-			"Nécrorateur Noirépine", -- [5]
-			"Oratore della Morte Spinanera", -- [6]
-			"죽음예언자 블랙쏜 처치", -- [7]
-			"Morta-voz Abrunhal", -- [8]
-			"Вестник смерти Черношип", -- [9]
-			"亡语者布莱克松", -- [10]
-			"亡語者黑棘", -- [11]
-		}, -- [2]
-		{
-			"Amnennar the Coldbringer", -- [1]
-			"Amnennar der Kältebringer", -- [2]
-			"Amnennar el Gélido", -- [3]
-			"Amnennar el Gélido", -- [4]
-			"Amnennar le Porte-Froid", -- [5]
-			"Amnennar l'Araldo del Freddo", -- [6]
-			"혹한의 암네나르", -- [7]
-			"Amnennar, o Frigífero", -- [8]
-			"Амненнар Хладовей", -- [9]
-			"寒冰之王亚门纳尔", -- [10]
-			"『寒冰使者』亞門納爾", -- [11]
-		}, -- [3]
-	},
-	["547"] = {
-		{
-			"Defeat Echoes", -- [1]
-			"Besiegt die Echos", -- [2]
-			"Derrotar a los ecos", -- [3]
-			"Derrota Ecos", -- [4]
-			"Vaincre les échos", -- [5]
-			"Sconfiggi gli Echi", -- [6]
-			"환영 처치", -- [7]
-			"Derrote os Ecos", -- [8]
-			"Победите эха", -- [9]
-			"击败残影", -- [10]
-			"擊敗回音", -- [11]
-		}, -- [1]
-		{
-			"Defeat Murozond", -- [1]
-			"Besiegt Murozond", -- [2]
-			"Derrota a Murozond", -- [3]
-			"Derrota a Murozond.", -- [4]
-			"Vaincre Murozond", -- [5]
-			"Sconfiggi Murozond", -- [6]
-			"무르도즈노 처치", -- [7]
-			"Derrote Murozond", -- [8]
-			"Победите Дорнозму", -- [9]
-			"击败姆诺兹多", -- [10]
-			"擊敗姆多茲諾", -- [11]
-		}, -- [2]
-	},
-	["247"] = {
-		{
-			"Step 1", -- [1]
-			"Schritt 1", -- [2]
-			"Step 1", -- [3]
-			"Step 1", -- [4]
-			"Étape 1", -- [5]
-			"Fase 1", -- [6]
-			"1단계", -- [7]
-			"Passo 1", -- [8]
-			"1 этап", -- [9]
-			"第1阶段", -- [10]
-			"步驟1", -- [11]
-		}, -- [1]
-		{
-			"Step 2", -- [1]
-			"Schritt 2", -- [2]
-			"Step 2", -- [3]
-			"Step 2", -- [4]
-			"Étape 2", -- [5]
-			"Fase 2", -- [6]
-			"2단계", -- [7]
-			"Passo 2", -- [8]
-			"2 этап", -- [9]
-			"第2阶段", -- [10]
-			"步驟2", -- [11]
-		}, -- [2]
-		{
-			"Step 3", -- [1]
-			"Schritt 3", -- [2]
-			"Step 3", -- [3]
-			"Step 3", -- [4]
-			"Étape 3", -- [5]
-			"Fase 3", -- [6]
-			"3단계", -- [7]
-			"Passo 3", -- [8]
-			"3 этап", -- [9]
-			"第3阶段", -- [10]
-			"步驟3", -- [11]
-		}, -- [3]
-		{
-			"Step 4", -- [1]
-			"Schritt 4", -- [2]
-			"Step 4", -- [3]
-			"Step 4", -- [4]
-			"Étape 4", -- [5]
-			"Fase 4", -- [6]
-			"4단계", -- [7]
-			"Passo 4", -- [8]
-			"4 этап", -- [9]
-			"第4阶段", -- [10]
-			"步驟4", -- [11]
-		}, -- [4]
-		{
-			"Step 5", -- [1]
-			"Schritt 5", -- [2]
-			"Step 5", -- [3]
-			"Step 5", -- [4]
-			"Étape 5", -- [5]
-			"Fase 5", -- [6]
-			"5단계", -- [7]
-			"Passo 5", -- [8]
-			"5 этап", -- [9]
-			"第5阶段", -- [10]
-			"步驟5", -- [11]
-		}, -- [5]
-		{
-			"Step 6", -- [1]
-			"Schritt 6", -- [2]
-			"Step 6", -- [3]
-			"Step 6", -- [4]
-			"Étape 6", -- [5]
-			"Fase 6", -- [6]
-			"6단계", -- [7]
-			"Passo 6", -- [8]
-			"6 этап", -- [9]
-			"第6阶段", -- [10]
-			"步驟6", -- [11]
-		}, -- [6]
-	},
-	["950"] = {
-		{
-			"Demon Down", -- [1]
-			"Dämon am Boden", -- [2]
-			"La caída del demonio", -- [3]
-			"Demonio abajo", -- [4]
-			"Démon à terre", -- [5]
-			"Demone abbattuto", -- [6]
-			"피 흘리는 악마", -- [7]
-			"Demônio caído", -- [8]
-			"Демон повержен", -- [9]
-			"摔落的恶魔", -- [10]
-			"降伏惡魔", -- [11]
-		}, -- [1]
-		{
-			"Corruption in the Deep", -- [1]
-			"Verderbnis in der Tiefe", -- [2]
-			"Corrupción en las profundidades", -- [3]
-			"Corrupción en lo profundo", -- [4]
-			"La corruption des profondeurs", -- [5]
-			"Corruzione nel profondo", -- [6]
-			"심연의 타락", -- [7]
-			"Corrupção nas profundezas", -- [8]
-			"Порча в глубине", -- [9]
-			"深岩的腐化", -- [10]
-			"深淵裡的腐化", -- [11]
-		}, -- [2]
-		{
-			"Hot on the Trail", -- [1]
-			"Auf den Fersen", -- [2]
-			"Pisándole los talones", -- [3]
-			"Pisándole los talones", -- [4]
-			"La piste est toute chaude", -- [5]
-			"In cerca di indizi", -- [6]
-			"뜨거운 추격", -- [7]
-			"Trilha quente", -- [8]
-			"По горячим следам", -- [9]
-			"如影随形", -- [10]
-			"奮力追擊", -- [11]
-		}, -- [3]
-		{
-			"Cleansing the Earth", -- [1]
-			"Läutern der Erde", -- [2]
-			"Purificar la tierra", -- [3]
-			"Purificando la tierra", -- [4]
-			"Purge souterraine", -- [5]
-			"Purificare la terra", -- [6]
-			"대지 정화", -- [7]
-			"Purificação da terra", -- [8]
-			"Очищение земли", -- [9]
-			"净化大地", -- [10]
-			"淨化大地", -- [11]
-		}, -- [4]
-		{
-			"The Demon Below", -- [1]
-			"Der Dämon in der Tiefe", -- [2]
-			"El demonio de las profundidades", -- [3]
-			"El demonio debajo", -- [4]
-			"Le démon des profondeurs", -- [5]
-			"Il demone delle profondità", -- [6]
-			"지하의 악마", -- [7]
-			"O demônio abaixo", -- [8]
-			"Демон из глубин", -- [9]
-			"地底的恶魔", -- [10]
-			"下方的惡魔", -- [11]
-		}, -- [5]
-		{
-			"The Doomhmamer Calls", -- [1]
-			"Der Schicksalshammer ruft", -- [2]
-			"El Martillo Maldito llama", -- [3]
-			"El Martillo Maldito te llama", -- [4]
-			"L’appel de Marteau-du-Destin", -- [5]
-			"Il richiamo di Martelfato", -- [6]
-			"둠해머의 부름", -- [7]
-			"Chamado do Martelo da Perdição", -- [8]
-			"Молот Рока зовет", -- [9]
-			"毁灭之锤的召唤", -- [10]
-			"末日錘的呼喚", -- [11]
-		}, -- [6]
-		{
-			"Finishing the Job", -- [1]
-			"Eine unvollendete Aufgabe", -- [2]
-			"Terminar el trabajo", -- [3]
-			"Terminando el trabajo", -- [4]
-			"Finir le boulot", -- [5]
-			"Finire il lavoro", -- [6]
-			"마무리", -- [7]
-			"Serviço completo", -- [8]
-			"Завершение начатого", -- [9]
-			"临门一脚", -- [10]
-			"完成工作", -- [11]
-		}, -- [7]
-		{
-			"A Ring Eternal", -- [1]
-			"Ein ewiger Ring", -- [2]
-			"Un anillo eterno", -- [3]
-			"Un anillo eterno", -- [4]
-			"Le cercle éternel", -- [5]
-			"Un anello eterno", -- [6]
-			"영원한 고리", -- [7]
-			"Harmonia eterna", -- [8]
-			"Служители вечны", -- [9]
-			"永恒之环", -- [10]
-			"議會永存", -- [11]
-		}, -- [8]
-	},
-	["650"] = {
-		{
-			"Scarlet Halls", -- [1]
-			"Die Scharlachroten Hallen", -- [2]
-			"Cámaras Escarlata", -- [3]
-			"Cámaras Escarlata", -- [4]
-			"Salles Écarlates", -- [5]
-			"Sale Scarlatte", -- [6]
-			"붉은십자군 전당", -- [7]
-			"Salões Escarlates", -- [8]
-			"Залы Алого ордена", -- [9]
-			"血色大厅", -- [10]
-			"血色大廳", -- [11]
-		}, -- [1]
-		{
-			"Armsmaster Harlan defeated", -- [1]
-			"Waffenmeister Harlan bezwungen", -- [2]
-			"Maestro de armas Harlan derrotado", -- [3]
-			"Maestro de armas Harlan derrotado", -- [4]
-			"Maître d’armes Harlan vaincu", -- [5]
-			"Sconfiggi il Maestro d'Armi Harlan", -- [6]
-			"무기전문가 할란 처치", -- [7]
-			"Mestre Armeiro Harlan derrotado", -- [8]
-			"Воитель Гарлан повержен", -- [9]
-			"击败武器大师哈兰", -- [10]
-			"擊敗武器大師哈倫", -- [11]
-		}, -- [2]
-	},
-	["329"] = {
-		{
-			"Extinguish Runes", -- [1]
-			"Löscht die Runen", -- [2]
-			"Extinción de runas", -- [3]
-			"Extinguir runas", -- [4]
-			"Éteindre les runes", -- [5]
-			"Estingui le rune", -- [6]
-			"룬 꺼뜨리기", -- [7]
-			"Extinguir runas", -- [8]
-			"Погасить руны", -- [9]
-			"熄灭符文", -- [10]
-			"熄滅符文", -- [11]
-		}, -- [1]
-		{
-			"Upper Blackrock Spire", -- [1]
-			"Obere Schwarzfelsspitze", -- [2]
-			"Cumbre de Roca Negra Superior", -- [3]
-			"Cumbre de Roca Negra superior", -- [4]
-			"Sommet du pic Rochenoire", -- [5]
-			"Bastioni di Roccianera Superiori", -- [6]
-			"검은바위 첨탑 상층", -- [7]
-			"Pico da Rocha Negra Superior", -- [8]
-			"Убейте боссов верхней части пика Черной горы", -- [9]
-			"黑石塔上层", -- [10]
-			"黑石塔上層", -- [11]
-		}, -- [2]
-	},
-	["629"] = {
-		{
-			"Mana-Tombs", -- [1]
-			"Managruft", -- [2]
-			"Tumbas de Maná", -- [3]
-			"Tumbas de Maná", -- [4]
-			"Tombes-mana", -- [5]
-			"Tombe del Mana", -- [6]
-			"마나 무덤", -- [7]
-			"Tumbas de Mana", -- [8]
-			"Гробницы Маны", -- [9]
-			"法力陵墓", -- [10]
-			"法力墓地", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-	},
-	["429"] = {
-		{
-			"Grimrail Depot", -- [1]
-			"Grimmgleisdepot", -- [2]
-			"Terminal Malavía", -- [3]
-			"Depósito Riel siniestro", -- [4]
-			"Dépôt de Tristerail", -- [5]
-			"Treno Frecciacupa", -- [6]
-			"파멸철로 정비소", -- [7]
-			"Central do Carrilcruel", -- [8]
-			"Депо Мрачных Путей", -- [9]
-			"恐轨车站", -- [10]
-			"恐軌車站", -- [11]
-		}, -- [1]
-	},
-	["248"] = {
-		{
-			"Get Ready...", -- [1]
-			"Macht Euch bereit…", -- [2]
-			"Prepárate...", -- [3]
-			"Prepárate...", -- [4]
-			"Prêt…", -- [5]
-			"Preparati...", -- [6]
-			"준비...", -- [7]
-			"Prepare-se...", -- [8]
-			"Приготовьтесь", -- [9]
-			"做好准备……", -- [10]
-			"做好準備...", -- [11]
-		}, -- [1]
-		{
-			"Proving Grounds", -- [1]
-			"Feuerprobe", -- [2]
-			"Terreno de Pruebas", -- [3]
-			"Terreno de Pruebas", -- [4]
-			"Ordalie", -- [5]
-			"Arena d'Addestramento", -- [6]
-			"수련의 장", -- [7]
-			"Campo de Testes", -- [8]
-			"Арена испытаний", -- [9]
-			"试炼场", -- [10]
-			"試煉場", -- [11]
-		}, -- [2]
-	},
-	["548"] = {
-		{
-			"Throne of the Tides", -- [1]
-			"Thron der Gezeiten", -- [2]
-			"Trono de las Mareas", -- [3]
-			"Trono de las Mareas", -- [4]
-			"Trône des marées", -- [5]
-			"Trono delle Maree", -- [6]
-			"파도의 왕좌", -- [7]
-			"Trono das Marés", -- [8]
-			"Трон Приливов", -- [9]
-			"潮汐王座", -- [10]
-			"海潮王座", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-	},
-	["646"] = {
-		{
-			"Scholomance", -- [1]
-			"Scholomance", -- [2]
-			"Scholomance", -- [3]
-			"Scholomance", -- [4]
-			"Scholomance", -- [5]
-			"Scholomance", -- [6]
-			"스칼로맨스", -- [7]
-			"Scolomântia", -- [8]
-			"Некроситет", -- [9]
-			"通灵学院", -- [10]
-			"通靈學院", -- [11]
-		}, -- [1]
-	},
-	["648"] = {
-		{
-			"Uldaman", -- [1]
-			"Uldaman", -- [2]
-			"Uldaman", -- [3]
-			"Uldaman", -- [4]
-			"Uldaman", -- [5]
-			"Uldaman", -- [6]
-			"울다만", -- [7]
-			"Uldaman", -- [8]
-			"Ульдаман", -- [9]
-			"奥达曼", -- [10]
-			"奧達曼", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [3]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [4]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [5]
-	},
-	["897"] = {
-		{
-			"Defend Sentinel Hill", -- [1]
-			"Verteidigt Späherkuppe", -- [2]
-			"Defiende Colina del Centinela", -- [3]
-			"Defiende la Colina del Centinela", -- [4]
-			"Défendre la colline des Sentinelles", -- [5]
-			"Difendere Guardiacolle", -- [6]
-			"감시의 언덕 방어", -- [7]
-			"Defenda o Morro da Sentinela", -- [8]
-			"Оборона Сторожевого холма", -- [9]
-			"保卫哨兵岭", -- [10]
-			"保衛哨兵嶺", -- [11]
-		}, -- [1]
-		{
-			"Defeat the Demon Commander", -- [1]
-			"Bezwingt den Dämonenkommandanten", -- [2]
-			"Derrota al comandante demoníaco", -- [3]
-			"Derrota al Comandante demoníaco", -- [4]
-			"Terrasser le commandant démon", -- [5]
-			"Sconfiggere il comandante demoniaco", -- [6]
-			"악마 사령관 처치", -- [7]
-			"Derrote o Demônio Comandante", -- [8]
-			"Победа над командиром демонов", -- [9]
-			"击败恶魔指挥官", -- [10]
-			"擊敗惡魔指揮官", -- [11]
-		}, -- [2]
-		{
-			"Repel the Legion Forces", -- [1]
-			"Schlagt die Streitkräfte der Legion zurück", -- [2]
-			"Rechaza a los ejércitos de la Legión", -- [3]
-			"Repele a las fuerzas de la Legión", -- [4]
-			"Repousser les troupes de la Légion", -- [5]
-			"Respingere le forze della Legione", -- [6]
-			"군단 격퇴", -- [7]
-			"Rechace as forças da Legião", -- [8]
-			"Отражение натиска Легиона", -- [9]
-			"击退军团部队", -- [10]
-			"擊退燃燒軍團", -- [11]
-		}, -- [3]
-		{
-			"Defeat the Demon Lord", -- [1]
-			"Bezwingt den Dämonenfürsten", -- [2]
-			"Derrota al señor demoníaco", -- [3]
-			"Derrota al Señor demoníaco", -- [4]
-			"Terrasser le seigneur démon", -- [5]
-			"Sconfiggere il Signore dei Demoni", -- [6]
-			"악마 군주 처치", -- [7]
-			"Derrote o Lorde Demônio", -- [8]
-			"Смерть повелителю демонов", -- [9]
-			"击败恶魔领主", -- [10]
-			"擊敗惡魔領主", -- [11]
-		}, -- [4]
-	},
-	["997"] = {
-		{
-			"test", -- [1]
-			"Willkommen", -- [2]
-			"Bienvenido", -- [3]
-			"Bienvenido", -- [4]
-			"Accueil", -- [5]
-			"Prova", -- [6]
-			"test", -- [7]
-			"test", -- [8]
-			"Добро пожаловать!", -- [9]
-			"测试", -- [10]
-			"test", -- [11]
-		}, -- [1]
-	},
-	["596"] = {
-		{
-			"Utgarde Keep", -- [1]
-			"Burg Utgarde", -- [2]
-			"Fortaleza de Utgarde", -- [3]
-			"Fortaleza de Utgarde", -- [4]
-			"Donjon d’Utgarde", -- [5]
-			"Forte Utgarde", -- [6]
-			"우트가드 성채", -- [7]
-			"Bastilha Utgarde", -- [8]
-			"Крепость Утгард", -- [9]
-			"乌特加德城堡", -- [10]
-			"俄特加德要塞", -- [11]
-		}, -- [1]
-	},
-	["593"] = {
-		{
-			"Ahn'kahet: The Old Kingdom", -- [1]
-			"Ahn'kahet: Das Alte Königreich", -- [2]
-			"Ahn'kahet: El Antiguo Reino", -- [3]
-			"Ahn'kahet: El Antiguo Reino", -- [4]
-			"Ahn’kahet : l’Ancien royaume", -- [5]
-			"Ahn'kahet, il Regno Antico", -- [6]
-			"안카헤트: 고대 왕국", -- [7]
-			"Ahn'kahet: O Velho Reino", -- [8]
-			"Ан'кахет: Старое Королевство", -- [9]
-			"安卡赫特：古代王国", -- [10]
-			"安卡罕特:古王國", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-	},
-	["1136"] = {
-		{
-			"Arcane Essence", -- [1]
-			"Arkane Essenz", -- [2]
-			"Esencia Arcana", -- [3]
-			"Esencia arcana", -- [4]
-			"L’essence arcanique", -- [5]
-			"Essenza Arcana", -- [6]
-			"비전 정수", -- [7]
-			"Essência arcana", -- [8]
-			"Чародейская сущность", -- [9]
-			"奥术精华", -- [10]
-			"秘法精華", -- [11]
-		}, -- [1]
-		{
-			"Becoming the Bait", -- [1]
-			"Zum Köder werden", -- [2]
-			"El arte de ser cebo", -- [3]
-			"Convirtiéndose en cebo", -- [4]
-			"Appât arcanique", -- [5]
-			"Diventare l'esca", -- [6]
-			"미끼가 된 대마법사", -- [7]
-			"Fazer-se de isca", -- [8]
-			"Наживку – на крючок", -- [9]
-			"成为诱饵", -- [10]
-			"成為誘餌", -- [11]
-		}, -- [2]
-		{
-			"Discovering Demons", -- [1]
-			"Dämonen entdecken", -- [2]
-			"Descubrir demonios", -- [3]
-			"Descubriendo demonios", -- [4]
-			"Découverte de démons", -- [5]
-			"Discernendo i demoni", -- [6]
-			"어디, 월척이 잡혔나?", -- [7]
-			"Descobrir demônios", -- [8]
-			"Игра в прятки с демонами", -- [9]
-			"发现恶魔", -- [10]
-			"發現惡魔", -- [11]
-		}, -- [3]
-		{
-			"Defeat Kreenam and Czaadym", -- [1]
-			"Kreenam und Czaadym bezwingen", -- [2]
-			"Derrota a Kreenam y Czaadym", -- [3]
-			"Derrota a Kreenam y Czaadym", -- [4]
-			"Terrasser Kreenam et Czaadym", -- [5]
-			"Sconfiggere Kreenam e Czaadym", -- [6]
-			"크리남과 크자딤 처치", -- [7]
-			"Derrotar Krynam e Czaadym", -- [8]
-			"Кринам и Чаадым", -- [9]
-			"击败克里纳姆和扎迪姆", -- [10]
-			"擊敗克力南和紮地姆", -- [11]
-		}, -- [4]
-		{
-			"Defeat Hakkar the Houndmaster", -- [1]
-			"Bezwingt Hakkar den Hundemeister", -- [2]
-			"Derrota a Hakkar, el maestro de canes", -- [3]
-			"Derrota a Hakkar el Maestro de los canes", -- [4]
-			"Vaincre Hakkar le dresseur de molosses", -- [5]
-			"Sconfiggere Hakkar il Maestro dei Segugi", -- [6]
-			"사냥개조련사 학카르 처치", -- [7]
-			"Derrotar Hakkar, o Mestre de Matilha.", -- [8]
-			"Победа над псарем Хаккаром", -- [9]
-			"击败驯犬者哈卡", -- [10]
-			"擊敗『馴犬者』哈卡爾", -- [11]
-		}, -- [5]
-		{
-			"Speak to Archmage Khadgar", -- [1]
-			"Sprecht mit Erzmagier Khadgar", -- [2]
-			"Habla con el archimago Khadgar", -- [3]
-			"Habla con el archimago Khadgar", -- [4]
-			"Parler à l’archimage Khadgar", -- [5]
-			"Due chiacchiere con l'Arcimago Khadgar", -- [6]
-			"대마법사 카드가와 대화", -- [7]
-			"Falar com Arquimago Hadggar", -- [8]
-			"Разговор с верховным магом Кадгаром", -- [9]
-			"和大法师卡德加谈谈", -- [10]
-			"與大法師卡德加交談", -- [11]
-		}, -- [6]
-	},
-	["1085"] = {
-		{
-			"Heal Vindicator Boros", -- [1]
-			"Heilt Verteidiger Boros", -- [2]
-			"Sanar al vindicador Boros", -- [3]
-			"Sana al Vindicador Boros", -- [4]
-			"Soigner le redresseur de torts Boros", -- [5]
-			"Cura il Vendicatore Boros", -- [6]
-			"구원자 보로스 치유", -- [7]
-			"Cure o Vindicante Boros", -- [8]
-			"Исцеление воздаятеля Бороса", -- [9]
-			"治疗守备官波鲁斯", -- [10]
-			"治療復仇者波羅斯", -- [11]
-		}, -- [1]
-		{
-			"To the Rescue", -- [1]
-			"Rettung in der Not", -- [2]
-			"Al rescate", -- [3]
-			"Al rescate", -- [4]
-			"Prêter main-forte", -- [5]
-			"Al salvataggio", -- [6]
-			"구출의 손길", -- [7]
-			"Ao resgate", -- [8]
-			"Путь к спасению", -- [9]
-			"生死救援", -- [10]
-			"把他們救出來", -- [11]
-		}, -- [2]
-		{
-			"Breaking Out", -- [1]
-			"Ausbruch", -- [2]
-			"La huida", -- [3]
-			"La fuga", -- [4]
-			"La gangr’évasion", -- [5]
-			"Fuga", -- [6]
-			"탈출", -- [7]
-			"A fuga", -- [8]
-			"На свободу", -- [9]
-			"生死逃亡", -- [10]
-			"越獄", -- [11]
-		}, -- [3]
-		{
-			"A Friend in Need", -- [1]
-			"Ein Freund in der Not", -- [2]
-			"Una amiga en apuros", -- [3]
-			"Un amigo en apuros", -- [4]
-			"Un ami dans le besoin", -- [5]
-			"Un amico in difficoltà", -- [6]
-			"도움이 필요한 친구", -- [7]
-			"Um amigo em apuros", -- [8]
-			"Друг в беде", -- [9]
-			"患难与共", -- [10]
-			"需要幫助的朋友", -- [11]
-		}, -- [4]
-		{
-			"What Evil Comes", -- [1]
-			"Welch Böses auch kommt", -- [2]
-			"El mal que surge", -- [3]
-			"La maldad que se aproxima", -- [4]
-			"L’origine du mal", -- [5]
-			"L'origine del male", -- [6]
-			"다가오는 악마의 정체", -- [7]
-			"Que mal virá", -- [8]
-			"Зло не дремлет", -- [9]
-			"无名邪恶", -- [10]
-			"邪惡降臨", -- [11]
-		}, -- [5]
-		{
-			"The Den of Evil", -- [1]
-			"Der Hort des Bösen", -- [2]
-			"La guarida del mal", -- [3]
-			"La guarida del mal", -- [4]
-			"L’antre du mal", -- [5]
-			"L'antro del male", -- [6]
-			"악의 소굴", -- [7]
-			"O antro do mal", -- [8]
-			"Логово зла", -- [9]
-			"恶之巢", -- [10]
-			"邪惡之巢", -- [11]
-		}, -- [6]
-		{
-			"The Beacon Relighted", -- [1]
-			"Das Leuchtfeuer neu entfacht", -- [2]
-			"La baliza se vuelve a encender", -- [3]
-			"La baliza vuelve a prenderse", -- [4]
-			"Le guide ravivé", -- [5]
-			"Riaccensione del faro", -- [6]
-			"다시 켜진 봉화", -- [7]
-			"O sinal reacendido", -- [8]
-			"Возвращение Светоча", -- [9]
-			"信标重燃", -- [10]
-			"重拾聖光", -- [11]
-		}, -- [7]
-	},
-	["1174"] = {
-		{
-			"Vault of the Wardens", -- [1]
-			"Das Verlies der Wächterinnen", -- [2]
-			"Cámara de las Celadoras", -- [3]
-			"Bóveda de los Celadores", -- [4]
-			"Caveau des Gardiennes", -- [5]
-			"Segrete delle Custodi", -- [6]
-			"감시관의 금고", -- [7]
-			"Câmara das Guardiãs", -- [8]
-			"Казематы Стражей", -- [9]
-			"守望者地窟", -- [10]
-			"看守者鐵獄", -- [11]
-		}, -- [1]
-	},
-	["597"] = {
-		{
-			"Utgarde Keep", -- [1]
-			"Burg Utgarde", -- [2]
-			"Fortaleza de Utgarde", -- [3]
-			"Fortaleza de Utgarde", -- [4]
-			"Donjon d’Utgarde", -- [5]
-			"Forte Utgarde", -- [6]
-			"우트가드 성채", -- [7]
-			"Bastilha Utgarde", -- [8]
-			"Крепость Утгард", -- [9]
-			"乌特加德城堡", -- [10]
-			"俄特加德要塞", -- [11]
-		}, -- [1]
-	},
-	["239"] = {
-		{
-			"Boarding Party!", -- [1]
-			"Nicht klar zum Entern!", -- [2]
-			"¡Al abordaje!", -- [3]
-			"¡Al abordaje!", -- [4]
-			"On nous aborde !", -- [5]
-			"Squadra d'assalto!", -- [6]
-			"승선대다!", -- [7]
-			"Grupo de Abordagem!", -- [8]
-			"Абордаж!", -- [9]
-			"登船小队！", -- [10]
-			"登船小隊!", -- [11]
-		}, -- [1]
-		{
-			"Explosives Acquisition", -- [1]
-			"Sprengstoffakquisition", -- [2]
-			"Adquisición de explosivos", -- [3]
-			"Adquisición de explosivos", -- [4]
-			"Acquisition d’explosifs", -- [5]
-			"Recupero esplosivi", -- [6]
-			"폭탄물 획득", -- [7]
-			"Aquisição de Explosivos", -- [8]
-			"Добыть взрывчатку", -- [9]
-			"获取炸药", -- [10]
-			"取得炸藥", -- [11]
-		}, -- [2]
-		{
-			"To Smithereens!", -- [1]
-			"Zerstört das Allianzschiff!", -- [2]
-			"¡En mil pedazos!", -- [3]
-			"¡En mil pedazos!", -- [4]
-			"En mille morceaux !", -- [5]
-			"Falla a pezzi!", -- [6]
-			"산산조각내라!", -- [7]
-			"Pelos ares!", -- [8]
-			"В щепки!", -- [9]
-			"粉身碎骨！", -- [10]
-			"炸成碎片!", -- [11]
-		}, -- [3]
-		{
-			"Defeat the Admiral!", -- [1]
-			"Bezwingt den Admiral!", -- [2]
-			"¡Derrota al almirante!", -- [3]
-			"¡Derrota al almirante!", -- [4]
-			"À bas l’amiral !", -- [5]
-			"Sconfiggi l'Ammiraglio!", -- [6]
-			"제독을 처치하라!", -- [7]
-			"Derrote o Almirante!", -- [8]
-			"Победите адмирала!", -- [9]
-			"击败海军上将！", -- [10]
-			"打敗上將!", -- [11]
-		}, -- [4]
-		{
-			"Bonus Objectives", -- [1]
-			"Bonusziele", -- [2]
-			"Objetivos de bonificación", -- [3]
-			"Objetivos de bonificación", -- [4]
-			"Objectifs bonus", -- [5]
-			"Obiettivi bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivos bônus", -- [8]
-			"Дополнительные задачи", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [5]
-	},
-	["639"] = {
-		{
-			"Hellfire Ramparts", -- [1]
-			"Höllenfeuerbollwerk", -- [2]
-			"Murallas del Fuego Infernal", -- [3]
-			"Murallas del Fuego Infernal", -- [4]
-			"Remparts des Flammes infernales", -- [5]
-			"Bastioni del Fuoco Infernale", -- [6]
-			"지옥불 성루", -- [7]
-			"Muralha Fogo do Inferno", -- [8]
-			"Бастионы Адского Пламени", -- [9]
-			"地狱火城墙", -- [10]
-			"地獄火壁壘", -- [11]
-		}, -- [1]
-	},
-	["539"] = {
-		{
-			"Temple of the Jade Serpent", -- [1]
-			"Tempel der Jadeschlange", -- [2]
-			"Templo del Dragón de Jade", -- [3]
-			"Templo del Dragón de Jade", -- [4]
-			"Temple du Serpent de jade", -- [5]
-			"Tempio della Serpe di Giada", -- [6]
-			"옥룡사", -- [7]
-			"Templo da Serpente de Jade", -- [8]
-			"Храм Нефритовой Змеи", -- [9]
-			"青龙寺", -- [10]
-			"玉蛟寺", -- [11]
-		}, -- [1]
-	},
-	["598"] = {
-		{
-			"Prisoner of War", -- [1]
-			"Kriegsgefangene", -- [2]
-			"Prisionero de Guerra", -- [3]
-			"Prisionera de guerra", -- [4]
-			"Prisonnière de guerre", -- [5]
-			"Prigioniero di guerra", -- [6]
-			"전쟁 포로", -- [7]
-			"Prisioneiro de Guerra", -- [8]
-			"Пленница", -- [9]
-			"战俘", -- [10]
-			"戰俘", -- [11]
-		}, -- [1]
-	},
-	["696"] = {
-		{
-			"Start Timer", -- [1]
-			"Timer starten", -- [2]
-			"Iniciar temporizador", -- [3]
-			"Iniciar temporizador", -- [4]
-			"Démarrer le chronomètre", -- [5]
-			"Avvio conto alla rovescia", -- [6]
-			"초읽기 시작", -- [7]
-			"Inicie o tempo", -- [8]
-			"Запуск таймера", -- [9]
-			"开始计时器", -- [10]
-			"開始計時", -- [11]
-		}, -- [1]
-	},
-	["182"] = {
-		{
-			"Boarding Party!", -- [1]
-			"Nicht klar zum Entern!", -- [2]
-			"¡Al abordaje!", -- [3]
-			"¡Al abordaje!", -- [4]
-			"On nous aborde !", -- [5]
-			"Squadra d'assalto!", -- [6]
-			"승선대다!", -- [7]
-			"Grupo de Abordagem!", -- [8]
-			"Абордаж!", -- [9]
-			"登船小队！", -- [10]
-			"登船小隊!", -- [11]
-		}, -- [1]
-		{
-			"Explosives Acquisition", -- [1]
-			"Sprengstoffakquisition", -- [2]
-			"Adquisición de explosivos", -- [3]
-			"Adquisición de explosivos", -- [4]
-			"Acquisition d’explosifs", -- [5]
-			"Recupero esplosivi", -- [6]
-			"폭탄물 획득", -- [7]
-			"Aquisição de Explosivos", -- [8]
-			"Добыть взрывчатку", -- [9]
-			"获取炸药", -- [10]
-			"取得炸藥", -- [11]
-		}, -- [2]
-		{
-			"To Smithereens!", -- [1]
-			"Zerstört das Hordeschiff!", -- [2]
-			"¡En mil pedazos!", -- [3]
-			"¡En mil pedazos!", -- [4]
-			"En mille morceaux !", -- [5]
-			"Falla a pezzi!", -- [6]
-			"산산조각내라!", -- [7]
-			"Pelos ares!", -- [8]
-			"В щепки!", -- [9]
-			"粉身碎骨！", -- [10]
-			"炸成碎片!", -- [11]
-		}, -- [3]
-		{
-			"Defeat the Admiral!", -- [1]
-			"Bezwingt den Admiral!", -- [2]
-			"¡Derrota al almirante!", -- [3]
-			"¡Derrota al almirante!", -- [4]
-			"À bas l’amiral !", -- [5]
-			"Sconfiggi l'Ammiraglio!", -- [6]
-			"제독을 처치하라!", -- [7]
-			"Derrote o Almirante!", -- [8]
-			"Победите адмирала!", -- [9]
-			"击败海军上将！", -- [10]
-			"打敗上將!", -- [11]
-		}, -- [4]
-		{
-			"Bonus Objectives", -- [1]
-			"Bonusziele", -- [2]
-			"Objetivos de bonificación", -- [3]
-			"Objetivos de bonificación", -- [4]
-			"Objectifs bonus", -- [5]
-			"Obiettivi bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivos bônus", -- [8]
-			"Дополнительные задачи", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [5]
-	},
-	["1125"] = {
-		{
-			"Follow the Caretaker", -- [1]
-			"Dem Verwalter folgen", -- [2]
-			"Sigue al custodio", -- [3]
-			"Sigue al Custodio", -- [4]
-			"Suivre le conservateur", -- [5]
-			"Seguire il Custode", -- [6]
-			"관리자 따라가기", -- [7]
-			"Siga o zelador", -- [8]
-			"Провожатый", -- [9]
-			"跟随管理员", -- [10]
-			"跟隨照料者", -- [11]
-		}, -- [1]
-		{
-			"Remove the Infestation", -- [1]
-			"Die Plage beseitigen", -- [2]
-			"Elimina la infestación", -- [3]
-			"Elimina la infestación", -- [4]
-			"Suppression des envahisseurs", -- [5]
-			"Rimuovere l'infestazione", -- [6]
-			"침입자 소탕", -- [7]
-			"Desinfestar", -- [8]
-			"Расправа над вредителями", -- [9]
-			"去除侵扰", -- [10]
-			"移除暗算機關", -- [11]
-		}, -- [2]
-		{
-			"Locate Magni", -- [1]
-			"Findet Magni", -- [2]
-			"Localiza a Magni", -- [3]
-			"Localiza a Magni", -- [4]
-			"À la recherche de Magni", -- [5]
-			"Trovare Magni", -- [6]
-			"마그니 찾기", -- [7]
-			"Encontrar Magni", -- [8]
-			"Найти Магни", -- [9]
-			"找到麦格尼", -- [10]
-			"找到麥格尼", -- [11]
-		}, -- [3]
-		{
-			"Bring Down the Barrier", -- [1]
-			"Nieder mit der Barriere", -- [2]
-			"Destruye la barrera", -- [3]
-			"Derriba la barrera", -- [4]
-			"À bas la barrière", -- [5]
-			"Abbattere la barriera", -- [6]
-			"방벽 제거", -- [7]
-			"Rompendo barreiras", -- [8]
-			"Устранение барьера", -- [9]
-			"解除屏障", -- [10]
-			"解除屏障", -- [11]
-		}, -- [4]
-		{
-			"Defeat the Demons", -- [1]
-			"Die Dämonen bezwingen", -- [2]
-			"Derrota a los demonios", -- [3]
-			"Derrota a los demonios", -- [4]
-			"Terrasser les démons", -- [5]
-			"Sconfiggere i demoni", -- [6]
-			"악마 무리 처치", -- [7]
-			"Derrotar os demônios", -- [8]
-			"Одолеть демонов", -- [9]
-			"击败恶魔", -- [10]
-			"擊敗惡魔", -- [11]
-		}, -- [5]
-		{
-			"Escort Magni", -- [1]
-			"Begleitet Magni", -- [2]
-			"Escolta a Magni", -- [3]
-			"Escolta a Magni", -- [4]
-			"Escorter Magni", -- [5]
-			"Scortare Magni", -- [6]
-			"마그니 호위", -- [7]
-			"Escoltar Magni", -- [8]
-			"Сопровождение Магни", -- [9]
-			"护送麦格尼", -- [10]
-			"護衛麥格尼", -- [11]
-		}, -- [6]
-		{
-			"Enter the Planetarium", -- [1]
-			"Betretet das Planetarium", -- [2]
-			"Entra en el Planetario", -- [3]
-			"Entra al Planetario", -- [4]
-			"Visite du planétarium", -- [5]
-			"Entrare nel Planetario", -- [6]
-			"투영관에 들어가기", -- [7]
-			"O Planetário", -- [8]
-			"Войти в планетарий", -- [9]
-			"进入天文台", -- [10]
-			"進入渾天儀", -- [11]
-		}, -- [7]
-		{
-			"The Diamond King's Message", -- [1]
-			"Die Botschaft des Diamantenkönigs", -- [2]
-			"El mensaje del rey de diamantes", -- [3]
-			"El mensaje del rey diamante", -- [4]
-			"Le message du roi de diamant", -- [5]
-			"Il messaggio del re dei diamanti", -- [6]
-			"다이아몬드 왕의 전언", -- [7]
-			"Mensagem do rei de diamante", -- [8]
-			"Слова алмазного короля", -- [9]
-			"钻石之王的消息", -- [10]
-			"鑽石之王有話要說", -- [11]
-		}, -- [8]
-	},
-	["1145"] = {
-		{
-			"Commence Bombardment!", -- [1]
-			"Das Bombardement beginnen", -- [2]
-			"¡Que comience el bombardeo!", -- [3]
-			"¡Comiencen el bombardeo!", -- [4]
-			"Feu à volonté !", -- [5]
-			"Fuoco alle polveri!", -- [6]
-			"폭격 개시!", -- [7]
-			"Iniciar o bombardeio!", -- [8]
-			"Готовсь... Цельсь... Пли!", -- [9]
-			"开始轰炸！", -- [10]
-			"開始轟炸！", -- [11]
-		}, -- [1]
-		{
-			"Glide Down to the Rendezvous", -- [1]
-			"Zum Treffpunkt hinuntergleiten", -- [2]
-			"Planea hasta el punto de encuentro", -- [3]
-			"Deslizamiento en descenso hacia el encuentro", -- [4]
-			"Planer jusqu’au point de rendez-vous", -- [5]
-			"Planare verso il punto di ritrovo", -- [6]
-			"고공 낙하", -- [7]
-			"Desça, planando, até o local de encontro", -- [8]
-			"Спуск к месту встречи", -- [9]
-			"滑翔到集合点", -- [10]
-			"滑翔前往集結地點", -- [11]
-		}, -- [2]
-		{
-			"Destroy the Legion", -- [1]
-			"Zerstört die Legion", -- [2]
-			"Destruye a la Legión", -- [3]
-			"Destruye a la Legión", -- [4]
-			"Détruire la Légion", -- [5]
-			"Annientare la Legione", -- [6]
-			"군단 섬멸", -- [7]
-			"Destrua a Legião", -- [8]
-			"Уничтожить Легион!", -- [9]
-			"消灭军团", -- [10]
-			"消滅燃燒軍團", -- [11]
-		}, -- [3]
-		{
-			"Regroup In Front of the Command Center", -- [1]
-			"Vor der Kommandozentrale versammeln", -- [2]
-			"Reagrupamiento frente al centro de mando", -- [3]
-			"Reagrupamiento frente al centro de mando", -- [4]
-			"Regroupement devant le centre de commandement", -- [5]
-			"Raduno al Centro di Comando", -- [6]
-			"사령부 앞에서 재집결", -- [7]
-			"Reagrupem-se em frente ao Centro de Comando", -- [8]
-			"Перегруппировка у флагманского корабля", -- [9]
-			"在指挥部前方重新集结", -- [10]
-			"在指揮中心前面重新整隊", -- [11]
-		}, -- [4]
-		{
-			"Fel Hammer, Fire!", -- [1]
-			"Teufelshammer, Feuer frei!", -- [2]
-			"¡Martillo Vil, fuego!", -- [3]
-			"¡Martillo Vil, fuego!", -- [4]
-			"Marteau gangrené, feu !", -- [5]
-			"Vilmartello, fuoco!", -- [6]
-			"지옥 망치호, 발사!", -- [7]
-			"Martelo Vil, fogo!", -- [8]
-			"Огонь!", -- [9]
-			"邪能之槌号，开火！", -- [10]
-			"魔錘號，射擊！", -- [11]
-		}, -- [5]
-		{
-			"Caria and Varedis At Last", -- [1]
-			"Caria und Varedis, endlich", -- [2]
-			"Caria y Varedis al fin", -- [3]
-			"Caria y Varedis, al fin", -- [4]
-			"Caria et Varedis, enfin…", -- [5]
-			"Caria e Varedis, alla fine ci incontriamo", -- [6]
-			"카리아와 베레디스의 최후", -- [7]
-			"Caria e Varedis, finalmente.", -- [8]
-			"Наказать предателей", -- [9]
-			"最后，只剩下凯丽娅和瓦雷迪斯", -- [10]
-			"最後的凱莉亞和瓦瑞迪斯", -- [11]
-		}, -- [6]
-		{
-			"Malevolence, Get Us Out of Here", -- [1]
-			"Malicia, bringt uns hier weg", -- [2]
-			"Malevolencia, sácanos de aquí", -- [3]
-			"Malevolencia, sácanos de aquí", -- [4]
-			"Maléficiae ! Nous devons sortir d’ici !", -- [5]
-			"Malevola, tiraci fuori da qui", -- [6]
-			"말레볼런스의 지원", -- [7]
-			"Malevolência, tire-nos daqui", -- [8]
-			"Злоба, вытащи нас отсюда.", -- [9]
-			"玛沃伦丝，带我们离开这里", -- [10]
-			"懷惡族母，帶我們離開這裡", -- [11]
-		}, -- [7]
-	},
-	["1037"] = {
-		{
-			"Culling the Cultists", -- [1]
-			"Kultisten knüppeln", -- [2]
-			"Diezmar a los cultores", -- [3]
-			"Sacrificando a los cultores", -- [4]
-			"Sectionner les sectateurs", -- [5]
-			"Epurare i cultisti", -- [6]
-			"이교도 혼내주기", -- [7]
-			"Extermínio de sectários", -- [8]
-			"Истребление сектантов", -- [9]
-			"屠杀教徒", -- [10]
-			"滅除教徒", -- [11]
-		}, -- [1]
-		{
-			"The Ghost King", -- [1]
-			"Der Geisterkönig", -- [2]
-			"El rey fantasma", -- [3]
-			"El Rey Fantasma", -- [4]
-			"Le roi fantôme", -- [5]
-			"Il re fantasma", -- [6]
-			"유령 왕", -- [7]
-			"O fantasma rei", -- [8]
-			"Король-призрак", -- [9]
-			"古王幽魂", -- [10]
-			"國王的鬼魂", -- [11]
-		}, -- [2]
-		{
-			"Thoradin's Folly", -- [1]
-			"Thoradins Torheit", -- [2]
-			"La locura de Thoradin", -- [3]
-			"La locura de Thoradin", -- [4]
-			"La folie de Thoradin", -- [5]
-			"La follia di Thoradin", -- [6]
-			"소라딘의 어리석음", -- [7]
-			"O erro de Thoradin", -- [8]
-			"Ошибка Торадина", -- [9]
-			"索拉丁的愚行", -- [10]
-			"索拉丁的愚行", -- [11]
-		}, -- [3]
-		{
-			"The Tomb of Tyr", -- [1]
-			"Tyrs Grabmal", -- [2]
-			"La Tumba de Tyr", -- [3]
-			"La Tumba de Tyr", -- [4]
-			"Le tombeau de Tyr", -- [5]
-			"Tomba di Tyr", -- [6]
-			"티르의 무덤", -- [7]
-			"A tumba de Tyr", -- [8]
-			"Гробница Тира", -- [9]
-			"提尔之墓", -- [10]
-			"提爾之墓", -- [11]
-		}, -- [4]
-		{
-			"Cleansing the Desecration", -- [1]
-			"Läutern der Entweihung", -- [2]
-			"Purificar la profanación", -- [3]
-			"Purificando la profanación", -- [4]
-			"Purification de la corruption", -- [5]
-			"Purificare la dissacrazione", -- [6]
-			"황폐화 정화", -- [7]
-			"A limpeza da profanação", -- [8]
-			"Очищение от осквернения", -- [9]
-			"净化亵渎", -- [10]
-			"淨化穢瀆之物", -- [11]
-		}, -- [5]
-		{
-			"The Root of the Corruption", -- [1]
-			"Die Wurzel des Übels", -- [2]
-			"La raíz de la corrupción", -- [3]
-			"La raíz de la corrupción", -- [4]
-			"La corruption à sa source", -- [5]
-			"Le radici del male", -- [6]
-			"부패의 근원", -- [7]
-			"A raiz da corrupção", -- [8]
-			"Источник порчи", -- [9]
-			"堕落的根源", -- [10]
-			"腐化的根源", -- [11]
-		}, -- [6]
-		{
-			"The Dark Passage", -- [1]
-			"Die dunkle Passage", -- [2]
-			"El pasadizo oscuro", -- [3]
-			"El pasaje oscuro", -- [4]
-			"Le passage obscur", -- [5]
-			"Passaggio oscuro", -- [6]
-			"어두운 통로", -- [7]
-			"A passagem sombria", -- [8]
-			"Темный путь", -- [9]
-			"黑暗通道", -- [10]
-			"黑暗的道路", -- [11]
-		}, -- [7]
-		{
-			"A Quick Execution", -- [1]
-			"Eine schnelle Hinrichtung", -- [2]
-			"Una ejecución rápida", -- [3]
-			"Una ejecución rápida", -- [4]
-			"Une prompte exécution", -- [5]
-			"Una rapida esecuzione", -- [6]
-			"빠른 처형", -- [7]
-			"Uma execução rápida", -- [8]
-			"Быстрая казнь", -- [9]
-			"高效处决", -- [10]
-			"引劍成一快", -- [11]
-		}, -- [8]
-		{
-			"To Kill a C'Thraxxi", -- [1]
-			"Einen C'Thraxxi töten", -- [2]
-			"Matar a un C'Thraxxi", -- [3]
-			"Matar a un C'Thraxxi", -- [4]
-			"Mort au C’Thraxxi", -- [5]
-			"Uccidere un C'thraxi", -- [6]
-			"크트락시 처치", -- [7]
-			"Crônica de um C'Thraxxi anunciado", -- [8]
-			"Смерть К'Тракси", -- [9]
-			"克拉西斯之死", -- [10]
-			"殺死克蘇拉希", -- [11]
-		}, -- [9]
-		{
-			"The Warbreaker", -- [1]
-			"Der Kriegsbrecher", -- [2]
-			"La Belígera", -- [3]
-			"El Belicista", -- [4]
-			"Le Brise-Guerre", -- [5]
-			"Spezzaguerra", -- [6]
-			"전쟁파괴자", -- [7]
-			"A Senhora da Guerra", -- [8]
-			"Миротворец", -- [9]
-			"灭战者", -- [10]
-			"破戰巨劍", -- [11]
-		}, -- [10]
-	},
-	["589"] = {
-		{
-			"The Violet Hold", -- [1]
-			"Die Violette Festung", -- [2]
-			"El Bastión Violeta", -- [3]
-			"El Bastión Violeta", -- [4]
-			"Le fort Pourpre", -- [5]
-			"Fortezza Violacea", -- [6]
-			"보랏빛 요새", -- [7]
-			"Castelo Violeta", -- [8]
-			"Аметистовая крепость", -- [9]
-			"紫罗兰监狱", -- [10]
-			"紫羅蘭堡", -- [11]
-		}, -- [1]
-	},
-	["689"] = {
-		{
-			"Skyreach", -- [1]
-			"Himmelsnadel", -- [2]
-			"Trecho Celestial", -- [3]
-			"Trecho Celestial", -- [4]
-			"Orée-du-Ciel", -- [5]
-			"Vetta dei Cieli", -- [6]
-			"하늘탑", -- [7]
-			"Beira-céu", -- [8]
-			"Небесный Путь", -- [9]
-			"通天峰", -- [10]
-			"擎天峰", -- [11]
-		}, -- [1]
-	},
-	["1155"] = {
-		{
-			"Where Are They?", -- [1]
-			"Wo sind sie?", -- [2]
-			"¿Dónde están?", -- [3]
-			"¿Dónde están?", -- [4]
-			"Où sont-ils ?", -- [5]
-			"Dove sono?", -- [6]
-			"포로 찾기", -- [7]
-			"Onde estarão?", -- [8]
-			"Где же они?", -- [9]
-			"他们在哪里？", -- [10]
-			"他們在哪裡？", -- [11]
-		}, -- [1]
-		{
-			"The Other Players", -- [1]
-			"Die anderen Spieler", -- [2]
-			"Los otros jugadores", -- [3]
-			"Los otros jugadores", -- [4]
-			"Les autres acteurs", -- [5]
-			"Gli altri partecipanti", -- [6]
-			"남은 자들", -- [7]
-			"Os outros jogadores", -- [8]
-			"Оставшиеся в строю", -- [9]
-			"其他玩家", -- [10]
-			"其他的志士", -- [11]
-		}, -- [2]
-		{
-			"The Third One", -- [1]
-			"Der Dritte", -- [2]
-			"El tercero", -- [3]
-			"El tercero", -- [4]
-			"Le troisième", -- [5]
-			"Il terzo", -- [6]
-			"세 번째 인원", -- [7]
-			"A terceira", -- [8]
-			"Третий", -- [9]
-			"第三个", -- [10]
-			"第三位", -- [11]
-		}, -- [3]
-		{
-			"An Unfortunate Accident", -- [1]
-			"Ein bedauernswerter Unfall", -- [2]
-			"Un desafortunado accidente", -- [3]
-			"Un desafortunado accidente", -- [4]
-			"Un accident des plus malencontreux", -- [5]
-			"Uno sfortunato incidente", -- [6]
-			"불행한 사고", -- [7]
-			"Um lamentável acidente", -- [8]
-			"Досадная случайность", -- [9]
-			"不幸的事故", -- [10]
-			"不幸的意外", -- [11]
-		}, -- [4]
-		{
-			"Back to Searching", -- [1]
-			"Weitersuchen", -- [2]
-			"Reanudar la búsqueda", -- [3]
-			"Una nueva búsqueda", -- [4]
-			"Reprise des recherches", -- [5]
-			"Continuare la ricerca", -- [6]
-			"수색 재개", -- [7]
-			"De volta à procura", -- [8]
-			"Поиски продолжаются", -- [9]
-			"继续搜索", -- [10]
-			"繼續搜索", -- [11]
-		}, -- [5]
-		{
-			"A Secret Meeting", -- [1]
-			"Geheimtreffen", -- [2]
-			"Una reunión secreta", -- [3]
-			"Una reunión secreta", -- [4]
-			"Rendez-vous secret", -- [5]
-			"Un incontro segreto", -- [6]
-			"비밀 만남", -- [7]
-			"Encontro secreto", -- [8]
-			"Тайная встреча", -- [9]
-			"秘密会见", -- [10]
-			"秘密會晤", -- [11]
-		}, -- [6]
-		{
-			"Back to the Manifest", -- [1]
-			"Nochmal von vorne", -- [2]
-			"De vuelta al manifiesto", -- [3]
-			"De vuelta al manifiesto", -- [4]
-			"Revenons-en au manifeste", -- [5]
-			"Di nuovo all'elenco", -- [6]
-			"감옥 명부", -- [7]
-			"De volta ao manifesto", -- [8]
-			"Продолжение поисков", -- [9]
-			"继续寻找名册", -- [10]
-			"繼續找名冊", -- [11]
-		}, -- [7]
-		{
-			"The Final Wing", -- [1]
-			"Der letzte Flügel", -- [2]
-			"La última ala", -- [3]
-			"La última ala", -- [4]
-			"La dernière aile", -- [5]
-			"L'ultima ala", -- [6]
-			"마지막 구역", -- [7]
-			"A última ala", -- [8]
-			"Последнее место для поисков", -- [9]
-			"最终之厅", -- [10]
-			"最後一區", -- [11]
-		}, -- [8]
-		{
-			"Baradin Hold", -- [1]
-			"Baradinfestung", -- [2]
-			"Bastión de Baradin", -- [3]
-			"Bastión de Baradin", -- [4]
-			"Le bastion de Baradin", -- [5]
-			"Forte di Baradin", -- [6]
-			"바라딘 요새", -- [7]
-			"Guarnição Baradin", -- [8]
-			"Крепость Барадин", -- [9]
-			"巴拉丁监狱", -- [10]
-			"巴拉丁堡", -- [11]
-		}, -- [9]
-		{
-			"The Eye of the Beast", -- [1]
-			"Das Auge der Bestie", -- [2]
-			"El ojo de la bestia", -- [3]
-			"El Ojo de la bestia", -- [4]
-			"L’œil de la Bête", -- [5]
-			"L'Occhio della Bestia", -- [6]
-			"괴물의 눈", -- [7]
-			"O olho da fera", -- [8]
-			"Око зверя", -- [9]
-			"野兽之眼", -- [10]
-			"野獸之眼", -- [11]
-		}, -- [10]
-	},
-	["581"] = {
-		{
-			"Halls of Lightning", -- [1]
-			"Die Hallen der Blitze", -- [2]
-			"Cámaras de Relámpagos", -- [3]
-			"Cámaras de Relámpagos", -- [4]
-			"Les salles de Foudre", -- [5]
-			"Sale del Fulmine", -- [6]
-			"번개의 전당", -- [7]
-			"Salões Relampejantes", -- [8]
-			"Чертоги Молний", -- [9]
-			"闪电大厅", -- [10]
-			"雷光大廳", -- [11]
-		}, -- [1]
-	},
-	["681"] = {
-		{
-			"Bloodmaul Slag Mines", -- [1]
-			"Blutschlägermine", -- [2]
-			"Minas Machacasangre", -- [3]
-			"Minas de Escoria Machacasangre", -- [4]
-			"Mine de la Masse-Sanglante", -- [5]
-			"Miniere dei Magliorosso", -- [6]
-			"피망치 잿가루 광산", -- [7]
-			"Minas de Escória do Malho Sangrento", -- [8]
-			"Шлаковые шахты Кровавого Молота", -- [9]
-			"血槌炉渣矿井", -- [10]
-			"熔渣礦場", -- [11]
-		}, -- [1]
-	},
-	["181"] = {
-		{
-			"Assault on Zan'vess", -- [1]
-			"Angriff auf Zan'vess", -- [2]
-			"Asalto a Zan'vess", -- [3]
-			"Asalto a Zan'vess", -- [4]
-			"L’attaque de Zan’vess", -- [5]
-			"Assalto a Zan'vess", -- [6]
-			"잔베스 강습", -- [7]
-			"Ataque a Zan'vess", -- [8]
-			"Атака на Зан'весс", -- [9]
-			"突袭扎尼维斯", -- [10]
-			"襲擊贊斐斯", -- [11]
-		}, -- [1]
-		{
-			"Defenses of Zan'vess", -- [1]
-			"Verteidigung von Zan'vess", -- [2]
-			"Defensas de Zan'vess", -- [3]
-			"Defensas de Zan'vess", -- [4]
-			"Les défenses de Zan’vess", -- [5]
-			"Difese di Zan'vess", -- [6]
-			"잔베스 수비진", -- [7]
-			"Defesas de Zan'vess", -- [8]
-			"Защитное поле Зан'весса", -- [9]
-			"防御扎尼维斯", -- [10]
-			"贊斐斯的防禦", -- [11]
-		}, -- [2]
-		{
-			"The Heart of Zan'vess", -- [1]
-			"Das Herz von Zan'vess", -- [2]
-			"El corazón de Zan'vess", -- [3]
-			"El corazón de Zan'vess", -- [4]
-			"Le cœur de Zan’vess", -- [5]
-			"Cuore di Zan'vess", -- [6]
-			"잔베스 중심부", -- [7]
-			"O Coração de Zan'vess", -- [8]
-			"Сердце Зан'весса", -- [9]
-			"扎尼维斯之心", -- [10]
-			"贊斐斯之心", -- [11]
-		}, -- [3]
-		{
-			"Weapons of Zan'vess", -- [1]
-			"Die Waffen von Zan'vess", -- [2]
-			"Armas de Zan'vess", -- [3]
-			"Armas de Zan'vess", -- [4]
-			"Les armes de Zan’vess", -- [5]
-			"Armi di Zan'vess", -- [6]
-			"잔베스의 무기들", -- [7]
-			"Armas de Zan'vess", -- [8]
-			"Оружие Зан'весса", -- [9]
-			"扎尼维斯的武装", -- [10]
-			"贊斐斯的武器", -- [11]
-		}, -- [4]
-	},
-	["682"] = {
-		{
-			"Grimrail Depot", -- [1]
-			"Grimmgleisdepot", -- [2]
-			"Terminal Malavía", -- [3]
-			"Depósito Riel siniestro", -- [4]
-			"Dépôt de Tristerail", -- [5]
-			"Treno Frecciacupa", -- [6]
-			"파멸철로 정비소", -- [7]
-			"Central do Carrilcruel", -- [8]
-			"Депо Мрачных Путей", -- [9]
-			"恐轨车站", -- [10]
-			"恐軌車站", -- [11]
-		}, -- [1]
-		{
-			"The Grimrail", -- [1]
-			"Der Grimmzug", -- [2]
-			"Malavía", -- [3]
-			"El Riel siniestro", -- [4]
-			"Le Tristerail", -- [5]
-			"Treno Frecciacupa", -- [6]
-			"파멸철로", -- [7]
-			"O Carrilcruel", -- [8]
-			"Мрачный Путь", -- [9]
-			"恐轨号", -- [10]
-			"恐軌列車", -- [11]
-		}, -- [2]
-	},
-	["582"] = {
-		{
-			"Halls of Stone", -- [1]
-			"Die Hallen des Steins", -- [2]
-			"Cámaras de Piedra", -- [3]
-			"Las Cámaras de Piedra", -- [4]
-			"Les salles de Pierre", -- [5]
-			"Sale della Pietra", -- [6]
-			"돌의 전당", -- [7]
-			"Salões Rochosos", -- [8]
-			"Чертоги Камня", -- [9]
-			"岩石大厅", -- [10]
-			"石之大廳", -- [11]
-		}, -- [1]
-	},
-	["528"] = {
-		{
-			"Mogu'shan Palace", -- [1]
-			"Mogu'shanpalast", -- [2]
-			"Palacio Mogu'shan", -- [3]
-			"Palacio Mogu'shan", -- [4]
-			"Palais Mogu’shan", -- [5]
-			"Palazzo Mogu'shan", -- [6]
-			"모구샨 궁전", -- [7]
-			"Palácio Mogu'shan", -- [8]
-			"Дворец Могу'шан", -- [9]
-			"魔古山宫殿", -- [10]
-			"魔古山宮", -- [11]
-		}, -- [1]
-	},
-	["428"] = {
-		{
-			"Shadowmoon Burial Grounds", -- [1]
-			"Schattenmondgrabstätte", -- [2]
-			"Cementerio de Sombraluna", -- [3]
-			"Cementerios de Sombraluna", -- [4]
-			"Terres sacrées d’Ombrelune", -- [5]
-			"Necropoli dei Torvaluna", -- [6]
-			"어둠달 지하묘지", -- [7]
-			"Sepulcrário da Lua Negra", -- [8]
-			"Некрополь Призрачной Луны", -- [9]
-			"影月墓地", -- [10]
-			"影月墓地", -- [11]
-		}, -- [1]
-	},
-	["824"] = {
-		{
-			"The Windrunner", -- [1]
-			"Die Windläufer", -- [2]
-			"El Brisaveloz", -- [3]
-			"El Brisaveloz", -- [4]
-			"Le Coursevent", -- [5]
-			"Ventolesto", -- [6]
-			"윈드러너호", -- [7]
-			"O Correventos", -- [8]
-			"Ветрокрылая", -- [9]
-			"风行者", -- [10]
-			"風行者", -- [11]
-		}, -- [1]
-		{
-			"The Eternity", -- [1]
-			"Die Ewigkeit", -- [2]
-			"La Eternidad", -- [3]
-			"La eternidad", -- [4]
-			"L’Éternité", -- [5]
-			"Eternità Infinita", -- [6]
-			"영원호", -- [7]
-			"O Eternidade", -- [8]
-			"\"Вечность\"", -- [9]
-			"永恒号", -- [10]
-			"永恆之境", -- [11]
-		}, -- [2]
-		{
-			"The Blightcaller", -- [1]
-			"Die Pestrufer", -- [2]
-			"El Clamañublo", -- [3]
-			"El Clamañublo", -- [4]
-			"Le Flétrisseur", -- [5]
-			"Invocatrice del Morbo", -- [6]
-			"역병소환사호", -- [7]
-			"O Pestífero", -- [8]
-			"\"Призыватель гибели\"", -- [9]
-			"凋零使徒号", -- [10]
-			"凋零者", -- [11]
-		}, -- [3]
-		{
-			"The Black Rose", -- [1]
-			"Die Schwarze Rose", -- [2]
-			"La Rosa Negra", -- [3]
-			"La Rosa Negra", -- [4]
-			"La Rose noire", -- [5]
-			"Rosa Nera", -- [6]
-			"흑장미호", -- [7]
-			"Rosa Negra", -- [8]
-			"\"Черная Роза\"", -- [9]
-			"黑玫瑰号", -- [10]
-			"黑玫瑰號", -- [11]
-		}, -- [4]
-		{
-			"Boarding the Skyfire", -- [1]
-			"An Bord der Himmelsfeuer", -- [2]
-			"Abordar El Abrasacielos", -- [3]
-			"Abordar el Abrasacielos", -- [4]
-			"Abordage du Brûleciel", -- [5]
-			"Abbordare la Fuoco Celeste", -- [6]
-			"하늘불꽃호 승선", -- [7]
-			"Abordagem do Celesfogo", -- [8]
-			"Высадка на \"Небесный огонь\"", -- [9]
-			"登上天火号", -- [10]
-			"登上天火號", -- [11]
-		}, -- [5]
-		{
-			"Queen Takes King", -- [1]
-			"Dame schlägt König", -- [2]
-			"La reina se come al rey", -- [3]
-			"La reina derrota al rey", -- [4]
-			"Échec au roi", -- [5]
-			"Regina mangia Re", -- [6]
-			"여왕이 왕을 잡다", -- [7]
-			"Rainha toma rei", -- [8]
-			"Королева бьет короля", -- [9]
-			"后吃王", -- [10]
-			"女王對國王", -- [11]
-		}, -- [6]
-	},
-	["873"] = {
-		{
-			"Pushing Them Back", -- [1]
-			"Drängt sie zurück", -- [2]
-			"Hacerlos retroceder", -- [3]
-			"Rechazarlos", -- [4]
-			"Nettoyage en règle", -- [5]
-			"Respingere i nemici", -- [6]
-			"동작 그만!", -- [7]
-			"Façam-nos recuar", -- [8]
-			"Остановите нашествие", -- [9]
-			"击退他们", -- [10]
-			"擊退敵人", -- [11]
-		}, -- [1]
-		{
-			"Suppressing the Source", -- [1]
-			"Die Quelle unterdrücken", -- [2]
-			"Suprimir la fuente", -- [3]
-			"Suprimir la fuente", -- [4]
-			"Tarir la source", -- [5]
-			"Bloccare la fonte", -- [6]
-			"동력 차단", -- [7]
-			"Supressão da fonte", -- [8]
-			"Ликвидация источника", -- [9]
-			"掐灭源头", -- [10]
-			"截斷來源", -- [11]
-		}, -- [2]
-		{
-			"Defend the Outpost", -- [1]
-			"Verteidigt den Außenposten", -- [2]
-			"Defiende la avanzada", -- [3]
-			"Defiende el Puesto de avanzada", -- [4]
-			"Défendre l’avant-poste", -- [5]
-			"Difendere l'avamposto", -- [6]
-			"전초기지 방어", -- [7]
-			"Defenda o posto-avançado", -- [8]
-			"Защита аванпоста", -- [9]
-			"保卫岗哨", -- [10]
-			"防衛哨站", -- [11]
-		}, -- [3]
-	},
-	["673"] = {
-		{
-			"Start Timer", -- [1]
-			"Timer starten", -- [2]
-			"Iniciar temporizador", -- [3]
-			"Iniciar temporizador", -- [4]
-			"Démarrer le chronomètre", -- [5]
-			"Avvio contro alla rovescia", -- [6]
-			"초읽기 시작", -- [7]
-			"Inicie o tempo", -- [8]
-			"Запуск таймера", -- [9]
-			"开始计时器", -- [10]
-			"開始計時", -- [11]
-		}, -- [1]
-		{
-			"Timer Over", -- [1]
-			"Zeit abgelaufen", -- [2]
-			"Temporizador finalizado", -- [3]
-			"Temporizador terminado", -- [4]
-			"Temps dépassé", -- [5]
-			"Tempo esaurito", -- [6]
-			"제한 시간 종료", -- [7]
-			"Acabou o tempo", -- [8]
-			"Время истекло", -- [9]
-			"时间到", -- [10]
-			"時間結束", -- [11]
-		}, -- [2]
-	},
-	["1166"] = {
-		{
-			"Black Rook Hold", -- [1]
-			"Die Rabenwehr", -- [2]
-			"Torreón Grajo Negro", -- [3]
-			"Fuerte Torre Oscura", -- [4]
-			"Le bastion du Freux", -- [5]
-			"Forte Corvonero", -- [6]
-			"검은 떼까마귀 요새", -- [7]
-			"Castelo Corvo Negro", -- [8]
-			"Крепость Черной Ладьи", -- [9]
-			"黑鸦堡垒", -- [10]
-			"玄鴉堡", -- [11]
-		}, -- [1]
-	},
-	["988"] = {
-		{
-			"The Downward Spiral", -- [1]
-			"Die Abwärtsspirale", -- [2]
-			"La espiral descendente", -- [3]
-			"La espiral descendente", -- [4]
-			"Spirale descendante", -- [5]
-			"La spirale discendente", -- [6]
-			"지하로 내려가기", -- [7]
-			"A espiral descendente", -- [8]
-			"Вниз по винтовой лестнице", -- [9]
-			"逆塔", -- [10]
-			"往下的迴旋樓梯", -- [11]
-		}, -- [1]
-		{
-			"Grasp of the Damned", -- [1]
-			"Umklammerung der Verdammten", -- [2]
-			"En manos de los malditos", -- [3]
-			"El alcance de los malditos", -- [4]
-			"L’emprise des damnés", -- [5]
-			"Presa dei dannati", -- [6]
-			"저주받은 자의 손아귀", -- [7]
-			"Garras dos condenados", -- [8]
-			"Хватка проклятых", -- [9]
-			"亡者之握", -- [10]
-			"詛咒之握", -- [11]
-		}, -- [2]
-		{
-			"Removal Protocols", -- [1]
-			"Entfernungsprotokolle", -- [2]
-			"Protocolos de eliminación", -- [3]
-			"Protocolos de eliminación", -- [4]
-			"Protocoles d’élimination", -- [5]
-			"Protocolli di rimozione", -- [6]
-			"작동규약 제거", -- [7]
-			"Protocolos de remoção", -- [8]
-			"Протоколы ликвидации", -- [9]
-			"清除协议", -- [10]
-			"移除程序", -- [11]
-		}, -- [3]
-		{
-			"Reap the Harvester", -- [1]
-			"Mäht den Ernter nieder", -- [2]
-			"Alzarse con la Falce", -- [3]
-			"Siega la Cosechadora", -- [4]
-			"Faucher la faux", -- [5]
-			"Mietere la Mietitrice", -- [6]
-			"수확기 수확", -- [7]
-			"Ceife a Ceifadora", -- [8]
-			"Жатва Жнеца", -- [9]
-			"收割者将被收割", -- [10]
-			"奪得收割者", -- [11]
-		}, -- [4]
-		{
-			"The Rider's Prize", -- [1]
-			"Der Preis des Reiters", -- [2]
-			"El trofeo del jinete", -- [3]
-			"El premio del jinete", -- [4]
-			"Le trophée du cavalier", -- [5]
-			"Il premio dei Cavalieri", -- [6]
-			"기수의 유물", -- [7]
-			"O prêmio do cavalgante", -- [8]
-			"Трофей всадника", -- [9]
-			"黑骑士的财宝", -- [10]
-			"黑騎兵的寶物", -- [11]
-		}, -- [5]
-		{
-			"Ulthalesh Feasts", -- [1]
-			"Ulthalesh labt sich", -- [2]
-			"El festín de Ulthalesh", -- [3]
-			"Festines de Ulthalesh", -- [4]
-			"Le festin d’Ulthalesh", -- [5]
-			"Il banchetto di Ulthalesh", -- [6]
-			"울타레쉬의 포식", -- [7]
-			"Ulthalesh se deleita", -- [8]
-			"Пир Ултхалеша", -- [9]
-			"乌萨勒斯的盛宴", -- [10]
-			"烏薩萊許大快朵頤", -- [11]
-		}, -- [6]
-		{
-			"", -- [1]
-			"", -- [2]
-			"", -- [3]
-			"", -- [4]
-			"", -- [5]
-			"", -- [6]
-			"", -- [7]
-			"", -- [8]
-			"", -- [9]
-			"", -- [10]
-			"", -- [11]
-		}, -- [7]
-	},
-	["573"] = {
-		{
-			"Halls of Reflection", -- [1]
-			"Hallen der Reflexion", -- [2]
-			"Cámaras de Reflexión", -- [3]
-			"Cámaras de Reflexión", -- [4]
-			"Salles des Reflets", -- [5]
-			"Sale dei Riflessi", -- [6]
-			"투영의 전당", -- [7]
-			"Salões da Reflexão", -- [8]
-			"Залы Отражений", -- [9]
-			"映像大厅", -- [10]
-			"倒影大廳", -- [11]
-		}, -- [1]
-	},
-	["680"] = {
-		{
-			"Bloodmaul Slag Mines", -- [1]
-			"Blutschlägermine", -- [2]
-			"Minas Machacasangre", -- [3]
-			"Minas de escoria Machacasangre", -- [4]
-			"Mine de la Masse-Sanglante", -- [5]
-			"Miniere dei Magliorosso", -- [6]
-			"피망치 잿가루 광산", -- [7]
-			"Minas de Escória do Malho Sangrento", -- [8]
-			"Шлаковые шахты Кровавого Молота", -- [9]
-			"血槌炉渣矿井", -- [10]
-			"血槌熔渣礦場", -- [11]
-		}, -- [1]
-	},
-	["580"] = {
-		{
-			"Halls of Lightning", -- [1]
-			"Die Hallen der Blitze", -- [2]
-			"Cámaras de Relámpagos", -- [3]
-			"Cámaras de Relámpagos", -- [4]
-			"Les salles de Foudre", -- [5]
-			"Sale del Fulmine", -- [6]
-			"번개의 전당", -- [7]
-			"Salões Relampejantes", -- [8]
-			"Чертоги Молний", -- [9]
-			"闪电大厅", -- [10]
-			"雷光大廳", -- [11]
-		}, -- [1]
-	},
-	["499"] = {
-		{
-			"Invasion!", -- [1]
-			"Invasion!", -- [2]
-			"¡Invasión!", -- [3]
-			"¡Invasión!", -- [4]
-			"Alerte aux envahisseurs !", -- [5]
-			"Invasione!", -- [6]
-			"침략!", -- [7]
-			"Invasão!", -- [8]
-			"Вторжение!", -- [9]
-			"入侵！", -- [10]
-			"入侵！", -- [11]
-		}, -- [1]
-		{
-			"Ambush", -- [1]
-			"Hinterhalt", -- [2]
-			"Emboscada", -- [3]
-			"Emboscada", -- [4]
-			"Embuscade", -- [5]
-			"Imboscata", -- [6]
-			"습격", -- [7]
-			"Emboscada", -- [8]
-			"Засада", -- [9]
-			"伏击", -- [10]
-			"伏擊", -- [11]
-		}, -- [2]
-		{
-			"The Holdout", -- [1]
-			"Durchhaltevermögen", -- [2]
-			"La resistencia", -- [3]
-			"La resistencia", -- [4]
-			"Le baroud", -- [5]
-			"Resistenza", -- [6]
-			"항전", -- [7]
-			"A Resistência", -- [8]
-			"Продержаться подольше", -- [9]
-			"坚持到底", -- [10]
-			"堅持到底", -- [11]
-		}, -- [3]
-		{
-			"Cleanup", -- [1]
-			"Aufräumkommando", -- [2]
-			"Limpieza", -- [3]
-			"Limpieza", -- [4]
-			"Nettoyage", -- [5]
-			"Ripulitura", -- [6]
-			"소탕", -- [7]
-			"Limpeza", -- [8]
-			"Зачистка", -- [9]
-			"摧枯拉朽", -- [10]
-			"收拾殘局", -- [11]
-		}, -- [4]
-		{
-			"The Calm", -- [1]
-			"Ruhe nach dem Sturm", -- [2]
-			"La calma", -- [3]
-			"La calma", -- [4]
-			"Le calme", -- [5]
-			"La calma", -- [6]
-			"정적", -- [7]
-			"A Calma", -- [8]
-			"Затишье", -- [9]
-			"风平浪静", -- [10]
-			"歇息備戰", -- [11]
-		}, -- [5]
-		{
-			"It is Near", -- [1]
-			"Es ist in der Nähe", -- [2]
-			"Está cerca", -- [3]
-			"Está cerca", -- [4]
-			"C’est tout près", -- [5]
-			"È vicino", -- [6]
-			"무언가 다가온다", -- [7]
-			"Esté perto", -- [8]
-			"Оно уже рядом", -- [9]
-			"它过来了", -- [10]
-			"就在眼前", -- [11]
-		}, -- [6]
-		{
-			"Bronze", -- [1]
-			"Bronze", -- [2]
-			"Bronce", -- [3]
-			"Bronce", -- [4]
-			"Bronze", -- [5]
-			"Bronzo", -- [6]
-			"동메달", -- [7]
-			"Bronze", -- [8]
-			"Бронза", -- [9]
-			"青铜级", -- [10]
-			"青銅", -- [11]
-		}, -- [7]
-		{
-			"Silver", -- [1]
-			"Silber", -- [2]
-			"Plata", -- [3]
-			"Plata", -- [4]
-			"Argent", -- [5]
-			"Argento", -- [6]
-			"은메달", -- [7]
-			"Prata", -- [8]
-			"Серебро", -- [9]
-			"白银级", -- [10]
-			"白銀", -- [11]
-		}, -- [8]
-		{
-			"Gold", -- [1]
-			"Gold", -- [2]
-			"Oro", -- [3]
-			"Oro", -- [4]
-			"Or", -- [5]
-			"Oro", -- [6]
-			"금메달", -- [7]
-			"Ouro", -- [8]
-			"Золото", -- [9]
-			"黄金级", -- [10]
-			"黃金", -- [11]
-		}, -- [9]
-		{
-			"Platinum", -- [1]
-			"Platin", -- [2]
-			"Platino", -- [3]
-			"Platino", -- [4]
-			"Platine", -- [5]
-			"Platino", -- [6]
-			"백금메달", -- [7]
-			"Platina", -- [8]
-			"Платина", -- [9]
-			"白金", -- [10]
-			"白金", -- [11]
-		}, -- [10]
-	},
-	["215"] = {
-		{
-			"Speak to Taoshi", -- [1]
-			"Sprecht mit Taoshi", -- [2]
-			"Habla con Taoshi", -- [3]
-			"Habla con Taoshi", -- [4]
-			"Parler à Taoshi", -- [5]
-			"Parla con Taoshi", -- [6]
-			"타오스와 대화", -- [7]
-			"Falar com Taoshi", -- [8]
-			"Поговорить с Таоши", -- [9]
-			"与陶矢交谈", -- [10]
-			"與陶氏說話", -- [11]
-		}, -- [1]
-		{
-			"Reach the Exit", -- [1]
-			"Erreicht den Ausgang", -- [2]
-			"Alcanza la salida", -- [3]
-			"Alcanza la salida", -- [4]
-			"Atteindre la sortie", -- [5]
-			"Raggiungi l'uscita", -- [6]
-			"출구로 이동", -- [7]
-			"Alcançar a Saída", -- [8]
-			"Добраться до выхода", -- [9]
-			"到达出口", -- [10]
-			"抵達出口", -- [11]
-		}, -- [2]
-	},
-	["599"] = {
-		{
-			"Prisoner of War", -- [1]
-			"Kriegsgefangene", -- [2]
-			"Prisionero de Guerra", -- [3]
-			"Prisionera de guerra", -- [4]
-			"Prisonnière de guerre", -- [5]
-			"Prigioniero di guerra", -- [6]
-			"전쟁 포로", -- [7]
-			"Prisioneiro de Guerra", -- [8]
-			"Пленница", -- [9]
-			"战俘", -- [10]
-			"戰俘", -- [11]
-		}, -- [1]
-		{
-			"Commander Stoutbeard defeated", -- [1]
-			"Kommandant Starkbart bezwungen", -- [2]
-			"Comandante Barbarrecia derrotado", -- [3]
-			"Comandante Barbarrecia derrotado.", -- [4]
-			"Commandant Rudebarbe vaincu", -- [5]
-			"Sconfiggi il Comandante Barbaforte", -- [6]
-			"사령관 스타우트비어드 처치", -- [7]
-			"Comandante Barbacã derrotado", -- [8]
-			"Командир Пивобород повержен", -- [9]
-			"击败指挥官斯托比德", -- [10]
-			"已擊敗指揮官厚鬚", -- [11]
-		}, -- [2]
-	},
-	["515"] = {
-		{
-			"Disciples of Naralex", -- [1]
-			"Jünger von Naralex", -- [2]
-			"Discípulos de Naralex", -- [3]
-			"Discípulos de Naralex", -- [4]
-			"Les disciples de Naralex", -- [5]
-			"Discepoli di Naralex", -- [6]
-			"나랄렉스의 제자", -- [7]
-			"Discípulos de Naralex", -- [8]
-			"Послушники Наралекса", -- [9]
-			"纳拉雷克斯的信徒", -- [10]
-			"納拉雷克斯侍徒", -- [11]
-		}, -- [1]
-		{
-			"Disciples of Naralex", -- [1]
-			"Jünger von Naralex", -- [2]
-			"Discípulos de Naralex", -- [3]
-			"Discípulos de Naralex", -- [4]
-			"Les disciples de Naralex", -- [5]
-			"Discepoli di Naralex", -- [6]
-			"나랄렉스의 제자", -- [7]
-			"Discípulos de Naralex", -- [8]
-			"Послушники Наралекса", -- [9]
-			"纳拉雷克斯的信徒", -- [10]
-			"納拉雷克斯侍徒", -- [11]
-		}, -- [2]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [3]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [4]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [5]
-	},
-	["615"] = {
-		{
-			"The Mechanar", -- [1]
-			"Die Mechanar", -- [2]
-			"El Mechanar", -- [3]
-			"El Mechanar", -- [4]
-			"Le Méchanar", -- [5]
-			"Mecanar", -- [6]
-			"메카나르", -- [7]
-			"Mecanar", -- [8]
-			"Механар", -- [9]
-			"能源舰", -- [10]
-			"麥克納爾", -- [11]
-		}, -- [1]
-	},
-	["591"] = {
-		{
-			"Drak'Tharon Keep", -- [1]
-			"Feste Drak'Tharon", -- [2]
-			"Fortaleza de Drak'Tharon", -- [3]
-			"Fortaleza de Drak'Tharon", -- [4]
-			"Donjon de Drak’Tharon", -- [5]
-			"Forte di Drak'Tharon", -- [6]
-			"드락타론 성채", -- [7]
-			"Bastilha Drak'Tharon", -- [8]
-			"Крепость Драк'Тарон", -- [9]
-			"达克萨隆要塞", -- [10]
-			"德拉克薩隆要塞", -- [11]
-		}, -- [1]
-	},
-	["992"] = {
-		{
-			"Maw of Souls", -- [1]
-			"Der Seelenschlund", -- [2]
-			"Fauce de Almas", -- [3]
-			"Fauces de almas", -- [4]
-			"La Gueule des âmes", -- [5]
-			"Fauci delle Anime", -- [6]
-			"영혼의 아귀", -- [7]
-			"Gorja das Almas", -- [8]
-			"Утроба душ", -- [9]
-			"噬魂之喉", -- [10]
-			"靈魂之喉", -- [11]
-		}, -- [1]
-	},
-	["678"] = {
-		{
-			"Auchindoun", -- [1]
-			"Auchindoun", -- [2]
-			"Auchindoun", -- [3]
-			"Auchindoun", -- [4]
-			"Auchindoun", -- [5]
-			"Auchindoun", -- [6]
-			"아킨둔", -- [7]
-			"Auchindoun", -- [8]
-			"Аукиндон", -- [9]
-			"奥金顿", -- [10]
-			"奧齊頓", -- [11]
-		}, -- [1]
-	},
-	["592"] = {
-		{
-			"Ahn'kahet: The Old Kingdom", -- [1]
-			"Ahn'kahet: Das Alte Königreich", -- [2]
-			"Ahn'kahet: El Antiguo Reino", -- [3]
-			"Ahn'kahet: El Antiguo Reino", -- [4]
-			"Ahn’kahet : l’Ancien royaume", -- [5]
-			"Ahn'kahet, il Regno Antico", -- [6]
-			"안카헤트: 고대 왕국", -- [7]
-			"Ahn'kahet: O Velho Reino", -- [8]
-			"Ан'кахет: Старое Королевство", -- [9]
-			"安卡赫特：古代王国", -- [10]
-			"安卡罕特:古王國", -- [11]
-		}, -- [1]
-	},
-	["278"] = {
-		{
-			"Noodle Time", -- [1]
-			"Nudelzeit", -- [2]
-			"La hora de los fideos", -- [3]
-			"La hora de los fideos", -- [4]
-			"L’heure des nouilles", -- [5]
-			"Spaghetti a Volontà", -- [6]
-			"국수 시간", -- [7]
-			"Hora do Macarrão", -- [8]
-			"Час лапши", -- [9]
-			"汤面时间", -- [10]
-			"湯麵時刻", -- [11]
-		}, -- [1]
-		{
-			"Bonus: Go for the Gold!", -- [1]
-			"Bonus: Siegertreppchen!", -- [2]
-			"Bonus: ¡A por el oro!", -- [3]
-			"Bonus: ¡Ve por el oro!", -- [4]
-			"Bonus : tentez l’or !", -- [5]
-			"Bonus: punta all'oro!", -- [6]
-			"보너스: 금메달을 향해!", -- [7]
-			"Bônus: Tente o ouro!", -- [8]
-			"Бонус: золото ждать не будет!", -- [9]
-			"奖励：冲向黄金！", -- [10]
-			"獎勵目標:金牌挑戰", -- [11]
-		}, -- [2]
-	},
-	["614"] = {
-		{
-			"The Mechanar", -- [1]
-			"Die Mechanar", -- [2]
-			"El Mechanar", -- [3]
-			"El Mechanar", -- [4]
-			"Le Méchanar", -- [5]
-			"Mecanar", -- [6]
-			"메카나르", -- [7]
-			"Mecanar", -- [8]
-			"Механар", -- [9]
-			"能源舰", -- [10]
-			"麥克納爾", -- [11]
-		}, -- [1]
-	},
-	["983"] = {
-		{
-			"Into the Skies", -- [1]
-			"In die Lüfte", -- [2]
-			"Hacia los cielos", -- [3]
-			"Hasta el cielo", -- [4]
-			"Dans les cieux", -- [5]
-			"Nel cuore del cielo", -- [6]
-			"저 하늘 위로", -- [7]
-			"Céus acima", -- [8]
-			"В небеса", -- [9]
-			"一步登天", -- [10]
-			"進入天空", -- [11]
-		}, -- [1]
-		{
-			"Running In The Clouds", -- [1]
-			"Rennen in den Wolken", -- [2]
-			"Correr por las nubes", -- [3]
-			"Corriendo entre las nubes", -- [4]
-			"Course dans les nuages", -- [5]
-			"A spasso tra le nubi", -- [6]
-			"구름을 달리다", -- [7]
-			"Corrida nas nuvens", -- [8]
-			"Бегущие по облакам", -- [9]
-			"腾云驾雾", -- [10]
-			"奔跑在雲端", -- [11]
-		}, -- [2]
-		{
-			"A Shocking Development", -- [1]
-			"Eine schockierende Entwicklung", -- [2]
-			"Un desarrollo impactante", -- [3]
-			"Un progreso impactante", -- [4]
-			"Ambiance survoltée", -- [5]
-			"Uno sviluppo sconcertante", -- [6]
-			"비약적인 발전", -- [7]
-			"Um acontecimento chocante", -- [8]
-			"Шокирующий поворот", -- [9]
-			"惊天动地", -- [10]
-			"驚人的發展", -- [11]
-		}, -- [3]
-		{
-			"Against The Storm", -- [1]
-			"Gegen den Sturm", -- [2]
-			"Contra la tormenta", -- [3]
-			"Contra la tormenta", -- [4]
-			"À l’épreuve des tempêtes", -- [5]
-			"Contro la tempesta", -- [6]
-			"폭풍에 맞서기", -- [7]
-			"Contra a tempestade", -- [8]
-			"Противостояние буре", -- [9]
-			"抗击风暴", -- [10]
-			"抵抗風暴", -- [11]
-		}, -- [4]
-		{
-			"Dragon Wrangling", -- [1]
-			"Drachenringen", -- [2]
-			"Doma de dragones", -- [3]
-			"Dragón atrapado", -- [4]
-			"Domptage draconique", -- [5]
-			"Domatore di draghi", -- [6]
-			"폭풍용을 타고", -- [7]
-			"Como domar um dragão", -- [8]
-			"Объездка дракона", -- [9]
-			"降龙伏虎", -- [10]
-			"與龍激鬥", -- [11]
-		}, -- [5]
-		{
-			"The Tyrant of Skywall", -- [1]
-			"Der Tyrann des Himmelswalls", -- [2]
-			"El tirano del Muro Celeste", -- [3]
-			"El tirano de Muro Celeste", -- [4]
-			"Le tyran de Mur-Céleste", -- [5]
-			"Il tiranno di Celaria", -- [6]
-			"하늘담의 폭군", -- [7]
-			"O tirano da Muralha Celeste", -- [8]
-			"Тиран Небесной выси", -- [9]
-			"天空之墙的统治者", -- [10]
-			"天空之牆的暴君", -- [11]
-		}, -- [6]
-		{
-			"Fists of the Heavens", -- [1]
-			"Fäuste der Himmel", -- [2]
-			"Puños de los Cielos", -- [3]
-			"Puños de los Cielos", -- [4]
-			"Poings des cieux", -- [5]
-			"Pugni del Cielo", -- [6]
-			"하늘의 주먹", -- [7]
-			"Punhos do Paraíso", -- [8]
-			"Кулаки Небес", -- [9]
-			"诸天之拳", -- [10]
-			"蒼天之拳", -- [11]
-		}, -- [7]
-	},
-	["1134"] = {
-		{
-			"A Personal Request", -- [1]
-			"Eine persönliche Bitte", -- [2]
-			"Un favor personal", -- [3]
-			"Una petición personal", -- [4]
-			"Une requête personnelle", -- [5]
-			"Una richiesta personale", -- [6]
-			"개인적인 부탁", -- [7]
-			"Um pedido pessoal", -- [8]
-			"Личная просьба", -- [9]
-			"私人请求", -- [10]
-			"私人要求", -- [11]
-		}, -- [1]
-		{
-			"A Bold Rescue", -- [1]
-			"Eine kühne Rettung", -- [2]
-			"Un rescate atrevido", -- [3]
-			"Un rescate audaz", -- [4]
-			"Un sauvetage des plus audacieux", -- [5]
-			"Un salvataggio audace", -- [6]
-			"대담한 구출", -- [7]
-			"Resgate ousado", -- [8]
-			"Дерзкое спасение", -- [9]
-			"大胆的营救", -- [10]
-			"大膽援救", -- [11]
-		}, -- [2]
-		{
-			"Prisoner No More", -- [1]
-			"Nie wieder Gefangener", -- [2]
-			"Fin del cautiverio", -- [3]
-			"Prisionero, ya no más", -- [4]
-			"Liberté retrouvée", -- [5]
-			"Mai più prigioniero", -- [6]
-			"그대에게 자유를", -- [7]
-			"Chega de ser prisioneiro", -- [8]
-			"На свободу!", -- [9]
-			"不再是阶下囚", -- [10]
-			"不再是囚犯", -- [11]
-		}, -- [3]
-	},
-	["207"] = {
-		{
-			"Taking Off...", -- [1]
-			"Abgehoben…", -- [2]
-			"¡Despegando!", -- [3]
-			"¡Despegando!", -- [4]
-			"Décollage…", -- [5]
-			"Decollo...", -- [6]
-			"이륙...", -- [7]
-			"Decolando...", -- [8]
-			"Взлетаем!", -- [9]
-			"起飞……", -- [10]
-			"動身...", -- [11]
-		}, -- [1]
-		{
-			"Intercepted!", -- [1]
-			"Abgefangen!", -- [2]
-			"¡Te han interceptado!", -- [3]
-			"¡Te han interceptado!", -- [4]
-			"Intercepté !", -- [5]
-			"Intercettato!", -- [6]
-			"발각!", -- [7]
-			"Interceptado!", -- [8]
-			"Перехват!", -- [9]
-			"遭遇拦截！", -- [10]
-			"攔截!", -- [11]
-		}, -- [2]
-		{
-			"Master the Beastmaster", -- [1]
-			"Meistert den Bestienmeister", -- [2]
-			"Domina al maestro de bestias", -- [3]
-			"Domina al maestro de bestias", -- [4]
-			"Maîtriser le belluaire", -- [5]
-			"Domare il Maestro delle Bestie", -- [6]
-			"야수조련사 조련하기", -- [7]
-			"Dominar o Senhor das Feras", -- [8]
-			"Обуздать повелителя зверей", -- [9]
-			"击败兽王", -- [10]
-			"馴服馴獸者", -- [11]
-		}, -- [3]
-		{
-			"Into the Mines", -- [1]
-			"In die Minen", -- [2]
-			"Hacia las minas", -- [3]
-			"Hacia las minas", -- [4]
-			"Dans la mine", -- [5]
-			"Nelle miniere", -- [6]
-			"광산으로", -- [7]
-			"Entrando nas minas", -- [8]
-			"В шахту!", -- [9]
-			"进入矿洞", -- [10]
-			"進入礦坑", -- [11]
-		}, -- [4]
-		{
-			"What's Yours is Mine!", -- [1]
-			"Meine Mine!", -- [2]
-			"¡Lo tuyo es mío!", -- [3]
-			"¡Lo tuyo es mío!", -- [4]
-			"Vous avez bonne mine !", -- [5]
-			"Quel che è tuo è mio!", -- [6]
-			"네 것은 내 것!", -- [7]
-			"A mina da hora!", -- [8]
-			"Было твое, стало мое!", -- [9]
-			"你的矿洞就是我的矿洞！", -- [10]
-			"你的礦就是我的礦!", -- [11]
-		}, -- [5]
-		{
-			"Cover Me!", -- [1]
-			"Gebt mir Deckung!", -- [2]
-			"¡Cúbreme!", -- [3]
-			"¡Cúbreme!", -- [4]
-			"Couvrez-moi !", -- [5]
-			"Coprimi!", -- [6]
-			"엄호해줘요!", -- [7]
-			"Me dê cobertura!", -- [8]
-			"Прикрой меня!", -- [9]
-			"掩护我！", -- [10]
-			"掩護我!", -- [11]
-		}, -- [6]
-	},
-	["583"] = {
-		{
-			"A Royal Escort", -- [1]
-			"Die Eskorte des Königs", -- [2]
-			"Una escolta real", -- [3]
-			"Una escolta real", -- [4]
-			"Une escorte royale", -- [5]
-			"Scorta reale", -- [6]
-			"왕 호위", -- [7]
-			"Uma escolta real", -- [8]
-			"Королевский эскорт", -- [9]
-			"皇家护卫", -- [10]
-			"護送皇室", -- [11]
-		}, -- [1]
-	},
-	["46"] = {
-		{
-			"Shado-Pan Monastery", -- [1]
-			"Shado-Pan-Kloster", -- [2]
-			"Monasterio del Shadopan", -- [3]
-			"Monasterio del Shadopan", -- [4]
-			"Monastère des Pandashan", -- [5]
-			"Monastero degli Shandaren", -- [6]
-			"음영파 수도원", -- [7]
-			"Monastério Shado-pan", -- [8]
-			"Монастырь Шадо-Пан", -- [9]
-			"影踪禅院", -- [10]
-			"影潘僧院", -- [11]
-		}, -- [1]
-	},
-	["707"] = {
-		{
-			"Invasion!", -- [1]
-			"Invasion!", -- [2]
-			"¡Invasión!", -- [3]
-			"¡Invasión!", -- [4]
-			"Alerte aux envahisseurs !", -- [5]
-			"Invasione!", -- [6]
-			"침략!", -- [7]
-			"Invasão!", -- [8]
-			"Вторжение!", -- [9]
-			"入侵！", -- [10]
-			"入侵！", -- [11]
-		}, -- [1]
-		{
-			"Ambush", -- [1]
-			"Hinterhalt", -- [2]
-			"Emboscada", -- [3]
-			"Emboscada", -- [4]
-			"Embuscade", -- [5]
-			"Imboscata", -- [6]
-			"습격", -- [7]
-			"Emboscada", -- [8]
-			"Засада", -- [9]
-			"伏击", -- [10]
-			"伏擊", -- [11]
-		}, -- [2]
-		{
-			"The Holdout", -- [1]
-			"Durchhaltevermögen", -- [2]
-			"La resistencia", -- [3]
-			"La resistencia", -- [4]
-			"Le baroud", -- [5]
-			"Resistenza", -- [6]
-			"항전", -- [7]
-			"A Resistência", -- [8]
-			"Продержаться подольше", -- [9]
-			"坚持到底", -- [10]
-			"堅持到底", -- [11]
-		}, -- [3]
-		{
-			"Cleanup", -- [1]
-			"Aufräumkommando", -- [2]
-			"Limpieza", -- [3]
-			"Limpieza", -- [4]
-			"Nettoyage", -- [5]
-			"Ripulitura", -- [6]
-			"소탕", -- [7]
-			"Limpeza", -- [8]
-			"Зачистка", -- [9]
-			"摧枯拉朽", -- [10]
-			"收拾殘局", -- [11]
-		}, -- [4]
-		{
-			"The Calm", -- [1]
-			"Ruhe nach dem Sturm", -- [2]
-			"La calma", -- [3]
-			"La calma", -- [4]
-			"Le calme", -- [5]
-			"La calma", -- [6]
-			"정적", -- [7]
-			"A Calma", -- [8]
-			"Затишье", -- [9]
-			"风平浪静", -- [10]
-			"歇息備戰", -- [11]
-		}, -- [5]
-		{
-			"The Forest Walks", -- [1]
-			"Ränkespiele", -- [2]
-			"El bosque anda", -- [3]
-			"Los caminos del bosque", -- [4]
-			"La forêt en marche", -- [5]
-			"La foresta cammina", -- [6]
-			"숲이 걸어온다", -- [7]
-			"A floresta se move", -- [8]
-			"Лес движется", -- [9]
-			"移动的森林", -- [10]
-			"森林動起來", -- [11]
-		}, -- [6]
-		{
-			"Bronze", -- [1]
-			"Bronze", -- [2]
-			"Bronce", -- [3]
-			"Bronce", -- [4]
-			"Bronze", -- [5]
-			"Bronzo", -- [6]
-			"동메달", -- [7]
-			"Bronze", -- [8]
-			"Бронза", -- [9]
-			"青铜级", -- [10]
-			"青銅", -- [11]
-		}, -- [7]
-		{
-			"Silver", -- [1]
-			"Silber", -- [2]
-			"Plata", -- [3]
-			"Plata", -- [4]
-			"Argent", -- [5]
-			"Argento", -- [6]
-			"은메달", -- [7]
-			"Prata", -- [8]
-			"Серебро", -- [9]
-			"白银级", -- [10]
-			"白銀", -- [11]
-		}, -- [8]
-		{
-			"Gold", -- [1]
-			"Gold", -- [2]
-			"Oro", -- [3]
-			"Oro", -- [4]
-			"Or", -- [5]
-			"Oro", -- [6]
-			"금메달", -- [7]
-			"Ouro", -- [8]
-			"Золото", -- [9]
-			"黄金级", -- [10]
-			"黃金", -- [11]
-		}, -- [9]
-		{
-			"Platinum", -- [1]
-			"Platin", -- [2]
-			"Platino", -- [3]
-			"Platino", -- [4]
-			"Platine", -- [5]
-			"Platino", -- [6]
-			"백금메달", -- [7]
-			"Platina", -- [8]
-			"Платина", -- [9]
-			"白金", -- [10]
-			"白金", -- [11]
-		}, -- [10]
-	},
-	["607"] = {
-		{
-			"The Shattered Halls", -- [1]
-			"Die Zerschmetterten Hallen", -- [2]
-			"Las Salas Arrasadas", -- [3]
-			"Las Salas Arrasadas", -- [4]
-			"Les salles Brisées", -- [5]
-			"Sale della Devastazione", -- [6]
-			"으스러진 손의 전당", -- [7]
-			"Salões Despedaçados", -- [8]
-			"Разрушенные залы", -- [9]
-			"破碎大厅", -- [10]
-			"破碎大廳", -- [11]
-		}, -- [1]
-	},
-	["183"] = {
-		{
-			"Prepare the Defenses", -- [1]
-			"Bereitet die Verteidigung vor", -- [2]
-			"Prepara las defensas", -- [3]
-			"Prepara las defensas", -- [4]
-			"Préparer les défenses", -- [5]
-			"Prepara le difese", -- [6]
-			"수비를 준비하라", -- [7]
-			"Prepare as defesas", -- [8]
-			"Подготовка укреплений", -- [9]
-			"准备防御", -- [10]
-			"防守準備", -- [11]
-		}, -- [1]
-		{
-			"Kill Commander Scargash", -- [1]
-			"Tötet Kommandant Schlitznarbe", -- [2]
-			"Mata al comandante Sangrescara", -- [3]
-			"Mata al comandante Sangrescara", -- [4]
-			"Tuer le commandant Coupentaille", -- [5]
-			"Uccidi il Comandante Sventracuori", -- [6]
-			"사령관 스카가쉬 살상 명령", -- [7]
-			"Mate o Comandante Escorchaga", -- [8]
-			"Убить командира Глубокого Шрама", -- [9]
-			"击败指挥官斯卡戈什", -- [10]
-			"殺了指揮官疤口", -- [11]
-		}, -- [2]
-	},
-	["206"] = {
-		{
-			"Rendezvous with Scout Captain Elsia", -- [1]
-			"Trefft Euch mit Späherhauptmann Elsia", -- [2]
-			"Reúnete con la capitana de exploradores Elsia", -- [3]
-			"Reúnete con la capitana de exploradores Elsia", -- [4]
-			"Rendez-vous avec le capitaine des éclaireurs Elsia", -- [5]
-			"Incontra il Capitano degli Esploratori Elsia", -- [6]
-			"정찰대장 엘시아와 접선", -- [7]
-			"Encontrar-se com a Capitã dos Batedores Elsia", -- [8]
-			"Встреча с капитаном разведчиков Эльсией", -- [9]
-			"与斥候队长艾尔希娅会合", -- [10]
-			"和斥候隊長艾爾西雅會合", -- [11]
-		}, -- [1]
-		{
-			"Survive the Ambush", -- [1]
-			"Überlebt den Überfall", -- [2]
-			"Sobrevive a la emboscada", -- [3]
-			"Sobrevive a la emboscada", -- [4]
-			"Survivre à l’embuscade", -- [5]
-			"Sopravvivi all'imboscata", -- [6]
-			"기습에서 생존", -- [7]
-			"Sobreviva à emboscada", -- [8]
-			"Пережить нападение", -- [9]
-			"在伏击中幸存下来", -- [10]
-			"撐過敵人的埋伏", -- [11]
-		}, -- [2]
-		{
-			"Destroy the Barricades", -- [1]
-			"Zerstört die Barrikaden", -- [2]
-			"Destruye las barricadas", -- [3]
-			"Destruye las barricadas", -- [4]
-			"Détruire les barricades", -- [5]
-			"Distruggi le barricate", -- [6]
-			"방벽 파괴", -- [7]
-			"Destruir as barricadas", -- [8]
-			"Разрушить баррикады", -- [9]
-			"摧毁屏障", -- [10]
-			"摧毀路障", -- [11]
-		}, -- [3]
-		{
-			"Kill Kresh the Ripper", -- [1]
-			"Tötet Kresh den Reißer", -- [2]
-			"Mata a Kresh el Destripador", -- [3]
-			"Mata a Kresh el Destripador", -- [4]
-			"Tuer Kresh l’éventreur", -- [5]
-			"Uccidi Kresh lo Squartatore", -- [6]
-			"학살자 크레쉬 처치", -- [7]
-			"Matar Cresh, o Estripador", -- [8]
-			"Убить Креша Раздирателя", -- [9]
-			"击败撕裂者科尔什", -- [10]
-			"殺死『撕裂者』克雷什", -- [11]
-		}, -- [4]
-		{
-			"Kill Arcanital Tula'chek and his Spirit Mask", -- [1]
-			"Tötet Arkanital Tula'chek und seine Geistermaske", -- [2]
-			"Mata al arcanital Tula'chek y a su máscara espíritu", -- [3]
-			"Mata al arcanital Tula'chek y a su máscara espíritu", -- [4]
-			"Tuer le rituarcaniste Tula’chek et son masque d’esprit", -- [5]
-			"Elimina Tula'chek e la Maschera Spiritica", -- [6]
-			"비전주술사 툴라첵과 영혼 가면 처치", -- [7]
-			"Matar o Arcanital Tula'chek e sua Máscara Espiritual", -- [8]
-			"Убить чародея-ритуалиста Тула'чека и его маску духов", -- [9]
-			"击败魔术士图拉奇克和他的灵魂面具", -- [10]
-			"殺死秘宗圖拉切與他的靈魂面具", -- [11]
-		}, -- [5]
-	},
-	["734"] = {
-		{
-			"Lower Blackrock Spires", -- [1]
-			"Untere Schwarzfelsspitze", -- [2]
-			"Cumbre de Roca Negra Inferior", -- [3]
-			"Cumbres de Roca Negra inferiores", -- [4]
-			"Bas du pic Rochenoire", -- [5]
-			"Bastioni di Roccianera Inferiori", -- [6]
-			"검은바위 첨탑 하층", -- [7]
-			"Picos da Rocha Negra Inferior", -- [8]
-			"Нижняя часть пика Черной горы", -- [9]
-			"黑石塔下层", -- [10]
-			"黑石塔下層", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-	},
-	["590"] = {
-		{
-			"Drak'Tharon Keep", -- [1]
-			"Feste Drak'Tharon", -- [2]
-			"Fortaleza de Drak'Tharon", -- [3]
-			"Fortaleza de Drak'Tharon", -- [4]
-			"Donjon de Drak’Tharon", -- [5]
-			"Forte di Drak'Tharon", -- [6]
-			"드락타론 성채", -- [7]
-			"Bastilha Drak'Tharon", -- [8]
-			"Крепость Драк'Тарон", -- [9]
-			"达克萨隆要塞", -- [10]
-			"德拉克薩隆要塞", -- [11]
-		}, -- [1]
-	},
-	["569"] = {
-		{
-			"Pit of Saron", -- [1]
-			"Grube von Saron", -- [2]
-			"Foso de Saron", -- [3]
-			"Foso de Saron", -- [4]
-			"Fosse de Saron", -- [5]
-			"Fossa di Saron", -- [6]
-			"사론의 구덩이", -- [7]
-			"Fosso de Saron", -- [8]
-			"Яма Сарона", -- [9]
-			"萨隆矿坑", -- [10]
-			"薩倫之淵", -- [11]
-		}, -- [1]
-	},
-	["669"] = {
-		{
-			"Detention Block", -- [1]
-			"Gefängnisblock", -- [2]
-			"Bloque de Detención", -- [3]
-			"Bloque de Detención", -- [4]
-			"Le mitard", -- [5]
-			"Blocco di Detenzione", -- [6]
-			"감금 구역", -- [7]
-			"Bloco de Detenção", -- [8]
-			"Тюремный блок", -- [9]
-			"禁闭室", -- [10]
-			"禁閉室", -- [11]
-		}, -- [1]
-		{
-			"Ring of Law", -- [1]
-			"Ring des Gesetzes", -- [2]
-			"Círculo de la Ley", -- [3]
-			"Círculo de la Ley", -- [4]
-			"Cercle de la loi", -- [5]
-			"Anello della Legge", -- [6]
-			"법의 심판장", -- [7]
-			"Círculo da Lei", -- [8]
-			"Зал Правосудия", -- [9]
-			"秩序竞技场", -- [10]
-			"秩序競技場", -- [11]
-		}, -- [2]
-		{
-			"High Interrogator Gerstahn", -- [1]
-			"Verhörmeisterin Gerstahn", -- [2]
-			"Alta interrogadora Gerstahn", -- [3]
-			"Alta interrogadora Gerstahn", -- [4]
-			"Grande interrogatrice Gerstahn", -- [5]
-			"Gerstahn la Grande Accusatrice", -- [6]
-			"대심문관 게르스탄", -- [7]
-			"Suprema Interrogadora Gerstahn", -- [8]
-			"Верховный дознаватель Герштан", -- [9]
-			"审讯官格斯塔恩", -- [10]
-			"高階審問者格斯塔恩", -- [11]
-		}, -- [3]
-		{
-			"Bael'Gar", -- [1]
-			"Bael'Gar", -- [2]
-			"Bael'Gar", -- [3]
-			"Bael'Gar", -- [4]
-			"Bael’Gar", -- [5]
-			"Bael'gar", -- [6]
-			"밸가르", -- [7]
-			"Bael'gar", -- [8]
-			"Бейл'Гор", -- [9]
-			"贝尔加", -- [10]
-			"貝爾加", -- [11]
-		}, -- [4]
-	},
-	["180"] = {
-		{
-			"Infiltrate the Ancient Fortress", -- [1]
-			"Infiltration der uralten Festung", -- [2]
-			"Infíltrate en la antigua fortaleza", -- [3]
-			"Infíltrate en la antigua fortaleza", -- [4]
-			"Infiltrer l’ancienne forteresse", -- [5]
-			"Penetra nell'Antica Fortezza", -- [6]
-			"고대 요새 침투", -- [7]
-			"Infiltre-se na Fortaleza Ancestral", -- [8]
-			"Проникнуть в древнюю крепость", -- [9]
-			"潜入远古堡垒", -- [10]
-			"潛入遠古堡壘", -- [11]
-		}, -- [1]
-		{
-			"Stealing for Profit", -- [1]
-			"Auf Beutezug", -- [2]
-			"El beneficio del robo", -- [3]
-			"El beneficio del robo", -- [4]
-			"Voler pour s’enrichir", -- [5]
-			"Profitto a tutti i costi", -- [6]
-			"훔칠수록 이득", -- [7]
-			"Roubando pelo Lucro", -- [8]
-			"Украсть ради наживы", -- [9]
-			"偷来横财", -- [10]
-			"偷盜得利", -- [11]
-		}, -- [2]
-	},
-	["525"] = {
-		{
-			"Siege of Niuzao Temple", -- [1]
-			"Belagerung des Niuzaotempels", -- [2]
-			"Asedio del Templo de Niuzao", -- [3]
-			"Asedio del Templo de Niuzao", -- [4]
-			"Siège du temple de Niuzao", -- [5]
-			"Assedio al Tempio di Niuzao", -- [6]
-			"니우짜오 사원 공성전투", -- [7]
-			"Cerco ao Templo Niuzao", -- [8]
-			"Осада храма Нюцзао", -- [9]
-			"围攻砮皂寺", -- [10]
-			"圍攻怒兆寺", -- [11]
-		}, -- [1]
-	},
-	["425"] = {
-		{
-			"Bloodmaul Slag Mines", -- [1]
-			"Blutschlägermine", -- [2]
-			"Minas Machacasangre", -- [3]
-			"Minas de escoria Machacasangre", -- [4]
-			"Mine de la Masse-Sanglante", -- [5]
-			"Miniere dei Magliorosso", -- [6]
-			"피망치 잿가루 광산", -- [7]
-			"Minas de Escória do Malho Sangrento", -- [8]
-			"Шлаковые шахты Кровавого Молота", -- [9]
-			"血槌炉渣矿井", -- [10]
-			"血槌熔渣礦場", -- [11]
-		}, -- [1]
-	},
-	["625"] = {
-		{
-			"Old Hillsbrad Foothills", -- [1]
-			"Vorgebirge des Alten Hügellands", -- [2]
-			"Antiguas Laderas de Trabalomas", -- [3]
-			"Antiguas Laderas de Trabalomas", -- [4]
-			"Contreforts de Hautebrande d’antan", -- [5]
-			"Passato di Colletorto", -- [6]
-			"옛 언덕마루 구릉지", -- [7]
-			"Antigo Contraforte de Eira dos Montes", -- [8]
-			"Старые предгорья Хилсбрада", -- [9]
-			"旧希尔斯布莱德丘陵", -- [10]
-			"希爾斯布萊德丘陵舊址", -- [11]
-		}, -- [1]
-	},
-	["962"] = {
-		{
-			"Far From Home", -- [1]
-			"Fern der Heimat", -- [2]
-			"Lejos de casa", -- [3]
-			"Lejos de casa", -- [4]
-			"Loin du foyer", -- [5]
-			"Lontani da casa", -- [6]
-			"집 떠나와", -- [7]
-			"Longe de casa", -- [8]
-			"Вдали от дома", -- [9]
-			"背井离乡", -- [10]
-			"遠離家園", -- [11]
-		}, -- [1]
-		{
-			"The Dread Warden", -- [1]
-			"Der Schreckenswächter", -- [2]
-			"El celador aterrador", -- [3]
-			"El celador del terror", -- [4]
-			"Le gardien de l’effroi", -- [5]
-			"Il Guardiano del Terrore", -- [6]
-			"공포의 감시관", -- [7]
-			"O carcereiro medonho", -- [8]
-			"Жуткий тюремщик", -- [9]
-			"可怕的狱卒", -- [10]
-			"驚懼獄卒", -- [11]
-		}, -- [2]
-		{
-			"The Shattered Council", -- [1]
-			"Der zerschmetterte Rat", -- [2]
-			"El consejo dispersado", -- [3]
-			"El consejo destrozado", -- [4]
-			"Le conseil brisé", -- [5]
-			"Il concilio infranto", -- [6]
-			"산산이 조각난 의회", -- [7]
-			"O conselho despedaçado", -- [8]
-			"Рассеянный Совет", -- [9]
-			"破碎的议会", -- [10]
-			"破碎的議會", -- [11]
-		}, -- [3]
-		{
-			"Jailbreak", -- [1]
-			"Ausbruch aus dem Gefängnis", -- [2]
-			"Fuga", -- [3]
-			"Fuga", -- [4]
-			"Évasion", -- [5]
-			"Evasione", -- [6]
-			"탈옥", -- [7]
-			"Fuga para a vitória", -- [8]
-			"Побег из тюрьмы", -- [9]
-			"越狱", -- [10]
-			"越獄", -- [11]
-		}, -- [4]
-		{
-			"The Pit Lord's Secrets", -- [1]
-			"Die Geheimnisse des Grubenlords", -- [2]
-			"Los secretos del señor del foso", -- [3]
-			"Los secretos del señor del foso", -- [4]
-			"Les secrets du seigneur des abîmes", -- [5]
-			"I segreti del Signore delle Fosse", -- [6]
-			"지옥의 군주의 비밀", -- [7]
-			"Os segredos do lorde abissal", -- [8]
-			"Секреты властителя преисподней", -- [9]
-			"深渊领主的秘密", -- [10]
-			"深淵領主的秘密", -- [11]
-		}, -- [5]
-		{
-			"To Fight Another Day", -- [1]
-			"Die Schlacht vertagen", -- [2]
-			"Luchar otro día", -- [3]
-			"Para luchar un día más", -- [4]
-			"Survivre pour mieux combattre", -- [5]
-			"Vivere per combattere un altro giorno", -- [6]
-			"또 하루를 싸우려", -- [7]
-			"Não é fuga, é retirada", -- [8]
-			"Мы еще сразимся", -- [9]
-			"留得青山在", -- [10]
-			"留得青山在", -- [11]
-		}, -- [6]
-	},
-	["688"] = {
-		{
-			"Skyreach", -- [1]
-			"Himmelsnadel", -- [2]
-			"Trecho Celestial", -- [3]
-			"Trecho Celestial", -- [4]
-			"Orée-du-Ciel", -- [5]
-			"Vetta dei Cieli", -- [6]
-			"하늘탑", -- [7]
-			"Beira-céu", -- [8]
-			"Небесный Путь", -- [9]
-			"通天峰", -- [10]
-			"擎天峰", -- [11]
-		}, -- [1]
-	},
-	["588"] = {
-		{
-			"The Violet Hold", -- [1]
-			"Die Violette Festung", -- [2]
-			"El Bastión Violeta", -- [3]
-			"El Bastión Violeta", -- [4]
-			"Le fort Pourpre", -- [5]
-			"Fortezza Violacea", -- [6]
-			"보랏빛 요새", -- [7]
-			"Castelo Violeta", -- [8]
-			"Аметистовая крепость", -- [9]
-			"紫罗兰监狱", -- [10]
-			"紫羅蘭堡", -- [11]
-		}, -- [1]
-	},
-	["524"] = {
-		{
-			"Siege of Niuzao Temple", -- [1]
-			"Belagerung des Niuzaotempels", -- [2]
-			"Asedio del Templo de Niuzao", -- [3]
-			"Asedio del Templo de Niuzao", -- [4]
-			"Siège du temple de Niuzao", -- [5]
-			"Assedio al Tempio di Niuzao", -- [6]
-			"니우짜오 사원 공성전투", -- [7]
-			"Cerco ao Templo Niuzao", -- [8]
-			"Осада храма Нюцзао", -- [9]
-			"围攻砮皂寺", -- [10]
-			"圍攻怒兆寺", -- [11]
-		}, -- [1]
-	},
-	["624"] = {
-		{
-			"Old Hillsbrad Foothills", -- [1]
-			"Vorgebirge des Alten Hügellands", -- [2]
-			"Antiguas Laderas de Trabalomas", -- [3]
-			"Antiguas Laderas de Trabalomas", -- [4]
-			"Contreforts de Hautebrande d’antan", -- [5]
-			"Passato di Colletorto", -- [6]
-			"옛 언덕마루 구릉지", -- [7]
-			"Antigo Contraforte de Eira dos Montes", -- [8]
-			"Старые предгорья Хилсбрада", -- [9]
-			"旧希尔斯布莱德丘陵", -- [10]
-			"希爾斯布萊德丘陵舊址", -- [11]
-		}, -- [1]
-	},
-	["724"] = {
-		{
-			"Invasion!", -- [1]
-			"Invasion!", -- [2]
-			"¡Invasión!", -- [3]
-			"¡Invasión!", -- [4]
-			"Alerte aux envahisseurs !", -- [5]
-			"Invasione!", -- [6]
-			"침략!", -- [7]
-			"Invasão!", -- [8]
-			"Вторжение!", -- [9]
-			"入侵！", -- [10]
-			"入侵！", -- [11]
-		}, -- [1]
-		{
-			"Assault", -- [1]
-			"Sturmangriff", -- [2]
-			"Asalto", -- [3]
-			"Asalto", -- [4]
-			"Assaut", -- [5]
-			"Assalto", -- [6]
-			"습격", -- [7]
-			"Ataque", -- [8]
-			"Нападение", -- [9]
-			"突袭", -- [10]
-			"襲擊", -- [11]
-		}, -- [2]
-		{
-			"The Holdout", -- [1]
-			"Durchhaltevermögen", -- [2]
-			"La resistencia", -- [3]
-			"La resistencia", -- [4]
-			"Le baroud", -- [5]
-			"Resistenza", -- [6]
-			"항전", -- [7]
-			"A Resistência", -- [8]
-			"Продержаться подольше", -- [9]
-			"坚持到底", -- [10]
-			"堅持到底", -- [11]
-		}, -- [3]
-		{
-			"Cleanup", -- [1]
-			"Aufräumkommando", -- [2]
-			"Limpieza", -- [3]
-			"Limpieza", -- [4]
-			"Nettoyage", -- [5]
-			"Ripulitura", -- [6]
-			"소탕", -- [7]
-			"Limpeza", -- [8]
-			"Зачистка", -- [9]
-			"摧枯拉朽", -- [10]
-			"收拾殘局", -- [11]
-		}, -- [4]
-		{
-			"The Calm", -- [1]
-			"Ruhe nach dem Sturm", -- [2]
-			"La calma", -- [3]
-			"La calma", -- [4]
-			"Le calme", -- [5]
-			"La calma", -- [6]
-			"정적", -- [7]
-			"A Calma", -- [8]
-			"Затишье", -- [9]
-			"风平浪静", -- [10]
-			"歇息備戰", -- [11]
-		}, -- [5]
-		{
-			"A Challenger Appears", -- [1]
-			"Ein Herausforderer erscheint", -- [2]
-			"Aparece un contendiente", -- [3]
-			"Surge un contendiente", -- [4]
-			"Place à l’adversaire !", -- [5]
-			"Arriva uno sfidante", -- [6]
-			"도전자 등장", -- [7]
-			"Um desafiante aparece", -- [8]
-			"А вот и соперник", -- [9]
-			"挑战者出现", -- [10]
-			"挑戰者出現", -- [11]
-		}, -- [6]
-		{
-			"Bronze", -- [1]
-			"Bronze", -- [2]
-			"Bronce", -- [3]
-			"Bronce", -- [4]
-			"Bronze", -- [5]
-			"Bronzo", -- [6]
-			"동메달", -- [7]
-			"Bronze", -- [8]
-			"Бронза", -- [9]
-			"青铜级", -- [10]
-			"青銅", -- [11]
-		}, -- [7]
-		{
-			"Silver", -- [1]
-			"Silber", -- [2]
-			"Plata", -- [3]
-			"Plata", -- [4]
-			"Argent", -- [5]
-			"Argento", -- [6]
-			"은메달", -- [7]
-			"Prata", -- [8]
-			"Серебро", -- [9]
-			"白银级", -- [10]
-			"白銀", -- [11]
-		}, -- [8]
-		{
-			"Gold", -- [1]
-			"Gold", -- [2]
-			"Oro", -- [3]
-			"Oro", -- [4]
-			"Or", -- [5]
-			"Oro", -- [6]
-			"금메달", -- [7]
-			"Ouro", -- [8]
-			"Золото", -- [9]
-			"黄金级", -- [10]
-			"黃金", -- [11]
-		}, -- [9]
-		{
-			"Platinum", -- [1]
-			"Platin", -- [2]
-			"Platino", -- [3]
-			"Platino", -- [4]
-			"Platine", -- [5]
-			"Platino", -- [6]
-			"백금메달", -- [7]
-			"Platina", -- [8]
-			"Платина", -- [9]
-			"白金", -- [10]
-			"白金", -- [11]
-		}, -- [10]
-	},
-	["71"] = {
-		{
-			"Welcome to Theramore", -- [1]
-			"Willkommen in Theramore", -- [2]
-			"Bienvenidos a Theramore", -- [3]
-			"Bienvenidos a Theramore", -- [4]
-			"Bienvenue à Theramore", -- [5]
-			"Benvenuti a Theramore", -- [6]
-			"테라모어에 오신 것을 환영합니다", -- [7]
-			"Bem-vindo a Theramore", -- [8]
-			"Добро пожаловать в Терамор!", -- [9]
-			"欢迎来到塞拉摩", -- [10]
-			"歡迎來到塞拉摩", -- [11]
-		}, -- [1]
-		{
-			"Sweep the Harbor", -- [1]
-			"Kehrstunde im Hafen", -- [2]
-			"Arrasa el puerto", -- [3]
-			"Arrasa el puerto", -- [4]
-			"Balayer le port", -- [5]
-			"Ripulisci il porto", -- [6]
-			"항구를 공격하라", -- [7]
-			"Limpando o Porto", -- [8]
-			"Освобождение гавани", -- [9]
-			"大扫除", -- [10]
-			"掃蕩港口", -- [11]
-		}, -- [2]
-		{
-			"Into the Ruins", -- [1]
-			"In die Ruinen", -- [2]
-			"En las ruinas", -- [3]
-			"En las ruinas", -- [4]
-			"Dans les ruines", -- [5]
-			"Alle rovine", -- [6]
-			"폐허 속으로", -- [7]
-			"Nas Ruínas", -- [8]
-			"К руинам", -- [9]
-			"深入废墟", -- [10]
-			"進入廢墟", -- [11]
-		}, -- [3]
-		{
-			"The Lady Proudmoore", -- [1]
-			"Lady Prachtmeer", -- [2]
-			"Lady Valiente", -- [3]
-			"Lady Valiente", -- [4]
-			"Dame Portvaillant", -- [5]
-			"Dama Marefiero", -- [6]
-			"여군주 프라우드무어", -- [7]
-			"Grã-senhora Proudmore", -- [8]
-			"Леди Праудмур", -- [9]
-			"普罗德摩尔女士", -- [10]
-			"普勞德摩爾女士", -- [11]
-		}, -- [4]
-		{
-			"Destroy the Destroyer", -- [1]
-			"Zerstört den Zerstörer", -- [2]
-			"Destruir el destructor", -- [3]
-			"Destruir el destructor", -- [4]
-			"Détruire le Destructeur", -- [5]
-			"Demolisci il Demolitore", -- [6]
-			"공성 전차를 파괴하라", -- [7]
-			"Destrua o Destruidor", -- [8]
-			"Разрушение разрушителя", -- [9]
-			"摧毁攻城车", -- [10]
-			"破壞毀滅者", -- [11]
-		}, -- [5]
-		{
-			"The Last Stand", -- [1]
-			"Das letzte Gefecht", -- [2]
-			"La resistencia final", -- [3]
-			"La resistencia final", -- [4]
-			"La bataille finale", -- [5]
-			"L'ultima difesa", -- [6]
-			"최후의 저항", -- [7]
-			"A Resistência Final", -- [8]
-			"Последняя битва", -- [9]
-			"背水一战", -- [10]
-			"背水一戰", -- [11]
-		}, -- [6]
-	},
-	["653"] = {
-		{
-			"Scarlet Monastery", -- [1]
-			"Das Scharlachrote Kloster", -- [2]
-			"Monasterio Escarlata", -- [3]
-			"Monasterio Escarlata", -- [4]
-			"Monastère Écarlate", -- [5]
-			"Monastero Scarlatto", -- [6]
-			"붉은십자군 수도원", -- [7]
-			"Monastério Escarlate", -- [8]
-			"Монастырь Алого ордена", -- [9]
-			"血色修道院", -- [10]
-			"血色修道院", -- [11]
-		}, -- [1]
-	},
-	["256"] = {
-		{
-			"He Who Has No Life", -- [1]
-			"Er, der kein Leben hat.", -- [2]
-			"El Exánime", -- [3]
-			"El Exánime", -- [4]
-			"Celui qui n’avait pas de vie", -- [5]
-			"Colui Che Non Ha Vita", -- [6]
-			"생명이 없는 자", -- [7]
-			"Aquele Que Não Possui Vida", -- [8]
-			"Тот, У Кого Нет Жизни", -- [9]
-			"亡者", -- [10]
-			"無魂之生者", -- [11]
-		}, -- [1]
-	},
-	["572"] = {
-		{
-			"Halls of Reflection", -- [1]
-			"Hallen der Reflexion", -- [2]
-			"Cámaras de Reflexión", -- [3]
-			"Cámaras de Reflexión", -- [4]
-			"Salles des Reflets", -- [5]
-			"Sale dei Riflessi", -- [6]
-			"투영의 전당", -- [7]
-			"Salões da Reflexão", -- [8]
-			"Залы Отражений", -- [9]
-			"映像大厅", -- [10]
-			"倒影大廳", -- [11]
-		}, -- [1]
-	},
-	["557"] = {
-		{
-			"Lost City of the Tol'vir", -- [1]
-			"Die Verlorene Stadt der Tol'vir", -- [2]
-			"Ciudad Perdida de los Tol'vir", -- [3]
-			"Ciudad Perdida de los Tol'vir", -- [4]
-			"Cité perdue des Tol’vir", -- [5]
-			"Città Perduta dei Tol'vir", -- [6]
-			"톨비르의 잃어버린 도시", -- [7]
-			"Cidade Perdida dos Tol'vir", -- [8]
-			"Затерянный город Тол'вир", -- [9]
-			"托维尔失落之城", -- [10]
-			"托維爾的失落之城", -- [11]
-		}, -- [1]
-	},
-	["257"] = {
-		{
-			"Champions of Pandaria", -- [1]
-			"Champions von Pandaria", -- [2]
-			"Campeones de Pandaria", -- [3]
-			"Campeones de Pandaria", -- [4]
-			"Champions de la Pandarie", -- [5]
-			"Campioni di Pandaria", -- [6]
-			"판다리아의 용사", -- [7]
-			"Campeões de Pandária", -- [8]
-			"Чемпионы Пандарии", -- [9]
-			"潘达利亚勇士", -- [10]
-			"潘達利亞之傑", -- [11]
-		}, -- [1]
-		{
-			"Celestial Combat", -- [1]
-			"Kampf den Erhabenen", -- [2]
-			"Duelo Celestial", -- [3]
-			"Duelo Celestial", -- [4]
-			"Combat vénérable", -- [5]
-			"Combattimento dei Celestiali", -- [6]
-			"천신 전투", -- [7]
-			"Combate Celestial", -- [8]
-			"Небесные бойцы", -- [9]
-			"天神之战", -- [10]
-			"天尊之戰", -- [11]
-		}, -- [2]
-	},
-	["553"] = {
-		{
-			"Grim Batol", -- [1]
-			"Grim Batol", -- [2]
-			"Grim Batol", -- [3]
-			"Grim Batol", -- [4]
-			"Grim Batol", -- [5]
-			"Grim Batol", -- [6]
-			"그림 바톨", -- [7]
-			"Grim Batol", -- [8]
-			"Грим Батол", -- [9]
-			"格瑞姆巴托", -- [10]
-			"格瑞姆巴托", -- [11]
-		}, -- [1]
-	},
-	["679"] = {
-		{
-			"Auchindoun", -- [1]
-			"Auchindoun", -- [2]
-			"Auchindoun", -- [3]
-			"Auchindoun", -- [4]
-			"Auchindoun", -- [5]
-			"Auchindoun", -- [6]
-			"아킨둔", -- [7]
-			"Auchindoun", -- [8]
-			"Аукиндон", -- [9]
-			"奥金顿", -- [10]
-			"奧齊頓", -- [11]
-		}, -- [1]
-	},
-	["579"] = {
-		{
-			"Utgarde Pinnacle", -- [1]
-			"Turm Utgarde", -- [2]
-			"Pináculo de Utgarde", -- [3]
-			"Pináculo de Utgarde", -- [4]
-			"Cime d’Utgarde", -- [5]
-			"Pinnacolo di Utgarde", -- [6]
-			"우트가드 첨탑", -- [7]
-			"Pináculo Utgarde", -- [8]
-			"Вершина Утгард", -- [9]
-			"乌特加德之巅", -- [10]
-			"俄特加德之巔", -- [11]
-		}, -- [1]
-	},
-	["179"] = {
-		{
-			"The Mission...", -- [1]
-			"Die Mission...", -- [2]
-			"La misión...", -- [3]
-			"La misión...", -- [4]
-			"La mission…", -- [5]
-			"La missione...", -- [6]
-			"임무...", -- [7]
-			"A Missão...", -- [8]
-			"Миссия…", -- [9]
-			"任务是……", -- [10]
-			"任務...", -- [11]
-		}, -- [1]
-		{
-			"We Ride!", -- [1]
-			"Unterwegs!", -- [2]
-			"1, 2, al escondite saurok", -- [3]
-			"1, 2, al escondite saurok", -- [4]
-			"En route !", -- [5]
-			"In sella!", -- [6]
-			"출발!", -- [7]
-			"Agora Cavalgamos!", -- [8]
-			"Мы едем!", -- [9]
-			"骑马前进！", -- [10]
-			"我們策騎奔馳!", -- [11]
-		}, -- [2]
-		{
-			"Guards!", -- [1]
-			"Wachen!", -- [2]
-			"¡Guardias!", -- [3]
-			"¡Guardias!", -- [4]
-			"Des gardes !", -- [5]
-			"Guardie!", -- [6]
-			"보초다!", -- [7]
-			"Guardas!", -- [8]
-			"Стража!", -- [9]
-			"守卫！", -- [10]
-			"守衛!", -- [11]
-		}, -- [3]
-		{
-			"Into the Cave", -- [1]
-			"In die Höhle", -- [2]
-			"En la cueva", -- [3]
-			"En la cueva", -- [4]
-			"Dans la grotte", -- [5]
-			"Dentro la caverna", -- [6]
-			"동굴 안으로", -- [7]
-			"Na Caverna", -- [8]
-			"В пещеру", -- [9]
-			"进入洞穴", -- [10]
-			"進入洞穴", -- [11]
-		}, -- [4]
-		{
-			"The Source", -- [1]
-			"Der Ursprung", -- [2]
-			"Origen", -- [3]
-			"Origen", -- [4]
-			"La source", -- [5]
-			"L'origine dei Saurok", -- [6]
-			"사우록의 근원", -- [7]
-			"A Fonte", -- [8]
-			"Происхождение", -- [9]
-			"起源", -- [10]
-			"源頭", -- [11]
-		}, -- [5]
-		{
-			"The Broodmaster", -- [1]
-			"Der Brutmeister", -- [2]
-			"El maestro de linaje", -- [3]
-			"El maestro de linaje", -- [4]
-			"Le maître des couvées", -- [5]
-			"Il Maestro della Progenie", -- [6]
-			"무리두목", -- [7]
-			"A Prolemestre", -- [8]
-			"Праматерь", -- [9]
-			"孵化大师", -- [10]
-			"育主", -- [11]
-		}, -- [6]
-		{
-			"Investigation", -- [1]
-			"Untersuchung", -- [2]
-			"Investigación", -- [3]
-			"Investigación", -- [4]
-			"Enquête", -- [5]
-			"Esame delle statue", -- [6]
-			"조사", -- [7]
-			"Investigação", -- [8]
-			"Осмотр", -- [9]
-			"调查", -- [10]
-			"調查", -- [11]
-		}, -- [7]
-		{
-			"Ambush!", -- [1]
-			"Hinterhalt!", -- [2]
-			"¡Emboscada!", -- [3]
-			"¡Emboscada!", -- [4]
-			"C’est une embuscade !", -- [5]
-			"Imboscata!", -- [6]
-			"기습이다!", -- [7]
-			"Emboscada!", -- [8]
-			"Нападение!", -- [9]
-			"有埋伏！", -- [10]
-			"突襲!", -- [11]
-		}, -- [8]
-	},
-	["1146"] = {
-		{
-			"The Final Battle", -- [1]
-			"Der letzte Kampf", -- [2]
-			"La batalla final", -- [3]
-			"La batalla final", -- [4]
-			"La bataille finale", -- [5]
-			"Lo scontro finale", -- [6]
-			"마지막 전투", -- [7]
-			"A batalha final", -- [8]
-			"Последняя битва", -- [9]
-			"最终之战", -- [10]
-			"最後一戰", -- [11]
-		}, -- [1]
-		{
-			"Defeat the Felbat Riders", -- [1]
-			"Die Reiter der Teufelsfledermäuse bezwingen", -- [2]
-			"Derrota a los jinetes de murciélago vil", -- [3]
-			"Derrota a los jinetes de murciélagos vil", -- [4]
-			"Terrasser les cavaliers des gangroptères", -- [5]
-			"Sconfiggere i Cavalieri di Vilpipistrelli", -- [6]
-			"지옥박쥐 기수 처치", -- [7]
-			"Derrotar os cavalgantes dos morcevis", -- [8]
-			"Наездники на сквернотопырях", -- [9]
-			"击败魔蝠骑手", -- [10]
-			"擊敗魔蝠騎士", -- [11]
-		}, -- [2]
-		{
-			"Crash Landing", -- [1]
-			"Bruchlandung", -- [2]
-			"Aterrizaje forzoso", -- [3]
-			"Aterrizaje forzoso", -- [4]
-			"Atterrissage en catastrophe", -- [5]
-			"Atterraggio d'emergenza", -- [6]
-			"불시착", -- [7]
-			"Aterrissagem forçada", -- [8]
-			"Жесткая посадка", -- [9]
-			"迫降", -- [10]
-			"迫降", -- [11]
-		}, -- [3]
-		{
-			"Aiding Thorim", -- [1]
-			"Thorim helfen", -- [2]
-			"Ayudar a Thorim", -- [3]
-			"Una ayuda a Thorim", -- [4]
-			"Aider Thorim", -- [5]
-			"Aiutare Thorim", -- [6]
-			"토림 지원", -- [7]
-			"Auxílio a Thorim", -- [8]
-			"Помощь Ториму", -- [9]
-			"协助托里姆", -- [10]
-			"協助索林姆", -- [11]
-		}, -- [4]
-		{
-			"Save Hodir", -- [1]
-			"Hodir retten", -- [2]
-			"Salva a Hodir", -- [3]
-			"Salva a Hodir", -- [4]
-			"Il faut sauver Hodir", -- [5]
-			"Salvare Hodir", -- [6]
-			"호디르 구출", -- [7]
-			"Salvar Hodir", -- [8]
-			"Спасение Ходира", -- [9]
-			"拯救霍迪尔", -- [10]
-			"拯救霍迪爾", -- [11]
-		}, -- [5]
-		{
-			"Defeat Hodir", -- [1]
-			"Hodir bezwingen", -- [2]
-			"Derrota a Hodir", -- [3]
-			"Derrota a Hodir", -- [4]
-			"Vaincre Hodir", -- [5]
-			"Sconfiggere Hodir", -- [6]
-			"호디르에게 안식을", -- [7]
-			"Derrotar Hodir", -- [8]
-			"Остановить Ходира", -- [9]
-			"击败霍迪尔", -- [10]
-			"擊敗霍迪爾", -- [11]
-		}, -- [6]
-	},
-	["1124"] = {
-		{
-			"You CAN Go Home", -- [1]
-			"Ihr KÖNNT nach Hause gehen", -- [2]
-			"PUEDES irte a casa", -- [3]
-			"PUEDES irte a casa", -- [4]
-			"Retour au bercail possible", -- [5]
-			"Di nuovo a casa", -- [6]
-			"돌아온 일리다리", -- [7]
-			"Você PODE ir para casa", -- [8]
-			"Домой!", -- [9]
-			"你们可以回家了", -- [10]
-			"回家真好", -- [11]
-		}, -- [1]
-		{
-			"Nothing Will Bar Our Way", -- [1]
-			"Nichts wird sich uns in den Weg stellen", -- [2]
-			"Nada se interpondrá en nuestro camino", -- [3]
-			"Nada se interpondrá en nuestro camino", -- [4]
-			"Rien ne nous empêchera de passer !", -- [5]
-			"Niente ci sbarrerà la strada", -- [6]
-			"진격의 일리다리", -- [7]
-			"Nada obstruirá nosso caminho", -- [8]
-			"Нам преграды нипочем", -- [9]
-			"我们不可阻挡", -- [10]
-			"沒有任何事能阻擋我們", -- [11]
-		}, -- [2]
-		{
-			"Confronting an Old Foe", -- [1]
-			"Konfrontation mit einem alten Feind", -- [2]
-			"Ante un viejo enemigo", -- [3]
-			"Confrontando a un viejo enemigo", -- [4]
-			"Un vieil adversaire", -- [5]
-			"Faccia a faccia contro un vecchio nemico", -- [6]
-			"숙적과의 조우", -- [7]
-			"Confronto com um antigo inimigo", -- [8]
-			"Старый враг", -- [9]
-			"面对老对手", -- [10]
-			"面對宿敵", -- [11]
-		}, -- [3]
-		{
-			"If He Will Not Listen to Reason...", -- [1]
-			"Und bist du nicht willig...", -- [2]
-			"Si no atiende a razones...", -- [3]
-			"Si no quiere entrar en razón...", -- [4]
-			"S’il ne veut pas entendre raison…", -- [5]
-			"Se non ascolterà la ragione...", -- [6]
-			"말을 듣지 않으면...", -- [7]
-			"Já que não quer ser razoável...", -- [8]
-			"Когда красноречие бессильно", -- [9]
-			"如果他不听劝……", -- [10]
-			"要是他不講道理…", -- [11]
-		}, -- [4]
-		{
-			"A Final Attempt at Diplomacy", -- [1]
-			"Ein letzter Versuch der Diplomatie", -- [2]
-			"Un último intento diplomático", -- [3]
-			"Un último intento de usar la diplomacia", -- [4]
-			"Une dernière tentative diplomatique", -- [5]
-			"Un ultimo tentativo di diplomazia", -- [6]
-			"마지막 제안", -- [7]
-			"Uma última chance à diplomacia", -- [8]
-			"Еще немного дипломатии", -- [9]
-			"外交上的最后努力", -- [10]
-			"最後一次嘗試溝通", -- [11]
-		}, -- [5]
-	},
-	["972"] = {
-		{
-			"The Rescue", -- [1]
-			"Die Rettung", -- [2]
-			"El rescate", -- [3]
-			"El rescate", -- [4]
-			"Le sauvetage", -- [5]
-			"Il salvataggio", -- [6]
-			"구출", -- [7]
-			"O resgate", -- [8]
-			"Спасение", -- [9]
-			"救援", -- [10]
-			"救援行動", -- [11]
-		}, -- [1]
-		{
-			"Stop the Summoners", -- [1]
-			"Haltet die Beschwörer auf", -- [2]
-			"Detener a los invocadores", -- [3]
-			"Detén a los invocadores", -- [4]
-			"Arrêter les invocateurs", -- [5]
-			"Fermare gli Evocatori", -- [6]
-			"소환사 저지", -- [7]
-			"Detenha os evocadores", -- [8]
-			"Остановите призывателей", -- [9]
-			"阻止召唤者", -- [10]
-			"阻止召喚師", -- [11]
-		}, -- [2]
-		{
-			"Search for Your Allies", -- [1]
-			"Sucht nach Euren Verbündeten", -- [2]
-			"Buscar a tus aliados", -- [3]
-			"Busca a tus aliados", -- [4]
-			"Chercher vos alliés", -- [5]
-			"Alla ricerca di alleati", -- [6]
-			"아군 수색", -- [7]
-			"Procure seus aliados", -- [8]
-			"В поисках союзников", -- [9]
-			"寻找你的盟友", -- [10]
-			"搜救盟友", -- [11]
-		}, -- [3]
-		{
-			"Defeat the Hound Mistress", -- [1]
-			"Bezwingt die Herrin der Hunde", -- [2]
-			"Derrota a la maestra de canes", -- [3]
-			"Derrota a la maestra de los sabuesos", -- [4]
-			"Vaincre la maîtresse-chien", -- [5]
-			"Sconfiggere la Signora dei Segugi", -- [6]
-			"토르비스 처치", -- [7]
-			"Derrote a Senhora dos Cães", -- [8]
-			"Повелительница гончих", -- [9]
-			"击败猎犬女王", -- [10]
-			"擊敗獵犬魔女", -- [11]
-		}, -- [4]
-		{
-			"Quiet the Herald", -- [1]
-			"Bringt den Herold zum Schweigen", -- [2]
-			"Silenciar al heraldo", -- [3]
-			"Silencia al heraldo", -- [4]
-			"Le silence du héraut", -- [5]
-			"Silenziare l'Alfiere", -- [6]
-			"전령의 침묵", -- [7]
-			"Cale o Arauto", -- [8]
-			"Утихомиривание глашатая", -- [9]
-			"歼灭使徒", -- [10]
-			"消滅信使", -- [11]
-		}, -- [5]
-		{
-			"End the Inquisition", -- [1]
-			"Beendet die Inquisition", -- [2]
-			"Acabar con la Inquisición", -- [3]
-			"El fin de la Inquisición", -- [4]
-			"Mettre fin à l’inquisition", -- [5]
-			"Porre fine all'inquisizione", -- [6]
-			"심문관의 최후", -- [7]
-			"Encerre a Inquisição", -- [8]
-			"Покончите с инквизицией", -- [9]
-			"终结审判", -- [10]
-			"終結審判官", -- [11]
-		}, -- [6]
-		{
-			"Where Is She?", -- [1]
-			"Wo ist sie?", -- [2]
-			"¿Dónde está?", -- [3]
-			"¿Dónde está?", -- [4]
-			"Où est-elle passée ?", -- [5]
-			"Dov'è?", -- [6]
-			"알레리아는 어디에?", -- [7]
-			"Onde está ela?", -- [8]
-			"Где же она?", -- [9]
-			"她在哪儿？", -- [10]
-			"她在哪裡？", -- [11]
-		}, -- [7]
-		{
-			"A Bow of Legend", -- [1]
-			"Ein legendärer Bogen", -- [2]
-			"Un arco de leyenda", -- [3]
-			"Un arco legendario", -- [4]
-			"Un arc de légende", -- [5]
-			"Un arco leggendario", -- [6]
-			"전설의 활", -- [7]
-			"Um arco de lendas", -- [8]
-			"Легендарный лук", -- [9]
-			"传奇之弓", -- [10]
-			"傳奇神弓", -- [11]
-		}, -- [8]
-	},
-	["1135"] = {
-		{
-			"Falling Skies", -- [1]
-			"Der Himmel stürzt herab", -- [2]
-			"El cielo cae sobre nuestras cabezas", -- [3]
-			"Desprendimiento de los cielos", -- [4]
-			"Quand le ciel s’effondre", -- [5]
-			"Cieli infuocati", -- [6]
-			"무너지는 하늘", -- [7]
-			"Céu desmoronando", -- [8]
-			"Падающие небеса", -- [9]
-			"陨落星辰", -- [10]
-			"天都要塌下來了", -- [11]
-		}, -- [1]
-		{
-			"Center of Gravity", -- [1]
-			"Das Zentrum der Schwerkraft", -- [2]
-			"Centro de gravedad", -- [3]
-			"Centro de gravedad", -- [4]
-			"Centre de gravité", -- [5]
-			"Centro di gravità", -- [6]
-			"중력의 중심", -- [7]
-			"Centro de gravidade", -- [8]
-			"Центр притяжения", -- [9]
-			"重力中心", -- [10]
-			"引力中心", -- [11]
-		}, -- [2]
-		{
-			"Twisting in the Wind", -- [1]
-			"Wirbeln im Wind", -- [2]
-			"Retorciéndose al viento", -- [3]
-			"El abismo del viento", -- [4]
-			"Porté par le vent", -- [5]
-			"Liberi nel vento", -- [6]
-			"뒤틀린 바람", -- [7]
-			"Retorcer ao vento", -- [8]
-			"Завихрение ветра", -- [9]
-			"在风中凌乱", -- [10]
-			"扭曲的魔導師", -- [11]
-		}, -- [3]
-		{
-			"Archmage Vargoth", -- [1]
-			"Erzmagier Vargoth", -- [2]
-			"Archimago Vargoth", -- [3]
-			"Archimago Vargoth", -- [4]
-			"Archimage Vargoth", -- [5]
-			"Arcimago Vargoth", -- [6]
-			"대마법사 바르고스", -- [7]
-			"Arquimago Vargoth", -- [8]
-			"Верховный маг Варгот", -- [9]
-			"大法师瓦格斯", -- [10]
-			"大法師瓦戈斯", -- [11]
-		}, -- [4]
-		{
-			"Grounded", -- [1]
-			"Geerdet", -- [2]
-			"En tierra", -- [3]
-			"En tierra", -- [4]
-			"Retour au sol", -- [5]
-			"Immobilizzato", -- [6]
-			"지상으로", -- [7]
-			"Em terra", -- [8]
-			"Самый быстрый путь вниз", -- [9]
-			"落地", -- [10]
-			"落地", -- [11]
-		}, -- [5]
-		{
-			"Stealth Philosophy", -- [1]
-			"Verstohlenheitsphilosophie", -- [2]
-			"Filosofía sigilosa", -- [3]
-			"Filosofía del sigilo", -- [4]
-			"La philosophie de la furtivité", -- [5]
-			"Filosofia furtiva", -- [6]
-			"은신의 왕도", -- [7]
-			"A filosofia da furtividade", -- [8]
-			"Деликатный подход", -- [9]
-			"潜行的哲学", -- [10]
-			"潛行的藝術", -- [11]
-		}, -- [6]
-		{
-			"The Soulstone's Power", -- [1]
-			"Die Macht des Seelensteins", -- [2]
-			"El poder de la piedra de alma", -- [3]
-			"El poder de la piedra de alma", -- [4]
-			"Le pouvoir de la pierre d’âme", -- [5]
-			"Il potere della Pietra dell'Anima", -- [6]
-			"영혼석의 힘", -- [7]
-			"O poder da Pedra da Alma", -- [8]
-			"Сила камня души", -- [9]
-			"灵魂石的力量", -- [10]
-			"靈魂石的力量", -- [11]
-		}, -- [7]
-	},
-	["556"] = {
-		{
-			"Incur Jin'do's Wrath", -- [1]
-			"Beschwört Jin'dos Zorn herauf", -- [2]
-			"Provoca la ira de Jin'do", -- [3]
-			"Despierta la ira de Jin'do.", -- [4]
-			"Le courroux de Jin’do", -- [5]
-			"Ira di Jin'do", -- [6]
-			"진도의 분노 부르기", -- [7]
-			"Provoque a Ira de Jin'do", -- [8]
-			"Навлеките на себя гнев Джин'до", -- [9]
-			"引发金度的怒火", -- [10]
-			"引發金度的憤怒", -- [11]
-		}, -- [1]
-		{
-			"Jin'do the Godbreaker", -- [1]
-			"Jin'do der Götterbrecher", -- [2]
-			"Jin'do el Sojuzgadioses", -- [3]
-			"Jin'do el Sojuzgadioses", -- [4]
-			"Jin’do le Briseur de dieux", -- [5]
-			"Jin'do l'Annientadei", -- [6]
-			"신파괴자 진도", -- [7]
-			"Jin'do, o Doma-deus", -- [8]
-			"Джин'до Низвергатель Богов", -- [9]
-			"碎神者金度", -- [10]
-			"破神者金度", -- [11]
-		}, -- [2]
-		{
-			"Bosses Defeated", -- [1]
-			"Bosse besiegt", -- [2]
-			"Jefes derrotados", -- [3]
-			"Jefes derrotados.", -- [4]
-			"Boss vaincus", -- [5]
-			"Boss sconfitti", -- [6]
-			"우두머리 처치", -- [7]
-			"Chefes derrotados", -- [8]
-			"Боссы повержены", -- [9]
-			"击败首领", -- [10]
-			"已擊敗的首領", -- [11]
-		}, -- [3]
-		{
-			"The Edge of Madness", -- [1]
-			"Rand des Wahnsinns", -- [2]
-			"Cabo de la Locura", -- [3]
-			"El Cabo de la Locura", -- [4]
-			"La frontière de la folie", -- [5]
-			"Orlo della Follia", -- [6]
-			"광란의 경계", -- [7]
-			"A Beira da Loucura", -- [8]
-			"Грань Безумия", -- [9]
-			"疯狂之缘", -- [10]
-			"瘋狂之緣", -- [11]
-		}, -- [4]
-	},
-	["70"] = {
-		{
-			"[PH] Defeat Masters", -- [1]
-			"[PH] Defeat Masters", -- [2]
-			"[PH] Defeat Masters", -- [3]
-			"[PH] Defeat Masters", -- [4]
-			"Vaincre les maîtres", -- [5]
-			"[PH] Sconfiggi i Maestri", -- [6]
-			"[PH] 사부를 처치해야 합니다.", -- [7]
-			"[PH] Derrote os Mestres", -- [8]
-			"[PH] Defeat Masters", -- [9]
-			"[PH]击败大师", -- [10]
-			"[PH] Defeat Masters", -- [11]
-		}, -- [1]
-	},
-	["40"] = {
-		{
-			"Rescue the Villagers", -- [1]
-			"Rettet die Dorfbewohner", -- [2]
-			"Salva a los habitantes", -- [3]
-			"Salva a los habitantes", -- [4]
-			"Sauver les villageois", -- [5]
-			"Salva gli abitanti", -- [6]
-			"녹옥 마을 주민 구출", -- [7]
-			"Resgate os Aldeões", -- [8]
-			"Спасение жителей деревни", -- [9]
-			"拯救村民", -- [10]
-			"拯救村民", -- [11]
-		}, -- [1]
-		{
-			"Rescue the Dojo", -- [1]
-			"Rettet den Dojo", -- [2]
-			"Salva el dojo", -- [3]
-			"Salva el dojo", -- [4]
-			"Sauver le dojo", -- [5]
-			"Salva il Dojo", -- [6]
-			"도장을 구하라", -- [7]
-			"Salve o Dojo", -- [8]
-			"Спасение додзё", -- [9]
-			"拯救道场", -- [10]
-			"拯救道場", -- [11]
-		}, -- [2]
-		{
-			"Recover Burgled Barrels", -- [1]
-			"Findet die gestohlenen Fässer", -- [2]
-			"Recupera los barriles robados", -- [3]
-			"Recupera los barriles robados", -- [4]
-			"Récupérer les barils volés", -- [5]
-			"Recupera i barili rubati", -- [6]
-			"서리당한 맥주통 회수", -- [7]
-			"Recupere os Barris Roubados", -- [8]
-			"Возвращение украденных бочонков", -- [9]
-			"找回失窃的桶", -- [10]
-			"取回遭竊的酒桶", -- [11]
-		}, -- [3]
-		{
-			"Rescue Greenstone Masons", -- [1]
-			"Rettet die Steinmetze von Grünstein", -- [2]
-			"Rescata a los canteros de Verdemar", -- [3]
-			"Rescata a los canteros de Verdemar", -- [4]
-			"Sauver les maçons de Pierre-Verte", -- [5]
-			"Salva i muratori di Pietraverde", -- [6]
-			"녹옥 석공 구출", -- [7]
-			"Resgate os Pedreiros da Rocha Verde", -- [8]
-			"Спасение каменщиков Зеленой Скалы", -- [9]
-			"拯救绿石工匠区", -- [10]
-			"拯救綠石石匠區", -- [11]
-		}, -- [4]
-		{
-			"Defeat Vengeful Hui", -- [1]
-			"Bezwingt den rachsüchtigen Hui", -- [2]
-			"Derrota a Hui el Vengativo", -- [3]
-			"Derrota a Hui el Vengativo", -- [4]
-			"Vaincre Hui le Vengeur", -- [5]
-			"Sconfiggi Hui il Vendicativo", -- [6]
-			"복수심에 불타는 후이 처치", -- [7]
-			"Derrotar Hui Vingativo", -- [8]
-			"Победа над Мстительным Хуэем", -- [9]
-			"击败仇灰", -- [10]
-			"殺死復仇之穢", -- [11]
-		}, -- [5]
-	},
-	["50"] = {
-		{
-			"Mogu'shan Palace", -- [1]
-			"Mogu'shanpalast", -- [2]
-			"Palacio Mogu'shan", -- [3]
-			"Palacio Mogu'shan", -- [4]
-			"Palais Mogu’shan", -- [5]
-			"Palazzo Mogu'shan", -- [6]
-			"모구샨 궁전", -- [7]
-			"Palácio Mogu'shan", -- [8]
-			"Дворец Могу'шан", -- [9]
-			"魔古山宫殿", -- [10]
-			"魔古山宮", -- [11]
-		}, -- [1]
-	},
-	["978"] = {
-		{
-			"Darkheart Thicket", -- [1]
-			"Das Finsterherzdickicht", -- [2]
-			"Arboleda Corazón Oscuro", -- [3]
-			"Matorral Corazón Oscuro", -- [4]
-			"Fourré Sombrecœur", -- [5]
-			"Boschetto Cuortetro", -- [6]
-			"어둠심장 숲", -- [7]
-			"Bosque Corenegro", -- [8]
-			"Чаща Темного Сердца", -- [9]
-			"黑心林地", -- [10]
-			"暗心灌木林", -- [11]
-		}, -- [1]
-	},
-	["542"] = {
-		{
-			"Blackrock Caverns", -- [1]
-			"Die Schwarzfelshöhlen", -- [2]
-			"Cavernas Roca Negra", -- [3]
-			"Cavernas Roca Negra", -- [4]
-			"Cavernes de Rochenoire", -- [5]
-			"Caverne di Roccianera", -- [6]
-			"검은바위 동굴", -- [7]
-			"Caverna Rocha Negra", -- [8]
-			"Пещеры Черной горы", -- [9]
-			"黑石岩窟", -- [10]
-			"黑石洞穴", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-	},
-	["567"] = {
-		{
-			"Disable Demon Portals", -- [1]
-			"Deaktiviert die Dämonenportale.", -- [2]
-			"Desactiva los portales de demonios", -- [3]
-			"Desactiva los portales demoníacos.", -- [4]
-			"Désactiver les portails démoniaques", -- [5]
-			"Disattiva i Portali Demoniaci", -- [6]
-			"악마의 차원문 닫기", -- [7]
-			"Desative os Portais Demoníacos", -- [8]
-			"Отключите порталы демонов", -- [9]
-			"关闭恶魔之门", -- [10]
-			"解除惡魔之門", -- [11]
-		}, -- [1]
-		{
-			"Slay Peroth'arn", -- [1]
-			"Tötet Peroth'arn", -- [2]
-			"Mata a Peroth'arn", -- [3]
-			"Mata a Peroth'arn.", -- [4]
-			"Tuer Peroth’arn", -- [5]
-			"Uccidi Peroth'arn", -- [6]
-			"페로스안 처치", -- [7]
-			"Mate Peroth'arn", -- [8]
-			"Убейте Перот'арна", -- [9]
-			"击败佩罗萨恩", -- [10]
-			"殺死佩洛薩恩", -- [11]
-		}, -- [2]
-		{
-			"Distract Queen Azshara", -- [1]
-			"Lenkt Königin Azshara ab", -- [2]
-			"Distrae a la reina Azshara", -- [3]
-			"Distrae a la Reina Azshara.", -- [4]
-			"Distraire la reine Azshara", -- [5]
-			"Distrai la Regina Azshara", -- [6]
-			"여왕 아즈샤라 방해", -- [7]
-			"Distraia a Rainha Azshara", -- [8]
-			"Отвлеките королеву Азшару", -- [9]
-			"拖住艾萨拉女王", -- [10]
-			"分散艾薩拉女王的注意力", -- [11]
-		}, -- [3]
-		{
-			"Defeat Mannoroth", -- [1]
-			"Besiegt Mannoroth", -- [2]
-			"Derrota a Mannoroth", -- [3]
-			"Derrota a Mannoroth.", -- [4]
-			"Terrassez Mannoroth", -- [5]
-			"Sconfiggi Mannoroth", -- [6]
-			"만노로스 처치", -- [7]
-			"Derrote Mannoroth", -- [8]
-			"Победите Маннорота", -- [9]
-			"击败玛诺洛斯", -- [10]
-			"擊敗瑪諾洛斯", -- [11]
-		}, -- [4]
-	},
-	["205"] = {
-		{
-			"Blending In", -- [1]
-			"Ganz unauffällig", -- [2]
-			"Panorama para matar", -- [3]
-			"Panorama para matar", -- [4]
-			"Se fondre dans le paysage", -- [5]
-			"Passare inosservati", -- [6]
-			"은밀한 정찰", -- [7]
-			"Infiltrando-se", -- [8]
-			"Разведка с воздуха", -- [9]
-			"乔装潜入", -- [10]
-			"混入其中", -- [11]
-		}, -- [1]
-		{
-			"Path of Smoke", -- [1]
-			"Rauchpfad", -- [2]
-			"Camino de humo", -- [3]
-			"Camino de humo", -- [4]
-			"La voie de la fumée", -- [5]
-			"Sentiero fumoso", -- [6]
-			"연기 자욱", -- [7]
-			"Caminho da Fumaça", -- [8]
-			"Путь дыма", -- [9]
-			"烟雾之径", -- [10]
-			"煙霧之途", -- [11]
-		}, -- [2]
-		{
-			"Shadows in the Storm", -- [1]
-			"Schatten im Sturm", -- [2]
-			"Sombras en la tormenta", -- [3]
-			"Sombras en la tormenta", -- [4]
-			"Des ombres dans la tempête", -- [5]
-			"Ombre nella tempesta", -- [6]
-			"폭풍 속의 그림자", -- [7]
-			"Sombras na Tempestade", -- [8]
-			"Тени шторма", -- [9]
-			"风暴中的阴影", -- [10]
-			"風暴中的陰影", -- [11]
-		}, -- [3]
-		{
-			"Wetwork", -- [1]
-			"Ein nasses Grab", -- [2]
-			"Trabajo sucio", -- [3]
-			"Trabajo sucio", -- [4]
-			"Se mouiller", -- [5]
-			"Massacro", -- [6]
-			"지저분한 일", -- [7]
-			"Matança", -- [8]
-			"Мокрое дело", -- [9]
-			"湿漉漉的任务", -- [10]
-			"刺殺任務", -- [11]
-		}, -- [4]
-		{
-			"Keep Quiet", -- [1]
-			"Ganz leise", -- [2]
-			"Guarda silencio", -- [3]
-			"Guarda silencio", -- [4]
-			"Rester discret", -- [5]
-			"Fai silenzio", -- [6]
-			"은밀한 이동", -- [7]
-			"Silêncio!", -- [8]
-			"Ни звука", -- [9]
-			"保持安静", -- [10]
-			"保持安靜", -- [11]
-		}, -- [5]
-		{
-			"Light Up the Night", -- [1]
-			"Licht in der Nacht", -- [2]
-			"Luz en la penumbra", -- [3]
-			"Luz en la penumbra", -- [4]
-			"Une lumière dans la nuit", -- [5]
-			"Illuminare la notte", -- [6]
-			"밤을 밝혀라", -- [7]
-			"Acendendo a Noite", -- [8]
-			"Ночь полна огня", -- [9]
-			"点亮夜晚", -- [10]
-			"照亮夜晚", -- [11]
-		}, -- [6]
-		{
-			"Breaking Out", -- [1]
-			"Ausbruch", -- [2]
-			"Salida", -- [3]
-			"Salida", -- [4]
-			"Évasion", -- [5]
-			"Fuga", -- [6]
-			"탈출", -- [7]
-			"Escapando", -- [8]
-			"Прорыв", -- [9]
-			"突破", -- [10]
-			"逃脫", -- [11]
-		}, -- [7]
-	},
-	["705"] = {
-		{
-			"Never ending step", -- [1]
-			"Der endlose Schritt", -- [2]
-			"Paso sin fin", -- [3]
-			"Paso interminable", -- [4]
-			"L’étape sans fin", -- [5]
-			"Fase senza fine", -- [6]
-			"끝나지 않는 과정", -- [7]
-			"Passo sem fim", -- [8]
-			"Бесконечная лестница", -- [9]
-			"永不止步", -- [10]
-			"無盡的步驟", -- [11]
-		}, -- [1]
-		{
-			"Progressive Bonus 1", -- [1]
-			"Progressive Bonus 1", -- [2]
-			"Progressive Bonus 1", -- [3]
-			"Bonus progresivo 1", -- [4]
-			"Progressive Bonus 1", -- [5]
-			"Bonus progressivo 1", -- [6]
-			"누진 보너스 1", -- [7]
-			"Bônus Progressivo 1", -- [8]
-			"Progressive Bonus 1", -- [9]
-			"进度奖励 1", -- [10]
-			"進度獎勵1", -- [11]
-		}, -- [2]
-		{
-			"Progressive Bonus 2", -- [1]
-			"Progressive Bonus 2", -- [2]
-			"Progressive Bonus 2", -- [3]
-			"Bonus progresivo 2", -- [4]
-			"Progressive Bonus 2", -- [5]
-			"Bonus progressivo 2", -- [6]
-			"누진 보너스 2", -- [7]
-			"Bônus Progressivo 2", -- [8]
-			"Progressive Bonus 2", -- [9]
-			"进度奖励 2", -- [10]
-			"進度獎勵2", -- [11]
-		}, -- [3]
-		{
-			"Progressive Bonus 3", -- [1]
-			"Progressive Bonus 3", -- [2]
-			"Progressive Bonus 3", -- [3]
-			"Bonus progresivo 3", -- [4]
-			"Progressive Bonus 3", -- [5]
-			"Bonus progressivo 3", -- [6]
-			"누진 보너스 3", -- [7]
-			"Bônus Progressivo 3", -- [8]
-			"Progressive Bonus 3", -- [9]
-			"进度奖励 3", -- [10]
-			"進度獎勵3", -- [11]
-		}, -- [4]
-	},
-	["605"] = {
-		{
-			"Prisoner of War", -- [1]
-			"Kriegsgefangene", -- [2]
-			"Prisionero de Guerra", -- [3]
-			"Prisionera de guerra", -- [4]
-			"Prisonnière de guerre", -- [5]
-			"Prigioniero di guerra", -- [6]
-			"전쟁 포로", -- [7]
-			"Prisioneiro de Guerra", -- [8]
-			"Пленница", -- [9]
-			"战俘", -- [10]
-			"戰俘", -- [11]
-		}, -- [1]
-		{
-			"Commander Kolurg defeated", -- [1]
-			"Kommandant Kolurg bezwungen", -- [2]
-			"Comandante Kolurg derrotado", -- [3]
-			"Comandante Kolurg derrotado.", -- [4]
-			"Commandant Kolurg vaincu", -- [5]
-			"Sconfiggi il Comandante Kolurg", -- [6]
-			"사령관 콜루르그 처치", -- [7]
-			"Comandante Kolurg derrotado", -- [8]
-			"Командир Колург повержен", -- [9]
-			"击败指挥官库鲁尔格", -- [10]
-			"已擊敗指揮官寇勒格", -- [11]
-		}, -- [2]
-	},
-	["1132"] = {
-		{
-			"Combat Training", -- [1]
-			"Kampftraining", -- [2]
-			"Instrucción de combate", -- [3]
-			"Instrucción de combate", -- [4]
-			"Entraînement au combat", -- [5]
-			"Addestramento al combattimento", -- [6]
-			"전투 훈련", -- [7]
-			"Treino de combate", -- [8]
-			"Боевые учения", -- [9]
-			"战斗训练", -- [10]
-			"戰鬥訓練", -- [11]
-		}, -- [1]
-		{
-			"A Frosty Friend", -- [1]
-			"Ein frostiger Freund", -- [2]
-			"Un amigo gélido", -- [3]
-			"Un amigo gélido", -- [4]
-			"Un ami glacial", -- [5]
-			"Una gelida amicizia", -- [6]
-			"차가운 친구", -- [7]
-			"Um amigo frio", -- [8]
-			"Кто со льдом дружен...", -- [9]
-			"酷酷的伙伴", -- [10]
-			"冷酷的朋友", -- [11]
-		}, -- [2]
-		{
-			"A Bolt Best Served Cold", -- [1]
-			"Kalt erwischt", -- [2]
-			"La escarcha se sirve fría", -- [3]
-			"Una descarga es mejor cuando se sirve fría", -- [4]
-			"Ça jette un froid", -- [5]
-			"Un dardo che va servito freddo", -- [6]
-			"차디찬 기운", -- [7]
-			"Uma seta que se atira fria", -- [8]
-			"Стрела, которую подают холодной", -- [9]
-			"冰镇的箭才是好箭", -- [10]
-			"冷箭的滋味", -- [11]
-		}, -- [3]
-		{
-			"Icy Death", -- [1]
-			"Eisiger Tod", -- [2]
-			"Muerte gélida", -- [3]
-			"Muerte glacial", -- [4]
-			"Mort de froid", -- [5]
-			"Morte glaciale", -- [6]
-			"치명적인 얼음", -- [7]
-			"Morte gélida", -- [8]
-			"Смерть с налетом инея", -- [9]
-			"寒冰死亡", -- [10]
-			"冷死了", -- [11]
-		}, -- [4]
-		{
-			"Frozen Fingers", -- [1]
-			"Gefrorene Finger", -- [2]
-			"Dedos congelados", -- [3]
-			"Dedos helados", -- [4]
-			"Doigts gelés", -- [5]
-			"Dita gelide", -- [6]
-			"얼어붙은 손길", -- [7]
-			"Dedos congelados", -- [8]
-			"Мертвая хватка холода", -- [9]
-			"寒冰指", -- [10]
-			"連手指都藍了", -- [11]
-		}, -- [5]
-		{
-			"Putting It All Together", -- [1]
-			"Das große Ganze", -- [2]
-			"Juntar las piezas", -- [3]
-			"Todas las piezas juntas", -- [4]
-			"Mise en pratique", -- [5]
-			"Mettersi alla prova", -- [6]
-			"종합주문세트", -- [7]
-			"Fixação de conteúdo", -- [8]
-			"Сборная солянка", -- [9]
-			"综合在一起", -- [10]
-			"準備完善", -- [11]
-		}, -- [6]
-		{
-			"Hey, I'm Over Here Now!", -- [1]
-			"Erst hier, dann dort, dann fort!", -- [2]
-			"¡Eh, ahora estoy aquí!", -- [3]
-			"¡Oye, estoy por aquí!", -- [4]
-			"Ohé, je suis là, maintenant !", -- [5]
-			"Ehi, sono qui!", -- [6]
-			"나 잡아봐라!", -- [7]
-			"Ei, estou aqui, agora!", -- [8]
-			"Эй, я здесь!", -- [9]
-			"嘿，我在这儿呢！", -- [10]
-			"喂，我在這裡啦！", -- [11]
-		}, -- [7]
-		{
-			"Freezing Roots", -- [1]
-			"Eisige Wurzeln", -- [2]
-			"Raíces congelantes", -- [3]
-			"Raíces heladas", -- [4]
-			"Racines glaçantes", -- [5]
-			"Radici gelide", -- [6]
-			"그대로 멈춰라!", -- [7]
-			"Raízes congelando", -- [8]
-			"Глубокая заморозка", -- [9]
-			"冻在原地", -- [10]
-			"連鞋子都凍住了", -- [11]
-		}, -- [8]
-		{
-			"Dropping Ice from the Sky", -- [1]
-			"Eis vom Himmel werfen", -- [2]
-			"Cae hielo del cielo", -- [3]
-			"Lluvia de hielo desde el cielo", -- [4]
-			"De la glace tombée du ciel", -- [5]
-			"Ghiaccio dal cielo", -- [6]
-			"휘몰아치는 눈발", -- [7]
-			"Fazendo gelo cair do céu", -- [8]
-			"Ледяной обвал", -- [9]
-			"从天而降的冰雪", -- [10]
-			"天降寒冰", -- [11]
-		}, -- [9]
-		{
-			"A Quick Test", -- [1]
-			"Schnelltest", -- [2]
-			"Una prueba rápida", -- [3]
-			"Una prueba rápida", -- [4]
-			"Un test rapide", -- [5]
-			"Una piccola prova", -- [6]
-			"깜짝 시험", -- [7]
-			"Teste rápido", -- [8]
-			"Испытание тет-а-тет", -- [9]
-			"快速测试", -- [10]
-			"立刻測試", -- [11]
-		}, -- [10]
-		{
-			"Twice the Challenge", -- [1]
-			"Doppelte Herausforderung", -- [2]
-			"Desafío por partida doble", -- [3]
-			"Un desafío doble", -- [4]
-			"Double défi", -- [5]
-			"Doppia sfida", -- [6]
-			"난이도 두 배", -- [7]
-			"Desafio em dose dupla", -- [8]
-			"Двойной вызов", -- [9]
-			"双倍挑战", -- [10]
-			"雙重挑戰", -- [11]
-		}, -- [11]
-		{
-			"Defend Against the Legion Assault", -- [1]
-			"Den Angriff der Legion abwehren", -- [2]
-			"Defiéndete del asalto de la Legión", -- [3]
-			"Defiéndete contra el ataque de la Legión", -- [4]
-			"Défense contre l’assaut de la Légion", -- [5]
-			"Difesa contro la Legione", -- [6]
-			"군단의 공격 막아내기", -- [7]
-			"Defender contra o ataque da Legião", -- [8]
-			"Оборона против Легиона", -- [9]
-			"在军团的攻击下保卫飞艇", -- [10]
-			"抵擋燃燒軍團的攻擊", -- [11]
-		}, -- [12]
-		{
-			"Assault on Broken Shore", -- [1]
-			"Angriff auf die Verheerte Küste", -- [2]
-			"Asalto a la Costa Abrupta", -- [3]
-			"Asalto a la Costa Quebrada", -- [4]
-			"L’assaut du rivage Brisé", -- [5]
-			"Assalto alla Riva Dispersa", -- [6]
-			"부서진 해변 공격", -- [7]
-			"Ataque à Costa Partida", -- [8]
-			"Штурм Расколотого берега", -- [9]
-			"突袭破碎海滩", -- [10]
-			"突襲破碎海岸", -- [11]
-		}, -- [13]
-	},
-	["1046"] = {
-		{
-			"Halls of Valor", -- [1]
-			"Die Hallen der Tapferkeit", -- [2]
-			"Cámaras del Valor", -- [3]
-			"Salones del Valor", -- [4]
-			"Salles des Valeureux", -- [5]
-			"Sale del Valore", -- [6]
-			"용맹의 전당", -- [7]
-			"Salões da Bravura", -- [8]
-			"Чертоги Доблести", -- [9]
-			"英灵殿", -- [10]
-			"英靈殿", -- [11]
-		}, -- [1]
-	},
-	["204"] = {
-		{
-			"Find Lost Explosives", -- [1]
-			"Findet den verlorenen Sprengstoff", -- [2]
-			"Encuentra los explosivos perdidos", -- [3]
-			"Encuentra los explosivos perdidos", -- [4]
-			"Trouver les explosifs perdus", -- [5]
-			"Trova gli esplosivi perduti", -- [6]
-			"잃어버린 폭탄을 찾아라", -- [7]
-			"Encontrar os explosivos perdidos", -- [8]
-			"Найти потерянную взрывчатку", -- [9]
-			"找到遗失的炸药", -- [10]
-			"尋找遺失的炸藥", -- [11]
-		}, -- [1]
-		{
-			"Deliver Explosives", -- [1]
-			"Liefert den Sprengstoff", -- [2]
-			"Entrega los explosivos", -- [3]
-			"Entrega los explosivos", -- [4]
-			"Livrer les explosifs", -- [5]
-			"Consegna gli esplosivi", -- [6]
-			"폭탄 전달", -- [7]
-			"Entregar os Explosivos", -- [8]
-			"Доставить взрывчатку", -- [9]
-			"运送炸药", -- [10]
-			"遞送炸藥", -- [11]
-		}, -- [2]
-		{
-			"Detonate Explosives", -- [1]
-			"Detoniert den Sprengstoff", -- [2]
-			"Detona los explosivos", -- [3]
-			"Detona los explosivos", -- [4]
-			"Faire détoner les explosifs", -- [5]
-			"Fai detonare gli esplosivi", -- [6]
-			"폭탄 폭파", -- [7]
-			"Detonar Explosivos", -- [8]
-			"Взрыв", -- [9]
-			"引爆炸药", -- [10]
-			"引爆炸藥", -- [11]
-		}, -- [3]
-		{
-			"Kill War-God Al'chukla", -- [1]
-			"Tötet Kriegsgott Al'chukla", -- [2]
-			"Mata al dios de la guerra Al'chukla", -- [3]
-			"Mata al dios de la guerra Al'chukla", -- [4]
-			"Tuer le dieu-guerrier Al’chukla", -- [5]
-			"Uccidi il Dio della Guerra Al'chukla", -- [6]
-			"전쟁신 알축라 처치", -- [7]
-			"Mate o Deus da Guerra Al'chukla", -- [8]
-			"Убейте бога войны Ал'чуклу", -- [9]
-			"击败战神阿尔图克拉", -- [10]
-			"殺死戰神阿裘卡拉", -- [11]
-		}, -- [4]
-	},
-	["568"] = {
-		{
-			"The Forge of Souls", -- [1]
-			"Die Seelenschmiede", -- [2]
-			"La Forja de Almas", -- [3]
-			"La Forja de Almas", -- [4]
-			"La Forge des Âmes", -- [5]
-			"Forgia delle Anime", -- [6]
-			"영혼의 제련소", -- [7]
-			"Forja das Almas", -- [8]
-			"Кузня Душ", -- [9]
-			"灵魂洪炉", -- [10]
-			"眾魂熔爐", -- [11]
-		}, -- [1]
-	},
-	["942"] = {
-		{
-			"Neltharion's Lair", -- [1]
-			"Neltharions Hort", -- [2]
-			"La Guarida de Neltharion", -- [3]
-			"Guarida de Neltharion", -- [4]
-			"Repaire de Neltharion", -- [5]
-			"Antro di Neltharion", -- [6]
-			"넬타리온의 둥지", -- [7]
-			"Covil de Neltharion", -- [8]
-			"Логово Нелтариона", -- [9]
-			"奈萨里奥的巢穴", -- [10]
-			"奈薩里奧巢穴", -- [11]
-		}, -- [1]
-	},
-	["704"] = {
-		{
-			"Invasion", -- [1]
-			"Invasion", -- [2]
-			"Invasión", -- [3]
-			"Invasión", -- [4]
-			"L'invasion", -- [5]
-			"Invasione", -- [6]
-			"침략", -- [7]
-			"Invasão", -- [8]
-			"Вторжение", -- [9]
-			"入侵", -- [10]
-			"入侵", -- [11]
-		}, -- [1]
-		{
-			"The Scouting Party", -- [1]
-			"Der Spähtrupp", -- [2]
-			"El grupo de exploración", -- [3]
-			"El grupo explorador", -- [4]
-			"Le groupe d’éclaireurs", -- [5]
-			"Il gruppo di esploratori", -- [6]
-			"정찰대", -- [7]
-			"O Grupo de Batedores", -- [8]
-			"Разведывательный отряд", -- [9]
-			"斥候小队", -- [10]
-			"偵察隊", -- [11]
-		}, -- [2]
-		{
-			"Hold Out!", -- [1]
-			"Haltet durch!", -- [2]
-			"¡Aguanta!", -- [3]
-			"¡Aguanta!", -- [4]
-			"Accrochez-vous !", -- [5]
-			"Non cedere!", -- [6]
-			"항전!", -- [7]
-			"Aguentem!", -- [8]
-			"Стоять до последнего!", -- [9]
-			"坚持住！", -- [10]
-			"堅持到底！", -- [11]
-		}, -- [3]
-		{
-			"Cleanup", -- [1]
-			"Aufräumkommando", -- [2]
-			"Limpieza", -- [3]
-			"Limpieza", -- [4]
-			"Nettoyage", -- [5]
-			"Ripulitura", -- [6]
-			"소탕", -- [7]
-			"Limpeza", -- [8]
-			"Зачистка", -- [9]
-			"摧枯拉朽", -- [10]
-			"收拾殘局", -- [11]
-		}, -- [4]
-		{
-			"The Calm", -- [1]
-			"Ruhe nach dem Sturm", -- [2]
-			"La calma", -- [3]
-			"La calma", -- [4]
-			"Le calme", -- [5]
-			"La calma", -- [6]
-			"정적", -- [7]
-			"A Calma", -- [8]
-			"Затишье", -- [9]
-			"风平浪静", -- [10]
-			"歇息備戰", -- [11]
-		}, -- [5]
-		{
-			"Commander's Fall", -- [1]
-			"Fall des Kommandanten", -- [2]
-			"La caída del comandante", -- [3]
-			"La caída del comandante", -- [4]
-			"La chute d’un commandant", -- [5]
-			"La caduta del comandante", -- [6]
-			"지휘관의 죽음", -- [7]
-			"A Ruína do Comandante", -- [8]
-			"Падение вождя", -- [9]
-			"指挥官的陨落", -- [10]
-			"指揮官之殞", -- [11]
-		}, -- [6]
-		{
-			"Bronze", -- [1]
-			"Bronze", -- [2]
-			"Bronce", -- [3]
-			"Bronce", -- [4]
-			"Bronze", -- [5]
-			"Bronzo", -- [6]
-			"동메달", -- [7]
-			"Bronze", -- [8]
-			"Бронза", -- [9]
-			"青铜级", -- [10]
-			"青銅", -- [11]
-		}, -- [7]
-		{
-			"Silver", -- [1]
-			"Silber", -- [2]
-			"Plata", -- [3]
-			"Plata", -- [4]
-			"Argent", -- [5]
-			"Argento", -- [6]
-			"은메달", -- [7]
-			"Prata", -- [8]
-			"Серебро", -- [9]
-			"白银级", -- [10]
-			"白銀", -- [11]
-		}, -- [8]
-		{
-			"Gold", -- [1]
-			"Gold", -- [2]
-			"Oro", -- [3]
-			"Oro", -- [4]
-			"Or", -- [5]
-			"Oro", -- [6]
-			"금메달", -- [7]
-			"Ouro", -- [8]
-			"Золото", -- [9]
-			"黄金级", -- [10]
-			"黃金", -- [11]
-		}, -- [9]
-		{
-			"Platinum", -- [1]
-			"Platin", -- [2]
-			"Platino", -- [3]
-			"Platino", -- [4]
-			"Platine", -- [5]
-			"Platino", -- [6]
-			"백금메달", -- [7]
-			"Platina", -- [8]
-			"Платина", -- [9]
-			"白金", -- [10]
-			"白金", -- [11]
-		}, -- [10]
-	},
-	["566"] = {
-		{
-			"The Forge of Souls", -- [1]
-			"Die Seelenschmiede", -- [2]
-			"La Forja de Almas", -- [3]
-			"La Forja de Almas", -- [4]
-			"La Forge des Âmes", -- [5]
-			"Forgia delle Anime", -- [6]
-			"영혼의 제련소", -- [7]
-			"Forja das Almas", -- [8]
-			"Кузня Душ", -- [9]
-			"灵魂洪炉", -- [10]
-			"眾魂熔爐", -- [11]
-		}, -- [1]
-	},
-	["666"] = {
-		{
-			"Capital Gardens", -- [1]
-			"Hauptstadtgärten", -- [2]
-			"Jardines de la Capital", -- [3]
-			"Jardines de la Capital", -- [4]
-			"Grands jardins", -- [5]
-			"Giardini della Capitale", -- [6]
-			"수도 정원", -- [7]
-			"Jardins Capitais", -- [8]
-			"Центральный сад", -- [9]
-			"中心花园", -- [10]
-			"中心花園", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-	},
-	["633"] = {
-		{
-			"The Slave Pens", -- [1]
-			"Die Sklavenunterkünfte", -- [2]
-			"Recinto de los Esclavos", -- [3]
-			"Recinto de los Esclavos", -- [4]
-			"Les enclos aux esclaves", -- [5]
-			"Fosse degli Schiavi", -- [6]
-			"강제 노역소", -- [7]
-			"O Pátio dos Escravos", -- [8]
-			"Узилище", -- [9]
-			"奴隶围栏", -- [10]
-			"奴隸監獄", -- [11]
-		}, -- [1]
-	},
-	["333"] = {
-		{
-			"Blackfathom Deeps", -- [1]
-			"Tiefschwarze Grotte", -- [2]
-			"Cavernas de Brazanegra", -- [3]
-			"Cavernas de Brazanegra", -- [4]
-			"Profondeurs de Brassenoire", -- [5]
-			"Abissi di Fondocupo", -- [6]
-			"검은심연 나락", -- [7]
-			"Profundezas Negras", -- [8]
-			"Непроглядная Пучина", -- [9]
-			"黑暗深渊", -- [10]
-			"黑澗深淵", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [3]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [4]
-	},
-	["1012"] = {
-		{
-			"Maritime Diplomacy", -- [1]
-			"Maritime Diplomatie", -- [2]
-			"Diplomacia marítima", -- [3]
-			"Diplomacia marítima", -- [4]
-			"Diplomatie maritime", -- [5]
-			"Diplomazia marittima", -- [6]
-			"해양 외교", -- [7]
-			"Diplomacia marítima", -- [8]
-			"Морская дипломатия", -- [9]
-			"海事外交", -- [10]
-			"海事交涉", -- [11]
-		}, -- [1]
-		{
-			"Blood and Plunder", -- [1]
-			"Blut und fette Beute", -- [2]
-			"Sangre y saqueo", -- [3]
-			"Sangre y saqueo", -- [4]
-			"Sang et pillage", -- [5]
-			"Sangue e bottino", -- [6]
-			"피와 약탈", -- [7]
-			"Sangue e saque!", -- [8]
-			"Кровь и золото", -- [9]
-			"鲜血与掠夺", -- [10]
-			"鮮血與掠奪", -- [11]
-		}, -- [2]
-		{
-			"Eliza's Gambit", -- [1]
-			"Elizas Schachzug", -- [2]
-			"El gambito de Eliza", -- [3]
-			"La estrategia de Eliza", -- [4]
-			"Le stratagème d’Eliza", -- [5]
-			"La scommessa di Eliza", -- [6]
-			"엘리자의 계략", -- [7]
-			"A jogada de Elisa", -- [8]
-			"Гамбит Элизы", -- [9]
-			"伊丽扎的战术", -- [10]
-			"伊莉莎的賭注", -- [11]
-		}, -- [3]
-		{
-			"Into the Depths", -- [1]
-			"In die Tiefen", -- [2]
-			"En las profundidades", -- [3]
-			"En las profundidades", -- [4]
-			"Dans les profondeurs", -- [5]
-			"Negli abissi", -- [6]
-			"깊숙한 곳으로", -- [7]
-			"Nas profundezas", -- [8]
-			"В храм", -- [9]
-			"进入深渊", -- [10]
-			"深入追擊", -- [11]
-		}, -- [4]
-		{
-			"Claiming the Prize", -- [1]
-			"Die Eroberung des Schatzes", -- [2]
-			"Obtener el trofeo", -- [3]
-			"Reclamando el premio", -- [4]
-			"Obtention du trophée", -- [5]
-			"Conquistare il premio", -- [6]
-			"제독의 선물", -- [7]
-			"A conquista do prêmio", -- [8]
-			"Долгожданный трофей", -- [9]
-			"夺取宝藏", -- [10]
-			"奪取戰利品", -- [11]
-		}, -- [5]
-	},
-	["1148"] = {
-		{
-			"Demons, Demons, Everywhere...", -- [1]
-			"Dämonen, Dämonen überall...", -- [2]
-			"Demonios, demonios por todas partes...", -- [3]
-			"Demonios, demonios, por todas partes", -- [4]
-			"Des démons partout…", -- [5]
-			"Demoni, demoni ovunque...", -- [6]
-			"온누리에 악마", -- [7]
-			"Demônios, demônios por todas as partes...", -- [8]
-			"Демоны, всюду демоны...", -- [9]
-			"恶魔，到处都是恶魔...", -- [10]
-			"到處都是惡魔、惡魔…", -- [11]
-		}, -- [1]
-		{
-			"Small But Mighty", -- [1]
-			"Klein, aber oho", -- [2]
-			"Pequeño, pero matón", -- [3]
-			"Pequeño pero poderoso", -- [4]
-			"Petit, mais costaud", -- [5]
-			"Piccolo ma forte", -- [6]
-			"작은 고추가 매운 법", -- [7]
-			"Pequeno, mas potente.", -- [8]
-			"Мал, да удал", -- [9]
-			"身型虽小，力大无穷", -- [10]
-			"很小但很厲害", -- [11]
-		}, -- [2]
-		{
-			"A Feat of Strength", -- [1]
-			"Heldentat", -- [2]
-			"Una proeza de fuerza", -- [3]
-			"Una proeza de fuerza", -- [4]
-			"Un tour de force", -- [5]
-			"Una prova di forza", -- [6]
-			"엄청난 힘", -- [7]
-			"Proeza para os fortes", -- [8]
-			"Триумф грубой силы", -- [9]
-			"力量的壮举", -- [10]
-			"偉業", -- [11]
-		}, -- [3]
-		{
-			"Hodir, Hodir, Hodir!", -- [1]
-			"Hodir, Hodir, Hodir!", -- [2]
-			"¡Hodir, Hodir, Hodir!", -- [3]
-			"¡Hodir, Hodir, Hodir!", -- [4]
-			"Hodir, Hodir, Hodir !", -- [5]
-			"Hodir, Hodir, Hodir!", -- [6]
-			"호디르, 호디르, 호디르!", -- [7]
-			"Hodir, Hodir, Hodir!", -- [8]
-			"Ходир, я иду к тебе!", -- [9]
-			"霍迪尔，霍迪尔，霍迪尔！", -- [10]
-			"霍迪爾、霍迪爾、霍迪爾！", -- [11]
-		}, -- [4]
-		{
-			"The Clash Of Thunder", -- [1]
-			"Der Donnerschlag", -- [2]
-			"El Fragor del Trueno", -- [3]
-			"El Fragor del Trueno", -- [4]
-			"Le Fracas du tonnerre", -- [5]
-			"La Sala del Tuono", -- [6]
-			"천둥의 울림", -- [7]
-			"Estrondo do Trovão", -- [8]
-			"Раскаты Грома", -- [9]
-			"雷霆角斗场", -- [10]
-			"雷鳴之廳", -- [11]
-		}, -- [5]
-		{
-			"A Feat of Battle", -- [1]
-			"Heldentat des Kampfes", -- [2]
-			"Una proeza de combate", -- [3]
-			"Una proeza en batalla", -- [4]
-			"Un exploit martial", -- [5]
-			"Un'impresa di guerra", -- [6]
-			"실력을 보여라", -- [7]
-			"Proeza para os senhores da guerra", -- [8]
-			"На войне как на войне", -- [9]
-			"战斗的壮举", -- [10]
-			"一戰出頭", -- [11]
-		}, -- [6]
-		{
-			"Rescue Thorim", -- [1]
-			"Rettet Thorim", -- [2]
-			"Rescata a Thorim", -- [3]
-			"Rescata a Thorim", -- [4]
-			"Le sauvetage de Thorim", -- [5]
-			"Salvare Thorim", -- [6]
-			"토림 구출", -- [7]
-			"Resgate de Thorim", -- [8]
-			"Спасение Торима", -- [9]
-			"营救托里姆", -- [10]
-			"解救索林姆", -- [11]
-		}, -- [7]
-		{
-			"Talk to Thorim", -- [1]
-			"Sprecht mit Thorim", -- [2]
-			"Habla con Thorim", -- [3]
-			"Habla con Thorim", -- [4]
-			"Entretien avec Thorim", -- [5]
-			"Parlare con Thorim", -- [6]
-			"토림과 대화", -- [7]
-			"Falar com Thorim", -- [8]
-			"Поговорить с Торимом", -- [9]
-			"和托里姆谈谈", -- [10]
-			"跟索林姆交談", -- [11]
-		}, -- [8]
-	},
-	["552"] = {
-		{
-			"The Vortex Pinnacle", -- [1]
-			"Der Vortexgipfel", -- [2]
-			"La Cumbre del Vórtice", -- [3]
-			"La Cumbre del Vórtice", -- [4]
-			"La cime du Vortex", -- [5]
-			"Pinnacolo del Vortice", -- [6]
-			"소용돌이 누각", -- [7]
-			"Pináculo do Vórtice", -- [8]
-			"Вершина Смерча", -- [9]
-			"旋云之巅", -- [10]
-			"漩渦尖塔", -- [11]
-		}, -- [1]
-	},
-	["1050"] = {
-		{
-			"Court of Stars", -- [1]
-			"Der Hof der Sterne", -- [2]
-			"Corte de las Estrellas", -- [3]
-			"Corte de Estrellas", -- [4]
-			"La cour des Étoiles", -- [5]
-			"Corte delle Stelle", -- [6]
-			"별의 궁정", -- [7]
-			"Pátio das Estrelas", -- [8]
-			"Квартал Звезд", -- [9]
-			"群星庭院", -- [10]
-			"眾星之廷", -- [11]
-		}, -- [1]
-	},
-	["1181"] = {
-		{
-			"Combat Training", -- [1]
-			"Kampftraining", -- [2]
-			"Instrucción de combate", -- [3]
-			"Instrucción de combate", -- [4]
-			"Entraînement au combat", -- [5]
-			"Addestramento al combattimento", -- [6]
-			"전투 훈련", -- [7]
-			"Treino de combate", -- [8]
-			"Боевые учения", -- [9]
-			"战斗训练", -- [10]
-			"戰鬥訓練", -- [11]
-		}, -- [1]
-		{
-			"Doing the Moonwalk", -- [1]
-			"Mondsüchtig", -- [2]
-			"Formas lunares", -- [3]
-			"A paso lunar", -- [4]
-			"Marcher sur la lune", -- [5]
-			"Luna piena", -- [6]
-			"달과 야수", -- [7]
-			"Moonwalk", -- [8]
-			"Прогулка под луной", -- [9]
-			"月球漫步", -- [10]
-			"梟獸學步", -- [11]
-		}, -- [2]
-		{
-			"Balancing The Moon and Sun", -- [1]
-			"Gleichgewicht von Sonne und Mond", -- [2]
-			"Equilibrio entre sol y luna", -- [3]
-			"Equilibrio entre la Luna y el Sol", -- [4]
-			"L’équilibre du soleil et de la lune", -- [5]
-			"Equilibrio tra Sole e Luna", -- [6]
-			"해와 달의 조화", -- [7]
-			"Balancear a Lua e o Sol", -- [8]
-			"Сила светил", -- [9]
-			"日月平衡", -- [10]
-			"日月平衡", -- [11]
-		}, -- [3]
-		{
-			"The Power of the Sun", -- [1]
-			"Die Macht der Sonne", -- [2]
-			"El poder del sol", -- [3]
-			"El poder del Sol", -- [4]
-			"Le pouvoir du soleil", -- [5]
-			"Il potere del Sole", -- [6]
-			"태양의 힘", -- [7]
-			"O poder do Sol", -- [8]
-			"Испепеляющее солнце", -- [9]
-			"太阳能", -- [10]
-			"日炎之力", -- [11]
-		}, -- [4]
-		{
-			"A Surge Forward", -- [1]
-			"Im Sog der Sterne", -- [2]
-			"Una oleada estelar", -- [3]
-			"Un avance repentino", -- [4]
-			"Des astres bouillonnants", -- [5]
-			"Seguire la Cometa", -- [6]
-			"샘솟는 별빛", -- [7]
-			"Surtando", -- [8]
-			"Звездный час", -- [9]
-			"滚滚向前", -- [10]
-			"星如湧泉", -- [11]
-		}, -- [5]
-		{
-			"Putting It All Together", -- [1]
-			"Das große Ganze", -- [2]
-			"Juntar las piezas", -- [3]
-			"Todas las piezas juntas", -- [4]
-			"Mise en pratique", -- [5]
-			"Mettersi alla prova", -- [6]
-			"종합주문세트", -- [7]
-			"Fixação de conteúdo", -- [8]
-			"Сборная солянка", -- [9]
-			"综合在一起", -- [10]
-			"準備完善", -- [11]
-		}, -- [6]
-		{
-			"Mending Your Wounds", -- [1]
-			"Wunden heilen", -- [2]
-			"Sanar tus heridas", -- [3]
-			"Curando las heridas", -- [4]
-			"Panser ses blessures", -- [5]
-			"Curare le ferite", -- [6]
-			"상처 보살피기", -- [7]
-			"Curar as feridas", -- [8]
-			"Исцеление ран", -- [9]
-			"治疗你的伤口", -- [10]
-			"照料你的傷口", -- [11]
-		}, -- [7]
-		{
-			"Grasping At Feet", -- [1]
-			"Fußfesseln", -- [2]
-			"Trampas enredadoras", -- [3]
-			"Agarre con los pies", -- [4]
-			"Par les pieds", -- [5]
-			"Un abbraccio stringente", -- [6]
-			"발목 잡기", -- [7]
-			"Agarrando-se aos pés", -- [8]
-			"Цепкие корни", -- [9]
-			"裹足不前", -- [10]
-			"糾纏不清", -- [11]
-		}, -- [8]
-		{
-			"A Quick Test", -- [1]
-			"Schnelltest", -- [2]
-			"Una prueba rápida", -- [3]
-			"Una prueba rápida", -- [4]
-			"Un test rapide", -- [5]
-			"Una piccola prova", -- [6]
-			"깜짝 시험", -- [7]
-			"Teste rápido", -- [8]
-			"Испытание тет-а-тет", -- [9]
-			"快速测试", -- [10]
-			"立刻測試", -- [11]
-		}, -- [9]
-		{
-			"Twice the Challenge", -- [1]
-			"Doppelte Herausforderung", -- [2]
-			"Desafío por partida doble", -- [3]
-			"Un desafío doble", -- [4]
-			"Double défi", -- [5]
-			"Doppia sfida", -- [6]
-			"난이도 두 배", -- [7]
-			"Desafio em dose dupla", -- [8]
-			"Двойной вызов", -- [9]
-			"双倍挑战", -- [10]
-			"雙重挑戰", -- [11]
-		}, -- [10]
-		{
-			"Defend Against the Legion Assault", -- [1]
-			"Den Angriff der Legion abwehren", -- [2]
-			"Defiéndete del asalto de la Legión", -- [3]
-			"Defiéndete contra el ataque de la Legión", -- [4]
-			"Défense contre l’assaut de la Légion", -- [5]
-			"Difesa contro la Legione", -- [6]
-			"군단의 공격 막아내기", -- [7]
-			"Defender contra o ataque da Legião", -- [8]
-			"Оборона против Легиона", -- [9]
-			"在军团的攻击下保卫飞艇", -- [10]
-			"抵擋燃燒軍團的攻擊", -- [11]
-		}, -- [11]
-		{
-			"Assault on Broken Shore", -- [1]
-			"Angriff auf die Verheerte Küste", -- [2]
-			"Asalto a la Costa Abrupta", -- [3]
-			"Asalto a la Costa Quebrada", -- [4]
-			"L’assaut du rivage Brisé", -- [5]
-			"Assalto alla Riva Dispersa", -- [6]
-			"부서진 해변 공격", -- [7]
-			"Ataque à Costa Partida", -- [8]
-			"Штурм Расколотого берега", -- [9]
-			"突袭破碎海滩", -- [10]
-			"突襲破碎海岸", -- [11]
-		}, -- [12]
-	},
-	["664"] = {
-		{
-			"Maraudon", -- [1]
-			"Maraudon", -- [2]
-			"Maraudon", -- [3]
-			"Maraudon", -- [4]
-			"Maraudon", -- [5]
-			"Maraudon", -- [6]
-			"마라우돈", -- [7]
-			"Maraudon", -- [8]
-			"Мародон", -- [9]
-			"玛拉顿", -- [10]
-			"瑪拉頓", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-	},
-	["733"] = {
-		{
-			"Invasion!", -- [1]
-			"Invasion!", -- [2]
-			"¡Invasión!", -- [3]
-			"¡Invasión!", -- [4]
-			"Alerte aux envahisseurs !", -- [5]
-			"Invasione!", -- [6]
-			"침략!", -- [7]
-			"Invasão!", -- [8]
-			"Нападение!", -- [9]
-			"入侵！", -- [10]
-			"入侵！", -- [11]
-		}, -- [1]
-		{
-			"Assault", -- [1]
-			"Sturmangriff", -- [2]
-			"Asalto", -- [3]
-			"Asalto", -- [4]
-			"Assaut", -- [5]
-			"Assalto", -- [6]
-			"습격", -- [7]
-			"Ataque", -- [8]
-			"Нападение", -- [9]
-			"突袭", -- [10]
-			"襲擊", -- [11]
-		}, -- [2]
-		{
-			"The Holdout", -- [1]
-			"Durchhaltevermögen", -- [2]
-			"La resistencia", -- [3]
-			"La resistencia", -- [4]
-			"Le baroud", -- [5]
-			"Resistenza", -- [6]
-			"항전", -- [7]
-			"A Resistência", -- [8]
-			"Продержаться подольше", -- [9]
-			"坚持到底", -- [10]
-			"堅持到底", -- [11]
-		}, -- [3]
-		{
-			"Cleanup", -- [1]
-			"Aufräumkommando", -- [2]
-			"Limpieza", -- [3]
-			"Limpieza", -- [4]
-			"Nettoyage", -- [5]
-			"Ripulitura", -- [6]
-			"소탕", -- [7]
-			"Limpeza", -- [8]
-			"Зачистка", -- [9]
-			"摧枯拉朽", -- [10]
-			"收拾殘局", -- [11]
-		}, -- [4]
-		{
-			"The Calm", -- [1]
-			"Ruhe nach dem Sturm", -- [2]
-			"La calma", -- [3]
-			"La calma", -- [4]
-			"Le calme", -- [5]
-			"La calma", -- [6]
-			"정적", -- [7]
-			"A Calma", -- [8]
-			"Затишье", -- [9]
-			"风平浪静", -- [10]
-			"歇息備戰", -- [11]
-		}, -- [5]
-		{
-			"Fire from the Skies", -- [1]
-			"Feuer vom Himmel", -- [2]
-			"Fuego por doquier", -- [3]
-			"Fuego de los cielos", -- [4]
-			"Le feu du ciel", -- [5]
-			"Fuoco dai cieli", -- [6]
-			"불벼락", -- [7]
-			"Fogo dos Céus", -- [8]
-			"Огонь с небес", -- [9]
-			"天降火雨", -- [10]
-			"天降大火", -- [11]
-		}, -- [6]
-		{
-			"Bronze", -- [1]
-			"Bronze", -- [2]
-			"Bronce", -- [3]
-			"Bronce", -- [4]
-			"Bronze", -- [5]
-			"Bronzo", -- [6]
-			"동메달", -- [7]
-			"Bronze", -- [8]
-			"Бронза", -- [9]
-			"青铜级", -- [10]
-			"青銅", -- [11]
-		}, -- [7]
-		{
-			"Silver", -- [1]
-			"Silber", -- [2]
-			"Plata", -- [3]
-			"Plata", -- [4]
-			"Argent", -- [5]
-			"Argento", -- [6]
-			"은메달", -- [7]
-			"Prata", -- [8]
-			"Серебро", -- [9]
-			"白银级", -- [10]
-			"白銀", -- [11]
-		}, -- [8]
-		{
-			"Gold", -- [1]
-			"Gold", -- [2]
-			"Oro", -- [3]
-			"Oro", -- [4]
-			"Or", -- [5]
-			"Oro", -- [6]
-			"금메달", -- [7]
-			"Ouro", -- [8]
-			"Золото", -- [9]
-			"黄金级", -- [10]
-			"黃金", -- [11]
-		}, -- [9]
-		{
-			"Platinum", -- [1]
-			"Platin", -- [2]
-			"Platino", -- [3]
-			"Platino", -- [4]
-			"Platine", -- [5]
-			"Platino", -- [6]
-			"백금메달", -- [7]
-			"Platina", -- [8]
-			"Платина", -- [9]
-			"白金", -- [10]
-			"白金", -- [11]
-		}, -- [10]
-	},
-	["254"] = {
-		{
-			"Test Stage 0", -- [1]
-			"Testphase 0", -- [2]
-			"Prueba de fase 0", -- [3]
-			"Prueba de fase 0", -- [4]
-			"Test Stage 0", -- [5]
-			"Prova fase 0", -- [6]
-			"시험 단계 0", -- [7]
-			"Estágio de teste 0", -- [8]
-			"Тестовый этап 0", -- [9]
-			"Test Stage 0", -- [10]
-			"測試階段0", -- [11]
-		}, -- [1]
-		{
-			"Step 1", -- [1]
-			"Schritt 1", -- [2]
-			"Paso 1", -- [3]
-			"Step 1", -- [4]
-			"Étape 1", -- [5]
-			"Fase 1", -- [6]
-			"1단계", -- [7]
-			"Passo 1", -- [8]
-			"1 этап", -- [9]
-			"第1阶段", -- [10]
-			"步驟1", -- [11]
-		}, -- [2]
-		{
-			"Step 2", -- [1]
-			"Schritt 2", -- [2]
-			"Paso 2", -- [3]
-			"Step 2", -- [4]
-			"Étape 2", -- [5]
-			"Fase 2", -- [6]
-			"2단계", -- [7]
-			"Passo 2", -- [8]
-			"2 этап", -- [9]
-			"第2阶段", -- [10]
-			"步驟2", -- [11]
-		}, -- [3]
-		{
-			"Step 3", -- [1]
-			"Schritt 3", -- [2]
-			"Paso 3", -- [3]
-			"Step 3", -- [4]
-			"Étape 3", -- [5]
-			"Fase 3", -- [6]
-			"3단계", -- [7]
-			"Passo 3", -- [8]
-			"3 этап", -- [9]
-			"第3阶段", -- [10]
-			"步驟3", -- [11]
-		}, -- [4]
-		{
-			"Step 4", -- [1]
-			"Schritt 4", -- [2]
-			"Paso 4", -- [3]
-			"Step 4", -- [4]
-			"Étape 4", -- [5]
-			"Fase 4", -- [6]
-			"4단계", -- [7]
-			"Passo 4", -- [8]
-			"4 этап", -- [9]
-			"第4阶段", -- [10]
-			"步驟4", -- [11]
-		}, -- [5]
-		{
-			"Step 5", -- [1]
-			"Schritt 5", -- [2]
-			"Paso 5", -- [3]
-			"Step 5", -- [4]
-			"Étape 5", -- [5]
-			"Fase 5", -- [6]
-			"5단계", -- [7]
-			"Passo 5", -- [8]
-			"5 этап", -- [9]
-			"第5阶段", -- [10]
-			"步驟5", -- [11]
-		}, -- [6]
-	},
-	["555"] = {
-		{
-			"Lost City of the Tol'vir", -- [1]
-			"Die Verlorene Stadt der Tol'vir", -- [2]
-			"Ciudad Perdida de los Tol'vir", -- [3]
-			"Ciudad Perdida de los Tol'vir", -- [4]
-			"Cité perdue des Tol’vir", -- [5]
-			"Città Perduta dei Tol'vir", -- [6]
-			"톨비르의 잃어버린 도시", -- [7]
-			"Cidade Perdida dos Tol'vir", -- [8]
-			"Затерянный город Тол'вир", -- [9]
-			"托维尔失落之城", -- [10]
-			"托維爾的失落之城", -- [11]
-		}, -- [1]
-	},
-	["1026"] = {
-		{
-			"The Downward Spiral", -- [1]
-			"Die Abwärtsspirale", -- [2]
-			"La espiral descendente", -- [3]
-			"La espiral descendente", -- [4]
-			"Spirale descendante", -- [5]
-			"La spirale discendente", -- [6]
-			"비틀린 심연으로", -- [7]
-			"A espiral descendente", -- [8]
-			"Вниз по винтовой лестнице", -- [9]
-			"逆塔", -- [10]
-			"往下的迴旋樓梯", -- [11]
-		}, -- [1]
-		{
-			"Grasp of the Damned", -- [1]
-			"Umklammerung der Verdammten", -- [2]
-			"En manos de los malditos", -- [3]
-			"El alcance de los malditos", -- [4]
-			"L’emprise des damnés", -- [5]
-			"Presa dei dannati", -- [6]
-			"저주받은 자의 손아귀", -- [7]
-			"Garras dos condenados", -- [8]
-			"Хватка проклятых", -- [9]
-			"亡者的爪缚", -- [10]
-			"詛咒之握", -- [11]
-		}, -- [2]
-		{
-			"Removal Protocols", -- [1]
-			"Entfernungsprotokolle", -- [2]
-			"Protocolos de eliminación", -- [3]
-			"Protocolos de eliminación", -- [4]
-			"Protocoles d’élimination", -- [5]
-			"Protocolli di rimozione", -- [6]
-			"제거 프로토콜", -- [7]
-			"Protocolos de remoção", -- [8]
-			"Протоколы ликвидации", -- [9]
-			"清除协议", -- [10]
-			"移除程序", -- [11]
-		}, -- [3]
-		{
-			"The World-Ender", -- [1]
-			"Der Weltenender", -- [2]
-			"El exterminador de mundos", -- [3]
-			"El fin del mundo", -- [4]
-			"Le destructeur de monde", -- [5]
-			"Il Devastatore di Mondi", -- [6]
-			"세상의 파괴자", -- [7]
-			"A Destruidora de Mundos", -- [8]
-			"Губитель миров", -- [9]
-			"灭世者", -- [10]
-			"世界終結者", -- [11]
-		}, -- [4]
-		{
-			"The Rider's Prize", -- [1]
-			"Der Preis des Reiters", -- [2]
-			"El trofeo del jinete", -- [3]
-			"El premio del jinete", -- [4]
-			"Le trophée du cavalier", -- [5]
-			"Il premio dei Cavalieri", -- [6]
-			"기수의 유물", -- [7]
-			"O prêmio do cavalgante", -- [8]
-			"Трофей всадника", -- [9]
-			"黑暗骑士的财宝", -- [10]
-			"黑騎兵的寶物", -- [11]
-		}, -- [5]
-		{
-			"The Fate of the Son", -- [1]
-			"Das Schicksal des Sohnes", -- [2]
-			"El destino del hijo", -- [3]
-			"El destino del hijo", -- [4]
-			"Le destin du fils", -- [5]
-			"Il destino del figlio", -- [6]
-			"아들의 운명", -- [7]
-			"O destino do filho", -- [8]
-			"Судьба сына", -- [9]
-			"父子的命运", -- [10]
-			"人子的命運", -- [11]
-		}, -- [6]
-		{
-			"Apocalypse", -- [1]
-			"Apokalypse", -- [2]
-			"Apocalipsis", -- [3]
-			"Apocalipsis", -- [4]
-			"Apocalypse", -- [5]
-			"Apocalisse", -- [6]
-			"대재앙", -- [7]
-			"Apocalipse", -- [8]
-			"Апокалипсис", -- [9]
-			"天启", -- [10]
-			"天啟", -- [11]
-		}, -- [7]
-	},
-	["1078"] = {
-		{
-			"The Unseen Blade", -- [1]
-			"Die ungesehene Klinge", -- [2]
-			"La hoja oculta", -- [3]
-			"La espada oculta", -- [4]
-			"La lame invisible", -- [5]
-			"La lama invisibile", -- [6]
-			"보이지 않는 검", -- [7]
-			"A lâmina oculta", -- [8]
-			"Незримый клинок", -- [9]
-			"无形之刃", -- [10]
-			"無形之刃", -- [11]
-		}, -- [1]
-		{
-			"The Key", -- [1]
-			"Der Schlüssel", -- [2]
-			"La llave", -- [3]
-			"La llave", -- [4]
-			"La clé", -- [5]
-			"Chiave Infernale", -- [6]
-			"열쇠", -- [7]
-			"A chave", -- [8]
-			"Ключ", -- [9]
-			"钥匙", -- [10]
-			"關鍵鑰匙", -- [11]
-		}, -- [2]
-		{
-			"Escape Artist", -- [1]
-			"Entfesselungskünstler", -- [2]
-			"Artista del escape", -- [3]
-			"Artista del escape", -- [4]
-			"Maître de l’évasion", -- [5]
-			"Artista della fuga", -- [6]
-			"탈출의 명수", -- [7]
-			"Artista da fuga", -- [8]
-			"Мастер побега", -- [9]
-			"逃命专家", -- [10]
-			"逃命專家", -- [11]
-		}, -- [3]
-		{
-			"The Eyes of the Deceiver", -- [1]
-			"Die Augen des Betrügers", -- [2]
-			"Los ojos del Impostor", -- [3]
-			"Los Ojos del Falsario", -- [4]
-			"Les yeux du Trompeur", -- [5]
-			"Gli occhi dell'ingannatore", -- [6]
-			"기만자의 눈", -- [7]
-			"Os olhos do enganador", -- [8]
-			"Глаза Искусителя", -- [9]
-			"欺诈者之眼", -- [10]
-			"欺詐者的雙眼", -- [11]
-		}, -- [4]
-		{
-			"Ascension", -- [1]
-			"Aufstieg", -- [2]
-			"Ascensión", -- [3]
-			"Ascensión", -- [4]
-			"Ascension", -- [5]
-			"Ascensione", -- [6]
-			"등반", -- [7]
-			"Ascensão", -- [8]
-			"Восхождение", -- [9]
-			"上升", -- [10]
-			"晉升", -- [11]
-		}, -- [5]
-		{
-			"A Duel of Fate", -- [1]
-			"Ein Duell des Schicksals", -- [2]
-			"Un duelo del destino", -- [3]
-			"Un duelo del destino", -- [4]
-			"Le duel du sort", -- [5]
-			"Un duello del destino", -- [6]
-			"운명의 대결", -- [7]
-			"Um duelo do destino", -- [8]
-			"Судьбоносный поединок", -- [9]
-			"宿命的决斗", -- [10]
-			"命運的決鬥", -- [11]
-		}, -- [6]
-		{
-			"Master of Shadows", -- [1]
-			"Meister der Schatten", -- [2]
-			"Maestro de las Sombras", -- [3]
-			"Maestro de las Sombras", -- [4]
-			"Maître des Ombres", -- [5]
-			"Maestro delle ombre", -- [6]
-			"어둠의 대가", -- [7]
-			"Mestre das sombras", -- [8]
-			"Мастер теней", -- [9]
-			"暗影大师", -- [10]
-			"暗影大師", -- [11]
-		}, -- [7]
-	},
-	["652"] = {
-		{
-			"Scarlet Monastery", -- [1]
-			"Das Scharlachrote Kloster", -- [2]
-			"Monasterio Escarlata", -- [3]
-			"Monasterio Escarlata", -- [4]
-			"Monastère Écarlate", -- [5]
-			"Monastero Scarlatto", -- [6]
-			"붉은십자군 수도원", -- [7]
-			"Monastério Escarlate", -- [8]
-			"Монастырь Алого ордена", -- [9]
-			"血色修道院", -- [10]
-			"血色修道院", -- [11]
-		}, -- [1]
-	},
-	["430"] = {
-		{
-			"The Everbloom", -- [1]
-			"Der Immergrüne Flor", -- [2]
-			"El Vergel Eterno", -- [3]
-			"El Sempibrote", -- [4]
-			"La Flore éternelle", -- [5]
-			"Verdeterno", -- [6]
-			"상록숲", -- [7]
-			"Floretérnia", -- [8]
-			"Вечное Цветение", -- [9]
-			"永茂林地", -- [10]
-			"永茂林", -- [11]
-		}, -- [1]
-	},
-	["630"] = {
-		{
-			"The Underbog", -- [1]
-			"Der Tiefensumpf", -- [2]
-			"La Sotiénaga", -- [3]
-			"La Sotiénaga", -- [4]
-			"La Basse-tourbière", -- [5]
-			"Torbiera Sotterranea", -- [6]
-			"지하수렁", -- [7]
-			"O Brejo Oculto", -- [8]
-			"Нижетопь", -- [9]
-			"幽暗沼泽", -- [10]
-			"深幽泥沼", -- [11]
-		}, -- [1]
-	},
-	["643"] = {
-		{
-			"The Deadmines", -- [1]
-			"Die Todesminen", -- [2]
-			"Las Minas de la Muerte", -- [3]
-			"Las Minas de la Muerte", -- [4]
-			"Les Mortemines", -- [5]
-			"Miniere della Morte", -- [6]
-			"죽음의 폐광", -- [7]
-			"Minas Mortas", -- [8]
-			"Мертвые копи", -- [9]
-			"死亡矿井", -- [10]
-			"死亡礦坑", -- [11]
-		}, -- [1]
-	},
-	["943"] = {
-		{
-			"The Council of Masters", -- [1]
-			"Der Rat der Meister", -- [2]
-			"El consejo de los maestros", -- [3]
-			"El Consejo de Maestros", -- [4]
-			"Le conseil des maîtres", -- [5]
-			"Il concilio dei maestri", -- [6]
-			"사부들의 의회", -- [7]
-			"O Conselho dos mestres", -- [8]
-			"Совет мастеров", -- [9]
-			"宗师大会", -- [10]
-			"大師議會", -- [11]
-		}, -- [1]
-		{
-			"The Cry of the Crane", -- [1]
-			"Der Schrei des Kranichs", -- [2]
-			"El grito de la grulla", -- [3]
-			"El grito de la grulla", -- [4]
-			"La complainte de la grue", -- [5]
-			"Il pianto della gru", -- [6]
-			"학의 울음", -- [7]
-			"O grito da garça", -- [8]
-			"Крик журавля", -- [9]
-			"神鹤的悲鸣", -- [10]
-			"鶴之悲鳴", -- [11]
-		}, -- [2]
-		{
-			"Journey to the East", -- [1]
-			"Reise in den Osten", -- [2]
-			"Viaje al este", -- [3]
-			"Viaje al este", -- [4]
-			"Voyage vers l’est", -- [5]
-			"Viaggio verso est", -- [6]
-			"동쪽으로의 여정", -- [7]
-			"Jornada ao oriente", -- [8]
-			"На запад!", -- [9]
-			"一路向东", -- [10]
-			"東遊記", -- [11]
-		}, -- [3]
-		{
-			"Tangle with a Tiger", -- [1]
-			"Erweckt den Tiger", -- [2]
-			"Luchar con un tigre", -- [3]
-			"Enredo con un tigre", -- [4]
-			"La férocité du tigre", -- [5]
-			"In coppia con la tigre", -- [6]
-			"호랑이 콧털을 건드리면...", -- [7]
-			"Enfrente o tigre", -- [8]
-			"Не шутите с тигром", -- [9]
-			"与虎谋皮", -- [10]
-			"與虎相鬥", -- [11]
-		}, -- [4]
-		{
-			"Precious Cargo", -- [1]
-			"Wertvolle Fracht", -- [2]
-			"Un cargamento preciado", -- [3]
-			"Un cargamento preciado", -- [4]
-			"Une cargaison précieuse", -- [5]
-			"Prezioso carico", -- [6]
-			"소중한 동행", -- [7]
-			"Carga valiosa", -- [8]
-			"Драгоценный груз", -- [9]
-			"珍贵的货物", -- [10]
-			"珍愛之寶", -- [11]
-		}, -- [5]
-		{
-			"Mastering the Odds", -- [1]
-			"Gegen jede Chance", -- [2]
-			"Vencer a las probabilidades", -- [3]
-			"Maestro de las probabilidades", -- [4]
-			"Contre vents et marées", -- [5]
-			"Dominare il fato", -- [6]
-			"있어서는 안 될 일", -- [7]
-			"Aumentar as chances", -- [8]
-			"Воспользуйтесь шансом", -- [9]
-			"克服万难", -- [10]
-			"克服逆境", -- [11]
-		}, -- [6]
-		{
-			"Portal Problems", -- [1]
-			"Portalprobleme", -- [2]
-			"Problemas en el portal", -- [3]
-			"Problemas en el portal", -- [4]
-			"Problèmes de portail", -- [5]
-			"Problemi di portali", -- [6]
-			"골치 아픈 차원문", -- [7]
-			"Portal problema", -- [8]
-			"Проблемы с порталом", -- [9]
-			"传送问题", -- [10]
-			"惱人的傳送門", -- [11]
-		}, -- [7]
-	},
-	["622"] = {
-		{
-			"Sethekk Halls", -- [1]
-			"Sethekkhallen", -- [2]
-			"Salas Sethekk", -- [3]
-			"Salas Sethekk", -- [4]
-			"Les salles des Sethekk", -- [5]
-			"Sale dei Sethekk", -- [6]
-			"세데크 전당", -- [7]
-			"Salões dos Sethekk", -- [8]
-			"Сетеккские залы", -- [9]
-			"塞泰克大厅", -- [10]
-			"塞司克大廳", -- [11]
-		}, -- [1]
-	},
-	["322"] = {
-		{
-			"Kill Zem, Kill Zem All", -- [1]
-			"Tötet sie! Tötet sie alle!", -- [2]
-			"Mátalos a todos, todos, todos", -- [3]
-			"Matadlos, matadlos a todos", -- [4]
-			"Fous devez les tuer tous", -- [5]
-			"Uccidili! Uccidili tutti!", -- [6]
-			"모두 없애라", -- [7]
-			"Mata, mata todo mundo", -- [8]
-			"Убей их, убей их всех", -- [9]
-			"杀死他们，不留活口！", -- [10]
-			"全部殺光", -- [11]
-		}, -- [1]
-		{
-			"Step 2", -- [1]
-			"Schritt 2", -- [2]
-			"Paso 2", -- [3]
-			"Step 2", -- [4]
-			"Étape 2", -- [5]
-			"Fase 2", -- [6]
-			"2단계", -- [7]
-			"Passo 2", -- [8]
-			"2 этап", -- [9]
-			"第2阶段", -- [10]
-			"步驟2", -- [11]
-		}, -- [2]
-		{
-			"Step 3", -- [1]
-			"Schritt 3", -- [2]
-			"Paso 3", -- [3]
-			"Step 3", -- [4]
-			"Étape 3", -- [5]
-			"Fase 3", -- [6]
-			"3단계", -- [7]
-			"Passo 3", -- [8]
-			"3 этап", -- [9]
-			"第3阶段", -- [10]
-			"步驟3", -- [11]
-		}, -- [3]
-	},
-	["1122"] = {
-		{
-			"Preparations", -- [1]
-			"Vorbereitungen", -- [2]
-			"Preparativos", -- [3]
-			"Preparativos", -- [4]
-			"Les préparatifs", -- [5]
-			"Preparativi", -- [6]
-			"준비", -- [7]
-			"Os preparativos", -- [8]
-			"Приготовления", -- [9]
-			"准备就绪", -- [10]
-			"做好準備", -- [11]
-		}, -- [1]
-		{
-			"Placing the Wards", -- [1]
-			"Die Zauberschutze platzieren", -- [2]
-			"Colocación de resguardos", -- [3]
-			"Colocando los resguardos", -- [4]
-			"Installation des protections", -- [5]
-			"Posizionare le protezioni", -- [6]
-			"수호물 배치", -- [7]
-			"Posicionar proteções", -- [8]
-			"Установка оберегов", -- [9]
-			"设置结界", -- [10]
-			"放置結界", -- [11]
-		}, -- [2]
-		{
-			"The Altar of End Times", -- [1]
-			"Der Altar der Endzeit", -- [2]
-			"El Altar del Fin de los Tiempos", -- [3]
-			"El Altar del fin de los días", -- [4]
-			"L’autel de la Fin des temps", -- [5]
-			"L'Altare della Fine dei Tempi", -- [6]
-			"종말의 제단", -- [7]
-			"O Altar do Fim dos Tempos", -- [8]
-			"Алтарь Конца Времен", -- [9]
-			"末世祭坛", -- [10]
-			"終焉祭壇", -- [11]
-		}, -- [3]
-		{
-			"The Great Ritual", -- [1]
-			"Das große Ritual", -- [2]
-			"El gran ritual", -- [3]
-			"El gran ritual", -- [4]
-			"Le grand rituel", -- [5]
-			"Il grande rituale", -- [6]
-			"웅장한 의식", -- [7]
-			"O grande ritual", -- [8]
-			"Великий ритуал", -- [9]
-			"大型仪式", -- [10]
-			"偉大儀式", -- [11]
-		}, -- [4]
-		{
-			"Showdown in the Realm of Madness", -- [1]
-			"Kräftemessen im Reich des Wahnsinns", -- [2]
-			"Enfrentamiento en el reino de la locura", -- [3]
-			"Enfrentamiento en el reino de la Locura", -- [4]
-			"Affrontement dans le royaume de la folie", -- [5]
-			"Scontro finale nel Reame del Cacciatore di Maghi", -- [6]
-			"광기의 세계에서의 사투", -- [7]
-			"Confronto final nos domínios da loucura", -- [8]
-			"Битва в царстве Безумия", -- [9]
-			"决战疯狂世界", -- [10]
-			"瘋狂之境的對決", -- [11]
-		}, -- [5]
-		{
-			"Ebonchill", -- [1]
-			"Schwarzfrost", -- [2]
-			"Ébano Glacial", -- [3]
-			"Frío del ébano", -- [4]
-			"Frissébène", -- [5]
-			"Gelonero", -- [6]
-			"칠흑한기", -- [7]
-			"Ébano Gélido", -- [8]
-			"Полярная Ночь", -- [9]
-			"黑檀之寒", -- [10]
-			"黯凜", -- [11]
-		}, -- [6]
-	},
-	["1138"] = {
-		{
-			"The Prophet and the Butcher", -- [1]
-			"Der Prophet und der Schlächter", -- [2]
-			"El profeta y el carnicero", -- [3]
-			"El profeta y el carnicero", -- [4]
-			"Le prophète et le Boucher", -- [5]
-			"Il profeta e il macellaio", -- [6]
-			"예언자와 도살자", -- [7]
-			"O profeta e o açougueiro", -- [8]
-			"Пророк и Палач", -- [9]
-			"先知与屠夫", -- [10]
-			"預言者與屠夫", -- [11]
-		}, -- [1]
-		{
-			"In Defense of the Exodar", -- [1]
-			"Verteidigung der Exodar", -- [2]
-			"En defensa de El Exodar", -- [3]
-			"En defensa del Exodar", -- [4]
-			"La défense de l’Exodar", -- [5]
-			"In difesa della Exodar", -- [6]
-			"엑소다르 방어", -- [7]
-			"Em defesa da Exodar", -- [8]
-			"Оборона Экзодара", -- [9]
-			"保卫埃索达", -- [10]
-			"防衛艾克索達", -- [11]
-		}, -- [2]
-		{
-			"Return to the Prophet", -- [1]
-			"Kehrt zum Propheten zurück.", -- [2]
-			"Vuelve con el profeta", -- [3]
-			"Regresa con el profeta", -- [4]
-			"Retourner voir le prophète", -- [5]
-			"Ritorno dal profeta", -- [6]
-			"예언자에게 돌아가기", -- [7]
-			"Fale novamente com o Profeta", -- [8]
-			"Возвращение к пророку", -- [9]
-			"回去找到先知", -- [10]
-			"回去找預言者", -- [11]
-		}, -- [3]
-		{
-			"The Light's Heart", -- [1]
-			"Das Herz des Lichts", -- [2]
-			"El Corazón de la Luz", -- [3]
-			"El corazón de la Luz", -- [4]
-			"Le Cœur de la Lumière", -- [5]
-			"Il Cuore della Luce", -- [6]
-			"빛의 심장", -- [7]
-			"O Coração da Luz", -- [8]
-			"Сердце Света", -- [9]
-			"圣光之心", -- [10]
-			"聖光之心", -- [11]
-		}, -- [4]
-		{
-			"A Long Way Down...", -- [1]
-			"Ein langer Weg nach unten...", -- [2]
-			"Un largo descenso...", -- [3]
-			"Un largo camino de descenso...", -- [4]
-			"Une longue descente…", -- [5]
-			"Una lunga caduta...", -- [6]
-			"먼 길", -- [7]
-			"Uma bela queda...", -- [8]
-			"Долгий путь вниз", -- [9]
-			"下方是条漫长的路……", -- [10]
-			"往下的漫漫長路…", -- [11]
-		}, -- [5]
-		{
-			"Revelations...", -- [1]
-			"Offenbarungen...", -- [2]
-			"Revelaciones...", -- [3]
-			"Revelaciones...", -- [4]
-			"Révélations…", -- [5]
-			"Rivelazioni", -- [6]
-			"폭로...", -- [7]
-			"Revelações...", -- [8]
-			"Откровения", -- [9]
-			"启示录……", -- [10]
-			"啟發…", -- [11]
-		}, -- [6]
-	},
-	["621"] = {
-		{
-			"The Arcatraz", -- [1]
-			"Die Arkatraz", -- [2]
-			"El Arcatraz", -- [3]
-			"El Arcatraz", -- [4]
-			"L’Arcatraz", -- [5]
-			"Arcatraz", -- [6]
-			"알카트라즈", -- [7]
-			"Arcatraz", -- [8]
-			"Аркатрац", -- [9]
-			"禁魔监狱", -- [10]
-			"亞克崔茲", -- [11]
-		}, -- [1]
-	},
-	["665"] = {
-		{
-			"Warpwood Quarter", -- [1]
-			"Wucherborkenviertel", -- [2]
-			"Barrio Alabeo", -- [3]
-			"Barrio Alabeo", -- [4]
-			"Quartier de Crochebois", -- [5]
-			"Quartiere di Legnotorto", -- [6]
-			"굽이나무 지구", -- [7]
-			"Distrito Lenhatorta", -- [8]
-			"Квартал Криводревов", -- [9]
-			"扭木广场", -- [10]
-			"扭木廣場", -- [11]
-		}, -- [1]
-	},
-	["565"] = {
-		{
-			"Halls of Origination", -- [1]
-			"Hallen des Ursprungs", -- [2]
-			"Cámaras de los Orígenes", -- [3]
-			"Cámaras de los Orígenes", -- [4]
-			"Salles de l’Origine", -- [5]
-			"Sale della Creazione", -- [6]
-			"시초의 전당", -- [7]
-			"Salões Primordiais", -- [8]
-			"Чертоги Созидания", -- [9]
-			"起源大厅", -- [10]
-			"起源大廳", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [3]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [4]
-	},
-	["606"] = {
-		{
-			"Shadow Labyrinth", -- [1]
-			"Schattenlabyrinth", -- [2]
-			"Laberinto de las Sombras", -- [3]
-			"Laberinto de las Sombras", -- [4]
-			"Labyrinthe des Ombres", -- [5]
-			"Labirinto delle Ombre", -- [6]
-			"어둠의 미궁", -- [7]
-			"Labirinto Soturno", -- [8]
-			"Темный лабиринт", -- [9]
-			"暗影迷宫", -- [10]
-			"暗影迷宮", -- [11]
-		}, -- [1]
-	},
-	["1170"] = {
-		{
-			"His Duplicity is Hardly Surprising", -- [1]
-			"Seine Doppelzüngigkeit ist keine Überraschung", -- [2]
-			"Su falsedad no sorprende", -- [3]
-			"Su duplicidad no es muy sorprendente.", -- [4]
-			"Une duplicité guère surprenante", -- [5]
-			"La sua doppiezza non mi sorprende", -- [6]
-			"놀랍지도 않은 이중성", -- [7]
-			"Sua duplicidade não surpresa", -- [8]
-			"Его истинное лицо", -- [9]
-			"他的两面三刀并不会让人感到意外", -- [10]
-			"他略懂二元論", -- [11]
-		}, -- [1]
-		{
-			"You Are Not Prepared!", -- [1]
-			"Ihr seid nicht vorbereitet!", -- [2]
-			"¡No estás preparado!", -- [3]
-			"¡No están preparados!", -- [4]
-			"Vous n’êtes pas prêts !", -- [5]
-			"Voi non siete pronti!", -- [6]
-			"너흰 아직 준비가 안 됐다!", -- [7]
-			"Você não está preparado!", -- [8]
-			"Ты не готов!", -- [9]
-			"你们这是自寻死路！", -- [10]
-			"你們還沒準備好！", -- [11]
-		}, -- [2]
-		{
-			"To The Skies", -- [1]
-			"In die Lüfte", -- [2]
-			"Al cielo", -- [3]
-			"Hacia los cielos", -- [4]
-			"En route vers les cieux", -- [5]
-			"Verso il Cielo!", -- [6]
-			"공중으로", -- [7]
-			"Para os céus", -- [8]
-			"В небо!", -- [9]
-			"天空召唤", -- [10]
-			"飛向天空", -- [11]
-		}, -- [3]
-		{
-			"The Final Countdown", -- [1]
-			"Der letzte Countdown", -- [2]
-			"La última cuenta atrás", -- [3]
-			"La última cuenta regresiva", -- [4]
-			"Le compte à rebours final", -- [5]
-			"Conto alla rovescia", -- [6]
-			"최후의 순간", -- [7]
-			"Contagem regressiva final", -- [8]
-			"Обратный отсчет", -- [9]
-			"最后的倒计时", -- [10]
-			"倒數計時", -- [11]
-		}, -- [4]
-		{
-			"The Demon Within", -- [1]
-			"Der innere Dämon", -- [2]
-			"El demonio interior", -- [3]
-			"El demonio interno", -- [4]
-			"Le démon intérieur", -- [5]
-			"Il demone interiore", -- [6]
-			"악마가 깃든 자", -- [7]
-			"O demônio interior", -- [8]
-			"Демон внутри", -- [9]
-			"心魔", -- [10]
-			"內在的惡魔", -- [11]
-		}, -- [5]
-		{
-			"The Huntress", -- [1]
-			"Die Jägerin", -- [2]
-			"La Cazadora", -- [3]
-			"La cazadora", -- [4]
-			"La chasseresse", -- [5]
-			"La cacciatrice", -- [6]
-			"여사냥꾼", -- [7]
-			"A caçadora", -- [8]
-			"Охотница", -- [9]
-			"女猎手", -- [10]
-			"女獵人", -- [11]
-		}, -- [6]
-	},
-	["51"] = {
-		{
-			"Scholomance", -- [1]
-			"Scholomance", -- [2]
-			"Scholomance", -- [3]
-			"Scholomance", -- [4]
-			"Scholomance", -- [5]
-			"Scholomance", -- [6]
-			"스칼로맨스", -- [7]
-			"Scolomântia", -- [8]
-			"Некроситет", -- [9]
-			"通灵学院", -- [10]
-			"通靈學院", -- [11]
-		}, -- [1]
-	},
-	["324"] = {
-		{
-			"The Battle Begins", -- [1]
-			"Die Schlacht beginnt", -- [2]
-			"Comienza la batalla", -- [3]
-			"Comienza la batalla", -- [4]
-			"La bataille commence", -- [5]
-			"Inizio della battaglia", -- [6]
-			"전투 시작", -- [7]
-			"A batalha começa", -- [8]
-			"Битва начинается", -- [9]
-			"一触即发", -- [10]
-			"大戰將至", -- [11]
-		}, -- [1]
-		{
-			"Hold the Choke Point", -- [1]
-			"Haltet den Engpass", -- [2]
-			"Protege el cuello de botella", -- [3]
-			"Mantén el cuello de botella", -- [4]
-			"Tenez le goulet d’étranglement.", -- [5]
-			"Proteggi la strettoia", -- [6]
-			"협곡 지키기", -- [7]
-			"Defender o gargalo", -- [8]
-			"Удержать теснину", -- [9]
-			"扼守要道", -- [10]
-			"守住隘口", -- [11]
-		}, -- [2]
-		{
-			"The Iron Clusterpult", -- [1]
-			"Das Eiserne Katapult", -- [2]
-			"La matapulta de la Horda de Hierro", -- [3]
-			"La clusterpulta de hierro", -- [4]
-			"Le canon à mitraille de Fer", -- [5]
-			"Sparagrappoli di Ferro", -- [6]
-			"강철 집속탄 투석기", -- [7]
-			"O Lança-bombas de Ferro", -- [8]
-			"Железная мегапушка", -- [9]
-			"钢铁集簇投掷炮", -- [10]
-			"鋼鐵集束砲", -- [11]
-		}, -- [3]
-		{
-			"A Good Defense", -- [1]
-			"Eine gute Verteidigung", -- [2]
-			"Una buena defensa", -- [3]
-			"Una buena defensa", -- [4]
-			"Une bonne défense", -- [5]
-			"Una buona difesa", -- [6]
-			"훌륭한 방어", -- [7]
-			"Uma boa defesa", -- [8]
-			"Хорошая защита", -- [9]
-			"坚守阵地", -- [10]
-			"良好的防禦", -- [11]
-		}, -- [4]
-		{
-			"Defending Drek'thar", -- [1]
-			"Verteidigt Drek'thar", -- [2]
-			"Defender a Drek'Thar", -- [3]
-			"Proteger a Drek'Thar", -- [4]
-			"La défense de Drek’thar", -- [5]
-			"Difendi Drek'thar", -- [6]
-			"드렉타르 보호", -- [7]
-			"Defendendo Drek'thar", -- [8]
-			"Защита Дрек'Тара", -- [9]
-			"保护德雷克塔尔", -- [10]
-			"保護德雷克塔爾", -- [11]
-		}, -- [5]
-		{
-			"Iron Thunderlords", -- [1]
-			"Eiserne Donnerfürsten", -- [2]
-			"Guerreros Señor del Trueno de la Horda de Hierro", -- [3]
-			"Señores del Trueno de hierro", -- [4]
-			"Les Sire-Tonnerre de Fer", -- [5]
-			"Spaccatuono di Ferro", -- [6]
-			"강철의 천둥군주", -- [7]
-			"Senhores do Trovão de Ferro", -- [8]
-			"Железные Громоборцы", -- [9]
-			"钢铁雷神", -- [10]
-			"鋼鐵雷霆王", -- [11]
-		}, -- [6]
-		{
-			"Malgrim Stormhand", -- [1]
-			"Malgrim Sturmhand", -- [2]
-			"Malgrim Mano Tormenta", -- [3]
-			"Malgrim Manotormenta", -- [4]
-			"Malgrim Foudremain", -- [5]
-			"Malgrim Manotonante", -- [6]
-			"말그림 스톰핸드", -- [7]
-			"Malgrim Mão Tempestuosa", -- [8]
-			"Малгрим Грозовой Кулак", -- [9]
-			"马尔格林·风暴之手", -- [10]
-			"瑪格林‧風臂", -- [11]
-		}, -- [7]
-		{
-			"The Final Defense", -- [1]
-			"Die letzte Verteidigung", -- [2]
-			"La última línea de defensa", -- [3]
-			"La última defensa", -- [4]
-			"L’ultime défense", -- [5]
-			"Difesa finale", -- [6]
-			"최후의 항전", -- [7]
-			"A defesa final", -- [8]
-			"Решающий бой", -- [9]
-			"最后的防线", -- [10]
-			"最終防禦", -- [11]
-		}, -- [8]
-		{
-			"Slay Maggoc", -- [1]
-			"Tötet Maggoc", -- [2]
-			"Mata a Maggoc", -- [3]
-			"Asesina a Maggoc", -- [4]
-			"Tuer Maggoc", -- [5]
-			"Uccidi Maggoc", -- [6]
-			"마그고크 처치", -- [7]
-			"Mate Maggoc", -- [8]
-			"Убить Маггока", -- [9]
-			"击败玛古克", -- [10]
-			"殺死瑪格歐克", -- [11]
-		}, -- [9]
-	},
-	["638"] = {
-		{
-			"Hellfire Ramparts", -- [1]
-			"Höllenfeuerbollwerk", -- [2]
-			"Murallas del Fuego Infernal", -- [3]
-			"Murallas del Fuego Infernal", -- [4]
-			"Remparts des Flammes infernales", -- [5]
-			"Bastioni del Fuoco Infernale", -- [6]
-			"지옥불 성루", -- [7]
-			"Muralha Fogo do Inferno", -- [8]
-			"Бастионы Адского Пламени", -- [9]
-			"地狱火城墙", -- [10]
-			"地獄火壁壘", -- [11]
-		}, -- [1]
-	},
-	["1144"] = {
-		{
-			"Commence Bombardment!", -- [1]
-			"Das Bombardement beginnen", -- [2]
-			"¡Que comience el bombardeo!", -- [3]
-			"¡Comiencen el bombardeo!", -- [4]
-			"Feu à volonté !", -- [5]
-			"Fuoco alle polveri!", -- [6]
-			"폭격 개시!", -- [7]
-			"Iniciar o bombardeio!", -- [8]
-			"Готовсь... Цельсь... Пли!", -- [9]
-			"开始轰炸！", -- [10]
-			"開始轟炸！", -- [11]
-		}, -- [1]
-		{
-			"Glide Down to the Rendezvous", -- [1]
-			"Zum Treffpunkt hinuntergleiten", -- [2]
-			"Planea hasta el punto de encuentro", -- [3]
-			"Deslizamiento en descenso hacia el encuentro", -- [4]
-			"Planer jusqu’au point de rendez-vous", -- [5]
-			"Planare verso il punto di ritrovo", -- [6]
-			"고공 낙하", -- [7]
-			"Desça, planando, até o local de encontro", -- [8]
-			"Спуск к месту встречи", -- [9]
-			"滑翔到集合点", -- [10]
-			"滑翔前往集結地點", -- [11]
-		}, -- [2]
-		{
-			"Destroy the Legion", -- [1]
-			"Zerstört die Legion", -- [2]
-			"Destruye a la Legión", -- [3]
-			"Destruye a la Legión", -- [4]
-			"Détruire la Légion", -- [5]
-			"Annientare la Legione", -- [6]
-			"군단 섬멸", -- [7]
-			"Destrua a Legião", -- [8]
-			"Уничтожить Легион!", -- [9]
-			"消灭军团", -- [10]
-			"消滅燃燒軍團", -- [11]
-		}, -- [3]
-		{
-			"Regroup In Front of the Command Center", -- [1]
-			"Vor der Kommandozentrale versammeln", -- [2]
-			"Reagrupamiento frente al centro de mando", -- [3]
-			"Reagrupamiento frente al centro de mando", -- [4]
-			"Regroupement devant le centre de commandement", -- [5]
-			"Raduno al Centro di Comando", -- [6]
-			"사령부 앞에서 재집결", -- [7]
-			"Reagrupem-se em frente ao Centro de Comando", -- [8]
-			"Перегруппировка у флагманского корабля", -- [9]
-			"在指挥部前方重新集结", -- [10]
-			"在指揮中心前面重新整隊", -- [11]
-		}, -- [4]
-		{
-			"Fel Hammer, Fire!", -- [1]
-			"Teufelshammer, Feuer frei!", -- [2]
-			"¡Martillo Vil, fuego!", -- [3]
-			"¡Martillo Vil, fuego!", -- [4]
-			"Marteau gangrené, feu !", -- [5]
-			"Vilmartello, fuoco!", -- [6]
-			"지옥 망치호, 발사!", -- [7]
-			"Martelo Vil, fogo!", -- [8]
-			"Огонь!", -- [9]
-			"邪能之槌号，开火！", -- [10]
-			"魔錘號，射擊！", -- [11]
-		}, -- [5]
-		{
-			"Caria and Varedis At Last", -- [1]
-			"Caria und Varedis, endlich", -- [2]
-			"Caria y Varedis al fin", -- [3]
-			"Caria y Varedis, al fin", -- [4]
-			"Caria et Varedis, enfin…", -- [5]
-			"Caria e Varedis, alla fine ci incontriamo", -- [6]
-			"카리아와 베레디스의 최후", -- [7]
-			"Caria e Varedis, finalmente", -- [8]
-			"Наказать предателей", -- [9]
-			"最后，只剩下凯丽娅和瓦雷迪斯", -- [10]
-			"最後的凱莉亞和瓦瑞迪斯", -- [11]
-		}, -- [6]
-		{
-			"Malevolence, Get Us Out of Here", -- [1]
-			"Malicia, bringt uns hier weg", -- [2]
-			"Malevolencia, sácanos de aquí", -- [3]
-			"Malevolencia, sácanos de aquí", -- [4]
-			"Maléficiae ! Nous devons sortir d’ici !", -- [5]
-			"Malevola, tiraci fuori da qui", -- [6]
-			"말레볼런스의 지원", -- [7]
-			"Malevolência, tire-nos daqui", -- [8]
-			"Злоба, вытащи нас отсюда.", -- [9]
-			"玛沃伦丝，带我们离开这里", -- [10]
-			"懷惡族母，帶我們離開這裡", -- [11]
-		}, -- [7]
-	},
-	["1137"] = {
-		{
-			"Crisis in the Temple", -- [1]
-			"Krise im Tempel", -- [2]
-			"Crisis en el templo", -- [3]
-			"Crisis en el templo", -- [4]
-			"Crise au temple", -- [5]
-			"Crisi al tempio", -- [6]
-			"사원의 위기", -- [7]
-			"Crise no templo", -- [8]
-			"Обстановка в храме", -- [9]
-			"寺庙中的危机", -- [10]
-			"寺廟的危機", -- [11]
-		}, -- [1]
-		{
-			"Checking Out", -- [1]
-			"Auschecken", -- [2]
-			"Echar un ojo", -- [3]
-			"Revisión general", -- [4]
-			"Scribes en détresse", -- [5]
-			"Biglietto di ritorno", -- [6]
-			"구출 작전", -- [7]
-			"De saída", -- [8]
-			"Прочь с насиженного места", -- [9]
-			"查房", -- [10]
-			"我只是來借書", -- [11]
-		}, -- [2]
-		{
-			"Hungering for Revenge", -- [1]
-			"Rachedurst", -- [2]
-			"Con ganas de venganza", -- [3]
-			"Sed de venganza", -- [4]
-			"Soif de vengeance", -- [5]
-			"Sete di vendetta", -- [6]
-			"복수는 나의 것", -- [7]
-			"Sede de vingança", -- [8]
-			"Жажда возмездия", -- [9]
-			"渴望复仇", -- [10]
-			"渴望報仇", -- [11]
-		}, -- [3]
-		{
-			"Down But Not Out", -- [1]
-			"Erloschen, aber nicht erledigt", -- [2]
-			"Derribado, pero no acabado", -- [3]
-			"Abatido, pero jamás rendido", -- [4]
-			"À terre, mais en vie", -- [5]
-			"Non è ancora finita", -- [6]
-			"희망을 잃지 마세요", -- [7]
-			"Caído, mas acordado", -- [8]
-			"Помощь выжившим", -- [9]
-			"虽然失败，依旧坚持", -- [10]
-			"被打趴了但還能站起來", -- [11]
-		}, -- [4]
-		{
-			"Death from Above", -- [1]
-			"Tod von oben", -- [2]
-			"La muerte cae desde el cielo", -- [3]
-			"La muerte cae desde el cielo", -- [4]
-			"La mort venue d’en haut", -- [5]
-			"Morte dall'Alto", -- [6]
-			"하늘의 저승사자", -- [7]
-			"A Morte Vem de Cima", -- [8]
-			"Смерть с небес", -- [9]
-			"死从天降", -- [10]
-			"死從天降", -- [11]
-		}, -- [5]
-		{
-			"The Battle of the Serpent", -- [1]
-			"Der Kampf der Schlange", -- [2]
-			"La batalla del dragón", -- [3]
-			"La batalla de la dragona", -- [4]
-			"La bataille du Serpent", -- [5]
-			"La battaglia della serpe", -- [6]
-			"옥룡의 전투", -- [7]
-			"A batalha da serpente", -- [8]
-			"Битва Змеи", -- [9]
-			"神龙之战", -- [10]
-			"玉龍之戰", -- [11]
-		}, -- [6]
-		{
-			"On Fel Wings", -- [1]
-			"Auf Teufelsschwingen", -- [2]
-			"Sobre alas viles", -- [3]
-			"Sobre alas viles", -- [4]
-			"Sur des ailes gangrenées", -- [5]
-			"Su ali vili", -- [6]
-			"지옥 날개를 타고", -- [7]
-			"Nas asas vis", -- [8]
-			"На крыльях Скверны", -- [9]
-			"魔翼翱翔", -- [10]
-			"魔化之翼", -- [11]
-		}, -- [7]
-		{
-			"Fu Zan, the Wanderer's Companion", -- [1]
-			"Fu Zan, Gefährte des Wanderers", -- [2]
-			"Fu Zan, el Compañero del Errante", -- [3]
-			"Fu Zan, el Compañero del Vagabundo", -- [4]
-			"Fu Zan, compagnon de l’explorateur", -- [5]
-			"Fu Zan, Compagno del Viandante", -- [6]
-			"푸 잔 - 방랑자의 친구", -- [7]
-			"Fu Zan, Companheiro do Andarilho", -- [8]
-			"Фу Цань, Спутник Странников", -- [9]
-			"福枬，云游者之友", -- [10]
-			"福山之杖，漫行者之伴", -- [11]
-		}, -- [8]
-		{
-			"The Wanderer Awakens", -- [1]
-			"Der Wanderer erwacht", -- [2]
-			"El errante despierta", -- [3]
-			"El vagabundo despierta", -- [4]
-			"L’explorateur s’éveille", -- [5]
-			"Il risveglio del viandante", -- [6]
-			"깨어난 방랑자", -- [7]
-			"O despertar do errante", -- [8]
-			"Дух странствий", -- [9]
-			"云游者觉醒", -- [10]
-			"漫行者甦醒", -- [11]
-		}, -- [9]
-	},
-	["1133"] = {
-		{
-			"Combat Training", -- [1]
-			"Kampftraining", -- [2]
-			"Instrucción de combate", -- [3]
-			"Instrucción de combate", -- [4]
-			"Entraînement au combat", -- [5]
-			"Addestramento al combattimento", -- [6]
-			"전투 훈련", -- [7]
-			"Treino de combate", -- [8]
-			"Боевые учения", -- [9]
-			"战斗训练", -- [10]
-			"戰鬥訓練", -- [11]
-		}, -- [1]
-		{
-			"Coating Your Daggers", -- [1]
-			"Vergiftete Klingen", -- [2]
-			"Cubrir tus dagas", -- [3]
-			"Ensuciando dagas", -- [4]
-			"Enduire ses dagues", -- [5]
-			"Intingere i pugnali", -- [6]
-			"독한 단검", -- [7]
-			"Untar as adagas", -- [8]
-			"Яд для кинжалов", -- [9]
-			"给你的匕首涂毒", -- [10]
-			"匕首餵毒", -- [11]
-		}, -- [2]
-		{
-			"Sneaking Around", -- [1]
-			"Auf leisen Sohlen", -- [2]
-			"Sin levantar sospechas", -- [3]
-			"Husmeando por ahí", -- [4]
-			"En toute discrétion", -- [5]
-			"Movimenti furtivi", -- [6]
-			"살금살금", -- [7]
-			"Sorrateiramente", -- [8]
-			"Осторожность превыше всего", -- [9]
-			"来去无踪", -- [10]
-			"走路小聲一點", -- [11]
-		}, -- [3]
-		{
-			"Slitting Throats", -- [1]
-			"An die Kehle", -- [2]
-			"Rebanar pescuezos", -- [3]
-			"Cortando gargantas", -- [4]
-			"Un vrai coupe-gorge", -- [5]
-			"Tagliagole", -- [6]
-			"조여드는 손", -- [7]
-			"Rasgar gargantas", -- [8]
-			"Берегите горло", -- [9]
-			"割开喉咙", -- [10]
-			"割脖子的方法", -- [11]
-		}, -- [4]
-		{
-			"When One Dagger Just Isn't Enough", -- [1]
-			"Ein Dolch ist nicht genug", -- [2]
-			"Cuando una daga no basta", -- [3]
-			"Cuando una daga no es suficiente", -- [4]
-			"Quand une dague ne suffit pas…", -- [5]
-			"Quando un pugnale non basta", -- [6]
-			"단검 하나로는 부족해", -- [7]
-			"Quando só uma adaga não basta", -- [8]
-			"В каждую руку – по кинжалу", -- [9]
-			"一把匕首可不够", -- [10]
-			"一把匕首太少", -- [11]
-		}, -- [5]
-		{
-			"The Gift That Keeps On Giving", -- [1]
-			"Tropfen für Tropfen für Tropfen", -- [2]
-			"La ofrenda que sigue dando", -- [3]
-			"La ofrenda que sigue dando", -- [4]
-			"La joie d’offrir", -- [5]
-			"Il dono infinito", -- [6]
-			"아낌없는 공격", -- [7]
-			"O aspirador de almas", -- [8]
-			"Подарок с подвохом", -- [9]
-			"惊喜连连", -- [10]
-			"好禮送不完", -- [11]
-		}, -- [6]
-		{
-			"More Poison, Please!", -- [1]
-			"Mehr Gift, bitte!", -- [2]
-			"¡Más veneno, por favor!", -- [3]
-			"¡Más veneno, por favor!", -- [4]
-			"Du rab’ de poison, s’il vous plaît !", -- [5]
-			"Altro veleno, grazie!", -- [6]
-			"독, 추가요!", -- [7]
-			"Mais veneno, por favor!", -- [8]
-			"Еще яда!", -- [9]
-			"请再来点药膏，谢谢！", -- [10]
-			"再毒一點，拜託！", -- [11]
-		}, -- [7]
-		{
-			"Putting It All Together", -- [1]
-			"Das große Ganze", -- [2]
-			"Juntar las piezas", -- [3]
-			"Todas las piezas juntas", -- [4]
-			"Mise en pratique", -- [5]
-			"Mettersi alla prova", -- [6]
-			"종합주문세트", -- [7]
-			"Fixação de conteúdo", -- [8]
-			"Сборная солянка", -- [9]
-			"综合在一起", -- [10]
-			"準備完善", -- [11]
-		}, -- [8]
-		{
-			"Slipping Into The Shadows", -- [1]
-			"Mit den Schatten verschmelzen", -- [2]
-			"Deslizarse a las sombras", -- [3]
-			"Desaparición entre las sombras", -- [4]
-			"Se fondre dans les ombres", -- [5]
-			"Sparire nelle ombre", -- [6]
-			"그림자에 스며들기", -- [7]
-			"Sumindo nas sombras", -- [8]
-			"Шаг в тень", -- [9]
-			"遁入阴影之中", -- [10]
-			"消失在暗影之中", -- [11]
-		}, -- [9]
-		{
-			"A Quick Test", -- [1]
-			"Schnelltest", -- [2]
-			"Una prueba rápida", -- [3]
-			"Una prueba rápida", -- [4]
-			"Un test rapide", -- [5]
-			"Una piccola prova", -- [6]
-			"깜짝 시험", -- [7]
-			"Teste rápido", -- [8]
-			"Испытание тет-а-тет", -- [9]
-			"快速测试", -- [10]
-			"立刻測試", -- [11]
-		}, -- [10]
-		{
-			"Twice the Challenge", -- [1]
-			"Doppelte Herausforderung", -- [2]
-			"Desafío por partida doble", -- [3]
-			"Un desafío doble", -- [4]
-			"Double défi", -- [5]
-			"Doppia sfida", -- [6]
-			"난이도 두 배", -- [7]
-			"Desafio em dose dupla", -- [8]
-			"Двойной вызов", -- [9]
-			"双倍挑战", -- [10]
-			"雙重挑戰", -- [11]
-		}, -- [11]
-		{
-			"Defend Against the Legion Assault", -- [1]
-			"Den Angriff der Legion abwehren", -- [2]
-			"Defiéndete del asalto de la Legión", -- [3]
-			"Defiéndete contra el ataque de la Legión", -- [4]
-			"Défense contre l’assaut de la Légion", -- [5]
-			"Difesa contro la Legione", -- [6]
-			"군단의 공격 막아내기", -- [7]
-			"Defender contra o ataque da Legião", -- [8]
-			"Оборона против Легиона", -- [9]
-			"在军团的攻击下保卫飞艇", -- [10]
-			"抵擋燃燒軍團的攻擊", -- [11]
-		}, -- [12]
-		{
-			"Assault on Broken Shore", -- [1]
-			"Angriff auf die Verheerte Küste", -- [2]
-			"Asalto a la Costa Abrupta", -- [3]
-			"Asalto a la Costa Quebrada", -- [4]
-			"L’assaut du rivage Brisé", -- [5]
-			"Assalto alla Riva Dispersa", -- [6]
-			"부서진 해변 공격", -- [7]
-			"Ataque à Costa Partida", -- [8]
-			"Штурм Расколотого берега", -- [9]
-			"突袭破碎海滩", -- [10]
-			"突襲破碎海岸", -- [11]
-		}, -- [13]
-	},
-	["662"] = {
-		{
-			"Foulspore Caverns", -- [1]
-			"Faulsporenhöhlen", -- [2]
-			"Grutas de la Espora Fétida", -- [3]
-			"Grutas de la Espora Fétida", -- [4]
-			"Caverne Vilespore", -- [5]
-			"Caverna Spora Funesta", -- [6]
-			"썩은포자 동굴", -- [7]
-			"Caverna Esporelama", -- [8]
-			"Зловонная пещера", -- [9]
-			"毒菇洞穴", -- [10]
-			"毒菇洞穴", -- [11]
-		}, -- [1]
-	},
-	["1096"] = {
-		{
-			"Combat Training", -- [1]
-			"Kampftraining", -- [2]
-			"Instrucción de combate", -- [3]
-			"Instrucción de combate", -- [4]
-			"Entraînement au combat", -- [5]
-			"Addestramento al combattimento", -- [6]
-			"전투 훈련", -- [7]
-			"Treino de combate", -- [8]
-			"Боевые учения", -- [9]
-			"战斗训练", -- [10]
-			"戰鬥訓練", -- [11]
-		}, -- [1]
-		{
-			"Embrace the Feline Side", -- [1]
-			"Die feline Seite ausleben", -- [2]
-			"Abraza el lado felino", -- [3]
-			"Acepta tu lado felino", -- [4]
-			"Miaou !", -- [5]
-			"Abbracciare il lato felino", -- [6]
-			"날렵한 움직임", -- [7]
-			"Entregar-se ao lado felino", -- [8]
-			"Кошачья грация", -- [9]
-			"拥抱猎豹", -- [10]
-			"貓力與你同在", -- [11]
-		}, -- [2]
-		{
-			"Skulking Around", -- [1]
-			"Sich davonstehlen", -- [2]
-			"Merodeando", -- [3]
-			"Merodeando por aquí", -- [4]
-			"Toujours à l’affût", -- [5]
-			"Questione di delicatezza", -- [6]
-			"꼭꼭 숨어라, 머리카락 보인다", -- [7]
-			"Na manha do gato", -- [8]
-			"Надежное укрытие", -- [9]
-			"潜伏于此", -- [10]
-			"悄悄行動", -- [11]
-		}, -- [3]
-		{
-			"Break out the Claws", -- [1]
-			"Die Krallen ausfahren", -- [2]
-			"Saca las garras", -- [3]
-			"Libérate de las zarpas", -- [4]
-			"Sortir les griffes", -- [5]
-			"Tirare fuori le zanne", -- [6]
-			"발톱 세우기", -- [7]
-			"Mostrar as garras", -- [8]
-			"Выпустить когти", -- [9]
-			"伸出利爪", -- [10]
-			"好像弄斷爪子了", -- [11]
-		}, -- [4]
-		{
-			"Shred them to Pieces", -- [1]
-			"Verarbeitet sie zu Hackfleisch", -- [2]
-			"Hazlos pedacitos", -- [3]
-			"Que no quede nada de ellos", -- [4]
-			"Déchiquetage en règle", -- [5]
-			"Farli a pezzi", -- [6]
-			"갈가리 찢기", -- [7]
-			"Despedaçá-los", -- [8]
-			"Смертоносные когти", -- [9]
-			"把他们撕成碎片", -- [10]
-			"把它們撕碎", -- [11]
-		}, -- [5]
-		{
-			"Bite 'em", -- [1]
-			"Ein kräftiger Biss", -- [2]
-			"A mordisco limpio", -- [3]
-			"Muérdelos", -- [4]
-			"Coup de dents", -- [5]
-			"Mordili!", -- [6]
-			"물어뜯기", -- [7]
-			"Morder", -- [8]
-			"Взять их!", -- [9]
-			"咬他们", -- [10]
-			"咬他們", -- [11]
-		}, -- [6]
-		{
-			"Rip It Up", -- [1]
-			"In Stücke reißen", -- [2]
-			"En canal", -- [3]
-			"Arráncales las tripas", -- [4]
-			"Tout déchirer", -- [5]
-			"Squarciali tutti", -- [6]
-			"사정없이 찢기", -- [7]
-			"Botar pra rasgar", -- [8]
-			"Потрошитель", -- [9]
-			"裂成两半", -- [10]
-			"把它撕爛", -- [11]
-		}, -- [7]
-		{
-			"Putting It All Together", -- [1]
-			"Das große Ganze", -- [2]
-			"Juntar las piezas", -- [3]
-			"Todas las piezas juntas", -- [4]
-			"Mise en pratique", -- [5]
-			"Mettersi alla prova", -- [6]
-			"종합주문세트", -- [7]
-			"Fixação de conteúdo", -- [8]
-			"Сборная солянка", -- [9]
-			"综合在一起", -- [10]
-			"準備完善", -- [11]
-		}, -- [8]
-		{
-			"Dashing Around", -- [1]
-			"Im Eilschritt marsch", -- [2]
-			"A toda velocidad", -- [3]
-			"Arrasándolo todo", -- [4]
-			"Ne pas confondre vitesse et précipitation", -- [5]
-			"Slanci aggraziati", -- [6]
-			"거침없이 달려들기", -- [7]
-			"Arremeter contra tudo", -- [8]
-			"Прыжок кошки", -- [9]
-			"横冲直撞", -- [10]
-			"衝來衝去", -- [11]
-		}, -- [9]
-		{
-			"Mending Your Wounds", -- [1]
-			"Wunden heilen", -- [2]
-			"Sanar tus heridas", -- [3]
-			"Curando las heridas", -- [4]
-			"Panser ses blessures", -- [5]
-			"Curare le ferite", -- [6]
-			"상처 치유", -- [7]
-			"Curar as feridas", -- [8]
-			"Исцеление ран", -- [9]
-			"治疗你的伤口", -- [10]
-			"照料你的傷口", -- [11]
-		}, -- [10]
-		{
-			"A Quick Test", -- [1]
-			"Schnelltest", -- [2]
-			"Una prueba rápida", -- [3]
-			"Una prueba rápida", -- [4]
-			"Un test rapide", -- [5]
-			"Una piccola prova", -- [6]
-			"깜짝 시험", -- [7]
-			"Teste rápido", -- [8]
-			"Испытание тет-а-тет", -- [9]
-			"快速测试", -- [10]
-			"立刻測試", -- [11]
-		}, -- [11]
-		{
-			"Twice the Challenge", -- [1]
-			"Doppelte Herausforderung", -- [2]
-			"Desafío por partida doble", -- [3]
-			"Un desafío doble", -- [4]
-			"Double défi", -- [5]
-			"Doppia sfida", -- [6]
-			"난이도 두 배", -- [7]
-			"Desafio em dose dupla", -- [8]
-			"Двойной вызов", -- [9]
-			"双倍挑战", -- [10]
-			"雙重挑戰", -- [11]
-		}, -- [12]
-		{
-			"Defend Against the Legion Assault", -- [1]
-			"Den Angriff der Legion abwehren", -- [2]
-			"Defiéndete del asalto de la Legión", -- [3]
-			"Defiéndete contra el ataque de la Legión", -- [4]
-			"Défense contre l’assaut de la Légion", -- [5]
-			"Difesa contro la Legione", -- [6]
-			"군단의 공격 막아내기", -- [7]
-			"Defender contra o ataque da Legião", -- [8]
-			"Оборона против Легиона", -- [9]
-			"在军团的攻击下保卫飞艇", -- [10]
-			"抵擋燃燒軍團的攻擊", -- [11]
-		}, -- [13]
-		{
-			"Assault on Broken Shore", -- [1]
-			"Angriff auf die Verheerte Küste", -- [2]
-			"Asalto a la Costa Abrupta", -- [3]
-			"Asalto a la Costa Quebrada", -- [4]
-			"L’assaut du rivage Brisé", -- [5]
-			"Assalto alla Riva Dispersa", -- [6]
-			"부서진 해변 공격", -- [7]
-			"Ataque à Costa Partida", -- [8]
-			"Штурм Расколотого берега", -- [9]
-			"突袭破碎海滩", -- [10]
-			"突襲破碎海岸", -- [11]
-		}, -- [14]
-	},
-	["1131"] = {
-		{
-			"You CAN Go Home", -- [1]
-			"Ihr KÖNNT nach Hause gehen", -- [2]
-			"PUEDES irte a casa", -- [3]
-			"PUEDES irte a casa", -- [4]
-			"Retour au bercail possible", -- [5]
-			"Di nuovo a casa", -- [6]
-			"돌아온 일리다리", -- [7]
-			"Você PODE ir para casa", -- [8]
-			"Домой!", -- [9]
-			"你们可以回家了", -- [10]
-			"回家真好", -- [11]
-		}, -- [1]
-		{
-			"Nothing Will Bar Our Way", -- [1]
-			"Nichts wird sich uns in den Weg stellen", -- [2]
-			"Nada se interpondrá en nuestro camino", -- [3]
-			"Nada se interpondrá en nuestro camino", -- [4]
-			"Rien ne nous empêchera de passer !", -- [5]
-			"Niente ci sbarrerà la strada", -- [6]
-			"진격의 일리다리", -- [7]
-			"Nada obstruirá nosso caminho", -- [8]
-			"Нам преграды нипочем", -- [9]
-			"我们不可阻挡", -- [10]
-			"沒有任何事能阻擋我們", -- [11]
-		}, -- [2]
-		{
-			"Confronting an Old Foe", -- [1]
-			"Konfrontation mit einem alten Feind", -- [2]
-			"Ante un viejo enemigo", -- [3]
-			"Confrontando a un viejo enemigo", -- [4]
-			"Un vieil adversaire", -- [5]
-			"Faccia a faccia contro un vecchio nemico", -- [6]
-			"숙적과의 조우", -- [7]
-			"Confronto com um antigo inimigo", -- [8]
-			"Старый враг", -- [9]
-			"面对老对手", -- [10]
-			"面對宿敵", -- [11]
-		}, -- [3]
-		{
-			"If He Will Not Listen to Reason...", -- [1]
-			"Und bist du nicht willig...", -- [2]
-			"Si no atiende a razones...", -- [3]
-			"Si no quiere entrar en razón...", -- [4]
-			"S’il ne veut pas entendre raison…", -- [5]
-			"Se non ascolterà la ragione...", -- [6]
-			"말을 듣지 않으면...", -- [7]
-			"Já que não quer ser razoável...", -- [8]
-			"Когда красноречие бессильно", -- [9]
-			"如果他不听劝……", -- [10]
-			"要是他不講道理…", -- [11]
-		}, -- [4]
-		{
-			"A Final Attempt at Diplomacy", -- [1]
-			"Ein letzter Versuch der Diplomatie", -- [2]
-			"Un último intento diplomático", -- [3]
-			"Un último intento de usar la diplomacia", -- [4]
-			"Une dernière tentative diplomatique", -- [5]
-			"Un ultimo tentativo di diplomazia", -- [6]
-			"마지막 제안", -- [7]
-			"Uma última chance à diplomacia", -- [8]
-			"Еще немного дипломатии", -- [9]
-			"外交上的最后努力", -- [10]
-			"最後一次嘗試溝通", -- [11]
-		}, -- [5]
-	},
-	["613"] = {
-		{
-			"The Botanica", -- [1]
-			"Die Botanika", -- [2]
-			"El Invernáculo", -- [3]
-			"El Invernáculo", -- [4]
-			"La Botanica", -- [5]
-			"Botanica", -- [6]
-			"신록의 정원", -- [7]
-			"Jardim Botânico", -- [8]
-			"Ботаника", -- [9]
-			"生态船", -- [10]
-			"波塔尼卡", -- [11]
-		}, -- [1]
-	},
-	["1179"] = {
-		{
-			"Surrounded by Darkness", -- [1]
-			"Umgeben von Dunkelheit", -- [2]
-			"Rodeados de oscuridad", -- [3]
-			"Rodeado de oscuridad", -- [4]
-			"Nimbés de ténèbres", -- [5]
-			"Circondati dall'oscurità", -- [6]
-			"어둠에 둘러싸여", -- [7]
-			"Envolto em escuridão", -- [8]
-			"В окружении тьмы", -- [9]
-			"被黑暗包围", -- [10]
-			"黑暗環伺", -- [11]
-		}, -- [1]
-		{
-			"Preparing for the Apocalypse", -- [1]
-			"Vorbereitung auf die Apokalypse", -- [2]
-			"Preparándose para el Apocalipsis", -- [3]
-			"Preparándose para el Apocalipsis", -- [4]
-			"Préparatifs en vue de l’apocalypse", -- [5]
-			"Preparativi per l'apocalisse", -- [6]
-			"재앙에 대비하라", -- [7]
-			"Preparando-se para o apocalipse", -- [8]
-			"Подготовка к апокалипсису", -- [9]
-			"准备迎接天启。", -- [10]
-			"備戰末日", -- [11]
-		}, -- [2]
-		{
-			"The Road to Fel", -- [1]
-			"Teufelstechnik", -- [2]
-			"El camino a la vileza", -- [3]
-			"El camino vil", -- [4]
-			"La route de la gangrène", -- [5]
-			"La via verso il vile", -- [6]
-			"지옥 마법으로의 길", -- [7]
-			"Estrada para a vileza", -- [8]
-			"Скверный путь", -- [9]
-			"邪能之路", -- [10]
-			"魔化之路", -- [11]
-		}, -- [3]
-		{
-			"Behold, the Endless March", -- [1]
-			"Seht, der endlose Marsch", -- [2]
-			"Contemplad la marcha interminable", -- [3]
-			"Observen, la Marcha Eterna", -- [4]
-			"La marche sans fin", -- [5]
-			"La marcia infinita", -- [6]
-			"보라, 끝없는 행진을", -- [7]
-			"Contemplem; a marcha sem fim", -- [8]
-			"Неисчислимое воинство", -- [9]
-			"看，无尽的大军", -- [10]
-			"看呀，無盡的前進", -- [11]
-		}, -- [4]
-		{
-			"No Man An Island", -- [1]
-			"Niemand ist eine Insel", -- [2]
-			"Ningún hombre es una isla", -- [3]
-			"Isla de nadie", -- [4]
-			"Aucun homme n’est une île", -- [5]
-			"L'isola di nessuno", -- [6]
-			"혼자가 아니다", -- [7]
-			"Ninguém é uma ilha", -- [8]
-			"Один в поле не воин", -- [9]
-			"吾道不孤", -- [10]
-			"無人是孤島", -- [11]
-		}, -- [5]
-		{
-			"True Sacrifice", -- [1]
-			"Ein echtes Opfer", -- [2]
-			"Verdadero sacrificio", -- [3]
-			"Un verdadero sacrificio", -- [4]
-			"Véritable sacrifice", -- [5]
-			"Un grande sacrificio", -- [6]
-			"진정한 희생", -- [7]
-			"Sacrifício verdadeiro", -- [8]
-			"Истинное самопожертвование", -- [9]
-			"真正的牺牲", -- [10]
-			"真正的犧牲", -- [11]
-		}, -- [6]
-		{
-			"When Good Men Do Nothing", -- [1]
-			"Wenn die Guten wegsehen", -- [2]
-			"Cuando los hombres buenos no hacen nada", -- [3]
-			"Cuando los buenos no hacen nada", -- [4]
-			"L’inaction des hommes de bien", -- [5]
-			"Quando i buoni non combinano nulla", -- [6]
-			"누군가는 해야 할 일", -- [7]
-			"Quando os bons cruzam os braços", -- [8]
-			"Когда честные бездействуют", -- [9]
-			"当好人袖手旁观", -- [10]
-			"好人無作為", -- [11]
-		}, -- [7]
-	},
-	["617"] = {
-		{
-			"Magisters' Terrace", -- [1]
-			"Terrasse der Magister", -- [2]
-			"Bancal del Magister", -- [3]
-			"El Bancal del Magister", -- [4]
-			"La terrasse des Magistères", -- [5]
-			"Terrazza dei Magisteri", -- [6]
-			"마법학자의 정원", -- [7]
-			"Terraço dos Magísteres", -- [8]
-			"Терраса Магистров", -- [9]
-			"魔导师平台", -- [10]
-			"博學者殿堂", -- [11]
-		}, -- [1]
-	},
-	["1177"] = {
-		{
-			"The Arcway", -- [1]
-			"Der Arkus", -- [2]
-			"La Arquería", -- [3]
-			"El Arco", -- [4]
-			"L’Arcavia", -- [5]
-			"L'Arcavia", -- [6]
-			"비전로", -- [7]
-			"O Arcâneo", -- [8]
-			"Катакомбы Сурамара", -- [9]
-			"魔法回廊", -- [10]
-			"幽暗地道", -- [11]
-		}, -- [1]
-	},
-	["45"] = {
-		{
-			"Stormstout Brewery", -- [1]
-			"Brauerei Sturmbräu", -- [2]
-			"Cervecería del Trueno", -- [3]
-			"Cervecería del Trueno", -- [4]
-			"Brasserie Brune d’Orage", -- [5]
-			"Birrificio Triplo Malto", -- [6]
-			"스톰스타우트 양조장", -- [7]
-			"Cervejaria Malte do Trovão", -- [8]
-			"Хмелеварня Буйных Портеров", -- [9]
-			"风暴烈酒酿造厂", -- [10]
-			"風暴烈酒酒坊", -- [11]
-		}, -- [1]
-	},
-	["920"] = {
-		{
-			"Eye of Azshara", -- [1]
-			"Das Auge Azsharas", -- [2]
-			"Ojo de Azshara", -- [3]
-			"Ojo de Azshara", -- [4]
-			"L’Œil d’Azshara", -- [5]
-			"Occhio di Azshara", -- [6]
-			"아즈샤라의 눈", -- [7]
-			"Olho de Azshara", -- [8]
-			"Око Азшары", -- [9]
-			"艾萨拉之眼", -- [10]
-			"艾薩拉之眼", -- [11]
-		}, -- [1]
-	},
-	["1083"] = {
-		{
-			"Combat Training", -- [1]
-			"Kampftraining", -- [2]
-			"Instrucción de combate", -- [3]
-			"Instrucción de combate", -- [4]
-			"Entraînement au combat", -- [5]
-			"Addestramento al combattimento", -- [6]
-			"전투 훈련", -- [7]
-			"Treino de combate", -- [8]
-			"Боевые учения", -- [9]
-			"战斗训练", -- [10]
-			"戰鬥訓練", -- [11]
-		}, -- [1]
-		{
-			"Call a Friend", -- [1]
-			"Einen Freund rufen", -- [2]
-			"Llama a un amigo", -- [3]
-			"Llamar a un amigo", -- [4]
-			"Appel à un ami", -- [5]
-			"Amici più di prima", -- [6]
-			"친구 부르기", -- [7]
-			"Chamar um amigo", -- [8]
-			"Помощь друга", -- [9]
-			"召唤小伙伴", -- [10]
-			"呼喚朋友", -- [11]
-		}, -- [2]
-		{
-			"Pet, Attack!", -- [1]
-			"Fass!", -- [2]
-			"¡Mascota, ataca!", -- [3]
-			"¡Mascota, ataca!", -- [4]
-			"Attaque, mon mignon !", -- [5]
-			"Famiglio, attacca!", -- [6]
-			"착하지, 물어!", -- [7]
-			"Ajudante, atacar!", -- [8]
-			"Фас!", -- [9]
-			"宠物，进攻！", -- [10]
-			"寵物，攻擊！", -- [11]
-		}, -- [3]
-		{
-			"Looking for More", -- [1]
-			"Auf der Suche nach mehr", -- [2]
-			"Buscar más", -- [3]
-			"Buscar más", -- [4]
-			"Recherche de compagnons", -- [5]
-			"Lo spirito della bestia", -- [6]
-			"타격 그 이상", -- [7]
-			"Procurando mais", -- [8]
-			"Инстинкт хищника", -- [9]
-			"还要更多", -- [10]
-			"想要更多", -- [11]
-		}, -- [4]
-		{
-			"Getting In On The Action", -- [1]
-			"Mittendrin statt nur dabei", -- [2]
-			"Entrar en acción", -- [3]
-			"Directo hacia la acción", -- [4]
-			"Un peu d’action", -- [5]
-			"Entrare in azione", -- [6]
-			"사격 개시", -- [7]
-			"Botando pra quebrar", -- [8]
-			"Выстрел в темноте", -- [9]
-			"开始行动", -- [10]
-			"實地使用", -- [11]
-		}, -- [5]
-		{
-			"You Won't Like Us When We're Mad...", -- [1]
-			"Wehe, wenn sie losgelassen...", -- [2]
-			"No te conviene enfadarnos...", -- [3]
-			"No te gustará vernos enojados...", -- [4]
-			"Je vais devoir me fâcher…", -- [5]
-			"Non ti piacerà vederli arrabbiati...", -- [6]
-			"드러난 광기", -- [7]
-			"Não vai gostar de ver-nos bravos...", -- [8]
-			"В гневе мы страшны", -- [9]
-			"我们发怒的样子可不好看……", -- [10]
-			"你不會想惹怒我們的…", -- [11]
-		}, -- [6]
-		{
-			"Putting It All Together", -- [1]
-			"Das große Ganze", -- [2]
-			"Juntar las piezas", -- [3]
-			"Todas las piezas juntas", -- [4]
-			"Mise en pratique", -- [5]
-			"Mettersi alla prova", -- [6]
-			"종합주문세트", -- [7]
-			"Fixação de conteúdo", -- [8]
-			"Сборная солянка", -- [9]
-			"综合在一起", -- [10]
-			"準備完善", -- [11]
-		}, -- [7]
-		{
-			"Shooting Every Target", -- [1]
-			"Jeder Schuss ein Treffer", -- [2]
-			"Disparar a todos los objetivos", -- [3]
-			"Un disparo para cada objetivo", -- [4]
-			"Un carquois bien plein", -- [5]
-			"Piazza pulita", -- [6]
-			"집중 사격", -- [7]
-			"Atirando em todos os alvos", -- [8]
-			"Стрельба по тарелочкам", -- [9]
-			"射击每一个目标", -- [10]
-			"射擊每個目標", -- [11]
-		}, -- [8]
-		{
-			"Playing Possum", -- [1]
-			"Kein Puls, keine Regung", -- [2]
-			"Hacerse el muerto", -- [3]
-			"Hacerse el muerto", -- [4]
-			"Simulacre de mort", -- [5]
-			"Giocare a fare il morto", -- [6]
-			"죽은 척하기", -- [7]
-			"Fingindo de morto", -- [8]
-			"Притвориться мертвым", -- [9]
-			"负鼠爱装死", -- [10]
-			"裝死", -- [11]
-		}, -- [9]
-		{
-			"A Quick Test", -- [1]
-			"Schnelltest", -- [2]
-			"Una prueba rápida", -- [3]
-			"Una prueba rápida", -- [4]
-			"Un test rapide", -- [5]
-			"Una piccola prova", -- [6]
-			"깜짝 시험", -- [7]
-			"Teste rápido", -- [8]
-			"Испытание тет-а-тет", -- [9]
-			"快速测试", -- [10]
-			"立刻測試", -- [11]
-		}, -- [10]
-		{
-			"Twice the Challenge", -- [1]
-			"Doppelte Herausforderung", -- [2]
-			"Desafío por partida doble", -- [3]
-			"Un desafío doble", -- [4]
-			"Double défi", -- [5]
-			"Doppia sfida", -- [6]
-			"난이도 두 배", -- [7]
-			"Desafio em dose dupla", -- [8]
-			"Двойной вызов", -- [9]
-			"双倍挑战", -- [10]
-			"雙重挑戰", -- [11]
-		}, -- [11]
-		{
-			"Defend Against the Legion Assault", -- [1]
-			"Den Angriff der Legion abwehren", -- [2]
-			"Defiéndete del asalto de la Legión", -- [3]
-			"Defiéndete contra el ataque de la Legión", -- [4]
-			"Défense contre l’assaut de la Légion", -- [5]
-			"Difesa contro la Legione", -- [6]
-			"군단의 공격 막아내기", -- [7]
-			"Defender contra o ataque da Legião", -- [8]
-			"Оборона против Легиона", -- [9]
-			"在军团的攻击下保卫飞艇", -- [10]
-			"抵擋燃燒軍團的攻擊", -- [11]
-		}, -- [12]
-		{
-			"Assault on Broken Shore", -- [1]
-			"Angriff auf die Verheerte Küste", -- [2]
-			"Asalto a la Costa Abrupta", -- [3]
-			"Asalto a la Costa Quebrada", -- [4]
-			"L’assaut du rivage Brisé", -- [5]
-			"Assalto alla Riva Dispersa", -- [6]
-			"부서진 해변 공격", -- [7]
-			"Ataque à Costa Partida", -- [8]
-			"Штурм Расколотого берега", -- [9]
-			"突袭破碎海滩", -- [10]
-			"突襲破碎海岸", -- [11]
-		}, -- [13]
-	},
-	["632"] = {
-		{
-			"The Slave Pens", -- [1]
-			"Die Sklavenunterkünfte", -- [2]
-			"Recinto de los Esclavos", -- [3]
-			"Recinto de los Esclavos", -- [4]
-			"Les enclos aux esclaves", -- [5]
-			"Fosse degli Schiavi", -- [6]
-			"강제 노역소", -- [7]
-			"O Pátio dos Escravos", -- [8]
-			"Узилище", -- [9]
-			"奴隶围栏", -- [10]
-			"奴隸監獄", -- [11]
-		}, -- [1]
-	},
-	["944"] = {
-		{
-			"Into the Mists", -- [1]
-			"In die Nebel", -- [2]
-			"Entre la niebla", -- [3]
-			"Entre la niebla", -- [4]
-			"Dans les brumes", -- [5]
-			"Nelle nebbie", -- [6]
-			"안개 속으로", -- [7]
-			"Brumas adentro", -- [8]
-			"Сквозь туман", -- [9]
-			"深入迷雾", -- [10]
-			"勇闖迷霧", -- [11]
-		}, -- [1]
-		{
-			"Village of the Damned", -- [1]
-			"Dorf der Verdammten", -- [2]
-			"La aldea de los Malditos", -- [3]
-			"La aldea de los Malditos", -- [4]
-			"Village des Damnés", -- [5]
-			"Il villaggio dei dannati", -- [6]
-			"저주받은 마을", -- [7]
-			"Vila dos malditos", -- [8]
-			"Деревня проклятых", -- [9]
-			"罪人村", -- [10]
-			"詛咒村落", -- [11]
-		}, -- [2]
-		{
-			"Deeper Into the Fog", -- [1]
-			"Tiefer in den Nebel", -- [2]
-			"En lo más profundo de la niebla", -- [3]
-			"En lo profundo de la niebla", -- [4]
-			"En plein brouillard", -- [5]
-			"Nel profondo della nebbia", -- [6]
-			"자욱한 안개 속으로", -- [7]
-			"Névoa adentro", -- [8]
-			"Все глубже в туман", -- [9]
-			"继续深入迷雾", -- [10]
-			"深入迷霧", -- [11]
-		}, -- [3]
-		{
-			"The Stolen Souls", -- [1]
-			"Die gestohlenen Seelen", -- [2]
-			"Las almas robadas", -- [3]
-			"Las almas robadas", -- [4]
-			"Les âmes volées", -- [5]
-			"Le anime rubate", -- [6]
-			"도난당한 영혼", -- [7]
-			"As almas roubadas", -- [8]
-			"Украденные души", -- [9]
-			"偷来的灵魂", -- [10]
-			"失竊的靈魂", -- [11]
-		}, -- [4]
-		{
-			"Vigfus Himself", -- [1]
-			"Vigfus höchstpersönlich", -- [2]
-			"El mismísimo Vigfus", -- [3]
-			"El propio Vigfus", -- [4]
-			"Vigfus en chair et en os", -- [5]
-			"Vigfus in persona", -- [6]
-			"비그푸스 블레이드윈드", -- [7]
-			"Vigfus em pessoa", -- [8]
-			"А вот и сам Вигфус", -- [9]
-			"维格弗斯亲至", -- [10]
-			"維格弗斯", -- [11]
-		}, -- [5]
-		{
-			"On The Trail", -- [1]
-			"Auf den Fersen", -- [2]
-			"Siguiendo la pista", -- [3]
-			"Pisándole los talones", -- [4]
-			"À la trace", -- [5]
-			"Seguire le tracce", -- [6]
-			"추적", -- [7]
-			"No rastro", -- [8]
-			"Погоня по следу", -- [9]
-			"蛛丝马迹", -- [10]
-			"緊追不捨", -- [11]
-		}, -- [6]
-		{
-			"The Warswords", -- [1]
-			"Die Kriegsschwerter", -- [2]
-			"Las Espadas de Guerra", -- [3]
-			"Las Espadas de Guerra", -- [4]
-			"Les épées de guerre", -- [5]
-			"Le spade da guerra", -- [6]
-			"전쟁검", -- [7]
-			"As Armíferas", -- [8]
-			"Боевые мечи", -- [9]
-			"战剑", -- [10]
-			"戰劍", -- [11]
-		}, -- [7]
-	},
-	["432"] = {
-		{
-			"Upper Blackrock Spire", -- [1]
-			"Obere Schwarzfelsspitze", -- [2]
-			"Cumbre de Roca Negra Superior", -- [3]
-			"Cumbre de Roca Negra superior", -- [4]
-			"Sommet du pic Rochenoire", -- [5]
-			"Bastioni di Roccianera Superiori", -- [6]
-			"검은바위 첨탑 상층", -- [7]
-			"Pico da Rocha Negra Superior", -- [8]
-			"Верхняя часть пика Черной горы", -- [9]
-			"黑石塔上层", -- [10]
-			"黑石塔上層", -- [11]
-		}, -- [1]
-	},
-	["744"] = {
-		{
-			"Extinguish Runes", -- [1]
-			"Löscht die Runen", -- [2]
-			"Extinción de runas", -- [3]
-			"Extinguir runas", -- [4]
-			"Éteindre les runes", -- [5]
-			"Estingui le rune", -- [6]
-			"룬 꺼뜨리기", -- [7]
-			"Extinguir runas", -- [8]
-			"Погасить руны", -- [9]
-			"熄灭符文", -- [10]
-			"熄滅符文", -- [11]
-		}, -- [1]
-		{
-			"Upper Blackrock Spire", -- [1]
-			"Obere Schwarzfelsspitze", -- [2]
-			"Cumbre de Roca Negra Superior", -- [3]
-			"Cumbre de Roca Negra superior", -- [4]
-			"Sommet du pic Rochenoire", -- [5]
-			"Bastioni di Roccianera Superiori", -- [6]
-			"검은바위 첨탑 상층", -- [7]
-			"Pico da Rocha Negra Superior", -- [8]
-			"Верхняя часть пика Черной горы", -- [9]
-			"黑石塔上层", -- [10]
-			"黑石塔上層", -- [11]
-		}, -- [2]
-	},
-	["616"] = {
-		{
-			"Magisters' Terrace", -- [1]
-			"Terrasse der Magister", -- [2]
-			"Bancal del Magister", -- [3]
-			"El Bancal del Magister", -- [4]
-			"La terrasse des Magistères", -- [5]
-			"Terrazza dei Magisteri", -- [6]
-			"마법학자의 정원", -- [7]
-			"Terraço dos Magísteres", -- [8]
-			"Терраса Магистров", -- [9]
-			"魔导师平台", -- [10]
-			"博學者殿堂", -- [11]
-		}, -- [1]
-	},
-	["516"] = {
-		{
-			"Shadowfang Keep", -- [1]
-			"Burg Schattenfang", -- [2]
-			"Castillo de Colmillo Oscuro", -- [3]
-			"Castillo de Colmillo Oscuro", -- [4]
-			"Donjon d’Ombrecroc", -- [5]
-			"Forte di Zannascura", -- [6]
-			"그림자송곳니 성채", -- [7]
-			"Bastilha da Presa Negra", -- [8]
-			"Крепость Темного Клыка", -- [9]
-			"影牙城堡", -- [10]
-			"影牙城堡", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective: Defeat Baron Silverlaine", -- [1]
-			"Bonusziel: Besiegt Baron Silberlein", -- [2]
-			"Objetivo de bonificación: Derrota al barón Filargenta", -- [3]
-			"Objetivo de bonificación: derrota al Barón Filargenta.", -- [4]
-			"Objectif bonus : vaincre le baron d’Argelaine", -- [5]
-			"Obiettivo bonus: sconfiggi il Barone Argenius", -- [6]
-			"추가 목표: 남작 실버레인 처치", -- [7]
-			"Objetivo bônus: Derrote o Barão Silverlaine", -- [8]
-			"Дополнительная задача: победите барона Сильверлейна", -- [9]
-			"奖励目标：击败席瓦莱恩男爵", -- [10]
-			"獎勵目標：擊敗席瓦萊恩男爵", -- [11]
-		}, -- [2]
-		{
-			"Bonus Objective: Defeat Commander Springvale", -- [1]
-			"Bonusziel: Besiegt Kommandant Grüntal", -- [2]
-			"Objetivo de bonificación: Derrota al comandante Vallefont", -- [3]
-			"Objetivo de bonificación: derrota al Comandante Vallefont.", -- [4]
-			"Objectif bonus : vaincre le commandant Printeval", -- [5]
-			"Obiettivo bonus: sconfiggi il Comandante Primavalle", -- [6]
-			"추가 목표: 사령관 스프링베일 처치", -- [7]
-			"Objetivo bônus: Derrote o Comandante Floraval", -- [8]
-			"Дополнительная задача: победите командира Спрингвейла", -- [9]
-			"奖励目标：击败指挥官斯普林瓦尔", -- [10]
-			"獎勵目標：指揮官斯普林瓦爾", -- [11]
-		}, -- [3]
-	},
-	["644"] = {
-		{
-			"Zul'Farrak", -- [1]
-			"Zul'Farrak", -- [2]
-			"Zul'Farrak", -- [3]
-			"Zul'Farrak", -- [4]
-			"Zul’Farrak", -- [5]
-			"Zul'Farrak", -- [6]
-			"줄파락", -- [7]
-			"Zul'Farrak", -- [8]
-			"Зул'Фаррак", -- [9]
-			"祖尔法拉克", -- [10]
-			"祖爾法拉克", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [3]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [4]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [5]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [6]
-	},
-	["668"] = {
-		{
-			"Dire Maul", -- [1]
-			"Düsterbruch", -- [2]
-			"La Masacre", -- [3]
-			"La Masacre", -- [4]
-			"Hache-Tripes", -- [5]
-			"Maglio Infausto", -- [6]
-			"혈투의 전장", -- [7]
-			"Martelo do Gládio Cruel", -- [8]
-			"Забытый Город", -- [9]
-			"厄运之槌", -- [10]
-			"厄運之槌", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [3]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [4]
-	},
-	["331"] = {
-		{
-			"Preparations", -- [1]
-			"Vorbereitungen", -- [2]
-			"Preparativos", -- [3]
-			"Preparativos", -- [4]
-			"Les préliminaires", -- [5]
-			"Preparativi", -- [6]
-			"준비", -- [7]
-			"Os preparativos", -- [8]
-			"Приготовления", -- [9]
-			"准备就绪", -- [10]
-			"做好準備", -- [11]
-		}, -- [1]
-		{
-			"The Iron Star", -- [1]
-			"Der Eiserne Stern", -- [2]
-			"La estrella de hierro", -- [3]
-			"La Estrella de Hierro", -- [4]
-			"L’étoile de Fer", -- [5]
-			"La Pirostella", -- [6]
-			"강철의 별", -- [7]
-			"A Estrela de Ferro", -- [8]
-			"Железная звезда", -- [9]
-			"钢铁之星", -- [10]
-			"鋼鐵之星", -- [11]
-		}, -- [2]
-		{
-			"The Battle is Joined", -- [1]
-			"Auf in die Schlacht!", -- [2]
-			"Batalla coordinada", -- [3]
-			"Comenzó la batalla", -- [4]
-			"La bataille fait rage", -- [5]
-			"Unirsi alla battaglia", -- [6]
-			"전투 시작", -- [7]
-			"A Batalha Começou", -- [8]
-			"Союзники вступают в бой", -- [9]
-			"战斗打响", -- [10]
-			"盟友參戰", -- [11]
-		}, -- [3]
-		{
-			"The Iron Harbor", -- [1]
-			"Der Eiserne Hafen", -- [2]
-			"El puerto de la Horda de Hierro", -- [3]
-			"El puerto de hierro", -- [4]
-			"Le port de Fer", -- [5]
-			"Darsena di Ferro", -- [6]
-			"강철 항구", -- [7]
-			"O Porto de Ferro", -- [8]
-			"Железная гавань", -- [9]
-			"钢铁海港", -- [10]
-			"鋼鐵港灣", -- [11]
-		}, -- [4]
-		{
-			"The Weapon", -- [1]
-			"Die Waffe", -- [2]
-			"El arma", -- [3]
-			"El arma", -- [4]
-			"L’arme", -- [5]
-			"L'arma", -- [6]
-			"무기", -- [7]
-			"A Arma", -- [8]
-			"Орудие", -- [9]
-			"武器", -- [10]
-			"傳說武器", -- [11]
-		}, -- [5]
-		{
-			"Blackhand", -- [1]
-			"Schwarzfaust", -- [2]
-			"Puño Negro", -- [3]
-			"Puño Negro", -- [4]
-			"Main-Noire", -- [5]
-			"Manonera", -- [6]
-			"블랙핸드", -- [7]
-			"Mão Negra", -- [8]
-			"Чернорук", -- [9]
-			"黑手", -- [10]
-			"黑手", -- [11]
-		}, -- [6]
-	},
-	["631"] = {
-		{
-			"The Underbog", -- [1]
-			"Der Tiefensumpf", -- [2]
-			"La Sotiénaga", -- [3]
-			"La Sotiénaga", -- [4]
-			"La Basse-tourbière", -- [5]
-			"Torbiera Sotterranea", -- [6]
-			"지하수렁", -- [7]
-			"O Brejo Oculto", -- [8]
-			"Нижетопь", -- [9]
-			"幽暗沼泽", -- [10]
-			"深幽泥沼", -- [11]
-		}, -- [1]
-	},
-	["531"] = {
-		{
-			"Shado-Pan Monastery", -- [1]
-			"Shado-Pan-Kloster", -- [2]
-			"Monasterio del Shadopan", -- [3]
-			"Monasterio del Shadopan", -- [4]
-			"Monastère des Pandashan", -- [5]
-			"Monastero degli Shandaren", -- [6]
-			"음영파 수도원", -- [7]
-			"Monastério Shado-pan", -- [8]
-			"Монастырь Шадо-Пан", -- [9]
-			"影踪禅院", -- [10]
-			"影潘僧院", -- [11]
-		}, -- [1]
-	},
-	["932"] = {
-		{
-			"Halls of Valor", -- [1]
-			"Die Hallen der Tapferkeit", -- [2]
-			"Cámaras del Valor", -- [3]
-			"Salones del Valor", -- [4]
-			"Les salles des Valeureux", -- [5]
-			"Sale del Valore", -- [6]
-			"용맹의 전당", -- [7]
-			"Salões da Bravura", -- [8]
-			"Чертоги Доблести", -- [9]
-			"英灵殿", -- [10]
-			"英靈殿", -- [11]
-		}, -- [1]
-	},
-	["641"] = {
-		{
-			"The Deadmines", -- [1]
-			"Die Todesminen", -- [2]
-			"Las Minas de la Muerte", -- [3]
-			"Las Minas de la Muerte", -- [4]
-			"Les Mortemines", -- [5]
-			"Miniere della Morte", -- [6]
-			"죽음의 폐광", -- [7]
-			"Minas Mortas", -- [8]
-			"Мертвые копи", -- [9]
-			"死亡矿井", -- [10]
-			"死亡礦坑", -- [11]
-		}, -- [1]
-	},
-	["535"] = {
-		{
-			"Shado-Pan Monastery", -- [1]
-			"Shado-Pan-Kloster", -- [2]
-			"Monasterio del Shadopan", -- [3]
-			"Monasterio del Shadopan", -- [4]
-			"Monastère des Pandashan", -- [5]
-			"Monastero degli Shandaren", -- [6]
-			"음영파 수도원", -- [7]
-			"Monastério Shado-pan", -- [8]
-			"Монастырь Шадо-Пан", -- [9]
-			"影踪禅院", -- [10]
-			"影潘僧院", -- [11]
-		}, -- [1]
-	},
-	["635"] = {
-		{
-			"The Blood Furnace", -- [1]
-			"Der Blutkessel", -- [2]
-			"El Horno de Sangre", -- [3]
-			"El Horno de Sangre", -- [4]
-			"La Fournaise du sang", -- [5]
-			"Forgia del Sangue", -- [6]
-			"피의 용광로", -- [7]
-			"A Fornalha de Sangue", -- [8]
-			"Кузня Крови", -- [9]
-			"鲜血熔炉", -- [10]
-			"血熔爐", -- [11]
-		}, -- [1]
-	},
-	["510"] = {
-		{
-			"The Stockade", -- [1]
-			"Das Verlies", -- [2]
-			"Las Mazmorras", -- [3]
-			"Las Mazmorras", -- [4]
-			"La Prison", -- [5]
-			"Segrete di Roccavento", -- [6]
-			"스톰윈드 지하감옥", -- [7]
-			"O Cárcere", -- [8]
-			"Тюрьма", -- [9]
-			"监狱", -- [10]
-			"監獄", -- [11]
-		}, -- [1]
-	},
-	["610"] = {
-		{
-			"The Black Morass", -- [1]
-			"Der Schwarze Morast", -- [2]
-			"La Ciénaga Negra", -- [3]
-			"La Ciénaga Negra", -- [4]
-			"Le Noir marécage", -- [5]
-			"Palude Nera", -- [6]
-			"검은늪", -- [7]
-			"Lamaçal Negro", -- [8]
-			"Черные топи", -- [9]
-			"黑色沼泽", -- [10]
-			"黑色沼澤", -- [11]
-		}, -- [1]
-	},
-	["990"] = {
-		{
-			"Ursoc's Lair", -- [1]
-			"Ursocs Unterschlupf", -- [2]
-			"Guarida de Ursoc", -- [3]
-			"Guarida de Ursoc", -- [4]
-			"Tanière d’Ursoc", -- [5]
-			"Antro di Ursoc", -- [6]
-			"우르속의 보금자리", -- [7]
-			"Covil de Ursoc", -- [8]
-			"Логово Урсока", -- [9]
-			"乌索克之巢", -- [10]
-			"厄索克巢穴", -- [11]
-		}, -- [1]
-		{
-			"The Light In The Dark", -- [1]
-			"Das Licht im Dunkel", -- [2]
-			"La luz en la oscuridad", -- [3]
-			"La Luz en la Oscuridad", -- [4]
-			"Une lueur dans les ténèbres", -- [5]
-			"La luce nell'oscurità", -- [6]
-			"암흑 속 한 줄기 빛", -- [7]
-			"A luz na escuridão", -- [8]
-			"Свет во тьме", -- [9]
-			"黑暗中的光明", -- [10]
-			"黑暗中的光明", -- [11]
-		}, -- [2]
-		{
-			"The Nightmare Approaches", -- [1]
-			"Der Alptraum beginnt", -- [2]
-			"Se acerca la Pesadilla", -- [3]
-			"La Pesadilla se aproxima", -- [4]
-			"Le Cauchemar approche", -- [5]
-			"L'Incubo si avvicina", -- [6]
-			"다가오는 악몽", -- [7]
-			"O Pesadelo se aproxima", -- [8]
-			"Кошмар приближается", -- [9]
-			"梦魇临近", -- [10]
-			"夢魘逼近", -- [11]
-		}, -- [3]
-		{
-			"The Nightmare Continues", -- [1]
-			"Der Alptraum geht weiter", -- [2]
-			"Continúa la Pesadilla", -- [3]
-			"La Pesadilla continúa", -- [4]
-			"Le Cauchemar continue", -- [5]
-			"L'Incubo continua", -- [6]
-			"계속되는 악몽", -- [7]
-			"O Pesadelo continua", -- [8]
-			"Кошмар не отступает", -- [9]
-			"梦魇不绝", -- [10]
-			"夢魘不息", -- [11]
-		}, -- [4]
-		{
-			"The Nightmare Continues", -- [1]
-			"Der Alptraum geht weiter", -- [2]
-			"Continúa la Pesadilla", -- [3]
-			"La Pesadilla continúa", -- [4]
-			"Le Cauchemar continue", -- [5]
-			"L'Incubo continua", -- [6]
-			"계속되는 악몽", -- [7]
-			"O Pesadelo continua", -- [8]
-			"Кошмар не отступает", -- [9]
-			"梦魇不绝", -- [10]
-			"夢魘不息", -- [11]
-		}, -- [5]
-		{
-			"The Nightmare Continues", -- [1]
-			"Der Alptraum geht weiter", -- [2]
-			"Continúa la Pesadilla", -- [3]
-			"La Pesadilla continúa", -- [4]
-			"Le Cauchemar continue", -- [5]
-			"L'Incubo continua", -- [6]
-			"계속되는 악몽", -- [7]
-			"O Pesadelo continua", -- [8]
-			"Кошмар не отступает", -- [9]
-			"梦魇不绝", -- [10]
-			"夢魘不息", -- [11]
-		}, -- [6]
-		{
-			"The Fallen One", -- [1]
-			"Der Gefallene", -- [2]
-			"El caído", -- [3]
-			"El caído", -- [4]
-			"Le déchu", -- [5]
-			"Il Caduto", -- [6]
-			"쓰러진 자", -- [7]
-			"O Tombado", -- [8]
-			"Падший", -- [9]
-			"堕落者", -- [10]
-			"亡者", -- [11]
-		}, -- [7]
-		{
-			"The Claws Reclaimed", -- [1]
-			"Die zurückeroberten Klauen", -- [2]
-			"Las Garras reclamadas", -- [3]
-			"Reclama las Garras", -- [4]
-			"Récupération des griffes", -- [5]
-			"Gli Artigli recuperati", -- [6]
-			"되찾은 곰 신의 유물", -- [7]
-			"As garras retomadas", -- [8]
-			"Возвращение Когтей", -- [9]
-			"夺回乌索克之爪", -- [10]
-			"重獲神爪", -- [11]
-		}, -- [8]
-	},
-	["1090"] = {
-		{
-			"Combat Training", -- [1]
-			"Kampftraining", -- [2]
-			"Instrucción de combate", -- [3]
-			"Instrucción de combate", -- [4]
-			"Entraînement au combat", -- [5]
-			"Addestramento al combattimento", -- [6]
-			"전투 훈련", -- [7]
-			"Treino de combate", -- [8]
-			"Боевые учения", -- [9]
-			"战斗训练", -- [10]
-			"戰鬥訓練", -- [11]
-		}, -- [1]
-		{
-			"A Little Bit of Pain", -- [1]
-			"Ein wenig Schmerz", -- [2]
-			"Un poquito de dolor", -- [3]
-			"Una pequeña pizca de dolor", -- [4]
-			"Une légère douleur", -- [5]
-			"Un po' di dolore", -- [6]
-			"고통의 결실", -- [7]
-			"Uma pitada de dor", -- [8]
-			"Болезненные методы", -- [9]
-			"有一点点痛", -- [10]
-			"會有一點點痛", -- [11]
-		}, -- [2]
-		{
-			"Holy Bolts", -- [1]
-			"Heilige Blitze", -- [2]
-			"Descargas Sagradas", -- [3]
-			"Descargas Sagradas", -- [4]
-			"Éclairs sacrés", -- [5]
-			"Atto di contrizione", -- [6]
-			"거룩한 신념", -- [7]
-			"Setas Sagradas", -- [8]
-			"Разящий Свет", -- [9]
-			"神圣飞弹", -- [10]
-			"神聖之光", -- [11]
-		}, -- [3]
-		{
-			"In Smite of Overwhelming Obstacles", -- [1]
-			"Schmerz lass nach", -- [2]
-			"Punición infinita", -- [3]
-			"Sorteando obstáculos inmensos", -- [4]
-			"Crime et Châtiment", -- [5]
-			"Punire i cattivi", -- [6]
-			"압도적인 성스러움", -- [7]
-			"Apesar dos enormes obstáculos", -- [8]
-			"Карающая длань", -- [9]
-			"重压下的惩击", -- [10]
-			"再辛苦也要做出好懲擊", -- [11]
-		}, -- [4]
-		{
-			"Putting It All Together", -- [1]
-			"Das große Ganze", -- [2]
-			"Juntar las piezas", -- [3]
-			"Todas las piezas juntas", -- [4]
-			"Mise en pratique", -- [5]
-			"Mettersi alla prova", -- [6]
-			"종합주문세트", -- [7]
-			"Fixação de conteúdo", -- [8]
-			"Сборная солянка", -- [9]
-			"综合在一起", -- [10]
-			"準備完善", -- [11]
-		}, -- [5]
-		{
-			"Playing Mind Games", -- [1]
-			"Gedankenspiele", -- [2]
-			"Jugar a juegos mentales", -- [3]
-			"Jugando a juegos mentales", -- [4]
-			"Maux d’esprit", -- [5]
-			"Giochi mentali", -- [6]
-			"공포 조장", -- [7]
-			"Jogos Mentais", -- [8]
-			"Вопль, вселяющий ужас", -- [9]
-			"玩弄人心", -- [10]
-			"玩心理遊戲", -- [11]
-		}, -- [6]
-		{
-			"A Shield From Your Enemies", -- [1]
-			"Abgeschirmt von Euren Feinden", -- [2]
-			"Un escudo contra tus enemigos", -- [3]
-			"Un escudo contra tus enemigos", -- [4]
-			"Un bouclier à toute épreuve", -- [5]
-			"Difendersi dai propri nemici", -- [6]
-			"거룩한 보호", -- [7]
-			"Proteção vinda dos inimigos", -- [8]
-			"Щит против врага", -- [9]
-			"御敌的护盾", -- [10]
-			"來自敵人的盾", -- [11]
-		}, -- [7]
-		{
-			"A Small Plea", -- [1]
-			"Eine kleine Bitte", -- [2]
-			"Una pequeña súplica", -- [3]
-			"Una pequeña súplica", -- [4]
-			"Une petite supplique", -- [5]
-			"Una piccola supplica", -- [6]
-			"작은 간청", -- [7]
-			"Uma pequena súplica", -- [8]
-			"Мольбу услышат небеса", -- [9]
-			"小小的恳求", -- [10]
-			"小小的請求", -- [11]
-		}, -- [8]
-		{
-			"A Quick Test", -- [1]
-			"Schnelltest", -- [2]
-			"Una prueba rápida", -- [3]
-			"Una prueba rápida", -- [4]
-			"Un test rapide", -- [5]
-			"Una piccola prova", -- [6]
-			"깜짝 시험", -- [7]
-			"Teste rápido", -- [8]
-			"Испытание тет-а-тет", -- [9]
-			"快速测试", -- [10]
-			"立刻測試", -- [11]
-		}, -- [9]
-		{
-			"Twice the Challenge", -- [1]
-			"Doppelte Herausforderung", -- [2]
-			"Desafío por partida doble", -- [3]
-			"Un desafío doble", -- [4]
-			"Double défi", -- [5]
-			"Doppia sfida", -- [6]
-			"난이도 두 배", -- [7]
-			"Desafio em dose dupla", -- [8]
-			"Двойной вызов", -- [9]
-			"双倍挑战", -- [10]
-			"雙重挑戰", -- [11]
-		}, -- [10]
-		{
-			"Defend Against the Legion Assault", -- [1]
-			"Den Angriff der Legion abwehren", -- [2]
-			"Defiéndete del asalto de la Legión", -- [3]
-			"Defiéndete contra el ataque de la Legión", -- [4]
-			"Défense contre l’assaut de la Légion", -- [5]
-			"Difesa contro la Legione", -- [6]
-			"군단의 공격 막아내기", -- [7]
-			"Defender contra o ataque da Legião", -- [8]
-			"Оборона против Легиона", -- [9]
-			"在军团的攻击下保卫飞艇", -- [10]
-			"抵擋燃燒軍團的攻擊", -- [11]
-		}, -- [11]
-		{
-			"Assault on Broken Shore", -- [1]
-			"Angriff auf die Verheerte Küste", -- [2]
-			"Asalto a la Costa Abrupta", -- [3]
-			"Asalto a la Costa Quebrada", -- [4]
-			"L’assaut du rivage Brisé", -- [5]
-			"Assalto alla Riva Dispersa", -- [6]
-			"부서진 해변 공격", -- [7]
-			"Ataque à Costa Partida", -- [8]
-			"Штурм Расколотого берега", -- [9]
-			"突袭破碎海滩", -- [10]
-			"突襲破碎海岸", -- [11]
-		}, -- [12]
-	},
-	["1034"] = {
-		{
-			"Engage the Enemy", -- [1]
-			"Schlachterzwingung", -- [2]
-			"Enfrentarse al enemigo", -- [3]
-			"Enfréntate al enemigo", -- [4]
-			"Sus à l’ennemi", -- [5]
-			"Affrontare il nemico", -- [6]
-			"공포의 군주와 교전", -- [7]
-			"Enfrente o inimigo", -- [8]
-			"Столкновение с врагом", -- [9]
-			"交战", -- [10]
-			"與敵人交戰", -- [11]
-		}, -- [1]
-		{
-			"The Forge Restrained", -- [1]
-			"Die gebundene Schmiede", -- [2]
-			"La Forja bajo control", -- [3]
-			"La Forja contenida", -- [4]
-			"La forge amoindrie", -- [5]
-			"Contenere la Forgia", -- [6]
-			"억제된 가열로", -- [7]
-			"A forja diminuída", -- [8]
-			"Скованное Горнило", -- [9]
-			"熔炉重生", -- [10]
-			"受制的熔爐", -- [11]
-		}, -- [2]
-		{
-			"The Power of the Guardians", -- [1]
-			"Die Macht der Wächter", -- [2]
-			"El poder de los guardianes", -- [3]
-			"El poder de los Guardianes", -- [4]
-			"Le pouvoir des Gardiens", -- [5]
-			"Il potere dei Guardiani", -- [6]
-			"수호자의 힘", -- [7]
-			"O poder dos Guardiões", -- [8]
-			"Сила Хранителей", -- [9]
-			"守护者之力", -- [10]
-			"守護者的力量", -- [11]
-		}, -- [3]
-		{
-			"The Dreadlord's Downfall", -- [1]
-			"Der Niedergang des Schreckenslords", -- [2]
-			"La caída del Señor del Terror", -- [3]
-			"La caída del Señor del Terror", -- [4]
-			"La chute du seigneur de l’effroi", -- [5]
-			"La caduta del Signore del Terrore", -- [6]
-			"공포의 군주 처치", -- [7]
-			"A queda do Senhor do Medo", -- [8]
-			"Падение повелителя ужаса", -- [9]
-			"恐惧魔王的败亡", -- [10]
-			"驚懼領主的落敗", -- [11]
-		}, -- [4]
-		{
-			"A Small Victory", -- [1]
-			"Ein kleiner Sieg", -- [2]
-			"Una pequeña victoria", -- [3]
-			"Una pequeña victoria", -- [4]
-			"Modeste victoire", -- [5]
-			"Una piccola vittoria", -- [6]
-			"작은 승리", -- [7]
-			"Uma pequena vitória", -- [8]
-			"Маленькая победа", -- [9]
-			"小小的胜利", -- [10]
-			"小小的勝利", -- [11]
-		}, -- [5]
-		{
-			"Keep it Secret, Keep it Safe", -- [1]
-			"Haltet es geheim, bewahrt es gut", -- [2]
-			"En secreto y a salvo", -- [3]
-			"No se lo digas a nadie", -- [4]
-			"Un secret bien gardé", -- [5]
-			"Mettere al sicuro", -- [6]
-			"은밀하게 안전하게", -- [7]
-			"O segredo do negócio é o segredo", -- [8]
-			"Тайное и надежное место", -- [9]
-			"注意保密，注意安全", -- [10]
-			"保守秘密，保守安全", -- [11]
-		}, -- [6]
-	},
-	["210"] = {
-		{
-			"The Mountaineers", -- [1]
-			"Die Gebirgsjäger", -- [2]
-			"Los montaraces", -- [3]
-			"Los montaraces", -- [4]
-			"Les montagnards", -- [5]
-			"I Montanari", -- [6]
-			"산악경비대원들", -- [7]
-			"Os Montanhistas", -- [8]
-			"Горная пехота", -- [9]
-			"巡山人", -- [10]
-			"巡山人", -- [11]
-		}, -- [1]
-		{
-			"Save Scout Stonebeard", -- [1]
-			"Rettet Späher Steinbart", -- [2]
-			"Salva al explorador Barbapétrea", -- [3]
-			"Salva al explorador Barbapétrea", -- [4]
-			"Sauver l’éclaireur Barbe-de-Pierre", -- [5]
-			"Salva l'Esploratore Barbapietra", -- [6]
-			"정찰병 스톤비어드 구출", -- [7]
-			"Resgatar o Batedor Barbarrocha", -- [8]
-			"Спасение разведчика Камнеборода", -- [9]
-			"解救斥候石须", -- [10]
-			"解救斥候石鬚", -- [11]
-		}, -- [2]
-		{
-			"Save Scout Boldbrew", -- [1]
-			"Rettet Späherin Kühnbräu", -- [2]
-			"Salva a la exploradora Birraudaz", -- [3]
-			"Salva a la exploradora Birraudaz", -- [4]
-			"Sauver l’éclaireuse Bièrafeu", -- [5]
-			"Salva l'Esploratrice Birrardita", -- [6]
-			"정찰병 볼드브루 구출", -- [7]
-			"Resgatar a Batedora Cervamarga", -- [8]
-			"Спасение разведчицы Резковар", -- [9]
-			"解救斥候粗酿", -- [10]
-			"解救斥候勇釀", -- [11]
-		}, -- [3]
-		{
-			"Save Scout Forgefellow", -- [1]
-			"Rettet Späher Schmiedebalg", -- [2]
-			"Salva al explorador Forjaleal", -- [3]
-			"Salva al explorador Forjaleal", -- [4]
-			"Sauver l’éclaireur Forgepair", -- [5]
-			"Salva l'Esploratore Granforgia", -- [6]
-			"정찰병 포지펠로 구출", -- [7]
-			"Resgatar o Batedor Forjamigo", -- [8]
-			"Спасение разведчика Кузнебрата", -- [9]
-			"解救斥候炉匠", -- [10]
-			"解救斥候鍛扈", -- [11]
-		}, -- [4]
-		{
-			"The Cold Cave", -- [1]
-			"Die kalte Höhle", -- [2]
-			"La cueva de hielo", -- [3]
-			"La cueva de hielo", -- [4]
-			"La grotte glacée", -- [5]
-			"La grotta gelida", -- [6]
-			"차가운 동굴", -- [7]
-			"A Caverna Gelada", -- [8]
-			"Ледяная пещера", -- [9]
-			"寒冷的洞穴", -- [10]
-			"冰穴", -- [11]
-		}, -- [5]
-		{
-			"Victory or Death", -- [1]
-			"Sieg oder Tod", -- [2]
-			"Victoria o muerte", -- [3]
-			"Victoria o muerte", -- [4]
-			"La victoire ou la mort", -- [5]
-			"Vittoria o morte", -- [6]
-			"승리가 아니면 죽음을", -- [7]
-			"Vitória ou Morte", -- [8]
-			"Победа или смерть", -- [9]
-			"不成功，就成仁", -- [10]
-			"不勝即亡", -- [11]
-		}, -- [6]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [7]
-	},
-	["427"] = {
-		{
-			"Auchindoun", -- [1]
-			"Auchindoun", -- [2]
-			"Auchindoun", -- [3]
-			"Auchindoun", -- [4]
-			"Auchindoun", -- [5]
-			"Auchindoun", -- [6]
-			"아킨둔", -- [7]
-			"Auchindoun", -- [8]
-			"Аукиндон", -- [9]
-			"奥金顿", -- [10]
-			"奧齊頓", -- [11]
-		}, -- [1]
-	},
-	["320"] = {
-		{
-			"Speak with Durotan", -- [1]
-			"Sprecht mit Durotan", -- [2]
-			"Habla con Durotan", -- [3]
-			"Habla con Durotan", -- [4]
-			"Parler à Durotan", -- [5]
-			"Parla con Durotan", -- [6]
-			"듀로탄과 대화", -- [7]
-			"Fale com Durotan", -- [8]
-			"Поговорите с Дуротаном.", -- [9]
-			"与杜隆坦的谈话", -- [10]
-			"和杜洛坦交談。", -- [11]
-		}, -- [1]
-		{
-			"Get to the Machinehouse", -- [1]
-			"Erreicht das Maschinenhaus", -- [2]
-			"Ve a la Casamáquina", -- [3]
-			"Ve a la casa de máquinas", -- [4]
-			"À la machinerie", -- [5]
-			"Raggiungi l'Officina Bellica", -- [6]
-			"기계작업장", -- [7]
-			"Vá para a Casa de Máquinas", -- [8]
-			"Добраться до машинного зала", -- [9]
-			"前往机房", -- [10]
-			"前往機械室", -- [11]
-		}, -- [2]
-		{
-			"Goraluk Anvilcrack", -- [1]
-			"Goraluk Hammerbruch", -- [2]
-			"Goraluk Yunquegrieta", -- [3]
-			"Goraluk Yunquegrieta", -- [4]
-			"Goraluk Brisenclume", -- [5]
-			"Goraluk Spaccaroccia", -- [6]
-			"고랄루크 앤빌크랙", -- [7]
-			"Goraluk Rachadastra", -- [8]
-			"Горалук Треснувшая Наковальня", -- [9]
-			"古拉鲁克", -- [10]
-			"古拉魯克", -- [11]
-		}, -- [3]
-		{
-			"Get to Supply Depot", -- [1]
-			"Erreicht das Vorratslager", -- [2]
-			"Ve al depósito de suministros", -- [3]
-			"Ve al depósito de suministros", -- [4]
-			"Au dépôt", -- [5]
-			"Raggiungi il Deposito Rifornimenti", -- [6]
-			"보급고", -- [7]
-			"Vá para o Depósito de Suprimentos", -- [8]
-			"Добраться до склада", -- [9]
-			"前往补给站", -- [10]
-			"前往補給站", -- [11]
-		}, -- [4]
-		{
-			"Survive Iron Horde Onslaught", -- [1]
-			"Überlebt den Ansturm der Eisernen Horde", -- [2]
-			"Sobrevive a la masacre de la Horda de Hierro", -- [3]
-			"Sobrevive al embate de la Horda de Hierro", -- [4]
-			"Survivre à l’attaque de la Horde de Fer", -- [5]
-			"Sopravvivi all'attacco dell'Orda di Ferro", -- [6]
-			"강철 호드의 맹공격 견디기", -- [7]
-			"Sobreviva ao Massacre da Horda de Ferro", -- [8]
-			"Пережить атаку Железной Орды", -- [9]
-			"中流砥柱", -- [10]
-			"在鋼鐵部落的突襲中存活", -- [11]
-		}, -- [5]
-		{
-			"Get to Central Dock", -- [1]
-			"Erreicht den zentralen Kai", -- [2]
-			"Llega al muelle central", -- [3]
-			"Ve al muelle central", -- [4]
-			"Atteindre le quai central", -- [5]
-			"Raggiungi il Molo Centrale", -- [6]
-			"중앙 부두", -- [7]
-			"Vá à Doca Central", -- [8]
-			"Добраться до центрального дока", -- [9]
-			"前往中央码头区", -- [10]
-			"前往中央碼頭", -- [11]
-		}, -- [6]
-		{
-			"Get on the Barge", -- [1]
-			"Gelangt an Bord", -- [2]
-			"Sube a la barcaza", -- [3]
-			"Sube a la barcaza", -- [4]
-			"Monter à bord de la péniche", -- [5]
-			"Abborda la Chiatta", -- [6]
-			"승선", -- [7]
-			"Entre na Barcaça.", -- [8]
-			"Попасть на баркас", -- [9]
-			"登上舰艇", -- [10]
-			"登上駁船。", -- [11]
-		}, -- [7]
-		{
-			"Destroy the Wavemurder Barge", -- [1]
-			"Zerstört die 'Wellenmord'", -- [2]
-			"Destruye la barcaza Mataolas", -- [3]
-			"Destruye la barcaza Mataolas", -- [4]
-			"Détruire la péniche Crime-des-Flots", -- [5]
-			"Distruggi la Chiatta Tsunami", -- [6]
-			"물결궂힘 화물선 파괴", -- [7]
-			"Destrua a Barcaça Mata-onda", -- [8]
-			"Уничтожить разбивающий волны баркас", -- [9]
-			"摧毁镇潮号舰艇", -- [10]
-			"摧毀弒浪者駁船", -- [11]
-		}, -- [8]
-	},
-	["523"] = {
-		{
-			"Shadowfang Keep", -- [1]
-			"Burg Schattenfang", -- [2]
-			"Castillo de Colmillo Oscuro", -- [3]
-			"Castillo de Colmillo Oscuro", -- [4]
-			"Donjon d’Ombrecroc", -- [5]
-			"Forte di Zannascura", -- [6]
-			"그림자송곳니 성채", -- [7]
-			"Bastilha da Presa Negra", -- [8]
-			"Крепость Темного Клыка", -- [9]
-			"影牙城堡", -- [10]
-			"影牙城堡", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective: Defeat Baron Silverlaine", -- [1]
-			"Bonusziel: Besiegt Baron Silberlein", -- [2]
-			"Objetivo de bonificación: Derrota al barón Filargenta", -- [3]
-			"Objetivo de bonificación: derrota al Barón Filargenta.", -- [4]
-			"Objectif bonus : vaincre le baron d’Argelaine", -- [5]
-			"Obiettivo bonus: sconfiggi il Barone Argenius", -- [6]
-			"추가 목표: 남작 실버레인 처치", -- [7]
-			"Objetivo bônus: Derrote o Barão Silverlaine", -- [8]
-			"Дополнительная задача: победите барона Сильверлейна", -- [9]
-			"奖励目标：击败席瓦莱恩男爵", -- [10]
-			"獎勵目標：擊敗席瓦萊恩男爵", -- [11]
-		}, -- [2]
-		{
-			"Bonus Objective: Defeat Commander Springvale", -- [1]
-			"Bonusziel: Besiegt Kommandant Grüntal", -- [2]
-			"Objetivo de bonificación: Derrota al comandante Vallefont", -- [3]
-			"Objetivo de bonificación: derrota al Comandante Vallefont.", -- [4]
-			"Objectif bonus : vaincre le commandant Printeval", -- [5]
-			"Obiettivo bonus: sconfiggi il Comandante Primavalle", -- [6]
-			"추가 목표: 사령관 스프링베일 처치", -- [7]
-			"Objetivo bônus: Derrote o Comandante Floraval", -- [8]
-			"Дополнительная задача: победите командира Спрингвейла", -- [9]
-			"奖励目标：击败指挥官斯普林瓦尔", -- [10]
-			"獎勵目標：指揮官斯普林瓦爾", -- [11]
-		}, -- [3]
-	},
-	["623"] = {
-		{
-			"Sethekk Halls", -- [1]
-			"Sethekkhallen", -- [2]
-			"Salas Sethekk", -- [3]
-			"Salas Sethekk", -- [4]
-			"Les salles des Sethekk", -- [5]
-			"Sale dei Sethekk", -- [6]
-			"세데크 전당", -- [7]
-			"Salões dos Sethekk", -- [8]
-			"Сетеккские залы", -- [9]
-			"塞泰克大厅", -- [10]
-			"塞司克大廳", -- [11]
-		}, -- [1]
-	},
-	["323"] = {
-		{
-			"Stop the Ritual", -- [1]
-			"Beendet das Ritual", -- [2]
-			"Detén el ritual", -- [3]
-			"Detén el ritual", -- [4]
-			"Arrêter le rituel", -- [5]
-			"Ferma il rituale", -- [6]
-			"의식 멈추기", -- [7]
-			"Impeça o Ritual", -- [8]
-			"Прервать ритуал", -- [9]
-			"终止仪式", -- [10]
-			"阻止儀式", -- [11]
-		}, -- [1]
-		{
-			"Army of Souls", -- [1]
-			"Seelenarmee", -- [2]
-			"Ejército de almas", -- [3]
-			"Ejército de almas", -- [4]
-			"L’armée des âmes", -- [5]
-			"Armata di anime", -- [6]
-			"영혼의 군대", -- [7]
-			"Exército de Almas", -- [8]
-			"Армия душ", -- [9]
-			"幽灵大军", -- [10]
-			"靈魂大軍", -- [11]
-		}, -- [2]
-		{
-			"Kilrogg Deadeye", -- [1]
-			"Kilrogg Totauge", -- [2]
-			"Kilrogg Mortojo", -- [3]
-			"Kilrogg Ojo Muerto", -- [4]
-			"Kilrogg Oeil-Mort", -- [5]
-			"Kilrogg Occhiotetro", -- [6]
-			"킬로그 데드아이", -- [7]
-			"Kilrogg Olho Morto", -- [8]
-			"Килрогг Мертвый Глаз", -- [9]
-			"基尔罗格·死眼", -- [10]
-			"基爾羅格‧亡眼", -- [11]
-		}, -- [3]
-		{
-			"5 Bonus", -- [1]
-			"5er-Bonus", -- [2]
-			"5 bonificaciones", -- [3]
-			"Bonus 5", -- [4]
-			"Bonus de 5", -- [5]
-			"5 bonus", -- [6]
-			"5 보너스", -- [7]
-			"5 bônus", -- [8]
-			"Еще 5", -- [9]
-			"5连斩奖励", -- [10]
-			"5的獎勵", -- [11]
-		}, -- [4]
-		{
-			"10 Bonus", -- [1]
-			"10er-Bonus", -- [2]
-			"10 bonificaciones", -- [3]
-			"Bonus 10", -- [4]
-			"Bonus de 10", -- [5]
-			"10 bonus", -- [6]
-			"10 보너스", -- [7]
-			"10 bônus", -- [8]
-			"Еще 10", -- [9]
-			"10连斩奖励", -- [10]
-			"10的獎勵", -- [11]
-		}, -- [5]
-	},
-	["1160"] = {
-		{
-			"Join the Battle", -- [1]
-			"Stürzt Euch in die Schlacht", -- [2]
-			"Únete a la batalla", -- [3]
-			"Únete a la batalla", -- [4]
-			"Rejoindre la bataille", -- [5]
-			"Unisciti alla battaglia", -- [6]
-			"참전", -- [7]
-			"Juntar-se à batalha", -- [8]
-			"В бой!", -- [9]
-			"加入战斗", -- [10]
-			"加入戰鬥", -- [11]
-		}, -- [1]
-		{
-			"Defeat Balnazzar's Lieutenants", -- [1]
-			"Balnazzars Hauptmänner bezwingen", -- [2]
-			"Derrota a los tenientes de Balnazzar", -- [3]
-			"Derrota a los tenientes de Balnazzar", -- [4]
-			"Terrasser les lieutenants de Balnazzar", -- [5]
-			"Sconfiggere i Luogotenenti di Balnazzar", -- [6]
-			"발나자르의 부관 처치", -- [7]
-			"Derrotar os tenentes de Balnazzar", -- [8]
-			"Одолеть приспешников Бальназара", -- [9]
-			"击败巴纳扎尔的副官", -- [10]
-			"擊敗巴納札爾的副官", -- [11]
-		}, -- [2]
-		{
-			"Destroy Legion portals.", -- [1]
-			"Legionsportale zerstören", -- [2]
-			"Destruye portales de la Legión", -- [3]
-			"Destruye portales de la Legión.", -- [4]
-			"Destruction de portails de la Légion", -- [5]
-			"Distruggere i portali della Legione", -- [6]
-			"군단 차원문 파괴", -- [7]
-			"Destruir portais da Legião.", -- [8]
-			"Уничтожение порталов Легиона", -- [9]
-			"摧毁军团传送门。", -- [10]
-			"摧毀燃燒軍團的傳送門。", -- [11]
-		}, -- [3]
-		{
-			"Defeat Balnazzar", -- [1]
-			"Balnazzar bezwingen", -- [2]
-			"Derrota a Balnazzar", -- [3]
-			"Derrota a Balnazzar", -- [4]
-			"Terrasser Balnazzar", -- [5]
-			"Sconfiggi Balnazzar", -- [6]
-			"발나자르 처치", -- [7]
-			"Derrotar Balnazzar", -- [8]
-			"Победа над Бальназаром", -- [9]
-			"击败巴纳扎尔", -- [10]
-			"擊敗巴納札爾", -- [11]
-		}, -- [4]
-	},
-	["201"] = {
-		{
-			"The Flight Master", -- [1]
-			"Die Flugmeisterin", -- [2]
-			"El maestro de vuelo", -- [3]
-			"El maestro de vuelo", -- [4]
-			"Le maître de vol", -- [5]
-			"Il Maestro di Volo", -- [6]
-			"비행 조련사", -- [7]
-			"O Mestre de Voo", -- [8]
-			"Распорядитель полетов", -- [9]
-			"飞行管理员", -- [10]
-			"飛行管理員", -- [11]
-		}, -- [1]
-		{
-			"A.C.E.s High", -- [1]
-			"Spaß mit A.S.S.", -- [2]
-			"El fuego de la venganza", -- [3]
-			"El fuego de la venganza", -- [4]
-			"Un as dans la manche", -- [5]
-			"Assalto dal cielo", -- [6]
-			"훌륭한 전투", -- [7]
-			"Uma Prova de Fogo", -- [8]
-			"А.С. на высоте", -- [9]
-			"A.C.E.空袭", -- [10]
-			"A.C.E.部隊來襲", -- [11]
-		}, -- [2]
-		{
-			"Reclaim the Court!", -- [1]
-			"Die Rückeroberung des Hofes!", -- [2]
-			"¡Reclama la corte!", -- [3]
-			"¡Reclama la corte!", -- [4]
-			"Reprenez la cour !", -- [5]
-			"Riconquista la corte!", -- [6]
-			"요새를 되찾아라!", -- [7]
-			"Domine o Pátio!", -- [8]
-			"Возвращение контроля над двором", -- [9]
-			"夺回庭院！", -- [10]
-			"收復中庭!", -- [11]
-		}, -- [3]
-		{
-			"The Warlord", -- [1]
-			"Der Kriegsfürst", -- [2]
-			"El señor de la guerra", -- [3]
-			"El señor de la guerra", -- [4]
-			"Le seigneur de guerre", -- [5]
-			"Il Signore della Guerra", -- [6]
-			"장군", -- [7]
-			"O Senhor da Guerra", -- [8]
-			"Полководец", -- [9]
-			"督军", -- [10]
-			"督軍", -- [11]
-		}, -- [4]
-		{
-			"Legwork", -- [1]
-			"Lauferei", -- [2]
-			"Trabajo preliminar", -- [3]
-			"Trabajo preliminar", -- [4]
-			"Travail sur le terrain", -- [5]
-			"Raccolta informazioni", -- [6]
-			"탐문 조사", -- [7]
-			"Pernadas", -- [8]
-			"Беготня", -- [9]
-			"外勤工作", -- [10]
-			"跑腿", -- [11]
-		}, -- [5]
-		{
-			"Setting Up", -- [1]
-			"Vorbereitung", -- [2]
-			"Tanto monta, monta tanto", -- [3]
-			"Tanto monta, monta tanto", -- [4]
-			"Préparatifs", -- [5]
-			"Preparare le difese", -- [6]
-			"방어 준비", -- [7]
-			"Preparar Armas", -- [8]
-			"Установка", -- [9]
-			"装备中", -- [10]
-			"做好準備", -- [11]
-		}, -- [6]
-		{
-			"Hold the Line!", -- [1]
-			"Weicht nicht zurück!", -- [2]
-			"¡Mantén la formación!", -- [3]
-			"¡Mantén la formación!", -- [4]
-			"Tenir le front !", -- [5]
-			"Difendi la posizione!", -- [6]
-			"전선을 사수하라!", -- [7]
-			"Mantenham a Formação!", -- [8]
-			"Держать строй!", -- [9]
-			"坚守阵地！", -- [10]
-			"守住陣線!", -- [11]
-		}, -- [7]
-	},
-	["627"] = {
-		{
-			"Auchenai Crypts", -- [1]
-			"Auchenaikrypta", -- [2]
-			"Criptas Auchenai", -- [3]
-			"Criptas Auchenai", -- [4]
-			"Cryptes Auchenaï", -- [5]
-			"Cripte degli Auchenai", -- [6]
-			"아키나이 납골당", -- [7]
-			"Catacumbas Auchenai", -- [8]
-			"Аукенайские гробницы", -- [9]
-			"奥金尼地穴", -- [10]
-			"奧奇奈地穴", -- [11]
-		}, -- [1]
-	},
-	["527"] = {
-		{
-			"Gate of the Setting Sun", -- [1]
-			"Tor der Untergehenden Sonne", -- [2]
-			"Puerta del Sol Poniente", -- [3]
-			"Puerta del Sol Poniente", -- [4]
-			"Porte du Soleil couchant", -- [5]
-			"Porta del Sole Calante", -- [6]
-			"석양문", -- [7]
-			"Portal do Sol Poente", -- [8]
-			"Врата Заходящего Солнца", -- [9]
-			"残阳关", -- [10]
-			"落陽關", -- [11]
-		}, -- [1]
-	},
-	["1182"] = {
-		{
-			"Combat Training", -- [1]
-			"Kampftraining", -- [2]
-			"Instrucción de combate", -- [3]
-			"Instrucción de combate", -- [4]
-			"Entraînement au combat", -- [5]
-			"Addestramento al combattimento", -- [6]
-			"전투 훈련", -- [7]
-			"Treino de combate", -- [8]
-			"Боевые учения", -- [9]
-			"战斗训练", -- [10]
-			"戰鬥訓練", -- [11]
-		}, -- [1]
-		{
-			"A Lick of Fire", -- [1]
-			"Ein Schlückchen Feuer", -- [2]
-			"Un chorrito de fuego", -- [3]
-			"Un chorrito de fuego", -- [4]
-			"La bouche en feu", -- [5]
-			"Una punta di fuoco", -- [6]
-			"불 한 입", -- [7]
-			"Uma pincelada de fogo", -- [8]
-			"Капельку огня", -- [9]
-			"烈焰舔舐", -- [10]
-			"添些火焰", -- [11]
-		}, -- [2]
-		{
-			"Can't Stop The Rock", -- [1]
-			"Den Stein ins Rollen bringen", -- [2]
-			"Roca invencible", -- [3]
-			"Un movimiento imparable", -- [4]
-			"Rien n’arrête le roc", -- [5]
-			"Rocce implacabili", -- [6]
-			"바위를 막을 순 없다", -- [7]
-			"Não se pode deter a Pedra", -- [8]
-			"Тверд, как скала", -- [9]
-			"无法阻挡巨石", -- [10]
-			"石化無敵", -- [11]
-		}, -- [3]
-		{
-			"Lashing Out", -- [1]
-			"Die Peitsche schwingen", -- [2]
-			"A latigazo limpio", -- [3]
-			"Gran arremetida", -- [4]
-			"Flagellation", -- [5]
-			"Battute sferzanti", -- [6]
-			"채찍을 휘둘러라", -- [7]
-			"Só no açoite", -- [8]
-			"Иногда нужно выпустить пар", -- [9]
-			"猛击", -- [10]
-			"狂暴打擊", -- [11]
-		}, -- [4]
-		{
-			"Hero of the Storm", -- [1]
-			"Held des Sturms", -- [2]
-			"Héroe de la tormenta", -- [3]
-			"Héroe de la Tormenta", -- [4]
-			"Héros de la tempête", -- [5]
-			"Eroe della Tempesta", -- [6]
-			"폭풍의 영웅", -- [7]
-			"Herói da tempestade", -- [8]
-			"Герой бури", -- [9]
-			"风暴英雄", -- [10]
-			"風暴英雄", -- [11]
-		}, -- [5]
-		{
-			"Putting It All Together", -- [1]
-			"Das große Ganze", -- [2]
-			"Juntar las piezas", -- [3]
-			"Todas las piezas juntas", -- [4]
-			"Mise en pratique", -- [5]
-			"Mettersi alla prova", -- [6]
-			"종합주문세트", -- [7]
-			"Fixação de conteúdo", -- [8]
-			"Сборная солянка", -- [9]
-			"综合在一起", -- [10]
-			"準備完善", -- [11]
-		}, -- [6]
-		{
-			"Ribbit,  Ribbit.", -- [1]
-			"Quaaak, quaaak.", -- [2]
-			"Croac, croac", -- [3]
-			"Croac, croac.", -- [4]
-			"Coâ, coâ !", -- [5]
-			"Cra, cra!", -- [6]
-			"개굴, 개굴", -- [7]
-			"Croac, croac.", -- [8]
-			"Кто сказал \"ква\"?", -- [9]
-			"呱，呱", -- [10]
-			"嘓嘓。", -- [11]
-		}, -- [7]
-		{
-			"Dousing Your Wounds", -- [1]
-			"Eine Welle der Heilung", -- [2]
-			"Empapa tus heridas", -- [3]
-			"Empapando las heridas", -- [4]
-			"Doux apaisement", -- [5]
-			"Lavarsi le ferite", -- [6]
-			"상처 돌보기", -- [7]
-			"Fechar as feridas", -- [8]
-			"Ванна из целебного бальзама", -- [9]
-			"浸泡伤口", -- [10]
-			"沖洗傷口", -- [11]
-		}, -- [8]
-		{
-			"Spiritual Assistance", -- [1]
-			"Geistiger Beistand", -- [2]
-			"Ayuda espiritual", -- [3]
-			"Ayuda espiritual", -- [4]
-			"Assistance spirituelle", -- [5]
-			"Supporto Spirituale", -- [6]
-			"영적 도움", -- [7]
-			"Auxílio espiritual", -- [8]
-			"Помощники из тонкого мира", -- [9]
-			"灵魂协助", -- [10]
-			"友善的靈魂", -- [11]
-		}, -- [9]
-		{
-			"A Quick Test", -- [1]
-			"Schnelltest", -- [2]
-			"Una prueba rápida", -- [3]
-			"Una prueba rápida", -- [4]
-			"Un test rapide", -- [5]
-			"Una piccola prova", -- [6]
-			"깜짝 시험", -- [7]
-			"Teste rápido", -- [8]
-			"Испытание тет-а-тет", -- [9]
-			"快速测试", -- [10]
-			"立刻測試", -- [11]
-		}, -- [10]
-		{
-			"Twice the Challenge", -- [1]
-			"Doppelte Herausforderung", -- [2]
-			"Desafío por partida doble", -- [3]
-			"Un desafío doble", -- [4]
-			"Double défi", -- [5]
-			"Doppia sfida", -- [6]
-			"난이도 두 배", -- [7]
-			"Desafio em dose dupla", -- [8]
-			"Двойной вызов", -- [9]
-			"双倍挑战", -- [10]
-			"雙重挑戰", -- [11]
-		}, -- [11]
-		{
-			"Defend Against the Legion Assault", -- [1]
-			"Den Angriff der Legion abwehren", -- [2]
-			"Defiéndete del asalto de la Legión", -- [3]
-			"Defiéndete contra el ataque de la Legión", -- [4]
-			"Défense contre l’assaut de la Légion", -- [5]
-			"Difesa contro la Legione", -- [6]
-			"군단의 공격 막아내기", -- [7]
-			"Defender contra o ataque da Legião", -- [8]
-			"Оборона против Легиона", -- [9]
-			"在军团的攻击下保卫飞艇", -- [10]
-			"抵擋燃燒軍團的攻擊", -- [11]
-		}, -- [12]
-		{
-			"Assault on Broken Shore", -- [1]
-			"Angriff auf die Verheerte Küste", -- [2]
-			"Asalto a la Costa Abrupta", -- [3]
-			"Asalto a la Costa Quebrada", -- [4]
-			"L’assaut du rivage Brisé", -- [5]
-			"Assalto alla Riva Dispersa", -- [6]
-			"부서진 해변 공격", -- [7]
-			"Ataque à Costa Partida", -- [8]
-			"Штурм Расколотого берега", -- [9]
-			"突袭破碎海滩", -- [10]
-			"突襲破碎海岸", -- [11]
-		}, -- [13]
-	},
-	["683"] = {
-		{
-			"Grimrail Depot", -- [1]
-			"Grimmgleisdepot", -- [2]
-			"Terminal Malavía", -- [3]
-			"Depósito Riel siniestro", -- [4]
-			"Dépôt de Tristerail", -- [5]
-			"Treno Frecciacupa", -- [6]
-			"파멸철로 정비소", -- [7]
-			"Central do Carrilcruel", -- [8]
-			"Депо Мрачных Путей", -- [9]
-			"恐轨车站", -- [10]
-			"恐軌車站", -- [11]
-		}, -- [1]
-		{
-			"The Grimrail", -- [1]
-			"Der Grimmzug", -- [2]
-			"Malavía", -- [3]
-			"El Riel siniestro", -- [4]
-			"Le Tristerail", -- [5]
-			"Treno Frecciacupa", -- [6]
-			"파멸철로", -- [7]
-			"O Carrilcruel", -- [8]
-			"Мрачный Путь", -- [9]
-			"恐轨号", -- [10]
-			"恐軌列車", -- [11]
-		}, -- [2]
-	},
-	["654"] = {
-		{
-			"Razorfen Kraul", -- [1]
-			"Kral der Klingenhauer", -- [2]
-			"Horado Rajacieno", -- [3]
-			"Horado Rajacieno", -- [4]
-			"Kraal de Tranchebauge", -- [5]
-			"Gallerie di Lamaspina", -- [6]
-			"가시덩굴 우리", -- [7]
-			"Urzal dos Tuscos", -- [8]
-			"Лабиринты Иглошкурых", -- [9]
-			"剃刀沼泽", -- [10]
-			"剃刀沼澤", -- [11]
-		}, -- [1]
-	},
-	["1150"] = {
-		{
-			"Loadout", -- [1]
-			"Verladen", -- [2]
-			"Equipamiento", -- [3]
-			"Carga total", -- [4]
-			"Battre le rappel", -- [5]
-			"Pronti e carichi", -- [6]
-			"군장", -- [7]
-			"Equipamento", -- [8]
-			"Начало операции", -- [9]
-			"战略物资", -- [10]
-			"裝備", -- [11]
-		}, -- [1]
-		{
-			"Down in the Depths", -- [1]
-			"Hinab in die Tiefen", -- [2]
-			"En las profundidades", -- [3]
-			"Bien en lo profundo", -- [4]
-			"Descente dans les profondeurs", -- [5]
-			"Giù nelle profondità", -- [6]
-			"깊이, 더 깊이", -- [7]
-			"Nas profundezas", -- [8]
-			"Вниз, к самым глубинам", -- [9]
-			"迈入深渊", -- [10]
-			"深入遺跡", -- [11]
-		}, -- [2]
-		{
-			"Spoils of War", -- [1]
-			"Kriegsbeute", -- [2]
-			"Botín de guerra", -- [3]
-			"Botín de guerra", -- [4]
-			"Butin de guerre", -- [5]
-			"Spoglie di Guerra", -- [6]
-			"전쟁의 전리품", -- [7]
-			"Espólios da Guerra", -- [8]
-			"Трофеи войны", -- [9]
-			"战争横财", -- [10]
-			"戰利品", -- [11]
-		}, -- [3]
-	},
-	["1099"] = {
-		{
-			"Thorim, Lord of Thunder", -- [1]
-			"Thorim, Herr des Donners", -- [2]
-			"Thorim, señor del trueno", -- [3]
-			"Thorim, Señor del Trueno", -- [4]
-			"Thorim, le seigneur du tonnerre", -- [5]
-			"Thorim, Re del Tuono", -- [6]
-			"천둥의 지배자 토림", -- [7]
-			"Thorim, Senhor do Trovão", -- [8]
-			"Торим, Повелитель Грома", -- [9]
-			"托里姆，雷电之王", -- [10]
-			"『雷霆之王』索林姆", -- [11]
-		}, -- [1]
-		{
-			"Battle is Joined", -- [1]
-			"Auf in die Schlacht", -- [2]
-			"La batalla comienza", -- [3]
-			"Unido a la batalla", -- [4]
-			"La bataille fait rage", -- [5]
-			"Unirsi alla battaglia", -- [6]
-			"전투 시작", -- [7]
-			"Entrando em batalha", -- [8]
-			"Битва началась", -- [9]
-			"战斗开始", -- [10]
-			"加入戰鬥", -- [11]
-		}, -- [2]
-		{
-			"Madness of the Usurper", -- [1]
-			"Wahnsinn des Thronräubers", -- [2]
-			"La locura de la usurpadora", -- [3]
-			"La locura del usurpador", -- [4]
-			"La démence de l’usurpatrice", -- [5]
-			"Follia dell'Usurpatrice", -- [6]
-			"강탈자의 광기", -- [7]
-			"Loucura do usurpador", -- [8]
-			"Безумие захватчицы", -- [9]
-			"篡神者的疯狂", -- [10]
-			"篡位者的瘋狂", -- [11]
-		}, -- [3]
-		{
-			"Heart of Thunder", -- [1]
-			"Herz des Sturms", -- [2]
-			"Corazón de trueno", -- [3]
-			"Corazón de trueno", -- [4]
-			"Cœur de tonnerre", -- [5]
-			"Cuore di Tuono", -- [6]
-			"천둥의 심장", -- [7]
-			"Coração do trovão", -- [8]
-			"Сердце грозы", -- [9]
-			"雷霆之心", -- [10]
-			"雷霆之心", -- [11]
-		}, -- [4]
-		{
-			"The Power of the Titans", -- [1]
-			"Die Macht der Titanen", -- [2]
-			"El poder de los titanes", -- [3]
-			"El poder de los titanes", -- [4]
-			"La puissance des titans", -- [5]
-			"La potenza dei Titani", -- [6]
-			"티탄의 힘", -- [7]
-			"O poder dos titãs", -- [8]
-			"Сила титанов", -- [9]
-			"泰坦的力量", -- [10]
-			"泰坦之力", -- [11]
-		}, -- [5]
-		{
-			"Odyssey's End", -- [1]
-			"Ende der Odyssee", -- [2]
-			"El final de la odisea", -- [3]
-			"Fin de la odisea", -- [4]
-			"La fin de l’odyssée", -- [5]
-			"Fine dell'odissea", -- [6]
-			"서사시의 끝", -- [7]
-			"Fim da odisseia", -- [8]
-			"Конец Одиссеи", -- [9]
-			"冒险结束", -- [10]
-			"旅程的尾聲", -- [11]
-		}, -- [6]
-	},
-	["626"] = {
-		{
-			"Auchenai Crypts", -- [1]
-			"Auchenaikrypta", -- [2]
-			"Criptas Auchenai", -- [3]
-			"Criptas Auchenai", -- [4]
-			"Cryptes Auchenaï", -- [5]
-			"Cripte degli Auchenai", -- [6]
-			"아키나이 납골당", -- [7]
-			"Catacumbas Auchenai", -- [8]
-			"Аукенайские гробницы", -- [9]
-			"奥金尼地穴", -- [10]
-			"奧奇奈地穴", -- [11]
-		}, -- [1]
-	},
-	["554"] = {
-		{
-			"Grim Batol", -- [1]
-			"Grim Batol", -- [2]
-			"Grim Batol", -- [3]
-			"Grim Batol", -- [4]
-			"Grim Batol", -- [5]
-			"Grim Batol", -- [6]
-			"그림 바톨", -- [7]
-			"Grim Batol", -- [8]
-			"Грим Батол", -- [9]
-			"格瑞姆巴托", -- [10]
-			"格瑞姆巴托", -- [11]
-		}, -- [1]
-	},
-	["426"] = {
-		{
-			"Iron Docks", -- [1]
-			"Eisendocks", -- [2]
-			"Puerto de Hierro", -- [3]
-			"Muelles de Hierro", -- [4]
-			"Quais de Fer", -- [5]
-			"Darsena di Ferro", -- [6]
-			"강철 선착장", -- [7]
-			"Docas de Ferro", -- [8]
-			"Железные доки", -- [9]
-			"钢铁码头", -- [10]
-			"鋼鐵碼頭", -- [11]
-		}, -- [1]
-	},
-	["526"] = {
-		{
-			"Gate of the Setting Sun", -- [1]
-			"Tor der Untergehenden Sonne", -- [2]
-			"Puerta del Sol Poniente", -- [3]
-			"Puerta del Sol Poniente", -- [4]
-			"Porte du Soleil couchant", -- [5]
-			"Porta del Sole Calante", -- [6]
-			"석양문", -- [7]
-			"Portal do Sol Poente", -- [8]
-			"Врата Заходящего Солнца", -- [9]
-			"残阳关", -- [10]
-			"落陽關", -- [11]
-		}, -- [1]
-	},
-	["909"] = {
-		{
-			"The Sealed Tomb", -- [1]
-			"Das versiegelte Grab", -- [2]
-			"La tumba sellada", -- [3]
-			"La tumba sellada", -- [4]
-			"Le tombeau scellé", -- [5]
-			"La tomba sigillata", -- [6]
-			"봉인된 무덤", -- [7]
-			"A tumba lacrada", -- [8]
-			"Запечатанная гробница", -- [9]
-			"封锁的墓穴", -- [10]
-			"封印之墓", -- [11]
-		}, -- [1]
-		{
-			"The Disturbance", -- [1]
-			"Die Störung", -- [2]
-			"La perturbación", -- [3]
-			"La perturbación", -- [4]
-			"Trouble-fête", -- [5]
-			"Disturbare i morti", -- [6]
-			"방해", -- [7]
-			"A perturbação", -- [8]
-			"Расхитители гробниц", -- [9]
-			"骚扰", -- [10]
-			"動亂", -- [11]
-		}, -- [2]
-		{
-			"Crypt Crawl", -- [1]
-			"Gruft abgrasen", -- [2]
-			"Adéntrate en la cripta", -- [3]
-			"Exploración de la cripta", -- [4]
-			"Exploration des cryptes", -- [5]
-			"Strisciare nella cripta", -- [6]
-			"납골당 수색", -- [7]
-			"Busca na cripta", -- [8]
-			"Обшаривание склепа", -- [9]
-			"探索墓穴", -- [10]
-			"潛入墓穴", -- [11]
-		}, -- [3]
-		{
-			"The Confrontation", -- [1]
-			"Die Konfrontation", -- [2]
-			"El enfrentamiento", -- [3]
-			"La confrontación", -- [4]
-			"L’affrontement", -- [5]
-			"Il confronto", -- [6]
-			"대치", -- [7]
-			"O confronto", -- [8]
-			"Противостояние", -- [9]
-			"决战", -- [10]
-			"對峙", -- [11]
-		}, -- [4]
-		{
-			"The Greatest Warrior", -- [1]
-			"", -- [2]
-			"", -- [3]
-			"El mejor guerrero", -- [4]
-			"", -- [5]
-			"Il guerriero più grande", -- [6]
-			"가장 위대한 전사", -- [7]
-			"O maior guerreiro", -- [8]
-			"", -- [9]
-			"最伟大的战士", -- [10]
-			"最偉大的戰士", -- [11]
-		}, -- [5]
-		{
-			"Armaments of the Black Wyrm", -- [1]
-			"Waffen des schwarzen Wyrms", -- [2]
-			"Armamentos del dragón Negro", -- [3]
-			"Los armamentos del Dragón Negro", -- [4]
-			"Arsenal des wyrms noirs", -- [5]
-			"Armamenti del Dragone Nero", -- [6]
-			"검은 고룡의 장비", -- [7]
-			"Armamentos da Serpe Negra", -- [8]
-			"Оружие Черного змея", -- [9]
-			"黑龙的守护", -- [10]
-			"黑龍武裝", -- [11]
-		}, -- [6]
-	},
-	["670"] = {
-		{
-			"Upper City", -- [1]
-			"Oberes Viertel", -- [2]
-			"Alto Arrabal", -- [3]
-			"Ciudad superior", -- [4]
-			"Ville haute", -- [5]
-			"Città Alta", -- [6]
-			"상부 도시", -- [7]
-			"Cidade Alta", -- [8]
-			"Верхний Город", -- [9]
-			"上层区", -- [10]
-			"上城區", -- [11]
-		}, -- [1]
-	},
-	["826"] = {
-		{
-			"Prepare for Battle", -- [1]
-			"Bereit für die Schlacht", -- [2]
-			"Prepararse para la batalla", -- [3]
-			"Prepárate para la batalla", -- [4]
-			"Une bataille à préparer", -- [5]
-			"Prepararsi alla battaglia", -- [6]
-			"전투 준비", -- [7]
-			"Preparação para a batalha", -- [8]
-			"Подготовка к битве", -- [9]
-			"准备作战", -- [10]
-			"準備戰鬥", -- [11]
-		}, -- [1]
-		{
-			"Fire at Will!", -- [1]
-			"Feuer frei!", -- [2]
-			"¡Fuego a discreción!", -- [3]
-			"¡Fuego a discreción!", -- [4]
-			"Feu à volonté !", -- [5]
-			"Fuoco a volontà!", -- [6]
-			"함포 발사!", -- [7]
-			"Atire quando quiser!", -- [8]
-			"Огонь по готовности!", -- [9]
-			"自由射击！", -- [10]
-			"全面射擊！", -- [11]
-		}, -- [2]
-		{
-			"Justice from Above", -- [1]
-			"Gerechtigkeit von oben", -- [2]
-			"Justicia desde el cielo", -- [3]
-			"Justicia desde el cielo", -- [4]
-			"La justice des cieux", -- [5]
-			"Una pioggia di giustizia", -- [6]
-			"하늘에서 정의가", -- [7]
-			"Justiça das alturas", -- [8]
-			"Правосудие свыше", -- [9]
-			"从天而降的正义", -- [10]
-			"正義從天而降", -- [11]
-		}, -- [3]
-		{
-			"Bats in the Bomb Bay", -- [1]
-			"Fledermäuse im Bombenschacht", -- [2]
-			"Murciélagos entre las armas", -- [3]
-			"Murciélagos en la Bahía de bombas", -- [4]
-			"Des chauves-souris dans la soute", -- [5]
-			"Pipistrelli nella polveriera", -- [6]
-			"조명탄 제거", -- [7]
-			"Morcegos no compartimento de bombas", -- [8]
-			"Нетопыри в бомбовом отсеке", -- [9]
-			"弹药舱中的蝙蝠", -- [10]
-			"炸彈艙的危機", -- [11]
-		}, -- [4]
-		{
-			"Last Stand", -- [1]
-			"Das letzte Gefecht", -- [2]
-			"Resistencia final", -- [3]
-			"Resistencia final", -- [4]
-			"Dans les derniers retranchements", -- [5]
-			"L'ultimo baluardo", -- [6]
-			"최후의 결전", -- [7]
-			"Resistência final", -- [8]
-			"Ни шагу назад", -- [9]
-			"破釜沉舟", -- [10]
-			"背水一戰", -- [11]
-		}, -- [5]
-	},
-	["945"] = {
-		{
-			"Push Back the Legion Assault", -- [1]
-			"Schlagt den Angriff der Legion zurück", -- [2]
-			"Rechazar el asalto de la Legión", -- [3]
-			"Haz retroceder el ataque de la Legión", -- [4]
-			"Repousser l’assaut de la Légion", -- [5]
-			"Respingere l'assalto della Legione", -- [6]
-			"군단 습격 저지", -- [7]
-			"Rechace o ataque da Legião", -- [8]
-			"Остановите натиск Легиона", -- [9]
-			"击退军团的攻势", -- [10]
-			"擊退進逼的燃燒軍團", -- [11]
-		}, -- [1]
-	},
-	["509"] = {
-		{
-			"Launch the Attack", -- [1]
-			"Zum Angriff blasen", -- [2]
-			"Inicia el ataque", -- [3]
-			"Lanza el ataque", -- [4]
-			"Lancer l’attaque", -- [5]
-			"Avvia l'attacco", -- [6]
-			"공격 개시", -- [7]
-			"Inicie o ataque", -- [8]
-			"В атаку", -- [9]
-			"开始攻击", -- [10]
-			"開始攻擊", -- [11]
-		}, -- [1]
-		{
-			"Regroup at the Bend", -- [1]
-			"An der Kurve treffen", -- [2]
-			"Reagruparse en la curva", -- [3]
-			"Reagruparse en la curva", -- [4]
-			"Regroupement au tournant", -- [5]
-			"Radunata presso la svolta", -- [6]
-			"재집결", -- [7]
-			"Reagrupar-se na Curva", -- [8]
-			"Перегруппировка за поворотом", -- [9]
-			"弯道集合", -- [10]
-			"在彎路重整", -- [11]
-		}, -- [2]
-		{
-			"Defeat the Packmaster", -- [1]
-			"Besiegt den Rottenkommandanten", -- [2]
-			"Derrota al maestro de manada", -- [3]
-			"Derrota al Maestro de la manada", -- [4]
-			"Vaincre le maître de la meute", -- [5]
-			"Sconfiggi il Mastrobranco", -- [6]
-			"무리지도자 처치", -- [7]
-			"Derrote o Líder da Alcateia", -- [8]
-			"Победите властителя стаи", -- [9]
-			"击败兽王", -- [10]
-			"擊敗狼王", -- [11]
-		}, -- [3]
-		{
-			"Survive the Gauntlet", -- [1]
-			"Spießrutenlauf", -- [2]
-			"Sobrevive al ataque", -- [3]
-			"Sobrevive al ataque", -- [4]
-			"Survivre au Défi", -- [5]
-			"Sopravvivi alla sfida", -- [6]
-			"시련", -- [7]
-			"Sobreviva à Forquilha", -- [8]
-			"Выживите на Улице Испытаний", -- [9]
-			"挡住敌人的夹击", -- [10]
-			"一線生機", -- [11]
-		}, -- [4]
-		{
-			"Slay Durn the Hungerer", -- [1]
-			"Tötet Durn den Nimmersatten", -- [2]
-			"Mata a Durn el Hambriento", -- [3]
-			"Mata a Durn el Hambriento.", -- [4]
-			"Vaincre Durn l’Affameur", -- [5]
-			"Uccidi Durn il Famelico", -- [6]
-			"굶주린 두른 처치", -- [7]
-			"Mate Durn, o Famélico", -- [8]
-			"Убейте Дарна Ненасытного", -- [9]
-			"击败饥饿者杜恩", -- [10]
-			"殺死『飢餓者』唐恩", -- [11]
-		}, -- [5]
-		{
-			"The Final Gates", -- [1]
-			"Die letzten Tore", -- [2]
-			"Las puertas finales", -- [3]
-			"La puerta final", -- [4]
-			"Les portes du trône", -- [5]
-			"I cancelli finali", -- [6]
-			"마지막 관문", -- [7]
-			"Os Portões Finais", -- [8]
-			"Последние врата", -- [9]
-			"最后关头", -- [10]
-			"最後的大門", -- [11]
-		}, -- [6]
-		{
-			"Confront Warlord Garrosh Hellscream", -- [1]
-			"Konfrontiert Kriegsherr Garrosh Höllschrei", -- [2]
-			"Enfréntate al señor de la guerra Garrosh Grito Infernal", -- [3]
-			"Confronta al Señor de la Guerra Garrosh Grito Infernal.", -- [4]
-			"Affronter le seigneur de guerre Garrosh Hurlenfer", -- [5]
-			"Affronta il Signore della Guerra Garrosh Malogrido", -- [6]
-			"전쟁군주 가로쉬 헬스크림과 대면", -- [7]
-			"Confronte o Senhor da Guerra Garrosh Grito Infernal", -- [8]
-			"Сразитесь с вождем Гаррошем Адским Криком", -- [9]
-			"对抗督军加尔鲁什·地狱咆哮", -- [10]
-			"迎戰卡爾洛斯‧地獄吼酋長", -- [11]
-		}, -- [7]
-	},
-	["609"] = {
-		{
-			"Shadow Labyrinth", -- [1]
-			"Schattenlabyrinth", -- [2]
-			"Laberinto de las Sombras", -- [3]
-			"Laberinto de las Sombras", -- [4]
-			"Labyrinthe des Ombres", -- [5]
-			"Labirinto delle Ombre", -- [6]
-			"어둠의 미궁", -- [7]
-			"Labirinto Soturno", -- [8]
-			"Темный лабиринт", -- [9]
-			"暗影迷宫", -- [10]
-			"暗影迷宮", -- [11]
-		}, -- [1]
-	},
-	["645"] = {
-		{
-			"Scholomance", -- [1]
-			"Scholomance", -- [2]
-			"Scholomance", -- [3]
-			"Scholomance", -- [4]
-			"Scholomance", -- [5]
-			"Scholomance", -- [6]
-			"스칼로맨스", -- [7]
-			"Scolomântia", -- [8]
-			"Некроситет", -- [9]
-			"通灵学院", -- [10]
-			"通靈學院", -- [11]
-		}, -- [1]
-	},
-	["545"] = {
-		{
-			"Blackrock Caverns", -- [1]
-			"Die Schwarzfelshöhlen", -- [2]
-			"Cavernas Roca Negra", -- [3]
-			"Cavernas Roca Negra", -- [4]
-			"Cavernes de Rochenoire", -- [5]
-			"Caverne di Roccianera", -- [6]
-			"검은바위 동굴", -- [7]
-			"Caverna Rocha Negra", -- [8]
-			"Пещеры Черной горы", -- [9]
-			"黑石岩窟", -- [10]
-			"黑石洞穴", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-	},
-	["44"] = {
-		{
-			"Temple of the Jade Serpent", -- [1]
-			"Tempel der Jadeschlange", -- [2]
-			"Templo del Dragón de Jade", -- [3]
-			"Templo del Dragón de Jade", -- [4]
-			"Temple du Serpent de jade", -- [5]
-			"Tempio della Serpe di Giada", -- [6]
-			"옥룡사", -- [7]
-			"Templo da Serpente de Jade", -- [8]
-			"Храм Нефритовой Змеи", -- [9]
-			"青龙寺", -- [10]
-			"玉蛟寺", -- [11]
-		}, -- [1]
-	},
-	["209"] = {
-		{
-			"Find Lost Explosives", -- [1]
-			"Findet den verlorenen Sprengstoff", -- [2]
-			"Encuentra los explosivos perdidos", -- [3]
-			"Encuentra los explosivos perdidos", -- [4]
-			"Trouver les explosifs perdus", -- [5]
-			"Trova gli esplosivi perduti", -- [6]
-			"잃어버린 폭탄을 찾아라", -- [7]
-			"Encontrar os explosivos perdidos", -- [8]
-			"Найти потерянную взрывчатку", -- [9]
-			"找到遗失的炸药", -- [10]
-			"尋找遺失的炸藥", -- [11]
-		}, -- [1]
-		{
-			"Deliver Explosives", -- [1]
-			"Liefert den Sprengstoff", -- [2]
-			"Entrega los explosivos", -- [3]
-			"Entrega los explosivos", -- [4]
-			"Livrer les explosifs", -- [5]
-			"Consegna gli esplosivi", -- [6]
-			"폭탄 전달", -- [7]
-			"Entregar os Explosivos", -- [8]
-			"Доставить взрывчатку", -- [9]
-			"运送炸药", -- [10]
-			"遞送炸藥", -- [11]
-		}, -- [2]
-		{
-			"Detonate Explosives", -- [1]
-			"Detoniert den Sprengstoff", -- [2]
-			"Detona los explosivos", -- [3]
-			"Detona los explosivos", -- [4]
-			"Faire détoner les explosifs", -- [5]
-			"Fai detonare gli esplosivi", -- [6]
-			"폭탄 폭파", -- [7]
-			"Detonar Explosivos", -- [8]
-			"Взрыв", -- [9]
-			"引爆炸药", -- [10]
-			"引爆炸藥", -- [11]
-		}, -- [3]
-		{
-			"Kill War-God Al'chukla", -- [1]
-			"Tötet Kriegsgott Al'chukla", -- [2]
-			"Mata al dios de la guerra Al'chukla", -- [3]
-			"Mata al dios de la guerra Al'chukla", -- [4]
-			"Tuer le dieu-guerrier Al’chukla", -- [5]
-			"Uccidi il Dio della Guerra Al'chukla", -- [6]
-			"전쟁신 알축라 처치", -- [7]
-			"Matar o Deus da Guerra Al'chukla", -- [8]
-			"Убейте бога войны Ал'чуклу", -- [9]
-			"击败战神阿尔图克拉", -- [10]
-			"殺死戰神阿裘卡拉", -- [11]
-		}, -- [4]
-	},
-	["620"] = {
-		{
-			"The Arcatraz", -- [1]
-			"Die Arkatraz", -- [2]
-			"El Arcatraz", -- [3]
-			"El Arcatraz", -- [4]
-			"L’Arcatraz", -- [5]
-			"Arcatraz", -- [6]
-			"알카트라즈", -- [7]
-			"Arcatraz", -- [8]
-			"Аркатрац", -- [9]
-			"禁魔监狱", -- [10]
-			"亞克崔茲", -- [11]
-		}, -- [1]
-	},
-	["269"] = {
-		{
-			"Tutorial", -- [1]
-			"Einweisung", -- [2]
-			"Tutorial", -- [3]
-			"Tutorial", -- [4]
-			"Apprentissage", -- [5]
-			"Tutorial", -- [6]
-			"연습", -- [7]
-			"Tutorial", -- [8]
-			"Обучение", -- [9]
-			"教学", -- [10]
-			"教學導覽", -- [11]
-		}, -- [1]
-		{
-			"Noodle Time", -- [1]
-			"Nudelzeit", -- [2]
-			"La hora de los fideos", -- [3]
-			"La hora de los fideos", -- [4]
-			"L’heure des nouilles", -- [5]
-			"Spaghetti a Volontà", -- [6]
-			"국수 시간", -- [7]
-			"Hora do Macarrão", -- [8]
-			"Час лапши", -- [9]
-			"汤面时间", -- [10]
-			"湯麵時刻", -- [11]
-		}, -- [2]
-	},
-	["901"] = {
-		{
-			"The Call of the North", -- [1]
-			"Der Ruf des Nordens", -- [2]
-			"La llamada del norte", -- [3]
-			"El llamado del Norte", -- [4]
-			"L’appel du Nord", -- [5]
-			"Il richiamo del nord", -- [6]
-			"노스렌드의 부름", -- [7]
-			"O chamado do Norte", -- [8]
-			"Зов Севера", -- [9]
-			"北地的召唤", -- [10]
-			"北地的呼喚", -- [11]
-		}, -- [1]
-		{
-			"The Gates Are Open", -- [1]
-			"Die Tore sind offen", -- [2]
-			"Las puertas están abiertas", -- [3]
-			"Las puertas están abiertas", -- [4]
-			"Opération portes ouvertes", -- [5]
-			"Le porte sono aperte", -- [6]
-			"활짝 열린 관문", -- [7]
-			"Os portões estão abertos", -- [8]
-			"Врата открыты", -- [9]
-			"敞开的大门", -- [10]
-			"門已開啟", -- [11]
-		}, -- [2]
-		{
-			"Seek the Fragments", -- [1]
-			"Sucht die Fragmente", -- [2]
-			"Buscar los fragmentos", -- [3]
-			"Busca los fragmentos", -- [4]
-			"Chercher les fragments", -- [5]
-			"Cercare i frammenti", -- [6]
-			"조각 모으기", -- [7]
-			"Procure os fragmentos", -- [8]
-			"В поисках обломков", -- [9]
-			"寻找碎片", -- [10]
-			"尋找碎片", -- [11]
-		}, -- [3]
-		{
-			"Travel to the Frozen Throne", -- [1]
-			"Reist zum Frostthron", -- [2]
-			"Viajar al Trono Helado", -- [3]
-			"Viaja al Trono Congelado", -- [4]
-			"Voyage vers le Trône de glace", -- [5]
-			"Raggiungere il Trono di Ghiaccio", -- [6]
-			"얼어붙은 왕좌로", -- [7]
-			"Vá até o Trono de Gelo", -- [8]
-			"Подъем к Ледяному Трону", -- [9]
-			"前往冰封王座", -- [10]
-			"前往冰封王座", -- [11]
-		}, -- [4]
-		{
-			"Power Overwhelming", -- [1]
-			"Die Macht ist überwältigend", -- [2]
-			"Poder sobrecogedor", -- [3]
-			"Sobredosis de poder", -- [4]
-			"Puissance accablante", -- [5]
-			"Potere travolgente", -- [6]
-			"압도적인 힘", -- [7]
-			"Poder esmagador", -- [8]
-			"Переполняющая мощь", -- [9]
-			"无上之力", -- [10]
-			"壓倒性的力量", -- [11]
-		}, -- [5]
-		{
-			"The Purge", -- [1]
-			"Die Reinigung", -- [2]
-			"La purga", -- [3]
-			"La Purga", -- [4]
-			"La purge", -- [5]
-			"La purificazione", -- [6]
-			"정화", -- [7]
-			"O expurgo", -- [8]
-			"Очищение", -- [9]
-			"净化", -- [10]
-			"淨化", -- [11]
-		}, -- [6]
-		{
-			"The Hungering Cold", -- [1]
-			"Die zehrende Kälte", -- [2]
-			"El frío voraz", -- [3]
-			"El frío voraz", -- [4]
-			"Le Froid dévorant", -- [5]
-			"Freddo penetrante", -- [6]
-			"갈망의 한기", -- [7]
-			"O frio voraz", -- [8]
-			"Алчущий холод", -- [9]
-			"饥饿之寒", -- [10]
-			"飢寒之力", -- [11]
-		}, -- [7]
-		{
-			"Death's March", -- [1]
-			"Tödlicher Marsch", -- [2]
-			"La marcha de la muerte", -- [3]
-			"La Marcha de la muerte", -- [4]
-			"Marche funèbre", -- [5]
-			"La marcia della morte", -- [6]
-			"죽음의 행진", -- [7]
-			"Marcha da morte", -- [8]
-			"Марш смерти", -- [9]
-			"死亡远征", -- [10]
-			"亡靈進軍", -- [11]
-		}, -- [8]
-		{
-			"You Have Your Orders", -- [1]
-			"Ihr habt Eure Befehle", -- [2]
-			"Tienes tus órdenes", -- [3]
-			"Tienes tus órdenes", -- [4]
-			"Vous connaissez les ordres", -- [5]
-			"Hai i tuoi ordini", -- [6]
-			"명령을 수행하라", -- [7]
-			"Você já tem as ordens", -- [8]
-			"Приказ есть приказ", -- [9]
-			"听命行事", -- [10]
-			"你聽到命令了", -- [11]
-		}, -- [9]
-	},
-	["1092"] = {
-		{
-			"The Empty Camp", -- [1]
-			"Das leere Lager", -- [2]
-			"El campamento vacío", -- [3]
-			"El campamento vacío", -- [4]
-			"Le campement désert", -- [5]
-			"Accampamento abbandonato", -- [6]
-			"버려진 야영지", -- [7]
-			"O acampamento vazio", -- [8]
-			"Опустевший лагерь", -- [9]
-			"空营", -- [10]
-			"空蕩蕩的營地", -- [11]
-		}, -- [1]
-		{
-			"Clearing the Way", -- [1]
-			"Den Weg frei machen", -- [2]
-			"Despejando el camino", -- [3]
-			"Despejando el camino", -- [4]
-			"Faire place nette", -- [5]
-			"Ripulire la strada", -- [6]
-			"길 뚫기", -- [7]
-			"Abrindo caminho", -- [8]
-			"Расчистка пути", -- [9]
-			"清除路障", -- [10]
-			"清除障礙", -- [11]
-		}, -- [2]
-		{
-			"Keeper's Rest", -- [1]
-			"Die Rast des Hüters", -- [2]
-			"Reposo del Vigilante", -- [3]
-			"Reposo del Vigilante", -- [4]
-			"Le repos du Vigilant", -- [5]
-			"Riposo del Guardiano", -- [6]
-			"수호자의 안식처", -- [7]
-			"Pouso do Guardião", -- [8]
-			"Последнее пристанище Хранителя", -- [9]
-			"守护者之眠", -- [10]
-			"守護者之憩", -- [11]
-		}, -- [3]
-		{
-			"The Broken Ritual", -- [1]
-			"Das Ritual der Zerschlagenen", -- [2]
-			"El ritual destrozado", -- [3]
-			"El ritual roto", -- [4]
-			"Le rituel interrompu", -- [5]
-			"Rituale infranto", -- [6]
-			"중단된 의식", -- [7]
-			"O ritual partido", -- [8]
-			"Прерванный ритуал", -- [9]
-			"失败的仪式", -- [10]
-			"破碎的儀式", -- [11]
-		}, -- [4]
-		{
-			"Into the Dark", -- [1]
-			"In das Dunkel", -- [2]
-			"Hacia la oscuridad", -- [3]
-			"En la oscuridad", -- [4]
-			"Dans les ténèbres", -- [5]
-			"Nelle tenebre", -- [6]
-			"어둠 속으로", -- [7]
-			"Treva adentro", -- [8]
-			"Спуск во тьму", -- [9]
-			"在黑暗中", -- [10]
-			"進入黑暗", -- [11]
-		}, -- [5]
-		{
-			"The Maw of the Beast", -- [1]
-			"Der Schlund der Bestie", -- [2]
-			"Las fauces de la bestia", -- [3]
-			"Las fauces de la bestia", -- [4]
-			"La gueule de la bête", -- [5]
-			"Il morso della bestia", -- [6]
-			"괴수의 아귀", -- [7]
-			"A gorja da fera", -- [8]
-			"Пасть чудовища", -- [9]
-			"野兽之喉", -- [10]
-			"勇闖虎穴", -- [11]
-		}, -- [6]
-		{
-			"Escaping the Prison", -- [1]
-			"Gefängnisflucht", -- [2]
-			"Escapar de la prisión", -- [3]
-			"Huida de la prisión", -- [4]
-			"Sortir de la prison", -- [5]
-			"Fuga dalla prigione", -- [6]
-			"감옥 탈출", -- [7]
-			"Fuga da prisão", -- [8]
-			"Побег из темницы", -- [9]
-			"脱狱", -- [10]
-			"逃出監牢", -- [11]
-		}, -- [7]
-		{
-			"Aid to the Fallen", -- [1]
-			"Hilfe für die Gefallenen", -- [2]
-			"Ayuda para los caídos", -- [3]
-			"Ayuda para los caídos", -- [4]
-			"Aider les blessés", -- [5]
-			"Aiuto ai caduti", -- [6]
-			"성기사 구제", -- [7]
-			"Ajuda aos caídos", -- [8]
-			"Помощь павшим", -- [9]
-			"援助掉队者", -- [10]
-			"救人要緊", -- [11]
-		}, -- [8]
-		{
-			"Something is Coming", -- [1]
-			"Etwas nähert sich", -- [2]
-			"Algo se acerca", -- [3]
-			"Algo se acerca", -- [4]
-			"Quelque chose approche", -- [5]
-			"Qualcosa è in arrivo", -- [6]
-			"사악한 존재의 엄습", -- [7]
-			"Tem alguma coisa chegando", -- [8]
-			"Что-то грядет...", -- [9]
-			"它来了", -- [10]
-			"有什麼東西過來了", -- [11]
-		}, -- [9]
-		{
-			"Ritual Defense", -- [1]
-			"Ritualverteidigung", -- [2]
-			"La defensa del ritual", -- [3]
-			"La defensa del ritual", -- [4]
-			"Défense de rituel", -- [5]
-			"Difesa del rituale", -- [6]
-			"의식 방어", -- [7]
-			"Defesa do ritual", -- [8]
-			"Безопасность ритуала", -- [9]
-			"仪式保卫", -- [10]
-			"儀式攻防", -- [11]
-		}, -- [10]
-		{
-			"The Silver Hand", -- [1]
-			"Die Silberne Hand", -- [2]
-			"La Mano de Plata", -- [3]
-			"La Mano de Plata", -- [4]
-			"La Main-d’Argent", -- [5]
-			"Mano d'Argento", -- [6]
-			"은빛 손", -- [7]
-			"O Punho de Prata", -- [8]
-			"Серебряная Длань", -- [9]
-			"白银之手", -- [10]
-			"白銀之手", -- [11]
-		}, -- [11]
-	},
-	["15"] = {
-		{
-			"Escort Brewmaster Bo", -- [1]
-			"Eskortiert Braumeister Bo", -- [2]
-			"Escolta al maestro cervecero Bo", -- [3]
-			"Escolta al maestro cervecero Bo", -- [4]
-			"Escorter le maître brasseur Bo", -- [5]
-			"Scorta il Mastro Birraio Bo", -- [6]
-			"양조사 보 호위", -- [7]
-			"Escolte o Mestre Cervejeiro Bô", -- [8]
-			"Сопровождение хмелевара Бо", -- [9]
-			"护送珀酒仙", -- [10]
-			"護送釀酒大師阿波", -- [11]
-		}, -- [1]
-		{
-			"Fill the Brewing Cauldron", -- [1]
-			"Füllt den Braukessel", -- [2]
-			"Llena el caldero de fermentación", -- [3]
-			"Llena el caldero de fermentación", -- [4]
-			"Remplir le chaudron de brassage", -- [5]
-			"Riempi il Tino di Fermentazione", -- [6]
-			"양조 가마솥 채우기", -- [7]
-			"Encha o Caldeirão de Brassagem", -- [8]
-			"Наполнение хмелеваренного котла", -- [9]
-			"装满酿酒大锅", -- [10]
-			"倒滿釀酒鍋", -- [11]
-		}, -- [2]
-		{
-			"Defeat Captain Ook", -- [1]
-			"Bezwingt Kapitän Uuk", -- [2]
-			"Derrota al capitán Ook.", -- [3]
-			"Derrota al capitán Ook.", -- [4]
-			"Vaincre le capitaine Ouk", -- [5]
-			"Sconfiggi Capitan Gancino", -- [6]
-			"선장 우끼 처치", -- [7]
-			"Derrote o Capitão Fedô", -- [8]
-			"Победа над капитаном Уком", -- [9]
-			"击败乌克头领", -- [10]
-			"殺死烏克船長", -- [11]
-		}, -- [3]
-	},
-	["1045"] = {
-		{
-			"Fill the bar", -- [1]
-			"Füllt die Leiste", -- [2]
-			"Llenar la barra", -- [3]
-			"Rellena la barra", -- [4]
-			"Remplir la barre", -- [5]
-			"Riempire la barra", -- [6]
-			"주점 채우기", -- [7]
-			"Preencha a barra", -- [8]
-			"Заполните панель", -- [9]
-			"填满进度条", -- [10]
-			"補滿能量條", -- [11]
-		}, -- [1]
-		{
-			"A Final Step", -- [1]
-			"Ein letzter Schritt", -- [2]
-			"Un último paso", -- [3]
-			"El último paso", -- [4]
-			"Dernière étape", -- [5]
-			"L'ultimo passo", -- [6]
-			"마지막 단계", -- [7]
-			"Um último passo", -- [8]
-			"Последний шаг", -- [9]
-			"最后一步", -- [10]
-			"最後一步", -- [11]
-		}, -- [2]
-	},
-	["677"] = {
-		{
-			"Grand Champions", -- [1]
-			"Großchampions", -- [2]
-			"Grandes Campeones", -- [3]
-			"Grandes Campeones", -- [4]
-			"Grands champions", -- [5]
-			"Gran Campioni", -- [6]
-			"최고 용사", -- [7]
-			"Grandes campeões", -- [8]
-			"Абсолютные чемпионы", -- [9]
-			"总冠军", -- [10]
-			"大勇士", -- [11]
-		}, -- [1]
-		{
-			"Argent Trial", -- [1]
-			"Argentumprüfung", -- [2]
-			"Prueba Argenta", -- [3]
-			"Prueba argenta", -- [4]
-			"Épreuve d’argent", -- [5]
-			"Prova d'Argento", -- [6]
-			"은빛십자군의 시험", -- [7]
-			"Torneio Argênteo", -- [8]
-			"Испытание Серебряного авангарда", -- [9]
-			"银色试炼", -- [10]
-			"銀白試煉", -- [11]
-		}, -- [2]
-		{
-			"The Black Knight", -- [1]
-			"Der schwarze Ritter", -- [2]
-			"El Caballero Negro", -- [3]
-			"El Caballero Negro", -- [4]
-			"Le Chevalier noir", -- [5]
-			"Cavaliere Nero", -- [6]
-			"흑기사", -- [7]
-			"O Cavaleiro Negro", -- [8]
-			"Черный рыцарь", -- [9]
-			"黑骑士", -- [10]
-			"黑騎士", -- [11]
-		}, -- [3]
-	},
-	["212"] = {
-		{
-			"Rendezvous with Ranger General Vereesa Windrunner", -- [1]
-			"Trefft Euch mit Waldläufergeneralin Vereesa Windläufer", -- [2]
-			"Reúnete con la General Forestal Vereesa Brisaveloz", -- [3]
-			"Reúnete con la General Forestal Vereesa Brisaveloz", -- [4]
-			"Rendez-vous avec le général des forestiers Vereesa Coursevent", -- [5]
-			"Incontra Vereesa Ventolesto", -- [6]
-			"순찰대 사령관 베리사 윈드러너와 접선", -- [7]
-			"Encontrar-se com a General Patrulheira Vereesa Correventos", -- [8]
-			"Встреча с предводительницей следопытов Верисой Ветрокрылой", -- [9]
-			"与游侠将军温蕾萨·风行者会合", -- [10]
-			"和遊俠將軍凡蕾莎·風行者會合", -- [11]
-		}, -- [1]
-		{
-			"Survive the Ambush", -- [1]
-			"Überlebt den Überfall", -- [2]
-			"Sobrevive a la emboscada", -- [3]
-			"Sobrevive a la emboscada", -- [4]
-			"Survivre à l’embuscade", -- [5]
-			"Sopravvivi all'imboscata", -- [6]
-			"기습에서 생존", -- [7]
-			"Sobreviva à emboscada", -- [8]
-			"Пережить нападение", -- [9]
-			"在伏击中幸存下来", -- [10]
-			"撐過敵人的埋伏", -- [11]
-		}, -- [2]
-		{
-			"Destroy the Barricades", -- [1]
-			"Zerstört die Barrikaden", -- [2]
-			"Destruye las barricadas", -- [3]
-			"Destruye las barricadas", -- [4]
-			"Détruire les barricades", -- [5]
-			"Distruggi le barricate", -- [6]
-			"방벽 파괴", -- [7]
-			"Destruir as barricadas", -- [8]
-			"Разрушить баррикады", -- [9]
-			"摧毁屏障", -- [10]
-			"摧毀路障", -- [11]
-		}, -- [3]
-		{
-			"Kill Anki and Beastcaller Pakutesh", -- [1]
-			"Tötet Anki und Bestienrufer Pakutesh", -- [2]
-			"Mata a Anki y al clamabestias Pakutesh", -- [3]
-			"Mata a Anki y al clamabestias Pakutesh", -- [4]
-			"Tuer Anki et le mande-bête Pakutesh", -- [5]
-			"Uccidi Anki e l'Invocatore delle Bestie Pakutesh", -- [6]
-			"안키와 야수소환사 파쿠테쉬 처치", -- [7]
-			"Matar Anki e o Chama-feras Pakutesh", -- [8]
-			"Убить Анки и заклинателя зверей Пакутеша", -- [9]
-			"击败安基和驭兽师帕库特什", -- [10]
-			"殺死安奇及喚獸者帕古它許", -- [11]
-		}, -- [4]
-		{
-			"Kill Arcanital Mara'kah and his Spirit Mask", -- [1]
-			"Tötet Arkanital Mara'kah und seine Geistermaske", -- [2]
-			"Mata al arcanital Mara'kah y a su máscara espíritu", -- [3]
-			"Mata al arcanital Mara'kah y a su máscara espíritu", -- [4]
-			"Tuer le rituarcaniste Mara’kah et son masque d’esprit", -- [5]
-			"Elimina Mara'kah e la Maschera Spiritica", -- [6]
-			"비전주술사 마라카와 영혼 가면 처치", -- [7]
-			"Matar o Arcanital Mara'kah e sua Máscara Espiritual", -- [8]
-			"Убить чародея-ритуалиста Мара'каха и его маску духов", -- [9]
-			"击败魔术士玛拉卡和他的灵魂面具", -- [10]
-			"殺死秘宗瑪拉卡與他的靈魂面具", -- [11]
-		}, -- [5]
-	},
-	["1189"] = {
-		{
-			"The Broken Shore", -- [1]
-			"Die Verheerte Küste", -- [2]
-			"Costa Abrupta", -- [3]
-			"La Costa Quebrada", -- [4]
-			"Le rivage Brisé", -- [5]
-			"Riva Dispersa", -- [6]
-			"부서진 해변", -- [7]
-			"A Costa Partida", -- [8]
-			"Расколотый берег", -- [9]
-			"破碎海滩", -- [10]
-			"破碎海岸", -- [11]
-		}, -- [1]
-		{
-			"Storm The Beach", -- [1]
-			"Erstürmt den Strand", -- [2]
-			"Asalta la playa", -- [3]
-			"Asalta la playa", -- [4]
-			"Le grand débarquement", -- [5]
-			"Assalto alla spiaggia", -- [6]
-			"해변 청소", -- [7]
-			"Tomar a praia", -- [8]
-			"Штурм побережья", -- [9]
-			"抢滩登陆", -- [10]
-			"興師海灘", -- [11]
-		}, -- [2]
-		{
-			"Defeat the Commander", -- [1]
-			"Bezwingt den Kommandanten", -- [2]
-			"Derrota al comandante", -- [3]
-			"Derrota al Comandante", -- [4]
-			"Terrasser le commandant", -- [5]
-			"Sconfiggere il comandante", -- [6]
-			"사령관 처치", -- [7]
-			"Derrotar o Comandante", -- [8]
-			"Убить командира", -- [9]
-			"击败指挥官", -- [10]
-			"擊敗指揮官", -- [11]
-		}, -- [3]
-		{
-			"Find The Others", -- [1]
-			"Die anderen finden", -- [2]
-			"Encuentra a los otros", -- [3]
-			"Encuentra a los demás", -- [4]
-			"Trouver les autres", -- [5]
-			"Trova gli altri", -- [6]
-			"다른 이 찾기", -- [7]
-			"Encontrar os outros", -- [8]
-			"Найти остальных", -- [9]
-			"找到其他人", -- [10]
-			"找到其他人", -- [11]
-		}, -- [4]
-		{
-			"Destroy the Portal", -- [1]
-			"Vernichtet das Portal", -- [2]
-			"Destruye el portal", -- [3]
-			"Destruye el portal", -- [4]
-			"Destruction du portail", -- [5]
-			"Distruggere il portale", -- [6]
-			"차원문 파괴", -- [7]
-			"Destruir o portal", -- [8]
-			"Разрушение портала", -- [9]
-			"摧毁传送门", -- [10]
-			"摧毀傳送門", -- [11]
-		}, -- [5]
-		{
-			"Raze the Black City", -- [1]
-			"Legt die Schwarze Stadt in Schutt und Asche", -- [2]
-			"Arrasar la Ciudad Negra", -- [3]
-			"Arrasa la Ciudad Negra", -- [4]
-			"Le sac de la ville Noire", -- [5]
-			"Assalto alla Città Oscura", -- [6]
-			"검은 도시 공격", -- [7]
-			"Arrasar a Cidade Negra", -- [8]
-			"Предайте огню Черный город", -- [9]
-			"扫荡黑色之城", -- [10]
-			"夷平黑城", -- [11]
-		}, -- [6]
-		{
-			"The Highlord", -- [1]
-			"Der Hochlord", -- [2]
-			"El Alto Señor", -- [3]
-			"El Alto Señor", -- [4]
-			"Le généralissime", -- [5]
-			"Il Gran Signore", -- [6]
-			"대영주", -- [7]
-			"O grão-lorde", -- [8]
-			"Верховный лорд", -- [9]
-			"大领主", -- [10]
-			"大領主", -- [11]
-		}, -- [7]
-		{
-			"Krosus", -- [1]
-			"Krosus", -- [2]
-			"Krosus", -- [3]
-			"Krosus", -- [4]
-			"Krosus", -- [5]
-			"Krosus", -- [6]
-			"크로서스", -- [7]
-			"Krosus", -- [8]
-			"Крос", -- [9]
-			"克洛苏斯", -- [10]
-			"克羅索斯", -- [11]
-		}, -- [8]
-		{
-			"Hold The Ridge", -- [1]
-			"Haltet den Grat", -- [2]
-			"Defiende la cresta", -- [3]
-			"Mantener la cresta", -- [4]
-			"Tenir la crête", -- [5]
-			"Difendi la cresta", -- [6]
-			"마루 방어", -- [7]
-			"Defenda o cume", -- [8]
-			"Удержать высоту", -- [9]
-			"死守山脊", -- [10]
-			"守住山脊", -- [11]
-		}, -- [9]
-	},
-	["977"] = {
-		{
-			"Darkheart Thicket", -- [1]
-			"Das Finsterherzdickicht", -- [2]
-			"Arboleda Corazón Oscuro", -- [3]
-			"Matorral Corazón Oscuro", -- [4]
-			"Fourré Sombrecœur", -- [5]
-			"Boschetto Cuortetro", -- [6]
-			"어둠심장 숲", -- [7]
-			"Bosque Corenegro", -- [8]
-			"Чаща Темного Сердца", -- [9]
-			"黑心林地", -- [10]
-			"暗心灌木林", -- [11]
-		}, -- [1]
-	},
-	["1038"] = {
-		{
-			"A Ring Unbroken", -- [1]
-			"Ein ungebrochener Ring", -- [2]
-			"Un anillo intacto", -- [3]
-			"Un anillo intacto", -- [4]
-			"Un cercle toujours vaillant", -- [5]
-			"Il circolo intatto", -- [6]
-			"부서지지 않은 고리", -- [7]
-			"Um círculo intacto", -- [8]
-			"Несломленные Служители", -- [9]
-			"不屈之环", -- [10]
-			"重建陶土議會", -- [11]
-		}, -- [1]
-		{
-			"We Glorious Few", -- [1]
-			"Eine glorreiche Handvoll", -- [2]
-			"Unos pocos gloriosos", -- [3]
-			"Un puñado de gloria", -- [4]
-			"Les derniers braves", -- [5]
-			"Pochi ma buoni", -- [6]
-			"얼마 남지 않은 영광의 주인공들", -- [7]
-			"Nós, os gloriosos", -- [8]
-			"Горстка героев", -- [9]
-			"光荣的坚持", -- [10]
-			"光榮的倖存者", -- [11]
-		}, -- [2]
-		{
-			"Melee at the Maelstrom", -- [1]
-			"Kampf am Mahlstrom", -- [2]
-			"Cuerpo a cuerpo en La Vorágine", -- [3]
-			"Pelea en La Vorágine", -- [4]
-			"Du rififi au Maelström", -- [5]
-			"Scontro nel Maelstrom", -- [6]
-			"혼돈의 소용돌이에서의 난전", -- [7]
-			"Refrega na voragem", -- [8]
-			"Разборки у Водоворота", -- [9]
-			"大漩涡的战斗", -- [10]
-			"混戰大漩渦", -- [11]
-		}, -- [3]
-		{
-			"Felling the Felbat", -- [1]
-			"Teufelsfledermaustöten", -- [2]
-			"Derribar al murciélago vil", -- [3]
-			"Derribando al murciélago vil", -- [4]
-			"Abattre le gangroptère", -- [5]
-			"Eliminazione del vilpipistrello", -- [6]
-			"지옥박쥐의 추락", -- [7]
-			"A queda do morcevil", -- [8]
-			"Сбейте сквернотопыря", -- [9]
-			"击落魔蝠", -- [10]
-			"擊落魔化蝙蝠", -- [11]
-		}, -- [4]
-		{
-			"Master of Storms", -- [1]
-			"Meister der Stürme", -- [2]
-			"Maestro de las tormentas", -- [3]
-			"Maestro de las tormentas", -- [4]
-			"Maître des tempêtes", -- [5]
-			"Signore della Tempesta", -- [6]
-			"폭풍의 주인", -- [7]
-			"Mestre das Tempestades", -- [8]
-			"Повелитель грозы", -- [9]
-			"风暴主宰", -- [10]
-			"風暴主宰", -- [11]
-		}, -- [5]
-	},
-	["900"] = {
-		{
-			"Stalking Your Prey", -- [1]
-			"Der Beute auf der Spur", -- [2]
-			"Acechar a tu presa", -- [3]
-			"Acechar tu presa", -- [4]
-			"Traquer votre proie", -- [5]
-			"Inseguire la preda", -- [6]
-			"먹이 추적", -- [7]
-			"No rastro da presa", -- [8]
-			"Преследование жертвы", -- [9]
-			"追踪你的猎物", -- [10]
-			"跟蹤獵物", -- [11]
-		}, -- [1]
-		{
-			"They Are Not Prepared", -- [1]
-			"Sie wissen nicht, was sie erwartet", -- [2]
-			"No están preparados", -- [3]
-			"No están preparados", -- [4]
-			"Ils ne sont pas prêts", -- [5]
-			"Loro non sono pronti", -- [6]
-			"아직 준비가 안 된 자들", -- [7]
-			"Eles não estão preparados", -- [8]
-			"Они не готовы", -- [9]
-			"他们这是自寻死路", -- [10]
-			"他們還沒準備好", -- [11]
-		}, -- [2]
-		{
-			"Wrath of the Illidari", -- [1]
-			"Zorn der Illidari", -- [2]
-			"Cólera de los Illidari", -- [3]
-			"Ira de los Illidari", -- [4]
-			"La colère des Illidari", -- [5]
-			"L'ira degli Illidari", -- [6]
-			"일리다리의 분노", -- [7]
-			"Ira dos Illidari", -- [8]
-			"Гнев иллидари", -- [9]
-			"伊利达雷之怒", -- [10]
-			"伊利達瑞之怒", -- [11]
-		}, -- [3]
-		{
-			"Unleashed Havoc", -- [1]
-			"Entfesselte Verwüstung", -- [2]
-			"Estragos desatados", -- [3]
-			"Las Espadas Gemelas del Falsario", -- [4]
-			"Dévastation déchaînée", -- [5]
-			"Caos scatenato", -- [6]
-			"샘솟는 파멸", -- [7]
-			"Devastação desenfreada", -- [8]
-			"Полное истребление", -- [9]
-			"释放的浩劫", -- [10]
-			"災虐降臨", -- [11]
-		}, -- [4]
-		{
-			"The Twinblades of the Deceiver", -- [1]
-			"Die Zwillingsklingen des Betrügers", -- [2]
-			"Las Hojas Gemelas del Impostor", -- [3]
-			"Las Espadas Gemelas del Falsario", -- [4]
-			"Les lames jumelles du Trompeur", -- [5]
-			"Le Lame Gemelle dell'Ingannatore", -- [6]
-			"기만자의 쌍날검", -- [7]
-			"As Lâminas Gêmeas do Enganador", -- [8]
-			"Парные клинки Искусителя", -- [9]
-			"欺诈者的双刃", -- [10]
-			"欺詐者雙刃", -- [11]
-		}, -- [5]
-	},
-	["576"] = {
-		{
-			"The Oculus", -- [1]
-			"Das Oculus", -- [2]
-			"El Oculus", -- [3]
-			"El Oculus", -- [4]
-			"L’Oculus", -- [5]
-			"Oculus", -- [6]
-			"마력의 눈", -- [7]
-			"Óculus", -- [8]
-			"Окулус", -- [9]
-			"魔环", -- [10]
-			"奧核之眼", -- [11]
-		}, -- [1]
-	},
-	["1097"] = {
-		{
-			"Searching the Hold", -- [1]
-			"Die Festung durchsuchen", -- [2]
-			"Buscar en el Bastión", -- [3]
-			"Explorando el bastión", -- [4]
-			"La fouille du bastion", -- [5]
-			"Ricerche nel forte", -- [6]
-			"요새 수색", -- [7]
-			"Vasculhando o castelo", -- [8]
-			"Поиски в Оплоте", -- [9]
-			"搜索堡垒", -- [10]
-			"搜索要塞", -- [11]
-		}, -- [1]
-		{
-			"Getting Over the Overfiend", -- [1]
-			"Oberdämon zu unterst", -- [2]
-			"Acabar con el gran maligno", -- [3]
-			"Superando al gran maligno", -- [4]
-			"Supérieur au démon", -- [5]
-			"Abbattere il Vilnato", -- [6]
-			"거대마귀 처치", -- [7]
-			"Superando o Demônio Superior", -- [8]
-			"Сразите архидемона", -- [9]
-			"比大恶魔还大", -- [10]
-			"領便當的惡魔將領", -- [11]
-		}, -- [2]
-		{
-			"Demon Hunting", -- [1]
-			"Dämonenjagd", -- [2]
-			"Cazando demonios", -- [3]
-			"Caza de demonios", -- [4]
-			"Chasse aux démons", -- [5]
-			"Caccia al Demone", -- [6]
-			"악마 사냥", -- [7]
-			"Caçada demoníaca", -- [8]
-			"Охота на демонов", -- [9]
-			"恶魔追猎", -- [10]
-			"惡魔狩獵", -- [11]
-		}, -- [3]
-		{
-			"The Legion", -- [1]
-			"Die Legion", -- [2]
-			"La Legión", -- [3]
-			"La Legión", -- [4]
-			"La Légion", -- [5]
-			"La Legione", -- [6]
-			"군단", -- [7]
-			"A Legião", -- [8]
-			"Легион", -- [9]
-			"军团", -- [10]
-			"燃燒軍團", -- [11]
-		}, -- [4]
-		{
-			"Screams of the Skull", -- [1]
-			"Schreie des Schädels", -- [2]
-			"Los gritos del cráneo", -- [3]
-			"Los gritos del cráneo", -- [4]
-			"Les cris du crâne", -- [5]
-			"Urla del teschio", -- [6]
-			"해골의 절규", -- [7]
-			"Gritos da caveira", -- [8]
-			"Вопли черепа", -- [9]
-			"颅骨的尖啸", -- [10]
-			"顱骨的尖嘯", -- [11]
-		}, -- [5]
-		{
-			"The Skull of the Man'ari", -- [1]
-			"Der Schädel der Man'ari", -- [2]
-			"El Cráneo del Man'ari", -- [3]
-			"El Cráneo de los Man'ari", -- [4]
-			"Le Crâne du Man’ari", -- [5]
-			"Teschio dei Man'ari", -- [6]
-			"만아리의 해골", -- [7]
-			"A Caveira dos Man'ari", -- [8]
-			"Череп Ман'ари", -- [9]
-			"堕落者之颅", -- [10]
-			"曼那瑞的顱骨", -- [11]
-		}, -- [6]
-		{
-			"There's a New Master in Town", -- [1]
-			"Ein neuer Meister ist in der Stadt", -- [2]
-			"Hay un nuevo maestro en la ciudad", -- [3]
-			"Un nuevo maestro ha llegado", -- [4]
-			"Changement de propriétaire", -- [5]
-			"Un nuovo maestro in città", -- [6]
-			"주인은 갈아타라고 있는 것", -- [7]
-			"Tem um novo mestre na área", -- [8]
-			"Новый хозяин", -- [9]
-			"旧物换新主", -- [10]
-			"新主人駕到", -- [11]
-		}, -- [7]
-	},
-	["318"] = {
-		{
-			"Collect Resources", -- [1]
-			"Sammelt Rohstoffe", -- [2]
-			"Reúne recursos", -- [3]
-			"Consigue recursos", -- [4]
-			"La collecte de ressources", -- [5]
-			"Raccogli le risorse", -- [6]
-			"자원 모으기", -- [7]
-			"Coletar recursos", -- [8]
-			"Добыча ресурсов", -- [9]
-			"收集资源", -- [10]
-			"收集資源", -- [11]
-		}, -- [1]
-	},
-	["908"] = {
-		{
-			"Show Faction Specific Criteria", -- [1]
-			"Fraktionsspezifische Kriterien anzeigen", -- [2]
-			"Mostrar los criterios específicos de la facción", -- [3]
-			"Mostrar los criterios específicos de las facciones", -- [4]
-			"Montrer les critères spécifiques de faction", -- [5]
-			"Show Faction Specific Criteria", -- [6]
-			"진영 구체적인 조건 보이기", -- [7]
-			"Mostrar critérios por facção", -- [8]
-			"Показать критерии фракций", -- [9]
-			"显示阵营指定条件", -- [10]
-			"Show Faction Specific Criteria", -- [11]
-		}, -- [1]
-		{
-			"A Final Step", -- [1]
-			"Ein letzter Schritt", -- [2]
-			"Un último paso", -- [3]
-			"El último paso", -- [4]
-			"Dernière étape", -- [5]
-			"L'ultimo passo", -- [6]
-			"마지막 단계", -- [7]
-			"Um último passo", -- [8]
-			"Последний шаг", -- [9]
-			"最后一步", -- [10]
-			"最後一步", -- [11]
-		}, -- [2]
-	},
-	["709"] = {
-		{
-			"The Everbloom", -- [1]
-			"Der Immergrüne Flor", -- [2]
-			"El Vergel Eterno", -- [3]
-			"El Sempibrote", -- [4]
-			"La Flore éternelle", -- [5]
-			"Verdeterno", -- [6]
-			"상록숲", -- [7]
-			"Floretérnia", -- [8]
-			"Вечное Цветение", -- [9]
-			"永茂林地", -- [10]
-			"永茂林", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-	},
-	["612"] = {
-		{
-			"The Botanica", -- [1]
-			"Die Botanika", -- [2]
-			"El Invernáculo", -- [3]
-			"El Invernáculo", -- [4]
-			"La Botanica", -- [5]
-			"Botanica", -- [6]
-			"신록의 정원", -- [7]
-			"Jardim Botânico", -- [8]
-			"Ботаника", -- [9]
-			"生态船", -- [10]
-			"波塔尼卡", -- [11]
-		}, -- [1]
-	},
-	["608"] = {
-		{
-			"The Shattered Halls", -- [1]
-			"Die Zerschmetterten Hallen", -- [2]
-			"Las Salas Arrasadas", -- [3]
-			"Las Salas Arrasadas", -- [4]
-			"Les salles Brisées", -- [5]
-			"Sale della Devastazione", -- [6]
-			"으스러진 손의 전당", -- [7]
-			"Salões Despedaçados", -- [8]
-			"Разрушенные залы", -- [9]
-			"破碎大厅", -- [10]
-			"破碎大廳", -- [11]
-		}, -- [1]
-	},
-	["508"] = {
-		{
-			"Launch the Attack", -- [1]
-			"Zum Angriff blasen", -- [2]
-			"Inicia el ataque", -- [3]
-			"Lanza el ataque", -- [4]
-			"Lancer l’attaque", -- [5]
-			"Avvia l'attacco", -- [6]
-			"공격 개시", -- [7]
-			"Inicie o ataque", -- [8]
-			"В атаку", -- [9]
-			"开始攻击", -- [10]
-			"開始攻擊", -- [11]
-		}, -- [1]
-		{
-			"Gather at the Bend", -- [1]
-			"An der Kurve sammeln", -- [2]
-			"Reunión en la curva", -- [3]
-			"Reunión en la curva", -- [4]
-			"Rassemblement au tournant", -- [5]
-			"Radunata presso la svolta", -- [6]
-			"재집결", -- [7]
-			"Reunir-se na Curva", -- [8]
-			"Сбор за поворотом", -- [9]
-			"弯道集合", -- [10]
-			"在彎路集結", -- [11]
-		}, -- [2]
-		{
-			"Defeat the Packmaster", -- [1]
-			"Besiegt den Rottenkommandanten", -- [2]
-			"Derrota al maestro de manada", -- [3]
-			"Derrota al Maestro de la manada", -- [4]
-			"Vaincre le maître de la meute", -- [5]
-			"Sconfiggi il Mastrobranco", -- [6]
-			"무리지도자 처치", -- [7]
-			"Derrote o Líder da Alcateia", -- [8]
-			"Победите властителя стаи", -- [9]
-			"击败兽王", -- [10]
-			"擊敗狼王", -- [11]
-		}, -- [3]
-		{
-			"Survive the Gauntlet", -- [1]
-			"Spießrutenlauf", -- [2]
-			"Sobrevive al ataque", -- [3]
-			"Sobrevive al ataque", -- [4]
-			"Survivre au Défi", -- [5]
-			"Sopravvivi alla sfida", -- [6]
-			"시련", -- [7]
-			"Sobreviva à Forquilha", -- [8]
-			"Выживите на Улице Испытаний", -- [9]
-			"挡住敌人的夹击", -- [10]
-			"一線生機", -- [11]
-		}, -- [4]
-		{
-			"Slay Durn the Hungerer", -- [1]
-			"Tötet Durn den Nimmersatten", -- [2]
-			"Mata a Durn el Hambriento", -- [3]
-			"Mata a Durn el Hambriento.", -- [4]
-			"Vaincre Durn l’Affameur", -- [5]
-			"Uccidi Durn il Famelico", -- [6]
-			"굶주린 두른 처치", -- [7]
-			"Mate Durn, o Famélico", -- [8]
-			"Убейте Дарна Ненасытного", -- [9]
-			"击败饥饿者杜恩", -- [10]
-			"殺死『飢餓者』唐恩", -- [11]
-		}, -- [5]
-		{
-			"The Final Gates", -- [1]
-			"Die letzten Tore", -- [2]
-			"Las puertas finales", -- [3]
-			"La puerta final", -- [4]
-			"Les portes du trône", -- [5]
-			"I cancelli finali", -- [6]
-			"마지막 관문", -- [7]
-			"Os Portões Finais", -- [8]
-			"Последние врата", -- [9]
-			"最后关头", -- [10]
-			"最後的大門", -- [11]
-		}, -- [6]
-		{
-			"Confront Warlord Garrosh Hellscream", -- [1]
-			"Konfrontiert Kriegsherr Garrosh Höllschrei", -- [2]
-			"Enfréntate al señor de la guerra Garrosh Grito Infernal", -- [3]
-			"Confronta al Señor de la Guerra Garrosh Grito Infernal.", -- [4]
-			"Affronter le seigneur de guerre Garrosh Hurlenfer", -- [5]
-			"Affronta il Signore della Guerra Garrosh Malogrido", -- [6]
-			"전쟁군주 가로쉬 헬스크림과 대면", -- [7]
-			"Confronte o Senhor da Guerra Garrosh Grito Infernal", -- [8]
-			"Сразитесь с вождем Гаррошем Адским Криком", -- [9]
-			"对抗督军加尔鲁什·地狱咆哮", -- [10]
-			"迎戰卡爾洛斯‧地獄吼酋長", -- [11]
-		}, -- [7]
-	},
-	["571"] = {
-		{
-			"Pit of Saron", -- [1]
-			"Grube von Saron", -- [2]
-			"Foso de Saron", -- [3]
-			"Foso de Saron", -- [4]
-			"Fosse de Saron", -- [5]
-			"Fossa di Saron", -- [6]
-			"사론의 구덩이", -- [7]
-			"Fosso de Saron", -- [8]
-			"Яма Сарона", -- [9]
-			"萨隆矿坑", -- [10]
-			"薩倫之淵", -- [11]
-		}, -- [1]
-	},
-	["577"] = {
-		{
-			"Utgarde Pinnacle", -- [1]
-			"Turm Utgarde", -- [2]
-			"Pináculo de Utgarde", -- [3]
-			"Pináculo de Utgarde", -- [4]
-			"Cime d’Utgarde", -- [5]
-			"Pinnacolo di Utgarde", -- [6]
-			"우트가드 첨탑", -- [7]
-			"Pináculo Utgarde", -- [8]
-			"Вершина Утгард", -- [9]
-			"乌特加德之巅", -- [10]
-			"俄特加德之巔", -- [11]
-		}, -- [1]
-	},
-	["611"] = {
-		{
-			"The Black Morass", -- [1]
-			"Der Schwarze Morast", -- [2]
-			"La Ciénaga Negra", -- [3]
-			"La Ciénaga Negra", -- [4]
-			"Le Noir marécage", -- [5]
-			"Palude Nera", -- [6]
-			"검은늪", -- [7]
-			"Lamaçal Negro", -- [8]
-			"Черные топи", -- [9]
-			"黑色沼泽", -- [10]
-			"黑色沼澤", -- [11]
-		}, -- [1]
-	},
-	["511"] = {
-		{
-			"Ragefire Chasm", -- [1]
-			"Der Flammenschlund", -- [2]
-			"Sima Ígnea", -- [3]
-			"Sima Ígnea", -- [4]
-			"Gouffre de Ragefeu", -- [5]
-			"Baratro di Fiamma Furente", -- [6]
-			"성난불길 협곡", -- [7]
-			"Cavernas Ígneas", -- [8]
-			"Огненная Пропасть", -- [9]
-			"怒焰裂谷", -- [10]
-			"怒焰裂谷", -- [11]
-		}, -- [1]
-	},
-	["558"] = {
-		{
-			"Halls of Origination", -- [1]
-			"Hallen des Ursprungs", -- [2]
-			"Cámaras de los Orígenes", -- [3]
-			"Cámaras de los Orígenes", -- [4]
-			"Salles de l’Origine", -- [5]
-			"Sale della Creazione", -- [6]
-			"시초의 전당", -- [7]
-			"Salões Primordiais", -- [8]
-			"Чертоги Созидания", -- [9]
-			"起源大厅", -- [10]
-			"起源大廳", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [3]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [4]
-	},
-	["995"] = {
-		{
-			"Maw of Souls", -- [1]
-			"Der Seelenschlund", -- [2]
-			"Fauce de Almas", -- [3]
-			"Fauces de almas", -- [4]
-			"La Gueule des âmes", -- [5]
-			"Fauci delle Anime", -- [6]
-			"영혼의 아귀", -- [7]
-			"Gorja das Almas", -- [8]
-			"Утроба душ", -- [9]
-			"噬魂之喉", -- [10]
-			"靈魂之喉", -- [11]
-		}, -- [1]
-	},
-	["619"] = {
-		{
-			"The Steamvault", -- [1]
-			"Dampfkammer", -- [2]
-			"La Cámara de Vapor", -- [3]
-			"La Cámara de Vapor", -- [4]
-			"Le caveau de la Vapeur", -- [5]
-			"Antro dei Vapori", -- [6]
-			"증기 저장고", -- [7]
-			"Câmara dos Vapores", -- [8]
-			"Паровое подземелье", -- [9]
-			"蒸汽地窟", -- [10]
-			"蒸汽洞窟", -- [11]
-		}, -- [1]
-	},
-	["294"] = {
-		{
-			"Razorfen Kraul", -- [1]
-			"Kral der Klingenhauer", -- [2]
-			"Horado Rajacieno", -- [3]
-			"Horado Rajacieno", -- [4]
-			"Kraal de Tranchebauge", -- [5]
-			"Gallerie di Lamaspina", -- [6]
-			"가시덩굴 우리", -- [7]
-			"Urzal dos Tuscos", -- [8]
-			"Лабиринты Иглошкурых", -- [9]
-			"剃刀沼泽", -- [10]
-			"剃刀沼澤", -- [11]
-		}, -- [1]
-	},
-	["594"] = {
-		{
-			"Azjol-Nerub", -- [1]
-			"Azjol-Nerub", -- [2]
-			"Azjol-Nerub", -- [3]
-			"Azjol-Nerub", -- [4]
-			"Azjol-Nérub", -- [5]
-			"Azjol-Nerub", -- [6]
-			"아졸네룹", -- [7]
-			"Azjol-Nerub", -- [8]
-			"Азжол-Неруб", -- [9]
-			"艾卓-尼鲁布", -- [10]
-			"阿茲歐-奈幽", -- [11]
-		}, -- [1]
-	},
-	["570"] = {
-		{
-			"The Hour of Twilight", -- [1]
-			"Die Stunde des Zwielichts", -- [2]
-			"La Hora del Crepúsculo", -- [3]
-			"La Hora del Crepúsculo", -- [4]
-			"L’Heure du Crépuscule", -- [5]
-			"L'Ora del Crepuscolo", -- [6]
-			"황혼의 시간", -- [7]
-			"A Hora do Crepúsculo", -- [8]
-			"Время Сумерек", -- [9]
-			"暮光审判", -- [10]
-			"暮光之時", -- [11]
-		}, -- [1]
-	},
-	["219"] = {
-		{
-			"Infiltration", -- [1]
-			"Infiltration", -- [2]
-			"Infiltración", -- [3]
-			"Infiltración", -- [4]
-			"Infiltration", -- [5]
-			"Infiltrazione", -- [6]
-			"침투", -- [7]
-			"Infiltração", -- [8]
-			"Проникновение", -- [9]
-			"渗透", -- [10]
-			"滲透", -- [11]
-		}, -- [1]
-		{
-			"Reconnaissance", -- [1]
-			"Erkundung", -- [2]
-			"Reconocimiento", -- [3]
-			"Reconocimiento", -- [4]
-			"Reconnaissance", -- [5]
-			"Ricognizione", -- [6]
-			"정찰", -- [7]
-			"Reconhecimento", -- [8]
-			"Разведка", -- [9]
-			"侦查", -- [10]
-			"偵察", -- [11]
-		}, -- [2]
-		{
-			"The Sealed Gate", -- [1]
-			"Das versiegelte Tor", -- [2]
-			"La puerta sellada", -- [3]
-			"La puerta sellada", -- [4]
-			"La porte scellée", -- [5]
-			"L'ingresso sigillato", -- [6]
-			"봉인된 관문", -- [7]
-			"O Portão Lacrado", -- [8]
-			"Запертые ворота", -- [9]
-			"封闭的大门", -- [10]
-			"上鎖的門", -- [11]
-		}, -- [3]
-		{
-			"Holdout", -- [1]
-			"Die Stellung halten", -- [2]
-			"Resistencia", -- [3]
-			"Resistencia", -- [4]
-			"Faire barrage", -- [5]
-			"Protezione", -- [6]
-			"저항", -- [7]
-			"Resistência", -- [8]
-			"Задержка", -- [9]
-			"坚持到底", -- [10]
-			"抵抗", -- [11]
-		}, -- [4]
-		{
-			"Bonus Objectives", -- [1]
-			"Bonusziele", -- [2]
-			"Objetivos de bonificación", -- [3]
-			"Objetivos de bonificación", -- [4]
-			"Objectifs bonus", -- [5]
-			"Obiettivi bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivos bônus", -- [8]
-			"Дополнительные задачи", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [5]
-	},
-	["676"] = {
-		{
-			"Grand Champions", -- [1]
-			"Großchampions", -- [2]
-			"Grandes Campeones", -- [3]
-			"Grandes Campeones", -- [4]
-			"Grands champions", -- [5]
-			"Gran Campioni", -- [6]
-			"최고 용사", -- [7]
-			"Grandes Campeões", -- [8]
-			"Абсолютные чемпионы", -- [9]
-			"总冠军", -- [10]
-			"大勇士", -- [11]
-		}, -- [1]
-		{
-			"Argent Trial", -- [1]
-			"Argentumprüfung", -- [2]
-			"Prueba Argenta", -- [3]
-			"Prueba argenta", -- [4]
-			"Épreuve d’argent", -- [5]
-			"Prova d'Argento", -- [6]
-			"은빛십자군의 시험", -- [7]
-			"Torneio Argênteo", -- [8]
-			"Испытание Серебряного авангарда", -- [9]
-			"银色试炼", -- [10]
-			"銀白試煉", -- [11]
-		}, -- [2]
-		{
-			"The Black Knight", -- [1]
-			"Der schwarze Ritter", -- [2]
-			"El Caballero Negro", -- [3]
-			"El Caballero Negro", -- [4]
-			"Le Chevalier noir", -- [5]
-			"Cavaliere Nero", -- [6]
-			"흑기사", -- [7]
-			"O Cavaleiro Negro", -- [8]
-			"Черный рыцарь", -- [9]
-			"黑骑士", -- [10]
-			"黑騎士", -- [11]
-		}, -- [3]
-	},
-	["976"] = {
-		{
-			"Proving Your Worth", -- [1]
-			"Bewährungsprobe", -- [2]
-			"Demostrar tu valía", -- [3]
-			"Demuestra lo que vales", -- [4]
-			"Prouver votre valeur", -- [5]
-			"Provare il valore", -- [6]
-			"실력 증명", -- [7]
-			"Prova de valor", -- [8]
-			"Доказательство силы", -- [9]
-			"证明你的实力", -- [10]
-			"證明你的價值", -- [11]
-		}, -- [1]
-		{
-			"Defeat the Giantslayer", -- [1]
-			"Bezwingt den Riesentöter", -- [2]
-			"Derrota al Matagigantes", -- [3]
-			"Derrota al destripador de gigantes", -- [4]
-			"Vaincre le Tueur de géants", -- [5]
-			"Sconfiggere l'Ammazzagiganti", -- [6]
-			"거인학살자와의 승부", -- [7]
-			"Derrote o Matador de Gigantes", -- [8]
-			"Победа над Убийцей Великанов", -- [9]
-			"击败巨人屠夫。", -- [10]
-			"擊敗巨人殺手", -- [11]
-		}, -- [2]
-		{
-			"Heroes of the Storm", -- [1]
-			"Helden des Sturms", -- [2]
-			"Héroes de la tormenta", -- [3]
-			"Héroes de la tormenta", -- [4]
-			"Héros du Nexus", -- [5]
-			"Eroi della Tempesta", -- [6]
-			"폭풍의 영웅", -- [7]
-			"Heróis da tempestade", -- [8]
-			"Герои бури", -- [9]
-			"风暴英雄", -- [10]
-			"風暴英雄", -- [11]
-		}, -- [3]
-		{
-			"Weapons of the Storm", -- [1]
-			"Waffen des Sturms", -- [2]
-			"Armas de la tormenta", -- [3]
-			"Armas de la tormenta", -- [4]
-			"Les armes de la tempête", -- [5]
-			"Armi della Tempesta", -- [6]
-			"폭풍의 무기", -- [7]
-			"Armas da Tempestade", -- [8]
-			"Оружие бури", -- [9]
-			"风暴武器", -- [10]
-			"風暴神兵", -- [11]
-		}, -- [4]
-		{
-			"Demonic Interruption", -- [1]
-			"Dämonische Unterbrechung", -- [2]
-			"Interrupción demoníaca", -- [3]
-			"Interrupción demoníaca", -- [4]
-			"Interruption démoniaque", -- [5]
-			"Interruzione demoniaca", -- [6]
-			"사악한 방해", -- [7]
-			"Interrupção demoníaca", -- [8]
-			"Демоническое вмешательство", -- [9]
-			"恶魔的打扰", -- [10]
-			"惡魔之擾", -- [11]
-		}, -- [5]
-	},
-	["876"] = {
-		{
-			"Push Back the Legion Assault", -- [1]
-			"Schlagt den Angriff der Legion zurück", -- [2]
-			"Rechazar el asalto de la Legión", -- [3]
-			"Haz retroceder el ataque de la Legión", -- [4]
-			"Repousser l’assaut de la Légion", -- [5]
-			"Respingere l'assalto della Legione", -- [6]
-			"군단 습격 저지", -- [7]
-			"Rechace o ataque da Legião", -- [8]
-			"Остановите натиск Легиона", -- [9]
-			"击退军团的攻势", -- [10]
-			"擊退進逼的燃燒軍團", -- [11]
-		}, -- [1]
-	},
-	["1017"] = {
-		{
-			"The Broken Shore (H)", -- [1]
-			"", -- [2]
-			"", -- [3]
-			"La Costa Quebrada (H)", -- [4]
-			"", -- [5]
-			"Riva Dispersa (Orda)", -- [6]
-			"부서진 해변 (H)", -- [7]
-			"A Costa Partida. (H)", -- [8]
-			"", -- [9]
-			"破碎海滩", -- [10]
-			"破碎海岸(部落)", -- [11]
-		}, -- [1]
-	},
-	["911"] = {
-		{
-			"Safe Entrance", -- [1]
-			"Sicherer Einstieg", -- [2]
-			"Entrada segura", -- [3]
-			"Entrada segura", -- [4]
-			"Accès sécurisé", -- [5]
-			"Entrata di sicurezza", -- [6]
-			"안전한 입구", -- [7]
-			"Entrada segura", -- [8]
-			"Безопасный вход", -- [9]
-			"安全入口", -- [10]
-			"安全通關", -- [11]
-		}, -- [1]
-		{
-			"Obtain the Bait", -- [1]
-			"Holt den Köder", -- [2]
-			"Conseguir el cebo", -- [3]
-			"Obtén el cebo", -- [4]
-			"Obtenir l’appât", -- [5]
-			"Ottenere l'esca", -- [6]
-			"미끼 구하기", -- [7]
-			"Obtenha a isca", -- [8]
-			"Добыча приманки", -- [9]
-			"获取诱饵", -- [10]
-			"取得誘餌", -- [11]
-		}, -- [2]
-		{
-			"Place the Bait", -- [1]
-			"Platziert den Köder", -- [2]
-			"Colocar el cebo", -- [3]
-			"Coloca el cebo", -- [4]
-			"Placer l’appât", -- [5]
-			"Posizionare l'esca", -- [6]
-			"미끼 설치", -- [7]
-			"Coloque a isca", -- [8]
-			"Положить приманку", -- [9]
-			"放置诱饵", -- [10]
-			"放置誘餌", -- [11]
-		}, -- [3]
-		{
-			"Slay the Hound", -- [1]
-			"Tötet den Hund", -- [2]
-			"Matar al can", -- [3]
-			"Mata al sabueso", -- [4]
-			"Tuer le chien", -- [5]
-			"Uccidere il Mastino", -- [6]
-			"사냥개 처치", -- [7]
-			"Mate o canaz", -- [8]
-			"Убейте гончую", -- [9]
-			"灭犬行动", -- [10]
-			"殺死獵犬", -- [11]
-		}, -- [4]
-		{
-			"Retrieve the Fangs", -- [1]
-			"Nehmt die Fänge an Euch", -- [2]
-			"Recuperar los Colmillos", -- [3]
-			"Recupera los Colmillos", -- [4]
-			"Récupérer les crocs", -- [5]
-			"Recuperare le zanne", -- [6]
-			"송곳니 회수", -- [7]
-			"Recupere as Presas", -- [8]
-			"Заберите Клыки", -- [9]
-			"夺取獠牙", -- [10]
-			"取回尖牙", -- [11]
-		}, -- [5]
-	},
-	["1023"] = {
-		{
-			"Black Rook Hold", -- [1]
-			"Die Rabenwehr", -- [2]
-			"Torreón Grajo Negro", -- [3]
-			"Fuerte Torre Oscura", -- [4]
-			"Bastion du Freux", -- [5]
-			"Forte Corvonero", -- [6]
-			"검은 떼까마귀 요새", -- [7]
-			"Castelo Corvo Negro", -- [8]
-			"Крепость Черной Ладьи", -- [9]
-			"黑鸦堡垒", -- [10]
-			"玄鴉堡", -- [11]
-		}, -- [1]
-		{
-			"Black Rook Hold", -- [1]
-			"Die Rabenwehr", -- [2]
-			"Torreón Grajo Negro", -- [3]
-			"Fuerte Torre Oscura", -- [4]
-			"Bastion du Freux", -- [5]
-			"Forte Corvonero", -- [6]
-			"검은 떼까마귀 요새", -- [7]
-			"Castelo Corvo Negro", -- [8]
-			"Крепость Черной Ладьи", -- [9]
-			"黑鸦堡垒", -- [10]
-			"玄鴉堡", -- [11]
-		}, -- [2]
-	},
-	["595"] = {
-		{
-			"Azjol-Nerub", -- [1]
-			"Azjol-Nerub", -- [2]
-			"Azjol-Nerub", -- [3]
-			"Azjol-Nerub", -- [4]
-			"Azjol-Nérub", -- [5]
-			"Azjol-Nerub", -- [6]
-			"아졸네룹", -- [7]
-			"Azjol-Nerub", -- [8]
-			"Азжол-Неруб", -- [9]
-			"艾卓-尼鲁布", -- [10]
-			"阿茲歐-奈幽", -- [11]
-		}, -- [1]
-	},
-	["65"] = {
-		{
-			"Make Boomer's Brew", -- [1]
-			"Braut Hammerbräu", -- [2]
-			"Fermenta cerveza relámpago", -- [3]
-			"Fermenta cerveza relámpago", -- [4]
-			"Faire de la bière détonante", -- [5]
-			"Crea la Birra Esplosiva", -- [6]
-			"폭발 맥주 만들기", -- [7]
-			"Cerveja Explosiva", -- [8]
-			"Варка \"Громобоя\"", -- [9]
-			"酿造闪电陈酿", -- [10]
-			"釀造轟隆酒", -- [11]
-		}, -- [1]
-		{
-			"Road to Thunderpaw", -- [1]
-			"Donnerpfotenpfad", -- [2]
-			"Camino a Zarpa Atronadora", -- [3]
-			"Camino a Zarpa Atronadora", -- [4]
-			"Faire route vers Patte-du-Tonnerre", -- [5]
-			"Strada degli Zampa Tonante", -- [6]
-			"썬더포우로의 여정", -- [7]
-			"A Estrada para Pata do Trovão", -- [8]
-			"Дорога к пику Громовой Лапы", -- [9]
-			"雷掌之路", -- [10]
-			"前往雷爪靜修居", -- [11]
-		}, -- [2]
-		{
-			"Save Thunderpaw Refuge", -- [1]
-			"Rettet das Donnerpfotenrefugium", -- [2]
-			"Salva el Refugio Zarpa Atronadora", -- [3]
-			"Salva el Refugio Zarpa Atronadora", -- [4]
-			"Sauver le refuge Patte-du-Tonnerre", -- [5]
-			"Salva la dimora degli Zampa Tonante", -- [6]
-			"썬더포우 은거처를 구하라", -- [7]
-			"Salve o Refúgio Pata de Trovão", -- [8]
-			"Защита Укрытия Громовой Лапы", -- [9]
-			"拯救雷掌阁", -- [10]
-			"拯救雷爪靜修居", -- [11]
-		}, -- [3]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [4]
-	},
-	["687"] = {
-		{
-			"Shadowmoon Burial Grounds", -- [1]
-			"Schattenmondgrabstätte", -- [2]
-			"Cementerio de Sombraluna", -- [3]
-			"Cementerios de Sombraluna", -- [4]
-			"Terres sacrées d’Ombrelune", -- [5]
-			"Necropoli dei Torvaluna", -- [6]
-			"어둠달 지하묘지", -- [7]
-			"Sepulcrário da Lua Negra", -- [8]
-			"Некрополь Призрачной Луны", -- [9]
-			"影月墓地", -- [10]
-			"影月墓地", -- [11]
-		}, -- [1]
-	},
-	["1018"] = {
-		{
-			"The Broken Shore (A)", -- [1]
-			"", -- [2]
-			"", -- [3]
-			"La Costa Quebrada (A)", -- [4]
-			"", -- [5]
-			"Riva Dispersa (Alleanza)", -- [6]
-			"부서진 해변 (A)", -- [7]
-			"A Costa Partida (A)", -- [8]
-			"", -- [9]
-			"破碎海滩", -- [10]
-			"破碎海岸(聯盟)", -- [11]
-		}, -- [1]
-	},
-	["1084"] = {
-		{
-			"Combat Training", -- [1]
-			"Kampftraining", -- [2]
-			"Instrucción de combate", -- [3]
-			"Instrucción de combate", -- [4]
-			"Entraînement au combat", -- [5]
-			"Addestramento al combattimento", -- [6]
-			"전투 훈련", -- [7]
-			"Treino de combate", -- [8]
-			"Боевые учения", -- [9]
-			"战斗训练", -- [10]
-			"戰鬥訓練", -- [11]
-		}, -- [1]
-		{
-			"Demonic Bidding", -- [1]
-			"Geheiß der Dämonen", -- [2]
-			"Órdenes demoníacas", -- [3]
-			"Vinculación demoníaca", -- [4]
-			"Obéissance démoniaque", -- [5]
-			"Volere demoniaco", -- [6]
-			"명령을 따르는 악마", -- [7]
-			"Lance demoníaco", -- [8]
-			"Обитатель Бездны", -- [9]
-			"恶魔召唤", -- [10]
-			"惡魔交易", -- [11]
-		}, -- [2]
-		{
-			"Curses!", -- [1]
-			"Verflucht!", -- [2]
-			"¡Maldición!", -- [3]
-			"¡Maldición!", -- [4]
-			"Malédiction !", -- [5]
-			"Maledizioni!", -- [6]
-			"저주!", -- [7]
-			"Maldição!", -- [8]
-			"Проклятие!", -- [9]
-			"诅咒！", -- [10]
-			"可惡！", -- [11]
-		}, -- [3]
-		{
-			"Corrupting Power", -- [1]
-			"Macht der Verderbnis", -- [2]
-			"Poder corruptor", -- [3]
-			"Poder corruptor", -- [4]
-			"Le pouvoir corrompt", -- [5]
-			"Potere corrompente", -- [6]
-			"부패의 힘", -- [7]
-			"Poder Corruptor", -- [8]
-			"Оскверняющая сила", -- [9]
-			"腐蚀的力量", -- [10]
-			"腐化力量", -- [11]
-		}, -- [4]
-		{
-			"Stealing Health", -- [1]
-			"Geben und nehmen", -- [2]
-			"Robo de salud", -- [3]
-			"Robo de vida", -- [4]
-			"Vol de vie", -- [5]
-			"Rubare la vita", -- [6]
-			"적의 고통은 나의 힘", -- [7]
-			"Roubar Vida", -- [8]
-			"Кража жизненных сил", -- [9]
-			"偷取生命", -- [10]
-			"盜取生命", -- [11]
-		}, -- [5]
-		{
-			"Add Some Instability", -- [1]
-			"Stabilität wird überbewertet", -- [2]
-			"Añade inestabilidad", -- [3]
-			"Un pequeño aumento de inestabilidad", -- [4]
-			"Une touche d’instabilité", -- [5]
-			"Un pizzico di instabilità", -- [6]
-			"불안정함 더하기", -- [7]
-			"Um pouco de instabilidade", -- [8]
-			"Эффект неожиданности", -- [9]
-			"生死无常", -- [10]
-			"動盪的技巧", -- [11]
-		}, -- [6]
-		{
-			"Putting It All Together", -- [1]
-			"Das große Ganze", -- [2]
-			"Juntar las piezas", -- [3]
-			"Todas las piezas juntas", -- [4]
-			"Mise en pratique", -- [5]
-			"Mettersi alla prova", -- [6]
-			"종합주문세트", -- [7]
-			"Fixação de conteúdo", -- [8]
-			"Сборная солянка", -- [9]
-			"综合在一起", -- [10]
-			"準備完善", -- [11]
-		}, -- [7]
-		{
-			"Life Tap", -- [1]
-			"Tauschhandel", -- [2]
-			"Transfusión de vida", -- [3]
-			"Transfusión de vida", -- [4]
-			"Connexion", -- [5]
-			"Conversione Vitale", -- [6]
-			"생명력 전환", -- [7]
-			"Conversão de vida", -- [8]
-			"Жизнеотвод", -- [9]
-			"生命分流", -- [10]
-			"生命分流", -- [11]
-		}, -- [8]
-		{
-			"Fear", -- [1]
-			"Angst und Schrecken", -- [2]
-			"Miedo", -- [3]
-			"Miedo", -- [4]
-			"Peur", -- [5]
-			"Paura", -- [6]
-			"공포", -- [7]
-			"Medo", -- [8]
-			"Страх", -- [9]
-			"恐惧", -- [10]
-			"恐懼", -- [11]
-		}, -- [9]
-		{
-			"We're Going To Need A Bigger Demon", -- [1]
-			"Auf die Größe kommt es an", -- [2]
-			"Vamos a necesitar un demonio más grande", -- [3]
-			"Un demonio, pero más grande", -- [4]
-			"Il va nous falloir un plus gros démon !", -- [5]
-			"Ci serve un demone più grosso", -- [6]
-			"상급 악마가 더 필요하겠어", -- [7]
-			"Precisaremos de um demônio maior", -- [8]
-			"Размер имеет значение", -- [9]
-			"我们需要一个更大的恶魔", -- [10]
-			"我們需要更大隻的惡魔", -- [11]
-		}, -- [10]
-		{
-			"A Quick Test", -- [1]
-			"Schnelltest", -- [2]
-			"Una prueba rápida", -- [3]
-			"Una prueba rápida", -- [4]
-			"Un test rapide", -- [5]
-			"Una piccola prova", -- [6]
-			"깜짝 시험", -- [7]
-			"Teste rápido", -- [8]
-			"Испытание тет-а-тет", -- [9]
-			"快速测试", -- [10]
-			"立刻測試", -- [11]
-		}, -- [11]
-		{
-			"Challenge Accepted", -- [1]
-			"Herausforderung angenommen", -- [2]
-			"Desafío aceptado", -- [3]
-			"Desafío aceptado", -- [4]
-			"Défi accepté", -- [5]
-			"Sfida accettata", -- [6]
-			"더 큰 도전", -- [7]
-			"Desafio aceito", -- [8]
-			"Вызов принят", -- [9]
-			"接受挑战", -- [10]
-			"接受挑戰", -- [11]
-		}, -- [12]
-		{
-			"Defend Against the Legion Attack", -- [1]
-			"Den Angriff der Legion abwehren", -- [2]
-			"Defiéndete del ataque de la Legión", -- [3]
-			"Defensa contra el ataque de la Legión", -- [4]
-			"Défense contre l’attaque de la Légion", -- [5]
-			"Difesa contro la Legione", -- [6]
-			"군단의 공격 막아내기", -- [7]
-			"Defender contra o ataque da Legião", -- [8]
-			"Оборона против Легиона", -- [9]
-			"抵抗燃烧军团的攻击", -- [10]
-			"抵擋燃燒軍團的攻擊", -- [11]
-		}, -- [13]
-		{
-			"Assault on Broken Shore", -- [1]
-			"Angriff auf die Verheerte Küste", -- [2]
-			"Asalto a la Costa Abrupta", -- [3]
-			"Asalto a la Costa Quebrada", -- [4]
-			"L’assaut du rivage Brisé", -- [5]
-			"Assalto alla Riva Dispersa", -- [6]
-			"부서진 해변 공격", -- [7]
-			"Ataque à Costa Partida", -- [8]
-			"Штурм Расколотого берега", -- [9]
-			"突袭破碎海滩", -- [10]
-			"突襲破碎海岸", -- [11]
-		}, -- [14]
-	},
-	["910"] = {
-		{
-			"Neltharion's Lair", -- [1]
-			"Neltharions Hort", -- [2]
-			"La Guarida de Neltharion", -- [3]
-			"Guarida de Neltharion", -- [4]
-			"Repaire de Neltharion", -- [5]
-			"Antro di Neltharion", -- [6]
-			"넬타리온의 둥지", -- [7]
-			"Covil de Neltharion", -- [8]
-			"Логово Нелтариона", -- [9]
-			"奈萨里奥的巢穴", -- [10]
-			"奈薩里奧巢穴", -- [11]
-		}, -- [1]
-	},
-	["745"] = {
-		{
-			"Invasion!", -- [1]
-			"Invasion!", -- [2]
-			"¡Invasión!", -- [3]
-			"¡Invasión!", -- [4]
-			"Alerte aux envahisseurs !", -- [5]
-			"Invasione!", -- [6]
-			"침략!", -- [7]
-			"Invasão!", -- [8]
-			"Нападение!", -- [9]
-			"入侵！", -- [10]
-			"入侵！", -- [11]
-		}, -- [1]
-		{
-			"Ambush", -- [1]
-			"Hinterhalt", -- [2]
-			"Emboscada", -- [3]
-			"Emboscada", -- [4]
-			"Embuscade", -- [5]
-			"Imboscata", -- [6]
-			"습격", -- [7]
-			"Emboscada", -- [8]
-			"Засада", -- [9]
-			"伏击", -- [10]
-			"伏擊", -- [11]
-		}, -- [2]
-		{
-			"The Holdout", -- [1]
-			"Durchhaltevermögen", -- [2]
-			"La resistencia", -- [3]
-			"La resistencia", -- [4]
-			"Le baroud", -- [5]
-			"Resistenza", -- [6]
-			"항전", -- [7]
-			"A Resistência", -- [8]
-			"Продержаться подольше", -- [9]
-			"坚持到底", -- [10]
-			"堅持到底", -- [11]
-		}, -- [3]
-		{
-			"Cleanup", -- [1]
-			"Aufräumkommando", -- [2]
-			"Limpieza", -- [3]
-			"Limpieza", -- [4]
-			"Nettoyage", -- [5]
-			"Ripulitura", -- [6]
-			"소탕", -- [7]
-			"Limpeza", -- [8]
-			"Зачистка", -- [9]
-			"摧枯拉朽", -- [10]
-			"收拾殘局", -- [11]
-		}, -- [4]
-		{
-			"The Calm", -- [1]
-			"Ruhe nach dem Sturm", -- [2]
-			"La calma", -- [3]
-			"La calma", -- [4]
-			"Le calme", -- [5]
-			"La calma", -- [6]
-			"정적", -- [7]
-			"A Calma", -- [8]
-			"Затишье", -- [9]
-			"风平浪静", -- [10]
-			"歇息備戰", -- [11]
-		}, -- [5]
-		{
-			"Shadows Gather", -- [1]
-			"Der Schatten wächst", -- [2]
-			"Las sombras se ciernen", -- [3]
-			"Las sombras se reúnen", -- [4]
-			"Les ombres se rassemblent", -- [5]
-			"Le ombre si addensano", -- [6]
-			"어둠이 드리운다", -- [7]
-			"A reunião das sombras", -- [8]
-			"Тени сгущаются", -- [9]
-			"暗影蔽日", -- [10]
-			"暗影集結", -- [11]
-		}, -- [6]
-	},
-	["203"] = {
-		{
-			"Assault on Zan'vess", -- [1]
-			"Angriff auf Zan'vess", -- [2]
-			"Asalto a Zan'vess", -- [3]
-			"Asalto a Zan'vess", -- [4]
-			"L’attaque de Zan’vess", -- [5]
-			"Assalto a Zan'vess", -- [6]
-			"잔베스 강습", -- [7]
-			"Ataque a Zan'vess", -- [8]
-			"Атака на Зан'весс", -- [9]
-			"突袭扎尼维斯", -- [10]
-			"襲擊贊斐斯", -- [11]
-		}, -- [1]
-		{
-			"Defenses of Zan'vess", -- [1]
-			"Verteidigung von Zan'vess", -- [2]
-			"Defensas de Zan'vess", -- [3]
-			"Defensas de Zan'vess", -- [4]
-			"Les défenses de Zan’vess", -- [5]
-			"Difese di Zan'vess", -- [6]
-			"잔베스 수비진", -- [7]
-			"Defesas de Zan'vess", -- [8]
-			"Защитное поле Зан'весса", -- [9]
-			"防御扎尼维斯", -- [10]
-			"贊斐斯的防禦", -- [11]
-		}, -- [2]
-		{
-			"The Heart of Zan'vess", -- [1]
-			"Das Herz von Zan'vess", -- [2]
-			"El corazón de Zan'vess", -- [3]
-			"El corazón de Zan'vess", -- [4]
-			"Le cœur de Zan’vess", -- [5]
-			"Cuore di Zan'vess", -- [6]
-			"잔베스 중심부", -- [7]
-			"O Coração de Zan'vess", -- [8]
-			"Сердце Зан'весса", -- [9]
-			"扎尼维斯之心", -- [10]
-			"贊斐斯之心", -- [11]
-		}, -- [3]
-		{
-			"Weapons of Zan'vess", -- [1]
-			"Die Waffen von Zan'vess", -- [2]
-			"Armas de Zan'vess", -- [3]
-			"Armas de Zan'vess", -- [4]
-			"Les armes de Zan’vess", -- [5]
-			"Armi di Zan'vess", -- [6]
-			"잔베스의 무기들", -- [7]
-			"Armas de Zan'vess", -- [8]
-			"Оружие Зан'весса", -- [9]
-			"扎尼维斯的武装", -- [10]
-			"贊斐斯的武器", -- [11]
-		}, -- [4]
-	},
-	["586"] = {
-		{
-			"Gundrak", -- [1]
-			"Gundrak", -- [2]
-			"Gundrak", -- [3]
-			"Gundrak", -- [4]
-			"Gundrak", -- [5]
-			"Gundrak", -- [6]
-			"군드락", -- [7]
-			"Gundrak", -- [8]
-			"Гундрак", -- [9]
-			"古达克", -- [10]
-			"剛德拉克", -- [11]
-		}, -- [1]
-	},
-	["918"] = {
-		{
-			"Eye of Azshara", -- [1]
-			"Das Auge Azsharas", -- [2]
-			"Ojo de Azshara", -- [3]
-			"Ojo de Azshara", -- [4]
-			"L’Œil d’Azshara", -- [5]
-			"Occhio di Azshara", -- [6]
-			"아즈샤라의 눈", -- [7]
-			"Olho de Azshara", -- [8]
-			"Око Азшары", -- [9]
-			"艾萨拉之眼", -- [10]
-			"艾薩拉之眼", -- [11]
-		}, -- [1]
-	},
-	["998"] = {
-		{
-			"The Council's Vengeance", -- [1]
-			"Die Rache des Rates", -- [2]
-			"La venganza del Consejo", -- [3]
-			"La venganza del Consejo", -- [4]
-			"La vengeance du conseil", -- [5]
-			"La vendetta del concilio", -- [6]
-			"의회의 복수", -- [7]
-			"A vingança do Conselho", -- [8]
-			"Отмщение Совета", -- [9]
-			"议会的复仇", -- [10]
-			"議會的復仇", -- [11]
-		}, -- [1]
-		{
-			"Cut Out the Heart", -- [1]
-			"Das Herz herausschneiden", -- [2]
-			"Arrancar el corazón", -- [3]
-			"Arráncale el alma", -- [4]
-			"Droit au cœur", -- [5]
-			"Estirpare il cuore", -- [6]
-			"심장 도려내기", -- [7]
-			"Arranque o coração", -- [8]
-			"Сердце Властителя", -- [9]
-			"剖腹剜心", -- [10]
-			"直搗黃龍", -- [11]
-		}, -- [2]
-		{
-			"Becoming the Overlord", -- [1]
-			"Werdet zum Oberanführer", -- [2]
-			"Convertirse en el Señor supremo", -- [3]
-			"Convirtiéndose en el Señor Supremo", -- [4]
-			"La succession du suzerain", -- [5]
-			"Il nuovo Supremo", -- [6]
-			"대군주의 자격", -- [7]
-			"Ascensão a lorde supremo", -- [8]
-			"Станьте Властителем", -- [9]
-			"成为大领主", -- [10]
-			"成為主宰", -- [11]
-		}, -- [3]
-	},
-	["208"] = {
-		{
-			"Bloodied Crossing", -- [1]
-			"Blutige Kreuzung", -- [2]
-			"Cruce Sangriento", -- [3]
-			"Cruce Sangriento", -- [4]
-			"Croisée Ensanglantée", -- [5]
-			"Crocevia Insanguinato", -- [6]
-			"선혈의 십자로", -- [7]
-			"Encruzilhada Rubra", -- [8]
-			"Кровавый перекресток", -- [9]
-			"血腥岔路口", -- [10]
-			"染血路口", -- [11]
-		}, -- [1]
-		{
-			"Destroy the Gatekeepers", -- [1]
-			"Zerstört die Torwächter", -- [2]
-			"Destruye a los guardianes", -- [3]
-			"Destruye a los guardianes", -- [4]
-			"Détruire les gardiens de la porte", -- [5]
-			"Distruggi i Guardiani delle Porte", -- [6]
-			"문지기를 처치하라", -- [7]
-			"Destruir os Guarda-pórticos", -- [8]
-			"Убить стражей дворцовых врат", -- [9]
-			"摧毁守门人", -- [10]
-			"擊敗守門人", -- [11]
-		}, -- [2]
-		{
-			"The Foot of Lei Shen", -- [1]
-			"Der Fuß des Lei Shen", -- [2]
-			"El Atrio de Lei Shen", -- [3]
-			"El Atrio de Lei Shen", -- [4]
-			"Le Seuil de Lei Shen", -- [5]
-			"Atrio di Lei Shen", -- [6]
-			"레이 션의 발치", -- [7]
-			"O Pé de Lei Shen", -- [8]
-			"Подступы ко дворцу Лэй Шэня", -- [9]
-			"雷神之基", -- [10]
-			"雷神之足", -- [11]
-		}, -- [3]
-		{
-			"Defeat Shan Bu", -- [1]
-			"Besiegt Shan'Bu", -- [2]
-			"Derrota a Shan Bu", -- [3]
-			"Derrota a Shan Bu", -- [4]
-			"Vaincre Shan Bu", -- [5]
-			"Sconfiggi Shan Bu", -- [6]
-			"샨 부 처치", -- [7]
-			"Derrotar Shan Bu", -- [8]
-			"Победить Шань-Бу", -- [9]
-			"击败山怖", -- [10]
-			"擊敗衫布", -- [11]
-		}, -- [4]
-	},
-	["550"] = {
-		{
-			"Throne of the Tides", -- [1]
-			"Thron der Gezeiten", -- [2]
-			"Trono de las Mareas", -- [3]
-			"Trono de las Mareas", -- [4]
-			"Trône des marées", -- [5]
-			"Trono delle Maree", -- [6]
-			"파도의 왕좌", -- [7]
-			"Trono das Marés", -- [8]
-			"Трон Приливов", -- [9]
-			"潮汐王座", -- [10]
-			"海潮王座", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-	},
-	["450"] = {
-		{
-			"A Vision Revealed", -- [1]
-			"Eine offenbarte Vision", -- [2]
-			"Una visión desvelada", -- [3]
-			"Una visión revelada", -- [4]
-			"Une vision révélée", -- [5]
-			"Una visione rivelatrice", -- [6]
-			"드러난 환영", -- [7]
-			"Uma Visão Revelada", -- [8]
-			"Видение прояснилось", -- [9]
-			"眼前的幻象", -- [10]
-			"揭露異象", -- [11]
-		}, -- [1]
-		{
-			"Enemy Onslaught", -- [1]
-			"Feindlicher Ansturm", -- [2]
-			"Ataque del enemigo", -- [3]
-			"Ataque enemigo", -- [4]
-			"Attaque ennemie", -- [5]
-			"Massacro dei nemici", -- [6]
-			"맹공격", -- [7]
-			"Massacre dos Inimigos", -- [8]
-			"Натиск врага", -- [9]
-			"敌军的突袭", -- [10]
-			"敵方猛攻", -- [11]
-		}, -- [2]
-		{
-			"Commander Vorka", -- [1]
-			"Kommandant Vorka", -- [2]
-			"Comandante Vorka", -- [3]
-			"Comandante Vorka", -- [4]
-			"Le commandant Vorka", -- [5]
-			"Comandante Vorka", -- [6]
-			"사령관 보르카", -- [7]
-			"Comandante Vorka", -- [8]
-			"Командир Ворка", -- [9]
-			"指挥官沃尔卡", -- [10]
-			"指揮官沃爾卡", -- [11]
-		}, -- [3]
-		{
-			"The Final Defense", -- [1]
-			"Die letzte Verteidigung", -- [2]
-			"La última línea de defensa", -- [3]
-			"La última defensa", -- [4]
-			"L’ultime défense", -- [5]
-			"Difesa finale", -- [6]
-			"최후의 항전", -- [7]
-			"A defesa final", -- [8]
-			"Решающий бой", -- [9]
-			"最后的防线", -- [10]
-			"最終防禦", -- [11]
-		}, -- [4]
-	},
-	["618"] = {
-		{
-			"The Steamvault", -- [1]
-			"Dampfkammer", -- [2]
-			"La Cámara de Vapor", -- [3]
-			"La Cámara de Vapor", -- [4]
-			"Le caveau de la Vapeur", -- [5]
-			"Antro dei Vapori", -- [6]
-			"증기 저장고", -- [7]
-			"Câmara dos Vapores", -- [8]
-			"Паровое подземелье", -- [9]
-			"蒸汽地窟", -- [10]
-			"蒸汽洞窟", -- [11]
-		}, -- [1]
-	},
-	["587"] = {
-		{
-			"Gundrak", -- [1]
-			"Gundrak", -- [2]
-			"Gundrak", -- [3]
-			"Gundrak", -- [4]
-			"Gundrak", -- [5]
-			"Gundrak", -- [6]
-			"군드락", -- [7]
-			"Gundrak", -- [8]
-			"Гундрак", -- [9]
-			"古达克", -- [10]
-			"剛德拉克", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-	},
-	["775"] = {
-		{
-			"Sounding the Charge", -- [1]
-			"Die Ladung ausloten", -- [2]
-			"Tocar a carga", -- [3]
-			"Sondeando la carga", -- [4]
-			"Sonner la charge", -- [5]
-			"All'attacco", -- [6]
-			"돌격하라!", -- [7]
-			"O soar da investida", -- [8]
-			"Сигнал к бою", -- [9]
-			"鸣响冲锋号", -- [10]
-			"出征的號角", -- [11]
-		}, -- [1]
-		{
-			"Crusaders' March", -- [1]
-			"Marsch der Kreuzfahrer", -- [2]
-			"La marcha de los cruzados", -- [3]
-			"Marcha de los Cruzados", -- [4]
-			"La marche des croisés", -- [5]
-			"La marcia dei crociati", -- [6]
-			"성전사들의 행진", -- [7]
-			"Marcha dos cruzados", -- [8]
-			"Марш рыцарей", -- [9]
-			"北伐军的远征", -- [10]
-			"十字軍的進擊", -- [11]
-		}, -- [2]
-		{
-			"Holy Vengeance", -- [1]
-			"Heilige Rache", -- [2]
-			"Venganza sagrada", -- [3]
-			"Venganza sagrada", -- [4]
-			"Vengeance sacrée", -- [5]
-			"Sacra vendetta", -- [6]
-			"성스러운 복수", -- [7]
-			"Vingança sagrada", -- [8]
-			"Священная месть", -- [9]
-			"神圣复仇", -- [10]
-			"神聖復仇", -- [11]
-		}, -- [3]
-		{
-			"The Ashbringer", -- [1]
-			"Der Aschenbringer", -- [2]
-			"La Crematoria", -- [3]
-			"La Crematoria", -- [4]
-			"Porte-Cendres", -- [5]
-			"Brandicenere", -- [6]
-			"파멸의 인도자", -- [7]
-			"A Crematória", -- [8]
-			"Испепелитель", -- [9]
-			"灰烬使者", -- [10]
-			"灰燼使者", -- [11]
-		}, -- [4]
-		{
-			"One Final Blessing", -- [1]
-			"Ein letzter Segen", -- [2]
-			"Una última bendición", -- [3]
-			"Una última bendición", -- [4]
-			"Une dernière bénédiction", -- [5]
-			"Un'ultima benedizione", -- [6]
-			"마지막 은총", -- [7]
-			"Uma bênção final", -- [8]
-			"Последнее благословение", -- [9]
-			"最后的祝福", -- [10]
-			"最後的祝福", -- [11]
-		}, -- [5]
-		{
-			"Balnazzar the Risen", -- [1]
-			"Balnazzar der Auferstandene", -- [2]
-			"Balnazzar el Alzado", -- [3]
-			"Balnazzar el Resucitado", -- [4]
-			"Balnazzar le Ressuscité", -- [5]
-			"Balnazzar il Risorto", -- [6]
-			"발나자르의 등장", -- [7]
-			"Balnazzar, o Ascendido", -- [8]
-			"Бальназар Восставший", -- [9]
-			"复生者巴纳扎尔", -- [10]
-			"復活的巴納札爾", -- [11]
-		}, -- [6]
-		{
-			"The Fate of the Highlord", -- [1]
-			"Das Schicksal des Hochlords", -- [2]
-			"El destino del Alto Señor", -- [3]
-			"El destino del Alto señor", -- [4]
-			"Le destin du généralissime", -- [5]
-			"Il destino del Gran Signore", -- [6]
-			"대영주의 운명", -- [7]
-			"O destino do Grão-Lorde", -- [8]
-			"Судьба Верховного лорда", -- [9]
-			"大领主的命运", -- [10]
-			"大領主的命運", -- [11]
-		}, -- [7]
-	},
-	["661"] = {
-		{
-			"The Wicked Grotto", -- [1]
-			"Die Tückische Grotte", -- [2]
-			"La Gruta Maldita", -- [3]
-			"La Gruta Maldita", -- [4]
-			"La grotte Maudite", -- [5]
-			"Grotta Perversa", -- [6]
-			"악의 동굴", -- [7]
-			"Gruta Malévola", -- [8]
-			"Оскверненный грот", -- [9]
-			"邪恶洞穴", -- [10]
-			"邪惡洞穴", -- [11]
-		}, -- [1]
-	},
-	["675"] = {
-		{
-			"The Stonecore", -- [1]
-			"Der Steinerne Kern", -- [2]
-			"El Núcleo Pétreo", -- [3]
-			"El Núcleo Pétreo", -- [4]
-			"Le Cœur-de-Pierre", -- [5]
-			"Nucleo di Pietra", -- [6]
-			"바위심장부", -- [7]
-			"Litocerne", -- [8]
-			"Каменные Недра", -- [9]
-			"巨石之核", -- [10]
-			"石岩之心", -- [11]
-		}, -- [1]
-	},
-	["989"] = {
-		{
-			"The Archmage", -- [1]
-			"Der Erzmagier", -- [2]
-			"El archimago", -- [3]
-			"El Archimago", -- [4]
-			"L’archimage", -- [5]
-			"L'Arcimago", -- [6]
-			"대마법사", -- [7]
-			"O Arquimago", -- [8]
-			"Верховный маг", -- [9]
-			"大法师", -- [10]
-			"大法師", -- [11]
-		}, -- [1]
-		{
-			"Visions of the Past", -- [1]
-			"Visionen der Vergangenheit", -- [2]
-			"Visiones del pasado", -- [3]
-			"Visiones del pasado", -- [4]
-			"Visions du passé", -- [5]
-			"Visioni del Passato", -- [6]
-			"과거의 환영", -- [7]
-			"Visões do passado", -- [8]
-			"Призраки прошлого", -- [9]
-			"往日的幻象", -- [10]
-			"往日的幻象", -- [11]
-		}, -- [2]
-		{
-			"Medivh's Defenses", -- [1]
-			"Medivhs Verteidigung", -- [2]
-			"Las defensas de Medivh", -- [3]
-			"Las defensas de Medivh", -- [4]
-			"Les défenses de Medivh", -- [5]
-			"Le difese di Medivh", -- [6]
-			"메디브의 방어", -- [7]
-			"Defesas de Medivh", -- [8]
-			"Охрана Медива", -- [9]
-			"麦迪文的防御", -- [10]
-			"麥迪文的防禦", -- [11]
-		}, -- [3]
-		{
-			"We Are Not Alone", -- [1]
-			"Wir sind nicht allein", -- [2]
-			"No estamos solos", -- [3]
-			"No estamos solos", -- [4]
-			"Nous ne sommes pas seuls", -- [5]
-			"Non siamo soli", -- [6]
-			"혼자가 아니야", -- [7]
-			"Não estamos sozinhos", -- [8]
-			"Враг близко", -- [9]
-			"我们并不孤单", -- [10]
-			"我們並不孤單", -- [11]
-		}, -- [4]
-		{
-			"Breaking In", -- [1]
-			"Einbruch", -- [2]
-			"Irrupción", -- [3]
-			"Forzando la entrada", -- [4]
-			"Effraction", -- [5]
-			"Irruzione", -- [6]
-			"침입", -- [7]
-			"Arrombamento", -- [8]
-			"Проникновение", -- [9]
-			"突破", -- [10]
-			"闖入", -- [11]
-		}, -- [5]
-		{
-			"Wisped Away", -- [1]
-			"Irrgeleitet", -- [2]
-			"Desvanecido", -- [3]
-			"Llevado lejos", -- [4]
-			"Partir en fumée", -- [5]
-			"Sussurri dispersi", -- [6]
-			"밝혀진 비밀", -- [7]
-			"Evanescente", -- [8]
-			"Улетевшие огоньки", -- [9]
-			"逃逸", -- [10]
-			"幽光消逝", -- [11]
-		}, -- [6]
-		{
-			"Bookkeeping", -- [1]
-			"Buchhaltung", -- [2]
-			"Ocuparse de los libros", -- [3]
-			"Contabilidad", -- [4]
-			"Tenue des livres", -- [5]
-			"Gestire la libreria", -- [6]
-			"고서 폐기", -- [7]
-			"Biblioteconomia", -- [8]
-			"Книгоучет", -- [9]
-			"图书管理", -- [10]
-			"整理書目", -- [11]
-		}, -- [7]
-		{
-			"Not the Intruders You're Looking For", -- [1]
-			"Nicht die Eindringlinge, nach denen ihr sucht", -- [2]
-			"No son los intrusos que buscáis", -- [3]
-			"No son los intrusos que estás buscando", -- [4]
-			"Un intrus peut en cacher un autre", -- [5]
-			"Non gli intrusi che ti aspettavi", -- [6]
-			"예상치 못한 침입자", -- [7]
-			"Não são os intrusos que você está procurando", -- [8]
-			"Это не те незваные гости, которых вы ищете", -- [9]
-			"我们不是你要找的入侵者", -- [10]
-			"不是你要找的入侵者", -- [11]
-		}, -- [8]
-		{
-			"Defenders of Karazhan", -- [1]
-			"Verteidiger von Karazhan", -- [2]
-			"Defensores de Karazhan", -- [3]
-			"Defensores de Karazhan", -- [4]
-			"Les défenseurs de Karazhan", -- [5]
-			"Difensori di Karazhan", -- [6]
-			"카라잔의 수호자", -- [7]
-			"Defensores de Karazhan", -- [8]
-			"Защитники Каражана", -- [9]
-			"卡拉赞的保卫者", -- [10]
-			"卡拉贊保衛者", -- [11]
-		}, -- [9]
-		{
-			"Knowledge is Key", -- [1]
-			"Wissen ist der Schlüssel", -- [2]
-			"El conocimiento es clave", -- [3]
-			"La clave está en el conocimiento", -- [4]
-			"Des connaissances essentielles", -- [5]
-			"La conoscenza è la chiave", -- [6]
-			"지식이 곧 열쇠", -- [7]
-			"O conhecimento é a chave", -- [8]
-			"Знание – сила", -- [9]
-			"知识才是关键。", -- [10]
-			"知識就是鑰匙", -- [11]
-		}, -- [10]
-		{
-			"Words of the Wise", -- [1]
-			"Worte des Weisen", -- [2]
-			"Palabras sabias", -- [3]
-			"Palabras de los sabios", -- [4]
-			"Les conseils du sage", -- [5]
-			"Parole di saggezza", -- [6]
-			"현자의 말", -- [7]
-			"Palavras do sábio", -- [8]
-			"Слова мудрости", -- [9]
-			"睿智之语", -- [10]
-			"智者之言", -- [11]
-		}, -- [11]
-	},
-	["961"] = {
-		{
-			"Picking Up the Pieces", -- [1]
-			"Die, die übrig blieb", -- [2]
-			"Recoger los pedazos", -- [3]
-			"Recoger los pedazos", -- [4]
-			"Ramasser les morceaux", -- [5]
-			"Raccogliere i pezzi", -- [6]
-			"탈출시키기", -- [7]
-			"Juntando as peças", -- [8]
-			"Взять на себя ответственность", -- [9]
-			"收拾残局", -- [10]
-			"撿起碎片", -- [11]
-		}, -- [1]
-		{
-			"Their Blood Will Flow", -- [1]
-			"Ihr Blut wird fließen", -- [2]
-			"Correrá su sangre", -- [3]
-			"Correrá su sangre", -- [4]
-			"Bain de sang", -- [5]
-			"Scorrerà il sangue", -- [6]
-			"피가 강을 이루리니", -- [7]
-			"O sangue vai correr", -- [8]
-			"Их кровь потечет рекой", -- [9]
-			"血流成河", -- [10]
-			"腥風血雨", -- [11]
-		}, -- [2]
-		{
-			"A River of Souls", -- [1]
-			"Ein Fluss aus Seelen", -- [2]
-			"Un río de almas", -- [3]
-			"Un río de almas", -- [4]
-			"La rivière des âmes", -- [5]
-			"Un fiume d'anime", -- [6]
-			"영혼의 강", -- [7]
-			"Um rio de almas", -- [8]
-			"Река душ", -- [9]
-			"灵魂之河", -- [10]
-			"靈魂之流", -- [11]
-		}, -- [3]
-		{
-			"In the Darkness of the Pit", -- [1]
-			"In der Dunkelheit der Grube", -- [2]
-			"En la oscuridad del foso", -- [3]
-			"En la oscuridad del foso", -- [4]
-			"Dans les ténèbres de la fosse", -- [5]
-			"Nell'oscurità della fossa", -- [6]
-			"균열의 어둠 속에서", -- [7]
-			"Nas trevas do fosso", -- [8]
-			"Во мраке преисподней", -- [9]
-			"在深渊的黑暗中", -- [10]
-			"身處黑暗深淵", -- [11]
-		}, -- [4]
-		{
-			"Nowhere to Hide", -- [1]
-			"Kein Versteck ist sicher", -- [2]
-			"Sin escapatoria", -- [3]
-			"Sin escapatoria", -- [4]
-			"Tu ne m’échapperas pas", -- [5]
-			"Senza un posto dove nascondersi", -- [6]
-			"숨을 곳은 없다", -- [7]
-			"Não há onde se esconder", -- [8]
-			"Негде спрятаться", -- [9]
-			"无处可藏", -- [10]
-			"無處可躲", -- [11]
-		}, -- [5]
-		{
-			"Vengeance for the Illidari", -- [1]
-			"Rache für die Illidari", -- [2]
-			"Venganza por los Illidari", -- [3]
-			"Venganza para los Illidari", -- [4]
-			"La vengeance des Illidari", -- [5]
-			"Vendetta per gli Illidari", -- [6]
-			"일리다리의 복수", -- [7]
-			"Vingança pelos Illidari", -- [8]
-			"Месть за иллидари", -- [9]
-			"为伊利达雷复仇", -- [10]
-			"伊利達瑞的復仇", -- [11]
-		}, -- [6]
-		{
-			"Right by Ascension", -- [1]
-			"Recht durch Aufstieg", -- [2]
-			"Derecho por ascensión", -- [3]
-			"Derecho por ascensión", -- [4]
-			"Droit d’ascension", -- [5]
-			"Tue di diritto", -- [6]
-			"합당한 자격", -- [7]
-			"Direito por ascensão", -- [8]
-			"По праву восхождения", -- [9]
-			"升格之道", -- [10]
-			"晉升之權", -- [11]
-		}, -- [7]
-	},
-	["795"] = {
-		{
-			"Wait For Players", -- [1]
-			"Wartet auf Spieler", -- [2]
-			"Esperar a jugadores", -- [3]
-			"Espera a los jugadores", -- [4]
-			"En attente de joueurs", -- [5]
-			"Attendi gli altri giocatori", -- [6]
-			"플레이어 기다리기", -- [7]
-			"Aguarde jogadores", -- [8]
-			"Ожидание игроков", -- [9]
-			"等待玩家", -- [10]
-			"等待救援*", -- [11]
-		}, -- [1]
-		{
-			"Tides of Glory", -- [1]
-			"Die Wellen des Ruhms", -- [2]
-			"Mareas de Gloria", -- [3]
-			"Mareas de gloria", -- [4]
-			"Les marées de la gloire", -- [5]
-			"Maree della gloria", -- [6]
-			"영광의 해일", -- [7]
-			"Mares da glória", -- [8]
-			"Волны Славы", -- [9]
-			"荣光滔滔", -- [10]
-			"榮耀之潮", -- [11]
-		}, -- [2]
-		{
-			"The Tidestone's Call", -- [1]
-			"Der Ruf des Gezeitensteins", -- [2]
-			"La llamada de la Piedramar", -- [3]
-			"La llamada de la Maretista", -- [4]
-			"L’appel de la Pierre-des-Marées", -- [5]
-			"Chiamata della Pietra delle Maree", -- [6]
-			"해일석의 부름", -- [7]
-			"O chamado da Pedramar", -- [8]
-			"Зов Приливного камня", -- [9]
-			"潮汐之石的召唤", -- [10]
-			"潮石的呼喚", -- [11]
-		}, -- [3]
-		{
-			"The Siegebreakers", -- [1]
-			"Die Belagerungsbrecher", -- [2]
-			"Los rompedores de asedio", -- [3]
-			"Los Rompedores de Asedio", -- [4]
-			"Les brise-siège", -- [5]
-			"Gli Spezzassedi", -- [6]
-			"공성파괴자", -- [7]
-			"Os quebra-cercos", -- [8]
-			"Стеноломы", -- [9]
-			"破城者", -- [10]
-			"突圍者", -- [11]
-		}, -- [4]
-		{
-			"Feeding on the Tidestone", -- [1]
-			"Zehren vom Gezeitenstein", -- [2]
-			"Alimentarse de la Piedramar", -- [3]
-			"Alimentándose de la Maretista", -- [4]
-			"Déprédateurs de la Pierre-des-Marées", -- [5]
-			"Consumare la Pietra delle Maree", -- [6]
-			"해일석의 힘 흡수", -- [7]
-			"Predadores da Pedramar", -- [8]
-			"Истощение Приливного камня", -- [9]
-			"吸取潮汐之石", -- [10]
-			"吸取潮石之力", -- [11]
-		}, -- [5]
-		{
-			"The Hunger", -- [1]
-			"Der Hunger", -- [2]
-			"El hambre", -- [3]
-			"El ansia", -- [4]
-			"La faim", -- [5]
-			"La fame", -- [6]
-			"굶주림", -- [7]
-			"A fome", -- [8]
-			"Голод", -- [9]
-			"饥渴", -- [10]
-			"極度飢餓", -- [11]
-		}, -- [6]
-		{
-			"As Two-Faced As They Come", -- [1]
-			"Hinterhältiger geht's nicht", -- [2]
-			"Falsos como ellos solos", -- [3]
-			"Se acercan los hipócritas", -- [4]
-			"Le gueux aux deux visages", -- [5]
-			"Due facce della stessa medaglia", -- [6]
-			"두 얼굴의 자들", -- [7]
-			"Mais duas caras, impossível", -- [8]
-			"Двуличнее не бывает", -- [9]
-			"两面三刀的下场", -- [10]
-			"全是表裡不一的傢伙", -- [11]
-		}, -- [7]
-	},
-	["1101"] = {
-		{
-			"The Azure Prisoner", -- [1]
-			"Der Azurgefangene", -- [2]
-			"El prisionero azur", -- [3]
-			"El Prisionero Azur", -- [4]
-			"Le prisonnier d’Azur", -- [5]
-			"Il prigioniero azzurro", -- [6]
-			"하늘빛 포로", -- [7]
-			"O prisioneiro lazúli", -- [8]
-			"Лазурный пленник", -- [9]
-			"碧蓝囚徒", -- [10]
-			"藍龍囚犯", -- [11]
-		}, -- [1]
-		{
-			"Seeking Answers", -- [1]
-			"Antworten suchen", -- [2]
-			"Buscando respuestas", -- [3]
-			"Buscando respuestas", -- [4]
-			"Chercher des réponses", -- [5]
-			"In cerca di risposte", -- [6]
-			"답 구하기", -- [7]
-			"Em busca de respostas", -- [8]
-			"В поисках ответов", -- [9]
-			"寻找答案", -- [10]
-			"找尋解答", -- [11]
-		}, -- [2]
-		{
-			"Echoes of Ancient Power", -- [1]
-			"Echos uralter Kraft", -- [2]
-			"Ecos de un poder antiguo", -- [3]
-			"Ecos de poder antiguo", -- [4]
-			"Les échos du pouvoir antique", -- [5]
-			"Echi di antico potere", -- [6]
-			"고대의 힘의 메아리", -- [7]
-			"Ecos de poder antigo", -- [8]
-			"Эхо древнего могущества", -- [9]
-			"远古之力的回响", -- [10]
-			"上古之力的回響", -- [11]
-		}, -- [3]
-		{
-			"The Way Out is Through", -- [1]
-			"Da müsst Ihr durch", -- [2]
-			"La salida es a través", -- [3]
-			"Para salir hay que atravesar", -- [4]
-			"La seule issue", -- [5]
-			"L'uscita è attraverso", -- [6]
-			"나가는 유일한 방법", -- [7]
-			"A saída é pelo meio", -- [8]
-			"Единственный путь – вперед", -- [9]
-			"道路通畅", -- [10]
-			"穿過去是唯一的路", -- [11]
-		}, -- [4]
-		{
-			"Consumed by Void", -- [1]
-			"Von Leere verschlungen", -- [2]
-			"Consumido por el vacío", -- [3]
-			"Consumido por el Vacío", -- [4]
-			"Consumé par le Vide", -- [5]
-			"Consumato dal Vuoto", -- [6]
-			"공허의 흡수", -- [7]
-			"Consumidos pelo caos", -- [8]
-			"Поглощение Бездной", -- [9]
-			"虚空吞噬", -- [10]
-			"被虛無吞噬", -- [11]
-		}, -- [5]
-		{
-			"Breaking and Binding", -- [1]
-			"Brechen und Binden", -- [2]
-			"Romper y vincular", -- [3]
-			"Rompiendo y unificando", -- [4]
-			"Recréer le lien", -- [5]
-			"Spezzare e vincolare", -- [6]
-			"구속과 해방", -- [7]
-			"Quebrar e atar", -- [8]
-			"Подчинение и связывание", -- [9]
-			"突破与禁锢", -- [10]
-			"突破與禁錮", -- [11]
-		}, -- [6]
-		{
-			"The Power of Aegwyn", -- [1]
-			"Die Macht von Aegwynn", -- [2]
-			"El poder de Aegwynn", -- [3]
-			"El poder de Aegwyn", -- [4]
-			"La puissance d’Aegwynn", -- [5]
-			"Il potere di Aegwynn", -- [6]
-			"에이그윈의 힘", -- [7]
-			"O poder de Aegwyn", -- [8]
-			"Сила Эгвин", -- [9]
-			"艾格文的力量", -- [10]
-			"艾格文之力", -- [11]
-		}, -- [7]
-	},
-	["806"] = {
-		{
-			"Defend Gadgetzan", -- [1]
-			"Verteidigt Gadgetzan", -- [2]
-			"Defiende Gadgetzan", -- [3]
-			"Protege a Gadgetzan", -- [4]
-			"La défense de Gadgetzan", -- [5]
-			"Difendi Meccania", -- [6]
-			"가젯잔 방어", -- [7]
-			"Defenda Geringontzan", -- [8]
-			"Оборона Прибамбасска", -- [9]
-			"保卫加基森", -- [10]
-			"守禦加基森", -- [11]
-		}, -- [1]
-		{
-			"Defeat the Demon Commanders", -- [1]
-			"Bezwingt den Dämonenkommandanten", -- [2]
-			"Derrota a los comandantes demoníacos", -- [3]
-			"Derrota a los Comandantes demoníacos", -- [4]
-			"Terrasser les commandants démons", -- [5]
-			"Sconfiggere i comandanti demoniaci", -- [6]
-			"악마 사령관 처치", -- [7]
-			"Derrote os Demônios Comandantes", -- [8]
-			"Победа над командирами Легиона", -- [9]
-			"击败恶魔指挥官", -- [10]
-			"擊敗惡魔指揮官", -- [11]
-		}, -- [2]
-		{
-			"Repel the Legion Forces", -- [1]
-			"Schlagt die Streitkräfte der Legion zurück", -- [2]
-			"Rechaza a los ejércitos de la Legión", -- [3]
-			"Repele a las fuerzas de la Legión", -- [4]
-			"Repousser les troupes de la Légion", -- [5]
-			"Respingere le forze della Legione", -- [6]
-			"군단 격퇴", -- [7]
-			"Rechace as forças da Legião", -- [8]
-			"Отражение натиска Легиона", -- [9]
-			"击退军团部队", -- [10]
-			"擊退燃燒軍團", -- [11]
-		}, -- [3]
-		{
-			"Defeat the Demon Lord", -- [1]
-			"Bezwingt den Dämonenfürsten", -- [2]
-			"Derrota al señor demoníaco", -- [3]
-			"Derrota al Señor demoníaco", -- [4]
-			"Terrasser le seigneur démon", -- [5]
-			"Sconfiggere il Signore dei Demoni", -- [6]
-			"악마 군주 처치", -- [7]
-			"Derrotar o lorde-demônio", -- [8]
-			"Смерть повелителю демонов", -- [9]
-			"击败恶魔领主", -- [10]
-			"擊敗惡魔領主", -- [11]
-		}, -- [4]
-	},
-	["663"] = {
-		{
-			"Earth Song Falls", -- [1]
-			"Fälle des Irdenen Gesangs", -- [2]
-			"Cascadas del Canto de la Tierra", -- [3]
-			"Cascadas del Canto de la Tierra", -- [4]
-			"Chutes de Chanteterre", -- [5]
-			"Cascate Cantaterra", -- [6]
-			"대지노래 폭포", -- [7]
-			"Cachoeiras da Canção Telúrica", -- [8]
-			"Поющие водопады", -- [9]
-			"地歌瀑布", -- [10]
-			"地歌瀑布", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-	},
-	["686"] = {
-		{
-			"Shadowmoon Burial Grounds", -- [1]
-			"Schattenmondgrabstätte", -- [2]
-			"Cementerio de Sombraluna", -- [3]
-			"Cementerios de Sombraluna", -- [4]
-			"Terres sacrées d’Ombrelune", -- [5]
-			"Necropoli dei Torvaluna", -- [6]
-			"어둠달 지하묘지", -- [7]
-			"Sepulcrário da Lua Negra", -- [8]
-			"Некрополь Призрачной Луны", -- [9]
-			"影月墓地", -- [10]
-			"影月墓地", -- [11]
-		}, -- [1]
-	},
-	["786"] = {
-		{
-			"The Broken Shore", -- [1]
-			"Die Verheerte Küste", -- [2]
-			"Costa Abrupta", -- [3]
-			"La Costa Quebrada", -- [4]
-			"Rivage Brisé", -- [5]
-			"Riva Dispersa", -- [6]
-			"부서진 해변", -- [7]
-			"A Costa Partida", -- [8]
-			"Расколотый берег", -- [9]
-			"破碎海滩", -- [10]
-			"破碎海岸", -- [11]
-		}, -- [1]
-		{
-			"Storm The Beach", -- [1]
-			"Erstürmt den Strand", -- [2]
-			"Asalta la playa", -- [3]
-			"Asalta la playa", -- [4]
-			"Le grand débarquement", -- [5]
-			"Assalto alla spiaggia", -- [6]
-			"해변 청소", -- [7]
-			"Tomar a praia", -- [8]
-			"Штурм побережья", -- [9]
-			"抢滩登陆", -- [10]
-			"掃蕩海灘", -- [11]
-		}, -- [2]
-		{
-			"Defeat the Commander", -- [1]
-			"Bezwingt den Kommandanten", -- [2]
-			"Derrota al comandante", -- [3]
-			"Derrota al Comandante", -- [4]
-			"Terrasser le commandant", -- [5]
-			"Sconfiggere il comandante", -- [6]
-			"사령관 처치", -- [7]
-			"Derrotar o Comandante", -- [8]
-			"Убить командира", -- [9]
-			"击败指挥官", -- [10]
-			"擊敗指揮官", -- [11]
-		}, -- [3]
-		{
-			"Find Varian", -- [1]
-			"Findet Varian", -- [2]
-			"Encontrar a Varian", -- [3]
-			"Encuentra a Varian", -- [4]
-			"Trouver Varian", -- [5]
-			"Trovare Varian", -- [6]
-			"바리안 찾기", -- [7]
-			"Encontre Varian", -- [8]
-			"Найти Вариана", -- [9]
-			"找到瓦里安", -- [10]
-			"找到瓦里安", -- [11]
-		}, -- [4]
-		{
-			"Destroy the Portal", -- [1]
-			"Vernichtet das Portal", -- [2]
-			"Destruye el portal", -- [3]
-			"Destruye el portal", -- [4]
-			"Destruction du portail", -- [5]
-			"Distruggere il portale", -- [6]
-			"차원문 파괴", -- [7]
-			"Destrua o portal", -- [8]
-			"Разрушение портала", -- [9]
-			"摧毁传送门", -- [10]
-			"摧毀傳送門", -- [11]
-		}, -- [5]
-		{
-			"Raze the Black City", -- [1]
-			"Legt die Schwarze Stadt in Schutt und Asche", -- [2]
-			"Arrasar la Ciudad Negra", -- [3]
-			"Arrasa la Ciudad Negra", -- [4]
-			"Le sac de la ville Noire", -- [5]
-			"Assalto alla Città Oscura", -- [6]
-			"검은 도시 공격", -- [7]
-			"Arrase a Cidade Negra", -- [8]
-			"Предайте огню Черный город", -- [9]
-			"扫荡黑色之城", -- [10]
-			"夷平黑城", -- [11]
-		}, -- [6]
-		{
-			"The Highlord", -- [1]
-			"Der Hochlord", -- [2]
-			"El Alto Señor", -- [3]
-			"El Alto Señor", -- [4]
-			"Le généralissime", -- [5]
-			"Il Gran Signore", -- [6]
-			"대영주", -- [7]
-			"O grão-lorde", -- [8]
-			"Верховный лорд", -- [9]
-			"大领主", -- [10]
-			"大領主", -- [11]
-		}, -- [7]
-		{
-			"Krosus", -- [1]
-			"Krosus", -- [2]
-			"Krosus", -- [3]
-			"Krosus", -- [4]
-			"Krosus", -- [5]
-			"Krosus", -- [6]
-			"크로서스", -- [7]
-			"Krosus", -- [8]
-			"Крос", -- [9]
-			"克洛苏斯", -- [10]
-			"克羅索斯", -- [11]
-		}, -- [8]
-		{
-			"Stop Gul'dan", -- [1]
-			"Haltet Gul'dan auf", -- [2]
-			"Detener a Gul'dan", -- [3]
-			"Detén a Gul'dan", -- [4]
-			"Arrêter Gul’dan", -- [5]
-			"Fermare Gul'dan", -- [6]
-			"굴단을 막아라", -- [7]
-			"Detenha Gul'dan", -- [8]
-			"Остановите Гул'дана", -- [9]
-			"阻止古尔丹", -- [10]
-			"阻止古爾丹", -- [11]
-		}, -- [9]
-	},
-	["742"] = {
-		{
-			"Invasion", -- [1]
-			"Invasion", -- [2]
-			"Invasión", -- [3]
-			"Invasión", -- [4]
-			"L'invasion", -- [5]
-			"Invasione", -- [6]
-			"침략", -- [7]
-			"Invasão", -- [8]
-			"Нападение", -- [9]
-			"入侵", -- [10]
-			"入侵", -- [11]
-		}, -- [1]
-		{
-			"The Scouting Party", -- [1]
-			"Der Spähtrupp", -- [2]
-			"El grupo de exploración", -- [3]
-			"El grupo explorador", -- [4]
-			"Le groupe d’éclaireurs", -- [5]
-			"Il gruppo di esploratori", -- [6]
-			"정찰대", -- [7]
-			"O Grupo de Batedores", -- [8]
-			"Разведывательный отряд", -- [9]
-			"斥候小队", -- [10]
-			"偵察隊", -- [11]
-		}, -- [2]
-		{
-			"Hold Out!", -- [1]
-			"Haltet durch!", -- [2]
-			"¡Aguanta!", -- [3]
-			"¡Aguanta!", -- [4]
-			"Accrochez-vous !", -- [5]
-			"Non cedere!", -- [6]
-			"항전!", -- [7]
-			"Aguentem!", -- [8]
-			"Стоять до последнего!", -- [9]
-			"坚持住！", -- [10]
-			"堅持到底！", -- [11]
-		}, -- [3]
-		{
-			"Cleanup", -- [1]
-			"Aufräumkommando", -- [2]
-			"Limpieza", -- [3]
-			"Limpieza", -- [4]
-			"Nettoyage", -- [5]
-			"Ripulitura", -- [6]
-			"소탕", -- [7]
-			"Limpeza", -- [8]
-			"Зачистка", -- [9]
-			"摧枯拉朽", -- [10]
-			"收拾殘局", -- [11]
-		}, -- [4]
-		{
-			"The Calm", -- [1]
-			"Ruhe nach dem Sturm", -- [2]
-			"La calma", -- [3]
-			"La calma", -- [4]
-			"Le calme", -- [5]
-			"La calma", -- [6]
-			"정적", -- [7]
-			"A Calma", -- [8]
-			"Затишье", -- [9]
-			"风平浪静", -- [10]
-			"歇息備戰", -- [11]
-		}, -- [5]
-		{
-			"Commander's Fall", -- [1]
-			"Fall des Kommandanten", -- [2]
-			"La caída del comandante", -- [3]
-			"La caída del comandante", -- [4]
-			"La chute d’un commandant", -- [5]
-			"La caduta del comandante", -- [6]
-			"지휘관의 죽음", -- [7]
-			"A Ruína do Comandante", -- [8]
-			"Падение вождя", -- [9]
-			"指挥官的陨落", -- [10]
-			"指揮官之死", -- [11]
-		}, -- [6]
-	},
-	["674"] = {
-		{
-			"The Stonecore", -- [1]
-			"Der Steinerne Kern", -- [2]
-			"El Núcleo Pétreo", -- [3]
-			"El Núcleo Pétreo", -- [4]
-			"Le Cœur-de-Pierre", -- [5]
-			"Nucleo di Pietra", -- [6]
-			"바위심장부", -- [7]
-			"Litocerne", -- [8]
-			"Каменные Недра", -- [9]
-			"巨石之核", -- [10]
-			"石岩之心", -- [11]
-		}, -- [1]
-	},
-	["200"] = {
-		{
-			"Enter the Black Temple", -- [1]
-			"Betretet den Schwarzen Tempel", -- [2]
-			"Entra en el Templo Oscuro", -- [3]
-			"Entra en el Templo Oscuro", -- [4]
-			"L’entrée du Temple noir", -- [5]
-			"Entra nel Tempio Nero", -- [6]
-			"검은 사원에 입장", -- [7]
-			"Entre no Templo Negro", -- [8]
-			"Войти в Черный храм", -- [9]
-			"进入黑暗神殿", -- [10]
-			"進入黑暗神廟", -- [11]
-		}, -- [1]
-		{
-			"Search for signs of the Council's Presence", -- [1]
-			"Findet Anzeichen für die Anwesenheit des Rates", -- [2]
-			"Busca señales de la presencia del Consejo", -- [3]
-			"Busca señales de la presencia del Consejo", -- [4]
-			"Trouver des traces de la présence du Conseil", -- [5]
-			"Cerca le tracce della presenza del Concilio", -- [6]
-			"의회가 존재한다는 증거를 찾아서", -- [7]
-			"Busque sinais da Presença do Conselho", -- [8]
-			"Найти следы присутствия Совета Мрачной Жатвы", -- [9]
-			"搜索议会存在的证据", -- [10]
-			"尋找議會存在的跡象", -- [11]
-		}, -- [2]
-		{
-			"Follow Akama to the Shrine of Lost Souls", -- [1]
-			"Folgt Akama zum Schrein der Verlorenen Seelen", -- [2]
-			"Sigue a Akama hasta el Santuario de las Almas Perdidas", -- [3]
-			"Sigue a Akama hasta el Santuario de las Almas Perdidas", -- [4]
-			"Suivre Akama jusqu’au sanctuaire des Âmes perdues", -- [5]
-			"Segui Akama fino al Santuario delle Anime Perdute", -- [6]
-			"아카마를 따라 길 잃은 영혼의 제단으로 이동", -- [7]
-			"Siga Akama até o Santuário das Almas Perdidas", -- [8]
-			"Идти за Акамой в Святилище Потерянных Душ", -- [9]
-			"跟随阿卡玛前往失落灵魂神殿。", -- [10]
-			"跟著阿卡瑪前往失落靈魂神殿", -- [11]
-		}, -- [3]
-		{
-			"Uncover the Council's Plan", -- [1]
-			"Den Plan des Rates aufdecken", -- [2]
-			"Descubre el plan del Consejo", -- [3]
-			"Descubre el plan del Consejo", -- [4]
-			"Découvrir le plan du Conseil", -- [5]
-			"Scopri i piani del Concilio", -- [6]
-			"의회의 계획을 밝혀라", -- [7]
-			"Descobrir o plano do Conselho", -- [8]
-			"Раскрыть план Совета", -- [9]
-			"揭示议会的计划", -- [10]
-			"揭發議會的計畫", -- [11]
-		}, -- [4]
-		{
-			"Defeat the Essence of Order", -- [1]
-			"Bezwingt die Essenz der Ordnung", -- [2]
-			"Derrota a la esencia de orden", -- [3]
-			"Derrota a la esencia de orden", -- [4]
-			"Vaincre l’essence de l’ordre", -- [5]
-			"Sconfiggi l'Essenza dell'Ordine", -- [6]
-			"질서의 정수를 처치하라", -- [7]
-			"Derrote a Essência da Ordem", -- [8]
-			"Победить сущность порядка", -- [9]
-			"击败秩序精华", -- [10]
-			"打敗秩序精華", -- [11]
-		}, -- [5]
-		{
-			"Escape the Shrine of Lost Souls", -- [1]
-			"Entkommt aus dem Schrein der Verlorenen Seelen", -- [2]
-			"Escapa del Santuario de las Almas Perdidas", -- [3]
-			"Escapa del Santuario de las Almas Perdidas", -- [4]
-			"Fuir le sanctuaire des Âmes perdues", -- [5]
-			"Fuga dal Santuario delle Anime Perdute", -- [6]
-			"길 잃은 영혼의 제단 탈출", -- [7]
-			"Fuja do Santuário das Almas Perdidas", -- [8]
-			"Бежать из Святилища Потерянных Душ", -- [9]
-			"逃出失落灵魂神殿", -- [10]
-			"逃離失落靈魂神殿", -- [11]
-		}, -- [6]
-		{
-			"Plunder the Den of Mortal Delights", -- [1]
-			"Plündert den Hof der Irdischen Gelüste", -- [2]
-			"Saquea la Guarida de los Placeres Mortales", -- [3]
-			"Saquea la Guarida de los Placeres Mortales", -- [4]
-			"Piller la tanière des Délices mortelles", -- [5]
-			"Saccheggia l'Antro delle Delizie Mortali", -- [6]
-			"향락의 소굴을 털어라", -- [7]
-			"Saquear Covil dos Prazeres Mortais", -- [8]
-			"Ограбление Приюта Земных Наслаждений", -- [9]
-			"劫掠欢愉之园", -- [10]
-			"劫掠凡慾邪窟", -- [11]
-		}, -- [7]
-		{
-			"Head to the Temple Summit", -- [1]
-			"Begebt Euch zur Tempelspitze", -- [2]
-			"Dirígete a la cima del templo", -- [3]
-			"Dirígete a la cima del templo", -- [4]
-			"Vers le sommet du temple", -- [5]
-			"Raggiungi la Sommità del Tempio", -- [6]
-			"사원 정상으로", -- [7]
-			"Vá para o Ápice do Templo", -- [8]
-			"К Храмовой вершине", -- [9]
-			"前往神殿之巅", -- [10]
-			"前往神廟頂層", -- [11]
-		}, -- [8]
-		{
-			"Defeat Kanrethad", -- [1]
-			"Besiegt Kanrethad", -- [2]
-			"Derrota a Kanrethad", -- [3]
-			"Derrota a Kanrethad", -- [4]
-			"Battre Kanrethad", -- [5]
-			"Sconfiggi Kanrethad", -- [6]
-			"칸레타드 처치", -- [7]
-			"Derrotar Kanrethad", -- [8]
-			"Победить Канретада", -- [9]
-			"击败坎雷萨德", -- [10]
-			"擊敗坎瑞薩德", -- [11]
-		}, -- [9]
-	},
-	["634"] = {
-		{
-			"The Blood Furnace", -- [1]
-			"Der Blutkessel", -- [2]
-			"El Horno de Sangre", -- [3]
-			"El Horno de Sangre", -- [4]
-			"La Fournaise du sang", -- [5]
-			"Forgia del Sangue", -- [6]
-			"피의 용광로", -- [7]
-			"A Fornalha de Sangue", -- [8]
-			"Кузня Крови", -- [9]
-			"鲜血熔炉", -- [10]
-			"血熔爐", -- [11]
-		}, -- [1]
-	},
-	["39"] = {
-		{
-			"End the Terror", -- [1]
-			"Beendet den Alptraum", -- [2]
-			"Acaba con el terror", -- [3]
-			"Acaba con el terror", -- [4]
-			"Mettre fin à la terreur", -- [5]
-			"Fine del terrore", -- [6]
-			"공포의 종식", -- [7]
-			"O Fim do Terror", -- [8]
-			"Конец ужаса", -- [9]
-			"终结恐惧", -- [10]
-			"終結恐懼", -- [11]
-		}, -- [1]
-		{
-			"The Pool of Life", -- [1]
-			"Der Teich des Lebens", -- [2]
-			"La Poza de vida", -- [3]
-			"La Poza de vida", -- [4]
-			"Le bassin de vie", -- [5]
-			"La Pozza della Vita", -- [6]
-			"생명의 웅덩이", -- [7]
-			"A Fonte de Vida", -- [8]
-			"Источник жизни", -- [9]
-			"生命之池", -- [10]
-			"生命之池", -- [11]
-		}, -- [2]
-		{
-			"Search the Crypt", -- [1]
-			"Durchsucht die Krypta", -- [2]
-			"Investiga la cripta", -- [3]
-			"Investiga la cripta", -- [4]
-			"Fouiller la crypte", -- [5]
-			"Esplora la cripta", -- [6]
-			"납골당 수색", -- [7]
-			"Vasculhar a Cripta", -- [8]
-			"Поиски в гробнице", -- [9]
-			"搜索地穴", -- [10]
-			"搜尋墓穴", -- [11]
-		}, -- [3]
-		{
-			"Destroy the Sha", -- [1]
-			"Bezwingt das Sha", -- [2]
-			"Acaba con el sha", -- [3]
-			"Acaba con el sha", -- [4]
-			"Détruire le sha", -- [5]
-			"Distruggi l'Abominio", -- [6]
-			"샤를 파괴하라", -- [7]
-			"Destrua o Sha", -- [8]
-			"Уничтожьте ша", -- [9]
-			"消灭煞魔", -- [10]
-			"消滅煞", -- [11]
-		}, -- [4]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [5]
-	},
-	["540"] = {
-		{
-			"Temple of the Jade Serpent", -- [1]
-			"Tempel der Jadeschlange", -- [2]
-			"Templo del Dragón de Jade", -- [3]
-			"Templo del Dragón de Jade", -- [4]
-			"Temple du Serpent de jade", -- [5]
-			"Tempio della Serpe di Giada", -- [6]
-			"옥룡사", -- [7]
-			"Templo da Serpente de Jade", -- [8]
-			"Храм Нефритовой Змеи", -- [9]
-			"青龙寺", -- [10]
-			"玉蛟寺", -- [11]
-		}, -- [1]
-	},
-	["538"] = {
-		{
-			"Stormstout Brewery", -- [1]
-			"Brauerei Sturmbräu", -- [2]
-			"Cervecería del Trueno", -- [3]
-			"Cervecería del Trueno", -- [4]
-			"Brasserie Brune d’Orage", -- [5]
-			"Birrificio Triplo Malto", -- [6]
-			"스톰스타우트 양조장", -- [7]
-			"Cervejaria Malte do Trovão", -- [8]
-			"Хмелеварня Буйных Портеров", -- [9]
-			"风暴烈酒酿造厂", -- [10]
-			"風暴烈酒酒坊", -- [11]
-		}, -- [1]
-	},
-	["723"] = {
-		{
-			"The Confrontation", -- [1]
-			"Die Konfrontation", -- [2]
-			"El enfrentamiento", -- [3]
-			"La confrontación", -- [4]
-			"L’affrontement", -- [5]
-			"Il confronto", -- [6]
-			"대면", -- [7]
-			"O Confronto", -- [8]
-			"Противостояние", -- [9]
-			"决战", -- [10]
-			"決戰", -- [11]
-		}, -- [1]
-		{
-			"Harnessing the Power", -- [1]
-			"Nutzung der Macht", -- [2]
-			"Dominar el poder", -- [3]
-			"Aprovechando el poder", -- [4]
-			"La puissance maîtrisée", -- [5]
-			"Ottenere il potere", -- [6]
-			"유물의 힘", -- [7]
-			"Reunindo Poder", -- [8]
-			"Обузданная мощь", -- [9]
-			"驾驭神力", -- [10]
-			"駕馭神力", -- [11]
-		}, -- [2]
-		{
-			"Bolstering their Forces", -- [1]
-			"Ihre Streitkräfte stärken", -- [2]
-			"Aumentar sus fuerzas", -- [3]
-			"Reforzando el ataque", -- [4]
-			"L’exaltation des troupes", -- [5]
-			"Sfruttare il potere", -- [6]
-			"계속되는 공격", -- [7]
-			"Reforçando as tropas deles", -- [8]
-			"Укрепление сил", -- [9]
-			"顶住他们的进攻", -- [10]
-			"鞏固部隊", -- [11]
-		}, -- [3]
-		{
-			"The Son of Gruul", -- [1]
-			"Der Sohn von Gruul", -- [2]
-			"El hijo de Gruul", -- [3]
-			"El hijo de Gruul", -- [4]
-			"Le fils de Gruul", -- [5]
-			"Il Figlio di Gruul", -- [6]
-			"그룰의 아들", -- [7]
-			"O Filho de Gruul", -- [8]
-			"Сын Груула", -- [9]
-			"格鲁尔之子", -- [10]
-			"戈魯爾之子", -- [11]
-		}, -- [4]
-		{
-			"The Final Confrontation", -- [1]
-			"Die letzte Konfrontation", -- [2]
-			"El enfrentamiento final", -- [3]
-			"La confrontación final", -- [4]
-			"L’affrontement final", -- [5]
-			"Il confronto finale", -- [6]
-			"결전", -- [7]
-			"O Confronto Final", -- [8]
-			"Кульминация противостояния", -- [9]
-			"最后的决战", -- [10]
-			"最後決戰", -- [11]
-		}, -- [5]
-	},
-	["551"] = {
-		{
-			"The Vortex Pinnacle", -- [1]
-			"Der Vortexgipfel", -- [2]
-			"La Cumbre del Vórtice", -- [3]
-			"La Cumbre del Vórtice", -- [4]
-			"La cime du Vortex", -- [5]
-			"Pinnacolo del Vortice", -- [6]
-			"소용돌이 누각", -- [7]
-			"Pináculo do Vórtice", -- [8]
-			"Вершина Смерча", -- [9]
-			"旋云之巅", -- [10]
-			"漩渦尖塔", -- [11]
-		}, -- [1]
-	},
-	["916"] = {
-		{
-			"Defend Tarren Mill", -- [1]
-			"Verteidigt Tarrens Mühle", -- [2]
-			"Defiende Molino Tarren", -- [3]
-			"Defiende el Molino Tarren", -- [4]
-			"La défense de Moulin-de-Tarren", -- [5]
-			"Difendere il Mulino di Tarren", -- [6]
-			"타렌 제분소 방어", -- [7]
-			"Defender Serraria Tarren", -- [8]
-			"Оборона мельницы Таррен", -- [9]
-			"保卫塔伦米尔", -- [10]
-			"守禦塔倫米爾", -- [11]
-		}, -- [1]
-		{
-			"Defeat the Demon Commander", -- [1]
-			"Bezwingt den Dämonenkommandanten", -- [2]
-			"Derrota al comandante demoníaco", -- [3]
-			"Derrota al Comandante demoníaco", -- [4]
-			"Terrasser le commandant démon", -- [5]
-			"Sconfiggere il comandante demoniaco", -- [6]
-			"악마 사령관 처치", -- [7]
-			"Derrotar o Demônio Comandante", -- [8]
-			"Победа над командиром демонов", -- [9]
-			"击败恶魔指挥官", -- [10]
-			"擊敗惡魔指揮官", -- [11]
-		}, -- [2]
-		{
-			"Repel the Legion Forces", -- [1]
-			"Schlagt die Streitkräfte der Legion zurück", -- [2]
-			"Rechaza a los ejércitos de la Legión", -- [3]
-			"Repele a las fuerzas de la Legión", -- [4]
-			"Repousser les troupes de la Légion", -- [5]
-			"Respingere le forze della Legione", -- [6]
-			"군단 격퇴", -- [7]
-			"Rechaçar as forças da Legião", -- [8]
-			"Отражение натиска Легиона", -- [9]
-			"击退燃烧军团的部队", -- [10]
-			"擊退燃燒軍團", -- [11]
-		}, -- [3]
-		{
-			"Defeat the Demon Lord", -- [1]
-			"Bezwingt den Dämonenfürsten", -- [2]
-			"Derrota al señor demoníaco", -- [3]
-			"Derrota al Señor demoníaco", -- [4]
-			"Terrasser le seigneur démon", -- [5]
-			"Sconfiggere il Signore dei Demoni", -- [6]
-			"악마 군주 처치", -- [7]
-			"Derrotar o lorde-demônio", -- [8]
-			"Смерть повелителю демонов", -- [9]
-			"击败恶魔领主", -- [10]
-			"擊敗惡魔領主", -- [11]
-		}, -- [4]
-	},
-	["907"] = {
-		{
-			"Defend the Crossroads", -- [1]
-			"Verteidigt das Wegekreuz", -- [2]
-			"Defiende El Cruce", -- [3]
-			"Defiende el Cruce", -- [4]
-			"Défendre la Croisée", -- [5]
-			"Difendere il Crocevia", -- [6]
-			"십자로 방어", -- [7]
-			"Defenda a Encruzilhada", -- [8]
-			"Оборона Перекрестка", -- [9]
-			"保卫十字路口", -- [10]
-			"守禦十字路口", -- [11]
-		}, -- [1]
-		{
-			"Defeat the Demon Commander", -- [1]
-			"Bezwingt den Dämonenkommandanten", -- [2]
-			"Derrota al comandante demoníaco", -- [3]
-			"Derrota al Comandante demoníaco", -- [4]
-			"Terrasser le commandant démon", -- [5]
-			"Sconfiggere il comandante demoniaco", -- [6]
-			"악마 사령관 처치", -- [7]
-			"Derrotar o Demônio Comandante", -- [8]
-			"Победа над командиром демонов", -- [9]
-			"击败恶魔指挥官", -- [10]
-			"擊敗惡魔指揮官", -- [11]
-		}, -- [2]
-		{
-			"Repel the Legion Forces", -- [1]
-			"Schlagt die Streitkräfte der Legion zurück", -- [2]
-			"Rechaza a los ejércitos de la Legión", -- [3]
-			"Repele a las fuerzas de la Legión", -- [4]
-			"Repousser les troupes de la Légion", -- [5]
-			"Respingere le forze della Legione", -- [6]
-			"군단 격퇴", -- [7]
-			"Rechace as forças da Legião", -- [8]
-			"Отражение натиска Легиона", -- [9]
-			"击退军团部队", -- [10]
-			"擊退燃燒軍團", -- [11]
-		}, -- [3]
-		{
-			"Defeat the Demon Lord", -- [1]
-			"Bezwingt den Dämonenfürsten", -- [2]
-			"Derrota al señor demoníaco", -- [3]
-			"Derrota al Señor demoníaco", -- [4]
-			"Terrasser le seigneur démon", -- [5]
-			"Sconfiggere il Signore dei Demoni", -- [6]
-			"악마 군주 처치", -- [7]
-			"Derrote o Lorde Demônio", -- [8]
-			"Смерть повелителю демонов", -- [9]
-			"击败恶魔领主", -- [10]
-			"擊敗惡魔領主", -- [11]
-		}, -- [4]
-	},
-	["731"] = {
-		{
-			"Extinguish Runes", -- [1]
-			"Löscht die Runen", -- [2]
-			"Extinción de runas", -- [3]
-			"Extinguir runas", -- [4]
-			"Éteindre les runes", -- [5]
-			"Estingui le rune", -- [6]
-			"룬 꺼뜨리기", -- [7]
-			"Extinguir runas", -- [8]
-			"Погасить руны", -- [9]
-			"熄灭符文", -- [10]
-			"熄滅符文", -- [11]
-		}, -- [1]
-		{
-			"Upper Blackrock Spire", -- [1]
-			"Obere Schwarzfelsspitze", -- [2]
-			"Cumbre de Roca Negra Superior", -- [3]
-			"Cumbre de Roca Negra superior", -- [4]
-			"Sommet du pic Rochenoire", -- [5]
-			"Bastioni di Roccianera Superiori", -- [6]
-			"검은바위 첨탑 상층", -- [7]
-			"Pico da Rocha Negra Superior", -- [8]
-			"Верхняя часть пика Черной горы", -- [9]
-			"黑石塔上层", -- [10]
-			"黑石塔上層", -- [11]
-		}, -- [2]
-	},
-	["929"] = {
-		{
-			"Halls of Valor", -- [1]
-			"Die Hallen der Tapferkeit", -- [2]
-			"Cámaras del Valor", -- [3]
-			"Salones del Valor", -- [4]
-			"Les salles des Valeureux", -- [5]
-			"Sale del Valore", -- [6]
-			"용맹의 전당", -- [7]
-			"Salões da Bravura", -- [8]
-			"Чертоги Доблести", -- [9]
-			"英灵殿", -- [10]
-			"英靈殿", -- [11]
-		}, -- [1]
-	},
-	["708"] = {
-		{
-			"The Everbloom", -- [1]
-			"Der Immergrüne Flor", -- [2]
-			"El Vergel Eterno", -- [3]
-			"El Sempibrote", -- [4]
-			"La Flore éternelle", -- [5]
-			"Verdeterno", -- [6]
-			"상록숲", -- [7]
-			"Floretérnia", -- [8]
-			"Вечное Цветение", -- [9]
-			"永茂林地", -- [10]
-			"永茂林", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-	},
-	["933"] = {
-		{
-			"Another Battle", -- [1]
-			"Ein weiterer Kampf", -- [2]
-			"Otra batalla", -- [3]
-			"Otra batalla", -- [4]
-			"Un autre combat", -- [5]
-			"Un'altra battaglia", -- [6]
-			"또 다른 전투", -- [7]
-			"Uma outra batalha", -- [8]
-			"Очередная битва", -- [9]
-			"新的战场", -- [10]
-			"另一個戰場", -- [11]
-		}, -- [1]
-		{
-			"A Desperate Charge", -- [1]
-			"Ein verzweifelter Ansturm", -- [2]
-			"Una carga desesperada", -- [3]
-			"Una carga desesperada", -- [4]
-			"Baroud d’honneur", -- [5]
-			"Una carica disperata", -- [6]
-			"필사의 돌격", -- [7]
-			"Uma investida desesperada", -- [8]
-			"Отчаянный натиск", -- [9]
-			"最后的冲锋", -- [10]
-			"背水一戰", -- [11]
-		}, -- [2]
-		{
-			"The Val'kyr", -- [1]
-			"Die Val'kyr", -- [2]
-			"La Val'kyr", -- [3]
-			"La Val'kyr", -- [4]
-			"Les Val’kyrs", -- [5]
-			"Val'kyr", -- [6]
-			"발키르", -- [7]
-			"As Val'kyren", -- [8]
-			"Валь'кира", -- [9]
-			"瓦格里", -- [10]
-			"華爾琪", -- [11]
-		}, -- [3]
-		{
-			"Reinforcing the Warband", -- [1]
-			"Die Truppen verstärken", -- [2]
-			"Reforzar a los guerreros", -- [3]
-			"Reforzando la banda de guerra", -- [4]
-			"Épauler la troupe de guerre", -- [5]
-			"Rinforzi alla squadra", -- [6]
-			"전투부대 지원", -- [7]
-			"Reforço do bando guerreiro", -- [8]
-			"Подкрепление", -- [9]
-			"援助兵团", -- [10]
-			"支援作戰", -- [11]
-		}, -- [4]
-		{
-			"Just A Pit Lord", -- [1]
-			"Nur ein Grubenlord", -- [2]
-			"Un mero señor del foso", -- [3]
-			"Solo un Señor del foso", -- [4]
-			"Une simple formalité", -- [5]
-			"Un comune Signore delle Fosse", -- [6]
-			"겨우 지옥의 군주 한 명에게...", -- [7]
-			"Um mero lorde abissal", -- [8]
-			"Всего лишь властитель преисподней", -- [9]
-			"深渊领主而已", -- [10]
-			"深淵領主", -- [11]
-		}, -- [5]
-	},
-	["49"] = {
-		{
-			"Siege of Niuzao Temple", -- [1]
-			"Belagerung des Niuzaotempels", -- [2]
-			"Asedio del Templo de Niuzao", -- [3]
-			"Asedio del Templo de Niuzao", -- [4]
-			"Siège du temple de Niuzao", -- [5]
-			"Assedio al Tempio di Niuzao", -- [6]
-			"니우짜오 사원 공성전투", -- [7]
-			"Cerco ao Templo Niuzao", -- [8]
-			"Осада храма Нюцзао", -- [9]
-			"围攻砮皂寺", -- [10]
-			"圍攻怒兆寺", -- [11]
-		}, -- [1]
-	},
-	["684"] = {
-		{
-			"Iron Docks", -- [1]
-			"Eisendocks", -- [2]
-			"Puerto de Hierro", -- [3]
-			"Muelles de Hierro", -- [4]
-			"Quais de Fer", -- [5]
-			"Darsena di Ferro", -- [6]
-			"강철 선착장", -- [7]
-			"Docas de Ferro", -- [8]
-			"Железные доки", -- [9]
-			"钢铁码头", -- [10]
-			"鋼鐵碼頭", -- [11]
-		}, -- [1]
-	},
-	["955"] = {
-		{
-			"Push Back the Legion Assault", -- [1]
-			"Schlagt den Angriff der Legion zurück", -- [2]
-			"Rechazar el asalto de la Legión", -- [3]
-			"Haz retroceder el ataque de la Legión", -- [4]
-			"Repousser l’assaut de la Légion", -- [5]
-			"Respingere l'assalto della Legione", -- [6]
-			"군단 습격 저지", -- [7]
-			"Rechace o ataque da Legião", -- [8]
-			"Остановите натиск Легиона", -- [9]
-			"击退军团的攻势", -- [10]
-			"擊退進逼的燃燒軍團", -- [11]
-		}, -- [1]
-		{
-			"Defeat the Legion Commander", -- [1]
-			"Bezwingt den Kommandanten der Legion", -- [2]
-			"Derrota al comandante de la Legión", -- [3]
-			"Derrota al Comandante de la Legión", -- [4]
-			"Terrasser le commandant de la Légion", -- [5]
-			"Sconfiggere il Comandante della Legione", -- [6]
-			"군단 사령관 처치", -- [7]
-			"Derrote o Comandante de Legião", -- [8]
-			"Победа над командиром Легиона", -- [9]
-			"击败军团指挥官", -- [10]
-			"擊敗燃燒軍團指揮官", -- [11]
-		}, -- [2]
-	},
-	["957"] = {
-		{
-			"The Frozen Halls", -- [1]
-			"Die Gefrorenen Hallen", -- [2]
-			"Las Cámaras Heladas", -- [3]
-			"Las Cámaras Heladas", -- [4]
-			"Les salles Gelées", -- [5]
-			"Sale Gelide", -- [6]
-			"얼어붙은 전당", -- [7]
-			"Salões Gelados", -- [8]
-			"Ледяные залы", -- [9]
-			"冰封大殿", -- [10]
-			"冰封大廳", -- [11]
-		}, -- [1]
-		{
-			"Meltdown", -- [1]
-			"Kernschmelze", -- [2]
-			"Fusión", -- [3]
-			"Fusión", -- [4]
-			"Dégel", -- [5]
-			"Scioglimento", -- [6]
-			"얼음 녹이기", -- [7]
-			"Derretimento", -- [8]
-			"Оттепель", -- [9]
-			"熔毁", -- [10]
-			"融化", -- [11]
-		}, -- [2]
-		{
-			"Hot On The Trail", -- [1]
-			"Auf den Fersen", -- [2]
-			"Pisándole los talones", -- [3]
-			"Pisándole los talones", -- [4]
-			"La piste est toute chaude", -- [5]
-			"La notte dei morti infuocati", -- [6]
-			"뜨거운 추격", -- [7]
-			"Trilha quente", -- [8]
-			"По горячим следам", -- [9]
-			"热力追踪", -- [10]
-			"奮力追擊", -- [11]
-		}, -- [3]
-		{
-			"Playing With Fire", -- [1]
-			"Spiel mit dem Feuer", -- [2]
-			"Jugando con fuego", -- [3]
-			"Jugando con fuego", -- [4]
-			"Jouer avec le feu", -- [5]
-			"Giocare col fuoco", -- [6]
-			"불장난은 나빠요", -- [7]
-			"Brincando com fogo", -- [8]
-			"Игра с огнем", -- [9]
-			"玩火自焚", -- [10]
-			"玩火自焚", -- [11]
-		}, -- [4]
-		{
-			"The Flamestrike", -- [1]
-			"Der Flammenstoß", -- [2]
-			"El Fogonazo", -- [3]
-			"El Fogonazo", -- [4]
-			"Le Choc de flammes", -- [5]
-			"Colonne di fuoco", -- [6]
-			"불기둥", -- [7]
-			"Golpe Flamejante", -- [8]
-			"Огненный столб", -- [9]
-			"烈焰之击", -- [10]
-			"烈焰之擊", -- [11]
-		}, -- [5]
-	},
-	["958"] = {
-		{
-			"Defend the Rear Gate", -- [1]
-			"Verteidigt das hintere Tor", -- [2]
-			"Defiende la Puerta Trasera", -- [3]
-			"Defiende la puerta trasera", -- [4]
-			"La défense de la porte d’Azshara", -- [5]
-			"Difendere l'Ingresso Posteriore di Orgrimmar", -- [6]
-			"뒷문 방어", -- [7]
-			"Defender o Portão Traseiro", -- [8]
-			"Оборона Задних врат", -- [9]
-			"保卫后门", -- [10]
-			"守禦後門", -- [11]
-		}, -- [1]
-		{
-			"Defeat the Demon Commander", -- [1]
-			"Bezwingt den Dämonenkommandanten", -- [2]
-			"Derrota al comandante demoníaco", -- [3]
-			"Derrota al Comandante demoníaco", -- [4]
-			"Terrasser le commandant démon", -- [5]
-			"Sconfiggere il comandante demoniaco", -- [6]
-			"악마 사령관 처치", -- [7]
-			"Derrotar o Demônio Comandante", -- [8]
-			"Победа над командиром демонов", -- [9]
-			"击败恶魔指挥官", -- [10]
-			"擊敗惡魔指揮官", -- [11]
-		}, -- [2]
-		{
-			"Repel the Legion Forces", -- [1]
-			"Schlagt die Streitkräfte der Legion zurück", -- [2]
-			"Rechaza a los ejércitos de la Legión", -- [3]
-			"Repele a las fuerzas de la Legión", -- [4]
-			"Repousser les troupes de la Légion", -- [5]
-			"Respingere le forze della Legione", -- [6]
-			"군단 격퇴", -- [7]
-			"Rechaçar as forças da Legião", -- [8]
-			"Отражение натиска Легиона", -- [9]
-			"击退燃烧军团的部队", -- [10]
-			"擊退燃燒軍團", -- [11]
-		}, -- [3]
-		{
-			"Defeat the Demon Lord", -- [1]
-			"Bezwingt den Dämonenfürsten", -- [2]
-			"Derrota al señor demoníaco", -- [3]
-			"Derrota al Señor demoníaco", -- [4]
-			"Terrasser le seigneur démon", -- [5]
-			"Sconfiggere il Signore dei Demoni", -- [6]
-			"악마 군주 처치", -- [7]
-			"Derrotar o lorde-demônio", -- [8]
-			"Смерть повелителю демонов", -- [9]
-			"击败恶魔领主", -- [10]
-			"擊敗惡魔領主", -- [11]
-		}, -- [4]
-	},
-	["967"] = {
-		{
-			"The Arcway", -- [1]
-			"Der Arkus", -- [2]
-			"La Arquería", -- [3]
-			"El Arco", -- [4]
-			"L’Arcavia", -- [5]
-			"L'Arcavia", -- [6]
-			"비전로", -- [7]
-			"O Arcâneo", -- [8]
-			"Катакомбы Сурамара", -- [9]
-			"魔法回廊", -- [10]
-			"幽暗地道", -- [11]
-		}, -- [1]
-	},
-	["973"] = {
-		{
-			"Landing", -- [1]
-			"Landung", -- [2]
-			"Desembarco", -- [3]
-			"Peñón", -- [4]
-			"Atterrissage", -- [5]
-			"Approdo", -- [6]
-			"착륙", -- [7]
-			"Pouso", -- [8]
-			"Высадка", -- [9]
-			"登陆", -- [10]
-			"降落", -- [11]
-		}, -- [1]
-		{
-			"The Haunted Harbor", -- [1]
-			"Der heimgesuchte Hafen", -- [2]
-			"El puerto embrujado", -- [3]
-			"El Puerto hechizado", -- [4]
-			"Le port hanté", -- [5]
-			"Il porto infestato", -- [6]
-			"귀신 들린 항구", -- [7]
-			"O porto assombrado", -- [8]
-			"Порт призраков", -- [9]
-			"港湾鬼影", -- [10]
-			"鬧鬼的港口", -- [11]
-		}, -- [2]
-		{
-			"Distracting Them Wisely", -- [1]
-			"Kluge Ablenkung", -- [2]
-			"Distraerlos sabiamente", -- [3]
-			"Distráelos con prudencia", -- [4]
-			"Sage diversion", -- [5]
-			"Distrarli con saggezza", -- [6]
-			"도둑질의 방법", -- [7]
-			"Sábia distração", -- [8]
-			"Продуманное отвлечение", -- [9]
-			"巧学活用", -- [10]
-			"以智取勝", -- [11]
-		}, -- [3]
-		{
-			"Easy Pickings", -- [1]
-			"Leichte Aufgabe", -- [2]
-			"Blancos fáciles", -- [3]
-			"Blancos fáciles", -- [4]
-			"Des cibles faciles", -- [5]
-			"Un gioco da ragazzi", -- [6]
-			"슬쩍하기", -- [7]
-			"Presas fáceis", -- [8]
-			"Легкая добыча", -- [9]
-			"轻而易举", -- [10]
-			"不是對手", -- [11]
-		}, -- [4]
-		{
-			"Just a Few More", -- [1]
-			"Nur noch ein paar mehr", -- [2]
-			"Solo unas cuantas más", -- [3]
-			"Solo unos pocos más", -- [4]
-			"Toujours plus", -- [5]
-			"Ancora qualcuna", -- [6]
-			"감시석이 더 필요해", -- [7]
-			"Só mais alguns", -- [8]
-			"Еще немного, еще чуть-чуть...", -- [9]
-			"再来点儿", -- [10]
-			"再多幾個", -- [11]
-		}, -- [5]
-		{
-			"The Wall of Fog", -- [1]
-			"Die Nebelmauer", -- [2]
-			"El muro de niebla", -- [3]
-			"El muro de niebla", -- [4]
-			"Le mur de brume", -- [5]
-			"Il muro di nebbia", -- [6]
-			"안개의 벽", -- [7]
-			"A muralha de névoa", -- [8]
-			"Стена тумана", -- [9]
-			"迷雾之墙", -- [10]
-			"迷霧之牆", -- [11]
-		}, -- [6]
-		{
-			"Into the Mists", -- [1]
-			"In die Nebel", -- [2]
-			"Entre la niebla", -- [3]
-			"Entre la niebla", -- [4]
-			"Dans les brumes", -- [5]
-			"Nelle nebbie", -- [6]
-			"안개 속으로", -- [7]
-			"Brumas adentro", -- [8]
-			"Сквозь туман", -- [9]
-			"深入迷雾", -- [10]
-			"進入霧中", -- [11]
-		}, -- [7]
-		{
-			"The Shallows of Death", -- [1]
-			"Die Untiefen des Todes", -- [2]
-			"Los bajíos de muerte", -- [3]
-			"Los bajos de la muerte", -- [4]
-			"Les bas-fonds de la mort", -- [5]
-			"La riviera della morte", -- [6]
-			"죽음의 여울", -- [7]
-			"A várzea da morte", -- [8]
-			"Отмель смерти", -- [9]
-			"死亡浅滩", -- [10]
-			"死亡低地", -- [11]
-		}, -- [8]
-		{
-			"Deadly Shadows", -- [1]
-			"Tödliche Schatten", -- [2]
-			"Sombras mortales", -- [3]
-			"Sombras letales", -- [4]
-			"Ombres meurtrières", -- [5]
-			"Ombre letali", -- [6]
-			"치명적인 그림자", -- [7]
-			"Sombras mortais", -- [8]
-			"Смертоносные тени", -- [9]
-			"致命阴影", -- [10]
-			"致命的暗影", -- [11]
-		}, -- [9]
-		{
-			"The Hunter or the Hunted", -- [1]
-			"Jäger oder Gejagter", -- [2]
-			"El cazador o la presa", -- [3]
-			"El cazador o la presa", -- [4]
-			"Le chasseur ou la proie", -- [5]
-			"Cacciatore o preda", -- [6]
-			"사냥하거나 혹은 사냥당하거나", -- [7]
-			"A caça ou o caçador", -- [8]
-			"Кто был охотник, кто добыча...", -- [9]
-			"猎人还是猎物？", -- [10]
-			"獵殺或是被獵", -- [11]
-		}, -- [10]
-		{
-			"For the Fallen", -- [1]
-			"Für die Gefallenen", -- [2]
-			"Por los caídos", -- [3]
-			"Por los caídos", -- [4]
-			"Au nom des disparus", -- [5]
-			"Per i caduti", -- [6]
-			"망자의 복수", -- [7]
-			"Pelos caídos", -- [8]
-			"Месть за павших", -- [9]
-			"复仇之战", -- [10]
-			"為了倒下的同伴", -- [11]
-		}, -- [11]
-		{
-			"The Lair of the Beast", -- [1]
-			"Der Hort der Bestie", -- [2]
-			"La guarida de la bestia", -- [3]
-			"La guarida de la bestia", -- [4]
-			"Le repaire de la bête", -- [5]
-			"La tana della bestia", -- [6]
-			"야수의 둥지", -- [7]
-			"O covil da fera", -- [8]
-			"Логово чудовища", -- [9]
-			"野兽之巢", -- [10]
-			"野獸巢穴", -- [11]
-		}, -- [12]
-		{
-			"Talonclaw", -- [1]
-			"Fangklaue", -- [2]
-			"Garra Feroz", -- [3]
-			"Garfa Corva", -- [4]
-			"Griffe-Serre", -- [5]
-			"Grinfiartiglio", -- [6]
-			"칼날갈퀴", -- [7]
-			"Garranha", -- [8]
-			"Хищный Коготь", -- [9]
-			"雄鹰之爪", -- [10]
-			"猛禽之爪", -- [11]
-		}, -- [13]
-	},
-	["991"] = {
-		{
-			"The Twilight Camp", -- [1]
-			"Der Stützpunkt des Schattenhammers", -- [2]
-			"El Campamento Crepuscular", -- [3]
-			"El campamento del Martillo Crepuscular", -- [4]
-			"Le campement du Crépuscule", -- [5]
-			"L'accampamento del Crepuscolo", -- [6]
-			"황혼의 야영지", -- [7]
-			"O Acampamento do Crepúsculo", -- [8]
-			"Сумеречный лагерь", -- [9]
-			"暮光营地", -- [10]
-			"暮光營地", -- [11]
-		}, -- [1]
-		{
-			"Raiding the Tomb Raiders", -- [1]
-			"Die Grabräuber berauben", -- [2]
-			"Asaltar a los asaltantes de tumbas", -- [3]
-			"Asalto a los cazadores de tumbas", -- [4]
-			"Sus aux pilleurs de tombe", -- [5]
-			"Incursione contro i Predatori di Tombe", -- [6]
-			"도굴꾼의 최후", -- [7]
-			"Saqueando os saqueadores de tumbas", -- [8]
-			"Ограбление грабителей могил", -- [9]
-			"螳螂捕蝉", -- [10]
-			"追殺盜墓者", -- [11]
-		}, -- [2]
-		{
-			"The Desecrated Tomb", -- [1]
-			"Das entweihte Grab", -- [2]
-			"La tumba profanada", -- [3]
-			"La tumba profanada", -- [4]
-			"Le tombeau profané", -- [5]
-			"La tomba sconsacrata", -- [6]
-			"훼손된 무덤", -- [7]
-			"A tumba profanada", -- [8]
-			"Оскверненная гробница", -- [9]
-			"被亵渎的古墓", -- [10]
-			"被褻瀆的陵墓", -- [11]
-		}, -- [3]
-		{
-			"The Tomb of Tyr", -- [1]
-			"Tyrs Grabmal", -- [2]
-			"La Tumba de Tyr", -- [3]
-			"La Tumba de Tyr", -- [4]
-			"Le tombeau de Tyr", -- [5]
-			"Tomba di Tyr", -- [6]
-			"티르의 무덤", -- [7]
-			"A tumba de Tyr", -- [8]
-			"Гробница Тира", -- [9]
-			"提尔之墓", -- [10]
-			"提爾之墓", -- [11]
-		}, -- [4]
-		{
-			"Reconsecration", -- [1]
-			"Wiederweihe", -- [2]
-			"Nueva consagración", -- [3]
-			"Reconsagración", -- [4]
-			"Réhabilitation sacrée", -- [5]
-			"Riconsacrazione", -- [6]
-			"신성불가침", -- [7]
-			"Reconsagração", -- [8]
-			"Повторное освящение", -- [9]
-			"再次净化", -- [10]
-			"再次奉獻", -- [11]
-		}, -- [5]
-		{
-			"Don't Fear the Reaper", -- [1]
-			"Keine Angst vorm Eisenmann", -- [2]
-			"No temas al segador", -- [3]
-			"No temas al segador", -- [4]
-			"Ne craignez pas le faucheur", -- [5]
-			"Non temere il mietitore", -- [6]
-			"공허를 두려워 말라", -- [7]
-			"Não tema o ceifador", -- [8]
-			"Не бойся Жнеца", -- [9]
-			"浑身是胆", -- [10]
-			"別害怕死亡", -- [11]
-		}, -- [6]
-		{
-			"Dark Passage", -- [1]
-			"Dunkle Passage", -- [2]
-			"Pasadizo oscuro", -- [3]
-			"Pasaje oscuro", -- [4]
-			"Passage obscur", -- [5]
-			"Passaggio oscuro", -- [6]
-			"어둠의 통로", -- [7]
-			"Passagem sombria", -- [8]
-			"Темный путь", -- [9]
-			"黑暗通道", -- [10]
-			"黑暗通道", -- [11]
-		}, -- [7]
-		{
-			"Death to the Deacon", -- [1]
-			"Tod dem Diakon", -- [2]
-			"Muerte al diácono", -- [3]
-			"Muerte al Diácono", -- [4]
-			"Mort au diacre", -- [5]
-			"Morte al Diacono", -- [6]
-			"부제에게 죽음을", -- [7]
-			"Morte ao Diácono", -- [8]
-			"Смерть Дьякону", -- [9]
-			"执事之死", -- [10]
-			"執事之死", -- [11]
-		}, -- [8]
-		{
-			"The Blade of the Black Empire", -- [1]
-			"Die Klinge des schwarzen Imperiums", -- [2]
-			"La Daga del Imperio Negro", -- [3]
-			"La Espada del Imperio Negro", -- [4]
-			"La lame de l’empire noir", -- [5]
-			"La Lama dell'Impero Nero", -- [6]
-			"검은 제국의 비수", -- [7]
-			"A Lâmina do Império Negro", -- [8]
-			"Клинок Темной Империи", -- [9]
-			"黑暗帝国之刃", -- [10]
-			"黑暗帝國之刃", -- [11]
-		}, -- [9]
-		{
-			"The True Death of Zakajz", -- [1]
-			"Der wahre Tod von Zakajz", -- [2]
-			"La verdadera muerte de Zakajz", -- [3]
-			"La muerte definitiva de Zakajz", -- [4]
-			"La véritable mort de Zakajz", -- [5]
-			"La vera morte di Zakajz", -- [6]
-			"마침내 죽은 자카이즈", -- [7]
-			"A verdadeira morte de Zakajz", -- [8]
-			"Окончательная смерть Закажа", -- [9]
-			"扎卡兹的彻底死亡", -- [10]
-			"扎卡茲真正死亡", -- [11]
-		}, -- [10]
-	},
-	["671"] = {
-		{
-			"Blackrock Depths", -- [1]
-			"Schwarzfelstiefen", -- [2]
-			"Profundidades de Roca Negra", -- [3]
-			"Profundidades de Roca Negra", -- [4]
-			"Profondeurs de Rochenoire", -- [5]
-			"Sotterranei di Roccianera", -- [6]
-			"검은바위 나락", -- [7]
-			"Abismo Rocha Negra", -- [8]
-			"Глубины Черной горы", -- [9]
-			"黑石深渊", -- [10]
-			"黑石深淵", -- [11]
-		}, -- [1]
-		{
-			"Ring of Law", -- [1]
-			"Ring des Gesetzes", -- [2]
-			"Círculo de la Ley", -- [3]
-			"Círculo de la Ley", -- [4]
-			"Cercle de la loi", -- [5]
-			"Anello della Legge", -- [6]
-			"법의 심판장", -- [7]
-			"Círculo da Lei", -- [8]
-			"Зал Правосудия", -- [9]
-			"秩序竞技场", -- [10]
-			"秩序競技場", -- [11]
-		}, -- [2]
-		{
-			"High Interrogator Gerstahn", -- [1]
-			"Verhörmeisterin Gerstahn", -- [2]
-			"Alta interrogadora Gerstahn", -- [3]
-			"Alta interrogadora Gerstahn", -- [4]
-			"Grande interrogatrice Gerstahn", -- [5]
-			"Gerstahn la Grande Accusatrice", -- [6]
-			"대심문관 게르스탄", -- [7]
-			"Suprema Interrogadora Gerstahn", -- [8]
-			"Верховный дознаватель Герштан", -- [9]
-			"审讯官格斯塔恩", -- [10]
-			"高階審問者格斯塔恩", -- [11]
-		}, -- [3]
-		{
-			"Bael'Gar", -- [1]
-			"Bael'Gar", -- [2]
-			"Bael'Gar", -- [3]
-			"Bael'Gar", -- [4]
-			"Bael’Gar", -- [5]
-			"Bael'gar", -- [6]
-			"밸가르", -- [7]
-			"Bael'gar", -- [8]
-			"Бейл'Гор", -- [9]
-			"贝尔加", -- [10]
-			"貝爾加", -- [11]
-		}, -- [4]
-		{
-			"The Grim Guzzler", -- [1]
-			"Zum Grimmigen Säufer", -- [2]
-			"Tragapenas", -- [3]
-			"Tragapenas", -- [4]
-			"Le Sinistre écluseur", -- [5]
-			"Il Torvo Beone", -- [6]
-			"험상궂은 주정뱅이 선술집", -- [7]
-			"O Glutão Implacável", -- [8]
-			"Трактир \"Угрюмый обжора\"", -- [9]
-			"黑铁酒吧", -- [10]
-			"黑鐵酒吧", -- [11]
-		}, -- [5]
-		{
-			"Phalanx", -- [1]
-			"Phalanx", -- [2]
-			"Falange", -- [3]
-			"Falange", -- [4]
-			"Phalange", -- [5]
-			"Falange", -- [6]
-			"팔랑크스", -- [7]
-			"Falange", -- [8]
-			"Фаланга", -- [9]
-			"法拉克斯", -- [10]
-			"法拉克斯", -- [11]
-		}, -- [6]
-	},
-	["1108"] = {
-		{
-			"On the Prowl", -- [1]
-			"Auf der Lauer", -- [2]
-			"Al acecho", -- [3]
-			"Merodear", -- [4]
-			"En maraude", -- [5]
-			"A caccia", -- [6]
-			"탐색", -- [7]
-			"À espreita", -- [8]
-			"В поисках", -- [9]
-			"潜伏徘徊", -- [10]
-			"潛行", -- [11]
-		}, -- [1]
-		{
-			"Where There's a Withered There's a Way", -- [1]
-			"Verwirrt, verdorrt, versperrt", -- [2]
-			"Las ruinas no te detienen", -- [3]
-			"Donde se pierde la ilusión, un marchito es la solución", -- [4]
-			"Par ici mon flétri", -- [5]
-			"Dove c'è un Avvizzito c'è gioia", -- [6]
-			"메마른 자가 있는 곳에 길이 있다", -- [7]
-			"Quando fenecidos não faltam, abre-se um caminho", -- [8]
-			"Способ есть всегда", -- [9]
-			"有枯法者，事竟成", -- [10]
-			"有凋萎者就一定有辦法", -- [11]
-		}, -- [2]
-		{
-			"Onward, Upward, and Downward", -- [1]
-			"Vorwärts, aufwärts, abwärts", -- [2]
-			"Arriba, abajo y para dentro", -- [3]
-			"Hacia adelante, hacia arriba, hacia abajo", -- [4]
-			"Tout droit, en haut et en bas", -- [5]
-			"Avanti, indietro, giù", -- [6]
-			"앞, 아래, 위, 위, 아래", -- [7]
-			"Pra frente, pra cima e pra baixo", -- [8]
-			"Вперед, в неизвестность", -- [9]
-			"向前，向上，向下", -- [10]
-			"前進、往上並往下", -- [11]
-		}, -- [3]
-		{
-			"It's a Furball", -- [1]
-			"Braves Kätzchen", -- [2]
-			"Bola de pelo", -- [3]
-			"Es una bola de pelos", -- [4]
-			"C’est une boule de poils !", -- [5]
-			"È una palla di pelo!", -- [6]
-			"감당할 수 없는 힘", -- [7]
-			"Bola de pelos", -- [8]
-			"Снова белый и пушистый", -- [9]
-			"可爱的毛球", -- [10]
-			"一團毛球", -- [11]
-		}, -- [4]
-		{
-			"Into the Darkness", -- [1]
-			"In die Finsternis", -- [2]
-			"En la oscuridad", -- [3]
-			"Hacia la oscuridad", -- [4]
-			"Dans les ténèbres", -- [5]
-			"Nell'oscurità", -- [6]
-			"어둠 속으로", -- [7]
-			"Escuridão adentro", -- [8]
-			"Тьма и сырость", -- [9]
-			"进入黑暗", -- [10]
-			"進入黑暗", -- [11]
-		}, -- [5]
-		{
-			"In a Tangled Web", -- [1]
-			"Gefangen im Netz", -- [2]
-			"Enredo en la red", -- [3]
-			"En una red enmarañada", -- [4]
-			"Dans une toile enchevêtrée", -- [5]
-			"In una tela intricata", -- [6]
-			"휘감는 거미줄", -- [7]
-			"Numa teia emaranhada", -- [8]
-			"Попавшийся в сети", -- [9]
-			"身陷缠绕之网", -- [10]
-			"糾纏的網", -- [11]
-		}, -- [6]
-		{
-			"The Fangs of Ashamane", -- [1]
-			"Die Fänge von Ashamane", -- [2]
-			"Los Colmillos de Crinceniza", -- [3]
-			"Los Colmillos de Ashamane", -- [4]
-			"Les Crocs d’Ashamane", -- [5]
-			"Le Zanne di Grigiomanto", -- [6]
-			"아샤메인의 송곳니", -- [7]
-			"As presas de Ashamane", -- [8]
-			"Клыки Пеплошкурой", -- [9]
-			"阿莎曼之牙", -- [10]
-			"亞夏曼之牙", -- [11]
-		}, -- [7]
-		{
-			"To the Grove", -- [1]
-			"Auf zum Hain", -- [2]
-			"A la Arboleda", -- [3]
-			"Hacia la Arboleda", -- [4]
-			"Vers la Sylverêve", -- [5]
-			"Verso il bosco", -- [6]
-			"꿈숲으로", -- [7]
-			"Rumo ao Bosque", -- [8]
-			"Назад, в Рощу", -- [9]
-			"前往林地", -- [10]
-			"前往林地", -- [11]
-		}, -- [8]
-	},
-	["1014"] = {
-		{
-			"The Downward Spiral", -- [1]
-			"Die Abwärtsspirale", -- [2]
-			"La espiral descendente", -- [3]
-			"La espiral descendente", -- [4]
-			"Spirale descendante", -- [5]
-			"La spirale discendente", -- [6]
-			"악순환", -- [7]
-			"A espiral descendente", -- [8]
-			"Вниз по винтовой лестнице", -- [9]
-			"逆塔", -- [10]
-			"往下的迴旋樓梯", -- [11]
-		}, -- [1]
-		{
-			"Grasp of the Damned", -- [1]
-			"Umklammerung der Verdammten", -- [2]
-			"En manos de los malditos", -- [3]
-			"El alcance de los malditos", -- [4]
-			"L’emprise des damnés", -- [5]
-			"Presa dei dannati", -- [6]
-			"저주받은 자의 손아귀", -- [7]
-			"Garras dos condenados", -- [8]
-			"Хватка проклятых", -- [9]
-			"亡者的爪缚", -- [10]
-			"詛咒之握", -- [11]
-		}, -- [2]
-		{
-			"Removal Protocols", -- [1]
-			"Entfernungsprotokolle", -- [2]
-			"Protocolos de eliminación", -- [3]
-			"Protocolos de eliminación", -- [4]
-			"Protocoles d’élimination", -- [5]
-			"Protocolli di rimozione", -- [6]
-			"작동규약 제거", -- [7]
-			"Protocolos de remoção", -- [8]
-			"Протоколы ликвидации", -- [9]
-			"清除协议", -- [10]
-			"移除程序", -- [11]
-		}, -- [3]
-		{
-			"Elune's Prize", -- [1]
-			"Elunes Trophäe", -- [2]
-			"El trofeo de Elune", -- [3]
-			"El premio de Elune", -- [4]
-			"Le trophée d’Élune", -- [5]
-			"Il premio di Elune", -- [6]
-			"엘룬의 유물", -- [7]
-			"O prêmio de Eluna", -- [8]
-			"Трофей Элуны", -- [9]
-			"艾露恩的宝物", -- [10]
-			"伊露恩的寶藏", -- [11]
-		}, -- [4]
-		{
-			"The Rider's Prize", -- [1]
-			"Der Preis des Reiters", -- [2]
-			"El trofeo del jinete", -- [3]
-			"El premio del jinete", -- [4]
-			"Le trophée du cavalier", -- [5]
-			"Il premio dei Cavalieri", -- [6]
-			"기수의 유물", -- [7]
-			"O prêmio do cavalgante", -- [8]
-			"Трофей всадника", -- [9]
-			"黑骑士的财宝", -- [10]
-			"黑騎兵的寶物", -- [11]
-		}, -- [5]
-		{
-			"Reaping the Riders", -- [1]
-			"Jetzt ist Sense für die Reiter", -- [2]
-			"Segar a los jinetes", -- [3]
-			"Segando a los jinetes", -- [4]
-			"Faucher les cavaliers", -- [5]
-			"Mietere i Cavalieri", -- [6]
-			"암흑 기수의 최후", -- [7]
-			"A ceifa dos cavalgantes", -- [8]
-			"Жатва Всадников", -- [9]
-			"收割黑骑士", -- [10]
-			"劫掠騎兵的寶物", -- [11]
-		}, -- [6]
-		{
-			"The Scythe Reclaimed", -- [1]
-			"Die zurückeroberte Sichel", -- [2]
-			"Guadaña reclamada", -- [3]
-			"La Guadaña recuperada", -- [4]
-			"Récupération de la faux", -- [5]
-			"La Falce recuperata", -- [6]
-			"되찾은 낫", -- [7]
-			"A foice recuperada", -- [8]
-			"Возвращение Косы", -- [9]
-			"镰刀回归", -- [10]
-			"奪回鐮刀", -- [11]
-		}, -- [7]
-	},
-	["574"] = {
-		{
-			"Zul'Aman", -- [1]
-			"Zul'Aman", -- [2]
-			"Zul'Aman", -- [3]
-			"Zul'Aman", -- [4]
-			"Zul’Aman", -- [5]
-			"Zul'Aman", -- [6]
-			"줄아만", -- [7]
-			"Zul'Aman", -- [8]
-			"Зул'Аман", -- [9]
-			"祖阿曼", -- [10]
-			"祖阿曼", -- [11]
-		}, -- [1]
-	},
-	["1027"] = {
-		{
-			"Assault on Violet Hold", -- [1]
-			"Sturm auf die Violette Festung", -- [2]
-			"Asalto al Bastión Violeta", -- [3]
-			"Ataque al Bastión Violeta", -- [4]
-			"L’assaut sur le fort Pourpre", -- [5]
-			"Assalto alla Fortezza Violacea", -- [6]
-			"보랏빛 요새 침공", -- [7]
-			"Ataque ao Castelo Violeta", -- [8]
-			"Штурм Аметистовой крепости", -- [9]
-			"突袭紫罗兰监狱", -- [10]
-			"紫羅蘭堡之襲", -- [11]
-		}, -- [1]
-		{
-			"Assault on Violet Hold", -- [1]
-			"Sturm auf die Violette Festung", -- [2]
-			"Asalto al Bastión Violeta", -- [3]
-			"Ataque al Bastión Violeta", -- [4]
-			"L’assaut sur le fort Pourpre", -- [5]
-			"Assalto alla Fortezza Violacea", -- [6]
-			"보랏빛 요새 침공", -- [7]
-			"Ataque ao Castelo Violeta", -- [8]
-			"Штурм Аметистовой крепости", -- [9]
-			"突袭紫罗兰监狱", -- [10]
-			"紫羅蘭堡之襲", -- [11]
-		}, -- [2]
-		{
-			"Assault on Violet Hold", -- [1]
-			"Sturm auf die Violette Festung", -- [2]
-			"Asalto al Bastión Violeta", -- [3]
-			"Ataque al Bastión Violeta", -- [4]
-			"L’assaut sur le fort Pourpre", -- [5]
-			"Assalto alla Fortezza Violacea", -- [6]
-			"보랏빛 요새 침공", -- [7]
-			"Ataque ao Castelo Violeta", -- [8]
-			"Штурм Аметистовой крепости", -- [9]
-			"突袭紫罗兰监狱", -- [10]
-			"紫羅蘭堡之襲", -- [11]
-		}, -- [3]
-	},
-	["1172"] = {
-		{
-			"Darkheart Thicket", -- [1]
-			"Das Finsterherzdickicht", -- [2]
-			"Arboleda Corazón Oscuro", -- [3]
-			"Matorral Corazón Oscuro", -- [4]
-			"Le fourré Sombrecœur", -- [5]
-			"Boschetto Cuortetro", -- [6]
-			"어둠심장 숲", -- [7]
-			"Bosque Corenegro", -- [8]
-			"Чаща Темного Сердца", -- [9]
-			"黑心林地", -- [10]
-			"暗心灌木林", -- [11]
-		}, -- [1]
-	},
-	["1005"] = {
-		{
-			"Vault of the Wardens", -- [1]
-			"Das Verlies der Wächterinnen", -- [2]
-			"Cámara de las Celadoras", -- [3]
-			"Bóveda de las Celadoras", -- [4]
-			"Caveau des Gardiennes", -- [5]
-			"Segrete delle Custodi", -- [6]
-			"감시관의 금고", -- [7]
-			"Câmara das Guardiãs", -- [8]
-			"Казематы Стражей", -- [9]
-			"守望者地窟", -- [10]
-			"看守者鐵獄", -- [11]
-		}, -- [1]
-	},
-	["1007"] = {
-		{
-			"Heal Taran Zhu", -- [1]
-			"Heilt Taran Zhu", -- [2]
-			"Sanar a Taran Zhu", -- [3]
-			"Sana a Taran Zhu", -- [4]
-			"Soigner Taran Zhu", -- [5]
-			"Curare Taran Zhu", -- [6]
-			"타란 주 치유", -- [7]
-			"Cure Taran Zhu", -- [8]
-			"Исцеление Тажаня Чжу", -- [9]
-			"治疗祝踏岚", -- [10]
-			"治療塔蘭‧祝", -- [11]
-		}, -- [1]
-		{
-			"Rescue the Shado-Pan", -- [1]
-			"Rettet die Shado-Pan", -- [2]
-			"Rescatar a los miembros del Shadopan", -- [3]
-			"Rescata a los Shadopan", -- [4]
-			"Sauver les Pandashan", -- [5]
-			"Salvare gli Shandaren", -- [6]
-			"음영파 구출", -- [7]
-			"Resgate os Shado-Pan", -- [8]
-			"Спасение Шадо-Пан", -- [9]
-			"解救影踪派", -- [10]
-			"解救影潘", -- [11]
-		}, -- [2]
-		{
-			"The Shado-Plan", -- [1]
-			"Der Shado-Plan", -- [2]
-			"El Shadoplan", -- [3]
-			"El plan de los Shadopan", -- [4]
-			"Le plan-dashan", -- [5]
-			"Gli Shandaren", -- [6]
-			"음영파", -- [7]
-			"O Shado-Plano", -- [8]
-			"Шадо-План", -- [9]
-			"影踪派", -- [10]
-			"影潘", -- [11]
-		}, -- [3]
-		{
-			"Don't Drink the Water", -- [1]
-			"Trinkt nicht das Wasser", -- [2]
-			"Agua que no has de beber...", -- [3]
-			"Agua que no has de beber...", -- [4]
-			"Ne buvez pas l’eau", -- [5]
-			"Non bere l'acqua", -- [6]
-			"마실 수 없는 물", -- [7]
-			"Água que passarinho não bebe", -- [8]
-			"Не пей эту воду!", -- [9]
-			"这水有毒", -- [10]
-			"別喝那裡的水", -- [11]
-		}, -- [4]
-		{
-			"The Emperor's Final Gift", -- [1]
-			"Das letzte Geschenk des Kaisers", -- [2]
-			"El último regalo del Emperador", -- [3]
-			"El don final del emperador", -- [4]
-			"Le dernier cadeau de l’empereur", -- [5]
-			"Il dono finale dell'Imperatore", -- [6]
-			"황제의 마지막 선물", -- [7]
-			"O último presente do imperador", -- [8]
-			"Последний дар императора", -- [9]
-			"皇帝最后的礼物", -- [10]
-			"大帝的遺贈", -- [11]
-		}, -- [5]
-	},
-	["423"] = {
-		{
-			"Skyreach", -- [1]
-			"Himmelsnadel", -- [2]
-			"Trecho Celestial", -- [3]
-			"Trecho Celestial", -- [4]
-			"Orée-du-Ciel", -- [5]
-			"Vetta dei Cieli", -- [6]
-			"하늘탑", -- [7]
-			"Beira-céu", -- [8]
-			"Небесный Путь", -- [9]
-			"通天峰", -- [10]
-			"擎天峰", -- [11]
-		}, -- [1]
-	},
-	["1094"] = {
-		{
-			"Combat Training", -- [1]
-			"Kampftraining", -- [2]
-			"Instrucción de combate", -- [3]
-			"Instrucción de combate", -- [4]
-			"Entraînement au combat", -- [5]
-			"Addestramento al combattimento", -- [6]
-			"전투 훈련", -- [7]
-			"Treino de combate", -- [8]
-			"Боевые учения", -- [9]
-			"战斗训练", -- [10]
-			"戰鬥訓練", -- [11]
-		}, -- [1]
-		{
-			"Bringing Out The Dead", -- [1]
-			"Die Toten auf den Plan rufen", -- [2]
-			"Recurrir a los muertos", -- [3]
-			"Aparición de los muertos", -- [4]
-			"Apportez vos morts !", -- [5]
-			"Rianimare i morti", -- [6]
-			"망자의 부활", -- [7]
-			"Trazer os mortos", -- [8]
-			"Беспокойство для покойных", -- [9]
-			"召唤亡者", -- [10]
-			"人死可以復生", -- [11]
-		}, -- [2]
-		{
-			"Spreading your Disease", -- [1]
-			"Eure Krankheit verbreiten", -- [2]
-			"Contagio masivo", -- [3]
-			"Propagando el virus", -- [4]
-			"Propagation de la maladie", -- [5]
-			"Diffondere il morbo", -- [6]
-			"질병 퍼뜨리기", -- [7]
-			"Disseminando a doença", -- [8]
-			"Расползающаяся зараза", -- [9]
-			"传播你的疾病", -- [10]
-			"傳染疾病", -- [11]
-		}, -- [3]
-		{
-			"It Festers", -- [1]
-			"Es schwärt so schön...", -- [2]
-			"Pus a espuertas", -- [3]
-			"Efecto degenerativo", -- [4]
-			"Écoulement de pus", -- [5]
-			"Problemi di infezione", -- [6]
-			"부패하는 상처", -- [7]
-			"Isso infecciona", -- [8]
-			"Гниющие раны", -- [9]
-			"溃烂吧！", -- [10]
-			"爛掉了", -- [11]
-		}, -- [4]
-		{
-			"Harnessing the Scourge", -- [1]
-			"Die Geißel zunutze machen", -- [2]
-			"Dominar la Plaga", -- [3]
-			"Controlando la Plaga", -- [4]
-			"Le Fléau maîtrisé", -- [5]
-			"Scatenare il Flagello", -- [6]
-			"스컬지의 힘으로", -- [7]
-			"Controlando o Flagelo", -- [8]
-			"Овладеть силой Плети", -- [9]
-			"驾驭天灾的力量", -- [10]
-			"利用天譴軍團", -- [11]
-		}, -- [5]
-		{
-			"Coiled, and Ready to Attack", -- [1]
-			"Den Mantel des Todes ausbreiten", -- [2]
-			"Espiral de ataque", -- [3]
-			"Enrollada y lista para atacar", -- [4]
-			"Décharge d’énergie impie", -- [5]
-			"Morte imminente", -- [6]
-			"치명적인 고리", -- [7]
-			"Bote armado, e pronto para atacar", -- [8]
-			"Лик, внушающий страх", -- [9]
-			"缠绕攻击", -- [10]
-			"纏繞，然後突襲", -- [11]
-		}, -- [6]
-		{
-			"Putting It All Together", -- [1]
-			"Das große Ganze", -- [2]
-			"Juntar las piezas", -- [3]
-			"Todas las piezas juntas", -- [4]
-			"Mise en pratique", -- [5]
-			"Mettersi alla prova", -- [6]
-			"종합주문세트", -- [7]
-			"Fixação de conteúdo", -- [8]
-			"Сборная солянка", -- [9]
-			"综合在一起", -- [10]
-			"準備完善", -- [11]
-		}, -- [7]
-		{
-			"Healing on the Offense", -- [1]
-			"Offensives Heilen", -- [2]
-			"Sanación ofensiva", -- [3]
-			"Sanación de la ofensiva", -- [4]
-			"Attaque curative", -- [5]
-			"La miglior difesa è l'attacco", -- [6]
-			"공격적인 치유", -- [7]
-			"Cura na ofensiva", -- [8]
-			"Нападение вместо лекарства", -- [9]
-			"进攻亦是治疗", -- [10]
-			"攻擊是最好的防守", -- [11]
-		}, -- [8]
-		{
-			"Get Over Here!", -- [1]
-			"Hierher!", -- [2]
-			"¡Ven aquí!", -- [3]
-			"¡Ven aquí!", -- [4]
-			"Par ici !", -- [5]
-			"Vieni qui!", -- [6]
-			"걸려들어라!", -- [7]
-			"Venha aqui!", -- [8]
-			"Ближе. Еще ближе...", -- [9]
-			"过来吧！", -- [10]
-			"快過來！", -- [11]
-		}, -- [9]
-		{
-			"Raising Some Friends", -- [1]
-			"Aufgeweckte Freunde", -- [2]
-			"Despertar a unos amigos", -- [3]
-			"Reclutando a algunos amigos", -- [4]
-			"Amis nécrosés", -- [5]
-			"Radunare alcuni amici", -- [6]
-			"죽은 자의 귀환", -- [7]
-			"Levantar alguns amigos", -- [8]
-			"Подмога с того света", -- [9]
-			"呼朋唤友", -- [10]
-			"找些好兄弟", -- [11]
-		}, -- [10]
-		{
-			"A Quick Test", -- [1]
-			"Schnelltest", -- [2]
-			"Una prueba rápida", -- [3]
-			"Una prueba rápida", -- [4]
-			"Un test rapide", -- [5]
-			"Una piccola prova", -- [6]
-			"깜짝 시험", -- [7]
-			"Teste rápido", -- [8]
-			"Испытание тет-а-тет", -- [9]
-			"快速测试", -- [10]
-			"立刻測試", -- [11]
-		}, -- [11]
-		{
-			"Twice the Challenge", -- [1]
-			"Doppelte Herausforderung", -- [2]
-			"Desafío por partida doble", -- [3]
-			"Un desafío doble", -- [4]
-			"Double défi", -- [5]
-			"Doppia sfida", -- [6]
-			"난이도 두 배", -- [7]
-			"Desafio em dose dupla", -- [8]
-			"Двойной вызов", -- [9]
-			"双倍挑战", -- [10]
-			"雙重挑戰", -- [11]
-		}, -- [12]
-		{
-			"Defend Against the Legion Assault", -- [1]
-			"Den Angriff der Legion abwehren", -- [2]
-			"Defiéndete del asalto de la Legión", -- [3]
-			"Defiéndete contra el ataque de la Legión", -- [4]
-			"Défense contre l’assaut de la Légion", -- [5]
-			"Difesa contro la Legione", -- [6]
-			"군단의 공격 막아내기", -- [7]
-			"Defender contra o ataque da Legião", -- [8]
-			"Оборона против Легиона", -- [9]
-			"在军团的攻击下保卫飞艇", -- [10]
-			"抵擋燃燒軍團的攻擊", -- [11]
-		}, -- [13]
-		{
-			"Assault on Broken Shore", -- [1]
-			"Angriff auf die Verheerte Küste", -- [2]
-			"Asalto a la Costa Abrupta", -- [3]
-			"Asalto a la Costa Quebrada", -- [4]
-			"L’assaut du rivage Brisé", -- [5]
-			"Assalto alla Riva Dispersa", -- [6]
-			"부서진 해변 공격", -- [7]
-			"Ataque à Costa Partida", -- [8]
-			"Штурм Расколотого берега", -- [9]
-			"突袭破碎海滩", -- [10]
-			"突襲破碎海岸", -- [11]
-		}, -- [14]
-	},
-	["715"] = {
-		{
-			"Invasion!", -- [1]
-			"Invasion!", -- [2]
-			"¡Invasión!", -- [3]
-			"¡Invasión!", -- [4]
-			"Alerte aux envahisseurs !", -- [5]
-			"Invasione!", -- [6]
-			"침략!", -- [7]
-			"Invasão!", -- [8]
-			"Вторжение!", -- [9]
-			"入侵！", -- [10]
-			"入侵！", -- [11]
-		}, -- [1]
-		{
-			"Ambush", -- [1]
-			"Hinterhalt", -- [2]
-			"Emboscada", -- [3]
-			"Emboscada", -- [4]
-			"Embuscade", -- [5]
-			"Imboscata", -- [6]
-			"습격", -- [7]
-			"Emboscada", -- [8]
-			"Засада", -- [9]
-			"伏击", -- [10]
-			"伏擊", -- [11]
-		}, -- [2]
-		{
-			"The Holdout", -- [1]
-			"Durchhaltevermögen", -- [2]
-			"La resistencia", -- [3]
-			"La resistencia", -- [4]
-			"Le baroud", -- [5]
-			"Resistenza", -- [6]
-			"항전", -- [7]
-			"A Resistência", -- [8]
-			"Продержаться подольше", -- [9]
-			"坚持到底", -- [10]
-			"堅持到底", -- [11]
-		}, -- [3]
-		{
-			"Cleanup", -- [1]
-			"Aufräumkommando", -- [2]
-			"Limpieza", -- [3]
-			"Limpieza", -- [4]
-			"Nettoyage", -- [5]
-			"Ripulitura", -- [6]
-			"소탕", -- [7]
-			"Limpeza", -- [8]
-			"Зачистка", -- [9]
-			"摧枯拉朽", -- [10]
-			"收拾殘局", -- [11]
-		}, -- [4]
-		{
-			"The Calm", -- [1]
-			"Ruhe nach dem Sturm", -- [2]
-			"La calma", -- [3]
-			"La calma", -- [4]
-			"Le calme", -- [5]
-			"La calma", -- [6]
-			"정적", -- [7]
-			"A Calma", -- [8]
-			"Затишье", -- [9]
-			"风平浪静", -- [10]
-			"歇息備戰", -- [11]
-		}, -- [5]
-		{
-			"Shadows Gather", -- [1]
-			"Der Schatten wächst", -- [2]
-			"Las sombras se ciernen", -- [3]
-			"Las sombras se reúnen", -- [4]
-			"Les ombres se rassemblent", -- [5]
-			"Le ombre si addensano", -- [6]
-			"어둠이 드리운다", -- [7]
-			"A reunião das sombras", -- [8]
-			"Тени сгущаются", -- [9]
-			"暗影蔽日", -- [10]
-			"暗影集結", -- [11]
-		}, -- [6]
-		{
-			"Bronze", -- [1]
-			"Bronze", -- [2]
-			"Bronce", -- [3]
-			"Bronce", -- [4]
-			"Bronze", -- [5]
-			"Bronzo", -- [6]
-			"동메달", -- [7]
-			"Bronze", -- [8]
-			"Бронза", -- [9]
-			"青铜级", -- [10]
-			"青銅", -- [11]
-		}, -- [7]
-		{
-			"Silver", -- [1]
-			"Silber", -- [2]
-			"Plata", -- [3]
-			"Plata", -- [4]
-			"Argent", -- [5]
-			"Argento", -- [6]
-			"은메달", -- [7]
-			"Prata", -- [8]
-			"Серебро", -- [9]
-			"白银级", -- [10]
-			"白銀", -- [11]
-		}, -- [8]
-		{
-			"Gold", -- [1]
-			"Gold", -- [2]
-			"Oro", -- [3]
-			"Oro", -- [4]
-			"Or", -- [5]
-			"Oro", -- [6]
-			"금메달", -- [7]
-			"Ouro", -- [8]
-			"Золото", -- [9]
-			"黄金级", -- [10]
-			"黃金", -- [11]
-		}, -- [9]
-		{
-			"Platinum", -- [1]
-			"Platin", -- [2]
-			"Platino", -- [3]
-			"Platino", -- [4]
-			"Platine", -- [5]
-			"Platino", -- [6]
-			"백금메달", -- [7]
-			"Platina", -- [8]
-			"Платиновая", -- [9]
-			"白金", -- [10]
-			"白金", -- [11]
-		}, -- [10]
-	},
-	["1029"] = {
-		{
-			"Assault on Violet Hold", -- [1]
-			"Sturm auf die Violette Festung", -- [2]
-			"Asalto al Bastión Violeta", -- [3]
-			"Ataque al Bastión Violeta", -- [4]
-			"L’assaut sur le fort Pourpre", -- [5]
-			"Assalto alla Fortezza Violacea", -- [6]
-			"보랏빛 요새 침공", -- [7]
-			"Ataque ao Castelo Violeta", -- [8]
-			"Штурм Аметистовой крепости", -- [9]
-			"突袭紫罗兰监狱", -- [10]
-			"紫羅蘭堡之襲", -- [11]
-		}, -- [1]
-		{
-			"Assault on Violet Hold", -- [1]
-			"Sturm auf die Violette Festung", -- [2]
-			"Asalto al Bastión Violeta", -- [3]
-			"Ataque al Bastión Violeta", -- [4]
-			"L’assaut sur le fort Pourpre", -- [5]
-			"Assalto alla Fortezza Violacea", -- [6]
-			"보랏빛 요새 침공", -- [7]
-			"Ataque ao Castelo Violeta", -- [8]
-			"Штурм Аметистовой крепости", -- [9]
-			"突袭紫罗兰监狱", -- [10]
-			"紫羅蘭堡之襲", -- [11]
-		}, -- [2]
-		{
-			"Assault on Violet Hold", -- [1]
-			"Sturm auf die Violette Festung", -- [2]
-			"Asalto al Bastión Violeta", -- [3]
-			"Ataque al Bastión Violeta", -- [4]
-			"L’assaut sur le fort Pourpre", -- [5]
-			"Assalto alla Fortezza Violacea", -- [6]
-			"보랏빛 요새 침공", -- [7]
-			"Ataque ao Castelo Violeta", -- [8]
-			"Штурм Аметистовой крепости", -- [9]
-			"突袭紫罗兰监狱", -- [10]
-			"紫羅蘭堡之襲", -- [11]
-		}, -- [3]
-	},
-	["575"] = {
-		{
-			"The Oculus", -- [1]
-			"Das Oculus", -- [2]
-			"El Oculus", -- [3]
-			"El Oculus", -- [4]
-			"L’Oculus", -- [5]
-			"Oculus", -- [6]
-			"마력의 눈", -- [7]
-			"Óculus", -- [8]
-			"Окулус", -- [9]
-			"魔环", -- [10]
-			"奧核之眼", -- [11]
-		}, -- [1]
-	},
-	["275"] = {
-		{
-			"Chosen by K'ara", -- [1]
-			"Von K'ara auserwählt", -- [2]
-			"La elección de K'ara", -- [3]
-			"$gEl elegido:La elegida; de K'ara", -- [4]
-			"Le choix de K’ara", -- [5]
-			"Scelto da K'ara", -- [6]
-			"크아라의 용사", -- [7]
-			"Escolhido por K'ara", -- [8]
-			"Избранники К'ары", -- [9]
-			"卡拉的选民", -- [10]
-			"卡拉的選擇", -- [11]
-		}, -- [1]
-		{
-			"The Gates of Grommar", -- [1]
-			"Das Tor von Grommar", -- [2]
-			"Las puertas de Grommar", -- [3]
-			"Las Puertas de Grommar", -- [4]
-			"Les portes de Grommar", -- [5]
-			"Cancelli di Grommar", -- [6]
-			"그롬마르 관문", -- [7]
-			"Os Portões de Grommar", -- [8]
-			"Врата Громмара", -- [9]
-			"格罗玛尔之门", -- [10]
-			"葛羅瑪大門", -- [11]
-		}, -- [2]
-		{
-			"The Purge of Grommar", -- [1]
-			"Die Säuberung Grommars", -- [2]
-			"La Purga de Grommar", -- [3]
-			"La purga de Grommar", -- [4]
-			"La purge de Grommar", -- [5]
-			"Epurazione di Grommar", -- [6]
-			"그롬마르 정화", -- [7]
-			"O Expurgo de Grommar", -- [8]
-			"Очищение Громмара", -- [9]
-			"血洗格罗玛尔", -- [10]
-			"葛羅瑪掃蕩行動", -- [11]
-		}, -- [3]
-		{
-			"Fire From the Skies", -- [1]
-			"Feuer aus dem Himmel", -- [2]
-			"Fuego por doquier", -- [3]
-			"Fuego de los cielos", -- [4]
-			"Le feu du ciel", -- [5]
-			"Fuoco dai cieli", -- [6]
-			"불벼락", -- [7]
-			"Fogo dos Céus", -- [8]
-			"Огонь с небес", -- [9]
-			"天降火雨", -- [10]
-			"天降大火", -- [11]
-		}, -- [4]
-	},
-	["1093"] = {
-		{
-			"Combat Training", -- [1]
-			"Kampftraining", -- [2]
-			"Instrucción de combate", -- [3]
-			"Instrucción de combate", -- [4]
-			"Entraînement au combat", -- [5]
-			"Addestramento al combattimento", -- [6]
-			"전투 훈련", -- [7]
-			"Treino de combate", -- [8]
-			"Боевые учения", -- [9]
-			"战斗训练", -- [10]
-			"戰鬥訓練", -- [11]
-		}, -- [1]
-		{
-			"Charging Headfirst Into Battle", -- [1]
-			"Mit dem Kopf voran in den Kampf", -- [2]
-			"De cabeza al combate", -- [3]
-			"De cabeza a la batalla", -- [4]
-			"Foncer tête baissée", -- [5]
-			"A testa bassa in battaglia", -- [6]
-			"일단 돌진", -- [7]
-			"Mergulhar de cabeça na batalha", -- [8]
-			"Рывок на передовую", -- [9]
-			"一头冲进战斗", -- [10]
-			"直衝戰場", -- [11]
-		}, -- [2]
-		{
-			"Take A Big Swing At It", -- [1]
-			"Einmal richtig Schwung holen", -- [2]
-			"Dar el golpe", -- [3]
-			"Intento de golpe", -- [4]
-			"Et v’lan !", -- [5]
-			"Manutenzione percussiva", -- [6]
-			"큰 거 한 방", -- [7]
-			"Com toda a força", -- [8]
-			"Бей, круши!", -- [9]
-			"用力挥舞", -- [10]
-			"這會打死人的", -- [11]
-		}, -- [3]
-		{
-			"Slamming it Home", -- [1]
-			"Ins Ziel schmettern", -- [2]
-			"Golpetazo monumental", -- [3]
-			"Corrida a base", -- [4]
-			"Coup de boutoir", -- [5]
-			"Una bella botta", -- [6]
-			"강력한 충돌", -- [7]
-			"Rebatida pra isolar", -- [8]
-			"Всем ударам удар", -- [9]
-			"击回老家", -- [10]
-			"勇猛的攻擊", -- [11]
-		}, -- [4]
-		{
-			"Smash Them To Pieces", -- [1]
-			"Kurz und klein schlagen", -- [2]
-			"Hazlos picadillo", -- [3]
-			"Hazlos pedazos", -- [4]
-			"Façon puzzle", -- [5]
-			"Farli a pezzi", -- [6]
-			"산산조각 부수기", -- [7]
-			"Estrago colossal", -- [8]
-			"Кулак гиганта", -- [9]
-			"打成碎片", -- [10]
-			"把它們擊碎", -- [11]
-		}, -- [5]
-		{
-			"Putting It All Together", -- [1]
-			"Das große Ganze", -- [2]
-			"Juntar las piezas", -- [3]
-			"Todas las piezas juntas", -- [4]
-			"Mise en pratique", -- [5]
-			"Mettersi alla prova", -- [6]
-			"종합주문세트", -- [7]
-			"Fixação de conteúdo", -- [8]
-			"Сборная солянка", -- [9]
-			"综合在一起", -- [10]
-			"準備完善", -- [11]
-		}, -- [6]
-		{
-			"Such a Rush", -- [1]
-			"Berauschend", -- [2]
-			"Con las prisas", -- [3]
-			"Qué prisa", -- [4]
-			"Montée d’adrénaline", -- [5]
-			"Che divertimento!", -- [6]
-			"패배는 없다", -- [7]
-			"Sem conter o ímpeto", -- [8]
-			"Абсолютный триумф", -- [9]
-			"急匆匆", -- [10]
-			"勝利的滋味", -- [11]
-		}, -- [7]
-		{
-			"Take It For A Spin", -- [1]
-			"Immer schön im Kreis drehen", -- [2]
-			"Dar una vuelta", -- [3]
-			"Échalo a rodar", -- [4]
-			"Ça tourne !", -- [5]
-			"Andare a farsi un giro", -- [6]
-			"뱅글뱅글", -- [7]
-			"Dando umas voltas", -- [8]
-			"Головокружение до изнеможения", -- [9]
-			"来转一圈看看", -- [10]
-			"開開看", -- [11]
-		}, -- [8]
-		{
-			"Jump Into The Fray", -- [1]
-			"Sprung mitten ins Geschehen", -- [2]
-			"Salto a la refriega", -- [3]
-			"Métete a la refriega", -- [4]
-			"Bond dans la mêlée", -- [5]
-			"Nel vivo della lotta!", -- [6]
-			"격전 속으로", -- [7]
-			"Pular de cabeça", -- [8]
-			"Прыжок в гущу боя", -- [9]
-			"跳入战场", -- [10]
-			"跳入戰場", -- [11]
-		}, -- [9]
-		{
-			"A Quick Test", -- [1]
-			"Schnelltest", -- [2]
-			"Una prueba rápida", -- [3]
-			"Una prueba rápida", -- [4]
-			"Un test rapide", -- [5]
-			"Una piccola prova", -- [6]
-			"깜짝 시험", -- [7]
-			"Teste rápido", -- [8]
-			"Испытание тет-а-тет", -- [9]
-			"快速测试", -- [10]
-			"立刻測試", -- [11]
-		}, -- [10]
-		{
-			"Twice the Challenge", -- [1]
-			"Doppelte Herausforderung", -- [2]
-			"Desafío por partida doble", -- [3]
-			"Un desafío doble", -- [4]
-			"Double défi", -- [5]
-			"Doppia sfida", -- [6]
-			"난이도 두 배", -- [7]
-			"Desafio em dose dupla", -- [8]
-			"Двойной вызов", -- [9]
-			"双倍挑战", -- [10]
-			"雙重挑戰", -- [11]
-		}, -- [11]
-		{
-			"Defend Against the Legion Assault", -- [1]
-			"Den Angriff der Legion abwehren", -- [2]
-			"Defiéndete del asalto de la Legión", -- [3]
-			"Defiéndete contra el ataque de la Legión", -- [4]
-			"Défense contre l’assaut de la Légion", -- [5]
-			"Difesa contro la Legione", -- [6]
-			"군단의 공격 막아내기", -- [7]
-			"Defender contra o ataque da Legião", -- [8]
-			"Оборона против Легиона", -- [9]
-			"在军团的攻击下保卫飞艇", -- [10]
-			"抵擋燃燒軍團的攻擊", -- [11]
-		}, -- [12]
-		{
-			"Assault on Broken Shore", -- [1]
-			"Angriff auf die Verheerte Küste", -- [2]
-			"Asalto a la Costa Abrupta", -- [3]
-			"Asalto a la Costa Quebrada", -- [4]
-			"L’assaut du rivage Brisé", -- [5]
-			"Assalto alla Riva Dispersa", -- [6]
-			"부서진 해변 공격", -- [7]
-			"Ataque à Costa Partida", -- [8]
-			"Штурм Расколотого берега", -- [9]
-			"突袭破碎海滩", -- [10]
-			"突襲破碎海岸", -- [11]
-		}, -- [13]
-	},
-	["211"] = {
-		{
-			"Speak with Wrathion", -- [1]
-			"Sprecht mit Furorion", -- [2]
-			"Habla con Wrathion", -- [3]
-			"Habla con Wrathion", -- [4]
-			"Parler à Irion", -- [5]
-			"Parla con Irathion", -- [6]
-			"래시온과 대화", -- [7]
-			"Falar com Wrathion", -- [8]
-			"Поговорить с Гневионом", -- [9]
-			"与拉希奥交谈", -- [10]
-			"與怒西昂交談", -- [11]
-		}, -- [1]
-		{
-			"Forged from Trillium", -- [1]
-			"Aus Trillium geschmiedet", -- [2]
-			"Forjado con trillium", -- [3]
-			"Forjado con trillium", -- [4]
-			"Forgé dans le trillium", -- [5]
-			"Forgiato con il trillio", -- [6]
-			"트릴리움으로 만들어진", -- [7]
-			"Forjado em Trílio", -- [8]
-			"Выковано из триллия", -- [9]
-			"锻造延极矿", -- [10]
-			"由延齡石打造而成", -- [11]
-		}, -- [2]
-		{
-			"Charging Up", -- [1]
-			"Aufladen", -- [2]
-			"Cargando", -- [3]
-			"Cargando", -- [4]
-			"Charge en cours", -- [5]
-			"Attivazione", -- [6]
-			"충전", -- [7]
-			"Carregando", -- [8]
-			"Зарядка", -- [9]
-			"充能中", -- [10]
-			"充能中", -- [11]
-		}, -- [3]
-		{
-			"Into the Forge", -- [1]
-			"Ab in die Schmiede", -- [2]
-			"En las forjas", -- [3]
-			"En las forjas", -- [4]
-			"Dans la forge", -- [5]
-			"Nella forgia", -- [6]
-			"제련소 안으로 이동", -- [7]
-			"Para dentro da forja", -- [8]
-			"В кузню", -- [9]
-			"深入熔炉", -- [10]
-			"進入熔爐", -- [11]
-		}, -- [4]
-		{
-			"Corruption Detected", -- [1]
-			"Korruption entdeckt", -- [2]
-			"Corrupción detectada", -- [3]
-			"Corrupción detectada", -- [4]
-			"Corruption détectée", -- [5]
-			"Corruzione rilevata", -- [6]
-			"오염물 발견!", -- [7]
-			"Corrupção detectada", -- [8]
-			"Обнаружена скверна", -- [9]
-			"发现腐化物", -- [10]
-			"偵測到腐化", -- [11]
-		}, -- [5]
-		{
-			"Manifested Corruption", -- [1]
-			"Manifestation der Verderbnis", -- [2]
-			"Manifestación de la corrupción", -- [3]
-			"Manifestación de la corrupción", -- [4]
-			"Corruption manifeste", -- [5]
-			"Manifestazione della corruzione", -- [6]
-			"드러난 오염물", -- [7]
-			"Corrupção manifesta", -- [8]
-			"Проявление осквернения", -- [9]
-			"腐化的具象", -- [10]
-			"腐化現身", -- [11]
-		}, -- [6]
-	},
-	["1068"] = {
-		{
-			"Making Introductions", -- [1]
-			"Vorstellungsrunde", -- [2]
-			"Hacer las presentaciones", -- [3]
-			"Empezando a conocerse", -- [4]
-			"Présentations", -- [5]
-			"Presentazioni", -- [6]
-			"친구 소개", -- [7]
-			"Apresentações", -- [8]
-			"Знакомство", -- [9]
-			"介绍一下", -- [10]
-			"彼此介紹", -- [11]
-		}, -- [1]
-		{
-			"Tomb Raider", -- [1]
-			"Die Gruft ruft!", -- [2]
-			"Asaltatumbas", -- [3]
-			"Cazador de tumbas", -- [4]
-			"Pilleur de tombes", -- [5]
-			"Incursione nelle tombe", -- [6]
-			"무덤 탐험가", -- [7]
-			"Saqueadores de tumbas", -- [8]
-			"Расхитители гробниц", -- [9]
-			"古墓丽影", -- [10]
-			"古墓奇兵", -- [11]
-		}, -- [2]
-		{
-			"Volund's Hoard", -- [1]
-			"Volunds Beutekammer", -- [2]
-			"Tesoro de Volund", -- [3]
-			"Reserva de Volund", -- [4]
-			"Le trésor de Volund", -- [5]
-			"Il tesoro di Volund", -- [6]
-			"볼룬드의 저장고", -- [7]
-			"O tesouro de Volund", -- [8]
-			"Сокровищница Волунда", -- [9]
-			"沃伦德的宝库", -- [10]
-			"沃隆德的寶庫", -- [11]
-		}, -- [3]
-		{
-			"Every Nook and Cranny", -- [1]
-			"Jede Nische und Ritze", -- [2]
-			"Hasta el último rincón", -- [3]
-			"Cada esquina y rincón", -- [4]
-			"Fouille en règle", -- [5]
-			"Cerca in ogni angolo", -- [6]
-			"구석구석 샅샅이", -- [7]
-			"Cada cantinho", -- [8]
-			"Перевернуть все вверх дном", -- [9]
-			"翻箱倒柜", -- [10]
-			"翻遍每一個角落", -- [11]
-		}, -- [4]
-		{
-			"Volund's Last Stand", -- [1]
-			"Volunds letztes Gefecht", -- [2]
-			"La última batalla de Volund", -- [3]
-			"El último ataque de Volund", -- [4]
-			"Le baroud de Volund", -- [5]
-			"L'ultima difesa di Volund", -- [6]
-			"볼룬드의 최후의 저항", -- [7]
-			"A resistência final de Volund", -- [8]
-			"Последний бой Волунда", -- [9]
-			"沃伦德的最后一战", -- [10]
-			"沃隆德的最後一搏", -- [11]
-		}, -- [5]
-		{
-			"Answering the Call", -- [1]
-			"Dem Ruf folgen", -- [2]
-			"Responder a la llamada", -- [3]
-			"Respondiendo al llamado", -- [4]
-			"Répondre à l’appel", -- [5]
-			"Rispondere alla chiamata", -- [6]
-			"기계노움의 부름", -- [7]
-			"Atendendo ao chamado", -- [8]
-			"Новый зов", -- [9]
-			"响应召唤", -- [10]
-			"回應呼喚", -- [11]
-		}, -- [6]
-	},
-	["1051"] = {
-		{
-			"Court of Stars", -- [1]
-			"Der Hof der Sterne", -- [2]
-			"Corte de las Estrellas", -- [3]
-			"Corte de Estrellas", -- [4]
-			"La cour des Étoiles", -- [5]
-			"Corte delle Stelle", -- [6]
-			"별의 궁정", -- [7]
-			"Pátio das Estrelas", -- [8]
-			"Квартал Звезд", -- [9]
-			"群星庭院", -- [10]
-			"眾星之廷", -- [11]
-		}, -- [1]
-	},
-	["1061"] = {
-		{
-			"The Legion's Devastation", -- [1]
-			"Das Wüten der Legion", -- [2]
-			"La devastación de la Legión", -- [3]
-			"La Devastación de la Legión", -- [4]
-			"Les ravages de la Légion", -- [5]
-			"Devastazione della Legione", -- [6]
-			"군단의 만행", -- [7]
-			"A devastação da Legião", -- [8]
-			"Опустошение Легиона", -- [9]
-			"军团的袭击", -- [10]
-			"燃燒軍團的破壞", -- [11]
-		}, -- [1]
-		{
-			"Saving the Injured", -- [1]
-			"Rettung der Verletzten", -- [2]
-			"Salvar a los heridos", -- [3]
-			"Salva a los Heridos", -- [4]
-			"Sauver les blessés", -- [5]
-			"Salvare i feriti", -- [6]
-			"부상자 구하기", -- [7]
-			"Resgate dos feridos", -- [8]
-			"Спасение раненых", -- [9]
-			"救治伤员", -- [10]
-			"拯救傷者", -- [11]
-		}, -- [2]
-		{
-			"The Renewal Begins", -- [1]
-			"Die Erneuerung beginnt", -- [2]
-			"Empieza la renovación", -- [3]
-			"La Renovación comienza", -- [4]
-			"Prélude au renouveau", -- [5]
-			"La purificazione ha inizio", -- [6]
-			"소생의 시작", -- [7]
-			"A renovação começa", -- [8]
-			"Начало возрождения", -- [9]
-			"重获新生", -- [10]
-			"淨化開始", -- [11]
-		}, -- [3]
-		{
-			"Cleansing the Corruption", -- [1]
-			"Läutern der Verderbnis", -- [2]
-			"Limpiar la corrupción", -- [3]
-			"Purificar la corrupción", -- [4]
-			"Halte à la corruption", -- [5]
-			"Purificare la corruzione", -- [6]
-			"타락 정화", -- [7]
-			"Purificar a corrupção", -- [8]
-			"Очищение от порчи", -- [9]
-			"清除腐化", -- [10]
-			"清除腐化", -- [11]
-		}, -- [4]
-		{
-			"The Moment of Truth", -- [1]
-			"Der Moment der Wahrheit", -- [2]
-			"La hora de la verdad", -- [3]
-			"El Momento de la verdad", -- [4]
-			"L’instant de vérité", -- [5]
-			"Il momento della verità", -- [6]
-			"진실의 시간", -- [7]
-			"A hora da verdade", -- [8]
-			"Момент истины", -- [9]
-			"真理时刻", -- [10]
-			"關鍵的一刻", -- [11]
-		}, -- [5]
-		{
-			"G'Hanir Reborn", -- [1]
-			"G'Hanirs Wiedergeburt", -- [2]
-			"G'Hanir renacido", -- [3]
-			"G'Hanir renacido", -- [4]
-			"G’Hanir réincarné", -- [5]
-			"G'hanir risorto", -- [6]
-			"부활한 그하니르", -- [7]
-			"G'hanir renascida", -- [8]
-			"Перерожденный Г'ханир", -- [9]
-			"加尼尔重生", -- [10]
-			"格哈尼爾重生", -- [11]
-		}, -- [6]
-		{
-			"Nature's Wrath", -- [1]
-			"Zorn der Natur", -- [2]
-			"Cólera de la Naturaleza", -- [3]
-			"Ira de la Naturaleza", -- [4]
-			"Courroux de la nature", -- [5]
-			"Ira Naturale", -- [6]
-			"자연의 격노", -- [7]
-			"Fúria da natureza", -- [8]
-			"Ярость природы", -- [9]
-			"自然之怒", -- [10]
-			"自然之怒", -- [11]
-		}, -- [7]
-	},
-	["1065"] = {
-		{
-			"The Azure Prisoner", -- [1]
-			"Der Azurgefangene", -- [2]
-			"El prisionero azur", -- [3]
-			"El Prisionero Azur", -- [4]
-			"Le prisonnier d’Azur", -- [5]
-			"Il prigioniero azzurro", -- [6]
-			"하늘빛 포로", -- [7]
-			"O prisioneiro lazúli", -- [8]
-			"Лазурный пленник", -- [9]
-			"碧蓝囚徒", -- [10]
-			"藍龍俘虜", -- [11]
-		}, -- [1]
-		{
-			"Seeking Answers", -- [1]
-			"Antworten suchen", -- [2]
-			"Buscando respuestas", -- [3]
-			"Buscando respuestas", -- [4]
-			"Chercher des réponses", -- [5]
-			"In cerca di risposte", -- [6]
-			"답 구하기", -- [7]
-			"Em busca de respostas", -- [8]
-			"В поисках ответов", -- [9]
-			"寻找答案", -- [10]
-			"找尋解答", -- [11]
-		}, -- [2]
-		{
-			"Cleansed by Holy Fire", -- [1]
-			"Von heiligem Feuer geläutert", -- [2]
-			"Purificado con Fuego Sagrado", -- [3]
-			"Limpiado por el Fuego Sagrado", -- [4]
-			"Purification par les flammes sacrées", -- [5]
-			"Purificato dal Fuoco Sacro", -- [6]
-			"신성한 불꽃의 정화", -- [7]
-			"Purgado por Fogo Sagrado", -- [8]
-			"Очищение священным огнем", -- [9]
-			"圣火的净化", -- [10]
-			"聖火淨化", -- [11]
-		}, -- [3]
-		{
-			"The Way Out is Through", -- [1]
-			"Da müsst Ihr durch", -- [2]
-			"La salida es a través", -- [3]
-			"Para salir hay que atravesar", -- [4]
-			"La seule issue", -- [5]
-			"L'uscita è attraverso", -- [6]
-			"나가는 유일한 방법은...", -- [7]
-			"A saída é pelo meio", -- [8]
-			"Единственный путь – вперед", -- [9]
-			"道路通畅", -- [10]
-			"穿過去是唯一的路", -- [11]
-		}, -- [4]
-		{
-			"Consumed by Void", -- [1]
-			"Von Leere verschlungen", -- [2]
-			"Consumido por el vacío", -- [3]
-			"Consumido por el Vacío", -- [4]
-			"Consumé par le Vide", -- [5]
-			"Consumato dal Vuoto", -- [6]
-			"공허의 흡수", -- [7]
-			"Consumidos pelo caos", -- [8]
-			"Поглощение Бездной", -- [9]
-			"虚空吞噬", -- [10]
-			"被虛無吞噬", -- [11]
-		}, -- [5]
-		{
-			"A Will of Fire", -- [1]
-			"Ein feuriger Wille", -- [2]
-			"Una voluntad de fuego", -- [3]
-			"Una voluntad de fuego", -- [4]
-			"Volonté de feu", -- [5]
-			"Una volontà di fuoco", -- [6]
-			"화염의 의지", -- [7]
-			"Vontade de fogo", -- [8]
-			"Воля огня", -- [9]
-			"圣火的意志", -- [10]
-			"烈焰意志", -- [11]
-		}, -- [6]
-		{
-			"To Wield the Flame", -- [1]
-			"Die Flamme führen", -- [2]
-			"Blandir la llama", -- [3]
-			"Blandir la llama", -- [4]
-			"Flamme en main", -- [5]
-			"Impugnare la fiamma", -- [6]
-			"불꽃 휘두르기", -- [7]
-			"O brandir da chama", -- [8]
-			"Огонь в руках", -- [9]
-			"玩火者", -- [10]
-			"運用烈焰", -- [11]
-		}, -- [7]
-	},
-	["1066"] = {
-		{
-			"Big Help", -- [1]
-			"Große Hilfe", -- [2]
-			"Gran ayuda", -- [3]
-			"Gran ayuda", -- [4]
-			"Un appui de taille", -- [5]
-			"Un grande aiuto", -- [6]
-			"생명의 은인", -- [7]
-			"Grande ajuda", -- [8]
-			"Большой помощник", -- [9]
-			"大救星", -- [10]
-			"莫大的協助", -- [11]
-		}, -- [1]
-		{
-			"Rescue Wavespeaker Adelee", -- [1]
-			"Rettet Wellensprecherin Adelee", -- [2]
-			"Rescatar a la hablaolas Adelee", -- [3]
-			"Rescata a Hablaolas Adelee", -- [4]
-			"Secourir la parle-vague Adelee", -- [5]
-			"Salvare la Parlaonde Adelee", -- [6]
-			"파도예언자 아델리 구출", -- [7]
-			"Resgate a Falaondas Adelee", -- [8]
-			"Спасение говорящей с волнами Адель", -- [9]
-			"解救波涛语者安德莉", -- [10]
-			"拯救語濤者愛德麗", -- [11]
-		}, -- [2]
-		{
-			"Secure the Central Junction", -- [1]
-			"Sichert die zentrale Kreuzung", -- [2]
-			"Asegurar el cruce central", -- [3]
-			"Asegura la Intersección central", -- [4]
-			"Prendre le contrôle du croisement central", -- [5]
-			"Controllo del bivio centrale", -- [6]
-			"중앙 교차로 확보", -- [7]
-			"Conquiste a Junção Central", -- [8]
-			"Центральное пересечение", -- [9]
-			"清理中央路口", -- [10]
-			"佔領中央匯合點", -- [11]
-		}, -- [3]
-		{
-			"Water Gauntlet", -- [1]
-			"Der Wasserspießrutenlauf", -- [2]
-			"Reto de agua", -- [3]
-			"Guantelete de agua", -- [4]
-			"La fureur des flots", -- [5]
-			"La prova dell'acqua", -- [6]
-			"파도의 시련", -- [7]
-			"Provação aquática", -- [8]
-			"Испытание водой", -- [9]
-			"水护手", -- [10]
-			"激流障壁", -- [11]
-		}, -- [4]
-		{
-			"Destroy the Sea Witch", -- [1]
-			"Vernichtet die Seehexe", -- [2]
-			"Acaba con la bruja del mar", -- [3]
-			"Destruye a la Bruja del mar", -- [4]
-			"Anéantir la sorcière des mers", -- [5]
-			"Distruggere la Strega di Mare", -- [6]
-			"바다 마녀 처치", -- [7]
-			"Destruam a Bruxa do Mar", -- [8]
-			"Смерть морской ведьмы", -- [9]
-			"消灭海巫", -- [10]
-			"消滅海巫", -- [11]
-		}, -- [5]
-		{
-			"Acquire Sharas'dal", -- [1]
-			"Bringt Sharas'dal in Euren Besitz", -- [2]
-			"Hazte con Sharas'dal", -- [3]
-			"Obtén Sharas'dal", -- [4]
-			"Obtenir Sharas’dal", -- [5]
-			"Ottenere Sharas'dal", -- [6]
-			"샤라스달 획득", -- [7]
-			"Obter Sharas'dal", -- [8]
-			"Завладеть Шарас'далом", -- [9]
-			"获得莎拉达尔", -- [10]
-			"取得薩拉達爾", -- [11]
-		}, -- [6]
-	},
-	["1073"] = {
-		{
-			"Combat Training", -- [1]
-			"Kampftraining", -- [2]
-			"Instrucción de combate", -- [3]
-			"Instrucción de combate", -- [4]
-			"Entraînement au combat", -- [5]
-			"Addestramento al combattimento", -- [6]
-			"전투 훈련", -- [7]
-			"Treino de combate", -- [8]
-			"Боевые учения", -- [9]
-			"战斗训练", -- [10]
-			"戰鬥訓練", -- [11]
-		}, -- [1]
-		{
-			"Judging Your Enemies", -- [1]
-			"Richtet Eure Feinde", -- [2]
-			"Juzgar a tus enemigos", -- [3]
-			"Enemigos bajo juicio", -- [4]
-			"Juger ses ennemis", -- [5]
-			"Giudicare i nemici", -- [6]
-			"심판의 날", -- [7]
-			"Julgar os inimigos", -- [8]
-			"Суд идет", -- [9]
-			"审判你的敌人", -- [10]
-			"審判你的敵人", -- [11]
-		}, -- [2]
-		{
-			"Bring Some Justice", -- [1]
-			"Im Namen der Gerechtigkeit", -- [2]
-			"Imparte justicia", -- [3]
-			"Que se haga justicia", -- [4]
-			"Rendre la justice", -- [5]
-			"Sete di giustizia", -- [6]
-			"심판을 받아라", -- [7]
-			"Trazendo a justiça", -- [8]
-			"Высшая мера наказания", -- [9]
-			"正义使者", -- [10]
-			"維護正義", -- [11]
-		}, -- [3]
-		{
-			"Crusading Around", -- [1]
-			"Kreuzfahrt", -- [2]
-			"Poderío cruzado", -- [3]
-			"Cruce de cruzadas", -- [4]
-			"En croisade", -- [5]
-			"Tra una crociata e l'altra", -- [6]
-			"신성한 기운", -- [7]
-			"Soltando o cruzado", -- [8]
-			"Во имя добра", -- [9]
-			"十字军征伐", -- [10]
-			"遍地聖擊", -- [11]
-		}, -- [4]
-		{
-			"What's the Verdict?", -- [1]
-			"Wie lautet das Urteil?", -- [2]
-			"¿Cuál es el veredicto?", -- [3]
-			"¿Cuál es el veredicto?", -- [4]
-			"Quel est le verdict ?", -- [5]
-			"Qual è il verdetto?", -- [6]
-			"신성한 선고", -- [7]
-			"Qual é o veredito?", -- [8]
-			"Каков ваш вердикт?", -- [9]
-			"裁决结果是？", -- [10]
-			"裁決結果如何？", -- [11]
-		}, -- [5]
-		{
-			"Putting It All Together", -- [1]
-			"Das große Ganze", -- [2]
-			"Juntar las piezas", -- [3]
-			"Todas las piezas juntas", -- [4]
-			"Mise en pratique", -- [5]
-			"Mettersi alla prova", -- [6]
-			"종합주문세트", -- [7]
-			"Fixação de conteúdo", -- [8]
-			"Сборная солянка", -- [9]
-			"综合在一起", -- [10]
-			"準備完善", -- [11]
-		}, -- [6]
-		{
-			"A Storm Is Rising", -- [1]
-			"Ein Sturm zieht auf", -- [2]
-			"Se avecina una tormenta", -- [3]
-			"Se levanta una tormenta", -- [4]
-			"Une tempête se lève", -- [5]
-			"C'è una tempesta in arrivo", -- [6]
-			"몰려드는 폭풍", -- [7]
-			"Uma tempestade está se formando", -- [8]
-			"Грядет буря", -- [9]
-			"风暴来临", -- [10]
-			"風暴將至", -- [11]
-		}, -- [7]
-		{
-			"You're So Divine", -- [1]
-			"Ihr seid göttlich", -- [2]
-			"Eres divino", -- [3]
-			"Eres una divinura", -- [4]
-			"La divinité incarnée", -- [5]
-			"Hai un aspetto divino!", -- [6]
-			"천상의 사랑을 당신에게", -- [7]
-			"És divino", -- [8]
-			"Божественная недосягаемость", -- [9]
-			"如此圣洁", -- [10]
-			"你好神聖", -- [11]
-		}, -- [8]
-		{
-			"Flashing Lights", -- [1]
-			"Blitzlichter", -- [2]
-			"Luces deslumbrantes", -- [3]
-			"Luces resplandecientes", -- [4]
-			"Des éclairs de lumière", -- [5]
-			"Lampi luminosi", -- [6]
-			"섬광", -- [7]
-			"Luzes dardejantes", -- [8]
-			"Свет, дарующий исцеление", -- [9]
-			"闪现的圣光", -- [10]
-			"聖光閃閃", -- [11]
-		}, -- [9]
-		{
-			"A Quick Test", -- [1]
-			"Schnelltest", -- [2]
-			"Una prueba rápida", -- [3]
-			"Una prueba rápida", -- [4]
-			"Un test rapide", -- [5]
-			"Una piccola prova", -- [6]
-			"깜짝 시험", -- [7]
-			"Teste rápido", -- [8]
-			"Испытание тет-а-тет", -- [9]
-			"快速测试", -- [10]
-			"立刻測試", -- [11]
-		}, -- [10]
-		{
-			"Twice the Challenge", -- [1]
-			"Doppelte Herausforderung", -- [2]
-			"Desafío por partida doble", -- [3]
-			"Un desafío doble", -- [4]
-			"Double défi", -- [5]
-			"Doppia sfida", -- [6]
-			"난이도 두 배", -- [7]
-			"Desafio em dose dupla", -- [8]
-			"Двойной вызов", -- [9]
-			"双倍挑战", -- [10]
-			"雙重挑戰", -- [11]
-		}, -- [11]
-		{
-			"Defend Against the Legion Assault", -- [1]
-			"Den Angriff der Legion abwehren", -- [2]
-			"Defiéndete del asalto de la Legión", -- [3]
-			"Defiéndete contra el ataque de la Legión", -- [4]
-			"Défense contre l’assaut de la Légion", -- [5]
-			"Difesa contro la Legione", -- [6]
-			"군단의 공격 막아내기", -- [7]
-			"Defender contra o ataque da Legião", -- [8]
-			"Оборона против Легиона", -- [9]
-			"在军团的攻击下保卫飞艇", -- [10]
-			"抵擋燃燒軍團的攻擊", -- [11]
-		}, -- [12]
-		{
-			"Assault the Broken Shore", -- [1]
-			"Sturmangriff auf die Verheerte Küste", -- [2]
-			"Asalta la Costa Abrupta", -- [3]
-			"Asalto a la Costa Quebrada", -- [4]
-			"L’assaut du rivage Brisé", -- [5]
-			"Assalto alla Riva Dispersa", -- [6]
-			"부서진 해변 강습", -- [7]
-			"Ataque à Costa Partida", -- [8]
-			"Нападение на Расколотый берег", -- [9]
-			"突袭破碎海滩", -- [10]
-			"突襲破碎海岸", -- [11]
-		}, -- [13]
-	},
-	["1082"] = {
-		{
-			"Island Landing", -- [1]
-			"Insulare Anlandung", -- [2]
-			"Llegada a la isla", -- [3]
-			"Peñón de la isla", -- [4]
-			"Débarquement insulaire", -- [5]
-			"Approdo all'isola", -- [6]
-			"섬 도착", -- [7]
-			"Chegada à ilha", -- [8]
-			"Высадка на острове", -- [9]
-			"登陆岛屿", -- [10]
-			"降落島嶼", -- [11]
-		}, -- [1]
-		{
-			"Into the Tomb", -- [1]
-			"Ins Grab", -- [2]
-			"Hacia la tumba", -- [3]
-			"Hacia la tumba", -- [4]
-			"Dans la tombe", -- [5]
-			"Nella tomba", -- [6]
-			"무덤 속으로", -- [7]
-			"Tumba adentro", -- [8]
-			"В гробницу", -- [9]
-			"墓穴之中", -- [10]
-			"深入墓穴", -- [11]
-		}, -- [2]
-		{
-			"Opening the Door", -- [1]
-			"Öffnen der Tür", -- [2]
-			"Abrir la puerta", -- [3]
-			"Abrir la puerta", -- [4]
-			"Ouvrir la porte", -- [5]
-			"Aprire la porta", -- [6]
-			"문 열기", -- [7]
-			"De portas abertas", -- [8]
-			"Дверь", -- [9]
-			"开门", -- [10]
-			"開門", -- [11]
-		}, -- [3]
-		{
-			"Shrine of the Truthguard", -- [1]
-			"Der Schrein des Wahrheitshüters", -- [2]
-			"Santuario de la Veraguardia", -- [3]
-			"Santuario de la Veraguardia", -- [4]
-			"Sanctuaire de Garde-Vérité", -- [5]
-			"Santuario dello Scudo della Verità", -- [6]
-			"진실의 수호자의 제단", -- [7]
-			"Santuário da Guarda Fiel", -- [8]
-			"Святилище Стража Истины", -- [9]
-			"真理守护者祭坛", -- [10]
-			"真理之盾神殿", -- [11]
-		}, -- [4]
-		{
-			"Yrgrim's Challenge", -- [1]
-			"Yrgrims Herausforderung", -- [2]
-			"Desafío de Yrgrim", -- [3]
-			"El desafío de Yrgrim", -- [4]
-			"Le défi d’Yrgrim", -- [5]
-			"La sfida di Yrgrim", -- [6]
-			"위르그림의 도전", -- [7]
-			"Desafio de Yrgrim", -- [8]
-			"Испытание Иргрима", -- [9]
-			"伊格瑞姆的挑战", -- [10]
-			"厄格林的挑戰", -- [11]
-		}, -- [5]
-		{
-			"The Truthguard", -- [1]
-			"Der Wahrheitshüter", -- [2]
-			"Veraguardia", -- [3]
-			"La Veraguardia", -- [4]
-			"Garde-Vérité", -- [5]
-			"Lo Scudo della Verità", -- [6]
-			"진실의 수호자", -- [7]
-			"A Guarda Fiel", -- [8]
-			"Страж Истины", -- [9]
-			"真理守护者", -- [10]
-			"真理之盾", -- [11]
-		}, -- [6]
-	},
-	["48"] = {
-		{
-			"Gate of the Setting Sun", -- [1]
-			"Tor der Untergehenden Sonne", -- [2]
-			"Puerta del Sol Poniente", -- [3]
-			"Puerta del Sol Poniente", -- [4]
-			"Porte du Soleil couchant", -- [5]
-			"Porta del Sole Calante", -- [6]
-			"석양문", -- [7]
-			"Portal do Sol Poente", -- [8]
-			"Врата Заходящего Солнца", -- [9]
-			"残阳关", -- [10]
-			"落陽關", -- [11]
-		}, -- [1]
-	},
-	["58"] = {
-		{
-			"Scar-Shell", -- [1]
-			"Narbenpanzer", -- [2]
-			"Escaraza", -- [3]
-			"Escaraza", -- [4]
-			"Ecaille-balafrée", -- [5]
-			"Gamara", -- [6]
-			"흉터껍질", -- [7]
-			"Conchagas", -- [8]
-			"Потертый Панцирь", -- [9]
-			"刀疤壳", -- [10]
-			"疤殼", -- [11]
-		}, -- [1]
-		{
-			"Jol'Grum", -- [1]
-			"Jol'Grum", -- [2]
-			"Jol'Grum", -- [3]
-			"Jol'Grum", -- [4]
-			"Jol’Grum", -- [5]
-			"Jol'grum", -- [6]
-			"졸그럼", -- [7]
-			"Jol'Grum", -- [8]
-			"Джол'Грум", -- [9]
-			"乔古鲁", -- [10]
-			"悠格魯姆", -- [11]
-		}, -- [2]
-		{
-			"Little Liuyang", -- [1]
-			"Klein Liuyang", -- [2]
-			"Pequeña Liuyang", -- [3]
-			"Pequeña Liuyang", -- [4]
-			"Petite Liuyang", -- [5]
-			"Piccola Liuyang", -- [6]
-			"꼬마 리우양", -- [7]
-			"Pequena Liuyang", -- [8]
-			"Малышка Люян", -- [9]
-			"小流炀", -- [10]
-			"小劉楊", -- [11]
-		}, -- [3]
-		{
-			"Chagan Firehoof", -- [1]
-			"Chagan Feuerhuf", -- [2]
-			"Chagan Pezuña Ígnea", -- [3]
-			"Chagan Pezuña Ígnea", -- [4]
-			"Chagan Sabot-de-Feu", -- [5]
-			"Chagan Ardizampa", -- [6]
-			"차간 파이어후프", -- [7]
-			"Chagan Casco de Fogo", -- [8]
-			"Чаган Огненное Копыто", -- [9]
-			"查干·焰蹄", -- [10]
-			"查剛·火蹄", -- [11]
-		}, -- [4]
-		{
-			"Defeat the Final Challenger!", -- [1]
-			"Bezwingt den letzten Herausforderer!", -- [2]
-			"¡Derrota al contendiente final!", -- [3]
-			"¡Derrota al contendiente final!", -- [4]
-			"Vaincre l’adversaire final !", -- [5]
-			"Sconfiggi lo Sfidante Finale!", -- [6]
-			"마지막 도전자를 처치하라!", -- [7]
-			"Derrote o Desafiante Final!", -- [8]
-			"Победите последнего противника!", -- [9]
-			"击败最终的挑战者！", -- [10]
-			"擊敗最後挑戰者!", -- [11]
-		}, -- [5]
-	},
-	["1168"] = {
-		{
-			"Join the Battle", -- [1]
-			"Stürzt Euch in die Schlacht", -- [2]
-			"Únete a la batalla", -- [3]
-			"Únete a la batalla", -- [4]
-			"Rejoindre la bataille", -- [5]
-			"Unisciti alla battaglia", -- [6]
-			"참전", -- [7]
-			"Juntar-se à batalha", -- [8]
-			"В бой!", -- [9]
-			"加入战斗", -- [10]
-			"加入戰鬥", -- [11]
-		}, -- [1]
-		{
-			"Defeat Balnazzar's Lieutenants", -- [1]
-			"Balnazzars Hauptmänner bezwingen", -- [2]
-			"Derrota a los tenientes de Balnazzar", -- [3]
-			"Derrota a los tenientes de Balnazzar", -- [4]
-			"Terrasser les lieutenants de Balnazzar", -- [5]
-			"Sconfiggere i Luogotenenti di Balnazzar", -- [6]
-			"발나자르의 부관 처치", -- [7]
-			"Derrotar os tenentes de Balnazzar", -- [8]
-			"Одолеть приспешников Бальназара", -- [9]
-			"击败巴纳扎尔的副官", -- [10]
-			"擊敗巴納札爾的副官", -- [11]
-		}, -- [2]
-		{
-			"Destroy Legion portals.", -- [1]
-			"Legionsportale zerstören", -- [2]
-			"Destruye portales de la Legión", -- [3]
-			"Destruye portales de la Legión.", -- [4]
-			"Destruction de portails de la Légion", -- [5]
-			"Distruggere i portali della Legione", -- [6]
-			"군단 차원문 파괴", -- [7]
-			"Destruir portais da Legião.", -- [8]
-			"Уничтожение порталов Легиона", -- [9]
-			"摧毁军团传送门。", -- [10]
-			"摧毀燃燒軍團的傳送門。", -- [11]
-		}, -- [3]
-		{
-			"Defeat Balnazzar", -- [1]
-			"Balnazzar bezwingen", -- [2]
-			"Derrota a Balnazzar", -- [3]
-			"Derrota a Balnazzar", -- [4]
-			"Terrasser Balnazzar", -- [5]
-			"Sconfiggi Balnazzar", -- [6]
-			"발나자르 처치", -- [7]
-			"Derrotar Balnazzar", -- [8]
-			"Победа над Бальназаром", -- [9]
-			"击败巴纳扎尔", -- [10]
-			"擊敗巴納札爾", -- [11]
-		}, -- [4]
-	},
-	["628"] = {
-		{
-			"Mana-Tombs", -- [1]
-			"Managruft", -- [2]
-			"Tumbas de Maná", -- [3]
-			"Tumbas de Maná", -- [4]
-			"Tombes-mana", -- [5]
-			"Tombe del Mana", -- [6]
-			"마나 무덤", -- [7]
-			"Tumbas de Mana", -- [8]
-			"Гробницы Маны", -- [9]
-			"法力陵墓", -- [10]
-			"法力墓地", -- [11]
-		}, -- [1]
-	},
-	["1091"] = {
-		{
-			"Combat Training", -- [1]
-			"Kampftraining", -- [2]
-			"Instrucción de combate", -- [3]
-			"Instrucción de combate", -- [4]
-			"Entraînement au combat", -- [5]
-			"Addestramento al combattimento", -- [6]
-			"전투 훈련", -- [7]
-			"Treino de combate", -- [8]
-			"Боевые учения", -- [9]
-			"战斗训练", -- [10]
-			"戰鬥訓練", -- [11]
-		}, -- [1]
-		{
-			"A Pinch Of Fire", -- [1]
-			"Eine Prise Feuer", -- [2]
-			"Una pizca de fuego", -- [3]
-			"Una pequeña llama", -- [4]
-			"Une pincée de feu", -- [5]
-			"Un pizzico di Fuoco", -- [6]
-			"뜨거운 맛", -- [7]
-			"Um pouco de fogo", -- [8]
-			"Дай жару!", -- [9]
-			"一小撮火焰", -- [10]
-			"一點火花", -- [11]
-		}, -- [2]
-		{
-			"Lava Launcher", -- [1]
-			"Lavawerfer", -- [2]
-			"Lanzalava", -- [3]
-			"Lanzador de lava", -- [4]
-			"Lanceur de lave", -- [5]
-			"Lanciatore di lava", -- [6]
-			"치솟는 용암", -- [7]
-			"Lança-lava", -- [8]
-			"Сила вулкана", -- [9]
-			"熔岩发射器", -- [10]
-			"熔岩發射器", -- [11]
-		}, -- [3]
-		{
-			"Lightning Bolt! Lightning Bolt!", -- [1]
-			"Blitzschlag! Blitzschlag!", -- [2]
-			"¡Descarga de relámpagos! ¡Descarga de relámpagos!", -- [3]
-			"¡Descarga de relámpagos! ¡Descarga de relámpagos!", -- [4]
-			"Électrifiant !", -- [5]
-			"Dardo Fulminante! Dardo Fulminante!", -- [6]
-			"파지직! 파지직!", -- [7]
-			"Raios!", -- [8]
-			"Гром и молния", -- [9]
-			"闪电箭！闪电箭！", -- [10]
-			"閃電箭！閃電箭！", -- [11]
-		}, -- [4]
-		{
-			"Let It Rock", -- [1]
-			"Rollende Steine", -- [2]
-			"Impacto pétreo", -- [3]
-			"Que empiece la fiesta", -- [4]
-			"Ça va secouer !", -- [5]
-			"Spacca!", -- [6]
-			"요동하는 대지", -- [7]
-			"Rock n' roll", -- [8]
-			"Могущество из самых недр", -- [9]
-			"摇摆起来", -- [10]
-			"搖滾大地", -- [11]
-		}, -- [5]
-		{
-			"Putting It All Together", -- [1]
-			"Das große Ganze", -- [2]
-			"Juntar las piezas", -- [3]
-			"Todas las piezas juntas", -- [4]
-			"Mise en pratique", -- [5]
-			"Mettersi alla prova", -- [6]
-			"종합주문세트", -- [7]
-			"Fixação de conteúdo", -- [8]
-			"Сборная солянка", -- [9]
-			"综合在一起", -- [10]
-			"準備完善", -- [11]
-		}, -- [6]
-		{
-			"Ribbit,  Ribbit.", -- [1]
-			"Quaaak, quaaak.", -- [2]
-			"Croac, croac", -- [3]
-			"Croac, croac.", -- [4]
-			"Coâ, coâ !", -- [5]
-			"Cra, cra!", -- [6]
-			"개굴, 개굴", -- [7]
-			"Croac, croac.", -- [8]
-			"Кто сказал \"ква\"?", -- [9]
-			"呱，呱", -- [10]
-			"嘓嘓。", -- [11]
-		}, -- [7]
-		{
-			"Shocking the World", -- [1]
-			"Ein Schock für die Welt", -- [2]
-			"Descarga al mundo", -- [3]
-			"Un impacto para el mundo", -- [4]
-			"Électriser le monde", -- [5]
-			"Scioccante!", -- [6]
-			"충격적인 세계", -- [7]
-			"Abalando o mundo", -- [8]
-			"Потрясение для всего мира", -- [9]
-			"电击世界", -- [10]
-			"震撼世界", -- [11]
-		}, -- [8]
-		{
-			"Dousing Your Wounds", -- [1]
-			"Eine Welle der Heilung", -- [2]
-			"Empapa tus heridas", -- [3]
-			"Empapando las heridas", -- [4]
-			"Doux apaisement", -- [5]
-			"Lavarsi le ferite", -- [6]
-			"상처 돌보기", -- [7]
-			"Fechar as feridas", -- [8]
-			"Ванна из целебного бальзама", -- [9]
-			"浸泡伤口", -- [10]
-			"清理傷口", -- [11]
-		}, -- [9]
-		{
-			"Unleashing The Elements", -- [1]
-			"Die Elemente entfesseln", -- [2]
-			"Liberación de elementos", -- [3]
-			"Liberando los elementos", -- [4]
-			"Libérer les éléments", -- [5]
-			"Scatenare gli elementi", -- [6]
-			"정령 해방", -- [7]
-			"Libertar os elementos", -- [8]
-			"Освобождение стихий", -- [9]
-			"释放元素", -- [10]
-			"釋放元素", -- [11]
-		}, -- [10]
-		{
-			"A Quick Test", -- [1]
-			"Schnelltest", -- [2]
-			"Una prueba rápida", -- [3]
-			"Una prueba rápida", -- [4]
-			"Un test rapide", -- [5]
-			"Una piccola prova", -- [6]
-			"깜짝 시험", -- [7]
-			"Teste rápido", -- [8]
-			"Испытание тет-а-тет", -- [9]
-			"快速测试", -- [10]
-			"立刻測試", -- [11]
-		}, -- [11]
-		{
-			"Twice the Challenge", -- [1]
-			"Doppelte Herausforderung", -- [2]
-			"Desafío por partida doble", -- [3]
-			"Un desafío doble", -- [4]
-			"Double défi", -- [5]
-			"Doppia sfida", -- [6]
-			"난이도 두 배", -- [7]
-			"Desafio em dose dupla", -- [8]
-			"Двойной вызов", -- [9]
-			"双倍挑战", -- [10]
-			"雙重挑戰", -- [11]
-		}, -- [12]
-		{
-			"Defend Against the Legion Assault", -- [1]
-			"Den Angriff der Legion abwehren", -- [2]
-			"Defiéndete del asalto de la Legión", -- [3]
-			"Defiéndete contra el ataque de la Legión", -- [4]
-			"Défense contre l’assaut de la Légion", -- [5]
-			"Difesa contro la Legione", -- [6]
-			"군단의 공격 막아내기", -- [7]
-			"Defender contra o ataque da Legião", -- [8]
-			"Оборона против Легиона", -- [9]
-			"在军团的攻击下保卫飞艇", -- [10]
-			"抵擋燃燒軍團的攻擊", -- [11]
-		}, -- [13]
-		{
-			"Assault on Broken Shore", -- [1]
-			"Angriff auf die Verheerte Küste", -- [2]
-			"Asalto a la Costa Abrupta", -- [3]
-			"Asalto a la Costa Quebrada", -- [4]
-			"L’assaut du rivage Brisé", -- [5]
-			"Assalto alla Riva Dispersa", -- [6]
-			"부서진 해변 공격", -- [7]
-			"Ataque à Costa Partida", -- [8]
-			"Штурм Расколотого берега", -- [9]
-			"突袭破碎海滩", -- [10]
-			"突襲破碎海岸", -- [11]
-		}, -- [14]
-	},
-	["216"] = {
-		{
-			"Talk to the Boss", -- [1]
-			"Sprecht mit dem Boss", -- [2]
-			"Habla con el jefe", -- [3]
-			"Habla con el jefe", -- [4]
-			"Parler au patron", -- [5]
-			"Parla col capo", -- [6]
-			"대장에게 말해봐", -- [7]
-			"Falar com o Chefe", -- [8]
-			"Разговор с вожаком", -- [9]
-			"跟老板谈谈", -- [10]
-			"與工頭交談", -- [11]
-		}, -- [1]
-		{
-			"Rock Grinding", -- [1]
-			"Felsen mahlen", -- [2]
-			"Roca pulverizada", -- [3]
-			"Roca pulverizada", -- [4]
-			"Casser du caillou", -- [5]
-			"Frantumare la roccia", -- [6]
-			"날뛰는 원소 정령", -- [7]
-			"Triturando rochas", -- [8]
-			"Грохот камней", -- [9]
-			"碎石机", -- [10]
-			"研磨石頭", -- [11]
-		}, -- [2]
-		{
-			"Economic Recovery", -- [1]
-			"Wirtschaftsaufschwung", -- [2]
-			"Recuperación económica", -- [3]
-			"Recuperación económica", -- [4]
-			"Reprise économique", -- [5]
-			"Recupero economico", -- [6]
-			"경제를 살리자", -- [7]
-			"Recuperação econômica", -- [8]
-			"Набить карманы", -- [9]
-			"经济复苏", -- [10]
-			"經濟復甦", -- [11]
-		}, -- [3]
-		{
-			"End of the Mine", -- [1]
-			"Das Ende der Mine", -- [2]
-			"Fin de la mina", -- [3]
-			"Fin de la mina", -- [4]
-			"Le fond de la mine", -- [5]
-			"In fondo alla miniera", -- [6]
-			"광산의 끝", -- [7]
-			"Fim da Mina", -- [8]
-			"Конец рудника", -- [9]
-			"矿洞的末端", -- [10]
-			"礦坑終點", -- [11]
-		}, -- [4]
-		{
-			"Heartbreak", -- [1]
-			"Gebrochenes Herz", -- [2]
-			"Corazón partido", -- [3]
-			"Corazón partido", -- [4]
-			"Cœur brisé", -- [5]
-			"Crepacuore", -- [6]
-			"심장을 노려라!", -- [7]
-			"Coração Partido", -- [8]
-			"Разбитое сердце", -- [9]
-			"心碎", -- [10]
-			"心碎", -- [11]
-		}, -- [5]
-		{
-			"Bonus Objectives", -- [1]
-			"Bonusziele", -- [2]
-			"Objetivos de bonificación", -- [3]
-			"Objetivos de bonificación", -- [4]
-			"Objectifs bonus", -- [5]
-			"Obiettivi bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivos bônus", -- [8]
-			"Дополнительные задачи", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [6]
-	},
-	["68"] = {
-		{
-			"The Lorewalker's Fate", -- [1]
-			"Das Schicksal der Lehrensucherin", -- [2]
-			"El destino del eremita", -- [3]
-			"El destino del eremita", -- [4]
-			"Le destin de la chroniqueuse", -- [5]
-			"Il destino del Ramingo della Sapienza", -- [6]
-			"전승지기의 운명", -- [7]
-			"O Destino da Andarilha das Lendas", -- [8]
-			"Судьба хранителя истории", -- [9]
-			"游学者的命运", -- [10]
-			"博學行者的命運", -- [11]
-		}, -- [1]
-		{
-			"Rescue the Golden Lotus", -- [1]
-			"Rettet den Goldenen Lotus", -- [2]
-			"Rescata a El Loto Dorado", -- [3]
-			"Rescata a El Loto Dorado", -- [4]
-			"Sauver le Lotus doré", -- [5]
-			"Salva il Loto Dorato", -- [6]
-			"황금 연꽃 원정대 구출", -- [7]
-			"Resgate o Lótus Dourado", -- [8]
-			"Спасение Золотого Лотоса", -- [9]
-			"拯救金莲教", -- [10]
-			"拯救金蓮會", -- [11]
-		}, -- [2]
-		{
-			"Stop the Execution", -- [1]
-			"Stoppt die Hinrichtung", -- [2]
-			"Detén la ejecución", -- [3]
-			"Detén la ejecución", -- [4]
-			"Empêcher l’exécution", -- [5]
-			"Impedisci l'esecuzione", -- [6]
-			"처형을 막아라", -- [7]
-			"Impeça a Execução", -- [8]
-			"Остановка казни", -- [9]
-			"刀下留人", -- [10]
-			"刀下留人", -- [11]
-		}, -- [3]
-		{
-			"Capture the Artifacts", -- [1]
-			"Erobert die Artefakte", -- [2]
-			"Hazte con los artefactos", -- [3]
-			"Hazte con los artefactos", -- [4]
-			"Capturer les artéfacts", -- [5]
-			"Conquista i Manufatti", -- [6]
-			"유물 확보", -- [7]
-			"Capture os Artefatos", -- [8]
-			"Захват реликвий", -- [9]
-			"夺取神器", -- [10]
-			"奪取神器", -- [11]
-		}, -- [4]
-		{
-			"Kill General Zhun", -- [1]
-			"Tötet General Zhun", -- [2]
-			"Mata al general Zhun", -- [3]
-			"Mata al general Zhun", -- [4]
-			"Tuer le général Zhun", -- [5]
-			"Uccidi il Generale Zhun", -- [6]
-			"장군 준 처치", -- [7]
-			"Mate o General Zhun", -- [8]
-			"Убийство генерала Чжуня", -- [9]
-			"杀死烛桓将军", -- [10]
-			"殺死曾將軍", -- [11]
-		}, -- [5]
-	},
-	["1095"] = {
-		{
-			"Combat Training", -- [1]
-			"Kampftraining", -- [2]
-			"Instrucción de combate", -- [3]
-			"Instrucción de combate", -- [4]
-			"Entraînement au combat", -- [5]
-			"Addestramento al combattimento", -- [6]
-			"전투 훈련", -- [7]
-			"Treino de combate", -- [8]
-			"Боевые учения", -- [9]
-			"战斗训练", -- [10]
-			"戰鬥訓練", -- [11]
-		}, -- [1]
-		{
-			"Ferocious Strike", -- [1]
-			"Wilder Schlag", -- [2]
-			"Ataque feroz", -- [3]
-			"Ataque feroz", -- [4]
-			"Frappe féroce", -- [5]
-			"Assalto feroce", -- [6]
-			"가혹한 일격", -- [7]
-			"Ataque Feroz", -- [8]
-			"Дикая ярость", -- [9]
-			"凶猛打击", -- [10]
-			"虎虎生風", -- [11]
-		}, -- [2]
-		{
-			"A Kick to the Face", -- [1]
-			"Ein Tritt ins Gesicht", -- [2]
-			"Una patada en la cara", -- [3]
-			"Una patada en la cara", -- [4]
-			"Un coup de pied au visage", -- [5]
-			"Un calcio in faccia", -- [6]
-			"면상 발차기", -- [7]
-			"Chute na cara", -- [8]
-			"Пинок по лицу", -- [9]
-			"照脸直踢", -- [10]
-			"打臉", -- [11]
-		}, -- [3]
-		{
-			"Kick It Again", -- [1]
-			"Nachtreten", -- [2]
-			"Patea con saña", -- [3]
-			"Patéala de nuevo", -- [4]
-			"Dégagement", -- [5]
-			"Un altro calcio", -- [6]
-			"연이어 발차기", -- [7]
-			"Chutar de novo", -- [8]
-			"Удар, лишающий чувств", -- [9]
-			"再踢一脚", -- [10]
-			"再踢一次", -- [11]
-		}, -- [4]
-		{
-			"A Thousand Strikes", -- [1]
-			"Tausend und ein Schlag", -- [2]
-			"Miles de golpes", -- [3]
-			"Mil golpes", -- [4]
-			"Un millier de coups", -- [5]
-			"Un migliaio di colpi", -- [6]
-			"주먹 작렬", -- [7]
-			"Mil Golpes", -- [8]
-			"Один удар вместо тысячи", -- [9]
-			"一瞬千击", -- [10]
-			"打一千次", -- [11]
-		}, -- [5]
-		{
-			"Putting It All Together", -- [1]
-			"Das große Ganze", -- [2]
-			"Juntar las piezas", -- [3]
-			"Todas las piezas juntas", -- [4]
-			"Mise en pratique", -- [5]
-			"Mettersi alla prova", -- [6]
-			"종합주문세트", -- [7]
-			"Fixação de conteúdo", -- [8]
-			"Сборная солянка", -- [9]
-			"综合在一起", -- [10]
-			"準備完善", -- [11]
-		}, -- [6]
-		{
-			"Keep on Rollin'", -- [1]
-			"Nicht aus der Rolle fallen", -- [2]
-			"Rodar y rodar", -- [3]
-			"Sigue rodando", -- [4]
-			"Ça roule, ma poule !", -- [5]
-			"Rotolando verso sud", -- [6]
-			"데굴데굴", -- [7]
-			"Vai rolando", -- [8]
-			"Трюк, достойный акробата", -- [9]
-			"翻滚不停", -- [10]
-			"翻滾吧！", -- [11]
-		}, -- [7]
-		{
-			"Well, Effuse Me!", -- [1]
-			"Übermut tut selten gut", -- [2]
-			"¡Efúndeme si puedes!", -- [3]
-			"Muy bien, ¡efúndeme!", -- [4]
-			"Effusions bienvenues", -- [5]
-			"Emanami questo!", -- [6]
-			"치유의 기술", -- [7]
-			"Bom, manda uma efusão!", -- [8]
-			"Излей мне душу", -- [9]
-			"让真气贯通我吧！", -- [10]
-			"我需要流洩！", -- [11]
-		}, -- [8]
-		{
-			"A Quick Test", -- [1]
-			"Schnelltest", -- [2]
-			"Una prueba rápida", -- [3]
-			"Una prueba rápida", -- [4]
-			"Un test rapide", -- [5]
-			"Una piccola prova", -- [6]
-			"깜짝 시험", -- [7]
-			"Teste rápido", -- [8]
-			"Испытание тет-а-тет", -- [9]
-			"快速测试", -- [10]
-			"立刻測試", -- [11]
-		}, -- [9]
-		{
-			"Twice the Challenge", -- [1]
-			"Doppelte Herausforderung", -- [2]
-			"Desafío por partida doble", -- [3]
-			"Un desafío doble", -- [4]
-			"Double défi", -- [5]
-			"Doppia sfida", -- [6]
-			"난이도 두 배", -- [7]
-			"Desafio em dose dupla", -- [8]
-			"Двойной вызов", -- [9]
-			"双倍挑战", -- [10]
-			"雙重挑戰", -- [11]
-		}, -- [10]
-		{
-			"Defend Against the Legion Assault", -- [1]
-			"Den Angriff der Legion abwehren", -- [2]
-			"Defiéndete del asalto de la Legión", -- [3]
-			"Defiéndete contra el ataque de la Legión", -- [4]
-			"Défense contre l’assaut de la Légion", -- [5]
-			"Difesa contro la Legione", -- [6]
-			"군단의 공격 막아내기", -- [7]
-			"Defender contra o ataque da Legião", -- [8]
-			"Оборона против Легиона", -- [9]
-			"在军团的攻击下保卫飞艇", -- [10]
-			"抵擋燃燒軍團的攻擊", -- [11]
-		}, -- [11]
-		{
-			"Assault on Broken Shore", -- [1]
-			"Angriff auf die Verheerte Küste", -- [2]
-			"Asalto a la Costa Abrupta", -- [3]
-			"Asalto a la Costa Quebrada", -- [4]
-			"L’assaut du rivage Brisé", -- [5]
-			"Assalto alla Riva Dispersa", -- [6]
-			"부서진 해변 공격", -- [7]
-			"Ataque à Costa Partida", -- [8]
-			"Штурм Расколотого берега", -- [9]
-			"突袭破碎海滩", -- [10]
-			"突襲破碎海岸", -- [11]
-		}, -- [12]
-	},
-	["667"] = {
-		{
-			"Gordok Commons", -- [1]
-			"Gordokhallen", -- [2]
-			"Ágora de Gordok", -- [3]
-			"Ágora de Gordok", -- [4]
-			"Communs gordok", -- [5]
-			"Sale di Gordok", -- [6]
-			"고르독 광장", -- [7]
-			"Pátio Gordok", -- [8]
-			"Палаты Гордока", -- [9]
-			"戈多克议会", -- [10]
-			"戈多克平民區", -- [11]
-		}, -- [1]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [2]
-		{
-			"Bonus Objective", -- [1]
-			"Bonusziel", -- [2]
-			"Objetivo de bonificación", -- [3]
-			"Objetivo de bonificación", -- [4]
-			"Objectif bonus", -- [5]
-			"Obiettivo bonus", -- [6]
-			"추가 목표", -- [7]
-			"Objetivo bônus", -- [8]
-			"Дополнительная задача", -- [9]
-			"奖励目标", -- [10]
-			"獎勵目標", -- [11]
-		}, -- [3]
-	},
-	["184"] = {
-		{
-			"The Flight Master", -- [1]
-			"Der Flugmeister", -- [2]
-			"El maestro de vuelo", -- [3]
-			"El maestro de vuelo", -- [4]
-			"Le maître de vol", -- [5]
-			"Il Maestro di Volo", -- [6]
-			"비행 조련사", -- [7]
-			"O Mestre de Voo", -- [8]
-			"Распорядитель полетов", -- [9]
-			"飞行管理员", -- [10]
-			"飛行管理員", -- [11]
-		}, -- [1]
-		{
-			"Death on the Docks", -- [1]
-			"Tod auf den Docks", -- [2]
-			"Muerte en los muelles", -- [3]
-			"Muerte en los muelles", -- [4]
-			"Mort sur les quais", -- [5]
-			"Morte sui moli", -- [6]
-			"부두에서의 격전", -- [7]
-			"Morte nas Docas", -- [8]
-			"Смерть на пристани", -- [9]
-			"死守码头", -- [10]
-			"死亡碼頭", -- [11]
-		}, -- [2]
-		{
-			"Reclaim the Court!", -- [1]
-			"Die Rückeroberung des Hofes!", -- [2]
-			"¡Reclama la corte!", -- [3]
-			"¡Reclama la corte!", -- [4]
-			"Reprenez la cour !", -- [5]
-			"Riconquista la corte!", -- [6]
-			"요새를 되찾아라!", -- [7]
-			"Domine o Pátio!", -- [8]
-			"Возвращение контроля над двором", -- [9]
-			"夺回庭院！", -- [10]
-			"收復中庭!", -- [11]
-		}, -- [3]
-		{
-			"The High Marshal", -- [1]
-			"Der Hochmarschall", -- [2]
-			"El alto mariscal", -- [3]
-			"El alto mariscal", -- [4]
-			"Le haut maréchal", -- [5]
-			"Il Gran Maresciallo", -- [6]
-			"대장군", -- [7]
-			"O Grão-marechal", -- [8]
-			"Верховный маршал", -- [9]
-			"大元帅", -- [10]
-			"大元帥", -- [11]
-		}, -- [4]
-		{
-			"Legwork", -- [1]
-			"Lauferei", -- [2]
-			"Trabajo preliminar", -- [3]
-			"Trabajo preliminar", -- [4]
-			"Travail sur le terrain", -- [5]
-			"Raccolta informazioni", -- [6]
-			"탐문 조사", -- [7]
-			"Pernadas", -- [8]
-			"Беготня", -- [9]
-			"外勤工作", -- [10]
-			"跑腿", -- [11]
-		}, -- [5]
-		{
-			"Setting Up", -- [1]
-			"Vorbereitung", -- [2]
-			"Tanto monta, monta tanto", -- [3]
-			"Tanto monta, monta tanto", -- [4]
-			"Préparatifs", -- [5]
-			"Preparare le difese", -- [6]
-			"방어 준비", -- [7]
-			"Preparar Armas", -- [8]
-			"Установка", -- [9]
-			"装备中", -- [10]
-			"做好準備", -- [11]
-		}, -- [6]
-		{
-			"Hold the Line!", -- [1]
-			"Weicht nicht zurück!", -- [2]
-			"¡Mantén la formación!", -- [3]
-			"¡Mantén la formación!", -- [4]
-			"Tenir le front !", -- [5]
-			"Difendi la posizione!", -- [6]
-			"전선을 사수하라!", -- [7]
-			"Mantenham a Formação!", -- [8]
-			"Держать строй!", -- [9]
-			"坚守阵地！", -- [10]
-			"守住陣線!", -- [11]
-		}, -- [7]
-	},
-	["785"] = {
-		{
-			"Felfire in the Sky #1", -- [1]
-			"", -- [2]
-			"", -- [3]
-			"Fuego vil en el cielo #1", -- [4]
-			"", -- [5]
-			"Vilfuoco nel cielo #1", -- [6]
-			"하늘 속 지옥불 #1", -- [7]
-			"Fogovil no céu #1", -- [8]
-			"", -- [9]
-			"天降邪火#1", -- [10]
-			"空降魔火#1", -- [11]
-		}, -- [1]
-		{
-			"You Face Jaraxxus", -- [1]
-			"Ihr tretet Jaraxxus entgegen", -- [2]
-			"Te enfrentas a Jaraxxus", -- [3]
-			"Enfrentas a Jaraxxus", -- [4]
-			"Devant vous se tient Jaraxxus", -- [5]
-			"Affrontate Jaraxxus!", -- [6]
-			"자락서스 대면", -- [7]
-			"Você encara Jaraxxus", -- [8]
-			"Перед вами Джараксус", -- [9]
-			"挑战加拉克苏斯", -- [10]
-			"面對賈拉克瑟斯", -- [11]
-		}, -- [2]
-	},
-	["685"] = {
-		{
-			"Iron Docks", -- [1]
-			"Eisendocks", -- [2]
-			"Puerto de Hierro", -- [3]
-			"Muelles de Hierro", -- [4]
-			"Quais de Fer", -- [5]
-			"Darsena di Ferro", -- [6]
-			"강철 선착장", -- [7]
-			"Docas de Ferro", -- [8]
-			"Железные доки", -- [9]
-			"钢铁码头", -- [10]
-			"鋼鐵碼頭", -- [11]
-		}, -- [1]
-	},
-	["449"] = {
-		{
-			"Defeat Arnokk the Burner", -- [1]
-			"Bezwingt Arnokk den Brenner", -- [2]
-			"Derrota a Arnokk el Quemador", -- [3]
-			"Derrota a Arnokk el Abrasador", -- [4]
-			"Vaincre Arnokk le Brûleur", -- [5]
-			"Sconfiggi Arnokk il Piromane", -- [6]
-			"방화광 아르노크 처치", -- [7]
-			"Derrotar Arnokk, o Incendiário", -- [8]
-			"Победите Арнокка Сжигателя", -- [9]
-			"击败炽燃者阿诺克", -- [10]
-			"擊敗『燃燒者』阿諾克", -- [11]
-		}, -- [1]
-		{
-			"Meet Yrel at the Karabor Harbor", -- [1]
-			"Trefft Yrel am Hafen von Karabor", -- [2]
-			"Reúnete con Yrel en el Puerto de Karabor", -- [3]
-			"Reúnete con Yrel en el Puerto de Karabor", -- [4]
-			"Rencontrer Yrel au port de Karabor", -- [5]
-			"Raggiungi Yrel presso il Porto di Karabor", -- [6]
-			"카라보르 항만에서 이렐 만나기", -- [7]
-			"Encontre Yrel no Porto de Karabor", -- [8]
-			"Встреча с Ирель в гавани Карабора", -- [9]
-			"在卡拉波港口与伊瑞尔见面", -- [10]
-			"在卡拉伯爾港與伊芮爾碰面", -- [11]
-		}, -- [2]
-		{
-			"Protect K'ara from the invading forces", -- [1]
-			"Beschützt K'ara vor den eindringenden Streitkräften", -- [2]
-			"Protege a K'ara de los invasores", -- [3]
-			"Protege a K'ara de las fuerzas invasoras", -- [4]
-			"Protéger K’ara des envahisseurs", -- [5]
-			"Proteggi K'ara dagli assalitori", -- [6]
-			"칩입자에게서 크아라 지키기", -- [7]
-			"Proteger K'ara das forças invasoras.", -- [8]
-			"Защитите К'ару от захватчиков", -- [9]
-			"保护卡拉不受入侵者的伤害", -- [10]
-			"保護卡拉不受入侵敵軍的威脅", -- [11]
-		}, -- [3]
-		{
-			"Kill Commander Vorka!", -- [1]
-			"Tötet Kommandant Vorka!", -- [2]
-			"¡Mata al comandante Vorka!", -- [3]
-			"¡Mata al comandante Vorka!", -- [4]
-			"Vaincre le commandant Vorka", -- [5]
-			"Uccidi il Comandante Vorka.", -- [6]
-			"사령관 보르카 처치!", -- [7]
-			"Mate o Comandante Vorka!", -- [8]
-			"Убить командира Ворку!", -- [9]
-			"击败指挥官沃尔卡！", -- [10]
-			"殺死指揮官沃爾卡！", -- [11]
-		}, -- [4]
-	},
-	["584"] = {
-		{
-			"Halls of Stone", -- [1]
-			"Die Hallen des Steins", -- [2]
-			"Cámaras de Piedra", -- [3]
-			"Las Cámaras de Piedra", -- [4]
-			"Les salles de Pierre", -- [5]
-			"Sale della Pietra", -- [6]
-			"돌의 전당", -- [7]
-			"Salões Rochosos", -- [8]
-			"Чертоги Камня", -- [9]
-			"岩石大厅", -- [10]
-			"石之大廳", -- [11]
-		}, -- [1]
-	},
-	["649"] = {
-		{
-			"Gnomeregan", -- [1]
-			"Gnomeregan", -- [2]
-			"Gnomeregan", -- [3]
-			"Gnomeregan", -- [4]
-			"Gnomeregan", -- [5]
-			"Gnomeregan", -- [6]
-			"놈리건", -- [7]
-			"Gnomeregan", -- [8]
-			"Гномреган", -- [9]
-			"诺莫瑞根", -- [10]
-			"諾姆瑞根", -- [11]
-		}, -- [1]
-		{
-			"Grubbis defeated", -- [1]
-			"Grubbis bezwungen", -- [2]
-			"Grubbis derrotado", -- [3]
-			"Grubbis derrotado", -- [4]
-			"Grubbis vaincu", -- [5]
-			"Sconfiggi Grubbis", -- [6]
-			"그루비스 처치", -- [7]
-			"Grúdio derrotado", -- [8]
-			"Грязнюк повержен", -- [9]
-			"击败格鲁比斯", -- [10]
-			"擊敗格魯比斯", -- [11]
-		}, -- [2]
-		{
-			"Viscous Fallout defeated", -- [1]
-			"Verflüssigte Ablagerung bezwungen", -- [2]
-			"Radiactivo viscoso derrotado", -- [3]
-			"Radiactivo viscoso derrotado", -- [4]
-			"Retombée visqueuse vaincue", -- [5]
-			"Sconfiggi la Scoria Viscosa", -- [6]
-			"방사성 폐기물 처치", -- [7]
-			"Precipitação Radioativa Viscosa derrotada", -- [8]
-			"Липкая муть повержена", -- [9]
-			"击败粘性辐射尘", -- [10]
-			"擊敗黏性輻射塵", -- [11]
-		}, -- [3]
-		{
-			"Electrocutioner 6000 defeated", -- [1]
-			"Elektrokutor 6000 bezwungen", -- [2]
-			"Electrocutor 6000 derrotado", -- [3]
-			"Electrocutor 6000 derrotado", -- [4]
-			"Electrocuteur 6000 vaincu", -- [5]
-			"Elettrocuz 6000", -- [6]
-			"기계화 문지기 6000 처치", -- [7]
-			"Eletrocutor 6000 derrotado", -- [8]
-			"\"Электрошокер 6000\" повержен", -- [9]
-			"击败电刑器6000型", -- [10]
-			"擊敗電刑器6000型", -- [11]
-		}, -- [4]
-		{
-			"Crowd Pummeler 9-60 defeated", -- [1]
-			"Meuteverprügler 9-60 bezwungen", -- [2]
-			"Golpeamasa 9-60 derrotado", -- [3]
-			"Golpeamasa 9-60 derrotado", -- [4]
-			"Faucheur de foule 9-60 vaincu", -- [5]
-			"Sconfiggi il Pungolatore 9-60", -- [6]
-			"고철 압축기 9-60 처치", -- [7]
-			"Espanca-gente 9-60 derrotado", -- [8]
-			"\"Толпогон 9-60\" повержен", -- [9]
-			"击败群体打击者9-60", -- [10]
-			"擊敗群體打擊者9-60", -- [11]
-		}, -- [5]
-	},
-	["1157"] = {
-		{
-			"The Return to Light's Hope", -- [1]
-			"Rückkehr zum Hoffnungsvollen Licht", -- [2]
-			"El regreso a Esperanza de la Luz", -- [3]
-			"El regreso a la Esperanza de la Luz", -- [4]
-			"Le retour à l’Espoir de Lumière", -- [5]
-			"Ritorno alla Cappella della Luce", -- [6]
-			"희망의 빛으로 돌아가기", -- [7]
-			"Retorno à Esperança da Luz", -- [8]
-			"Возвращение в Часовню Последней Надежды", -- [9]
-			"回到圣光之愿", -- [10]
-			"回到聖光之願", -- [11]
-		}, -- [1]
-		{
-			"Preparations", -- [1]
-			"Vorbereitungen", -- [2]
-			"Preparativos", -- [3]
-			"Preparativos", -- [4]
-			"Les préparatifs", -- [5]
-			"Preparativi", -- [6]
-			"준비", -- [7]
-			"Os preparativos", -- [8]
-			"Приготовления", -- [9]
-			"备战", -- [10]
-			"做好準備", -- [11]
-		}, -- [2]
-		{
-			"Upon the Hill of No Return", -- [1]
-			"Auf dem Hügel ohne Widerkehr", -- [2]
-			"En la colina sin retorno", -- [3]
-			"Sobre la Colina del Retorno Negado", -- [4]
-			"Sur la colline sans retour", -- [5]
-			"Punto di non ritorno", -- [6]
-			"돌아설 수 없는 길목", -- [7]
-			"Nas colinas do adeus", -- [8]
-			"Точка невозврата", -- [9]
-			"无言的山丘", -- [10]
-			"視死如歸", -- [11]
-		}, -- [3]
-		{
-			"The Dead Shall Rise", -- [1]
-			"Die Toten werden wiederauferstehen", -- [2]
-			"Los muertos se alzarán", -- [3]
-			"Los muertos deben alzarse", -- [4]
-			"Les morts se relèveront", -- [5]
-			"I morti risorgono", -- [6]
-			"망자여, 일어나라", -- [7]
-			"Os mortos erguer-se-ão", -- [8]
-			"Мертвые, восстаньте!", -- [9]
-			"亡者复生", -- [10]
-			"亡者復甦", -- [11]
-		}, -- [4]
-		{
-			"The Highlord Awaits", -- [1]
-			"Der Hochlord wartet", -- [2]
-			"El Alto Señor aguarda", -- [3]
-			"El Alto Señor espera", -- [4]
-			"Le généralissime attend", -- [5]
-			"Il Gran Signore attende", -- [6]
-			"대영주와의 만남", -- [7]
-			"Grão-lorde a sua espera", -- [8]
-			"Верховный лорд ждет", -- [9]
-			"大领主在等着你", -- [10]
-			"大領主在等待著", -- [11]
-		}, -- [5]
-		{
-			"The Sanctum of Light", -- [1]
-			"Das Sanktum des Lichts", -- [2]
-			"El Sagrario de la Luz", -- [3]
-			"El Santuario de la Luz", -- [4]
-			"Le sanctum de la Lumière", -- [5]
-			"Il Santuario della Luce", -- [6]
-			"빛의 성소", -- [7]
-			"O Sacrário da Luz", -- [8]
-			"Обитель Света", -- [9]
-			"圣光秘殿", -- [10]
-			"聖光會堂", -- [11]
-		}, -- [6]
-		{
-			"Lady of the Light", -- [1]
-			"Lady des Lichts", -- [2]
-			"La señora de la Luz", -- [3]
-			"Señora de la Luz", -- [4]
-			"La dame de Lumière", -- [5]
-			"La Dama della Luce", -- [6]
-			"빛의 여인", -- [7]
-			"Lady da Luz", -- [8]
-			"Госпожа Света", -- [9]
-			"圣光女伯爵", -- [10]
-			"聖光女士", -- [11]
-		}, -- [7]
-		{
-			"An Unholy Fate", -- [1]
-			"Ein unheiliges Schicksal", -- [2]
-			"Una suerte profana", -- [3]
-			"Un destino profano", -- [4]
-			"Un destin impie", -- [5]
-			"Un destino empio", -- [6]
-			"지독한 운명", -- [7]
-			"Um destino horrível", -- [8]
-			"Злая судьба", -- [9]
-			"亵渎命运", -- [10]
-			"不神聖的命運", -- [11]
-		}, -- [8]
-	},
-	["1025"] = {
-		{
-			"Kill Murlocs", -- [1]
-			"Tötet Murlocs", -- [2]
-			"Mata múrlocs", -- [3]
-			"Mata múrlocs", -- [4]
-			"Élimination des murlocs", -- [5]
-			"Uccidere i Murloc", -- [6]
-			"멀록 처치", -- [7]
-			"Matar Murlocs.", -- [8]
-			"Смерть мурлокам", -- [9]
-			"消灭鱼人", -- [10]
-			"殺死魚人", -- [11]
-		}, -- [1]
-		{
-			"Fishing", -- [1]
-			"Angeln", -- [2]
-			"Pesca", -- [3]
-			"Pesca", -- [4]
-			"Pêche", -- [5]
-			"Pesca", -- [6]
-			"낚시", -- [7]
-			"Pesca", -- [8]
-			"Рыбная ловля", -- [9]
-			"钓鱼", -- [10]
-			"釣魚", -- [11]
-		}, -- [2]
-		{
-			"Delivery", -- [1]
-			"Zustellung", -- [2]
-			"Entrega", -- [3]
-			"Entrega", -- [4]
-			"Livraison", -- [5]
-			"Consegna", -- [6]
-			"배달", -- [7]
-			"Entrega", -- [8]
-			"Доставка", -- [9]
-			"送达", -- [10]
-			"送達", -- [11]
-		}, -- [3]
-		{
-			"What's below?", -- [1]
-			"Was ist da unten?", -- [2]
-			"¿Qué hay ahí abajo?", -- [3]
-			"¿Qué hay debajo?", -- [4]
-			"Qu’y a-t-il là-dessous ?", -- [5]
-			"Misteri del profondo", -- [6]
-			"범인은 누구?", -- [7]
-			"O que tem lá embaixo?", -- [8]
-			"Что прячется в глубинах", -- [9]
-			"下面是什么？", -- [10]
-			"下面有什麼？", -- [11]
-		}, -- [4]
-		{
-			"Mglrrp", -- [1]
-			"Mglrrp", -- [2]
-			"Mglrrp", -- [3]
-			"Mglrrp", -- [4]
-			"Mglrrp", -- [5]
-			"Mglrrp", -- [6]
-			"아옳옲", -- [7]
-			"Mglrrp", -- [8]
-			"Мглррп", -- [9]
-			"墨勒普", -- [10]
-			"莫咕哺", -- [11]
-		}, -- [5]
-	},
-	["1123"] = {
-		{
-			"On High Alert", -- [1]
-			"Höchste Alarmstufe", -- [2]
-			"En máxima alerta", -- [3]
-			"En alerta máxima", -- [4]
-			"En alerte", -- [5]
-			"Massima Allerta", -- [6]
-			"삼엄한 경계", -- [7]
-			"Em nível alto de alerta", -- [8]
-			"Повышенная готовность", -- [9]
-			"高度戒备", -- [10]
-			"高度警戒", -- [11]
-		}, -- [1]
-		{
-			"Live Drop", -- [1]
-			"Rauch ohne Feuer", -- [2]
-			"Un regalito", -- [3]
-			"Un botín con vida", -- [4]
-			"Ça va faire boum !", -- [5]
-			"Bomba in buca", -- [6]
-			"은밀한 교환", -- [7]
-			"Pessoalmente", -- [8]
-			"Дымовая операция", -- [9]
-			"当面传递", -- [10]
-			"即時投彈", -- [11]
-		}, -- [2]
-		{
-			"Tricks of the Trade", -- [1]
-			"Das A und O des Handelns", -- [2]
-			"Secretos del oficio", -- [3]
-			"Secretos del oficio", -- [4]
-			"Les ficelles du métier", -- [5]
-			"Trucchi del Mestiere", -- [6]
-			"장사의 비법", -- [7]
-			"Truques do Ofício", -- [8]
-			"Маленькие хитрости", -- [9]
-			"商业机密", -- [10]
-			"交易的訣竅", -- [11]
-		}, -- [3]
-		{
-			"To Catch a Cultist", -- [1]
-			"Einen Kultisten fangen", -- [2]
-			"Atrapar a un cultor", -- [3]
-			"La caza del cultor", -- [4]
-			"La capture d’un sectateur", -- [5]
-			"Catturare un cultista", -- [6]
-			"이교도 추적", -- [7]
-			"Como prender um sectário", -- [8]
-			"Охота на сектантов", -- [9]
-			"为了抓住一名教徒", -- [10]
-			"逮住教徒", -- [11]
-		}, -- [4]
-		{
-			"Rendezvous", -- [1]
-			"Rendezvous", -- [2]
-			"Punto de encuentro", -- [3]
-			"Encuentro", -- [4]
-			"Rendez-vous", -- [5]
-			"Raduno", -- [6]
-			"약속 지점", -- [7]
-			"Encontro marcado", -- [8]
-			"Встреча", -- [9]
-			"汇合点", -- [10]
-			"會合點", -- [11]
-		}, -- [5]
-		{
-			"We Need Answers", -- [1]
-			"Wir brauchen Antworten", -- [2]
-			"Necesitamos respuestas", -- [3]
-			"Necesitamos respuestas", -- [4]
-			"Il nous faut des réponses !", -- [5]
-			"Ci servono risposte", -- [6]
-			"실토", -- [7]
-			"Queremos respostas", -- [8]
-			"В поисках ответов", -- [9]
-			"我们需要答案", -- [10]
-			"我們需要答案", -- [11]
-		}, -- [6]
-		{
-			"On the Trail", -- [1]
-			"Auf den Fersen", -- [2]
-			"Siguiendo la pista", -- [3]
-			"Sobre la pista", -- [4]
-			"À la trace", -- [5]
-			"Sulle Tracce", -- [6]
-			"추적", -- [7]
-			"No Rastro", -- [8]
-			"Погоня по следу", -- [9]
-			"跟踪追击", -- [10]
-			"緊追不捨", -- [11]
-		}, -- [7]
-		{
-			"Marked for Death", -- [1]
-			"Todesurteil", -- [2]
-			"Marcado para morir", -- [3]
-			"Marcado para morir", -- [4]
-			"Désigné pour mourir", -- [5]
-			"Marchiato per morire", -- [6]
-			"죽음의 표적", -- [7]
-			"Marcado para morrer", -- [8]
-			"Метка смерти", -- [9]
-			"死亡标记", -- [10]
-			"死亡標記", -- [11]
-		}, -- [8]
-		{
-			"A Dark Gift", -- [1]
-			"Ein dunkles Geschenk", -- [2]
-			"Un oscuro regalo", -- [3]
-			"Un regalo oscuro", -- [4]
-			"Un sombre présent", -- [5]
-			"Un dono oscuro", -- [6]
-			"어둠의 선물", -- [7]
-			"Presente sinistro", -- [8]
-			"Темный дар", -- [9]
-			"黑暗的礼物", -- [10]
-			"黑暗贈禮", -- [11]
-		}, -- [9]
-		{
-			"Taking Your Leave", -- [1]
-			"Abschied nehmen", -- [2]
-			"Despedida", -- [3]
-			"Emprendiendo la huida", -- [4]
-			"Prendre congé", -- [5]
-			"Ossequi", -- [6]
-			"다음에 만나요", -- [7]
-			"Indo embora", -- [8]
-			"Отбытие", -- [9]
-			"离开一下", -- [10]
-			"告辭離開", -- [11]
-		}, -- [10]
-	},
-	["1159"] = {
-		{
-			"Hitting the Books", -- [1]
-			"Es steht geschrieben", -- [2]
-			"Hincar los codos", -- [3]
-			"Golpear los libros", -- [4]
-			"Rat de bibliothèque", -- [5]
-			"Concentrarsi sui libri", -- [6]
-			"기록 소거", -- [7]
-			"De cara nos livros", -- [8]
-			"Копание в книгах", -- [9]
-			"书籍研究", -- [10]
-			"讀書破卷", -- [11]
-		}, -- [1]
-		{
-			"The Nightflow Conduit", -- [1]
-			"Die Nachtflussleitung", -- [2]
-			"El Conducto Nocturno", -- [3]
-			"El conducto del flujo nocturno", -- [4]
-			"L’artère Ruissenuit", -- [5]
-			"Il Condotto Oscuro", -- [6]
-			"밤흐름 도관", -- [7]
-			"O Conduíte da Noite", -- [8]
-			"Проводник Ночного Колодца", -- [9]
-			"夜流水渠", -- [10]
-			"夜流中樞", -- [11]
-		}, -- [2]
-		{
-			"Knock Knock", -- [1]
-			"Klopf, klopf", -- [2]
-			"Toc toc", -- [3]
-			"Toc, toc", -- [4]
-			"Toc, toc", -- [5]
-			"Toc toc!", -- [6]
-			"똑똑", -- [7]
-			"Toc, toc", -- [8]
-			"Тук-тук", -- [9]
-			"咚咚咚", -- [10]
-			"有人在嗎？", -- [11]
-		}, -- [3]
-		{
-			"E.M.P.", -- [1]
-			"E.M.P.", -- [2]
-			"PTME", -- [3]
-			"P.E.M.", -- [4]
-			"Projection de mana", -- [5]
-			"I.E.M.", -- [6]
-			"E.M.P.", -- [7]
-			"P.E.M.", -- [8]
-			"ЭПМ", -- [9]
-			"E.M.P.", -- [10]
-			"電磁脈衝", -- [11]
-		}, -- [4]
-		{
-			"Weather the Storm", -- [1]
-			"Den Sturm überstehen", -- [2]
-			"Capea la tormenta", -- [3]
-			"Sobrevive a la tormenta", -- [4]
-			"Une tempête à braver", -- [5]
-			"Affrontare la tempesta", -- [6]
-			"폭풍을 견뎌라", -- [7]
-			"Suportar a tempestade", -- [8]
-			"У природы нет плохой погоды", -- [9]
-			"度过风暴", -- [10]
-			"撐過風暴", -- [11]
-		}, -- [5]
-	},
-	["1169"] = {
-		{
-			"Eye of Azshara", -- [1]
-			"Das Auge Azsharas", -- [2]
-			"Ojo de Azshara", -- [3]
-			"Ojo de Azshara", -- [4]
-			"L’Œil d’Azshara", -- [5]
-			"Occhio di Azshara", -- [6]
-			"아즈샤라의 눈", -- [7]
-			"Olho de Azshara", -- [8]
-			"Око Азшары", -- [9]
-			"艾萨拉之眼", -- [10]
-			"艾薩拉之眼", -- [11]
-		}, -- [1]
-	},
-	["585"] = {
-		{
-			"A Royal Escort", -- [1]
-			"Die Eskorte des Königs", -- [2]
-			"Una escolta real", -- [3]
-			"Una escolta real", -- [4]
-			"Une escorte royale", -- [5]
-			"Scorta reale", -- [6]
-			"왕 호위", -- [7]
-			"Uma escolta real", -- [8]
-			"Королевский эскорт", -- [9]
-			"皇家护卫", -- [10]
-			"護送皇室", -- [11]
-		}, -- [1]
-		{
-			"Infinite Corruptor Defeated", -- [1]
-			"Ewiger Verderber besiegt", -- [2]
-			"Corruptor infinito derrotado", -- [3]
-			"Corruptor Infinito derrotado.", -- [4]
-			"Corrupteur infini vaincu", -- [5]
-			"Sconfiggi il Corruttore dell'Infinito", -- [6]
-			"무한의 타락자 처치", -- [7]
-			"Corruptor Infinito derrotado", -- [8]
-			"Осквернитель из рода Бесконечности повержен", -- [9]
-			"击败永恒腐蚀者", -- [10]
-			"擊敗恆龍墮落者", -- [11]
-		}, -- [2]
-	},
-	["1173"] = {
-		{
-			"Vault of the Wardens", -- [1]
-			"Das Verlies der Wächterinnen", -- [2]
-			"Cámara de las Celadoras", -- [3]
-			"Bóveda de los Celadores", -- [4]
-			"Caveau des Gardiennes", -- [5]
-			"Segrete delle Custodi", -- [6]
-			"감시관의 금고", -- [7]
-			"Câmara das Guardiãs", -- [8]
-			"Казематы Стражей", -- [9]
-			"守望者地窟", -- [10]
-			"看守者鐵獄", -- [11]
-		}, -- [1]
-	},
-	["1175"] = {
-		{
-			"Maw of Souls", -- [1]
-			"Der Seelenschlund", -- [2]
-			"Fauce de Almas", -- [3]
-			"Fauces de almas", -- [4]
-			"La Gueule des âmes", -- [5]
-			"Fauci delle Anime", -- [6]
-			"영혼의 아귀", -- [7]
-			"Gorja das Almas", -- [8]
-			"Утроба душ", -- [9]
-			"噬魂之喉", -- [10]
-			"靈魂之喉", -- [11]
-		}, -- [1]
-	},
-	["1178"] = {
-		{
-			"Court of Stars", -- [1]
-			"Der Hof der Sterne", -- [2]
-			"Corte de las Estrellas", -- [3]
-			"Corte de Estrellas", -- [4]
-			"La cour des Étoiles", -- [5]
-			"Corte delle Stelle", -- [6]
-			"별의 궁정", -- [7]
-			"Pátio das Estrelas", -- [8]
-			"Квартал Звезд", -- [9]
-			"群星庭院", -- [10]
-			"眾星之廷", -- [11]
-		}, -- [1]
-	},
+LibScenariosStepsDB = { 
+["53"] = { 
+{ "Scarlet Monastery", "Scharlachrotes Kloster", "Monasterio Escarlata", "Monasterio Escarlata", "Monastère Écarlate", "Monastero Scarlatto", "붉은십자군 수도원", "Monastério Escarlate", "Монастырь Алого ордена", "血色修道院", "血色修道院", }, 
+},
+["63"] = {
+{ "The Brewmoon Festival!", "Das Braumondfest!", "El Festival de la Cerveza Lunar", "El Festival de la Cerveza Lunar", "Le festival de Brasse-Lune", "Festival di Birraluna", "맥주달 축제", "Festival da Cerveja da Lua!", "Фестиваль Хмельнолуния!", "酿月祭", "酒月節", }, 
+{ "The Scouts Report.", "Berichte der Späher", "El informe de los exploradores", "El informe de los exploradores", "Le rapport des éclaireurs", "Rapporto degli esploratori", "정찰병의 보고", "O Relatório do Batedor", "Результаты разведки", "斥候来报。", "偵察報告", }, 
+{ "The Yaungol attack!", "Die Yaungol greifen an!", "¡El ataque yaungol!", "¡El ataque yaungol!", "L’attaque yaungole !", "Attacco degli Yaungol", "야운골이 공격한다!", "O Ataque dos Yaungóis!", "Атака яунголов!", "野牛人入侵！", "揚古入侵！", }, 
+{ "Warbringer Qobi", "Kriegshetzer Qobi", "Belisario Qobi", "Belisario Qobi", "Porteguerre Qobi", "Araldo della Guerra Qobi", "전쟁인도자 코비", "Armipotente Qobi", "Воитель Коби", "战争使者虬碧", "戰爭使者闊畢", }, 
+},
+["537"] = {
+{ "Stormstout Brewery", "Brauerei Sturmbräu", "Cervecería del Trueno", "Cervecería del Trueno", "Brasserie Brune d’Orage", "Birrificio Triplo Malto", "스톰스타우트 양조장", "Cervejaria Malte do Trovão", "Хмелеварня Буйных Портеров", "风暴烈酒酿造厂", "風暴烈酒酒坊", }, 
+},
+["637"] = {
+{ "Disable the Ziggurats", "Deaktiviert die Ziggurats", "Desactiva los zigurats", "Desactiva los zigurats.", "Désactiver les ziggourats", "Disattiva le Ziggurat", "지구라트 정지", "Desative os Zigurates", "Отключите зиккураты", "关闭通灵塔", "關閉通靈塔", }, 
+{ "The Slaughterhouse", "Das Schlachthaus", "El Degolladero", "El Matadero", "L’abattoir", "Mattatoio", "도살장", "O Abatedouro", "Бойня", "屠宰房", "屠宰房", }, 
+{ "Ramstein the Gorger", "Ramstein der Verschlinger", "Ramstein el Empachador", "Ramstein el Empachador", "Ramstein Grandgosier", "Sconfiggi Ramstein il Bramacarne", "먹보 람스타인", "Ramstein, o Devorador", "Рамштайн Ненасытный", "吞咽者拉姆斯登", "『暴食者』拉姆斯登", }, 
+{ "Lord Aurius Rivendare", "Baron Aurius Totenschwur", "Lord Aurius Osahendido", "Lord Aurius Osahendido", "Seigneur Aurius Vaillefendre", "Ser Aurius Fieramorte", "군주 아우리우스 리븐데어", "Lorde Aurius Rivendare", "Лорд Аурий Ривендер", "奥里克斯·瑞文戴尔领主", "奧里爾斯·瑞文戴爾領主", }, 
+{ "Magistrate Barthilas defeated", "Magistrat Barthilas bezwungen", "Magistrado Barthilas derrotado", "Magistrado Barthilas derrotado.", "Magistrat Barthilas vaincu", "Sconfiggi il Magistrato Barthilas", "집정관 발실라스 처치", "Magistrado Barthilas derrotado", "Мировой судья Бартилас повержен", "击败巴瑟拉斯镇长", "擊敗巴瑟拉斯鎮長", }, 
+},
+["940"] = {
+{ "Hunting the Hunters", "Jagd auf die Jäger", "Cazar a los cazadores", "Cazar a los cazadores", "La chasse aux chasseurs", "Caccia ai cacciatori", "사냥꾼 사냥", "Caçando os caçadores", "Охота на охотников", "猎杀猎人", "獵殺獵人", }, 
+{ "Scout the Path", "Späht den Pfad aus", "Explorar el camino", "Explora el camino", "Explorer le chemin", "Esplorare la via", "길목 정찰", "Faça reconhecimento da trilha", "Разведка пути", "侦察道路", "偵察路徑", }, 
+{ "Breaching the Defenses", "Durchbrechen der Verteidigung", "Traspasar las defensas", "Traspasando las defensas", "Faille défensive", "Sfondare le difese", "불의 벽을 넘어", "O romper das defesas", "Брешь в обороне", "突破防御", "突破防線", }, 
+{ "The Search Continues", "Die Suche geht weiter", "La búsqueda continúa", "La búsqueda continúa", "La recherche continue", "La ricerca continua", "계속되는 수색", "A busca continua", "Поиски продолжаются", "继续搜寻", "繼續搜尋", }, 
+{ "End of the Inquisition", "Das Ende der Inquisition", "El fin de la Inquisición", "El fin de la Inquisición", "La fin de l’inquisition", "Fine dell'Inquisizione", "심문관의 최후", "Fim da Inquisição", "С инквизицией покончено", "结束审判", "審判終結", }, 
+{ "Back to the Prisoner", "Zurück zum Gefangenen", "Volver con el prisionero", "De vuelta al prisionero", "Retour à la geôle", "Ritorno dal prigioniero", "죄수 해방", "De volta ao prisioneiro", "Возвращение к пленнику", "返回监狱", "回去找囚犯", }, 
+{ "Sieging the Citadel", "Belagerung der Zitadelle", "Asediar la ciudadela", "Asedio a la ciudadela", "Le siège de la citadelle", "Assedio alla cittadella", "성채 포위", "Cerco à cidadela", "Осада цитадели", "围攻城堡", "圍攻城塞", }, 
+{ "Into the Depths", "In die Tiefen", "En las profundidades", "En las profundidades", "Dans les profondeurs", "Negli abissi", "깊숙한 곳으로", "Nas profundezas", "В глубины", "进入深渊", "邁入深淵", }, 
+{ "The Fleshripper", "Der Fleischreißer", "El Desgarracarnes", "El Desgarrador", "Le Déchire-chair", "Lo Squartacarne", "살점분리자", "O Ripa-carne", "Раздиратель Плоти", "裂肉者", "裂肉狂魔", }, 
+{ "The Maw of the Damned", "Der Schlund der Verdammten", "La Fauce del Maldito", "La Fauce de los Malditos", "Gueule-du-Damné", "Il Morso del Dannato", "저주받은 자의 아귀", "A Gorja dos Condenados", "Проклятый Пожиратель", "诅咒之喉", "遭譴者之顎", }, 
+{ "The Call of Icecrown", "Der Ruf der Eiskronenzitadelle", "La llamada de Corona de Hielo", "El llamado de Corona de Hielo", "L’appel de la Couronne de glace", "Chiamata della Corona di Ghiaccio", "얼음왕관의 부름", "O chamado da Coroa de Gelo", "Зов Ледяной Короны", "冰冠的召唤", "寒冰皇冠的呼喚", }, 
+},
+["237"] = {
+{ "Select a Trial", "Wählt eine Prüfung", "Elige una prueba", "Elige una prueba", "Choisir une épreuve", "Scegli una prova", "시험 선택", "Escolha um teste", "Выбор испытания", "选择试炼", "選擇一項試煉", }, 
+},
+["640"] = {
+{ "The Temple of Atal'hakkar", "Der Tempel von Atal'Hakkar", "El Templo de Atal'Hakkar", "El Templo de Atal'Hakkar", "Le temple d’Atal’Hakkar", "Tempio di Atal'Hakkar", "아탈학카르 신전", "O Templo de Atal'hakkar", "Храм Атал'Хаккара", "阿塔哈卡神庙", "阿塔哈卡神廟", }, 
+},
+["1253"] = {
+{ "Darkheart Thicket", "Das Finsterherzdickicht", "Arboleda Corazón Oscuro", "Matorral Corazón Oscuro", "Fourré Sombrecœur", "Boschetto Cuortetro", "어둠심장 숲", "Bosque Corenegro", "Чаща Темного Сердца", "黑心林地", "暗心灌木林", }, 
+},
+["1214"] = {
+{ "Combat Training", "Kampftraining", "Instrucción de combate", "Instrucción de combate", "Entraînement au combat", "Addestramento al Combattimento", "전투 훈련", "Treino de combate", "Боевые учения", "战斗训练", "戰鬥訓練", }, 
+{ "Call a Friend", "Einen Freund rufen", "Llama a un amigo", "Llamar a un amigo", "Appel à un ami", "Amici più di prima", "친구 부르기", "Chamar um amigo", "Помощь друга", "召唤小伙伴", "呼喚朋友", }, 
+{ "Here I Come!", "Bin da, wer noch?", "¡Allá voy!", "¡Allá voy!", "Me voilà !", "Eccomi!", "간다!", "Aí vou eu!", "А вот и я!", "我来了！", "我來了！", }, 
+{ "Just A Flesh Wound", "Nur 'ne Fleischwunde", "Es solo un rasguño", "Heridas superficiales", "Juste une égratignure", "È solo un graffio", "얕은 상처일 뿐", "Só um arranhão", "Всего лишь царапина", "只是皮肉伤", "區區皮肉傷", }, 
+{ "Attacking From All Sides", "Angriff von allen Seiten", "Ataque por todos los flancos", "Ataque por los cuatro costados", "De tous les côtés", "Attacchi da ogni dove", "모든 측면의 공격", "Ataque de todos os lados", "Атака со всех сторон", "全方位打击", "四面楚歌", }, 
+{ "Clever Girl", "Cleveres Kerlchen", "Buen trabajo", "Empatía animal", "Petite futée", "Ragazza furba", "영리한 소녀", "Garota esperta", "Хорошая девочка", "聪明宝宝", "聰明的女孩", }, 
+{ "Bite, Bite, Goose!", "Süß, aber tödlich!", "El mordisco de la mangosta", "¡Muérdelo, muérdelo, ganso!", "Attention à la mangouste !", "Mordi, mordi!", "물어라, 물어, 살쾡이!", "Me gusta Mangusto!", "Куси, куси его!", "咬吧，猫鼬，咬吧！", "咬！咬啊！", }, 
+{ "Putting It All Together", "Das große Ganze", "Juntar las piezas", "Todas las piezas juntas", "Mise en pratique", "Mettersi alla prova", "종합주문세트", "Fixação de conteúdo", "Сборная солянка", "综合在一起", "準備完善", }, 
+{ "Carve Them Up!", "Skalpell, bitte!", "¡Hazlos pedacitos!", "¡Córtalos a todos!", "Écharpez-les !", "Falciali tutti!", "모두 저며라!", "Bê-á-bá do Trinchar", "Всех на мясо!", "削他们！", "解決他們！", }, 
+{ "Playing Possum", "Kein Puls, keine Regung", "Hacerse el muerto", "Hacerse el muerto", "Simulacre de mort", "Fare il Morto", "죽은 척하기", "Fingindo de Morto", "Притвориться мертвым", "负鼠爱装死", "裝死", }, 
+{ "A Quick Test", "Schnelltest", "Una prueba rápida", "Una prueba rápida", "Un test rapide", "Una piccola prova", "깜짝 시험", "Teste rápido", "Испытание тет-а-тет", "快速测试", "隨堂考", }, 
+{ "Twice the Challenge", "Doppelte Herausforderung", "Desafío por partida doble", "Un desafío doble", "Double défi", "Doppia sfida", "난이도 두 배", "Desafio em dose dupla", "Двойной вызов", "双倍挑战", "雙重挑戰", }, 
+{ "Defend Against the Legion Assault", "Den Angriff der Legion abwehren", "Defiéndete del asalto de la Legión", "Defiéndete contra el ataque de la Legión", "Défense contre l’assaut de la Légion", "Difesa contro la Legione", "군단의 공격 막아내기", "Defesa contra o ataque da Legião", "Оборона против Легиона", "在军团的攻击下保卫飞艇", "抵擋燃燒軍團的攻擊", }, 
+{ "Assault on Broken Shore", "Angriff auf die Verheerte Küste", "Asalto a la Costa Abrupta", "Asalto a la Costa Quebrada", "L’assaut du rivage Brisé", "Assalto alla Riva Dispersa", "부서진 해변 공격", "Ataque à Costa Partida", "Штурм Расколотого берега", "突袭破碎海滩", "突襲破碎海岸", }, 
+},
+["651"] = {
+{ "Scarlet Halls", "Die Scharlachroten Hallen", "Cámaras Escarlata", "Cámaras Escarlata", "Salles Écarlates", "Sale Scarlatte", "붉은십자군 전당", "Salões Escarlates", "Залы Алого ордена", "血色大厅", "血色大廳", }, 
+{ "Armsmaster Harlan defeated", "Waffenmeister Harlan bezwungen", "Maestro de armas Harlan derrotado", "Maestro de armas Harlan derrotado", "Maître d’armes Harlan vaincu", "Sconfiggi il Maestro d'Armi Harlan", "무기전문가 할란 처치", "Mestre Armeiro Harlan derrotado", "Воитель Гарлан повержен", "击败武器大师哈兰", "擊敗武器大師哈倫", }, 
+},
+["1328"] = {
+{ "Uncharted Territory", "Unerforschtes Gebiet", "Territorio inexplorado", "Territorio no explorado", "En territoire inconnu", "Territorio inesplorato", "미지의 땅", "Território Desconhecido", "Неизведанная территория", "未知领域", "未知的領域", }, 
+{ "The Frozen Span", "Der Frostübergang", "El Tramo Congelado", "El Puente gélido", "Le viaduc Gelé", "Baratro Congelato", "얼어붙은 교각", "O Vão Glacial", "Ледяные просторы", "冰封之桥", "冰封大橋", }, 
+{ "Essence of the Red", "Die Essenz des Roten", "Esencia de lo Rojo", "Esencia del rojo", "Essence des Rouges", "Essenza del Rosso", "적색의 정수", "Essência do Vermelho", "Сущность красных драконов", "红龙精华", "紅龍精華", }, 
+{ "Life to Death", "Leben zu Tod", "De vida a muerte", "Vida a muerte", "De la vie à la mort", "Dalla vita alla morte", "생명에서 죽음으로", "Da Vida à Morte", "Жизнь и смерть", "向死而生", "由生轉死", }, 
+{ "Unholy Resurrection", "Unheilige Auferstehung", "Resurrección profana", "Resurrección profana", "Résurrection impie", "Resurrezione empia", "부정한 부활", "Ressurreição Profana", "Нечестивое воскрешение", "邪恶复生", "穢邪復生", }, 
+},
+["959"] = {
+{ "Defend Kharanos", "Verteidigt Kharanos", "Defiende Kharanos", "Defiende Kharanos", "La défense de Kharanos", "Difendere Kharanos", "카라노스 방어", "Defenda Kharanos", "Оборона Караноса", "保卫卡拉诺斯", "守禦卡拉諾斯", }, 
+{ "Defeat the Demon Commander", "Bezwingt den Dämonenkommandanten", "Derrota al comandante demoníaco", "Derrota al Comandante demoníaco", "Terrasser le commandant démon", "Sconfiggere il comandante demoniaco", "악마 사령관 처치", "Derrotar o Demônio Comandante", "Победа над командиром демонов", "击败恶魔指挥官", "擊敗惡魔指揮官", }, 
+{ "Repel the Legion Forces", "Schlagt die Streitkräfte der Legion zurück", "Rechaza a los ejércitos de la Legión", "Repele a las fuerzas de la Legión", "Repousser les troupes de la Légion", "Respingere le forze della Legione", "군단 격퇴", "Rechaçar as forças da Legião", "Отражение натиска Легиона", "击退燃烧军团的部队", "擊退燃燒軍團", }, 
+{ "Defeat the Demon Lord", "Bezwingt den Dämonenfürsten", "Derrota al señor demoníaco", "Derrota al Señor demoníaco", "Terrasser le seigneur démon", "Sconfiggere il Signore dei Demoni", "악마 군주 처치", "Derrotar o lorde-demônio", "Смерть повелителю демонов", "击败恶魔领主", "擊敗惡魔領主", }, 
+},
+["636"] = {
+{ "The Dreadlord Balnazzar", "Der Schreckenslord Balnazzar", "El Señor del Terror Balnazzar", "El Señor del Terror Balnazzar", "Le Seigneur de l’effroi Balnazzar", "Signore del Terrore Balnazzar", "공포의 군주 발나자르", "O Senhor do Medo Balnazzar", "Повелитель Ужаса Бальназар", "恐惧魔王巴纳扎尔", "驚懼領主巴納札爾", }, 
+{ "The Unforgiven defeated", "Den Unverziehenen bezwungen", "La Imperdonable derrotada", "La Imperdonable derrotada.", "Le Condamné vaincu", "Sconfiggi L'Implacabile", "용서받지 못한 자 처치", "O Imperdoável derrotado", "Непрощенный повержен", "击败不可宽恕者", "擊敗不可寬恕者", }, 
+{ "Hearthsinger Forresten defeated", "Herdsinger Forresten bezwungen", "Cantachimeneas Forresten derrotado", "Cantachimeneas Forresten derrotado.", "Chanteloge Forrestin vaincu", "Sconfiggi Forresten il Cantastorie", "하스싱어 포레스턴 처치", "Cantalar Forresten derrotado", "Певчий Форрестен повержен", "击败弗雷斯特恩", "擊敗爐邊歌手弗瑞斯坦", }, 
+{ "Timmy the Cruel defeated", "Timmy den Grausamen bezwungen", "Timmy el Cruel derrotado", "Timmy el Cruel derrotado.", "Timmy le Cruel vaincu", "Sconfiggi Timmy il Crudele", "잔혹한 티미 처치", "Tico, o Cruel derrotado", "Тимми Беспощадный повержен", "击败悲惨的提米", "擊敗殘忍的提米", }, 
+{ "Postmaster Malown defeated", "Postmeister Malown bezwungen", "Jefe de correos Gassol derrotado", "Jefe de correos Gassol derrotado.", "Postier Malown vaincu", "Sconfiggi il Postino Malown", "우체국장 말로운 처치", "Chefe do Correio Malown derrotado", "Почтальон Мэлоун повержен", "击败邮差马龙", "擊敗郵政局長瑪羅恩", }, 
+{ "Commander Malor defeated", "Kommandant Malor bezwungen", "Comandante Malor derrotado", "Comandante Malor derrotado.", "Commandant Malor vaincu", "Sconfiggi il Comandante Malor", "사령관 말로 처치", "Comandante Malor derrotado", "Командир Малор повержен", "击败指挥官玛洛尔", "已擊敗指揮官瑪洛爾", }, 
+{ "Willey Hopebreaker defeated", "Willey Hoffnungsbrecher bezwungen", "Willey Rompeesperanzas derrotado", "Willey Rompeesperanzas derrotado.", "Willey Mutilespoir vaincu", "Sconfiggi Willey Frangifede", "윌리 호프브레이커 처치", "Gualter Quebrafé derrotado", "Вилли Разбивающий Надежды повержен", "击败希望破坏者威利", "擊敗威利‧希望破除者", }, 
+{ "Instructor Galford defeated", "Instrukteur Galford bezwungen", "Instructor Galford derrotado", "Instructor Galford derrotado.", "Instructeur Galford vaincu", "Sconfiggi l'Istruttore Galford", "교관 갈포드 처치", "Instrutor Galford derrotado", "Инструктор Галфорд повержен", "击败档案管理员加尔福特", "擊敗古卷管理者加爾福特", }, 
+},
+["536"] = {
+{ "Mogu'shan Palace", "Mogu'shanpalast", "Palacio Mogu'shan", "Palacio Mogu'shan", "Palais Mogu’shan", "Palazzo Mogu'shan", "모구샨 궁전", "Palácio Mogu'shan", "Дворец Могу'шан", "魔古山宫殿", "魔古山宮", }, 
+},
+["736"] = {
+{ "A Gladiator's Welcome", "Heimkehr des Gladiators", "Una bienvenida de gladiador", "Una bienvenida de Gladiador", "Un accueil de gladiateur", "Un gladiatorio benvenuto", "검투사의 환영", "Boas-vindas ao Gladiador", "Добро пожаловать в гладиаторы", "角斗士的欢迎", "歡迎鬥士入場", }, 
+{ "My Name is Gladiator", "Mein Name ist Gladiator", "Mi nombre es Gladiador", "Me llamo Gladiador", "Mon nom est Gladiateur", "Il mio nome è Gladiatore", "진정한 검투사", "Meu nome é Gladiador", "Меня зовут Гладиатор", "我的名字是角斗士", "我的名字叫鬥士", }, 
+{ "Fight, Kill, Salute", "Kampf, Sieg, Gruß", "¡Luchar, matar, saludar!", "Luchar, matar, rendir pleitesía", "Morituri te salutant", "Combattere, uccidere, rendere onore", "싸워라, 죽여라, 경례하라", "Lutar, matar, saudar", "Кровь, смерть, триумф", "战斗！杀戮！欢呼！", "戰鬥、殺戮，致敬！", }, 
+},
+["52"] = {
+{ "Scarlet Halls", "Scharlachrote Hallen", "Cámaras Escarlata", "Cámaras Escarlata", "Salles Écarlates", "Sale Scarlatte", "붉은십자군 전당", "Salões Escarlate", "Залы Алого ордена", "血色大厅", "血色大廳", }, 
+},
+["72"] = {
+{ "To the Waterline!", "Ein Schlag ins Wasser!", "¡A la línea de flotación!", "¡A la línea de flotación!", "Sur la ligne de flottaison !", "Alla linea di galleggiamento!", "해안선을 확보하라!", "Antes mesmo de levantar âncora!", "До ватерлинии!", "沉下去吧！", "前往水岸!", }, 
+{ "The Blastmaster", "Der Sprengmeister", "El maestro destructor", "El maestro destructor", "Le maître-dynamiteur", "Lo Scoppiomastro", "폭발물전문가", "O Explodista", "Подрывник", "爆破大师", "爆破專家", }, 
+{ "Gryphon, Down", "Greif am Boden", "Grifo derribado", "Grifo derribado", "Un griffon, fon, fon", "A cuccia, Grifone!", "그리핀이 추락했다", "Grifo voando, um perigo", "Конец грифонам", "狮鹫坠落", "獅鷲獸墜落", }, 
+{ "Tanks for Nothing!", "Das wird 'ne hübsche Überraschung", "¡Tanques para nada!", "¡Tanques para nada!", "Arrête ton char !", "Occhio ai carri!", "전차를 파괴하라!", "Tanque Cheio e Tanque Vazio", "Танкобойня", "让坦克见鬼去吧！", "消失吧，坦克!", }, 
+{ "Fly, Spy!", "Auf der Flucht!", "¡Vuela, espía!", "¡Vuela, espía!", "Espionnage aérien !", "Vola, spia, vola!", "날아라, 첩자!", "Sai da prisão, espião!", "Лети, шпион!", "自由了！", "飛吧，間諜!", }, 
+},
+["647"] = {
+{ "Blackthorn's Lieutenants", "Schwarzdorns Leutnants", "Los tenientes de Espina Negra", "Tenientes de Espina Negra", "Les lieutenants de Noirépine", "Luogotenenti di Spinanera", "블랙쏜의 부관들", "Tenentes de Abrunhal", "Приспешники Черношипа", "布莱克松的党羽", "黑棘的副官", }, 
+{ "Death Speaker Blackthorn", "Todessprecher Schwarzdorn", "Portavoz de la muerte Espina Negra", "Portavoz de la muerte Espina Negra", "Nécrorateur Noirépine", "Oratore della Morte Spinanera", "죽음예언자 블랙쏜 처치", "Morta-voz Abrunhal", "Вестник смерти Черношип", "亡语者布莱克松", "亡語者黑棘", }, 
+{ "Amnennar the Coldbringer", "Amnennar der Kältebringer", "Amnennar el Gélido", "Amnennar el Gélido", "Amnennar le Porte-Froid", "Amnennar l'Araldo del Freddo", "혹한의 암네나르", "Amnennar, o Frigífero", "Амненнар Хладовей", "寒冰之王亚门纳尔", "『寒冰使者』亞門納爾", }, 
+},
+["547"] = {
+{ "Defeat Echoes", "Besiegt die Echos", "Derrotar a los ecos", "Derrota Ecos", "Vaincre les échos", "Sconfiggi gli Echi", "환영 처치", "Derrote os Ecos", "Победите эха", "击败残影", "擊敗回音", }, 
+{ "Defeat Murozond", "Besiegt Murozond", "Derrota a Murozond", "Derrota a Murozond.", "Vaincre Murozond", "Sconfiggi Murozond", "무르도즈노 처치", "Derrote Murozond", "Победите Дорнозму", "击败姆诺兹多", "擊敗姆多茲諾", }, 
+},
+["247"] = {
+{ "Step 1", "Schritt 1", "Step 1", "Step 1", "Étape 1", "Fase 1", "1단계", "Passo 1", "1 этап", "第1阶段", "步驟1", }, 
+{ "Step 2", "Schritt 2", "Step 2", "Step 2", "Étape 2", "Fase 2", "2단계", "Passo 2", "2 этап", "第2阶段", "步驟2", }, 
+{ "Step 3", "Schritt 3", "Step 3", "Step 3", "Étape 3", "Fase 3", "3단계", "Passo 3", "3 этап", "第3阶段", "步驟3", }, 
+{ "Step 4", "Schritt 4", "Step 4", "Step 4", "Étape 4", "Fase 4", "4단계", "Passo 4", "4 этап", "第4阶段", "步驟4", }, 
+{ "Step 5", "Schritt 5", "Step 5", "Step 5", "Étape 5", "Fase 5", "5단계", "Passo 5", "5 этап", "第5阶段", "步驟5", }, 
+{ "Step 6", "Schritt 6", "Step 6", "Step 6", "Étape 6", "Fase 6", "6단계", "Passo 6", "6 этап", "第6阶段", "步驟6", }, 
+},
+["950"] = {
+{ "Demon Down", "Dämon am Boden", "La caída del demonio", "Demonio abajo", "Démon à terre", "Demone abbattuto", "피 흘리는 악마", "Demônio caído", "Демон повержен", "摔落的恶魔", "降伏惡魔", }, 
+{ "Corruption in the Deep", "Verderbnis in der Tiefe", "Corrupción en las profundidades", "Corrupción en lo profundo", "La corruption des profondeurs", "Corruzione nel profondo", "심연의 타락", "Corrupção nas profundezas", "Порча в глубине", "深岩的腐化", "深淵裡的腐化", }, 
+{ "Hot on the Trail", "Auf den Fersen", "Pisándole los talones", "Pisándole los talones", "La piste est toute chaude", "In cerca di indizi", "뜨거운 추격", "Trilha quente", "По горячим следам", "如影随形", "奮力追擊", }, 
+{ "Cleansing the Earth", "Läutern der Erde", "Purificar la tierra", "Purificando la tierra", "Purge souterraine", "Purificare la terra", "대지 정화", "Purificação da terra", "Очищение земли", "净化大地", "淨化大地", }, 
+{ "The Demon Below", "Der Dämon in der Tiefe", "El demonio de las profundidades", "El demonio debajo", "Le démon des profondeurs", "Il demone delle profondità", "지하의 악마", "O demônio abaixo", "Демон из глубин", "地底的恶魔", "底下的惡魔", }, 
+{ "The Doomhmamer Calls", "Der Schicksalshammer ruft", "El Martillo Maldito llama", "El Martillo Maldito te llama", "L’appel de Marteau-du-Destin", "Il richiamo di Martelfato", "둠해머의 부름", "Chamado do Martelo da Perdição", "Молот Рока зовет", "毁灭之锤的召唤", "末日錘的呼喚", }, 
+{ "Finishing the Job", "Eine unvollendete Aufgabe", "Terminar el trabajo", "Terminando el trabajo", "Finir le boulot", "Finire il lavoro", "마무리", "Serviço completo", "Завершение начатого", "临门一脚", "完成工作", }, 
+{ "A Ring Eternal", "Ein ewiger Ring", "Un anillo eterno", "Un anillo eterno", "Le cercle éternel", "Un anello eterno", "영원한 고리", "Harmonia eterna", "Служители вечны", "永恒之环", "議會永存", }, 
+},
+["650"] = {
+{ "Scarlet Halls", "Die Scharlachroten Hallen", "Cámaras Escarlata", "Cámaras Escarlata", "Salles Écarlates", "Sale Scarlatte", "붉은십자군 전당", "Salões Escarlates", "Залы Алого ордена", "血色大厅", "血色大廳", }, 
+{ "Armsmaster Harlan defeated", "Waffenmeister Harlan bezwungen", "Maestro de armas Harlan derrotado", "Maestro de armas Harlan derrotado", "Maître d’armes Harlan vaincu", "Sconfiggi il Maestro d'Armi Harlan", "무기전문가 할란 처치", "Mestre Armeiro Harlan derrotado", "Воитель Гарлан повержен", "击败武器大师哈兰", "擊敗武器大師哈倫", }, 
+},
+["1256"] = {
+{ "Maw of Souls", "Der Seelenschlund", "Fauce de Almas", "Fauces de almas", "Gueule des âmes", "Fauci delle Anime", "영혼의 아귀", "Gorja das Almas", "Утроба душ", "噬魂之喉", "靈魂之喉", }, 
+},
+["1306"] = {
+{ "Report to the Shrine", "Meldet Euch am Schrein", "Presentarse en el santuario", "Preséntate en el santuario", "Rapport au sanctuaire", "Rapporto al Santuario", "제단에 보고", "Apresentar-se ao santuário", "Прибытие в святилище", "去神殿报到", "返回聖壇", }, 
+{ "Defend the Shrine", "Verteidigung des Schreins", "Defender el santuario", "Defiende el santuario", "Défense du sanctuaire", "Difendere il Santuario", "제단 방어", "Defesa do santuário", "Оборона святилища", "保卫神殿", "保衛聖壇", }, 
+{ "Return to the Shrine", "Rückkehr zum Schrein", "Regresa al santuario", "Regresa al santuario", "Retour au sanctuaire", "Ritorno al Santuario", "다시 제단으로", "De volta ao santuário", "Возвращение в святилище", "回到圣殿", "重回聖壇", }, 
+{ "Uncover the Traitor", "Entlarvt den Verräter", "Descubrir al traidor", "Descubre al traidor", "Démasquer le traître", "Scoprire il traditore", "배신자 색출", "Desmascarar o traidor", "Выявление предателя", "发现叛徒", "揪出叛徒", }, 
+{ "Return to the Dreamgrove", "Rückkehr zum Hain der Träume", "Retorno a la Arboleda de los Sueños", "Regresa a la Arboleda de los Sueños", "Retour à la Sylverêve", "Ritorno al Bosco dei Sogni", "다시 꿈숲으로", "Retorno ao Bosque Onírico", "Возвращение в Рощу Снов", "返回梦境林地", "重回幻夢之林", }, 
+},
+["1203"] = {
+{ "Secure the Promenade", "Sichert die Promenade", "Asegura el Paseo", "Asegura el Paseo", "Sécuriser la Promenade", "Rendere sicura la Gran Terrazza", "대정원 확보", "Tomada do Passeio", "Захват променада", "肃清大步道", "占領漫步宏園", }, 
+{ "Defeat the Ancient Shieldguard", "Bezwingt den uralten Schildwächter", "Derrota al guardia protector antiguo", "Derrota al Escudero ancestral", "Vaincre l’ancien garde-bouclier.", "Sconfiggi lo Scudiero Antico.", "고대 방패수호병 처치", "Derrote o Guarda de Elite Antigo", "Победите древнего стража щита", "击败上古神盾卫士", "擊敗遠古盾衛", }, 
+{ "Secure the Concourse of Destiny", "Sichert den Laufsteg des Schicksals", "Asegura el Atrio del Destino", "Asegura el Vestíbulo del Destino", "Sécuriser le corridor de la Destinée", "Prendi il controllo del Viale del Destino", "운명의 대로 확보", "Tomada do Átrio do Destino", "Захват Двора Судьбы", "肃清命运广场", "占領命運集合場", }, 
+{ "Trigger the Telemancy Trap", "Löst die telemantische Falle aus", "Activa la trampa de telemancia", "Activa la trampa de telemancia", "Le piège de télémancie", "Attivare la Trappola Telemantica", "이동술 함정 발동", "Acionamento da Armadilha de Telemancia", "Вызовите срабатывание телемантической ловушки", "触发传送陷阱", "觸發傳送陷阱", }, 
+},
+["329"] = {
+{ "Extinguish Runes", "Löscht die Runen", "Extinción de runas", "Extinguir runas", "Éteindre les runes", "Estingui le rune", "룬 꺼뜨리기", "Extinguir runas", "Погасить руны", "熄灭符文", "熄滅符文", }, 
+{ "Upper Blackrock Spire", "Obere Schwarzfelsspitze", "Cumbre de Roca Negra Superior", "Cumbre de Roca Negra superior", "Sommet du pic Rochenoire", "Bastioni di Roccianera Superiori", "검은바위 첨탑 상층", "Pico da Rocha Negra Superior", "Убейте боссов верхней части пика Черной горы", "黑石塔上层", "黑石塔上層", }, 
+},
+["629"] = {
+{ "Mana-Tombs", "Managruft", "Tumbas de Maná", "Tumbas de Maná", "Tombes-mana", "Tombe del Mana", "마나 무덤", "Tumbas de Mana", "Гробницы Маны", "法力陵墓", "法力墓地", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["429"] = {
+{ "Grimrail Depot", "Grimmgleisdepot", "Terminal Malavía", "Depósito Riel siniestro", "Dépôt de Tristerail", "Treno Frecciacupa", "파멸철로 정비소", "Central do Carrilcruel", "Депо Мрачных Путей", "恐轨车站", "恐軌車站", }, 
+},
+["248"] = {
+{ "Get Ready...", "Macht Euch bereit…", "Prepárate...", "Prepárate...", "Prêt…", "Preparati...", "준비...", "Prepare-se...", "Приготовьтесь", "做好准备……", "做好準備...", }, 
+{ "Proving Grounds", "Feuerprobe", "Terreno de Pruebas", "Terreno de Pruebas", "Ordalie", "Arena d'Addestramento", "수련의 장", "Campo de Testes", "Арена испытаний", "试炼场", "試煉場", }, 
+},
+["548"] = {
+{ "Throne of the Tides", "Thron der Gezeiten", "Trono de las Mareas", "Trono de las Mareas", "Trône des marées", "Trono delle Maree", "파도의 왕좌", "Trono das Marés", "Трон Приливов", "潮汐王座", "海潮王座", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["646"] = {
+{ "Scholomance", "Scholomance", "Scholomance", "Scholomance", "Scholomance", "Scholomance", "스칼로맨스", "Scolomântia", "Некроситет", "通灵学院", "通靈學院", }, 
+},
+["648"] = {
+{ "Uldaman", "Uldaman", "Uldaman", "Uldaman", "Uldaman", "Uldaman", "울다만", "Uldaman", "Ульдаман", "奥达曼", "奧達曼", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["897"] = {
+{ "Defend Sentinel Hill", "Verteidigt Späherkuppe", "Defiende Colina del Centinela", "Defiende la Colina del Centinela", "Défendre la colline des Sentinelles", "Difendere Guardiacolle", "감시의 언덕 방어", "Defenda o Morro da Sentinela", "Оборона Сторожевого холма", "保卫哨兵岭", "保衛哨兵嶺", }, 
+{ "Defeat the Demon Commander", "Bezwingt den Dämonenkommandanten", "Derrota al comandante demoníaco", "Derrota al Comandante demoníaco", "Terrasser le commandant démon", "Sconfiggere il comandante demoniaco", "악마 사령관 처치", "Derrote o Demônio Comandante", "Победа над командиром демонов", "击败恶魔指挥官", "擊敗惡魔指揮官", }, 
+{ "Repel the Legion Forces", "Schlagt die Streitkräfte der Legion zurück", "Rechaza a los ejércitos de la Legión", "Repele a las fuerzas de la Legión", "Repousser les troupes de la Légion", "Respingere le forze della Legione", "군단 격퇴", "Rechace as forças da Legião", "Отражение натиска Легиона", "击退军团部队", "擊退燃燒軍團", }, 
+{ "Defeat the Demon Lord", "Bezwingt den Dämonenfürsten", "Derrota al señor demoníaco", "Derrota al Señor demoníaco", "Terrasser le seigneur démon", "Sconfiggere il Signore dei Demoni", "악마 군주 처치", "Derrote o Lorde Demônio", "Смерть повелителю демонов", "击败恶魔领主", "擊敗惡魔領主", }, 
+},
+["997"] = {
+{ "test", "Willkommen", "Bienvenido", "Bienvenido", "Accueil", "Prova", "test", "test", "Добро пожаловать!", "测试", "test", }, 
+},
+["596"] = {
+{ "Utgarde Keep", "Burg Utgarde", "Fortaleza de Utgarde", "Fortaleza de Utgarde", "Donjon d’Utgarde", "Forte Utgarde", "우트가드 성채", "Bastilha Utgarde", "Крепость Утгард", "乌特加德城堡", "俄特加德要塞", }, 
+},
+["593"] = {
+{ "Ahn'kahet: The Old Kingdom", "Ahn'kahet: Das Alte Königreich", "Ahn'kahet: El Antiguo Reino", "Ahn'kahet: El Antiguo Reino", "Ahn’kahet : l’Ancien royaume", "Ahn'kahet, il Regno Antico", "안카헤트: 고대 왕국", "Ahn'kahet: O Velho Reino", "Ан'кахет: Старое Королевство", "安卡赫特：古代王国", "安卡罕特:古王國", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["1136"] = {
+{ "Arcane Essence", "Arkane Essenz", "Esencia Arcana", "Esencia arcana", "L’essence arcanique", "Essenza Arcana", "비전 정수", "Essência arcana", "Чародейская сущность", "奥术精华", "秘法精華", }, 
+{ "Becoming the Bait", "Zum Köder werden", "El arte de ser cebo", "Convirtiéndose en cebo", "Appât arcanique", "Diventare l'esca", "미끼가 된 대마법사", "Fazer-se de isca", "Наживку – на крючок", "成为诱饵", "成為誘餌", }, 
+{ "Discovering Demons", "Dämonen entdecken", "Descubrir demonios", "Descubriendo demonios", "Découverte de démons", "Discernendo i demoni", "어디, 월척이 잡혔나?", "Descobrir demônios", "Игра в прятки с демонами", "发现恶魔", "發現惡魔", }, 
+{ "Defeat Kreenam and Czaadym", "Kreenam und Czaadym bezwingen", "Derrota a Kreenam y Czaadym", "Derrota a Kreenam y Czaadym", "Terrasser Kreenam et Czaadym", "Sconfiggere Kreenam e Czaadym", "크리남과 크자딤 처치", "Derrotar Krynam e Czaadym", "Кринам и Чаадым", "击败克里纳姆和扎迪姆", "擊敗克力南和紮地姆", }, 
+{ "Defeat Hakkar the Houndmaster", "Bezwingt Hakkar den Hundemeister", "Derrota a Hakkar, el maestro de canes", "Derrota a Hakkar el Maestro de los canes", "Vaincre Hakkar le dresseur de molosses", "Sconfiggere Hakkar il Maestro dei Segugi", "사냥개조련사 학카르 처치", "Derrotar Hakkar, o Mestre de Matilha.", "Победа над псарем Хаккаром", "击败驯犬者哈卡", "擊敗『馴犬者』哈卡爾", }, 
+{ "Speak to Archmage Khadgar", "Sprecht mit Erzmagier Khadgar", "Habla con el archimago Khadgar", "Habla con el archimago Khadgar", "Parler à l’archimage Khadgar", "Due chiacchiere con l'Arcimago Khadgar", "대마법사 카드가와 대화", "Falar com Arquimago Hadggar", "Разговор с верховным магом Кадгаром", "和大法师卡德加谈谈", "與大法師卡德加交談", }, 
+},
+["1085"] = {
+{ "Heal Vindicator Boros", "Heilt Verteidiger Boros", "Sanar al vindicador Boros", "Sana al Vindicador Boros", "Soigner le redresseur de torts Boros", "Cura il Vendicatore Boros", "구원자 보로스 치유", "Cure o Vindicante Boros", "Исцеление воздаятеля Бороса", "治疗守备官波鲁斯", "治療復仇者波羅斯", }, 
+{ "To the Rescue", "Rettung in der Not", "Al rescate", "Al rescate", "Prêter main-forte", "Al salvataggio", "구출의 손길", "Ao resgate", "Путь к спасению", "生死救援", "救援行動", }, 
+{ "Breaking Out", "Ausbruch", "La huida", "La fuga", "La gangr’évasion", "Fuga", "탈출", "A fuga", "На свободу", "生死逃亡", "越獄", }, 
+{ "A Friend in Need", "Ein Freund in der Not", "Una amiga en apuros", "Un amigo en apuros", "Un ami dans le besoin", "Un amico in difficoltà", "도움이 필요한 친구", "Um amigo em apuros", "Друг в беде", "患难与共", "需要幫助的朋友", }, 
+{ "What Evil Comes", "Welch Böses auch kommt", "El mal que surge", "La maldad que se aproxima", "L’origine du mal", "L'origine del male", "다가오는 악마의 정체", "Que mal virá", "Зло не дремлет", "无名邪恶", "邪惡降臨", }, 
+{ "The Den of Evil", "Der Hort des Bösen", "La guarida del mal", "La guarida del mal", "L’antre du mal", "L'antro del male", "악의 소굴", "O antro do mal", "Логово зла", "恶之巢", "邪惡之巢", }, 
+{ "The Beacon Relighted", "Das Leuchtfeuer neu entfacht", "La baliza se vuelve a encender", "La baliza vuelve a prenderse", "Le guide ravivé", "Riaccensione del faro", "다시 켜진 봉화", "O sinal reacendido", "Возвращение Светоча", "信标重燃", "重拾聖光", }, 
+},
+["1174"] = {
+{ "Neltharion's Lair", "Neltharions Hort", "Guarida de Neltharion", "Guarida de Neltharion", "Repaire de Neltharion", "Antro di Neltharion", "넬타리온의 둥지", "Covil de Neltharion", "Логово Нелтариона", "奈萨里奥的巢穴", "奈薩里奧巢穴", }, 
+},
+["597"] = {
+{ "Utgarde Keep", "Burg Utgarde", "Fortaleza de Utgarde", "Fortaleza de Utgarde", "Donjon d’Utgarde", "Forte Utgarde", "우트가드 성채", "Bastilha Utgarde", "Крепость Утгард", "乌特加德城堡", "俄特加德要塞", }, 
+},
+["239"] = {
+{ "Boarding Party!", "Nicht klar zum Entern!", "¡Al abordaje!", "¡Al abordaje!", "On nous aborde !", "Squadra d'assalto!", "승선대다!", "Grupo de Abordagem!", "Абордаж!", "登船小队！", "登船小隊!", }, 
+{ "Explosives Acquisition", "Sprengstoffakquisition", "Adquisición de explosivos", "Adquisición de explosivos", "Acquisition d’explosifs", "Recupero esplosivi", "폭탄물 획득", "Aquisição de Explosivos", "Добыть взрывчатку", "获取炸药", "取得炸藥", }, 
+{ "To Smithereens!", "Zerstört das Allianzschiff!", "¡En mil pedazos!", "¡En mil pedazos!", "En mille morceaux !", "Falla a pezzi!", "산산조각내라!", "Pelos ares!", "В щепки!", "粉身碎骨！", "炸成碎片!", }, 
+{ "Defeat the Admiral!", "Bezwingt den Admiral!", "¡Derrota al almirante!", "¡Derrota al almirante!", "À bas l’amiral !", "Sconfiggi l'Ammiraglio!", "제독을 처치하라!", "Derrote o Almirante!", "Победите адмирала!", "击败海军上将！", "打敗上將!", }, 
+{ "Bonus Objectives", "Bonusziele", "Objetivos de bonificación", "Objetivos de bonificación", "Objectifs bonus", "Obiettivi bonus", "추가 목표", "Objetivos bônus", "Дополнительные задачи", "奖励目标", "獎勵目標", }, 
+},
+["1303"] = {
+{ "Speak with Matron Mother Malevolence", "Auf ein Wort", "Hablar con la madre matriarca Malevolencia", "Habla con la Madre Matrona Malevolencia.", "Parler à la matrone Maléficiae", "La Matrona Suprema Malevola", "모군주 말레볼런스와 대화", "Falar com a Mãe Matrona Malévola", "Встреча с верховной матерью", "与主母玛沃伦丝交谈", "與懷惡族母交談", }, 
+{ "Bat-Breaking", "Der Widerspenstigen Zähmung", "Doma de murciélagos", "Murciélago malote", "Chauve-domptage", "Spezzapipistrelli", "박쥐 길들이기", "Quebra-morcego", "Подчинение нетопыря", "驯养蝙蝠", "制服魔蝠", }, 
+{ "The Scent of Blood", "Der Geruch des Blutes", "El aroma de la sangre", "El aroma de la sangre", "L’odeur du sang", "L'odore del sangue", "피의 향기", "Cheiro de Sangue", "Запах крови", "血之气息", "追血循跡", }, 
+{ "A Strong Will", "Ein starker Wille", "Una voluntad fuerte", "Una voluntad férrea", "Volonté de fer", "Una volontà forte", "강한 의지", "A força da determinação", "Сильная воля", "坚强意志", "堅強的意志", }, 
+{ "You Can Run...", "Kein Entkommen", "Puedes correr...", "Puedes huir...", "Cours toujours…", "Puoi scappare...", "도망쳐 봐야...", "Você Pode Correr...", "От меня не спрячешься", "无路可逃……", "儘管逃吧…", }, 
+{ "Leap of Faith", "So nah und doch so fern", "Salto de fe", "Salto de fe", "Saut de foi", "Balzo della Fede", "신의의 도약", "Salto de Fé", "Прыжок в неизвестность", "信仰飞跃", "跳起來就對了", }, 
+{ "Fel Dominance", "Teuflische Dominanz", "Dominancia vil", "Dominación vil", "Dressage final", "Vildominio", "지옥 정복", "Dominância Vil", "Подчинение Скверной", "邪能压制", "壓制魔蝠", }, 
+{ "The Slayer's Steed", "Das Ross des Rächers", "El corcel del asesino", "La montura del Destripador", "La monture du vengeur", "Il destriero del Flagello dei Demoni", "학살자의 날개", "O Corcel do Matador", "Крылья истребителя", "屠魔者的坐骑", "斬魔者的戰騎", }, 
+},
+["639"] = {
+{ "Hellfire Ramparts", "Höllenfeuerbollwerk", "Murallas del Fuego Infernal", "Murallas del Fuego Infernal", "Remparts des Flammes infernales", "Bastioni del Fuoco Infernale", "지옥불 성루", "Muralha Fogo do Inferno", "Бастионы Адского Пламени", "地狱火城墙", "地獄火壁壘", }, 
+},
+["539"] = {
+{ "Temple of the Jade Serpent", "Tempel der Jadeschlange", "Templo del Dragón de Jade", "Templo del Dragón de Jade", "Temple du Serpent de jade", "Tempio della Serpe di Giada", "옥룡사", "Templo da Serpente de Jade", "Храм Нефритовой Змеи", "青龙寺", "玉蛟寺", }, 
+},
+["1255"] = {
+{ "Halls of Valor", "Die Hallen der Tapferkeit", "Cámaras del Valor", "Salones del Valor", "Salles des Valeureux", "Sale del Valore", "용맹의 전당", "Salões da Bravura", "Чертоги Доблести", "英灵殿", "英靈殿", }, 
+},
+["598"] = {
+{ "Prisoner of War", "Kriegsgefangene", "Prisionero de Guerra", "Prisionera de guerra", "Prisonnière de guerre", "Prigioniero di guerra", "전쟁 포로", "Prisioneiro de Guerra", "Пленница", "战俘", "戰俘", }, 
+},
+["696"] = {
+{ "Start Timer", "Timer starten", "Iniciar temporizador", "Iniciar temporizador", "Démarrer le chronomètre", "Avvio conto alla rovescia", "초읽기 시작", "Inicie o tempo", "Запуск таймера", "开始计时器", "開始計時", }, 
+},
+["182"] = {
+{ "Boarding Party!", "Nicht klar zum Entern!", "¡Al abordaje!", "¡Al abordaje!", "On nous aborde !", "Squadra d'assalto!", "승선대다!", "Grupo de Abordagem!", "Абордаж!", "登船小队！", "登船小隊!", }, 
+{ "Explosives Acquisition", "Sprengstoffakquisition", "Adquisición de explosivos", "Adquisición de explosivos", "Acquisition d’explosifs", "Recupero esplosivi", "폭탄물 획득", "Aquisição de Explosivos", "Добыть взрывчатку", "获取炸药", "取得炸藥", }, 
+{ "To Smithereens!", "Zerstört das Hordeschiff!", "¡En mil pedazos!", "¡En mil pedazos!", "En mille morceaux !", "Falla a pezzi!", "산산조각내라!", "Pelos ares!", "В щепки!", "粉身碎骨！", "炸成碎片!", }, 
+{ "Defeat the Admiral!", "Bezwingt den Admiral!", "¡Derrota al almirante!", "¡Derrota al almirante!", "À bas l’amiral !", "Sconfiggi l'Ammiraglio!", "제독을 처치하라!", "Derrote o Almirante!", "Победите адмирала!", "击败海军上将！", "打敗上將!", }, 
+{ "Bonus Objectives", "Bonusziele", "Objetivos de bonificación", "Objetivos de bonificación", "Objectifs bonus", "Obiettivi bonus", "추가 목표", "Objetivos bônus", "Дополнительные задачи", "奖励目标", "獎勵目標", }, 
+},
+["1244"] = {
+{ "First Contact", "Erstkontakt", "Primer contacto", "Primer contacto", "Premier contact", "Primo contatto", "첫 조우", "Primeiro contato", "Первый контакт", "第一次接触", "第一次接觸", }, 
+{ "System Overload", "Systemüberladung", "Sobrecarga del sistema", "Sobrecarga del sistema", "Surchauffe du système", "Sovraccarico del sistema", "시스템 과부하", "Sobrecarga do sistema", "Перегрузка системы", "系统过载", "系統超載", }, 
+{ "This Ship Will Self-Destruct in...", "Selbstzerstörung des Schiffs in...", "La nave se autodestruirá en...", "Esta nave se autodestruirá en...", "Ce navire explosera dans…", "Questa nave si autodistruggerà entro...", "함선 자폭까지 남은 시간...", "Esta nau vai se autodestruir em...", "Корабль самоуничтожится через...", "本舰船即将自毁……", "這艘船艦即將自爆…", }, 
+{ "Lord Mephistroth", "Lord Mephistroth", "Lord Mephistroth", "Lord Mephistroth", "Seigneur Méphistroth", "Sire Mefistroth", "군주 메피스트로스", "Lorde Mephistroph", "Владыка Мефистрот", "孟菲斯托斯", "梅菲斯托領主", }, 
+},
+["1125"] = {
+{ "Follow the Caretaker", "Dem Verwalter folgen", "Sigue al custodio", "Sigue al Custodio", "Suivre le conservateur", "Seguire il Custode", "관리자 따라가기", "Siga o zelador", "Провожатый", "跟随管理员", "跟隨管理員", }, 
+{ "Remove the Infestation", "Die Plage beseitigen", "Elimina la infestación", "Elimina la infestación", "Suppression des envahisseurs", "Rimuovere l'infestazione", "침입자 소탕", "Desinfestar", "Расправа над вредителями", "去除侵扰", "移除蟲害", }, 
+{ "Locate Magni", "Findet Magni", "Localiza a Magni", "Localiza a Magni", "À la recherche de Magni", "Trovare Magni", "마그니 찾기", "Encontrar Magni", "Найти Магни", "找到麦格尼", "找到麥格尼", }, 
+{ "Bring Down the Barrier", "Nieder mit der Barriere", "Destruye la barrera", "Derriba la barrera", "À bas la barrière", "Abbattere la barriera", "방벽 제거", "Rompendo barreiras", "Устранение барьера", "解除屏障", "解除屏障", }, 
+{ "Defeat the Demons", "Die Dämonen bezwingen", "Derrota a los demonios", "Derrota a los demonios", "Terrasser les démons", "Sconfiggere i demoni", "악마 무리 처치", "Derrotar os demônios", "Одолеть демонов", "击败恶魔", "擊敗惡魔", }, 
+{ "Escort Magni", "Begleitet Magni", "Escolta a Magni", "Escolta a Magni", "Escorter Magni", "Scortare Magni", "마그니 호위", "Escoltar Magni", "Сопровождение Магни", "护送麦格尼", "護送麥格尼", }, 
+{ "Enter the Planetarium", "Betretet das Planetarium", "Entra en el Planetario", "Entra al Planetario", "Visite du planétarium", "Entrare nel Planetario", "투영관에 들어가기", "O Planetário", "Войти в планетарий", "进入天文台", "進入渾天儀", }, 
+{ "The Diamond King's Message", "Die Botschaft des Diamantenkönigs", "El mensaje del rey de diamantes", "El mensaje del rey diamante", "Le message du roi de diamant", "Il messaggio del re dei diamanti", "다이아몬드 왕의 전언", "Mensagem do rei de diamante", "Слова алмазного короля", "钻石之王的消息", "鑽石之王有話要說", }, 
+},
+["1145"] = {
+{ "Commence Bombardment!", "Das Bombardement beginnen", "¡Que comience el bombardeo!", "¡Comiencen el bombardeo!", "Feu à volonté !", "Fuoco alle polveri!", "폭격 개시!", "Iniciar o bombardeio!", "Готовсь... Цельсь... Пли!", "开始轰炸！", "開始轟炸！", }, 
+{ "Glide Down to the Rendezvous", "Zum Treffpunkt hinuntergleiten", "Planea hasta el punto de encuentro", "Deslizamiento en descenso hacia el encuentro", "Planer jusqu’au point de rendez-vous", "Planare verso il punto di ritrovo", "고공 낙하", "Desça, planando, até o local de encontro", "Спуск к месту встречи", "滑翔到集合点", "滑翔前往集結地點", }, 
+{ "Destroy the Legion", "Zerstört die Legion", "Destruye a la Legión", "Destruye a la Legión", "Détruire la Légion", "Annientare la Legione", "군단 섬멸", "Destrua a Legião", "Уничтожить Легион!", "消灭军团", "消滅燃燒軍團", }, 
+{ "Regroup In Front of the Command Center", "Vor der Kommandozentrale versammeln", "Reagrupamiento frente al centro de mando", "Reagrupamiento frente al centro de mando", "Regroupement devant le centre de commandement", "Raduno al Centro di Comando", "사령부 앞에서 재집결", "Reagrupem-se em frente ao Centro de Comando", "Перегруппировка у флагманского корабля", "在指挥部前方重新集结", "在指揮中心前面重新整隊", }, 
+{ "Fel Hammer, Fire!", "Teufelshammer, Feuer frei!", "¡Martillo Vil, fuego!", "¡Martillo Vil, fuego!", "Marteau gangrené, feu !", "Vilmartello, fuoco!", "지옥 망치호, 발사!", "Martelo Vil, fogo!", "Огонь!", "邪能之槌号，开火！", "魔錘號，射擊！", }, 
+{ "Caria and Varedis At Last", "Caria und Varedis, endlich", "Caria y Varedis al fin", "Caria y Varedis, al fin", "Caria et Varedis, enfin…", "Caria e Varedis, alla fine ci incontriamo", "카리아와 베레디스의 최후", "Caria e Varedis, finalmente.", "Наказать предателей", "最后，只剩下凯丽娅和瓦雷迪斯", "凱莉亞和瓦瑞迪斯的終點", }, 
+{ "Malevolence, Get Us Out of Here", "Malicia, bringt uns hier weg", "Malevolencia, sácanos de aquí", "Malevolencia, sácanos de aquí", "Maléficiae ! Nous devons sortir d’ici !", "Malevola, tiraci fuori da qui", "말레볼런스의 지원", "Malevolência, tire-nos daqui", "Злоба, вытащи нас отсюда.", "玛沃伦丝，带我们离开这里", "懷惡族母，帶我們離開這裡", }, 
+},
+["1037"] = {
+{ "Culling the Cultists", "Kultisten knüppeln", "Diezmar a los cultores", "Sacrificando a los cultores", "Sectionner les sectateurs", "Epurare i cultisti", "이교도 혼내주기", "Extermínio de sectários", "Истребление сектантов", "屠杀教徒", "滅除教徒", }, 
+{ "The Ghost King", "Der Geisterkönig", "El rey fantasma", "El Rey Fantasma", "Le roi fantôme", "Il re fantasma", "유령 왕", "O fantasma rei", "Король-призрак", "古王幽魂", "王魂", }, 
+{ "Thoradin's Folly", "Thoradins Torheit", "La locura de Thoradin", "La locura de Thoradin", "La folie de Thoradin", "La follia di Thoradin", "소라딘의 어리석음", "O erro de Thoradin", "Ошибка Торадина", "索拉丁的愚行", "索拉丁的愚行", }, 
+{ "The Tomb of Tyr", "Tyrs Grabmal", "La Tumba de Tyr", "La Tumba de Tyr", "Le tombeau de Tyr", "Tomba di Tyr", "티르의 무덤", "A tumba de Tyr", "Гробница Тира", "提尔之墓", "提爾之墓", }, 
+{ "Cleansing the Desecration", "Läutern der Entweihung", "Purificar la profanación", "Purificando la profanación", "Purification de la corruption", "Purificare la dissacrazione", "황폐화 정화", "A limpeza da profanação", "Очищение от осквернения", "净化亵渎", "淨化穢瀆之物", }, 
+{ "The Root of the Corruption", "Die Wurzel des Übels", "La raíz de la corrupción", "La raíz de la corrupción", "La corruption à sa source", "Le radici del male", "부패의 근원", "A raiz da corrupção", "Источник порчи", "堕落的根源", "腐化的根源", }, 
+{ "The Dark Passage", "Die dunkle Passage", "El pasadizo oscuro", "El pasaje oscuro", "Le passage obscur", "Passaggio oscuro", "어두운 통로", "A passagem sombria", "Темный путь", "黑暗通道", "黑暗通道", }, 
+{ "A Quick Execution", "Eine schnelle Hinrichtung", "Una ejecución rápida", "Una ejecución rápida", "Une prompte exécution", "Una rapida esecuzione", "빠른 처형", "Uma execução rápida", "Быстрая казнь", "高效处决", "引劍成一快", }, 
+{ "To Kill a C'Thraxxi", "Einen C'Thraxxi töten", "Matar a un C'Thraxxi", "Matar a un C'Thraxxi", "Mort au C’Thraxxi", "Uccidere un C'thraxi", "크트락시 처치", "Crônica de um C'Thraxxi anunciado", "Смерть К'Тракси", "克拉西斯之死", "殺死克蘇拉希", }, 
+{ "The Warbreaker", "Der Kriegsbrecher", "La Belígera", "El Belicista", "Le Brise-Guerre", "Spezzaguerra", "전쟁파괴자", "A Senhora da Guerra", "Миротворец", "灭战者", "破戰巨劍", }, 
+},
+["589"] = {
+{ "The Violet Hold", "Die Violette Festung", "El Bastión Violeta", "El Bastión Violeta", "Le fort Pourpre", "Fortezza Violacea", "보랏빛 요새", "Castelo Violeta", "Аметистовая крепость", "紫罗兰监狱", "紫羅蘭堡", }, 
+},
+["689"] = {
+{ "Skyreach", "Himmelsnadel", "Trecho Celestial", "Trecho Celestial", "Orée-du-Ciel", "Vetta dei Cieli", "하늘탑", "Beira-céu", "Небесный Путь", "通天峰", "擎天峰", }, 
+},
+["1155"] = {
+{ "Where Are They?", "Wo sind sie?", "¿Dónde están?", "¿Dónde están?", "Où sont-ils ?", "Dove sono?", "포로 찾기", "Onde estarão?", "Где же они?", "他们在哪里？", "他們在哪裡？", }, 
+{ "The Other Players", "Die anderen Spieler", "Los otros jugadores", "Los otros jugadores", "Les autres acteurs", "Gli altri partecipanti", "남은 자들", "Os outros jogadores", "Оставшиеся в строю", "剩余人士", "其他的角逐者", }, 
+{ "The Third One", "Der Dritte", "El tercero", "El tercero", "Le troisième", "Il terzo", "세 번째 인원", "A terceira", "Третий", "第三个", "第三位", }, 
+{ "An Unfortunate Accident", "Ein bedauernswerter Unfall", "Un desafortunado accidente", "Un desafortunado accidente", "Un accident des plus malencontreux", "Uno sfortunato incidente", "불행한 사고", "Um lamentável acidente", "Досадная случайность", "不幸的事故", "不幸的意外", }, 
+{ "Back to Searching", "Weitersuchen", "Reanudar la búsqueda", "Una nueva búsqueda", "Reprise des recherches", "Continuare la ricerca", "수색 재개", "De volta à procura", "Поиски продолжаются", "继续搜索", "繼續搜索", }, 
+{ "A Secret Meeting", "Geheimtreffen", "Una reunión secreta", "Una reunión secreta", "Rendez-vous secret", "Un incontro segreto", "비밀 만남", "Encontro secreto", "Тайная встреча", "秘密会见", "秘密會晤", }, 
+{ "Back to the Manifest", "Nochmal von vorne", "De vuelta al manifiesto", "De vuelta al manifiesto", "Revenons-en au manifeste", "Di nuovo all'elenco", "감옥 명부", "De volta ao manifesto", "Продолжение поисков", "继续寻找名册", "繼續找名冊", }, 
+{ "The Final Wing", "Der letzte Flügel", "La última ala", "La última ala", "La dernière aile", "L'ultima ala", "마지막 구역", "A última ala", "Последнее место для поисков", "最终之厅", "最後一區", }, 
+{ "Baradin Hold", "Baradinfestung", "Bastión de Baradin", "Bastión de Baradin", "Le bastion de Baradin", "Forte di Baradin", "바라딘 요새", "Guarnição Baradin", "Крепость Барадин", "巴拉丁监狱", "巴拉丁堡", }, 
+{ "The Eye of the Beast", "Das Auge der Bestie", "El ojo de la bestia", "El Ojo de la bestia", "L’œil de la Bête", "L'Occhio della Bestia", "괴물의 눈", "O olho da fera", "Око зверя", "野兽之眼", "野獸之眼", }, 
+},
+["581"] = {
+{ "Halls of Lightning", "Die Hallen der Blitze", "Cámaras de Relámpagos", "Cámaras de Relámpagos", "Les salles de Foudre", "Sale del Fulmine", "번개의 전당", "Salões Relampejantes", "Чертоги Молний", "闪电大厅", "雷光大廳", }, 
+},
+["681"] = {
+{ "Bloodmaul Slag Mines", "Blutschlägermine", "Minas Machacasangre", "Minas de Escoria Machacasangre", "Mine de la Masse-Sanglante", "Miniere dei Magliorosso", "피망치 잿가루 광산", "Minas de Escória do Malho Sangrento", "Шлаковые шахты Кровавого Молота", "血槌炉渣矿井", "熔渣礦場", }, 
+},
+["181"] = {
+{ "Assault on Zan'vess", "Angriff auf Zan'vess", "Asalto a Zan'vess", "Asalto a Zan'vess", "L’attaque de Zan’vess", "Assalto a Zan'vess", "잔베스 강습", "Ataque a Zan'vess", "Атака на Зан'весс", "突袭扎尼维斯", "襲擊贊斐斯", }, 
+{ "Defenses of Zan'vess", "Verteidigung von Zan'vess", "Defensas de Zan'vess", "Defensas de Zan'vess", "Les défenses de Zan’vess", "Difese di Zan'vess", "잔베스 수비진", "Defesas de Zan'vess", "Защитное поле Зан'весса", "防御扎尼维斯", "贊斐斯的防禦", }, 
+{ "The Heart of Zan'vess", "Das Herz von Zan'vess", "El corazón de Zan'vess", "El corazón de Zan'vess", "Le cœur de Zan’vess", "Cuore di Zan'vess", "잔베스 중심부", "O Coração de Zan'vess", "Сердце Зан'весса", "扎尼维斯之心", "贊斐斯之心", }, 
+{ "Weapons of Zan'vess", "Die Waffen von Zan'vess", "Armas de Zan'vess", "Armas de Zan'vess", "Les armes de Zan’vess", "Armi di Zan'vess", "잔베스의 무기들", "Armas de Zan'vess", "Оружие Зан'весса", "扎尼维斯的武装", "贊斐斯的武器", }, 
+},
+["682"] = {
+{ "Grimrail Depot", "Grimmgleisdepot", "Terminal Malavía", "Depósito Riel siniestro", "Dépôt de Tristerail", "Treno Frecciacupa", "파멸철로 정비소", "Central do Carrilcruel", "Депо Мрачных Путей", "恐轨车站", "恐軌車站", }, 
+{ "The Grimrail", "Der Grimmzug", "Malavía", "El Riel siniestro", "Le Tristerail", "Treno Frecciacupa", "파멸철로", "O Carrilcruel", "Мрачный Путь", "恐轨号", "恐軌列車", }, 
+},
+["582"] = {
+{ "Halls of Stone", "Die Hallen des Steins", "Cámaras de Piedra", "Las Cámaras de Piedra", "Les salles de Pierre", "Sale della Pietra", "돌의 전당", "Salões Rochosos", "Чертоги Камня", "岩石大厅", "石之大廳", }, 
+},
+["528"] = {
+{ "Mogu'shan Palace", "Mogu'shanpalast", "Palacio Mogu'shan", "Palacio Mogu'shan", "Palais Mogu’shan", "Palazzo Mogu'shan", "모구샨 궁전", "Palácio Mogu'shan", "Дворец Могу'шан", "魔古山宫殿", "魔古山宮", }, 
+},
+["428"] = {
+{ "Shadowmoon Burial Grounds", "Schattenmondgrabstätte", "Cementerio de Sombraluna", "Cementerios de Sombraluna", "Terres sacrées d’Ombrelune", "Necropoli dei Torvaluna", "어둠달 지하묘지", "Sepulcrário da Lua Negra", "Некрополь Призрачной Луны", "影月墓地", "影月墓地", }, 
+},
+["824"] = {
+{ "The Windrunner", "Die Windläufer", "El Brisaveloz", "El Brisaveloz", "Le Coursevent", "Ventolesto", "윈드러너호", "O Correventos", "\"Ветрокрылая\"", "风行者", "風行者", }, 
+{ "The Eternity", "Die Ewigkeit", "La Eternidad", "La eternidad", "L’Éternité", "Eternità Infinita", "영원호", "O Eternidade", "\"Вечность\"", "永恒号", "永恆之境", }, 
+{ "The Blightcaller", "Die Pestrufer", "El Clamañublo", "El Clamañublo", "Le Flétrisseur", "Invocatrice del Morbo", "역병소환사호", "O Pestífero", "\"Призыватель гибели\"", "凋零使徒号", "凋零者", }, 
+{ "The Black Rose", "Die Schwarze Rose", "La Rosa Negra", "La Rosa Negra", "La Rose noire", "Rosa Nera", "흑장미호", "Rosa Negra", "\"Черная Роза\"", "黑玫瑰号", "黑玫瑰號", }, 
+{ "Boarding the Skyfire", "An Bord der Himmelsfeuer", "Abordar El Abrasacielos", "Abordar el Abrasacielos", "Abordage du Brûleciel", "Abbordare la Fuoco Celeste", "하늘불꽃호 승선", "Abordagem do Celesfogo", "Высадка на \"Небесный огонь\"", "登上天火号", "登上天火號", }, 
+{ "Queen Takes King", "Dame schlägt König", "La reina se come al rey", "La reina derrota al rey", "Échec au roi", "Regina mangia Re", "여왕이 왕을 잡다", "Rainha toma rei", "Королева бьет короля", "后吃王", "女王對國王", }, 
+},
+["873"] = {
+{ "Pushing Them Back", "Drängt sie zurück", "Hacerlos retroceder", "Rechazarlos", "Nettoyage en règle", "Respingere i nemici", "동작 그만!", "Façam-nos recuar", "Остановите нашествие", "击退他们", "擊退敵人", }, 
+{ "Suppressing the Source", "Die Quelle unterdrücken", "Suprimir la fuente", "Suprimir la fuente", "Tarir la source", "Bloccare la fonte", "동력 차단", "Supressão da fonte", "Ликвидация источника", "掐灭源头", "截斷來源", }, 
+{ "Defend the Outpost", "Verteidigt den Außenposten", "Defiende la avanzada", "Defiende el Puesto de avanzada", "Défendre l’avant-poste", "Difendere l'avamposto", "전초기지 방어", "Defenda o posto-avançado", "Защита аванпоста", "保卫岗哨", "防衛哨站", }, 
+},
+["673"] = {
+{ "Start Timer", "Timer starten", "Iniciar temporizador", "Iniciar temporizador", "Démarrer le chronomètre", "Avvio contro alla rovescia", "초읽기 시작", "Inicie o tempo", "Запуск таймера", "开始计时器", "開始計時", }, 
+{ "Timer Over", "Zeit abgelaufen", "Temporizador finalizado", "Temporizador terminado", "Temps dépassé", "Tempo esaurito", "제한 시간 종료", "Acabou o tempo", "Время истекло", "时间到", "時間結束", }, 
+},
+["1166"] = {
+{ "Black Rook Hold", "Die Rabenwehr", "Torreón Grajo Negro", "Fuerte Torre Oscura", "Le bastion du Freux", "Forte Corvonero", "검은 떼까마귀 요새", "Castelo Corvo Negro", "Крепость Черной Ладьи", "黑鸦堡垒", "玄鴉堡", }, 
+},
+["1336"] = {
+{ "The Tidestone's Rest", "Die Rast des Gezeitensteins", "Reposo de la Piedramar", "El descanso de la Maretista", "Repos de la Pierre-des-Marées", "Requie della Pietra delle Maree", "해일석의 안식처", "Repouso da Pedramar", "Покои Приливного камня", "潮汐之眠", "潮石之息", }, 
+},
+["988"] = {
+{ "The Downward Spiral", "Die Abwärtsspirale", "La espiral descendente", "La espiral descendente", "Spirale descendante", "La spirale discendente", "지하로 내려가기", "A espiral descendente", "Вниз по винтовой лестнице", "逆塔", "往下的迴旋樓梯", }, 
+{ "Grasp of the Damned", "Umklammerung der Verdammten", "En manos de los malditos", "El alcance de los malditos", "L’emprise des damnés", "Presa dei dannati", "저주받은 자의 손아귀", "Garras dos condenados", "Хватка проклятых", "亡者之握", "詛咒之握", }, 
+{ "Removal Protocols", "Entfernungsprotokolle", "Protocolos de eliminación", "Protocolos de eliminación", "Protocoles d’élimination", "Protocolli di rimozione", "작동규약 제거", "Protocolos de remoção", "Протоколы ликвидации", "清除协议", "移除程序", }, 
+{ "Reap the Harvester", "Mäht den Ernter nieder", "Alzarse con la Falce", "Siega la Cosechadora", "Faucher la faux", "Mietere la Mietitrice", "수확기 수확", "Ceife a Ceifadora", "Жатва Жнеца", "收割者将被收割", "奪得收割者", }, 
+{ "The Rider's Prize", "Der Preis des Reiters", "El trofeo del jinete", "El premio del jinete", "Le trophée du cavalier", "Il premio dei Cavalieri", "기수의 유물", "O prêmio do cavalgante", "Трофей всадника", "黑骑士的财宝", "黑騎兵的寶物", }, 
+{ "Ulthalesh Feasts", "Ulthalesh labt sich", "El festín de Ulthalesh", "Festines de Ulthalesh", "Le festin d’Ulthalesh", "Il banchetto di Ulthalesh", "울타레쉬의 포식", "Ulthalesh se deleita", "Пир Ултхалеша", "乌萨勒斯的盛宴", "烏薩萊許大快朵頤", }, 
+{ "0", "", "", "", "", "", "", "", "", "", "", }, 
+},
+["573"] = {
+{ "Halls of Reflection", "Hallen der Reflexion", "Cámaras de Reflexión", "Cámaras de Reflexión", "Salles des Reflets", "Sale dei Riflessi", "투영의 전당", "Salões da Reflexão", "Залы Отражений", "映像大厅", "倒影大廳", }, 
+},
+["680"] = {
+{ "Bloodmaul Slag Mines", "Blutschlägermine", "Minas Machacasangre", "Minas de escoria Machacasangre", "Mine de la Masse-Sanglante", "Miniere dei Magliorosso", "피망치 잿가루 광산", "Minas de Escória do Malho Sangrento", "Шлаковые шахты Кровавого Молота", "血槌炉渣矿井", "血槌熔渣礦場", }, 
+},
+["580"] = {
+{ "Halls of Lightning", "Die Hallen der Blitze", "Cámaras de Relámpagos", "Cámaras de Relámpagos", "Les salles de Foudre", "Sale del Fulmine", "번개의 전당", "Salões Relampejantes", "Чертоги Молний", "闪电大厅", "雷光大廳", }, 
+},
+["499"] = {
+{ "Invasion!", "Invasion!", "¡Invasión!", "¡Invasión!", "Alerte aux envahisseurs !", "Invasione!", "침략!", "Invasão!", "Вторжение!", "入侵！", "入侵！", }, 
+{ "Ambush", "Hinterhalt", "Emboscada", "Emboscada", "Embuscade", "Imboscata", "습격", "Emboscada", "Засада", "伏击", "伏擊", }, 
+{ "The Holdout", "Durchhaltevermögen", "La resistencia", "La resistencia", "Le baroud", "Resistenza", "항전", "A Resistência", "Продержаться подольше", "坚持到底", "堅持到底", }, 
+{ "Cleanup", "Aufräumkommando", "Limpieza", "Limpieza", "Nettoyage", "Ripulitura", "소탕", "Limpeza", "Зачистка", "摧枯拉朽", "收拾殘局", }, 
+{ "The Calm", "Ruhe nach dem Sturm", "La calma", "La calma", "Le calme", "La calma", "정적", "A Calma", "Затишье", "风平浪静", "歇息備戰", }, 
+{ "It is Near", "Es ist in der Nähe", "Está cerca", "Está cerca", "C’est tout près", "È vicino", "무언가 다가온다", "Esté perto", "Оно уже рядом", "它过来了", "就在眼前", }, 
+{ "Bronze", "Bronze", "Bronce", "Bronce", "Bronze", "Bronzo", "동메달", "Bronze", "Бронза", "青铜级", "青銅", }, 
+{ "Silver", "Silber", "Plata", "Plata", "Argent", "Argento", "은메달", "Prata", "Серебро", "白银级", "白銀", }, 
+{ "Gold", "Gold", "Oro", "Oro", "Or", "Oro", "금메달", "Ouro", "Золото", "黄金级", "黃金", }, 
+{ "Platinum", "Platin", "Platino", "Platino", "Platine", "Platino", "백금메달", "Platina", "Платина", "白金", "白金", }, 
+},
+["215"] = {
+{ "Speak to Taoshi", "Sprecht mit Taoshi", "Habla con Taoshi", "Habla con Taoshi", "Parler à Taoshi", "Parla con Taoshi", "타오스와 대화", "Falar com Taoshi", "Поговорить с Таоши", "与陶矢交谈", "與陶氏說話", }, 
+{ "Reach the Exit", "Erreicht den Ausgang", "Alcanza la salida", "Alcanza la salida", "Atteindre la sortie", "Raggiungi l'uscita", "출구로 이동", "Alcançar a Saída", "Добраться до выхода", "到达出口", "抵達出口", }, 
+},
+["599"] = {
+{ "Prisoner of War", "Kriegsgefangene", "Prisionero de Guerra", "Prisionera de guerra", "Prisonnière de guerre", "Prigioniero di guerra", "전쟁 포로", "Prisioneiro de Guerra", "Пленница", "战俘", "戰俘", }, 
+{ "Commander Stoutbeard defeated", "Kommandant Starkbart bezwungen", "Comandante Barbarrecia derrotado", "Comandante Barbarrecia derrotado.", "Commandant Rudebarbe vaincu", "Sconfiggi il Comandante Barbaforte", "사령관 스타우트비어드 처치", "Comandante Barbacã derrotado", "Командир Пивобород повержен", "击败指挥官斯托比德", "已擊敗指揮官厚鬚", }, 
+},
+["515"] = {
+{ "Disciples of Naralex", "Jünger von Naralex", "Discípulos de Naralex", "Discípulos de Naralex", "Les disciples de Naralex", "Discepoli di Naralex", "나랄렉스의 제자", "Discípulos de Naralex", "Послушники Наралекса", "纳拉雷克斯的信徒", "納拉雷克斯侍徒", }, 
+{ "Disciples of Naralex", "Jünger von Naralex", "Discípulos de Naralex", "Discípulos de Naralex", "Les disciples de Naralex", "Discepoli di Naralex", "나랄렉스의 제자", "Discípulos de Naralex", "Послушники Наралекса", "纳拉雷克斯的信徒", "納拉雷克斯侍徒", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["615"] = {
+{ "The Mechanar", "Die Mechanar", "El Mechanar", "El Mechanar", "Le Méchanar", "Mecanar", "메카나르", "Mecanar", "Механар", "能源舰", "麥克納爾", }, 
+},
+["591"] = {
+{ "Drak'Tharon Keep", "Feste Drak'Tharon", "Fortaleza de Drak'Tharon", "Fortaleza de Drak'Tharon", "Donjon de Drak’Tharon", "Forte di Drak'Tharon", "드락타론 성채", "Bastilha Drak'Tharon", "Крепость Драк'Тарон", "达克萨隆要塞", "德拉克薩隆要塞", }, 
+},
+["992"] = {
+{ "Maw of Souls", "Der Seelenschlund", "Fauce de Almas", "Fauces de almas", "Gueule des âmes", "Fauci delle Anime", "영혼의 아귀", "Gorja das Almas", "Утроба душ", "噬魂之喉", "靈魂之喉", }, 
+},
+["678"] = {
+{ "Auchindoun", "Auchindoun", "Auchindoun", "Auchindoun", "Auchindoun", "Auchindoun", "아킨둔", "Auchindoun", "Аукиндон", "奥金顿", "奧齊頓", }, 
+},
+["592"] = {
+{ "Ahn'kahet: The Old Kingdom", "Ahn'kahet: Das Alte Königreich", "Ahn'kahet: El Antiguo Reino", "Ahn'kahet: El Antiguo Reino", "Ahn’kahet : l’Ancien royaume", "Ahn'kahet, il Regno Antico", "안카헤트: 고대 왕국", "Ahn'kahet: O Velho Reino", "Ан'кахет: Старое Королевство", "安卡赫特：古代王国", "安卡罕特:古王國", }, 
+},
+["278"] = {
+{ "Noodle Time", "Nudelzeit", "La hora de los fideos", "La hora de los fideos", "L’heure des nouilles", "Spaghetti a volontà", "국수 시간", "Hora do Macarrão", "Час лапши", "汤面时间", "湯麵時刻", }, 
+{ "Bonus: Go for the Gold!", "Bonus: Siegertreppchen!", "Bonus: ¡A por el oro!", "Bonus: ¡Ve por el oro!", "Bonus : tentez l’or !", "Bonus: punta all'oro!", "보너스: 금메달을 향해!", "Bônus: Tente o ouro!", "Бонус: золото ждать не будет!", "奖励：冲向黄金！", "獎勵目標:金牌挑戰", }, 
+},
+["1335"] = {
+{ "Cathedral of Eternal Night", "Kathedrale der Ewigen Nacht", "Catedral de la Noche Eterna", "Catedral de la Noche eterna", "Cathédrale de la Nuit éternelle", "Cattedrale della Notte Eterna", "영원한 밤의 대성당", "Catedral da Noite Eterna", "Собор Вечной Ночи", "永夜大教堂", "永夜聖殿", }, 
+{ "Cathedral of Eternal Night", "Kathedrale der Ewigen Nacht", "Catedral de la Noche Eterna", "Catedral de la Noche eterna", "Cathédrale de la Nuit éternelle", "Cattedrale della Notte Eterna", "영원한 밤의 대성당", "Catedral da Noite Eterna", "Собор Вечной Ночи", "永夜大教堂", "永夜聖殿", }, 
+},
+["614"] = {
+{ "The Mechanar", "Die Mechanar", "El Mechanar", "El Mechanar", "Le Méchanar", "Mecanar", "메카나르", "Mecanar", "Механар", "能源舰", "麥克納爾", }, 
+},
+["983"] = {
+{ "Into the Skies", "In die Lüfte", "Hacia los cielos", "Hasta el cielo", "Dans les cieux", "Nel cuore del cielo", "저 하늘 위로", "Céus acima", "В небеса", "一步登天", "進入天空", }, 
+{ "Running In The Clouds", "Rennen in den Wolken", "Correr por las nubes", "Corriendo entre las nubes", "Course dans les nuages", "A spasso tra le nubi", "구름을 달리다", "Corrida nas nuvens", "Бегущие по облакам", "腾云驾雾", "奔跑在雲端", }, 
+{ "A Shocking Development", "Eine schockierende Entwicklung", "Un desarrollo impactante", "Un progreso impactante", "Ambiance survoltée", "Uno sviluppo sconcertante", "비약적인 발전", "Um acontecimento chocante", "Шокирующий поворот", "惊天动地", "驚人的發展", }, 
+{ "Against The Storm", "Gegen den Sturm", "Contra la tormenta", "Contra la tormenta", "À l’épreuve des tempêtes", "Contro la tempesta", "폭풍에 맞서기", "Contra a tempestade", "Противостояние буре", "抗击风暴", "抵抗風暴", }, 
+{ "Dragon Wrangling", "Drachenringen", "Doma de dragones", "Dragón atrapado", "Domptage draconique", "Domatore di draghi", "폭풍용을 타고", "Como domar um dragão", "Объездка дракона", "降龙伏虎", "與龍激鬥", }, 
+{ "The Tyrant of Skywall", "Der Tyrann des Himmelswalls", "El tirano del Muro Celeste", "El tirano de Muro Celeste", "Le tyran de Mur-Céleste", "Il tiranno di Celaria", "하늘담의 폭군", "O tirano da Muralha Celeste", "Тиран Небесной выси", "天空之墙的统治者", "天空之牆的暴君", }, 
+{ "Fists of the Heavens", "Fäuste der Himmel", "Puños de los Cielos", "Puños de los Cielos", "Poings des cieux", "Pugni del Cielo", "하늘의 주먹", "Punhos do Paraíso", "Кулаки Небес", "诸天之拳", "蒼天之拳", }, 
+},
+["1134"] = {
+{ "A Personal Request", "Eine persönliche Bitte", "Un favor personal", "Una petición personal", "Une requête personnelle", "Una richiesta personale", "개인적인 부탁", "Um pedido pessoal", "Личная просьба", "私人请求", "私人請求", }, 
+{ "A Bold Rescue", "Eine kühne Rettung", "Un rescate atrevido", "Un rescate audaz", "Un sauvetage des plus audacieux", "Un salvataggio audace", "대담한 구출", "Resgate ousado", "Дерзкое спасение", "大胆的营救", "大膽援救", }, 
+{ "Prisoner No More", "Nie wieder Gefangener", "Fin del cautiverio", "Prisionero, ya no más", "Liberté retrouvée", "Mai più prigioniero", "그대에게 자유를", "Chega de ser prisioneiro", "На свободу!", "不再是阶下囚", "重獲自由", }, 
+},
+["207"] = {
+{ "Taking Off...", "Abgehoben…", "¡Despegando!", "¡Despegando!", "Décollage…", "Decollo...", "이륙...", "Decolando...", "Взлетаем!", "起飞……", "動身...", }, 
+{ "Intercepted!", "Abgefangen!", "¡Te han interceptado!", "¡Te han interceptado!", "Intercepté !", "Intercettato!", "발각!", "Interceptado!", "Перехват!", "遭遇拦截！", "攔截!", }, 
+{ "Master the Beastmaster", "Meistert den Bestienmeister", "Domina al maestro de bestias", "Domina al maestro de bestias", "Maîtriser le belluaire", "Domare il Maestro delle Bestie", "야수조련사 조련하기", "Dominar o Senhor das Feras", "Обуздать повелителя зверей", "击败兽王", "馴服馴獸者", }, 
+{ "Into the Mines", "In die Minen", "Hacia las minas", "Hacia las minas", "Dans la mine", "Nelle miniere", "광산으로", "Entrando nas minas", "В шахту!", "进入矿洞", "進入礦坑", }, 
+{ "What's Yours is Mine!", "Meine Mine!", "¡Lo tuyo es mío!", "¡Lo tuyo es mío!", "Vous avez bonne mine !", "Quel che è tuo è mio!", "네 것은 내 것!", "A mina da hora!", "Было твое, стало мое!", "你的矿洞就是我的矿洞！", "你的礦就是我的礦!", }, 
+{ "Cover Me!", "Gebt mir Deckung!", "¡Cúbreme!", "¡Cúbreme!", "Couvrez-moi !", "Coprimi!", "엄호해줘요!", "Me dê cobertura!", "Прикрой меня!", "掩护我！", "掩護我!", }, 
+},
+["583"] = {
+{ "A Royal Escort", "Die Eskorte des Königs", "Una escolta real", "Una escolta real", "Une escorte royale", "Scorta reale", "왕 호위", "Uma escolta real", "Королевский эскорт", "皇家护卫", "護送皇室", }, 
+},
+["46"] = {
+{ "Shado-Pan Monastery", "Shado-Pan-Kloster", "Monasterio del Shadopan", "Monasterio del Shadopan", "Monastère des Pandashan", "Monastero degli Shandaren", "음영파 수도원", "Monastério Shado-pan", "Монастырь Шадо-Пан", "影踪禅院", "影潘僧院", }, 
+},
+["707"] = {
+{ "Invasion!", "Invasion!", "¡Invasión!", "¡Invasión!", "Alerte aux envahisseurs !", "Invasione!", "침략!", "Invasão!", "Вторжение!", "入侵！", "入侵！", }, 
+{ "Ambush", "Hinterhalt", "Emboscada", "Emboscada", "Embuscade", "Imboscata", "습격", "Emboscada", "Засада", "伏击", "伏擊", }, 
+{ "The Holdout", "Durchhaltevermögen", "La resistencia", "La resistencia", "Le baroud", "Resistenza", "항전", "A Resistência", "Продержаться подольше", "坚持到底", "堅持到底", }, 
+{ "Cleanup", "Aufräumkommando", "Limpieza", "Limpieza", "Nettoyage", "Ripulitura", "소탕", "Limpeza", "Зачистка", "摧枯拉朽", "收拾殘局", }, 
+{ "The Calm", "Ruhe nach dem Sturm", "La calma", "La calma", "Le calme", "La calma", "정적", "A Calma", "Затишье", "风平浪静", "歇息備戰", }, 
+{ "The Forest Walks", "Ränkespiele", "El bosque anda", "Los caminos del bosque", "La forêt en marche", "La foresta cammina", "숲이 걸어온다", "A floresta se move", "Лес движется", "移动的森林", "森林動起來", }, 
+{ "Bronze", "Bronze", "Bronce", "Bronce", "Bronze", "Bronzo", "동메달", "Bronze", "Бронза", "青铜级", "青銅", }, 
+{ "Silver", "Silber", "Plata", "Plata", "Argent", "Argento", "은메달", "Prata", "Серебро", "白银级", "白銀", }, 
+{ "Gold", "Gold", "Oro", "Oro", "Or", "Oro", "금메달", "Ouro", "Золото", "黄金级", "黃金", }, 
+{ "Platinum", "Platin", "Platino", "Platino", "Platine", "Platino", "백금메달", "Platina", "Платина", "白金", "白金", }, 
+},
+["607"] = {
+{ "The Shattered Halls", "Die Zerschmetterten Hallen", "Las Salas Arrasadas", "Las Salas Arrasadas", "Les salles Brisées", "Sale della Devastazione", "으스러진 손의 전당", "Salões Despedaçados", "Разрушенные залы", "破碎大厅", "破碎大廳", }, 
+},
+["183"] = {
+{ "Prepare the Defenses", "Bereitet die Verteidigung vor", "Prepara las defensas", "Prepara las defensas", "Préparer les défenses", "Prepara le difese", "수비를 준비하라", "Prepare as defesas", "Подготовка укреплений", "准备防御", "防守準備", }, 
+{ "Kill Commander Scargash", "Tötet Kommandant Schlitznarbe", "Mata al comandante Sangrescara", "Mata al comandante Sangrescara", "Tuer le commandant Coupentaille", "Uccidi il Comandante Sventracuori", "사령관 스카가쉬 살상 명령", "Mate o Comandante Escorchaga", "Убить командира Глубокого Шрама", "击败指挥官斯卡戈什", "殺了指揮官疤口", }, 
+},
+["206"] = {
+{ "Rendezvous with Scout Captain Elsia", "Trefft Euch mit Späherhauptmann Elsia", "Reúnete con la capitana de exploradores Elsia", "Reúnete con la capitana de exploradores Elsia", "Rendez-vous avec le capitaine des éclaireurs Elsia", "Incontra il Capitano degli Esploratori Elsia", "정찰대장 엘시아와 접선", "Encontrar-se com a Capitã dos Batedores Elsia", "Встреча с капитаном разведчиков Эльсией", "与斥候队长艾尔希娅会合", "和斥候隊長艾爾西雅會合", }, 
+{ "Survive the Ambush", "Überlebt den Überfall", "Sobrevive a la emboscada", "Sobrevive a la emboscada", "Survivre à l’embuscade", "Sopravvivi all'imboscata", "기습에서 생존", "Sobreviva à emboscada", "Пережить нападение", "在伏击中幸存下来", "撐過敵人的埋伏", }, 
+{ "Destroy the Barricades", "Zerstört die Barrikaden", "Destruye las barricadas", "Destruye las barricadas", "Détruire les barricades", "Distruggi le barricate", "방벽 파괴", "Destruir as barricadas", "Разрушить баррикады", "摧毁屏障", "摧毀路障", }, 
+{ "Kill Kresh the Ripper", "Tötet Kresh den Reißer", "Mata a Kresh el Destripador", "Mata a Kresh el Destripador", "Tuer Kresh l’éventreur", "Uccidi Kresh lo Squartatore", "학살자 크레쉬 처치", "Matar Cresh, o Estripador", "Убить Креша Раздирателя", "击败撕裂者科尔什", "殺死『撕裂者』克雷什", }, 
+{ "Kill Arcanital Tula'chek and his Spirit Mask", "Tötet Arkanital Tula'chek und seine Geistermaske", "Mata al arcanital Tula'chek y a su máscara espíritu", "Mata al arcanital Tula'chek y a su máscara espíritu", "Tuer le rituarcaniste Tula’chek et son masque d’esprit", "Elimina Tula'chek e la Maschera Spiritica", "비전주술사 툴라첵과 영혼 가면 처치", "Matar o Arcanital Tula'chek e sua Máscara Espiritual", "Убить чародея-ритуалиста Тула'чека и его маску духов", "击败魔术士图拉奇克和他的灵魂面具", "殺死秘宗圖拉切與他的靈魂面具", }, 
+},
+["734"] = {
+{ "Lower Blackrock Spires", "Untere Schwarzfelsspitze", "Cumbre de Roca Negra Inferior", "Cumbres de Roca Negra inferiores", "Bas du pic Rochenoire", "Bastioni di Roccianera Inferiori", "검은바위 첨탑 하층", "Picos da Rocha Negra Inferior", "Нижняя часть пика Черной горы", "黑石塔下层", "黑石塔下層", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["590"] = {
+{ "Drak'Tharon Keep", "Feste Drak'Tharon", "Fortaleza de Drak'Tharon", "Fortaleza de Drak'Tharon", "Donjon de Drak’Tharon", "Forte di Drak'Tharon", "드락타론 성채", "Bastilha Drak'Tharon", "Крепость Драк'Тарон", "达克萨隆要塞", "德拉克薩隆要塞", }, 
+},
+["569"] = {
+{ "Pit of Saron", "Grube von Saron", "Foso de Saron", "Foso de Saron", "Fosse de Saron", "Fossa di Saron", "사론의 구덩이", "Fosso de Saron", "Яма Сарона", "萨隆矿坑", "薩倫之淵", }, 
+},
+["669"] = {
+{ "Detention Block", "Gefängnisblock", "Bloque de Detención", "Bloque de Detención", "Le mitard", "Blocco di Detenzione", "감금 구역", "Bloco de Detenção", "Тюремный блок", "禁闭室", "禁閉室", }, 
+{ "Ring of Law", "Ring des Gesetzes", "Círculo de la Ley", "Círculo de la Ley", "Cercle de la loi", "Anello della Legge", "법의 심판장", "Círculo da Lei", "Зал Правосудия", "秩序竞技场", "秩序競技場", }, 
+{ "High Interrogator Gerstahn", "Verhörmeisterin Gerstahn", "Alta interrogadora Gerstahn", "Alta interrogadora Gerstahn", "Grande interrogatrice Gerstahn", "Gerstahn la Grande Accusatrice", "대심문관 게르스탄", "Suprema Interrogadora Gerstahn", "Верховный дознаватель Герштан", "审讯官格斯塔恩", "高階審問者格斯塔恩", }, 
+{ "Bael'Gar", "Bael'Gar", "Bael'Gar", "Bael'Gar", "Bael’Gar", "Bael'gar", "밸가르", "Bael'gar", "Бейл'Гор", "贝尔加", "貝爾加", }, 
+},
+["180"] = {
+{ "Infiltrate the Ancient Fortress", "Infiltration der uralten Festung", "Infíltrate en la antigua fortaleza", "Infíltrate en la antigua fortaleza", "Infiltrer l’ancienne forteresse", "Penetra nell'Antica Fortezza", "고대 요새 침투", "Infiltre-se na Fortaleza Ancestral", "Проникнуть в древнюю крепость", "潜入远古堡垒", "潛入遠古堡壘", }, 
+{ "Stealing for Profit", "Auf Beutezug", "El beneficio del robo", "El beneficio del robo", "Voler pour s’enrichir", "Profitto a tutti i costi", "훔칠수록 이득", "Roubando pelo Lucro", "Украсть ради наживы", "偷来横财", "偷盜得利", }, 
+},
+["525"] = {
+{ "Siege of Niuzao Temple", "Belagerung des Niuzaotempels", "Asedio del Templo de Niuzao", "Asedio del Templo de Niuzao", "Siège du temple de Niuzao", "Assedio al Tempio di Niuzao", "니우짜오 사원 공성전투", "Cerco ao Templo Niuzao", "Осада храма Нюцзао", "围攻砮皂寺", "圍攻怒兆寺", }, 
+},
+["425"] = {
+{ "Bloodmaul Slag Mines", "Blutschlägermine", "Minas Machacasangre", "Minas de escoria Machacasangre", "Mine de la Masse-Sanglante", "Miniere dei Magliorosso", "피망치 잿가루 광산", "Minas de Escória do Malho Sangrento", "Шлаковые шахты Кровавого Молота", "血槌炉渣矿井", "血槌熔渣礦場", }, 
+},
+["625"] = {
+{ "Old Hillsbrad Foothills", "Vorgebirge des Alten Hügellands", "Antiguas Laderas de Trabalomas", "Antiguas Laderas de Trabalomas", "Contreforts de Hautebrande d’antan", "Passato di Colletorto", "옛 언덕마루 구릉지", "Antigo Contraforte de Eira dos Montes", "Старые предгорья Хилсбрада", "旧希尔斯布莱德丘陵", "希爾斯布萊德丘陵舊址", }, 
+},
+["962"] = {
+{ "Far From Home", "Fern der Heimat", "Lejos de casa", "Lejos de casa", "Loin du foyer", "Lontani da casa", "집 떠나와", "Longe de casa", "Вдали от дома", "背井离乡", "遠離家園", }, 
+{ "The Dread Warden", "Der Schreckenswächter", "El celador aterrador", "El celador del terror", "Le gardien de l’effroi", "Il Guardiano del Terrore", "공포의 감시관", "O carcereiro medonho", "Жуткий тюремщик", "可怕的狱卒", "驚懼獄卒", }, 
+{ "The Shattered Council", "Der zerschmetterte Rat", "El consejo dispersado", "El consejo destrozado", "Le conseil brisé", "Il concilio infranto", "산산이 조각난 의회", "O conselho despedaçado", "Рассеянный Совет", "破碎的议会", "破碎的議會", }, 
+{ "Jailbreak", "Ausbruch aus dem Gefängnis", "Fuga", "Fuga", "Évasion", "Evasione", "탈옥", "Fuga para a vitória", "Побег из тюрьмы", "越狱", "越獄", }, 
+{ "The Pit Lord's Secrets", "Die Geheimnisse des Grubenlords", "Los secretos del señor del foso", "Los secretos del señor del foso", "Les secrets du seigneur des abîmes", "I segreti del Signore delle Fosse", "지옥의 군주의 비밀", "Os segredos do lorde abissal", "Секреты властителя преисподней", "深渊领主的秘密", "深淵領主的秘密", }, 
+{ "To Fight Another Day", "Die Schlacht vertagen", "Luchar otro día", "Para luchar un día más", "Survivre pour mieux combattre", "Vivere per combattere un altro giorno", "또 하루를 싸우려", "Não é fuga, é retirada", "Мы еще сразимся", "留得青山在", "留得青山在", }, 
+},
+["688"] = {
+{ "Skyreach", "Himmelsnadel", "Trecho Celestial", "Trecho Celestial", "Orée-du-Ciel", "Vetta dei Cieli", "하늘탑", "Beira-céu", "Небесный Путь", "通天峰", "擎天峰", }, 
+},
+["588"] = {
+{ "The Violet Hold", "Die Violette Festung", "El Bastión Violeta", "El Bastión Violeta", "Le fort Pourpre", "Fortezza Violacea", "보랏빛 요새", "Castelo Violeta", "Аметистовая крепость", "紫罗兰监狱", "紫羅蘭堡", }, 
+},
+["524"] = {
+{ "Siege of Niuzao Temple", "Belagerung des Niuzaotempels", "Asedio del Templo de Niuzao", "Asedio del Templo de Niuzao", "Siège du temple de Niuzao", "Assedio al Tempio di Niuzao", "니우짜오 사원 공성전투", "Cerco ao Templo Niuzao", "Осада храма Нюцзао", "围攻砮皂寺", "圍攻怒兆寺", }, 
+},
+["624"] = {
+{ "Old Hillsbrad Foothills", "Vorgebirge des Alten Hügellands", "Antiguas Laderas de Trabalomas", "Antiguas Laderas de Trabalomas", "Contreforts de Hautebrande d’antan", "Passato di Colletorto", "옛 언덕마루 구릉지", "Antigo Contraforte de Eira dos Montes", "Старые предгорья Хилсбрада", "旧希尔斯布莱德丘陵", "希爾斯布萊德丘陵舊址", }, 
+},
+["724"] = {
+{ "Invasion!", "Invasion!", "¡Invasión!", "¡Invasión!", "Alerte aux envahisseurs !", "Invasione!", "침략!", "Invasão!", "Вторжение!", "入侵！", "入侵！", }, 
+{ "Assault", "Sturmangriff", "Asalto", "Asalto", "Assaut", "Assalto", "습격", "Ataque", "Нападение", "突袭", "襲擊", }, 
+{ "The Holdout", "Durchhaltevermögen", "La resistencia", "La resistencia", "Le baroud", "Resistenza", "항전", "A Resistência", "Продержаться подольше", "坚持到底", "堅持到底", }, 
+{ "Cleanup", "Aufräumkommando", "Limpieza", "Limpieza", "Nettoyage", "Ripulitura", "소탕", "Limpeza", "Зачистка", "摧枯拉朽", "收拾殘局", }, 
+{ "The Calm", "Ruhe nach dem Sturm", "La calma", "La calma", "Le calme", "La calma", "정적", "A Calma", "Затишье", "风平浪静", "歇息備戰", }, 
+{ "A Challenger Appears", "Ein Herausforderer erscheint", "Aparece un contendiente", "Surge un contendiente", "Place à l’adversaire !", "Arriva uno sfidante", "도전자 등장", "Um desafiante aparece", "А вот и соперник", "挑战者出现", "挑戰者出現", }, 
+{ "Bronze", "Bronze", "Bronce", "Bronce", "Bronze", "Bronzo", "동메달", "Bronze", "Бронза", "青铜级", "青銅", }, 
+{ "Silver", "Silber", "Plata", "Plata", "Argent", "Argento", "은메달", "Prata", "Серебро", "白银级", "白銀", }, 
+{ "Gold", "Gold", "Oro", "Oro", "Or", "Oro", "금메달", "Ouro", "Золото", "黄金级", "黃金", }, 
+{ "Platinum", "Platin", "Platino", "Platino", "Platine", "Platino", "백금메달", "Platina", "Платина", "白金", "白金", }, 
+},
+["71"] = {
+{ "Welcome to Theramore", "Willkommen in Theramore", "Bienvenidos a Theramore", "Bienvenidos a Theramore", "Bienvenue à Theramore", "Benvenuti a Theramore", "테라모어에 오신 것을 환영합니다", "Bem-vindo a Theramore", "Добро пожаловать в Терамор!", "欢迎来到塞拉摩", "歡迎來到塞拉摩", }, 
+{ "Sweep the Harbor", "Kehrstunde im Hafen", "Arrasa el puerto", "Arrasa el puerto", "Balayer le port", "Ripulisci il porto", "항구를 공격하라", "Limpando o Porto", "Освобождение гавани", "大扫除", "掃蕩港口", }, 
+{ "Into the Ruins", "In die Ruinen", "En las ruinas", "En las ruinas", "Dans les ruines", "Alle rovine", "폐허 속으로", "Nas Ruínas", "К руинам", "深入废墟", "進入廢墟", }, 
+{ "The Lady Proudmoore", "Lady Prachtmeer", "Lady Valiente", "Lady Valiente", "Dame Portvaillant", "Dama Marefiero", "여군주 프라우드무어", "Grã-senhora Proudmore", "Леди Праудмур", "普罗德摩尔女士", "普勞德摩爾女士", }, 
+{ "Destroy the Destroyer", "Zerstört den Zerstörer", "Destruir el destructor", "Destruir el destructor", "Détruire le Destructeur", "Demolisci il Demolitore", "공성 전차를 파괴하라", "Destrua o Destruidor", "Разрушение разрушителя", "摧毁攻城车", "破壞毀滅者", }, 
+{ "The Last Stand", "Das letzte Gefecht", "La resistencia final", "La resistencia final", "La bataille finale", "L'ultima difesa", "최후의 저항", "A Resistência Final", "Последняя битва", "背水一战", "背水一戰", }, 
+},
+["653"] = {
+{ "Scarlet Monastery", "Das Scharlachrote Kloster", "Monasterio Escarlata", "Monasterio Escarlata", "Monastère Écarlate", "Monastero Scarlatto", "붉은십자군 수도원", "Monastério Escarlate", "Монастырь Алого ордена", "血色修道院", "血色修道院", }, 
+},
+["256"] = {
+{ "He Who Has No Life", "Er, der kein Leben hat.", "El Exánime", "El Exánime", "Celui qui n’avait pas de vie", "Colui Che Non Ha Vita", "생명이 없는 자", "Aquele Que Não Possui Vida", "Тот, У Кого Нет Жизни", "亡者", "無魂之生者", }, 
+},
+["572"] = {
+{ "Halls of Reflection", "Hallen der Reflexion", "Cámaras de Reflexión", "Cámaras de Reflexión", "Salles des Reflets", "Sale dei Riflessi", "투영의 전당", "Salões da Reflexão", "Залы Отражений", "映像大厅", "倒影大廳", }, 
+},
+["557"] = {
+{ "Lost City of the Tol'vir", "Die Verlorene Stadt der Tol'vir", "Ciudad Perdida de los Tol'vir", "Ciudad Perdida de los Tol'vir", "Cité perdue des Tol’vir", "Città Perduta dei Tol'vir", "톨비르의 잃어버린 도시", "Cidade Perdida dos Tol'vir", "Затерянный город Тол'вир", "托维尔失落之城", "托維爾的失落之城", }, 
+},
+["1298"] = {
+{ "The Calling Stone", "Der Rufstein", "La piedra de llamada", "La piedra de llamada", "La pierre d’appel", "Pietra dell'Evocazione", "소환석", "A pedra de evocação", "Камень призыва", "召唤石", "召喚石", }, 
+{ "The Minions of Xoroth", "Die Schergen Xoroths", "Los esbirros de Xoroth", "Los esbirros de Xoroth", "Les serviteurs de Xoroth", "I servitori di Xoroth", "소로스의 하수인", "Os lacaios de Zoroth", "Зоротианские приспешники", "克诺索斯的爪牙", "克索諾斯惡魔爪牙", }, 
+{ "The Fel Knight", "Der Teufelsritter", "El caballero vil", "El caballero vil", "Le gangrechevalier", "Il Vilcavaliere", "지옥 기사", "O cavaleiro vil", "Рыцарь Скверны", "邪能骑士", "魔化騎士", }, 
+},
+["257"] = {
+{ "Champions of Pandaria", "Champions von Pandaria", "Campeones de Pandaria", "Campeones de Pandaria", "Champions de la Pandarie", "Campioni di Pandaria", "판다리아의 용사", "Campeões de Pandária", "Чемпионы Пандарии", "潘达利亚勇士", "潘達利亞之傑", }, 
+{ "Celestial Combat", "Kampf den Erhabenen", "Duelo Celestial", "Duelo Celestial", "Combat vénérable", "Combattimento dei Celestiali", "천신 전투", "Combate Celestial", "Небесные бойцы", "天神之战", "天尊之戰", }, 
+},
+["553"] = {
+{ "Grim Batol", "Grim Batol", "Grim Batol", "Grim Batol", "Grim Batol", "Grim Batol", "그림 바톨", "Grim Batol", "Грим Батол", "格瑞姆巴托", "格瑞姆巴托", }, 
+},
+["679"] = {
+{ "Auchindoun", "Auchindoun", "Auchindoun", "Auchindoun", "Auchindoun", "Auchindoun", "아킨둔", "Auchindoun", "Аукиндон", "奥金顿", "奧齊頓", }, 
+},
+["579"] = {
+{ "Utgarde Pinnacle", "Turm Utgarde", "Pináculo de Utgarde", "Pináculo de Utgarde", "Cime d’Utgarde", "Pinnacolo di Utgarde", "우트가드 첨탑", "Pináculo Utgarde", "Вершина Утгард", "乌特加德之巅", "俄特加德之巔", }, 
+},
+["179"] = {
+{ "The Mission...", "Die Mission...", "La misión...", "La misión...", "La mission…", "La missione...", "임무...", "A Missão...", "Миссия…", "任务是……", "任務...", }, 
+{ "We Ride!", "Unterwegs!", "1, 2, al escondite saurok", "1, 2, al escondite saurok", "En route !", "In sella!", "출발!", "Agora Cavalgamos!", "Мы едем!", "骑马前进！", "我們策騎奔馳!", }, 
+{ "Guards!", "Wachen!", "¡Guardias!", "¡Guardias!", "Des gardes !", "Guardie!", "보초다!", "Guardas!", "Стража!", "守卫！", "守衛!", }, 
+{ "Into the Cave", "In die Höhle", "En la cueva", "En la cueva", "Dans la grotte", "Dentro la caverna", "동굴 안으로", "Na Caverna", "В пещеру", "进入洞穴", "進入洞穴", }, 
+{ "The Source", "Der Ursprung", "Origen", "Origen", "La source", "L'origine dei Saurok", "사우록의 근원", "A Fonte", "Происхождение", "起源", "源頭", }, 
+{ "The Broodmaster", "Der Brutmeister", "El maestro de linaje", "El maestro de linaje", "Le maître des couvées", "Il Maestro della Progenie", "무리두목", "A Prolemestre", "Праматерь", "孵化大师", "育主", }, 
+{ "Investigation", "Untersuchung", "Investigación", "Investigación", "Enquête", "Esame delle statue", "조사", "Investigação", "Осмотр", "调查", "調查", }, 
+{ "Ambush!", "Hinterhalt!", "¡Emboscada!", "¡Emboscada!", "C’est une embuscade !", "Imboscata!", "기습이다!", "Emboscada!", "Нападение!", "有埋伏！", "突襲!", }, 
+},
+["1146"] = {
+{ "The Final Battle", "Der letzte Kampf", "La batalla final", "La batalla final", "La bataille finale", "Lo scontro finale", "마지막 전투", "A batalha final", "Последняя битва", "最终之战", "最後一戰", }, 
+{ "Defeat the Felbat Riders", "Die Reiter der Teufelsfledermäuse bezwingen", "Derrota a los jinetes de murciélago vil", "Derrota a los jinetes de murciélagos vil", "Terrasser les cavaliers des gangroptères", "Sconfiggere i Cavalieri di Vilpipistrelli", "지옥박쥐 기수 처치", "Derrotar os cavalgantes dos morcevis", "Наездники на сквернотопырях", "击败魔蝠骑手", "擊敗魔蝠騎士", }, 
+{ "Crash Landing", "Bruchlandung", "Aterrizaje forzoso", "Aterrizaje forzoso", "Atterrissage en catastrophe", "Atterraggio d'emergenza", "불시착", "Aterrissagem forçada", "Жесткая посадка", "迫降", "緊急迫降", }, 
+{ "Aiding Thorim", "Thorim helfen", "Ayudar a Thorim", "Una ayuda a Thorim", "Aider Thorim", "Aiutare Thorim", "토림 지원", "Auxílio a Thorim", "Помощь Ториму", "协助托里姆", "協助索林姆", }, 
+{ "Save Hodir", "Hodir retten", "Salva a Hodir", "Salva a Hodir", "Il faut sauver Hodir", "Salvare Hodir", "호디르 구출", "Salvar Hodir", "Спасение Ходира", "拯救霍迪尔", "拯救霍迪爾", }, 
+{ "Defeat Hodir", "Hodir bezwingen", "Derrota a Hodir", "Derrota a Hodir", "Vaincre Hodir", "Sconfiggere Hodir", "호디르에게 안식을", "Derrotar Hodir", "Остановить Ходира", "击败霍迪尔", "擊敗霍迪爾", }, 
+},
+["1124"] = {
+{ "You CAN Go Home", "Ihr KÖNNT nach Hause gehen", "PUEDES irte a casa", "PUEDES irte a casa", "Retour au bercail possible", "Di nuovo a casa", "돌아온 일리다리", "Você PODE ir para casa", "Домой!", "你们可以回家了", "回家真好", }, 
+{ "Nothing Will Bar Our Way", "Nichts wird sich uns in den Weg stellen", "Nada se interpondrá en nuestro camino", "Nada se interpondrá en nuestro camino", "Rien ne nous empêchera de passer !", "Niente ci sbarrerà la strada", "진격의 일리다리", "Nada obstruirá nosso caminho", "Нам преграды нипочем", "我们不可阻挡", "勢如破竹", }, 
+{ "Confronting an Old Foe", "Konfrontation mit einem alten Feind", "Ante un viejo enemigo", "Confrontando a un viejo enemigo", "Un vieil adversaire", "Faccia a faccia contro un vecchio nemico", "숙적과의 조우", "Confronto com um antigo inimigo", "Старый враг", "面对老对手", "好久不見", }, 
+{ "If He Will Not Listen to Reason...", "Und bist du nicht willig...", "Si no atiende a razones...", "Si no quiere entrar en razón...", "S’il ne veut pas entendre raison…", "Se non ascolterà la ragione...", "말을 듣지 않으면...", "Já que não quer ser razoável...", "Когда красноречие бессильно", "如果他不听劝……", "要是他不講道理…", }, 
+{ "A Final Attempt at Diplomacy", "Ein letzter Versuch der Diplomatie", "Un último intento diplomático", "Un último intento de usar la diplomacia", "Une dernière tentative diplomatique", "Un ultimo tentativo di diplomazia", "마지막 제안", "Uma última chance à diplomacia", "Еще немного дипломатии", "外交上的最后努力", "最後一次嘗試溝通", }, 
+},
+["972"] = {
+{ "The Rescue", "Die Rettung", "El rescate", "El rescate", "Le sauvetage", "Il salvataggio", "구출", "O resgate", "Спасение", "救援", "救援行動", }, 
+{ "Stop the Summoners", "Haltet die Beschwörer auf", "Detener a los invocadores", "Detén a los invocadores", "Arrêter les invocateurs", "Fermare gli Evocatori", "소환사 저지", "Detenha os evocadores", "Остановите призывателей", "阻止召唤者", "阻止召喚師", }, 
+{ "Search for Your Allies", "Sucht nach Euren Verbündeten", "Buscar a tus aliados", "Busca a tus aliados", "Chercher vos alliés", "Alla ricerca di alleati", "아군 수색", "Procure seus aliados", "В поисках союзников", "寻找你的盟友", "搜救盟友", }, 
+{ "Defeat the Hound Mistress", "Bezwingt die Herrin der Hunde", "Derrota a la maestra de canes", "Derrota a la maestra de los sabuesos", "Vaincre la maîtresse-chien", "Sconfiggere la Signora dei Segugi", "토르비스 처치", "Derrote a Senhora dos Cães", "Повелительница гончих", "击败猎犬女王", "擊敗獵犬魔女", }, 
+{ "Quiet the Herald", "Bringt den Herold zum Schweigen", "Silenciar al heraldo", "Silencia al heraldo", "Le silence du héraut", "Silenziare l'Alfiere", "전령의 침묵", "Cale o Arauto", "Утихомиривание глашатая", "歼灭使徒", "消滅信使", }, 
+{ "End the Inquisition", "Beendet die Inquisition", "Acabar con la Inquisición", "El fin de la Inquisición", "Mettre fin à l’inquisition", "Porre fine all'inquisizione", "심문관의 최후", "Encerre a Inquisição", "Покончите с инквизицией", "终结审判", "終結審判官", }, 
+{ "Where Is She?", "Wo ist sie?", "¿Dónde está?", "¿Dónde está?", "Où est-elle passée ?", "Dov'è?", "알레리아는 어디에?", "Onde está ela?", "Где же она?", "她在哪儿？", "她在哪裡？", }, 
+{ "A Bow of Legend", "Ein legendärer Bogen", "Un arco de leyenda", "Un arco legendario", "Un arc de légende", "Un arco leggendario", "전설의 활", "Um arco de lendas", "Легендарный лук", "传奇之弓", "傳奇神弓", }, 
+},
+["1254"] = {
+{ "Eye of Azshara", "Das Auge Azsharas", "Ojo de Azshara", "Ojo de Azshara", "Œil d’Azshara", "Occhio di Azshara", "아즈샤라의 눈", "Olho de Azshara", "Око Азшары", "艾萨拉之眼", "艾薩拉之眼", }, 
+},
+["1135"] = {
+{ "Falling Skies", "Der Himmel stürzt herab", "El cielo cae sobre nuestras cabezas", "Desprendimiento de los cielos", "Quand le ciel s’effondre", "Cieli infuocati", "무너지는 하늘", "Céu desmoronando", "Падающие небеса", "陨落星辰", "天塌下來了", }, 
+{ "Center of Gravity", "Das Zentrum der Schwerkraft", "Centro de gravedad", "Centro de gravedad", "Centre de gravité", "Centro di gravità", "중력의 중심", "Centro de gravidade", "Центр притяжения", "重力中心", "引力中心", }, 
+{ "Twisting in the Wind", "Wirbeln im Wind", "Retorciéndose al viento", "El abismo del viento", "Porté par le vent", "Liberi nel vento", "뒤틀린 바람", "Retorcer ao vento", "Завихрение ветра", "在风中凌乱", "風中殘燭", }, 
+{ "Archmage Vargoth", "Erzmagier Vargoth", "Archimago Vargoth", "Archimago Vargoth", "Archimage Vargoth", "Arcimago Vargoth", "대마법사 바르고스", "Arquimago Vargoth", "Верховный маг Варгот", "大法师瓦格斯", "大法師瓦戈斯", }, 
+{ "Grounded", "Geerdet", "En tierra", "En tierra", "Retour au sol", "Immobilizzato", "지상으로", "Em terra", "Самый быстрый путь вниз", "落地", "落地", }, 
+{ "Stealth Philosophy", "Verstohlenheitsphilosophie", "Filosofía sigilosa", "Filosofía del sigilo", "La philosophie de la furtivité", "Filosofia furtiva", "은신의 왕도", "A filosofia da furtividade", "Деликатный подход", "潜行的哲学", "潛行的藝術", }, 
+{ "The Soulstone's Power", "Die Macht des Seelensteins", "El poder de la piedra de alma", "El poder de la piedra de alma", "Le pouvoir de la pierre d’âme", "Il potere della Pietra dell'Anima", "영혼석의 힘", "O poder da Pedra da Alma", "Сила камня души", "灵魂石的力量", "靈魂石的力量", }, 
+},
+["556"] = {
+{ "Incur Jin'do's Wrath", "Beschwört Jin'dos Zorn herauf", "Provoca la ira de Jin'do", "Despierta la ira de Jin'do.", "Le courroux de Jin’do", "Ira di Jin'do", "진도의 분노 부르기", "Provoque a Ira de Jin'do", "Навлеките на себя гнев Джин'до", "引发金度的怒火", "引發金度的憤怒", }, 
+{ "Jin'do the Godbreaker", "Jin'do der Götterbrecher", "Jin'do el Sojuzgadioses", "Jin'do el Sojuzgadioses", "Jin’do le Briseur de dieux", "Jin'do l'Annientadei", "신파괴자 진도", "Jin'do, o Doma-deus", "Джин'до Низвергатель Богов", "碎神者金度", "破神者金度", }, 
+{ "Bosses Defeated", "Bosse besiegt", "Jefes derrotados", "Jefes derrotados.", "Boss vaincus", "Boss sconfitti", "우두머리 처치", "Chefes derrotados", "Боссы повержены", "击败首领", "已擊敗的首領", }, 
+{ "The Cache of Madness", "Der Hort des Wahnsinns", "El Extremo de la Locura", "El Extremo de la Locura", "L’antre de la Folie", "Scrigno della Follia", "광란의 은닉처", "Antro da Loucura", "Тайник Безумия", "疯狂之缘", "狂性儲納所", }, 
+},
+["70"] = {
+{ "[PH] Defeat Masters", "[PH] Defeat Masters", "[PH] Defeat Masters", "[PH] Defeat Masters", "Vaincre les maîtres", "[PH] Sconfiggi i Maestri", "[PH] 사부를 처치해야 합니다.", "[PH] Derrote os Mestres", "[PH] Defeat Masters", "[PH]击败大师", "[PH] Defeat Masters", }, 
+},
+["40"] = {
+{ "Rescue the Villagers", "Rettet die Dorfbewohner", "Salva a los habitantes", "Salva a los habitantes", "Sauver les villageois", "Salva gli abitanti", "녹옥 마을 주민 구출", "Resgate os Aldeões", "Спасение жителей деревни", "拯救村民", "拯救村民", }, 
+{ "Rescue the Dojo", "Rettet den Dojo", "Salva el dojo", "Salva el dojo", "Sauver le dojo", "Salva il Dojo", "도장을 구하라", "Salve o Dojo", "Спасение додзё", "拯救道场", "拯救道場", }, 
+{ "Recover Burgled Barrels", "Findet die gestohlenen Fässer", "Recupera los barriles robados", "Recupera los barriles robados", "Récupérer les barils volés", "Recupera i barili rubati", "서리당한 맥주통 회수", "Recupere os Barris Roubados", "Возвращение украденных бочонков", "找回失窃的桶", "取回遭竊的酒桶", }, 
+{ "Rescue Greenstone Masons", "Rettet die Steinmetze von Grünstein", "Rescata a los canteros de Verdemar", "Rescata a los canteros de Verdemar", "Sauver les maçons de Pierre-Verte", "Salva i muratori di Pietraverde", "녹옥 석공 구출", "Resgate os Pedreiros da Rocha Verde", "Спасение каменщиков Зеленой Скалы", "拯救绿石工匠区", "拯救綠石石匠區", }, 
+{ "Defeat Vengeful Hui", "Bezwingt den rachsüchtigen Hui", "Derrota a Hui el Vengativo", "Derrota a Hui el Vengativo", "Vaincre Hui le Vengeur", "Sconfiggi Hui il Vendicativo", "복수심에 불타는 후이 처치", "Derrotar Hui Vingativo", "Победа над Мстительным Хуэем", "击败仇灰", "殺死復仇之穢", }, 
+},
+["50"] = {
+{ "Mogu'shan Palace", "Mogu'shanpalast", "Palacio Mogu'shan", "Palacio Mogu'shan", "Palais Mogu’shan", "Palazzo Mogu'shan", "모구샨 궁전", "Palácio Mogu'shan", "Дворец Могу'шан", "魔古山宫殿", "魔古山宮", }, 
+},
+["978"] = {
+{ "Darkheart Thicket", "Das Finsterherzdickicht", "Arboleda Corazón Oscuro", "Matorral Corazón Oscuro", "Fourré Sombrecœur", "Boschetto Cuortetro", "어둠심장 숲", "Bosque Corenegro", "Чаща Темного Сердца", "黑心林地", "暗心灌木林", }, 
+},
+["542"] = {
+{ "Blackrock Caverns", "Die Schwarzfelshöhlen", "Cavernas Roca Negra", "Cavernas Roca Negra", "Cavernes de Rochenoire", "Caverne di Roccianera", "검은바위 동굴", "Caverna Rocha Negra", "Пещеры Черной горы", "黑石岩窟", "黑石洞穴", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["567"] = {
+{ "Disable Demon Portals", "Deaktiviert die Dämonenportale.", "Desactiva los portales de demonios", "Desactiva los portales demoníacos.", "Désactiver les portails démoniaques", "Disattiva i Portali Demoniaci", "악마의 차원문 닫기", "Desative os Portais Demoníacos", "Отключите порталы демонов", "关闭恶魔之门", "解除惡魔之門", }, 
+{ "Slay Peroth'arn", "Tötet Peroth'arn", "Mata a Peroth'arn", "Mata a Peroth'arn.", "Tuer Peroth’arn", "Uccidi Peroth'arn", "페로스안 처치", "Mate Peroth'arn", "Убейте Перот'арна", "击败佩罗萨恩", "殺死佩洛薩恩", }, 
+{ "Distract Queen Azshara", "Lenkt Königin Azshara ab", "Distrae a la reina Azshara", "Distrae a la Reina Azshara.", "Distraire la reine Azshara", "Distrai la Regina Azshara", "여왕 아즈샤라 방해", "Distraia a Rainha Azshara", "Отвлеките королеву Азшару", "拖住艾萨拉女王", "分散艾薩拉女王的注意力", }, 
+{ "Defeat Mannoroth", "Besiegt Mannoroth", "Derrota a Mannoroth", "Derrota a Mannoroth.", "Terrassez Mannoroth", "Sconfiggi Mannoroth", "만노로스 처치", "Derrote Mannoroth", "Победите Маннорота", "击败玛诺洛斯", "擊敗瑪諾洛斯", }, 
+},
+["1274"] = {
+{ "A Call from the Depths", "Ein Ruf aus der Tiefe", "Una llamada desde las profundidades", "El llamado de las profundidades", "L’appel des profondeurs", "Una chiamata dalle profondità", "심연의 부름", "Chamado das profundezas", "Зов из глубин", "深渊的召唤", "深淵的呼喚", }, 
+{ "The Lost Observatory", "Das vergessene Observatorium", "El observatorio perdido", "El observatorio perdido", "L’observatoire oublié", "L'osservatorio perduto", "잊혀진 관측소", "O observatório perdido", "Затерянная обсерватория", "失落的观察室", "失落的觀測所", }, 
+{ "Custodial Matters", "Verwaltungssache", "Cuestiones de custodia", "Temas de custodia", "Affaires de garde", "Problemi di custodia", "깨어나는 관리인", "Questão de zelo", "Работа смотрителя", "管理问题", "管理人很重要", }, 
+{ "The Seekers", "Die Sucher", "Los buscadores", "Los buscadores", "Les veilleurs", "Gli Osservatori", "길잡이", "Os perscrutadores", "Дозорные", "寻觅者", "追尋者", }, 
+{ "Constructs Awaken", "Erwachende Konstrukte", "El despertar de los ensamblajes", "El despertar de los ensamblajes", "L’éveil des assemblages", "Il risveglio dei costrutti", "깨어난 파수꾼", "O despertar dos constructos", "Защитные механизмы", "苏醒的构造体", "甦醒的造物", }, 
+},
+["1339"] = {
+{ "Deceiver's Fall", "Niedergang des Betrügers", "Caída del Impostor", "La caída del Falsario", "La chute du Trompeur", "Caduta dell'Ingannatore", "기만자의 몰락", "Queda do Enganador", "Падение Искусителя", "欺诈者之陨", "欺詐者末路", }, 
+},
+["1337"] = {
+{ "Wailing Halls", "Die Klagenden Hallen", "Cámaras de los Lamentos", "Salones de los lamentos", "Salles des Lamentations", "Sale dei Lamenti", "통곡의 전당", "Salões Ululantes", "Залы Стенаний", "哀嚎大厅", "哀嚎大廳", }, 
+},
+["205"] = {
+{ "Blending In", "Ganz unauffällig", "Panorama para matar", "Panorama para matar", "Se fondre dans le paysage", "Passare inosservati", "은밀한 정찰", "Infiltrando-se", "Разведка с воздуха", "乔装潜入", "混入其中", }, 
+{ "Path of Smoke", "Rauchpfad", "Camino de humo", "Camino de humo", "La voie de la fumée", "Sentiero fumoso", "연기 자욱", "Caminho da Fumaça", "Путь дыма", "烟雾之径", "煙霧之途", }, 
+{ "Shadows in the Storm", "Schatten im Sturm", "Sombras en la tormenta", "Sombras en la tormenta", "Des ombres dans la tempête", "Ombre nella tempesta", "폭풍 속의 그림자", "Sombras na Tempestade", "Тени шторма", "风暴中的阴影", "風暴中的陰影", }, 
+{ "Wetwork", "Ein nasses Grab", "Trabajo sucio", "Trabajo sucio", "Se mouiller", "Massacro", "지저분한 일", "Matança", "Мокрое дело", "湿漉漉的任务", "刺殺任務", }, 
+{ "Keep Quiet", "Ganz leise", "Guarda silencio", "Guarda silencio", "Rester discret", "Fai silenzio", "은밀한 이동", "Silêncio!", "Ни звука", "保持安静", "保持安靜", }, 
+{ "Light Up the Night", "Licht in der Nacht", "Luz en la penumbra", "Luz en la penumbra", "Une lumière dans la nuit", "Illuminare la notte", "밤을 밝혀라", "Acendendo a Noite", "Ночь полна огня", "点亮夜晚", "照亮夜晚", }, 
+{ "Breaking Out", "Ausbruch", "Salida", "Salida", "Évasion", "Fuga", "탈출", "Escapando", "Прорыв", "突破", "逃脫", }, 
+},
+["1323"] = {
+{ "Cathedral of Eternal Night", "Die Kathedrale der Ewigen Nacht", "Catedral de la Noche Eterna", "Catedral de la Noche eterna", "Cathédrale de la Nuit éternelle", "Cattedrale della Notte Eterna", "영원한 밤의 대성당", "Catedral da Noite Eterna", "Собор Вечной Ночи", "永夜大教堂", "永夜聖殿", }, 
+},
+["324"] = {
+{ "The Battle Begins", "Die Schlacht beginnt", "Comienza la batalla", "Comienza la batalla", "La bataille commence", "Inizio della battaglia", "전투 시작", "A batalha começa", "Битва начинается", "一触即发", "大戰將至", }, 
+{ "Hold the Choke Point", "Haltet den Engpass", "Protege el cuello de botella", "Mantén el cuello de botella", "Tenez le goulet d’étranglement.", "Proteggi la strettoia", "협곡 지키기", "Defender o gargalo", "Удержать теснину", "扼守要道", "守住隘口", }, 
+{ "The Iron Clusterpult", "Das Eiserne Katapult", "La matapulta de la Horda de Hierro", "La clusterpulta de hierro", "Le canon à mitraille de Fer", "Sparagrappoli di Ferro", "강철 집속탄 투석기", "O Lança-bombas de Ferro", "Железная мегапушка", "钢铁集簇投掷炮", "鋼鐵集束砲", }, 
+{ "A Good Defense", "Eine gute Verteidigung", "Una buena defensa", "Una buena defensa", "Une bonne défense", "Una buona difesa", "훌륭한 방어", "Uma boa defesa", "Хорошая защита", "坚守阵地", "良好的防禦", }, 
+{ "Defending Drek'thar", "Verteidigt Drek'thar", "Defender a Drek'Thar", "Proteger a Drek'Thar", "La défense de Drek’thar", "Difendi Drek'thar", "드렉타르 보호", "Defendendo Drek'thar", "Защита Дрек'Тара", "保护德雷克塔尔", "保護德雷克塔爾", }, 
+{ "Iron Thunderlords", "Eiserne Donnerfürsten", "Guerreros Señor del Trueno de la Horda de Hierro", "Señores del Trueno de hierro", "Les Sire-Tonnerre de Fer", "Spaccatuono di Ferro", "강철의 천둥군주", "Senhores do Trovão de Ferro", "Железные Громоборцы", "钢铁雷神", "鋼鐵雷霆王", }, 
+{ "Malgrim Stormhand", "Malgrim Sturmhand", "Malgrim Mano Tormenta", "Malgrim Manotormenta", "Malgrim Foudremain", "Malgrim Manotonante", "말그림 스톰핸드", "Malgrim Mão Tempestuosa", "Малгрим Грозовой Кулак", "马尔格林·风暴之手", "瑪格林‧風臂", }, 
+{ "The Final Defense", "Die letzte Verteidigung", "La última línea de defensa", "La última defensa", "L’ultime défense", "Difesa finale", "최후의 항전", "A defesa final", "Решающий бой", "最后的防线", "最終防禦", }, 
+{ "Slay Maggoc", "Tötet Maggoc", "Mata a Maggoc", "Asesina a Maggoc", "Tuer Maggoc", "Uccidi Maggoc", "마그고크 처치", "Mate Maggoc", "Убить Маггока", "击败玛古克", "殺死瑪格歐克", }, 
+},
+["705"] = {
+{ "Never ending step", "Der endlose Schritt", "Paso sin fin", "Paso interminable", "L’étape sans fin", "Fase senza fine", "끝나지 않는 과정", "Passo sem fim", "Бесконечная лестница", "永不止步", "無盡的步驟", }, 
+{ "Progressive Bonus 1", "Progressive Bonus 1", "Progressive Bonus 1", "Bonus progresivo 1", "Progressive Bonus 1", "Bonus progressivo 1", "누진 보너스 1", "Bônus Progressivo 1", "Progressive Bonus 1", "进度奖励 1", "進度獎勵1", }, 
+{ "Progressive Bonus 2", "Progressive Bonus 2", "Progressive Bonus 2", "Bonus progresivo 2", "Progressive Bonus 2", "Bonus progressivo 2", "누진 보너스 2", "Bônus Progressivo 2", "Progressive Bonus 2", "进度奖励 2", "進度獎勵2", }, 
+{ "Progressive Bonus 3", "Progressive Bonus 3", "Progressive Bonus 3", "Bonus progresivo 3", "Progressive Bonus 3", "Bonus progressivo 3", "누진 보너스 3", "Bônus Progressivo 3", "Progressive Bonus 3", "进度奖励 3", "進度獎勵3", }, 
+},
+["605"] = {
+{ "Prisoner of War", "Kriegsgefangene", "Prisionero de Guerra", "Prisionera de guerra", "Prisonnière de guerre", "Prigioniero di guerra", "전쟁 포로", "Prisioneiro de Guerra", "Пленница", "战俘", "戰俘", }, 
+{ "Commander Kolurg defeated", "Kommandant Kolurg bezwungen", "Comandante Kolurg derrotado", "Comandante Kolurg derrotado.", "Commandant Kolurg vaincu", "Sconfiggi il Comandante Kolurg", "사령관 콜루르그 처치", "Comandante Kolurg derrotado", "Командир Колург повержен", "击败指挥官库鲁尔格", "已擊敗指揮官寇勒格", }, 
+},
+["1132"] = {
+{ "Combat Training", "Kampftraining", "Instrucción de combate", "Instrucción de combate", "Entraînement au combat", "Addestramento al combattimento", "전투 훈련", "Treino de combate", "Боевые учения", "战斗训练", "戰鬥訓練", }, 
+{ "A Frosty Friend", "Ein frostiger Freund", "Un amigo gélido", "Un amigo gélido", "Un ami glacial", "Una gelida amicizia", "차가운 친구", "Um amigo frio", "Кто со льдом дружен...", "酷酷的伙伴", "冰冷的朋友", }, 
+{ "A Bolt Best Served Cold", "Kalt erwischt", "La escarcha se sirve fría", "Una descarga es mejor cuando se sirve fría", "Ça jette un froid", "Un dardo che va servito freddo", "차디찬 기운", "Uma seta que se atira fria", "Стрела, которую подают холодной", "冰镇的箭才是好箭", "冷箭的滋味", }, 
+{ "Icy Death", "Eisiger Tod", "Muerte gélida", "Muerte glacial", "Mort de froid", "Morte glaciale", "치명적인 얼음", "Morte gélida", "Смерть с налетом инея", "寒冰死亡", "冷死人了", }, 
+{ "Frozen Fingers", "Gefrorene Finger", "Dedos congelados", "Dedos helados", "Doigts gelés", "Dita gelide", "얼어붙은 손길", "Dedos congelados", "Мертвая хватка холода", "寒冰指", "連手指都藍了", }, 
+{ "A Flurry of Frost", "Jetzt hagelt's Frost", "Un aluvión de escarcha", "Un aluvión gélido", "Rafale de givre", "Una raffica gelida", "냉기의 진눈깨비", "Ímpeto gélido", "Морозный шквал", "冰霜风暴", "冰霜漫舞", }, 
+{ "Putting It All Together", "Das große Ganze", "Juntar las piezas", "Todas las piezas juntas", "Mise en pratique", "Mettersi alla prova", "종합주문세트", "Fixação de conteúdo", "Сборная солянка", "综合在一起", "準備完善", }, 
+{ "Hey, I'm Over Here Now!", "Erst hier, dann dort, dann fort!", "¡Eh, ahora estoy aquí!", "¡Oye, estoy por aquí!", "Ohé, je suis là, maintenant !", "Ehi, sono qui!", "나 잡아봐라!", "Ei, estou aqui, agora!", "Эй, я здесь!", "嘿，我在这儿呢！", "嗨，我在這裡啦！", }, 
+{ "Freezing Roots", "Eisige Wurzeln", "Raíces congelantes", "Raíces heladas", "Racines glaçantes", "Radici gelide", "그대로 멈춰라!", "Raízes congelando", "Глубокая заморозка", "冻在原地", "冰根凍柢", }, 
+{ "Dropping Ice from the Sky", "Eis vom Himmel werfen", "Cae hielo del cielo", "Lluvia de hielo desde el cielo", "De la glace tombée du ciel", "Ghiaccio dal cielo", "휘몰아치는 눈발", "Fazendo gelo cair do céu", "Ледяной обвал", "从天而降的冰雪", "天降寒冰", }, 
+{ "A Quick Test", "Schnelltest", "Una prueba rápida", "Una prueba rápida", "Un test rapide", "Una piccola prova", "깜짝 시험", "Teste rápido", "Испытание тет-а-тет", "快速测试", "隨堂考", }, 
+{ "Twice the Challenge", "Doppelte Herausforderung", "Desafío por partida doble", "Un desafío doble", "Double défi", "Doppia sfida", "난이도 두 배", "Desafio em dose dupla", "Двойной вызов", "双倍挑战", "雙重挑戰", }, 
+{ "Defend Against the Legion Assault", "Den Angriff der Legion abwehren", "Defiéndete del asalto de la Legión", "Defiéndete contra el ataque de la Legión", "Défense contre l’assaut de la Légion", "Difesa contro la Legione", "군단의 공격 막아내기", "Defender contra o ataque da Legião", "Оборона против Легиона", "在军团的攻击下保卫飞艇", "抵擋燃燒軍團的攻擊", }, 
+{ "Assault on Broken Shore", "Angriff auf die Verheerte Küste", "Asalto a la Costa Abrupta", "Asalto a la Costa Quebrada", "L’assaut du rivage Brisé", "Assalto alla Riva Dispersa", "부서진 해변 공격", "Ataque à Costa Partida", "Штурм Расколотого берега", "突袭破碎海滩", "突襲破碎海岸", }, 
+},
+["1046"] = {
+{ "Halls of Valor", "Die Hallen der Tapferkeit", "Cámaras del Valor", "Salones del Valor", "Salles des Valeureux", "Sale del Valore", "용맹의 전당", "Salões da Bravura", "Чертоги Доблести", "英灵殿", "英靈殿", }, 
+},
+["204"] = {
+{ "Find Lost Explosives", "Findet den verlorenen Sprengstoff", "Encuentra los explosivos perdidos", "Encuentra los explosivos perdidos", "Trouver les explosifs perdus", "Trova gli esplosivi perduti", "잃어버린 폭탄을 찾아라", "Encontrar os explosivos perdidos", "Найти потерянную взрывчатку", "找到遗失的炸药", "尋找遺失的炸藥", }, 
+{ "Deliver Explosives", "Liefert den Sprengstoff", "Entrega los explosivos", "Entrega los explosivos", "Livrer les explosifs", "Consegna gli esplosivi", "폭탄 전달", "Entregar os Explosivos", "Доставить взрывчатку", "运送炸药", "遞送炸藥", }, 
+{ "Detonate Explosives", "Detoniert den Sprengstoff", "Detona los explosivos", "Detona los explosivos", "Faire détoner les explosifs", "Fai detonare gli esplosivi", "폭탄 폭파", "Detonar Explosivos", "Взрыв", "引爆炸药", "引爆炸藥", }, 
+{ "Kill War-God Al'chukla", "Tötet Kriegsgott Al'chukla", "Mata al dios de la guerra Al'chukla", "Mata al dios de la guerra Al'chukla", "Tuer le dieu-guerrier Al’chukla", "Uccidi il Dio della Guerra Al'chukla", "전쟁신 알축라 처치", "Mate o Deus da Guerra Al'chukla", "Убейте бога войны Ал'чуклу", "击败战神阿尔图克拉", "殺死戰神阿裘卡拉", }, 
+},
+["568"] = {
+{ "The Forge of Souls", "Die Seelenschmiede", "La Forja de Almas", "La Forja de Almas", "La Forge des Âmes", "Forgia delle Anime", "영혼의 제련소", "Forja das Almas", "Кузня Душ", "灵魂洪炉", "眾魂熔爐", }, 
+},
+["942"] = {
+{ "Neltharion's Lair", "Neltharions Hort", "La Guarida de Neltharion", "Guarida de Neltharion", "Repaire de Neltharion", "Antro di Neltharion", "넬타리온의 둥지", "Covil de Neltharion", "Логово Нелтариона", "奈萨里奥的巢穴", "奈薩里奧巢穴", }, 
+},
+["1096"] = {
+{ "Combat Training", "Kampftraining", "Instrucción de combate", "Instrucción de combate", "Entraînement au combat", "Addestramento al combattimento", "전투 훈련", "Treino de combate", "Боевые учения", "战斗训练", "戰鬥訓練", }, 
+{ "Embrace the Feline Side", "Die feline Seite ausleben", "Abraza el lado felino", "Acepta tu lado felino", "Miaou !", "Abbracciare il lato felino", "날렵한 움직임", "Entregar-se ao lado felino", "Кошачья грация", "拥抱猎豹", "貓力與你同在", }, 
+{ "Skulking Around", "Sich davonstehlen", "Merodeando", "Merodeando por aquí", "Toujours à l’affût", "Questione di delicatezza", "꼭꼭 숨어라, 머리카락 보인다", "Na manha do gato", "Надежное укрытие", "潜伏于此", "悄悄行動", }, 
+{ "Break out the Claws", "Die Krallen ausfahren", "Saca las garras", "Libérate de las zarpas", "Sortir les griffes", "Tirare fuori le zanne", "발톱 세우기", "Mostrar as garras", "Выпустить когти", "伸出利爪", "好像弄斷爪子了", }, 
+{ "Shred them to Pieces", "Verarbeitet sie zu Hackfleisch", "Hazlos pedacitos", "Que no quede nada de ellos", "Déchiquetage en règle", "Farli a pezzi", "갈가리 찢기", "Despedaçá-los", "Смертоносные когти", "把他们撕成碎片", "把它們撕碎", }, 
+{ "Bite 'em", "Ein kräftiger Biss", "A mordisco limpio", "Muérdelos", "Coup de dents", "Mordili!", "물어뜯기", "Morder", "Взять их!", "咬他们", "咬給他死", }, 
+{ "Rip It Up", "In Stücke reißen", "En canal", "Arráncales las tripas", "Tout déchirer", "Squarciali tutti", "사정없이 찢기", "Botar pra rasgar", "Потрошитель", "裂成两半", "撕給他爛", }, 
+{ "Putting It All Together", "Das große Ganze", "Juntar las piezas", "Todas las piezas juntas", "Mise en pratique", "Mettersi alla prova", "종합주문세트", "Fixação de conteúdo", "Сборная солянка", "综合在一起", "準備完善", }, 
+{ "Dashing Around", "Im Eilschritt marsch", "A toda velocidad", "Arrasándolo todo", "Ne pas confondre vitesse et précipitation", "Slanci aggraziati", "거침없이 달려들기", "Arremeter contra tudo", "Прыжок кошки", "横冲直撞", "衝來衝去", }, 
+{ "Mending Your Wounds", "Wunden heilen", "Sanar tus heridas", "Curando las heridas", "Panser ses blessures", "Curare le ferite", "상처 치유", "Curar as feridas", "Исцеление ран", "治疗你的伤口", "治療你的傷口", }, 
+{ "A Quick Test", "Schnelltest", "Una prueba rápida", "Una prueba rápida", "Un test rapide", "Una piccola prova", "깜짝 시험", "Teste rápido", "Испытание тет-а-тет", "快速测试", "隨堂考", }, 
+{ "Twice the Challenge", "Doppelte Herausforderung", "Desafío por partida doble", "Un desafío doble", "Double défi", "Doppia sfida", "난이도 두 배", "Desafio em dose dupla", "Двойной вызов", "双倍挑战", "雙重挑戰", }, 
+{ "Defend Against the Legion Assault", "Den Angriff der Legion abwehren", "Defiéndete del asalto de la Legión", "Defiéndete contra el ataque de la Legión", "Défense contre l’assaut de la Légion", "Difesa contro la Legione", "군단의 공격 막아내기", "Defender contra o ataque da Legião", "Оборона против Легиона", "在军团的攻击下保卫飞艇", "抵擋燃燒軍團的攻擊", }, 
+{ "Assault on Broken Shore", "Angriff auf die Verheerte Küste", "Asalto a la Costa Abrupta", "Asalto a la Costa Quebrada", "L’assaut du rivage Brisé", "Assalto alla Riva Dispersa", "부서진 해변 공격", "Ataque à Costa Partida", "Штурм Расколотого берега", "突袭破碎海滩", "突襲破碎海岸", }, 
+},
+["1265"] = {
+{ "Defending the Halls", "Verteidigung der Hallen", "Defender las cámaras", "Defensa de los salones", "Défense des salles", "Difendere le Sale", "전당 방어", "Defender os salões", "Защита Чертогов", "保卫英灵殿", "保衛英靈殿", }, 
+{ "The Fallen Shieldmaiden", "Die gefallene Schildmaid", "La doncella escudera caída", "La doncella escudera caída", "La vierge déchue", "La Signora dello Scudo Caduta", "몰락한 방패여전사", "A dama escudeira caída", "Падшая дева щита", "堕落的女武神", "墮落的女盾侍", }, 
+},
+["704"] = {
+{ "Invasion", "Invasion", "Invasión", "Invasión", "L'invasion", "Invasione", "침략", "Invasão", "Вторжение", "入侵", "入侵", }, 
+{ "The Scouting Party", "Der Spähtrupp", "El grupo de exploración", "El grupo explorador", "Le groupe d’éclaireurs", "Il gruppo di esploratori", "정찰대", "O Grupo de Batedores", "Разведывательный отряд", "斥候小队", "偵察隊", }, 
+{ "Hold Out!", "Haltet durch!", "¡Aguanta!", "¡Aguanta!", "Accrochez-vous !", "Non cedere!", "항전!", "Aguentem!", "Стоять до последнего!", "坚持住！", "堅持到底！", }, 
+{ "Cleanup", "Aufräumkommando", "Limpieza", "Limpieza", "Nettoyage", "Ripulitura", "소탕", "Limpeza", "Зачистка", "摧枯拉朽", "收拾殘局", }, 
+{ "The Calm", "Ruhe nach dem Sturm", "La calma", "La calma", "Le calme", "La calma", "정적", "A Calma", "Затишье", "风平浪静", "歇息備戰", }, 
+{ "Commander's Fall", "Fall des Kommandanten", "La caída del comandante", "La caída del comandante", "La chute d’un commandant", "La caduta del comandante", "지휘관의 죽음", "A Ruína do Comandante", "Падение вождя", "指挥官的陨落", "指揮官之殞", }, 
+{ "Bronze", "Bronze", "Bronce", "Bronce", "Bronze", "Bronzo", "동메달", "Bronze", "Бронза", "青铜级", "青銅", }, 
+{ "Silver", "Silber", "Plata", "Plata", "Argent", "Argento", "은메달", "Prata", "Серебро", "白银级", "白銀", }, 
+{ "Gold", "Gold", "Oro", "Oro", "Or", "Oro", "금메달", "Ouro", "Золото", "黄金级", "黃金", }, 
+{ "Platinum", "Platin", "Platino", "Platino", "Platine", "Platino", "백금메달", "Platina", "Платина", "白金", "白金", }, 
+},
+["566"] = {
+{ "The Forge of Souls", "Die Seelenschmiede", "La Forja de Almas", "La Forja de Almas", "La Forge des Âmes", "Forgia delle Anime", "영혼의 제련소", "Forja das Almas", "Кузня Душ", "灵魂洪炉", "眾魂熔爐", }, 
+},
+["666"] = {
+{ "Capital Gardens", "Hauptstadtgärten", "Jardines de la Capital", "Jardines de la Capital", "Grands jardins", "Giardini della Capitale", "수도 정원", "Jardins Capitais", "Центральный сад", "中心花园", "中心花園", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["633"] = {
+{ "The Slave Pens", "Die Sklavenunterkünfte", "Recinto de los Esclavos", "Recinto de los Esclavos", "Les enclos aux esclaves", "Fosse degli Schiavi", "강제 노역소", "O Pátio dos Escravos", "Узилище", "奴隶围栏", "奴隸監獄", }, 
+},
+["1266"] = {
+{ "Taking Down Tugar", "Tod dem Tugar", "Eliminar a Tugar", "La caída de Tugar", "Élimination de Tugar", "Abbattere Tugar", "투가르 처치", "Acabar com Tugar", "Охота на Тугара", "了结图加", "消滅圖加", }, 
+{ "Feltotem's Fall", "Sturz der Teufelstotems", "La caída de los Tótem Vil", "La caída de Viltótem", "La chute des Totems-Fétides", "La caduta dei Totem Vile", "지옥토템의 몰락", "Queda do Totem Vil", "Падение Тотема Скверны", "邪能图腾之陨", "魔化圖騰的落敗", }, 
+},
+["1309"] = {
+{ "Lower Return to Karazhan", "Untere Rückkehr nach Karazhan", "Regreso a Karazhan inferior", "Regreso inferior a Karazhan", "Retour à Karazhan (bas)", "Ritorno a Karazhan Inferiore", "다시 찾은 카라잔 하층", "Retorno a Karazhan inferior", "Возвращение в Каражан (нижняя часть)", "重返卡拉赞（下层）", "重返卡拉贊下層", }, 
+},
+["333"] = {
+{ "Blackfathom Deeps", "Tiefschwarze Grotte", "Cavernas de Brazanegra", "Cavernas de Brazanegra", "Profondeurs de Brassenoire", "Abissi di Fondocupo", "검은심연 나락", "Profundezas Negras", "Непроглядная Пучина", "黑暗深渊", "黑澗深淵", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["1012"] = {
+{ "Maritime Diplomacy", "Maritime Diplomatie", "Diplomacia marítima", "Diplomacia marítima", "Diplomatie maritime", "Diplomazia marittima", "해양 외교", "Diplomacia marítima", "Морская дипломатия", "海事外交", "海事交涉", }, 
+{ "Blood and Plunder", "Blut und fette Beute", "Sangre y saqueo", "Sangre y saqueo", "Sang et pillage", "Sangue e bottino", "피와 약탈", "Sangue e saque!", "Кровь и золото", "鲜血与掠夺", "鮮血與掠奪", }, 
+{ "Eliza's Gambit", "Elizas Schachzug", "El gambito de Eliza", "La estrategia de Eliza", "Le stratagème d’Eliza", "La scommessa di Eliza", "엘리자의 계략", "A jogada de Elisa", "Гамбит Элизы", "伊丽扎的战术", "伊莉莎的賭注", }, 
+{ "Into the Depths", "In die Tiefen", "En las profundidades", "En las profundidades", "Dans les profondeurs", "Negli abissi", "깊숙한 곳으로", "Nas profundezas", "В храм", "深入神殿", "深入追擊", }, 
+{ "Claiming the Prize", "Die Eroberung des Schatzes", "Obtener el trofeo", "Reclamando el premio", "Obtention du trophée", "Conquistare il premio", "제독의 선물", "A conquista do prêmio", "Долгожданный трофей", "夺取宝藏", "奪取戰利品", }, 
+},
+["1252"] = {
+{ "Court of Stars", "Der Hof der Sterne", "Corte de las Estrellas", "Corte de Estrellas", "La cour des Étoiles", "Corte delle Stelle", "별의 궁정", "Pátio das Estrelas", "Квартал Звезд", "群星庭院", "眾星之廷", }, 
+},
+["1148"] = {
+{ "Demons, Demons, Everywhere...", "Dämonen, Dämonen überall...", "Demonios, demonios por todas partes...", "Demonios, demonios, por todas partes", "Des démons partout…", "Demoni, demoni ovunque...", "온누리에 악마", "Demônios, demônios por todas as partes...", "Демоны, всюду демоны...", "恶魔，到处都是恶魔...", "到處都是惡魔…", }, 
+{ "Small But Mighty", "Klein, aber oho", "Pequeño, pero matón", "Pequeño pero poderoso", "Petit, mais costaud", "Piccolo ma forte", "작은 고추가 매운 법", "Pequeno, mas potente.", "Мал, да удал", "身型虽小，力大无穷", "人小志氣高", }, 
+{ "A Feat of Strength", "Heldentat", "Una proeza de fuerza", "Una proeza de fuerza", "Un tour de force", "Una prova di forza", "엄청난 힘", "Proeza para os fortes", "Триумф грубой силы", "力量的壮举", "偉業", }, 
+{ "Hodir, Hodir, Hodir!", "Hodir, Hodir, Hodir!", "¡Hodir, Hodir, Hodir!", "¡Hodir, Hodir, Hodir!", "Hodir, Hodir, Hodir !", "Hodir, Hodir, Hodir!", "호디르, 호디르, 호디르!", "Hodir, Hodir, Hodir!", "Ходир, я иду к тебе!", "霍迪尔，霍迪尔，霍迪尔！", "霍迪爾、霍迪爾、霍迪爾！", }, 
+{ "The Clash Of Thunder", "Der Donnerschlag", "El Fragor del Trueno", "El Fragor del Trueno", "Le Fracas du tonnerre", "La Sala del Tuono", "천둥의 울림", "Estrondo do Trovão", "Раскаты Грома", "雷霆角斗场", "雷鳴之廳", }, 
+{ "A Feat of Battle", "Heldentat des Kampfes", "Una proeza de combate", "Una proeza en batalla", "Un exploit martial", "Un'impresa di guerra", "실력을 보여라", "Proeza para os senhores da guerra", "На войне как на войне", "战斗的壮举", "戰況激昂", }, 
+{ "Rescue Thorim", "Rettet Thorim", "Rescata a Thorim", "Rescata a Thorim", "Le sauvetage de Thorim", "Salvare Thorim", "토림 구출", "Resgate de Thorim", "Спасение Торима", "营救托里姆", "解救索林姆", }, 
+{ "Talk to Thorim", "Sprecht mit Thorim", "Habla con Thorim", "Habla con Thorim", "Entretien avec Thorim", "Parlare con Thorim", "토림과 대화", "Falar com Thorim", "Поговорить с Торимом", "和托里姆谈谈", "跟索林姆交談", }, 
+},
+["552"] = {
+{ "The Vortex Pinnacle", "Der Vortexgipfel", "La Cumbre del Vórtice", "La Cumbre del Vórtice", "La cime du Vortex", "Pinnacolo del Vortice", "소용돌이 누각", "Pináculo do Vórtice", "Вершина Смерча", "旋云之巅", "漩渦尖塔", }, 
+},
+["1090"] = {
+{ "Combat Training", "Kampftraining", "Instrucción de combate", "Instrucción de combate", "Entraînement au combat", "Addestramento al combattimento", "전투 훈련", "Treino de combate", "Боевые учения", "战斗训练", "戰鬥訓練", }, 
+{ "A Little Bit of Pain", "Ein wenig Schmerz", "Un poquito de dolor", "Una pequeña pizca de dolor", "Une légère douleur", "Un po' di dolore", "고통의 결실", "Uma pitada de dor", "Болезненные методы", "有一点点痛", "會有一點點痛", }, 
+{ "Holy Bolts", "Heilige Blitze", "Descargas Sagradas", "Descargas Sagradas", "Éclairs sacrés", "Atto di contrizione", "거룩한 신념", "Setas Sagradas", "Разящий Свет", "神圣飞弹", "神聖之光", }, 
+{ "In Smite of Overwhelming Obstacles", "Schmerz lass nach", "Punición infinita", "Sorteando obstáculos inmensos", "Crime et Châtiment", "Punire i cattivi", "압도적인 성스러움", "Apesar dos enormes obstáculos", "Карающая длань", "重压下的惩击", "無所不用懲擊", }, 
+{ "Putting It All Together", "Das große Ganze", "Juntar las piezas", "Todas las piezas juntas", "Mise en pratique", "Mettersi alla prova", "종합주문세트", "Fixação de conteúdo", "Сборная солянка", "综合在一起", "準備完善", }, 
+{ "Playing Mind Games", "Gedankenspiele", "Jugar a juegos mentales", "Jugando a juegos mentales", "Maux d’esprit", "Giochi mentali", "공포 조장", "Jogos Mentais", "Вопль, вселяющий ужас", "玩弄人心", "心理遊戲", }, 
+{ "A Shield From Your Enemies", "Abgeschirmt von Euren Feinden", "Un escudo contra tus enemigos", "Un escudo contra tus enemigos", "Un bouclier à toute épreuve", "Difendersi dai propri nemici", "거룩한 보호", "Proteção vinda dos inimigos", "Щит против врага", "御敌的护盾", "光盾護身", }, 
+{ "A Small Plea", "Eine kleine Bitte", "Una pequeña súplica", "Una pequeña súplica", "Une petite supplique", "Una piccola supplica", "작은 간청", "Uma pequena súplica", "Мольбу услышат небеса", "小小的恳求", "小小的祈求", }, 
+{ "A Quick Test", "Schnelltest", "Una prueba rápida", "Una prueba rápida", "Un test rapide", "Una piccola prova", "깜짝 시험", "Teste rápido", "Испытание тет-а-тет", "快速测试", "隨堂考", }, 
+{ "Twice the Challenge", "Doppelte Herausforderung", "Desafío por partida doble", "Un desafío doble", "Double défi", "Doppia sfida", "난이도 두 배", "Desafio em dose dupla", "Двойной вызов", "双倍挑战", "雙重挑戰", }, 
+{ "Defend Against the Legion Assault", "Den Angriff der Legion abwehren", "Defiéndete del asalto de la Legión", "Defiéndete contra el ataque de la Legión", "Défense contre l’assaut de la Légion", "Difesa contro la Legione", "군단의 공격 막아내기", "Defender contra o ataque da Legião", "Оборона против Легиона", "在军团的攻击下保卫飞艇", "抵擋燃燒軍團的攻擊", }, 
+{ "Assault on Broken Shore", "Angriff auf die Verheerte Küste", "Asalto a la Costa Abrupta", "Asalto a la Costa Quebrada", "L’assaut du rivage Brisé", "Assalto alla Riva Dispersa", "부서진 해변 공격", "Ataque à Costa Partida", "Штурм Расколотого берега", "突袭破碎海滩", "突襲破碎海岸", }, 
+},
+["1050"] = {
+{ "Court of Stars", "Der Hof der Sterne", "Corte de las Estrellas", "Corte de Estrellas", "Cour des Étoiles", "Corte delle Stelle", "별의 궁정", "Pátio das Estrelas", "Квартал Звезд", "群星庭院", "眾星之廷", }, 
+},
+["1220"] = {
+{ "A Helping Hand", "Eine helfende Hand", "Echar una mano", "Una mano de ayuda", "La main tendue", "Aiuto prezioso", "도움의 손길", "Mão amiga", "Рука помощи", "援护之手", "伸出援手", }, 
+{ "Operation Preparation", "Einsatzvorbereitung", "Preparación de la operación", "Preparación de la operación", "Préparatifs de l’opération", "Preparazione all'operazione", "작전 준비", "Preparativos para a operação", "Подготовка к операции", "行动准备", "行動前的準備", }, 
+{ "Imminent Launch", "Bevorstehender Start", "Lanzamiento inminente", "Lanzamiento inminente", "Mise à feu imminente", "Lancio imminente", "발사 직전", "Lançamento iminente", "Подготовка к запуску", "即将发射", "情勢緊張", }, 
+{ "Thermaplugg's End", "Thermadrahts Ende", "El fin de Termochufe", "El fin de Termochufe", "La fin de Thermojoncteur", "La fine di Termospin", "텔마플러그의 최후", "Desconectando o Termaplugue", "Смерть Термоштепселю", "瑟玛普拉格的末日", "瑟瑪普拉格的末日", }, 
+},
+["1282"] = {
+{ "Freedom", "Freiheit", "Libertad", "Libertad", "Liberté", "Libertà", "자유", "Liberdade", "Свобода", "自由", "自由", }, 
+{ "Siege Breaker", "Belagerungsbrecher", "Sicario del Asedio", "Rompeasedios", "Briseur de siège", "Demolitore d'Assedio", "공성 파괴단", "Rompe-cerco", "Прорыв осады", "突围者", "攻城毀滅者", }, 
+{ "Insertion", "Eindringen", "Inserción", "Inserción", "Infiltration", "Infiltrazione", "투입", "Inserção", "Проникновение", "潜伏", "敵後行動", }, 
+{ "Taken Down From Within", "Von innen heraus vernichtet", "Derribado desde dentro", "Destrucción desde adentro", "Sapée de l’intérieur", "Abbatterli dall'interno", "내부로부터의 공격", "Destruir de dentro", "Удар изнутри", "祸起萧墙", "從內部破壞", }, 
+{ "Commander Takedown", "Dem Kommandanten an den Kragen", "La caída del comandante", "La caída del comandante", "Capitulation du commandant", "Sconfiggere il comandante", "사령관 제거", "Comandante derrubado", "Ликвидация командира", "消灭指挥官", "擊殺指揮官", }, 
+{ "Get Out of There", "Nichts wie raus", "Fuera de ahí", "Sal de ahí", "Échappée belle", "Fuga per la vittoria", "벗어나기", "Saia daí", "Быстрей отсюда!", "离开那儿", "撤離行動", }, 
+},
+["1181"] = {
+{ "Combat Training", "Kampftraining", "Instrucción de combate", "Instrucción de combate", "Entraînement au combat", "Addestramento al combattimento", "전투 훈련", "Treino de combate", "Боевые учения", "战斗训练", "戰鬥訓練", }, 
+{ "Doing the Moonwalk", "Mondsüchtig", "Formas lunares", "A paso lunar", "Marcher sur la lune", "Luna piena", "달과 야수", "Moonwalk", "Прогулка под луной", "月球漫步", "梟獸學步", }, 
+{ "Balancing The Moon and Sun", "Gleichgewicht von Sonne und Mond", "Equilibrio entre sol y luna", "Equilibrio entre la Luna y el Sol", "L’équilibre du soleil et de la lune", "Equilibrio tra Sole e Luna", "해와 달의 조화", "Balancear a Lua e o Sol", "Сила светил", "日月平衡", "日月平衡", }, 
+{ "The Power of the Sun", "Die Macht der Sonne", "El poder del sol", "El poder del Sol", "Le pouvoir du soleil", "Il potere del Sole", "태양의 힘", "O poder do Sol", "Испепеляющее солнце", "太阳能", "日炎之力", }, 
+{ "A Surge Forward", "Im Sog der Sterne", "Una oleada estelar", "Un avance repentino", "Des astres bouillonnants", "Seguire la Cometa", "샘솟는 별빛", "Surtando", "Звездный час", "滚滚向前", "星如湧泉", }, 
+{ "Striking a Balance", "Auf einen Schlag zum Gleichgewicht", "A golpe de equilibrio", "Llegando a un acuerdo", "Atteindre l’équilibre", "Trovare un compromesso", "조화 이루기", "Em busca do equilíbrio", "Установление равновесия", "平衡之道", "平衡之道", }, 
+{ "Putting It All Together", "Das große Ganze", "Juntar las piezas", "Todas las piezas juntas", "Mise en pratique", "Mettersi alla prova", "종합주문세트", "Fixação de conteúdo", "Сборная солянка", "综合在一起", "準備完善", }, 
+{ "Mending Your Wounds", "Wunden heilen", "Sanar tus heridas", "Curando las heridas", "Panser ses blessures", "Curare le ferite", "상처 보살피기", "Curar as feridas", "Исцеление ран", "治疗你的伤口", "治療你的傷口", }, 
+{ "Grasping At Feet", "Fußfesseln", "Trampas enredadoras", "Agarre con los pies", "Par les pieds", "Un abbraccio stringente", "발목 잡기", "Agarrando-se aos pés", "Цепкие корни", "裹足不前", "糾纏不清", }, 
+{ "A Quick Test", "Schnelltest", "Una prueba rápida", "Una prueba rápida", "Un test rapide", "Una piccola prova", "깜짝 시험", "Teste rápido", "Испытание тет-а-тет", "快速测试", "隨堂考", }, 
+{ "Twice the Challenge", "Doppelte Herausforderung", "Desafío por partida doble", "Un desafío doble", "Double défi", "Doppia sfida", "난이도 두 배", "Desafio em dose dupla", "Двойной вызов", "双倍挑战", "雙重挑戰", }, 
+{ "Defend Against the Legion Assault", "Den Angriff der Legion abwehren", "Defiéndete del asalto de la Legión", "Defiéndete contra el ataque de la Legión", "Défense contre l’assaut de la Légion", "Difesa contro la Legione", "군단의 공격 막아내기", "Defender contra o ataque da Legião", "Оборона против Легиона", "在军团的攻击下保卫飞艇", "抵擋燃燒軍團的攻擊", }, 
+{ "Assault on Broken Shore", "Angriff auf die Verheerte Küste", "Asalto a la Costa Abrupta", "Asalto a la Costa Quebrada", "L’assaut du rivage Brisé", "Assalto alla Riva Dispersa", "부서진 해변 공격", "Ataque à Costa Partida", "Штурм Расколотого берега", "突袭破碎海滩", "突襲破碎海岸", }, 
+},
+["664"] = {
+{ "Maraudon", "Maraudon", "Maraudon", "Maraudon", "Maraudon", "Maraudon", "마라우돈", "Maraudon", "Мародон", "玛拉顿", "瑪拉頓", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["1275"] = {
+{ "Choose Your Allies", "Wählt Eure Verbündeten", "Elegir a tus aliados", "Elige a tus aliados", "Choisir ses alliés", "Scegliere gli alleati", "동료 선택", "Escolha seus aliados", "Выбор союзников", "选择盟友", "選擇同伴", }, 
+{ "Search the City", "Durchsuchung der Stadt", "Registrar la ciudad", "Registra la ciudad", "Fouiller la ville", "Ricerca in città", "도시 수색", "Vasculhar a cidade", "Прочесывание города", "全城大搜", "搜索城市", }, 
+{ "Return to Grayson", "Rückkehr zu Grayson", "Volver con Grayson", "Regresa con Grisillo", "Retourner voir Grayson", "Grayson", "다시 그레이슨에게로", "Falar novamente com Grayson", "Возвращение к Грейсону", "向格雷森复命", "回去找格雷森", }, 
+{ "Imbue the Barding", "Erfüllt das Geschirr mit heiliger Kraft", "Imbuir la barda", "Infunde la gualdrapa", "Imprégnation du caparaçon", "Infondere la bardatura", "마갑에 신성한 힘 주입", "Imbuir a barda", "Усиление барда", "为骑甲灌魔", "為坐騎護具灌注神聖能量", }, 
+{ "Ride to Rivendare's Crypt", "Ritt zu Totenschwurs Gruft", "Viaje a la cripta de Osahendido", "Cabalga hacia la cripta de Osahendido", "Voyage vers la crypte de Vaillefendre", "La cripta di Fieramorte", "리븐데어의 지하 묘지", "Viagem à cripta de Rivendare", "Склеп Ривендера", "前往瑞文戴尔的墓穴", "前往瑞文戴爾的墓穴", }, 
+{ "Defeat Raemien", "Besiegt Raemien", "Derrotar a Raemien", "Derrota a Raemien", "Terrasser Raëmien", "Sconfiggere Raemien", "래미엔 처치", "Derrotar Raemien", "Победа над Рэмиеном", "击败雷曼", "擊敗瑞密安", }, 
+{ "Speak With Grayson", "Sprecht mit Grayson", "Habla con Grayson.", "Habla con Grisillo", "Parler à Grayson", "Parla con Grayson", "그레이슨과 대화", "Falar com Grayson", "Возвращение в часовню", "与格雷森交谈", "跟格雷森交談", }, 
+},
+["733"] = {
+{ "Invasion!", "Invasion!", "¡Invasión!", "¡Invasión!", "Alerte aux envahisseurs !", "Invasione!", "침략!", "Invasão!", "Нападение!", "入侵！", "入侵！", }, 
+{ "Assault", "Sturmangriff", "Asalto", "Asalto", "Assaut", "Assalto", "습격", "Ataque", "Нападение", "突袭", "襲擊", }, 
+{ "The Holdout", "Durchhaltevermögen", "La resistencia", "La resistencia", "Le baroud", "Resistenza", "항전", "A Resistência", "Продержаться подольше", "坚持到底", "堅持到底", }, 
+{ "Cleanup", "Aufräumkommando", "Limpieza", "Limpieza", "Nettoyage", "Ripulitura", "소탕", "Limpeza", "Зачистка", "摧枯拉朽", "收拾殘局", }, 
+{ "The Calm", "Ruhe nach dem Sturm", "La calma", "La calma", "Le calme", "La calma", "정적", "A Calma", "Затишье", "风平浪静", "歇息備戰", }, 
+{ "Fire from the Skies", "Feuer vom Himmel", "Fuego por doquier", "Fuego de los cielos", "Le feu du ciel", "Fuoco dai cieli", "불벼락", "Fogo dos Céus", "Огонь с небес", "天降火雨", "天降大火", }, 
+{ "Bronze", "Bronze", "Bronce", "Bronce", "Bronze", "Bronzo", "동메달", "Bronze", "Бронза", "青铜级", "青銅", }, 
+{ "Silver", "Silber", "Plata", "Plata", "Argent", "Argento", "은메달", "Prata", "Серебро", "白银级", "白銀", }, 
+{ "Gold", "Gold", "Oro", "Oro", "Or", "Oro", "금메달", "Ouro", "Золото", "黄金级", "黃金", }, 
+{ "Platinum", "Platin", "Platino", "Platino", "Platine", "Platino", "백금메달", "Platina", "Платина", "白金", "白金", }, 
+},
+["254"] = {
+{ "Test Stage 0", "Testphase 0", "Prueba de fase 0", "Prueba de fase 0", "Test Stage 0", "Prova fase 0", "시험 단계 0", "Estágio de teste 0", "Тестовый этап 0", "Test Stage 0", "測試階段0", }, 
+{ "Step 1", "Schritt 1", "Paso 1", "Step 1", "Étape 1", "Fase 1", "1단계", "Passo 1", "1 этап", "第1阶段", "步驟1", }, 
+{ "Step 2", "Schritt 2", "Paso 2", "Step 2", "Étape 2", "Fase 2", "2단계", "Passo 2", "2 этап", "第2阶段", "步驟2", }, 
+{ "Step 3", "Schritt 3", "Paso 3", "Step 3", "Étape 3", "Fase 3", "3단계", "Passo 3", "3 этап", "第3阶段", "步驟3", }, 
+{ "Step 4", "Schritt 4", "Paso 4", "Step 4", "Étape 4", "Fase 4", "4단계", "Passo 4", "4 этап", "第4阶段", "步驟4", }, 
+{ "Step 5", "Schritt 5", "Paso 5", "Step 5", "Étape 5", "Fase 5", "5단계", "Passo 5", "5 этап", "第5阶段", "步驟5", }, 
+},
+["662"] = {
+{ "Foulspore Caverns", "Faulsporenhöhlen", "Grutas de la Espora Fétida", "Grutas de la Espora Fétida", "Caverne Vilespore", "Caverna Spora Funesta", "썩은포자 동굴", "Caverna Esporelama", "Зловонная пещера", "毒菇洞穴", "毒菇洞穴", }, 
+},
+["668"] = {
+{ "Dire Maul", "Düsterbruch", "La Masacre", "La Masacre", "Hache-Tripes", "Maglio Infausto", "혈투의 전장", "Martelo do Gládio Cruel", "Забытый Город", "厄运之槌", "厄運之槌", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["1169"] = {
+{ "Eye of Azshara", "Das Auge Azsharas", "Ojo de Azshara", "Ojo de Azshara", "Œil d’Azshara", "Occhio di Azshara", "아즈샤라의 눈", "Olho de Azshara", "Око Азшары", "艾萨拉之眼", "艾薩拉之眼", }, 
+},
+["555"] = {
+{ "Lost City of the Tol'vir", "Die Verlorene Stadt der Tol'vir", "Ciudad Perdida de los Tol'vir", "Ciudad Perdida de los Tol'vir", "Cité perdue des Tol’vir", "Città Perduta dei Tol'vir", "톨비르의 잃어버린 도시", "Cidade Perdida dos Tol'vir", "Затерянный город Тол'вир", "托维尔失落之城", "托維爾的失落之城", }, 
+},
+["785"] = {
+{ "Felfire in the Sky #1", "", "", "Fuego vil en el cielo #1", "", "Vilfuoco nel cielo #1", "하늘 속 지옥불 #1", "Fogovil no céu #1", "", "天降邪火#1", "空降魔火#1", }, 
+{ "You Face Jaraxxus", "Ihr tretet Jaraxxus entgegen", "Te enfrentas a Jaraxxus", "Enfrentas a Jaraxxus", "Devant vous se tient Jaraxxus", "Affrontate Jaraxxus!", "자락서스 대면", "Você encara Jaraxxus", "Перед вами Джараксус", "挑战加拉克苏斯", "面對賈拉克瑟斯", }, 
+},
+["1026"] = {
+{ "The Downward Spiral", "Die Abwärtsspirale", "La espiral descendente", "La espiral descendente", "Spirale descendante", "La spirale discendente", "비틀린 심연으로", "A espiral descendente", "Вниз по винтовой лестнице", "逆塔", "往下的迴旋樓梯", }, 
+{ "Grasp of the Damned", "Umklammerung der Verdammten", "En manos de los malditos", "El alcance de los malditos", "L’emprise des damnés", "Presa dei dannati", "저주받은 자의 손아귀", "Garras dos condenados", "Хватка проклятых", "亡者的爪缚", "詛咒之握", }, 
+{ "Removal Protocols", "Entfernungsprotokolle", "Protocolos de eliminación", "Protocolos de eliminación", "Protocoles d’élimination", "Protocolli di rimozione", "제거 프로토콜", "Protocolos de remoção", "Протоколы ликвидации", "清除协议", "移除程序", }, 
+{ "The World-Ender", "Der Weltenender", "El exterminador de mundos", "El fin del mundo", "Le destructeur de monde", "Il Devastatore di Mondi", "세상의 파괴자", "A Destruidora de Mundos", "Губитель миров", "灭世者", "世界終結者", }, 
+{ "The Rider's Prize", "Der Preis des Reiters", "El trofeo del jinete", "El premio del jinete", "Le trophée du cavalier", "Il premio dei Cavalieri", "기수의 유물", "O prêmio do cavalgante", "Трофей всадника", "黑暗骑士的财宝", "黑騎兵的寶物", }, 
+{ "The Fate of the Son", "Das Schicksal des Sohnes", "El destino del hijo", "El destino del hijo", "Le destin du fils", "Il destino del figlio", "아들의 운명", "O destino do filho", "Судьба сына", "父子的命运", "人子的命運", }, 
+{ "Apocalypse", "Apokalypse", "Apocalipsis", "Apocalipsis", "Apocalypse", "Apocalisse", "대재앙", "Apocalipse", "Апокалипсис", "天启", "天啟", }, 
+},
+["1078"] = {
+{ "The Unseen Blade", "Die ungesehene Klinge", "La hoja oculta", "La espada oculta", "La lame invisible", "La lama invisibile", "보이지 않는 검", "A lâmina oculta", "Незримый клинок", "无形之刃", "無形之刃", }, 
+{ "The Key", "Der Schlüssel", "La llave", "La llave", "La clé", "Chiave Infernale", "열쇠", "A chave", "Ключ", "钥匙", "關鍵鑰匙", }, 
+{ "Escape Artist", "Entfesselungskünstler", "Artista del escape", "Artista del escape", "Maître de l’évasion", "Artista della fuga", "탈출의 명수", "Artista da fuga", "Мастер побега", "逃命专家", "逃命專家", }, 
+{ "The Eyes of the Deceiver", "Die Augen des Betrügers", "Los ojos del Impostor", "Los Ojos del Falsario", "Les yeux du Trompeur", "Gli occhi dell'ingannatore", "기만자의 눈", "Os olhos do enganador", "Глаза Искусителя", "欺诈者之眼", "欺詐者的雙眼", }, 
+{ "Ascension", "Aufstieg", "Ascensión", "Ascensión", "Ascension", "Ascensione", "등반", "Ascensão", "Восхождение", "上升", "晉升", }, 
+{ "A Duel of Fate", "Ein Duell des Schicksals", "Un duelo del destino", "Un duelo del destino", "Le duel du sort", "Un duello del destino", "운명의 대결", "Um duelo do destino", "Судьбоносный поединок", "宿命的决斗", "命運的決鬥", }, 
+{ "Master of Shadows", "Meister der Schatten", "Maestro de las Sombras", "Maestro de las Sombras", "Maître des Ombres", "Maestro delle ombre", "어둠의 대가", "Mestre das sombras", "Мастер теней", "暗影大师", "暗影大師", }, 
+},
+["652"] = {
+{ "Scarlet Monastery", "Das Scharlachrote Kloster", "Monasterio Escarlata", "Monasterio Escarlata", "Monastère Écarlate", "Monastero Scarlatto", "붉은십자군 수도원", "Monastério Escarlate", "Монастырь Алого ордена", "血色修道院", "血色修道院", }, 
+},
+["430"] = {
+{ "The Everbloom", "Der Immergrüne Flor", "El Vergel Eterno", "El Sempibrote", "La Flore éternelle", "Verdeterno", "상록숲", "Floretérnia", "Вечное Цветение", "永茂林地", "永茂林", }, 
+},
+["1175"] = {
+{ "Maw of Souls", "Der Seelenschlund", "Fauce de Almas", "Fauces de almas", "Gueule des âmes", "Fauci delle Anime", "영혼의 아귀", "Gorja das Almas", "Утроба душ", "噬魂之喉", "靈魂之喉", }, 
+},
+["630"] = {
+{ "The Underbog", "Der Tiefensumpf", "La Sotiénaga", "La Sotiénaga", "La Basse-tourbière", "Torbiera Sotterranea", "지하수렁", "O Brejo Oculto", "Нижетопь", "幽暗沼泽", "深幽泥沼", }, 
+},
+["1236"] = {
+{ "Knock Knock...", "Klopf, klopf...", "Toc toc...", "Toc, toc...", "Toc, toc…", "Toc toc...", "똑똑...", "Toc, toc...", "Тук-тук...", "笃笃笃……", "敲敲門…", }, 
+{ "Detoxification", "Entgiftung", "Desintoxicación", "Depuración", "Détoxification", "Disintossicazione", "해독", "Desintoxicação", "Детоксикация", "解毒", "解毒", }, 
+{ "Maniacal Laughter...", "Irres Gelächter...", "Risa maníaca...", "Risa maniática...", "Rire dément…", "Muahahahah", "광기의 웃음...", "Risada maníaca...", "Безумный смех", "疯狂的笑声……", "瘋狂的笑聲…", }, 
+{ "Chug It!", "Prost!", "¡Traga!", "¡De un trago!", "Cul sec !", "Alla goccia", "마셔!", "Vira!", "Пей до дна!", "干了啦！", "灌下去！", }, 
+{ "Demon Overload", "Dämonenüberladung", "Sobrecarga de demonios", "Sobrecarga demoníaca", "Surcharge de démons", "Sovraccarico demoniaco", "악마 과다", "Sobrecarga demoníaca", "Слишком много демонов", "恶魔过载", "太多惡魔", }, 
+{ "Brewmasters Attack!", "Die Braumeisterin", "¡Maestros cerveceros al ataque!", "¡El ataque de los maestros cerveceros!", "Maîtres brasseurs, à l’attaque !", "L'attacco dei Mastri Birrai", "양조사 나가신다!", "Ataque dos mestres cervejeiros!", "Хмелевары, вперед!", "酒仙出击！", "釀酒大師進攻！", }, 
+},
+["1235"] = {
+{ "Deviate Dangers", "Mutierte Gefahren", "Evita el peligro", "Peligros descarriados", "Dangers déviants", "Pericoli degeneri", "돌연변이 위험", "Perigos aberrantes", "Невиданная угроза", "变异危机", "危險變異怪", }, 
+{ "Son of Skum", "Sohn des Skum", "Hijo de Skum", "Hijo de Skum", "Fils de Skum", "Figlio di Skum", "스컴의 자손", "Filho de Skória", "Потомок Шкама", "斯卡姆之子", "斯卡姆之子", }, 
+{ "Legacy of Fangs", "Vermächtnis der Fangzähne", "Legado de colmillos", "Legado de los colmillos", "L’héritage des crocs", "Eredità delle zanne", "송곳니의 유산", "Legado das presas", "Ядовитое наследие", "毒牙的遗产", "尖牙遺毒", }, 
+{ "Call of the Serpent", "Ruf der Schlange", "La llamada de la serpiente", "Llamado de la serpiente", "L’appel du serpent", "Richiamo del serpente", "독사의 부름", "Chamado de Serpentis", "Зов змеи", "毒蛇的召唤", "毒蛇之喚", }, 
+{ "Ectoplasmic Growth", "Wachsendes Ektoplasma", "Crecimiento ectoplásmico", "Crecimiento ectoplásmico", "Expansion ectoplasmique", "Rigenerazione ectoplasmatica", "성장 세포", "Crescimento ectoplásmico", "Рост эктоплазмы", "细胞繁殖", "持續生長的軟漿怪", }, 
+{ "Confront Shadowy Figure", "Schattenhafte Gestalt konfrontieren", "Enfrentarse a la figura enigmática", "Enfrenta a la figura enigmática", "Affronter la silhouette mystérieuse", "La Figura Ombrosa", "정체불명의 인물", "Confrontar o vulto sombrio", "Бой с таинственным некромантом", "战胜阴暗的人影", "面對幽暗人影", }, 
+{ "Everliving", "Ewiges Leben", "El Eterno", "El Eterno", "Immortelle", "Sempreverde", "영생", "Sempre-vivo", "Вечноживущий враг", "永生者", "永生", }, 
+},
+["683"] = {
+{ "Grimrail Depot", "Grimmgleisdepot", "Terminal Malavía", "Depósito Riel siniestro", "Dépôt de Tristerail", "Treno Frecciacupa", "파멸철로 정비소", "Central do Carrilcruel", "Депо Мрачных Путей", "恐轨车站", "恐軌車站", }, 
+{ "The Grimrail", "Der Grimmzug", "Malavía", "El Riel siniestro", "Le Tristerail", "Treno Frecciacupa", "파멸철로", "O Carrilcruel", "Мрачный Путь", "恐轨号", "恐軌列車", }, 
+},
+["1219"] = {
+{ "step 1", "Schritt 1", "Paso 1", "paso 1", "Étape 1", "Fase 1", "1단계", "Estágio 1", "Шаг 1", "step 1", "第1步", }, 
+{ "step 2", "Schritt 2", "Paso 2", "paso 2", "Étape 2", "Fase 2", "2단계", "Estágio 2", "Шаг 2", "step 2", "第2步", }, 
+},
+["643"] = {
+{ "The Deadmines", "Die Todesminen", "Las Minas de la Muerte", "Las Minas de la Muerte", "Les Mortemines", "Miniere della Morte", "죽음의 폐광", "Minas Mortas", "Мертвые копи", "死亡矿井", "死亡礦坑", }, 
+},
+["1202"] = {
+{ "The New Plan", "Neuer Plan", "El nuevo plan", "El nuevo plan", "Plan B", "Un nuovo piano", "새로운 계획", "Um novo plano", "Новый план", "新计划", "新計畫", }, 
+{ "Magic Bars the Way", "Magie versperrt den Weg", "La magia bloquea el camino", "La magia bloquea el camino", "Barrière magique", "La magia sbarra la strada", "마법이 길을 막는다", "Magia no meio do caminho", "Магия преграждает путь", "魔法拦路", "魔法擋路", }, 
+{ "Breaking the Barrier", "Die Barriere durchbrechen", "Rompiendo la barrera", "Rompiendo la barrera", "La poche dimensionnelle", "Una barriera da spezzare", "방벽 파괴", "Rompendo a barreira", "Убрать барьер", "突破屏障", "打破屏障", }, 
+{ "The Fall of Dalion", "Dalion fällt", "La caída de Dalion", "La caída de Dalion", "La chute de Dalion", "La caduta di Dalion", "달리온의 몰락", "A queda de Dalion", "Падение Далиона", "达里昂之陨", "達利昂之死", }, 
+{ "Breaking Through", "Durchbruch", "Abrirse paso", "Abriéndose paso", "L'intrusion", "Il medium", "돌파", "Abrindo caminho", "Прорыв", "过关斩将", "突破", }, 
+{ "Finally, Andaris", "Endlich, Andaris.", "Andaris, por fin", "Por fin, Andaris.", "Enfin, Andaris", "Alla fine, Andaris", "마침내, 안다리스", "Enfim, Andaris", "И, наконец, Андарис", "轮到你了，安达丽斯", "終於，安妲麗絲", }, 
+{ "Death to Andaris", "Andaris muss sterben", "Muerte a Andaris", "Muerte a Andaris", "Mort à Andaris", "Morte ad Andaris", "안다리스에게 죽음을", "Morte a Andaris", "Смерть Андарис!", "安达丽斯之死", "殺死安妲麗絲", }, 
+{ "The Nighthold Beckons", "Die Nachtfestung ruft", "El Bastión Nocturno llama", "El llamado de la Fortaleza Nocturna", "L’appel du palais Sacrenuit", "La Rocca della Notte chiama", "밤의 요새가 부른다", "O chamado do Baluarte da Noite", "Цитадель зовет", "暗夜要塞在召唤", "暗夜堡的呼喚", }, 
+},
+["1310"] = {
+{ "Into the Rabbit Hole", "In den Kaninchenbau", "Dentro de la madriguera", "En la madriguera", "Dans le terrier du lapin", "Nella tana del coniglio", "토끼 굴 속으로", "Na toca do coelho", "В кроличью нору", "深入兔子洞", "進入兔子洞", }, 
+{ "Lupine Fiasco", "Knurrende Katastrophe", "Fiasco lupino", "Lupine Fiasco", "Gros méchant loup", "Fiasco lupesco", "늑대 소동", "Quem tem medo do lobo mau?", "Волчий голод", "狼的惨败", "惡狼伏誅", }, 
+{ "Now For My Next Trick", "Jetzt zu meinem nächsten Trick", "Y como siguiente número...", "Para mi siguiente truco...", "Et maintenant, pour mon prochain tour !", "E ora il prossimo numero", "자, 다음 마술은", "E para o meu próximo truque", "А теперь – следующий фокус...", "下一个戏法", "看我的下一個戲法", }, 
+},
+["943"] = {
+{ "The Council of Masters", "Der Rat der Meister", "El consejo de los maestros", "El Consejo de Maestros", "Le conseil des maîtres", "Il concilio dei maestri", "사부들의 의회", "O Conselho dos mestres", "Совет мастеров", "宗师大会", "大師議會", }, 
+{ "The Cry of the Crane", "Der Schrei des Kranichs", "El grito de la grulla", "El grito de la grulla", "La complainte de la grue", "Il pianto della gru", "학의 울음", "O grito da garça", "Крик журавля", "神鹤的悲鸣", "鶴之悲鳴", }, 
+{ "Journey to the East", "Reise in den Osten", "Viaje al este", "Viaje al este", "Voyage vers l’est", "Viaggio verso est", "동쪽으로의 여정", "Jornada ao oriente", "На запад!", "一路向东", "東遊記", }, 
+{ "Tangle with a Tiger", "Erweckt den Tiger", "Luchar con un tigre", "Enredo con un tigre", "La férocité du tigre", "In coppia con la tigre", "호랑이 콧털을 건드리면...", "Enfrente o tigre", "Не шутите с тигром", "与虎谋皮", "與虎相鬥", }, 
+{ "Precious Cargo", "Wertvolle Fracht", "Un cargamento preciado", "Un cargamento preciado", "Une cargaison précieuse", "Prezioso carico", "소중한 동행", "Carga valiosa", "Драгоценный груз", "珍贵的货物", "珍愛之寶", }, 
+{ "Mastering the Odds", "Gegen jede Chance", "Vencer a las probabilidades", "Maestro de las probabilidades", "Contre vents et marées", "Dominare il fato", "있어서는 안 될 일", "Aumentar as chances", "Воспользуйтесь шансом", "克服万难", "克服逆境", }, 
+{ "Portal Problems", "Portalprobleme", "Problemas en el portal", "Problemas en el portal", "Problèmes de portail", "Problemi di portali", "골치 아픈 차원문", "Portal problema", "Проблемы с порталом", "传送问题", "惱人的傳送門", }, 
+},
+["1204"] = {
+{ "The Confrontation", "Die Konfrontation", "El enfrentamiento", "La confrontación", "L’affrontement", "Il confronto", "대면", "O confronto", "Противостояние", "决战", "決戰", }, 
+{ "Gaining Power", "Machtgewinn", "Acumulación de poder", "Más poder", "Pouvoir grandissant", "Acquistare potenza", "커지는 힘", "De olho no poder", "Обретение силы", "获取力量", "獲得力量", }, 
+{ "The Shadow Within", "Der innere Schatten", "La sombra interior", "La sombra interna", "L’ombre intérieure", "L'ombra interiore", "내부의 어둠", "Sombras interiores", "Тьма внутри", "心中阴影", "內在的黑暗", }, 
+},
+["1178"] = {
+{ "Court of Stars", "Der Hof der Sterne", "Corte de las Estrellas", "Corte de Estrellas", "Cour des Étoiles", "Corte delle Stelle", "별의 궁정", "Pátio das Estrelas", "Квартал Звезд", "群星庭院", "眾星之廷", }, 
+},
+["1137"] = {
+{ "Crisis in the Temple", "Krise im Tempel", "Crisis en el templo", "Crisis en el templo", "Crise au temple", "Crisi al tempio", "사원의 위기", "Crise no templo", "Обстановка в храме", "寺庙中的危机", "寺廟的危機", }, 
+{ "Checking Out", "Auschecken", "Echar un ojo", "Revisión general", "Scribes en détresse", "Biglietto di ritorno", "구출 작전", "De saída", "Прочь с насиженного места", "查房", "我只是來借書", }, 
+{ "Hungering for Revenge", "Rachedurst", "Con ganas de venganza", "Sed de venganza", "Soif de vengeance", "Sete di vendetta", "복수는 나의 것", "Sede de vingança", "Жажда возмездия", "渴望复仇", "渴望報仇", }, 
+{ "Down But Not Out", "Erloschen, aber nicht erledigt", "Derribado, pero no acabado", "Abatido, pero jamás rendido", "À terre, mais en vie", "Non è ancora finita", "희망을 잃지 마세요", "Caído, mas acordado", "Помощь выжившим", "虽然失败，依旧坚持", "被打趴了但還能站起來", }, 
+{ "Death from Above", "Tod von oben", "La muerte cae desde el cielo", "La muerte cae desde el cielo", "La mort venue d’en haut", "Morte dall'Alto", "하늘의 저승사자", "A Morte Vem de Cima", "Смерть с небес", "死从天降", "死從天降", }, 
+{ "The Battle of the Serpent", "Der Kampf der Schlange", "La batalla del dragón", "La batalla de la dragona", "La bataille du Serpent", "La battaglia della serpe", "옥룡의 전투", "A batalha da serpente", "Битва Змеи", "神龙之战", "玉龍之戰", }, 
+{ "On Fel Wings", "Auf Teufelsschwingen", "Sobre alas viles", "Sobre alas viles", "Sur des ailes gangrenées", "Su ali vili", "지옥 날개를 타고", "Nas asas vis", "На крыльях Скверны", "魔翼翱翔", "魔化之翼", }, 
+{ "Fu Zan, the Wanderer's Companion", "Fu Zan, Gefährte des Wanderers", "Fu Zan, el Compañero del Errante", "Fu Zan, el Compañero del Vagabundo", "Fu Zan, compagnon de l’explorateur", "Fu Zan, Compagno del Viandante", "푸 잔 - 방랑자의 친구", "Fu Zan, Companheiro do Andarilho", "Фу Цань, Спутник Странников", "福枬，云游者之友", "福山之杖，漫行者之伴", }, 
+{ "The Wanderer Awakens", "Der Wanderer erwacht", "El errante despierta", "El vagabundo despierta", "L’explorateur s’éveille", "Il risveglio del viandante", "깨어난 방랑자", "O despertar do errante", "Дух странствий", "云游者觉醒", "漫行者甦醒", }, 
+},
+["48"] = {
+{ "Gate of the Setting Sun", "Tor der Untergehenden Sonne", "Puerta del Sol Poniente", "Puerta del Sol Poniente", "Porte du Soleil couchant", "Porta del Sole Calante", "석양문", "Portal do Sol Poente", "Врата Заходящего Солнца", "残阳关", "落陽關", }, 
+},
+["622"] = {
+{ "Sethekk Halls", "Sethekkhallen", "Salas Sethekk", "Salas Sethekk", "Les salles des Sethekk", "Sale dei Sethekk", "세데크 전당", "Salões dos Sethekk", "Сетеккские залы", "塞泰克大厅", "塞司克大廳", }, 
+},
+["1173"] = {
+{ "Vault of the Wardens", "Das Verlies der Wächterinnen", "Cámara de las Celadoras", "Bóveda de las Celadoras", "Caveau des Gardiennes", "Segrete delle Custodi", "감시관의 금고", "Câmara das Guardiãs", "Казематы Стражей", "守望者地窟", "看守者鐵獄", }, 
+},
+["1025"] = {
+{ "Kill Murlocs", "Tötet Murlocs", "Mata múrlocs", "Mata múrlocs", "Élimination des murlocs", "Uccidere i Murloc", "멀록 처치", "Matar Murlocs.", "Смерть мурлокам", "消灭鱼人", "殺死魚人", }, 
+{ "Fishing", "Angeln", "Pesca", "Pesca", "Pêche", "Pesca", "낚시", "Pesca", "Рыбная ловля", "钓鱼", "釣魚", }, 
+{ "Delivery", "Zustellung", "Entrega", "Entrega", "Livraison", "Consegna", "배달", "Entrega", "Доставка", "送达", "送達", }, 
+{ "What's below?", "Was ist da unten?", "¿Qué hay ahí abajo?", "¿Qué hay debajo?", "Qu’y a-t-il là-dessous ?", "Misteri del profondo", "범인은 누구?", "O que tem lá embaixo?", "Что прячется в глубинах", "下面是什么？", "下面有什麼？", }, 
+{ "Mglrrp", "Mglrrp", "Mglrrp", "Mglrrp", "Mglrrp", "Mglrrp", "아옳옲", "Mglrrp", "Мглррп", "墨勒普", "莫咕哺", }, 
+},
+["322"] = {
+{ "Kill Zem, Kill Zem All", "Tötet sie! Tötet sie alle!", "Mátalos a todos, todos, todos", "Matadlos, matadlos a todos", "Fous devez les tuer tous", "Uccidili! Uccidili tutti!", "모두 없애라", "Mata, mata todo mundo", "Убей их, убей их всех", "杀死他们，不留活口！", "全部殺光", }, 
+{ "Step 2", "Schritt 2", "Paso 2", "Step 2", "Étape 2", "Fase 2", "2단계", "Passo 2", "2 этап", "第2阶段", "步驟2", }, 
+{ "Step 3", "Schritt 3", "Paso 3", "Step 3", "Étape 3", "Fase 3", "3단계", "Passo 3", "3 этап", "第3阶段", "步驟3", }, 
+},
+["1122"] = {
+{ "Preparations", "Vorbereitungen", "Preparativos", "Preparativos", "Les préparatifs", "Preparativi", "준비", "Os preparativos", "Приготовления", "准备就绪", "做好準備", }, 
+{ "Placing the Wards", "Die Zauberschutze platzieren", "Colocación de resguardos", "Colocando los resguardos", "Installation des protections", "Posizionare le protezioni", "수호물 설치", "Posicionar proteções", "Установка оберегов", "设置结界", "放置結界", }, 
+{ "The Altar of End Times", "Der Altar der Endzeit", "El Altar del Fin de los Tiempos", "El Altar del fin de los días", "L’autel de la Fin des temps", "L'Altare della Fine dei Tempi", "종말의 제단", "O Altar do Fim dos Tempos", "Алтарь Конца Времен", "末世祭坛", "終焉祭壇", }, 
+{ "The Great Ritual", "Das große Ritual", "El gran ritual", "El gran ritual", "Le grand rituel", "Il grande rituale", "웅장한 의식", "O grande ritual", "Великий ритуал", "大型仪式", "偉大儀式", }, 
+{ "Showdown in the Realm of Madness", "Kräftemessen im Reich des Wahnsinns", "Enfrentamiento en el reino de la locura", "Enfrentamiento en el reino de la Locura", "Affrontement dans le royaume de la folie", "Scontro finale nel Reame del Cacciatore di Maghi", "광기의 세계에서의 사투", "Confronto final nos domínios da loucura", "Битва в царстве Безумия", "决战疯狂世界", "瘋狂之境的對決", }, 
+{ "Ebonchill", "Schwarzfrost", "Ébano Glacial", "Frío del ébano", "Frissébène", "Gelonero", "칠흑한기", "Ébano Gélido", "Полярная Ночь", "黑檀之寒", "黯凜", }, 
+},
+["613"] = {
+{ "The Botanica", "Die Botanika", "El Invernáculo", "El Invernáculo", "La Botanica", "Botanica", "신록의 정원", "Jardim Botânico", "Ботаника", "生态船", "波塔尼卡", }, 
+},
+["1170"] = {
+{ "His Duplicity is Hardly Surprising", "Seine Doppelzüngigkeit ist keine Überraschung", "Su falsedad no sorprende", "Su duplicidad no es muy sorprendente.", "Une duplicité guère surprenante", "La sua doppiezza non mi sorprende", "놀랍지도 않은 이중성", "Sua duplicidade não surpresa", "Его истинное лицо", "他的两面三刀并不会让人感到意外", "意料之中的背叛", }, 
+{ "You Are Not Prepared!", "Ihr seid nicht vorbereitet!", "¡No estás preparado!", "¡No están preparados!", "Vous n’êtes pas prêts !", "Voi non siete pronti!", "너흰 아직 준비가 안 됐다!", "Você não está preparado!", "Ты не готов!", "你们这是自寻死路！", "你們還沒準備好！", }, 
+{ "To The Skies", "In die Lüfte", "Al cielo", "Hacia los cielos", "En route vers les cieux", "Verso il Cielo!", "공중으로", "Para os céus", "В небо!", "天空召唤", "從天而降", }, 
+{ "The Final Countdown", "Der letzte Countdown", "La última cuenta atrás", "La última cuenta regresiva", "Le compte à rebours final", "Conto alla rovescia", "최후의 순간", "Contagem regressiva final", "Обратный отсчет", "最后的倒计时", "最後倒數", }, 
+{ "The Demon Within", "Der innere Dämon", "El demonio interior", "El demonio interno", "Le démon intérieur", "Il demone interiore", "악마가 깃든 자", "O demônio interior", "Внутренний демон", "心魔", "內在的惡魔", }, 
+{ "The Huntress", "Die Jägerin", "La Cazadora", "La cazadora", "La chasseresse", "La cacciatrice", "여사냥꾼", "A caçadora", "Охотница", "女猎手", "女獵人", }, 
+},
+["1138"] = {
+{ "The Prophet and the Butcher", "Der Prophet und der Schlächter", "El profeta y el carnicero", "El profeta y el carnicero", "Le prophète et le Boucher", "Il profeta e il macellaio", "예언자와 도살자", "O profeta e o açougueiro", "Пророк и Палач", "先知与屠夫", "預言者與屠夫", }, 
+{ "In Defense of the Exodar", "Verteidigung der Exodar", "En defensa de El Exodar", "En defensa del Exodar", "La défense de l’Exodar", "In difesa della Exodar", "엑소다르 방어", "Em defesa da Exodar", "Оборона Экзодара", "保卫埃索达", "防衛艾克索達", }, 
+{ "Return to the Prophet", "Kehrt zum Propheten zurück.", "Vuelve con el profeta", "Regresa con el profeta", "Retourner voir le prophète", "Ritorno dal profeta", "예언자에게 돌아가기", "Fale novamente com o Profeta", "Возвращение к пророку", "回去找到先知", "回去找預言者", }, 
+{ "The Light's Heart", "Das Herz des Lichts", "El Corazón de la Luz", "El corazón de la Luz", "Le Cœur de la Lumière", "Il Cuore della Luce", "빛의 심장", "O Coração da Luz", "Сердце Света", "圣光之心", "聖光之心", }, 
+{ "A Long Way Down...", "Ein langer Weg nach unten...", "Un largo descenso...", "Un largo camino de descenso...", "Une longue descente…", "Una lunga caduta...", "먼 길", "Uma bela queda...", "Долгий путь вниз", "下方是条漫长的路……", "往下的漫漫長路…", }, 
+{ "Revelations...", "Offenbarungen...", "Revelaciones...", "Revelaciones...", "Révélations…", "Rivelazioni", "폭로...", "Revelações...", "Откровения", "启示录……", "啟示…", }, 
+},
+["1299"] = {
+{ "Securing Thunder Totem", "Donnertotem sichern", "Asegurar Tótem del Trueno", "Asegura Tótem del Trueno", "Sécuriser Totem-du-Tonnerre", "Proteggere Totem del Fulmine", "천둥 토템 확보", "Proteger Totem do Trovão", "Защита Громового Тотема", "保卫雷霆图腾", "保衛雷霆圖騰", }, 
+{ "Base Defense", "Basisverteidigung", "Defensa de la base", "Defensa de la base", "Défense de base", "Difesa della base", "기지 방어", "Defesa básica", "Защита базы", "基地防御", "防禦基地", }, 
+{ "Incoming!", "Achtung, Angriff!", "¡Enemigos!", "¡Enemigos al ataque!", "En approche !", "In arrivo!", "적의 공격이다!", "Ataque inimigo!", "Враг атакует!", "来了！", "敵人來了！", }, 
+{ "Last Defense", "Letzte Verteidigung", "Última defensa", "La última defensa", "Dernière ligne de défense", "Ultima difesa", "최후의 방어", "Última defesa", "Последний рубеж", "最后的防线", "最後防線", }, 
+{ "Regroup", "Neu formieren", "Reorganización", "Reagrúpate", "Regroupement des troupes", "Raggrupparsi", "재집결", "Reagrupar", "Перегруппировка", "重整旗鼓", "重整旗鼓", }, 
+{ "To the Ship!", "Zum Schiff!", "¡A la nave!", "¡A la nave!", "Au vaisseau !", "Alla nave!", "함선으로!", "Para o navio!", "На корабль!", "登上战舰！", "朝船艦出發！", }, 
+{ "Free our people.", "Befreit unser Volk", "Liberar a nuestra gente", "Libera a nuestro pueblo.", "Libération de notre peuple", "Liberare la nostra gente", "동족 구출", "Liberte o nosso povo", "Освобождение тауренов", "拯救人民", "解救我們的族人。", }, 
+{ "Destroyed from within.", "Von innen heraus zerstört", "Destruido desde el interior", "Destrucción desde adentro", "Détruit de l’intérieur", "Distrutti dall'interno", "내부로부터의 파괴", "Destruído de dentro", "Уничтожить изнутри", "由内而外", "從內部破壞。", }, 
+{ "The final fight", "Die letzte Schlacht", "La batalla final", "La batalla final", "Combat final", "Il combattimento finale", "최후의 전투", "A luta final", "Последний бой", "最后一战", "最終戰鬥", }, 
+{ "Time to go.", "Zeit zu gehen", "Es la hora.", "Hora de irse", "L’heure est venue", "Ora di partire", "가야 할 시간", "Hora de ir", "Пора!", "该出发了。", "該離開了。", }, 
+},
+["1168"] = {
+{ "Join the Battle", "Stürzt Euch in die Schlacht", "Únete a la batalla", "Únete a la batalla", "Rejoindre la bataille", "Unisciti alla battaglia", "참전", "Juntar-se à batalha", "В бой!", "加入战斗", "加入戰鬥", }, 
+{ "Defeat Balnazzar's Lieutenants", "Balnazzars Hauptmänner bezwingen", "Derrota a los tenientes de Balnazzar", "Derrota a los tenientes de Balnazzar", "Terrasser les lieutenants de Balnazzar", "Sconfiggere i Luogotenenti di Balnazzar", "발나자르의 부관 처치", "Derrotar os tenentes de Balnazzar", "Одолеть приспешников Бальназара", "击败巴纳扎尔的副官", "擊敗巴納札爾的副官", }, 
+{ "Destroy Legion portals.", "Legionsportale zerstören", "Destruye portales de la Legión", "Destruye portales de la Legión.", "Destruction de portails de la Légion", "Distruggere i portali della Legione", "군단 차원문 파괴", "Destruir portais da Legião.", "Уничтожение порталов Легиона", "摧毁军团传送门。", "摧毀燃燒軍團傳送門", }, 
+{ "Defeat Balnazzar", "Balnazzar bezwingen", "Derrota a Balnazzar", "Derrota a Balnazzar", "Terrasser Balnazzar", "Sconfiggi Balnazzar", "발나자르 처치", "Derrotar Balnazzar", "Победа над Бальназаром", "击败巴纳扎尔", "擊敗巴納札爾", }, 
+},
+["432"] = {
+{ "Upper Blackrock Spire", "Obere Schwarzfelsspitze", "Cumbre de Roca Negra Superior", "Cumbre de Roca Negra superior", "Sommet du pic Rochenoire", "Bastioni di Roccianera Superiori", "검은바위 첨탑 상층", "Pico da Rocha Negra Superior", "Верхняя часть пика Черной горы", "黑石塔上层", "黑石塔上層", }, 
+},
+["621"] = {
+{ "The Arcatraz", "Die Arkatraz", "El Arcatraz", "El Arcatraz", "L’Arcatraz", "Arcatraz", "알카트라즈", "Arcatraz", "Аркатрац", "禁魔监狱", "亞克崔茲", }, 
+},
+["665"] = {
+{ "Warpwood Quarter", "Wucherborkenviertel", "Barrio Alabeo", "Barrio Alabeo", "Quartier de Crochebois", "Quartiere di Legnotorto", "굽이나무 지구", "Distrito Lenhatorta", "Квартал Криводревов", "扭木广场", "扭木廣場", }, 
+},
+["565"] = {
+{ "Halls of Origination", "Hallen des Ursprungs", "Cámaras de los Orígenes", "Cámaras de los Orígenes", "Salles de l’Origine", "Sale della Creazione", "시초의 전당", "Salões Primordiais", "Чертоги Созидания", "起源大厅", "起源大廳", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["1160"] = {
+{ "Join the Battle", "Stürzt Euch in die Schlacht", "Únete a la batalla", "Únete a la batalla", "Rejoindre la bataille", "Unisciti alla battaglia", "참전", "Juntar-se à batalha", "В бой!", "加入战斗", "加入戰鬥", }, 
+{ "Defeat Balnazzar's Lieutenants", "Balnazzars Hauptmänner bezwingen", "Derrota a los tenientes de Balnazzar", "Derrota a los tenientes de Balnazzar", "Terrasser les lieutenants de Balnazzar", "Sconfiggere i Luogotenenti di Balnazzar", "발나자르의 부관 처치", "Derrotar os tenentes de Balnazzar", "Одолеть приспешников Бальназара", "击败巴纳扎尔的副官", "擊敗巴納札爾的副官", }, 
+{ "Destroy Legion portals.", "Legionsportale zerstören", "Destruye portales de la Legión", "Destruye portales de la Legión.", "Destruction de portails de la Légion", "Distruggere i portali della Legione", "군단 차원문 파괴", "Destruir portais da Legião.", "Уничтожение порталов Легиона", "摧毁军团传送门。", "摧毀燃燒軍團傳送門", }, 
+{ "Defeat Balnazzar", "Balnazzar bezwingen", "Derrota a Balnazzar", "Derrota a Balnazzar", "Terrasser Balnazzar", "Sconfiggi Balnazzar", "발나자르 처치", "Derrotar Balnazzar", "Победа над Бальназаром", "击败巴纳扎尔", "擊敗巴納札爾", }, 
+},
+["631"] = {
+{ "The Underbog", "Der Tiefensumpf", "La Sotiénaga", "La Sotiénaga", "La Basse-tourbière", "Torbiera Sotterranea", "지하수렁", "O Brejo Oculto", "Нижетопь", "幽暗沼泽", "深幽泥沼", }, 
+},
+["1159"] = {
+{ "Hitting the Books", "Es steht geschrieben", "Hincar los codos", "Golpear los libros", "Rat de bibliothèque", "Concentrarsi sui libri", "기록 소거", "De cara nos livros", "Копание в книгах", "书籍研究", "讀書破卷", }, 
+{ "The Nightflow Conduit", "Die Nachtflussleitung", "El Conducto Nocturno", "El conducto del flujo nocturno", "L’artère Ruissenuit", "Il Condotto Oscuro", "밤흐름 도관", "O Conduíte da Noite", "Проводник Ночного Колодца", "夜流水渠", "夜流中樞", }, 
+{ "Knock Knock", "Klopf, klopf", "Toc toc", "Toc, toc", "Toc, toc", "Toc toc!", "똑똑", "Toc, toc", "Тук-тук", "咚咚咚", "有人在嗎？", }, 
+{ "E.M.P.", "E.M.P.", "PTME", "P.E.M.", "Projection de mana", "Generatore di Tempeste di Mana Effimere", "E.M.P.", "P.E.M.", "ЭПМ", "E.M.P.", "電磁脈衝", }, 
+{ "Weather the Storm", "Den Sturm überstehen", "Capea la tormenta", "Sobrevive a la tormenta", "Une tempête à braver", "Affrontare la tempesta", "폭풍을 견뎌라", "Suportar a tempestade", "У природы нет плохой погоды", "度过风暴", "撐過風暴", }, 
+},
+["1230"] = {
+{ "Prepare the Discs", "Die Scheiben vorbereiten", "Preparar los discos", "Prepara los discos", "Préparer les disques", "Preparare i dischi", "원반 준비", "Preparar os discos", "Подготовка дисков", "准备飞碟", "準備稜碟", }, 
+{ "Disperse the Elements", "Elementare Bändigung", "Dispersar los elementos", "Dispersa los elementos", "Disperser les éléments", "Disperdere gli elementi", "마력 분산", "Dispersar os elementos", "Рассеивание энергии", "消散元素", "分散力量", }, 
+},
+["275"] = {
+{ "Chosen by K'ara", "Von K'ara auserwählt", "La elección de K'ara", "El elegido de K'ara", "Le choix de K’ara", "Scelto da K'ara", "크아라의 용사", "Escolhido por K'ara", "Избранники К'ары", "卡拉的选民", "卡拉的選擇", }, 
+{ "The Gates of Grommar", "Das Tor von Grommar", "Las puertas de Grommar", "Las Puertas de Grommar", "Les portes de Grommar", "Cancelli di Grommar", "그롬마르 관문", "Os Portões de Grommar", "Врата Громмара", "格罗玛尔之门", "葛羅瑪大門", }, 
+{ "The Purge of Grommar", "Die Säuberung Grommars", "La Purga de Grommar", "La purga de Grommar", "La purge de Grommar", "Epurazione di Grommar", "그롬마르 정화", "O Expurgo de Grommar", "Очищение Громмара", "血洗格罗玛尔", "葛羅瑪掃蕩行動", }, 
+{ "Fire From the Skies", "Feuer aus dem Himmel", "Fuego por doquier", "Fuego de los cielos", "Le feu du ciel", "Fuoco dai cieli", "불벼락", "Fogo dos Céus", "Огонь с небес", "天降火雨", "天降大火", }, 
+},
+["575"] = {
+{ "The Oculus", "Das Oculus", "El Oculus", "El Oculus", "L’Oculus", "Oculus", "마력의 눈", "Óculus", "Окулус", "魔环", "奧核之眼", }, 
+},
+["1133"] = {
+{ "Combat Training", "Kampftraining", "Instrucción de combate", "Instrucción de combate", "Entraînement au combat", "Addestramento al combattimento", "전투 훈련", "Treino de combate", "Боевые учения", "战斗训练", "戰鬥訓練", }, 
+{ "Coating Your Daggers", "Vergiftete Klingen", "Cubrir tus dagas", "Ensuciando dagas", "Enduire ses dagues", "Intingere i pugnali", "독한 단검", "Untar as adagas", "Яд для кинжалов", "给你的匕首涂毒", "匕首淬毒", }, 
+{ "Sneaking Around", "Auf leisen Sohlen", "Sin levantar sospechas", "Husmeando por ahí", "En toute discrétion", "Movimenti furtivi", "살금살금", "Sorrateiramente", "Осторожность превыше всего", "来去无踪", "步伐放輕", }, 
+{ "Slitting Throats", "An die Kehle", "Rebanar pescuezos", "Cortando gargantas", "Un vrai coupe-gorge", "Tagliagole", "조여드는 손", "Rasgar gargantas", "Берегите горло", "割开喉咙", "割喉戰", }, 
+{ "When One Dagger Just Isn't Enough", "Ein Dolch ist nicht genug", "Cuando una daga no basta", "Cuando una daga no es suficiente", "Quand une dague ne suffit pas…", "Quando un pugnale non basta", "단검 하나로는 부족해", "Quando só uma adaga não basta", "В каждую руку – по кинжалу", "一把匕首可不够", "兩把剛剛好", }, 
+{ "The Gift That Keeps On Giving", "Tropfen für Tropfen für Tropfen", "La ofrenda que sigue dando", "La ofrenda que sigue dando", "La joie d’offrir", "Il dono infinito", "아낌없는 공격", "O aspirador de almas", "Подарок с подвохом", "惊喜连连", "一次次受傷", }, 
+{ "More Poison, Please!", "Mehr Gift, bitte!", "¡Más veneno, por favor!", "¡Más veneno, por favor!", "Du rab’ de poison, s’il vous plaît !", "Altro veleno, grazie!", "독, 추가요!", "Mais veneno, por favor!", "Еще яда!", "请再来点药膏，谢谢！", "再毒一點，拜託！", }, 
+{ "Putting It All Together", "Das große Ganze", "Juntar las piezas", "Todas las piezas juntas", "Mise en pratique", "Mettersi alla prova", "종합주문세트", "Fixação de conteúdo", "Сборная солянка", "综合在一起", "準備完善", }, 
+{ "Slipping Into The Shadows", "Mit den Schatten verschmelzen", "Deslizarse a las sombras", "Desaparición entre las sombras", "Se fondre dans les ombres", "Sparire nelle ombre", "그림자에 스며들기", "Sumindo nas sombras", "Шаг в тень", "遁入阴影之中", "消失在暗影之中", }, 
+{ "A Quick Test", "Schnelltest", "Una prueba rápida", "Una prueba rápida", "Un test rapide", "Una piccola prova", "깜짝 시험", "Teste rápido", "Испытание тет-а-тет", "快速测试", "隨堂考", }, 
+{ "Twice the Challenge", "Doppelte Herausforderung", "Desafío por partida doble", "Un desafío doble", "Double défi", "Doppia sfida", "난이도 두 배", "Desafio em dose dupla", "Двойной вызов", "双倍挑战", "雙重挑戰", }, 
+{ "Defend Against the Legion Assault", "Den Angriff der Legion abwehren", "Defiéndete del asalto de la Legión", "Defiéndete contra el ataque de la Legión", "Défense contre l’assaut de la Légion", "Difesa contro la Legione", "군단의 공격 막아내기", "Defender contra o ataque da Legião", "Оборона против Легиона", "在军团的攻击下保卫飞艇", "抵擋燃燒軍團的攻擊", }, 
+{ "Assault on Broken Shore", "Angriff auf die Verheerte Küste", "Asalto a la Costa Abrupta", "Asalto a la Costa Quebrada", "L’assaut du rivage Brisé", "Assalto alla Riva Dispersa", "부서진 해변 공격", "Ataque à Costa Partida", "Штурм Расколотого берега", "突袭破碎海滩", "突襲破碎海岸", }, 
+},
+["423"] = {
+{ "Skyreach", "Himmelsnadel", "Trecho Celestial", "Trecho Celestial", "Orée-du-Ciel", "Vetta dei Cieli", "하늘탑", "Beira-céu", "Небесный Путь", "通天峰", "擎天峰", }, 
+},
+["674"] = {
+{ "The Stonecore", "Der Steinerne Kern", "El Núcleo Pétreo", "El Núcleo Pétreo", "Le Cœur-de-Pierre", "Nucleo di Pietra", "바위심장부", "Litocerne", "Каменные Недра", "巨石之核", "石岩之心", }, 
+},
+["527"] = {
+{ "Gate of the Setting Sun", "Tor der Untergehenden Sonne", "Puerta del Sol Poniente", "Puerta del Sol Poniente", "Porte du Soleil couchant", "Porta del Sole Calante", "석양문", "Portal do Sol Poente", "Врата Заходящего Солнца", "残阳关", "落陽關", }, 
+},
+["634"] = {
+{ "The Blood Furnace", "Der Blutkessel", "El Horno de Sangre", "El Horno de Sangre", "La Fournaise du sang", "Forgia del Sangue", "피의 용광로", "A Fornalha de Sangue", "Кузня Крови", "鲜血熔炉", "血熔爐", }, 
+},
+["1131"] = {
+{ "You CAN Go Home", "Ihr KÖNNT nach Hause gehen", "PUEDES irte a casa", "PUEDES irte a casa", "Retour au bercail possible", "Di nuovo a casa", "돌아온 일리다리", "Você PODE ir para casa", "Домой!", "你们可以回家了", "回家真好", }, 
+{ "Nothing Will Bar Our Way", "Nichts wird sich uns in den Weg stellen", "Nada se interpondrá en nuestro camino", "Nada se interpondrá en nuestro camino", "Rien ne nous empêchera de passer !", "Niente ci sbarrerà la strada", "진격의 일리다리", "Nada obstruirá nosso caminho", "Нам преграды нипочем", "我们不可阻挡", "勢如破竹", }, 
+{ "Confronting an Old Foe", "Konfrontation mit einem alten Feind", "Ante un viejo enemigo", "Confrontando a un viejo enemigo", "Un vieil adversaire", "Faccia a faccia contro un vecchio nemico", "숙적과의 조우", "Confronto com um antigo inimigo", "Старый враг", "面对老对手", "好久不見", }, 
+{ "If He Will Not Listen to Reason...", "Und bist du nicht willig...", "Si no atiende a razones...", "Si no quiere entrar en razón...", "S’il ne veut pas entendre raison…", "Se non ascolterà la ragione...", "말을 듣지 않으면...", "Já que não quer ser razoável...", "Когда красноречие бессильно", "如果他不听劝……", "要是他不講道理…", }, 
+{ "A Final Attempt at Diplomacy", "Ein letzter Versuch der Diplomatie", "Un último intento diplomático", "Un último intento de usar la diplomacia", "Une dernière tentative diplomatique", "Un ultimo tentativo di diplomazia", "마지막 제안", "Uma última chance à diplomacia", "Еще немного дипломатии", "外交上的最后努力", "最後一次嘗試溝通", }, 
+},
+["1321"] = {
+{ "Cathedral of Eternal Night", "Die Kathedrale der Ewigen Nacht", "Catedral de la Noche Eterna", "Catedral de la Noche eterna", "Cathédrale de la Nuit éternelle", "Cattedrale della Notte Eterna", "영원한 밤의 대성당", "Catedral da Noite Eterna", "Собор Вечной Ночи", "永夜大教堂", "永夜聖殿", }, 
+},
+["1123"] = {
+{ "On High Alert", "Höchste Alarmstufe", "En máxima alerta", "En alerta máxima", "En alerte", "Massima Allerta", "삼엄한 경계", "Em nível alto de alerta", "Повышенная готовность", "高度戒备", "高度警戒", }, 
+{ "Live Drop", "Rauch ohne Feuer", "Un regalito", "Un botín con vida", "Ça va faire boum !", "Bomba in buca", "은밀한 교환", "Pessoalmente", "Дымовая операция", "当面传递", "即時投彈", }, 
+{ "Tricks of the Trade", "Das A und O des Handelns", "Secretos del oficio", "Secretos del oficio", "Les ficelles du métier", "Trucchi del Mestiere", "장사의 비법", "Truques do Ofício", "Маленькие хитрости", "商业机密", "交易的訣竅", }, 
+{ "To Catch a Cultist", "Einen Kultisten fangen", "Atrapar a un cultor", "La caza del cultor", "La capture d’un sectateur", "Catturare un cultista", "이교도 추적", "Como prender um sectário", "Охота на сектантов", "为了抓住一名教徒", "逮住教徒", }, 
+{ "Rendezvous", "Rendezvous", "Punto de encuentro", "Encuentro", "Rendez-vous", "Raduno", "약속 지점", "Encontro marcado", "Встреча", "汇合点", "會合點", }, 
+{ "We Need Answers", "Wir brauchen Antworten", "Necesitamos respuestas", "Necesitamos respuestas", "Il nous faut des réponses !", "Ci servono risposte", "실토", "Queremos respostas", "В поисках ответов", "我们需要答案", "我們需要答案", }, 
+{ "On the Trail", "Auf den Fersen", "Siguiendo la pista", "Sobre la pista", "À la trace", "Sulle Tracce", "추적", "No Rastro", "Погоня по следу", "跟踪追击", "緊追不捨", }, 
+{ "Marked for Death", "Todesurteil", "Marcado para morir", "Marcado para morir", "Désigné pour mourir", "Marchiato per morire", "죽음의 표적", "Marcado para morrer", "Метка смерти", "死亡标记", "死亡標記", }, 
+{ "A Dark Gift", "Ein dunkles Geschenk", "Un oscuro regalo", "Un regalo oscuro", "Un sombre présent", "Un dono oscuro", "어둠의 선물", "Presente sinistro", "Темный дар", "黑暗的礼物", "黑暗贈禮", }, 
+{ "Taking Your Leave", "Abschied nehmen", "Despedida", "Emprendiendo la huida", "Prendre congé", "Ossequi", "다음에 만나요", "Indo embora", "Отбытие", "离开一下", "告辭離開", }, 
+},
+["65"] = {
+{ "Make Boomer's Brew", "Braut Hammerbräu", "Fermenta cerveza relámpago", "Fermenta cerveza relámpago", "Faire de la bière détonante", "Crea la Birra Esplosiva", "폭발 맥주 만들기", "Cerveja Explosiva", "Варка \"Громобоя\"", "酿造闪电陈酿", "釀造轟隆酒", }, 
+{ "Road to Thunderpaw", "Donnerpfotenpfad", "Camino a Zarpa Atronadora", "Camino a Zarpa Atronadora", "Faire route vers Patte-du-Tonnerre", "Strada degli Zampa Tonante", "썬더포우로의 여정", "A Estrada para Pata do Trovão", "Дорога к пику Громовой Лапы", "雷掌之路", "前往雷爪靜修居", }, 
+{ "Save Thunderpaw Refuge", "Rettet das Donnerpfotenrefugium", "Salva el Refugio Zarpa Atronadora", "Salva el Refugio Zarpa Atronadora", "Sauver le refuge Patte-du-Tonnerre", "Salva la dimora degli Zampa Tonante", "썬더포우 은거처를 구하라", "Salve o Refúgio Pata de Trovão", "Защита Укрытия Громовой Лапы", "拯救雷掌阁", "拯救雷爪靜修居", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["1177"] = {
+{ "The Arcway", "Der Arkus", "La Arquería", "El Arco", "L’Arcavia", "L'Arcavia", "비전로", "O Arcâneo", "Катакомбы Сурамара", "魔法回廊", "幽暗地道", }, 
+},
+["45"] = {
+{ "Stormstout Brewery", "Brauerei Sturmbräu", "Cervecería del Trueno", "Cervecería del Trueno", "Brasserie Brune d’Orage", "Birrificio Triplo Malto", "스톰스타우트 양조장", "Cervejaria Malte do Trovão", "Хмелеварня Буйных Портеров", "风暴烈酒酿造厂", "風暴烈酒酒坊", }, 
+},
+["920"] = {
+{ "Eye of Azshara", "Das Auge Azsharas", "Ojo de Azshara", "Ojo de Azshara", "Œil d’Azshara", "Occhio di Azshara", "아즈샤라의 눈", "Olho de Azshara", "Око Азшары", "艾萨拉之眼", "艾薩拉之眼", }, 
+},
+["1099"] = {
+{ "Thorim, Lord of Thunder", "Thorim, Herr des Donners", "Thorim, señor del trueno", "Thorim, Señor del Trueno", "Thorim, le seigneur du tonnerre", "Thorim, Re del Tuono", "천둥의 지배자 토림", "Thorim, Senhor do Trovão", "Торим, Повелитель Грома", "托里姆，雷电之王", "『雷霆之王』索林姆", }, 
+{ "Battle is Joined", "Auf in die Schlacht", "La batalla comienza", "Unido a la batalla", "La bataille fait rage", "Unirsi alla battaglia", "전투 시작", "Entrando em batalha", "Битва началась", "战斗开始", "加入戰鬥", }, 
+{ "Madness of the Usurper", "Wahnsinn des Thronräubers", "La locura de la usurpadora", "La locura del usurpador", "La démence de l’usurpatrice", "Follia dell'Usurpatrice", "강탈자의 광기", "Loucura do usurpador", "Безумие захватчицы", "篡神者的疯狂", "篡位者的瘋狂", }, 
+{ "Heart of Thunder", "Herz des Sturms", "Corazón de trueno", "Corazón de trueno", "Cœur de tonnerre", "Cuore di Tuono", "천둥의 심장", "Coração do trovão", "Сердце грозы", "雷霆之心", "雷霆之心", }, 
+{ "The Power of the Titans", "Die Macht der Titanen", "El poder de los titanes", "El poder de los titanes", "La puissance des titans", "La potenza dei Titani", "티탄의 힘", "O poder dos titãs", "Сила титанов", "泰坦的力量", "泰坦之力", }, 
+{ "Odyssey's End", "Ende der Odyssee", "El final de la odisea", "Fin de la odisea", "La fin de l’odyssée", "Fine dell'odissea", "서사시의 끝", "Fim da odisseia", "Конец Одиссеи", "冒险结束", "旅程的尾聲", }, 
+},
+["632"] = {
+{ "The Slave Pens", "Die Sklavenunterkünfte", "Recinto de los Esclavos", "Recinto de los Esclavos", "Les enclos aux esclaves", "Fosse degli Schiavi", "강제 노역소", "O Pátio dos Escravos", "Узилище", "奴隶围栏", "奴隸監獄", }, 
+},
+["944"] = {
+{ "Into the Mists", "In die Nebel", "Entre la niebla", "Entre la niebla", "Dans les brumes", "Nelle nebbie", "안개 속으로", "Brumas adentro", "Сквозь туман", "深入迷雾", "勇闖迷霧", }, 
+{ "Village of the Damned", "Dorf der Verdammten", "La aldea de los Malditos", "La aldea de los Malditos", "Village des Damnés", "Il villaggio dei dannati", "저주받은 마을", "Vila dos malditos", "Деревня проклятых", "罪人村", "詛咒村落", }, 
+{ "Deeper Into the Fog", "Tiefer in den Nebel", "En lo más profundo de la niebla", "En lo profundo de la niebla", "En plein brouillard", "Nel profondo della nebbia", "자욱한 안개 속으로", "Névoa adentro", "Все глубже в туман", "继续深入迷雾", "深入迷霧", }, 
+{ "The Stolen Souls", "Die gestohlenen Seelen", "Las almas robadas", "Las almas robadas", "Les âmes volées", "Le anime rubate", "도난당한 영혼", "As almas roubadas", "Украденные души", "偷来的灵魂", "失竊的靈魂", }, 
+{ "Vigfus Himself", "Vigfus höchstpersönlich", "El mismísimo Vigfus", "El propio Vigfus", "Vigfus en chair et en os", "Vigfus in persona", "비그푸스 블레이드윈드", "Vigfus em pessoa", "А вот и сам Вигфус", "维格弗斯亲至", "維格弗斯", }, 
+{ "On The Trail", "Auf den Fersen", "Siguiendo la pista", "Pisándole los talones", "À la trace", "Seguire le tracce", "추적", "No rastro", "Погоня по следу", "蛛丝马迹", "緊追不捨", }, 
+{ "The Warswords", "Die Kriegsschwerter", "Las Espadas de Guerra", "Las Espadas de Guerra", "Les épées de guerre", "Le spade da guerra", "전쟁검", "As Armíferas", "Боевые мечи", "战剑", "戰劍", }, 
+},
+["1179"] = {
+{ "Surrounded by Darkness", "Umgeben von Dunkelheit", "Rodeados de oscuridad", "Rodeado de oscuridad", "Nimbés de ténèbres", "Circondati dall'oscurità", "어둠에 둘러싸여", "Envolto em escuridão", "В окружении тьмы", "被黑暗包围", "黑暗環伺", }, 
+{ "Preparing for the Apocalypse", "Vorbereitung auf die Apokalypse", "Preparándose para el Apocalipsis", "Preparándose para el Apocalipsis", "Préparatifs en vue de l’apocalypse", "Preparativi per l'apocalisse", "재앙에 대비하라", "Preparando-se para o apocalipse", "Подготовка к апокалипсису", "准备迎接天启。", "備戰末日", }, 
+{ "The Road to Fel", "Teufelstechnik", "El camino a la vileza", "El camino vil", "La route de la gangrène", "La via verso il vile", "지옥 마법으로의 길", "Estrada para a vileza", "Скверный путь", "邪能之路", "魔化之路", }, 
+{ "Behold, the Endless March", "Seht, der endlose Marsch", "Contemplad la marcha interminable", "Observen, la Marcha Eterna", "La marche sans fin", "La marcia infinita", "보라, 끝없는 행진을", "Contemplem; a marcha sem fim", "Неисчислимое воинство", "看，无尽的大军", "無盡行軍", }, 
+{ "No Man An Island", "Niemand ist eine Insel", "Ningún hombre es una isla", "Isla de nadie", "Aucun homme n’est une île", "L'isola di nessuno", "혼자가 아니다", "Ninguém é uma ilha", "Один в поле не воин", "吾道不孤", "無人是孤島", }, 
+{ "True Sacrifice", "Ein echtes Opfer", "Verdadero sacrificio", "Un verdadero sacrificio", "Véritable sacrifice", "Un grande sacrificio", "진정한 희생", "Sacrifício verdadeiro", "Истинное самопожертвование", "真正的牺牲", "真正的犧牲", }, 
+{ "When Good Men Do Nothing", "Wenn die Guten wegsehen", "Cuando los hombres buenos no hacen nada", "Cuando los buenos no hacen nada", "L’inaction des hommes de bien", "Quando i buoni non combinano nulla", "누군가는 해야 할 일", "Quando os bons cruzam os braços", "Когда честные бездействуют", "当好人袖手旁观", "當正義無作為", }, 
+},
+["744"] = {
+{ "Extinguish Runes", "Löscht die Runen", "Extinción de runas", "Extinguir runas", "Éteindre les runes", "Estingui le rune", "룬 꺼뜨리기", "Extinguir runas", "Погасить руны", "熄灭符文", "熄滅符文", }, 
+{ "Upper Blackrock Spire", "Obere Schwarzfelsspitze", "Cumbre de Roca Negra Superior", "Cumbre de Roca Negra superior", "Sommet du pic Rochenoire", "Bastioni di Roccianera Superiori", "검은바위 첨탑 상층", "Pico da Rocha Negra Superior", "Верхняя часть пика Черной горы", "黑石塔上层", "黑石塔上層", }, 
+},
+["616"] = {
+{ "Magisters' Terrace", "Terrasse der Magister", "Bancal del Magister", "El Bancal del Magister", "La terrasse des Magistères", "Terrazza dei Magisteri", "마법학자의 정원", "Terraço dos Magísteres", "Терраса Магистров", "魔导师平台", "博學者殿堂", }, 
+},
+["516"] = {
+{ "Shadowfang Keep", "Burg Schattenfang", "Castillo de Colmillo Oscuro", "Castillo de Colmillo Oscuro", "Donjon d’Ombrecroc", "Forte di Zannascura", "그림자송곳니 성채", "Bastilha da Presa Negra", "Крепость Темного Клыка", "影牙城堡", "影牙城堡", }, 
+{ "Bonus Objective: Defeat Baron Silverlaine", "Bonusziel: Besiegt Baron Silberlein", "Objetivo de bonificación: Derrota al barón Filargenta", "Objetivo de bonificación: derrota al Barón Filargenta.", "Objectif bonus : vaincre le baron d’Argelaine", "Obiettivo bonus: sconfiggi il Barone Argenius", "추가 목표: 남작 실버레인 처치", "Objetivo bônus: Derrote o Barão Silverlaine", "Дополнительная задача: победите барона Сильверлейна", "奖励目标：击败席瓦莱恩男爵", "獎勵目標：擊敗席瓦萊恩男爵", }, 
+{ "Bonus Objective: Defeat Commander Springvale", "Bonusziel: Besiegt Kommandant Grüntal", "Objetivo de bonificación: Derrota al comandante Vallefont", "Objetivo de bonificación: derrota al Comandante Vallefont.", "Objectif bonus : vaincre le commandant Printeval", "Obiettivo bonus: sconfiggi il Comandante Primavalle", "추가 목표: 사령관 스프링베일 처치", "Objetivo bônus: Derrote o Comandante Floraval", "Дополнительная задача: победите командира Спрингвейла", "奖励目标：击败指挥官斯普林瓦尔", "獎勵目標：指揮官斯普林瓦爾", }, 
+},
+["644"] = {
+{ "Zul'Farrak", "Zul'Farrak", "Zul'Farrak", "Zul'Farrak", "Zul’Farrak", "Zul'Farrak", "줄파락", "Zul'Farrak", "Зул'Фаррак", "祖尔法拉克", "祖爾法拉克", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["1027"] = {
+{ "Assault on Violet Hold", "Sturm auf die Violette Festung", "Asalto al Bastión Violeta", "Ataque al Bastión Violeta", "L’assaut sur le fort Pourpre", "Assalto alla Fortezza Violacea", "보랏빛 요새 침공", "Ataque ao Castelo Violeta", "Штурм Аметистовой крепости", "突袭紫罗兰监狱", "紫羅蘭堡之襲", }, 
+{ "Assault on Violet Hold", "Sturm auf die Violette Festung", "Asalto al Bastión Violeta", "Ataque al Bastión Violeta", "L’assaut sur le fort Pourpre", "Assalto alla Fortezza Violacea", "보랏빛 요새 침공", "Ataque ao Castelo Violeta", "Штурм Аметистовой крепости", "突袭紫罗兰监狱", "紫羅蘭堡之襲", }, 
+{ "Assault on Violet Hold", "Sturm auf die Violette Festung", "Asalto al Bastión Violeta", "Ataque al Bastión Violeta", "L’assaut sur le fort Pourpre", "Assalto alla Fortezza Violacea", "보랏빛 요새 침공", "Ataque ao Castelo Violeta", "Штурм Аметистовой крепости", "突袭紫罗兰监狱", "紫羅蘭堡之襲", }, 
+},
+["331"] = {
+{ "Preparations", "Vorbereitungen", "Preparativos", "Preparativos", "Les préliminaires", "Preparativi", "준비", "Os preparativos", "Приготовления", "准备就绪", "做好準備", }, 
+{ "The Iron Star", "Der Eiserne Stern", "La estrella de hierro", "La Estrella de Hierro", "L’étoile de Fer", "La Pirostella", "강철의 별", "A Estrela de Ferro", "Железная звезда", "钢铁之星", "鋼鐵之星", }, 
+{ "The Battle is Joined", "Auf in die Schlacht!", "Batalla coordinada", "Comenzó la batalla", "La bataille fait rage", "Unirsi alla battaglia", "전투 시작", "A Batalha Começou", "Союзники вступают в бой", "战斗打响", "盟友參戰", }, 
+{ "The Iron Harbor", "Der Eiserne Hafen", "El puerto de la Horda de Hierro", "El puerto de hierro", "Le port de Fer", "Darsena di Ferro", "강철 항구", "O Porto de Ferro", "Железная гавань", "钢铁海港", "鋼鐵港灣", }, 
+{ "The Weapon", "Die Waffe", "El arma", "El arma", "L’arme", "L'arma", "무기", "A Arma", "Орудие", "武器", "傳說武器", }, 
+{ "Blackhand", "Schwarzfaust", "Puño Negro", "Puño Negro", "Main-Noire", "Manonera", "블랙핸드", "Mão Negra", "Чернорук", "黑手", "黑手", }, 
+},
+["318"] = {
+{ "Collect Resources", "Sammelt Rohstoffe", "Reúne recursos", "Consigue recursos", "La collecte de ressources", "Raccogli le risorse", "자원 모으기", "Coletar recursos", "Добыча ресурсов", "收集资源", "收集資源", }, 
+},
+["531"] = {
+{ "Shado-Pan Monastery", "Shado-Pan-Kloster", "Monasterio del Shadopan", "Monasterio del Shadopan", "Monastère des Pandashan", "Monastero degli Shandaren", "음영파 수도원", "Monastério Shado-pan", "Монастырь Шадо-Пан", "影踪禅院", "影潘僧院", }, 
+},
+["932"] = {
+{ "Halls of Valor", "Die Hallen der Tapferkeit", "Cámaras del Valor", "Salones del Valor", "Les salles des Valeureux", "Sale del Valore", "용맹의 전당", "Salões da Bravura", "Чертоги Доблести", "英灵殿", "英靈殿", }, 
+},
+["574"] = {
+{ "Zul'Aman", "Zul'Aman", "Zul'Aman", "Zul'Aman", "Zul’Aman", "Zul'Aman", "줄아만", "Zul'Aman", "Зул'Аман", "祖阿曼", "祖阿曼", }, 
+},
+["535"] = {
+{ "Shado-Pan Monastery", "Shado-Pan-Kloster", "Monasterio del Shadopan", "Monasterio del Shadopan", "Monastère des Pandashan", "Monastero degli Shandaren", "음영파 수도원", "Monastério Shado-pan", "Монастырь Шадо-Пан", "影踪禅院", "影潘僧院", }, 
+},
+["635"] = {
+{ "The Blood Furnace", "Der Blutkessel", "El Horno de Sangre", "El Horno de Sangre", "La Fournaise du sang", "Forgia del Sangue", "피의 용광로", "A Fornalha de Sangue", "Кузня Крови", "鲜血熔炉", "血熔爐", }, 
+},
+["510"] = {
+{ "The Stockade", "Das Verlies", "Las Mazmorras", "Las Mazmorras", "La Prison", "Segrete di Roccavento", "스톰윈드 지하감옥", "O Cárcere", "Тюрьма", "监狱", "監獄", }, 
+},
+["15"] = {
+{ "Escort Brewmaster Bo", "Eskortiert Braumeister Bo", "Escolta al maestro cervecero Bo", "Escolta al maestro cervecero Bo", "Escorter le maître brasseur Bo", "Scorta il Mastro Birraio Bo", "양조사 보 호위", "Escolte o Mestre Cervejeiro Bô", "Сопровождение хмелевара Бо", "护送珀酒仙", "護送釀酒大師阿波", }, 
+{ "Fill the Brewing Cauldron", "Füllt den Braukessel", "Llena el caldero de fermentación", "Llena el caldero de fermentación", "Remplir le chaudron de brassage", "Riempi il Tino di Fermentazione", "양조 가마솥 채우기", "Encha o Caldeirão de Brassagem", "Наполнение хмелеваренного котла", "装满酿酒大锅", "倒滿釀酒鍋", }, 
+{ "Defeat Captain Ook", "Bezwingt Kapitän Uuk", "Derrota al capitán Ook.", "Derrota al capitán Ook.", "Vaincre le capitaine Ouk", "Sconfiggi Capitan Gancino", "선장 우끼 처치", "Derrote o Capitão Fedô", "Победа над капитаном Уком", "击败乌克头领", "殺死烏克船長", }, 
+},
+["1014"] = {
+{ "The Downward Spiral", "Die Abwärtsspirale", "La espiral descendente", "La espiral descendente", "Spirale descendante", "La spirale discendente", "악순환", "A espiral descendente", "Вниз по винтовой лестнице", "逆塔", "往下的迴旋樓梯", }, 
+{ "Grasp of the Damned", "Umklammerung der Verdammten", "En manos de los malditos", "El alcance de los malditos", "L’emprise des damnés", "Presa dei dannati", "저주받은 자의 손아귀", "Garras dos condenados", "Хватка проклятых", "亡者的爪缚", "詛咒之握", }, 
+{ "Removal Protocols", "Entfernungsprotokolle", "Protocolos de eliminación", "Protocolos de eliminación", "Protocoles d’élimination", "Protocolli di rimozione", "작동규약 제거", "Protocolos de remoção", "Протоколы ликвидации", "清除协议", "移除程序", }, 
+{ "Elune's Prize", "Elunes Trophäe", "El trofeo de Elune", "El premio de Elune", "Le trophée d’Élune", "Il premio di Elune", "엘룬의 유물", "O prêmio de Eluna", "Трофей Элуны", "艾露恩的宝物", "伊露恩的寶藏", }, 
+{ "The Rider's Prize", "Der Preis des Reiters", "El trofeo del jinete", "El premio del jinete", "Le trophée du cavalier", "Il premio dei Cavalieri", "기수의 유물", "O prêmio do cavalgante", "Трофей всадника", "黑骑士的财宝", "黑騎兵的寶物", }, 
+{ "Reaping the Riders", "Jetzt ist Sense für die Reiter", "Segar a los jinetes", "Segando a los jinetes", "Faucher les cavaliers", "Mietere i Cavalieri", "암흑 기수의 최후", "A ceifa dos cavalgantes", "Жатва Всадников", "收割黑骑士", "劫掠騎兵的寶物", }, 
+{ "The Scythe Reclaimed", "Die zurückeroberte Sichel", "Guadaña reclamada", "La Guadaña recuperada", "Récupération de la faux", "La Falce recuperata", "되찾은 낫", "A foice recuperada", "Возвращение Косы", "镰刀回归", "奪回鐮刀", }, 
+},
+["1108"] = {
+{ "On the Prowl", "Auf der Lauer", "Al acecho", "Merodear", "La bête rôde", "A caccia", "탐색", "À espreita", "В поисках", "潜伏徘徊", "潛行", }, 
+{ "Where There's a Withered There's a Way", "Verwirrt, verdorrt, versperrt", "Las ruinas no te detienen", "Donde se pierde la ilusión, un marchito es la solución", "Par ici mon flétri", "Dove c'è un Avvizzito c'è gioia", "메마른 자가 있는 곳에 길이 있다", "Quando fenecidos não faltam, abre-se um caminho", "Способ есть всегда", "有枯法者，事竟成", "有凋萎者事竟成", }, 
+{ "Onward, Upward, and Downward", "Vorwärts, aufwärts, abwärts", "Arriba, abajo y para dentro", "Hacia adelante, hacia arriba, hacia abajo", "Tout droit, en haut et en bas", "Avanti, indietro, giù", "앞, 아래, 위, 위, 아래", "Pra frente, pra cima e pra baixo", "Вперед, в неизвестность", "向前，向上，向下", "前進、往上、往下", }, 
+{ "It's a Furball", "Braves Kätzchen", "Bola de pelo", "Es una bola de pelos", "C’est une boule de poils !", "È una palla di pelo!", "감당할 수 없는 힘", "Bola de pelos", "Снова белый и пушистый", "可爱的毛球", "一團毛球", }, 
+{ "Into the Darkness", "In die Finsternis", "En la oscuridad", "Hacia la oscuridad", "Dans les ténèbres", "Nell'oscurità", "어둠 속으로", "Escuridão adentro", "Тьма и сырость", "进入黑暗", "進入黑暗", }, 
+{ "In a Tangled Web", "Gefangen im Netz", "Enredo en la red", "En una red enmarañada", "Dans une toile enchevêtrée", "In una tela intricata", "휘감는 거미줄", "Numa teia emaranhada", "Попавшийся в сети", "身陷缠绕之网", "身不由己", }, 
+{ "The Fangs of Ashamane", "Die Fänge von Ashamane", "Los Colmillos de Crinceniza", "Los Colmillos de Ashamane", "Les Crocs d’Ashamane", "Le Zanne di Grigiomanto", "아샤메인의 송곳니", "As presas de Ashamane", "Клыки Пеплошкурой", "阿莎曼之牙", "亞夏曼之牙", }, 
+{ "To the Grove", "Auf zum Hain", "A la Arboleda", "Hacia la Arboleda", "Vers la Sylverêve", "Verso il bosco", "꿈숲으로", "Rumo ao Bosque", "Назад, в Рощу", "前往林地", "前往林地", }, 
+},
+["1312"] = {
+{ "Meet Up with Thisalee", "Treffen mit Thisalee", "Reunión con Thisalee", "Reúnete con Thisalee", "Retrouver Thisalee", "Incontro con Thisalee", "티살리 상봉", "Encontrar Tessália", "Встреча с Тизали", "与希萨莉汇合", "跟黎沙莉會合", }, 
+{ "Infiltrate the Legion Encampment", "Infiltration des Legionslagers", "Infiltrarse en el campamento de la Legión", "Infíltrate en el campamento de la Legión", "Infiltrer le campement de la Légion", "Nell'accampamento della Legione", "군단 야영지 침투", "Penetrar no acampamento da Legião", "Проникновение в лагерь Легиона", "潜入军团营地", "潛入燃燒軍團營地", }, 
+{ "Scouting Infazzar's Plans", "Infazzars Pläne aufdecken", "Descubrir los planes de Infazzar", "Averigua los planes de Infazzar", "Dévoiler les plans d’Infazzar", "I piani di Infazzar", "인파자르의 계획 염탐", "Descobrir os planos de Infazzar", "Планы Инфаззара", "探查伊法扎尔的计划", "探查因法薩爾的計畫", }, 
+{ "Flying Abominations", "Fliegende Monstrositäten", "Abominaciones voladoras", "Abominaciones voladoras", "Abominations volantes", "Abomini volanti", "날개 달린 괴물", "Abominações voadoras", "Летающие твари", "飞行的怪物", "飛翼怪物", }, 
+{ "Follow Infazzar", "Folgt Infazzar", "Seguir a Infazzar", "Sigue a Infazzar", "Suivre Infazzar", "Seguire Infazzar", "인파자르 추적", "Seguir Infazzar", "Погоня за Инфаззаром", "跟踪伊法扎尔", "跟蹤因法薩爾", }, 
+{ "Kill Infazzar", "Tötet Infazzar", "Matar a Infazzar", "Mata a Infazzar", "Tuer Infazzar", "Uccidi Infazzar", "인파자르 처치", "Matar Infazzar", "Смерть Инфаззару!", "击杀伊法扎尔", "殺死因法薩爾", }, 
+{ "Return to the Dreamgrove", "Rückkehr zum Hain der Träume", "Retorno a la Arboleda de los Sueños", "Regresa a la Arboleda de los Sueños", "Retour à la Sylverêve", "Ritorno al Bosco dei Sogni", "다시 꿈숲으로", "Retorno ao Bosque Onírico", "Возвращение в Рощу Снов", "返回梦境林地", "返回幻夢之林", }, 
+},
+["210"] = {
+{ "The Mountaineers", "Die Gebirgsjäger", "Los montaraces", "Los montaraces", "Les montagnards", "I Montanari", "산악경비대원들", "Os Montanhistas", "Горная пехота", "巡山人", "巡山人", }, 
+{ "Save Scout Stonebeard", "Rettet Späher Steinbart", "Salva al explorador Barbapétrea", "Salva al explorador Barbapétrea", "Sauver l’éclaireur Barbe-de-Pierre", "Salva l'Esploratore Barbapietra", "정찰병 스톤비어드 구출", "Resgatar o Batedor Barbarrocha", "Спасение разведчика Камнеборода", "解救斥候石须", "解救斥候石鬚", }, 
+{ "Save Scout Boldbrew", "Rettet Späherin Kühnbräu", "Salva a la exploradora Birraudaz", "Salva a la exploradora Birraudaz", "Sauver l’éclaireuse Bièrafeu", "Salva l'Esploratrice Birrardita", "정찰병 볼드브루 구출", "Resgatar a Batedora Cervamarga", "Спасение разведчицы Резковар", "解救斥候粗酿", "解救斥候勇釀", }, 
+{ "Save Scout Forgefellow", "Rettet Späher Schmiedebalg", "Salva al explorador Forjaleal", "Salva al explorador Forjaleal", "Sauver l’éclaireur Forgepair", "Salva l'Esploratore Granforgia", "정찰병 포지펠로 구출", "Resgatar o Batedor Forjamigo", "Спасение разведчика Кузнебрата", "解救斥候炉匠", "解救斥候鍛扈", }, 
+{ "The Cold Cave", "Die kalte Höhle", "La cueva de hielo", "La cueva de hielo", "La grotte glacée", "La grotta gelida", "차가운 동굴", "A Caverna Gelada", "Ледяная пещера", "寒冷的洞穴", "冰穴", }, 
+{ "Victory or Death", "Sieg oder Tod", "Victoria o muerte", "Victoria o muerte", "La victoire ou la mort", "Vittoria o morte", "승리가 아니면 죽음을", "Vitória ou Morte", "Победа или смерть", "不成功，就成仁", "不勝即亡", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["975"] = {
+{ "Repel the Invaders", "Gegenwehr", "Repeler a los invasores", "Expulsa a los invasores", "Repousser les envahisseurs", "Respingere gli invasori", "침략자 격퇴", "Rechaçar os invasores", "Отпор захватчикам", "驱逐入侵者", "擊退入侵者", }, 
+{ "The Mother's Revenge", "Die Rache der Mutter", "La venganza de la madre", "La venganza de la madre", "Vengeance maternelle", "Vendetta della madre", "어미의 복수", "A revanche da mãe", "Месть матери", "母亲的复仇", "族母的復仇", }, 
+{ "Gaining Control", "Die Kontrolle gewinnen", "Recuperar el control", "Bajo control", "Prise de contrôle", "Prendere il controllo", "제어권 획득", "Tomar o comando", "Восстановление контроля", "获取控制权", "取得控制", }, 
+{ "Mutual Destruction", "Wie du mir, so ich dir", "Destrucción mutua", "Destrucción mutua", "Destruction mutuelle", "Distruzione reciproca", "상호 파괴", "Destruição mútua", "Взаимное уничтожение", "同归于尽", "相互毀滅", }, 
+},
+["216"] = {
+{ "Talk to the Boss", "Sprecht mit dem Boss", "Habla con el jefe", "Habla con el jefe", "Parler au patron", "Parla col capo", "대장에게 말해봐", "Falar com o Chefe", "Разговор с вожаком", "跟老板谈谈", "與工頭交談", }, 
+{ "Rock Grinding", "Felsen mahlen", "Roca pulverizada", "Roca pulverizada", "Casser du caillou", "Frantumare la roccia", "날뛰는 원소 정령", "Triturando rochas", "Грохот камней", "碎石机", "研磨石頭", }, 
+{ "Economic Recovery", "Wirtschaftsaufschwung", "Recuperación económica", "Recuperación económica", "Reprise économique", "Recupero economico", "경제를 살리자", "Recuperação econômica", "Набить карманы", "经济复苏", "經濟復甦", }, 
+{ "End of the Mine", "Das Ende der Mine", "Fin de la mina", "Fin de la mina", "Le fond de la mine", "In fondo alla miniera", "광산의 끝", "Fim da Mina", "Конец рудника", "矿洞的末端", "礦坑終點", }, 
+{ "Heartbreak", "Gebrochenes Herz", "Corazón partido", "Corazón partido", "Cœur brisé", "Crepacuore", "심장을 노려라!", "Coração Partido", "Разбитое сердце", "心碎", "心碎", }, 
+{ "Bonus Objectives", "Bonusziele", "Objetivos de bonificación", "Objetivos de bonificación", "Objectifs bonus", "Obiettivi bonus", "추가 목표", "Objetivos bônus", "Дополнительные задачи", "奖励目标", "獎勵目標", }, 
+},
+["523"] = {
+{ "Shadowfang Keep", "Burg Schattenfang", "Castillo de Colmillo Oscuro", "Castillo de Colmillo Oscuro", "Donjon d’Ombrecroc", "Forte di Zannascura", "그림자송곳니 성채", "Bastilha da Presa Negra", "Крепость Темного Клыка", "影牙城堡", "影牙城堡", }, 
+{ "Bonus Objective: Defeat Baron Silverlaine", "Bonusziel: Besiegt Baron Silberlein", "Objetivo de bonificación: Derrota al barón Filargenta", "Objetivo de bonificación: derrota al Barón Filargenta.", "Objectif bonus : vaincre le baron d’Argelaine", "Obiettivo bonus: sconfiggi il Barone Argenius", "추가 목표: 남작 실버레인 처치", "Objetivo bônus: Derrote o Barão Silverlaine", "Дополнительная задача: победите барона Сильверлейна", "奖励目标：击败席瓦莱恩男爵", "獎勵目標：擊敗席瓦萊恩男爵", }, 
+{ "Bonus Objective: Defeat Commander Springvale", "Bonusziel: Besiegt Kommandant Grüntal", "Objetivo de bonificación: Derrota al comandante Vallefont", "Objetivo de bonificación: derrota al Comandante Vallefont.", "Objectif bonus : vaincre le commandant Printeval", "Obiettivo bonus: sconfiggi il Comandante Primavalle", "추가 목표: 사령관 스프링베일 처치", "Objetivo bônus: Derrote o Comandante Floraval", "Дополнительная задача: победите командира Спрингвейла", "奖励目标：击败指挥官斯普林瓦尔", "獎勵目標：指揮官斯普林瓦爾", }, 
+},
+["623"] = {
+{ "Sethekk Halls", "Sethekkhallen", "Salas Sethekk", "Salas Sethekk", "Les salles des Sethekk", "Sale dei Sethekk", "세데크 전당", "Salões dos Sethekk", "Сетеккские залы", "塞泰克大厅", "塞司克大廳", }, 
+},
+["323"] = {
+{ "Stop the Ritual", "Beendet das Ritual", "Detén el ritual", "Detén el ritual", "Arrêter le rituel", "Ferma il rituale", "의식 멈추기", "Impeça o Ritual", "Прервать ритуал", "终止仪式", "阻止儀式", }, 
+{ "Army of Souls", "Seelenarmee", "Ejército de almas", "Ejército de almas", "L’armée des âmes", "Armata di anime", "영혼의 군대", "Exército de Almas", "Армия душ", "幽灵大军", "靈魂大軍", }, 
+{ "Kilrogg Deadeye", "Kilrogg Totauge", "Kilrogg Mortojo", "Kilrogg Ojo Muerto", "Kilrogg Oeil-Mort", "Kilrogg Occhiotetro", "킬로그 데드아이", "Kilrogg Olho Morto", "Килрогг Мертвый Глаз", "基尔罗格·死眼", "基爾羅格‧亡眼", }, 
+{ "5 Bonus", "5er-Bonus", "5 bonificaciones", "Bonus 5", "Bonus de 5", "5 bonus", "5 보너스", "5 bônus", "Еще 5", "5连斩奖励", "5的獎勵", }, 
+{ "10 Bonus", "10er-Bonus", "10 bonificaciones", "Bonus 10", "Bonus de 10", "10 bonus", "10 보너스", "10 bônus", "Еще 10", "10连斩奖励", "10的獎勵", }, 
+},
+["1221"] = {
+{ "Agatha's Lair", "Agathas Hort", "Guarida de Agatha", "Guarida de Agatha", "L’antre d’Agatha", "L'antro di Agatha", "아가타의 소굴", "Covil de Ágata", "Логово Агаты", "阿加莎的巢穴", "亞加薩巢穴", }, 
+},
+["1093"] = {
+{ "Combat Training", "Kampftraining", "Instrucción de combate", "Instrucción de combate", "Entraînement au combat", "Addestramento al combattimento", "전투 훈련", "Treino de combate", "Боевые учения", "战斗训练", "戰鬥訓練", }, 
+{ "Charging Headfirst Into Battle", "Mit dem Kopf voran in den Kampf", "De cabeza al combate", "De cabeza a la batalla", "Foncer tête baissée", "A testa bassa in battaglia", "일단 돌진", "Mergulhar de cabeça na batalha", "Рывок на передовую", "一头冲进战斗", "直衝戰場", }, 
+{ "Take A Big Swing At It", "Einmal richtig Schwung holen", "Dar el golpe", "Intento de golpe", "Et v’lan !", "Manutenzione percussiva", "큰 거 한 방", "Com toda a força", "Бей, круши!", "用力挥舞", "這會打死人的", }, 
+{ "Slamming it Home", "Ins Ziel schmettern", "Golpetazo monumental", "Corrida a base", "Coup de boutoir", "Una bella botta", "강력한 충돌", "Rebatida pra isolar", "Всем ударам удар", "击回老家", "勇猛的攻擊", }, 
+{ "Smash Them To Pieces", "Kurz und klein schlagen", "Hazlos picadillo", "Hazlos pedazos", "Façon puzzle", "Farli a pezzi", "산산조각 부수기", "Estrago colossal", "Кулак гиганта", "打成碎片", "把它們擊碎", }, 
+{ "Putting It All Together", "Das große Ganze", "Juntar las piezas", "Todas las piezas juntas", "Mise en pratique", "Mettersi alla prova", "종합주문세트", "Fixação de conteúdo", "Сборная солянка", "综合在一起", "準備完善", }, 
+{ "Such a Rush", "Berauschend", "Con las prisas", "Qué prisa", "Montée d’adrénaline", "Che divertimento!", "패배는 없다", "Sem conter o ímpeto", "Абсолютный триумф", "急匆匆", "血氣衝上心頭", }, 
+{ "Take It For A Spin", "Immer schön im Kreis drehen", "Dar una vuelta", "Échalo a rodar", "Ça tourne !", "Andare a farsi un giro", "뱅글뱅글", "Dando umas voltas", "Головокружение до изнеможения", "来转一圈看看", "轉吧轉吧", }, 
+{ "Jump Into The Fray", "Sprung mitten ins Geschehen", "Salto a la refriega", "Métete a la refriega", "Bond dans la mêlée", "Nel vivo della lotta!", "격전 속으로", "Pular de cabeça", "Прыжок в гущу боя", "跳入战场", "跳入戰場", }, 
+{ "A Quick Test", "Schnelltest", "Una prueba rápida", "Una prueba rápida", "Un test rapide", "Una piccola prova", "깜짝 시험", "Teste rápido", "Испытание тет-а-тет", "快速测试", "隨堂考", }, 
+{ "Twice the Challenge", "Doppelte Herausforderung", "Desafío por partida doble", "Un desafío doble", "Double défi", "Doppia sfida", "난이도 두 배", "Desafio em dose dupla", "Двойной вызов", "双倍挑战", "雙重挑戰", }, 
+{ "Defend Against the Legion Assault", "Den Angriff der Legion abwehren", "Defiéndete del asalto de la Legión", "Defiéndete contra el ataque de la Legión", "Défense contre l’assaut de la Légion", "Difesa contro la Legione", "군단의 공격 막아내기", "Defender contra o ataque da Legião", "Оборона против Легиона", "在军团的攻击下保卫飞艇", "抵擋燃燒軍團的攻擊", }, 
+{ "Assault on Broken Shore", "Angriff auf die Verheerte Küste", "Asalto a la Costa Abrupta", "Asalto a la Costa Quebrada", "L’assaut du rivage Brisé", "Assalto alla Riva Dispersa", "부서진 해변 공격", "Ataque à Costa Partida", "Штурм Расколотого берега", "突袭破碎海滩", "突襲破碎海岸", }, 
+},
+["627"] = {
+{ "Auchenai Crypts", "Auchenaikrypta", "Criptas Auchenai", "Criptas Auchenai", "Cryptes Auchenaï", "Cripte degli Auchenai", "아키나이 납골당", "Catacumbas Auchenai", "Аукенайские гробницы", "奥金尼地穴", "奧奇奈地穴", }, 
+},
+["1271"] = {
+{ "Speak with Cenarius", "Sprecht mit Cenarius", "Hablar con Cenarius", "Habla con Cenarius", "Parler à Cénarius", "Parla con Cenarius", "세나리우스와 대화", "Falar com Cenarius", "Встреча с Кенарием", "与塞纳留斯谈一谈", "與塞納留斯交談", }, 
+{ "Secure a Foothold", "Sichert eine Stellung", "Asegurar la posición", "Asegura una posición", "S’assurer une base", "Conquistare un avamposto", "거점 확보", "Garantir uma posição", "Укрепление позиций", "立足之地", "佔領據點", }, 
+{ "Open the Way", "Freie Bahn", "Abrir el camino", "Abre el camino", "Ouvrir la voie", "Aprire la via", "길 확보", "Abrir caminho", "Расчистить путь", "打开道路", "開啟通道", }, 
+{ "Moving on up", "Es geht aufwärts", "Llegar a lo más alto", "Hacia arriba", "Toujours plus haut", "Risalita", "위로 이동", "Sobe!", "Путь наверх", "登高望远", "登上高處", }, 
+{ "Lord of the Tower", "Herr des Turms", "Señor de la torre", "Señor de la torre", "Seigneur de la tour", "Signore della torre", "탑의 군주", "Senhor da torre", "Повелитель башни", "塔楼里的领主", "高塔之主", }, 
+{ "Clear the skies", "Den Luftraum säubern", "Despejar los cielos", "Hay que despejar los cielos", "Dégager l’espace aérien", "Ripulire i cieli", "하늘 청소", "Limpar os céus", "Чистое небо", "肃清空域", "掃蕩天空", }, 
+{ "Up and Away", "Auf und davon", "¡Hasta el cielo y más allá!", "Allá vamos", "On décolle", "Sempre più in alto", "위로 더 위로", "Para o alto e avante", "Вверх, под облака", "远走高飞", "遠走高飛", }, 
+{ "Defeat the Legion Commander", "Bezwingt den Kommandanten der Legion", "Derrota al comandante de la Legión", "Derrota al Comandante de la Legión", "Terrasser le commandant de la Légion", "Sconfiggere il Comandante della Legione", "군단 사령관 처치", "Derrotar o Comandante de legião", "Победа над командиром Легиона", "击败军团指挥官", "擊敗燃燒軍團指揮官", }, 
+{ "Escape!", "Flieht!", "¡Huida!", "¡Escapa!", "Fuyez !", "Fuga!", "탈출!", "Fuja!", "Побег!", "逃亡！", "脫逃！", }, 
+},
+["44"] = {
+{ "Temple of the Jade Serpent", "Tempel der Jadeschlange", "Templo del Dragón de Jade", "Templo del Dragón de Jade", "Temple du Serpent de jade", "Tempio della Serpe di Giada", "옥룡사", "Templo da Serpente de Jade", "Храм Нефритовой Змеи", "青龙寺", "玉蛟寺", }, 
+},
+["1091"] = {
+{ "Combat Training", "Kampftraining", "Instrucción de combate", "Instrucción de combate", "Entraînement au combat", "Addestramento al combattimento", "전투 훈련", "Treino de combate", "Боевые учения", "战斗训练", "戰鬥訓練", }, 
+{ "A Pinch Of Fire", "Eine Prise Feuer", "Una pizca de fuego", "Una pequeña llama", "Une pincée de feu", "Un pizzico di Fuoco", "뜨거운 맛", "Um pouco de fogo", "Дай жару!", "一小撮火焰", "一點火花", }, 
+{ "Lava Launcher", "Lavawerfer", "Lanzalava", "Lanzador de lava", "Lanceur de lave", "Lanciatore di lava", "치솟는 용암", "Lança-lava", "Сила вулкана", "熔岩发射器", "熔岩發射器", }, 
+{ "Lightning Bolt! Lightning Bolt!", "Blitzschlag! Blitzschlag!", "¡Descarga de relámpagos!", "¡Descarga de relámpagos! ¡Descarga de relámpagos!", "Électrifiant !", "Dardo Fulminante! Dardo Fulminante!", "파지직! 파지직!", "Raios!", "Гром и молния", "闪电箭！闪电箭！", "閃電箭！閃電箭！", }, 
+{ "Let It Rock", "Rollende Steine", "Impacto pétreo", "Que empiece la fiesta", "Ça va secouer !", "Spacca!", "요동하는 대지", "Rock n' roll", "Могущество из самых недр", "摇摆起来", "搖滾大地", }, 
+{ "Putting It All Together", "Das große Ganze", "Juntar las piezas", "Todas las piezas juntas", "Mise en pratique", "Mettersi alla prova", "종합주문세트", "Fixação de conteúdo", "Сборная солянка", "综合在一起", "準備完善", }, 
+{ "Ribbit,  Ribbit.", "Quaaak, quaaak.", "Croac, croac", "Croac, croac.", "Coâ, coâ !", "Cra, cra!", "개굴, 개굴", "Croac, croac.", "Кто сказал \"ква\"?", "呱，呱", "嘓嘓。", }, 
+{ "Shocking the World", "Ein Schock für die Welt", "Descarga al mundo", "Un impacto para el mundo", "Électriser le monde", "Scioccante!", "충격적인 세계", "Abalando o mundo", "Потрясение для всего мира", "电击世界", "震撼世界", }, 
+{ "Dousing Your Wounds", "Eine Welle der Heilung", "Empapa tus heridas", "Empapando las heridas", "Doux apaisement", "Lavarsi le ferite", "상처 돌보기", "Fechar as feridas", "Ванна из целебного бальзама", "浸泡伤口", "清理傷口", }, 
+{ "Unleashing The Elements", "Die Elemente entfesseln", "Liberación de elementos", "Liberando los elementos", "Libérer les éléments", "Scatenare gli elementi", "정령 해방", "Libertar os elementos", "Освобождение стихий", "释放元素", "釋放元素", }, 
+{ "A Quick Test", "Schnelltest", "Una prueba rápida", "Una prueba rápida", "Un test rapide", "Una piccola prova", "깜짝 시험", "Teste rápido", "Испытание тет-а-тет", "快速测试", "隨堂考", }, 
+{ "Twice the Challenge", "Doppelte Herausforderung", "Desafío por partida doble", "Un desafío doble", "Double défi", "Doppia sfida", "난이도 두 배", "Desafio em dose dupla", "Двойной вызов", "双倍挑战", "雙重挑戰", }, 
+{ "Defend Against the Legion Assault", "Den Angriff der Legion abwehren", "Defiéndete del asalto de la Legión", "Defiéndete contra el ataque de la Legión", "Défense contre l’assaut de la Légion", "Difesa contro la Legione", "군단의 공격 막아내기", "Defender contra o ataque da Legião", "Оборона против Легиона", "在军团的攻击下保卫飞艇", "抵擋燃燒軍團的攻擊", }, 
+{ "Assault on Broken Shore", "Angriff auf die Verheerte Küste", "Asalto a la Costa Abrupta", "Asalto a la Costa Quebrada", "L’assaut du rivage Brisé", "Assalto alla Riva Dispersa", "부서진 해변 공격", "Ataque à Costa Partida", "Штурм Расколотого берега", "突袭破碎海滩", "突襲破碎海岸", }, 
+},
+["1045"] = {
+{ "Fill the bar", "Füllt die Leiste", "Llenar la barra", "Rellena la barra", "Remplir la barre", "Riempire la barra", "주점 채우기", "Preencha a barra", "Заполните панель", "填满进度条", "補滿能量條", }, 
+{ "A Final Step", "Ein letzter Schritt", "Un último paso", "El último paso", "Dernière étape", "L'ultimo passo", "마지막 단계", "Um último passo", "Последний шаг", "最后一步", "最後一步", }, 
+},
+["1150"] = {
+{ "Loadout", "Verladen", "Equipamiento", "Carga total", "Battre le rappel", "Pronti e carichi", "군장", "Equipamento", "Начало операции", "战略物资", "整裝待發", }, 
+{ "Down in the Depths", "Hinab in die Tiefen", "En las profundidades", "Bien en lo profundo", "Descente dans les profondeurs", "Giù nelle profondità", "깊이, 더 깊이", "Nas profundezas", "Вниз, к самым глубинам", "迈入深渊", "深入遺跡", }, 
+{ "Spoils of War", "Kriegsbeute", "Botín de guerra", "Botín de guerra", "Butin de guerre", "Spoglie di Guerra", "전쟁의 전리품", "Espólios da Guerra", "Трофеи войны", "战争横财", "戰利品", }, 
+},
+["1083"] = {
+{ "Combat Training", "Kampftraining", "Instrucción de combate", "Instrucción de combate", "Entraînement au combat", "Addestramento al combattimento", "전투 훈련", "Treino de combate", "Боевые учения", "战斗训练", "戰鬥訓練", }, 
+{ "Call a Friend", "Einen Freund rufen", "Llama a un amigo", "Llamar a un amigo", "Appel à un ami", "Amici più di prima", "친구 부르기", "Chamar um amigo", "Помощь друга", "召唤小伙伴", "呼喚朋友", }, 
+{ "Pet, Attack!", "Fass!", "¡Mascota, ataca!", "¡Mascota, ataca!", "Attaque, mon mignon !", "Famiglio, attacca!", "착하지, 물어!", "Ajudante, atacar!", "Фас!", "宠物，进攻！", "寵物，攻擊！", }, 
+{ "Looking for More", "Auf der Suche nach mehr", "Buscar más", "Buscar más", "Recherche de compagnons", "Lo spirito della bestia", "타격 그 이상", "Procurando mais", "Инстинкт хищника", "还要更多", "想要更多", }, 
+{ "Getting In On The Action", "Mittendrin statt nur dabei", "Entrar en acción", "Directo hacia la acción", "Un peu d’action", "Entrare in azione", "사격 개시", "Botando pra quebrar", "Выстрел в темноте", "开始行动", "實地使用", }, 
+{ "You Won't Like Us When We're Mad...", "Wehe, wenn sie losgelassen...", "No te conviene enfadarnos...", "No te gustará vernos enojados...", "Je vais devoir me fâcher…", "Non ti piacerà vederli arrabbiati...", "드러난 광기", "Não vai gostar de ver-nos bravos...", "В гневе мы страшны", "我们发怒的样子可不好看……", "你不會想惹怒我們的…", }, 
+{ "Putting It All Together", "Das große Ganze", "Juntar las piezas", "Todas las piezas juntas", "Mise en pratique", "Mettersi alla prova", "종합주문세트", "Fixação de conteúdo", "Сборная солянка", "综合在一起", "準備完善", }, 
+{ "Shooting Every Target", "Jeder Schuss ein Treffer", "Disparar a todos los objetivos", "Un disparo para cada objetivo", "Un carquois bien plein", "Piazza pulita", "집중 사격", "Atirando em todos os alvos", "Стрельба по тарелочкам", "射击每一个目标", "射擊每個目標", }, 
+{ "Playing Possum", "Kein Puls, keine Regung", "Hacerse el muerto", "Hacerse el muerto", "Simulacre de mort", "Giocare a fare il morto", "죽은 척하기", "Fingindo de morto", "Притвориться мертвым", "负鼠爱装死", "裝死", }, 
+{ "A Quick Test", "Schnelltest", "Una prueba rápida", "Una prueba rápida", "Un test rapide", "Una piccola prova", "깜짝 시험", "Teste rápido", "Испытание тет-а-тет", "快速测试", "隨堂考", }, 
+{ "Twice the Challenge", "Doppelte Herausforderung", "Desafío por partida doble", "Un desafío doble", "Double défi", "Doppia sfida", "난이도 두 배", "Desafio em dose dupla", "Двойной вызов", "双倍挑战", "雙重挑戰", }, 
+{ "Defend Against the Legion Assault", "Den Angriff der Legion abwehren", "Defiéndete del asalto de la Legión", "Defiéndete contra el ataque de la Legión", "Défense contre l’assaut de la Légion", "Difesa contro la Legione", "군단의 공격 막아내기", "Defender contra o ataque da Legião", "Оборона против Легиона", "在军团的攻击下保卫飞艇", "抵擋燃燒軍團的攻擊", }, 
+{ "Assault on Broken Shore", "Angriff auf die Verheerte Küste", "Asalto a la Costa Abrupta", "Asalto a la Costa Quebrada", "L’assaut du rivage Brisé", "Assalto alla Riva Dispersa", "부서진 해변 공격", "Ataque à Costa Partida", "Штурм Расколотого берега", "突袭破碎海滩", "突襲破碎海岸", }, 
+},
+["654"] = {
+{ "Razorfen Kraul", "Kral der Klingenhauer", "Horado Rajacieno", "Horado Rajacieno", "Kraal de Tranchebauge", "Gallerie di Lamaspina", "가시덩굴 우리", "Urzal dos Tuscos", "Лабиринты Иглошкурых", "剃刀沼泽", "剃刀沼澤", }, 
+},
+["1338"] = {
+{ "Chamber of the Avatar", "Die Kammer des Avatars", "Cámara del Avatar", "Cámara del Avatar", "Chambre de l’Avatar", "Sala dell'Avatar", "화신의 방", "Câmara do Avatar", "Зал аватары", "化身密室", "化身密室", }, 
+},
+["426"] = {
+{ "Iron Docks", "Eisendocks", "Puerto de Hierro", "Muelles de Hierro", "Quais de Fer", "Darsena di Ferro", "강철 선착장", "Docas de Ferro", "Железные доки", "钢铁码头", "鋼鐵碼頭", }, 
+},
+["526"] = {
+{ "Gate of the Setting Sun", "Tor der Untergehenden Sonne", "Puerta del Sol Poniente", "Puerta del Sol Poniente", "Porte du Soleil couchant", "Porta del Sole Calante", "석양문", "Portal do Sol Poente", "Врата Заходящего Солнца", "残阳关", "落陽關", }, 
+},
+["909"] = {
+{ "The Sealed Tomb", "Das versiegelte Grab", "La tumba sellada", "La tumba sellada", "Le tombeau scellé", "La tomba sigillata", "봉인된 무덤", "A tumba lacrada", "Запечатанная гробница", "封锁的墓穴", "封印之墓", }, 
+{ "The Disturbance", "Die Störung", "La perturbación", "La perturbación", "Trouble-fête", "Disturbare i morti", "방해", "A perturbação", "Расхитители гробниц", "骚扰", "動亂", }, 
+{ "Crypt Crawl", "Gruft abgrasen", "Adéntrate en la cripta", "Exploración de la cripta", "Exploration des cryptes", "Strisciare nella cripta", "납골당 수색", "Busca na cripta", "Обшаривание склепа", "探索墓穴", "潛入墓穴", }, 
+{ "The Confrontation", "Die Konfrontation", "El enfrentamiento", "La confrontación", "L’affrontement", "Il confronto", "대치", "O confronto", "Противостояние", "决战", "對峙", }, 
+{ "The Greatest Warrior", "", "", "El mejor guerrero", "", "Il guerriero più grande", "가장 위대한 전사", "O maior guerreiro", "", "最伟大的战士", "最偉大的戰士", }, 
+{ "Armaments of the Black Wyrm", "Waffen des schwarzen Wyrms", "Armamentos del dragón Negro", "Los armamentos del Dragón Negro", "Arsenal des wyrms noirs", "Armamenti del Dragone Nero", "검은 고룡의 장비", "Armamentos da Serpe Negra", "Оружие Черного змея", "黑龙的守护", "黑龍武裝", }, 
+},
+["1082"] = {
+{ "Island Landing", "Insulare Anlandung", "Llegada a la isla", "Peñón de la isla", "Débarquement insulaire", "Approdo all'isola", "섬 도착", "Chegada à ilha", "Высадка на острове", "登陆岛屿", "降落島嶼", }, 
+{ "Into the Tomb", "Ins Grab", "Hacia la tumba", "Hacia la tumba", "Dans la tombe", "Nella tomba", "무덤 속으로", "Tumba adentro", "В гробницу", "墓穴之中", "深入墓穴", }, 
+{ "Opening the Door", "Öffnen der Tür", "Abrir la puerta", "Abrir la puerta", "Ouvrir la porte", "Aprire la porta", "문 열기", "De portas abertas", "Дверь", "开门", "開門", }, 
+{ "Shrine of the Truthguard", "Der Schrein des Wahrheitshüters", "Santuario de la Veraguardia", "Santuario de la Veraguardia", "Sanctuaire de Garde-Vérité", "Santuario dello Scudo della Verità", "진실의 수호자의 제단", "Santuário da Guarda Fiel", "Святилище Стража Истины", "真理守护者祭坛", "真理之盾神殿", }, 
+{ "Yrgrim's Challenge", "Yrgrims Herausforderung", "Desafío de Yrgrim", "El desafío de Yrgrim", "Le défi d’Yrgrim", "La sfida di Yrgrim", "위르그림의 도전", "Desafio de Yrgrim", "Испытание Иргрима", "伊格瑞姆的挑战", "厄格林的挑戰", }, 
+{ "The Truthguard", "Der Wahrheitshüter", "Veraguardia", "La Veraguardia", "Garde-Vérité", "Lo Scudo della Verità", "진실의 수호자", "A Guarda Fiel", "Страж Истины", "真理守护者", "真理之盾", }, 
+},
+["826"] = {
+{ "Prepare for Battle", "Bereit für die Schlacht", "Prepararse para la batalla", "Prepárate para la batalla", "Une bataille à préparer", "Prepararsi alla battaglia", "전투 준비", "Preparação para a batalha", "Подготовка к битве", "准备作战", "準備戰鬥", }, 
+{ "Fire at Will!", "Feuer frei!", "¡Fuego a discreción!", "¡Fuego a discreción!", "Feu à volonté !", "Fuoco a volontà!", "함포 발사!", "Atire quando quiser!", "Огонь по готовности!", "自由射击！", "全面射擊！", }, 
+{ "Justice from Above", "Gerechtigkeit von oben", "Justicia desde el cielo", "Justicia desde el cielo", "La justice des cieux", "Una pioggia di giustizia", "하늘에서 정의가", "Justiça das alturas", "Правосудие свыше", "从天而降的正义", "正義從天而降", }, 
+{ "Bats in the Bomb Bay", "Fledermäuse im Bombenschacht", "Murciélagos entre las armas", "Murciélagos en la Bahía de bombas", "Des chauves-souris dans la soute", "Pipistrelli nella polveriera", "조명탄 제거", "Morcegos no compartimento de bombas", "Нетопыри в бомбовом отсеке", "弹药舱中的蝙蝠", "炸彈艙的危機", }, 
+{ "Last Stand", "Das letzte Gefecht", "Resistencia final", "Resistencia final", "Dans les derniers retranchements", "L'ultimo baluardo", "최후의 결전", "Resistência final", "Ни шагу назад", "破釜沉舟", "背水一戰", }, 
+},
+["1005"] = {
+{ "Vault of the Wardens", "Das Verlies der Wächterinnen", "Cámara de las Celadoras", "Bóveda de las Celadoras", "Caveau des Gardiennes", "Segrete delle Custodi", "감시관의 금고", "Câmara das Guardiãs", "Казематы Стражей", "守望者地窟", "看守者鐵獄", }, 
+},
+["509"] = {
+{ "Launch the Attack", "Zum Angriff blasen", "Inicia el ataque", "Lanza el ataque", "Lancer l’attaque", "Avvia l'attacco", "공격 개시", "Inicie o ataque", "В атаку", "开始攻击", "開始攻擊", }, 
+{ "Regroup at the Bend", "An der Kurve treffen", "Reagruparse en la curva", "Reagruparse en la curva", "Regroupement au tournant", "Radunata presso la svolta", "재집결", "Reagrupar-se na Curva", "Перегруппировка за поворотом", "弯道集合", "在彎路重整", }, 
+{ "Defeat the Packmaster", "Besiegt den Rottenkommandanten", "Derrota al maestro de manada", "Derrota al Maestro de la manada", "Vaincre le maître de la meute", "Sconfiggi il Mastrobranco", "무리지도자 처치", "Derrote o Líder da Alcateia", "Победите властителя стаи", "击败兽王", "擊敗狼王", }, 
+{ "Survive the Gauntlet", "Spießrutenlauf", "Sobrevive al ataque", "Sobrevive al ataque", "Survivre au Défi", "Sopravvivi alla sfida", "시련", "Sobreviva à Forquilha", "Выживите на Улице Испытаний", "挡住敌人的夹击", "一線生機", }, 
+{ "Slay Durn the Hungerer", "Tötet Durn den Nimmersatten", "Mata a Durn el Hambriento", "Mata a Durn el Hambriento.", "Vaincre Durn l’Affameur", "Uccidi Durn il Famelico", "굶주린 두른 처치", "Mate Durn, o Famélico", "Убейте Дарна Ненасытного", "击败饥饿者杜恩", "殺死『飢餓者』唐恩", }, 
+{ "The Final Gates", "Die letzten Tore", "Las puertas finales", "La puerta final", "Les portes du trône", "I cancelli finali", "마지막 관문", "Os Portões Finais", "Последние врата", "最后关头", "最後的大門", }, 
+{ "Confront Warlord Garrosh Hellscream", "Konfrontiert Kriegsherr Garrosh Höllschrei", "Enfréntate al señor de la guerra Garrosh Grito Infernal", "Confronta al Señor de la Guerra Garrosh Grito Infernal.", "Affronter le seigneur de guerre Garrosh Hurlenfer", "Affronta il Signore della Guerra Garrosh Malogrido", "전쟁군주 가로쉬 헬스크림과 대면", "Confronte o Senhor da Guerra Garrosh Grito Infernal", "Сразитесь с вождем Гаррошем Адским Криком", "对抗督军加尔鲁什·地狱咆哮", "迎戰卡爾洛斯‧地獄吼酋長", }, 
+},
+["201"] = {
+{ "The Flight Master", "Die Flugmeisterin", "El maestro de vuelo", "El maestro de vuelo", "Le maître de vol", "Il Maestro di Volo", "비행 조련사", "O Mestre de Voo", "Распорядитель полетов", "飞行管理员", "飛行管理員", }, 
+{ "A.C.E.s High", "Spaß mit A.S.S.", "El fuego de la venganza", "El fuego de la venganza", "Un as dans la manche", "Assalto dal cielo", "훌륭한 전투", "Uma Prova de Fogo", "А.С. на высоте", "A.C.E.空袭", "A.C.E.部隊來襲", }, 
+{ "Reclaim the Court!", "Die Rückeroberung des Hofes!", "¡Reclama la corte!", "¡Reclama la corte!", "Reprenez la cour !", "Riconquista la corte!", "요새를 되찾아라!", "Domine o Pátio!", "Возвращение контроля над двором", "夺回庭院！", "收復中庭!", }, 
+{ "The Warlord", "Der Kriegsfürst", "El señor de la guerra", "El señor de la guerra", "Le seigneur de guerre", "Il Signore della Guerra", "장군", "O Senhor da Guerra", "Полководец", "督军", "督軍", }, 
+{ "Legwork", "Lauferei", "Trabajo preliminar", "Trabajo preliminar", "Travail sur le terrain", "Raccolta informazioni", "탐문 조사", "Pernadas", "Беготня", "外勤工作", "跑腿", }, 
+{ "Setting Up", "Vorbereitung", "Tanto monta, monta tanto", "Tanto monta, monta tanto", "Préparatifs", "Preparare le difese", "방어 준비", "Preparar Armas", "Установка", "装备中", "做好準備", }, 
+{ "Hold the Line!", "Weicht nicht zurück!", "¡Mantén la formación!", "¡Mantén la formación!", "Tenir le front !", "Difendi la posizione!", "전선을 사수하라!", "Mantenham a Formação!", "Держать строй!", "坚守阵地！", "守住陣線!", }, 
+},
+["709"] = {
+{ "The Everbloom", "Der Immergrüne Flor", "El Vergel Eterno", "El Sempibrote", "La Flore éternelle", "Verdeterno", "상록숲", "Floretérnia", "Вечное Цветение", "永茂林地", "永茂林", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["545"] = {
+{ "Blackrock Caverns", "Die Schwarzfelshöhlen", "Cavernas Roca Negra", "Cavernas Roca Negra", "Cavernes de Rochenoire", "Caverne di Roccianera", "검은바위 동굴", "Caverna Rocha Negra", "Пещеры Черной горы", "黑石岩窟", "黑石洞穴", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["684"] = {
+{ "Iron Docks", "Eisendocks", "Puerto de Hierro", "Muelles de Hierro", "Quais de Fer", "Darsena di Ferro", "강철 선착장", "Docas de Ferro", "Железные доки", "钢铁码头", "鋼鐵碼頭", }, 
+},
+["320"] = {
+{ "Speak with Durotan", "Sprecht mit Durotan", "Habla con Durotan", "Habla con Durotan", "Parler à Durotan", "Parla con Durotan", "듀로탄과 대화", "Fale com Durotan", "Поговорите с Дуротаном.", "与杜隆坦的谈话", "和杜洛坦交談。", }, 
+{ "Get to the Machinehouse", "Erreicht das Maschinenhaus", "Ve a la Casamáquina", "Ve a la casa de máquinas", "À la machinerie", "Raggiungi l'Officina Bellica", "기계작업장", "Vá para a Casa de Máquinas", "Добраться до машинного зала", "前往机房", "前往機械室", }, 
+{ "Goraluk Anvilcrack", "Goraluk Hammerbruch", "Goraluk Yunquegrieta", "Goraluk Yunquegrieta", "Goraluk Brisenclume", "Goraluk Spaccaroccia", "고랄루크 앤빌크랙", "Goraluk Rachadastra", "Горалук Треснувшая Наковальня", "古拉鲁克", "古拉魯克", }, 
+{ "Get to Supply Depot", "Erreicht das Vorratslager", "Ve al depósito de suministros", "Ve al depósito de suministros", "Au dépôt", "Raggiungi il Deposito Rifornimenti", "보급고", "Vá para o Depósito de Suprimentos", "Добраться до склада", "前往补给站", "前往補給站", }, 
+{ "Survive Iron Horde Onslaught", "Überlebt den Ansturm der Eisernen Horde", "Sobrevive a la masacre de la Horda de Hierro", "Sobrevive al embate de la Horda de Hierro", "Survivre à l’attaque de la Horde de Fer", "Sopravvivi all'attacco dell'Orda di Ferro", "강철 호드의 맹공격 견디기", "Sobreviva ao Massacre da Horda de Ferro", "Пережить атаку Железной Орды", "中流砥柱", "在鋼鐵部落的突襲中存活", }, 
+{ "Get to Central Dock", "Erreicht den zentralen Kai", "Llega al muelle central", "Ve al muelle central", "Atteindre le quai central", "Raggiungi il Molo Centrale", "중앙 부두", "Vá à Doca Central", "Добраться до центрального дока", "前往中央码头区", "前往中央碼頭", }, 
+{ "Get on the Barge", "Gelangt an Bord", "Sube a la barcaza", "Sube a la barcaza", "Monter à bord de la péniche", "Abborda la Chiatta", "승선", "Entre na Barcaça.", "Попасть на баркас", "登上舰艇", "登上駁船。", }, 
+{ "Destroy the Wavemurder Barge", "Zerstört die 'Wellenmord'", "Destruye la barcaza Mataolas", "Destruye la barcaza Mataolas", "Détruire la péniche Crime-des-Flots", "Distruggi la Chiatta Tsunami", "물결궂힘 화물선 파괴", "Destrua a Barcaça Mata-onda", "Уничтожить разбивающий волны баркас", "摧毁镇潮号舰艇", "摧毀弒浪者駁船", }, 
+},
+["620"] = {
+{ "The Arcatraz", "Die Arkatraz", "El Arcatraz", "El Arcatraz", "L’Arcatraz", "Arcatraz", "알카트라즈", "Arcatraz", "Аркатрац", "禁魔监狱", "亞克崔茲", }, 
+},
+["1307"] = {
+{ "The Lords of Wind", "Die Herren des Windes", "Los Señores del Viento", "Los Señores del viento", "Les seigneurs du Vent", "I Signori del Vento", "바람의 군주들", "Os senhores do vento", "Повелители ветров", "风之领主", "御風領主", }, 
+{ "The Skylord Returns", "Die Rückkehr des Himmelsfürsten", "El regreso del Señor del Cielo", "El regreso del Señor del cielo", "Le retour du seigneur du ciel", "Il ritorno del Signore dei Cieli", "하늘군주의 귀환", "O Senhor Celeste retorna", "Возвращение повелителя небес", "啸天者归来", "天空領主歸位", }, 
+},
+["901"] = {
+{ "The Call of the North", "Der Ruf des Nordens", "La llamada del norte", "El llamado del Norte", "L’appel du Nord", "Il richiamo del nord", "노스렌드의 부름", "O chamado do Norte", "Зов Севера", "北地的召唤", "北地的呼喚", }, 
+{ "The Gates Are Open", "Die Tore sind offen", "Las puertas están abiertas", "Las puertas están abiertas", "Opération portes ouvertes", "Le porte sono aperte", "활짝 열린 관문", "Os portões estão abertos", "Врата открыты", "敞开的大门", "門已開啟", }, 
+{ "Seek the Fragments", "Sucht die Fragmente", "Buscar los fragmentos", "Busca los fragmentos", "Chercher les fragments", "Cercare i frammenti", "조각 모으기", "Procure os fragmentos", "В поисках обломков", "寻找碎片", "尋找碎片", }, 
+{ "Travel to the Frozen Throne", "Reist zum Frostthron", "Viajar al Trono Helado", "Viaja al Trono Congelado", "Voyage vers le Trône de glace", "Raggiungere il Trono di Ghiaccio", "얼어붙은 왕좌로", "Vá até o Trono de Gelo", "Подъем к Ледяному Трону", "前往冰封王座", "前往冰封王座", }, 
+{ "Power Overwhelming", "Die Macht ist überwältigend", "Poder sobrecogedor", "Sobredosis de poder", "Puissance accablante", "Potere travolgente", "압도적인 힘", "Poder esmagador", "Переполняющая мощь", "无上之力", "壓倒性的力量", }, 
+{ "The Purge", "Die Reinigung", "La purga", "La Purga", "La purge", "La purificazione", "정화", "O expurgo", "Очищение", "净化", "淨化", }, 
+{ "The Hungering Cold", "Die zehrende Kälte", "El frío voraz", "El frío voraz", "Le Froid dévorant", "Freddo penetrante", "갈망의 한기", "O frio voraz", "Алчущий холод", "饥饿之寒", "飢寒之力", }, 
+{ "Death's March", "Tödlicher Marsch", "La marcha de la muerte", "La Marcha de la muerte", "Marche funèbre", "La marcia della morte", "죽음의 행진", "Marcha da morte", "Марш смерти", "死亡远征", "亡靈進軍", }, 
+{ "You Have Your Orders", "Ihr habt Eure Befehle", "Tienes tus órdenes", "Tienes tus órdenes", "Vous connaissez les ordres", "Hai i tuoi ordini", "명령을 수행하라", "Você já tem as ordens", "Приказ есть приказ", "听命行事", "你聽到命令了", }, 
+},
+["1092"] = {
+{ "The Empty Camp", "Das leere Lager", "El campamento vacío", "El campamento vacío", "Le campement désert", "Accampamento abbandonato", "버려진 야영지", "O acampamento vazio", "Опустевший лагерь", "空营", "空蕩蕩的營地", }, 
+{ "Clearing the Way", "Den Weg frei machen", "Despejando el camino", "Despejando el camino", "Faire place nette", "Ripulire la strada", "길 뚫기", "Abrindo caminho", "Расчистка пути", "清除路障", "清除障礙", }, 
+{ "Keeper's Rest", "Die Rast des Hüters", "Reposo del Vigilante", "Reposo del Vigilante", "Le repos du Vigilant", "Riposo del Guardiano", "수호자의 안식처", "Pouso do Guardião", "Последнее пристанище Хранителя", "守护者之眠", "守護者之憩", }, 
+{ "The Broken Ritual", "Das Ritual der Zerschlagenen", "El ritual destrozado", "El ritual roto", "Le rituel interrompu", "Rituale infranto", "중단된 의식", "O ritual partido", "Прерванный ритуал", "失败的仪式", "破碎的儀式", }, 
+{ "Into the Dark", "In das Dunkel", "Hacia la oscuridad", "En la oscuridad", "Dans les ténèbres", "Nelle tenebre", "어둠 속으로", "Treva adentro", "Спуск во тьму", "在黑暗中", "進入黑暗", }, 
+{ "The Maw of the Beast", "Der Schlund der Bestie", "Las fauces de la bestia", "Las fauces de la bestia", "La gueule de la bête", "Il morso della bestia", "괴수의 아귀", "A gorja da fera", "Пасть чудовища", "野兽之喉", "勇闖虎穴", }, 
+{ "Escaping the Prison", "Gefängnisflucht", "Escapar de la prisión", "Huida de la prisión", "Sortir de la prison", "Fuga dalla prigione", "감옥 탈출", "Fuga da prisão", "Побег из темницы", "脱狱", "逃出監牢", }, 
+{ "Aid to the Fallen", "Hilfe für die Gefallenen", "Ayuda para los caídos", "Ayuda para los caídos", "Aider les blessés", "Aiuto ai caduti", "성기사 구제", "Ajuda aos caídos", "Помощь павшим", "援助掉队者", "救人要緊", }, 
+{ "Something is Coming", "Etwas nähert sich", "Algo se acerca", "Algo se acerca", "Quelque chose approche", "Qualcosa è in arrivo", "사악한 존재의 엄습", "Tem alguma coisa chegando", "Что-то грядет...", "它来了", "有什麼東西過來了", }, 
+{ "Ritual Defense", "Ritualverteidigung", "La defensa del ritual", "La defensa del ritual", "Défense de rituel", "Difesa del rituale", "의식 방어", "Defesa do ritual", "Безопасность ритуала", "仪式保卫", "儀式攻防", }, 
+{ "The Silver Hand", "Die Silberne Hand", "La Mano de Plata", "La Mano de Plata", "La Main-d’Argent", "Mano d'Argento", "은빛 손", "O Punho de Prata", "Серебряная Длань", "白银之手", "白銀之手", }, 
+},
+["907"] = {
+{ "Defend the Crossroads", "Verteidigt das Wegekreuz", "Defiende El Cruce", "Defiende el Cruce", "Défendre la Croisée", "Difendere il Crocevia", "십자로 방어", "Defenda a Encruzilhada", "Оборона Перекрестка", "保卫十字路口", "守禦十字路口", }, 
+{ "Defeat the Demon Commander", "Bezwingt den Dämonenkommandanten", "Derrota al comandante demoníaco", "Derrota al Comandante demoníaco", "Terrasser le commandant démon", "Sconfiggere il comandante demoniaco", "악마 사령관 처치", "Derrotar o Demônio Comandante", "Победа над командиром демонов", "击败恶魔指挥官", "擊敗惡魔指揮官", }, 
+{ "Repel the Legion Forces", "Schlagt die Streitkräfte der Legion zurück", "Rechaza a los ejércitos de la Legión", "Repele a las fuerzas de la Legión", "Repousser les troupes de la Légion", "Respingere le forze della Legione", "군단 격퇴", "Rechace as forças da Legião", "Отражение натиска Легиона", "击退军团部队", "擊退燃燒軍團", }, 
+{ "Defeat the Demon Lord", "Bezwingt den Dämonenfürsten", "Derrota al señor demoníaco", "Derrota al Señor demoníaco", "Terrasser le seigneur démon", "Sconfiggere il Signore dei Demoni", "악마 군주 처치", "Derrote o Lorde Demônio", "Смерть повелителю демонов", "击败恶魔领主", "擊敗惡魔領主", }, 
+},
+["611"] = {
+{ "The Black Morass", "Der Schwarze Morast", "La Ciénaga Negra", "La Ciénaga Negra", "Le Noir marécage", "Palude Nera", "검은늪", "Lamaçal Negro", "Черные топи", "黑色沼泽", "黑色沼澤", }, 
+},
+["677"] = {
+{ "Grand Champions", "Großchampions", "Grandes Campeones", "Grandes Campeones", "Grands champions", "Gran Campioni", "최고 용사", "Grandes campeões", "Абсолютные чемпионы", "总冠军", "大勇士", }, 
+{ "Argent Trial", "Argentumprüfung", "Prueba Argenta", "Prueba argenta", "Épreuve d’argent", "Prova d'Argento", "은빛십자군의 시험", "Torneio Argênteo", "Испытание Серебряного авангарда", "银色试炼", "銀白試煉", }, 
+{ "The Black Knight", "Der schwarze Ritter", "El Caballero Negro", "El Caballero Negro", "Le Chevalier noir", "Cavaliere Nero", "흑기사", "O Cavaleiro Negro", "Черный рыцарь", "黑骑士", "黑騎士", }, 
+},
+["1066"] = {
+{ "Big Help", "Große Hilfe", "Gran ayuda", "Gran ayuda", "Un appui de taille", "Un grande aiuto", "생명의 은인", "Grande ajuda", "Большой помощник", "大救星", "莫大的幫助", }, 
+{ "Rescue Wavespeaker Adelee", "Rettet Wellensprecherin Adelee", "Rescatar a la hablaolas Adelee", "Rescata a Hablaolas Adelee", "Secourir la parle-vague Adelee", "Salvare la Parlaonde Adelee", "파도예언자 아델리 구출", "Resgate a Falaondas Adelee", "Спасение говорящей с волнами Адель", "解救波涛语者安德莉", "拯救語濤者愛德麗", }, 
+{ "Secure the Central Junction", "Sichert die zentrale Kreuzung", "Asegurar el cruce central", "Asegura la Intersección central", "Prendre le contrôle du croisement central", "Controllo del bivio centrale", "중앙 교차로 확보", "Conquiste a Junção Central", "Центральное пересечение", "清理中央路口", "占領中央匯合點", }, 
+{ "Water Gauntlet", "Der Wasserspießrutenlauf", "Reto de agua", "Guantelete de agua", "La fureur des flots", "La prova dell'acqua", "파도의 시련", "Provação aquática", "Испытание водой", "水护手", "激流障壁", }, 
+{ "Destroy the Sea Witch", "Vernichtet die Seehexe", "Acaba con la bruja del mar", "Destruye a la Bruja del mar", "Anéantir la sorcière des mers", "Distruggere la Strega di Mare", "바다 마녀 처치", "Destruam a Bruxa do Mar", "Смерть морской ведьмы", "消灭海巫", "消滅海巫", }, 
+{ "Acquire Sharas'dal", "Bringt Sharas'dal in Euren Besitz", "Hazte con Sharas'dal", "Obtén Sharas'dal", "Obtenir Sharas’dal", "Ottenere Sharas'dal", "샤라스달 획득", "Obter Sharas'dal", "Завладеть Шарас'далом", "获得莎拉达尔", "取得薩拉達爾", }, 
+},
+["1189"] = {
+{ "The Broken Shore", "Die Verheerte Küste", "Costa Abrupta", "La Costa Quebrada", "Rivage Brisé", "Riva Dispersa", "부서진 해변", "A Costa Partida", "Расколотый берег", "破碎海滩", "破碎海岸", }, 
+{ "Storm The Beach", "Erstürmt den Strand", "Asalta la playa", "Asalta la playa", "Le grand débarquement", "Assalto alla spiaggia", "해변 청소", "Tomar a praia", "Штурм побережья", "抢滩登陆", "興師海灘", }, 
+{ "Defeat the Commander", "Bezwingt den Kommandanten", "Derrota al comandante", "Derrota al Comandante", "Terrasser le commandant", "Sconfiggere il comandante", "사령관 처치", "Derrotar o Comandante", "Убить командира", "击败指挥官", "擊敗指揮官", }, 
+{ "Find The Others", "Die anderen finden", "Encuentra a los otros", "Encuentra a los demás", "Trouver les autres", "Trova gli altri", "다른 이 찾기", "Encontrar os outros", "Найти остальных", "找到其他人", "找到其他人", }, 
+{ "Destroy the Portal", "Vernichtet das Portal", "Destruye el portal", "Destruye el portal", "Destruction du portail", "Distruggere il portale", "차원문 파괴", "Destruir o portal", "Разрушение портала", "摧毁传送门", "摧毀傳送門", }, 
+{ "Raze the Black City", "Legt die Schwarze Stadt in Schutt und Asche", "Arrasar la Ciudad Negra", "Arrasa la Ciudad Negra", "Le sac de la ville Noire", "Assalto alla Città Oscura", "검은 도시 공격", "Arrasar a Cidade Negra", "Предайте огню Черный город", "扫荡黑色之城", "夷平黑城", }, 
+{ "The Highlord", "Der Hochlord", "El Alto Señor", "El Alto Señor", "Le généralissime", "Il Gran Signore", "대영주", "O grão-lorde", "Верховный лорд", "大领主", "大領主", }, 
+{ "Krosus", "Krosus", "Krosus", "Krosus", "Krosus", "Krosus", "크로서스", "Krosus", "Крос", "克洛苏斯", "克羅索斯", }, 
+{ "Hold The Ridge", "Haltet den Grat", "Defiende la cresta", "Mantener la cresta", "Tenir la crête", "Difendi la cresta", "마루 방어", "Defenda o cume", "Удержать высоту", "死守山脊", "守住山脊", }, 
+},
+["977"] = {
+{ "Darkheart Thicket", "Das Finsterherzdickicht", "Arboleda Corazón Oscuro", "Matorral Corazón Oscuro", "Fourré Sombrecœur", "Boschetto Cuortetro", "어둠심장 숲", "Bosque Corenegro", "Чаща Темного Сердца", "黑心林地", "暗心灌木林", }, 
+},
+["619"] = {
+{ "The Steamvault", "Dampfkammer", "La Cámara de Vapor", "La Cámara de Vapor", "Le caveau de la Vapeur", "Antro dei Vapori", "증기 저장고", "Câmara dos Vapores", "Паровое подземелье", "蒸汽地窟", "蒸汽洞窟", }, 
+},
+["900"] = {
+{ "Stalking Your Prey", "Der Beute auf der Spur", "Acechar a tu presa", "Acechar tu presa", "Traquer votre proie", "Inseguire la preda", "먹이 추적", "No rastro da presa", "Преследование жертвы", "追踪你的猎物", "跟蹤獵物", }, 
+{ "They Are Not Prepared", "Sie wissen nicht, was sie erwartet", "No están preparados", "No están preparados", "Ils ne sont pas prêts", "Loro non sono pronti", "아직 준비가 안 된 자들", "Eles não estão preparados", "Они не готовы", "他们这是自寻死路", "他們還沒準備好", }, 
+{ "Wrath of the Illidari", "Zorn der Illidari", "Cólera de los Illidari", "Ira de los Illidari", "La colère des Illidari", "L'ira degli Illidari", "일리다리의 분노", "Ira dos Illidari", "Гнев иллидари", "伊利达雷之怒", "伊利達瑞之怒", }, 
+{ "Unleashed Havoc", "Entfesselte Verwüstung", "Estragos desatados", "Las Espadas Gemelas del Falsario", "Dévastation déchaînée", "Caos scatenato", "샘솟는 파멸", "Devastação desenfreada", "Полное истребление", "释放的浩劫", "災虐降臨", }, 
+{ "The Twinblades of the Deceiver", "Die Zwillingsklingen des Betrügers", "Las Hojas Gemelas del Impostor", "Las Espadas Gemelas del Falsario", "Les lames jumelles du Trompeur", "Le Lame Gemelle dell'Ingannatore", "기만자의 쌍날검", "As Lâminas Gêmeas do Enganador", "Парные клинки Искусителя", "欺诈者的双刃", "欺詐者雙刃", }, 
+},
+["576"] = {
+{ "The Oculus", "Das Oculus", "El Oculus", "El Oculus", "L’Oculus", "Oculus", "마력의 눈", "Óculus", "Окулус", "魔环", "奧核之眼", }, 
+},
+["294"] = {
+{ "Razorfen Kraul", "Kral der Klingenhauer", "Horado Rajacieno", "Horado Rajacieno", "Kraal de Tranchebauge", "Gallerie di Lamaspina", "가시덩굴 우리", "Urzal dos Tuscos", "Лабиринты Иглошкурых", "剃刀沼泽", "剃刀沼澤", }, 
+},
+["1065"] = {
+{ "The Azure Prisoner", "Der Azurgefangene", "El prisionero azur", "El Prisionero Azur", "Le prisonnier d’Azur", "Il prigioniero azzurro", "하늘빛 포로", "O prisioneiro lazúli", "Лазурный пленник", "碧蓝囚徒", "藍龍俘虜", }, 
+{ "Seeking Answers", "Antworten suchen", "Buscando respuestas", "Buscando respuestas", "Chercher des réponses", "In cerca di risposte", "답 구하기", "Em busca de respostas", "В поисках ответов", "寻找答案", "找尋解答", }, 
+{ "Cleansed by Holy Fire", "Von heiligem Feuer geläutert", "Purificado con Fuego Sagrado", "Limpiado por el Fuego Sagrado", "Purification par les flammes sacrées", "Purificato dal Fuoco Sacro", "신성한 불꽃의 정화", "Purgado por Fogo Sagrado", "Очищение священным огнем", "圣火的净化", "聖火淨化", }, 
+{ "The Way Out is Through", "Da müsst Ihr durch", "La salida es a través", "Para salir hay que atravesar", "La seule issue", "L'uscita è attraverso", "나가는 유일한 방법은...", "A saída é pelo meio", "Единственный путь – вперед", "道路通畅", "穿過去是唯一的路", }, 
+{ "Consumed by Void", "Von Leere verschlungen", "Consumido por el vacío", "Consumido por el Vacío", "Consumé par le Vide", "Consumato dal Vuoto", "공허의 흡수", "Consumidos pelo caos", "Поглощение Бездной", "虚空吞噬", "被虛無吞噬", }, 
+{ "A Will of Fire", "Ein feuriger Wille", "Una voluntad de fuego", "Una voluntad de fuego", "Volonté de feu", "Una volontà di fuoco", "화염의 의지", "Vontade de fogo", "Воля огня", "圣火的意志", "烈焰意志", }, 
+{ "To Wield the Flame", "Die Flamme führen", "Blandir la llama", "Blandir la llama", "Flamme en main", "Impugnare la fiamma", "불꽃 휘두르기", "O brandir da chama", "Огонь в руках", "玩火者", "操弄烈焰", }, 
+},
+["908"] = {
+{ "Show Faction Specific Criteria", "Fraktionsspezifische Kriterien anzeigen", "Mostrar los criterios específicos de la facción", "Mostrar los criterios específicos de las facciones", "Montrer les critères spécifiques de faction", "Show Faction Specific Criteria", "진영 구체적인 조건 보이기", "Mostrar critérios por facção", "Показать критерии фракций", "显示阵营指定条件", "Show Faction Specific Criteria", }, 
+{ "A Final Step", "Ein letzter Schritt", "Un último paso", "El último paso", "Dernière étape", "L'ultimo passo", "마지막 단계", "Um último passo", "Последний шаг", "最后一步", "最後一步", }, 
+},
+["1061"] = {
+{ "The Legion's Devastation", "Das Wüten der Legion", "La devastación de la Legión", "La Devastación de la Legión", "Les ravages de la Légion", "Devastazione della Legione", "군단의 만행", "A devastação da Legião", "Опустошение Легиона", "军团的袭击", "燃燒軍團的破壞", }, 
+{ "Saving the Injured", "Rettung der Verletzten", "Salvar a los heridos", "Salva a los Heridos", "Sauver les blessés", "Salvare i feriti", "부상자 구하기", "Resgate dos feridos", "Спасение раненых", "救治伤员", "拯救傷者", }, 
+{ "The Renewal Begins", "Die Erneuerung beginnt", "Empieza la renovación", "La Renovación comienza", "Prélude au renouveau", "La purificazione ha inizio", "소생의 시작", "A renovação começa", "Начало возрождения", "重获新生", "淨化開始", }, 
+{ "Cleansing the Corruption", "Läutern der Verderbnis", "Limpiar la corrupción", "Purificar la corrupción", "Halte à la corruption", "Purificare la corruzione", "타락 정화", "Purificar a corrupção", "Очищение от порчи", "清除腐化", "清除腐化", }, 
+{ "The Moment of Truth", "Der Moment der Wahrheit", "La hora de la verdad", "El Momento de la verdad", "L’instant de vérité", "Il momento della verità", "진실의 시간", "A hora da verdade", "Момент истины", "真理时刻", "關鍵的一刻", }, 
+{ "G'Hanir Reborn", "G'Hanirs Wiedergeburt", "G'Hanir renacido", "G'Hanir renacido", "G’Hanir réincarné", "G'hanir risorto", "부활한 그하니르", "G'hanir renascida", "Перерожденный Г'ханир", "加尼尔重生", "格哈尼爾重生", }, 
+{ "Nature's Wrath", "Zorn der Natur", "Cólera de la Naturaleza", "Ira de la Naturaleza", "Courroux de la nature", "Ira Naturale", "자연의 격노", "Fúria da natureza", "Ярость природы", "自然之怒", "自然之怒", }, 
+},
+["612"] = {
+{ "The Botanica", "Die Botanika", "El Invernáculo", "El Invernáculo", "La Botanica", "Botanica", "신록의 정원", "Jardim Botânico", "Ботаника", "生态船", "波塔尼卡", }, 
+},
+["1068"] = {
+{ "Making Introductions", "Vorstellungsrunde", "Hacer las presentaciones", "Empezando a conocerse", "Présentations", "Presentazioni", "친구 소개", "Apresentações", "Знакомство", "介绍一下", "彼此介紹", }, 
+{ "Tomb Raider", "Die Gruft ruft!", "Asaltatumbas", "Cazador de tumbas", "Pilleur de tombes", "Incursione nelle tombe", "무덤 탐험가", "Saqueadores de tumbas", "Расхитители гробниц", "古墓丽影", "古墓奇兵", }, 
+{ "Volund's Hoard", "Volunds Beutekammer", "Tesoro de Volund", "Reserva de Volund", "Le trésor de Volund", "Il tesoro di Volund", "볼룬드의 저장고", "O tesouro de Volund", "Сокровищница Волунда", "沃伦德的宝库", "沃隆德的寶庫", }, 
+{ "Every Nook and Cranny", "Jede Nische und Ritze", "Hasta el último rincón", "Cada esquina y rincón", "Fouille en règle", "Cerca in ogni angolo", "구석구석 샅샅이", "Cada cantinho", "Перевернуть все вверх дном", "翻箱倒柜", "翻遍每一個角落", }, 
+{ "Volund's Last Stand", "Volunds letztes Gefecht", "La última batalla de Volund", "El último ataque de Volund", "Le baroud de Volund", "L'ultima difesa di Volund", "볼룬드의 최후의 저항", "A resistência final de Volund", "Последний бой Волунда", "沃伦德的最后一战", "沃隆德的最後一搏", }, 
+{ "Answering the Call", "Dem Ruf folgen", "Responder a la llamada", "Respondiendo al llamado", "Répondre à l’appel", "Rispondere alla chiamata", "기계노움의 부름", "Atendendo ao chamado", "Новый зов", "响应召唤", "回應呼喚", }, 
+},
+["508"] = {
+{ "Launch the Attack", "Zum Angriff blasen", "Inicia el ataque", "Lanza el ataque", "Lancer l’attaque", "Avvia l'attacco", "공격 개시", "Inicie o ataque", "В атаку", "开始攻击", "開始攻擊", }, 
+{ "Gather at the Bend", "An der Kurve sammeln", "Reunión en la curva", "Reunión en la curva", "Rassemblement au tournant", "Radunata presso la svolta", "재집결", "Reunir-se na Curva", "Сбор за поворотом", "弯道集合", "在彎路集結", }, 
+{ "Defeat the Packmaster", "Besiegt den Rottenkommandanten", "Derrota al maestro de manada", "Derrota al Maestro de la manada", "Vaincre le maître de la meute", "Sconfiggi il Mastrobranco", "무리지도자 처치", "Derrote o Líder da Alcateia", "Победите властителя стаи", "击败兽王", "擊敗狼王", }, 
+{ "Survive the Gauntlet", "Spießrutenlauf", "Sobrevive al ataque", "Sobrevive al ataque", "Survivre au Défi", "Sopravvivi alla sfida", "시련", "Sobreviva à Forquilha", "Выживите на Улице Испытаний", "挡住敌人的夹击", "一線生機", }, 
+{ "Slay Durn the Hungerer", "Tötet Durn den Nimmersatten", "Mata a Durn el Hambriento", "Mata a Durn el Hambriento.", "Vaincre Durn l’Affameur", "Uccidi Durn il Famelico", "굶주린 두른 처치", "Mate Durn, o Famélico", "Убейте Дарна Ненасытного", "击败饥饿者杜恩", "殺死『飢餓者』唐恩", }, 
+{ "The Final Gates", "Die letzten Tore", "Las puertas finales", "La puerta final", "Les portes du trône", "I cancelli finali", "마지막 관문", "Os Portões Finais", "Последние врата", "最后关头", "最後的大門", }, 
+{ "Confront Warlord Garrosh Hellscream", "Konfrontiert Kriegsherr Garrosh Höllschrei", "Enfréntate al señor de la guerra Garrosh Grito Infernal", "Confronta al Señor de la Guerra Garrosh Grito Infernal.", "Affronter le seigneur de guerre Garrosh Hurlenfer", "Affronta il Signore della Guerra Garrosh Malogrido", "전쟁군주 가로쉬 헬스크림과 대면", "Confronte o Senhor da Guerra Garrosh Grito Infernal", "Сразитесь с вождем Гаррошем Адским Криком", "对抗督军加尔鲁什·地狱咆哮", "迎戰卡爾洛斯‧地獄吼酋長", }, 
+},
+["1051"] = {
+{ "Court of Stars", "Der Hof der Sterne", "Corte de las Estrellas", "Corte de Estrellas", "Cour des Étoiles", "Corte delle Stelle", "별의 궁정", "Pátio das Estrelas", "Квартал Звезд", "群星庭院", "眾星之廷", }, 
+},
+["577"] = {
+{ "Utgarde Pinnacle", "Turm Utgarde", "Pináculo de Utgarde", "Pináculo de Utgarde", "Cime d’Utgarde", "Pinnacolo di Utgarde", "우트가드 첨탑", "Pináculo Utgarde", "Вершина Утгард", "乌特加德之巅", "俄特加德之巔", }, 
+},
+["1308"] = {
+{ "Upper Return to Karazhan", "Obere Rückkehr nach Karazhan", "Regreso a Karazhan superior", "Regreso superior a Karazhan", "Retour à Karazhan (sommet)", "Ritorno a Karazhan Superiore", "다시 찾은 카라잔 상층", "Retorno a Karazhan superior", "Возвращение в Каражан (верхняя часть)", "重返卡拉赞（上层）", "重返卡拉贊上層", }, 
+},
+["795"] = {
+{ "Wait For Players", "Wartet auf Spieler", "Esperar a jugadores", "Espera a los jugadores", "En attente de joueurs", "Attendi gli altri giocatori", "플레이어 기다리기", "Aguarde jogadores", "Ожидание игроков", "等待玩家", "等待救援*", }, 
+{ "Tides of Glory", "Die Wellen des Ruhms", "Mareas de Gloria", "Mareas de gloria", "Les marées de la gloire", "Maree della gloria", "영광의 해일", "Mares da glória", "Волны Славы", "荣光滔滔", "榮耀之潮", }, 
+{ "The Tidestone's Call", "Der Ruf des Gezeitensteins", "La llamada de la Piedramar", "La llamada de la Maretista", "L’appel de la Pierre-des-Marées", "Chiamata della Pietra delle Maree", "해일석의 부름", "O chamado da Pedramar", "Зов Приливного камня", "潮汐之石的召唤", "潮石的呼喚", }, 
+{ "The Siegebreakers", "Die Belagerungsbrecher", "Los rompedores de asedio", "Los Rompedores de Asedio", "Les brise-siège", "Gli Spezzassedi", "공성파괴자", "Os quebra-cercos", "Стеноломы", "破城者", "突圍者", }, 
+{ "Feeding on the Tidestone", "Zehren vom Gezeitenstein", "Alimentarse de la Piedramar", "Alimentándose de la Maretista", "Déprédateurs de la Pierre-des-Marées", "Consumare la Pietra delle Maree", "해일석의 힘 흡수", "Predadores da Pedramar", "Истощение Приливного камня", "吸取潮汐之石", "吸取潮石之力", }, 
+{ "The Hunger", "Der Hunger", "El hambre", "El ansia", "La faim", "La fame", "굶주림", "A fome", "Голод", "饥渴", "極度飢餓", }, 
+{ "As Two-Faced As They Come", "Hinterhältiger geht's nicht", "Falsos como ellos solos", "Se acercan los hipócritas", "Le gueux aux deux visages", "Due facce della stessa medaglia", "두 얼굴의 자들", "Mais duas caras, impossível", "Двуличнее не бывает", "两面三刀的下场", "全是表裡不一的傢伙", }, 
+},
+["1038"] = {
+{ "A Ring Unbroken", "Ein ungebrochener Ring", "Un anillo intacto", "Un anillo intacto", "Un cercle toujours vaillant", "Il circolo intatto", "부서지지 않은 고리", "Um círculo intacto", "Несломленные Служители", "不屈之环", "重建陶土議會", }, 
+{ "We Glorious Few", "Eine glorreiche Handvoll", "Unos pocos gloriosos", "Un puñado de gloria", "Les derniers braves", "Pochi ma buoni", "얼마 남지 않은 영광의 주인공들", "Nós, os gloriosos", "Горстка героев", "光荣的坚持", "光榮的倖存者", }, 
+{ "Melee at the Maelstrom", "Kampf am Mahlstrom", "Cuerpo a cuerpo en La Vorágine", "Pelea en La Vorágine", "Du rififi au Maelström", "Scontro nel Maelstrom", "혼돈의 소용돌이에서의 난전", "Refrega na voragem", "Разборки у Водоворота", "大漩涡的战斗", "混戰大漩渦", }, 
+{ "Felling the Felbat", "Teufelsfledermaustöten", "Derribar al murciélago vil", "Derribando al murciélago vil", "Abattre le gangroptère", "Eliminazione del vilpipistrello", "지옥박쥐의 추락", "A queda do morcevil", "Сбейте сквернотопыря", "击落魔蝠", "擊落魔化蝙蝠", }, 
+{ "Master of Storms", "Meister der Stürme", "Maestro de las tormentas", "Maestro de las tormentas", "Maître des tempêtes", "Signore della Tempesta", "폭풍의 주인", "Mestre das Tempestades", "Повелитель грозы", "风暴主宰", "風暴主宰", }, 
+},
+["995"] = {
+{ "Maw of Souls", "Der Seelenschlund", "Fauce de Almas", "Fauces de almas", "Gueule des âmes", "Fauci delle Anime", "영혼의 아귀", "Gorja das Almas", "Утроба душ", "噬魂之喉", "靈魂之喉", }, 
+},
+["211"] = {
+{ "Speak with Wrathion", "Sprecht mit Furorion", "Habla con Wrathion", "Habla con Wrathion", "Parler à Irion", "Parla con Irathion", "래시온과 대화", "Falar com Wrathion", "Поговорить с Гневионом", "与拉希奥交谈", "與怒西昂交談", }, 
+{ "Forged from Trillium", "Aus Trillium geschmiedet", "Forjado con trillium", "Forjado con trillium", "Forgé dans le trillium", "Forgiato con il trillio", "트릴리움으로 만들어진", "Forjado em Trílio", "Выковано из триллия", "锻造延极矿", "由延齡石打造而成", }, 
+{ "Charging Up", "Aufladen", "Cargando", "Cargando", "Charge en cours", "Attivazione", "충전", "Carregando", "Зарядка", "充能中", "充能中", }, 
+{ "Into the Forge", "Ab in die Schmiede", "En las forjas", "En las forjas", "Dans la forge", "Nella forgia", "제련소 안으로 이동", "Para dentro da forja", "В кузню", "深入熔炉", "進入熔爐", }, 
+{ "Corruption Detected", "Korruption entdeckt", "Corrupción detectada", "Corrupción detectada", "Corruption détectée", "Corruzione rilevata", "오염물 발견!", "Corrupção detectada", "Обнаружена скверна", "发现腐化物", "偵測到腐化", }, 
+{ "Manifested Corruption", "Manifestation der Verderbnis", "Manifestación de la corrupción", "Manifestación de la corrupción", "Corruption manifeste", "Manifestazione della corruzione", "드러난 오염물", "Corrupção manifesta", "Проявление осквернения", "腐化的具象", "腐化現身", }, 
+},
+["1257"] = {
+{ "Neltharion's Lair", "Neltharions Hort", "Guarida de Neltharion", "Guarida de Neltharion", "Repaire de Neltharion", "Antro di Neltharion", "넬타리온의 둥지", "Covil de Neltharion", "Логово Нелтариона", "奈萨里奥的巢穴", "奈薩里奧巢穴", }, 
+},
+["594"] = {
+{ "Azjol-Nerub", "Azjol-Nerub", "Azjol-Nerub", "Azjol-Nerub", "Azjol-Nérub", "Azjol-Nerub", "아졸네룹", "Azjol-Nerub", "Азжол-Неруб", "艾卓-尼鲁布", "阿茲歐-奈幽", }, 
+},
+["570"] = {
+{ "The Hour of Twilight", "Die Stunde des Zwielichts", "La Hora del Crepúsculo", "La Hora del Crepúsculo", "L’Heure du Crépuscule", "L'Ora del Crepuscolo", "황혼의 시간", "A Hora do Crepúsculo", "Время Сумерек", "暮光审判", "暮光之時", }, 
+},
+["219"] = {
+{ "Infiltration", "Infiltration", "Infiltración", "Infiltración", "Infiltration", "Infiltrazione", "침투", "Infiltração", "Проникновение", "渗透", "滲透", }, 
+{ "Reconnaissance", "Erkundung", "Reconocimiento", "Reconocimiento", "Reconnaissance", "Ricognizione", "정찰", "Reconhecimento", "Разведка", "侦查", "偵察", }, 
+{ "The Sealed Gate", "Das versiegelte Tor", "La puerta sellada", "La puerta sellada", "La porte scellée", "L'ingresso sigillato", "봉인된 관문", "O Portão Lacrado", "Запертые ворота", "封闭的大门", "上鎖的門", }, 
+{ "Holdout", "Die Stellung halten", "Resistencia", "Resistencia", "Faire barrage", "Protezione", "저항", "Resistência", "Задержка", "坚持到底", "抵抗", }, 
+{ "Bonus Objectives", "Bonusziele", "Objetivos de bonificación", "Objetivos de bonificación", "Objectifs bonus", "Obiettivi bonus", "추가 목표", "Objetivos bônus", "Дополнительные задачи", "奖励目标", "獎勵目標", }, 
+},
+["676"] = {
+{ "Grand Champions", "Großchampions", "Grandes Campeones", "Grandes Campeones", "Grands champions", "Gran Campioni", "최고 용사", "Grandes Campeões", "Абсолютные чемпионы", "总冠军", "大勇士", }, 
+{ "Argent Trial", "Argentumprüfung", "Prueba Argenta", "Prueba argenta", "Épreuve d’argent", "Prova d'Argento", "은빛십자군의 시험", "Torneio Argênteo", "Испытание Серебряного авангарда", "银色试炼", "銀白試煉", }, 
+{ "The Black Knight", "Der schwarze Ritter", "El Caballero Negro", "El Caballero Negro", "Le Chevalier noir", "Cavaliere Nero", "흑기사", "O Cavaleiro Negro", "Черный рыцарь", "黑骑士", "黑騎士", }, 
+},
+["976"] = {
+{ "Proving Your Worth", "Bewährungsprobe", "Demostrar tu valía", "Demuestra lo que vales", "Prouver votre valeur", "Provare il valore", "실력 증명", "Prova de valor", "Доказательство силы", "证明你的实力", "證明你的價值", }, 
+{ "Defeat the Giantslayer", "Bezwingt den Riesentöter", "Derrota al Matagigantes", "Derrota al destripador de gigantes", "Vaincre le Tueur de géants", "Sconfiggere l'Ammazzagiganti", "거인학살자와의 승부", "Derrote o Matador de Gigantes", "Победа над Убийцей Великанов", "击败巨人屠夫。", "擊敗巨人殺手", }, 
+{ "Heroes of the Storm", "Helden des Sturms", "Héroes de la tormenta", "Héroes de la tormenta", "Héros du Nexus", "Eroi della Tempesta", "폭풍의 영웅", "Heróis da tempestade", "Герои бури", "风暴英雄", "風暴英雄", }, 
+{ "Weapons of the Storm", "Waffen des Sturms", "Armas de la tormenta", "Armas de la tormenta", "Les armes de la tempête", "Armi della Tempesta", "폭풍의 무기", "Armas da Tempestade", "Оружие бури", "风暴武器", "風暴神兵", }, 
+{ "Demonic Interruption", "Dämonische Unterbrechung", "Interrupción demoníaca", "Interrupción demoníaca", "Interruption démoniaque", "Interruzione demoniaca", "사악한 방해", "Interrupção demoníaca", "Демоническое вмешательство", "恶魔的打扰", "惡魔之擾", }, 
+},
+["876"] = {
+{ "Push Back the Legion Assault", "Schlagt den Angriff der Legion zurück", "Rechazar el asalto de la Legión", "Haz retroceder el ataque de la Legión", "Repousser l’assaut de la Légion", "Respingere l'assalto della Legione", "군단 습격 저지", "Rechace o ataque da Legião", "Остановите натиск Легиона", "击退军团的攻势", "擊退進逼的燃燒軍團", }, 
+},
+["1017"] = {
+{ "The Broken Shore (H)", "", "", "La Costa Quebrada (H)", "", "Riva Dispersa (Orda)", "부서진 해변 (H)", "A Costa Partida. (H)", "", "破碎海滩", "破碎海岸(部落)", }, 
+},
+["911"] = {
+{ "Safe Entrance", "Sicherer Einstieg", "Entrada segura", "Entrada segura", "Accès sécurisé", "Entrata di sicurezza", "안전한 입구", "Entrada segura", "Безопасный вход", "安全入口", "安全通關", }, 
+{ "Obtain the Bait", "Holt den Köder", "Conseguir el cebo", "Obtén el cebo", "Obtenir l’appât", "Ottenere l'esca", "미끼 구하기", "Obtenha a isca", "Добыча приманки", "获取诱饵", "取得誘餌", }, 
+{ "Place the Bait", "Platziert den Köder", "Colocar el cebo", "Coloca el cebo", "Placer l’appât", "Posizionare l'esca", "미끼 설치", "Coloque a isca", "Положить приманку", "放置诱饵", "放置誘餌", }, 
+{ "Slay the Hound", "Tötet den Hund", "Matar al can", "Mata al sabueso", "Tuer le chien", "Uccidere il Mastino", "사냥개 처치", "Mate o canaz", "Убейте гончую", "灭犬行动", "殺死獵犬", }, 
+{ "Retrieve the Fangs", "Nehmt die Fänge an Euch", "Recuperar los Colmillos", "Recupera los Colmillos", "Récupérer les crocs", "Recuperare le zanne", "송곳니 회수", "Recupere as Presas", "Заберите Клыки", "夺取獠牙", "取回尖牙", }, 
+},
+["586"] = {
+{ "Gundrak", "Gundrak", "Gundrak", "Gundrak", "Gundrak", "Gundrak", "군드락", "Gundrak", "Гундрак", "古达克", "剛德拉克", }, 
+},
+["595"] = {
+{ "Azjol-Nerub", "Azjol-Nerub", "Azjol-Nerub", "Azjol-Nerub", "Azjol-Nérub", "Azjol-Nerub", "아졸네룹", "Azjol-Nerub", "Азжол-Неруб", "艾卓-尼鲁布", "阿茲歐-奈幽", }, 
+},
+["1029"] = {
+{ "Assault on Violet Hold", "Sturm auf die Violette Festung", "Asalto al Bastión Violeta", "Ataque al Bastión Violeta", "L’assaut sur le fort Pourpre", "Assalto alla Fortezza Violacea", "보랏빛 요새 침공", "Ataque ao Castelo Violeta", "Штурм Аметистовой крепости", "突袭紫罗兰监狱", "紫羅蘭堡之襲", }, 
+{ "Assault on Violet Hold", "Sturm auf die Violette Festung", "Asalto al Bastión Violeta", "Ataque al Bastión Violeta", "L’assaut sur le fort Pourpre", "Assalto alla Fortezza Violacea", "보랏빛 요새 침공", "Ataque ao Castelo Violeta", "Штурм Аметистовой крепости", "突袭紫罗兰监狱", "紫羅蘭堡之襲", }, 
+{ "Assault on Violet Hold", "Sturm auf die Violette Festung", "Asalto al Bastión Violeta", "Ataque al Bastión Violeta", "L’assaut sur le fort Pourpre", "Assalto alla Fortezza Violacea", "보랏빛 요새 침공", "Ataque ao Castelo Violeta", "Штурм Аметистовой крепости", "突袭紫罗兰监狱", "紫羅蘭堡之襲", }, 
+},
+["687"] = {
+{ "Shadowmoon Burial Grounds", "Schattenmondgrabstätte", "Cementerio de Sombraluna", "Cementerios de Sombraluna", "Terres sacrées d’Ombrelune", "Necropoli dei Torvaluna", "어둠달 지하묘지", "Sepulcrário da Lua Negra", "Некрополь Призрачной Луны", "影月墓地", "影月墓地", }, 
+},
+["554"] = {
+{ "Grim Batol", "Grim Batol", "Grim Batol", "Grim Batol", "Grim Batol", "Grim Batol", "그림 바톨", "Grim Batol", "Грим Батол", "格瑞姆巴托", "格瑞姆巴托", }, 
+},
+["1084"] = {
+{ "Combat Training", "Kampftraining", "Instrucción de combate", "Instrucción de combate", "Entraînement au combat", "Addestramento al combattimento", "전투 훈련", "Treino de combate", "Боевые учения", "战斗训练", "戰鬥訓練", }, 
+{ "Demonic Bidding", "Geheiß der Dämonen", "Órdenes demoníacas", "Vinculación demoníaca", "Obéissance démoniaque", "Volere demoniaco", "명령을 따르는 악마", "Lance demoníaco", "Обитатель Бездны", "恶魔召唤", "惡魔交易", }, 
+{ "Curses!", "Verflucht!", "¡Maldición!", "¡Maldición!", "Malédiction !", "Maledizioni!", "저주!", "Maldição!", "Проклятие!", "诅咒！", "可惡！", }, 
+{ "Corrupting Power", "Macht der Verderbnis", "Poder corruptor", "Poder corruptor", "Le pouvoir corrompt", "Potere corrompente", "부패의 힘", "Poder Corruptor", "Оскверняющая сила", "腐蚀的力量", "腐化力量", }, 
+{ "Stealing Health", "Geben und nehmen", "Robo de salud", "Robo de vida", "Vol de vie", "Rubare la vita", "적의 고통은 나의 힘", "Roubar Vida", "Кража жизненных сил", "偷取生命", "盜取生命力", }, 
+{ "Add Some Instability", "Stabilität wird überbewertet", "Añade inestabilidad", "Un pequeño aumento de inestabilidad", "Une touche d’instabilité", "Un pizzico di instabilità", "불안정함 더하기", "Um pouco de instabilidade", "Эффект неожиданности", "生死无常", "動盪因子", }, 
+{ "Putting It All Together", "Das große Ganze", "Juntar las piezas", "Todas las piezas juntas", "Mise en pratique", "Mettersi alla prova", "종합주문세트", "Fixação de conteúdo", "Сборная солянка", "综合在一起", "準備完善", }, 
+{ "Life Tap", "Tauschhandel", "Transfusión de vida", "Transfusión de vida", "Connexion", "Conversione Vitale", "생명력 전환", "Conversão de vida", "Жизнеотвод", "生命分流", "生命分流", }, 
+{ "Fear", "Angst und Schrecken", "Miedo", "Miedo", "Peur", "Paura", "공포", "Medo", "Страх", "恐惧", "恐懼", }, 
+{ "We're Going To Need A Bigger Demon", "Auf die Größe kommt es an", "Necesitaremos un demonio más grande", "Un demonio, pero más grande", "Il va nous falloir un plus gros démon !", "Ci serve un demone più grosso", "상급 악마가 더 필요하겠어", "Precisaremos de um demônio maior", "Размер имеет значение", "我们需要一个更大的恶魔", "我們需要更大隻的惡魔", }, 
+{ "A Quick Test", "Schnelltest", "Una prueba rápida", "Una prueba rápida", "Un test rapide", "Una piccola prova", "깜짝 시험", "Teste rápido", "Испытание тет-а-тет", "快速测试", "隨堂考", }, 
+{ "Challenge Accepted", "Herausforderung angenommen", "Desafío aceptado", "Desafío aceptado", "Défi accepté", "Sfida accettata", "더 큰 도전", "Desafio aceito", "Вызов принят", "接受挑战", "接受挑戰", }, 
+{ "Defend Against the Legion Attack", "Den Angriff der Legion abwehren", "Defiéndete del ataque de la Legión", "Defensa contra el ataque de la Legión", "Défense contre l’attaque de la Légion", "Difesa contro la Legione", "군단의 공격 막아내기", "Defender contra o ataque da Legião", "Оборона против Легиона", "抵抗燃烧军团的攻击", "抵擋燃燒軍團的攻擊", }, 
+{ "Assault on Broken Shore", "Angriff auf die Verheerte Küste", "Asalto a la Costa Abrupta", "Asalto a la Costa Quebrada", "L’assaut du rivage Brisé", "Assalto alla Riva Dispersa", "부서진 해변 공격", "Ataque à Costa Partida", "Штурм Расколотого берега", "突袭破碎海滩", "突襲破碎海岸", }, 
+},
+["910"] = {
+{ "Neltharion's Lair", "Neltharions Hort", "La Guarida de Neltharion", "Guarida de Neltharion", "Repaire de Neltharion", "Antro di Neltharion", "넬타리온의 둥지", "Covil de Neltharion", "Логово Нелтариона", "奈萨里奥的巢穴", "奈薩里奧巢穴", }, 
+},
+["1023"] = {
+{ "Black Rook Hold", "Die Rabenwehr", "Torreón Grajo Negro", "Fuerte Torre Oscura", "Bastion du Freux", "Forte Corvonero", "검은 떼까마귀 요새", "Castelo Corvo Negro", "Крепость Черной Ладьи", "黑鸦堡垒", "玄鴉堡", }, 
+{ "Black Rook Hold", "Die Rabenwehr", "Torreón Grajo Negro", "Fuerte Torre Oscura", "Bastion du Freux", "Forte Corvonero", "검은 떼까마귀 요새", "Castelo Corvo Negro", "Крепость Черной Ладьи", "黑鸦堡垒", "玄鴉堡", }, 
+{ "Black Rook Hold", "Die Rabenwehr", "Torreón Grajo Negro", "Fuerte Torre Oscura", "Bastion du Freux", "Forte Corvonero", "검은 떼까마귀 요새", "Castelo Corvo Negro", "Крепость Черной Ладьи", "黑鸦堡垒", "玄鴉堡", }, 
+},
+["1258"] = {
+{ "Vault of the Wardens", "Das Verlies der Wächterinnen", "Cámara de las Celadoras", "Bóveda de las Celadoras", "Caveau des Gardiennes", "Segrete delle Custodi", "감시관의 금고", "Câmara das Guardiãs", "Казематы Стражей", "守望者地窟", "看守者鐵獄", }, 
+},
+["203"] = {
+{ "Assault on Zan'vess", "Angriff auf Zan'vess", "Asalto a Zan'vess", "Asalto a Zan'vess", "L’attaque de Zan’vess", "Assalto a Zan'vess", "잔베스 강습", "Ataque a Zan'vess", "Атака на Зан'весс", "突袭扎尼维斯", "襲擊贊斐斯", }, 
+{ "Defenses of Zan'vess", "Verteidigung von Zan'vess", "Defensas de Zan'vess", "Defensas de Zan'vess", "Les défenses de Zan’vess", "Difese di Zan'vess", "잔베스 수비진", "Defesas de Zan'vess", "Защитное поле Зан'весса", "防御扎尼维斯", "贊斐斯的防禦", }, 
+{ "The Heart of Zan'vess", "Das Herz von Zan'vess", "El corazón de Zan'vess", "El corazón de Zan'vess", "Le cœur de Zan’vess", "Cuore di Zan'vess", "잔베스 중심부", "O Coração de Zan'vess", "Сердце Зан'весса", "扎尼维斯之心", "贊斐斯之心", }, 
+{ "Weapons of Zan'vess", "Die Waffen von Zan'vess", "Armas de Zan'vess", "Armas de Zan'vess", "Les armes de Zan’vess", "Armi di Zan'vess", "잔베스의 무기들", "Armas de Zan'vess", "Оружие Зан'весса", "扎尼维斯的武装", "贊斐斯的武器", }, 
+},
+["918"] = {
+{ "Eye of Azshara", "Das Auge Azsharas", "Ojo de Azshara", "Ojo de Azshara", "Œil d’Azshara", "Occhio di Azshara", "아즈샤라의 눈", "Olho de Azshara", "Око Азшары", "艾萨拉之眼", "艾薩拉之眼", }, 
+},
+["958"] = {
+{ "Defend the Rear Gate", "Verteidigt das hintere Tor", "Defiende la Puerta Trasera", "Defiende la puerta trasera", "La défense de la porte d’Azshara", "Difendere l'Ingresso Posteriore di Orgrimmar", "뒷문 방어", "Defender o Portão Traseiro", "Оборона Задних врат", "保卫后门", "守禦後門", }, 
+{ "Defeat the Demon Commander", "Bezwingt den Dämonenkommandanten", "Derrota al comandante demoníaco", "Derrota al Comandante demoníaco", "Terrasser le commandant démon", "Sconfiggere il comandante demoniaco", "악마 사령관 처치", "Derrotar o Demônio Comandante", "Победа над командиром демонов", "击败恶魔指挥官", "擊敗惡魔指揮官", }, 
+{ "Repel the Legion Forces", "Schlagt die Streitkräfte der Legion zurück", "Rechaza a los ejércitos de la Legión", "Repele a las fuerzas de la Legión", "Repousser les troupes de la Légion", "Respingere le forze della Legione", "군단 격퇴", "Rechaçar as forças da Legião", "Отражение натиска Легиона", "击退燃烧军团的部队", "擊退燃燒軍團", }, 
+{ "Defeat the Demon Lord", "Bezwingt den Dämonenfürsten", "Derrota al señor demoníaco", "Derrota al Señor demoníaco", "Terrasser le seigneur démon", "Sconfiggere il Signore dei Demoni", "악마 군주 처치", "Derrotar o lorde-demônio", "Смерть повелителю демонов", "击败恶魔领主", "擊敗惡魔領主", }, 
+},
+["618"] = {
+{ "The Steamvault", "Dampfkammer", "La Cámara de Vapor", "La Cámara de Vapor", "Le caveau de la Vapeur", "Antro dei Vapori", "증기 저장고", "Câmara dos Vapores", "Паровое подземелье", "蒸汽地窟", "蒸汽洞窟", }, 
+},
+["587"] = {
+{ "Gundrak", "Gundrak", "Gundrak", "Gundrak", "Gundrak", "Gundrak", "군드락", "Gundrak", "Гундрак", "古达克", "剛德拉克", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["715"] = {
+{ "Invasion!", "Invasion!", "¡Invasión!", "¡Invasión!", "Alerte aux envahisseurs !", "Invasione!", "침략!", "Invasão!", "Вторжение!", "入侵！", "入侵！", }, 
+{ "Ambush", "Hinterhalt", "Emboscada", "Emboscada", "Embuscade", "Imboscata", "습격", "Emboscada", "Засада", "伏击", "伏擊", }, 
+{ "The Holdout", "Durchhaltevermögen", "La resistencia", "La resistencia", "Le baroud", "Resistenza", "항전", "A Resistência", "Продержаться подольше", "坚持到底", "堅持到底", }, 
+{ "Cleanup", "Aufräumkommando", "Limpieza", "Limpieza", "Nettoyage", "Ripulitura", "소탕", "Limpeza", "Зачистка", "摧枯拉朽", "收拾殘局", }, 
+{ "The Calm", "Ruhe nach dem Sturm", "La calma", "La calma", "Le calme", "La calma", "정적", "A Calma", "Затишье", "风平浪静", "歇息備戰", }, 
+{ "Shadows Gather", "Der Schatten wächst", "Las sombras se ciernen", "Las sombras se reúnen", "Les ombres se rassemblent", "Le ombre si addensano", "어둠이 드리운다", "A reunião das sombras", "Тени сгущаются", "暗影蔽日", "暗影集結", }, 
+{ "Bronze", "Bronze", "Bronce", "Bronce", "Bronze", "Bronzo", "동메달", "Bronze", "Бронза", "青铜级", "青銅", }, 
+{ "Silver", "Silber", "Plata", "Plata", "Argent", "Argento", "은메달", "Prata", "Серебро", "白银级", "白銀", }, 
+{ "Gold", "Gold", "Oro", "Oro", "Or", "Oro", "금메달", "Ouro", "Золото", "黄金级", "黃金", }, 
+{ "Platinum", "Platin", "Platino", "Platino", "Platine", "Platino", "백금메달", "Platina", "Платиновая", "白金", "白金", }, 
+},
+["1288"] = {
+{ "Upper Return to Karazhan", "Obere Rückkehr nach Karazhan", "Regreso a Karazhan superior", "Regreso superior a Karazhan", "Retour à Karazhan (sommet)", "Ritorno a Karazhan Superiore", "다시 찾은 카라잔 상층", "Retorno a Karazhan superior", "Возвращение в Каражан (верхняя часть)", "重返卡拉赞（上层）", "重返卡拉贊上層", }, 
+},
+["1172"] = {
+{ "Darkheart Thicket", "Das Finsterherzdickicht", "Arboleda Corazón Oscuro", "Matorral Corazón Oscuro", "Fourré Sombrecœur", "Boschetto Cuortetro", "어둠심장 숲", "Bosque Corenegro", "Чаща Темного Сердца", "黑心林地", "暗心灌木林", }, 
+},
+["208"] = {
+{ "Bloodied Crossing", "Blutige Kreuzung", "Cruce Sangriento", "Cruce Sangriento", "Croisée Ensanglantée", "Crocevia Insanguinato", "선혈의 십자로", "Encruzilhada Rubra", "Кровавый перекресток", "血腥岔路口", "染血路口", }, 
+{ "Destroy the Gatekeepers", "Zerstört die Torwächter", "Destruye a los guardianes", "Destruye a los guardianes", "Détruire les gardiens de la porte", "Distruggi i Guardiani delle Porte", "문지기를 처치하라", "Destruir os Guarda-pórticos", "Убить стражей дворцовых врат", "摧毁守门人", "擊敗守門人", }, 
+{ "The Foot of Lei Shen", "Der Fuß des Lei Shen", "El Atrio de Lei Shen", "El Atrio de Lei Shen", "Le Seuil de Lei Shen", "Atrio di Lei Shen", "레이 션의 발치", "O Pé de Lei Shen", "Подступы ко дворцу Лэй Шэня", "雷神之基", "雷神之足", }, 
+{ "Defeat Shan Bu", "Besiegt Shan'Bu", "Derrota a Shan Bu", "Derrota a Shan Bu", "Vaincre Shan Bu", "Sconfiggi Shan Bu", "샨 부 처치", "Derrotar Shan Bu", "Победить Шань-Бу", "击败山怖", "擊敗衫布", }, 
+},
+["661"] = {
+{ "The Wicked Grotto", "Die Tückische Grotte", "La Gruta Maldita", "La Gruta Maldita", "La grotte Maudite", "Grotta Perversa", "악의 동굴", "Gruta Malévola", "Оскверненный грот", "邪恶洞穴", "邪惡洞穴", }, 
+},
+["998"] = {
+{ "The Council's Vengeance", "Die Rache des Rates", "La venganza del Consejo", "La venganza del Consejo", "La vengeance du conseil", "La vendetta del concilio", "의회의 복수", "A vingança do Conselho", "Отмщение Совета", "议会的复仇", "議會的復仇", }, 
+{ "Cut Out the Heart", "Das Herz herausschneiden", "Arrancar el corazón", "Arráncale el alma", "Droit au cœur", "Estirpare il cuore", "심장 도려내기", "Arranque o coração", "Сердце Властителя", "剖腹剜心", "直搗黃龍", }, 
+{ "Becoming the Overlord", "Werdet zum Oberanführer", "Convertirse en el Señor supremo", "Convirtiéndose en el Señor Supremo", "La succession du suzerain", "Il nuovo Supremo", "대군주의 자격", "Ascensão a lorde supremo", "Станьте Властителем", "成为大领主", "成為主宰", }, 
+},
+["961"] = {
+{ "Picking Up the Pieces", "Die, die übrig blieb", "Recoger los pedazos", "Recoger los pedazos", "Ramasser les morceaux", "Raccogliere i pezzi", "탈출시키기", "Juntando as peças", "Взять на себя ответственность", "收拾残局", "撿起碎片", }, 
+{ "Their Blood Will Flow", "Ihr Blut wird fließen", "Correrá su sangre", "Correrá su sangre", "Bain de sang", "Scorrerà il sangue", "피가 강을 이루리니", "O sangue vai correr", "Их кровь потечет рекой", "血流成河", "腥風血雨", }, 
+{ "A River of Souls", "Ein Fluss aus Seelen", "Un río de almas", "Un río de almas", "La rivière des âmes", "Un fiume d'anime", "영혼의 강", "Um rio de almas", "Река душ", "灵魂之河", "靈魂之流", }, 
+{ "In the Darkness of the Pit", "In der Dunkelheit der Grube", "En la oscuridad del foso", "En la oscuridad del foso", "Dans les ténèbres de la fosse", "Nell'oscurità della fossa", "균열의 어둠 속에서", "Nas trevas do fosso", "Во мраке преисподней", "在深渊的黑暗中", "身處黑暗深淵", }, 
+{ "Nowhere to Hide", "Kein Versteck ist sicher", "Sin escapatoria", "Sin escapatoria", "Tu ne m’échapperas pas", "Senza un posto dove nascondersi", "숨을 곳은 없다", "Não há onde se esconder", "Негде спрятаться", "无处可藏", "無處可躲", }, 
+{ "Vengeance for the Illidari", "Rache für die Illidari", "Venganza por los Illidari", "Venganza para los Illidari", "La vengeance des Illidari", "Vendetta per gli Illidari", "일리다리의 복수", "Vingança pelos Illidari", "Месть за иллидари", "为伊利达雷复仇", "伊利達瑞的復仇", }, 
+{ "Right by Ascension", "Recht durch Aufstieg", "Derecho por ascensión", "Derecho por ascensión", "Droit d’ascension", "Tue di diritto", "합당한 자격", "Direito por ascensão", "По праву восхождения", "升格之道", "晉升之權", }, 
+},
+["1259"] = {
+{ "The Highlord's Return", "Rückkehr des Hochlords", "El retorno del Alto Señor", "El regreso del Alto señor", "Le retour du généralissime", "Il ritorno del Gran Signore", "돌아온 대군주", "O retorno do grão-lorde", "Возвращение верховного лорда", "魔王归来", "大領主歸來", }, 
+{ "Twisting the Nether", "Den Nether aufwirbeln", "El abisal vacío", "Vaciando el abismo", "Le Néant distordu", "Distorcere il Fatuo", "황천 뒤틀기", "Espiralando o éter", "Круговерчение Пустоты", "扭曲虚空", "讓虛空扭曲", }, 
+{ "Goodbye Kruul World", "In Kruulitäten geraten", "Adiós, mundo Kruul", "Adiós, mundo Kruuel", "Adieu monde kruuel", "La fine di Kruul", "잘 가, 크룰!", "Adeus, mundo kruuel", "Прощай, Круул", "再见了，有库鲁尔的世界", "卡魯歐的世界永別了", }, 
+},
+["989"] = {
+{ "The Archmage", "Der Erzmagier", "El archimago", "El Archimago", "L’archimage", "L'Arcimago", "대마법사", "O Arquimago", "Верховный маг", "大法师", "大法師", }, 
+{ "Visions of the Past", "Visionen der Vergangenheit", "Visiones del pasado", "Visiones del pasado", "Visions du passé", "Visioni del Passato", "과거의 환영", "Visões do passado", "Призраки прошлого", "往日的幻象", "往日的幻象", }, 
+{ "Medivh's Defenses", "Medivhs Verteidigung", "Las defensas de Medivh", "Las defensas de Medivh", "Les défenses de Medivh", "Le difese di Medivh", "메디브의 방어", "Defesas de Medivh", "Охрана Медива", "麦迪文的防御", "麥迪文的防禦", }, 
+{ "We Are Not Alone", "Wir sind nicht allein", "No estamos solos", "No estamos solos", "Nous ne sommes pas seuls", "Non siamo soli", "혼자가 아니야", "Não estamos sozinhos", "Враг близко", "我们并不孤单", "我們並不孤單", }, 
+{ "Breaking In", "Einbruch", "Irrupción", "Forzando la entrada", "Effraction", "Irruzione", "침입", "Arrombamento", "Проникновение", "突破", "闖入", }, 
+{ "Wisped Away", "Irrgeleitet", "Desvanecido", "Llevado lejos", "Partir en fumée", "Sussurri dispersi", "밝혀진 비밀", "Evanescente", "Улетевшие огоньки", "逃逸", "幽光消逝", }, 
+{ "Bookkeeping", "Buchhaltung", "Ocuparse de los libros", "Contabilidad", "Tenue des livres", "Gestire la libreria", "고서 폐기", "Biblioteconomia", "Книгоучет", "图书管理", "整理書目", }, 
+{ "Not the Intruders You're Looking For", "Nicht die Eindringlinge, nach denen ihr sucht", "No son los intrusos que buscáis", "No son los intrusos que estás buscando", "Un intrus peut en cacher un autre", "Non gli intrusi che ti aspettavi", "예상치 못한 침입자", "Não são os intrusos que você está procurando", "Это не те незваные гости, которых вы ищете", "我们不是你要找的入侵者", "不是你要找的入侵者", }, 
+{ "Defenders of Karazhan", "Verteidiger von Karazhan", "Defensores de Karazhan", "Defensores de Karazhan", "Les défenseurs de Karazhan", "Difensori di Karazhan", "카라잔의 수호자", "Defensores de Karazhan", "Защитники Каражана", "卡拉赞的保卫者", "卡拉贊保衛者", }, 
+{ "Knowledge is Key", "Wissen ist der Schlüssel", "El conocimiento es clave", "La clave está en el conocimiento", "Des connaissances essentielles", "La conoscenza è la chiave", "지식이 곧 열쇠", "O conhecimento é a chave", "Знание – сила", "知识才是关键。", "知識是關鍵", }, 
+{ "Words of the Wise", "Worte des Weisen", "Palabras sabias", "Palabras de los sabios", "Les conseils du sage", "Parole di saggezza", "현자의 말", "Palavras do sábio", "Слова мудрости", "睿智之语", "智者之言", }, 
+},
+["1101"] = {
+{ "The Azure Prisoner", "Der Azurgefangene", "El prisionero azur", "El Prisionero Azur", "Le prisonnier d’Azur", "Il prigioniero azzurro", "하늘빛 포로", "O prisioneiro lazúli", "Лазурный пленник", "碧蓝囚徒", "藍龍囚犯", }, 
+{ "Seeking Answers", "Antworten suchen", "Buscando respuestas", "Buscando respuestas", "Chercher des réponses", "In cerca di risposte", "답 구하기", "Em busca de respostas", "В поисках ответов", "寻找答案", "找尋解答", }, 
+{ "Echoes of Ancient Power", "Echos uralter Kraft", "Ecos de un poder antiguo", "Ecos de poder antiguo", "Les échos du pouvoir antique", "Echi di antico potere", "고대의 힘의 메아리", "Ecos de poder antigo", "Эхо древнего могущества", "远古之力的回响", "上古之力的回響", }, 
+{ "The Way Out is Through", "Da müsst Ihr durch", "La salida es a través", "Para salir hay que atravesar", "La seule issue", "L'uscita è attraverso", "나가는 유일한 방법", "A saída é pelo meio", "Единственный путь – вперед", "道路通畅", "穿過去是唯一的路", }, 
+{ "Consumed by Void", "Von Leere verschlungen", "Consumido por el vacío", "Consumido por el Vacío", "Consumé par le Vide", "Consumato dal Vuoto", "공허의 흡수", "Consumidos pelo caos", "Поглощение Бездной", "虚空吞噬", "被虛無吞噬", }, 
+{ "Breaking and Binding", "Brechen und Binden", "Romper y vincular", "Rompiendo y unificando", "Recréer le lien", "Spezzare e vincolare", "구속과 해방", "Quebrar e atar", "Подчинение и связывание", "突破与禁锢", "突破與禁錮", }, 
+{ "The Power of Aegwyn", "Die Macht von Aegwynn", "El poder de Aegwynn", "El poder de Aegwyn", "La puissance d’Aegwynn", "Il potere di Aegwynn", "에이그윈의 힘", "O poder de Aegwyn", "Сила Эгвин", "艾格文的力量", "艾格文之力", }, 
+},
+["990"] = {
+{ "Ursoc's Lair", "Ursocs Unterschlupf", "Guarida de Ursoc", "Guarida de Ursoc", "Tanière d’Ursoc", "Antro di Ursoc", "우르속의 보금자리", "Covil de Ursoc", "Логово Урсока", "乌索克之巢", "厄索克巢穴", }, 
+{ "The Light In The Dark", "Das Licht im Dunkel", "La luz en la oscuridad", "La Luz en la Oscuridad", "Une lueur dans les ténèbres", "La luce nell'oscurità", "암흑 속 한 줄기 빛", "A luz na escuridão", "Свет во тьме", "黑暗中的光明", "黑暗中的光明", }, 
+{ "The Nightmare Approaches", "Der Alptraum beginnt", "Se acerca la Pesadilla", "La Pesadilla se aproxima", "Le Cauchemar approche", "L'Incubo si avvicina", "다가오는 악몽", "O Pesadelo se aproxima", "Кошмар приближается", "梦魇临近", "夢魘逼近", }, 
+{ "The Nightmare Continues", "Der Alptraum geht weiter", "Continúa la Pesadilla", "La Pesadilla continúa", "Le Cauchemar continue", "L'Incubo continua", "계속되는 악몽", "O Pesadelo continua", "Кошмар не отступает", "梦魇不绝", "夢魘不息", }, 
+{ "The Nightmare Continues", "Der Alptraum geht weiter", "Continúa la Pesadilla", "La Pesadilla continúa", "Le Cauchemar continue", "L'Incubo continua", "계속되는 악몽", "O Pesadelo continua", "Кошмар не отступает", "梦魇不绝", "夢魘不息", }, 
+{ "The Nightmare Continues", "Der Alptraum geht weiter", "Continúa la Pesadilla", "La Pesadilla continúa", "Le Cauchemar continue", "L'Incubo continua", "계속되는 악몽", "O Pesadelo continua", "Кошмар не отступает", "梦魇不绝", "夢魘不息", }, 
+{ "The Fallen One", "Der Gefallene", "El caído", "El caído", "Le déchu", "Il Caduto", "쓰러진 자", "O Tombado", "Падший", "堕落者", "亡者", }, 
+{ "The Claws Reclaimed", "Die zurückeroberten Klauen", "Las Garras reclamadas", "Reclama las Garras", "Récupération des griffes", "Gli Artigli recuperati", "되찾은 곰 신의 유물", "As garras retomadas", "Возвращение Когтей", "夺回乌索克之爪", "取回神爪", }, 
+},
+["973"] = {
+{ "Landing", "Landung", "Desembarco", "Peñón", "Atterrissage", "Approdo", "착륙", "Pouso", "Высадка", "登陆", "降落", }, 
+{ "The Haunted Harbor", "Der heimgesuchte Hafen", "El puerto embrujado", "El Puerto hechizado", "Le port hanté", "Il porto infestato", "귀신 들린 항구", "O porto assombrado", "Порт призраков", "港湾鬼影", "鬧鬼的港口", }, 
+{ "Distracting Them Wisely", "Kluge Ablenkung", "Distraerlos sabiamente", "Distráelos con prudencia", "Sage diversion", "Distrarli con saggezza", "도둑질의 방법", "Sábia distração", "Продуманное отвлечение", "巧学活用", "以智取勝", }, 
+{ "Easy Pickings", "Leichte Aufgabe", "Blancos fáciles", "Blancos fáciles", "Des cibles faciles", "Un gioco da ragazzi", "슬쩍하기", "Presas fáceis", "Легкая добыча", "轻而易举", "不是對手", }, 
+{ "Just a Few More", "Nur noch ein paar mehr", "Solo unas cuantas más", "Solo unos pocos más", "Toujours plus", "Ancora qualcuna", "감시석이 더 필요해", "Só mais alguns", "Еще немного, еще чуть-чуть...", "再来点儿", "再多幾個", }, 
+{ "The Wall of Fog", "Die Nebelmauer", "El muro de niebla", "El muro de niebla", "Le mur de brume", "Il muro di nebbia", "안개의 벽", "A muralha de névoa", "Стена тумана", "迷雾之墙", "迷霧之牆", }, 
+{ "Into the Mists", "In die Nebel", "Entre la niebla", "Entre la niebla", "Dans les brumes", "Nelle nebbie", "안개 속으로", "Brumas adentro", "Сквозь туман", "深入迷雾", "進入霧中", }, 
+{ "The Shallows of Death", "Die Untiefen des Todes", "Los bajíos de muerte", "Los bajos de la muerte", "Les bas-fonds de la mort", "La riviera della morte", "죽음의 여울", "A várzea da morte", "Отмель смерти", "死亡浅滩", "死亡低地", }, 
+{ "Deadly Shadows", "Tödliche Schatten", "Sombras mortales", "Sombras letales", "Ombres meurtrières", "Ombre letali", "치명적인 그림자", "Sombras mortais", "Смертоносные тени", "致命阴影", "致命的暗影", }, 
+{ "The Hunter or the Hunted", "Jäger oder Gejagter", "El cazador o la presa", "El cazador o la presa", "Le chasseur ou la proie", "Cacciatore o preda", "사냥하거나 혹은 사냥당하거나", "A caça ou o caçador", "Кто был охотник, кто добыча...", "猎人还是猎物？", "獵殺或是被獵", }, 
+{ "For the Fallen", "Für die Gefallenen", "Por los caídos", "Por los caídos", "Au nom des disparus", "Per i caduti", "망자의 복수", "Pelos caídos", "Месть за павших", "复仇之战", "為了倒下的同伴", }, 
+{ "The Lair of the Beast", "Der Hort der Bestie", "La guarida de la bestia", "La guarida de la bestia", "Le repaire de la bête", "La tana della bestia", "야수의 둥지", "O covil da fera", "Логово чудовища", "野兽之巢", "野獸巢穴", }, 
+{ "Talonclaw", "Fangklaue", "Garra Feroz", "Garfa Corva", "Griffe-Serre", "Grinfiartiglio", "칼날갈퀴", "Garranha", "Хищный Коготь", "雄鹰之爪", "猛禽之爪", }, 
+},
+["686"] = {
+{ "Shadowmoon Burial Grounds", "Schattenmondgrabstätte", "Cementerio de Sombraluna", "Cementerios de Sombraluna", "Terres sacrées d’Ombrelune", "Necropoli dei Torvaluna", "어둠달 지하묘지", "Sepulcrário da Lua Negra", "Некрополь Призрачной Луны", "影月墓地", "影月墓地", }, 
+},
+["786"] = {
+{ "The Broken Shore", "Die Verheerte Küste", "Costa Abrupta", "La Costa Quebrada", "Rivage Brisé", "Riva Dispersa", "부서진 해변", "A Costa Partida", "Расколотый берег", "破碎海滩", "破碎海岸", }, 
+{ "Storm The Beach", "Erstürmt den Strand", "Asalta la playa", "Asalta la playa", "Le grand débarquement", "Assalto alla spiaggia", "해변 청소", "Tomar a praia", "Штурм побережья", "抢滩登陆", "掃蕩海灘", }, 
+{ "Defeat the Commander", "Bezwingt den Kommandanten", "Derrota al comandante", "Derrota al Comandante", "Terrasser le commandant", "Sconfiggere il comandante", "사령관 처치", "Derrotar o Comandante", "Убить командира", "击败指挥官", "擊敗指揮官", }, 
+{ "Find Varian", "Findet Varian", "Encontrar a Varian", "Encuentra a Varian", "Trouver Varian", "Trovare Varian", "바리안 찾기", "Encontre Varian", "Найти Вариана", "找到瓦里安", "找到瓦里安", }, 
+{ "Destroy the Portal", "Vernichtet das Portal", "Destruye el portal", "Destruye el portal", "Destruction du portail", "Distruggere il portale", "차원문 파괴", "Destrua o portal", "Разрушение портала", "摧毁传送门", "摧毀傳送門", }, 
+{ "Raze the Black City", "Legt die Schwarze Stadt in Schutt und Asche", "Arrasar la Ciudad Negra", "Arrasa la Ciudad Negra", "Le sac de la ville Noire", "Assalto alla Città Oscura", "검은 도시 공격", "Arrase a Cidade Negra", "Предайте огню Черный город", "扫荡黑色之城", "夷平黑城", }, 
+{ "The Highlord", "Der Hochlord", "El Alto Señor", "El Alto Señor", "Le généralissime", "Il Gran Signore", "대영주", "O grão-lorde", "Верховный лорд", "大领主", "大領主", }, 
+{ "Krosus", "Krosus", "Krosus", "Krosus", "Krosus", "Krosus", "크로서스", "Krosus", "Крос", "克洛苏斯", "克羅索斯", }, 
+{ "Stop Gul'dan", "Haltet Gul'dan auf", "Detener a Gul'dan", "Detén a Gul'dan", "Arrêter Gul’dan", "Fermare Gul'dan", "굴단을 막아라", "Detenha Gul'dan", "Остановите Гул'дана", "阻止古尔丹", "阻止古爾丹", }, 
+},
+["1095"] = {
+{ "Combat Training", "Kampftraining", "Instrucción de combate", "Instrucción de combate", "Entraînement au combat", "Addestramento al combattimento", "전투 훈련", "Treino de combate", "Боевые учения", "战斗训练", "戰鬥訓練", }, 
+{ "Ferocious Strike", "Wilder Schlag", "Ataque feroz", "Ataque feroz", "Frappe féroce", "Assalto feroce", "가혹한 일격", "Ataque Feroz", "Дикая ярость", "凶猛打击", "虎虎生風", }, 
+{ "A Kick to the Face", "Ein Tritt ins Gesicht", "Una patada en la cara", "Una patada en la cara", "Un coup de pied au visage", "Un calcio in faccia", "면상 발차기", "Chute na cara", "Пинок по лицу", "照脸直踢", "踢他臉", }, 
+{ "Kick It Again", "Nachtreten", "Patea con saña", "Patéala de nuevo", "Dégagement", "Un altro calcio", "연이어 발차기", "Chutar de novo", "Удар, лишающий чувств", "再踢一脚", "再踢一次", }, 
+{ "A Thousand Strikes", "Tausend und ein Schlag", "Miles de golpes", "Mil golpes", "Un millier de coups", "Un migliaio di colpi", "주먹 작렬", "Mil Golpes", "Один удар вместо тысячи", "一瞬千击", "打一千次", }, 
+{ "Putting It All Together", "Das große Ganze", "Juntar las piezas", "Todas las piezas juntas", "Mise en pratique", "Mettersi alla prova", "종합주문세트", "Fixação de conteúdo", "Сборная солянка", "综合在一起", "準備完善", }, 
+{ "Keep on Rollin'", "Nicht aus der Rolle fallen", "Rodar y rodar", "Sigue rodando", "Ça roule, ma poule !", "Rotolando verso sud", "데굴데굴", "Vai rolando", "Трюк, достойный акробата", "翻滚不停", "翻滾吧！", }, 
+{ "Well, Effuse Me!", "Übermut tut selten gut", "¡Efúndeme si puedes!", "Muy bien, ¡efúndeme!", "Effusions bienvenues", "Emanami questo!", "치유의 기술", "Bom, manda uma efusão!", "Излей мне душу", "让真气贯通我吧！", "不好意思，洩洩！", }, 
+{ "A Quick Test", "Schnelltest", "Una prueba rápida", "Una prueba rápida", "Un test rapide", "Una piccola prova", "깜짝 시험", "Teste rápido", "Испытание тет-а-тет", "快速测试", "隨堂考", }, 
+{ "Twice the Challenge", "Doppelte Herausforderung", "Desafío por partida doble", "Un desafío doble", "Double défi", "Doppia sfida", "난이도 두 배", "Desafio em dose dupla", "Двойной вызов", "双倍挑战", "雙重挑戰", }, 
+{ "Defend Against the Legion Assault", "Den Angriff der Legion abwehren", "Defiéndete del asalto de la Legión", "Defiéndete contra el ataque de la Legión", "Défense contre l’assaut de la Légion", "Difesa contro la Legione", "군단의 공격 막아내기", "Defender contra o ataque da Legião", "Оборона против Легиона", "在军团的攻击下保卫飞艇", "抵擋燃燒軍團的攻擊", }, 
+{ "Assault on Broken Shore", "Angriff auf die Verheerte Küste", "Asalto a la Costa Abrupta", "Asalto a la Costa Quebrada", "L’assaut du rivage Brisé", "Assalto alla Riva Dispersa", "부서진 해변 공격", "Ataque à Costa Partida", "Штурм Расколотого берега", "突袭破碎海滩", "突襲破碎海岸", }, 
+},
+["967"] = {
+{ "The Arcway", "Der Arkus", "La Arquería", "El Arco", "L’Arcavia", "L'Arcavia", "비전로", "O Arcâneo", "Катакомбы Сурамара", "魔法回廊", "幽暗地道", }, 
+{ "The Arcway", "Der Arkus", "La Arquería", "El Arco", "L’Arcavia", "Arcavia", "비전로", "O Arcâneo", "Катакомбы Сурамара", "魔法回廊", "幽暗地道", }, 
+},
+["200"] = {
+{ "Enter the Black Temple", "Betretet den Schwarzen Tempel", "Entra en el Templo Oscuro", "Entra en el Templo Oscuro", "L’entrée du Temple noir", "Entra nel Tempio Nero", "검은 사원에 입장", "Entre no Templo Negro", "Войти в Черный храм", "进入黑暗神殿", "進入黑暗神廟", }, 
+{ "Search for signs of the Council's Presence", "Findet Anzeichen für die Anwesenheit des Rates", "Busca señales de la presencia del Consejo", "Busca señales de la presencia del Consejo", "Trouver des traces de la présence du Conseil", "Cerca le tracce della presenza del Concilio", "의회가 존재한다는 증거를 찾아서", "Busque sinais da Presença do Conselho", "Найти следы присутствия Совета Мрачной Жатвы", "搜索议会存在的证据", "尋找議會存在的跡象", }, 
+{ "Follow Akama to the Shrine of Lost Souls", "Folgt Akama zum Schrein der Verlorenen Seelen", "Sigue a Akama hasta el Santuario de las Almas Perdidas", "Sigue a Akama hasta el Santuario de las Almas Perdidas", "Suivre Akama jusqu’au sanctuaire des Âmes perdues", "Segui Akama fino al Santuario delle Anime Perdute", "아카마를 따라 길 잃은 영혼의 제단으로 이동", "Siga Akama até o Santuário das Almas Perdidas", "Идти за Акамой в Святилище Потерянных Душ", "跟随阿卡玛前往失落灵魂神殿。", "跟著阿卡瑪前往失落靈魂神殿", }, 
+{ "Uncover the Council's Plan", "Den Plan des Rates aufdecken", "Descubre el plan del Consejo", "Descubre el plan del Consejo", "Découvrir le plan du Conseil", "Scopri i piani del Concilio", "의회의 계획을 밝혀라", "Descobrir o plano do Conselho", "Раскрыть план Совета", "揭示议会的计划", "揭發議會的計畫", }, 
+{ "Defeat the Essence of Order", "Bezwingt die Essenz der Ordnung", "Derrota a la esencia de orden", "Derrota a la esencia de orden", "Vaincre l’essence de l’ordre", "Sconfiggi l'Essenza dell'Ordine", "질서의 정수를 처치하라", "Derrote a Essência da Ordem", "Победить сущность порядка", "击败秩序精华", "打敗秩序精華", }, 
+{ "Escape the Shrine of Lost Souls", "Entkommt aus dem Schrein der Verlorenen Seelen", "Escapa del Santuario de las Almas Perdidas", "Escapa del Santuario de las Almas Perdidas", "Fuir le sanctuaire des Âmes perdues", "Fuga dal Santuario delle Anime Perdute", "길 잃은 영혼의 제단 탈출", "Fuja do Santuário das Almas Perdidas", "Бежать из Святилища Потерянных Душ", "逃出失落灵魂神殿", "逃離失落靈魂神殿", }, 
+{ "Plunder the Den of Mortal Delights", "Plündert den Hof der Irdischen Gelüste", "Saquea la Guarida de los Placeres Mortales", "Saquea la Guarida de los Placeres Mortales", "Piller la tanière des Délices mortelles", "Saccheggia l'Antro delle Delizie Mortali", "향락의 소굴을 털어라", "Saquear Covil dos Prazeres Mortais", "Ограбление Приюта Земных Наслаждений", "劫掠欢愉之园", "劫掠凡慾邪窟", }, 
+{ "Head to the Temple Summit", "Begebt Euch zur Tempelspitze", "Dirígete a la cima del templo", "Dirígete a la cima del templo", "Vers le sommet du temple", "Raggiungi la Sommità del Tempio", "사원 정상으로", "Vá para o Ápice do Templo", "К Храмовой вершине", "前往神殿之巅", "前往神廟頂層", }, 
+{ "Defeat Kanrethad", "Besiegt Kanrethad", "Derrota a Kanrethad", "Derrota a Kanrethad", "Battre Kanrethad", "Sconfiggi Kanrethad", "칸레타드 처치", "Derrotar Kanrethad", "Победить Канретада", "击败坎雷萨德", "擊敗坎瑞薩德", }, 
+},
+["1018"] = {
+{ "The Broken Shore (A)", "", "", "La Costa Quebrada (A)", "", "Riva Dispersa (Alleanza)", "부서진 해변 (A)", "A Costa Partida (A)", "", "破碎海滩", "破碎海岸(聯盟)", }, 
+},
+["957"] = {
+{ "The Frozen Halls", "Die Gefrorenen Hallen", "Las Cámaras Heladas", "Las Cámaras Heladas", "Les salles Gelées", "Sale Gelide", "얼어붙은 전당", "Salões Gelados", "Ледяные залы", "冰封大殿", "冰封大廳", }, 
+{ "Meltdown", "Kernschmelze", "Fusión", "Fusión", "Dégel", "Scioglimento", "얼음 녹이기", "Derretimento", "Оттепель", "熔毁", "融化", }, 
+{ "Hot On The Trail", "Auf den Fersen", "Pisándole los talones", "Pisándole los talones", "La piste est toute chaude", "La notte dei morti infuocati", "뜨거운 추격", "Trilha quente", "По горячим следам", "热力追踪", "奮力追擊", }, 
+{ "Playing With Fire", "Spiel mit dem Feuer", "Jugando con fuego", "Jugando con fuego", "Jouer avec le feu", "Giocare col fuoco", "불장난은 나빠요", "Brincando com fogo", "Игра с огнем", "玩火自焚", "玩火自焚", }, 
+{ "The Flamestrike", "Der Flammenstoß", "El Fogonazo", "El Fogonazo", "Le Choc de flammes", "Colonne di fuoco", "불기둥", "Golpe Flamejante", "Огненный столб", "烈焰之击", "烈焰之擊", }, 
+},
+["723"] = {
+{ "The Confrontation", "Die Konfrontation", "El enfrentamiento", "La confrontación", "L’affrontement", "Il confronto", "대면", "O Confronto", "Противостояние", "决战", "決戰", }, 
+{ "Harnessing the Power", "Nutzung der Macht", "Dominar el poder", "Aprovechando el poder", "La puissance maîtrisée", "Ottenere il potere", "유물의 힘", "Reunindo Poder", "Обузданная мощь", "驾驭神力", "駕馭神力", }, 
+{ "Bolstering their Forces", "Ihre Streitkräfte stärken", "Aumentar sus fuerzas", "Reforzando el ataque", "L’exaltation des troupes", "Sfruttare il potere", "계속되는 공격", "Reforçando as tropas deles", "Укрепление сил", "顶住他们的进攻", "鞏固部隊", }, 
+{ "The Son of Gruul", "Der Sohn von Gruul", "El hijo de Gruul", "El hijo de Gruul", "Le fils de Gruul", "Il Figlio di Gruul", "그룰의 아들", "O Filho de Gruul", "Сын Груула", "格鲁尔之子", "戈魯爾之子", }, 
+{ "The Final Confrontation", "Die letzte Konfrontation", "El enfrentamiento final", "La confrontación final", "L’affrontement final", "Il confronto finale", "결전", "O Confronto Final", "Кульминация противостояния", "最后的决战", "最後決戰", }, 
+},
+["540"] = {
+{ "Temple of the Jade Serpent", "Tempel der Jadeschlange", "Templo del Dragón de Jade", "Templo del Dragón de Jade", "Temple du Serpent de jade", "Tempio della Serpe di Giada", "옥룡사", "Templo da Serpente de Jade", "Храм Нефритовой Змеи", "青龙寺", "玉蛟寺", }, 
+},
+["933"] = {
+{ "Another Battle", "Ein weiterer Kampf", "Otra batalla", "Otra batalla", "Un autre combat", "Un'altra battaglia", "또 다른 전투", "Uma outra batalha", "Очередная битва", "新的战场", "另一個戰場", }, 
+{ "A Desperate Charge", "Ein verzweifelter Ansturm", "Una carga desesperada", "Una carga desesperada", "Baroud d’honneur", "Una carica disperata", "필사의 돌격", "Uma investida desesperada", "Отчаянный натиск", "最后的冲锋", "背水一戰", }, 
+{ "The Val'kyr", "Die Val'kyr", "La Val'kyr", "La Val'kyr", "Les Val’kyrs", "Val'kyr", "발키르", "As Val'kyren", "Валь'кира", "瓦格里", "華爾琪", }, 
+{ "Reinforcing the Warband", "Die Truppen verstärken", "Reforzar a los guerreros", "Reforzando la banda de guerra", "Épauler la troupe de guerre", "Rinforzi alla squadra", "전투부대 지원", "Reforço do bando guerreiro", "Подкрепление", "援助兵团", "支援作戰", }, 
+{ "Just A Pit Lord", "Nur ein Grubenlord", "Un mero señor del foso", "Solo un Señor del foso", "Une simple formalité", "Un comune Signore delle Fosse", "겨우 지옥의 군주 한 명에게...", "Um mero lorde abissal", "Всего лишь властитель преисподней", "深渊领主而已", "深淵領主", }, 
+},
+["1097"] = {
+{ "Searching the Hold", "Die Festung durchsuchen", "Buscar en el Bastión", "Explorando el bastión", "La fouille du bastion", "Ricerche nel forte", "요새 수색", "Vasculhando o castelo", "Поиски в Оплоте", "搜索堡垒", "搜索要塞", }, 
+{ "Getting Over the Overfiend", "Oberdämon zu unterst", "Acabar con el gran maligno", "Superando al gran maligno", "Supérieur au démon", "Abbattere il Vilnato", "거대마귀 처치", "Superando o Demônio Superior", "Сразите архидемона", "比大恶魔还大", "越級上報", }, 
+{ "Demon Hunting", "Dämonenjagd", "Cazando demonios", "Caza de demonios", "Chasse aux démons", "Caccia al Demone", "악마 사냥", "Caçada demoníaca", "Охота на демонов", "恶魔追猎", "惡魔狩獵", }, 
+{ "The Legion", "Die Legion", "La Legión", "La Legión", "La Légion", "La Legione", "군단", "A Legião", "Легион", "军团", "燃燒軍團", }, 
+{ "Screams of the Skull", "Schreie des Schädels", "Los gritos del cráneo", "Los gritos del cráneo", "Les cris du crâne", "Urla del teschio", "해골의 절규", "Gritos da caveira", "Вопли черепа", "颅骨的尖啸", "顱骨的尖嘯", }, 
+{ "The Skull of the Man'ari", "Der Schädel der Man'ari", "El Cráneo del Man'ari", "El Cráneo de los Man'ari", "Le Crâne du Man’ari", "Teschio dei Man'ari", "만아리의 해골", "A Caveira dos Man'ari", "Череп Ман'ари", "堕落者之颅", "曼那瑞的顱骨", }, 
+{ "There's a New Master in Town", "Ein neuer Meister ist in der Stadt", "Hay un nuevo maestro en la ciudad", "Un nuevo maestro ha llegado", "Changement de propriétaire", "Un nuovo maestro in città", "주인은 갈아타라고 있는 것", "Tem um novo mestre na área", "Новый хозяин", "旧物换新主", "我才是老大", }, 
+},
+["708"] = {
+{ "The Everbloom", "Der Immergrüne Flor", "El Vergel Eterno", "El Sempibrote", "La Flore éternelle", "Verdeterno", "상록숲", "Floretérnia", "Вечное Цветение", "永茂林地", "永茂林", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["511"] = {
+{ "Ragefire Chasm", "Der Flammenschlund", "Sima Ígnea", "Sima Ígnea", "Gouffre de Ragefeu", "Baratro di Fiamma Furente", "성난불길 협곡", "Cavernas Ígneas", "Огненная Пропасть", "怒焰裂谷", "怒焰裂谷", }, 
+},
+["212"] = {
+{ "Rendezvous with Ranger General Vereesa Windrunner", "Trefft Euch mit Waldläufergeneralin Vereesa Windläufer", "Reúnete con la General Forestal Vereesa Brisaveloz", "Reúnete con la General Forestal Vereesa Brisaveloz", "Rendez-vous avec le général des forestiers Vereesa Coursevent", "Incontra Vereesa Ventolesto", "순찰대 사령관 베리사 윈드러너와 접선", "Encontrar-se com a General Patrulheira Vereesa Correventos", "Встреча с предводительницей следопытов Верисой Ветрокрылой", "与游侠将军温蕾萨·风行者会合", "和遊俠將軍凡蕾莎·風行者會合", }, 
+{ "Survive the Ambush", "Überlebt den Überfall", "Sobrevive a la emboscada", "Sobrevive a la emboscada", "Survivre à l’embuscade", "Sopravvivi all'imboscata", "기습에서 생존", "Sobreviva à emboscada", "Пережить нападение", "在伏击中幸存下来", "撐過敵人的埋伏", }, 
+{ "Destroy the Barricades", "Zerstört die Barrikaden", "Destruye las barricadas", "Destruye las barricadas", "Détruire les barricades", "Distruggi le barricate", "방벽 파괴", "Destruir as barricadas", "Разрушить баррикады", "摧毁屏障", "摧毀路障", }, 
+{ "Kill Anki and Beastcaller Pakutesh", "Tötet Anki und Bestienrufer Pakutesh", "Mata a Anki y al clamabestias Pakutesh", "Mata a Anki y al clamabestias Pakutesh", "Tuer Anki et le mande-bête Pakutesh", "Uccidi Anki e l'Invocatore delle Bestie Pakutesh", "안키와 야수소환사 파쿠테쉬 처치", "Matar Anki e o Chama-feras Pakutesh", "Убить Анки и заклинателя зверей Пакутеша", "击败安基和驭兽师帕库特什", "殺死安奇及喚獸者帕古它許", }, 
+{ "Kill Arcanital Mara'kah and his Spirit Mask", "Tötet Arkanital Mara'kah und seine Geistermaske", "Mata al arcanital Mara'kah y a su máscara espíritu", "Mata al arcanital Mara'kah y a su máscara espíritu", "Tuer le rituarcaniste Mara’kah et son masque d’esprit", "Elimina Mara'kah e la Maschera Spiritica", "비전주술사 마라카와 영혼 가면 처치", "Matar o Arcanital Mara'kah e sua Máscara Espiritual", "Убить чародея-ритуалиста Мара'каха и его маску духов", "击败魔术士玛拉卡和他的灵魂面具", "殺死秘宗瑪拉卡與他的靈魂面具", }, 
+},
+["929"] = {
+{ "Halls of Valor", "Die Hallen der Tapferkeit", "Cámaras del Valor", "Salones del Valor", "Les salles des Valeureux", "Sale del Valore", "용맹의 전당", "Salões da Bravura", "Чертоги Доблести", "英灵殿", "英靈殿", }, 
+},
+["608"] = {
+{ "The Shattered Halls", "Die Zerschmetterten Hallen", "Las Salas Arrasadas", "Las Salas Arrasadas", "Les salles Brisées", "Sale della Devastazione", "으스러진 손의 전당", "Salões Despedaçados", "Разрушенные залы", "破碎大厅", "破碎大廳", }, 
+},
+["731"] = {
+{ "Extinguish Runes", "Löscht die Runen", "Extinción de runas", "Extinguir runas", "Éteindre les runes", "Estingui le rune", "룬 꺼뜨리기", "Extinguir runas", "Погасить руны", "熄灭符文", "熄滅符文", }, 
+{ "Upper Blackrock Spire", "Obere Schwarzfelsspitze", "Cumbre de Roca Negra Superior", "Cumbre de Roca Negra superior", "Sommet du pic Rochenoire", "Bastioni di Roccianera Superiori", "검은바위 첨탑 상층", "Pico da Rocha Negra Superior", "Верхняя часть пика Черной горы", "黑石塔上层", "黑石塔上層", }, 
+},
+["49"] = {
+{ "Siege of Niuzao Temple", "Belagerung des Niuzaotempels", "Asedio del Templo de Niuzao", "Asedio del Templo de Niuzao", "Siège du temple de Niuzao", "Assedio al Tempio di Niuzao", "니우짜오 사원 공성전투", "Cerco ao Templo Niuzao", "Осада храма Нюцзао", "围攻砮皂寺", "圍攻怒兆寺", }, 
+},
+["39"] = {
+{ "End the Terror", "Beendet den Alptraum", "Acaba con el terror", "Acaba con el terror", "Mettre fin à la terreur", "Fine del terrore", "공포의 종식", "O Fim do Terror", "Конец ужаса", "终结恐惧", "終結恐懼", }, 
+{ "The Pool of Life", "Der Teich des Lebens", "La Poza de vida", "La Poza de vida", "Le bassin de vie", "La Pozza della Vita", "생명의 웅덩이", "A Fonte de Vida", "Источник жизни", "生命之池", "生命之池", }, 
+{ "Search the Crypt", "Durchsucht die Krypta", "Investiga la cripta", "Investiga la cripta", "Fouiller la crypte", "Esplora la cripta", "납골당 수색", "Vasculhar a Cripta", "Поиски в гробнице", "搜索地穴", "搜尋墓穴", }, 
+{ "Destroy the Sha", "Bezwingt das Sha", "Acaba con el sha", "Acaba con el sha", "Détruire le sha", "Distruggi l'Abominio", "샤를 파괴하라", "Destrua o Sha", "Уничтожьте ша", "消灭煞魔", "消滅煞", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["916"] = {
+{ "Defend Tarren Mill", "Verteidigt Tarrens Mühle", "Defiende Molino Tarren", "Defiende el Molino Tarren", "La défense de Moulin-de-Tarren", "Difendere il Mulino di Tarren", "타렌 제분소 방어", "Defender Serraria Tarren", "Оборона мельницы Таррен", "保卫塔伦米尔", "守禦塔倫米爾", }, 
+{ "Defeat the Demon Commander", "Bezwingt den Dämonenkommandanten", "Derrota al comandante demoníaco", "Derrota al Comandante demoníaco", "Terrasser le commandant démon", "Sconfiggere il comandante demoniaco", "악마 사령관 처치", "Derrotar o Demônio Comandante", "Победа над командиром демонов", "击败恶魔指挥官", "擊敗惡魔指揮官", }, 
+{ "Repel the Legion Forces", "Schlagt die Streitkräfte der Legion zurück", "Rechaza a los ejércitos de la Legión", "Repele a las fuerzas de la Legión", "Repousser les troupes de la Légion", "Respingere le forze della Legione", "군단 격퇴", "Rechaçar as forças da Legião", "Отражение натиска Легиона", "击退燃烧军团的部队", "擊退燃燒軍團", }, 
+{ "Defeat the Demon Lord", "Bezwingt den Dämonenfürsten", "Derrota al señor demoníaco", "Derrota al Señor demoníaco", "Terrasser le seigneur démon", "Sconfiggere il Signore dei Demoni", "악마 군주 처치", "Derrotar o lorde-demônio", "Смерть повелителю демонов", "击败恶魔领主", "擊敗惡魔領主", }, 
+},
+["551"] = {
+{ "The Vortex Pinnacle", "Der Vortexgipfel", "La Cumbre del Vórtice", "La Cumbre del Vórtice", "La cime du Vortex", "Pinnacolo del Vortice", "소용돌이 누각", "Pináculo do Vórtice", "Вершина Смерча", "旋云之巅", "漩渦尖塔", }, 
+},
+["1073"] = {
+{ "Combat Training", "Kampftraining", "Instrucción de combate", "Instrucción de combate", "Entraînement au combat", "Addestramento al combattimento", "전투 훈련", "Treino de combate", "Боевые учения", "战斗训练", "戰鬥訓練", }, 
+{ "Judging Your Enemies", "Richtet Eure Feinde", "Juzgar a tus enemigos", "Enemigos bajo juicio", "Juger ses ennemis", "Giudicare i nemici", "심판의 날", "Julgar os inimigos", "Суд идет", "审判你的敌人", "審判敵人", }, 
+{ "Bring Some Justice", "Im Namen der Gerechtigkeit", "Imparte justicia", "Que se haga justicia", "Rendre la justice", "Sete di giustizia", "심판을 받아라", "Trazendo a justiça", "Высшая мера наказания", "正义使者", "維護正義", }, 
+{ "Crusading Around", "Kreuzfahrt", "Poderío cruzado", "Cruce de cruzadas", "En croisade", "Tra una crociata e l'altra", "신성한 기운", "Soltando o cruzado", "Во имя добра", "十字军征伐", "遍地聖擊", }, 
+{ "What's the Verdict?", "Wie lautet das Urteil?", "¿Cuál es el veredicto?", "¿Cuál es el veredicto?", "Quel est le verdict ?", "Qual è il verdetto?", "신성한 선고", "Qual é o veredito?", "Каков ваш вердикт?", "裁决结果是？", "裁決結果如何？", }, 
+{ "Putting It All Together", "Das große Ganze", "Juntar las piezas", "Todas las piezas juntas", "Mise en pratique", "Mettersi alla prova", "종합주문세트", "Fixação de conteúdo", "Сборная солянка", "综合在一起", "準備完善", }, 
+{ "A Storm Is Rising", "Ein Sturm zieht auf", "Se avecina una tormenta", "Se levanta una tormenta", "Une tempête se lève", "C'è una tempesta in arrivo", "몰려드는 폭풍", "Uma tempestade está se formando", "Грядет буря", "风暴来临", "風暴將至", }, 
+{ "You're So Divine", "Ihr seid göttlich", "Eres divino", "Eres una divinura", "La divinité incarnée", "Hai un aspetto divino!", "천상의 사랑을 당신에게", "És divino", "Божественная недосягаемость", "如此圣洁", "你好神聖", }, 
+{ "Flashing Lights", "Blitzlichter", "Luces deslumbrantes", "Luces resplandecientes", "Des éclairs de lumière", "Lampi luminosi", "섬광", "Luzes dardejantes", "Свет, дарующий исцеление", "闪现的圣光", "聖光閃閃", }, 
+{ "A Quick Test", "Schnelltest", "Una prueba rápida", "Una prueba rápida", "Un test rapide", "Una piccola prova", "깜짝 시험", "Teste rápido", "Испытание тет-а-тет", "快速测试", "隨堂考", }, 
+{ "Twice the Challenge", "Doppelte Herausforderung", "Desafío por partida doble", "Un desafío doble", "Double défi", "Doppia sfida", "난이도 두 배", "Desafio em dose dupla", "Двойной вызов", "双倍挑战", "雙重挑戰", }, 
+{ "Defend Against the Legion Assault", "Den Angriff der Legion abwehren", "Defiéndete del asalto de la Legión", "Defiéndete contra el ataque de la Legión", "Défense contre l’assaut de la Légion", "Difesa contro la Legione", "군단의 공격 막아내기", "Defender contra o ataque da Legião", "Оборона против Легиона", "在军团的攻击下保卫飞艇", "抵擋燃燒軍團的攻擊", }, 
+{ "Assault the Broken Shore", "Sturmangriff auf die Verheerte Küste", "Asalta la Costa Abrupta", "Asalto a la Costa Quebrada", "L’assaut du rivage Brisé", "Assalto alla Riva Dispersa", "부서진 해변 강습", "Ataque à Costa Partida", "Нападение на Расколотый берег", "突袭破碎海滩", "突襲破碎海岸", }, 
+},
+["538"] = {
+{ "Stormstout Brewery", "Brauerei Sturmbräu", "Cervecería del Trueno", "Cervecería del Trueno", "Brasserie Brune d’Orage", "Birrificio Triplo Malto", "스톰스타우트 양조장", "Cervejaria Malte do Trovão", "Хмелеварня Буйных Портеров", "风暴烈酒酿造厂", "風暴烈酒酒坊", }, 
+},
+["209"] = {
+{ "Find Lost Explosives", "Findet den verlorenen Sprengstoff", "Encuentra los explosivos perdidos", "Encuentra los explosivos perdidos", "Trouver les explosifs perdus", "Trova gli esplosivi perduti", "잃어버린 폭탄을 찾아라", "Encontrar os explosivos perdidos", "Найти потерянную взрывчатку", "找到遗失的炸药", "尋找遺失的炸藥", }, 
+{ "Deliver Explosives", "Liefert den Sprengstoff", "Entrega los explosivos", "Entrega los explosivos", "Livrer les explosifs", "Consegna gli esplosivi", "폭탄 전달", "Entregar os Explosivos", "Доставить взрывчатку", "运送炸药", "遞送炸藥", }, 
+{ "Detonate Explosives", "Detoniert den Sprengstoff", "Detona los explosivos", "Detona los explosivos", "Faire détoner les explosifs", "Fai detonare gli esplosivi", "폭탄 폭파", "Detonar Explosivos", "Взрыв", "引爆炸药", "引爆炸藥", }, 
+{ "Kill War-God Al'chukla", "Tötet Kriegsgott Al'chukla", "Mata al dios de la guerra Al'chukla", "Mata al dios de la guerra Al'chukla", "Tuer le dieu-guerrier Al’chukla", "Uccidi il Dio della Guerra Al'chukla", "전쟁신 알축라 처치", "Matar o Deus da Guerra Al'chukla", "Убейте бога войны Ал'чуклу", "击败战神阿尔图克拉", "殺死戰神阿裘卡拉", }, 
+},
+["645"] = {
+{ "Scholomance", "Scholomance", "Scholomance", "Scholomance", "Scholomance", "Scholomance", "스칼로맨스", "Scolomântia", "Некроситет", "通灵学院", "通靈學院", }, 
+},
+["671"] = {
+{ "Blackrock Depths", "Schwarzfelstiefen", "Profundidades de Roca Negra", "Profundidades de Roca Negra", "Profondeurs de Rochenoire", "Sotterranei di Roccianera", "검은바위 나락", "Abismo Rocha Negra", "Глубины Черной горы", "黑石深渊", "黑石深淵", }, 
+{ "Ring of Law", "Ring des Gesetzes", "Círculo de la Ley", "Círculo de la Ley", "Cercle de la loi", "Anello della Legge", "법의 심판장", "Círculo da Lei", "Зал Правосудия", "秩序竞技场", "秩序競技場", }, 
+{ "High Interrogator Gerstahn", "Verhörmeisterin Gerstahn", "Alta interrogadora Gerstahn", "Alta interrogadora Gerstahn", "Grande interrogatrice Gerstahn", "Gerstahn la Grande Accusatrice", "대심문관 게르스탄", "Suprema Interrogadora Gerstahn", "Верховный дознаватель Герштан", "审讯官格斯塔恩", "高階審問者格斯塔恩", }, 
+{ "Bael'Gar", "Bael'Gar", "Bael'Gar", "Bael'Gar", "Bael’Gar", "Bael'gar", "밸가르", "Bael'gar", "Бейл'Гор", "贝尔加", "貝爾加", }, 
+{ "The Grim Guzzler", "Zum Grimmigen Säufer", "Tragapenas", "Tragapenas", "Le Sinistre écluseur", "Il Torvo Beone", "험상궂은 주정뱅이 선술집", "O Glutão Implacável", "Трактир \"Угрюмый обжора\"", "黑铁酒吧", "黑鐵酒吧", }, 
+{ "Phalanx", "Phalanx", "Falange", "Falange", "Phalange", "Falange", "팔랑크스", "Falange", "Фаланга", "法拉克斯", "法拉克斯", }, 
+},
+["675"] = {
+{ "The Stonecore", "Der Steinerne Kern", "El Núcleo Pétreo", "El Núcleo Pétreo", "Le Cœur-de-Pierre", "Nucleo di Pietra", "바위심장부", "Litocerne", "Каменные Недра", "巨石之核", "石岩之心", }, 
+},
+["775"] = {
+{ "Sounding the Charge", "Die Ladung ausloten", "Tocar a carga", "Sondeando la carga", "Sonner la charge", "All'attacco", "돌격하라!", "O soar da investida", "Сигнал к бою", "鸣响冲锋号", "出征的號角", }, 
+{ "Crusaders' March", "Marsch der Kreuzfahrer", "La marcha de los cruzados", "Marcha de los Cruzados", "La marche des croisés", "La marcia dei crociati", "성전사들의 행진", "Marcha dos cruzados", "Марш рыцарей", "北伐军的远征", "十字軍的進擊", }, 
+{ "Holy Vengeance", "Heilige Rache", "Venganza sagrada", "Venganza sagrada", "Vengeance sacrée", "Sacra vendetta", "성스러운 복수", "Vingança sagrada", "Священная месть", "神圣复仇", "神聖復仇", }, 
+{ "The Ashbringer", "Der Aschenbringer", "La Crematoria", "La Crematoria", "Porte-Cendres", "Brandicenere", "파멸의 인도자", "A Crematória", "Испепелитель", "灰烬使者", "灰燼使者", }, 
+{ "One Final Blessing", "Ein letzter Segen", "Una última bendición", "Una última bendición", "Une dernière bénédiction", "Un'ultima benedizione", "마지막 은총", "Uma bênção final", "Последнее благословение", "最后的祝福", "最後的祝福", }, 
+{ "Balnazzar the Risen", "Balnazzar der Auferstandene", "Balnazzar el Alzado", "Balnazzar el Resucitado", "Balnazzar le Ressuscité", "Balnazzar il Risorto", "발나자르의 등장", "Balnazzar, o Ascendido", "Бальназар Восставший", "复生者巴纳扎尔", "復活的巴納札爾", }, 
+{ "The Fate of the Highlord", "Das Schicksal des Hochlords", "El destino del Alto Señor", "El destino del Alto señor", "Le destin du généralissime", "Il destino del Gran Signore", "대영주의 운명", "O destino do Grão-Lorde", "Судьба Верховного лорда", "大领主的命运", "大領主的命運", }, 
+},
+["450"] = {
+{ "A Vision Revealed", "Eine offenbarte Vision", "Una visión desvelada", "Una visión revelada", "Une vision révélée", "Una visione rivelatrice", "드러난 환영", "Uma Visão Revelada", "Видение прояснилось", "眼前的幻象", "揭露異象", }, 
+{ "Enemy Onslaught", "Feindlicher Ansturm", "Ataque del enemigo", "Ataque enemigo", "Attaque ennemie", "Massacro dei nemici", "맹공격", "Massacre dos Inimigos", "Натиск врага", "敌军的突袭", "敵方猛攻", }, 
+{ "Commander Vorka", "Kommandant Vorka", "Comandante Vorka", "Comandante Vorka", "Le commandant Vorka", "Comandante Vorka", "사령관 보르카", "Comandante Vorka", "Командир Ворка", "指挥官沃尔卡", "指揮官沃爾卡", }, 
+{ "The Final Defense", "Die letzte Verteidigung", "La última línea de defensa", "La última defensa", "L’ultime défense", "Difesa finale", "최후의 항전", "A defesa final", "Решающий бой", "最后的防线", "最終防禦", }, 
+},
+["550"] = {
+{ "Throne of the Tides", "Thron der Gezeiten", "Trono de las Mareas", "Trono de las Mareas", "Trône des marées", "Trono delle Maree", "파도의 왕좌", "Trono das Marés", "Трон Приливов", "潮汐王座", "海潮王座", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["609"] = {
+{ "Shadow Labyrinth", "Schattenlabyrinth", "Laberinto de las Sombras", "Laberinto de las Sombras", "Labyrinthe des Ombres", "Labirinto delle Ombre", "어둠의 미궁", "Labirinto Soturno", "Темный лабиринт", "暗影迷宫", "暗影迷宮", }, 
+},
+["1280"] = {
+{ "Into the Fray", "Auf ins Getümmel", "En el fragor de la batalla", "A la refriega", "Dans la mêlée", "Nel vivo della lotta", "참전", "Ao combate", "В гущу боя", "投入战斗", "身先士卒", }, 
+{ "Vanguard of the Assault", "Vorhut des Angriffs", "Vanguardia del asalto", "Vanguardia del asalto", "L’avant-garde de l’assaut", "Avanguardia dell'assalto", "공격의 선봉", "Vanguarda do ataque", "Авангард нападения", "突击先锋", "突擊先鋒", }, 
+{ "Might of the Legion", "Macht der Legion", "El poderío de la Legión", "El poder de la Legión", "Puissance de la Légion", "Vigore della Legione", "군단의 힘", "Poder da Legião", "Мощь Легиона", "军团力量", "軍團之力", }, 
+{ "Rifts of Chaos", "Risse des Chaos", "Fallas del caos", "Fisuras del caos", "Failles de chaos", "Fenditure del caos", "혼돈의 균열", "Fissuras de caos", "Источник хаоса", "混乱裂隙", "混沌裂隙", }, 
+{ "The Doomguard's Command", "Der Schreckenskommandant", "La orden del guardia apocalíptico", "La orden del guardia apocalíptico", "Le commandement la Garde funeste", "Il comandante dei Demoni Guardiani", "파멸수호병 사령관", "O comando do demonarca", "Командир повелителей ужаса", "末日守卫的命令", "末日守衛的命令", }, 
+{ "Gateway to Ruin", "Weg in den Ruin", "Portal a la ruina", "Portal hacia las ruinas", "Portail vers le vaisseau de la Légion Ruine", "Sull'ammiraglia della Legione", "파멸로 가는 관문", "Portal para a ruína", "Врата разрушения", "毁灭之门", "通往毀滅", }, 
+{ "Pillar of Fire", "Feuersäule", "Pilar de fuego", "Pilar de fuego", "Pilier de feu", "Distruggere l'Ammiraglia", "불기둥", "Pilar de Fogo", "Столп огня", "火焰之柱", "烈焰火柱", }, 
+{ "Mephistroth", "Mephistroth", "Mephistroth", "Mephistroth", "Méphistroth", "Mefistroth", "메피스트로스", "Mephistroth", "Мефистрот", "孟菲斯托斯", "梅菲斯托", }, 
+},
+["1007"] = {
+{ "Heal Taran Zhu", "Heilt Taran Zhu", "Sanar a Taran Zhu", "Sana a Taran Zhu", "Soigner Taran Zhu", "Curare Taran Zhu", "타란 주 치유", "Cure Taran Zhu", "Исцеление Тажаня Чжу", "治疗祝踏岚", "治療塔蘭‧祝", }, 
+{ "Rescue the Shado-Pan", "Rettet die Shado-Pan", "Rescatar a los miembros del Shadopan", "Rescata a los Shadopan", "Sauver les Pandashan", "Salvare gli Shandaren", "음영파 구출", "Resgate os Shado-Pan", "Спасение Шадо-Пан", "解救影踪派", "解救影潘", }, 
+{ "The Shado-Plan", "Der Shado-Plan", "El Shadoplan", "El plan de los Shadopan", "Le plan-dashan", "Gli Shandaren", "음영파", "O Shado-Plano", "Шадо-План", "影踪派", "影潘計畫", }, 
+{ "Don't Drink the Water", "Trinkt nicht das Wasser", "Agua que no has de beber...", "Agua que no has de beber...", "Ne buvez pas l’eau", "Non bere l'acqua", "마실 수 없는 물", "Água que passarinho não bebe", "Не пей эту воду!", "这水有毒", "別喝那裡的水", }, 
+{ "The Emperor's Final Gift", "Das letzte Geschenk des Kaisers", "El último regalo del Emperador", "El don final del emperador", "Le dernier cadeau de l’empereur", "Il dono finale dell'Imperatore", "황제의 마지막 선물", "O último presente do imperador", "Последний дар императора", "皇帝最后的礼物", "大帝的遺贈", }, 
+},
+["626"] = {
+{ "Auchenai Crypts", "Auchenaikrypta", "Criptas Auchenai", "Criptas Auchenai", "Cryptes Auchenaï", "Cripte degli Auchenai", "아키나이 납골당", "Catacumbas Auchenai", "Аукенайские гробницы", "奥金尼地穴", "奧奇奈地穴", }, 
+},
+["1094"] = {
+{ "Combat Training", "Kampftraining", "Instrucción de combate", "Instrucción de combate", "Entraînement au combat", "Addestramento al combattimento", "전투 훈련", "Treino de combate", "Боевые учения", "战斗训练", "戰鬥訓練", }, 
+{ "Bringing Out The Dead", "Die Toten auf den Plan rufen", "Recurrir a los muertos", "Aparición de los muertos", "Apportez vos morts !", "Rianimare i morti", "망자의 부활", "Trazer os mortos", "Беспокойство для покойных", "召唤亡者", "人死可以復生", }, 
+{ "Spreading your Disease", "Eure Krankheit verbreiten", "Contagio masivo", "Propagando el virus", "Propagation de la maladie", "Diffondere il morbo", "질병 퍼뜨리기", "Disseminando a doença", "Расползающаяся зараза", "传播你的疾病", "傳染疾病", }, 
+{ "It Festers", "Es schwärt so schön...", "Pus a espuertas", "Efecto degenerativo", "Écoulement de pus", "Problemi di infezione", "부패하는 상처", "Isso infecciona", "Гниющие раны", "溃烂吧！", "大爛人", }, 
+{ "Harnessing the Scourge", "Die Geißel zunutze machen", "Dominar la Plaga", "Controlando la Plaga", "Le Fléau maîtrisé", "Scatenare il Flagello", "스컬지의 힘으로", "Controlando o Flagelo", "Овладеть силой Плети", "驾驭天灾的力量", "駕馭天譴", }, 
+{ "Coiled, and Ready to Attack", "Den Mantel des Todes ausbreiten", "Espiral de ataque", "Enrollada y lista para atacar", "Décharge d’énergie impie", "Morte imminente", "치명적인 고리", "Bote armado, e pronto para atacar", "Лик, внушающий страх", "缠绕攻击", "纏繞突襲", }, 
+{ "Putting It All Together", "Das große Ganze", "Juntar las piezas", "Todas las piezas juntas", "Mise en pratique", "Mettersi alla prova", "종합주문세트", "Fixação de conteúdo", "Сборная солянка", "综合在一起", "準備完善", }, 
+{ "Healing on the Offense", "Offensives Heilen", "Sanación ofensiva", "Sanación de la ofensiva", "Attaque curative", "La miglior difesa è l'attacco", "공격적인 치유", "Cura na ofensiva", "Нападение вместо лекарства", "进攻亦是治疗", "攻擊是最好的防守", }, 
+{ "Get Over Here!", "Hierher!", "¡Ven aquí!", "¡Ven aquí!", "Par ici !", "Vieni qui!", "걸려들어라!", "Venha aqui!", "Ближе. Еще ближе...", "过来吧！", "給我過來！", }, 
+{ "Raising Some Friends", "Aufgeweckte Freunde", "Despertar a unos amigos", "Reclutando a algunos amigos", "Amis nécrosés", "Radunare alcuni amici", "죽은 자의 귀환", "Levantar alguns amigos", "Подмога с того света", "呼朋唤友", "找些好兄弟", }, 
+{ "A Quick Test", "Schnelltest", "Una prueba rápida", "Una prueba rápida", "Un test rapide", "Una piccola prova", "깜짝 시험", "Teste rápido", "Испытание тет-а-тет", "快速测试", "隨堂考", }, 
+{ "Twice the Challenge", "Doppelte Herausforderung", "Desafío por partida doble", "Un desafío doble", "Double défi", "Doppia sfida", "난이도 두 배", "Desafio em dose dupla", "Двойной вызов", "双倍挑战", "雙重挑戰", }, 
+{ "Defend Against the Legion Assault", "Den Angriff der Legion abwehren", "Defiéndete del asalto de la Legión", "Defiéndete contra el ataque de la Legión", "Défense contre l’assaut de la Légion", "Difesa contro la Legione", "군단의 공격 막아내기", "Defender contra o ataque da Legião", "Оборона против Легиона", "在军团的攻击下保卫飞艇", "抵擋燃燒軍團的攻擊", }, 
+{ "Assault on Broken Shore", "Angriff auf die Verheerte Küste", "Asalto a la Costa Abrupta", "Asalto a la Costa Quebrada", "L’assaut du rivage Brisé", "Assalto alla Riva Dispersa", "부서진 해변 공격", "Ataque à Costa Partida", "Штурм Расколотого берега", "突袭破碎海滩", "突襲破碎海岸", }, 
+},
+["742"] = {
+{ "Invasion", "Invasion", "Invasión", "Invasión", "L'invasion", "Invasione", "침략", "Invasão", "Нападение", "入侵", "入侵", }, 
+{ "The Scouting Party", "Der Spähtrupp", "El grupo de exploración", "El grupo explorador", "Le groupe d’éclaireurs", "Il gruppo di esploratori", "정찰대", "O Grupo de Batedores", "Разведывательный отряд", "斥候小队", "偵察隊", }, 
+{ "Hold Out!", "Haltet durch!", "¡Aguanta!", "¡Aguanta!", "Accrochez-vous !", "Non cedere!", "항전!", "Aguentem!", "Стоять до последнего!", "坚持住！", "堅持到底！", }, 
+{ "Cleanup", "Aufräumkommando", "Limpieza", "Limpieza", "Nettoyage", "Ripulitura", "소탕", "Limpeza", "Зачистка", "摧枯拉朽", "收拾殘局", }, 
+{ "The Calm", "Ruhe nach dem Sturm", "La calma", "La calma", "Le calme", "La calma", "정적", "A Calma", "Затишье", "风平浪静", "歇息備戰", }, 
+{ "Commander's Fall", "Fall des Kommandanten", "La caída del comandante", "La caída del comandante", "La chute d’un commandant", "La caduta del comandante", "지휘관의 죽음", "A Ruína do Comandante", "Падение вождя", "指挥官的陨落", "指揮官之死", }, 
+},
+["663"] = {
+{ "Earth Song Falls", "Fälle des Irdenen Gesangs", "Cascadas del Canto de la Tierra", "Cascadas del Canto de la Tierra", "Chutes de Chanteterre", "Cascate Cantaterra", "대지노래 폭포", "Cachoeiras da Canção Telúrica", "Поющие водопады", "地歌瀑布", "地歌瀑布", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["558"] = {
+{ "Halls of Origination", "Hallen des Ursprungs", "Cámaras de los Orígenes", "Cámaras de los Orígenes", "Salles de l’Origine", "Sale della Creazione", "시초의 전당", "Salões Primordiais", "Чертоги Созидания", "起源大厅", "起源大廳", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["571"] = {
+{ "Pit of Saron", "Grube von Saron", "Foso de Saron", "Foso de Saron", "Fosse de Saron", "Fossa di Saron", "사론의 구덩이", "Fosso de Saron", "Яма Сарона", "萨隆矿坑", "薩倫之淵", }, 
+},
+["1182"] = {
+{ "Combat Training", "Kampftraining", "Instrucción de combate", "Instrucción de combate", "Entraînement au combat", "Addestramento al combattimento", "전투 훈련", "Treino de combate", "Боевые учения", "战斗训练", "戰鬥訓練", }, 
+{ "A Lick of Fire", "Ein Schlückchen Feuer", "Un chorrito de fuego", "Un chorrito de fuego", "La bouche en feu", "Una punta di fuoco", "불 한 입", "Uma pincelada de fogo", "Капельку огня", "烈焰舔舐", "添些火焰", }, 
+{ "Can't Stop The Rock", "Den Stein ins Rollen bringen", "Roca invencible", "Un movimiento imparable", "Rien n’arrête le roc", "Rocce implacabili", "바위를 막을 순 없다", "Não se pode deter a Pedra", "Тверд, как скала", "无法阻挡巨石", "巨石強身", }, 
+{ "Lashing Out", "Die Peitsche schwingen", "A latigazo limpio", "Gran arremetida", "Flagellation", "Battute sferzanti", "채찍을 휘둘러라", "Só no açoite", "Иногда нужно выпустить пар", "猛击", "火口噴人", }, 
+{ "Hero of the Storm", "Held des Sturms", "Héroe de la tormenta", "Héroe de la Tormenta", "Héros de la tempête", "Eroe della Tempesta", "폭풍의 영웅", "Herói da tempestade", "Герой бури", "风暴英雄", "風暴英雄", }, 
+{ "Putting It All Together", "Das große Ganze", "Juntar las piezas", "Todas las piezas juntas", "Mise en pratique", "Mettersi alla prova", "종합주문세트", "Fixação de conteúdo", "Сборная солянка", "综合在一起", "準備完善", }, 
+{ "Ribbit,  Ribbit.", "Quaaak, quaaak.", "Croac, croac", "Croac, croac.", "Coâ, coâ !", "Cra, cra!", "개굴, 개굴", "Croac, croac.", "Кто сказал \"ква\"?", "呱，呱", "嘓嘓，嘓嘓", }, 
+{ "Dousing Your Wounds", "Eine Welle der Heilung", "Empapa tus heridas", "Empapando las heridas", "Doux apaisement", "Lavarsi le ferite", "상처 돌보기", "Fechar as feridas", "Ванна из целебного бальзама", "浸泡伤口", "清理傷口", }, 
+{ "Spiritual Assistance", "Geistiger Beistand", "Ayuda espiritual", "Ayuda espiritual", "Assistance spirituelle", "Supporto Spirituale", "영적 도움", "Auxílio espiritual", "Помощники из тонкого мира", "灵魂协助", "靈魂相助", }, 
+{ "A Quick Test", "Schnelltest", "Una prueba rápida", "Una prueba rápida", "Un test rapide", "Una piccola prova", "깜짝 시험", "Teste rápido", "Испытание тет-а-тет", "快速测试", "隨堂考", }, 
+{ "Twice the Challenge", "Doppelte Herausforderung", "Desafío por partida doble", "Un desafío doble", "Double défi", "Doppia sfida", "난이도 두 배", "Desafio em dose dupla", "Двойной вызов", "双倍挑战", "雙重挑戰", }, 
+{ "Defend Against the Legion Assault", "Den Angriff der Legion abwehren", "Defiéndete del asalto de la Legión", "Defiéndete contra el ataque de la Legión", "Défense contre l’assaut de la Légion", "Difesa contro la Legione", "군단의 공격 막아내기", "Defender contra o ataque da Legião", "Оборона против Легиона", "在军团的攻击下保卫飞艇", "抵擋燃燒軍團的攻擊", }, 
+{ "Assault on Broken Shore", "Angriff auf die Verheerte Küste", "Asalto a la Costa Abrupta", "Asalto a la Costa Quebrada", "L’assaut du rivage Brisé", "Assalto alla Riva Dispersa", "부서진 해변 공격", "Ataque à Costa Partida", "Штурм Расколотого берега", "突袭破碎海滩", "突襲破碎海岸", }, 
+},
+["806"] = {
+{ "Defend Gadgetzan", "Verteidigt Gadgetzan", "Defiende Gadgetzan", "Protege a Gadgetzan", "La défense de Gadgetzan", "Difendi Meccania", "가젯잔 방어", "Defenda Geringontzan", "Оборона Прибамбасска", "保卫加基森", "守禦加基森", }, 
+{ "Defeat the Demon Commanders", "Bezwingt den Dämonenkommandanten", "Derrota a los comandantes demoníacos", "Derrota a los Comandantes demoníacos", "Terrasser les commandants démons", "Sconfiggere i comandanti demoniaci", "악마 사령관 처치", "Derrote os Demônios Comandantes", "Победа над командирами Легиона", "击败恶魔指挥官", "擊敗惡魔指揮官", }, 
+{ "Repel the Legion Forces", "Schlagt die Streitkräfte der Legion zurück", "Rechaza a los ejércitos de la Legión", "Repele a las fuerzas de la Legión", "Repousser les troupes de la Légion", "Respingere le forze della Legione", "군단 격퇴", "Rechace as forças da Legião", "Отражение натиска Легиона", "击退军团部队", "擊退燃燒軍團", }, 
+{ "Defeat the Demon Lord", "Bezwingt den Dämonenfürsten", "Derrota al señor demoníaco", "Derrota al Señor demoníaco", "Terrasser le seigneur démon", "Sconfiggere il Signore dei Demoni", "악마 군주 처치", "Derrotar o lorde-demônio", "Смерть повелителю демонов", "击败恶魔领主", "擊敗惡魔領主", }, 
+},
+["610"] = {
+{ "The Black Morass", "Der Schwarze Morast", "La Ciénaga Negra", "La Ciénaga Negra", "Le Noir marécage", "Palude Nera", "검은늪", "Lamaçal Negro", "Черные топи", "黑色沼泽", "黑色沼澤", }, 
+},
+["1251"] = {
+{ "Assault on Violet Hold", "Sturm auf die Violette Festung", "Asalto al Bastión Violeta", "Ataque al Bastión Violeta", "L’assaut sur le fort Pourpre", "Assalto alla Fortezza Violacea", "보랏빛 요새 침공", "Ataque ao Castelo Violeta", "Штурм Аметистовой крепости", "突袭紫罗兰监狱", "紫羅蘭堡之襲", }, 
+{ "Assault on Violet Hold", "Sturm auf die Violette Festung", "Asalto al Bastión Violeta", "Ataque al Bastión Violeta", "L’assaut sur le fort Pourpre", "Assalto alla Fortezza Violacea", "보랏빛 요새 침공", "Ataque ao Castelo Violeta", "Штурм Аметистовой крепости", "突袭紫罗兰监狱", "紫羅蘭堡之襲", }, 
+{ "Assault on Violet Hold", "Sturm auf die Violette Festung", "Asalto al Bastión Violeta", "Ataque al Bastión Violeta", "L’assaut sur le fort Pourpre", "Assalto alla Fortezza Violacea", "보랏빛 요새 침공", "Ataque ao Castelo Violeta", "Штурм Аметистовой крепости", "突袭紫罗兰监狱", "紫羅蘭堡之襲", }, 
+},
+["1273"] = {
+{ "A Brother Betrayed", "Der betrogene Bruder", "Traición fraternal", "Traición fraternal", "La trahison d’un frère", "Fratello traditore", "배신당한 형제", "Traição fraterna", "Преданный брат", "背叛的手足", "背叛的兄弟", }, 
+{ "The Prophecy Denied", "Der Prophezeiung zum Trotze", "La profecía negada", "La profecía rechazada", "Prophétie annulée", "La profezia negata", "빗나간 예언", "Profecia negada", "Несбывшееся пророчество", "未实现的预言", "預言成空", }, 
+},
+["617"] = {
+{ "Magisters' Terrace", "Terrasse der Magister", "Bancal del Magister", "El Bancal del Magister", "La terrasse des Magistères", "Terrazza dei Magisteri", "마법학자의 정원", "Terraço dos Magísteres", "Терраса Магистров", "魔导师平台", "博學者殿堂", }, 
+},
+["745"] = {
+{ "Invasion!", "Invasion!", "¡Invasión!", "¡Invasión!", "Alerte aux envahisseurs !", "Invasione!", "침략!", "Invasão!", "Нападение!", "入侵！", "入侵！", }, 
+{ "Ambush", "Hinterhalt", "Emboscada", "Emboscada", "Embuscade", "Imboscata", "습격", "Emboscada", "Засада", "伏击", "伏擊", }, 
+{ "The Holdout", "Durchhaltevermögen", "La resistencia", "La resistencia", "Le baroud", "Resistenza", "항전", "A Resistência", "Продержаться подольше", "坚持到底", "堅持到底", }, 
+{ "Cleanup", "Aufräumkommando", "Limpieza", "Limpieza", "Nettoyage", "Ripulitura", "소탕", "Limpeza", "Зачистка", "摧枯拉朽", "收拾殘局", }, 
+{ "The Calm", "Ruhe nach dem Sturm", "La calma", "La calma", "Le calme", "La calma", "정적", "A Calma", "Затишье", "风平浪静", "歇息備戰", }, 
+{ "Shadows Gather", "Der Schatten wächst", "Las sombras se ciernen", "Las sombras se reúnen", "Les ombres se rassemblent", "Le ombre si addensano", "어둠이 드리운다", "A reunião das sombras", "Тени сгущаются", "暗影蔽日", "暗影集結", }, 
+},
+["1034"] = {
+{ "Engage the Enemy", "Schlachterzwingung", "Enfrentarse al enemigo", "Enfréntate al enemigo", "Sus à l’ennemi", "Affrontare il nemico", "공포의 군주와 교전", "Enfrente o inimigo", "Столкновение с врагом", "交战", "與敵人交戰", }, 
+{ "The Forge Restrained", "Die gebundene Schmiede", "La Forja bajo control", "La Forja contenida", "La forge amoindrie", "Contenere la Forgia", "억제된 가열로", "A forja diminuída", "Скованное Горнило", "熔炉重生", "受制的熔爐", }, 
+{ "The Power of the Guardians", "Die Macht der Wächter", "El poder de los guardianes", "El poder de los Guardianes", "Le pouvoir des Gardiens", "Il potere dei Guardiani", "수호자의 힘", "O poder dos Guardiões", "Сила Хранителей", "守护者之力", "守護者的力量", }, 
+{ "The Dreadlord's Downfall", "Der Niedergang des Schreckenslords", "La caída del Señor del Terror", "La caída del Señor del Terror", "La chute du seigneur de l’effroi", "La caduta del Signore del Terrore", "공포의 군주 처치", "A queda do Senhor do Medo", "Падение повелителя ужаса", "恐惧魔王的败亡", "驚懼領主的落敗", }, 
+{ "A Small Victory", "Ein kleiner Sieg", "Una pequeña victoria", "Una pequeña victoria", "Modeste victoire", "Una piccola vittoria", "작은 승리", "Uma pequena vitória", "Маленькая победа", "小小的胜利", "小小的勝利", }, 
+{ "Keep it Secret, Keep it Safe", "Haltet es geheim, bewahrt es gut", "En secreto y a salvo", "No se lo digas a nadie", "Un secret bien gardé", "Mettere al sicuro", "은밀하게 안전하게", "O segredo do negócio é o segredo", "Тайное и надежное место", "注意保密，注意安全", "保守秘密，保守安全", }, 
+},
+["427"] = {
+{ "Auchindoun", "Auchindoun", "Auchindoun", "Auchindoun", "Auchindoun", "Auchindoun", "아킨둔", "Auchindoun", "Аукиндон", "奥金顿", "奧齊頓", }, 
+},
+["670"] = {
+{ "Upper City", "Oberes Viertel", "Alto Arrabal", "Ciudad superior", "Ville haute", "Città Alta", "상부 도시", "Cidade Alta", "Верхний Город", "上层区", "上城區", }, 
+},
+["58"] = {
+{ "Scar-Shell", "Narbenpanzer", "Escaraza", "Escaraza", "Ecaille-balafrée", "Gamara", "흉터껍질", "Conchagas", "Потертый Панцирь", "刀疤壳", "疤殼", }, 
+{ "Jol'Grum", "Jol'Grum", "Jol'Grum", "Jol'Grum", "Jol’Grum", "Jol'grum", "졸그럼", "Jol'Grum", "Джол'Грум", "乔古鲁", "悠格魯姆", }, 
+{ "Little Liuyang", "Klein Liuyang", "Pequeña Liuyang", "Pequeña Liuyang", "Petite Liuyang", "Piccola Liuyang", "꼬마 리우양", "Pequena Liuyang", "Малышка Люян", "小流炀", "小劉楊", }, 
+{ "Chagan Firehoof", "Chagan Feuerhuf", "Chagan Pezuña Ígnea", "Chagan Pezuña Ígnea", "Chagan Sabot-de-Feu", "Chagan Ardizampa", "차간 파이어후프", "Chagan Casco de Fogo", "Чаган Огненное Копыто", "查干·焰蹄", "查剛·火蹄", }, 
+{ "Defeat the Final Challenger!", "Bezwingt den letzten Herausforderer!", "¡Derrota al contendiente final!", "¡Derrota al contendiente final!", "Vaincre l’adversaire final !", "Sconfiggi lo Sfidante Finale!", "마지막 도전자를 처치하라!", "Derrote o Desafiante Final!", "Победите последнего противника!", "击败最终的挑战者！", "擊敗最後挑戰者!", }, 
+},
+["991"] = {
+{ "The Twilight Camp", "Der Stützpunkt des Schattenhammers", "El Campamento Crepuscular", "El campamento del Martillo Crepuscular", "Le campement du Crépuscule", "L'accampamento del Crepuscolo", "황혼의 야영지", "O Acampamento do Crepúsculo", "Сумеречный лагерь", "暮光营地", "暮光營地", }, 
+{ "Raiding the Tomb Raiders", "Die Grabräuber berauben", "Asaltar a los asaltantes de tumbas", "Asalto a los cazadores de tumbas", "Sus aux pilleurs de tombe", "Incursione contro i Predatori di Tombe", "도굴꾼의 최후", "Saqueando os saqueadores de tumbas", "Ограбление грабителей могил", "螳螂捕蝉", "追殺盜墓者", }, 
+{ "The Desecrated Tomb", "Das entweihte Grab", "La tumba profanada", "La tumba profanada", "Le tombeau profané", "La tomba sconsacrata", "훼손된 무덤", "A tumba profanada", "Оскверненная гробница", "被亵渎的古墓", "被褻瀆的陵墓", }, 
+{ "The Tomb of Tyr", "Tyrs Grabmal", "La Tumba de Tyr", "La Tumba de Tyr", "Le tombeau de Tyr", "Tomba di Tyr", "티르의 무덤", "A tumba de Tyr", "Гробница Тира", "提尔之墓", "提爾之墓", }, 
+{ "Reconsecration", "Wiederweihe", "Nueva consagración", "Reconsagración", "Réhabilitation sacrée", "Riconsacrazione", "신성불가침", "Reconsagração", "Повторное освящение", "再次净化", "再次奉獻", }, 
+{ "Don't Fear the Reaper", "Keine Angst vorm Eisenmann", "No temas al segador", "No temas al segador", "Ne craignez pas le faucheur", "Non temere il mietitore", "공허를 두려워 말라", "Não tema o ceifador", "Не бойся Жнеца", "浑身是胆", "別害怕死亡", }, 
+{ "Dark Passage", "Dunkle Passage", "Pasadizo oscuro", "Pasaje oscuro", "Passage obscur", "Passaggio oscuro", "어둠의 통로", "Passagem sombria", "Темный путь", "黑暗通道", "黑暗通道", }, 
+{ "Death to the Deacon", "Tod dem Diakon", "Muerte al diácono", "Muerte al Diácono", "Mort au diacre", "Morte al Diacono", "부제에게 죽음을", "Morte ao Diácono", "Смерть Дьякону", "执事之死", "執事之死", }, 
+{ "The Blade of the Black Empire", "Die Klinge des schwarzen Imperiums", "La Daga del Imperio Negro", "La Espada del Imperio Negro", "La lame de l’empire noir", "La Lama dell'Impero Nero", "검은 제국의 비수", "A Lâmina do Império Negro", "Клинок Темной Империи", "黑暗帝国之刃", "黑暗帝國之刃", }, 
+{ "The True Death of Zakajz", "Der wahre Tod von Zakajz", "La verdadera muerte de Zakajz", "La muerte definitiva de Zakajz", "La véritable mort de Zakajz", "La vera morte di Zakajz", "마침내 죽은 자카이즈", "A verdadeira morte de Zakajz", "Окончательная смерть Закажа", "扎卡兹的彻底死亡", "扎卡茲真正死亡", }, 
+},
+["269"] = {
+{ "Tutorial", "Einweisung", "Tutorial", "Tutorial", "Apprentissage", "Tutorial", "연습", "Tutorial", "Обучение", "教学", "教學導覽", }, 
+{ "Noodle Time", "Nudelzeit", "La hora de los fideos", "La hora de los fideos", "L’heure des nouilles", "Spaghetti a volontà", "국수 시간", "Hora do Macarrão", "Час лапши", "汤面时间", "湯麵時刻", }, 
+},
+["628"] = {
+{ "Mana-Tombs", "Managruft", "Tumbas de Maná", "Tumbas de Maná", "Tombes-mana", "Tombe del Mana", "마나 무덤", "Tumbas de Mana", "Гробницы Маны", "法力陵墓", "法力墓地", }, 
+},
+["1281"] = {
+{ "The Landing", "Die Landestelle", "El rellano", "El alto", "L’entrée", "L'approdo", "층계참", "A plataforma", "Гнездовье", "平台", "平臺", }, 
+{ "Searching for the Rook", "Suche in der Rabenwehr", "En busca del grajo", "La búsqueda de la torre", "La fouille du Freux", "Forte Corvonero", "떼까마귀 탐색", "Vasculhar o castelo", "Поиски в крепости", "搜索堡垒", "搜查玄鴉堡", }, 
+{ "Desperate Times", "Verzweifelte Zeiten", "Tiempos desesperados", "Tiempos desesperados", "Une situation désespérée", "Tempi duri", "절박한 시간", "Tempos de desespero", "Большие проблемы", "情势危急", "危急時刻", }, 
+{ "What Lies Ahead", "Der Weg vor uns", "Lo que espera", "Lo que espera adelante", "Un avenir incertain", "Cosa ci attende", "저 앞에 기다리는 것", "O que há à frente", "Это еще не все", "前方的路", "前往何方", }, 
+{ "Erdris and the Risen", "Erdris und die Auferstandenen", "Erdris y los resucitados", "Erdris y los resucitados", "Erdris et les ressuscités", "Erdris e i risorti", "에르드리스와 되살아난 자들", "Erdris e os Reerguidos", "Эрдрис и его восставшая армия", "艾德里斯与亡者", "厄德里斯與亡靈部隊", }, 
+{ "Rise, Soldiers!", "Erhebt Euch, Soldaten!", "¡Alzaos, soldados!", "¡Levántense, soldados!", "Levez-vous, soldats !", "Risorgete, soldati!", "일어나라, 병사들이여!", "Ergam-se, soldados!", "Восстаньте, воины!", "站起来，士兵们！", "起來吧，士兵！", }, 
+{ "A Thorn in the Side", "Ein Dorn im Auge", "Una espina en el costado", "Una espina clavada", "Une épine dans le flanc", "Una spina nel fianco", "내가 쏜 우두머리", "Um espinho no flanco", "Корень зла", "肉中刺", "芒刺在背", }, 
+},
+["68"] = {
+{ "The Lorewalker's Fate", "Das Schicksal der Lehrensucherin", "El destino del eremita", "El destino del eremita", "Le destin de la chroniqueuse", "Il destino del Ramingo della Sapienza", "전승지기의 운명", "O Destino da Andarilha das Lendas", "Судьба хранителя истории", "游学者的命运", "博學行者的命運", }, 
+{ "Rescue the Golden Lotus", "Rettet den Goldenen Lotus", "Rescata a El Loto Dorado", "Rescata a El Loto Dorado", "Sauver le Lotus doré", "Salva il Loto Dorato", "황금 연꽃 원정대 구출", "Resgate o Lótus Dourado", "Спасение Золотого Лотоса", "拯救金莲教", "拯救金蓮會", }, 
+{ "Stop the Execution", "Stoppt die Hinrichtung", "Detén la ejecución", "Detén la ejecución", "Empêcher l’exécution", "Impedisci l'esecuzione", "처형을 막아라", "Impeça a Execução", "Остановка казни", "刀下留人", "刀下留人", }, 
+{ "Capture the Artifacts", "Erobert die Artefakte", "Hazte con los artefactos", "Hazte con los artefactos", "Capturer les artéfacts", "Conquista i Manufatti", "유물 확보", "Capture os Artefatos", "Захват реликвий", "夺取神器", "奪取神器", }, 
+{ "Kill General Zhun", "Tötet General Zhun", "Mata al general Zhun", "Mata al general Zhun", "Tuer le général Zhun", "Uccidi il Generale Zhun", "장군 준 처치", "Mate o General Zhun", "Убийство генерала Чжуня", "杀死烛桓将军", "殺死曾將軍", }, 
+},
+["667"] = {
+{ "Gordok Commons", "Gordokhallen", "Ágora de Gordok", "Ágora de Gordok", "Communs gordok", "Sale di Gordok", "고르독 광장", "Pátio Gordok", "Палаты Гордока", "戈多克议会", "戈多克平民區", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+{ "Bonus Objective", "Bonusziel", "Objetivo de bonificación", "Objetivo de bonificación", "Objectif bonus", "Obiettivo bonus", "추가 목표", "Objetivo bônus", "Дополнительная задача", "奖励目标", "獎勵目標", }, 
+},
+["1289"] = {
+{ "Lower Return to Karazhan", "Untere Rückkehr nach Karazhan", "Regreso a Karazhan inferior", "Regreso inferior a Karazhan", "Retour à Karazhan (bas)", "Ritorno a Karazhan Inferiore", "다시 찾은 카라잔 하층", "Retorno a Karazhan inferior", "Возвращение в Каражан (нижняя часть)", "重返卡拉赞（下层）", "重返卡拉贊下層", }, 
+},
+["184"] = {
+{ "The Flight Master", "Der Flugmeister", "El maestro de vuelo", "El maestro de vuelo", "Le maître de vol", "Il Maestro di Volo", "비행 조련사", "O Mestre de Voo", "Распорядитель полетов", "飞行管理员", "飛行管理員", }, 
+{ "Death on the Docks", "Tod auf den Docks", "Muerte en los muelles", "Muerte en los muelles", "Mort sur les quais", "Morte sui moli", "부두에서의 격전", "Morte nas Docas", "Смерть на пристани", "死守码头", "死亡碼頭", }, 
+{ "Reclaim the Court!", "Die Rückeroberung des Hofes!", "¡Reclama la corte!", "¡Reclama la corte!", "Reprenez la cour !", "Riconquista la corte!", "요새를 되찾아라!", "Domine o Pátio!", "Возвращение контроля над двором", "夺回庭院！", "收復中庭!", }, 
+{ "The High Marshal", "Der Hochmarschall", "El alto mariscal", "El alto mariscal", "Le haut maréchal", "Il Gran Maresciallo", "대장군", "O Grão-marechal", "Верховный маршал", "大元帅", "大元帥", }, 
+{ "Legwork", "Lauferei", "Trabajo preliminar", "Trabajo preliminar", "Travail sur le terrain", "Raccolta informazioni", "탐문 조사", "Pernadas", "Беготня", "外勤工作", "跑腿", }, 
+{ "Setting Up", "Vorbereitung", "Tanto monta, monta tanto", "Tanto monta, monta tanto", "Préparatifs", "Preparare le difese", "방어 준비", "Preparar Armas", "Установка", "装备中", "做好準備", }, 
+{ "Hold the Line!", "Weicht nicht zurück!", "¡Mantén la formación!", "¡Mantén la formación!", "Tenir le front !", "Difendi la posizione!", "전선을 사수하라!", "Mantenham a Formação!", "Держать строй!", "坚守阵地！", "守住陣線!", }, 
+},
+["641"] = {
+{ "The Deadmines", "Die Todesminen", "Las Minas de la Muerte", "Las Minas de la Muerte", "Les Mortemines", "Miniere della Morte", "죽음의 폐광", "Minas Mortas", "Мертвые копи", "死亡矿井", "死亡礦坑", }, 
+},
+["685"] = {
+{ "Iron Docks", "Eisendocks", "Puerto de Hierro", "Muelles de Hierro", "Quais de Fer", "Darsena di Ferro", "강철 선착장", "Docas de Ferro", "Железные доки", "钢铁码头", "鋼鐵碼頭", }, 
+},
+["449"] = {
+{ "Defeat Arnokk the Burner", "Bezwingt Arnokk den Brenner", "Derrota a Arnokk el Quemador", "Derrota a Arnokk el Abrasador", "Vaincre Arnokk le Brûleur", "Sconfiggi Arnokk il Piromane", "방화광 아르노크 처치", "Derrotar Arnokk, o Incendiário", "Победите Арнокка Сжигателя", "击败炽燃者阿诺克", "擊敗『燃燒者』阿諾克", }, 
+{ "Meet Yrel at the Karabor Harbor", "Trefft Yrel am Hafen von Karabor", "Reúnete con Yrel en el Puerto de Karabor", "Reúnete con Yrel en el Puerto de Karabor", "Rencontrer Yrel au port de Karabor", "Raggiungi Yrel presso il Porto di Karabor", "카라보르 항만에서 이렐 만나기", "Encontre Yrel no Porto de Karabor", "Встреча с Ирель в гавани Карабора", "在卡拉波港口与伊瑞尔见面", "在卡拉伯爾港與伊芮爾碰面", }, 
+{ "Protect K'ara from the invading forces", "Beschützt K'ara vor den eindringenden Streitkräften", "Protege a K'ara de los invasores", "Protege a K'ara de las fuerzas invasoras", "Protéger K’ara des envahisseurs", "Proteggi K'ara dagli assalitori", "칩입자에게서 크아라 지키기", "Proteger K'ara das forças invasoras.", "Защитите К'ару от захватчиков", "保护卡拉不受入侵者的伤害", "保護卡拉不受入侵敵軍的威脅", }, 
+{ "Kill Commander Vorka!", "Tötet Kommandant Vorka!", "¡Mata al comandante Vorka!", "¡Mata al comandante Vorka!", "Vaincre le commandant Vorka", "Uccidi il Comandante Vorka", "사령관 보르카 처치!", "Mate o Comandante Vorka!", "Убить командира Ворку!", "击败指挥官沃尔卡！", "殺死指揮官沃爾卡！", }, 
+},
+["584"] = {
+{ "Halls of Stone", "Die Hallen des Steins", "Cámaras de Piedra", "Las Cámaras de Piedra", "Les salles de Pierre", "Sale della Pietra", "돌의 전당", "Salões Rochosos", "Чертоги Камня", "岩石大厅", "石之大廳", }, 
+},
+["649"] = {
+{ "Gnomeregan", "Gnomeregan", "Gnomeregan", "Gnomeregan", "Gnomeregan", "Gnomeregan", "놈리건", "Gnomeregan", "Гномреган", "诺莫瑞根", "諾姆瑞根", }, 
+{ "Grubbis defeated", "Grubbis bezwungen", "Grubbis derrotado", "Grubbis derrotado", "Grubbis vaincu", "Sconfiggi Grubbis", "그루비스 처치", "Grúdio derrotado", "Грязнюк повержен", "击败格鲁比斯", "擊敗格魯比斯", }, 
+{ "Viscous Fallout defeated", "Verflüssigte Ablagerung bezwungen", "Radiactivo viscoso derrotado", "Radiactivo viscoso derrotado", "Retombée visqueuse vaincue", "Sconfiggi la Scoria Viscosa", "방사성 폐기물 처치", "Precipitação Radioativa Viscosa derrotada", "Липкая муть повержена", "击败粘性辐射尘", "擊敗黏性輻射塵", }, 
+{ "Electrocutioner 6000 defeated", "Elektrokutor 6000 bezwungen", "Electrocutor 6000 derrotado", "Electrocutor 6000 derrotado", "Electrocuteur 6000 vaincu", "Elettrocuz 6000", "기계화 문지기 6000 처치", "Eletrocutor 6000 derrotado", "\"Электрошокер 6000\" повержен", "击败电刑器6000型", "擊敗電刑器6000型", }, 
+{ "Crowd Pummeler 9-60 defeated", "Meuteverprügler 9-60 bezwungen", "Golpeamasa 9-60 derrotado", "Golpeamasa 9-60 derrotado", "Faucheur de foule 9-60 vaincu", "Sconfiggi il Pungolatore 9-60", "고철 압축기 9-60 처치", "Espanca-gente 9-60 derrotado", "\"Толпогон 9-60\" повержен", "击败群体打击者9-60", "擊敗群體打擊者9-60", }, 
+},
+["1157"] = {
+{ "The Return to Light's Hope", "Rückkehr zum Hoffnungsvollen Licht", "El regreso a Esperanza de la Luz", "El regreso a la Esperanza de la Luz", "Le retour à l’Espoir de Lumière", "Ritorno alla Cappella della Luce", "희망의 빛으로 돌아가기", "Retorno à Esperança da Luz", "Возвращение в Часовню Последней Надежды", "回到圣光之愿", "回到聖光之願", }, 
+{ "Preparations", "Vorbereitungen", "Preparativos", "Preparativos", "Les préparatifs", "Preparativi", "준비", "Os preparativos", "Приготовления", "备战", "做好準備", }, 
+{ "Upon the Hill of No Return", "Auf dem Hügel ohne Widerkehr", "En la colina sin retorno", "Sobre la Colina del Retorno Negado", "Sur la colline sans retour", "Punto di non ritorno", "돌아설 수 없는 길목", "Nas colinas do adeus", "Точка невозврата", "无言的山丘", "視死如歸", }, 
+{ "The Dead Shall Rise", "Die Toten werden wiederauferstehen", "Los muertos se alzarán", "Los muertos deben alzarse", "Les morts se relèveront", "I morti risorgono", "망자여, 일어나라", "Os mortos erguer-se-ão", "Мертвые, восстаньте!", "亡者复生", "亡者復甦", }, 
+{ "The Highlord Awaits", "Der Hochlord wartet", "El Alto Señor aguarda", "El Alto Señor espera", "Le généralissime attend", "Il Gran Signore attende", "대영주와의 만남", "Grão-lorde a sua espera", "Верховный лорд ждет", "大领主在等着你", "大領主等著", }, 
+{ "The Sanctum of Light", "Das Sanktum des Lichts", "El Sagrario de la Luz", "El Santuario de la Luz", "Le sanctum de la Lumière", "Il Santuario della Luce", "빛의 성소", "O Sacrário da Luz", "Обитель Света", "圣光秘殿", "聖光會堂", }, 
+{ "Lady of the Light", "Lady des Lichts", "La señora de la Luz", "Señora de la Luz", "La dame de Lumière", "La Dama della Luce", "빛의 여인", "Lady da Luz", "Госпожа Света", "圣光女伯爵", "聖光女士", }, 
+{ "An Unholy Fate", "Ein unheiliges Schicksal", "Una suerte profana", "Un destino profano", "Un destin impie", "Un destino empio", "지독한 운명", "Um destino horrível", "Злая судьба", "亵渎命运", "不潔的命運", }, 
+},
+["1283"] = {
+{ "Challenge and Defeat Your First Opponent", "Die erste Herausforderung", "Retar y derrotar a tu primer oponente", "Desafía y derrota a tu primer oponente", "Défier et terrasser votre premier adversaire", "Il primo avversario", "첫 번째 상대에게 도전하고 승리하기", "Desafiar e derrotar seu primeiro adversário", "Победа над первым противником", "挑战并击败第一个对手", "挑戰並擊敗你的第一個對手", }, 
+{ "Challenge and Defeat Your Second Opponent", "Die zweite Herausforderung", "Retar y derrotar a tu segundo oponente", "Desafía y derrota a tu segundo oponente", "Défier et terrasser votre deuxième adversaire et le terrasser", "Il secondo avversario", "두 번째 상대에게 도전하고 승리하기", "Desafiar e derrotar seu segundo adversário", "Победа над вторым противником", "挑战并击败第二个对手", "挑戰並擊敗你的第二個對手", }, 
+{ "Challenge and Defeat Your Third Opponent", "Die dritte Herausforderung", "Retar y derrotar a tu tercer oponente", "Desafía y derrota a tu tercer oponente", "Défier et terrasser votre troisième adversaire", "Il terzo avversario", "세 번째 상대에게 도전하고 승리하기", "Desafiar e derrotar seu terceiro adversário", "Победа над третьим противником", "挑战并击败第三个对手", "挑戰並擊敗你的第三個對手", }, 
+{ "Defeat Your Final Opponent", "Der letzte Gegner", "Derrotar a tu oponente final", "Derrota al último oponente", "Triompher de votre dernier adversaire", "L'avversario finale", "마지막 상대에게 승리하기", "Derrotar seu adversário final", "Победа над последним противником", "击败最后一个对手", "擊敗你最後的對手", }, 
+},
+["1290"] = {
+{ "Assist the blue dragons", "Hilfe für die blauen Drachen", "Ayudar a los dragones Azules", "Ayuda a los dragones azules", "Aide aux dragons bleus", "Aiutare i Draghi Blu", "푸른용들을 도와야 합니다.", "Ajudar os dragões azuis", "Помощь синим драконам", "协助蓝龙", "協助藍龍", }, 
+{ "Meet up with the Blue drakes", "Treffen mit den blauen Drachen", "Reunión con los dracos azules", "Encuentra a los dracos azules", "Rencontre avec les drakes bleus", "Incontrare i Drachi Blu", "푸른 비룡들과 만나기", "Encontrar os dracos azuis", "Встреча с синими драконами", "找到幼年蓝龙", "與藍龍會合", }, 
+{ "Reach the Legion Ship", "Erreicht das Legionsschiff", "Llegar a la nave de la Legión", "Llega hasta la nave de la Legión", "Atteindre le vaisseau de la Légion", "Raggiungere la Nave della Legione", "군단 함선에 도착", "Chegar à nave da Legião", "Корабль Легиона", "抵达军团战舰", "抵達燃燒軍團船艦", }, 
+{ "Get on up there", "Hoch hinaus", "Subir ahí arriba", "Súbete ahí", "Vertige interdit", "Fin lassù", "저 위로", "Suba lá", "Верхний ярус", "一路向上", "到上面去", }, 
+{ "Take down the Leader", "Schaltet den Anführer aus", "Acabar con el líder", "Acaba con el líder", "Éliminer le chef", "Sconfiggere il capo", "지휘관 처치", "Derrotar o líder", "Смерть предводителю!", "擒贼擒王", "消滅首領", }, 
+{ "Escape!", "Flieht!", "¡Huida!", "¡Escapa!", "Fuyez !", "Fuga!", "탈출!", "Fuja!", "Побег", "逃亡！", "脫逃！", }, 
+},
+["1305"] = {
+{ "The Hunt Begins", "Die Jagd beginnt", "Empieza la caza", "Empieza la caza", "La traque commence", "La caccia è aperta", "사냥 개시", "A caça começa", "Охота началась", "狩猎开始", "狩獵開始", }, 
+{ "Night of Claw and Talon", "Nacht der Krallen und Klauen", "Noche de garras y zarpas", "La noche de la garra y la garfa", "La nuit des griffes et serres", "La notte dell'artiglio e dell'unghia", "발톱의 밤", "Noite de garras", "Ночь хищников", "利爪之夜", "凶禽與猛獸之夜", }, 
+{ "Haukenulfnir", "Haukenulfnir", "Haukenulfnir", "Haukenulfnir", "Haukenulfnir", "Haukenulfnir", "하케누피니르", "Haukenulfnir", "Хаукенульфнир", "霍克努夫尼尔", "霍肯沃尼爾", }, 
+{ "Revel The Night Away", "Die Nacht durchfeiern", "Celebra toda la noche", "Fiesta nocturna", "Festivités nocturnes", "Bisboccia Notturna", "오늘 밤은 연회와 함께", "Farreando a noite inteira", "Пир на весь мир", "彻夜狂欢", "狂歡晚宴", }, 
+},
+["638"] = {
+{ "Hellfire Ramparts", "Höllenfeuerbollwerk", "Murallas del Fuego Infernal", "Murallas del Fuego Infernal", "Remparts des Flammes infernales", "Bastioni del Fuoco Infernale", "지옥불 성루", "Muralha Fogo do Inferno", "Бастионы Адского Пламени", "地狱火城墙", "地獄火壁壘", }, 
+},
+["585"] = {
+{ "A Royal Escort", "Die Eskorte des Königs", "Una escolta real", "Una escolta real", "Une escorte royale", "Scorta reale", "왕 호위", "Uma escolta real", "Королевский эскорт", "皇家护卫", "護送皇室", }, 
+{ "Infinite Corruptor Defeated", "Ewiger Verderber besiegt", "Corruptor infinito derrotado", "Corruptor Infinito derrotado.", "Corrupteur infini vaincu", "Sconfiggi il Corruttore dell'Infinito", "무한의 타락자 처치", "Corruptor Infinito derrotado", "Осквернитель из рода Бесконечности повержен", "击败永恒腐蚀者", "擊敗恆龍墮落者", }, 
+},
+["51"] = {
+{ "Scholomance", "Scholomance", "Scholomance", "Scholomance", "Scholomance", "Scholomance", "스칼로맨스", "Scolomântia", "Некроситет", "通灵学院", "通靈學院", }, 
+},
+["1144"] = {
+{ "Commence Bombardment!", "Das Bombardement beginnen", "¡Que comience el bombardeo!", "¡Comiencen el bombardeo!", "Feu à volonté !", "Fuoco alle polveri!", "폭격 개시!", "Iniciar o bombardeio!", "Готовсь... Цельсь... Пли!", "开始轰炸！", "開始轟炸！", }, 
+{ "Glide Down to the Rendezvous", "Zum Treffpunkt hinuntergleiten", "Planea hasta el punto de encuentro", "Deslizamiento en descenso hacia el encuentro", "Planer jusqu’au point de rendez-vous", "Planare verso il punto di ritrovo", "고공 낙하", "Desça, planando, até o local de encontro", "Спуск к месту встречи", "滑翔到集合点", "滑翔前往集結地點", }, 
+{ "Destroy the Legion", "Zerstört die Legion", "Destruye a la Legión", "Destruye a la Legión", "Détruire la Légion", "Annientare la Legione", "군단 섬멸", "Destrua a Legião", "Уничтожить Легион!", "消灭军团", "消滅燃燒軍團", }, 
+{ "Regroup In Front of the Command Center", "Vor der Kommandozentrale versammeln", "Reagrupamiento frente al centro de mando", "Reagrupamiento frente al centro de mando", "Regroupement devant le centre de commandement", "Raduno al Centro di Comando", "사령부 앞에서 재집결", "Reagrupem-se em frente ao Centro de Comando", "Перегруппировка у флагманского корабля", "在指挥部前方重新集结", "在指揮中心前面重新整隊", }, 
+{ "Fel Hammer, Fire!", "Teufelshammer, Feuer frei!", "¡Martillo Vil, fuego!", "¡Martillo Vil, fuego!", "Marteau gangrené, feu !", "Vilmartello, fuoco!", "지옥 망치호, 발사!", "Martelo Vil, fogo!", "Огонь!", "邪能之槌号，开火！", "魔錘號，射擊！", }, 
+{ "Caria and Varedis At Last", "Caria und Varedis, endlich", "Caria y Varedis al fin", "Caria y Varedis, al fin", "Caria et Varedis, enfin…", "Caria e Varedis, alla fine ci incontriamo", "카리아와 베레디스의 최후", "Caria e Varedis, finalmente", "Наказать предателей", "最后，只剩下凯丽娅和瓦雷迪斯", "凱莉亞和瓦瑞迪斯的終點", }, 
+{ "Malevolence, Get Us Out of Here", "Malicia, bringt uns hier weg", "Malevolencia, sácanos de aquí", "Malevolencia, sácanos de aquí", "Maléficiae ! Nous devons sortir d’ici !", "Malevola, tiraci fuori da qui", "말레볼런스의 지원", "Malevolência, tire-nos daqui", "Злоба, вытащи нас отсюда.", "玛沃伦丝，带我们离开这里", "懷惡族母，帶我們離開這裡", }, 
+},
+["606"] = {
+{ "Shadow Labyrinth", "Schattenlabyrinth", "Laberinto de las Sombras", "Laberinto de las Sombras", "Labyrinthe des Ombres", "Labirinto delle Ombre", "어둠의 미궁", "Labirinto Soturno", "Темный лабиринт", "暗影迷宫", "暗影迷宮", }, 
+},
 };

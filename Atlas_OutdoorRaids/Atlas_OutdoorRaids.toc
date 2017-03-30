@@ -1,4 +1,4 @@
-## Interface: 70100
+## Interface: 70200
 #@non-debug@
 ## Title: Atlas |r|cFF0099FF[Outdoor Raids]|r
 ## Title-deDE: Atlas |r|cFF0099FF[Außenweltschlachtzüge]|r
@@ -22,9 +22,9 @@
 # ## Notes: Outdoor Raid Encounters
 # ## Notes-zhTW: Atlas 戶外首領地圖插件
 #@end-debug@
-## Version: 1.37.00
+## Version: 1.39.01
 ## Author: arith, Dynaletik, dubcat
-## X-Date: 2017-01-24T7:20:30Z
+## X-Date: 2017-03-29T15:10:34Z
 ## X-Credits: Dan Gilbert, Lothaer
 ## X-Email: atlas.addon at gmail dot com
 ## X-Website: http://www.atlasmod.com

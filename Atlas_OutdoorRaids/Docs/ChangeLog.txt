@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt 27 2017-01-24 07:20:30Z arith $
+$Id: ChangeLog.txt 31 2017-03-29 15:10:34Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
@@ -7,6 +7,22 @@ Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 ==============
 = Change Log =
 ==============
+
+v1.39.01 (Mar. 29, 2017)
+------------------------
+- Fixed the issue that by right-clicking on world boss' name in 
+  legend panel won't bring up AtlasLoot window
+- Added location of Malificus
+
+v1.39.00 (Mar. 27, 2017)
+------------------------
+- Toc update to support WoW 7.2
+- Broken Isles map revamped
+- Added the following new world bosses (location is not yer available):
+  - Brutallus
+  - Malificus
+  - Si'vash
+  - Apocron
 
 v1.37.00 (Jan. 24, 2017)
 ------------------------

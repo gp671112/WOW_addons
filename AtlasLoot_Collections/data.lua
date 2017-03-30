@@ -12,6 +12,9 @@ local P25_DIFF = data:AddDifficulty(AL["25 Player"], "p25", nil, 4)
 local P25H_DIFF = data:AddDifficulty(AL["25 Player Heroic"], "p25h", nil, 6)
 local MYTHIC_DIFF = data:AddDifficulty(AL["Mythic"], "m", nil, 16)
 
+local LEGENDARY_DIFF = data:AddDifficulty(ITEM_QUALITY5_DESC)
+
+local LEGION_DIFF = data:AddDifficulty(EXPANSION_NAME6)
 local WOD_DIFF = data:AddDifficulty(EXPANSION_NAME5)
 local MOP_DIFF = data:AddDifficulty(EXPANSION_NAME4)
 local CATA_DIFF = data:AddDifficulty(EXPANSION_NAME3)
@@ -50,7 +53,7 @@ data["ARTIFACTS"] = {
 				{  3, 128403 },
 				{  5, 140538, [PRICE_EXTRA_ITTYPE] = "money:1000000" },
 				{  6, 140554, [PRICE_EXTRA_ITTYPE] = "money:1000000" },
-				{  8, 136796, [PRICE_EXTRA_ITTYPE] = "money:500000" }, 
+				{  8, 136796, [PRICE_EXTRA_ITTYPE] = "money:500000" },
 				{ 16, 139673, [PRICE_EXTRA_ITTYPE] = "money:5000000"  },
 				{ 17, 139674, [PRICE_EXTRA_ITTYPE] = "money:5000000"  },
 				{ 18, 139675, [PRICE_EXTRA_ITTYPE] = "money:5000000"  },
@@ -59,7 +62,7 @@ data["ARTIFACTS"] = {
 				{ 21, 139678, [PRICE_EXTRA_ITTYPE] = "money:5000000"  },
 				{ 22, 139679, [PRICE_EXTRA_ITTYPE] = "money:5000000"  },
 				{ 23, 139680, [PRICE_EXTRA_ITTYPE] = "money:5000000"  },
-				{ 25, 140962, [PRICE_EXTRA_ITTYPE] = "orderresources:500" }, 
+				{ 25, 140962, [PRICE_EXTRA_ITTYPE] = "orderresources:500" },
 				{ 26, 140935, [PRICE_EXTRA_ITTYPE] = "orderresources:2000" },
 				{ 27, 140963, [PRICE_EXTRA_ITTYPE] = "orderresources:4000" },
 			},
@@ -78,7 +81,7 @@ data["ARTIFACTS"] = {
 				{ 21, 139720, [PRICE_EXTRA_ITTYPE] = "money:5000000" },
 				{ 22, 139721, [PRICE_EXTRA_ITTYPE] = "money:5000000" },
 				{ 23, 139722, [PRICE_EXTRA_ITTYPE] = "money:5000000" },
-				{ 25, 140964, [PRICE_EXTRA_ITTYPE] = "orderresources:500" }, 
+				{ 25, 140964, [PRICE_EXTRA_ITTYPE] = "orderresources:500" },
 				{ 26, 140936, [PRICE_EXTRA_ITTYPE] = "orderresources:2000" },
 				{ 27, 140965, [PRICE_EXTRA_ITTYPE] = "orderresources:4000" },
 			},
@@ -106,7 +109,7 @@ data["ARTIFACTS"] = {
 				{ 21, 139728, [PRICE_EXTRA_ITTYPE] = "money:5000000" },
 				{ 22, 139729, [PRICE_EXTRA_ITTYPE] = "money:5000000" },
 				{ 23, 139730, [PRICE_EXTRA_ITTYPE] = "money:5000000" },
-				{ 25, 140966, [PRICE_EXTRA_ITTYPE] = "orderresources:500" }, 
+				{ 25, 140966, [PRICE_EXTRA_ITTYPE] = "orderresources:500" },
 				{ 26, 140937, [PRICE_EXTRA_ITTYPE] = "orderresources:2000" },
 				{ 27, 140967, [PRICE_EXTRA_ITTYPE] = "orderresources:4000" },
 			},
@@ -299,19 +302,19 @@ data["ARTIFACTS"] = {
 				{  2, 128908 },
 				{  3, 128910 },
 				{  5, 140537, [PRICE_EXTRA_ITTYPE] = "money:1000000" },
-				{  6, 140557, [PRICE_EXTRA_ITTYPE] = "money:1000000" }, 
-				{  7, 140559, [PRICE_EXTRA_ITTYPE] = "money:1000000" }, 
-				{ 16, 139681, [PRICE_EXTRA_ITTYPE] = "money:5000000" }, 
-				{ 17, 139682, [PRICE_EXTRA_ITTYPE] = "money:5000000" }, 
-				{ 18, 139683, [PRICE_EXTRA_ITTYPE] = "money:5000000" }, 
-				{ 19, 139684, [PRICE_EXTRA_ITTYPE] = "money:5000000" }, 
-				{ 20, 139685, [PRICE_EXTRA_ITTYPE] = "money:5000000" }, 
-				{ 21, 139686, [PRICE_EXTRA_ITTYPE] = "money:5000000" }, 
-				{ 22, 139687, [PRICE_EXTRA_ITTYPE] = "money:5000000" }, 
-				{ 23, 139688, [PRICE_EXTRA_ITTYPE] = "money:5000000" }, 
-				{ 25, 140984, [PRICE_EXTRA_ITTYPE] = "orderresources:500" }, 
-				{ 26, 140946, [PRICE_EXTRA_ITTYPE] = "orderresources:2000" }, 
-				{ 27, 140985, [PRICE_EXTRA_ITTYPE] = "orderresources:4000" }, 
+				{  6, 140557, [PRICE_EXTRA_ITTYPE] = "money:1000000" },
+				{  7, 140559, [PRICE_EXTRA_ITTYPE] = "money:1000000" },
+				{ 16, 139681, [PRICE_EXTRA_ITTYPE] = "money:5000000" },
+				{ 17, 139682, [PRICE_EXTRA_ITTYPE] = "money:5000000" },
+				{ 18, 139683, [PRICE_EXTRA_ITTYPE] = "money:5000000" },
+				{ 19, 139684, [PRICE_EXTRA_ITTYPE] = "money:5000000" },
+				{ 20, 139685, [PRICE_EXTRA_ITTYPE] = "money:5000000" },
+				{ 21, 139686, [PRICE_EXTRA_ITTYPE] = "money:5000000" },
+				{ 22, 139687, [PRICE_EXTRA_ITTYPE] = "money:5000000" },
+				{ 23, 139688, [PRICE_EXTRA_ITTYPE] = "money:5000000" },
+				{ 25, 140984, [PRICE_EXTRA_ITTYPE] = "orderresources:500" },
+				{ 26, 140946, [PRICE_EXTRA_ITTYPE] = "orderresources:2000" },
+				{ 27, 140985, [PRICE_EXTRA_ITTYPE] = "orderresources:4000" },
 			},
 		},
 	},
@@ -349,7 +352,7 @@ data["APEXISCRYSTALGEAR"] = {
 				{ 3, 122331, [PRICE_EXTRA_ITTYPE] = "116971:1:apexis:14500" }, -- Ethereal Refractory Heartcloak
 				{ 4, 122332, [PRICE_EXTRA_ITTYPE] = "116972:1:apexis:14500" }, -- Ethereal Crystal Reinforced Doomcloak
 				{ 5, 122328, [PRICE_EXTRA_ITTYPE] = "116951:1:apexis:14500" }, -- Ethereal Shard-Covered Dreadcloak
-				
+
 				{ 7, 122308, [PRICE_EXTRA_ITTYPE] = "115396:1:apexis:20000" }, -- Ethereal Windcrystal Hood
 				{ 8, 122309, [PRICE_EXTRA_ITTYPE] = "115397:1:apexis:20000" }, -- Ethereal Crystalhide Cowl
 				{ 9, 122310, [PRICE_EXTRA_ITTYPE] = "115398:1:apexis:20000" }, -- Ethereal Crystal-Leaf Helm
@@ -377,7 +380,7 @@ data["APEXISCRYSTALGEAR"] = {
 			},
 		},
 		{
-				
+
 			name = string.format(AL["ilvl %d"], 655).." "..AL["Armor"],
 			[NORMAL_DIFF] = {
 				{ 1, 116969, [PRICE_EXTRA_ITTYPE] = "115391:1:apexis:14500" },	-- Flawless Crystal-Edged Bladecloak
@@ -385,27 +388,27 @@ data["APEXISCRYSTALGEAR"] = {
 				{ 3, 116971, [PRICE_EXTRA_ITTYPE] = "115393:1:apexis:14500" },	-- Flawless Refractory Heartcloak
 				{ 4, 116972, [PRICE_EXTRA_ITTYPE] = "115394:1:apexis:14500" },	-- Flawless Crystal Reinforced Doomcloak
 				{ 5, 116951, [PRICE_EXTRA_ITTYPE] = "115395:1:apexis:14500" },	-- Flawless Shard-Covered Dreadcloak
-				
+
 				{ 7, 115396, [PRICE_EXTRA_ITTYPE] = "116957:1:apexis:20000" },	-- Flawless Windcrystal Hood
 				{ 8, 115397, [PRICE_EXTRA_ITTYPE] = "116958:1:apexis:20000" },	-- Flawless Crystalhide Cowl
 				{ 9, 115398, [PRICE_EXTRA_ITTYPE] = "116959:1:apexis:20000" },	-- Flawless Crystal-Leaf Helm
 				{ 10, 115399, [PRICE_EXTRA_ITTYPE] = "116960:1:apexis:20000" },	-- Flawless Crystal-Plated Greathelm
-				
+
 				{ 12, 115400, [PRICE_EXTRA_ITTYPE] = "116961:1:apexis:14500" },	-- Flawless Windcrystal Bracers
 				{ 13, 115401, [PRICE_EXTRA_ITTYPE] = "116962:1:apexis:14500" },	-- Flawless Crystalhide Bracers
 				{ 14, 115402, [PRICE_EXTRA_ITTYPE] = "116963:1:apexis:14500" },	-- Flawless Crystal-Leaf Bracers
 				{ 15, 115403, [PRICE_EXTRA_ITTYPE] = "116964:1:apexis:14500" },	-- Flawless Crystal-Plated Bracers
-				
+
 				{ 16, 116947, [PRICE_EXTRA_ITTYPE] = "115387:1:apexis:17000" },	-- Flawless Windcrystal Wraps
 				{ 17, 116948, [PRICE_EXTRA_ITTYPE] = "115388:1:apexis:17000" },	-- Flawless Crystalhide Grips
 				{ 18, 116949, [PRICE_EXTRA_ITTYPE] = "115389:1:apexis:17000" },	-- Flawless Crystal-Leaf Gloves
 				{ 19, 116950, [PRICE_EXTRA_ITTYPE] = "115390:1:apexis:17000" },	-- Flawless Crystal-Plated Gauntlets
-				
+
 				{ 21, 116939, [PRICE_EXTRA_ITTYPE] = "116935:1:apexis:17000" },	-- Flawless Windcrystal Cord
 				{ 22, 116940, [PRICE_EXTRA_ITTYPE] = "116936:1:apexis:17000" },	-- Flawless Crystalhide Belt
 				{ 23, 116941, [PRICE_EXTRA_ITTYPE] = "116937:1:apexis:17000" },	-- Flawless Crystal-Leaf Chain
-				{ 24, 116942, [PRICE_EXTRA_ITTYPE] = "116938:1:apexis:17000" },	-- Flawless Crystal-Plated Greatbelt				
-				
+				{ 24, 116942, [PRICE_EXTRA_ITTYPE] = "116938:1:apexis:17000" },	-- Flawless Crystal-Plated Greatbelt
+
 				{ 26, 116931, [PRICE_EXTRA_ITTYPE] = "116927:1:apexis:20000" },	-- Flawless Windcrystal Leggings
 				{ 27, 116932, [PRICE_EXTRA_ITTYPE] = "116928:1:apexis:20000" },	-- Flawless Crystalhide Legguards
 				{ 28, 116933, [PRICE_EXTRA_ITTYPE] = "116929:1:apexis:20000" },	-- Flawless Crystal-Leaf Legguards
@@ -420,27 +423,27 @@ data["APEXISCRYSTALGEAR"] = {
 				{ 3, 115393, [PRICE_EXTRA_ITTYPE] = "116975:1:apexis:9000" },	-- Exceptional Refractory Heartcloak
 				{ 4, 115394, [PRICE_EXTRA_ITTYPE] = "116976:1:apexis:9000" },	-- Exceptional Crystal Reinforced Doomcloak
 				{ 5, 115395, [PRICE_EXTRA_ITTYPE] = "116952:1:apexis:9000" },	-- Exceptional Shard-Covered Dreadcloak
-				
+
 				{ 7, 116957, [PRICE_EXTRA_ITTYPE] = "116953:1:apexis:11500" },	-- Exceptional Windcrystal Hood
 				{ 8, 116958, [PRICE_EXTRA_ITTYPE] = "116954:1:apexis:11500" },	-- Exceptional Crystalhide Cowl
 				{ 9, 116959, [PRICE_EXTRA_ITTYPE] = "116955:1:apexis:11500" },	-- Exceptional Crystal-Leaf Helm
 				{ 10, 116960, [PRICE_EXTRA_ITTYPE] = "116956:1:apexis:11500" },	-- Exceptional Crystal-Plated Greathelm
-				
+
 				{ 12, 116961, [PRICE_EXTRA_ITTYPE] = "116965:1:apexis:9000" },	-- Exceptional Windcrystal Bracers
 				{ 13, 116962, [PRICE_EXTRA_ITTYPE] = "116966:1:apexis:9000" },	-- Exceptional Crystalhide Bracers
 				{ 14, 116963, [PRICE_EXTRA_ITTYPE] = "116967:1:apexis:9000" },	-- Exceptional Crystal-Leaf Bracers
 				{ 15, 116964, [PRICE_EXTRA_ITTYPE] = "116968:1:apexis:9000" },	-- Exceptional Crystal-Plated Bracers
-				
+
 				{ 16, 115387, [PRICE_EXTRA_ITTYPE] = "116943:1:apexis:10500" },	-- Exceptional Windcrystal Wraps
 				{ 17, 115388, [PRICE_EXTRA_ITTYPE] = "116944:1:apexis:10500" },	-- Exceptional Crystalhide Grips
 				{ 18, 115389, [PRICE_EXTRA_ITTYPE] = "116945:1:apexis:10500" },	-- Exceptional Crystal-Leaf Gloves
 				{ 19, 115390, [PRICE_EXTRA_ITTYPE] = "116946:1:apexis:10500" },	-- Exceptional Crystal-Plated Gauntlets
-				
+
 				{ 21, 116935, [PRICE_EXTRA_ITTYPE] = "115378:1:apexis:10500" },	-- Exceptional Windcrystal Cord
 				{ 22, 116936, [PRICE_EXTRA_ITTYPE] = "115379:1:apexis:10500" },	-- Exceptional Crystalhide Belt
 				{ 23, 116937, [PRICE_EXTRA_ITTYPE] = "115380:1:apexis:10500" },	-- Exceptional Crystal-Leaf Chain
 				{ 24, 116938, [PRICE_EXTRA_ITTYPE] = "115381:1:apexis:10500" },	-- Exceptional Crystal-Plated Greatbelt
-				
+
 				{ 26, 116927, [PRICE_EXTRA_ITTYPE] = "115374:1:apexis:11500" },	-- Exceptional Windcrystal Leggings
 				{ 27, 116928, [PRICE_EXTRA_ITTYPE] = "115375:1:apexis:11500" },	-- Exceptional Crystalhide Legguards
 				{ 28, 116929, [PRICE_EXTRA_ITTYPE] = "115376:1:apexis:11500" },	-- Exceptional Crystal-Leaf Legguards
@@ -455,27 +458,27 @@ data["APEXISCRYSTALGEAR"] = {
 				{ 3, 116975, [PRICE_EXTRA_ITTYPE] = "apexis:3000" },	-- Refractory Heartcloak
 				{ 4, 116976, [PRICE_EXTRA_ITTYPE] = "apexis:3000" },	-- Crystal Reinforced Doomcloak
 				{ 5, 116952, [PRICE_EXTRA_ITTYPE] = "apexis:3000" },	-- Shard-Covered Dreadcloa
-				
+
 				{ 7, 116953, [PRICE_EXTRA_ITTYPE] = "apexis:5000" },	-- Windcrystal Hood
 				{ 8, 116954, [PRICE_EXTRA_ITTYPE] = "apexis:5000" },	-- Crystalhide Cowl
 				{ 9, 116955, [PRICE_EXTRA_ITTYPE] = "apexis:5000" },	-- Crystal-Leaf Helm
 				{ 10, 116956, [PRICE_EXTRA_ITTYPE] = "apexis:5000" },	-- Crystal-Plated Greathelm
-				
+
 				{ 12, 116965, [PRICE_EXTRA_ITTYPE] = "apexis:3000" },	-- Windcrystal Bracers
 				{ 13, 116966, [PRICE_EXTRA_ITTYPE] = "apexis:3000" },	-- Crystalhide Bracers
 				{ 14, 116967, [PRICE_EXTRA_ITTYPE] = "apexis:3000" },	-- Crystal-Leaf Bracers
 				{ 15, 116968, [PRICE_EXTRA_ITTYPE] = "apexis:3000" },	-- Crystal-Plated Bracers
-				
+
 				{ 16, 116943, [PRICE_EXTRA_ITTYPE] = "apexis:4000" },	-- Windcrystal Wraps
 				{ 17, 116944, [PRICE_EXTRA_ITTYPE] = "apexis:4000" },	-- Crystalhide Grips
 				{ 18, 116945, [PRICE_EXTRA_ITTYPE] = "apexis:4000" },	-- Crystal-Leaf Gloves
 				{ 19, 116946, [PRICE_EXTRA_ITTYPE] = "apexis:4000" },	-- Crystal-Plated Gauntlets
-				
+
 				{ 21, 115378, [PRICE_EXTRA_ITTYPE] = "apexis:4000" },	-- Windcrystal Cord
 				{ 22, 115379, [PRICE_EXTRA_ITTYPE] = "apexis:4000" },	-- Crystalhide Belt
 				{ 23, 115380, [PRICE_EXTRA_ITTYPE] = "apexis:4000" },	-- Crystal-Leaf Chain
 				{ 24, 115381, [PRICE_EXTRA_ITTYPE] = "apexis:4000" },	-- Crystal-Plated Greatbelt
-				
+
 				{ 26, 115374, [PRICE_EXTRA_ITTYPE] = "apexis:5000" },	-- Windcrystal Leggings
 				{ 27, 115375, [PRICE_EXTRA_ITTYPE] = "apexis:5000" },	-- Crystalhide Legguards
 				{ 28, 115376, [PRICE_EXTRA_ITTYPE] = "apexis:5000" },	-- Crystal-Leaf Legguards
@@ -534,7 +537,7 @@ data["TIMEWALKINGEVENT"] = {
 				{ 5, 33857, [PRICE_EXTRA_ITTYPE] = "timewarped:25" }, -- Crate of Meat
 				{ 6, 35348, [PRICE_EXTRA_ITTYPE] = "timewarped:150" }, -- Bag of Fishing Treasures
 				{ 8, 122338, [PRICE_EXTRA_ITTYPE] = "timewarped:750" }, -- Ancient Heirloom Armor Casing
-				{ 9, 122340, [PRICE_EXTRA_ITTYPE] = "timewarped:1000" }, -- Timeworn Heirloom Armor Casing	
+				{ 9, 122340, [PRICE_EXTRA_ITTYPE] = "timewarped:1000" }, -- Timeworn Heirloom Armor Casing
 				{ 11, 129945, [PRICE_EXTRA_ITTYPE] = "timewarped:50" }, -- Commendation of The Consortium
 				{ 12, 129946, [PRICE_EXTRA_ITTYPE] = "timewarped:50" }, -- Commendation of The Sha'tar
 				{ 13, [ATLASLOOT_IT_HORDE] = 129947, [ATLASLOOT_IT_ALLIANCE] = 129948, [PRICE_EXTRA_ITTYPE] = "timewarped:50" }, -- Commendation of Honor Hold / Commendation of Thrallmar
@@ -550,14 +553,14 @@ data["TIMEWALKINGEVENT"] = {
 		{
 			name = EXPANSION_NAME2,
 			[NORMAL_DIFF] = {
-				{ 1, 129922, "mount", [PRICE_EXTRA_ITTYPE] = "timewarped:5000" }, -- Bridle of the Ironbound Wraithcharger	
+				{ 1, 129922, "mount", [PRICE_EXTRA_ITTYPE] = "timewarped:5000" }, -- Bridle of the Ironbound Wraithcharger
 				{ 3, 129938, [PRICE_EXTRA_ITTYPE] = "timewarped:1500" }, -- Will of Northrend
-				{ 5, 44113, [PRICE_EXTRA_ITTYPE] = "timewarped:25" }, -- Small Spice Bag	
+				{ 5, 44113, [PRICE_EXTRA_ITTYPE] = "timewarped:25" }, -- Small Spice Bag
 				{ 7, 122338, [PRICE_EXTRA_ITTYPE] = "timewarped:750" }, -- Ancient Heirloom Armor Casing
-				{ 8, 122340, [PRICE_EXTRA_ITTYPE] = "timewarped:1000" }, -- Timeworn Heirloom Armor Casing	
+				{ 8, 122340, [PRICE_EXTRA_ITTYPE] = "timewarped:1000" }, -- Timeworn Heirloom Armor Casing
 				{ 10, 129940, [PRICE_EXTRA_ITTYPE] = "timewarped:50" }, -- Commendation of the Kirin Tor
 				{ 11, 129941, [PRICE_EXTRA_ITTYPE] = "timewarped:50" }, -- Commendation of the Ebon Blade
-				{ 12, [ATLASLOOT_IT_HORDE] = 129954, [ATLASLOOT_IT_ALLIANCE] = 129955, [PRICE_EXTRA_ITTYPE] = "timewarped:50" }, -- Commendation of the Alliance Vanguard / Commendation of the Horde Expedition	
+				{ 12, [ATLASLOOT_IT_HORDE] = 129954, [ATLASLOOT_IT_ALLIANCE] = 129955, [PRICE_EXTRA_ITTYPE] = "timewarped:50" }, -- Commendation of the Alliance Vanguard / Commendation of the Horde Expedition
 				{ 16, 129965, [PRICE_EXTRA_ITTYPE] = "timewarped:750" }, -- Grizzlesnout's Fang
 				{ 18, 129952, [PRICE_EXTRA_ITTYPE] = "timewarped:2000" }, -- Hourglass of Eternity
 				{ 20, 46007, [PRICE_EXTRA_ITTYPE] = "timewarped:150" }, -- Bag of Fishing Treasures
@@ -566,7 +569,7 @@ data["TIMEWALKINGEVENT"] = {
 				{ 25, 129942, [PRICE_EXTRA_ITTYPE] = "timewarped:50" }, -- Commendation of the Argent Crusade
 				{ 26, 129943, [PRICE_EXTRA_ITTYPE] = "timewarped:50" }, -- Commendation of the Sons of Hodir
 				{ 27, 129944, [PRICE_EXTRA_ITTYPE] = "timewarped:50" }, -- Commendation of the Wyrmrest Accord
-				
+
 			},
 		},
 		{
@@ -575,12 +578,12 @@ data["TIMEWALKINGEVENT"] = {
 				{ 1, 133511, [PRICE_EXTRA_ITTYPE] = "timewarped:1500" }, -- Gurboggle's Gleaming Bauble
 				{ 3, 67414, [PRICE_EXTRA_ITTYPE] = "timewarped:150" }, -- Bag of Shiny Things
 				{ 5, 122338, [PRICE_EXTRA_ITTYPE] = "timewarped:750" }, -- Ancient Heirloom Armor Casing
-				{ 6, 122340, [PRICE_EXTRA_ITTYPE] = "timewarped:1000" }, -- Timeworn Heirloom Armor Casing	
+				{ 6, 122340, [PRICE_EXTRA_ITTYPE] = "timewarped:1000" }, -- Timeworn Heirloom Armor Casing
 				{ 8, 133160, [PRICE_EXTRA_ITTYPE] = "timewarped:50" }, -- Commendation of Therazane
 				{ 9, 133154, [PRICE_EXTRA_ITTYPE] = "timewarped:50" }, -- Commendation of the Ramkahen
 				{ 10, [ATLASLOOT_IT_HORDE] = 133150, [ATLASLOOT_IT_ALLIANCE] = 133151, [PRICE_EXTRA_ITTYPE] = "timewarped:50" }, -- Commendation of the Wildhammer Clan / Commendation of the Dragonmaw Clan
 				{ 16, 133542, [PRICE_EXTRA_ITTYPE] = "timewarped:3000" }, -- Tosselwrench's Mega-Accurate Simulation Viewfinder
-				{ 18, [ATLASLOOT_IT_HORDE] = 133545, [ATLASLOOT_IT_ALLIANCE] = 49602, [PRICE_EXTRA_ITTYPE] = "timewarped:10" }, -- Earl Black Tea / "New!" Kaja'Cola	
+				{ 18, [ATLASLOOT_IT_HORDE] = 133545, [ATLASLOOT_IT_ALLIANCE] = 49602, [PRICE_EXTRA_ITTYPE] = "timewarped:10" }, -- Earl Black Tea / "New!" Kaja'Cola
 				{ 20, 122339, [PRICE_EXTRA_ITTYPE] = "timewarped:900" }, -- Ancient Heirloom Scabbard
 				{ 21, 122341, [PRICE_EXTRA_ITTYPE] = "timewarped:1200" }, -- Timeworn Heirloom Scabbard
 				{ 23, 133159, [PRICE_EXTRA_ITTYPE] = "timewarped:50" }, -- Commendation of The Earthen Ring
@@ -589,7 +592,6 @@ data["TIMEWALKINGEVENT"] = {
 		},
 	},
 }
-
 
 data["BOEWORLDEPICS"] = {
 	name = AL["BoE World Epics"],
@@ -857,6 +859,7 @@ data["CMGEAR"] = {
 		},
 	},
 }
+
 data["MOUNTS"] = {
 	name = AL["Mounts"],
 	ContentType = COLLECTION_CONTENT,
@@ -888,7 +891,7 @@ data["MOUNTS"] = {
 				{ 23, 69226, "ac9599" }, -- Felfirehawk2
 				{ 24, 91802, "ac7862" }, -- Jade Pandaren Kite String2
 				{ 25, 70910, "ac5325" }, -- Horn of the Vicious War Wolf2
-				
+
 				{ 12, 87769, "ac6927" }, -- Reins of the Crimson Cloud Serpent
 				{ 13, 87773, "ac6932" }, -- Reins of the Heavenly Crimson Cloud Serpent
 				{ 14, 93662, "ac8124" }, -- Reins of the Armored Skyscreamer
@@ -1120,7 +1123,7 @@ data["MOUNTS"] = {
 				{ 11, 18767, "mount", [PRICE_EXTRA_ITTYPE] = "money:100000" }, -- Reins of the Swift Mistsaber
 				{ 12, 8629, "mount", [PRICE_EXTRA_ITTYPE] = "money:10000" }, -- Reins of the Striped Nightsaber
 				{ 13, 18902, "mount", [PRICE_EXTRA_ITTYPE] = "money:100000" }, -- Reins of the Swift Stormsaber
-				{ 14, 13086, "mount", [PRICE_EXTRA_ITTYPE] = "money:1000000" }, -- Reins of the Winterspring Frostsaber				
+				{ 14, 13086, "mount", [PRICE_EXTRA_ITTYPE] = "money:1000000" }, -- Reins of the Winterspring Frostsaber
 				{ 15, 18772, "mount", [PRICE_EXTRA_ITTYPE] = "money:100000" }, -- Swift Green Mechanostrider
 				{ 16, 18773, "mount", [PRICE_EXTRA_ITTYPE] = "money:100000" }, -- Swift White Mechanostrider
 				{ 17, 18774, "mount", [PRICE_EXTRA_ITTYPE] = "money:100000" }, -- Swift Yellow Mechanostrider
@@ -1422,6 +1425,7 @@ data["MOUNTS"] = {
 		},
 	},
 }
+
 data["CLASSICSETS"] = {
 	name = AL["Classic Sets"],
 	ContentType = COLLECTION_CONTENT,
@@ -1732,7 +1736,7 @@ data["HEIRLOOM"] = {
 				{ 1, 122338, [PRICE_EXTRA_ITTYPE] = "money:10000000-darkmoon:100-championsseal:55-honor:2000-ancestrycoin:40" },	-- Ancient Heirloom Armor Casing
 				{ 2, 122340, [PRICE_EXTRA_ITTYPE] = "money:20000000-ancestrycoin:75" },	-- Timeworn Heirloom Armor Casing
 				{ 16, 122339, [PRICE_EXTRA_ITTYPE] = "money:12000000-darkmoon:120-championsseal:65-honor:2400-lovetoken:200" },	-- Ancient Heirloom Scabbard
-				{ 17, 122341, [PRICE_EXTRA_ITTYPE] = "money:50000000-lovetoken:450" },	-- Timeworn Heirloom Scabbard			
+				{ 17, 122341, [PRICE_EXTRA_ITTYPE] = "money:50000000-lovetoken:450" },	-- Timeworn Heirloom Scabbard
 			},
 		},
 		{	--HeirloomClothCloaks
@@ -1769,7 +1773,7 @@ data["HEIRLOOM"] = {
 			[NORMAL_DIFF] = {
 				{ 1, "122248:Stage3H", 122340 },	-- Stained Shadowcraft Cap  (Stage 3)
 				{ 2, "122248:Stage2H", 122338 },	-- Stained Shadowcraft Cap  (Stage 2)
-				{ 3, "122248", [PRICE_EXTRA_ITTYPE] = "money:5000000" },	-- Stained Shadowcraft Cap 
+				{ 3, "122248", [PRICE_EXTRA_ITTYPE] = "money:5000000" },	-- Stained Shadowcraft Cap
 				{ 5, "122358:Stage3H", 122340 },	-- Stained Shadowcraft Spaulders (Stage 3)
 				{ 6, "122358:Stage2H", 122338 },	-- Stained Shadowcraft Spaulders (Stage 2)
 				{ 7, "122358", [PRICE_EXTRA_ITTYPE] = "money:5000000-darkmoon:50-championsseal:25" },	-- Stained Shadowcraft Spaulders
@@ -1946,11 +1950,11 @@ data["HEIRLOOM"] = {
 				{ 113, "128173:Stage3H", 122340 },	-- Admiral Taylor's Loyalty Ring
 				{ 114, "128173:Stage2H", 122338 },	-- Admiral Taylor's Loyalty Ring
 				{ 115, "128173"},	--, [QUEST_EXTRA_ITTYPE] = 8193 },	-- Admiral Taylor's Loyalty Ring
-				{ 116, "126948"},	--, [QUEST_EXTRA_ITTYPE] = 8193 },	-- Defending Champion				
-				{ 118, "126949"},	--, [QUEST_EXTRA_ITTYPE] = 8193 },	-- Returning Champion				
+				{ 116, "126948"},	--, [QUEST_EXTRA_ITTYPE] = 8193 },	-- Defending Champion
+				{ 118, "126949"},	--, [QUEST_EXTRA_ITTYPE] = 8193 },	-- Returning Champion
 				{ 120, "128318"},	--, [QUEST_EXTRA_ITTYPE] = 8193 },	-- Touch of the Void
 			},
-		},		
+		},
 		{	--HeirloomPVPArmor
 			name = AL["PvP"].." "..AL["Armor"],
 			[NORMAL_DIFF] = {
@@ -2027,11 +2031,284 @@ data["HEIRLOOM"] = {
 	},
 }
 
+data["LEGION_LEGENDARIES"] = {
+	name = AL["Legendary Items"].." - "..EXPANSION_NAME6,
+	ContentType = COLLECTION_CONTENT,
+	items = {
+		{
+			name = AL["Normal"],
+			[LEGENDARY_DIFF] = {
+				{ 1, 144249 }, -- Archimonde's Hatred Reborn
+				{ 2, 144258 }, -- Velen's Future Sight
+				{ 3, 144259 }, -- Kil'jaeden's Burning Wish
+				{ 4, 132444 }, -- Prydaz, Xavaric's Magnum Opus
+				{ 5, 132452 }, -- Sephuz's Secret
+				{ 16, 143613 }, -- Distilled Titan Essence
+			},
+		},
+		{
+			name = ATLASLOOT_DEATHKNIGHT_COLOR..ALIL["DEATHKNIGHT"],
+			[LEGENDARY_DIFF] = {
+				{ 1 , 144280 }, -- Death March
+				{ 2 , 132459 }, -- Perseverance of the Ebon Martyr
+				{ 3 , 137075 }, -- Tak'theritrix's Shoulderpads
+				{ 4 , 144281 }, -- Skullflower's Haemostasis
+				{ 5 , 132376 }, -- Acherus Drapes
+				{ 6 , 132366 }, -- Koltira's Newfound Will
+				{ 7 , 132367 }, -- Service of Gorefiend
+				{ 8 , 132441 }, -- Draugr, Girdle of the Everlasting King
+				{ 9 , 144293 }, -- Consort's Cold Core
+				{ 10, 132453 }, -- Rattlegore Bone Legplates
+				{ 11, 132365 }, -- Shackles of Bryndaor
+				{ 12, 132458 }, -- Toravon's Whiteout Bindings
+				{ 13, 132448 }, -- The Instructor's Fourth Lesson
+				{ 14, 137037 }, -- Uvanimor, the Unbeautiful
+				{ 15, 137223 }, -- Seal of Necrofantasia
+				{ 16, 133974 }, -- Lana'thel's Lament
+			},
+		},
+		{
+			name = ATLASLOOT_DEMONHUNTER_COLOR..ALIL["DEMONHUNTER"],
+			[LEGENDARY_DIFF] = {
+				{ 1 , 137061 }, -- Raddon's Cascading Eyes
+				{ 2 , 144279 }, -- Delusions of Grandeur
+				{ 3 , 137071 }, -- Runemaster's Pauldrons
+				{ 4 , 137014 }, -- Achor, the Eternal Hunger
+				{ 5 , 137066 }, -- Cloak of Fel Flames
+				{ 6 , 133976 }, -- Cinidaria, the Symbiote
+				{ 7 , 138949 }, -- Kirel Narak
+				{ 8 , 137022 }, -- Loramus Thalipedes' Sacrifice
+				{ 9 , 137091 }, -- The Defiler's Lost Vambraces
+				{ 10, 137090 }, -- Mo'arg Bionic Stabilizers
+				{ 11, 144292 }, -- Spirit of the Darkness Flame
+				{ 12, 138854 }, -- Fragment of the Betrayer's Prison
+				{ 13, 137038 }, -- Anger of the Half-Giants
+			},
+		},
+		{
+			name = ATLASLOOT_DRUID_COLOR..ALIL["DRUID"],
+			[LEGENDARY_DIFF] = {
+				{ 1 , 144432 }, -- Oakheart's Puny Quods
+				{ 2 , 137062 }, -- The Emerald Dreamcatcher
+				{ 3 , 137072 }, -- Aman'Thul's Wisdom
+				{ 4 , 144295 }, -- Lady and the Child
+				{ 5 , 137015 }, -- Ekowraith, Creator of Worlds
+				{ 6 , 137078 }, -- The Dark Titan's Advice
+				{ 7 , 133976 }, -- Cinidaria, the Symbiote
+				{ 8 , 144354 }, -- Fiery Red Maimers
+				{ 9 , 137067 }, -- Elize's Everlasting Encasement
+				{ 10, 137023 }, -- Promise of Elune, the Moon Goddess
+				{ 11, 137024 }, -- Ailuro Pouncers
+				{ 12, 137025 }, -- Skysec's Hold
+				{ 13, 137026 }, -- Essence of Infusion
+				{ 14, 137092 }, -- Oneth's Intuition
+				{ 15, 137095 }, -- Edraith, Bonds of Aglaya
+				{ 16, 137056 }, -- Luffa Wrappings
+				{ 17, 137094 }, -- The Wildshaper's Clutch
+				{ 18, 144242 }, -- X'oni's Caress
+				{ 19, 137039 }, -- Impeccable Fel Essence
+				{ 20, 137040 }, -- Chatoyant Signet
+				{ 21, 137041 }, -- Dual Determination
+				{ 22, 137042 }, -- Tearstone of Elune
+			},
+		},
+		{
+			name = ATLASLOOT_HUNTER_COLOR..ALIL["HUNTER"],
+			[LEGENDARY_DIFF] = {
+				{ 1 , 137064 }, -- The Shadow Hunter's Voodoo Mask
+				{ 2 , 144326 }, -- The Mantle of Command
+				{ 3 , 144361 }, -- Butcher's Bone Apron
+				{ 4 , 137082 }, -- Helbrine, Rope of the Mist Marauder
+				{ 5 , 137080 }, -- Roar of the Seven Lions
+				{ 6 , 137081 }, -- War Belt of the Sentinel Army
+				{ 7 , 132466 }, -- Roots of Shaladrassil
+				{ 8 , 137227 }, -- Qa'pla, Eredun War Order
+				{ 9 , 137033 }, -- Ullr's Feather Snowshoes
+				{ 10, 137034 }, -- Nesingwary's Trapping Treads
+				{ 11, 141353 }, -- Magnetized Blasting Cap Launcher
+				{ 12, 137101 }, -- Call of the Wild
+				{ 13, 144303 }, -- MKII Gyroscopic Stabilizer
+				{ 14, 137382 }, -- The Apex Predator's Claw
+				{ 15, 137043 }, -- Frizzo's Fingertrap
+				{ 16, 137055 }, -- Zevrim's Hunger
+			},
+		},
+		{
+			name = ATLASLOOT_MAGE_COLOR..ALIL["MAGE"],
+			[LEGENDARY_DIFF] = {
+				{ 1 , 144274 }, -- Gravity Spiral
+				{ 2 , 132863 }, -- Darckli's Dragonfire Diadem
+				{ 3 , 144260 }, -- Ice Time
+				{ 4 , 133977 }, -- Belo'vir's Final Stand
+				{ 5 , 133970 }, -- Zann'esu Journey
+				{ 6 , 132442 }, -- Cord of Infinity
+				{ 7 , 132454 }, -- Koralon's Burning Touch
+				{ 8 , 132451 }, -- Mystic Kilt of the Rune Master
+				{ 9 , 132455 }, -- Norgannon's Foresight
+				{ 10, 132406 }, -- Marquee Bindings of the Sun King
+				{ 11, 132413 }, -- Rhonin's Assaulting Armwraps
+				{ 12, 138140 }, -- Magtheridon's Banished Bracers
+				{ 13, 144355 }, -- Pyrotex Ignition Cloth
+				{ 14, 132411 }, -- Lady Vashj's Grasp
+				{ 15, 132410 }, -- Shard of the Exodar
+			},
+		},
+		{
+			name = ATLASLOOT_MONK_COLOR..ALIL["MONK"],
+			[LEGENDARY_DIFF] = {
+				{ 1 , 137063 }, -- Fundamental Observation
+				{ 2 , 137073 }, -- Unison Spaulders
+				{ 3 , 144239 }, -- The Emperor's Capacitor
+				{ 4 , 144340 }, -- Shelter of Rin
+				{ 5 , 137016 }, -- Sal'salabim's Lost Tunic
+				{ 6 , 137019 }, -- Cenedril, Reflector of Hatred
+				{ 7 , 137079 }, -- Gai Plin's Soothing Sash
+				{ 8 , 138879 }, -- Ovyd's Winter Wrap
+				{ 9 , 133976 }, -- Cinidaria, the Symbiote
+				{ 10, 137068 }, -- Leggings of The Black Flame
+				{ 11, 137027 }, -- Firestone Walkers
+				{ 12, 137028 }, -- Ei'thas, Lunar Glides of Eramas
+				{ 13, 137029 }, -- Katsuo's Eclipse
+				{ 14, 137096 }, -- Petrichor Lagniappe
+				{ 15, 137097 }, -- Drinking Horn Cover
+				{ 16, 144277 }, -- Anvil-Hardened Wristwraps
+				{ 17, 137057 }, -- Hidden Master's Forbidden Touch
+				{ 18, 137044 }, -- Jewel of the Lost Abbey
+				{ 19, 137220 }, -- March of the Legion
+				{ 20, 137045 }, -- Eye of Collidus the Warp-Watcher
+			},
+		},
+		{
+			name = ATLASLOOT_PALADIN_COLOR..ALIL["PALADIN"],
+			[LEGENDARY_DIFF] = {
+				{ 1 , 144275 }, -- Saruan's Resolve
+				{ 2 , 137065 }, -- Justice Gaze
+				{ 3 , 144358 }, -- Ashes to Dust
+				{ 4 , 137076 }, -- Obsidian Stone Spaulders
+				{ 5 , 137017 }, -- Breastplate of the Golden Val'kyr
+				{ 6 , 137020 }, -- Whisper of the Nathrezim
+				{ 7 , 144273 }, -- Maraad's Dying Breath
+				{ 8 , 137086 }, -- Chain of Thrayn
+				{ 9 , 137070 }, -- Tyelca, Ferren Marcus's Stature
+				{ 10, 132443 }, -- Aggramar's Stride
+				{ 11, 137105 }, -- Uther's Guard
+				{ 12, 140846 }, -- Aegisjalmur, the Armguards of Awe
+				{ 13, 137059 }, -- Tyr's Hand of Faith
+				{ 14, 137046 }, -- Ilterendi, Crown Jewel of Silvermoon
+				{ 15, 137047 }, -- Heathcliff's Immortality
+				{ 16, 137048 }, -- Liadrin's Fury Unleashed
+			},
+		},
+		{
+			name = ATLASLOOT_PRIEST_COLOR..ALIL["PRIEST"],
+			[LEGENDARY_DIFF] = {
+				{ 1 , 133971 }, -- Zenk'aram, Iridi's Anadem
+				{ 2 , 144244 }, -- Kam Xi'raff
+				{ 3 , 132437 }, -- Mother Shahraz's Seduction
+				{ 4 , 132861 }, -- Estel, Dejahna's Inspiration
+				{ 5 , 137109 }, -- X'anshi, Shroud of Archbishop Benedictus
+				{ 6 , 144438 }, -- Zeks Exterminatus
+				{ 7 , 133800 }, -- Cord of Maiev, Priestess of the Moon
+				{ 8 , 132864 }, -- Mangaza's Madness
+				{ 9 , 132445 }, -- Al'maiesh, the Cord of Hope
+				{ 10, 132447 }, -- Entrancing Trousers of An'juna
+				{ 11, 132455 }, -- Norgannon's Foresight
+				{ 12, 132409 }, -- Anund's Seared Shackles
+				{ 13, 132436 }, -- Skjoldr, Sanctuary of Ivagont
+				{ 14, 132450 }, -- Muze's Unwavering Will
+				{ 15, 144247 }, -- Rammal's Ulterior Motive
+				{ 16, 132461 }, -- Xalan the Feared's Clench
+				{ 17, 133973 }, -- The Twins' Painful Touch
+				{ 18, 137276 }, -- N'ero, Band of Promises
+				{ 19, 132449 }, -- Phyrix's Embrace
+			},
+		},
+		{
+			name = ATLASLOOT_ROGUE_COLOR..ALIL["ROGUE"],
+			[LEGENDARY_DIFF] = {
+				{ 1 , 144236 }, -- Mantle of the Master Assassin
+				{ 2 , 137021 }, -- The Dreadlord's Deceit
+				{ 3 , 133976 }, -- Cinidaria, the Symbiote
+				{ 4 , 137069 }, -- Will of Valeera
+				{ 5 , 137032 }, -- Shadow Satyr's Walk
+				{ 6 , 137031 }, -- Thraxi's Tricksy Treads
+				{ 7 , 137030 }, -- Duskwalker's Footpads
+				{ 8 , 137100 }, -- Denial of the Half-Giants
+				{ 9 , 137099 }, -- Greenskin's Waterlogged Wristcuffs
+				{ 10, 137098 }, -- Zoldyck Family Training Shackles
+				{ 11, 141321 }, -- Shivarran Symmetry
+				{ 12, 137049 }, -- Insignia of Ravenholdt
+			},
+		},
+		{
+			name = ATLASLOOT_SHAMAN_COLOR..ALIL["SHAMAN"],
+			[LEGENDARY_DIFF] = {
+				{ 1 , 143732 }, -- Uncertain Reminder
+				{ 2 , 137074 }, -- Echoes of the Great Sundering
+				{ 3 , 137616 }, -- Emalon's Charged Core
+				{ 4 , 137103 }, -- Storm Tempests
+				{ 5 , 137085 }, -- Intact Nazjatar Molting
+				{ 6 , 137083 }, -- Pristine Proto-Scale Girdle
+				{ 7 , 132466 }, -- Roots of Shaladrassil
+				{ 8 , 138117 }, -- Spiritual Journey
+				{ 9 , 137035 }, -- The Deceiver's Blood Pact
+				{ 10, 137036 }, -- Elemental Rebalancers
+				{ 11, 137102 }, -- Al'Akir's Acrimony
+				{ 12, 137104 }, -- Nobundo's Redemption
+				{ 13, 137084 }, -- Akainu's Absolute Justice
+				{ 14, 137058 }, -- Praetorian's Tidecallers
+				{ 15, 137050 }, -- Eye of the Twisting Nether
+				{ 16, 137051 }, -- Focuser of Jonat, the Elder
+			},
+		},
+		{
+			name = ATLASLOOT_WARLOCK_COLOR..ALIL["WARLOCK"],
+			[LEGENDARY_DIFF] = {
+				{ 1 , 144385 }, -- Wakener's Loyalty
+				{ 2 , 132394 }, -- Hood of Eternal Disdain
+				{ 3 , 144369 }, -- Lessons of Space-Time
+				{ 4 , 132393 }, -- Recurrent Ritual
+				{ 5 , 144364 }, -- Reap and Sow
+				{ 6 , 132375 }, -- Odr, Shawl of the Ymirjar
+				{ 7 , 132456 }, -- Feretory of Souls
+				{ 8 , 132457 }, -- Power Cord of Lethtendris
+				{ 9 , 132374 }, -- Kazzak's Final Curse
+				{ 10, 132357 }, -- Pillars of the Dark Portal
+				{ 11, 132455 }, -- Norgannon's Foresight
+				{ 12, 132379 }, -- Sin'dorei Spite
+				{ 13, 132381 }, -- Streten's Sleepless Shackles
+				{ 14, 132407 }, -- Magistrike Restraints
+				{ 15, 132460 }, -- Alythess's Pyrogenics
+				{ 16, 132369 }, -- Wilfred's Sigil of Superior Summoning
+				{ 17, 132378 }, -- Sacrolash's Dark Strike
+			},
+		},
+		{
+			name = ATLASLOOT_WARRIOR_COLOR..ALIL["WARRIOR"],
+			[LEGENDARY_DIFF] = {
+				{ 1 , 137088 }, -- Ceann-Ar Charger
+				{ 2 , 143728 }, -- Timeless Stratagem
+				{ 3 , 137018 }, -- Destiny Driver
+				{ 4 , 137053 }, -- Kazzalax, Fujieda's Fury
+				{ 5 , 137089 }, -- Thundergod's Vigor
+				{ 6 , 137087 }, -- Naj'entus's Vertebrae
+				{ 7 , 137077 }, -- Weight of the Earth
+				{ 8 , 132443 }, -- Aggramar's Stride
+				{ 9 , 137107 }, -- Mannoroth's Bloodletting Manacles
+				{ 10, 137108 }, -- Kakushan's Stormscale Gauntlets
+				{ 11, 137060 }, -- Archavon's Heavy Hand
+				{ 12, 137052 }, -- Ayala's Stone Heart
+				{ 13, 137054 }, -- The Walls Fell
+			},
+		},
+	},
+}
+
 data["LEGENDARIES"] = {
 	name = AL["Legendary Items"],
 	ContentType = COLLECTION_CONTENT,
 	items = {
-		{
+		{-- Warlords of Draenor
 			name = EXPANSION_NAME5,
 			[ALLIANCE_DIFF] = {
 				{ 1, 124634, "ac10021" },	-- Thorasus, the Stone Heart of Draenor
@@ -2050,7 +2327,7 @@ data["LEGENDARIES"] = {
 				{ 5, 124638, "ac10148" },	-- Etheralus, the Eternal Reward
 			},
 		},
-		{
+		{-- Mists of Pandaria
 			name = EXPANSION_NAME4,
 			[ALLIANCE_DIFF] = {
 				{ 1, 102248, "ac8325" },	-- Fen-Yu, Fury of Xuen
@@ -2073,7 +2350,7 @@ data["LEGENDARIES"] = {
 				{ 16, 93403, "ac8008" },	-- Eye of the Black Prince
 			},
 		},
-		{
+		{-- Cataclysm
 			name = EXPANSION_NAME3,
 			[NORMAL_DIFF] = {
 				{ 1, 77949, "ac6181" },	-- Golad, Twilight of Aspects
@@ -2087,7 +2364,7 @@ data["LEGENDARIES"] = {
 				{ 18, 71084 },	-- Branch of Nordrassil
 			},
 		},
-		{
+		{-- Wrath of the Lich King
 			name = EXPANSION_NAME2,
 			[NORMAL_DIFF] = {
 				{ 1, 49623, "ac4623" },	-- Shadowmourne
@@ -2095,7 +2372,7 @@ data["LEGENDARIES"] = {
 				{ 16, 46017, "ac3142" },	-- Val'anyr, Hammer of Ancient Kings
 			},
 		},
-		{
+		{-- The Burning Crusade
 			name = EXPANSION_NAME1,
 			[NORMAL_DIFF] = {
 				{ 1, 34334, "ac725" },	-- Thori'dal, the Stars' Fury
@@ -2110,7 +2387,7 @@ data["LEGENDARIES"] = {
 				{ 22, 30314 },	-- Phaseshift Bulwark
 			},
 		},
-		{
+		{-- Classic
 			name = EXPANSION_NAME0,
 			[NORMAL_DIFF] = {
 				{ 1, 22632, "ac425" },	-- Atiesh, Greatstaff of the Guardian
@@ -3346,7 +3623,880 @@ data["TIERSETS"] = {
 				{ 22, "Tier18:warlock:mB1" },
 				{ 24, "Tier18:warrior:mB1" },
 			},
-		},		
+		},
+		{	-- Tier 19 Sets
+			name = format(AL["Tier %d Sets"], 19).." ("..EXPANSION_NAME6..")",
+			[RF_DIFF] = {
+				{ 1 , "Tier19:deathknight:rf" },
+				{ 3 , "Tier19:demonhunter:rf" },
+				{ 5 , "Tier19:druid:rf" },
+				{ 7 , "Tier19:hunter:rf" },
+				{ 9 , "Tier19:mage:rf" },
+				{ 11, "Tier19:monk:rf" },
+				{ 13, "Tier19:rogue:rf" },
+				{ 15, "Tier19:paladin:rf" },
+				{ 16, "Tier19:priest:rf" },
+				{ 18, "Tier19:shaman:rf" },
+				{ 20, "Tier19:warlock:rf" },
+				{ 22, "Tier19:warrior:rf" },
+			},
+			[NORMAL_DIFF] = {
+				{ 1 , "Tier19:deathknight:n" },
+				{ 3 , "Tier19:demonhunter:n" },
+				{ 5 , "Tier19:druid:n" },
+				{ 7 , "Tier19:hunter:n" },
+				{ 9 , "Tier19:mage:n" },
+				{ 11, "Tier19:monk:n" },
+				{ 13, "Tier19:rogue:n" },
+				{ 15, "Tier19:paladin:n" },
+				{ 16, "Tier19:priest:n" },
+				{ 18, "Tier19:shaman:n" },
+				{ 20, "Tier19:warlock:n" },
+				{ 22, "Tier19:warrior:n" },
+			},
+			[HEROIC_DIFF] = {
+				{ 1 , "Tier19:deathknight:h" },
+				{ 3 , "Tier19:demonhunter:h" },
+				{ 5 , "Tier19:druid:h" },
+				{ 7 , "Tier19:hunter:h" },
+				{ 9 , "Tier19:mage:h" },
+				{ 11, "Tier19:monk:h" },
+				{ 13, "Tier19:rogue:h" },
+				{ 15, "Tier19:paladin:h" },
+				{ 16, "Tier19:priest:h" },
+				{ 18, "Tier19:shaman:h" },
+				{ 20, "Tier19:warlock:h" },
+				{ 22, "Tier19:warrior:h" },
+			},
+			[MYTHIC_DIFF] = {
+				{ 1 , "Tier19:deathknight:m" },
+				{ 3 , "Tier19:demonhunter:m" },
+				{ 5 , "Tier19:druid:m" },
+				{ 7 , "Tier19:hunter:m" },
+				{ 9 , "Tier19:mage:m" },
+				{ 11, "Tier19:monk:m" },
+				{ 13, "Tier19:rogue:m" },
+				{ 15, "Tier19:paladin:m" },
+				{ 16, "Tier19:priest:m" },
+				{ 18, "Tier19:shaman:m" },
+				{ 20, "Tier19:warlock:m" },
+				{ 22, "Tier19:warrior:m" },
+			},
+		},
+	},
+}
+
+data["TIERSETS_BYCLASS"] = {
+	name = AL["Tier Sets - per Class"],
+	ContentType = COLLECTION_CONTENT,
+	TableType = SET_ITTYPE,
+	items = {
+		{
+			name = ATLASLOOT_DEATHKNIGHT_COLOR..ALIL["DEATHKNIGHT"],
+			[NORMAL_DIFF] = {
+				{ 1 , "Tier7:deathknightblood:n" },
+				{ 2 , "Tier7:deathknightdps:n" },
+				{ 3 , "Tier7:deathknightblood:p25" },
+				{ 4 , "Tier7:deathknightdps:p25" },
+				{ 6 , "Tier8:deathknightblood:n" },
+				{ 7 , "Tier8:deathknightdps:n" },
+				{ 8 , "Tier8:deathknightblood:p25" },
+				{ 9 , "Tier8:deathknightdps:p25" },
+				{ 11, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:deathknightblood:n", [ATLASLOOT_IT_HORDE] = "Tier9H:deathknightblood:n" },
+				{ 12, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:deathknightblood:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:deathknightblood:p25" },
+				{ 13, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:deathknightblood:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:deathknightblood:p25h" },
+				{ 14, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:deathknightdps:n", [ATLASLOOT_IT_HORDE] = "Tier9H:deathknightdps:n" },
+				{ 15, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:deathknightdps:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:deathknightdps:p25" },
+				{ 16, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:deathknightdps:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:deathknightdps:p25h" },
+				{ 18, "Tier10:deathknightblood:n" },
+				{ 19, "Tier10:deathknightdps:n" },
+				{ 20, "Tier10:deathknightblood:p25" },
+				{ 21, "Tier10:deathknightdps:p25" },
+				{ 22, "Tier10:deathknightblood:p25h" },
+				{ 23, "Tier10:deathknightdps:p25h" },
+				{ 25, "Tier11:deathknightblood:n" },
+				{ 26, "Tier11:deathknightdps:n" },
+				{ 27, "Tier11:deathknightblood:h" },
+				{ 28, "Tier11:deathknightdps:h" },
+				{ 101, "Tier12:deathknightblood:n" },
+				{ 102, "Tier12:deathknightdps:n" },
+				{ 103, "Tier12:deathknightblood:h" },
+				{ 104, "Tier12:deathknightdps:h" },
+				{ 106, "Tier13:deathknightblood:rf" },
+				{ 107, "Tier13:deathknightdps:rf" },
+				{ 108, "Tier13:deathknightblood:n" },
+				{ 109, "Tier13:deathknightdps:n" },
+				{ 110, "Tier13:deathknightblood:h" },
+				{ 111, "Tier13:deathknightdps:h" },
+				{ 116, "Tier14:deathknightblood:rf" },
+				{ 117, "Tier14:deathknightdps:rf" },
+				{ 118, "Tier14:deathknightblood:n" },
+				{ 119, "Tier14:deathknightdps:n" },
+				{ 120, "Tier14:deathknightblood:h" },
+				{ 121, "Tier14:deathknightdps:h" },
+				{ 123, "Tier15:deathknightblood:rf" },
+				{ 124, "Tier15:deathknightdps:rf" },
+				{ 125, "Tier15:deathknightblood:n" },
+				{ 126, "Tier15:deathknightdps:n" },
+				{ 127, "Tier15:deathknightblood:h" },
+				{ 128, "Tier15:deathknightdps:h" },
+				{ 201, "Tier16:deathknightblood:rf" },
+				{ 202, "Tier16:deathknightdps:rf" },
+				{ 203, "Tier16:deathknightblood:n" },
+				{ 204, "Tier16:deathknightdps:n" },
+				{ 205, "Tier16:deathknightblood:h" },
+				{ 206, "Tier16:deathknightdps:h" },
+				{ 207, "Tier16:deathknightblood:m" },
+				{ 208, "Tier16:deathknightdps:m" },
+				{ 210, "Tier17:dk:n" },
+				{ 211, "Tier17:dk:hB1" },
+				{ 212, "Tier17:dk:mB1" },
+				{ 216, "Tier18:dk:n" },
+				{ 217, "Tier18:dk:hB1" },
+				{ 218, "Tier18:dk:mB1" },
+				{ 220, "Tier19:deathknight:rf" },
+				{ 221, "Tier19:deathknight:n" },
+				{ 222, "Tier19:deathknight:h" },
+				{ 223, "Tier19:deathknight:m" },
+			},
+		},
+		{
+			name = ATLASLOOT_DEMONHUNTER_COLOR..ALIL["DEMONHUNTER"],
+			[NORMAL_DIFF] = {
+				{ 1 , "Tier19:demonhunter:rf" },
+				{ 2 , "Tier19:demonhunter:n" },
+				{ 3 , "Tier19:demonhunter:h" },
+				{ 4 , "Tier19:demonhunter:m" },
+			},
+		},
+		{
+			name = ATLASLOOT_DRUID_COLOR..ALIL["DRUID"],
+			[NORMAL_DIFF] = {
+				{ 1  , "Tier1:druid:n" },
+				{ 3  , "Tier2:druid:n" },
+				{ 5  , "Tier3:druid:n" },
+				{ 7  , "Tier4:druidbalance:n" },
+				{ 8  , "Tier4:druidferal:n" },
+				{ 9  , "Tier4:druidrestoration:n" },
+				{ 11 , "Tier5:druidbalance:p25" },
+				{ 12 , "Tier5:druidferal:p25" },
+				{ 13 , "Tier5:druidrestoration:p25" },
+				{ 16 , "Tier6:druidbalance:p25" },
+				{ 17 , "Tier6:druidferal:p25" },
+				{ 18 , "Tier6:druidrestoration:p25" },
+				{ 20 , "Tier7:druidbalance:n" },
+				{ 21 , "Tier7:druidferal:n" },
+				{ 22 , "Tier7:druidrestoration:n" },
+				{ 23 , "Tier7:druidbalance:p25" },
+				{ 24 , "Tier7:druidferal:p25" },
+				{ 25 , "Tier7:druidrestoration:p25" },
+				{ 101, "Tier8:druidbalance:n" },
+				{ 102, "Tier8:druidferal:n" },
+				{ 103, "Tier8:druidrestoration:n" },
+				{ 104, "Tier8:druidbalance:p25" },
+				{ 105, "Tier8:druidferal:p25" },
+				{ 106, "Tier8:druidrestoration:p25" },
+				{ 108, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:druidbalance:n", [ATLASLOOT_IT_HORDE] = "Tier9H:druidbalance:n" },
+				{ 109, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:druidbalance:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:druidbalance:p25" },
+				{ 110, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:druidbalance:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:druidbalance:p25h" },
+				{ 111, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:druidferal:n", [ATLASLOOT_IT_HORDE] = "Tier9H:druidferal:n" },
+				{ 112, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:druidferal:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:druidferal:p25" },
+				{ 113, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:druidferal:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:druidferal:p25h" },
+				{ 114, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:druidrestoration:n", [ATLASLOOT_IT_HORDE] = "Tier9H:druidrestoration:n" },
+				{ 115, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:druidrestoration:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:druidrestoration:p25" },
+				{ 116, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:druidrestoration:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:druidrestoration:p25h" },
+				{ 118, "Tier10:druidbalance:n" },
+				{ 119, "Tier10:druidferal:n" },
+				{ 120, "Tier10:druidrestoration:n" },
+				{ 121, "Tier10:druidbalance:p25" },
+				{ 122, "Tier10:druidferal:p25" },
+				{ 123, "Tier10:druidrestoration:p25" },
+				{ 124, "Tier10:druidbalance:p25h" },
+				{ 125, "Tier10:druidferal:p25h" },
+				{ 126, "Tier10:druidrestoration:p25h" },
+				{ 201, "Tier11:druidbalance:n" },
+				{ 202, "Tier11:druidferal:n" },
+				{ 203, "Tier11:druidrestoration:n" },
+				{ 204, "Tier11:druidbalance:h" },
+				{ 205, "Tier11:druidferal:h" },
+				{ 206, "Tier11:druidrestoration:h" },
+				{ 208, "Tier12:druidbalance:n" },
+				{ 209, "Tier12:druidferal:n" },
+				{ 210, "Tier12:druidrestoration:n" },
+				{ 211, "Tier12:druidbalance:h" },
+				{ 212, "Tier12:druidferal:h" },
+				{ 213, "Tier12:druidrestoration:h" },
+				{ 216, "Tier13:druidbalance:rf" },
+				{ 217, "Tier13:druidferal:rf" },
+				{ 218, "Tier13:druidrestoration:rf" },
+				{ 219, "Tier13:druidbalance:n" },
+				{ 220, "Tier13:druidferal:n" },
+				{ 221, "Tier13:druidrestoration:n" },
+				{ 222, "Tier13:druidbalance:h" },
+				{ 223, "Tier13:druidferal:h" },
+				{ 224, "Tier13:druidrestoration:h" },
+				{ 301, "Tier14:druidbalance:rf" },
+				{ 302, "Tier14:druidferal:rf" },
+				{ 303, "Tier14:druidguardian:rf" },
+				{ 304, "Tier14:druidrestoration:rf" },
+				{ 305, "Tier14:druidbalance:n" },
+				{ 306, "Tier14:druidferal:n" },
+				{ 307, "Tier14:druidguardian:n" },
+				{ 308, "Tier14:druidrestoration:n" },
+				{ 309, "Tier14:druidbalance:h" },
+				{ 310, "Tier14:druidferal:h" },
+				{ 311, "Tier14:druidguardian:h" },
+				{ 312, "Tier14:druidrestoration:h" },
+				{ 316, "Tier15:druidbalance:rf" },
+				{ 317, "Tier15:druidferal:rf" },
+				{ 318, "Tier15:druidguardian:rf" },
+				{ 319, "Tier15:druidrestoration:rf" },
+				{ 320, "Tier15:druidbalance:n" },
+				{ 321, "Tier15:druidferal:n" },
+				{ 322, "Tier15:druidguardian:n" },
+				{ 323, "Tier15:druidrestoration:n" },
+				{ 324, "Tier15:druidbalance:h" },
+				{ 325, "Tier15:druidferal:h" },
+				{ 326, "Tier15:druidguardian:h" },
+				{ 327, "Tier15:druidrestoration:h" },
+				{ 401, "Tier16:druidbalance:rf" },
+				{ 402, "Tier16:druidferal:rf" },
+				{ 403, "Tier16:druidguardian:rf" },
+				{ 404, "Tier16:druidrestoration:rf" },
+				{ 405, "Tier16:druidbalance:n" },
+				{ 406, "Tier16:druidferal:n" },
+				{ 407, "Tier16:druidguardian:n" },
+				{ 408, "Tier16:druidrestoration:n" },
+				{ 409, "Tier16:druidbalance:h" },
+				{ 410, "Tier16:druidferal:h" },
+				{ 411, "Tier16:druidguardian:h" },
+				{ 412, "Tier16:druidrestoration:h" },
+				{ 413, "Tier16:druidbalance:m" },
+				{ 414, "Tier16:druidferal:m" },
+				{ 415, "Tier16:druidguardian:m" },
+				{ 416, "Tier16:druidrestoration:m" },
+				{ 418, "Tier17:druid:n" },
+				{ 419, "Tier17:druid:hB1" },
+				{ 420, "Tier17:druid:mB1" },
+				{ 422, "Tier18:druid:n" },
+				{ 423, "Tier18:druid:hB1" },
+				{ 424, "Tier18:druid:mB1" },
+				{ 426, "Tier19:druid:rf" },
+				{ 427, "Tier19:druid:n" },
+				{ 428, "Tier19:druid:h" },
+				{ 429, "Tier19:druid:m" },
+			},
+		},
+		{
+			name = ATLASLOOT_HUNTER_COLOR..ALIL["HUNTER"],
+			[NORMAL_DIFF] = {
+				{ 1 , "Tier1:hunter:n" },
+				{ 3 , "Tier2:hunter:n" },
+				{ 5 , "Tier3:hunter:n" },
+				{ 6 , "Tier4:hunter:n" },
+				{ 8 , "Tier5:hunter:p25" },
+				{ 11, "Tier6:hunter:p25" },
+				{ 13, "Tier7:hunter:n" },
+				{ 14, "Tier7:hunter:p25" },
+				{ 16, "Tier8:hunter:n" },
+				{ 17, "Tier8:hunter:p25" },
+				{ 19, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:hunter:n", [ATLASLOOT_IT_HORDE] = "Tier9H:hunter:n" },
+				{ 20, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:hunter:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:hunter:p25" },
+				{ 21, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:hunter:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:hunter:p25h" },
+				{ 23, "Tier10:hunter:n" },
+				{ 24, "Tier10:hunter:p25" },
+				{ 25, "Tier10:hunter:p25h" },
+				{ 27, "Tier11:hunter:n" },
+				{ 28, "Tier11:hunter:h" },
+				{ 101, "Tier12:hunter:n" },
+				{ 102, "Tier12:hunter:h" },
+				{ 104, "Tier13:hunter:rf" },
+				{ 105, "Tier13:hunter:n" },
+				{ 106, "Tier13:hunter:h" },
+				{ 108, "Tier14:hunter:rf" },
+				{ 109, "Tier14:hunter:n" },
+				{ 110, "Tier14:hunter:h" },
+				{ 112, "Tier15:hunter:rf" },
+				{ 113, "Tier15:hunter:n" },
+				{ 114, "Tier15:hunter:h" },
+				{ 116, "Tier16:hunter:rf" },
+				{ 117, "Tier16:hunter:n" },
+				{ 118, "Tier16:hunter:h" },
+				{ 119, "Tier16:hunter:m" },
+				{ 121, "Tier17:hunter:n" },
+				{ 122, "Tier17:hunter:hB1" },
+				{ 123, "Tier17:hunter:mB1" },
+				{ 125, "Tier18:hunter:n" },
+				{ 126, "Tier18:hunter:hB1" },
+				{ 127, "Tier18:hunter:mB1" },
+				{ 201, "Tier19:hunter:rf" },
+				{ 202, "Tier19:hunter:n" },
+				{ 203, "Tier19:hunter:h" },
+				{ 204, "Tier19:hunter:m" },
+			},
+		},
+		{
+			name = ATLASLOOT_MAGE_COLOR..ALIL["MAGE"],
+			[NORMAL_DIFF] = {
+				{ 1 , "Tier1:mage:n" },
+				{ 3 , "Tier2:mage:n" },
+				{ 5 , "Tier3:mage:n" },
+				{ 7 , "Tier4:mage:n" },
+				{ 9 , "Tier5:mage:p25" },
+				{ 11, "Tier6:mage:p25" },
+				{ 13, "Tier7:mage:n" },
+				{ 14, "Tier7:mage:p25" },
+				{ 16, "Tier8:mage:n" },
+				{ 17, "Tier8:mage:p25" },
+				{ 19, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:mage:n", [ATLASLOOT_IT_HORDE] = "Tier9H:mage:n" },
+				{ 20, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:mage:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:mage:p25" },
+				{ 21, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:mage:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:mage:p25h" },
+				{ 23, "Tier10:mage:n" },
+				{ 24, "Tier10:mage:p25" },
+				{ 25, "Tier10:mage:p25h" },
+				{ 27, "Tier11:mage:n" },
+				{ 28, "Tier11:mage:h" },
+				{ 101, "Tier12:mage:n" },
+				{ 102, "Tier12:mage:h" },
+				{ 104, "Tier13:mage:rf" },
+				{ 105, "Tier13:mage:n" },
+				{ 106, "Tier13:mage:h" },
+				{ 108, "Tier14:mage:rf" },
+				{ 109, "Tier14:mage:n" },
+				{ 110, "Tier14:mage:h" },
+				{ 112, "Tier15:mage:rf" },
+				{ 113, "Tier15:mage:n" },
+				{ 114, "Tier15:mage:h" },
+				{ 116, "Tier16:mage:rf" },
+				{ 117, "Tier16:mage:n" },
+				{ 118, "Tier16:mage:h" },
+				{ 119, "Tier16:mage:m" },
+				{ 121, "Tier17:mage:n" },
+				{ 122, "Tier17:mage:hB1" },
+				{ 123, "Tier17:mage:mB1" },
+				{ 125, "Tier18:mage:n" },
+				{ 126, "Tier18:mage:hB1" },
+				{ 127, "Tier18:mage:mB1" },
+				{ 201, "Tier19:mage:rf" },
+				{ 202, "Tier19:mage:n" },
+				{ 203, "Tier19:mage:h" },
+				{ 204, "Tier19:mage:m" },
+			},
+		},
+		{
+			name = ATLASLOOT_MONK_COLOR..ALIL["MONK"],
+			[NORMAL_DIFF] = {
+				{ 1 , "Tier14:monkbrewmaster:rf" },
+				{ 2 , "Tier14:monkmistweaver:rf" },
+				{ 3 , "Tier14:monkwindwalker:rf" },
+				{ 4 , "Tier14:monkbrewmaster:n" },
+				{ 5 , "Tier14:monkmistweaver:n" },
+				{ 6 , "Tier14:monkwindwalker:n" },
+				{ 7 , "Tier14:monkbrewmaster:h" },
+				{ 8 , "Tier14:monkmistweaver:h" },
+				{ 9 , "Tier14:monkwindwalker:h" },
+				{ 16, "Tier15:monkbrewmaster:rf" },
+				{ 17, "Tier15:monkmistweaver:rf" },
+				{ 18, "Tier15:monkwindwalker:rf" },
+				{ 19, "Tier15:monkbrewmaster:n" },
+				{ 20, "Tier15:monkmistweaver:n" },
+				{ 21, "Tier15:monkwindwalker:n" },
+				{ 22, "Tier15:monkbrewmaster:h" },
+				{ 23, "Tier15:monkmistweaver:h" },
+				{ 24, "Tier15:monkwindwalker:h" },
+				{ 101, "Tier16:monkbrewmaster:rf" },
+				{ 102, "Tier16:monkmistweaver:rf" },
+				{ 103, "Tier16:monkwindwalker:rf" },
+				{ 104, "Tier16:monkbrewmaster:n" },
+				{ 105, "Tier16:monkmistweaver:n" },
+				{ 106, "Tier16:monkwindwalker:n" },
+				{ 107, "Tier16:monkbrewmaster:h" },
+				{ 108, "Tier16:monkmistweaver:h" },
+				{ 109, "Tier16:monkwindwalker:h" },
+				{ 110, "Tier16:monkbrewmaster:m" },
+				{ 111, "Tier16:monkmistweaver:m" },
+				{ 112, "Tier16:monkwindwalker:m" },
+				{ 116, "Tier17:monk:n" },
+				{ 117, "Tier17:monk:hB1" },
+				{ 118, "Tier17:monk:mB1" },
+				{ 120, "Tier18:monk:n" },
+				{ 121, "Tier18:monk:hB1" },
+				{ 122, "Tier18:monk:mB1" },
+				{ 124, "Tier19:monk:rf" },
+				{ 125, "Tier19:monk:n" },
+				{ 126, "Tier19:monk:h" },
+				{ 127, "Tier19:monk:m" },
+			},
+		},
+		{
+			name = ATLASLOOT_PALADIN_COLOR..ALIL["PALADIN"],
+			[NORMAL_DIFF] = {
+				{ 1 , "Tier1:paladin:n" },
+				{ 3 , "Tier2:paladin:n" },
+				{ 5 , "Tier3:paladin:n" },
+				{ 7 , "Tier4:paladinholy:n" },
+				{ 8 , "Tier4:paladinprotection:n" },
+				{ 9 , "Tier4:paladinretribution:n" },
+				{ 11, "Tier5:paladinholy:p25" },
+				{ 12, "Tier5:paladinprotection:p25" },
+				{ 13, "Tier5:paladinretribution:p25" },
+				{ 16, "Tier6:paladinholy:p25" },
+				{ 17, "Tier6:paladinprotection:p25" },
+				{ 18, "Tier6:paladinretribution:p25" },
+				{ 20, "Tier7:paladinholy:n" },
+				{ 21, "Tier7:paladinprotection:n" },
+				{ 22, "Tier7:paladinretribution:n" },
+				{ 23, "Tier7:paladinholy:p25" },
+				{ 24, "Tier7:paladinprotection:p25" },
+				{ 25, "Tier7:paladinretribution:p25" },
+				{ 101, "Tier8:paladinholy:n" },
+				{ 102, "Tier8:paladinprotection:n" },
+				{ 103, "Tier8:paladinretribution:n" },
+				{ 104, "Tier8:paladinholy:p25" },
+				{ 105, "Tier8:paladinprotection:p25" },
+				{ 106, "Tier8:paladinretribution:p25" },
+				{ 108, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:paladinholy:n", [ATLASLOOT_IT_HORDE] = "Tier9H:paladinholy:n" },
+				{ 109, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:paladinholy:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:paladinholy:p25" },
+				{ 110, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:paladinholy:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:paladinholy:p25h" },
+				{ 111, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:paladinprotection:n", [ATLASLOOT_IT_HORDE] = "Tier9H:paladinprotection:n" },
+				{ 112, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:paladinprotection:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:paladinprotection:p25" },
+				{ 113, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:paladinprotection:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:paladinprotection:p25h" },
+				{ 114, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:paladinretribution:n", [ATLASLOOT_IT_HORDE] = "Tier9H:paladinretribution:n" },
+				{ 115, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:paladinretribution:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:paladinretribution:p25" },
+				{ 116, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:paladinretribution:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:paladinretribution:p25h" },
+				{ 118, "Tier10:paladinholy:n" },
+				{ 119, "Tier10:paladinprotection:n" },
+				{ 120, "Tier10:paladinretribution:n" },
+				{ 121, "Tier10:paladinholy:p25" },
+				{ 122, "Tier10:paladinprotection:p25" },
+				{ 123, "Tier10:paladinretribution:p25" },
+				{ 124, "Tier10:paladinholy:p25h" },
+				{ 125, "Tier10:paladinprotection:p25h" },
+				{ 126, "Tier10:paladinretribution:p25h" },
+				{ 201, "Tier11:paladinholy:n" },
+				{ 202, "Tier11:paladinprotection:n" },
+				{ 203, "Tier11:paladinretribution:n" },
+				{ 204, "Tier11:paladinholy:h" },
+				{ 205, "Tier11:paladinprotection:h" },
+				{ 206, "Tier11:paladinretribution:h" },
+				{ 208, "Tier12:paladinholy:n" },
+				{ 209, "Tier12:paladinprotection:n" },
+				{ 210, "Tier12:paladinretribution:n" },
+				{ 211, "Tier12:paladinholy:h" },
+				{ 212, "Tier12:paladinprotection:h" },
+				{ 213, "Tier12:paladinretribution:h" },
+				{ 216, "Tier13:paladinholy:rf" },
+				{ 217, "Tier13:paladinprotection:rf" },
+				{ 218, "Tier13:paladinretribution:rf" },
+				{ 219, "Tier13:paladinholy:n" },
+				{ 220, "Tier13:paladinprotection:n" },
+				{ 221, "Tier13:paladinretribution:n" },
+				{ 222, "Tier13:paladinholy:h" },
+				{ 223, "Tier13:paladinprotection:h" },
+				{ 224, "Tier13:paladinretribution:h" },
+				{ 301, "Tier14:paladinholy:rf" },
+				{ 302, "Tier14:paladinprotection:rf" },
+				{ 303, "Tier14:paladinretribution:rf" },
+				{ 304, "Tier14:paladinholy:n" },
+				{ 305, "Tier14:paladinprotection:n" },
+				{ 306, "Tier14:paladinretribution:n" },
+				{ 307, "Tier14:paladinholy:h" },
+				{ 308, "Tier14:paladinprotection:h" },
+				{ 309, "Tier14:paladinretribution:h" },
+				{ 316, "Tier15:paladinholy:rf" },
+				{ 317, "Tier15:paladinprotection:rf" },
+				{ 318, "Tier15:paladinretribution:rf" },
+				{ 319, "Tier15:paladinholy:n" },
+				{ 320, "Tier15:paladinprotection:n" },
+				{ 321, "Tier15:paladinretribution:n" },
+				{ 322, "Tier15:paladinholy:h" },
+				{ 323, "Tier15:paladinprotection:h" },
+				{ 324, "Tier15:paladinretribution:h" },
+				{ 401, "Tier16:paladinholy:rf" },
+				{ 402, "Tier16:paladinprotection:rf" },
+				{ 403, "Tier16:paladinretribution:rf" },
+				{ 404, "Tier16:paladinholy:n" },
+				{ 405, "Tier16:paladinprotection:n" },
+				{ 406, "Tier16:paladinretribution:n" },
+				{ 407, "Tier16:paladinholy:h" },
+				{ 408, "Tier16:paladinprotection:h" },
+				{ 409, "Tier16:paladinretribution:h" },
+				{ 410, "Tier16:paladinholy:m" },
+				{ 411, "Tier16:paladinprotection:m" },
+				{ 412, "Tier16:paladinretribution:m" },
+				{ 416, "Tier17:paladin:n" },
+				{ 417, "Tier17:paladin:hB1" },
+				{ 418, "Tier17:paladin:mB1" },
+				{ 420, "Tier18:paladin:n" },
+				{ 421, "Tier18:paladin:hB1" },
+				{ 422, "Tier18:paladin:mB1" },
+				{ 424, "Tier19:paladin:rf" },
+				{ 425, "Tier19:paladin:n" },
+				{ 426, "Tier19:paladin:h" },
+				{ 427, "Tier19:paladin:m" },
+			},
+		},
+		{
+			name = ATLASLOOT_PRIEST_COLOR..ALIL["PRIEST"],
+			[NORMAL_DIFF] = {
+				{ 1 , "Tier1:priest:n" },
+				{ 3 , "Tier2:priest:n" },
+				{ 5 , "Tier3:priest:n" },
+				{ 7 , "Tier4:priestheal:n" },
+				{ 8 , "Tier4:priestshadow:n" },
+				{ 10, "Tier5:priestheal:p25" },
+				{ 11, "Tier5:priestshadow:p25" },
+				{ 13, "Tier6:priestheal:p25" },
+				{ 14, "Tier6:priestshadow:p25" },
+				{ 16, "Tier7:priestheal:n" },
+				{ 17, "Tier7:priestshadow:n" },
+				{ 18, "Tier7:priestheal:p25" },
+				{ 19, "Tier7:priestshadow:p25" },
+				{ 21, "Tier8:priestheal:n" },
+				{ 22, "Tier8:priestshadow:n" },
+				{ 23, "Tier8:priestheal:p25" },
+				{ 24, "Tier8:priestshadow:p25" },
+				{ 101, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:priestheal:n", [ATLASLOOT_IT_HORDE] = "Tier9H:priestheal:n" },
+				{ 102, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:priestheal:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:priestheal:p25" },
+				{ 103, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:priestheal:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:priestheal:p25h" },
+				{ 104, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:priestshadow:n", [ATLASLOOT_IT_HORDE] = "Tier9H:priestshadow:n" },
+				{ 105, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:priestshadow:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:priestshadow:p25" },
+				{ 106, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:priestshadow:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:priestshadow:p25h" },
+				{ 108, "Tier10:priestheal:n" },
+				{ 109, "Tier10:priestshadow:n" },
+				{ 110, "Tier10:priestheal:p25" },
+				{ 111, "Tier10:priestshadow:p25" },
+				{ 112, "Tier10:priestheal:p25h" },
+				{ 113, "Tier10:priestshadow:p25h" },
+				{ 116, "Tier11:priestheal:n" },
+				{ 117, "Tier11:priestshadow:n" },
+				{ 118, "Tier11:priestheal:h" },
+				{ 119, "Tier11:priestshadow:h" },
+				{ 121, "Tier12:priestheal:n" },
+				{ 122, "Tier12:priestshadow:n" },
+				{ 123, "Tier12:priestheal:h" },
+				{ 124, "Tier12:priestshadow:h" },
+				{ 201, "Tier13:priestheal:rf" },
+				{ 202, "Tier13:priestshadow:rf" },
+				{ 203, "Tier13:priestheal:n" },
+				{ 204, "Tier13:priestshadow:n" },
+				{ 205, "Tier13:priestheal:h" },
+				{ 206, "Tier13:priestshadow:h" },
+				{ 208, "Tier14:priestheal:rf" },
+				{ 209, "Tier14:priestshadow:rf" },
+				{ 210, "Tier14:priestheal:n" },
+				{ 211, "Tier14:priestshadow:n" },
+				{ 212, "Tier14:priestheal:h" },
+				{ 213, "Tier14:priestshadow:h" },
+				{ 216, "Tier15:priestheal:rf" },
+				{ 217, "Tier15:priestshadow:rf" },
+				{ 218, "Tier15:priestheal:n" },
+				{ 219, "Tier15:priestshadow:n" },
+				{ 220, "Tier15:priestheal:h" },
+				{ 221, "Tier15:priestshadow:h" },
+				{ 223, "Tier16:priestheal:rf" },
+				{ 224, "Tier16:priestshadow:rf" },
+				{ 225, "Tier16:priestheal:n" },
+				{ 226, "Tier16:priestshadow:n" },
+				{ 227, "Tier16:priestheal:h" },
+				{ 228, "Tier16:priestshadow:h" },
+				{ 229, "Tier16:priestheal:m" },
+				{ 230, "Tier16:priestshadow:m" },
+				{ 301, "Tier17:priest:n" },
+				{ 302, "Tier17:priest:hB1" },
+				{ 303, "Tier17:priest:mB1" },
+				{ 305, "Tier18:priest:n" },
+				{ 306, "Tier18:priest:hB1" },
+				{ 307, "Tier18:priest:mB1" },
+				{ 309, "Tier19:priest:rf" },
+				{ 310, "Tier19:priest:n" },
+				{ 311, "Tier19:priest:h" },
+				{ 312, "Tier19:priest:m" },
+			},
+		},
+		{
+			name = ATLASLOOT_ROGUE_COLOR..ALIL["ROGUE"],
+			[NORMAL_DIFF] = {
+				{ 1 , "Tier1:rogue:n" },
+				{ 3 , "Tier2:rogue:n" },
+				{ 5 , "Tier3:rogue:n" },
+				{ 7 , "Tier4:rogue:n" },
+				{ 9 , "Tier5:rogue:p25" },
+				{ 11 , "Tier6:rogue:p25" },
+				{ 13, "Tier7:rogue:n" },
+				{ 14, "Tier7:rogue:p25" },
+				{ 16, "Tier8:rogue:n" },
+				{ 17, "Tier8:rogue:p25" },
+				{ 19, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:rogue:n", [ATLASLOOT_IT_HORDE] = "Tier9H:rogue:n" },
+				{ 20, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:rogue:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:rogue:p25" },
+				{ 21, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:rogue:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:rogue:p25h" },
+				{ 23, "Tier10:rogue:n" },
+				{ 24, "Tier10:rogue:p25" },
+				{ 25, "Tier10:rogue:p25h" },
+				{ 27, "Tier11:rogue:n" },
+				{ 28, "Tier11:rogue:h" },
+				{ 101, "Tier12:rogue:n" },
+				{ 102, "Tier12:rogue:h" },
+				{ 104, "Tier13:rogue:rf" },
+				{ 105, "Tier13:rogue:n" },
+				{ 106, "Tier13:rogue:h" },
+				{ 108, "Tier14:rogue:rf" },
+				{ 109, "Tier14:rogue:n" },
+				{ 110, "Tier14:rogue:h" },
+				{ 112, "Tier15:rogue:rf" },
+				{ 113, "Tier15:rogue:n" },
+				{ 114, "Tier15:rogue:h" },
+				{ 116, "Tier16:rogue:rf" },
+				{ 117, "Tier16:rogue:n" },
+				{ 118, "Tier16:rogue:h" },
+				{ 119, "Tier16:rogue:m" },
+				{ 121, "Tier17:rogue:n" },
+				{ 122, "Tier17:rogue:hB1" },
+				{ 123, "Tier17:rogue:mB1" },
+				{ 125, "Tier18:rogue:n" },
+				{ 126, "Tier18:rogue:hB1" },
+				{ 127, "Tier18:rogue:mB1" },
+				{ 201, "Tier19:rogue:rf" },
+				{ 202, "Tier19:rogue:n" },
+				{ 203, "Tier19:rogue:h" },
+				{ 204, "Tier19:rogue:m" },
+			},
+		},
+		{
+			name = ATLASLOOT_SHAMAN_COLOR..ALIL["SHAMAN"],
+			[NORMAL_DIFF] = {
+				{ 1 , "Tier1:shaman:n" },
+				{ 3 , "Tier2:shaman:n" },
+				{ 5 , "Tier3:shaman:n" },
+				{ 7 , "Tier4:shamanelemental:n" },
+				{ 8 , "Tier4:shamanenhancement:n" },
+				{ 9 , "Tier4:shamanrestoration:n" },
+				{ 11, "Tier5:shamanelemental:p25" },
+				{ 12, "Tier5:shamanenhancement:p25" },
+				{ 13, "Tier5:shamanrestoration:p25" },
+				{ 16, "Tier6:shamanelemental:p25" },
+				{ 17, "Tier6:shamanenhancement:p25" },
+				{ 18, "Tier6:shamanrestoration:p25" },
+				{ 20, "Tier7:shamanelemental:n" },
+				{ 21, "Tier7:shamanenhancement:n" },
+				{ 22, "Tier7:shamanrestoration:n" },
+				{ 23, "Tier7:shamanelemental:p25" },
+				{ 24, "Tier7:shamanenhancement:p25" },
+				{ 25, "Tier7:shamanrestoration:p25" },
+				{ 101, "Tier8:shamanelemental:n" },
+				{ 102, "Tier8:shamanenhancement:n" },
+				{ 103, "Tier8:shamanrestoration:n" },
+				{ 104, "Tier8:shamanelemental:p25" },
+				{ 105, "Tier8:shamanenhancement:p25" },
+				{ 106, "Tier8:shamanrestoration:p25" },
+				{ 108, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:shamanelemental:n", [ATLASLOOT_IT_HORDE] = "Tier9H:shamanelemental:n" },
+				{ 109, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:shamanelemental:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:shamanelemental:p25" },
+				{ 110, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:shamanelemental:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:shamanelemental:p25h" },
+				{ 111, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:shamanenhancement:n", [ATLASLOOT_IT_HORDE] = "Tier9H:shamanenhancement:n" },
+				{ 112, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:shamanenhancement:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:shamanenhancement:p25" },
+				{ 113, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:shamanenhancement:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:shamanenhancement:p25h" },
+				{ 114, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:shamanrestoration:n", [ATLASLOOT_IT_HORDE] = "Tier9H:shamanrestoration:n" },
+				{ 115, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:shamanrestoration:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:shamanrestoration:p25" },
+				{ 116, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:shamanrestoration:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:shamanrestoration:p25h" },
+				{ 118, "Tier10:shamanelemental:n" },
+				{ 119, "Tier10:shamanenhancement:n" },
+				{ 120, "Tier10:shamanrestoration:n" },
+				{ 121, "Tier10:shamanelemental:p25" },
+				{ 122, "Tier10:shamanenhancement:p25" },
+				{ 123, "Tier10:shamanrestoration:p25" },
+				{ 124, "Tier10:shamanelemental:p25h" },
+				{ 125, "Tier10:shamanenhancement:p25h" },
+				{ 126, "Tier10:shamanrestoration:p25h" },
+				{ 201, "Tier11:shamanelemental:n" },
+				{ 202, "Tier11:shamanenhancement:n" },
+				{ 203, "Tier11:shamanrestoration:n" },
+				{ 204, "Tier11:shamanelemental:h" },
+				{ 205, "Tier11:shamanenhancement:h" },
+				{ 206, "Tier11:shamanrestoration:h" },
+				{ 208, "Tier12:shamanelemental:n" },
+				{ 209, "Tier12:shamanenhancement:n" },
+				{ 210, "Tier12:shamanrestoration:n" },
+				{ 211, "Tier12:shamanelemental:h" },
+				{ 212, "Tier12:shamanenhancement:h" },
+				{ 213, "Tier12:shamanrestoration:h" },
+				{ 216, "Tier13:shamanelemental:rf" },
+				{ 217, "Tier13:shamanenhancement:rf" },
+				{ 218, "Tier13:shamanrestoration:rf" },
+				{ 219, "Tier13:shamanelemental:n" },
+				{ 220, "Tier13:shamanenhancement:n" },
+				{ 221, "Tier13:shamanrestoration:n" },
+				{ 222, "Tier13:shamanelemental:h" },
+				{ 223, "Tier13:shamanenhancement:h" },
+				{ 224, "Tier13:shamanrestoration:h" },
+				{ 301, "Tier14:shamanelemental:rf" },
+				{ 302, "Tier14:shamanenhancement:rf" },
+				{ 303, "Tier14:shamanrestoration:rf" },
+				{ 304, "Tier14:shamanelemental:n" },
+				{ 305, "Tier14:shamanenhancement:n" },
+				{ 306, "Tier14:shamanrestoration:n" },
+				{ 307, "Tier14:shamanelemental:h" },
+				{ 308, "Tier14:shamanenhancement:h" },
+				{ 309, "Tier14:shamanrestoration:h" },
+				{ 316, "Tier15:shamanelemental:rf" },
+				{ 317, "Tier15:shamanenhancement:rf" },
+				{ 318, "Tier15:shamanrestoration:rf" },
+				{ 319, "Tier15:shamanelemental:n" },
+				{ 320, "Tier15:shamanenhancement:n" },
+				{ 321, "Tier15:shamanrestoration:n" },
+				{ 322, "Tier15:shamanelemental:h" },
+				{ 323, "Tier15:shamanenhancement:h" },
+				{ 324, "Tier15:shamanrestoration:h" },
+				{ 401, "Tier16:shamanelemental:rf" },
+				{ 402, "Tier16:shamanenhancement:rf" },
+				{ 403, "Tier16:shamanrestoration:rf" },
+				{ 404, "Tier16:shamanelemental:n" },
+				{ 405, "Tier16:shamanenhancement:n" },
+				{ 406, "Tier16:shamanrestoration:n" },
+				{ 407, "Tier16:shamanelemental:h" },
+				{ 408, "Tier16:shamanenhancement:h" },
+				{ 409, "Tier16:shamanrestoration:h" },
+				{ 410, "Tier16:shamanelemental:m" },
+				{ 411, "Tier16:shamanenhancement:m" },
+				{ 412, "Tier16:shamanrestoration:m" },
+				{ 416, "Tier17:shaman:n" },
+				{ 417, "Tier17:shaman:hB1" },
+				{ 418, "Tier17:shaman:mB1" },
+				{ 420, "Tier18:shaman:n" },
+				{ 421, "Tier18:shaman:hB1" },
+				{ 422, "Tier18:shaman:mB1" },
+				{ 424, "Tier19:shaman:rf" },
+				{ 425, "Tier19:shaman:n" },
+				{ 426, "Tier19:shaman:h" },
+				{ 427, "Tier19:shaman:m" },
+			},
+		},
+		{
+			name = ATLASLOOT_WARLOCK_COLOR..ALIL["WARLOCK"],
+			[NORMAL_DIFF] = {
+				{ 1 , "Tier1:warlock:n" },
+				{ 3 , "Tier2:warlock:n" },
+				{ 5 , "Tier3:warlock:n" },
+				{ 7 , "Tier4:warlock:n" },
+				{ 9 , "Tier5:warlock:p25" },
+				{ 11, "Tier6:warlock:p25" },
+				{ 13, "Tier7:warlock:n" },
+				{ 14, "Tier7:warlock:p25" },
+				{ 16, "Tier8:warlock:n" },
+				{ 17, "Tier8:warlock:p25" },
+				{ 19, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:warlock:n", [ATLASLOOT_IT_HORDE] = "Tier9H:warlock:n" },
+				{ 20, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:warlock:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:warlock:p25" },
+				{ 21, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:warlock:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:warlock:p25h" },
+				{ 23, "Tier10:warlock:n" },
+				{ 24, "Tier10:warlock:p25" },
+				{ 25, "Tier10:warlock:p25h" },
+				{ 27, "Tier11:warlock:n" },
+				{ 28, "Tier11:warlock:h" },
+				{ 101, "Tier12:warlock:n" },
+				{ 102, "Tier12:warlock:h" },
+				{ 104, "Tier13:warlock:rf" },
+				{ 105, "Tier13:warlock:n" },
+				{ 106, "Tier13:warlock:h" },
+				{ 109, "Tier14:warlock:rf" },
+				{ 110, "Tier14:warlock:n" },
+				{ 111, "Tier14:warlock:h" },
+				{ 113, "Tier15:warlock:rf" },
+				{ 114, "Tier15:warlock:n" },
+				{ 115, "Tier15:warlock:h" },
+				{ 116, "Tier16:warlock:rf" },
+				{ 117, "Tier16:warlock:n" },
+				{ 118, "Tier16:warlock:h" },
+				{ 119, "Tier16:warlock:m" },
+				{ 121, "Tier17:warlock:n" },
+				{ 122, "Tier17:warlock:hB1" },
+				{ 123, "Tier17:warlock:mB1" },
+				{ 125, "Tier18:warlock:n" },
+				{ 126, "Tier18:warlock:hB1" },
+				{ 127, "Tier18:warlock:mB1" },
+				{ 201, "Tier19:warlock:rf" },
+				{ 202, "Tier19:warlock:n" },
+				{ 203, "Tier19:warlock:h" },
+				{ 204, "Tier19:warlock:m" },
+			},
+		},
+		{
+			name = ATLASLOOT_WARRIOR_COLOR..ALIL["WARRIOR"],
+			[NORMAL_DIFF] = {
+				{ 1 , "Tier1:warrior:n" },
+				{ 3 , "Tier2:warrior:n" },
+				{ 5 , "Tier3:warrior:n" },
+				{ 7 , "Tier4:warriordps:n" },
+				{ 8 , "Tier4:warriorprotection:n" },
+				{ 10, "Tier5:warriordps:p25" },
+				{ 11, "Tier5:warriorprotection:p25" },
+				{ 13, "Tier6:warriordps:p25" },
+				{ 14, "Tier6:warriorprotection:p25" },
+				{ 16, "Tier7:warriordps:n" },
+				{ 17, "Tier7:warriorprotection:n" },
+				{ 18, "Tier7:warriordps:p25" },
+				{ 19, "Tier7:warriorprotection:p25" },
+				{ 21, "Tier8:warriordps:n" },
+				{ 22, "Tier8:warriorprotection:n" },
+				{ 23, "Tier8:warriordps:p25" },
+				{ 24, "Tier8:warriorprotection:p25" },
+				{ 101, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:warriordps:n", [ATLASLOOT_IT_HORDE] = "Tier9H:warriordps:n" },
+				{ 102, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:warriordps:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:warriordps:p25" },
+				{ 103, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:warriordps:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:warriordps:p25h" },
+				{ 104, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:warriorprotection:n", [ATLASLOOT_IT_HORDE] = "Tier9H:warriorprotection:n" },
+				{ 105, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:warriorprotection:p25", [ATLASLOOT_IT_HORDE] = "Tier9H:warriorprotection:p25" },
+				{ 106, [ATLASLOOT_IT_ALLIANCE] = "Tier9A:warriorprotection:p25h", [ATLASLOOT_IT_HORDE] = "Tier9H:warriorprotection:p25h" },
+				{ 108, "Tier10:warriordps:n" },
+				{ 109, "Tier10:warriorprotection:n" },
+				{ 110, "Tier10:warriordps:p25" },
+				{ 111, "Tier10:warriorprotection:p25" },
+				{ 112, "Tier10:warriordps:p25h" },
+				{ 113, "Tier10:warriorprotection:p25h" },
+				{ 116, "Tier11:warriordps:n" },
+				{ 117, "Tier11:warriorprotection:n" },
+				{ 118, "Tier11:warriordps:h" },
+				{ 119, "Tier11:warriorprotection:h" },
+				{ 121, "Tier12:warriordps:n" },
+				{ 122, "Tier12:warriorprotection:n" },
+				{ 123, "Tier12:warriordps:h" },
+				{ 124, "Tier12:warriorprotection:h" },
+				{ 201, "Tier13:warriordps:rf" },
+				{ 202, "Tier13:warriorprotection:rf" },
+				{ 203, "Tier13:warriordps:n" },
+				{ 204, "Tier13:warriorprotection:n" },
+				{ 205, "Tier13:warriordps:h" },
+				{ 206, "Tier13:warriorprotection:h" },
+				{ 208, "Tier14:warriordps:rf" },
+				{ 209, "Tier14:warriorprotection:rf" },
+				{ 210, "Tier14:warriordps:n" },
+				{ 211, "Tier14:warriorprotection:n" },
+				{ 212, "Tier14:warriordps:h" },
+				{ 213, "Tier14:warriorprotection:h" },
+				{ 216, "Tier15:warriordps:rf" },
+				{ 217, "Tier15:warriorprotection:rf" },
+				{ 218, "Tier15:warriordps:n" },
+				{ 219, "Tier15:warriorprotection:n" },
+				{ 220, "Tier15:warriordps:h" },
+				{ 221, "Tier15:warriorprotection:h" },
+				{ 223, "Tier16:warriordps:rf" },
+				{ 224, "Tier16:warriorprotection:rf" },
+				{ 225, "Tier16:warriordps:n" },
+				{ 226, "Tier16:warriorprotection:n" },
+				{ 227, "Tier16:warriordps:h" },
+				{ 228, "Tier16:warriorprotection:h" },
+				{ 229, "Tier16:warriordps:m" },
+				{ 230, "Tier16:warriorprotection:m" },
+				{ 301, "Tier17:warrior:n" },
+				{ 302, "Tier17:warrior:hB1" },
+				{ 303, "Tier17:warrior:mB1" },
+				{ 305, "Tier18:warrior:n" },
+				{ 306, "Tier18:warrior:hB1" },
+				{ 307, "Tier18:warrior:mB1" },
+				{ 309, "Tier19:warrior:rf" },
+				{ 310, "Tier19:warrior:n" },
+				{ 311, "Tier19:warrior:h" },
+				{ 312, "Tier19:warrior:m" },
+			},
+		},
+	
 	},
 }
 

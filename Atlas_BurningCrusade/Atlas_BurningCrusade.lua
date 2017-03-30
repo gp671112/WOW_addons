@@ -1,4 +1,4 @@
--- $Id: Atlas_BurningCrusade.lua 20 2017-01-16 10:36:39Z arith $
+-- $Id: Atlas_BurningCrusade.lua 26 2017-03-24 10:00:09Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -582,20 +582,20 @@ local myMaps = {
 		DungeonID = "175";
 		PlayerLimit = "10";
 		Acronym = L["Kara"];
-		WorldMapID = "799";
+		WorldMapID = "32";
 		JournalInstanceID = "745";
 		Module = "Atlas_BurningCrusade";
 		NextMap = "KarazhanStart";
 		{ BLUE.." A) "..BZ["Karazhan"]..ALC["L-Parenthesis"]..ALC["Front"]..ALC["R-Parenthesis"], 10001 };
 		{ BLUE.." B) "..BZ["Karazhan"]..ALC["L-Parenthesis"]..ALC["Back"]..ALC["R-Parenthesis"], 10002 };
-		{ GREN.." 1') "..L["Archmage Leryda"], 10003 };
-		{ GREN..INDENT..L["Archmage Alturus"] };
-		{ GREN..INDENT..L["Apprentice Darius"] };
-		{ GREN.." 2') "..L["Stairs to Underground Pond"], 10004 };
-		{ GREN.." 3') "..L["Stairs to Underground Well"], 10005 };
+		{ BLUE.." C) "..BZ["Return to Karazhan"]..ALC["L-Parenthesis"]..ALC["Upper"]..ALC["R-Parenthesis"], 10003 };
+		{ GREN.." 1') "..L["Mage Darius"], 18255 };
+		{ GREN.." 2') "..format(ALC["Stairs to %s"], BZ["The Master's Cellar"]), 10004 };
+		{ GREN.." 3') "..format(ALC["Stairs to %s"], BZ["The Master's Cellar"]), 10005 };
 		{ GREN.." 4') "..L["Charred Bone Fragment"], 10006 };
 		{ GREN.." 5') "..ALC["Meeting Stone"], 10007 };
 		{ GREN.." 6') "..ALC["Graveyard"], 10008 };
+		{ GREN.." 7') "..L["Lydia Accoste"], 66255 };
 	};
 	KarazhanStart = {
 		ZoneName = { BZ["Karazhan"]..ALC["MapA"]..ALC["L-Parenthesis"]..ALC["Start"]..ALC["R-Parenthesis"] };
@@ -612,7 +612,7 @@ local myMaps = {
 		{ BLUE.." A) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Front"]..ALC["R-Parenthesis"], 10001 };
 		{ BLUE.." B-J) "..ALC["Connection"], 10002 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Attumen the Huntsman", 1553), 1553 };
-		{ WHIT..INDENT..Atlas_GetBossName("Midnight") };
+		{ WHIT..INDENT..Atlas_GetBossName("Midnight", 1553, 2) };
 		{ WHIT.." 2) "..Atlas_GetBossName("Moroes", 1554), 1554 };
 		{ WHIT..INDENT..L["Baroness Dorothea Millstipe"]..ALC["L-Parenthesis"]..ALC["Random"]..ALC["Comma"]..ALC["Shadow Priest"]..ALC["R-Parenthesis"] };
 		{ WHIT..INDENT..L["Lady Catriona Von'Indi"]..ALC["L-Parenthesis"]..ALC["Random"]..ALC["Comma"]..ALC["Holy Priest"]..ALC["R-Parenthesis"] };

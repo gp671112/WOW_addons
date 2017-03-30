@@ -1,11 +1,11 @@
-## Interface: 70100
+## Interface: 70200
 ## LoadOnDemand: 1
 #@non-debug@
 ## Title: Atlas
 ## Title-deDE: Atlas
 ## Title-esES: Atlas
 ## Title-esMX: Atlas
-## Title-frFR: Titre
+## Title-frFR: Atlas
 ## Title-koKR: Atlas
 ## Title-ptBR: Atlas
 ## Title-ruRU: Atlas

@@ -1,4 +1,4 @@
-## Interface: 70100
+## Interface: 70200
 #@non-debug@
 ## Title: Atlas |r|cFF0099FF[Class Order Halls]|r
 ## Title-deDE: Atlas |r|cFF0099FF[Klassenordenshallen]|r
@@ -15,9 +15,9 @@
 # ## Notes: Map of Class Order Halls
 # ## Notes-zhTW: Atlas 職業大廳地圖
 #@end-debug@
-## Version: 1.37.01
+## Version: 1.39.02
 ## Author: arith
-## X-Date: 2017-02-09T11:40:46Z
+## X-Date: 2017-03-30T5:03:02Z
 ## X-Email: atlas.addon at gmail.com
 ## X-Website: http://www.atlasmod.com
 ## X-Category: Map

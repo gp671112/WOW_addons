@@ -1,10 +1,10 @@
-﻿-- $Id: Atlas_DungeonLocs-koKR.lua 12 2016-07-13 09:16:38Z arith $
+-- $Id: Atlas_DungeonLocs-koKR.lua 39 2017-03-21 17:31:38Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
-	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbertat gmail dot com>
+	Copyright 2010 - Lothaer <lothayerat gmail dot com>, Atlas Team
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -33,7 +33,4 @@ L["Dungeon Locations"] = "Emplacements des instances"
 L["Green"] = "Vert"
 L["Instances"] = "Instances"
 L["White"] = "Blanc"
-L["ToC/Description"] = "Emplacements des instances" -- Needs review
--- L["ToC/Title"] = ""
-
 end

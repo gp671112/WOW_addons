@@ -1,8 +1,10 @@
-## Interface: 70100
+## Interface: 70200
 ## Title: GTFO
 ## Notes: GTFO, you're dying!
+## Title-zhTW: |cFFFF0080[危險警報]|rGTFO
+## Notes-zhTW: 危險警報，請移開你的位置！
 ## Author: Zensunim of Dragonblight
-## Version: 4.42.7
+## Version: 4.42.9
 ## DefaultState: Enabled
 ## SavedVariables: GTFOData
 Localization\enUS.lua

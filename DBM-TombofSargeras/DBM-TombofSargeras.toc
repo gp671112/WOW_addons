@@ -17,8 +17,6 @@
 ## X-DBM-Mod-MapID: 1676
 ## X-DBM-Mod-MinCoreRevision: 14737
 localization.en.lua
-localization.kr.lua
-localization.de.lua
 localization.cn.lua
 localization.tw.lua
 Goroth.lua

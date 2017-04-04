@@ -84,7 +84,7 @@ if ( GetLocale() == "zhTW" ) then
 	["|cfff0eb20Flight location not learned|r"] = "|cfff0eb20尚未開啟這個飛行鳥點|r",
 	
 	-- TaxiDB.lua
-	["DG: Flight master data updated!"] = "任務高手: 飛行管理員資料已經更新!",
+	["DG: Flight master data updated!"] = "任務高手：飛行管理員資料已經更新!",
 	
 	-- MapOverlays.lua 
 	["|cffffd200Player:|r ---"] = "|cffffd200玩家:|r ---",

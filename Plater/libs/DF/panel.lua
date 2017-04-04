@@ -3302,11 +3302,11 @@ function DF:CreateTabContainer (parent, title, frame_name, frame_list, options_t
 		DF.TabContainerFunctions.CreateUnderlineGlow (tabButton)
 		
 		if (i == 1) then
-			local right_click_to_back = DF:CreateLabel (f, "點一下右鍵關閉視窗", 10, "gray")
+			local right_click_to_back = DF:CreateLabel (f, "right click to close", 10, "gray")
 			right_click_to_back:SetPoint ("bottomright", f, "bottomright", -1, 0)
 			f.IsFrontPage = true
 		else
-			local right_click_to_back = DF:CreateLabel (f, "點一下右鍵返回基本設定", 10, "gray")
+			local right_click_to_back = DF:CreateLabel (f, "right click to go back to main menu", 10, "gray")
 			right_click_to_back:SetPoint ("bottomright", f, "bottomright", -1, 0)
 		end
 		
@@ -3501,7 +3501,7 @@ end
 
 
 -- preciso de uma fauxscroll que seja facil de lidar
--- ele cria scroll aqui, preciso falar a fun誽o que cria a linha e a fun誽o que atualiza
+-- ele cria scroll aqui, preciso falar a fun��o que cria a linha e a fun��o que atualiza
 -- precisa passsar o tamanho em height width quantas barras vai mostrar
 -- search box incluso opcionalmente
 

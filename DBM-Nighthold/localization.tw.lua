@@ -13,8 +13,8 @@ L= DBM:GetModLocalization(1725)
 
 L:SetOptionLocalization({
 	InfoFrameBehavior	= "設置此戰鬥訊息框架的顯示方式",
-	TimeRelease				= "顯示中了定時釋放的玩家",
-	TimeBomb				= "顯示中了定時炸彈的玩家"
+	TimeRelease					= "顯示中了定時釋放的玩家",
+	TimeBomb					= "顯示中了定時炸彈的玩家"
 })
 
 ---------------------------
@@ -35,7 +35,7 @@ L= DBM:GetModLocalization(1762)
 L:SetMiscLocalization({
 	First					= "第一",
 	Second				= "第二",
-	Third				= "第三",
+	Third					= "第三",
 	Adds1				= "手下們！都進來！",
 	Adds2				= "讓這些笨蛋見識真正的戰鬥！"
 })

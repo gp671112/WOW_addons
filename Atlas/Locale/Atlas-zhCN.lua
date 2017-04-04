@@ -117,9 +117,13 @@ L["ATLAS_DDL_TYPE_INSTANCE_CF"] = "副本 2/5"
 L["ATLAS_DDL_TYPE_INSTANCE_GM"] = "副本 3/5"
 L["ATLAS_DDL_TYPE_INSTANCE_NS"] = "副本 4/5"
 L["ATLAS_DDL_TYPE_INSTANCE_TZ"] = "副本 5/5"
-L["ATLAS_DEP_MSG1"] = "检测到过期的 Atlas 扩展插件。"
-L["ATLAS_DEP_MSG2"] = "这些插件已经被禁用。"
-L["ATLAS_DEP_MSG3"] = "请从插件目录（AddOns）中将其删除。"
+L["ATLAS_DEP_MSG1"] = "检测到过期的 Atlas 扩展/模块/插件。"
+L["ATLAS_DEP_MSG2"] = "这些插件在此角色已经被禁用。"
+L["ATLAS_DEP_MSG3"] = [=[请从插件目录（AddOns）中将其删除。
+
+过期扩展/模块/插件列表：]=]
+L["ATLAS_DEP_MSG4"] = [=[每当安一个装最新的，
+别忘了在插件列表里启用它。]=]
 L["ATLAS_DEP_OK"] = "确定"
 L["ATLAS_ENTRANCE_BUTTON"] = "入口"
 L["ATLAS_EXPAND_BUTTON"] = "点击打开 Atlas 传奇面板。"
@@ -172,6 +176,7 @@ L["ATLAS_OPTIONS_AUTOSEL_TIP"] = "Atlas 可侦测您目前所在的副区域以�
 L["ATLAS_OPTIONS_BOSS_DESC"] = "当首领信息可获取时, 显示该信息"
 L["ATLAS_OPTIONS_BOSS_DESC_SCALE"] = "首领信息提示窗口大小比率"
 L["ATLAS_OPTIONS_BOSS_DESC_TIP"] = "当鼠标光标移动到地图上首领的标号时, 并且首领信息可获取时, 显示该首领的相关信息."
+L["ATLAS_OPTIONS_BOSS_POTRAIT"] = "当可用时显示首领头像"
 L["ATLAS_OPTIONS_BUTPOS"] = "图标位置"
 L["ATLAS_OPTIONS_BUTRAD"] = "图标半径"
 L["ATLAS_OPTIONS_BUTTON"] = "选项"

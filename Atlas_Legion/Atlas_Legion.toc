@@ -21,9 +21,9 @@
 # ## Notes-zhCN: 军团再临副本地图
 # ## Notes-zhTW: 軍臨天下副本地圖模組
 #@end-debug@
-## Version: 1.39.00
+## Version: 1.40.00
 ## Author: arith
-## X-Date: 2017-03-27T15:44:20Z
+## X-Date: 2017-03-31T8:09:09Z
 ## X-Email: atlas.addon at gmail dot com
 ## X-Website: http://www.atlasmod.com
 ## X-Category: Map

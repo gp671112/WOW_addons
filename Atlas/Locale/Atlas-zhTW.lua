@@ -1,4 +1,4 @@
--- $Id: Atlas-zhTW.lua 189 2017-03-27 12:20:49Z arith $
+-- $Id: Atlas-zhTW.lua 193 2017-03-30 16:53:28Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -115,9 +115,14 @@ L["ATLAS_DDL_TYPE_INSTANCE_CF"] = "副本 2/5"
 L["ATLAS_DDL_TYPE_INSTANCE_GM"] = "副本 3/5"
 L["ATLAS_DDL_TYPE_INSTANCE_NS"] = "副本 4/5"
 L["ATLAS_DDL_TYPE_INSTANCE_TZ"] = "副本 5/5"
-L["ATLAS_DEP_MSG1"] = "Atlas 偵測到過期的模組"
-L["ATLAS_DEP_MSG2"] = "這些模組已從這個角色被停用"
-L["ATLAS_DEP_MSG3"] = "請將這些模組從 AddOns 目錄移除"
+L["ATLAS_DEP_MSG1"] = "Atlas 偵測到過期的模組/相依插件。"
+L["ATLAS_DEP_MSG2"] = "這個/這些模組已從這個角色被停用。"
+L["ATLAS_DEP_MSG3"] = [=[請將這個/這些模組從 AddOns 目錄移除，
+然後再去取得最新的版本並加以安裝。
+
+以下是過期的模組/相依插件列表：]=]
+L["ATLAS_DEP_MSG4"] = [=[當您將過期的模組/相依插件替換並安裝成新版之後，
+請別忘記在插件列表裡啟用它(們)。]=]
 L["ATLAS_DEP_OK"] = "OK"
 L["ATLAS_ENTRANCE_BUTTON"] = "入口"
 L["ATLAS_EXPAND_BUTTON"] = "按下以展開 Atlas 的地圖說明窗格。"
@@ -170,6 +175,7 @@ L["ATLAS_OPTIONS_AUTOSEL_TIP"] = "Atlas 可偵測您目前所在的副區域以�
 L["ATLAS_OPTIONS_BOSS_DESC"] = "當首領資訊可獲取時，顯示該資訊"
 L["ATLAS_OPTIONS_BOSS_DESC_SCALE"] = "首領資訊提示視窗大小比率"
 L["ATLAS_OPTIONS_BOSS_DESC_TIP"] = "當滑鼠游標移動到地圖上首領的標號時，並且首領資訊可獲取時，顯示該首領的相關資訊。"
+L["ATLAS_OPTIONS_BOSS_POTRAIT"] = "當首領頭像可獲取時，顯示首領頭像"
 L["ATLAS_OPTIONS_BUTPOS"] = "按鈕位置"
 L["ATLAS_OPTIONS_BUTRAD"] = "按鈕半徑範圍"
 L["ATLAS_OPTIONS_BUTTON"] = "選項"

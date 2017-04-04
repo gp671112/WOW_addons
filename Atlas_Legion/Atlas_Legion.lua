@@ -1,4 +1,4 @@
--- $Id: Atlas_Legion.lua 103 2017-03-27 15:44:20Z arith $
+-- $Id: Atlas_Legion.lua 105 2017-03-30 16:52:59Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -497,7 +497,12 @@ local myMaps = {
 		Module = "Atlas_Legion";
 		NextMap = "ReturntoKarazhanB";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
-		{ BLUE.." B-C) "..ALC["Connection"], 10002 };
+		{ BLUE.." B-D) "..ALC["Connection"], 10002 };
+		{ GREN.." 1') "..L["Barnes"], 114339 }; 
+		{ WHIT.." 1) "..Atlas_GetBossName("Opera Hall: Wikket", 1820), 1820 };
+		{ WHIT.." 2) "..Atlas_GetBossName("Opera Hall: Westfall Story", 1826), 1826 };
+		{ WHIT.." 3) "..Atlas_GetBossName("Opera Hall: Beautiful Beast", 1827), 1827 };
+		{ GREN.." 2') "..L["Soul Fragment"], 10002 };
 	};
 	ReturntoKarazhanB = {
 		ZoneName = { BZ["Return to Karazhan"]..ALC["MapB"] };
@@ -515,35 +520,12 @@ local myMaps = {
 		Module = "Atlas_Legion";
 		PrevMap = "ReturntoKarazhanA";
 		NextMap = "ReturntoKarazhanC";
-		{ BLUE.." B-D) "..ALC["Connection"], 10001 };
-		{ GREN.." 1') "..L["Barnes"], 114339 }; 
-		{ WHIT.." 1) "..Atlas_GetBossName("Opera Hall: Wikket", 1820), 1820 };
-		{ WHIT.." 2) "..Atlas_GetBossName("Opera Hall: Westfall Story", 1826), 1826 };
-		{ WHIT.." 3) "..Atlas_GetBossName("Opera Hall: Beautiful Beast", 1827), 1827 };
-		{ GREN.." 2') "..L["Soul Fragment"], 10002 };
-	};
-	ReturntoKarazhanC = {
-		ZoneName = { BZ["Return to Karazhan"]..ALC["MapC"] };
-		Location = { BZ["Deadwind Pass"] };
-		DungeonHeroicID = "1475"; -- 1474: Upper Return to Karazhan; 1475: Lower Return to Karazhan
-		DungeonMythicID = "1475";
-		DungeonLevel = "4";
-		--Acronym = "";
-		WorldMapID = "1115";
-		JournalInstanceID = "860";
-		LevelRange = "110";
-		MinLevel = "110";
-		PlayerLimit = "5";
-		MinGearLevel = "825";
-		Module = "Atlas_Legion";
-		PrevMap = "ReturntoKarazhanB";
-		NextMap = "ReturntoKarazhanD";
 		{ BLUE.." D-F) "..ALC["Connection"], 10001 };
 		{ GREN.." 3') "..L["Soul Fragment"], 10002 };
 		{ WHIT.." 4) "..Atlas_GetBossName("Maiden of Virtue", 1825), 1825 };
 	};
-	ReturntoKarazhanD = {
-		ZoneName = { BZ["Return to Karazhan"]..ALC["MapD"] };
+	ReturntoKarazhanC = {
+		ZoneName = { BZ["Return to Karazhan"]..ALC["MapC"] };
 		Location = { BZ["Deadwind Pass"] };
 		DungeonHeroicID = "1475"; -- 1474: Upper Return to Karazhan; 1475: Lower Return to Karazhan
 		DungeonMythicID = "1475";
@@ -556,14 +538,14 @@ local myMaps = {
 		PlayerLimit = "5";
 		MinGearLevel = "825";
 		Module = "Atlas_Legion";
-		PrevMap = "ReturntoKarazhanC";
-		NextMap = "ReturntoKarazhanE";
+		PrevMap = "ReturntoKarazhanB";
+		NextMap = "ReturntoKarazhanD";
 		{ BLUE.." E-H) "..ALC["Connection"], 10001 };
 		{ WHIT.." 5) "..Atlas_GetBossName("Moroes", 1837), 1837 };
 		{ GREN.." 4') "..L["Soul Fragment"], 10002 };
 	};
-	ReturntoKarazhanE = {
-		ZoneName = { BZ["Return to Karazhan"]..ALC["MapE"] };
+	ReturntoKarazhanD = {
+		ZoneName = { BZ["Return to Karazhan"]..ALC["MapD"] };
 		Location = { BZ["Deadwind Pass"] };
 		DungeonHeroicID = "1475"; -- 1474: Upper Return to Karazhan; 1475: Lower Return to Karazhan
 		DungeonMythicID = "1475";
@@ -576,8 +558,8 @@ local myMaps = {
 		PlayerLimit = "5";
 		MinGearLevel = "825";
 		Module = "Atlas_Legion";
-		PrevMap = "ReturntoKarazhanD";
-		NextMap = "ReturntoKarazhanF";
+		PrevMap = "ReturntoKarazhanC";
+		NextMap = "ReturntoKarazhanE";
 		{ BLUE.." F-H) "..ALC["Connection"], 10001 };
 		{ BLUE.." I) "..format(ALC["Portal to %s"], ALC["Entrance"]), 10002 };
 		{ GREN.." 5') "..L["Koren"], 114815};
@@ -585,8 +567,8 @@ local myMaps = {
 		{ WHIT..INDENT..Atlas_GetBossName("Midnight", 1835, 2) };
 		{ GREN.." 6') "..L["Soul Fragment"], 10003 };
 	};
-	ReturntoKarazhanF = {
-		ZoneName = { BZ["Return to Karazhan"]..ALC["MapF"] };
+	ReturntoKarazhanE = {
+		ZoneName = { BZ["Return to Karazhan"]..ALC["MapE"] };
 		Location = { BZ["Deadwind Pass"] };
 		DungeonHeroicID = "1475"; -- 1474: Upper Return to Karazhan; 1475: Lower Return to Karazhan
 		DungeonMythicID = "1475";
@@ -599,15 +581,15 @@ local myMaps = {
 		PlayerLimit = "5";
 		MinGearLevel = "825";
 		Module = "Atlas_Legion";
-		PrevMap = "ReturntoKarazhanE";
-		NextMap = "ReturntoKarazhanG";
+		PrevMap = "ReturntoKarazhanD";
+		NextMap = "ReturntoKarazhanF";
 		{ BLUE.." C) "..ALC["Connection"], 10001 };
 		{ WHIT.." 7) "..Atlas_GetBossName("The Curator", 1836)..ALC["L-Parenthesis"]..ALC["Wanders"]..ALC["R-Parenthesis"], 1836 };
 		{ GREN.." 7') "..L["Soul Fragment"], 10002 };
 		{ BLUE.." J) "..format(ALC["Portal to %s"], BZ["Guardian's Library"]), 10003 };
 	};
-	ReturntoKarazhanG = {
-		ZoneName = { BZ["Return to Karazhan"]..ALC["MapG"] };
+	ReturntoKarazhanF = {
+		ZoneName = { BZ["Return to Karazhan"]..ALC["MapF"] };
 		Location = { BZ["Deadwind Pass"] };
 		DungeonHeroicID = "1474"; -- 1474: Upper Return to Karazhan; 1475: Lower Return to Karazhan
 		DungeonMythicID = "1474";
@@ -620,14 +602,14 @@ local myMaps = {
 		PlayerLimit = "5";
 		MinGearLevel = "825";
 		Module = "Atlas_Legion";
-		PrevMap = "ReturntoKarazhanF";
-		NextMap = "ReturntoKarazhanH";
+		PrevMap = "ReturntoKarazhanE";
+		NextMap = "ReturntoKarazhanG";
 		{ BLUE.." J) "..ALC["Portal"], 10001 };
 		{ WHIT.." 8) "..Atlas_GetBossName("Shade of Medivh", 1817), 1817 };
 		{ BLUE.." K) "..ALC["Portal"], 10002 };
 	};
-	ReturntoKarazhanH = {
-		ZoneName = { BZ["Return to Karazhan"]..ALC["MapH"] };
+	ReturntoKarazhanG = {
+		ZoneName = { BZ["Return to Karazhan"]..ALC["MapG"] };
 		Location = { BZ["Deadwind Pass"] };
 		DungeonHeroicID = "1474"; -- 1474: Upper Return to Karazhan; 1475: Lower Return to Karazhan
 		DungeonMythicID = "1474";
@@ -640,14 +622,14 @@ local myMaps = {
 		PlayerLimit = "5";
 		MinGearLevel = "825";
 		Module = "Atlas_Legion";
-		PrevMap = "ReturntoKarazhanG";
-		NextMap = "ReturntoKarazhanI";
+		PrevMap = "ReturntoKarazhanF";
+		NextMap = "ReturntoKarazhanH";
 		{ BLUE.." K) "..ALC["Entrance"], 10001 };
 		{ GREN.." 8') "..L["Medivh's Footlocker"], 266826 };
 		{ WHIT.." 9) "..Atlas_GetBossName("Mana Devourer", 1818), 1818 };
 	};
-	ReturntoKarazhanI = {
-		ZoneName = { BZ["Return to Karazhan"]..ALC["MapI"] };
+	ReturntoKarazhanH = {
+		ZoneName = { BZ["Return to Karazhan"]..ALC["MapH"] };
 		Location = { BZ["Deadwind Pass"] };
 		DungeonHeroicID = "1474"; -- 1474: Upper Return to Karazhan; 1475: Lower Return to Karazhan
 		DungeonMythicID = "1474";
@@ -660,15 +642,15 @@ local myMaps = {
 		PlayerLimit = "5";
 		MinGearLevel = "825";
 		Module = "Atlas_Legion";
-		PrevMap = "ReturntoKarazhanH";
-		NextMap = "ReturntoKarazhanJ";
+		PrevMap = "ReturntoKarazhanG";
+		NextMap = "ReturntoKarazhanI";
 		{ BLUE.." L) "..ALC["Entrance"], 10001 };
 		{ BLUE.." M) "..ALC["Connection"], 10002 };
 		{ BLUE.." N) "..format(ALC["Portal to %s"], ALC["Entrance"]).."\n"..INDENT..GREY..ALC["Upper floor"], 10003 };
 		{ INDENT..GREY..ALC["Upper floor"] };
 	};
-	ReturntoKarazhanJ = {
-		ZoneName = { BZ["Return to Karazhan"]..ALC["MapJ"] };
+	ReturntoKarazhanI = {
+		ZoneName = { BZ["Return to Karazhan"]..ALC["MapI"] };
 		Location = { BZ["Deadwind Pass"] };
 		DungeonHeroicID = "1474"; -- 1474: Upper Return to Karazhan; 1475: Lower Return to Karazhan
 		DungeonMythicID = "1474";

@@ -6,7 +6,7 @@ end
 --details! framework
 local DF = _G ["DetailsFramework"]
 if (not DF) then
-	print ("|cFFFFAA00血條增強: 無法找到相關程式。若是剛安裝或剛更新這個插件，請重新啟動遊戲。|r")
+	print ("|cFFFFAA00Plater: framework not found, if you just installed or updated the addon, please restart your client.|r")
 	return
 end
 
@@ -246,10 +246,10 @@ local default_config = {
 				percent_text_ooc = false,
 				
 				filter = {
-					[1] = true, --"重要NPC"
+					[1] = true, --"important npc"
 					[2] = true, --repair"
-					[3] = true, --merchant"
-					[4] = true, --innkeeper"
+					[3] = false, --merchant"
+					[4] = false, --innkeeper"
 					[5] = true, --banker"
 					[6] = true, --autioneer"
 					[7] = true, --flyght master"
@@ -272,7 +272,7 @@ local default_config = {
 					[31] = false, --herbalism trainer"
 					[32] = false, --skinning trainer"
 					[33] = false, --alchemy trainer"
-					[34] = false, --"珠寶學訓練師"
+					[34] = false, --"jewelcrafting trainer"
 				},
 				
 				quest_enabled = true,
@@ -488,7 +488,7 @@ local default_config = {
 		indicator_extra_raidmark = true,
 		indicator_anchor = {side = 2, x = -2, y = 0},
 		
-		target_indicator = "無",
+		target_indicator = "NONE",
 		
 		border_color = {0, 0, 0, .15},
 		border_thickness = 3,
@@ -523,7 +523,7 @@ local default_config = {
 }
 
 local options_table = {
-	name = "血條增強",
+	name = "Plater Nameplates",
 	type = "group",
 	args = {
 		
@@ -756,7 +756,7 @@ function Plater.SpellIsCC (spellName)
 end
 
 local TargetIndicators = {
-	["無"] = {
+	["NONE"] = {
 		path = [[Interface\ACHIEVEMENTFRAME\UI-Achievement-WoodBorder-Corner]],
 		coords = {{.9, 1, .9, 1}, {.9, 1, .9, 1}, {.9, 1, .9, 1}, {.9, 1, .9, 1}},
 		desaturated = false,
@@ -765,7 +765,7 @@ local TargetIndicators = {
 		x = 1,
 		y = 1,
 	},
-	["磁石"] = {
+	["Magneto"] = {
 		path = [[Interface\Artifacts\RelicIconFrame]],
 		coords = {{0, .5, 0, .5}, {0, .5, .5, 1}, {.5, 1, .5, 1}, {.5, 1, 0, .5}},
 		desaturated = false,
@@ -774,7 +774,7 @@ local TargetIndicators = {
 		x = 1,
 		y = 1,
 	},
-	["灰色粗邊"] = {
+	["Gray Bold"] = {
 		path = [[Interface\ContainerFrame\UI-Icon-QuestBorder]],
 		coords = {{0, .5, 0, .5}, {0, .5, .5, 1}, {.5, 1, .5, 1}, {.5, 1, 0, .5}},
 		desaturated = true,
@@ -783,7 +783,7 @@ local TargetIndicators = {
 		x = 2,
 		y = 2,
 	},
-	["圖釘"] = {
+	["Pins"] = {
 		path = [[Interface\ITEMSOCKETINGFRAME\UI-ItemSockets]],
 		coords = {{145/256, 161/256, 3/256, 19/256}, {145/256, 161/256, 19/256, 3/256}, {161/256, 145/256, 19/256, 3/256}, {161/256, 145/256, 3/256, 19/256}},
 		desaturated = 1,
@@ -792,7 +792,7 @@ local TargetIndicators = {
 		x = 2,
 		y = 2,
 	},
-	["黃金"] = {
+	["Golden"] = {
 		path = [[Interface\PETBATTLES\PetBattle-GoldSpeedFrame]],
 		coords = {{1/128, 67/128, 1/128, 67/128}, {1/128, 67/128, 67/128, 1/128}, {67/128, 1/128, 67/128, 1/128}, {67/128, 1/128, 1/128, 67/128}},
 		desaturated = false,
@@ -801,7 +801,7 @@ local TargetIndicators = {
 		x = 4,
 		y = 4,
 	},
-	["白銀"] = {
+	["Silver"] = {
 		path = [[Interface\PETBATTLES\PETBATTLEHUD]],
 		coords = {{848/1024, 868/1024, 454/512, 474/512}, {848/1024, 868/1024, 474/512, 495/512}, {868/1024, 889/1024, 474/512, 495/512}, {868/1024, 889/1024, 454/512, 474/512}}, --848 889 454 495
 		desaturated = false,
@@ -810,7 +810,7 @@ local TargetIndicators = {
 		x = 1,
 		y = 1,
 	},
-	["裝飾"] = {
+	["Ornament"] = {
 		path = [[Interface\PETBATTLES\PETJOURNAL]],
 		coords = {{124/512, 161/512, 71/1024, 99/1024}, {119/512, 156/512, 29/1024, 57/1024}}, 
 		desaturated = false,
@@ -819,7 +819,7 @@ local TargetIndicators = {
 		x = 16,
 		y = 0,
 	},
-	["史詩"] = {
+	["Epic"] = {
 		path = [[Interface\Reforging\Reforge-Texture]],
 		coords = {
 			{0/512, 16/512, 0/128, 16/128}, 
@@ -940,7 +940,7 @@ function Plater.OnInit()
 	
 	Plater.RefreshDBUpvalues()
 	
-	--constr鏙 a lista de cc
+	--constr�i a lista de cc
 	for spellId, _ in pairs (CrowdControl) do
 		local spellName = GetSpellInfo (spellId)
 		LocalizedCrowdControl [spellName] = true
@@ -963,7 +963,7 @@ function Plater.OnInit()
 	Plater.InjectOnDefaultOptions (CNP_Name, Plater.DriverConfigType ["ENEMY"], Plater.DriverConfigMembers ["UseRangeCheck"], false)
 	Plater.InjectOnDefaultOptions (CNP_Name, Plater.DriverConfigType ["ENEMY"], Plater.DriverConfigMembers ["UseAlwaysHostile"], false)
 	
-	--configura誽o do personagem
+	--configura��o do personagem
 	PlaterDBChr = PlaterDBChr or {first_run = {}}
 	PlaterDBChr.debuffsBanned = PlaterDBChr.debuffsBanned or {}
 	PlaterDBChr.buffsBanned = PlaterDBChr.buffsBanned or {}
@@ -996,7 +996,7 @@ function Plater.OnInit()
 	C_Timer.After (4, Plater.UpdateCullingDistance)
 	C_Timer.After (4.1, Plater.ForceCVars)
 	
-	--verifica se ?a primeira vez que rodou o addon no personagem
+	--verifica se � a primeira vez que rodou o addon no personagem
 	local check_first_run = function()
 		if (not UnitGUID ("player")) then
 			C_Timer.After (1, Plater.CheckFirstRun)
@@ -1082,7 +1082,7 @@ function Plater.OnInit()
 		Plater.UpdatePlateBorders (self.plateFrame)
 	end)
 	
-	--sobrep髊 a fun誽o que atualiza as auras
+	--sobrep�e a fun��o que atualiza as auras
 	local Override_UNIT_AURA_EVENT = function (self, unit)
 		local nameplate = C_NamePlate.GetNamePlateForUnit (unit)
 		if (nameplate) then
@@ -1112,16 +1112,16 @@ function Plater.OnInit()
 	local CooldownFrame_Set = CooldownFrame_Set
 	
 	function Plater.Override_UpdateBuffs (self, unit, filter)
-		--n緌 esta sendo mais usado
+		--n�o esta sendo mais usado
 		if (true) then
 			return
 		end
 	end
 	
 	InstallOverride (NPB_Name, Plater.DriverFuncNames.OnUpdateBuffs, Plater.Override_UpdateBuffs)
-	--buffcontainermixin ?diferente de nameplate frame mixin
+	--buffcontainermixin � diferente de nameplate frame mixin
 	
-	--sobrep髊 a fun誽o, economiza processamento uma vez que o resultado da fun誽o original n緌 ?usado
+	--sobrep�e a fun��o, economiza processamento uma vez que o resultado da fun��o original n�o � usado
 	local Override_UNIT_AURA_ANCHORUPDATE = function (self)
 		if (self.Point1) then
 			self:SetPoint (self.Point1, self.Anchor, self.Point2, self.X, self.Y)
@@ -1129,7 +1129,7 @@ function Plater.OnInit()
 	end
 	InstallOverride (NPB_Name, Plater.DriverFuncNames.OnUpdateAnchor, Override_UNIT_AURA_ANCHORUPDATE)
 	
-	--tamanho dos 獳ones dos debuffs sobre a nameplate
+	--tamanho dos �cones dos debuffs sobre a nameplate
 	function Plater.UpdateAuraIcons (self, unit, filter)
 		local hasCC = false
 		local show_cc = Plater.db.profile.debuff_show_cc
@@ -1212,7 +1212,7 @@ function Plater.OnInit()
 			--esta plate possui debuffs sendo mostrados
 			Plater.PlateShowingDebuffFrame (plateFrame)
 		else
-			--esta plate n緌 tem debuffs
+			--esta plate n�o tem debuffs
 			Plater.PlateNotShowingDebuffFrame (plateFrame)
 		end
 	end
@@ -1223,8 +1223,8 @@ function Plater.OnInit()
 		Plater.UpdateManaAndResourcesBar()
 	
 		if (not onTarget) then
-			-- ele esta chamando duas vezes, uma com resources no alvo e outra n緌
-			--ignorarando a que ele diz que n緌 esta no alvo
+			-- ele esta chamando duas vezes, uma com resources no alvo e outra n�o
+			--ignorarando a que ele diz que n�o esta no alvo
 			return
 		end
 
@@ -1337,7 +1337,7 @@ function Plater.OnInit()
 	end)
 	
 	InstallHook (Plater.GetDriverSubObjectName (CBF_Name, Plater.DriverFuncNames.OnTick), function (self, deltaTime)
-		if (self.percentText) then --?uma castbar do plater?
+		if (self.percentText) then --� uma castbar do plater?
 			self.ThrottleUpdate = self.ThrottleUpdate - deltaTime
 			if (self.ThrottleUpdate < 0) then
 				if (self.casting) then
@@ -1510,7 +1510,7 @@ function Plater.UpdateSelfPlate()
 	ClassNameplateManaBarFrame:SetSize (unpack (DB_PLATE_CONFIG.player.mana))
 end
 
--- se o jogador estiver em combate, colorir a barra de acordo com o aggro do jogador ~aggro 緁gro
+-- se o jogador estiver em combate, colorir a barra de acordo com o aggro do jogador ~aggro �ggro
 
 local set_aggro_color = function (self, r, g, b) --self.actorName
 	if (DB_AGGRO_CHANGE_HEALTHBAR_COLOR) then
@@ -1526,7 +1526,7 @@ end
 
 function Plater.UpdateAggroPlates (self)
 	if (not self.displayedUnit or UnitIsPlayer (self.displayedUnit) or Plater.petCache [self:GetParent() [MEMBER_GUID]] or self.displayedUnit:match ("pet%d$")) then
-		--n緌 computar aggro de jogadores inimigos
+		--n�o computar aggro de jogadores inimigos
 		return
 	end
 	
@@ -1538,20 +1538,20 @@ function Plater.UpdateAggroPlates (self)
 	--self:SetAlpha (1)
 	
 	if (IsPlayerEffectivelyTank()) then --true or 
-		--se o jogador ?TANK
+		--se o jogador � TANK
 
 		if (not isTanking) then
 			if (UnitAffectingCombat (self.displayedUnit)) then
-				--n緌 h?aggro neste mob mas ele esta participando do combate
+				--n�o h� aggro neste mob mas ele esta participando do combate
 				Plater.ForceChangeHealthBarColor (self.healthBar, unpack (Plater.db.profile.tank.colors.noaggro))
 				if (self.PlateFrame [MEMBER_NOCOMBAT]) then
 					self.PlateFrame [MEMBER_NOCOMBAT] = nil
 					Plater.CheckRange (self.PlateFrame, true)
 				end
 			else
-				--n緌 ha aggro e ele n緌 esta participando do combate
+				--n�o ha aggro e ele n�o esta participando do combate
 				if (self [MEMBER_REACTION] == 4) then
-					--o mob ?um npc neutro, apenas colorir com a cor neutra
+					--o mob � um npc neutro, apenas colorir com a cor neutra
 					set_aggro_color (self.healthBar, 1, 1, 0)
 				else
 					set_aggro_color (self.healthBar, unpack (Plater.db.profile.tank.colors.nocombat))
@@ -1564,13 +1564,13 @@ function Plater.UpdateAggroPlates (self)
 			end
 		else
 			--o jogador esta tankando e:
-			if (threatStatus == 3) then --esta tankando com seguran蓷
+			if (threatStatus == 3) then --esta tankando com seguran�a
 				set_aggro_color (self.healthBar, unpack (Plater.db.profile.tank.colors.aggro))
-			elseif (threatStatus == 2) then --esta tankando sem seguran蓷
+			elseif (threatStatus == 2) then --esta tankando sem seguran�a
 				set_aggro_color (self.healthBar, unpack (Plater.db.profile.tank.colors.pulling))
 				self.aggroGlowUpper:Show()
 				self.aggroGlowLower:Show()
-			else --n緌 esta tankando
+			else --n�o esta tankando
 				set_aggro_color (self.healthBar, unpack (Plater.db.profile.tank.colors.noaggro))
 			end
 			if (self.PlateFrame [MEMBER_NOCOMBAT]) then
@@ -1579,7 +1579,7 @@ function Plater.UpdateAggroPlates (self)
 			end
 		end
 	else
-		--o player ?DPS
+		--o player � DPS
 		
 		if (isTanking) then
 			--o jogador esta tankando como dps
@@ -1606,9 +1606,9 @@ function Plater.UpdateAggroPlates (self)
 						Plater.CheckRange (self.PlateFrame, true)
 					end
 				else
-					--n緌 ha aggro e ele n緌 esta participando do combate
+					--n�o ha aggro e ele n�o esta participando do combate
 					if (self [MEMBER_REACTION] == 4) then
-						--o mob ?um npc neutro, apenas colorir com a cor neutra
+						--o mob � um npc neutro, apenas colorir com a cor neutra
 						set_aggro_color (self.healthBar, 1, 1, 0)
 					else
 						set_aggro_color (self.healthBar, unpack (Plater.db.profile.tank.colors.nocombat))
@@ -1634,7 +1634,7 @@ function Plater.UpdateAggroPlates (self)
 					self:GetParent().playerHasAggro = false
 					self.aggroGlowUpper:Show()
 					self.aggroGlowLower:Show()
-				elseif (threatStatus == 0) then --n緌 esta tankando
+				elseif (threatStatus == 0) then --n�o esta tankando
 					set_aggro_color (self.healthBar, unpack (Plater.db.profile.dps.colors.noaggro))
 					self:GetParent().playerHasAggro = false
 				end
@@ -1737,7 +1737,7 @@ function Plater.UpdateAuras_Manual (self, unit)
 			auraIndex = auraIndex + 1
 		end
 	end
-	--> esconde os frames n緌 usados
+	--> esconde os frames n�o usados
 	hide_non_used_auraFrames (self.buffList, auraIndex)
 end
 
@@ -1754,7 +1754,7 @@ function Plater.UpdateAuras_Automatic (self, unit)
 			auraIndex = auraIndex + 1
 		end
 	end	
-	--> esconde os frames n緌 usados
+	--> esconde os frames n�o usados
 	hide_non_used_auraFrames (self.buffList, auraIndex)
 end
 function Plater.UpdateAuras_Self_Automatic (self)
@@ -1770,11 +1770,11 @@ function Plater.UpdateAuras_Self_Automatic (self)
 			auraIndex = auraIndex + 1
 		end
 	end	
-	--> esconde os frames n緌 usados
+	--> esconde os frames n�o usados
 	hide_non_used_auraFrames (self.buffList, auraIndex)
 end
 
--- ~ontick ~onupdate ~tick ~鰒update
+-- ~ontick ~onupdate ~tick ~�nupdate
 local EventTickFunction = function (tickFrame, deltaTime)
 	
 	tickFrame.ThrottleUpdate = tickFrame.ThrottleUpdate - deltaTime
@@ -1795,7 +1795,7 @@ local EventTickFunction = function (tickFrame, deltaTime)
 		--auras
 		if (DB_AURA_ENABLED) then
 			tickFrame.BuffFrame:UpdateAnchor()
-			if (DB_TRACK_METHOD == 0x1) then --autom嫢ico
+			if (DB_TRACK_METHOD == 0x1) then --autom�tico
 				if (tickFrame.actorType == ACTORTYPE_PLAYER) then
 					Plater.UpdateAuras_Self_Automatic (tickFrame.BuffFrame)
 				else
@@ -1812,7 +1812,7 @@ local EventTickFunction = function (tickFrame, deltaTime)
 		--aggro
 		if (CAN_CHECK_AGGRO and InCombatLockdown()) then
 			if (tickFrame.PlateFrame [MEMBER_REACTION] <= 4 and not IsTapDenied (unitFrame)) then
-				--?um inimigo ou neutro
+				--� um inimigo ou neutro
 				Plater.UpdateAggroPlates (unitFrame)
 			else
 				--o proprio jogo seta a cor da barra aqui
@@ -2082,8 +2082,8 @@ function Plater.UpdateTarget (plateFrame)
 		Plater.UpdateTargetPoints (plateFrame)
 		Plater.UpdateTargetTexture (plateFrame)
 		
-		--o target nunca tem obscura誽o
-		--tocar a anima誽o se necess嫫io
+		--o target nunca tem obscura��o
+		--tocar a anima��o se necess�rio
 		plateFrame.Obscured:Hide()
 	else
 		plateFrame.TargetNeonUp:Hide()
@@ -2092,7 +2092,7 @@ function Plater.UpdateTarget (plateFrame)
 		
 		if (DB_TARGET_SHADY_ENABLED and (not DB_TARGET_SHADY_COMBATONLY or Plater.RegenIsDisabled)) then
 			if (not plateFrame.Obscured:IsShown()) then
-				--tocar a anima誽o de fade in
+				--tocar a anima��o de fade in
 				--botar a texture de obscure
 			end
 			plateFrame.Obscured:Show()
@@ -2233,7 +2233,7 @@ function Plater.CreateAggroFlashFrame (plateFrame)
 	t:SetAllPoints()
 	t:SetBlendMode ("ADD")
 	local s = f_anim:CreateFontString (nil, "overlay", "GameFontNormal")
-	s:SetText ("-獲得仇恨-")
+	s:SetText ("-AGGRO-")
 	s:SetTextColor (.70, .70, .70)
 	s:SetPoint ("center", t, "center")
 	
@@ -2382,7 +2382,7 @@ function Plater.IsQuestObjective (plateFrame)
 		if (Plater.QuestCache [text]) then
 			--este npc percente a uma quest
 			if (not IsInGroup() and i < 8) then
-				--verifica se j?fechou a quantidade necess嫫ia pra esse npc
+				--verifica se j� fechou a quantidade necess�ria pra esse npc
 				local nextLineText = ScanQuestTextCache [i+1]:GetText()
 				if (nextLineText) then
 					local p1, p2 = nextLineText:match ("(%d%d)/(%d%d)") --^ - 
@@ -2439,11 +2439,11 @@ function Plater.QuestLogUpdated()
 end
 
 function Plater.FormatTextForFriend (plateFrame, actorNameString, playerName, plateConfigs)
-	if (GetGuildInfo (plateFrame.UnitFrame.unit) == Plater.PlayerGuildName) then
+	--if (GetGuildInfo (plateFrame.UnitFrame.unit) == Plater.PlayerGuildName) then
 		--DF:SetFontColor (actorNameString, "lime")
-		DF:SetFontColor (actorNameString, "chartreuse")
-		DF:SetFontOutline (actorNameString, false)
-	end	
+	--	DF:SetFontColor (actorNameString, "chartreuse")
+	--	DF:SetFontOutline (actorNameString, false)
+	--end	
 end
 
 -- ~updatetext
@@ -2456,7 +2456,7 @@ function Plater.UpdatePlateText (plateFrame, plateConfigs)
 	local lifeString = plateFrame.UnitFrame.healthBar.lifePercent
 
 	if (plateFrame.isSelf) then
-		--se a barra for do proprio jogador n緌 tem porque setar o nome
+		--se a barra for do proprio jogador n�o tem porque setar o nome
 		nameString:SetText ("")
 		
 	elseif (plateFrame.onlyShowThePlayerName) then
@@ -2511,7 +2511,7 @@ function Plater.UpdatePlateText (plateFrame, plateConfigs)
 		
 		Plater.UpdateUnitName (plateFrame)
 		
-		--seta o nome na linha secund嫫ia
+		--seta o nome na linha secund�ria
 		if (plateFrame.shouldShowNpcNameAndTitle) then
 
 			--> mostra todos os npcs
@@ -2525,7 +2525,7 @@ function Plater.UpdatePlateText (plateFrame, plateConfigs)
 				DF:SetFontSize (plateFrame.actorNameSolo, plateConfigs.big_actorname_text_size)
 				DF:SetFontFace (plateFrame.actorNameSolo, plateConfigs.big_actorname_text_font)
 				DF:SetFontOutline (plateFrame.actorNameSolo, plateConfigs.big_actorname_text_shadow)
-				--profiss緌
+				--profiss�o
 				local subTitle = Plater.GetActorSubName (plateFrame)
 				if (subTitle and subTitle ~= "" and not subTitle:match ("%d")) then
 					plateFrame.actorSubTitleSolo:Show()
@@ -2539,7 +2539,7 @@ function Plater.UpdatePlateText (plateFrame, plateConfigs)
 					DF:SetFontOutline (plateFrame.actorSubTitleSolo, plateConfigs.big_actortitle_text_shadow)
 				end
 			else
-				--faz o scan no tooltip para saber se ?um npc relevante
+				--faz o scan no tooltip para saber se � um npc relevante
 				local subTitle = Plater.GetActorSubName (plateFrame)
 				if (subTitle and subTitle ~= "" and not Plater.IsIgnored (plateFrame, true)) then
 					if (not subTitle:match ("%d")) then
@@ -2745,7 +2745,7 @@ function Plater.UpdatePlateSize (plateFrame, justAdded)
 	local castFrame = unitFrame.castBar
 	local buffFrame = unitFrame.BuffFrame
 	local nameFrame = unitFrame.healthBar.actorName
-
+	
 	local isMinus = Plater.ShouldForceSmallBar (plateFrame)
 	local isInCombat = InCombatLockdown()
 
@@ -2882,6 +2882,7 @@ function Plater.UpdatePlateSize (plateFrame, justAdded)
 					healthFrame.IsDecreasingHeight = nil
 					healthFrame.TargetHeight = targetHeight
 					healthFrame.ToIncreace = targetHeight - currentHeight
+					--print ("!", healthFrame.ToIncreace, 2886)
 					healthFrame:SetScript ("OnUpdate", change_height_up)
 				end
 			elseif (currentHeight > targetHeight) then
@@ -2963,6 +2964,7 @@ function Plater.UpdatePlateSize (plateFrame, justAdded)
 					healthFrame.IsDecreasingHeight = nil
 					healthFrame.TargetHeight = targetHeight
 					healthFrame.ToIncreace = targetHeight - currentHeight
+					--print (healthFrame:GetName())
 					healthFrame:SetScript ("OnUpdate", change_height_up)
 				end
 			elseif (currentHeight > targetHeight) then
@@ -3205,7 +3207,7 @@ function Plater.UpdatePlateFrame (plateFrame, actorType, forceUpdate, justAdded)
 			plateFrame:Hide()
 		end
 		
-	--a plate ?de um NPC inimigo e estamos dentro de um santu嫫io?
+	--a plate � de um NPC inimigo e estamos dentro de um santu�rio?
 	elseif (plateFrame [MEMBER_REACTION] < 4 and Plater.zonePvpType == "sanctuary") then
 		if (InCombatLockdown()) then
 			healthFrame:Hide()
@@ -3265,11 +3267,11 @@ function Plater.UpdatePlateFrame (plateFrame, actorType, forceUpdate, justAdded)
 				nameFrame:Hide()
 				plateFrame.shouldShowNpcNameAndTitle = true
 			
-			--mostrar apenas plates para npcs relevantes / verifica se possui relev滱cia ativa
+			--mostrar apenas plates para npcs relevantes / verifica se possui relev�ncia ativa
 			elseif (DB_PLATE_CONFIG [actorType].only_relevant) then
 				--a relevancia esta ativada
 
-				--se n緌 tem um tipo ou o tipo esta desligado
+				--se n�o tem um tipo ou o tipo esta desligado
 				if (not plateFrame [MEMBER_NPCTYPE] or not DB_PLATE_CONFIG [actorType].filter [plateFrame [MEMBER_NPCTYPE]]) then
 					--if (InCombatLockdown()) then
 						healthFrame:Hide()
@@ -3279,7 +3281,7 @@ function Plater.UpdatePlateFrame (plateFrame, actorType, forceUpdate, justAdded)
 					--	plateFrame:Hide()
 					--end
 					
-					--verifica se pode mostrar o nome dos npcs que n緌 possuem relevancia
+					--verifica se pode mostrar o nome dos npcs que n�o possuem relevancia
 					if (DB_PLATE_CONFIG [actorType].relevant_and_proffesions) then
 						--plateFrame.shouldShowNpcNameAndTitle = true
 						plateFrame.shouldShowNpcTitle = true
@@ -3345,7 +3347,7 @@ function Plater.UpdatePlateFrame (plateFrame, actorType, forceUpdate, justAdded)
 				plateFrame:Show()
 			end
 			
-			--se for um jogador da fac誽o rival, verificar se pode mostrar a cor da classe ou ?uma cor fixa
+			--se for um jogador da fac��o rival, verificar se pode mostrar a cor da classe ou � uma cor fixa
 			if (actorType == ACTORTYPE_ENEMY_PLAYER) then
 				if (not DB_PLATE_CONFIG [actorType].use_playerclass_color) then
 					Plater.ForceChangeHealthBarColor (healthFrame, unpack (DB_PLATE_CONFIG [actorType].fixed_class_color))
@@ -3565,7 +3567,7 @@ function Plater.UpdatePlateBorderThickness (plateFrame)
 	
 	local textures = plateFrame.UnitFrame.healthBar.border.Textures
 	
-	-- 9 a 12 nunca s緌 escondias
+	-- 9 a 12 nunca s�o escondias
 	if (DB_BORDER_THICKNESS == 1) then
 		--hida de 1 a 8
 		for i = 1, 8 do
@@ -3627,7 +3629,7 @@ function Plater.CheckRange (plateFrame, onAdded)
 		return
 	end
 
-	--dummies nao efatam o combate e n緌 tem aggro
+	--dummies nao efatam o combate e n�o tem aggro
 	--as plates deles vao ficar sem alpha
 	
 	if (IsSpellInRange (Plater.SpellForRangeCheck, plateFrame [MEMBER_UNITID]) == 1) then
@@ -3707,7 +3709,7 @@ local ExtraIconFrame_SetIcon = function (self, icon, isCC, w, h, L, R, T, B)
 end
 
 Plater ["NAME_PLATE_CREATED"] = function (self, event, plateFrame) -- ~created
-	--isto ?uma nameplate
+	--isto � uma nameplate
 	plateFrame.UnitFrame.PlateFrame = plateFrame
 	plateFrame.isNamePlate = true
 	plateFrame.UnitFrame.isNamePlate = true
@@ -3716,6 +3718,39 @@ Plater ["NAME_PLATE_CREATED"] = function (self, event, plateFrame) -- ~created
 	local healthBar = plateFrame.UnitFrame.healthBar
 	plateFrame.NameAnchor = 0
 	
+--[=[
+	local frameName = "PlaterHealthBar" .. math.random (1000*1000)
+	local newHealthBar = CreateFrame ("StatusBar", frameName, UIParent)
+
+	for a, b in pairs (healthBar) do
+		--newHealthBar [a] = b
+	end
+
+	newHealthBar.myHealPrediction = healthBar.myHealPrediction
+	newHealthBar.myHealAbsorb = healthBar.myHealAbsorb
+	newHealthBar.myHealAbsorbLeftShadow = healthBar.myHealAbsorbLeftShadow
+	newHealthBar.myHealAbsorbRightShadow = healthBar.myHealAbsorbRightShadow
+	newHealthBar.otherHealPrediction = healthBar.otherHealPrediction
+	newHealthBar.totalAbsorb = healthBar.totalAbsorb
+	newHealthBar.totalAbsorbOverlay = healthBar.totalAbsorbOverlay
+	newHealthBar.overAbsorbGlow = healthBar.overAbsorbGlow
+	newHealthBar.overHealAbsorbGlow = healthBar.overHealAbsorbGlow
+	
+	--
+	newHealthBar.background = healthBar.background
+	newHealthBar.border = healthBar.border
+	newHealthBar.barTexture = healthBar.barTexture
+	newHealthBar:SetStatusBarTexture (healthBar.barTexture)
+	--
+	
+--	print (newHealthBar, newHealthBar:GetName())
+	
+	plateFrame.UnitFrame.healthBar = newHealthBar
+	plateFrame.UnitFrame.newHealthBar = newHealthBar
+	healthBar = newHealthBar
+	newHealthBar.IsNew = true
+--]=]
+
 	--highlight para o mouse over
 	local mouseHighlight = healthBar:CreateTexture (nil, "overlay")
 	mouseHighlight:SetDrawLayer ("overlay", 7)
@@ -3847,7 +3882,7 @@ Plater ["NAME_PLATE_CREATED"] = function (self, event, plateFrame) -- ~created
 	DF:SetFontColor (ExtraIcon1Timer, "white")
 	plateFrame.UnitFrame.ExtraIcon1Timer = ExtraIcon1Timer
 	
-	--icone tr瘰 dimens髊s
+	--icone tr�s dimens�es
 	plateFrame.Top3DFrame = CreateFrame ("playermodel", plateFrame:GetName() .. "3DFrame", plateFrame, "ModelWithControlsTemplate")
 	plateFrame.Top3DFrame:SetPoint ("bottom", plateFrame, "top", 0, -100)
 	plateFrame.Top3DFrame:SetSize (200, 250)
@@ -3868,7 +3903,7 @@ Plater ["NAME_PLATE_CREATED"] = function (self, event, plateFrame) -- ~created
 	percentText:SetPoint ("right", plateFrame.UnitFrame.castBar, "right")
 	plateFrame.UnitFrame.castBar.percentText = percentText
 	
-	--icone de n緌 interromp癉el
+	--icone de n�o interromp�vel
 	plateFrame.UnitFrame.castBar.BorderShield:SetTexture ([[Interface\ACHIEVEMENTFRAME\UI-Achievement-Progressive-IconBorder]])
 	plateFrame.UnitFrame.castBar.BorderShield:SetTexCoord (5/64, 37/64, 1/64, 36/64)
 	plateFrame.UnitFrame.castBar.isNamePlate = true
@@ -3911,7 +3946,7 @@ function Plater.CanShowPlateFor (actorType)
 	return DB_PLATE_CONFIG [actorType].enabled
 end
 
-Plater ["NAME_PLATE_UNIT_ADDED"] = function (self, event, unitBarId) -- ~added 緂ded
+Plater ["NAME_PLATE_UNIT_ADDED"] = function (self, event, unitBarId) -- ~added �dded
 	--pega a nameplate deste jogador
 	
 	local plateFrame = C_NamePlate.GetNamePlateForUnit (unitBarId)
@@ -3942,7 +3977,7 @@ Plater ["NAME_PLATE_UNIT_ADDED"] = function (self, event, unitBarId) -- ~added �
 			Plater.UpdatePlateFrame (plateFrame, ACTORTYPE_PLAYER, nil, true)
 		else
 			if (UnitIsPlayer (unitBarId)) then
-				--?um jogador, determinar se ?um inimigo ou aliado
+				--� um jogador, determinar se � um inimigo ou aliado
 				if (reaction >= UNITREACTION_FRIENDLY) then
 					plateFrame.NameAnchor = DB_NAME_PLAYERFRIENDLY_ANCHOR
 					Plater.UpdatePlateFrame (plateFrame, ACTORTYPE_FRIENDLY_PLAYER, nil, true)
@@ -3959,7 +3994,7 @@ Plater ["NAME_PLATE_UNIT_ADDED"] = function (self, event, unitBarId) -- ~added �
 					end
 				end
 			else
-				--?um npc
+				--� um npc
 				if (reaction >= UNITREACTION_FRIENDLY) then
 					plateFrame.NameAnchor = DB_NAME_NPCFRIENDLY_ANCHOR
 					Plater.UpdatePlateFrame (plateFrame, ACTORTYPE_FRIENDLY_NPC, nil, true)
@@ -3968,7 +4003,7 @@ Plater ["NAME_PLATE_UNIT_ADDED"] = function (self, event, unitBarId) -- ~added �
 						CastingBarFrame_SetUnit (plateFrame.UnitFrame.castBar, nil, nil, nil)
 					end
 				else
-					--inclui npcs que s緌 neutros
+					--inclui npcs que s�o neutros
 					plateFrame.NameAnchor = DB_NAME_NPCENEMY_ANCHOR
 					Plater.UpdatePlateFrame (plateFrame, ACTORTYPE_ENEMY_NPC, nil, true)
 					actorType = ACTORTYPE_ENEMY_NPC
@@ -4115,10 +4150,10 @@ function Plater.ShutdownInterfaceOptionsPanel()
 	
 	local Button = DF:CreateButton (f, open_options, 100, 20, "", -1, nil, nil, nil, nil, nil, DF:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"))
 	Button:SetPoint ("topleft", f, "topleft", 10, 0)
-	Button:SetText ("開啟血條增強設定")
+	Button:SetText ("Open Plater Options")
 	Button:SetIcon ([[Interface\BUTTONS\UI-OptionsButton]], 18, 18, "overlay", {0, 1, 0, 1})
 	
-	local Label = DF:CreateLabel (f, "名條的選項在哪?\n- 開啟血條增強設定選項，在左上方。")
+	local Label = DF:CreateLabel (f, "Where are the Nameplate options?\n- Open Plater options, they are at the top left.")
 	Label:SetPoint ("bottomleft", Button, "topleft", 0, 2)
 end
 
@@ -4218,7 +4253,7 @@ end
 
 SLASH_PLATER1 = "/plater"
 SLASH_PLATER2 = "/nameplate"
-SLASH_PLATER3 = "/血條"
+SLASH_PLATER3 = "/nameplates"
 
 local function distance (x1,y1,x2,y2)
 	local _,TLx,TLy,BRx,BRy = GetCurrentMapZone()
@@ -4251,13 +4286,13 @@ local cvarDiagList = {
 function SlashCmdList.PLATER (msg, editbox)
 	if (msg == "dignostico" or msg == "diag" or msg == "debug") then
 		
-		print ("血條增強診斷:")
+		print ("Plater Diagnostic:")
 		for i = 1, #cvarDiagList do
 			local cvar = cvarDiagList [i]
 			print ("|cFFC0C0C0" .. cvar, "|r->", GetCVar (cvar))
 		end
 		
-		local alphaPlateFrame = "畫面中沒有血條"
+		local alphaPlateFrame = "there's no nameplate in the screen"
 		local alphaUnitFrame = ""
 		local alphaHealthFrame = ""
 		local testPlate
@@ -4286,9 +4321,9 @@ function SlashCmdList.PLATER (msg, editbox)
 			local healthBarIsShown = testPlate.UnitFrame.healthBar:IsShown() and "yes" or "no"
 			print ("|cFFC0C0C0ShownStatus|r", "->", plateIsShown, "-", unitFrameIsShown, "-", healthBarIsShown)
 		else
-			print ("|cFFC0C0C0Size|r", "-> 畫面中沒有血條")
-			print ("|cFFC0C0C0Point|r", "-> 畫面中沒有血條")
-			print ("|cFFC0C0C0ShownStatus|r", "-> 畫面中沒有血條")
+			print ("|cFFC0C0C0Size|r", "-> there's no nameplate in the screen")
+			print ("|cFFC0C0C0Point|r", "-> there's no nameplate in the screen")
+			print ("|cFFC0C0C0ShownStatus|r", "-> there's no nameplate in the screen")
 		end
 		
 		return
@@ -4313,7 +4348,7 @@ local ignored_npcs_when_profession = {
 --	[] = true, --
 }
 
---nome das fac踥es em legion
+--nome das fac��es em legion
 local faction_coord_mul = (10^3)
 local legion_factions = { --localize-me
 	"Court of Farondis", 
@@ -4331,7 +4366,7 @@ local factions_index = {
 	["The Wardens"] = 5,
 	["Valarjar"] = 6,
 }
---armazena as fac踥es ignoradas
+--armazena as fac��es ignoradas
 local ignored_factions = {}
 local faction_distance = 5000
 --coords x y or multiplier
@@ -4542,7 +4577,7 @@ function Plater.CheckForNpcType (plateFrame)
 		return
 	end
 end
---area da fac誽o no mapa
+--area da fac��o no mapa
 local factioncoords = function (self)
 	if (not InCombatLockdown()) then	
 		local locs_list = {{}, {}}
@@ -4852,8 +4887,8 @@ function Plater.OpenOptionsPanel()
 	Plater.db.profile.OptionsPanelDB = Plater.db.profile.OptionsPanelDB or {}
 	
 	--controi o menu principal
-	--local f = DF:Create1PxPanel (UIParent, 900, 600, "血條增強設定", "PlaterOptionsPanel", Plater.db.profile.OptionsPanelDB)
-	local f = DF:CreateSimplePanel (UIParent, 1100, 610, "血條增強設定", "PlaterOptionsPanelFrame", {UseScaleBar = true}, Plater.db.profile.OptionsPanelDB)
+	--local f = DF:Create1PxPanel (UIParent, 900, 600, "Plater Options", "PlaterOptionsPanel", Plater.db.profile.OptionsPanelDB)
+	local f = DF:CreateSimplePanel (UIParent, 1100, 610, "Plater Options", "PlaterOptionsPanelFrame", {UseScaleBar = true}, Plater.db.profile.OptionsPanelDB)
 	--f:SetPoint ("center", UIParent, "center", 0, 0)
 	local profile = Plater.db.profile
 	
@@ -4866,16 +4901,16 @@ function Plater.OpenOptionsPanel()
 		button_text_size = 10,
 	}
 	
-	-- mainFrame ?um frame vazio para sustentrar todos os demais frames, este frame sempre ser?mostrado
-	local mainFrame = DF:CreateTabContainer (f, "血條增強設定", "PlaterOptionsPanelContainer", {
-		{name = "FrontPage", title = "基本設定"},
-		{name = "PersonalBar", title = "我的血條"},
-		{name = "FriendlyPlayer", title = "友方玩家"},
-		{name = "EnemyPlayer", title = "敵方玩家"},
-		{name = "FriendlyNpc", title = "友方NPC"},
-		{name = "EnemyNpc", title = "敵方NPC"},
-		{name = "DebuffConfig", title = "增益和減益效果"},
-		{name = "ProfileManagement", title = "設定檔"},
+	-- mainFrame � um frame vazio para sustentrar todos os demais frames, este frame sempre ser� mostrado
+	local mainFrame = DF:CreateTabContainer (f, "Plater Options", "PlaterOptionsPanelContainer", {
+		{name = "FrontPage", title = "Main Menu"},
+		{name = "PersonalBar", title = "Personal Bar"},
+		{name = "FriendlyPlayer", title = "Friendly Player"},
+		{name = "EnemyPlayer", title = "Enemy Player"},
+		{name = "FriendlyNpc", title = "Friendly Npc"},
+		{name = "EnemyNpc", title = "Enemy Npc"},
+		{name = "DebuffConfig", title = "Config Debuffs"},
+		{name = "ProfileManagement", title = "Profiles"},
 	}, 
 	frame_options)
 
@@ -4920,7 +4955,7 @@ function Plater.OpenOptionsPanel()
 		end)
 	end)
 	
-	--cria o bot緌 de configurar a relevancia para os friendly npcs
+	--cria o bot�o de configurar a relevancia para os friendly npcs
 	local relevancePanel = CreateFrame ("frame", nil, friendlyNPCsFrame)
 	relevancePanel:SetSize (860, 500)
 	relevancePanel:SetBackdrop ({bgFile = [[Interface\FrameGeneral\UI-Background-Marble]], tile = true, tileSize = 16, edgeFile = [[Interface\Buttons\WHITE8X8]], edgeSize = 1})
@@ -4931,33 +4966,33 @@ function Plater.OpenOptionsPanel()
 	
 	do
 		local options = {
-			[1] = "重要NPC",
-			[2] = "裝備修理",
-			[3] = "商人",
-			[4] = "旅店老闆",
-			[5] = "銀行職員",
-			[6] = "拍賣師",
-			[7] = "飛行管理員",
-			[8] = "獸欄管理員",
-			[9] = "寵物訓練師",
-			[10] = "美容師",
-			[11] = "塑形",
-			[12] = "食物和飲料",
-			[20] = "釣魚訓練師",
-			[21] = "急救訓練師",
-			[22] = "考古學訓練師",
-			[23] = "烹飪訓練師",
-			[24] = "採礦訓練師",
-			[25] = "工程學訓練師",
-			[26] = "製皮訓練師",
-			[27] = "裁縫訓練師",
-			[28] = "附魔訓練師",
-			[29] = "鍛造訓練師",
-			[30] = "銘文學訓練師",
-			[31] = "草藥訓練師",
-			[32] = "剝皮訓練師",
-			[33] = "煉金術訓練師",
-			[34] = "珠寶學訓練師",
+			[1] = "important npc",
+			[2] = "repair",
+			[3] = "merchant",
+			[4] = "innkeeper",
+			[5] = "banker",
+			[6] = "autioneer",
+			[7] = "flyght master",
+			[8] = "stable master",
+			[9] = "pet master",
+			[10] = "barber",
+			[11] = "transmogrifier",
+			[12] = "food and drink",
+			[20] = "fishing trainer",
+			[21] = "first aid trainer",
+			[22] = "archaeology trainer",
+			[23] = "cooking trainer",
+			[24] = "mining trainer",
+			[25] = "engineering trainer",
+			[26] = "leatherworking trainer",
+			[27] = "tailor trainer",
+			[28] = "enchanting trainer",
+			[29] = "blacksmith trainer",
+			[30] = "inscription trainer",
+			[31] = "herbalism trainer",
+			[32] = "skinning trainer",
+			[33] = "alchemy trainer",
+			[34] = "jewelcrafting trainer",
 		}
 		
 		local reorder = {}
@@ -4997,17 +5032,17 @@ function Plater.OpenOptionsPanel()
 	local open_friendlynpc_relevance_panel = function()
 		relevancePanel:SetShown (not relevancePanel:IsShown())
 	end
-	local relevanceButton = DF:CreateButton (friendlyNPCsFrame, open_friendlynpc_relevance_panel, 200, 20, "設定相關NPC", nil, nil, nil, nil, nil, nil, DF:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"))
+	local relevanceButton = DF:CreateButton (friendlyNPCsFrame, open_friendlynpc_relevance_panel, 200, 20, "Config Relevance", nil, nil, nil, nil, nil, nil, DF:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"))
 	relevanceButton:SetPoint ("topleft", friendlyNPCsFrame, "topleft", 237, -30)
 	
 	relevancePanel:SetPoint ("topleft", relevanceButton.widget, "bottomleft", 0, -35)
 	
 -------------------------
--- fun踥es gerais dos dropdowns
+-- fun��es gerais dos dropdowns
 	local textures = LibSharedMedia:HashTable ("statusbar")
 
 	--anchor table
-	local anchor_names = {"左上", "左", "左下", "下", "右下", "右", "右上", "上", "中", "內側左", "內側右", "內側上", "內側下"}
+	local anchor_names = {"Top Left", "Left", "Bottom Left", "Bottom", "Bottom Right", "Right", "Top Right", "Top", "Center", "Inner Left", "Inner Right", "Inner Top", "Inner Bottom"}
 	local build_anchor_side_table = function (actorType, member)
 		local t = {}
 		for i = 1, 13 do
@@ -5090,7 +5125,7 @@ function Plater.OpenOptionsPanel()
 	
 
 -------------------------------------------------------------------------------
---op踥es do painel de interface da blizzard
+--op��es do painel de interface da blizzard
 
 
 function Plater.ChangeNameplateAnchor (_, _, value)
@@ -5103,14 +5138,14 @@ function Plater.ChangeNameplateAnchor (_, _, value)
 	end
 end
 local nameplate_anchor_options = {
-	{label = "頭頂", value = 0, onclick = Plater.ChangeNameplateAnchor, desc = "所有血條都顯示在角色的上方。"},
-	{label = "頭頂/腳下", value = 1, onclick = Plater.ChangeNameplateAnchor, desc = "友方和中立的血條在頭頂，敵方的在腳下。"},
-	{label = "腳下", value = 2, onclick = Plater.ChangeNameplateAnchor, desc = "所有血條都顯示在角色的下方。"},
+	{label = "Head", value = 0, onclick = Plater.ChangeNameplateAnchor, desc = "All nameplates are placed above the character."},
+	{label = "Head/Feet", value = 1, onclick = Plater.ChangeNameplateAnchor, desc = "Friendly and neutral has the nameplate on their head, enemies below the feet."},
+	{label = "Feet", value = 2, onclick = Plater.ChangeNameplateAnchor, desc = "All nameplates are placed below the character."},
 }
 
 local interface_options = {
 
-		--{type = "label", get = function() return "介面選項:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		--{type = "label", get = function() return "Interface Options:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 
 		{
 			type = "toggle",
@@ -5119,12 +5154,12 @@ local interface_options = {
 				if (not InCombatLockdown()) then
 					SetCVar (CVAR_SHOWPERSONAL, math.abs (tonumber (GetCVar (CVAR_SHOWPERSONAL))-1))
 				else
-					Plater:Msg ("正在戰鬥中。")
+					Plater:Msg ("you are in combat.")
 					self:SetValue (GetCVar (CVAR_SHOWPERSONAL) == CVAR_ENABLED)
 				end
 			end,
-			name = "玩家血條和能量條",
-			desc = "在角色下方顯示小型血量和能量條。",
+			name = "Personal Health and Mana Bars",
+			desc = "Shows a mini health and mana bars under your character.",
 			nocombat = true,
 		},
 		{
@@ -5134,12 +5169,12 @@ local interface_options = {
 				if (not InCombatLockdown()) then
 					SetCVar (CVAR_RESOURCEONTARGET, math.abs (tonumber (GetCVar (CVAR_RESOURCEONTARGET))-1))
 				else
-					Plater:Msg ("正在戰鬥中。")
+					Plater:Msg ("you are in combat.")
 					self:SetValue (GetCVar (CVAR_RESOURCEONTARGET) == CVAR_ENABLED)
 				end
 			end,
-			name = "將資源條顯示在目標上方",
-			desc = "將你的資源條，例如連擊點數顯示在當前目標的上方。\n\n必須啟用 '玩家血條和能量條'",
+			name = "Show Resources on Target",
+			desc = "Shows your resource such as combo points above your current target.\n\n'Personal Health and Mana Bars' has to be enabled",
 			nocombat = true,
 		},
 		{
@@ -5149,12 +5184,12 @@ local interface_options = {
 				if (not InCombatLockdown()) then
 					SetCVar (CVAR_SHOWALL, math.abs (tonumber (GetCVar (CVAR_SHOWALL))-1))
 				else
-					Plater:Msg ("正在戰鬥中。")
+					Plater:Msg ("you are in combat.")
 					self:SetValue (GetCVar (CVAR_SHOWALL) == CVAR_ENABLED)
 				end
 			end,
-			name = "總是顯示血條",
-			desc = "顯示所有靠近你的單位的血條，就算停用戰鬥中顯示相關角色時也會顯示。",
+			name = "Always Show Nameplates",
+			desc = "Show nameplates for all units near you. If disabled on show relevant units when you are in combat.",
 			nocombat = true,
 		},
 		{
@@ -5164,12 +5199,12 @@ local interface_options = {
 				if (not InCombatLockdown()) then
 					SetCVar (CVAR_PLATEMOTION, math.abs (tonumber (GetCVar (CVAR_PLATEMOTION))-1))
 				else
-					Plater:Msg ("正在戰鬥中。")
+					Plater:Msg ("you are in combat.")
 					self:SetValue (GetCVar (CVAR_PLATEMOTION) == CVAR_ENABLED)
 				end
 			end,
-			name = "不要重疊血條",
-			desc = "血條不會重疊在一起。",
+			name = "Stacking Nameplates",
+			desc = "Nameplates won't overlap each other.",
 			nocombat = true,
 		},
 		
@@ -5180,12 +5215,12 @@ local interface_options = {
 				if (not InCombatLockdown()) then
 					SetCVar (CVAR_ENEMY_MINIONS, math.abs (tonumber (GetCVar (CVAR_ENEMY_MINIONS))-1))
 				else
-					Plater:Msg ("正在戰鬥中。")
+					Plater:Msg ("you are in combat.")
 					self:SetValue (GetCVar (CVAR_ENEMY_MINIONS) == CVAR_ENABLED)
 				end
 			end,
-			name = "敵方單位 (" .. (GetBindingKey ("NAMEPLATES") or "") .. "): 僕從",
-			desc = "顯示敵方寵物、圖騰和保鑣的血條。",
+			name = "Enemy Units (" .. (GetBindingKey ("NAMEPLATES") or "") .. "): Minions",
+			desc = "Show nameplate for enemy pets, totems and guardians.",
 			nocombat = true,
 		},
 		{
@@ -5195,12 +5230,12 @@ local interface_options = {
 				if (not InCombatLockdown()) then
 					SetCVar (CVAR_ENEMY_MINUS, math.abs (tonumber (GetCVar (CVAR_ENEMY_MINUS))-1))
 				else
-					Plater:Msg ("正在戰鬥中。")
+					Plater:Msg ("you are in combat.")
 					self:SetValue (GetCVar (CVAR_ENEMY_MINUS) == CVAR_ENABLED)
 				end
 			end,
-			name = "敵方單位 (V): 小怪",
-			desc = "顯示小怪的血條。",
+			name = "Enemy Units (V): Minor",
+			desc = "Show nameplate for minor enemies.",
 			nocombat = true,
 		},
 		{
@@ -5213,12 +5248,12 @@ local interface_options = {
 					SetCVar (CVAR_FRIENDLY_TOTEMS, GetCVar (CVAR_FRIENDLY_GUARDIAN))
 					SetCVar (CVAR_FRIENDLY_MINIONS, GetCVar (CVAR_FRIENDLY_GUARDIAN))
 				else
-					Plater:Msg ("正在戰鬥中。")
+					Plater:Msg ("you are in combat.")
 					self:SetValue (GetCVar (CVAR_FRIENDLY_GUARDIAN) == CVAR_ENABLED)
 				end
 			end,
-			name = "友方單位 (" .. (GetBindingKey ("FRIENDNAMEPLATES") or "") .. "): 僕從",
-			desc = "顯示友方寵物、圖騰和保鑣的血條。\n\n需要啟用友方NPC選項。",
+			name = "Friendly Units (" .. (GetBindingKey ("FRIENDNAMEPLATES") or "") .. "): Minions",
+			desc = "Show nameplate for friendly pets, totems and guardians.\n\nAlso check the Enabled box below Friendly Npc Config.",
 			nocombat = true,
 		},
 		
@@ -5230,14 +5265,14 @@ local interface_options = {
 				if (not InCombatLockdown()) then
 					SetCVar (CVAR_CULLINGDISTANCE, value)
 				else
-					Plater:Msg ("正在戰鬥中。")
+					Plater:Msg ("you are in combat.")
 				end
 			end,
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "血條視野距離",
-			desc = "可以看見多遠範圍內的血條 (單位 碼)。\n\n|cFFFFFFFF預設: 60|r",
+			name = "View Distance",
+			desc = "How far you can see nameplates (in yards).\n\n|cFFFFFFFFDefault: 60|r",
 			nocombat = true,
 		},
 		{
@@ -5251,7 +5286,7 @@ local interface_options = {
 						SetCVar (CVAR_CEILING, value)
 					end
 				else
-					Plater:Msg ("正在戰鬥中。")
+					Plater:Msg ("you are in combat.")
 				end
 			end,
 			min = 0.000,
@@ -5259,16 +5294,16 @@ local interface_options = {
 			step = 0.005,
 			thumbscale = 1.7,
 			usedecimals = true,
-			name = "螢幕頂部間距:",
-			desc = "血條與螢幕頂端之間的最小距離，血條往上移動時最高不能超出這個範圍。\n\n|cFFFFFFFF預設值: 0.065|r\n\n|cFFFFFF00特別注意|r: 設為 0 將會停用這個功能。",
+			name = "Top Clamp Size",
+			desc = "Top margin, space where nameplates can't pass through and 'get trapped in the screen'.\n\n|cFFFFFFFFDefault: 0.065|r\n\n|cFFFFFF00Important|r: setting to 0 disables this feature.",
 			nocombat = true,
 		},
 		{
 			type = "select",
 			get = function() return tonumber (GetCVar (CVAR_ANCHOR)) end,
 			values = function() return nameplate_anchor_options end,
-			name = "血條位置",
-			desc = "血條顯示的位置。\n\n|cFFFFFFFF預設值: 頭頂|r",
+			name = "Anchor Point",
+			desc = "Where the nameplate is anchored to.\n\n|cFFFFFFFFDefault: Head|r",
 			nocombat = true,
 		},
 		{
@@ -5278,7 +5313,7 @@ local interface_options = {
 				if (not InCombatLockdown()) then
 					SetCVar (CVAR_MOVEMENT_SPEED, value)
 				else
-					Plater:Msg ("正在戰鬥中。")
+					Plater:Msg ("you are in combat.")
 				end
 			end,
 			min = 0.001,
@@ -5286,8 +5321,8 @@ local interface_options = {
 			step = 0.005,
 			thumbscale = 1.7,
 			usedecimals = true,
-			name = "移動速度",
-			desc = "不要重疊血條時，血條的移動速度。\n\n|cFFFFFFFF預設值: 0.025|r",
+			name = "Moviment Speed",
+			desc = "How fast the nameplate moves (when stacking is enabled).\n\n|cFFFFFFFFDefault: 0.025|r",
 			nocombat = true,
 		},
 		{
@@ -5297,7 +5332,7 @@ local interface_options = {
 				if (not InCombatLockdown()) then
 					SetCVar ("nameplateOverlapV", value)
 				else
-					Plater:Msg ("正在戰鬥中。")
+					Plater:Msg ("you are in combat.")
 				end
 			end,
 			min = 0.2,
@@ -5305,8 +5340,8 @@ local interface_options = {
 			step = 0.1,
 			thumbscale = 1.7,
 			usedecimals = true,
-			name = "垂直間距",
-			desc = "不要重疊血條時，每個血條之間的垂直距離。\n\n|cFFFFFFFF預設值: 1.10|r",
+			name = "Vertical Padding",
+			desc = "Verticaly distance factor between each nameplate (when stacking is enabled).\n\n|cFFFFFFFFDefault: 1.10|r",
 			nocombat = true,
 		},
 		{
@@ -5316,7 +5351,7 @@ local interface_options = {
 				if (not InCombatLockdown()) then
 					SetCVar ("nameplateMinScale", value)
 				else
-					Plater:Msg ("正在戰鬥中。")
+					Plater:Msg ("you are in combat.")
 				end
 			end,
 			min = 0.5,
@@ -5324,8 +5359,8 @@ local interface_options = {
 			step = 0.1,
 			thumbscale = 1.7,
 			usedecimals = true,
-			name = "距離縮放",
-			desc = "距離鏡頭很遠的血條縮放大小。\n\n|cFFFFFF00特別注意|r: 是與鏡頭的距離，而不是你的角色。\n\n|cFFFFFFFF預設值: 0.8|r",
+			name = "Distance Scale",
+			desc = "Scale applied when the nameplate is far away from the camera.\n\n|cFFFFFF00Important|r: is the distance from the camera and |cFFFF4444not|r the distance from your character.\n\n|cFFFFFFFFDefault: 0.8|r",
 			nocombat = true,
 		},
 		{
@@ -5335,7 +5370,7 @@ local interface_options = {
 				if (not InCombatLockdown()) then
 					SetCVar ("nameplateSelectedScale", value)
 				else
-					Plater:Msg ("正在戰鬥中。")
+					Plater:Msg ("you are in combat.")
 				end
 			end,
 			min = 0.75,
@@ -5343,8 +5378,8 @@ local interface_options = {
 			step = 0.1,
 			thumbscale = 1.7,
 			usedecimals = true,
-			name = "當前目標縮放",
-			desc = "正在選取的當前目標縮放大小。\n\n|cFFFFFFFF預設值: 1|r",
+			name = "Selected Scale",
+			desc = "The nameplate size for the current target is multiplied by this value.\n\n|cFFFFFFFFDefault: 1|r",
 			nocombat = true,
 		},
 		{
@@ -5354,7 +5389,7 @@ local interface_options = {
 				if (not InCombatLockdown()) then
 					SetCVar ("nameplateGlobalScale", value)
 				else
-					Plater:Msg ("正在戰鬥中。")
+					Plater:Msg ("you are in combat.")
 				end
 			end,
 			min = 0.75,
@@ -5362,14 +5397,14 @@ local interface_options = {
 			step = 0.1,
 			thumbscale = 1.7,
 			usedecimals = true,
-			name = "整體縮放",
-			desc = "所有血條的縮放大小。\n\n|cFFFFFFFF預設值: 1|r",
+			name = "Global Scale",
+			desc = "Scale all nameplates.\n\n|cFFFFFFFFDefault: 1|r",
 			nocombat = true,
 		},
 
 }
 
-local interface_title = Plater:CreateLabel (frontPageFrame, "介面選項 (遊戲原本的):", Plater:GetTemplate ("font", "ORANGE_FONT_TEMPLATE"))
+local interface_title = Plater:CreateLabel (frontPageFrame, "Interface Options (from the client):", Plater:GetTemplate ("font", "ORANGE_FONT_TEMPLATE"))
 interface_title:SetPoint (startX, startY)
 
 local in_combat_background = Plater:CreateImage (frontPageFrame)
@@ -5378,7 +5413,7 @@ in_combat_background:SetPoint ("topleft", interface_title, "bottomleft", 0, -2)
 in_combat_background:SetPoint ("bottomright", frontPageFrame, "bottomright", -10, 320)
 in_combat_background:Hide()
 
-local in_combat_label = Plater:CreateLabel (frontPageFrame, "戰鬥中無法變更設定", 24, "silver")
+local in_combat_label = Plater:CreateLabel (frontPageFrame, "you are in combat", 24, "silver")
 in_combat_label:SetPoint ("right", in_combat_background, "right", -10, 0)
 in_combat_label:Hide()
 
@@ -5400,7 +5435,7 @@ DF:BuildMenu (frontPageFrame, interface_options, startX, startY-20, 300 + 60, tr
 -- painel para configurar debuffs e buffs
 
 local debuff_options = {
-	{type = "label", get = function() return "一般設定:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+	{type = "label", get = function() return "General Settings:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 	
 	{
 		type = "toggle",
@@ -5418,8 +5453,8 @@ local debuff_options = {
 				end
 			end
 		end,
-		name = "啟用",
-		desc = "啟用",
+		name = "Enabled",
+		desc = "Enabled",
 	},
 	{
 		type = "toggle",
@@ -5429,8 +5464,8 @@ local debuff_options = {
 			Plater.RefreshAuras()
 			Plater.UpdateAllPlates()
 		end,
-		name = "顯示時間",
-		desc = "增益和減益效果的剩餘時間。",
+		name = "Show Timer",
+		desc = "Time left on buff or debuff.",
 	},
 	{
 		type = "range",
@@ -5443,8 +5478,8 @@ local debuff_options = {
 		min = 8,
 		max = 40,
 		step = 1,
-		name = "寬",
-		desc = "減益效果圖示寬度。",
+		name = "Width",
+		desc = "Debuff's icon width.",
 	},
 	{
 		type = "range",
@@ -5457,8 +5492,8 @@ local debuff_options = {
 		min = 8,
 		max = 40,
 		step = 1,
-		name = "高",
-		desc = "減益效果圖示高度。",
+		name = "Height",
+		desc = "Debuff's icon height.",
 	},
 	{
 		type = "toggle",
@@ -5467,8 +5502,8 @@ local debuff_options = {
 			Plater.db.profile.debuff_show_cc = value
 			Plater.UpdateAllPlates()
 		end,
-		name = "控場圖示",
-		desc = "有角色使用控場技能時 (例如變形術)。",
+		name = "Crowd Control Icon",
+		desc = "When the actor has a crowd control spell (such as Polymorph).",
 	},
 	{type = "blank"},
 	{
@@ -5482,8 +5517,8 @@ local debuff_options = {
 		max = 1,
 		step = 0.01,
 		usedecimals = true,
-		name = "透明",
-		desc = "透明",
+		name = "Alpha",
+		desc = "Alpha",
 	},
 	{
 		type = "range",
@@ -5496,8 +5531,8 @@ local debuff_options = {
 		min = -100,
 		max = 100,
 		step = 1,
-		name = "水平位置",
-		desc = "水平位置",
+		name = "X Offset",
+		desc = "X Offset",
 	},
 	{
 		type = "range",
@@ -5510,8 +5545,8 @@ local debuff_options = {
 		min = -100,
 		max = 100,
 		step = 1,
-		name = "垂直位置",
-		desc = "垂直位置",
+		name = "Y Offset",
+		desc = "Y Offset",
 	},
 
 }
@@ -5537,7 +5572,7 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 
 
 -------------------------------------------------------------------------------
--- op踥es para a barra do player ~player
+-- op��es para a barra do player ~player
 	
 	local on_select_player_percent_text_font = function (_, _, value)
 		Plater.db.profile.plate_config.player.percent_text_font = value
@@ -5561,7 +5596,7 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 	
 	local options_personal = {
 		--life size
-		{type = "label", get = function() return "血條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Health Bar Size:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.player.health[1] end,
@@ -5574,8 +5609,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "血條的寬度。",
+			name = "Width",
+			desc = "Width of the health bar.",
 		},
 		{
 			type = "range",
@@ -5589,13 +5624,13 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "血條的高度。",
+			name = "Height",
+			desc = "Height of the health bar.",
 		},
 		
 		--mana size
 		{type = "blank"},
-		{type = "label", get = function() return "能量條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Power Bar Size:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.player.mana[1] end,
@@ -5608,8 +5643,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "能量條的寬度。",
+			name = "Width",
+			desc = "Width of the power bar.",
 		},
 		{
 			type = "range",
@@ -5623,11 +5658,11 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "能量條的高度。",
+			name = "Height",
+			desc = "Height of the power bar.",
 		},
 		{type = "blank"},
-		{type = "label", get = function() return "玩家血條位置:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Personal Bar Location:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return tonumber (GetCVar ("nameplateSelfBottomInset")*100) end,
@@ -5635,7 +5670,7 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 				--Plater.db.profile.plate_config.player.y_position_offset = value
 
 				if (InCombatLockdown()) then
-					Plater:Msg ("正在戰鬥中。")
+					Plater:Msg ("you are in combat.")
 					self:SetValue (tonumber (GetCVar ("nameplateSelfBottomInset")*100))
 					return
 				end
@@ -5658,7 +5693,7 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 					frame.Shadow:SetTexCoord (0, 1, 0, 22/32)
 					frame.Shadow:SetVertexColor (0, 0, 0, 1)
 					frame.Text = frame:CreateFontString (nil, "artwork", "GameFontNormal")
-					frame.Text:SetText ("血條增強: 玩家血條位置")
+					frame.Text:SetText ("Plater: Personal Bar Position")
 					frame.Text:SetPoint ("center")
 					
 					frame.HideAnimation = DF:CreateAnimationHub (frame, nil, function() frame:Hide() end)
@@ -5690,14 +5725,14 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			max = 98,
 			step = 1,
 			nocombat = true,
-			name = "畫面位置",
-			desc = "調整垂直方向的位置。",
+			name = "Screen Position",
+			desc = "Adjust the positioning on the Y axis.",
 		},
 
 		{type = "breakline"},
 		
 		--percent text
-		{type = "label", get = function() return "血條百分比文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Health Percent Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--enabled
 		{
 			type = "toggle",
@@ -5706,8 +5741,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 				Plater.db.profile.plate_config.player.percent_text_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "顯示百分比文字。",
+			name = "Enabled",
+			desc = "Show the percent text.",
 		},
 		--percent text size
 		{
@@ -5720,16 +5755,16 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--percent text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.player.percent_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_player_percent_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--percent text shadow
 		{
@@ -5739,8 +5774,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 				Plater.db.profile.plate_config.player.percent_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--pecent text color
 		{
@@ -5754,8 +5789,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		--percent text alpha
 		{
@@ -5768,8 +5803,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			min = 0,
 			max = 1,
 			step = 0.1,
-			name = "透明",
-			desc = "文字的透明度。",
+			name = "Alpha",
+			desc = "Set the transparency of the text.",
 			usedecimals = true,
 		},
 		--percent anchor
@@ -5777,8 +5812,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.player.percent_text_anchor.side end,
 			values = function() return build_anchor_side_table ("player", "percent_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--percent anchor x offset
 		{
@@ -5791,8 +5826,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--percent anchor x offset
 		{
@@ -5805,12 +5840,12 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},
 		
 		{type = "blank"},
-		{type = "label", get = function() return "能量百分比文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Power Percent Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--enabled
 		{
 			type = "toggle",
@@ -5819,8 +5854,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 				Plater.db.profile.plate_config.player.power_percent_text_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "顯示百分比文字。",
+			name = "Enabled",
+			desc = "Show the percent text.",
 		},
 		--percent text size
 		{
@@ -5833,16 +5868,16 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--percent text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.player.power_percent_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_player_power_percent_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--percent text shadow
 		{
@@ -5852,8 +5887,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 				Plater.db.profile.plate_config.player.power_percent_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--pecent text color
 		{
@@ -5867,8 +5902,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		--percent text alpha
 		{
@@ -5881,8 +5916,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			min = 0,
 			max = 1,
 			step = 0.1,
-			name = "透明",
-			desc = "文字的透明度。",
+			name = "Alpha",
+			desc = "Set the transparency of the text.",
 			usedecimals = true,
 		},
 		--percent anchor
@@ -5890,8 +5925,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.player.power_percent_text_anchor.side end,
 			values = function() return build_anchor_side_table ("player", "power_percent_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--percent anchor x offset
 		{
@@ -5904,8 +5939,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--percent anchor x offset
 		{
@@ -5918,14 +5953,14 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},		
 
 		{type = "breakline"},
 		
 		--class resources
-		{type = "label", get = function() return "資源條:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Resources:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--monk WW chi bar
 		{
 			type = "range",
@@ -5938,8 +5973,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			max = 3,
 			step = 0.01,
 			usedecimals = true,
-			name = "|T"..iconWindWalker..":0|t 真氣縮放",
-			desc = "調整這種資源的縮放大小。",
+			name = "|T"..iconWindWalker..":0|t Chi Scale",
+			desc = "Adjust the scale of this resource.",
 		},
 		--mage arcane charge
 		{
@@ -5953,8 +5988,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			max = 3,
 			step = 0.01,
 			usedecimals = true,
-			name = "|T" .. iconArcane .. ":0|t 秘法縮放",
-			desc = "調整這種資源的縮放大小。",
+			name = "|T" .. iconArcane .. ":0|t Arcane Charge Scale",
+			desc = "Adjust the scale of this resource.",
 		},
 		--dk rune
 		{
@@ -5968,8 +6003,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			max = 3,
 			step = 0.01,
 			usedecimals = true,
-			name = "|T" .. iconRune .. ":0|t 符文縮放",
-			desc = "調整這種資源的縮放大小。",
+			name = "|T" .. iconRune .. ":0|t Rune Scale",
+			desc = "Adjust the scale of this resource.",
 		},
 		--paladin holy power
 		{
@@ -5983,8 +6018,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			max = 3,
 			step = 0.01,
 			usedecimals = true,
-			name = "|T" .. iconHolyPower .. ":0|t 聖能縮放",
-			desc = "調整這種資源的縮放大小。",
+			name = "|T" .. iconHolyPower .. ":0|t Holy Power Scale",
+			desc = "Adjust the scale of this resource.",
 		},
 		--rogue combo point
 		{
@@ -5998,8 +6033,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			max = 3,
 			step = 0.01,
 			usedecimals = true,
-			name = "|T" .. iconRogueCB .. ":0|t 連擊點數縮放",
-			desc = "調整這種資源的縮放大小。",
+			name = "|T" .. iconRogueCB .. ":0|t Combo Point Scale",
+			desc = "Adjust the scale of this resource.",
 		},
 		--druid feral combo point
 		{
@@ -6013,8 +6048,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			max = 3,
 			step = 0.01,
 			usedecimals = true,
-			name = "|T" .. iconDruidCB .. ":0|t 連擊點數縮放",
-			desc = "調整這種資源的縮放大小。",
+			name = "|T" .. iconDruidCB .. ":0|t Combo Point Scale",
+			desc = "Adjust the scale of this resource.",
 		},
 		--warlock shard
 		{
@@ -6028,8 +6063,8 @@ DF:BuildMenu (auraFilterFrame, debuff_options, startX, startY, 300, true, option
 			max = 3,
 			step = 0.01,
 			usedecimals = true,
-			name = "|T" .. iconSoulShard .. ":0|t 靈魂碎片縮放",
-			desc = "調整這種資源的縮放大小。",
+			name = "|T" .. iconSoulShard .. ":0|t Soul Shard Scale",
+			desc = "Adjust the scale of this resource.",
 		},
 
 }
@@ -6038,8 +6073,8 @@ DF:BuildMenu (personalPlayerFrame, options_personal, startX, startY, heightSize,
 
 
 -------------------------------------------------------------------------------
---coloca as op踥es gerais no main menu logo abaixo dos 4 bot髊s
---OPES NO PAINEL PRINCIPAL
+--coloca as op��es gerais no main menu logo abaixo dos 4 bot�es
+--OP��ES NO PAINEL PRINCIPAL
 
 function Plater.ChangeNpcRelavance (_, _, value)
 	if (value == 1) then
@@ -6069,10 +6104,10 @@ function Plater.ChangeNpcRelavance (_, _, value)
 	Plater.UpdateAllPlates()
 end
 local relevance_options = {
-	{label = "只顯示相關的", value = 1, onclick = Plater.ChangeNpcRelavance},
-	{label = "相關 + 有頭銜的", value = 2, onclick = Plater.ChangeNpcRelavance},
-	{label = "所有有頭銜的", value = 3, onclick = Plater.ChangeNpcRelavance},
-	{label = "所有NPC", value = 4, onclick = Plater.ChangeNpcRelavance},
+	{label = "Only Relevant", value = 1, onclick = Plater.ChangeNpcRelavance},
+	{label = "Relevant + Professions", value = 2, onclick = Plater.ChangeNpcRelavance},
+	{label = "All Professions", value = 3, onclick = Plater.ChangeNpcRelavance},
+	{label = "All Npcs", value = 4, onclick = Plater.ChangeNpcRelavance},
 }
 
 local on_select_target_indicator = function (_, _, indicator)
@@ -6090,20 +6125,20 @@ end
 	--menu 1 ~general ~geral
 	local options_table1 = {
 	
-		{type = "label", get = function() return "一般外觀:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "General Appearance:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "select",
 			get = function() return Plater.db.profile.health_statusbar_texture end,
 			values = function() return health_bar_texture_options end,
-			name = "血條材質",
-			desc = "血條所使用的材質。",
+			name = "Health Bar Texture",
+			desc = "Texture used on the health bar",
 		},
 		{
 			type = "select",
 			get = function() return Plater.db.profile.health_statusbar_bgtexture end,
 			values = function() return health_bar_bgtexture_options end,
-			name = "血條背景材質",
-			desc = "血條背景所使用的材質。",
+			name = "Health Bar Background Texture",
+			desc = "Texture used on the health bar background",
 		},
 		{
 			type = "color",
@@ -6116,29 +6151,29 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "血條背景顏色",
-			desc = "血條背景所使用的顏色。",
+			name = "Health Bar Background Color",
+			desc = "Color used to paint the health bar background.",
 		},
 		{
 			type = "select",
 			get = function() return Plater.db.profile.health_selection_overlay end,
 			values = function() return health_selection_overlay_options end,
-			name = "目標材質",
-			desc = "當前目標血條上所使用的材質。",
+			name = "Target Overlay Texture",
+			desc = "Used above the health bar when it is the current target.",
 		},
 		{
 			type = "select",
 			get = function() return Plater.db.profile.cast_statusbar_texture end,
 			values = function() return cast_bar_texture_options end,
-			name = "施法條材質",
-			desc = "施法條所使用的材質。",
+			name = "Cast Bar Texture",
+			desc = "Texture used on the cast bar",
 		},
 		{
 			type = "select",
 			get = function() return Plater.db.profile.cast_statusbar_bgtexture end,
 			values = function() return cast_bar_bgtexture_options end,
-			name = "施法條背景材質",
-			desc = "施法條背景所使用的材質。",
+			name = "Cast Bar Background Texture",
+			desc = "Texture used on the cast bar background.",
 		},
 		
 		{
@@ -6151,8 +6186,8 @@ end
 				local color = Plater.db.profile.cast_statusbar_color
 				color[1], color[2], color[3], color[4] = r, g, b, a
 			end,
-			name = "施法條顏色",
-			desc = "施法條顏色",
+			name = "Cast Bar Color",
+			desc = "Cast Bar Color",
 		},
 		{
 			type = "color",
@@ -6164,8 +6199,8 @@ end
 				local color = Plater.db.profile.cast_statusbar_color_nointerrupt
 				color[1], color[2], color[3], color[4] = r, g, b, a
 			end,
-			name = "無法打斷的施法條顏色",
-			desc = "無法打斷的施法條顏色",
+			name = "Cast Bar Color No Interrupt",
+			desc = "Cast Bar Color No Interrupt",
 		},
 		
 		{
@@ -6179,8 +6214,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "施法條背景顏色",
-			desc = "施法條背景所使用的顏色。",
+			name = "Cast Bar Background Color",
+			desc = "Color used to paint the cast bar background.",
 		},
 		--[[
 		{
@@ -6190,8 +6225,8 @@ end
 				Plater.db.profile.hover_highlight = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "顯著標示",
-			desc = "顯著標示滑鼠指向的血條。",
+			name = "Highlight",
+			desc = "Highlight effect when hovering over a nameplate.",
 		},
 		{
 			type = "range",
@@ -6202,8 +6237,8 @@ end
 			min = 0,
 			max = 1,
 			step = 0.1,
-			name = "顯著標示透明度",
-			desc = "顯著標示透明度。",
+			name = "Highlight Alpha",
+			desc = "Highlight Alpha.",
 			usedecimals = true,
 		},
 		--]]
@@ -6221,8 +6256,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdatePlateBorders()
 			end,
-			name = "邊框顏色",
-			desc = "血條邊框的顏色。",
+			name = "Border Color",
+			desc = "Color of the plate border.",
 		},
 		{
 			type = "range",
@@ -6235,12 +6270,12 @@ end
 			min = 1,
 			max = 3,
 			step = 1,
-			name = "邊框粗細",
-			desc = "邊框有多粗。",
+			name = "Border Thickness",
+			desc = "How thick the border should be.",
 		},
 		
 		{type = "blank"},
-		--{type = "label", get = function() return "施法條:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		--{type = "label", get = function() return "Cast Bars:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "toggle",
 			get = function() return Plater.db.profile.hide_enemy_castbars end,
@@ -6248,8 +6283,8 @@ end
 				Plater.db.profile.hide_enemy_castbars = value
 				Plater.UpdateUseCastBar()
 			end,
-			name = "隱藏敵方施法條",
-			desc = "隱藏敵方施法條",
+			name = "Hide Enemy Cast Bar",
+			desc = "Hide Enemy Cast Bar",
 		},
 		{
 			type = "toggle",
@@ -6258,13 +6293,13 @@ end
 				Plater.db.profile.hide_friendly_castbars = value
 				Plater.UpdateUseCastBar()
 			end,
-			name = "隱藏友方施法條",
-			desc = "隱藏友方施法條",
+			name = "Hide Friendly Cast Bar",
+			desc = "Hide Friendly Cast Bar",
 		},		
 		
 		{type = "breakline"},
 		
-		{type = "label", get = function() return "依據仇恨值顯示血條顏色:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Plate Color by Aggro:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "color",
 			get = function()
@@ -6275,8 +6310,8 @@ end
 				local color = Plater.db.profile.tank.colors.aggro
 				color[1], color[2], color[3], color[4] = r, g, b, a
 			end,
-			name = "[坦克] 獲得仇恨",
-			desc = "你是坦克並且獲得仇恨時。",
+			name = "[tank] Aggro",
+			desc = "When you are a Tank and have aggro.",
 		},
 		{
 			type = "color",
@@ -6288,8 +6323,8 @@ end
 				local color = Plater.db.profile.tank.colors.noaggro
 				color[1], color[2], color[3], color[4] = r, g, b, a
 			end,
-			name = "[坦克] 失去仇恨",
-			desc = "你是坦克但怪物不是攻擊你時。",
+			name = "[tank] No Aggro",
+			desc = "When you are the tank and the mob isn't attacking you.",
 		},
 		{
 			type = "color",
@@ -6301,8 +6336,8 @@ end
 				local color = Plater.db.profile.tank.colors.pulling
 				color[1], color[2], color[3], color[4] = r, g, b, a
 			end,
-			name = "[坦克] 高威脅值",
-			desc = "快要從其他坦克或隊友那裏獲得仇恨時。",
+			name = "[tank] High Threat",
+			desc = "When you are near to pull the aggro from the other tank or group member.",
 		},
 		{
 			type = "color",
@@ -6314,12 +6349,12 @@ end
 				local color = Plater.db.profile.tank.colors.nocombat
 				color[1], color[2], color[3], color[4] = r, g, b, a
 			end,
-			name = "[坦克] 非戰鬥中",
-			desc = "不在戰鬥中，或敵人不是在和你或你的隊友戰鬥時。",
+			name = "[tank] Not in Combat",
+			desc = "When you are in combat and the enemy isn't in combat with you or with a member of your group.",
 		},
 		
 		{type = "blank"},
---		{type = "label", get = function() return "傷害輸出血條顏色:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+--		{type = "label", get = function() return "Plate Color As a Dps:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "color",
 			get = function()
@@ -6330,8 +6365,8 @@ end
 				local color = Plater.db.profile.dps.colors.aggro
 				color[1], color[2], color[3], color[4] = r, g, b, a
 			end,
-			name = "[dps] 獲得仇恨",
-			desc = "你是傷害輸出 (或治療者) 並且獲得仇恨時。",
+			name = "[dps] Aggro",
+			desc = "The name plate is painted with this color when you are a Dps (or healer) and have aggro.",
 		},
 		{
 			type = "color",
@@ -6343,8 +6378,8 @@ end
 				local color = Plater.db.profile.dps.colors.noaggro
 				color[1], color[2], color[3], color[4] = r, g, b, a
 			end,
-			name = "[dps] 失去仇恨",
-			desc = "你是傷害輸出 (或治療者) 但怪物不是攻擊你時。",
+			name = "[dps] No Aggro",
+			desc = "When you are a dps (or healer) and the mob isn't attacking you.",
 		},
 		{
 			type = "color",
@@ -6356,12 +6391,12 @@ end
 				local color = Plater.db.profile.dps.colors.pulling
 				color[1], color[2], color[3], color[4] = r, g, b, a
 			end,
-			name = "[dps] 高威脅值",
-			desc = "快要獲得仇恨時。",
+			name = "[dps] High Threat",
+			desc = "When you are neat to pull the aggro.",
 		},
 		
 		{type = "blank"},
-		{type = "label", get = function() return "獲得仇恨時變更:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Aggro Modifies:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 	
 		{
 			type = "toggle",
@@ -6376,8 +6411,8 @@ end
 					end
 				end
 			end,
-			name = "血條顏色",
-			desc = "血條顏色",
+			name = "Health Bar Color",
+			desc = "Health Bar Color",
 		},
 		{
 			type = "toggle",
@@ -6387,8 +6422,8 @@ end
 				Plater.RefreshDBUpvalues()
 				Plater.UpdateAllPlates()
 			end,
-			name = "邊框顏色",
-			desc = "邊框顏色",
+			name = "Border Color",
+			desc = "Border Color",
 		},
 		{
 			type = "toggle",
@@ -6398,12 +6433,12 @@ end
 				Plater.RefreshDBUpvalues()
 				Plater.UpdateAllPlates()
 			end,
-			name = "名字顏色",
-			desc = "名字顏色",
+			name = "Name Color",
+			desc = "Name Color",
 		},
 		
 		{type = "breakline"},
-		{type = "label", get = function() return "指示圖示:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Icon Indicators:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		
 		{
 			type = "toggle",
@@ -6412,8 +6447,8 @@ end
 				Plater.db.profile.indicator_faction = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "敵方陣營圖示",
-			desc = "顯示部落或聯盟圖示",
+			name = "Enemy Faction Icon",
+			desc = "Show horde or alliance icon.",
 		},
 		{
 			type = "toggle",
@@ -6422,8 +6457,8 @@ end
 				Plater.db.profile.indicator_elite = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "精英圖示",
-			desc = "顯示角色是否為精英。",
+			name = "Elite Icon",
+			desc = "Show when the actor is elite.",
 		},
 		{
 			type = "toggle",
@@ -6432,8 +6467,8 @@ end
 				Plater.db.profile.indicator_rare = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "稀有圖示",
-			desc = "顯示角色是否為稀有。",
+			name = "Rare Icon",
+			desc = "Show when the actor is rare.",
 		},
 		{
 			type = "toggle",
@@ -6442,8 +6477,8 @@ end
 				Plater.db.profile.indicator_quest = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "任務圖示",
-			desc = "顯示角色是否為任務BOSS。",
+			name = "Quest Icon",
+			desc = "Show when the actor is a boss for a quest.",
 		},
 		{
 			type = "toggle",
@@ -6452,8 +6487,8 @@ end
 				Plater.db.profile.indicator_enemyclass = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "敵方職業",
-			desc = "敵方玩家的職業圖示。",
+			name = "Enemy Class",
+			desc = "Enemy player class icon.",
 		},
 
 		--indicator icon anchor
@@ -6461,8 +6496,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.indicator_anchor.side end,
 			values = function() return build_anchor_side_table (nil, "indicator_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--indicator icon anchor x offset
 		{
@@ -6475,8 +6510,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move horizontally.",
 		},
 		--indicator icon anchor y offset
 		{
@@ -6489,8 +6524,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move vertically.",
 		},
 
 		{
@@ -6501,12 +6536,12 @@ end
 				Plater.UpdateAllPlates()
 				Plater.UpdateRaidMarker()
 			end,
-			name = "額外團隊標記",
-			desc = "在血條裡面放置額外的團隊標記圖示。",
+			name = "Extra Raid Mark",
+			desc = "Places an extra raid mark icon inside the health bar.",
 		},
 		
 		{type = "blank"},
-		{type = "label", get = function() return "點選範圍:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Box Selection Space:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.click_space[1] end,
@@ -6517,9 +6552,9 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
+			name = "Width",
 			nocombat = true,
-			desc = "滑鼠點擊可選取目標的範圍有多大。",
+			desc = "How large are area which accepts mouse clicks to select the target",
 		},
 		{
 			type = "range",
@@ -6531,9 +6566,9 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
+			name = "Height",
 			nocombat = true,
-			desc = "滑鼠點擊可選取目標的範圍有多高。",
+			desc = "The height of the are area which accepts mouse clicks to select the target",
 		},
 		{
 			type = "toggle",
@@ -6543,12 +6578,12 @@ end
 				Plater.UpdatePlateClickSpace (nil, nil, true)
 			end,
 			nocombat = true,
-			name = "總是顯示背景",
-			desc = "顯示點選範圍區域的背景。",
+			name = "Always Show Background",
+			desc = "Enable a background showing the area of the clicable area.",
 		},
 		
 		{type = "breakline"},
-		{type = "label", get = function() return "目標:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Target:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--target alpha
 		{
 			type = "toggle",
@@ -6559,8 +6594,8 @@ end
 				Plater.OnPlayerTargetChanged()
 				--update
 			end,
-			name = "使用目標陰影",
-			desc = "單位在範圍內，但不是你的當前目標時，套用一層陰影。",
+			name = "Use Target Shading",
+			desc = "Apply a layer of shadow above the nameplate when the unit is in range but isn't your current target.",
 		},
 		{
 			type = "toggle",
@@ -6571,8 +6606,8 @@ end
 				Plater.OnPlayerTargetChanged()
 				--update
 			end,
-			name = "戰鬥中才使用目標陰影",
-			desc = "只在進入戰鬥時套用目標陰影。",
+			name = "Target Shading Only in Combat",
+			desc = "Apply target shading only when in combat.",
 		},
 		{
 			type = "range",
@@ -6586,8 +6621,8 @@ end
 			min = 0,
 			max = 1,
 			step = 0.1,
-			name = "目標陰影強度",
-			desc = "套用的陰影明顯程度。",
+			name = "Target Shading Amount",
+			desc = "Amount of shade to apply.",
 			usedecimals = true,
 		},
 		{
@@ -6597,8 +6632,8 @@ end
 				Plater.db.profile.target_highlight = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "顯著標示目標",
-			desc = "顯著標示當前目標的血條。",
+			name = "Target Highlight",
+			desc = "Highlight effect on the nameplate of your current target.",
 		},
 		{
 			type = "range",
@@ -6610,8 +6645,8 @@ end
 			min = 0,
 			max = 1,
 			step = 0.1,
-			name = "顯著標示目標透明度",
-			desc = "顯著標示目標透明度。",
+			name = "Target Highlight Alpha",
+			desc = "Target Highlight Alpha.",
 			usedecimals = true,
 		},
 		
@@ -6619,12 +6654,12 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.target_indicator end,
 			values = function() return build_target_indicator_table() end,
-			name = "目標指示圖示",
-			desc = "目標指示圖示",
+			name = "Target Indicator",
+			desc = "Target Indicator",
 		},
 		
 		{type = "blank"},
-		{type = "label", get = function() return "透明度選項:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Alpha Control:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 
 		--alpha and range check
 		{
@@ -6633,8 +6668,8 @@ end
 			set = function (self, fixedparam, value) 
 				Plater.db.profile.not_affecting_combat_enabled = value
 			end,
-			name = "使用非戰鬥中透明度",
-			desc = "當你進入戰鬥時，更改非戰鬥中單位的血條透明度。\n\n|cFFFFFF00特別注意|r: 如果單位不在戰鬥中，將會覆蓋超出距離透明度的設定。",
+			name = "Use No Combat Alpha",
+			desc = "Changes the nameplate alpha when you are in combat and the unit isn't.\n\n|cFFFFFF00Important|r: If the unit isn't in combat, it overrides the alpha from the range check.",
 		},
 		{
 			type = "range",
@@ -6645,8 +6680,8 @@ end
 			min = 0,
 			max = 1,
 			step = 0.1,
-			name = "非戰鬥中透明度",
-			desc = "非戰鬥中' 的透明程度。",
+			name = "No Combat Alpha",
+			desc = "Amount of transparency to apply for 'No Combat' feature.",
 			usedecimals = true,
 		},
 		{
@@ -6658,8 +6693,8 @@ end
 			min = 0,
 			max = 1,
 			step = 0.1,
-			name = "超出距離透明度",
-			desc = "單位超出距離時的透明程度。",
+			name = "Range Check Alpha",
+			desc = "Amount of transparency to apply when the unit is out of range.",
 			usedecimals = true,
 		},
 	}
@@ -6700,8 +6735,8 @@ end
 				end
 				return t
 			end,
-			name = "距離範圍 |T" .. spec_icon .. ":16:16|t " .. spec_name,
-			desc = "這個專精用來檢查是否超出距離範圍的法術技能。",
+			name = "Range Check |T" .. spec_icon .. ":16:16|t " .. spec_name,
+			desc = "Spell to range check on this specializartion.",
 		})
 		i = i + 1
 	end	
@@ -6729,7 +6764,7 @@ end
 	end
 	
 	--anchor table
-	local order_names = {"減益, 血條, 施法條", "血條, 減益, 施法條", "施法條, 血條, 減益"}
+	local order_names = {"Debuffs, Health Bar, Cast Bar", "Health Bar, Debuffs, Cast Bar", "Cast Bar, Health Bar, Debuffs"}
 	local build_order_options = function (actorType)
 		local t = {}
 		for i = 1, 3 do
@@ -6746,7 +6781,7 @@ end
 	end
 	
 ------------------------------------------------	
---FriendlyPC painel de op踥es ~friendly ~friendlynpc
+--FriendlyPC painel de op��es ~friendly ~friendlynpc
 	
 	local on_select_friendly_playername_font = function (_, _, value)
 		Plater.db.profile.plate_config.friendlyplayer.actorname_text_font = value
@@ -6771,7 +6806,7 @@ end
 
 	local options_table3 = {
 		--health bar size out of combat
-		{type = "label", get = function() return "非戰鬥中血條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Health Bar Size out of Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.health[1] end,
@@ -6782,8 +6817,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "非戰鬥中血條的寬度。",
+			name = "Width",
+			desc = "Width of the health bar when out of combat.",
 		},
 		{
 			type = "range",
@@ -6795,12 +6830,12 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "非戰鬥中血條的高度。",
+			name = "Height",
+			desc = "Height of the health bar when out of combat.",
 		},
 		
 		--health bar size in combat
-		{type = "label", get = function() return "戰鬥中血條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Health Bar Size in Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.health_incombat[1] end,
@@ -6811,8 +6846,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "戰鬥中血條的寬度。",
+			name = "Width",
+			desc = "Width of the health bar when in combat.",
 		},
 		{
 			type = "range",
@@ -6824,14 +6859,14 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "戰鬥中血條的高度。",
+			name = "Height",
+			desc = "Height of the health bar when in combat.",
 		},
 		
 		{type = "blank"},
 		
 		--cast bar size out of combat
-		{type = "label", get = function() return "非戰鬥中施法條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Cast Bar Size out of Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.cast[1] end,
@@ -6842,8 +6877,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "非戰鬥中施法條的寬度。",
+			name = "Width",
+			desc = "Width of the cast bar when out of combat.",
 		},
 		{
 			type = "range",
@@ -6855,11 +6890,11 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "非戰鬥中施法條的高度。",
+			name = "Height",
+			desc = "Height of the cast bar when out of combat.",
 		},
 		--cast bar size out of combat
-		{type = "label", get = function() return "戰鬥中施法條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Cast Bar Size in Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.cast_incombat[1] end,
@@ -6870,8 +6905,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "戰鬥中施法條的寬度。",
+			name = "Width",
+			desc = "Width of the cast bar when in combat.",
 		},
 		{
 			type = "range",
@@ -6883,13 +6918,13 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "戰鬥中施法條的高度。",
+			name = "Height",
+			desc = "Height of the cast bar when in combat.",
 		},
 		
 		{type = "blank"},
 		--player name size
-		{type = "label", get = function() return "玩家名稱文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Player Name Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.actorname_text_size end,
@@ -6901,16 +6936,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--player name font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.actorname_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_friendly_playername_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--player name color
 		{
@@ -6924,8 +6959,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		--player name shadow
 		{
@@ -6935,8 +6970,8 @@ end
 				Plater.db.profile.plate_config.friendlyplayer.actorname_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		
 		--npc name anchor
@@ -6944,8 +6979,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.actorname_text_anchor.side end,
 			values = function() return build_anchor_side_table ("friendlyplayer", "actorname_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--npc name anchor x offset
 		{
@@ -6958,8 +6993,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--npc name anchor x offset
 		{
@@ -6972,15 +7007,15 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},	
 		
 		--cast text size
 		{type = "breakline"},
 		
 		--cast text size
-		{type = "label", get = function() return "法術名稱文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Spell Name Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.spellname_text_size end,
@@ -6991,16 +7026,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--cast text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.spellname_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_friendly_playercastname_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--cast text color
 		{
@@ -7014,8 +7049,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		--cast text shadow
 		{
@@ -7025,13 +7060,13 @@ end
 				Plater.db.profile.plate_config.friendlyplayer.spellname_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		
 		--level text settings
 		{type = "blank"},
-		{type = "label", get = function() return "等級文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Level Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--level enabled
 		{
 			type = "toggle",
@@ -7040,8 +7075,8 @@ end
 				Plater.db.profile.plate_config.friendlyplayer.level_text_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "顯示角色等級。",
+			name = "Enabled",
+			desc = "Check this box to show the level of the actor.",
 		},
 		--level text size
 		{
@@ -7054,16 +7089,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--level text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.level_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_friendlyplayer_level_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--level text shadow
 		{
@@ -7073,8 +7108,8 @@ end
 				Plater.db.profile.plate_config.friendlyplayer.level_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--level text alpha
 		{
@@ -7087,8 +7122,8 @@ end
 			min = 0,
 			max = 1,
 			step = 0.1,
-			name = "透明",
-			desc = "文字的透明度。",
+			name = "Alpha",
+			desc = "Set the transparency of the text.",
 			usedecimals = true,
 		},
 		--level anchor
@@ -7096,8 +7131,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.level_text_anchor.side end,
 			values = function() return build_anchor_side_table ("friendlyplayer", "level_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--level anchor x offset
 		{
@@ -7110,8 +7145,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--level anchor x offset
 		{
@@ -7124,23 +7159,23 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},
 		
 		{type = "blank"},
-		{type = "label", get = function() return "排列順序:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Plate Order:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--plate order
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.plate_order end,
 			values = function() return build_order_options ("friendlyplayer") end,
-			name = "順序",
-			desc = "血條、施法條和增益/減益效果該如何排列。\n\n由下 (靠近角色的頭) 到上。",
+			name = "Order",
+			desc = "How the health, cast and buff bars are ordered.\n\nFrom bottom (near the character head) to top.",
 		},
 		
 		{type = "blank"},
-		{type = "label", get = function() return "增益/減益效果:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Buff Frame:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--y offset
 		{
 			type = "range",
@@ -7152,14 +7187,14 @@ end
 			min = -64,
 			max = 64,
 			step = 1,
-			name = "垂直位置",
-			desc = "調整垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Adjusts the position on the Y axis.",
 		},
 		
 		{type = "breakline"},
 		
 		--percent text
-		{type = "label", get = function() return "血條百分比文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Health Percent Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--enabled
 		{
 			type = "toggle",
@@ -7168,8 +7203,8 @@ end
 				Plater.db.profile.plate_config.friendlyplayer.percent_text_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "顯示百分比文字。",
+			name = "Enabled",
+			desc = "Show the percent text.",
 		},
 		--out of combat
 		{
@@ -7180,8 +7215,8 @@ end
 				
 				Plater.UpdateAllPlates()
 			end,
-			name = "非戰鬥中",
-			desc = "不在戰鬥中也要顯示百分比。",
+			name = "Out of Combat",
+			desc = "Show the percent even when isn't in combat.",
 		},		
 		--percent text size
 		{
@@ -7194,16 +7229,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--percent text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.percent_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_friendlyplayer_percent_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--percent text shadow
 		{
@@ -7213,8 +7248,8 @@ end
 				Plater.db.profile.plate_config.friendlyplayer.percent_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--pecent text color
 		{
@@ -7228,8 +7263,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		--percent text alpha
 		{
@@ -7242,8 +7277,8 @@ end
 			min = 0,
 			max = 1,
 			step = 0.1,
-			name = "透明",
-			desc = "文字的透明度。",
+			name = "Alpha",
+			desc = "Set the transparency of the text.",
 			usedecimals = true,
 		},
 		--percent anchor
@@ -7251,8 +7286,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.percent_text_anchor.side end,
 			values = function() return build_anchor_side_table ("friendlyplayer", "percent_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--percent anchor x offset
 		{
@@ -7265,8 +7300,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--percent anchor x offset
 		{
@@ -7279,12 +7314,12 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},
 		
 		{type = "blank"},
-		{type = "label", get = function() return "施法時間文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Cast Time Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "toggle",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.spellpercent_text_enabled end,
@@ -7292,8 +7327,8 @@ end
 				Plater.db.profile.plate_config.friendlyplayer.spellpercent_text_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "顯示施法時間進度。",
+			name = "Enabled",
+			desc = "Show the cast time progress.",
 		},
 		--cast time text
 		{
@@ -7306,16 +7341,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--cast time text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.spellpercent_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_friendlyplayer_spellpercent_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--cast time text shadow
 		{
@@ -7325,8 +7360,8 @@ end
 				Plater.db.profile.plate_config.friendlyplayer.spellpercent_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--cast time text color
 		{
@@ -7340,8 +7375,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		
 		--cast time anchor
@@ -7349,8 +7384,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlyplayer.spellpercent_text_anchor.side end,
 			values = function() return build_anchor_side_table ("friendlyplayer", "spellpercent_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--cast time anchor x offset
 		{
@@ -7363,8 +7398,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--cast time anchor x offset
 		{
@@ -7377,12 +7412,12 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},
 		
 		{type = "breakline"},
-		{type = "label", get = function() return "一般設定:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "General Settings:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "toggle",
 			get = function() return Plater.db.profile.use_playerclass_color end,
@@ -7390,8 +7425,8 @@ end
 				Plater.db.profile.use_playerclass_color = value
 				Plater.UpdateUseClassColors()
 			end,
-			name = "使用職業顏色",
-			desc = "玩家血條使用玩家的職業顏色。",
+			name = "Use Class Colors",
+			desc = "Player name plates uses the player class color",
 		},
 		{
 			type = "toggle",
@@ -7400,8 +7435,8 @@ end
 				Plater.db.profile.plate_config [ACTORTYPE_FRIENDLY_PLAYER].only_damaged = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "只有受到傷害的玩家",
-			desc = "隱藏生命力滿的友方玩家血條。",
+			name = "Only Damaged Players",
+			desc = "Hide the health bar when a friendly character has full health.",
 		},
 		{
 			type = "toggle",
@@ -7410,8 +7445,8 @@ end
 				Plater.db.profile.plate_config [ACTORTYPE_FRIENDLY_PLAYER].only_thename = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "只顯示名字",
-			desc = "隱藏血條，只顯示角色的名字。",
+			name = "Only Show The Name",
+			desc = "Hide the health bar, only show the character name.",
 		},
 		
 		
@@ -7420,7 +7455,7 @@ end
 	DF:BuildMenu (friendlyPCsFrame, options_table3, startX, startY, heightSize, true, options_text_template, options_dropdown_template, options_switch_template, true, options_slider_template, options_button_template)
 
 --------------------------------
---Enemy Player painel de op踥es ~enemy
+--Enemy Player painel de op��es ~enemy
 
 	local on_select_enemy_playername_font = function (_, _, value)
 		Plater.db.profile.plate_config.enemyplayer.actorname_text_font = value
@@ -7447,7 +7482,7 @@ end
 	
 	local options_table4 = {
 		--health bar size out of combat
-		{type = "label", get = function() return "非戰鬥中血條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Health Bar Size out of Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.health[1] end,
@@ -7458,8 +7493,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "非戰鬥中血條的寬度。",
+			name = "Width",
+			desc = "Width of the health bar when out of combat.",
 		},
 		{
 			type = "range",
@@ -7471,12 +7506,12 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "非戰鬥中血條的高度。",
+			name = "Height",
+			desc = "Height of the health bar when out of combat.",
 		},
 		
 		--health bar size in combat
-		{type = "label", get = function() return "戰鬥中血條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Health Bar Size in Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.health_incombat[1] end,
@@ -7487,8 +7522,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "戰鬥中血條的寬度。",
+			name = "Width",
+			desc = "Width of the health bar when in combat.",
 		},
 		{
 			type = "range",
@@ -7500,12 +7535,12 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "戰鬥中血條的高度。",
+			name = "Height",
+			desc = "Height of the health bar when in combat.",
 		},
 		{type = "blank"},
 		--cast bar size out of combat
-		{type = "label", get = function() return "非戰鬥中施法條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Cast Bar Size out of Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.cast[1] end,
@@ -7516,8 +7551,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "非戰鬥中施法條的寬度。",
+			name = "Width",
+			desc = "Width of the cast bar when out of combat.",
 		},
 		{
 			type = "range",
@@ -7529,11 +7564,11 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "非戰鬥中施法條的高度。",
+			name = "Height",
+			desc = "Height of the cast bar when out of combat.",
 		},
 		--cast bar size out of combat
-		{type = "label", get = function() return "戰鬥中施法條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Cast Bar Size in Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.cast_incombat[1] end,
@@ -7544,8 +7579,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "戰鬥中施法條的寬度。",
+			name = "Width",
+			desc = "Width of the cast bar when in combat.",
 		},
 		{
 			type = "range",
@@ -7557,13 +7592,13 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "戰鬥中施法條的高度。",
+			name = "Height",
+			desc = "Height of the cast bar when in combat.",
 		},
 		
 		--player name size
 		{type = "blank"},
-		{type = "label", get = function() return "玩家名稱文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Player Name Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.actorname_text_size end,
@@ -7575,8 +7610,8 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 
 		--player name font
@@ -7584,8 +7619,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.actorname_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_enemy_playername_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--player name color
 		{
@@ -7599,8 +7634,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		--player name shadow
 		{
@@ -7610,8 +7645,8 @@ end
 				Plater.db.profile.plate_config.enemyplayer.actorname_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		
 		--npc name anchor
@@ -7619,8 +7654,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.actorname_text_anchor.side end,
 			values = function() return build_anchor_side_table ("enemyplayer", "actorname_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--npc name anchor x offset
 		{
@@ -7633,8 +7668,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--npc name anchor x offset
 		{
@@ -7647,14 +7682,14 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},	
 		
 		{type = "breakline"},
 		
 		--cast text size
-		{type = "label", get = function() return "法術名稱文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Spell Name Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.spellname_text_size end,
@@ -7665,16 +7700,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--cast text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.spellname_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_enemy_playercastname_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--cast text color
 		{
@@ -7688,8 +7723,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		--cast text shadow
 		{
@@ -7699,13 +7734,13 @@ end
 				Plater.db.profile.plate_config.enemyplayer.spellname_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		
 		--level text settings
 		{type = "blank"},
-		{type = "label", get = function() return "等級文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Level Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--level enabled
 		{
 			type = "toggle",
@@ -7714,8 +7749,8 @@ end
 				Plater.db.profile.plate_config.enemyplayer.level_text_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "顯示角色等級。",
+			name = "Enabled",
+			desc = "Check this box to show the level of the actor.",
 		},
 		--level text size
 		{
@@ -7728,16 +7763,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--level text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.level_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_enemyplayer_level_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--level text shadow
 		{
@@ -7747,8 +7782,8 @@ end
 				Plater.db.profile.plate_config.enemyplayer.level_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--level text alpha
 		{
@@ -7761,8 +7796,8 @@ end
 			min = 0,
 			max = 1,
 			step = 0.1,
-			name = "透明",
-			desc = "文字的透明度。",
+			name = "Alpha",
+			desc = "Set the transparency of the text.",
 			usedecimals = true,
 		},
 		--level anchor
@@ -7770,8 +7805,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.level_text_anchor.side end,
 			values = function() return build_anchor_side_table ("enemyplayer", "level_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--level anchor x offset
 		{
@@ -7784,8 +7819,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--level anchor x offset
 		{
@@ -7798,23 +7833,23 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},
 		
 		--plate order
 		{type = "blank"},
-		{type = "label", get = function() return "排列順序:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Plate Order:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.plate_order end,
 			values = function() return build_order_options ("enemyplayer") end,
-			name = "順序",
-			desc = "血條、施法條和增益/減益效果該如何排列。\n\n由下 (靠近角色的頭) 到上。",
+			name = "Order",
+			desc = "How the health, cast and buff bars are ordered.\n\nFrom bottom (near the character head) to top.",
 		},
 		
 		{type = "blank"},
-		{type = "label", get = function() return "減益圖示:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Debuff Frame:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--y offset
 		{
 			type = "range",
@@ -7826,14 +7861,14 @@ end
 			min = -64,
 			max = 64,
 			step = 1,
-			name = "垂直位置",
-			desc = "調整垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Adjusts the position on the Y axis.",
 		},
 		
 		{type = "breakline"},
 		
 		--percent text
-		{type = "label", get = function() return "血條百分比文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Health Percent Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--enabled
 		{
 			type = "toggle",
@@ -7842,8 +7877,8 @@ end
 				Plater.db.profile.plate_config.enemyplayer.percent_text_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "顯示百分比文字。",
+			name = "Enabled",
+			desc = "Show the percent text.",
 		},
 		--out of combat
 		{
@@ -7854,8 +7889,8 @@ end
 				
 				Plater.UpdateAllPlates()
 			end,
-			name = "非戰鬥中",
-			desc = "不在戰鬥中也要顯示百分比。",
+			name = "Out of Combat",
+			desc = "Show the percent even when isn't in combat.",
 		},
 		--percent text size
 		{
@@ -7868,16 +7903,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--percent text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.percent_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_enemyplayer_percent_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--percent text shadow
 		{
@@ -7887,8 +7922,8 @@ end
 				Plater.db.profile.plate_config.enemyplayer.percent_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--pecent text color
 		{
@@ -7902,8 +7937,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		--percent text alpha
 		{
@@ -7916,8 +7951,8 @@ end
 			min = 0,
 			max = 1,
 			step = 0.1,
-			name = "透明",
-			desc = "文字的透明度。",
+			name = "Alpha",
+			desc = "Set the transparency of the text.",
 			usedecimals = true,
 		},
 		--percent anchor
@@ -7925,8 +7960,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.percent_text_anchor.side end,
 			values = function() return build_anchor_side_table ("enemyplayer", "percent_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--percent anchor x offset
 		{
@@ -7939,8 +7974,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--percent anchor x offset
 		{
@@ -7953,12 +7988,12 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},
 		
 		{type = "blank"},
-		{type = "label", get = function() return "施法時間文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Cast Time Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "toggle",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.spellpercent_text_enabled end,
@@ -7966,8 +8001,8 @@ end
 				Plater.db.profile.plate_config.enemyplayer.spellpercent_text_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "顯示施法時間進度。",
+			name = "Enabled",
+			desc = "Show the cast time progress.",
 		},
 		--cast time text
 		{
@@ -7980,16 +8015,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--cast time text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.spellpercent_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_enemyplayer_spellpercent_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--cast time text shadow
 		{
@@ -7999,8 +8034,8 @@ end
 				Plater.db.profile.plate_config.enemyplayer.spellpercent_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--cast time text color
 		{
@@ -8014,8 +8049,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		
 		--cast time anchor
@@ -8023,8 +8058,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.spellpercent_text_anchor.side end,
 			values = function() return build_anchor_side_table ("enemyplayer", "spellpercent_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--cast time anchor x offset
 		{
@@ -8037,8 +8072,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--cast time anchor x offset
 		{
@@ -8051,12 +8086,12 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},
 		
 		{type = "breakline"},
-		{type = "label", get = function() return "一般設定:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "General Settings:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "toggle",
 			get = function() return Plater.db.profile.plate_config.enemyplayer.use_playerclass_color end,
@@ -8064,8 +8099,8 @@ end
 				Plater.db.profile.plate_config.enemyplayer.use_playerclass_color = value
 				Plater.UpdateAllPlates (true)
 			end,
-			name = "使用職業顏色",
-			desc = "玩家血條使用玩家的職業顏色。",
+			name = "Use Class Colors",
+			desc = "Player name plates uses the player class color",
 		},
 		{
 			type = "color",
@@ -8078,15 +8113,15 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "固定的職業顏色",
-			desc = "沒有使用職業顏色時，固定使用這個顏色。",
+			name = "Fixed Class Color",
+			desc = "Use this color when not using class colors.",
 		},
 		
 	}
 	DF:BuildMenu (enemyPCsFrame, options_table4, startX, startY, heightSize, true, options_text_template, options_dropdown_template, options_switch_template, true, options_slider_template, options_button_template)
 
 -----------------------------------------------	
---Friendly NPC painel de op踥es ~friendly
+--Friendly NPC painel de op��es ~friendly
 
 	local on_select_friendly_npcname_font = function (_, _, value)
 		Plater.db.profile.plate_config.friendlynpc.actorname_text_font = value
@@ -8123,7 +8158,7 @@ end
 	local friendly_npc_options_table = {
 	
 		--health bar size out of combat
-		{type = "label", get = function() return "非戰鬥中血條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Health Bar Size out of Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.health[1] end,
@@ -8134,8 +8169,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "非戰鬥中血條的寬度。",
+			name = "Width",
+			desc = "Width of the health bar when out of combat.",
 		},
 		{
 			type = "range",
@@ -8147,12 +8182,12 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "非戰鬥中血條的高度。",
+			name = "Height",
+			desc = "Height of the health bar when out of combat.",
 		},
 		
 		--health bar size in combat
-		{type = "label", get = function() return "戰鬥中血條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Health Bar Size in Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.health_incombat[1] end,
@@ -8163,8 +8198,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "戰鬥中血條的寬度。",
+			name = "Width",
+			desc = "Width of the health bar when in combat.",
 		},
 		{
 			type = "range",
@@ -8176,12 +8211,12 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "戰鬥中血條的高度。",
+			name = "Height",
+			desc = "Height of the health bar when in combat.",
 		},
 		{type = "blank"},
 		--cast bar size out of combat
-		{type = "label", get = function() return "非戰鬥中施法條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Cast Bar Size out of Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.cast[1] end,
@@ -8192,8 +8227,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "非戰鬥中施法條的寬度。",
+			name = "Width",
+			desc = "Width of the cast bar when out of combat.",
 		},
 		{
 			type = "range",
@@ -8205,11 +8240,11 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "非戰鬥中施法條的高度。",
+			name = "Height",
+			desc = "Height of the cast bar when out of combat.",
 		},
 		--cast bar size out of combat
-		{type = "label", get = function() return "戰鬥中施法條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Cast Bar Size in Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.cast_incombat[1] end,
@@ -8220,8 +8255,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "戰鬥中施法條的寬度。",
+			name = "Width",
+			desc = "Width of the cast bar when in combat.",
 		},
 		{
 			type = "range",
@@ -8233,13 +8268,13 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "戰鬥中施法條的高度。",
+			name = "Height",
+			desc = "Height of the cast bar when in combat.",
 		},
 		
 		--player name size
 		{type = "blank"},
-		{type = "label", get = function() return "NPC名稱文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Npc Name Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.actorname_text_size end,
@@ -8251,16 +8286,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--player name font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.actorname_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_enemy_npcname_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--player name color
 		{
@@ -8274,8 +8309,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		--player name shadow
 		{
@@ -8285,8 +8320,8 @@ end
 				Plater.db.profile.plate_config.friendlynpc.actorname_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		
 		--npc name anchor
@@ -8294,8 +8329,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.actorname_text_anchor.side end,
 			values = function() return build_anchor_side_table ("friendlynpc", "actorname_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--npc name anchor x offset
 		{
@@ -8308,8 +8343,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--npc name anchor x offset
 		{
@@ -8322,14 +8357,14 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},	
 		
 		{type = "breakline"},
 		
 		--cast text size
-		{type = "label", get = function() return "法術名稱文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Spell Name Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.spellname_text_size end,
@@ -8340,16 +8375,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--cast text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.spellname_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_enemy_npccastname_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--cast text color
 		{
@@ -8363,8 +8398,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		--cast text shadow
 		{
@@ -8374,13 +8409,13 @@ end
 				Plater.db.profile.plate_config.friendlynpc.spellname_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		
 		--level text settings
 		{type = "blank"},
-		{type = "label", get = function() return "等級文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Level Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--level enabled
 		{
 			type = "toggle",
@@ -8389,8 +8424,8 @@ end
 				Plater.db.profile.plate_config.friendlynpc.level_text_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "顯示角色等級。",
+			name = "Enabled",
+			desc = "Check this box to show the level of the actor.",
 		},
 		--level text size
 		{
@@ -8403,16 +8438,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--level text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.level_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_friendlynpc_level_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--level text shadow
 		{
@@ -8422,8 +8457,8 @@ end
 				Plater.db.profile.plate_config.friendlynpc.level_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--level text alpha
 		{
@@ -8436,8 +8471,8 @@ end
 			min = 0,
 			max = 1,
 			step = 0.1,
-			name = "透明",
-			desc = "文字的透明度。",
+			name = "Alpha",
+			desc = "Set the transparency of the text.",
 			usedecimals = true,
 		},
 		--level anchor
@@ -8445,8 +8480,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.level_text_anchor.side end,
 			values = function() return build_anchor_side_table ("friendlynpc", "level_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--level anchor x offset
 		{
@@ -8459,8 +8494,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--level anchor x offset
 		{
@@ -8473,23 +8508,23 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},
 		
 		--plate order
 		{type = "blank"},
-		{type = "label", get = function() return "排列順序:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Plate Order:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.plate_order end,
 			values = function() return build_order_options ("friendlynpc") end,
-			name = "順序",
-			desc = "血條、施法條和增益/減益效果該如何排列。\n\n由下 (靠近角色的頭) 到上。",
+			name = "Order",
+			desc = "How the health, cast and buff bars are ordered.\n\nFrom bottom (near the character head) to top.",
 		},
 		
 		{type = "blank"},
-		{type = "label", get = function() return "增益/減益效果:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Buff Frame:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--y offset
 		{
 			type = "range",
@@ -8501,14 +8536,14 @@ end
 			min = -64,
 			max = 64,
 			step = 1,
-			name = "垂直位置",
-			desc = "調整垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Adjusts the position on the Y axis.",
 		},
 		
 		{type = "breakline"},
 		
 		--percent text
-		{type = "label", get = function() return "血條百分比文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Health Percent Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--enabled
 		{
 			type = "toggle",
@@ -8517,8 +8552,8 @@ end
 				Plater.db.profile.plate_config.friendlynpc.percent_text_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "顯示百分比文字。",
+			name = "Enabled",
+			desc = "Show the percent text.",
 		},
 		--out of combat
 		{
@@ -8529,8 +8564,8 @@ end
 				
 				Plater.UpdateAllPlates()
 			end,
-			name = "非戰鬥中",
-			desc = "不在戰鬥中也要顯示百分比。",
+			name = "Out of Combat",
+			desc = "Show the percent even when isn't in combat.",
 		},
 		--percent text size
 		{
@@ -8543,16 +8578,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--percent text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.percent_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_friendlynpc_percent_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--percent text shadow
 		{
@@ -8562,8 +8597,8 @@ end
 				Plater.db.profile.plate_config.friendlynpc.percent_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--pecent text color
 		{
@@ -8577,8 +8612,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		--percent text alpha
 		{
@@ -8591,8 +8626,8 @@ end
 			min = 0,
 			max = 1,
 			step = 0.1,
-			name = "透明",
-			desc = "文字的透明度。",
+			name = "Alpha",
+			desc = "Set the transparency of the text.",
 			usedecimals = true,
 		},
 		--percent anchor
@@ -8600,8 +8635,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.percent_text_anchor.side end,
 			values = function() return build_anchor_side_table ("friendlynpc", "percent_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--percent anchor x offset
 		{
@@ -8614,8 +8649,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--percent anchor x offset
 		{
@@ -8628,12 +8663,12 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},
 		
 		{type = "blank"},
-		{type = "label", get = function() return "任務顏色:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Quest Color:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--enabled
 		{
 			type = "toggle",
@@ -8642,8 +8677,8 @@ end
 				Plater.db.profile.plate_config.friendlynpc.quest_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "任務目標角色的名條，現在有新的顏色。",
+			name = "Enabled",
+			desc = "Nameplates for objectives mobs, now have a new color.",
 		},
 		{
 			type = "color",
@@ -8656,12 +8691,12 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "友方NPC",
-			desc = "友方角色是任務目標時，名條使用這個顏色。",
+			name = "Friendly Npc",
+			desc = "Nameplate has this color when a friendly mob is a quest objective.",
 		},		
 		
 		{type = "blank"},
-		{type = "label", get = function() return "頭銜文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Profession Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		
 		--profession text size
 		{
@@ -8674,16 +8709,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--profession text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.big_actortitle_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_friendlynpc_titletext_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--profession text shadow
 		{
@@ -8693,8 +8728,8 @@ end
 				Plater.db.profile.plate_config.friendlynpc.big_actortitle_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--profession text color
 		{
@@ -8708,13 +8743,13 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		
 		{type = "breakline"},
 		
-		{type = "label", get = function() return "一般設定:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "General Settings:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "toggle",
 			get = function() return Plater.CanShowPlateFor (ACTORTYPE_FRIENDLY_NPC) end,
@@ -8722,20 +8757,20 @@ end
 				Plater.SetShowActorType (ACTORTYPE_FRIENDLY_NPC, value)
 				Plater.UpdateAllPlates()
 			end,
-			name = "顯示友方NPC",
-			desc = "顯示友方NPC的血條。\n\n|cFFFFFF00特別注意|r: 這個選項會根據遊戲本身名條的狀態 (開啟或關閉) 而變動。\n\n|cFFFFFF00特別注意|r: 當這個選項停用時，卻透過遊戲設定啟用友方名條 (" .. (GetBindingKey ("FRIENDNAMEPLATES") or "") .. ") 這時不會顯示血條但是仍然可以點擊名條。",
+			name = "Show Friendly Npc",
+			desc = "Show nameplate for friendly npcs.\n\n|cFFFFFF00Important|r: This option is dependent on the client`s nameplate state (on/off).\n\n|cFFFFFF00Important|r: when disabled but enabled on the client through (" .. (GetBindingKey ("FRIENDNAMEPLATES") or "") .. ") the healthbar isn't visible but the nameplate is still clickable.",
 		},
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config [ACTORTYPE_FRIENDLY_NPC].relevance_state end,
 			values = function() return relevance_options end,
-			name = "顯示哪些友方NPC",
-			desc = "更改友方NPC的顯示方式。\n\n|cFFFFFF00特別注意|r: 這個選項會根據遊戲本身名條的狀態 (開啟或關閉) 而變動。",
+			name = "Friendly Npc Relevance",
+			desc = "Modify the way friendly npcs are shown.\n\n|cFFFFFF00Important|r: This option is dependent on the client`s nameplate state (on/off).",
 		},
 		
 		{type = "blank"},
 		
-		{type = "label", get = function() return "NPC名稱文字 (沒有血條時):" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Npc Name Text When no Health Bar Shown:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		
 		--profession text size
 		{
@@ -8748,16 +8783,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--profession text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.big_actorname_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_friendlynpc_bignametext_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--profession text shadow
 		{
@@ -8767,8 +8802,8 @@ end
 				Plater.db.profile.plate_config.friendlynpc.big_actorname_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--profession text color
 		{
@@ -8782,12 +8817,12 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		
 		{type = "blank"},
-		{type = "label", get = function() return "施法時間文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Cast Time Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "toggle",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.spellpercent_text_enabled end,
@@ -8795,8 +8830,8 @@ end
 				Plater.db.profile.plate_config.friendlynpc.spellpercent_text_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "顯示施法時間進度。",
+			name = "Enabled",
+			desc = "Show the cast time progress.",
 		},
 		--cast time text
 		{
@@ -8809,16 +8844,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--cast time text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.spellpercent_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_friendlynpc_spellpercent_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--cast time text shadow
 		{
@@ -8828,8 +8863,8 @@ end
 				Plater.db.profile.plate_config.friendlynpc.spellpercent_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--cast time text color
 		{
@@ -8843,8 +8878,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		
 		--cast time anchor
@@ -8852,8 +8887,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.friendlynpc.spellpercent_text_anchor.side end,
 			values = function() return build_anchor_side_table ("friendlynpc", "spellpercent_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--cast time anchor x offset
 		{
@@ -8866,8 +8901,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--cast time anchor x offset
 		{
@@ -8880,15 +8915,15 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},
 		
 	}
 	DF:BuildMenu (friendlyNPCsFrame, friendly_npc_options_table, startX, startY, heightSize, true, options_text_template, options_dropdown_template, options_switch_template, true, options_slider_template, options_button_template)
 
 -----------------------------------------------	
---Enemy NPC painel de op踥es ~enemy
+--Enemy NPC painel de op��es ~enemy
 
 	local on_select_enemy_npcname_font = function (_, _, value)
 		Plater.db.profile.plate_config.enemynpc.actorname_text_font = value
@@ -8915,7 +8950,7 @@ end
 	--menu 2 --enemy npc
 	local options_table2 = {
 		--health bar size out of combat
-		{type = "label", get = function() return "非戰鬥中血條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Health Bar Size out of Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.enemynpc.health[1] end,
@@ -8926,8 +8961,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "非戰鬥中血條的寬度。",
+			name = "Width",
+			desc = "Width of the health bar when out of combat.",
 		},
 		{
 			type = "range",
@@ -8939,12 +8974,12 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "非戰鬥中血條的高度。",
+			name = "Height",
+			desc = "Height of the health bar when out of combat.",
 		},
 		
 		--health bar size in combat
-		{type = "label", get = function() return "戰鬥中血條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Health Bar Size in Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.enemynpc.health_incombat[1] end,
@@ -8955,8 +8990,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "戰鬥中血條的寬度。",
+			name = "Width",
+			desc = "Width of the health bar when in combat.",
 		},
 		{
 			type = "range",
@@ -8968,12 +9003,12 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "戰鬥中血條的高度。",
+			name = "Height",
+			desc = "Height of the health bar when in combat.",
 		},
 		{type = "blank"},
 		--cast bar size out of combat
-		{type = "label", get = function() return "非戰鬥中施法條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Cast Bar Size out of Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.enemynpc.cast[1] end,
@@ -8984,8 +9019,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "非戰鬥中施法條的寬度。",
+			name = "Width",
+			desc = "Width of the cast bar when out of combat.",
 		},
 		{
 			type = "range",
@@ -8997,11 +9032,11 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "非戰鬥中施法條的高度。",
+			name = "Height",
+			desc = "Height of the cast bar when out of combat.",
 		},
 		--cast bar size out of combat
-		{type = "label", get = function() return "戰鬥中施法條大小:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Cast Bar Size in Combat:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.enemynpc.cast_incombat[1] end,
@@ -9012,8 +9047,8 @@ end
 			min = 50,
 			max = 300,
 			step = 1,
-			name = "寬",
-			desc = "戰鬥中施法條的寬度。",
+			name = "Width",
+			desc = "Width of the cast bar when in combat.",
 		},
 		{
 			type = "range",
@@ -9025,12 +9060,12 @@ end
 			min = 1,
 			max = 100,
 			step = 1,
-			name = "高",
-			desc = "戰鬥中施法條的高度。",
+			name = "Height",
+			desc = "Height of the cast bar when in combat.",
 		},
 		{type = "blank"},
 		--player name size
-		{type = "label", get = function() return "NPC名稱文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Npc Name Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.enemynpc.actorname_text_size end,
@@ -9042,16 +9077,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--player name font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemynpc.actorname_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_enemy_npcname_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--player name color
 		{
@@ -9065,8 +9100,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		--player name shadow
 		{
@@ -9076,8 +9111,8 @@ end
 				Plater.db.profile.plate_config.enemynpc.actorname_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		
 		--npc name anchor
@@ -9085,8 +9120,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemynpc.actorname_text_anchor.side end,
 			values = function() return build_anchor_side_table ("enemynpc", "actorname_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--npc name anchor x offset
 		{
@@ -9099,8 +9134,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--npc name anchor x offset
 		{
@@ -9113,14 +9148,14 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},	
 		
 		{type = "breakline"},
 		
 		--cast text size
-		{type = "label", get = function() return "法術名稱文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Spell Name Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "range",
 			get = function() return Plater.db.profile.plate_config.enemynpc.spellname_text_size end,
@@ -9131,16 +9166,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--cast text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemynpc.spellname_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_enemy_npccastname_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--cast text color
 		{
@@ -9154,8 +9189,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		--cast text shadow
 		{
@@ -9165,13 +9200,13 @@ end
 				Plater.db.profile.plate_config.enemynpc.spellname_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		
 		--level text settings
 		{type = "blank"},
-		{type = "label", get = function() return "等級文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Level Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--level enabled
 		{
 			type = "toggle",
@@ -9180,8 +9215,8 @@ end
 				Plater.db.profile.plate_config.enemynpc.level_text_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "顯示角色等級。",
+			name = "Enabled",
+			desc = "Check this box to show the level of the actor.",
 		},
 		--level text size
 		{
@@ -9194,16 +9229,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--level text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemynpc.level_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_enemy_level_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--level text shadow
 		{
@@ -9213,8 +9248,8 @@ end
 				Plater.db.profile.plate_config.enemynpc.level_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--level text alpha
 		{
@@ -9227,8 +9262,8 @@ end
 			min = 0,
 			max = 1,
 			step = 0.1,
-			name = "透明",
-			desc = "文字的透明度。",
+			name = "Alpha",
+			desc = "Set the transparency of the text.",
 			usedecimals = true,
 		},
 		--level anchor
@@ -9236,8 +9271,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemynpc.level_text_anchor.side end,
 			values = function() return build_anchor_side_table ("enemynpc", "level_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--level anchor x offset
 		{
@@ -9250,8 +9285,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--level anchor x offset
 		{
@@ -9264,23 +9299,23 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},
 		
 		--plate order
 		{type = "blank"},
-		{type = "label", get = function() return "排列順序:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Plate Order:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemynpc.plate_order end,
 			values = function() return build_order_options ("enemynpc") end,
-			name = "順序",
-			desc = "血條、施法條和增益/減益效果該如何排列。\n\n由下 (靠近角色的頭) 到上。",
+			name = "Order",
+			desc = "How the health, cast and buff bars are ordered.\n\nFrom bottom (near the character head) to top.",
 		},
 		
 		{type = "blank"},
-		{type = "label", get = function() return "減益圖示:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Debuff Frame:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--y offset
 		{
 			type = "range",
@@ -9292,14 +9327,14 @@ end
 			min = -64,
 			max = 64,
 			step = 1,
-			name = "垂直位置",
-			desc = "調整垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Adjusts the position on the Y axis.",
 		},
 		
 		{type = "breakline"},
 		
 		--percent text
-		{type = "label", get = function() return "血條百分比文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Health Percent Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--enabled
 		{
 			type = "toggle",
@@ -9308,8 +9343,8 @@ end
 				Plater.db.profile.plate_config.enemynpc.percent_text_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "顯示百分比文字。",
+			name = "Enabled",
+			desc = "Show the percent text.",
 		},
 		--out of combat
 		{
@@ -9320,8 +9355,8 @@ end
 				
 				Plater.UpdateAllPlates()
 			end,
-			name = "非戰鬥中",
-			desc = "不在戰鬥中也要顯示百分比。",
+			name = "Out of Combat",
+			desc = "Show the percent even when isn't in combat.",
 		},
 		--percent text size
 		{
@@ -9334,16 +9369,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--percent text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemynpc.percent_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_enemy_percent_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--percent text shadow
 		{
@@ -9353,8 +9388,8 @@ end
 				Plater.db.profile.plate_config.enemynpc.percent_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--pecent text color
 		{
@@ -9368,8 +9403,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		--percent text alpha
 		{
@@ -9382,8 +9417,8 @@ end
 			min = 0,
 			max = 1,
 			step = 0.1,
-			name = "透明",
-			desc = "文字的透明度。",
+			name = "Alpha",
+			desc = "Set the transparency of the text.",
 			usedecimals = true,
 		},
 		--percent anchor
@@ -9391,8 +9426,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemynpc.percent_text_anchor.side end,
 			values = function() return build_anchor_side_table ("enemynpc", "percent_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--percent anchor x offset
 		{
@@ -9405,8 +9440,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--percent anchor x offset
 		{
@@ -9419,8 +9454,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},
 		--health amount
 		{
@@ -9430,12 +9465,12 @@ end
 				Plater.db.profile.plate_config.enemynpc.percent_show_health = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "顯示血量數值",
-			desc = "顯示血量數值",
+			name = "Show Health Amount",
+			desc = "Show Health Amount",
 		},
 		
 		{type = "blank"},
-		{type = "label", get = function() return "施法時間文字:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Cast Time Text:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		{
 			type = "toggle",
 			get = function() return Plater.db.profile.plate_config.enemynpc.spellpercent_text_enabled end,
@@ -9443,8 +9478,8 @@ end
 				Plater.db.profile.plate_config.enemynpc.spellpercent_text_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "顯示施法時間進度。",
+			name = "Enabled",
+			desc = "Show the cast time progress.",
 		},
 		--cast time text
 		{
@@ -9457,16 +9492,16 @@ end
 			min = 6,
 			max = 99,
 			step = 1,
-			name = "大小",
-			desc = "文字的大小。",
+			name = "Size",
+			desc = "Size of the text.",
 		},
 		--cast time text font
 		{
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemynpc.spellpercent_text_font end,
 			values = function() return DF:BuildDropDownFontList (on_select_enemy_spellpercent_text_font) end,
-			name = "字型",
-			desc = "文字的字型。",
+			name = "Font",
+			desc = "Font of the text.",
 		},
 		--cast time text shadow
 		{
@@ -9476,8 +9511,8 @@ end
 				Plater.db.profile.plate_config.enemynpc.spellpercent_text_shadow = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "陰影",
-			desc = "文字顯示黑色邊框。",
+			name = "Shadow",
+			desc = "If the text has a black outline.",
 		},
 		--cast time text color
 		{
@@ -9491,8 +9526,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "顏色",
-			desc = "文字的顏色。",
+			name = "Color",
+			desc = "The color of the text.",
 		},
 		
 		--cast time anchor
@@ -9500,8 +9535,8 @@ end
 			type = "select",
 			get = function() return Plater.db.profile.plate_config.enemynpc.spellpercent_text_anchor.side end,
 			values = function() return build_anchor_side_table ("enemynpc", "spellpercent_text_anchor") end,
-			name = "對齊",
-			desc = "對齊到血條的哪一邊。",
+			name = "Anchor",
+			desc = "Which side of the nameplate this widget is attach to.",
 		},
 		--cast time anchor x offset
 		{
@@ -9514,8 +9549,8 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "水平位置",
-			desc = "稍微調整文字在水平方向的位置。",
+			name = "X Offset",
+			desc = "Slightly move the text horizontally.",
 		},
 		--cast time anchor x offset
 		{
@@ -9528,13 +9563,13 @@ end
 			min = -20,
 			max = 20,
 			step = 1,
-			name = "垂直位置",
-			desc = "稍微調整文字在垂直方向的位置。",
+			name = "Y Offset",
+			desc = "Slightly move the text vertically.",
 		},
 		
 		{type = "breakline"},
 		
-		{type = "label", get = function() return "任務顏色:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
+		{type = "label", get = function() return "Quest Color:" end, text_template = DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE")},
 		--enabled
 		{
 			type = "toggle",
@@ -9543,8 +9578,8 @@ end
 				Plater.db.profile.plate_config.enemynpc.quest_enabled = value
 				Plater.UpdateAllPlates()
 			end,
-			name = "啟用",
-			desc = "任務目標角色的名條，現在有新的顏色。",
+			name = "Enabled",
+			desc = "Nameplates for objectives mobs, now have a new color.",
 		},
 		{
 			type = "color",
@@ -9557,8 +9592,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "敵對NPC",
-			desc = "任務目標為敵對角色時，名條使用這個顏色。",
+			name = "Hostile Npc",
+			desc = "Nameplate has this color when a hostile mob is a quest objective.",
 		},
 		{
 			type = "color",
@@ -9571,8 +9606,8 @@ end
 				color[1], color[2], color[3], color[4] = r, g, b, a
 				Plater.UpdateAllPlates()
 			end,
-			name = "中立NPC",
-			desc = "任務目標為中立角色時，名條使用這個顏色。",
+			name = "Neutral Npc",
+			desc = "Nameplate has this color when a neutral mob is a quest objective.",
 		},
 	}
 	DF:BuildMenu (enemyNPCsFrame, options_table2, startX, startY, heightSize, true, options_text_template, options_dropdown_template, options_switch_template, true, options_slider_template, options_button_template)
@@ -9593,8 +9628,8 @@ end
 				Plater.SetShowActorType (ACTORTYPE_FRIENDLY_PLAYER, value)
 				Plater.UpdateAllPlates()
 			end,
-			name = "友方玩家",
-			desc = "顯示友方玩家的血條。\n\n|cFFFFFF00特別注意|r: 這個選項會根據遊戲本身名條的狀態 (開啟或關閉) 而變動。\n\n|cFFFFFF00特別注意|r: 當這個選項停用時，卻透過遊戲設定啟用友方名條 (" .. (GetBindingKey ("FRIENDNAMEPLATES") or "") .. ") 這時不會顯示血條但是仍然可以點擊名條。",
+			name = "Friendly Players",
+			desc = "Show nameplate for friendly players.\n\n|cFFFFFF00Important|r: This option is dependent on the client`s nameplate state (on/off).\n\n|cFFFFFF00Important|r: when disabled but enabled on the client through (" .. (GetBindingKey ("FRIENDNAMEPLATES") or "") .. ") the healthbar isn't visible but the nameplate is still clickable.",
 		},
 		{
 			type = "toggle",
@@ -9603,8 +9638,8 @@ end
 				Plater.SetShowActorType (ACTORTYPE_ENEMY_PLAYER, value)
 				Plater.UpdateAllPlates()
 			end,
-			name = "敵方玩家",
-			desc = "顯示敵方玩家的血條。\n\n|cFFFFFF00特別注意|r: 這個選項會根據遊戲本身名條的狀態 (開啟或關閉) 而變動。\n\n|cFFFFFF00特別注意|r: 當這個選項停用時，卻透過遊戲設定啟用敵方名條 (" .. (GetBindingKey ("NAMEPLATES") or "") .. ") 這時不會顯示血條但是仍然可以點擊名條。",
+			name = "Enemy Players",
+			desc = "Show nameplate for enemy players.\n\n|cFFFFFF00Important|r: This option is dependent on the client`s nameplate state (on/off).\n\n|cFFFFFF00Important|r: when disabled but enabled on the client through (" .. (GetBindingKey ("NAMEPLATES") or "") .. ") the healthbar isn't visible but the nameplate is still clickable.",
 		},
 	--]]
 	--[[
@@ -9615,7 +9650,7 @@ end
 				Plater.SetShowActorType (ACTORTYPE_ENEMY_NPC, value)
 				Plater.UpdateAllPlates()
 			end,
-			name = "敵方NPC",
-			desc = "顯示敵方NPC的血條。\n\n|cFFFFFF00特別注意|r: 這個選項會根據遊戲本身名條的狀態 (開啟或關閉) 而變動。\n\n|cFFFFFF00特別注意|r: 當這個選項停用時，卻透過遊戲設定啟用敵方名條 (" .. (GetBindingKey ("NAMEPLATES") or "") .. ") 這時不會顯示血條但是仍然可以點擊名條。",
+			name = "Enemy Npc",
+			desc = "Show nameplate for enemy npcs.\n\n|cFFFFFF00Important|r: This option is dependent on the client`s nameplate state (on/off).\n\n|cFFFFFF00Important|r: when disabled but enabled on the client through (" .. (GetBindingKey ("NAMEPLATES") or "") .. ") the healthbar isn't visible but the nameplate is still clickable.",
 		},
 --]]		

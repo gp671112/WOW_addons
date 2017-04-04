@@ -1160,19 +1160,15 @@ end
 -----------------------------
 
 function DF:OpenInterfaceProfile()
-	-- 加上共用函數的插件名稱
-	local nameLoc
-	if self.__name== "EnemyGrid" then nameLoc = "敵方框架" else nameLoc = "血條" end
-	
-	InterfaceOptionsFrame_OpenToCategory (nameLoc)
-	InterfaceOptionsFrame_OpenToCategory (nameLoc)
+	InterfaceOptionsFrame_OpenToCategory (self.__name)
+	InterfaceOptionsFrame_OpenToCategory (self.__name)
 	for i = 1, 100 do
 		local button = _G ["InterfaceOptionsFrameAddOnsButton" .. i]
 		if (button) then
 			local text = _G ["InterfaceOptionsFrameAddOnsButton" .. i .. "Text"]
 			if (text) then
 				text = text:GetText()
-				if (text == nameLoc) then
+				if (text == self.__name) then
 					local toggle = _G ["InterfaceOptionsFrameAddOnsButton" .. i .. "Toggle"]
 					if (toggle) then
 						if (toggle:GetNormalTexture():GetTexture():find ("PlusButton")) then
@@ -1188,7 +1184,7 @@ function DF:OpenInterfaceProfile()
 				end
 			end
 		else
-			self:Msg ("無法找到設定檔介面。")
+			self:Msg ("Couldn't not find the profile panel.")
 			break
 		end
 	end

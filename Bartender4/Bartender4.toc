@@ -1,15 +1,9 @@
-## Interface: 70000
-## X-Curse-Packaged-Version: 4.7.2
-## X-Curse-Project-Name: Bartender4
-## X-Curse-Project-ID: bartender4
-## X-Curse-Repository-ID: wow/bartender4/mainline
+## Interface: 70200
 
 ## Title: Bartender4
 ## Notes: Simple and Advanced combined - Bartender4 ActionBar AddOn
-## Title-zhTW: |cFF0080FF[動作列]|rBartender4
-## Notes-zhTW: 老牌動作條，指令：/bt
 
-## Version: 4.7.2
+## Version: 4.7.7
 
 ## Author: Nevcairiel
 ## X-Email: h.leppkes at gmail dot com
@@ -73,6 +67,7 @@ RepXPBar.lua
 VehicleBar.lua
 BlizzardArt.lua
 ExtraActionBar.lua
+ZoneAbilityBar.lua
 
 ## Options ##
 Options\AceGUIWidget-NumberEditBox.lua
@@ -91,6 +86,7 @@ Options\RepXPBar.lua
 Options\VehicleBar.lua
 Options\BlizzardArt.lua
 Options\ExtraActionBar.lua
+Options\ZoneAbilityBar.lua
 
 ## Presets -- needs to be the last ##
 Options\Presets.lua

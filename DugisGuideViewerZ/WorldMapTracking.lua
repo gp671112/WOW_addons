@@ -1692,8 +1692,8 @@ function WMT:Initialize()
     local pressedAbandonIndex = nil
     StaticPopupDialogs["GROUP_ABANDON_CONFIRMATION"] = {
         text = L["Abandon All Quests?"],
-        button1 = L["Yes"],
-        button2 = L["No"],
+        button1 = YES,
+        button2 = NO,
         OnHide = function()
             pressedAbandonIndex = nil
         end,

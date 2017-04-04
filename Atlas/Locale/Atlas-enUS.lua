@@ -1,4 +1,4 @@
--- $Id: Atlas-enUS.lua 189 2017-03-27 12:20:49Z arith $
+-- $Id: Atlas-enUS.lua 193 2017-03-30 16:53:28Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -118,9 +118,13 @@ L["ATLAS_DDL_TYPE_INSTANCE_CF"] = "Instances C-F"
 L["ATLAS_DDL_TYPE_INSTANCE_GM"] = "Instances G-M"
 L["ATLAS_DDL_TYPE_INSTANCE_NS"] = "Instances N-S"
 L["ATLAS_DDL_TYPE_INSTANCE_TZ"] = "Instances T-Z"
-L["ATLAS_DEP_MSG1"] = "Atlas has detected outdated module(s)."
-L["ATLAS_DEP_MSG2"] = "They have been disabled for this character."
-L["ATLAS_DEP_MSG3"] = "Delete them from your AddOns folder."
+L["ATLAS_DEP_MSG1"] = "Atlas has detected outdated plugin(s)/module(s)/addon(s)."
+L["ATLAS_DEP_MSG2"] = "It has / They have been disabled for this character."
+L["ATLAS_DEP_MSG3"] = [=[Delete it/them from your AddOns folder and get the latest one installed.
+
+List of outdated plugin(s)/module(s)/addon(s):]=]
+L["ATLAS_DEP_MSG4"] = [=[Once you have the latest ones installed, 
+don't forget to enable them from Addon list.]=]
 L["ATLAS_DEP_OK"] = "Ok"
 L["ATLAS_ENTRANCE_BUTTON"] = "Entrance"
 L["ATLAS_EXPAND_BUTTON"] = "Click to open Atlas' legend panel."
@@ -175,6 +179,7 @@ L["ATLAS_OPTIONS_AUTOSEL_TIP"] = "Auto-select instance map, Atlas will detect yo
 L["ATLAS_OPTIONS_BOSS_DESC"] = "Show boss description when available"
 L["ATLAS_OPTIONS_BOSS_DESC_SCALE"] = "Boss Description Map ToolTip Scale"
 L["ATLAS_OPTIONS_BOSS_DESC_TIP"] = "When mouse hover the boss number, display the boss description when relative information is available."
+L["ATLAS_OPTIONS_BOSS_POTRAIT"] = "Show boss potrait when available"
 L["ATLAS_OPTIONS_BUTPOS"] = "Button Position"
 L["ATLAS_OPTIONS_BUTRAD"] = "Button Radius"
 L["ATLAS_OPTIONS_BUTTON"] = "Options"

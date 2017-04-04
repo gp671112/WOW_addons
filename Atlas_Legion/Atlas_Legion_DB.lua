@@ -1,4 +1,4 @@
--- $Id: Atlas_Legion_DB.lua 100 2017-03-27 12:20:42Z arith $
+-- $Id: Atlas_Legion_DB.lua 105 2017-03-30 16:52:59Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -196,34 +196,32 @@ local myDB = {
 		{ "7'", 66255, 93, 328 }; -- Lydia Accoste
 	};
 	ReturntoKarazhanA = {
-		{ "A", 10001, 346, 348 }; -- Entrance
-		{ "B", 10002, 210, 84 }; -- Connection
-		{ "C", 10002, 434, 418 }; -- Connection
+		{ "A", 10001, 365, 288 }; -- Entrance
+		{ "B", 10002, 228, 25 }; -- Connection
+		{ "C", 10002, 461, 358 }; -- Connection
+		{ "B", 10002, 231, 303 }; -- Connection
+		{ "D", 10002, 306, 397 }; -- Connection
+		{ 1, 1820, 80, 346 }; -- Opera Hall: Wikket
+		{ 2, 1826, 74, 370 }; -- Opera Hall: Westfall Story
+		{ 3, 1827, 70, 388 }; -- Opera Hall: Beautiful Beast
+		{ "1'", 114339, 100, 369 }; -- Barnes
+		{ "2'", 10002, 152, 373 }; -- Soul Fragment
 	};
 	ReturntoKarazhanB = {
-		{ "B", 10001, 341, 165 }; -- Connection
-		{ "D", 10001, 447, 289 }; -- Connection
-		{ 1, 1820, 150, 218 }; -- Opera Hall: Wikket
-		{ 2, 1826, 147, 247 }; -- Opera Hall: Westfall Story
-		{ 3, 1827, 141, 277 }; -- Opera Hall: Beautiful Beast
-		{ "1'", 114339, 172, 250 }; -- Barnes
-		{ "2'", 10002, 241, 259 }; -- Soul Fragment
-	};
-	ReturntoKarazhanC = {
 		{ "D", 10001, 23, 216 }; -- Connection
 		{ "E", 10001, 270, 268 }; -- Connection
 		{ "F", 10001, 33, 152 }; -- Connection
 		{ 4, 1825, 410, 289 }; -- Maiden of Virtue
 		{ "3'", 10002, 397, 117 }; -- Soul Fragment
 	};
-	ReturntoKarazhanD = {
+	ReturntoKarazhanC = {
 		{ "E", 10001, 352, 99 }; -- Connection
 		{ "H", 10001, 278, 249 }; -- Connection
 		{ "G", 10001, 170, 436 }; -- Connection
 		{ 5, 1837, 142, 177 }; -- Moroes
 		{ "4'", 10002, 118, 172 };
 	};
-	ReturntoKarazhanE = {
+	ReturntoKarazhanD = {
 		{ "F", 10001, 116, 15 }; -- Connection
 		{ "G", 10001, 111, 456 }; -- Connection
 		{ "H", 10001, 231, 304 }; -- Connection
@@ -232,28 +230,28 @@ local myDB = {
 		{ "5'", 114815, 154, 359 }; -- Koren
 		{ "6'", 10003, 418, 58 }; -- Soul Fragment
 	};
-	ReturntoKarazhanF = {
+	ReturntoKarazhanE = {
 		{ "C", 10001, 349, 162 }; -- Connection
 		{ "J", 10003, 275, 398 }; -- Portal
 		{ 7, 1836, 249, 363 }; -- The Curator
 		{ "7'", 10002, 229, 401 }; -- Soul Fragment
 	};
-	ReturntoKarazhanG = {
+	ReturntoKarazhanF = {
 		{ "J", 10001, 56, 102 }; -- Portal
 		{ "K", 10002, 449, 342 }; -- Portal
 		{ 8, 1817, 451, 250 }; -- Shade of Medivh
 	};
-	ReturntoKarazhanH = {
+	ReturntoKarazhanG = {
 		{ "K", 10001, 22, 334 }; -- Entrance
 		{ 9, 1818, 83, 107 }; -- Mana Devourer
 		{ "8'", 266826, 27, 251 }; -- Medivh's Footlocker
 	};
-	ReturntoKarazhanI = {
+	ReturntoKarazhanH = {
 		{ "L", 10001, 21, 41 }; -- Entrance
 		{ "M", 10002, 192, 487 }; -- Connection
 		{ "N", 10003, 14, 60 }; -- Portal
 	};
-	ReturntoKarazhanJ = {
+	ReturntoKarazhanI = {
 		{ "M", 10001, 282, 271 }; -- Connection
 		{ 10, 1838, 248, 291 }; -- Viz'aduum the Watcher
 		{ "9'", 115497, 196, 375 }; -- Archmage Khadgar

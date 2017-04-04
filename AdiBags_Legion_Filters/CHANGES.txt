@@ -1,0 +1,12 @@
+lightweight tag f345601f66d2347d0a7a8b52fa0c647bdbb50055 1.5
+Author:	legowxelab2z8 <legowxelab2z8@Gmail.com>
+Date:	Fri Mar 31 19:34:44 2017 -0700
+
+commit 14163de034282e6d261c92c9633745b9a388ca26
+Author: legowxelab2z8 <legowxelab2z8@Gmail.com>
+Date:   Fri Mar 31 19:30:59 2017 -0700
+
+    Localization change
+    
+    Localization trick Uses GetMapNameByID(1021) to get the name of Broken Shore.
+

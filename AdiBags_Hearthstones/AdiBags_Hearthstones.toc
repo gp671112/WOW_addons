@@ -1,0 +1,15 @@
+## Interface: 70200
+## Title: AdiBags - Hearthstones
+## Notes: Adds various hearthing items to AdiBags virtual groups
+## Title-zhTW: |cFFFF8000[背包/銀行]|rAdiBags - 爐石
+## Notes-zhTW: 增加各種傳送物品到AdiBags的虛擬類別
+
+## Version: 7.2-release1
+## Author: Myrroddin of Llane-US (Knights of the Storm, Alliance)
+## X-Date: 2017-03-28T16:51:19Z
+## X-License: © 2016 - 2017 Paul "Myrroddin" Vandersypen, All Rights Reserved
+## X-Category: Bags & Inventory
+## Dependencies: AdiBags
+
+Localization.lua
+AdiBags_Hearthstones.lua

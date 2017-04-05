@@ -9,9 +9,5 @@
 ## X-Curse-Project-Name: LibStub
 ## X-Curse-Project-ID: libstub
 ## X-Curse-Repository-ID: wow/libstub/mainline
-## X-Curse-Packaged-Version: r37
-## X-Curse-Project-Name: Plater Nameplates
-## X-Curse-Project-ID: plater-nameplates
-## X-Curse-Repository-ID: wow/plater-nameplates/mainline
 
 LibStub.lua

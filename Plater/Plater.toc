@@ -1,12 +1,8 @@
-## Interface: 70100
+## Interface: 70200
 ## Title: Plater
 ## Notes: Config the new name plates
 ## SavedVariables: PlaterDB
 ## SavedVariablesPerCharacter: PlaterDBChr
-## X-Curse-Packaged-Version: r37
-## X-Curse-Project-Name: Plater Nameplates
-## X-Curse-Project-ID: plater-nameplates
-## X-Curse-Repository-ID: wow/plater-nameplates/mainline
 
 #@no-lib-strip@
 libs\libs.xml

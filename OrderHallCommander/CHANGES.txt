@@ -1,0 +1,12 @@
+tag 6ae793a9477e4de4757028fc80aacdedb0d1e5e2 1.1.3
+Author:	Alar of Runetotem <alar@aspide.it>
+Date:	Mon Apr 3 08:08:13 2017 +0200
+
+New upgrade tokens added
+
+commit d305f077779b7089419b34df701f46de87e379b9
+Author: Alar of Runetotem <alar@aspide.it>
+Date:   Sat Apr 1 08:26:20 2017 +0200
+
+    Feature: added option to sort unfilled missions as last
+

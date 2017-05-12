@@ -15,9 +15,9 @@
 # ## Notes: Cataclysm Dungeon Maps
 # ## Notes-zhTW: 浩劫與重生副本地圖模組
 #@end-debug@
-## Version: 1.39.00
+## Version: 2017-04-14T9:45:17Z
 ## Author: arith, Dynaletik, dubcat
-## X-Date: 2017-03-27T8:35:01Z
+## X-Date: 2017-04-14T9:45:17Z
 ## X-Credits: Dan Gilbert, Lothaer
 ## X-Email: atlas.addon at gmail dot com
 ## X-Website: http://www.atlasmod.com

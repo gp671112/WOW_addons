@@ -1,7 +1,7 @@
-changeset:   125:e79e4d8941df
-tag:         v7.2.0.125-release
+changeset:   132:e5284c231115
+tag:         v7.2.0.132-release
 user:        Tercio
-date:        Tue Apr 04 11:39:36 2017 -0300
-summary:     - ticket #353: "quests on broken shore should by pass filters".
+date:        Thu Apr 27 13:33:30 2017 -0300
+summary:     - Ticket #401: order hall resources filter problem on fly map fixed.
 
 

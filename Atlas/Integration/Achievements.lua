@@ -1,4 +1,4 @@
--- $Id: Achievements.lua 193 2017-03-30 16:53:28Z arith $
+-- $Id: Achievements.lua 218 2017-04-13 15:10:34Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -35,12 +35,12 @@ local bit = _G.bit;
 -- ----------------------------------------------------------------------------
 -- AddOn namespace.
 -- ----------------------------------------------------------------------------
-
 local FOLDER_NAME, private = ...
 local LibStub = _G.LibStub
-local L = LibStub("AceLocale-3.0"):GetLocale("Atlas");
+local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
+local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name);
 
-function Atlas_AchievementButtonUpdate(button, achievementID)
+function addon:AchievementButtonUpdate(button, achievementID)
 	button.achievementID = achievementID;
 	button.link = GetAchievementLink(achievementID) or nil;
 	-- id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievementID or categoryID, index)
@@ -85,7 +85,7 @@ function Atlas_AchievementButtonUpdate(button, achievementID)
 	button.tooltiptext = tooltiptext.."\n|CFF8080FF"..L["ATLAS_OPEN_ACHIEVEMENT"].."|R";
 end
 
-function Atlas_OpenAchievement(achievementID)
+function addon:OpenAchievement(achievementID)
 	if not achievementID then return; end
 	
 	if not IsAddOnLoaded("Blizzard_AchievementUI") then

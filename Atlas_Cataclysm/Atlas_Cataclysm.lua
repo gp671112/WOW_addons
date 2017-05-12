@@ -1,4 +1,4 @@
--- $Id: Atlas_Cataclysm.lua 16 2017-01-16 09:55:01Z arith $
+-- $Id: Atlas_Cataclysm.lua 20 2017-04-14 09:45:17Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -60,6 +60,11 @@ local myMaps = {
 		{ WHIT.." 1) "..Atlas_GetBossName("Argaloth", 139), 139 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Occu'thar", 140), 140 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Alizabal, Mistress of Hate", 339), 339 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Pit Lord Argaloth", "ac=5416" };
+		{ "Occu'thar", "ac=6045" };
+		{ "Baradin Hold Guild Run", "ac=5425" };
 	};
 	BlackrockCaverns = {
 		ZoneName = { BZ["Blackrock Mountain"]..ALC["Colon"]..BZ["Blackrock Caverns"] };
@@ -79,6 +84,15 @@ local myMaps = {
 		{ GREN.." 1') "..L["Finkle Einhorn"], 10002 };
 		{ GREN..INDENT..ALC["Teleporter"] };
 		{ GREN.." 2') "..ALC["Teleporter"], 10003 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Crushing Bones and Cracking Skulls", "ac=5281" };
+		{ "Arrested Development", "ac=5282" };
+		{ "Too Hot to Handle", "ac=5283" };
+		{ "Ascendant Descending", "ac=5284" };
+		{ "Blackrock Caverns", "ac=4833" };
+		{ "Heroic: Blackrock Caverns", "ac=5060" };
+		{ "Heroic: Blackrock Caverns Guild Run", "ac=5134" };
 	};
 	BlackwingDescent = {
 		ZoneName = { BZ["Blackrock Mountain"]..ALC["Colon"]..BZ["Blackwing Descent"] };
@@ -97,6 +111,24 @@ local myMaps = {
 		{ WHIT.." 4) "..Atlas_GetBossName("Maloriak", 173), 173 };
 		{ WHIT.." 5) "..Atlas_GetBossName("Atramedes", 171), 171 };
 		{ WHIT.." 6) "..Atlas_GetBossName("Nefarian's End", 174), 174 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Parasite Evening", "ac=5306" };
+		{ "Achieve-a-tron", "ac=5307" };
+		{ "Silence is Golden", "ac=5308" };
+		{ "Full of Sound and Fury", "ac=5309" };
+		{ "Aberrant Behavior", "ac=5310" };
+		{ "Keeping it in the Family", "ac=4849" };
+		{ "Blackwing Descent", "ac=4842" };
+		{ "Heroic: Magmaw", "ac=5094" };
+		{ "Heroic: Omnotron Defense System", "ac=5107" };
+		{ "Heroic: Maloriak", "ac=5108" };
+		{ "Heroic: Atramedes", "ac=5109" };
+		{ "Heroic: Chimaeron", "ac=5115" };
+		{ "Heroic: Nefarian", "ac=5116" };
+		{ "Blackwing Descent Guild Run", "ac=4985" };
+		{ "Heroic: Nefarian Guild Run", "ac=5462" };
+		{ "Realm First! Nefarian", "ac=5409" };
 	};
 	CoTDragonSoulA = {
 		ZoneName = { BZ["Caverns of Time"]..ALC["Colon"]..BZ["Dragon Soul"]..ALC["MapA"] };
@@ -115,6 +147,29 @@ local myMaps = {
 		{ WHIT.." 5) "..Atlas_GetBossName("Ultraxion", 331)..ALC["L-Parenthesis"]..ALC["Upper"]..ALC["R-Parenthesis"], 331 };
 		{ GREN..INDENT..L["Dasnurimi <Geologist & Conservator>"]..ALC["L-Parenthesis"]..ALC["Lower"]..ALC["R-Parenthesis"] };
 		{ GREN..INDENT..L["Lord Afrasastrasz"]..ALC["L-Parenthesis"]..ALC["Lower"]..ALC["R-Parenthesis"] };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Fall of Deathwing", "ac=6107" };
+		{ "Destroyer's End", "ac=6177" };
+		{ "Don't Stand So Close to Me", "ac=6174" };
+		{ "Ping Pong Champion", "ac=6128" };
+		{ "Taste the Rainbow!", "ac=6129" };
+		{ "Holding Hands", "ac=6175" };
+		{ "Minutes to Midnight", "ac=6084" };
+		{ "Deck Defender", "ac=6105" };
+		{ "Maybe He'll Get Dizzy...", "ac=6133" };
+		{ "Chromatic Champion", "ac=6180" };
+		{ "Heroic: Morchok", "ac=6109" };
+		{ "Heroic: Warlord Zon'ozz", "ac=6110" };
+		{ "Heroic: Yor'sahj the Unsleeping", "ac=6111" };
+		{ "Heroic: Hagara the Stormbinder", "ac=6112" };
+		{ "Heroic: Ultraxion", "ac=6113" };
+		{ "Heroic: Warmaster Blackhorn", "ac=6114" };
+		{ "Heroic: Spine of Deathwing", "ac=6115" };
+		{ "Heroic: Madness of Deathwing", "ac=6116" };
+		{ "Dragon Soul Guild Run", "ac=6123" };
+		{ "Heroic: Deathwing Guild Run", "ac=6125" };
+		{ "Realm First! Deathwing", "ac=6126" };
 	};
 	CoTDragonSoulB = {
 		ZoneName = { BZ["Caverns of Time"]..ALC["Colon"]..BZ["Dragon Soul"]..ALC["MapB"] };
@@ -132,6 +187,29 @@ local myMaps = {
 		{ WHIT.." 2) "..Atlas_GetBossName("Warlord Zon'ozz", 324), 324 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Yor'sahj the Unsleeping", 325), 325 };
 		{ WHIT.." 4) "..Atlas_GetBossName("Hagara the Stormbinder", 317), 317 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Fall of Deathwing", "ac=6107" };
+		{ "Destroyer's End", "ac=6177" };
+		{ "Don't Stand So Close to Me", "ac=6174" };
+		{ "Ping Pong Champion", "ac=6128" };
+		{ "Taste the Rainbow!", "ac=6129" };
+		{ "Holding Hands", "ac=6175" };
+		{ "Minutes to Midnight", "ac=6084" };
+		{ "Deck Defender", "ac=6105" };
+		{ "Maybe He'll Get Dizzy...", "ac=6133" };
+		{ "Chromatic Champion", "ac=6180" };
+		{ "Heroic: Morchok", "ac=6109" };
+		{ "Heroic: Warlord Zon'ozz", "ac=6110" };
+		{ "Heroic: Yor'sahj the Unsleeping", "ac=6111" };
+		{ "Heroic: Hagara the Stormbinder", "ac=6112" };
+		{ "Heroic: Ultraxion", "ac=6113" };
+		{ "Heroic: Warmaster Blackhorn", "ac=6114" };
+		{ "Heroic: Spine of Deathwing", "ac=6115" };
+		{ "Heroic: Madness of Deathwing", "ac=6116" };
+		{ "Dragon Soul Guild Run", "ac=6123" };
+		{ "Heroic: Deathwing Guild Run", "ac=6125" };
+		{ "Realm First! Deathwing", "ac=6126" };
 	};
 	CoTDragonSoulC = {
 		ZoneName = { BZ["Caverns of Time"]..ALC["Colon"]..BZ["Dragon Soul"]..ALC["MapC"] };
@@ -147,6 +225,29 @@ local myMaps = {
 		{ WHIT.." 6) "..Atlas_GetBossName("Warmaster Blackhorn", 332), 332 };
 		{ WHIT.." 7) "..Atlas_GetBossName("Spine of Deathwing", 318), 318 };
 		{ WHIT.." 8) "..Atlas_GetBossName("Madness of Deathwing", 333), 333 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Fall of Deathwing", "ac=6107" };
+		{ "Destroyer's End", "ac=6177" };
+		{ "Don't Stand So Close to Me", "ac=6174" };
+		{ "Ping Pong Champion", "ac=6128" };
+		{ "Taste the Rainbow!", "ac=6129" };
+		{ "Holding Hands", "ac=6175" };
+		{ "Minutes to Midnight", "ac=6084" };
+		{ "Deck Defender", "ac=6105" };
+		{ "Maybe He'll Get Dizzy...", "ac=6133" };
+		{ "Chromatic Champion", "ac=6180" };
+		{ "Heroic: Morchok", "ac=6109" };
+		{ "Heroic: Warlord Zon'ozz", "ac=6110" };
+		{ "Heroic: Yor'sahj the Unsleeping", "ac=6111" };
+		{ "Heroic: Hagara the Stormbinder", "ac=6112" };
+		{ "Heroic: Ultraxion", "ac=6113" };
+		{ "Heroic: Warmaster Blackhorn", "ac=6114" };
+		{ "Heroic: Spine of Deathwing", "ac=6115" };
+		{ "Heroic: Madness of Deathwing", "ac=6116" };
+		{ "Dragon Soul Guild Run", "ac=6123" };
+		{ "Heroic: Deathwing Guild Run", "ac=6125" };
+		{ "Realm First! Deathwing", "ac=6126" };
 	};
 	CoTEndTime = {
 		ZoneName = { BZ["Caverns of Time"]..ALC["Colon"]..BZ["End Time"] };
@@ -166,6 +267,12 @@ local myMaps = {
 		{ WHIT.." 4) "..Atlas_GetBossName("Echo of Tyrande", 283)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 283 };
 		{ WHIT.." 5) "..Atlas_GetBossName("Murozond", 289), 289 };
 		{ GREN.." 1') "..ALC["Teleporter"], 10002 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Moon Guard", "ac=5995" };
+		{ "Severed Ties", "ac=6130" };
+		{ "Heroic: End Time", "ac=6117" };
+		{ "Heroic: End Time Guild Run", "ac=6120" };
 	};
 	CoTHourOfTwilight = {
 		ZoneName = { BZ["Caverns of Time"]..ALC["Colon"]..BZ["Hour of Twilight"] };
@@ -182,6 +289,10 @@ local myMaps = {
 		{ WHIT.." 2) "..Atlas_GetBossName("Asira Dawnslayer", 342), 342 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Archbishop Benedictus", 341), 341 };
 		{ BLUE..INDENT..ALC["Portal"]..ALC["L-Parenthesis"]..BZ["Stormwind"]..ALC["Slash"]..BZ["Orgrimmar"]..ALC["R-Parenthesis"] };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Eclipse", "ac=6132" };
+		{ "Heroic: Hour of Twilight Guild Run", "ac=6122" };
 	};
 	CoTWellOfEternity = {
 		ZoneName = { BZ["Caverns of Time"]..ALC["Colon"]..BZ["Well of Eternity"] };
@@ -201,6 +312,12 @@ local myMaps = {
 		{ GREN..INDENT..L["Chromie"] };
 		{ GREN.." 1') "..Atlas_GetBossName("Illidan Stormrage"), 10002 };
 		{ GREN.." 2') "..ALC["Teleporter"], 10003 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Lazy Eye", "ac=6127" };
+		{ "That's Not Canon!", "ac=6070" };
+		{ "Heroic: Well of Eternity", "ac=6118" };
+		{ "Heroic: Well of Eternity Guild Run", "ac=6121" };
 	};
 	Firelands = {
 		ZoneName = { BZ["Firelands"] };
@@ -225,6 +342,21 @@ local myMaps = {
 		{ WHIT.." 6) "..Atlas_GetBossName("Majordomo Staghelm", 197), 197 };
 		{ WHIT.." 7) "..Atlas_GetBossName("Ragnaros", 198), 198 };
 		{ GREN.." 1') "..ALC["Teleporter"], 10003 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Death from Above", "ac=5821" };
+		{ "Only the Penitent...", "ac=5799" };
+		{ "Firelands", "ac=5802" };
+		{ "Heroic: Beth'tilac", "ac=5807" };
+		{ "Heroic: Lord Rhyolith", "ac=5808" };
+		{ "Heroic: Shannox", "ac=5806" };
+		{ "Heroic: Alysrazor", "ac=5809" };
+		{ "Heroic: Baleroc", "ac=5805" };
+		{ "Heroic: Majordomo Fandral Staghelm", "ac=5804" };
+		{ "Heroic: Ragnaros", "ac=5803" };
+		{ "Firelands Guild Run", "ac=5983" };
+		{ "Heroic: Ragnaros Guild Run", "ac=5984" };
+		{ "Realm First! Ragnaros", "ac=5985" };
 	};
 	GrimBatol = {
 		ZoneName = { BZ["Grim Batol"] };
@@ -243,6 +375,13 @@ local myMaps = {
 		{ GREN.." 1') "..L["Baleflame"], 10002 };
 		{ GREN..INDENT..L["Farseer Tooranu <The Earthen Ring>"] };
 		{ GREN..INDENT..L["Velastrasza"] };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Umbrage for Umbriss", "ac=5297" };
+		{ "Don't Need to Break Eggs to Make an Omelet", "ac=5298" };
+		{ "Grim Batol", "ac=4840" };
+		{ "Heroic: Grim Batol", "ac=5062" };
+		{ "Heroic: Grim Batol Guild Run", "ac=5138" };
 	};
 	HallsOfOrigination = {
 		ZoneName = { BZ["Halls of Origination"] };
@@ -264,6 +403,15 @@ local myMaps = {
 		{ GREN.." 1') "..ALC["Teleporter"], 10002 };
 		{ GREN.." 2') "..L["Brann Bronzebeard"], 10003 };
 		{ GREN.." 3') "..L["Large Stone Obelisk"], 10004 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "I Hate That Song", "ac=5293" };
+		{ "Straw That Broke the Camel's Back", "ac=5294" };
+		{ "Faster Than the Speed of Light", "ac=5296" };
+		{ "Sun of a....", "ac=5295" };
+		{ "Halls of Origination", "ac=4841" };
+		{ "Heroic: Halls of Origination", "ac=5065" };
+		{ "Heroic: Halls of Origination Guild Run", "ac=5139" };
 	};
 	LostCityOfTolvir = {
 		ZoneName = { BZ["Lost City of the Tol'vir"] };
@@ -282,6 +430,14 @@ local myMaps = {
 		{ WHIT.." 3) "..Atlas_GetBossName("High Prophet Barim", 119), 119 };
 		{ WHIT.." 4) "..Atlas_GetBossName("Siamat", 122), 122 };
 		{ GREN.." 1') "..L["Tol'vir Grave"], 10002 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Kill It With Fire!", "ac=5290" };
+		{ "Acrocalypse Now", "ac=5291" };
+		{ "Headed South", "ac=5292" };
+		{ "Lost City of the Tol'vir", "ac=4848" };
+		{ "Heroic: Lost City of the Tol'vir", "ac=5066" };
+		{ "Heroic: Lost City of the Tol'vir Guild Run", "ac=5140" };
 	};
 	ShadowfangKeep = {
 		ZoneName = { BZ["Shadowfang Keep"] };
@@ -311,6 +467,14 @@ local myMaps = {
 		{ GREN..INDENT..L["Deathstalker Commander Belmont"]..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] };
 		{ GREN.." 2') "..L["Haunted Stable Hand"]..ALC["L-Parenthesis"]..ALC["Teleporter"]..ALC["R-Parenthesis"], 10005 };
 		{ GREN.." 3') "..L["Investigator Fezzen Brasstacks"]..ALC["L-Parenthesis"]..ALC["Love is in the Air"]..ALC["R-Parenthesis"], 10006 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Pardon Denied", "ac=5503" };
+		{ "To the Ground!", "ac=5504" };
+		{ "Bullet Time", "ac=5505" };
+		{ "Shadowfang Keep", "ac=631" };
+		{ "Heroic: Shadowfang Keep", "ac=5093" };
+		{ "Heroic: Shadowfang Keep Guild Run", "ac=5142" };
 	};
 	TheBastionOfTwilight = {
 		ZoneName = { BZ["The Bastion of Twilight"] };
@@ -332,6 +496,23 @@ local myMaps = {
 		{ WHIT.." 4) "..Atlas_GetBossName("Cho'gall", 167), 167 };
 		{ WHIT.." 5) "..Atlas_GetBossName("Sinestra", 168)..ALC["L-Parenthesis"]..ALC["Heroic"]..ALC["R-Parenthesis"], 168 };
 		{ GREN.." 1') "..ALC["Teleporter"], 10003 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "The Only Escape", "ac=5300" };
+		{ "Double Dragon", "ac=4852" };
+		{ "Elementary", "ac=5311" };
+		{ "The Abyss Will Gaze Back Into You", "ac=5312" };
+		{ "I Can't Hear You Over the Sound of How Awesome I Am", "ac=5313" };
+		{ "The Bastion of Twilight Guild Run", "ac=4986" };
+		{ "The Bastion of Twilight", "ac=4850" };
+		{ "Heroic: Halfus Wyrmbreaker", "ac=5118" };
+		{ "Heroic: Valiona and Theralion", "ac=5117" };
+		{ "Heroic: Ascendant Council", "ac=5119" };
+		{ "Heroic: Cho'gall", "ac=5120" };
+		{ "Heroic: Sinestra", "ac=5121" };
+		{ "Heroic: Cho'gall Guild Run", "ac=5461" };
+		{ "Heroic: Sinestra Guild Run", "ac=5464" };
+		{ "Realm First! Sinestra", "ac=5411" };
 	};
 	TheDeadminesEnt = {
 		ZoneName = { BZ["The Deadmines"]..ALC["L-Parenthesis"]..ALC["Entrance"]..ALC["R-Parenthesis"] };
@@ -377,6 +558,17 @@ local myMaps = {
 		{ GREN..INDENT..L["Miss Mayhem"]..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] };
 		{ GREN..INDENT..L["Vend-O-Tron D-Luxe"]..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] };
 		{ GREN.." 2') "..ALC["Teleporter"], 10004 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Ready for Raiding", "ac=5366" };
+		{ "Rat Pack", "ac=5367" };
+		{ "Prototype Prodigy", "ac=5368" };
+		{ "It's Frost Damage", "ac=5369" };
+		{ "I'm on a Diet", "ac=5370" };
+		{ "Vigorous VanCleef Vindicator", "ac=5371" };
+		{ "Deadmines", "ac=628" };
+		{ "Heroic: Deadmines", "ac=5083" };
+		{ "Heroic: Deadmines Guild Run", "ac=5141" };
 	};
 	TheStonecore = {
 		ZoneName = { BZ["The Stonecore"] };
@@ -395,6 +587,12 @@ local myMaps = {
 		{ WHIT.." 3) "..Atlas_GetBossName("Ozruk", 112), 112 };
 		{ WHIT.." 4) "..Atlas_GetBossName("High PRIESTess Azil", 113), 113 };
 		{ GREN.." 1') "..ALC["Teleporter"], 10003 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Rotten to the Core", "ac=5287" };
+		{ "The Stonecore", "ac=4846" };
+		{ "Heroic: The Stonecore", "ac=5063" };
+		{ "Heroic: The Stonecore Guild Run", "ac=5136" };
 	};
 	TheVortexPinnacle = {
 		ZoneName = { BZ["The Vortex Pinnacle"] };
@@ -412,6 +610,13 @@ local myMaps = {
 		{ WHIT.." 3) "..Atlas_GetBossName("Asaad, Caliph of Zephyrs", 116), 116 };
 		{ GREN.." 1') "..ALC["Teleporter"], 10002 };
 		{ GREN.." 2') "..L["Magical Brazier"], 10003 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "No Static at All", "ac=5288" };
+		{ "Extra Credit Bonus Stage", "ac=5289" };
+		{ "The Vortex Pinnacle", "ac=4847" };
+		{ "Heroic: The Vortex Pinnacle", "ac=5064" };
+		{ "Heroic: The Vortex Pinnacle Guild Run", "ac=5137" };
 	};
 	ThroneOfTheFourWinds = {
 		ZoneName = { BZ["Throne of the Four Winds"] };
@@ -429,6 +634,16 @@ local myMaps = {
 		{ WHIT..INDENT..Atlas_GetBossName("Nezir", 154, 2)..ALC["L-Parenthesis"]..ALC["North"]..ALC["R-Parenthesis"], 154 };
 		{ WHIT..INDENT..Atlas_GetBossName("Rohash", 154, 3)..ALC["L-Parenthesis"]..ALC["East"]..ALC["R-Parenthesis"], 154 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Al'Akir", 155), 155 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Stay Chill", "ac=5304" };
+		{ "Four Play", "ac=5305" };
+		{ "Throne of the Four Winds", "ac=4851" };
+		{ "Heroic: Conclave of Wind", "ac=5122" };
+		{ "Heroic: Al'Akir", "ac=5123" };
+		{ "Throne of the Four Winds Guild Run", "ac=4987" };
+		{ "Heroic: Al'Akir Guild Run", "ac=5463" };
+		{ "Realm First! Al'Akir", "ac=5410" };
 	};
 	ThroneOfTheTides = {
 		ZoneName = { BZ["The Abyssal Maw"]..ALC["Colon"]..BZ["Throne of the Tides"] };
@@ -449,6 +664,13 @@ local myMaps = {
 		{ WHIT.." 4) "..Atlas_GetBossName("Ozumat", 104), 104 };
 		{ GREN..INDENT..L["Neptulon"] };
 		{ GREN.." 1') "..ALC["Teleporter"], 10003 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Old Faithful", "ac=5285" };
+		{ "Prince of Tides", "ac=5286" };
+		{ "Throne of the Tides", "ac=4839" };
+		{ "Heroic: Throne of the Tides", "ac=5061" };
+		{ "Heroic: Throne of the Tides Guild Run", "ac=5135" };
 	};
 	ZulAman = {
 		ZoneName = { BZ["Zul'Aman"] };
@@ -496,6 +718,16 @@ local myMaps = {
 		{ GREN..INDENT..L["Relissa"] };
 		{ GREN..INDENT..L["Rosa"] };
 		{ GREN..INDENT..L["Tyllan"] };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Tunnel Vision", "ac=5750" };
+		{ "Hex Mix", "ac=5761" };
+		{ "Bear-ly Made It", "ac=5858" };
+		{ "Ring Out!", "ac=5760" };
+		{ "Amani War Bear", "ac=430" };
+		{ "Zul'Aman", "ac=691" };
+		{ "Heroic: Zul'Aman", "ac=5769" };
+		{ "Heroic: Zul'Aman Guild Run", "ac=5771" };
 	};	
 	ZulGurub = {
 		ZoneName = { BZ["Zul'Gurub"] };
@@ -545,6 +777,18 @@ local myMaps = {
 		{ GREN..INDENT..L["Zanzil's Cauldron of Frostburn Formula"] };
 		{ GREN..INDENT..L["Zanzil's Cauldron of Burning Blood"] };
 		{ WHIT.."17) "..Atlas_GetBossName("Jin'do the Godbreaker", 185), 185 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Gurubashi Headhunter", "ac=5744" };
+		{ "It's Not Easy Being Green", "ac=5743" };
+		{ "Ohganot So Fast!", "ac=5762" };
+		{ "Spirit Twister", "ac=5759" };
+		{ "Swift Zulian Tiger", "ac=880" };
+		{ "Swift Razzashi Raptor", "ac=881" };
+		{ "Deadliest Catch", "ac=560" };
+		{ "Zul'Gurub", "ac=688" };
+		{ "Heroic: Zul'Gurub", "ac=5768" };
+		{ "Heroic: Zul'Gurub Guild Run", "ac=5770" };
 	};
 };
 

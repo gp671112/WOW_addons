@@ -1,4 +1,4 @@
--- $Id: Atlas-koKR.lua 140 2017-01-16 08:56:14Z arith $
+-- $Id: Atlas-koKR.lua 225 2017-04-18 08:22:35Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -290,6 +290,7 @@ L["Top"] = "정상"
 L["Tunnel"] = "터널"
 L["Underwater"] = "수중"
 L["Upper"] = "상층"
+L["Upper floor"] = "상층"
 L["Varies"] = "위치 바뀜"
 L["West"] = "서쪽"
 L["Yarley <Armorer>"] = "야를리 <방어구 제작자>"

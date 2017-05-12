@@ -110,12 +110,15 @@ if ( GetLocale() == "zhTW" ) then
 	["|cff11ff11/dugi on - |rEnable Dugi Addon."] = "|cff11ff11/dugi on - |r啟用 Dugi 插件。",
 	["|cff11ff11/dugi off - |rDisable Dugi Addon."] = "|cff11ff11/dugi off - |r停用 Dugi 插件。",
 	["|cff11ff11/dugi config - |rDisplay settings menu."] = "|cff11ff11/dugi config - |r開啟設定選項。",
+	["|cff11ff11/dugi automount - |rToogle Auto Mount on/off."] = "|cff11ff11/dugi automount - |r啟用/停用自動坐騎。",
 	["|cff11ff11" .. "Dugi: Frame Reset"] = "|cff11ff11" .. "Dugi: 已經重置框架",
 	["|cff11ff11" .. "Dugi: Cleared Saved Variables"] = "|cff11ff11" .. "Dugi: 已經清除儲存的變數",
-	["|cff11ff11" .. "Dugi Guides Off"] = "|cff11ff11" .. "Dugi 任務高手 已啟用",
-	["|cff11ff11" .. "Dugi Guides On"] = "|cff11ff11" .. "Dugi 任務高手 已停用",
+	["|cff11ff11" .. "Dugi Guides Essential Mode"] = "Dugi 任務高手精簡版 已啟用",
+	["|cff11ff11" .. "Dugi Guides Off"] = "|cff11ff11" .. "Dugi 任務高手 已停用",
+	["|cff11ff11" .. "Dugi Guides On"] = "|cff11ff11" .. "Dugi 任務高手 已啟用",
 	["|cff11ff11Auto Mount is ON|r"] = "|cff11ff11自動坐騎 已啟用|r",
 	["|cff11ff11Auto Mount is OFF|r"] = "|cff11ff11自動坐騎 已停用|r",
+	
 		
 	["Search Locations"] = "搜尋地名",
 	["Locations in"] = "位於",
@@ -157,6 +160,21 @@ if ( GetLocale() == "zhTW" ) then
 	["Ground"] = "陸地坐騎",
 	["Flying"] = "飛行座騎",
 	["Aquatic"] = "水中坐騎",
+	
+	["Enabled Map Preview"] = "啟用地圖預覽",
+	["Addon"] = "插件",
+	["Guide Mode"] = "啟用完整版",
+	["Essential Mode"] = "啟用精簡版",
+	["Off Mode"] = "暫時停用",
+	["Quick Settings"] = "快速設定",
+	["Auto Mount"] = "自動坐騎",
+	["Gear Advisor"] = "裝備建議",
+	["Auto Quest Accept/Turn in"] = "自動接交任務",
+	["Map Preview"] = "地圖預覽",
+	["Auto Select Flight Path"] = "自動選擇飛行路線",
+	["More settings.."] = "更多設定選項...",
+	["Home"] = "首頁",
+	
 	
 	
 	

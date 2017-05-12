@@ -1,4 +1,4 @@
--- $Id: Atlas_OutdoorRaids.lua 31 2017-03-29 15:10:34Z arith $
+-- $Id: Atlas_OutdoorRaids.lua 36 2017-04-20 06:25:45Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -96,6 +96,7 @@ local myData = {
 		{ "" };
 		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
 		{ "Unleashed Monstrosities", "ac=11160" };
+		{ "Terrors of the Shore", "ac=11786" };
 	};
 	OR_Draenor = {
 		ZoneName = { L["Draenor World Bosses"] };

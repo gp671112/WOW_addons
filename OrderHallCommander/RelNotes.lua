@@ -14,9 +14,22 @@ self:Wiki([[
 == Silent mode ==
 typing /ohc silent in chat will eliminate every chat message from GarrisonCommander
 ]])
+self:RelNotes(1,2,2,[[
+Fix: #44 Error when changing options on send mission page
+Fix: #47 Troops shipment not appearing on panel loading 
+Fix: Not enough champions warning was appearing way too often
+Feature: "Better party available" tooltip improvement, now also lists party composition
+Fix: Removes an incompatibility with AuroraUI
+]])
+self:RelNotes(1,2,1,[[
+Fix: #43 Added missing consumable items
+Fix: #41 Consumables are now always shown
+Fix: #39 Removed usage of Blizzard UIDropDown in order to avoid random taint
+Feature: #40 Missions blacklisting available
+]])
 self:RelNotes(1,1,3,[[
-Fix: Now manages new champions ilevel upgrade token
-Feature: added option to sort unfilled missions as last 
+Fix: #35 Now manages new champions ilevel upgrade token
+Feature: #30 added option to sort unfilled missions as last 
 ]])
 self:RelNotes(1,1,2,[[
 Toc bump

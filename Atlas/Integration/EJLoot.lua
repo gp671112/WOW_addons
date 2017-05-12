@@ -1,4 +1,4 @@
--- $Id: EJLoot.lua 193 2017-03-30 16:53:28Z arith $
+-- $Id: EJLoot.lua 227 2017-04-25 15:54:36Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -32,12 +32,23 @@
 -- Localized Lua globals.
 -- ----------------------------------------------------------------------------
 -- Functions
-local _G = getfenv(0);
+local _G = getfenv(0)
+local ipairs = _G.ipairs
+local pairs = _G.pairs;
 -- Libraries
+local string = _G.string
+local math = _G.math;
+local floor = math.floor
 -- ----------------------------------------------------------------------------
 -- AddOn namespace.
 -- ----------------------------------------------------------------------------
 local FOLDER_NAME, private = ...
+
+local LibStub = _G.LibStub
+local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+
+local EJ_SetDifficulty, EJ_SetLootFilter = EJ_SetDifficulty, EJ_SetLootFilter
+local EJ_GetEncounterInfo, EJ_GetLootInfoByIndex, EJ_GetNumLoot = EJ_GetEncounterInfo, EJ_GetLootInfoByIndex, EJ_GetNumLoot
 
 local NO_INV_TYPE_FILTER = 0;
 
@@ -91,7 +102,7 @@ end
 function Atlas_EncounterJournal_OnLoad(self)
 --	EncounterJournalTitleText:SetText(ADVENTURE_JOURNAL);
 --	SetPortraitToTexture(EncounterJournalPortrait,"Interface\\EncounterJournal\\UI-EJ-PortraitIcon");
-	self:RegisterEvent("EJ_LOOT_DATA_RECIEVED");
+--	self:RegisterEvent("EJ_LOOT_DATA_RECIEVED");
 	self:RegisterEvent("EJ_DIFFICULTY_UPDATE");
 --	self:RegisterEvent("UNIT_PORTRAIT_UPDATE");
 --	self:RegisterEvent("SEARCH_DB_LOADED");
@@ -161,7 +172,7 @@ function Atlas_EncounterJournal_OnLoad(self)
 end
 
 function Atlas_EncounterJournal_OnLeave(self)
-	self:UnregisterEvent("EJ_LOOT_DATA_RECIEVED");
+--	self:UnregisterEvent("EJ_LOOT_DATA_RECIEVED");
 end
 
 function Atlas_EncounterJournal_HasChangedContext(instanceID, instanceType, difficultyID)
@@ -243,10 +254,10 @@ function Atlas_EncounterJournal_OnShow(self)
 end
 
 function Atlas_EncounterJournal_OnEvent(self, event, ...)
-	if  event == "EJ_LOOT_DATA_RECIEVED" then
-		local itemID = ...
-		if itemID and not EJ_IsLootListOutOfDate() then
-			Atlas_EncounterJournal_LootCallback(itemID);
+--	if  event == "EJ_LOOT_DATA_RECIEVED" then
+--		local itemID = ...
+--		if itemID and not EJ_IsLootListOutOfDate() then
+--			Atlas_EncounterJournal_LootCallback(itemID);
 --[[
 			if EncounterJournal.searchResults:IsShown() then
 				EncounterJournal_SearchUpdate();
@@ -256,9 +267,9 @@ function Atlas_EncounterJournal_OnEvent(self, event, ...)
 ]]
 --		else
 --			Atlas_EncounterJournal_LootUpdate();
-		end
-	elseif event == "EJ_DIFFICULTY_UPDATE" then
---	if event == "EJ_DIFFICULTY_UPDATE" then
+--		end
+--	elseif event == "EJ_DIFFICULTY_UPDATE" then
+	if event == "EJ_DIFFICULTY_UPDATE" then
 		--fix the difficulty buttons
 		Atlas_EncounterJournal_UpdateDifficulty(...);
 --[[
@@ -309,7 +320,8 @@ function Atlas_EncounterJournal_SetLootButton(item)
 		SetItemButtonQuality(item, quality, itemID);
 
 	else
-		item.name:SetText(RETRIEVING_ITEM_INFO);
+		--item.name:SetText(RETRIEVING_ITEM_INFO);
+		item.name:SetText(L["ATLAS_REOPEN_LOOT_AGAIN"]);
 		item.icon:SetTexture("Interface\\Icons\\INV_Misc_QuestionMark");
 		item.slot:SetText("");
 		item.armorType:SetText("");

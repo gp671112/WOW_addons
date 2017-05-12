@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt 202 2017-04-02 12:22:23Z arith $
+$Id: ChangeLog.txt 229 2017-04-30 10:57:23Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
@@ -9,11 +9,68 @@ Known Issues:
 ==============
 - User might see the boss loots are not fully loaded and showing item info 
   is retrieving. If that's the case, user will need to close and open the
-  loot window again.
+  loot window again. (this seems to be fixed since v1.40.00)
 
 ==============
 = Change Log =
 ==============
+
+v1.41.05 (Apr. 30, 2017)
+------------------------
+- Updated map data of Black Rook Hold
+
+v1.41.04 (Apr. 25, 2017)
+------------------------
+- Disabled listening to EJ_LOOT_DATA_RECIEVED event to prevent from one random error.
+
+v1.41.03 (Apr. 18, 2017)
+------------------------
+- Added map data of Gul'dan's chamber
+- Added feature to retrieve creature name from server and get displayed on 
+  map's legend panel and tooltip. 
+  This should improve the issue for those lack of translation
+
+v1.41.02 (Apr. 17, 2017)
+------------------------
+- Library update: NoTaint_UIDropDownMenu
+
+v1.41.01 (Apr. 15, 2017)
+------------------------
+- Added new map data of the Nighthold
+
+v1.41.00 (Apr. 14, 2017)
+------------------------
+- Migrated option panel and settings to be managed via Ace3 libraries
+- Now you can disable the boss portait if you don't like it
+- Now you can select a default profile for all of your characters, or define
+  individual one for specific characters
+- Re-arranged most of the functions to be object-oriented
+- Re-ordered the code files' loading sequence in ToC
+- Drop AtlasOptions
+
+v1.40.06 (Apr. 13, 2017)
+------------------------
+- Checking deprecated plugins now will recognize the alpha build's version 
+  if specifed; or will ignore those set "@project-version@" as the version
+  number to be changed by CurseForge's auto-packaging.
+
+v1.40.05 (Apr. 13, 2017)
+------------------------
+- Now Atlas won't force to disable deprecated plugins. 
+- Translation update:
+  - Korean
+  - Latin American Spanish (MrCook1e)
+  - Simplified Chinese
+
+v1.40.04 (Apr. 07, 2017)
+------------------------
+- Nighthold map data update
+
+v1.40.03 (Apr. 06, 2017)
+------------------------
+- Libraries update:
+  - LibBabble-Boss-3.0
+  - LibBabble-Faction-3.0
 
 v1.40.02 (Apr. 02, 2017)
 ------------------------

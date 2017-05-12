@@ -1,4 +1,4 @@
--- $Id: AtlasLootIntegration.lua 193 2017-03-30 16:53:28Z arith $
+-- $Id: AtlasLootIntegration.lua 218 2017-04-13 15:10:34Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -37,9 +37,9 @@ local type = _G.type;
 -- AddOn namespace.
 -- ----------------------------------------------------------------------------
 local FOLDER_NAME, private = ...
-
 local LibStub = _G.LibStub
-local L = LibStub("AceLocale-3.0"):GetLocale("Atlas");
+local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
+local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name);
 
 -- Atlas to AtlasLoot's module mapping
 local modules = {
@@ -52,7 +52,7 @@ local modules = {
 	Atlas_Legion			= "AtlasLoot_Legion",
 };
 
-function Atlas_EnableAtlasLootButton(base, zoneID)
+function addon:EnableAtlasLootButton(base, zoneID)
 	local loadable = select(4, GetAddOnInfo("AtlasLoot"));
 	if (loadable) then 
 		local showbutton = false;
@@ -85,7 +85,7 @@ function Atlas_EnableAtlasLootButton(base, zoneID)
 	end
 end
 
-function Atlas_AtlasLootButton_OnClick(self, button)
+function addon:AtlasLootButton_OnClick(self, button)
 	if (button == "RightButton") then
 		if (AtlasLoot.GUI.frame:IsVisible()) then
 			AtlasLoot.GUI.frame:Hide();

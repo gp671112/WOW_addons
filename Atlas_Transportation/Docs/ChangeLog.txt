@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt 84 2017-03-30 05:09:59Z arith $
+$Id: ChangeLog.txt 87 2017-04-06 09:14:52Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
@@ -7,6 +7,10 @@ Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail.com>
 ==============
 = Change Log =
 ==============
+
+v1.40.00 (Apr. 06, 2017)
+------------------------
+- Added portal information in Deliverance Point, Broken Shore
 
 v1.39.02 (Mar. 30, 2017)
 ------------------------

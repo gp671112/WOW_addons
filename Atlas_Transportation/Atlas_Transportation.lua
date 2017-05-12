@@ -1,4 +1,4 @@
--- $Id: Atlas_Transportation.lua 84 2017-03-30 05:09:59Z arith $
+-- $Id: Atlas_Transportation.lua 87 2017-04-06 09:14:52Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -2293,6 +2293,12 @@ local myData = {
 		{ INDENT..INDENT.._RED..ALC["L-Parenthesis"]..L["Warning: Drop"]..ALC["R-Parenthesis"] };
 		{ INDENT..GREY.."  -> "..BZ["Karazhan"]..ALC["Comma"]..BZ["Deadwind Pass"]..ALC["Comma"]..BZ["Eastern Kingdoms"] };
 		{ PURP.." C) "..format(ALC["Portal to %s"], BZ["Dalaran"])..GREY.." (30.1, 40.7)", 10042 };
+		{ NUTL.."37) "..BZ["Deliverance Point"]..ALC["Hyphen"].._G["72_BROKENSHORE_BUILDING_MAGETOWER"]..GREY.." (46.3, 61.9)" };
+		{ INDENT..GREY.."  -> "..BZ["Meredil"]..ALC["Comma"]..BZ["Suramar"] };
+		{ INDENT..GREY.."  -> "..BZ["Valdisdall"]..ALC["Comma"]..BZ["Stormheim"] };
+		{ INDENT..GREY.."  -> "..BZ["Lorlathil"]..ALC["Comma"]..BZ["Val'sharah"] };
+		{ INDENT..GREY.."  -> "..BZ["Crumbled Palace"]..ALC["Comma"]..BZ["Azsuna"] };
+		{ INDENT..GREY.."  -> "..BZ["Thunder Totem"]..ALC["Comma"]..BZ["Highmountain"] };
 		{ "" };
 		{ _RED..L["Taxi Nodes"] };
 		{ BLUE..BZ["Dalaran"] };
@@ -2459,6 +2465,12 @@ local myData = {
 		{ INDENT..INDENT.._RED..ALC["L-Parenthesis"]..L["Warning: Drop"]..ALC["R-Parenthesis"] };
 		{ INDENT..GREY.."  -> "..BZ["Karazhan"]..ALC["Comma"]..BZ["Deadwind Pass"]..ALC["Comma"]..BZ["Eastern Kingdoms"] };
 		{ PURP.." C) "..format(ALC["Portal to %s"], BZ["Dalaran"])..GREY.." (30.1, 40.7)", 10042 };
+		{ NUTL.."37) "..BZ["Deliverance Point"]..ALC["Hyphen"].._G["72_BROKENSHORE_BUILDING_MAGETOWER"]..GREY.." (46.3, 61.9)" };
+		{ INDENT..GREY.."  -> "..BZ["Meredil"]..ALC["Comma"]..BZ["Suramar"] };
+		{ INDENT..GREY.."  -> "..BZ["Valdisdall"]..ALC["Comma"]..BZ["Stormheim"] };
+		{ INDENT..GREY.."  -> "..BZ["Lorlathil"]..ALC["Comma"]..BZ["Val'sharah"] };
+		{ INDENT..GREY.."  -> "..BZ["Crumbled Palace"]..ALC["Comma"]..BZ["Azsuna"] };
+		{ INDENT..GREY.."  -> "..BZ["Thunder Totem"]..ALC["Comma"]..BZ["Highmountain"] };
 		{ "" };
 		{ _RED..L["Taxi Nodes"] };
 		{ BLUE..BZ["Dalaran"] };

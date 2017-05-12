@@ -90,6 +90,7 @@ local Current_Sorter
 local sortKeys={}
 local MAX=math.huge
 local function GetPerc(mission,realvalue)
+	if addon.db.profile.blacklist[mission.missionID] then return 0 end
 	local p=addon:GetSelectedParty(mission.missionID)
 	local perc=-p.perc or 0
 	if realvalue then
@@ -203,7 +204,7 @@ function module:LoadButtons(...)
 	for i=1,#buttonlist do
 		local b=buttonlist[i]	
 		self:SecureHookScript(b,"OnEnter","AdjustMissionTooltip")
-		self:SecureHookScript(b,"OnClick","PostMissionClick")
+		self:RawHookScript(b,"OnClick","RawMissionClick")
 		b:RegisterForClicks("AnyDown")
 		local scale=0.8
 		local f,h,s=b.Title:GetFont()
@@ -253,10 +254,13 @@ function module:OnUpdateMissions()
 end
 function module:CheckShadow()
 	if not OHFMissions.showInProgress and not OHFCompleteDialog:IsVisible() and missionNonFilled then
-		local totChamps,totTroops=addon:GetTotFollowers('CHAMP _' .. AVAILABLE),addon:GetTotFollowers('TROOP _' .. AVAILABLE)
+		local totChamps,totTroops,maxChamps=addon:GetTotFollowers('CHAMP_' .. AVAILABLE),addon:GetTotFollowers('TROOP_' .. AVAILABLE),addon:GetNumber("MAXCHAMP")
+		--[===[@debug@
+		print("Checking shadows for ",maxChamps,totChamps,totTroops)
+		--@end-debug@]===]
 		if totChamps==0 then
 			self:NoMartiniNoParty(GARRISON_PARTY_NOT_ENOUGH_CHAMPIONS)
-		elseif addon:GetNumber("MAXCHAMP") + totTroops < 3 then
+		elseif (maxChamps + totTroops < 3) and maxChamps < 3 then
 			self:NoMartiniNoParty(L["Not enough troops, raise maximum champions' number"])
 		elseif totTroops==0 then
 			self:NoMartiniNoParty(L["You have no troops"])
@@ -275,8 +279,10 @@ function module:OnSingleUpdate(frame)
 			missionIDS[frame]=frame.info.missionID
 		--end
 		local class,value=addon:GetMissionData(frame.info.missionID,'class')
+		local rw=frame.Rewards[1]
+		rw.Icon:SetDesaturated(addon.db.profile.blacklist[frame.info.missionID])
+		rw.IconBorder:SetDesaturated(addon.db.profile.blacklist[frame.info.missionID])
 		if class and class=="Artifact" then
-			local rw=frame.Rewards[1]
 			rw.Quantity:SetText(value .. "*")
 			rw.Quantity:Show()
 		end
@@ -316,7 +322,7 @@ function addon:RefreshMissions()
 	wipe(missionIDS)
 	OHFMissions:UpdateMissions()
 	if OHF.MissionTab.MissionPage:IsVisible() then
-		module:PostMissionClick(OHF.MissionTab.MissionPage)
+		module:RawMissionClick(OHF.MissionTab.MissionPage)
 	end
 end
 local function ToggleSet(this,value)
@@ -453,6 +459,7 @@ function module:MainOnShow()
 	self:RawHook(OHFMissions,"UpdateMissions","OnUpdateMissions",true)
 	self:SecureHook("GarrisonMissionButton_SetRewards","OnSingleUpdate")
 	addon:RefreshFollowerStatus()
+	addon:GetCacheModule():GARRISON_LANDINGPAGE_SHIPMENTS()
 	addon:ParseFollowers()
 	addon.lastChange=GetTime()
 	addon:ApplySORTMISSION(addon:GetString("SORTMISSION"))
@@ -538,6 +545,9 @@ function module:AdjustMissionButton(frame)
 	if not missionthreats[frame] then
 		missionthreats[frame]=CreateFrame("Frame",nil,frame,"OHCThreats")
 	end
+	if addon.db.profile.blacklist[missionID] then
+		frame.Title:SetTextColor(0,0,0)
+	end
 	self:AddMembers(frame)
 end
 function module:AddMembers(frame)
@@ -568,9 +578,10 @@ function module:AddMembers(frame)
 	stats.Chance:SetFormattedText(PERCENTAGE_STRING,perc)
 	stats.Chance:SetTextColor(addon:GetDifficultyColors(perc,true))
 	parties[missionID]=key
+	local blacklisted=addon.db.profile.blacklist[missionID]
 	for i=1,mission.numFollowers do
 		if party:Follower(i) then
-			if members.Champions[i]:SetFollower(party:Follower(i),true) then
+			if members.Champions[i]:SetFollower(party:Follower(i),true,blacklisted) then
 				stats.Chance:SetTextColor(C.Grey())
 			end
 			missionNonFilled=false
@@ -583,7 +594,10 @@ function module:AddMembers(frame)
 	for i=mission.numFollowers+1,3 do
 			members.Champions[i]:Hide()
 	end
-		
+	if blacklisted  then
+		stats.Chance:SetTextColor(C.Grey())
+		frame.Level:SetTextColor(C.Grey())
+	end
 	return self:AddThreats(frame,threats,party,missionID)
 end	
 local function goodColor(good,bad)
@@ -741,9 +755,6 @@ function module:AdjustMissionTooltip(this,...)
 	local party=addon:GetMissionParties(missionID)
 	local key=parties[missionID]
 	if party then
---[===[@debug@
-		print(party)
---@end-debug@	]===]
 		local candidate =party:GetSelectedParty(key)
 		if candidate then
 			if candidate.hasBonusLootNegativeEffect then
@@ -777,6 +788,12 @@ function module:AdjustMissionTooltip(this,...)
 			-- hasUncounterableSuccessChanceNegativeEffect
 		end
 	end
+	if (addon.db.profile.blacklist[this.info.missionID]) then
+		GameTooltip:AddDoubleLine(L["Blacklisted"],L["Right-Click to remove from blacklist"],1,0.125,0.125,C:Green())
+		--GameTooltip:AddLine(L["Blacklisted missions are ignored in Mission Control"])
+	else
+		GameTooltip:AddDoubleLine(L["Not blacklisted"],L["Right-Click to blacklist"],0.125,1.0,0.125,C:Red())
+	end
 	-- Mostrare per ogni tempo di attesa solo la percentuale migliore
 	wipe(bestTimes)
 	wipe(bestTimesIndex)
@@ -787,8 +804,8 @@ function module:AdjustMissionTooltip(this,...)
 			local candidate=party:GetSelectedParty(otherkey)
 			local duration=addon:BusyFor(candidate)
 			if duration > 0 then
-				if not bestTimes[duration] or bestTimes[duration] < candidate.perc then
-					bestTimes[duration]=candidate.perc
+				if not bestTimes[duration] or not bestTimes[duration].perc or bestTimes[duration].perc < candidate.perc then
+					bestTimes[duration]=candidate
 				end
 			end
 		end
@@ -803,24 +820,41 @@ function module:AdjustMissionTooltip(this,...)
 		local bestChance=0
 		for i=1,#bestTimesIndex do
 			local key=bestTimesIndex[i]
-			if bestTimes[key] > bestChance then
-				bestChance=bestTimes[key]
+			local candidate=bestTimes[key]
+			if candidate.perc > bestChance then
+				bestChance=candidate.perc
 				tip:AddDoubleLine(SecondsToTime(key),GARRISON_MISSION_PERCENT_CHANCE:format(bestChance),C.Orange.r,C.Orange.g,C.Orange.b,addon:GetDifficultyColors(bestChance))
+				for _,c in candidate:IterateFollowers() do
+					local busy=G.GetFollowerMissionTimeLeftSeconds(c) or 0
+					tip:AddDoubleLine(G.GetFollowerLink(c),SecondsToTime(busy),1,1,1,addon:GetDifficultyColors(busy/10))
+				end
 			end
 		end
 	end
 	tip:Show()
 	
 end
-function module:PostMissionClick(this,button)
+function module:RawMissionClick(this,button)
 	local mission=this.info or this.missionInfo -- callable also from mission page
+	if button=="LeftButton" then
+		self.hooks[this].OnClick(this,button)
+		if( IsControlKeyDown()) then 
+			self:Print("Ctrl key, ignoring mission prefill")
+		else 		
+			addon:GetMissionpageModule():FillMissionPage(mission,parties[mission.missionID])
+		end
+	elseif button=="RightButton" then
+		addon.db.profile.blacklist[mission.missionID]= not addon.db.profile.blacklist[mission.missionID]	
+		GameTooltip:Hide()
+		addon:RefreshMissions()
+		this:GetScript("OnEnter")(this)
 --[===[@debug@
-	if button=="MiddleButton" then
+	elseif button=="MiddleButton" then
 		addon:TestParty(mission.missionID)
+		
 		return
-	end
 --@end-debug@]===]
-	addon:GetMissionpageModule():FillMissionPage(mission,parties[mission.missionID])
+	end
 end
 do
 

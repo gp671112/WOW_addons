@@ -1,4 +1,4 @@
--- $Id: Atlas_OutdoorRaids_DB.lua 31 2017-03-29 15:10:34Z arith $
+-- $Id: Atlas_OutdoorRaids_DB.lua 38 2017-04-26 16:59:44Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -49,8 +49,8 @@ local myDB = {
 		{ 11, 1783, 180, 232, 412, 310 }; -- Na'zak the Fiend
 		-- { 12, 1883, }; -- Brutallus
 		{ 13, 1884, 312, 335, 580, 438 }; -- Malificus
-		-- { 14, 1885, }; -- Si'vash
-		-- { 15, 1956, }; -- Apocron
+		{ 14, 1885, 363, 338, 639, 442 }; -- Si'vash
+		{ 15, 1956, 315, 369, 581, 482 }; -- Apocron
 	};
 	OR_Draenor = {
 		{ 1, 1291, 271, 119, 517, 153 }; -- Drov the Ruiner

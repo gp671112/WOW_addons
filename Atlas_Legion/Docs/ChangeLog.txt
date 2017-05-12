@@ -1,10 +1,81 @@
-$Id: ChangeLog.txt 106 2017-03-31 08:09:09Z arith $
+$Id: ChangeLog.txt 130 2017-04-30 11:01:57Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 ==============
 = Change Log =
 ==============
+
+v1.41.05 (Apr. 30, 2017)
+------------------------
+- Black Rook Hold maps revamped
+- Added rare mob Lord Etheldrin Ravencrest and WQ boss Kelorn Nightblade, 
+  General Tel'arn, and Ranger General Feleor to Black Rook Hold
+- Added alchemy quest (Heavy, But Helpful) item (Sabelite Sulfate) to
+  Black Rook Hold
+- Added achievement (You Used to Scrawl Me In Your Fel Tome) object items
+  to Black Rook Hold
+- Localization update:
+  - Russian (BLizzatron)
+
+v1.41.04 (Apr. 28, 2017)
+------------------------
+- Fixed WQ bosses' number in Eye of Azshara
+- Localization update:
+  - German (pas06)
+  - Traditional Chinese
+
+v1.41.03 (Apr. 18, 2017)
+------------------------
+- Added map of Gul'dan's chamber
+- Changed to use Atlas' get creature name feature to get the non-encounter's name
+
+v1.41.02 (Apr. 17, 2017)
+------------------------
+- Added Cathedral of Eternal Night's WQ boss - Raga'yut
+
+v1.41.01 (Apr. 15, 2017)
+------------------------
+- Added Mana Focus position to map of Return to Karazhan (Map H)
+- Slightly adjusted the entrance A and connection C's positions 
+  in Return to Karazhan (Map A)
+- Slightly adjusted the connection G's position in the Nighthold (Map B)
+- Added portal locations in Nighthold's maps
+- Added 1st floor of the Nightspire map to the Nighthold
+
+v1.41.00 (Apr. 14, 2017)
+------------------------
+- Added world boss - Flightmaster Volnath in the Nighthold
+
+v1.40.04 (Apr. 13, 2017)
+------------------------
+- Localization update:
+  - German (pas06)
+  - Simplified Chinese (ananhaid)
+  - Traditional Chinese
+
+v1.40.03 (Apr. 10, 2017)
+------------------------
+- Added large maps for the Nighthold
+- Added location of world quest boss - Gilded Guardian in the Nighthold
+- Localization update:
+  - German (pas06)
+  - Simplified Chinese (ananhaid)
+
+v1.40.02 (Apr. 08, 2017)
+------------------------
+- Added achievements of Cathedral of Eternal Night and Tomb of Sargeras
+- The Arcway map revamped
+- Added large map for the Arcway
+
+v1.40.01 (Apr. 07, 2017)
+------------------------
+- Nighthold maps revamped and re-organized
+  - Combine the original Map A and Map B into one single map
+  - Switch the original Map C and Map D
+  - Revamped map of Captain's Quarters (Tichondrius)
+  - Corrected Gul'dan's location and remove the original MapG
+- Change the boss order in Nighthold to better match with the LFR
 
 v1.40.00 (Mar. 31, 2017)
 ------------------------

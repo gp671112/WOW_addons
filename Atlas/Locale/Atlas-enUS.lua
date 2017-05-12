@@ -1,4 +1,4 @@
--- $Id: Atlas-enUS.lua 193 2017-03-30 16:53:28Z arith $
+-- $Id: Atlas-enUS.lua 227 2017-04-25 15:54:36Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -132,11 +132,11 @@ L["ATLAS_INFO"] = "Atlas Information"
 L["ATLAS_INFO_12200"] = [=[Important Notice:
 
 Due to the concern of increasing addon file size, we have moved out 
-part of our dungeon maps and built-in plug-ins into separated addon package.
+npart of our dungeon maps and built-in plug-ins into separated addon package.
 
 Users who download our addons from some of the famous game web sites 
-may only get our core addon which only include the Atlas core function 
-and the latest WoW expansion maps.
+nmay only get our core addon which only include the Atlas core function 
+nand the latest WoW expansion maps.
 
 If you also want to see all the old expansions' maps, and also want all those 
 Atlas plug-ins made by us, you have to download and install them separately.
@@ -147,7 +147,7 @@ Read below forum topic for more information:
 Or visit our website to see where to download:
 |cff6666ffhttp://www.atlasmod.com/|cffffffff]=]
 L["ATLAS_INFO_12201"] = [=[Please be advised that we have created a new plug-in - |cff6666ffAtlas Scenarios|cffffffff, to 
-provide the brand-new Scenarios maps introduced in WoW 5.0. 
+nprovide the brand-new Scenarios maps introduced in WoW 5.0. 
 
 Check out our web site for more details, and don't forget to download / 
 install it separately.
@@ -163,7 +163,7 @@ L["ATLAS_MISSING_MODULE"] = [=[Atlas has detected some missing module(s) / plugi
 It could be you had outdated module(s) / plugin(s) which had been disabled by Atlas. 
 If you have now installed all latest ones, go to your addon list to see if all of them have been enabled. 
 
-If you are sure that you don't need those "missing" module(s) / plugin(s) and do not want to see this message again, you can go to option panel to disable the notification. 
+If you are sure that you don't need those \"missing\" module(s) / plugin(s) and do not want to see this message again, you can go to option panel to disable the notification. 
 
 List of missing module(s) / plugin(s): 
 ]=]
@@ -193,6 +193,8 @@ L["ATLAS_OPTIONS_COLORINGDROPDOWN_TIP"] = "Based on the instance's recommended m
 L["ATLAS_OPTIONS_CTRL"] = "Hold down Control for tooltips"
 L["ATLAS_OPTIONS_CTRL_TIP"] = "Enable to show tooltips text while hold down control key and mouse over the map info. Useful when the text is too long to be displayed in the window."
 L["ATLAS_OPTIONS_DONTSHOWAGAIN"] = "Don't show the same information again."
+L["ATLAS_OPTIONS_HEADER_ADDONCONFIG"] = "Addon Configurations"
+L["ATLAS_OPTIONS_HEADER_DISPLAY"] = "Display Options"
 L["ATLAS_OPTIONS_LOCK"] = "Lock Atlas window"
 L["ATLAS_OPTIONS_LOCK_TIP"] = "Toggle lock / unlock of Atlas window."
 L["ATLAS_OPTIONS_RCLICK"] = "Right-Click for World Map"
@@ -203,6 +205,7 @@ L["ATLAS_OPTIONS_SHOWBUT"] = "Show Button on Minimap"
 L["ATLAS_OPTIONS_SHOWBUT_TIP"] = "Show Atlas button around the minimap."
 L["ATLAS_OPTIONS_SHOWWMBUT"] = "Show Button on World Map window."
 L["ATLAS_OPTIONS_TRANS"] = "Transparency"
+L["ATLAS_REOPEN_LOOT_AGAIN"] = "Please reopen the loot window to reload."
 L["ATLAS_ROPEN_ATLASLOOT_WINDOW"] = "Right-click to open AtlasLoot window."
 L["ATLAS_SEARCH_UNAVAIL"] = "Search Unavailable"
 L["ATLAS_SLASH"] = "/atlas"
@@ -293,6 +296,7 @@ L["Period"] = ". "
 L["Portal"] = "Portal"
 L["Portal to %s"] = "Portal to %s"
 L["PossibleMissingModule"] = "It is likely this map is from this module: "
+L["Profile Options"] = "Profile Options"
 L["Protection Warrior"] = "Protection Warrior"
 L["Purple"] = "Purple"
 L["Random"] = "Random"

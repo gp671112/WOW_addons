@@ -1,4 +1,4 @@
--- $Id: EJIntegration.lua 193 2017-03-30 16:53:28Z arith $
+-- $Id: EJIntegration.lua 225 2017-04-18 08:22:35Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -38,8 +38,16 @@ local select = _G.select;
 -- ----------------------------------------------------------------------------
 local FOLDER_NAME, private = ...
 local LibStub = _G.LibStub
-local L = LibStub("AceLocale-3.0"):GetLocale("Atlas");
+local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
+local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name);
 local BB = Atlas_GetLocaleLibBabble("LibBabble-Boss-3.0");
+
+-- Adopted from EncounterJournal
+local EJ_HTYPE_OVERVIEW = 3;
+
+function addon:EncounterJournal_CheckForOverview(rootSectionID)
+	return select(3,EJ_GetSectionInfo(rootSectionID)) == EJ_HTYPE_OVERVIEW;
+end
 
 -- ------------------------------------------------------------
 -- Call this function to translate boss name
@@ -47,7 +55,7 @@ local BB = Atlas_GetLocaleLibBabble("LibBabble-Boss-3.0");
 -- Syntax 2: Atlas_GetBossName(bossname, encounterID);
 -- Syntax 2: Atlas_GetBossName(bossname, encounterID, creatureIndex);
 -- ------------------------------------------------------------
-function Atlas_GetBossName(bossname, encounterID, creatureIndex)
+function addon:GetBossName(bossname, encounterID, creatureIndex)
 	if (encounterID) then
 		local encounter;
 		if (creatureIndex) then
@@ -82,7 +90,11 @@ function Atlas_GetBossName(bossname, encounterID, creatureIndex)
 	return bossname;
 end
 
-function Atlas_AdventureJournalButton_OnClick(frame)
+function Atlas_GetBossName(bossname, encounterID, creatureIndex)
+	return addon:GetBossName(bossname, encounterID, creatureIndex)
+end
+
+function addon:AdventureJournalButton_OnClick(frame)
 	local instanceID = frame.instanceID;
 	local disabled = not C_AdventureJournal.CanBeShown();
 	if (disabled) then return; end
@@ -111,7 +123,7 @@ function Atlas_AdventureJournalButton_OnClick(frame)
 	end
 end
 
-function Atlas_AdventureJournalButton_OnEnter(frame)
+function addon:AdventureJournalButton_OnEnter(frame)
 	local instanceID = frame.instanceID;
 	if (not instanceID) then return; end
 
@@ -138,7 +150,7 @@ function Atlas_AdventureJournalButton_OnEnter(frame)
 	end
 end
 
-function Atlas_AdventureJournal_EncounterButton_OnClick(instanceID, encounterID, keepAtlas)
+function addon:AdventureJournal_EncounterButton_OnClick(instanceID, encounterID, keepAtlas)
 	if (not instanceID or not encounterID) then return; end
 	
 	local disabled = not C_AdventureJournal.CanBeShown();
@@ -170,7 +182,7 @@ function Atlas_AdventureJournal_EncounterButton_OnClick(instanceID, encounterID,
 	end
 end
 
-function Atlas_AdventureJournal_MapButton_OnClick(frame)
+function addon:AdventureJournal_MapButton_OnClick(frame)
 	local mapID = frame.mapID;
 	local dungeonLevel = frame.dungeonLevel;
 
@@ -190,14 +202,33 @@ function Atlas_AdventureJournal_MapButton_OnClick(frame)
 	end
 end
 
+local function autoSelect_from_EncounterJournal()
+	local instanceID = EncounterJournal.instanceID;
+	
+	if (not instanceID) then
+		return;
+	end
+
+	for type_k, type_v in pairs(ATLAS_DROPDOWNS) do
+		for zone_k, zone_v in pairs(type_v) do
+			if (AtlasMaps[zone_v].JournalInstanceID and tonumber(AtlasMaps[zone_v].JournalInstanceID) == instanceID) then
+				Atlas.db.profile.options.dropdowns.module = type_k;
+				Atlas.db.profile.options.dropdowns.zone = zone_k;
+				Atlas_Refresh();
+				return;
+			end
+		end
+	end
+end
+
 -- Encounter Journal's button bidding
-local function Atlas_ToggleFromEncounterJournal_OnClick(self)
-	Atlas_AutoSelect_from_EncounterJournal();
+local function toggleFromEncounterJournal_OnClick(self)
+	autoSelect_from_EncounterJournal();
 	ToggleFrame(EncounterJournal);
 	Atlas_Toggle();
 end
 
-local function Atlas_ToggleFromEncounterJournal_OnShow(self)
+local function toggleFromEncounterJournal_OnShow(self)
 	local ElvUI = select(4, GetAddOnInfo("ElvUI"));
 
 	if (not ElvUI) then return; end
@@ -227,7 +258,7 @@ local function Atlas_ToggleFromEncounterJournal_OnShow(self)
 	end
 end
 
-function Atlas_EncounterJournal_Binding()
+function addon:EncounterJournal_Binding()
 	local button = _G["AtlasToggleFromEncounterJournal"];
 	if (not button) then
 		button = CreateFrame("Button","AtlasToggleFromEncounterJournal", EncounterJournal);
@@ -243,28 +274,10 @@ function Atlas_EncounterJournal_Binding()
 			GameTooltip:SetText(L["ATLAS_CLICK_TO_OPEN"], nil, nil, nil, nil, 1);
 		end);
 		button:SetScript("OnLeave", function(self) GameTooltip:Hide(); end);
-		button:SetScript("OnClick",Atlas_ToggleFromEncounterJournal_OnClick);
-		button:SetScript("OnShow",Atlas_ToggleFromEncounterJournal_OnShow);
+		button:SetScript("OnClick", toggleFromEncounterJournal_OnClick);
+		button:SetScript("OnShow", toggleFromEncounterJournal_OnShow);
 	end
 end
 
-function Atlas_AutoSelect_from_EncounterJournal()
-	local instanceID = EncounterJournal.instanceID;
-	
-	if (not instanceID) then
-		return;
-	end
-
-	for type_k, type_v in pairs(ATLAS_DROPDOWNS) do
-		for zone_k, zone_v in pairs(type_v) do
-			if (AtlasMaps[zone_v].JournalInstanceID and tonumber(AtlasMaps[zone_v].JournalInstanceID) == instanceID) then
-				Atlas.db.profile.options.dropdowns.module = type_k;
-				Atlas.db.profile.options.dropdowns.zone = zone_k;
-				Atlas_Refresh();
-				return;
-			end
-		end
-	end
-end
 -- End of Encounter Journal's button bidding
 

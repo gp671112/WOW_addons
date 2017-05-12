@@ -1,4 +1,4 @@
--- $Id: Atlas-zhTW.lua 193 2017-03-30 16:53:28Z arith $
+-- $Id: Atlas-zhTW.lua 216 2017-04-13 06:48:03Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -189,6 +189,8 @@ L["ATLAS_OPTIONS_COLORINGDROPDOWN_TIP"] = "依據副本建議的最低進入等�
 L["ATLAS_OPTIONS_CTRL"] = "按住 Ctrl 鍵以顯示工具提示"
 L["ATLAS_OPTIONS_CTRL_TIP"] = "勾選後，當滑鼠移到地圖資訊欄位時，按下 Ctrl 控制鍵，則會將資訊的完整資訊以提示型態顯示。當資訊過長而被截斷時很有用。"
 L["ATLAS_OPTIONS_DONTSHOWAGAIN"] = "不再顯示相同訊息。"
+L["ATLAS_OPTIONS_HEADER_ADDONCONFIG"] = "插件設定"
+L["ATLAS_OPTIONS_HEADER_DISPLAY"] = "顯示選項"
 L["ATLAS_OPTIONS_LOCK"] = "鎖定 Atlas 視窗位置"
 L["ATLAS_OPTIONS_LOCK_TIP"] = "設定將 Atlas 視窗位置鎖定或不鎖定"
 L["ATLAS_OPTIONS_RCLICK"] = "滑鼠右鍵開啟世界地圖"
@@ -289,6 +291,7 @@ L["Period"] = "。"
 L["Portal"] = "傳送門"
 L["Portal to %s"] = "到%s的傳送門"
 L["PossibleMissingModule"] = "遺失的地圖應是來自以下的模組："
+L["Profile Options"] = "設定檔選項"
 L["Protection Warrior"] = "防戰"
 L["Purple"] = "紫"
 L["Random"] = "隨機"

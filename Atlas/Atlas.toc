@@ -8,7 +8,7 @@
 ## Title-koKR: Atlas
 ## Title-ptBR: Atlas
 ## Title-ruRU: Atlas
-## Title-zhCN: Atlas |cFF0099FF[主程式]|r
+## Title-zhCN: Atlas |cFF0099FF[主程序]|r
 ## Title-zhTW: |r|cFF0099FF[地圖]|rAtlas 地圖集 |cFF0099FF[主程式]|r
 ## Notes: Instance Map Browser
 ## Notes-deDE: Instanzkarten-Browser
@@ -46,36 +46,45 @@
 # ## Notes-zhTW: Atlas 地圖集主程式
 #@end-debug@
 ## Author: arith, dubcat
-## Version: 1.40.02
+## Version: v1.41.05
 ## OptionalDeps: Ace3, LibBabble-Boss-3.0, LibBabble-SubZone-3.0, LibBabble-Faction-3.0, LibDataBroker-1.1, LibAboutPanel, CallbackHandler-1.0, LibDBIcon-1.0, LibDialog-1.0
 ## X-Category: Map
 ## X-Credits: Dan Gilbert, Lothaer, Dynaletik
-## X-Date: 2017-04-02T12:22:23Z
+## X-Date: 2017-04-30T10:57:23Z
 ## X-Donate: http://pledgie.com/campaigns/14729
 ## X-Email: atlas.addon at gmail dot com
 ## X-Feedback: http://www.atlasmod.com/phpBB3/
 ## X-License: GPLv2
-## X-Localizations: enUS, deDE, esES, esMX, frFR, ruRU, zhTW, zhCN, ptBR
+## X-Localizations: enUS, deDE, esES, esMX, frFR, ruRU, zhTW, zhCN, ptBR, koKR
 ## X-Website: http://www.atlasmod.com
-## X-OptionsFrame: AtlasOptionsFrame
-## SavedVariables: AtlasOptions, AtlasDB
+## SavedVariables: AtlasDB
 
 Libs\Libs.xml
 Locale\Locales.xml
-Core\Constants.lua
+Data\Constants.lua
+
 Core\FontsTemplates.xml
 Core\Templates.xml
 Core\IngameLocales.lua
-Core\Maps_Association.lua
-Integration\EJIntegration.lua
-Core\Maps_DB.lua
-Core\Maps_NPC_DB.lua
-Core\DropDownConfig.lua
 
+# Map Configs
+Data\Maps_Association.lua
+Data\Maps_PreSetDB.lua
+Data\DropDownConfig.lua
+
+# Core
+Core\Atlas.lua
+Core\AtlasFrame.lua
+Core\Atlas.xml
+Core\Config.lua
+
+# Integration functions
+Integration\EJIntegration.lua
+Integration\EJLoot.xml
+Integration\WorldMapIntegration.xml
 Integration\Achievements.lua
 Integration\AtlasLootIntegration.lua
 
-Core\Atlas.xml
-Core\Options.xml
-Integration\EJLoot.xml
-Integration\WorldMapIntegration.xml
+# Data which is not part of any module
+Data\Maps.lua
+Data\Maps_NPC_DB.lua

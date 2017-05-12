@@ -102,7 +102,7 @@ local function UpdateFrames(noPageUpdate)
 	end
 	
 	-- AtlasMapID
-	if (AtlasLoot.Atlas.IsEnabled() and moduleData[dataID].AtlasMapID) then
+	if (AtlasLoot.AtlasIntegration.IsEnabled() and moduleData[dataID].AtlasMapID) then
 		GUI.frame.contentFrame.AtlasMapButton.AtlasMapID = moduleData[dataID].AtlasMapID
 		GUI.frame.contentFrame.AtlasMapButton:Show()
 		if (GUI.frame.contentFrame.soundsButton:IsVisible()) then
@@ -117,6 +117,8 @@ local function UpdateFrames(noPageUpdate)
 		GUI.frame.contentFrame.AtlasMapButton:Hide()
 	end
 	
+	-- BaseLvl for Items
+	GUI.ItemFrame.ItemBaseLvl = moduleData[dataID].ItemBaseLvl
 		
 	if not noPageUpdate then
 		-- Next/Prev
@@ -234,14 +236,14 @@ end
 
 -- Atlas
 local function AtlasMapButton_OnClick(self, button)
-	if (AtlasLoot.Atlas.IsEnabled()) then
+	if (AtlasLoot.AtlasIntegration.IsEnabled()) then
 		if (button == "RightButton") then
 			if ( AtlasFrameSmall:IsVisible() ) then
 				HideUIPanel(AtlasFrameSmall);
 			end
 		else
 			if (self.AtlasMapID) then
-				AtlasLoot.Atlas.ShowMap(self.AtlasMapID);
+				AtlasLoot.AtlasIntegration.ShowMap(self.AtlasMapID);
 			end
 		end
 	end

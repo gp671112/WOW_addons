@@ -39,6 +39,7 @@ local FAKE_FOLLOWERID="0x0000000000000000"
 local MAX_LEVEL=110
 local LE_FOLLOWER_TYPE_GARRISON_7_0=LE_FOLLOWER_TYPE_GARRISON_7_0
 local GARRISON_FOLLOWER_MAX_UPGRADE_QUALITY=GARRISON_FOLLOWER_MAX_UPGRADE_QUALITY[LE_FOLLOWER_TYPE_GARRISON_7_0]
+local GARRISON_FOLLOWER_MAX_ITEM_LEVEL = 900
 local ShowTT=OrderHallCommanderMixin.ShowTT
 local HideTT=OrderHallCommanderMixin.HideTT
 
@@ -146,13 +147,16 @@ function module:RefreshUpgrades(model,followerID,displayID,showWeapon)
 	end
 	wipe(UpgradeButtons)
 	if not follower then print("No follower for ",followerID) return end
-	if follower.isTroop then return end
 	if not follower.isCollected then return end
 	if follower.status==GARRISON_FOLLOWER_ON_MISSION then return end
 	if follower.status==GARRISON_FOLLOWER_COMBAT_ALLY then return end
 	--if follower.status==GARRISON_FOLLOWER_INACTIVE then return end
 	local u=UpgradeFrame
 	local previous
+	for _,id in pairs(addon:GetData("Buffs")) do
+		previous=self:RenderUpgradeButton(id,previous)
+	end	
+	if follower.isTroop then return end
 	if follower.iLevel <850  then
 		for _,id in pairs(addon:GetData("Upgrades")) do
 			previous=self:RenderUpgradeButton(id,previous)

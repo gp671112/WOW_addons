@@ -1,4 +1,4 @@
--- $Id: Atlas_Legion-enUS.lua 102 2017-03-27 14:46:14Z arith $
+-- $Id: Atlas_Legion-enUS.lua 130 2017-04-30 11:01:57Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -29,6 +29,7 @@ if L then
 	-- Assault on VioletHold
 
 	-- Cathedral of Eternal Night
+	L["Raga'yut"] = "Raga'yut" -- 120715
 
 	-- Court of Stars
 	L["Ly'leth Lunastre"] = "Ly'leth Lunastre"; -- 106468
@@ -36,12 +37,18 @@ if L then
 	L["Velimar"] = "Velimar"; -- 108740
 
 	-- Black Rook Hold 
-	L["Dantalionax"] = "Dantalionax";
+	L["Dantalionax"] = "Dantalionax"; -- 99611
 	L["Lady Velandras Ravencrest"] = "Lady Velandras Ravencrest"; -- 98538
 	L["Ancient Widow"] = "Ancient Widow"; --98637
 	L["Archmage Galeorn"] = "Archmage Galeorn"; -- 111068
 	L["Kalyndras <Rook's Quartermaster>"] = "Kalyndras <Rook's Quartermaster>"; -- 112725
 	L["Braxas the Fleshcarver"] = "Braxas the Fleshcarver"; -- 111290
+	L["Torn Page"] = "Torn Page"
+	L["Dog-Eared Page"] = "Dog-Eared Page"
+	L["Worn-Edged Page"] = "Worn-Edged Page"
+	L["Singed Page"] = "Singed Page"
+	L["Ink-splattered Page"] = "Ink-splattered Page"
+	L["Hastily-Scrawled Page"] = "Hastily-Scrawled Page"
 
 	-- Darkheart Thicket
 	L["Rage Rot"] = "Rage Rot"; -- 101660
@@ -93,19 +100,23 @@ if L then
 	L["Portal to Shal'Aran"] = "Portal to Shal'Aran";
 	L["The Rat King"] = "The Rat King"; -- 111057
 	L["Sludge Face"] = "Sludge Face"; -- 111021
+	L["Suramar Leyline Map"] = "Suramar Leyline Map"; -- object: 251641
 
 	-- The Emerald Nightmare
 	L["Nightmare Watcher"] = "Nightmare Watcher";
-	L["Malfurion Stormrage"] = "Malfurion Stormrage";
+	L["Malfurion Stormrage"] = "Malfurion Stormrage"; -- 106482
 	L["Teleport to Moonglade"] = "Teleport to Moonglade";
 
 	-- The Nighthold
 	L["Teleport to Tichondrius / Grand Magistrix Elisande"] = "Teleport to Tichondrius / Grand Magistrix Elisande";
+	L["First Arcanist Thalyssra"] = "First Arcanist Thalyssra"; -- 110791
+	L["Gilded Guardian"] = "Gilded Guardian"; -- 112712
+	L["Flightmaster Volnath"] = "Flightmaster Volnath"; -- 116004
 	
 	-- Trial of Valor
 	
 	-- Vault of the Wardens
-	L["Fel-Ravaged Tome"] = "Fel-Ravaged Tome";
+	L["Fel-Ravaged Tome"] = "Fel-Ravaged Tome"; -- object=258979
 	L["Drelanim Whisperwind"] = "Drelanim Whisperwind"; -- 103860
 	L["Grimoira"] = "Grimoira"; -- 105824
 	L["Requires Skaggldrynk"] = "Requires Skaggldrynk";

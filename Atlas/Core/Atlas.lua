@@ -1,4 +1,4 @@
--- $Id: Atlas.lua 199 2017-03-31 17:50:41Z arith $
+-- $Id: Atlas.lua 225 2017-04-18 08:22:35Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -44,14 +44,18 @@ local math = _G.math;
 local FOLDER_NAME, private = ...
 
 local LibStub = _G.LibStub
+local addon = LibStub("AceAddon-3.0"):NewAddon(private.addon_name, "AceConsole-3.0")
+addon.constants = private.constants
+addon.constants.addon_name = private.addon_name
+addon.Name = FOLDER_NAME
+_G.Atlas = addon
+
 local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name);
 local BZ = Atlas_GetLocaleLibBabble("LibBabble-SubZone-3.0");
+local BB = Atlas_GetLocaleLibBabble("LibBabble-Boss-3.0");
 local LibDialog = LibStub("LibDialog-1.0");
-local Atlas = LibStub("AceAddon-3.0"):NewAddon("Atlas", "AceConsole-3.0")
-Atlas.constants = private.constants
-Atlas.constants.addon_name = private.addon_name
-Atlas.Name = FOLDER_NAME
-_G.Atlas = Atlas
+local AceDB = LibStub("AceDB-3.0")
+
 local profile;
 
 -- Minimap button with LibDBIcon-1.0
@@ -63,24 +67,49 @@ local LDB = LibStub("LibDataBroker-1.1"):NewDataObject("Atlas", {
 
 local minimapButton = LibStub("LibDBIcon-1.0");
 
-function Atlas:OnInitialize()
-	self.db = LibStub("AceDB-3.0"):New("AtlasDB", Atlas.constants.defaults, true)
+function addon:OnInitialize()
+	self.db = AceDB:New("AtlasDB", addon.constants.defaults, true)
 	
 	profile = self.db.profile;
 	
 	minimapButton:Register("Atlas", LDB, self.db.profile.minimap);
-	self:RegisterChatCommand("atlasbutton", AtlasButton_Toggle);
+	self:RegisterChatCommand("atlasbutton", Atlas_ButtonToggle2);
 	self:RegisterChatCommand("atlas", Atlas_Toggle);
-	self:RegisterChatCommand("atlas "..ATLAS_SLASH_OPTIONS, AtlasOptions_Toggle);
+	--self:RegisterChatCommand("atlas "..ATLAS_SLASH_OPTIONS, AtlasOptions_Toggle);
+
+	self.db.RegisterCallback(self, "OnProfileChanged", "Refresh")
+	self.db.RegisterCallback(self, "OnProfileCopied", "Refresh")
+	self.db.RegisterCallback(self, "OnProfileReset", "Refresh")
 	
 	self:SetupOptions();
 end
 
-function Atlas:OnEnable()
+function addon:OnEnable()
 
 end
 
-function Atlas:Toggle()
+function addon:Refresh()
+	profile = self.db.profile;
+
+	Atlas_PopulateDropdowns();
+	Atlas_Refresh();
+	AtlasFrameDropDownType_OnShow();
+	AtlasFrameDropDown_OnShow();
+	addon:UpdateLock();
+	addon:UpdateAlpha();
+	addon:UpdateScale();
+	AtlasFrame:SetClampedToScreen(profile.options.frames.clamp);
+	AtlasFrameLarge:SetClampedToScreen(profile.options.frames.clamp);
+	AtlasFrameSmall:SetClampedToScreen(profile.options.frames.clamp);
+	if (profile.options.worldMapButton) then
+		AtlasToggleFromWorldMap:Show();
+	else
+		AtlasToggleFromWorldMap:Hide();
+	end
+
+end
+--[[
+function addon:Toggle()
 	self.db.profile.minimap.hide = not self.db.profile.minimap.hide
 	if self.db.profile.minimap.hide then
 		minimapButton:Hide("Atlas")
@@ -90,40 +119,20 @@ function Atlas:Toggle()
 		--AtlasOptions.AtlasButtonShown = true;
 	end
 end
-
-function AtlasButton_Toggle()
-	Atlas:Toggle()
-end
-
---[[
--- Code by Grayhoof (SCT)
-local function Atlas_CloneTable(tablein)	-- Return a copy of the table tablein
-	local new_table = {};			-- Create a new table
-	local ka, va = next(tablein, nil);	-- The ka is an index of tablein; va = tablein[ka]
-	while ka do
-		if type(va) == "table" then 
-			va = Atlas_CloneTable(va);
-		end 
-		new_table[ka] = va;
-		ka, va = next(tablein, ka);	-- Get next index
-	end
-	return new_table;
-end
-
-function Atlas:FreshOptions()
-	--AtlasOptions = Atlas_CloneTable(Atlas.constants.defaultoptions);
-end
-
--- function to check if user has all the options parameter, 
--- if not (due to some might be newly added), then add it with default value
-local function Atlas_UpdateOptions(player_options)
-	for k, v in pairs(Atlas.constants.defaultoptions) do
-		if (player_options[k] == nil) then
-			player_options[k] = v;
-		end
-	end
-end
 ]]
+function Atlas_ButtonToggle2()
+	profile.minimap.hide = not profile.minimap.hide
+	Atlas_ButtonToggle()
+end
+function Atlas_ButtonToggle()
+	if profile.minimap.hide then
+		minimapButton:Hide("Atlas")
+		--AtlasOptions.AtlasButtonShown = false;
+	else
+		minimapButton:Show("Atlas")
+		--AtlasOptions.AtlasButtonShown = true;
+	end
+end
 
 local function copyOptions()
 	local options = profile.options;
@@ -151,58 +160,36 @@ local function copyOptions()
 	options.disableUpdateNotification = AtlasOptions.AtlasDontShowInfo;
 end
 
-function Atlas:SetupOptions()
-	--local profile = Atlas.db.profile;
-	-- Init saved vars for a new install
-	--if ( AtlasOptions == nil ) then
-	--	Atlas:FreshOptions();
-	--end
-
-	--Atlas_UpdateOptions(AtlasOptions);
-
-	--saved options version check
-	--if (AtlasOptions["AtlasVersion"] ~= ATLAS_OLDEST_VERSION_SAME_SETTINGS) then
-	--	Atlas:FreshOptions();
-	--end
-	
-	if (AtlasOptions and profile.options_copied == false) then
-		copyOptions();
-		profile.options_copied = true;
-	else
-		profile.options_copied = true;
-	end
-end
-
--- Adopted from EncounterJournal
-local EJ_HTYPE_OVERVIEW = 3;
-
-local function Atlas_EncounterJournal_CheckForOverview(rootSectionID)
-	return select(3,EJ_GetSectionInfo(rootSectionID)) == EJ_HTYPE_OVERVIEW;
-end
-
--- Priority list for *not my spec*
-local overviewPriorities = {
-	[1] = "DAMAGER",
-	[2] = "HEALER",
-	[3] = "TANK",
-}
-
-local flagsByRole = {
-	["DAMAGER"] = 1,
-	["HEALER"] = 2,
-	["TANK"] = 0,
-}
-
-local rolesByFlag = {
-	[0] = "TANK",
-	[1] = "DAMAGER",
-	[2] = "HEALER"
-}
-
 local function debug(info)
 	if (ATLAS_DEBUGMODE) then
 		DEFAULT_CHAT_FRAME:AddMessage(L["ATLAS_TITLE"]..L["Colon"]..info);
 	end
+end
+
+-- get creature's name from server
+local cache_tooltip = CreateFrame("GameTooltip", "cacheToolTip", UIParent, "GameTooltipTemplate")
+local creature_cache
+local function getCreatureNamebyID(id)
+	if not id then return end
+
+	cache_tooltip:SetOwner(UIParent, "ANCHOR_NONE")
+	cache_tooltip:SetHyperlink(("unit:Creature-0-0-0-0-%d"):format(id))
+	creature_cache = _G["cacheToolTipTextLeft1"]:GetText()
+end
+
+function addon:GetCreatureName(creatureName, id)
+	if (not id) then return; end
+	
+	-- Lookup BabbleBoss first
+	if (BB[creatureName]) then
+		creatureName = BB[creatureName];
+	else
+		getCreatureNamebyID(id)
+		creatureName = creature_cache or creatureName
+		creature_cache = nil
+	end
+
+	return creatureName;
 end
 
 -- Below to temporarily create a table to store the core map's data
@@ -255,6 +242,12 @@ local function Atlas_BossButtonCleanUp(button)
 end
 
 local function Atlas_BossButtonUpdate(button, encounterID, instanceID, b_iconImage, moduleData)
+	local rolesByFlag = {
+		[0] = "TANK",
+		[1] = "DAMAGER",
+		[2] = "HEALER"
+	}
+
 	button:SetID(encounterID);
 	button.encounterID = encounterID;
 	if (instanceID and instanceID ~= 0) then
@@ -267,7 +260,7 @@ local function Atlas_BossButtonUpdate(button, encounterID, instanceID, b_iconIma
 		button.tooltiptitle = ejbossname;
 		button.tooltiptext = description;
 		button.link = link;
-		if (Atlas_EncounterJournal_CheckForOverview(rootSectionID)) then
+		if (addon:EncounterJournal_CheckForOverview(rootSectionID)) then
 			-- title, description, depth, abilityIcon, displayInfo, 
 			-- siblingID, nextSectionID, filteredByDifficulty, link, 
 			-- startsOpen, flag1, flag2, flag3, flag4 = EJ_GetSectionInfo(sectionID)
@@ -340,6 +333,15 @@ function Atlas_SearchAndRefresh(text)
 	Atlas_ScrollBar_Update();
 end
 
+local function parse_entry_strings(typeStr, id, preStr, index, lineplusoffset)
+	if (typeStr == "item") then
+		local itemID = id;
+		local itemName = GetItemInfo(itemID);
+		itemName = itemName or GetItemInfo(itemID) or preStr or "";
+		if (itemName) then _G["AtlasEntry"..index.."_Text"]:SetText(ATLAS_SCROLL_LIST[lineplusoffset]..itemName); end
+	end
+end
+
 function Atlas_ScrollBar_Update()
 	local zoneID = ATLAS_DROPDOWNS[profile.options.dropdowns.module][profile.options.dropdowns.zone];
 	local mapdata = AtlasMaps;
@@ -364,18 +366,19 @@ function Atlas_ScrollBar_Update()
 					if (spos) then
 						local achievementID = strsub(ATLAS_SCROLL_ID[lineplusoffset][1], epos+1);
 						achievementID = tonumber(achievementID);
-						Atlas_AchievementButtonUpdate(button, achievementID);
+						addon:AchievementButtonUpdate(button, achievementID);
 					end
 				else
 				end
 				
 				if (ATLAS_SCROLL_ID[lineplusoffset][3] and ATLAS_SCROLL_ID[lineplusoffset][3]~= "") then
-					if (ATLAS_SCROLL_ID[lineplusoffset][3] == "item") then
+					parse_entry_strings(ATLAS_SCROLL_ID[lineplusoffset][3], ATLAS_SCROLL_ID[lineplusoffset][1], ATLAS_SCROLL_ID[lineplusoffset][4], i, lineplusoffset)
+--[[					if (ATLAS_SCROLL_ID[lineplusoffset][3] == "item") then
 						local itemID = ATLAS_SCROLL_ID[lineplusoffset][1];
 						local itemName = GetItemInfo(itemID);
 						itemName = itemName or GetItemInfo(itemID) or ATLAS_SCROLL_ID[lineplusoffset][4] or "";
 						if (itemName) then _G["AtlasEntry"..i.."_Text"]:SetText(ATLAS_SCROLL_LIST[lineplusoffset]..itemName); end
-					end
+					end]]
 				end
 			end
 			button:Show();
@@ -453,7 +456,7 @@ function Atlas_PopulateDropdowns()
 end
 
 local function Atlas_Process_Deprecated()
-	local Deprecated_List = Atlas.constants.deprecatedList;
+	local Deprecated_List = addon.constants.deprecatedList;
 
 	-- Check for outdated modules, build a list of them, then disable them and tell the player
 	local OldList = {};
@@ -470,6 +473,8 @@ local function Atlas_Process_Deprecated()
 			local oldVersion = true;			
 			if (v[2] ~= nil and GetAddOnMetadata(v[1], "Version") >= v[2]) then
 				oldVersion = false;
+			elseif (v[3] ~= nil and GetAddOnMetadata(v[1], "Version") >= v[3]) then
+				oldVersion = false;
 			end
 			if (oldVersion) then
 				table.insert(OldList, v[1]);
@@ -480,11 +485,11 @@ local function Atlas_Process_Deprecated()
 		local textList = "";
 		for k, v in pairs(OldList) do
 			textList = textList.."\n"..v..", "..GetAddOnMetadata(v, "Version");
-			DisableAddOn(v);
+			--DisableAddOn(v);
 		end
 
 		LibDialog:Register("ATLAS_OLD_MODULES", {
-			text = L["ATLAS_DEP_MSG1"].."\n"..L["ATLAS_DEP_MSG2"].."\n"..L["ATLAS_DEP_MSG3"].."\n|cff6666ff"..textList.."|r\n\n"..L["ATLAS_DEP_MSG4"],
+			text = L["ATLAS_DEP_MSG1"].."\n"..L["ATLAS_DEP_MSG3"].."\n|cff6666ff"..textList.."|r\n\n"..L["ATLAS_DEP_MSG4"],
 			buttons = {
 				{
 					text = OKAY,
@@ -536,7 +541,6 @@ function Atlas_OnLoad(self)
 	-- Register the Atlas frame for the following events
 	self:RegisterEvent("PLAYER_LOGIN");
 	self:RegisterEvent("ADDON_LOADED");
-	self:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED");
 
 	-- Allows Atlas to be closed with the Escape key
 	tinsert(UISpecialFrames, "AtlasFrame");
@@ -553,12 +557,12 @@ function Atlas_OnEvent(self, event, ...)
 	if (event=="ADDON_LOADED" and (arg1=="Atlas" or arg1=="Blizzard_EncounterJournal")) then
 		--Blizzard_EncounterJournal
 		if (IsAddOnLoaded("Blizzard_EncounterJournal") and IsAddOnLoaded("Atlas")) then
-			Atlas_EncounterJournal_Binding();
+			addon:EncounterJournal_Binding();
 		end
 	end
 
 	if (event == "ADDON_LOADED" and arg1 == "Atlas") then
-		Atlas:Init();
+		addon:Init();
 	end
 	
 end
@@ -576,13 +580,10 @@ end
 
 -- Detect if not all modules / plugins are installed
 function Atlas_Check_Modules()
---	if (AtlasOptions["AtlasCheckModule"] == nil) then
---		AtlasOptions["AtlasCheckModule"] = true;
---	end
 	if (not profile.options.checkMissingModules) then
 		return;
 	end
-	local Module_List = Atlas.constants.moduleList;
+	local Module_List = addon.constants.moduleList;
 
 	-- Check for outdated modules, build a list of them, then disable them and tell the player
 	local List = {};
@@ -618,34 +619,21 @@ function Atlas_Check_Modules()
 	end
 end
 
--- Function to pop up a window to show the latest addon information
-function Atlas_ShowInfo()
-	if (AtlasOptions["AtlasDontShowInfo_12201"]) then
-		return;
-	else
-		AtlasInfoFrame:Show();
-		AtlasInfoFrameToggleButton:SetChecked(AtlasOptions.AtlasDontShowInfo_12201);
-	end
-end
-
-function Atlas_ShowInfo_Toggle()
-	if (AtlasOptions["AtlasDontShowInfo_12201"]) then
-		AtlasOptions["AtlasDontShowInfo_12201"] = false;
-	else
-		AtlasOptions["AtlasDontShowInfo_12201"] = true;
-	end
-	AtlasInfoFrameToggleButton:SetChecked(AtlasOptions.AtlasDontShowInfo_12201);
-end
-
 -- Initializes everything relating to saved variables and data in other lua files
 -- This should be called ONLY when we're sure our variables are in memory
-function Atlas:Init() 
+function addon:Init() 
 	-- Make the Atlas window go all the way to the edge of the screen, exactly
 	AtlasFrame:SetClampRectInsets(12, 0, -12, 0);
 	AtlasFrameLarge:SetClampRectInsets(12, 0, -12, 0);
 	AtlasFrameSmall:SetClampRectInsets(12, 0, -12, 0);
 
-	Atlas:SetupOptions();
+--	addon:SetupOptions();
+	if (AtlasOptions and profile.options_copied == false) then
+		copyOptions();
+		profile.options_copied = true;
+	else
+		profile.options_copied = true;
+	end
 
 	-- Populate the dropdown lists...yeeeah this is so much nicer!
 	Atlas_PopulateDropdowns();
@@ -659,8 +647,8 @@ function Atlas:Init()
 	
 	-- Now that saved variables have been loaded, update everything accordingly
 	Atlas_Refresh();
-	Atlas_UpdateLock();
-	Atlas_UpdateAlpha();
+	addon:UpdateLock();
+	addon:UpdateAlpha();
 	AtlasFrame:SetClampedToScreen(profile.options.frames.clamp);
 	AtlasFrameLarge:SetClampedToScreen(profile.options.frames.clamp);
 	AtlasFrameSmall:SetClampedToScreen(profile.options.frames.clamp);
@@ -672,7 +660,7 @@ function Atlas:Init()
 		if button == "LeftButton" then
 			Atlas_Toggle();
 		elseif button == "RightButton" then
-			AtlasOptions_Toggle();
+			addon:OpenOptions();
 		end
 	end;
 	LDB.OnTooltipShow = function(tooltip)
@@ -682,27 +670,13 @@ function Atlas:Init()
 	end;
 	
 	Atlas_Check_Modules();
---[[	if (AtlasOptions["AtlasDontShowInfo_12201"]) then
-		Atlas_ShowInfo();
-	end
-]]
+
 	if (profile.options.worldMapButton) then
 		AtlasToggleFromWorldMap:Show();
 	else
 		AtlasToggleFromWorldMap:Hide();
 	end
 end
-
-
--- Parses slash commands
--- If an un-recognized command is given, toggle Atlas
---[[function Atlas_SlashCommand(msg)
-	if (msg == ATLAS_SLASH_OPTIONS) then
-		AtlasOptions_Toggle();
-	else
-		Atlas_Toggle();
-	end
-end]]
 
 -- Simple function to toggle the visibility of the Atlas frame
 function Atlas_Toggle()
@@ -839,7 +813,7 @@ function Atlas_MapAddNPCButton()
 			if (info_x == nil) then info_x = -18; end
 			if (info_y == nil) then info_y = -18; end
 
-			if (info_id < 10000) then
+			if (info_id < 10000 and profile.options.frames.showBossPotrait) then
 				bossbutton = _G["AtlasMapBossButton"..bossindex];
 				if (not bossbutton) then
 					bossbutton = CreateFrame("Button", "AtlasMapBossButton"..bossindex, AtlasFrame, "AtlasFrameBossButtonTemplate");
@@ -974,7 +948,7 @@ function Atlas_MapAddNPCButtonLarge()
 			local info_y 		= t[i][6];
 			local info_colortag	= t[i][7];
 
-			if (info_id < 10000 and info_x and info_y) then
+			if (info_id < 10000 and info_x and info_y and profile.options.frames.showBossPotrait) then
 				bossbutton = _G["AtlasMapBossButtonL"..bossindex];
 				if (not bossbutton) then
 					bossbutton = CreateFrame("Button", "AtlasMapBossButtonL"..bossindex, AtlasFrameLarge, "AtlasFrameBossButtonTemplate");
@@ -1403,7 +1377,7 @@ function Atlas_MapRefresh(mapID)
 	AtlasText_MinGearLevel_Text:SetText(tMGL);
 
 	-- AtlasLoot supports
-	Atlas_EnableAtlasLootButton(base, zoneID);
+	addon:EnableAtlasLootButton(base, zoneID);
 
 	-- Check if Journal Encounter Instance is available
 	if (base.JournalInstanceID) then
@@ -1525,12 +1499,9 @@ function Atlas_MapRefresh(mapID)
 	end
 
 	-- The boss description to be added here
-	if (profile.options.frames.showBossPotrait) then
-		Atlas_MapAddNPCButton();
-		Atlas_MapAddNPCButtonLarge();
-	else
-		--Atlas_Clear_NPC_Button();
-	end
+	Atlas_MapAddNPCButton();
+	Atlas_MapAddNPCButtonLarge();
+	--Atlas_Clear_NPC_Button();
 end
 
 -- Refreshes the Atlas frame, usually because a new map needs to be displayed

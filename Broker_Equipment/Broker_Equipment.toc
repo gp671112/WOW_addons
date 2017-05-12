@@ -1,0 +1,16 @@
+## Interface: 70100
+## Author: p3lim
+## Version: 70100.27-Release
+## Title: Broker Equipment
+## Notes: LDB Equipment Manager plug-in
+## SavedVariables: Broker_EquipmentDB
+
+## OptionalDeps: LibStub, CallbackHandler-1.0, LibDataBroker-1.1
+
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+
+Localization.lua
+Config.lua
+Broker_Equipment.lua

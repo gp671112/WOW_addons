@@ -9,18 +9,21 @@ local _G = getfenv(0)
 -- ----------------------------------------------------------------------------
 local ALName, ALPrivate = ...
 local AtlasLoot = _G.AtlasLoot
-local Atlas = {}
-AtlasLoot.Atlas = Atlas
+local AtlasIntegration = {}
+AtlasLoot.AtlasIntegration = AtlasIntegration
 
 local ATLAS_SMALLFRAME_SELECTED_ORIG
 
-function Atlas.IsEnabled()
+function AtlasIntegration.IsEnabled()
 	local loadable = select(4, GetAddOnInfo("Atlas"));
 
 	return loadable;
 end
 
-function Atlas.ShowMap(mapID)
+function AtlasIntegration.ShowMap(mapID)
+	if (not AtlasLoot.AtlasIntegration.IsEnabled()) then return; end
+
+	local options = Atlas.db.profile.options;
 	ATLAS_SMALLFRAME_SELECTED_ORIG = ATLAS_SMALLFRAME_SELECTED;
 	ATLAS_SMALLFRAME_SELECTED = true;
 
@@ -28,8 +31,8 @@ function Atlas.ShowMap(mapID)
 	for k, v in pairs(ATLAS_DROPDOWNS) do
 		for k2, v2 in pairs(v) do
 			if (v2 == mapID) then
-				AtlasOptions.AtlasType = k;
-				AtlasOptions.AtlasZone = k2;
+				options.dropdowns.module = k;
+				options.dropdowns.zone = k2;
 				foundMatch = true;
 				break;
 			end

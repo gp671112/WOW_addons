@@ -1,4 +1,4 @@
-<!-- $Id: Bindings.xml 159 2017-02-08 09:12:59Z arith $ -->
+<!-- $Id: Bindings.xml 216 2017-04-13 06:48:03Z arith $ -->
 <!--
 
 	Atlas, a World of Warcraft instance map browser
@@ -29,7 +29,7 @@
 		Atlas_Toggle();
 	</Binding>
 	<Binding name="ATLAS_OPTIONS" category="ADDONS">
-		AtlasOptions_Toggle();
+		Atlas:OpenOptions();
 	</Binding>
 	<Binding name="ATLAS_AUTOSEL" category="ADDONS">
 		Atlas_AutoSelect();

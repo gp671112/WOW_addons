@@ -1,10 +1,18 @@
-$Id: ChangeLog.txt 86 2017-03-30 05:03:02Z arith $
+$Id: ChangeLog.txt 92 2017-04-13 19:31:29Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 ==============
 = Change Log =
 ==============
+
+v1.41.00 (Apr. 14, 2017)
+------------------------
+- Priest order hall map revamped
+
+v1.40.00 (Apr. 12, 2017)
+------------------------
+- Warrior map revamped
 
 v1.39.02 (Mar. 30, 2017)
 ------------------------

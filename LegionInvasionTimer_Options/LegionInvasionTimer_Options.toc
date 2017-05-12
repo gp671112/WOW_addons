@@ -1,0 +1,20 @@
+## Interface: 70200
+## Title: LegionInvasionTimer_Options
+## Author: Funkydude
+## Notes: LegionInvasionTimer Configuration Options.
+## Title-zhTW: |cFF9ACD32軍團入侵計時器選項|r
+## Notes-zhCN: LegionInvasionTimer 配置选项。
+## Notes-zhTW: LegionInvasionTimer 配置選項。
+## Version: v7.2.10
+## X-Category: Miscellaneous
+## X-License: All Rights Reserved: You are free to fork and modify on GitHub, please ask us about anything else.
+## X-Curse-Project-ID: 101625
+## X-WoWI-ID: 24128
+
+## LoadOnDemand: 1
+## Dependencies: LegionInvasionTimer
+
+embeds.xml
+locales.xml
+Options.lua
+

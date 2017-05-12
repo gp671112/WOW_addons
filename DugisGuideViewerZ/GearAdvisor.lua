@@ -3007,6 +3007,10 @@ function GA:Initialize()
         if C_EquipmentSet and C_EquipmentSet.GetEquipmentSetIDs then
             --For 7.2.0
             C_EquipmentSet.GetEquipmentSetIDs = function()
+                if shouldUseOriginalEquipmentFunctions() then
+                    return orig_GetEquipmentSetIDs()
+                end
+            
                 local res = orig_GetEquipmentSetIDs()
                 res[#res + 1] = dugiSmartSetID
                 return res
@@ -3049,7 +3053,14 @@ function GA:Initialize()
 		end
 
 		local function GetSpecIcon()
-			return (select(4, GetSpecializationInfo((SpecFromOption(DGV:UserSetting(DGV_GASMARTSETTARGET))))))
+            local spec = DGV:UserSetting(DGV_GASMARTSETTARGET)
+            local specIndex = SpecFromOption(spec)
+            
+            if specIndex == nil then
+                return "Interface\\ICONS\\INV_Misc_QuestionMark"
+            else
+                return (select(4, GetSpecializationInfo(specIndex)))
+            end
 		end
 
 		-- name, icon, setID, isEquipped, numItems, numEquipped, numInventory, numMissing, numIgnored = GetEquipmentSetInfo(index)
@@ -3217,7 +3228,9 @@ function GA:Initialize()
             local stack = debugstack()
             local isCalledByBagnonAddon = (string.find(stack, "Bagnon") ~= nil)
             local isCalledCargBags_NivayaAddon = (string.find(stack, "Nivaya") ~= nil)
-            return  isCalledByBagnonAddon or isCalledCargBags_NivayaAddon
+			local isCalledByAdibags = (string.find(stack, "AdiBags") ~= nil)
+			local isCalledByOutfitter = (string.find(stack, "Outfitter") ~= nil)
+            return  isCalledByBagnonAddon or isCalledCargBags_NivayaAddon or isCalledByAdibags or isCalledByOutfitter
         end
 
 		-- Returns a table listing the items in an equipment set

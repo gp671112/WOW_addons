@@ -1,4 +1,4 @@
--- $Id: AtlasLootIntegration.lua 218 2017-04-13 15:10:34Z arith $
+-- $Id: AtlasLootIntegration.lua 253 2017-05-25 07:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -28,10 +28,11 @@
 -- Localized Lua globals.
 -- ----------------------------------------------------------------------------
 -- Functions
-local _G = getfenv(0);
-local pairs = _G.pairs;
-local select = _G.select;
-local type = _G.type;
+local _G = getfenv(0)
+local pairs = _G.pairs
+local select = _G.select
+local type = _G.type
+local tonumber = _G.tonumber
 -- Libraries
 -- ----------------------------------------------------------------------------
 -- AddOn namespace.
@@ -40,6 +41,8 @@ local FOLDER_NAME, private = ...
 local LibStub = _G.LibStub
 local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
 local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name);
+
+local iAtlasLoot = select(4, GetAddOnInfo("AtlasLoot"));
 
 -- Atlas to AtlasLoot's module mapping
 local modules = {
@@ -53,12 +56,11 @@ local modules = {
 };
 
 function addon:EnableAtlasLootButton(base, zoneID)
-	local loadable = select(4, GetAddOnInfo("AtlasLoot"));
-	if (loadable) then 
+	if (iAtlasLoot) then 
 		local showbutton = false;
 		
-		if (modules[base.Module]) then
-			local enabled = GetAddOnEnableState(UnitName("player"), modules[base.Module]);
+		if (modules[base.Module] or modules[base.ALModule]) then
+			local enabled = GetAddOnEnableState(UnitName("player"), modules[base.Module] or modules[base.ALModule]);
 			if (enabled > 0) then
 				showbutton = true;
 			end
@@ -66,13 +68,13 @@ function addon:EnableAtlasLootButton(base, zoneID)
 		if (showbutton) then
 			AtlasFrame.AtlasLoot.instanceID = base.JournalInstanceID;
 			AtlasFrame.AtlasLoot.AtlasMapID = zoneID;
-			AtlasFrame.AtlasLoot.AtlasModule = base.Module;
+			AtlasFrame.AtlasLoot.AtlasModule = base.Module or base.ALModule;
 			AtlasFrameLarge.AtlasLoot.instanceID = base.JournalInstanceID;
 			AtlasFrameLarge.AtlasLoot.AtlasMapID = zoneID;
-			AtlasFrameLarge.AtlasLoot.AtlasModule = base.Module;
+			AtlasFrameLarge.AtlasLoot.AtlasModule = base.Module or base.ALModule;
 			AtlasFrameSmall.AtlasLoot.instanceID = base.JournalInstanceID;
 			AtlasFrameSmall.AtlasLoot.AtlasMapID = zoneID;
-			AtlasFrameSmall.AtlasLoot.AtlasModule = base.Module;
+			AtlasFrameSmall.AtlasLoot.AtlasModule = base.Module or base.ALModule;
 
 			AtlasFrameAtlasLootButton:Show(); 
 			AtlasFrameLargeAtlasLootButton:Show(); 
@@ -86,6 +88,7 @@ function addon:EnableAtlasLootButton(base, zoneID)
 end
 
 function addon:AtlasLootButton_OnClick(self, button)
+	if (not iAtlasLoot) then return end
 	if (button == "RightButton") then
 		if (AtlasLoot.GUI.frame:IsVisible()) then
 			AtlasLoot.GUI.frame:Hide();

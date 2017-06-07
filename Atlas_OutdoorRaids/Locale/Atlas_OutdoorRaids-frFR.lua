@@ -29,6 +29,10 @@ local L = AceLocale:NewLocale("Atlas_OutdoorRaids", "frFR", false);
 
 if L then
 L["Ancient Skull Pile"] = "Ancienne pile de crânes"
+--Translation missing 
+-- L["Broken Isles World Bosses"] = ""
+--Translation missing 
+-- L["Broken Shore World Bosses"] = ""
 L["Darkscreecher Akkarai"] = "Akkarai le Hurle-sombre"
 L["Draenor World Bosses"] = "Boss de Monde de Draenor"
 L["Gezzarak the Huntress"] = "Gezzarak la Chasseresse"
@@ -50,4 +54,10 @@ L["Talonpriest Skizzik"] = "Prêtre de la serre Skizzik"
 L["Talonpriest Zellek"] = "Prêtre de la serre Zellek"
 L["Terokk"] = "Terokk"
 L["Vakkiz the Windrager"] = "Vakkiz le Ragevent"
+
+-- ToC
+L["Description"] = "Rencontres de Raid"
+--Translation missing 
+-- L["Title"] = ""
+
 end

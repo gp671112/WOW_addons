@@ -1,4 +1,4 @@
-local MAJOR, MINOR = "LibPetBreedInfo-1.0", 60
+local MAJOR, MINOR = "LibPetBreedInfo-1.0", 61
 local lib, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 
 if not lib then return end
@@ -2834,11 +2834,24 @@ lib.breedData.speciesToAvailableBreeds = {
     --[1981] = {???}, -- TAMER: Swoop
     --[1982] = {???}, -- TAMER: Buzz
     --[1983] = {???}, -- TAMER: Cherry
-    [1984] = {6, 7, 9}, -- NEW: Albino Buzzard
+    [1984] = {6, 7, 9, 12}, -- NEW: Albino Buzzard
+	[1997] = {4}, -- NEW: Crackers
+	[1999] = {5, 8, 9, 11}, -- NEW: Cavern Moccasin
+	[2000] = {7, 8, 10}, -- NEW: Young Venomfang
 	[2004] = {7}, -- NEW: Trashy
+	[2008] = {12}, -- TAMER: Fido
+    [2009] = {4},  -- TAMER: Seer's Eye
+    [2010] = {7}, -- TAMER: Flickering Fel
+    [2011] = {5}, -- TAMER: Imply
+    [2012] = {10}, -- TAMER: Rover
+    [2013] = {3}, -- TAMER: Seduction
+    [2014] = {12}, -- TAMER: Living Pool
+    [2015] = {7}, -- TAMER: Tia Mia and Larry
+    [2016] = {7}, -- TAMER: Rock Lobster
 	[2017] = {4}, -- NEW: Infinite Hatchling
 	[2018] = {10}, -- NEW: Paradox Spirit
 	[2022] = {3}, -- NEW: Tylarr Gronnden
+	[2042] = {8}, -- NEW: Scraps
 }
 
 --[[

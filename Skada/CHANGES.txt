@@ -1,15 +1,32 @@
 ------------------------------------------------------------------------
-r727 | zarnivoop | 2017-01-26 16:06:58 -0600 (Thu, 26 Jan 2017) | 1 line
+r735 | zarnivoop | 2017-05-14 14:22:00 -0500 (Sun, 14 May 2017) | 1 line
 Changed paths:
-   M /trunk/.pkgmeta
-   M /trunk/embeds.xml
+   M /trunk/modules/Debuffs.lua
 
-screw that then - disembedded disabled until someone with more patience than me takes a look
+fixed buff/debuffs counters being a bit wacky
 ------------------------------------------------------------------------
-r726 | zarnivoop | 2017-01-26 15:50:36 -0600 (Thu, 26 Jan 2017) | 1 line
+r734 | zarnivoop | 2017-05-14 13:57:22 -0500 (Sun, 14 May 2017) | 1 line
 Changed paths:
-   M /trunk/Skada.toc
+   M /trunk/modules/Debuffs.lua
 
-another bump, just to see if the packager/curse client will make nice with disembedded now
+added spell icons for debuffs/buffs
+------------------------------------------------------------------------
+r733 | zarnivoop | 2017-05-14 12:41:13 -0500 (Sun, 14 May 2017) | 1 line
+Changed paths:
+   M /trunk/Version.lua
+
+have some version notifications too!
+------------------------------------------------------------------------
+r732 | zarnivoop | 2017-05-14 12:37:28 -0500 (Sun, 14 May 2017) | 1 line
+Changed paths:
+   M /trunk/locale/enUS.lua
+
+localization
+------------------------------------------------------------------------
+r731 | zarnivoop | 2017-05-14 12:36:58 -0500 (Sun, 14 May 2017) | 1 line
+Changed paths:
+   M /trunk/modules/Debuffs.lua
+
+added buff/debuff spell overviews
 ------------------------------------------------------------------------
 

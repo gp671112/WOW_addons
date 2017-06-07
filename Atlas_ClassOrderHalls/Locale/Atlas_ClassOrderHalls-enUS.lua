@@ -1,4 +1,4 @@
--- $Id: Atlas_ClassOrderHalls-enUS.lua 76 2017-01-24 09:07:56Z arith $
+-- $Id: Atlas_ClassOrderHalls-enUS.lua 101 2017-05-23 09:06:01Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -25,7 +25,7 @@
 --]]
 
 local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
-local L = AceLocale:NewLocale("Atlas_ClassOrderHalls", "enUS", true);
+local L = AceLocale:NewLocale("Atlas_ClassOrderHalls", "enUS", true, true);
 
 if L then
 -- //////////////////////////
@@ -46,6 +46,7 @@ L["Travel to:"] = "Travel to:"
 -- Death Knight
 -- //////////////////////////
 L["Portal to another floor"] = "Portal to another floor"
+L["Portal to the roof"] = "Portal to the roof"
 L["Soul Forge"] = "Soul Forge"
 L["Siouxsie the Banshee <Mission Specialist>"] = "Siouxsie the Banshee <Mission Specialist>" -- 93568
 L["Highlord Darion Mograine"] = "Highlord Darion Mograine" -- 93437
@@ -62,6 +63,11 @@ L["Korgaz Deadaxe <Ebon Soldier Recruiter>"] = "Korgaz Deadaxe <Ebon Soldier Rec
 L["Salanar the Horseman"] = "Salanar the Horseman" -- 111480
 L["Thassarian"] = "Thassarian" -- 93456
 L["King Thoras Trollbane"] = "King Thoras Trollbane" -- 113419
+L["Requires Frost Wyrm work order advancement"] = "Requires Frost Wyrm work order advancement"
+L["Frost Crux"] = "Frost Crux"
+L["Requires Frost and Death order advancement"] = "Requires Frost and Death order advancement"
+L["Eran Droll <Ebon Knight Frostreavers Recruiter>"] = "Eran Droll <Ebon Knight Frostreavers Recruiter>" -- 120135
+L["Winter Payne"] = "Winter Payne" -- 111634
 
 -- //////////////////////////
 -- Demon Hunter
@@ -84,6 +90,11 @@ L["Loramus Thalipedes <Class Hall Upgrades>"] = "Loramus Thalipedes <Class Hall 
 L["Belath Dawnblade <Illidari>"] = "Belath Dawnblade <Illidari>" -- 108782
 L["Ariana Fireheart <Illidari>"] = "Ariana Fireheart <Illidari>" -- 103760
 L["Slitesh <Armaments Requisitioner>"] = "Slitesh <Armaments Requisitioner>" -- 110433
+L["Requires Fel Hammer's Wrath order advancement"] = "Requires Fel Hammer's Wrath order advancement"
+L["Empowered Rift Core"] = "Empowered Rift Core"
+L["Evelune Soulreaver <Wrath of the Order>"] = "Evelune Soulreaver <Wrath of the Order>" -- 111775
+L["Requires Blades of Death order advancement"] = "Requires Blades of Death order advancement"
+L["Tormented Shivarra <Shivarra Recruiter>"] = "Tormented Shivarra <Shivarra Recruiter>" -- 120140
 
 -- //////////////////////////
 -- Druid
@@ -102,6 +113,11 @@ L["Skylord Omnuron <Mission Specialist>"] = "Skylord Omnuron <Mission Specialist
 L["Zen'kiki"] = "Zen'kiki" -- 98784
 L["Yaris Darkclaw <Recruiter>"] = "Yaris Darkclaw <Recruiter>" -- 106442
 L["Mylune"] = "Mylune" -- 113525
+L["Requires Wardens of the Grove order advancement"] = "Requires Wardens of the Grove order advancement"
+L["Shalorn Star <Dreamgrove Warden Recruiter>"] = "Shalorn Star <Dreamgrove Warden Recruiter>" -- 108391
+L["Treant Sapling <Ancient of War Tender>"] = "Treant Sapling <Ancient of War Tender>" -- 111786
+L["Requires Ancient of War order advancement"] = "Requires Ancient of War order advancement"
+--L["Ancient of War"] = "Ancient of War"
 
 -- //////////////////////////
 -- Hunter
@@ -122,6 +138,8 @@ L["Great Eagle"] = "Great Eagle" -- 108552
 L["Ogdrul <The Seeker>"] = "Ogdrul <The Seeker>" -- 113688
 L["Image of Mimiron"] = "Image of Mimiron" -- 110424
 L["Berger the Steadfast <Champion Armaments>"] = "Berger the Steadfast <Champion Armaments>" -- 110412
+L["Requires Born of the Night order advancement"] = "Requires Born of the Night order advancement"
+L["Nighthuntress Silus <Nightborne Hunters Recruiter>"] = "Nighthuntress Silus <Nightborne Hunters Recruiter>" -- 106445
 
 -- //////////////////////////
 -- Mage
@@ -142,6 +160,10 @@ L["Esara Verrinde <Magisters>"] = "Esara Verrinde <Magisters>" -- 108380
 L["Ravandwyr <Senior Kirin Tor Apprentice>"] = "Ravandwyr <Senior Kirin Tor Apprentice>" -- 108377
 L["Magister Varenthas <High Forgeguard>"] = "Magister Varenthas <High Forgeguard>" -- 109642
 L["Minuette <Armament Summoner>"] = "Minuette <Armament Summoner>" -- 110427
+L["Ari"] = "Ari" -- 109307
+L["Teleportation Nexus"] = "Teleportation Nexus"
+L["Requires Guardians of the Kirin Tor order advancement"] = "Requires Guardians of the Kirin Tor order advancement"
+L["Guardian Alar <Kirin Tor Guardians Recruiter>"] = "Guardian Alar <Kirin Tor Guardians Recruiter>" -- 106434
 
 -- //////////////////////////
 -- Monk
@@ -160,6 +182,10 @@ L["Wise Scholar Lianji <Senior Master Serpent>"] = "Wise Scholar Lianji <Senior 
 L["Tianji <Ox Troop Trainer>"] = "Tianji <Ox Troop Trainer>" -- 105015
 L["High Elder Cloudfall"] = "High Elder Cloudfall" -- 104744
 L["Gin Lai <Tiger Troop Trainer>"] = "Gin Lai <Tiger Troop Trainer>" -- 105019
+L["Tianili <Celestial Trainer>"] = "Tianili <Celestial Trainer>" -- 106538
+L["Requires Celestial Favor order advancement"] = "Requires Celestial Favor order advancement"
+L["Master Swoo <Masters of Serenity Recruiter>"] = "Master Swoo <Masters of Serenity Recruiter>" -- 120145
+L["Requires Masters of the Path order advancement"] = "Requires Masters of the Path order advancement"
 
 -- //////////////////////////
 -- Paladin
@@ -178,6 +204,12 @@ L["Lord Maxwell Tyrosus"] = "Lord Maxwell Tyrosus" -- 90259
 L["Commander Born <Silver Hand Officer Recruiter>"] = "Commander Born <Silver Hand Officer Recruiter>" -- 106448
 L["Valgar Highforge <Grand Smith of the Order>"] = "Valgar Highforge <Grand Smith of the Order>" -- 90261
 L["Lord Irulon Trueblade"] = "Lord Irulon Trueblade" -- 99947
+L["Charger Saddle"] = "Charger Saddle"
+L["Terric the Illuminator"] = "Terric the Illuminator" -- 111772
+L["Requires Grand Crusade order advancement"] = "Requires Grand Crusade order advancement"
+L["Silver Hand Orders"] = "Silver Hand Orders"
+L["Requires Silver Hand Crusaders order advancement"] = "Requires Silver Hand Crusaders order advancement"
+L["Crusader Kern <Silver Hand Crusader Recruiter>"] = "Crusader Kern <Silver Hand Crusader Recruiter>" -- 120146
 
 -- //////////////////////////
 -- Priest
@@ -217,6 +249,8 @@ L["Jenri <Spymaster>"] = "Jenri <Spymaster>" -- 99863
 L["Valeera Sanguinar"] = "Valeera Sanguinar" -- 98102
 L["Garona Halforcen"] = "Garona Halforcen" -- 94141
 L["Mal <Weapons Smuggler>"] = "Mal <Weapons Smuggler>" -- 110348
+L["Vanessa VanCleef"] = "Vanessa VanCleef" -- 102550
+L["Knocker - %s"] = "Knocker - %s"
 
 -- //////////////////////////
 -- Shaman
@@ -275,4 +309,12 @@ L["Captain Hjalmar Stahlstrom <Recruiter>"] = "Captain Hjalmar Stahlstrom <Recru
 L["Einar the Runecaster <Class Hall Upgrades>"] = "Einar the Runecaster <Class Hall Upgrades>" -- 107994 
 L["Savyn Valorborn <Recruiter>"] = "Savyn Valorborn <Recruiter>" -- 106460
 L["Haklang Ulfsson <Armaments Requisitioner>"] = "Haklang Ulfsson <Armaments Requisitioner>" -- 110437
+L["Hymdall"] = "Hymdall" -- 107987
+L["Odyn"] = "Odyn" -- 96469
+L["Requires Val'kyr Call order advancement"] = "Requires Val'kyr Call order advancement"
+L["Horn of War"] = "Horn of War"
+L["Matilda Skoptidottir"] = "Matilda Skoptidottir" -- 111774
+L["Requires Strike Hard order advancement"] = "Requires Strike Hard order advancement"
+L["Sharak Tor <Recruiter>"] = "Sharak Tor <Recruiter>" -- 106461, horde
+L["Matthew Glensorrow <Recruiter>"] = "Matthew Glensorrow <Recruiter>" -- 120077, alliance
 end

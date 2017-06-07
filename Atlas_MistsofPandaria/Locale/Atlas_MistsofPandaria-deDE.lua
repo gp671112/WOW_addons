@@ -72,4 +72,9 @@ L["ToT"] = "TdD"
 L["Unblinking Eye"] = "Starrendes Auge"
 L["Zao'cho <The Emperor's Shield>"] = "Zao'cho <Der Schild des Kaisers>"
 
+-- ToC
+L["Description"] = "Karten der Instanzen aus Mists of Pandaria"
+L["Title"] = "Atlas |r|cFF0099FF[Mists of Pandaria]|r"
+
+
 end

@@ -1104,12 +1104,14 @@ end
 
 function ArkInventory:EVENT_ARKINV_BAG_UPDATE_COOLDOWN_BUCKET( arg )
 	
+	--ArkInventory.Output( "EVENT_ARKINV_BAG_UPDATE_COOLDOWN_BUCKET( ", arg, " )" )
+	
 	for loc_id in pairs( arg ) do
 		local me = ArkInventory.GetPlayerCodex( loc_id )
 		if me.style.slot.cooldown.show then
 			if not ArkInventory.Global.Mode.Combat or me.style.slot.cooldown.combat then
 				if me.style.sort.when ~= ArkInventory.Const.SortWhen.Instant then
-					ArkInventory.Frame_Main_Generate( loc_id, ArkInventory.Const.Window.Draw.Refresh )
+					ArkInventory.Frame_Main_Update_Cooldown( loc_id )
 				end
 			end
 		end
@@ -1117,25 +1119,20 @@ function ArkInventory:EVENT_ARKINV_BAG_UPDATE_COOLDOWN_BUCKET( arg )
 	
 end
 
-function ArkInventory:EVENT_WOW_BAG_UPDATE_COOLDOWN( event, arg1, arg2, arg3, arg4 )
+function ArkInventory:EVENT_WOW_BAG_UPDATE_COOLDOWN( event, arg1 )
 	
 	--ArkInventory.Output( "EVENT_WOW_BAG_UPDATE_COOLDOWN( ", arg1, " )" )
 	
+	local loc_id = ArkInventory.Const.Location.Bag
+	
 	if arg1 then
-		local loc_id = ArkInventory.BlizzardBagIdToInternalId( arg1 )
-		ArkInventory:SendMessage( "EVENT_ARKINV_BAG_UPDATE_COOLDOWN_BUCKET", loc_id )
-	else
-		for loc_id, loc_data in pairs( ArkInventory.Global.Location ) do
-			if loc_data.canView then
-				local me = ArkInventory.GetPlayerCodex( loc_id )
-				if me.style.slot.cooldown.global then
-					ArkInventory:SendMessage( "EVENT_ARKINV_BAG_UPDATE_COOLDOWN_BUCKET", loc_id )
-				end
-			end
-		end
+		loc_id = ArkInventory.BlizzardBagIdToInternalId( arg1 )
 	end
 	
+	ArkInventory:SendMessage( "EVENT_ARKINV_BAG_UPDATE_COOLDOWN_BUCKET", loc_id )
+	
 end
+
 
 function ArkInventory:EVENT_ARKINV_QUEST_UPDATE_BUCKET( )
 	ArkInventory.Frame_Main_Generate( nil, ArkInventory.Const.Window.Draw.Refresh )
@@ -3418,7 +3415,7 @@ function ArkInventory.ScanChanged( old, h, sb, count )
 	-- item counts are now reset here if required
 	
 	-- do not use the full hyperlink, pull out the itemstring part and check against that, theres a bug where the name isnt always included in the hyperlink
-
+	
 	if not h then
 		
 		-- slot is empty
@@ -3603,7 +3600,7 @@ function ArkInventory.ObjectInfoArray( h, i )
 		
 		info.name = info.info[1] or info.name
 		if not info.name or info.name == "" then
-			info.name = string.match( info.h, "|h%[(.+)%]|h" ) or info.name
+			info.name = string.match( info.info[2] or h, "|h%[(.+)%]|h" ) or info.name
 		end
 		
 		info.q = info.info[3] or info.q
@@ -3615,22 +3612,6 @@ function ArkInventory.ObjectInfoArray( h, i )
 --			ArkInventory.Output( "[ ", gsub( gsub( info.osd.h, "\124", " " ), ":", " : " ), " ]" )
 --			ArkInventory.Output( "[ ", gsub( gsub( info.h, "\124", " " ), ":", " : " ), " ]" )
 --		end
-		
-		if info.osd.upgradeid > 0 or info.osd.bonusids then
-			
-			-- upgradable or has bonusId that may not adjust the itemlevel return value (eg 615/timewarped), so get item level from tooltip
-			
-			--ArkInventory.TooltipSetHyperlink( ArkInventory.Global.Tooltip.Scan, info.h )
-			ArkInventory.TooltipSetHyperlink( ArkInventory.Global.Tooltip.Scan, info.h )
-			local _, _, ilvl = ArkInventory.TooltipFind( ArkInventory.Global.Tooltip.Scan, ArkInventory.Localise["WOW_TOOLTIP_ITEM_LEVEL"], false, true, true, 4, true )
-			
-			info.ilvl = tonumber( ilvl ) or info.ilvl
-			
---			if info.ilvl ~= info.info[4] then
---				ArkInventory.Output( h, " / ", info.info[4], " / ", ilvl, " / ", info.osd.upgradeid, " / ", info.osd.bonusids )
---			end
-			
-		end
 		
 		info.uselevel = info.info[5] or info.uselevel
 		info.itemtype = info.info[6] or info.itemtype
@@ -3648,6 +3629,61 @@ function ArkInventory.ObjectInfoArray( h, i )
 		info.itemtypeid = info.info[12] or info.itemtypeid
 		info.itemsubtypeid = info.info[13] or info.itemsubtypeid
 		
+		if info.osd.upgradeid > 0 or info.osd.bonusids then
+			
+			-- upgradable or has bonusId that may not adjust the itemlevel return value (eg 615/timewarped), so get item level from tooltip
+			
+			--ArkInventory.TooltipSetHyperlink( ArkInventory.Global.Tooltip.Scan, info.h )
+			ArkInventory.TooltipSetHyperlink( ArkInventory.Global.Tooltip.Scan, info.h )
+			local _, _, ilvl = ArkInventory.TooltipFind( ArkInventory.Global.Tooltip.Scan, ArkInventory.Localise["WOW_TOOLTIP_ITEM_LEVEL"], false, true, true, 4, true )
+			
+			info.ilvl = tonumber( ilvl ) or info.ilvl
+			
+--			if info.ilvl ~= info.info[4] then
+--				ArkInventory.Output( h, " / ", info.info[4], " / ", ilvl, " / ", info.osd.upgradeid, " / ", info.osd.bonusids )
+--			end
+			
+		end
+		
+		if info.itemsubtypeid == ArkInventory.Const.ItemClass.GEM_ARTIFACT_RELIC then
+			
+			local _, _, ilvl = ArkInventory.TooltipFind( ArkInventory.Global.Tooltip.Scan, ArkInventory.Localise["WOW_TOOLTIP_RELIC_LEVEL"], false, true, true, 0, true )
+			
+			info.ilvl = tonumber( ilvl ) or info.ilvl
+			
+		end
+		
+	elseif info.class == "keystone" then
+		
+		--ArkInventory.Output( "[ ", gsub( gsub( info.osd.h, "\124", " " ), ":", " : " ), " ]" )
+		
+		info.info = { GetItemInfo( h ) }
+		--ArkInventory.Output( h )
+		--ArkInventory.Output( {GetContainerItemInfo(2, 15)} )
+		--ArkInventory.Output( "[", GetItemIcon( "keystone:200" ), "]" )
+		
+		info.name = info.info[1] or info.name
+		if not info.name or info.name == "" then
+			info.name = string.match( info.h, "|h%[(.+)%]|h" ) or info.name
+		end
+		
+		info.q = 4 or info.q
+		
+		info.ilvl = info.osd.level or info.ilvl
+		
+--		info.itemtype = info.info[6] or info.itemtype
+--		info.itemsubtype = info.info[7] or info.itemsubtype
+		
+--		if not info.info[10] or info.info[10] == "" then
+--			info.texture = GetItemIcon( h ) or info.texture
+--		else
+--			info.texture = info.info[10]
+--		end
+		info.texture = 525134
+		
+--		info.itemtypeid = info.info[12] or info.itemtypeid
+--		info.itemsubtypeid = info.info[13] or info.itemsubtypeid
+		
 	elseif info.class == "spell" then
 		
 		info.info = { GetSpellInfo( info.id ) }
@@ -3658,7 +3694,7 @@ function ArkInventory.ObjectInfoArray( h, i )
 		if not info.name or info.name == "" then
 			info.name = string.match( info.h, "|h%[(.+)%]|h" ) or info.name
 		end
-
+		
 		info.q = 1
 		info.texture = info.info[3] or info.texture
 		
@@ -3756,14 +3792,10 @@ function ArkInventory.ObjectStringDecode( h, i )
 			[12]upgradetypeid
 				4 = pandaria x/4
 				512 = timewarped
-				4587520 = keystone with 0 affixes
-				5111808 = keystone with 1 affixes
-				6160384 = keystone with 2 affixes
-				4063232 = keystone with 3 affixes
 			[13]sourceid
 			[14]numbonusids
 			[..]bonusids
-			[15]upgradevalue (or instance id for keystones)
+			[15]upgradevalue
 			
 			relic weapons
 			[16]numrelicids1
@@ -3772,15 +3804,6 @@ function ArkInventory.ObjectStringDecode( h, i )
 			[..]relicids2
 			[18]numrelicids3
 			[..]relicids3
-			
-			mythic keystones
-			[15]instanceid
-			[16]level
-			[..]affix1
-			[..]affix2
-			[..]affix3
-			[17]status (1=active, 2=depleted)
-			
 			
 		]]--
 		
@@ -3852,6 +3875,32 @@ function ArkInventory.ObjectStringDecode( h, i )
 				
 			end
 			
+		end
+		
+	elseif v.class == "keystone" then
+		
+		--[[
+			[01]class
+			[02]instanceid
+			[03]level
+			[04]status (1=active, 2=depleted)
+			[05]affixid1
+			[06]affixid2
+			[07]affixid3
+		]]--
+		
+		v.instance = v[2]
+		v.level = v[3]
+		v.status = v[4]
+		
+		-- affix ids
+		for x = 5, 7 do
+			if v[x] ~= 0 then
+				if not v.bonusids then
+					v.bonusids = { }
+				end
+				v.bonusids[v[x]] = true
+			end
 		end
 		
 	elseif v.class == "spell" then

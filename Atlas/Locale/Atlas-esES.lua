@@ -1,4 +1,4 @@
--- $Id: Atlas-esES.lua 140 2017-01-16 08:56:14Z arith $
+-- $Id: Atlas-esES.lua 247 2017-05-18 15:01:35Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -40,9 +40,9 @@ AtlasSortIgnore = {"the (.+)"};
 
 -- Syntax: ["real_zone_name"] = "localized map zone name"
 AtlasZoneSubstitutions = {
-	["Ahn'Qiraj"] = "Templo de Ahn'Qiraj";
-	["The Temple of Atal'Hakkar"] = "El Templo de Atal'Hakkar";
---	["Throne of Tides"] = "Fauce Abisal: Trono de las Mareas";
+	["Ahn'Qiraj"] = "Templo de Ahn'Qiraj",
+	["The Temple of Atal'Hakkar"] = "El Templo de Atal'Hakkar",
+--	["Throne of Tides"] = "Fauce Abisal: Trono de las Mareas"
 };
 end
 
@@ -294,4 +294,9 @@ L["Wave 6"] = "Ola 6"
 L["West"] = "Oeste"
 L["Yarley <Armorer>"] = "Yarley <Armero>"
 L["Zaladormu"] = "Zaladormu"
+
+-- ToC
+L["Description"] = "Navegador de Mapas de Mazmorras"
+L["Title"] = "Atlas"
+
 end

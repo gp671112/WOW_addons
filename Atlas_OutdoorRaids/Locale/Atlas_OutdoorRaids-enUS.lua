@@ -1,4 +1,4 @@
--- $Id: Atlas_OutdoorRaids-enUS.lua 25 2017-01-19 07:42:24Z arith $
+-- $Id: Atlas_OutdoorRaids-enUS.lua 40 2017-05-04 05:16:39Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -32,6 +32,7 @@ local L = AceLocale:NewLocale("Atlas_OutdoorRaids", "enUS", true);
 if L then
 L["Ancient Skull Pile"] = "Ancient Skull Pile"
 L["Broken Isles World Bosses"] = "Broken Isles World Bosses"
+L["Broken Shore World Bosses"] = "Broken Shore World Bosses"
 L["Darkscreecher Akkarai"] = "Darkscreecher Akkarai"
 L["Draenor World Bosses"] = "Draenor World Bosses"
 L["Gezzarak the Huntress"] = "Gezzarak the Huntress"
@@ -53,4 +54,9 @@ L["Talonpriest Skizzik"] = "Talonpriest Skizzik"
 L["Talonpriest Zellek"] = "Talonpriest Zellek"
 L["Terokk"] = "Terokk"
 L["Vakkiz the Windrager"] = "Vakkiz the Windrager"
+
+-- ToC
+L["Description"] = "Maps for Outdoor Raid Encounters"
+L["Title"] = "Atlas |r|cFF0099FF[Outdoor Raids]|r"
+
 end

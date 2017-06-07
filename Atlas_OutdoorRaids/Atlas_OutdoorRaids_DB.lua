@@ -1,4 +1,4 @@
--- $Id: Atlas_OutdoorRaids_DB.lua 38 2017-04-26 16:59:44Z arith $
+-- $Id: Atlas_OutdoorRaids_DB.lua 40 2017-05-04 05:16:39Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -47,10 +47,16 @@ local myDB = {
 		{  9, 1756, 405,  98, 689, 132 }; -- The Soultakers
 		{ 10, 1749, 323, 133, 605, 177 }; -- Nithogg
 		{ 11, 1783, 180, 232, 412, 310 }; -- Na'zak the Fiend
-		-- { 12, 1883, }; -- Brutallus
-		{ 13, 1884, 312, 335, 580, 438 }; -- Malificus
+		{ 12, 1883, 315, 340, 580, 441 }; -- Brutallus
+		{ 13, 1884, 308, 333, 570, 438 }; -- Malificus
 		{ 14, 1885, 363, 338, 639, 442 }; -- Si'vash
 		{ 15, 1956, 315, 369, 581, 482 }; -- Apocron
+	};
+	OR_BrokenShore = {
+		{ 12, 1883, 263, 175, 428, 196 }; -- Brutallus
+		{ 13, 1884, 251, 168, 415, 192 }; -- Malificus
+		{ 14, 1885, 478, 185, 778, 207 }; -- Si'vash
+		{ 15, 1956, 269, 333, 441, 452 }; -- Apocron
 	};
 	OR_Draenor = {
 		{ 1, 1291, 271, 119, 517, 153 }; -- Drov the Ruiner

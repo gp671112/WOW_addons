@@ -66,6 +66,8 @@ L["FL"] = "FL"
 L["Forest Frogs"] = "森林蛙"
 L["Gazakroth"] = "卡扎克洛斯"
 L["GB"] = "GB"
+--Translation missing 
+-- L["Goblin Teleporter"] = ""
 L["Gub <Destroyer of Fish>"] = "伽布 <鲜鱼毁灭者>"
 L["Harald <Food Vendor>"] = "阿拉尔德 <食物商人>"
 L["Haunted Stable Hand"] = "鬼怪马夫"
@@ -136,4 +138,9 @@ L["Zanzil's Cauldron of Frostburn Formula"] = "赞吉尔的霜灼药方坩埚"
 L["Zanzil's Cauldron of Toxic Torment"] = "赞吉尔的剧毒折磨坩埚"
 L["ZG"] = "ZG"
 L["Zungam"] = "苏加姆"
+
+-- ToC
+L["Description"] = "大地的裂变副本地图"
+L["Title"] = "Atlas |r|cFF0099FF[大地的裂变]|r"
+
 end

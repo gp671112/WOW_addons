@@ -1,0 +1,22 @@
+lightweight tag aaf0faa6377d4699da8447d3704bed8e20410a79 v0.5.4
+Author:	Chris Heald <cheald@gmail.com>
+Date:	Sat May 13 00:27:50 2017 -0700
+
+commit aaf0faa6377d4699da8447d3704bed8e20410a79
+Author: Chris Heald <cheald@gmail.com>
+Date:   Sat May 13 00:27:50 2017 -0700
+
+    Hide the kick button if there are no more eligible units in the party to kick
+
+commit f0ee74e526dda75bc982c19762d2c2dfda52760e
+Author: Chris Heald <cheald@gmail.com>
+Date:   Thu May 11 16:58:14 2017 -0700
+
+    Fix distance lookup for kick message
+
+commit 18832361b96391b5d3f6eaab33b1e4e3c76b372b
+Author: Chris Heald <cheald@gmail.com>
+Date:   Thu May 11 16:39:54 2017 -0700
+
+    Only do OOB checks when player is in bounds
+

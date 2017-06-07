@@ -8,8 +8,8 @@
 local _G = getfenv(0);
 local TITAN_BAG_ID = "Bag";
 local TITAN_BAG_THRESHOLD_TABLE = {
-	Values = { 0.5, 0.75 },
-	Colors = { GREEN_FONT_COLOR, NORMAL_FONT_COLOR, RED_FONT_COLOR },
+	Values = { 0.5, 0.75, 0.9 },
+	Colors = { HIGHLIGHT_FONT_COLOR, NORMAL_FONT_COLOR, ORANGE_FONT_COLOR, RED_FONT_COLOR },
 }
 local updateTable = {TITAN_BAG_ID, TITAN_PANEL_UPDATE_BUTTON};
 -- ******************************** Variables *******************************
@@ -228,26 +228,26 @@ end
 function TitanPanelRightClickMenu_PrepareBagMenu()
 	local info
 	-- level 2
-	if _G["LIB_UIDROPDOWNMENU_MENU_LEVEL"] == 2 then
-		if _G["LIB_UIDROPDOWNMENU_MENU_VALUE"] == "Options" then
-			TitanPanelRightClickMenu_AddTitle(L["TITAN_PANEL_OPTIONS"], _G["LIB_UIDROPDOWNMENU_MENU_LEVEL"])
+	if _G["L_UIDROPDOWNMENU_MENU_LEVEL"] == 2 then
+		if _G["L_UIDROPDOWNMENU_MENU_VALUE"] == "Options" then
+			TitanPanelRightClickMenu_AddTitle(L["TITAN_PANEL_OPTIONS"], _G["L_UIDROPDOWNMENU_MENU_LEVEL"])
 			info = {};
 			info.text = L["TITAN_BAG_MENU_SHOW_USED_SLOTS"];
 			info.func = TitanPanelBagButton_ShowUsedSlots;
 			info.checked = TitanGetVar(TITAN_BAG_ID, "ShowUsedSlots");
-			Lib_UIDropDownMenu_AddButton(info, _G["LIB_UIDROPDOWNMENU_MENU_LEVEL"]);
+			L_UIDropDownMenu_AddButton(info, _G["L_UIDROPDOWNMENU_MENU_LEVEL"]);
 
 			info = {};
 			info.text = L["TITAN_BAG_MENU_SHOW_AVAILABLE_SLOTS"];
 			info.func = TitanPanelBagButton_ShowAvailableSlots;
 			info.checked = TitanUtils_Toggle(TitanGetVar(TITAN_BAG_ID, "ShowUsedSlots"));
-			Lib_UIDropDownMenu_AddButton(info, _G["LIB_UIDROPDOWNMENU_MENU_LEVEL"]);
+			L_UIDropDownMenu_AddButton(info, _G["L_UIDROPDOWNMENU_MENU_LEVEL"]);
 
 			info = {};
 			info.text = L["TITAN_BAG_MENU_SHOW_DETAILED"];
 			info.func = TitanPanelBagButton_ShowDetailedInfo;
 			info.checked = TitanGetVar(TITAN_BAG_ID, "ShowDetailedInfo");
-			Lib_UIDropDownMenu_AddButton(info, _G["LIB_UIDROPDOWNMENU_MENU_LEVEL"]);
+			L_UIDropDownMenu_AddButton(info, _G["L_UIDROPDOWNMENU_MENU_LEVEL"]);
 		end
 		return
 	end
@@ -260,14 +260,14 @@ function TitanPanelRightClickMenu_PrepareBagMenu()
 	info.text = L["TITAN_PANEL_OPTIONS"];
 	info.value = "Options"
 	info.hasArrow = 1;
-	Lib_UIDropDownMenu_AddButton(info);
+	L_UIDropDownMenu_AddButton(info);
 
 	TitanPanelRightClickMenu_AddSpacer();
 	info = {};
 	info.text = L["TITAN_BAG_MENU_IGNORE_PROF_BAGS_SLOTS"];
 	info.func = TitanPanelBagButton_ToggleIgnoreProfBagSlots;
 	info.checked = TitanUtils_Toggle(TitanGetVar(TITAN_BAG_ID, "CountProfBagSlots"));
-	Lib_UIDropDownMenu_AddButton(info, _G["LIB_UIDROPDOWNMENU_MENU_LEVEL"]);
+	L_UIDropDownMenu_AddButton(info, _G["L_UIDROPDOWNMENU_MENU_LEVEL"]);
 
 	TitanPanelRightClickMenu_AddSpacer();
 	TitanPanelRightClickMenu_AddToggleIcon(TITAN_BAG_ID);

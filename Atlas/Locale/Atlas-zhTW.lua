@@ -1,4 +1,4 @@
--- $Id: Atlas-zhTW.lua 216 2017-04-13 06:48:03Z arith $
+-- $Id: Atlas-zhTW.lua 246 2017-05-15 07:33:49Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -42,6 +42,11 @@ end
 
 
 if L then
+L[" 1/2"] = " 1/2"
+L[" 2/2"] = " 2/2"
+L["%s Dungeons"] = "%s地城"
+L["%s Instances"] = "%s副本"
+L["%s Raids"] = "%s團隊副本"
 L["Adult"] = "成年"
 L["AKA"] = "又稱"
 L["Alexston Chrome <Tavern of Time>"] = "艾力克斯頓·科洛米 <時間酒館>"
@@ -201,6 +206,7 @@ L["ATLAS_OPTIONS_SHOWBUT"] = "在小地圖旁顯示 Atlas 按鈕"
 L["ATLAS_OPTIONS_SHOWBUT_TIP"] = "在小地圖旁顯示 Atlas 按鈕"
 L["ATLAS_OPTIONS_SHOWWMBUT"] = "在世界地圖上顯示 Atlas 按鈕"
 L["ATLAS_OPTIONS_TRANS"] = "透明度"
+L["ATLAS_REOPEN_LOOT_AGAIN"] = "請重新開啟首領戰利品視窗以重新載入物品資訊。"
 L["ATLAS_ROPEN_ATLASLOOT_WINDOW"] = "右鍵點擊以開啟 AtlasLoot 視窗。"
 L["ATLAS_SEARCH_UNAVAIL"] = "搜尋功能停用"
 L["ATLAS_SLASH"] = "/atlas"
@@ -335,4 +341,9 @@ L["Wave 6"] = "第 6 波"
 L["West"] = "西"
 L["Yarley <Armorer>"] = "亞利 <護甲商>"
 L["Zaladormu"] = "薩拉多姆"
+
+-- ToC
+L["Description"] = "|cff00CC33Atlas 地圖集主程式|r"
+L["Title"] = "|r|cFF0099FF[地圖]|rAtlas 地圖集 |cFF0099FF[主程式]|r"
+
 end

@@ -1,4 +1,4 @@
--- $Id: Atlas_Cataclysm-enUS.lua 16 2017-01-16 09:55:01Z arith $
+-- $Id: Atlas_Cataclysm-enUS.lua 24 2017-05-10 09:16:25Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -67,6 +67,7 @@ L["FL"] = "FL"
 L["Forest Frogs"] = "Forest Frogs"
 L["Gazakroth"] = "Gazakroth"
 L["GB"] = "GB"
+L["Goblin Teleporter"] = "Goblin Teleporter"
 L["Gub <Destroyer of Fish>"] = "Gub <Destroyer of Fish>"
 L["Harald <Food Vendor>"] = "Harald <Food Vendor>"
 L["Haunted Stable Hand"] = "Haunted Stable Hand"
@@ -137,6 +138,11 @@ L["Zanzil's Cauldron of Frostburn Formula"] = "Zanzil's Cauldron of Frostburn Fo
 L["Zanzil's Cauldron of Toxic Torment"] = "Zanzil's Cauldron of Toxic Torment"
 L["ZG"] = "ZG"
 L["Zungam"] = "Zungam"
+
+-- ToC
+L["Description"] = "Cataclysm Instances' Maps"
+L["Title"] = "Atlas |r|cFF0099FF[Cataclysm]|r"
+
 --************************************************
 -- Zone Names, Acronyms, and Common Strings
 --************************************************
@@ -223,6 +229,7 @@ L["Zungam"] = "Zungam"
 	L["Quartermaster Lewis <Quartermaster>"] = "Quartermaster Lewis <Quartermaster>";
 	L["Miss Mayhem"] = "Miss Mayhem";
 	L["Vend-O-Tron D-Luxe"] = "Vend-O-Tron D-Luxe";
+	L["Goblin Teleporter"] = "Goblin Teleporter";
 
 	--The Stonecore
 	L["Earthwarden Yrsa <The Earthen Ring>"] = "Earthwarden Yrsa <The Earthen Ring>";

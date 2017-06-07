@@ -1,4 +1,4 @@
--- $Id: Atlas-ruRU.lua 140 2017-01-16 08:56:14Z arith $
+-- $Id: Atlas-ruRU.lua 240 2017-05-12 17:13:41Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -30,8 +30,8 @@ local L = AceLocale:NewLocale("Atlas", "ruRU", false);
 -- Atlas Russian Localization
 -- Compiled by Eugene Filatov, bigoblin, StingerSoft
 -- Last Update: 23.01.2011
--- $Date: 2017-01-16 02:56:14 -0600 (Mon, 16 Jan 2017) $
--- $Revision: 140 $
+-- $Date: 2017-05-12 12:13:41 -0500 (Fri, 12 May 2017) $
+-- $Revision: 240 $
 
 if ( GetLocale() == "ruRU" ) then
 -- Define the leading strings to be ignored while sorting
@@ -48,6 +48,11 @@ end
 
 
 if L then
+L[" 1/2"] = "1/2"
+L[" 2/2"] = "2/2"
+L["%s Dungeons"] = "%s подземелья"
+L["%s Instances"] = "%s подземелья"
+L["%s Raids"] = "%s рейды"
 L["Adult"] = "Взрослый"
 L["AKA"] = "ИК"
 L["Alexston Chrome <Tavern of Time>"] = "Алекстон Хром <Таверна Времени>"
@@ -126,7 +131,7 @@ L["ATLAS_DEP_MSG2"] = "Оно / они были отключены для это
 L["ATLAS_DEP_MSG3"] = [=[Удалите это из вашей папки AddOns и установите последнюю версию.
 
 Список устаревших плагин(ов)/модуль(ей)/аддон(ов):]=]
-L["ATLAS_DEP_MSG4"] = [=[Если у вас есть последние из установленых,
+L["ATLAS_DEP_MSG4"] = [=[Если у вас есть последние из установленных,
 не забудьте включить их из списка списка аддонов.]=]
 L["ATLAS_DEP_OK"] = "ОК"
 L["ATLAS_ENTRANCE_BUTTON"] = "Вход"
@@ -342,5 +347,10 @@ L["Wave 6"] = "6-ая волна"
 L["West"] = "Запад"
 L["Yarley <Armorer>"] = "Ярли <Бронник>"
 L["Zaladormu"] = "Заладорму"
+
+-- ToC
+L["Description"] = "Обозреватель подземелий"
+L["Title"] = "Atlas"
+
 
 end

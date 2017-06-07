@@ -1,10 +1,36 @@
-$Id: ChangeLog.txt 92 2017-04-13 19:31:29Z arith $
+$Id: ChangeLog.txt 105 2017-05-30 16:00:41Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 ==============
 = Change Log =
 ==============
+
+v1.41.04 (May 30, 2017)
+------------------------
+- Localization update:
+  - German (pas06)
+  - Simplified Chinese (ananhaid)
+
+v1.41.03 (May 23, 2017)
+------------------------
+- Revamped Death Knight's order hall maps
+- Added Eran Droll and Winter Payne to Death Knight's order hall
+- Added Tormented Shivarra and Evelune Soulreaver to Demon Hunter's order hall
+- Added Matilda Skoptidottir and Sharak Tor / Matthew Glensorrow in Warrior's order hall
+- Added Crusader Kern to Paladin's order hall
+
+v1.41.02 (May 19, 2017)
+------------------------
+- Added Terric the Illuminator in Paladin's order hall
+- IntroduceAtlas:GetCreatureName function to lookup NPC's localized names
+- Localization update:
+  - German (pas06)
+
+v1.41.01 (May 08, 2017)
+------------------------
+- Corrected the tooltips for Lady Alistra and Soul Forge / Grand Master 
+  Siegesmith Corvus in Death Knight Map
 
 v1.41.00 (Apr. 14, 2017)
 ------------------------

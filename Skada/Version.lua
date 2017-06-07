@@ -1,12 +1,17 @@
 Skada.versions = {
     {
+        id = "1.6.7",
+        title = "Skada 1.6.7",
+        message = "增加新增益與簡易概述模式，顯示使用的法術。 點擊一個法術顯示相應的玩家。<br/>"
+    },
+    {
         id = "1.6.4",
         title = "Skada 1.6.4",
-        message = "增加新的更新頻率選項。<br/>增加一個新的通知系統(LibNotify)來顯示不引人注目的版本資訊。"
+        message = "Added a new update frequency option.<br/>Added a new notification system (LibNotify) to display version information unobtrusively."
     },
     {
         id = "1.6.3",
-        title = "近期更新匯總",
-        message = "新增平滑條選項，來平滑條的動畫變化。注意這會多耗系統效能。<br/>模組列表現在按您使用模組的頻率進行排序。(BNS版本修改為停用)<br/>新增法術類型顏色與提示訊息。<br/>預設更新頻率加倍。<br/>修復了RealUI用戶的兼容性問題。"
+        title = "Roundup of recent changes",
+        message = "Added a Smooth Bars option, for smoothly animated bar changes. Note that this does come at a performance cost.<br/>Mode list is now sorted by how often you use the modes.<br/>Added spell school color and tooltip info.<br/>Doubled default update frequency.<br/>Fixed a compatibility issue for RealUI users."
     }
 }

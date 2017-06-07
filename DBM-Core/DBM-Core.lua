@@ -41,9 +41,9 @@
 --  Globals/Default Options  --
 -------------------------------
 DBM = {
-	Revision = tonumber(("$Revision: 16121 $"):sub(12, -3)),
-	DisplayVersion = "7.2.2 BNS", -- the string that is shown as version
-	ReleaseRevision = 16121 -- the revision of the latest stable version that is available
+	Revision = tonumber(("$Revision: 16243 $"):sub(12, -3)),
+	DisplayVersion = "7.2.7 BNS", -- the string that is shown as version
+	ReleaseRevision = 16243 -- the revision of the latest stable version that is available
 }
 DBM.HighestRelease = DBM.ReleaseRevision --Updated if newer version is detected, used by update nags to reflect critical fixes user is missing on boss pulls
 
@@ -53,6 +53,7 @@ if not DBM.Revision then
 	DBM.Revision = DBM.ReleaseRevision
 end
 
+local wowVersionString, _, _, wowTOC = GetBuildInfo()
 local testBuild = false
 if IsTestBuild() then
 	testBuild = true
@@ -96,11 +97,10 @@ DBM.DefaultOptions = {
 	ModelSoundValue = "Short",
 	CountdownVoice = "Corsica",
 	CountdownVoice2 = "Kolt",
-	CountdownVoice3v2 = "HoTS_R",
+	CountdownVoice3v2 = "Pewsey",
 	ChosenVoicePack = "None",
 	VoiceOverSpecW2 = "DefaultOnly",
 	AlwaysPlayVoice = false,
-	ShowCountdownText = false,
 	Enabled = true,
 	ShowWarningsInChat = true,
 	ShowSWarningsInChat = true,
@@ -251,23 +251,23 @@ DBM.DefaultOptions = {
 	DontPlayCountdowns = false,
 	DontSendYells = false,
 	BlockNoteShare = false,
+	DontShowReminders = false,
 	DontShowPT2 = false,
 	DontShowPTCountdownText = false,
 	DontPlayPTCountdown = false,
 	DontShowPTText = false,
 	DontShowPTNoID = false,
-	DontShowCTCount = false,
-	DontShowFlexMessage = false,
 	PTCountThreshold = 5,
 	LatencyThreshold = 250,
 	BigBrotherAnnounceToRaid = false,
 	SettingsMessageShown = false,
 	ForumsMessageShown = false,
-	PGMessageShown = false,
+	PGMessageShown2 = false,
 	MCMessageShown = false,
 	BCTWMessageShown = false,
 	WOTLKTWMessageShown = false,
 	CATATWMessageShown = false,
+	MISTSTWMessageShown = false,
 	AlwaysShowSpeedKillTimer = true,
 	CRT_Enabled = false,
 	ShowRespawn = true,
@@ -301,38 +301,6 @@ DBM.Counts = {
 	{	text	= "Koltrane (Male)",value 	= "Kolt", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Kolt\\", max = 10},
 	{	text	= "Pewsey (Male)",value 	= "Pewsey", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Pewsey\\", max = 10},
 	{	text	= "Bear (Male Child)",value = "Bear", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Bear\\", max = 10},
-	{	text	= "Overwatch: Announcer",	value 	= "Overwatch", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Announcer\\", max = 10},
-	{	text	= "Overwatch: Bastion",	value 	= "Bastion", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Bastion\\", max = 5},
-	{	text	= "Overwatch: D.Va",	value 	= "DVa", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\DVa\\", max = 5},
-	{	text	= "Overwatch: D.Va (Korean)",	value 	= "DVakr", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\DVa\\kr\\", max = 5},
-	{	text	= "Overwatch: Genji",	value 	= "Genji", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Genji\\", max = 5},
-	{	text	= "Overwatch: Genji (Japanese)",	value 	= "Genjijp", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Genji\\jp\\", max = 5},
-	{	text	= "Overwatch: Hanzo",	value 	= "Hanzo", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Hanzo\\", max = 5},
-	{	text	= "Overwatch: Junkrat",	value 	= "Junkrat", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Junkrat\\", max = 5},
-	{	text	= "Overwatch: Lucio",	value 	= "Lucio", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Lucio\\", max = 5},
-	{	text	= "Overwatch: Mccree",	value 	= "Mccree", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Mccree\\", max = 5},
-	{	text	= "Overwatch: Mei",	value 	= "Mei", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Mei\\", max = 5},
-	{	text	= "Overwatch: Mei (Chinese)",	value 	= "Meicn", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Mei\\cn\\", max = 5},
-	{	text	= "Overwatch: Mercy",	value 	= "Mercy", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Mercy\\", max = 5},
-	{	text	= "Overwatch: Pharah",	value 	= "Pharah", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Pharah\\", max = 5},
-	{	text	= "Overwatch: Reaper",	value 	= "Reaper", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Reaper\\", max = 5},
-	{	text	= "Overwatch: Reinhardt",	value 	= "Reinhardt", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Reinhardt\\", max = 5},
-	{	text	= "Overwatch: Roadhog",	value 	= "Roadhog", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Roadhog\\", max = 5},
-	{	text	= "Overwatch: Soldier",	value 	= "Soldier", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Soldier\\", max = 5},
-	{	text	= "Overwatch: Symmetra",	value 	= "Symmetra", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Symmetra\\", max = 5},
-	{	text	= "Overwatch: Torbjorn",	value 	= "Torbjorn", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Torbjorn\\", max = 5},
-	{	text	= "Overwatch: Tracer",	value 	= "Tracer", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Tracer\\", max = 5},
-	{	text	= "Overwatch: Widowmaker",	value 	= "Widowmaker", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Widowmaker\\", max = 5},
-	{	text	= "Overwatch: Winston",	value 	= "Winston", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Winston\\", max = 5},
-	{	text	= "Overwatch: Zarya",	value 	= "Zarya", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Zarya\\", max = 5},
-	{	text	= "Overwatch: Zenyatta",	value 	= "Zenyatta", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Overwatch\\Zenyatta\\", max = 5},
-	{	text	= "HoTS: Default",	value 	= "HoTS_D", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Heroes\\Default\\", max = 5},
-	{	text	= "HoTS: Blackheart",	value 	= "HoTS_B", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Heroes\\Blackheart\\", max = 5},
-	{	text	= "HoTS: Gardens",	value 	= "HoTS_G", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Heroes\\Gardens\\", max = 5},
-	{	text	= "HoTS: Lady of Thorns",	value 	= "HoTS_T", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Heroes\\LadyOfThorns\\", max = 5},
-	{	text	= "HoTS: Necromancer",	value 	= "HoTS_N", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Heroes\\Necromancer\\", max = 5},
-	{	text	= "HoTS: Ravenlord",	value 	= "HoTS_R", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Heroes\\RavenLord\\", max = 5},
-	{	text	= "HoTS: Snake",	value 	= "HoTS_S", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Heroes\\Snake\\", max = 5},
 	{	text	= "Anshlun (ptBR Male)",value = "Anshlun", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Anshlun\\", max = 10},
 	{	text	= "Neryssa (ptBR Female)",value = "Neryssa", path = "Interface\\AddOns\\DBM-Core\\Sounds\\Neryssa\\", max = 10},
 }
@@ -415,13 +383,12 @@ local addsGUIDs = {}
 local targetEventsRegistered = false
 local targetMonitor = nil
 local statusWhisperDisabled = false
-local wowVersionString, _, _, wowTOC = GetBuildInfo()
 local dbmToc = 0
 local UpdateChestTimer
 local breakTimerStart
 local AddMsg
 
-local fakeBWVersion, fakeBWHash = 50, "1e39f8a"
+local fakeBWVersion, fakeBWHash = 54, "31ef498"
 local versionQueryString, versionResponseString = "Q^%d^%s", "V^%d^%s"
 
 local enableIcons = true -- set to false when a raid leader or a promoted player has a newer version of DBM
@@ -435,6 +402,7 @@ local bannedMods = { -- a list of "banned" (meaning they are replaced by another
 	"DBM-SiegeOfOrgrimmar",--Block legacy version. New version is "DBM-SiegeOfOrgrimmarV2"
 	"DBM-HighMail",
 	"DBM-ProvingGrounds-MoP",--Renamed to DBM-ProvingGrounds in 6.0 version since blizzard updated content for WoD
+	"DBM-ProvingGrounds",--Renamed to DBM-Challenges going forward to include proving grounds and any new single player challendges of similar design such as mage tower artifact quests
 	"DBM-VPKiwiBeta",--Renamed to DBM-VPKiwi in final version.
 	"DBM-Suramar",--Renamed to DBM-Nighthold
 }
@@ -584,10 +552,6 @@ local function stripServerName(cap)
 		cap = Ambiguate(cap, "short")
 	end
 	return cap
-end
-
-local function countDownTextDelay(timer)
-	TimerTracker_OnEvent(TimerTracker, "START_TIMER", 2, timer+1, timer+1)
 end
 
 --------------
@@ -1067,7 +1031,7 @@ do
 				AddMsg(DBM, DBM_CORE_VOICE_MISSING)
 			end
 		else
-			if #self.Voices > 1 then
+			if not self.Options.DontShowReminders and #self.Voices > 1 then
 				--At least one voice pack installed but activeVP set to "None"
 				AddMsg(DBM, DBM_CORE_VOICE_DISABLED)
 			end
@@ -1079,6 +1043,10 @@ do
 		if voice1 == "None" then--Migrate to new setting
 			self.Options.CountdownVoice = self.DefaultOptions.CountdownVoice
 			self.Options.DontPlayCountdowns = true
+		end
+		if voice3 == "HoTS_R" and select(4, GetAddOnInfo("DBM-CountPack-HoTS")) then
+			--Heroes count pack already installed, migrate user setting instead of forcing pewsey voice
+			self.Options.CountdownVoice3v2 = "HoTS_Ravenlord"
 		end
 		local found1, found2, found3 = false, false, false
 		for i = 1, #self.Counts do
@@ -1094,15 +1062,15 @@ do
 			end
 		end
 		if not found1 then
-			AddMsg(DBM, DBM_CORE_VOICE_COUNT_MISSING:format(1))
+			AddMsg(DBM, DBM_CORE_VOICE_COUNT_MISSING:format(1, self.DefaultOptions.CountdownVoice))
 			self.Options.CountdownVoice = self.DefaultOptions.CountdownVoice
 		end
 		if not found2 then
-			AddMsg(DBM, DBM_CORE_VOICE_COUNT_MISSING:format(2))
+			AddMsg(DBM, DBM_CORE_VOICE_COUNT_MISSING:format(2, self.DefaultOptions.CountdownVoice2))
 			self.Options.CountdownVoice2 = self.DefaultOptions.CountdownVoice2
 		end
 		if not found3 then
-			AddMsg(DBM, DBM_CORE_VOICE_COUNT_MISSING:format(3))
+			AddMsg(DBM, DBM_CORE_VOICE_COUNT_MISSING:format(3, self.DefaultOptions.CountdownVoice3v2))
 			self.Options.CountdownVoice3v2 = self.DefaultOptions.CountdownVoice3v2
 		end
 		self:BuildVoiceCountdownCache()
@@ -1117,6 +1085,9 @@ do
 			else--It must have ended while we were offline, kill variable.
 				self.Options.tempBreak2 = nil
 			end
+		end
+		if IsInGuild() then
+			SendAddonMessage("D4", "GH", "GUILD")
 		end
 	end
 
@@ -1235,6 +1206,20 @@ do
 						self:Schedule(10, self.CheckVoicePackVersion, self, voiceValue)--Still at 1 since the count sounds won't break any mods or affect filter. V2 if support countsound path
 						if GetAddOnMetadata(i, "X-DBM-Voice-HasCount") then--Supports adding countdown options, insert new countdown into table
 							tinsert(self.Counts, { text = GetAddOnMetadata(i, "X-DBM-Voice-Name"), value = "VP:"..voiceValue, path = "Interface\\AddOns\\DBM-VP"..voiceValue.."\\count\\", max = 10})
+						end
+					end
+				end
+				if GetAddOnMetadata(i, "X-DBM-CountPack") and enabled ~= 0 then
+					if checkEntry(bannedMods, addonName) then
+						AddMsg(self, "The mod " .. addonName .. " is deprecated and will not be available. Please remove the folder " .. addonName .. " from your Interface" .. (IsWindowsClient() and "\\" or "/") .. "AddOns folder to get rid of this message. Check for an updated version of " .. addonName .. " that is compatible with your game version.")
+					else
+						local loaded = LoadAddOn(addonName)
+						local voiceGlobal = GetAddOnMetadata(i, "X-DBM-CountPack-GlobalName")
+						local insertFunction = _G[voiceGlobal]
+						if loaded and insertFunction then
+							insertFunction()
+						else
+							DBM:Debug(addonName.." failed to load at time CountPack function ran", 2)
 						end
 					end
 				end
@@ -2119,6 +2104,9 @@ do
 			DBM:RequestTimers(1)
 			DBM:RequestTimers(2)
 			DBM:RequestTimers(3)
+		elseif cmd:sub(1, 6) == "silent" then
+			DBM.Options.SilentMode = DBM.Options.SilentMode == false and true or false
+			DBM:AddMsg("SilentMode is " .. (DBM.Options.SilentMode and "ON" or "OFF"))
 		else
 			DBM:LoadGUI()
 		end
@@ -2286,8 +2274,6 @@ do
 				raid[sender].worldlag = worldlag
 			end
 		end)
-	else
-		DBM:AddMsg(DBM_CORE_UPDATE_REQUIRES_RELAUNCH)
 	end
 
 end
@@ -2314,8 +2300,6 @@ do
 			self:Unschedule(loopTimer)
 			fakeMod.countdown:Cancel()
 			self.Bars:CancelBar(text)
-			self:Unschedule(countDownTextDelay)
-			TimerTracker_OnEvent(TimerTracker, "PLAYER_ENTERING_WORLD")
 			return
 		end
 		if sender and ignore[sender] then return end
@@ -2350,16 +2334,6 @@ do
 			if not self.Options.DontPlayPTCountdown then
 				fakeMod.countdown:Cancel()
 				fakeMod.countdown:Start(time)
-			end
-			if not self.Options.DontShowPTCountdownText then
-				self:Unschedule(countDownTextDelay)
-				TimerTracker_OnEvent(TimerTracker, "PLAYER_ENTERING_WORLD")
-				local threshold = self.Options.PTCountThreshold
-				if time > threshold then
-					self:Schedule(time-threshold, countDownTextDelay, threshold)
-				else
-					TimerTracker_OnEvent(TimerTracker, "START_TIMER", 2, time, time)
-				end
 			end
 		end
 		if loop then
@@ -2447,9 +2421,9 @@ do
 		elseif arg1 == "update" then
 			DBM:ShowUpdateReminder(arg2, arg3) -- displayVersion, revision
 		elseif arg == "localizersneeded" then
-			DBM:ShowUpdateReminder(nil, nil, DBM_FORUMS_COPY_URL_DIALOG, "http://www.deadlybossmods.com/forum/viewtopic.php?f=3&t=5")
+			DBM:ShowUpdateReminder(nil, nil, DBM_FORUMS_COPY_URL_DIALOG, "https://www.deadlybossmods.com/forum/viewtopic.php?f=3&t=5")
 		elseif arg1 == "forumsnews" then
-			DBM:ShowUpdateReminder(nil, nil, DBM_FORUMS_COPY_URL_DIALOG_NEWS, "http://www.deadlybossmods.com/forum/viewtopic.php?f=3&p=171#p171")
+			DBM:ShowUpdateReminder(nil, nil, DBM_FORUMS_COPY_URL_DIALOG_NEWS, "https://www.deadlybossmods.com/forum/viewtopic.php?f=3&t=226&p=690#p690")
 		elseif arg1 == "forums" then
 			DBM:ShowUpdateReminder(nil, nil, DBM_FORUMS_COPY_URL_DIALOG)
 		elseif arg1 == "showRaidIdResults" then
@@ -2657,7 +2631,7 @@ do
 				SendAddonMessage("BigWigs", versionQueryString:format(0, fakeBWHash), IsPartyLFG() and "INSTANCE_CHAT" or "RAID")
 				self:Schedule(2, self.RoleCheck, false, self)
 				fireEvent("raidJoin", playerName)
-				if BigWigs and BigWigs.db.profile.raidicon and not self.Options.DontSetIcons then--Both DBM and bigwigs have raid icon marking turned on.
+				if BigWigs and BigWigs.db.profile.raidicon and not self.Options.DontSetIcons and self:GetRaidRank() > 0 then--Both DBM and bigwigs have raid icon marking turned on.
 					self:AddMsg(DBM_CORE_BIGWIGS_ICON_CONFLICT)--Warn that one of them should be turned off to prevent conflict (which they turn off is obviously up to raid leaders preference, dbm accepts either or turned off to stop this alert)
 				end
 			end
@@ -3590,23 +3564,27 @@ end
 --------------------------------
 do
 	local function checkMods(self)
-		if difficultyIndex == 24 then
-			--Surely a less shitty way of checking "this is a BC dungeon"?
+		if difficultyIndex == 24 then--Timewalking
 			if (LastInstanceMapID == 540 or LastInstanceMapID == 558 or LastInstanceMapID == 556 or LastInstanceMapID == 555 or LastInstanceMapID == 542 or LastInstanceMapID == 546 or LastInstanceMapID == 545 or LastInstanceMapID == 547 or LastInstanceMapID == 553 or LastInstanceMapID == 554 or LastInstanceMapID == 552 or LastInstanceMapID == 557 or LastInstanceMapID == 269 or LastInstanceMapID == 560 or LastInstanceMapID == 543 or LastInstanceMapID == 585) and not self.Options.BCTWMessageShown and not GetAddOnInfo("DBM-Party-BC") then
 				self.Options.BCTWMessageShown = true
 				AddMsg(self, DBM_CORE_MOD_AVAILABLE:format("DBM-Party-BC"))
-			--Surely a less shitty way of checking "this is a wrath dungeon"?
+			elseif LastInstanceMapID == 564 and not self.Options.BCTWMessageShown and not GetAddOnInfo("DBM-BlackTemple") then
+				self.Options.BCTWMessageShown = true
+				AddMsg(self, DBM_CORE_MOD_AVAILABLE:format("DBM-BlackTemple"))
 			elseif (LastInstanceMapID == 619 or LastInstanceMapID == 601 or LastInstanceMapID == 595 or LastInstanceMapID == 600 or LastInstanceMapID == 604 or LastInstanceMapID == 602 or LastInstanceMapID == 599 or LastInstanceMapID == 576 or LastInstanceMapID == 578 or LastInstanceMapID == 574 or LastInstanceMapID == 575 or LastInstanceMapID == 608 or LastInstanceMapID == 658 or LastInstanceMapID == 632 or LastInstanceMapID == 668 or LastInstanceMapID == 650) and not self.Options.WOTLKTWMessageShown and not GetAddOnInfo("DBM-Party-WotLK") then
 				self.Options.WOTLKTWMessageShown = true
 				AddMsg(self, DBM_CORE_MOD_AVAILABLE:format("DBM-Party-WotLK"))
 			elseif (LastInstanceMapID == 755 or LastInstanceMapID == 645 or LastInstanceMapID == 36 or LastInstanceMapID == 670 or LastInstanceMapID == 644 or LastInstanceMapID == 33 or LastInstanceMapID == 643 or LastInstanceMapID == 725 or LastInstanceMapID == 657 or LastInstanceMapID == 309 or LastInstanceMapID == 859 or LastInstanceMapID == 568 or LastInstanceMapID == 938 or LastInstanceMapID == 940 or LastInstanceMapID == 939) and not self.Options.CATATWMessageShown and not GetAddOnInfo("DBM-Party-Cataclysm") then
-				self.Options.CATATWMessageShown = true-- 
+				self.Options.CATATWMessageShown = true
 				AddMsg(self, DBM_CORE_MOD_AVAILABLE:format("DBM-Party-Cataclysm"))
+			elseif (LastInstanceMapID == 960 or LastInstanceMapID == 961 or LastInstanceMapID == 959 or LastInstanceMapID == 962 or LastInstanceMapID == 994 or LastInstanceMapID == 1011 or LastInstanceMapID == 1007 or LastInstanceMapID == 1001 or LastInstanceMapID == 1004) and not self.Options.MISTSTWMessageShown and not GetAddOnInfo("DBM-Party-MoP") then
+				self.Options.MISTSTWMessageShown = true
+				AddMsg(self, DBM_CORE_MOD_AVAILABLE:format("DBM-Party-MoP"))
 			end
 		else
-			if LastInstanceMapID == 1148 and not self.Options.PGMessageShown and not GetAddOnInfo("DBM-ProvingGrounds") then
-				self.Options.PGMessageShown = true
-				AddMsg(self, DBM_CORE_MOD_AVAILABLE:format("DBM-ProvingGrounds"))
+			if (LastInstanceMapID == 1148 or LastInstanceMapID == 1698 or LastInstanceMapID == 1710 or LastInstanceMapID == 1703 or LastInstanceMapID == 1702 or LastInstanceMapID == 1684 or LastInstanceMapID == 1673 or LastInstanceMapID == 1616) and not self.Options.PGMessageShown2 and not GetAddOnInfo("DBM-Challenges") then
+				self.Options.PGMessageShown2 = true
+				AddMsg(self, DBM_CORE_MOD_AVAILABLE:format("DBM-Challenges"))
 			elseif LastInstanceMapID == 409 and not self.Options.MCMessageShown and not GetAddOnInfo("DBM-MC") then
 				self.Options.MCMessageShown = true
 				AddMsg(self, DBM_CORE_MOD_AVAILABLE:format("DBM-MC"))
@@ -3643,7 +3621,16 @@ do
 		end
 		-- LoadMod
 		self:LoadModsOnDemand("mapId", mapID)
-		checkMods(self)
+		if not self.Options.DontShowReminders then
+			checkMods(self)
+		end
+		if DBM:HasMapRestrictions() then
+			DBM.Arrow:Hide()
+			DBMHudMap:Disable()
+			if DBM.RangeCheck:IsRadarShown() then
+				DBM.RangeCheck:Hide(true)
+			end
+		end
 	end
 	--Faster and more accurate loading for instances, but useless outside of them
 	function DBM:LOADING_SCREEN_DISABLED()
@@ -3672,7 +3659,9 @@ do
 				if enabled ~= 0 then
 					self:LoadMod(v)
 				else
-					self:AddMsg(DBM_CORE_LOAD_MOD_DISABLED:format(v.name))
+					if not self.Options.DontShowReminders then
+						self:AddMsg(DBM_CORE_LOAD_MOD_DISABLED:format(v.name))
+					end
 				end
 			end
 		end
@@ -3913,7 +3902,7 @@ do
 				if mod and delay and (not mod.zones or mod.zones[LastInstanceMapID]) and (not mod.minSyncRevision or modRevision >= mod.minSyncRevision) then
 					DBM:StartCombat(mod, delay + lag, "SYNC from - "..sender, true, startHp)
 					if (mod.revision < modHFRevision) and (mod.revision > 1000) then--mod.revision because we want to compare to OUR revision not senders
-						if DBM:AntiSpam(3, "HOTFIX") then
+						if DBM:AntiSpam(3, "HOTFIX") and not DBM.Options.DontShowReminders then
 							if DBM.HighestRelease < modHFRevision then--There is a newer RELEASE version of DBM out that has this mods fixes
 								showConstantReminder = 2
 								DBM:AddMsg(DBM_CORE_UPDATEREMINDER_HOTFIX)
@@ -4004,7 +3993,6 @@ do
 			dummyMod.countdown:Cancel()
 		end
 		if not DBM.Options.DontShowPTCountdownText then
-			DBM:Unschedule(countDownTextDelay)
 			TimerTracker_OnEvent(TimerTracker, "PLAYER_ENTERING_WORLD")--easiest way to nil out timers on TimerTracker frame. This frame just has no actual star/stop functions
 		end
 		dummyMod.text:Cancel()
@@ -4122,7 +4110,12 @@ do
 		breakTimerStart(DBM, timer, sender)
 	end
 
-	local function SendVersion()
+	local function SendVersion(guild)
+		if guild then
+			local message = ("%d\t%s\t%s"):format(DBM.Revision, tostring(DBM.ReleaseRevision), DBM.DisplayVersion)
+			SendAddonMessage("D4", "GV\t" .. message, "GUILD")
+			return
+		end
 		if DBM.Options.FakeBWVersion then
 			SendAddonMessage("BigWigs", versionResponseString:format(fakeBWVersion, fakeBWHash), IsInGroup(2) and "INSTANCE_CHAT" or "RAID")
 			return
@@ -4139,11 +4132,83 @@ do
 			sendSync("V", ("%d\t%s\t%s\t%s\t%s"):format(DBM.Revision, tostring(DBM.ReleaseRevision), DBM.DisplayVersion, GetLocale(), tostring(not DBM.Options.DontSetIcons)))
 		end
 	end
+	
+	local function HandleVersion(revision, version, displayVersion, sender, noRaid)
+		if version > DBM.Revision then -- Update reminder
+			if not checkEntry(newerVersionPerson, sender) then
+				newerVersionPerson[#newerVersionPerson + 1] = sender
+				DBM:Debug("Newer version detected from "..sender.." : Rev - "..revision..", Ver - "..version..", Rev Diff - "..(revision - DBM.Revision), 3)
+			end
+			if #newerVersionPerson < 4 then
+				if #newerVersionPerson == 2 and updateNotificationDisplayed < 2 then--Only requires 2 for update notification.
+					if DBM.HighestRelease < version then
+						DBM.HighestRelease = version
+					end
+					DBM.NewerVersion = displayVersion
+					--UGLY hack to get release version number instead of alpha one
+					if DBM.NewerVersion:find("alpha") then
+						local temp1, temp2 = string.split(" ", DBM.NewerVersion)--Strip down to just version, no alpha
+						local temp3, temp4, temp5 = string.split(".", temp1)--Strip version down to 3 numbers
+						if temp5 then
+							temp5 = tonumber(temp5)
+							temp5 = temp5 - 1
+							temp5 = tostring(temp5)
+							DBM.NewerVersion = temp3.."."..temp4.."."..temp5
+						end
+					end
+					--Find min revision.
+					updateNotificationDisplayed = 2
+					AddMsg(DBM, DBM_CORE_UPDATEREMINDER_HEADER:match("([^\n]*)"))
+					AddMsg(DBM, DBM_CORE_UPDATEREMINDER_HEADER:match("\n(.*)"):format(displayVersion, version))
+					AddMsg(DBM, ("|HDBM:update:%s:%s|h|cff3588ff[%s]"):format(displayVersion, version, DBM_CORE_UPDATEREMINDER_URL or "http://www.deadlybossmods.com"))
+					showConstantReminder = 1
+				elseif not noRaid and #newerVersionPerson == 3 and updateNotificationDisplayed < 3 then--The following code requires at least THREE people to send that higher revision. That should be more than adaquate
+					--Find min revision.
+					local revDifference = mmin((raid[newerVersionPerson[1]].revision - DBM.Revision), (raid[newerVersionPerson[2]].revision - DBM.Revision), (raid[newerVersionPerson[3]].revision - DBM.Revision))
+					--Disable if out of date and it's a major patch.
+					if not testBuild and dbmToc < wowTOC then
+						updateNotificationDisplayed = 3
+						AddMsg(DBM, DBM_CORE_UPDATEREMINDER_MAJORPATCH)
+						DBM:Disable()
+					--Disable if revision grossly out of date even if not major patch.
+					elseif revDifference > 100 then
+						if updateNotificationDisplayed < 3 then
+							updateNotificationDisplayed = 3
+							AddMsg(DBM, DBM_CORE_UPDATEREMINDER_DISABLE)
+							DBM:Disable()
+						end
+					end
+				end
+			end
+		end
+		if DBM.DisplayVersion:find("alpha") and #newerVersionPerson < 2 and #newerRevisionPerson < 2 and updateNotificationDisplayed < 2 and (revision - DBM.Revision) > 20 then
+			if not checkEntry(newerRevisionPerson, sender) then
+				newerRevisionPerson[#newerRevisionPerson + 1] = sender
+				DBM:Debug("Newer revision detected from "..sender.." : Rev - "..revision..", Ver - "..version..", Rev Diff - "..(revision - DBM.Revision))
+			end
+			if #newerRevisionPerson == 2 then
+				local revDifference = mmin((raid[newerRevisionPerson[1]].revision - DBM.Revision), (raid[newerRevisionPerson[2]].revision - DBM.Revision))
+				if testBuild and revDifference > 5 then
+					updateNotificationDisplayed = 3
+					AddMsg(DBM, DBM_CORE_UPDATEREMINDER_DISABLE)
+					DBM:Disable()
+				else
+					updateNotificationDisplayed = 2
+					AddMsg(DBM, DBM_CORE_UPDATEREMINDER_HEADER_ALPHA:format(revDifference))
+				end
+			end
+		end
+	end
 
 	-- TODO: is there a good reason that version information is broadcasted and not unicasted?
 	syncHandlers["H"] = function(sender)
 		DBM:Unschedule(SendVersion)--Throttle so we don't needlessly send tons of comms during initial raid invites
 		DBM:Schedule(3, SendVersion)--Send version if 3 seconds have past since last "Hi" sync
+	end
+	
+	syncHandlers["GH"] = function(sender)
+		DBM:Unschedule(SendVersion, true)--Throttle so we don't needlessly send tons of comms during initial raid invites
+		DBM:Schedule(3, SendVersion, true)--Send version if 3 seconds have past since last "Hi" sync
 	end
 
 	syncHandlers["BV"] = function(sender, version, hash)--Parsed from bigwigs V7+
@@ -4163,72 +4228,21 @@ do
 			raid[sender].locale = locale
 			raid[sender].enabledIcons = iconEnabled or "false"
 			DBM:Debug("Received version info from "..sender.." : Rev - "..revision..", Ver - "..version..", Rev Diff - "..(revision - DBM.Revision), 3)
-			if version > DBM.Revision then -- Update reminder
-				if not checkEntry(newerVersionPerson, sender) then
-					newerVersionPerson[#newerVersionPerson + 1] = sender
-					DBM:Debug("Newer version detected from "..sender.." : Rev - "..revision..", Ver - "..version..", Rev Diff - "..(revision - DBM.Revision), 3)
-				end
-				if #newerVersionPerson < 4 then
-					if #newerVersionPerson == 2 and updateNotificationDisplayed < 2 then--Only requires 2 for update notification.
-						if DBM.HighestRelease < version then
-							DBM.HighestRelease = version
-						end
-						DBM.NewerVersion = displayVersion
-						--UGLY hack to get release version number instead of alpha one
-						if DBM.NewerVersion:find("alpha") then
-							local temp1, temp2 = string.split(" ", DBM.NewerVersion)--Strip down to just version, no alpha
-							local temp3, temp4, temp5 = string.split(".", temp1)--Strip version down to 3 numbers
-							if temp5 then
-								temp5 = tonumber(temp5)
-								temp5 = temp5 - 1
-								temp5 = tostring(temp5)
-								DBM.NewerVersion = temp3.."."..temp4.."."..temp5
-							end
-						end
-						--Find min revision.
-						updateNotificationDisplayed = 2
-						AddMsg(DBM, DBM_CORE_UPDATEREMINDER_HEADER:match("([^\n]*)"))
-						AddMsg(DBM, DBM_CORE_UPDATEREMINDER_HEADER:match("\n(.*)"):format(displayVersion, version))
-						AddMsg(DBM, ("|HDBM:update:%s:%s|h|cff3588ff[%s]"):format(displayVersion, version, DBM_CORE_UPDATEREMINDER_URL or "http://www.deadlybossmods.com"))
-						showConstantReminder = 1
-					elseif #newerVersionPerson == 3 and updateNotificationDisplayed < 3 then--The following code requires at least THREE people to send that higher revision. That should be more than adaquate
-						--Find min revision.
-						local revDifference = mmin((raid[newerVersionPerson[1]].revision - DBM.Revision), (raid[newerVersionPerson[2]].revision - DBM.Revision), (raid[newerVersionPerson[3]].revision - DBM.Revision))
-						--Disable if out of date and it's a major patch.
-						if not testBuild and dbmToc < wowTOC then
-							updateNotificationDisplayed = 3
-							AddMsg(DBM, DBM_CORE_UPDATEREMINDER_MAJORPATCH)
-							DBM:Disable()
-						--Disable if revision grossly out of date even if not major patch.
-						elseif revDifference > 100 then
-							if updateNotificationDisplayed < 3 then
-								updateNotificationDisplayed = 3
-								AddMsg(DBM, DBM_CORE_UPDATEREMINDER_DISABLE)
-								DBM:Disable()
-							end
-						end
-					end
-				end
-			end
-			if DBM.DisplayVersion:find("alpha") and #newerVersionPerson < 2 and #newerRevisionPerson < 2 and updateNotificationDisplayed < 2 and (revision - DBM.Revision) > 20 then
-				if not checkEntry(newerRevisionPerson, sender) then
-					newerRevisionPerson[#newerRevisionPerson + 1] = sender
-					DBM:Debug("Newer revision detected from "..sender.." : Rev - "..revision..", Ver - "..version..", Rev Diff - "..(revision - DBM.Revision))
-				end
-				if #newerRevisionPerson == 2 then
-					local revDifference = mmin((raid[newerRevisionPerson[1]].revision - DBM.Revision), (raid[newerRevisionPerson[2]].revision - DBM.Revision))
-					if testBuild and revDifference > 5 then
-						updateNotificationDisplayed = 3
-						AddMsg(DBM, DBM_CORE_UPDATEREMINDER_DISABLE)
-						DBM:Disable()
-					else
-						updateNotificationDisplayed = 2
-						AddMsg(DBM, DBM_CORE_UPDATEREMINDER_HEADER_ALPHA:format(revDifference))
-					end
-				end
+			if not DBM.Options.DontShowReminders then
+				HandleVersion(revision, version, displayVersion, sender)
 			end
 		end
 		DBM:GROUP_ROSTER_UPDATE()
+	end
+	
+	syncHandlers["GV"] = function(sender, revision, version, displayVersion)
+		revision, version = tonumber(revision), tonumber(version)
+		if revision and version and displayVersion then
+			DBM:Debug("Received G version info from "..sender.." : Rev - "..revision..", Ver - "..version..", Rev Diff - "..(revision - DBM.Revision), 3)
+			if not DBM.Options.DontShowReminders then
+				HandleVersion(revision, version, displayVersion, sender, true)
+			end
+		end
 	end
 
 	syncHandlers["U"] = function(sender, time, text)
@@ -5107,6 +5121,7 @@ do
 	function DBM:INSTANCE_ENCOUNTER_ENGAGE_UNIT()
 		if timerRequestInProgress then return end--do not start ieeu combat if timer request is progressing. (not to break Timer Recovery stuff)
 		if dbmIsEnabled and combatInfo[LastInstanceMapID] then
+			self:Debug("INSTANCE_ENCOUNTER_ENGAGE_UNIT event fired for zoneId"..LastInstanceMapID, 3)
 			for i, v in ipairs(combatInfo[LastInstanceMapID]) do
 				if v.type:find("combat") and isBossEngaged(v.multiMobPullDetection or v.mob) then
 					self:StartCombat(v.mod, 0, "IEEU")
@@ -5565,7 +5580,7 @@ do
 					self:AddMsg(DBM_CORE_NEED_LOGS)
 				end
 				--call OnCombatStart
-				if mod.OnCombatStart and not mod.ignoreBestkill then
+				if mod.OnCombatStart then
 					mod:OnCombatStart(delay or 0, event == "PLAYER_REGEN_DISABLED_AND_MESSAGE" or event == "SPELL_CAST_SUCCESS")
 				end
 				--send "C" sync
@@ -5609,6 +5624,9 @@ do
 					dummyMod.text:Cancel()
 					self.Bars:CancelBar(DBM_CORE_TIMER_PULL)
 					TimerTracker_OnEvent(TimerTracker, "PLAYER_ENTERING_WORLD")
+				end
+				if BigWigs and BigWigs.db.profile.raidicon and not self.Options.DontSetIcons and self:GetRaidRank() > 0 then--Both DBM and bigwigs have raid icon marking turned on.
+					self:AddMsg(DBM_CORE_BIGWIGS_ICON_CONFLICT)--Warn that one of them should be turned off to prevent conflict (which they turn off is obviously up to raid leaders preference, dbm accepts either or turned off to stop this alert)
 				end
 			else
 				self:AddMsg(DBM_CORE_COMBAT_STATE_RECOVERED:format(difficultyText..name, strFromTime(delay)))
@@ -5746,7 +5764,7 @@ do
 						end
 					end
 				end
-				if showConstantReminder == 2 and IsInGroup() and savedDifficulty ~= "lfr" and savedDifficulty ~= "lfr25" then
+				if not self.Options.DontShowReminders and showConstantReminder == 2 and IsInGroup() and savedDifficulty ~= "lfr" and savedDifficulty ~= "lfr25" then
 					showConstantReminder = 1
 					--Show message any time this is a mod that has a newer hotfix revision
 					--These people need to know the wipe could very well be their fault.
@@ -6073,7 +6091,8 @@ function DBM:GetCurrentInstanceDifficulty()
 	elseif difficulty == 7 then--Fixed LFR (ie pre WoD zones)
 		return "lfr25", difficultyName.." - ", difficulty, instanceGroupSize
 	elseif difficulty == 8 then
-		return "challenge5", PLAYER_DIFFICULTY6.."+ - ", difficulty, instanceGroupSize
+		local currentMPRank = C_ChallengeMode.GetActiveKeystoneInfo() or 0
+		return "challenge5", PLAYER_DIFFICULTY6.."+ ("..currentMPRank..") - ", difficulty, instanceGroupSize
 	elseif difficulty == 9 then--40 man raids have their own difficulty now, no longer returned as normal 10man raids
 		return "normal10", difficultyName.." - ",difficulty, instanceGroupSize--Just use normal10 anyways, since that's where we been saving 40 man stuff for so long anyways, no reason to change it now, not like any 40 mans can be toggled between 10 and 40 where we NEED to tell the difference.
 	elseif difficulty == 11 then
@@ -6124,6 +6143,7 @@ function DBM:HasMapRestrictions()
 end
 
 function DBM:PlaySoundFile(path, ignoreSFX)
+	if self.Options.SilentMode then return end
 	local soundSetting = self.Options.UseSoundChannel
 	if soundSetting == "Dialog" then
 		PlaySoundFile(path, "Dialog")
@@ -6135,6 +6155,7 @@ function DBM:PlaySoundFile(path, ignoreSFX)
 end
 
 function DBM:PlaySound(path)
+	if self.Options.SilentMode then return end
 	local soundSetting = self.Options.UseSoundChannel
 	if soundSetting == "Master" then
 		PlaySound(path, "Master")
@@ -6326,12 +6347,15 @@ end
 
 do
 	function DBM:PLAYER_ENTERING_WORLD()
-		if GetLocale() == "ptBR" or GetLocale() == "frFR" or GetLocale() == "itIT" or GetLocale() == "esES" or GetLocale() == "ruRU" then
-			C_TimerAfter(10, function() if self.Options.HelpMessageVersion < 4 then self.Options.HelpMessageVersion = 4 self:AddMsg(DBM_CORE_NEED_LOCALS) end end)
+		if not self.Options.DontShowReminders then
+			if GetLocale() == "ptBR" or GetLocale() == "frFR" or GetLocale() == "itIT" or GetLocale() == "esES" or GetLocale() == "ruRU" then
+				C_TimerAfter(10, function() if self.Options.HelpMessageVersion < 4 then self.Options.HelpMessageVersion = 4 self:AddMsg(DBM_CORE_NEED_LOCALS) end end)
+			end
+			--C_TimerAfter(20, function() if not self.Options.ForumsMessageShown then self.Options.ForumsMessageShown = self.ReleaseRevision self:AddMsg(DBM_FORUMS_MESSAGE) end end)
+			C_TimerAfter(25, function() if self.Options.SilentMode then self:AddMsg(DBM_SILENT_REMINDER) end end)
+			C_TimerAfter(30, function() if not self.Options.SettingsMessageShown then self.Options.SettingsMessageShown = true self:AddMsg(DBM_HOW_TO_USE_MOD) end end)
+			C_TimerAfter(40, function() if self.Options.NewsMessageShown < 10 then self.Options.NewsMessageShown = 10 self:AddMsg(DBM_CORE_WHATS_NEW) end end)
 		end
-		--C_TimerAfter(20, function() if not self.Options.ForumsMessageShown then self.Options.ForumsMessageShown = self.ReleaseRevision self:AddMsg(DBM_FORUMS_MESSAGE) end end)
-		C_TimerAfter(30, function() if not self.Options.SettingsMessageShown then self.Options.SettingsMessageShown = true self:AddMsg(DBM_HOW_TO_USE_MOD) end end)
-		--C_TimerAfter(40, function() if self.Options.NewsMessageShown < 8 then self.Options.NewsMessageShown = 8 self:AddMsg(DBM_CORE_WHATS_NEW_LINK) end end)
 		if type(RegisterAddonMessagePrefix) == "function" then
 			if not RegisterAddonMessagePrefix("D4") then -- main prefix for DBM4
 				self:AddMsg("Error: unable to register DBM addon message prefix (reached client side addon message filter limit), synchronization will be unavailable") -- TODO: confirm that this actually means that the syncs won't show up
@@ -6414,12 +6438,12 @@ do
 			if not difficultyText then -- prevent error when timer recovery function worked and etc (StartCombat not called)
 				difficultyText = select(2, DBM:GetCurrentInstanceDifficulty())
 			end
-			if IsInScenarioGroup() then return end--status not really useful on scenario mods since there is no way to report progress as a percent. We just ignore it.
 			local mod
 			for i, v in ipairs(inCombat) do
 				mod = not v.isCustomMod and v
 			end
 			mod = mod or inCombat[1]
+			if IsInScenarioGroup() and not mod.soloChallenge then return end--status not really useful on scenario mods since there is no way to report progress as a percent. We just ignore it.
 			local hp = mod.highesthealth and mod:GetHighestBossHealth() or mod:GetLowestBossHealth()
 			local hpText = mod.CustomHealthUpdate and mod:CustomHealthUpdate() or hp and ("%d%%"):format(hp) or DBM_CORE_UNKNOWN
 			if mod.vb.phase then
@@ -6449,7 +6473,7 @@ do
 				hpText = hpText.." ("..BOSSES_KILLED:format(bossesKilled, mod.numBoss)..")"
 			end
 			if not autoRespondSpam[sender] then
-				if IsInScenarioGroup() then
+				if IsInScenarioGroup() and not mod.soloChallenge then
 					sendWhisper(sender, chatPrefix..DBM_CORE_AUTO_RESPOND_WHISPER_SCENARIO:format(playerName, difficultyText..(mod.combatInfo.name or ""), getNumAlivePlayers(), DBM:GetNumGroupMembers()))
 				else
 					sendWhisper(sender, chatPrefix..DBM_CORE_AUTO_RESPOND_WHISPER:format(playerName, difficultyText..(mod.combatInfo.name or ""), hpText, IsInInstance() and getNumRealAlivePlayers() or getNumAlivePlayers(), DBM:GetNumRealGroupMembers()))
@@ -8811,8 +8835,14 @@ do
 		)
 		if #DBM.Voices < 2 then optionName = false end--Hide options if no voice packs are installed
 		if optionName then
-			obj.option = optionName
-			self:AddBoolOption(obj.option, optionDefault, "sound")
+			if spellId then--Still need to use spell ID for voice pack filter if one is provided
+				obj.option = "Voice"..spellId..(optionVersion or "")
+				self:AddBoolOption(obj.option, optionDefault, "sound")
+				self.localization.options[obj.option] = optionName
+			else
+				obj.option = optionName
+				self:AddBoolOption(obj.option, optionDefault, "sound")
+			end
 		elseif not (optionName == false) then
 			obj.option = "Voice"..spellId..(optionVersion or "")
 			self:AddBoolOption(obj.option, optionDefault, "sound")
@@ -8862,30 +8892,20 @@ do
 		voice3 = self.Options.CountdownVoice3v2
 		local voicesFound = 0
 		for i = 1, #self.Counts do
-			if voicesFound == 3 then return end
 			local curVoice = self.Counts[i]
 			if curVoice.value == voice1 then
 				path1 = curVoice.path
 				voice1max = curVoice.max
-				voicesFound = voicesFound + 1
-			elseif curVoice.value == voice2 then
+			end
+			if curVoice.value == voice2 then
 				path2 = curVoice.path
 				voice2max = curVoice.max
-				voicesFound = voicesFound + 1
-			elseif curVoice.value == voice3 then
+			end
+			if curVoice.value == voice3 then
 				path3 = curVoice.path
 				voice3max = curVoice.max
-				voicesFound = voicesFound + 1
 			end
 		end
-	end
-
-	local function showCountdown(timer)
-		TimerTracker_OnEvent(TimerTracker, "START_TIMER", 2, timer+1, timer+1)
-	end
-
-	local function stopCountdown()
-		TimerTracker_OnEvent(TimerTracker, "PLAYER_ENTERING_WORLD")
 	end
 
 	function countdownProtoType:Start(timer, count)
@@ -8894,14 +8914,6 @@ do
 			timer = timer < 2 and self.timer or timer
 			count = count or self.count or 5
 			if timer <= count then count = floor(timer) end
-			if DBM.Options.ShowCountdownText and not (self.textDisabled or self.alternateVoice) and self.type ~= "Countout" then
-				stopCountdown()
-				if timer >= count then
-					DBM:Schedule(timer-count, showCountdown, count)
-				else
-					DBM:Schedule(timer%1, showCountdown, floor(timer))
-				end
-			end
 			if DBM.Options.DontPlayCountdowns then return end
 			if not path1 or not path2 or not path3 then
 				DBM:Debug("Voice cache not built at time of countdownProtoType:Start. On fly caching.")
@@ -8947,10 +8959,6 @@ do
 	end
 
 	function countdownProtoType:Cancel()
-		if DBM.Options.ShowCountdownText and not self.textDisabled then
-			DBM:Unschedule(showCountdown)
-			stopCountdown()
-		end
 		self.mod:Unschedule(self.Start, self)
 		self.sound5:Cancel()
 	end
@@ -9726,11 +9734,13 @@ do
 		local activeVP = self.Options.ChosenVoicePack
 		--Check if voice pack out of date
 		if activeVP ~= "None" and activeVP == value then
-			if self.VoiceVersions[value] < 6 then--Version will be bumped when new voice packs released that contain new voices.
-				self:AddMsg(DBM_CORE_VOICE_PACK_OUTDATED)
+			if self.VoiceVersions[value] < 7 then--Version will be bumped when new voice packs released that contain new voices.
+				if not self.Options.DontShowReminders then
+					self:AddMsg(DBM_CORE_VOICE_PACK_OUTDATED)
+				end
 				SWFilterDisabed = self.VoiceVersions[value]--Set disable to version on current voice pack
 			else
-				SWFilterDisabed = 6
+				SWFilterDisabed = 7
 			end
 		end
 	end
@@ -10304,14 +10314,6 @@ do
 			if not DBM.Options.DontPlayPTCountdown then
 				self.countdown:Start(timer)
 			end
-			if not DBM.Options.DontShowPTCountdownText then
-				local threshold = DBM.Options.PTCountThreshold
-				if timer > threshold then
-					DBM:Schedule(timer-threshold, countDownTextDelay, threshold)
-				else
-					TimerTracker_OnEvent(TimerTracker, "START_TIMER", 2, timer, timer)
-				end
-			end
 		end
 	end
 
@@ -10328,9 +10330,7 @@ do
 			self.warning2:Cancel()
 		end
 		if self.countdown then
-			DBM:Unschedule(countDownTextDelay)
 			self.countdown:Cancel()
-			TimerTracker_OnEvent(TimerTracker, "PLAYER_ENTERING_WORLD")
 		end
 		self.bar:Stop()
 	end

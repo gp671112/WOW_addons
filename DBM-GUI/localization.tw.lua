@@ -1,4 +1,4 @@
-﻿if GetLocale() ~= "zhTW" then return end
+if GetLocale() ~= "zhTW" then return end
 if not DBM_GUI_Translations then DBM_GUI_Translations = {} end
 local L = DBM_GUI_Translations
 
@@ -6,14 +6,14 @@ L.MainFrame	= "Deadly Boss Mods"
 
 L.TranslationByPrefix		= "翻譯:"
 L.TranslationBy 				= "Imbav@聖光之願&三皈依@世界之樹"
-L.Website						= "拜訪我們的討論與支援論壇:|cFF73C2FBwww.deadlybossmods.com|r 在推特上關注我們@deadlybossmods 或 @MysticalOS"L.WebsiteButton				= "論壇"
-L.WebsiteButton			= "論壇"
+L.Website					= "拜訪討論/支援論壇:|cFF73C2FBwww.deadlybossmods.com|r 請在推特上關注@deadlybossmods或@MysticalOS"
+L.WebsiteButton				= "論壇"
 
 L.OTabBosses	= "首領模組"
 L.OTabOptions	= GAMEOPTIONS_MENU
 
 L.TabCategory_Options		= "綜合設置"
-L.TabCategory_OTHER		= "其它首領模組"
+L.TabCategory_OTHER			= "其它首領模組"
 
 L.BossModLoaded				= "%s狀態"
 L.BossModLoad_now 			= [[該模組尚未載入。
@@ -157,7 +157,7 @@ L.ExpandUpwards				= "計時條向上延伸"
 L.FillUpBars				= "填滿計時條"
 L.ClickThrough				= "禁用鼠標事件(允許你點擊穿透計時條)"
 L.Bar_Decimal				= "%d秒以下顯示小數點"
-L.Bar_DBMOnly				= "以下選項只支援 \"DBM\" 計時條風格(兩個條件任一就會放大)"
+L.Bar_DBMOnly				= "以下選項只支援 \"DBM\" 計時條風格"
 L.Bar_EnlargeTime			= "計時條時間低於:%d時放大"
 L.Bar_EnlargePercent		= "計時條百分比低於:%0.1f%%時放大"
 L.BarSpark					= "計時條閃光"
@@ -172,7 +172,7 @@ L.Panel_SpecWarnFrame		= "特別警告"
 L.Area_SpecWarn				= "特別警告選項"
 L.SpecWarn_ClassColor		= "為特別警告套用職業顏色"
 L.ShowSWarningsInChat 		= "在聊天視窗中顯示特別警告"
-L.SWarnNameInNote			= "使用特別警告5選項，如果自訂的註記包含您的名字"
+L.SWarnNameInNote			= "使用特別警告5選項如果自訂註記有包含你的名字"
 L.SpecialWarningIcon		= "在特別警告上顯示圖示"
 L.SpecWarn_FlashFrame		= "為特別警告閃爍螢幕"
 L.SpecWarn_FlashFrameRepeat	= "反覆%d次(如果啟用)"
@@ -199,6 +199,7 @@ L.Area_HUDOptions			= "HUD 選項"
 L.HUDColorOverride			= "選擇通用HUD顏色"
 L.HUDSizeOverride			= "選擇通用HUD大小"
 L.HUDAlphaOverride			= "選擇通用HUD透明度"
+
 L.HUDTextureOverride		= "選擇通用HUD材質 (這不套用到'圖示'材質選項)"
 L.HUDColorSelect			= "HUD顏色 %d"
 L.HUDTextureSelect1			= "選擇主要HUD材質"
@@ -216,7 +217,6 @@ L.CountdownVoice2			= "設置次要倒數計時語音"
 L.CountdownVoice3			= "設置第三倒數計時語音"
 L.VoicePackChoice			= "設置語音警告的語音包"
 L.Area_CountdownOptions		= "倒數選項"
-L.ShowCountdownText			= "主要語音倒數時顯示倒數文字"
 L.Area_VoicePackOptions		= "語音包選項(協力語音包)"
 L.SpecWarn_NoSoundsWVoice	= "設置何時撥放特別警告音效也使用語音警告..."
 L.SWFNever					= "絕不"
@@ -234,20 +234,22 @@ L.HP_ShowDemo				= "顯示血量框架"
 L.BarWidth					= "寬度:%d"
 
 -- Tab: Global Filter
-L.Panel_SpamFilter			= "DBM全局停用及過濾"
-L.Area_SpamFilter_Outgoing	= "DBM全局停用及過濾選項"
+L.Panel_SpamFilter			= "DBM全局禁用及過濾"
+L.Area_SpamFilter_Outgoing	= "DBM全局禁用及過濾選項"
 L.SpamBlockNoShowAnnounce	= "不顯示提示或播放警告音效"
 L.SpamBlockNoSpecWarn		= "不顯示特別警告或播放特別警告音效"
-L.SpamBlockNoShowTimers		= "不顯示模組計時條(首領模組/挑戰模式/尋求組隊/重生)"
-L.SpamBlockNoShowUTimers	= "不顯示玩家發送的計時條(自訂/拉怪/休息)"
+L.SpamBlockNoShowTimers		= "不顯示計時器"
+L.SpamBlockNoShowUTimers	= "不顯示玩家送出的計時器(自訂/拉怪/休息)"
 L.SpamBlockNoSetIcon		= "不設置標記在目標上"
 L.SpamBlockNoRangeFrame		= "不顯示距離框架"
 L.SpamBlockNoInfoFrame		= "不顯示訊息框架"
 L.SpamBlockNoHudMap			= "不要顯示HudMap"
+L.SpamBlockNoNameplate		= "不要顯示名條光環"
 L.SpamBlockNoHealthFrame	= "不顯示血量框架"
 L.SpamBlockNoCountdowns		= "不播放倒數音效"
 L.SpamBlockNoYells			= "不送出大喊至頻道"
 L.SpamBlockNoNoteSync		= "不接受註記分享"
+L.SpamBlockNoReminders		= "不顯示任何登入，建議或更新消息（不推薦）"
 
 L.Area_Restore				= "DBM復原選項(當模組完成後DBM將恢復以前的使用者狀態)"
 L.SpamBlockNoIconRestore	= "不在戰鬥結束後記住和還原團隊圖示狀態"
@@ -272,7 +274,7 @@ L.DontShowPTNoID			= "阻擋與你不同區域ID送出的開怪倒數計時條"
 L.DontShowPT				= "不要顯示開怪/休息倒數計時條"
 L.DontShowPTText			= "不要顯示開怪/休息提示文字"
 L.DontPlayPTCountdown		= "不要使用開怪/休息/開戰/自訂計時器倒數音效"
-L.DontShowPTCountdownText	= "不要顯示開怪/休息/開戰/自訂計時器倒數文字"
+L.DontShowPTCountdownText	= "不要顯示開怪計時倒數文字"
 L.PT_Threshold				= "不要顯示高於%d秒以上的休息/開戰/自訂倒數計時器文字"
 
 L.Panel_HideBlizzard		= "禁用及隱藏暴雪功能"
@@ -326,6 +328,7 @@ L.Area_Advanced				= "進階選項"
 L.FakeBW					= "假裝使用BigWigs版本檢查而不是用DBM版本(適合用在工會強制使用BigWigs時)"
 L.AITimer					= "DBM為從未遭遇的戰鬥使用內建的AI計時器來自動生成計時條(在初期Beta或PTR首次遭遇首領時之測試非常有幫助)。注意：這可能不能正確運作在有著相同技能的多重目標上。"
 L.AutoCorrectTimer			= "自動校正時間過長的計時器(適合在公會正在進行全新副本而首領模組還沒被更新至可靠的程度). 注意此選項也可能使某些計時器錯亂，如首領重置計時器或階段轉換而DBM編碼還不能夠去處理。"
+
 L.PizzaTimer_Headline		= '建立一個計時條'
 L.PizzaTimer_Title			= '名稱（如“Pizza計時器”）'
 L.PizzaTimer_Hours 			= "時"

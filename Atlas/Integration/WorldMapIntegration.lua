@@ -1,4 +1,4 @@
--- $Id: WorldMapIntegration.lua 218 2017-04-13 15:10:34Z arith $
+-- $Id: WorldMapIntegration.lua 253 2017-05-25 07:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -29,8 +29,8 @@
 -- Localized Lua globals.
 -- ----------------------------------------------------------------------------
 -- Functions
-local _G = getfenv(0);
-local pairs = _G.pairs;
+local _G = getfenv(0)
+local pairs, tonumber = _G.pairs, _G.tonumber
 -- Libraries
 
 -- ----------------------------------------------------------------------------

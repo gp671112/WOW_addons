@@ -1,4 +1,4 @@
--- $Id: Achievements.lua 218 2017-04-13 15:10:34Z arith $
+-- $Id: Achievements.lua 253 2017-05-25 07:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -31,6 +31,7 @@
 local _G = getfenv(0);
 -- Libraries
 local bit = _G.bit;
+local format = string.format
 
 -- ----------------------------------------------------------------------------
 -- AddOn namespace.

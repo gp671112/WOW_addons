@@ -1,4 +1,4 @@
--- $Id: Atlas_OutdoorRaids.lua 36 2017-04-20 06:25:45Z arith $
+-- $Id: Atlas_OutdoorRaids.lua 42 2017-05-14 14:12:18Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -73,7 +73,7 @@ local myData = {
 		JournalInstanceID = "822";
 		WorldMapID = "1007";
 		LargeMap = "OR_BrokenIsles";
-		Module = "Atlas_Legion";
+		ALModule = "Atlas_Legion";
 		{ WHIT.." 1) "..Atlas_GetBossName("Calamir", 1774), 1774 };				-- (Azsuna)
 		{ WHIT.." 2) "..Atlas_GetBossName("Withered J'im", 1796), 1796 };			-- (Azsuna)
 		{ WHIT.." 3) "..Atlas_GetBossName("Levantus", 1769), 1769 };				-- (Azsuna)
@@ -98,6 +98,24 @@ local myData = {
 		{ "Unleashed Monstrosities", "ac=11160" };
 		{ "Terrors of the Shore", "ac=11786" };
 	};
+	OR_BrokenShore = {
+		ZoneName = { L["Broken Shore World Bosses"] };
+		Location = { BZ["Broken Shore"] };
+		LevelRange = "110+";
+		PlayerLimit = "40";
+		JournalInstanceID = "822";
+		WorldMapID = "1021";
+		LargeMap = "OR_BrokenShore";
+		ALModule = "Atlas_Legion";
+		{ WHIT.."12) "..Atlas_GetBossName("Brutallus", 1883), 1883 };
+		{ WHIT.."13) "..Atlas_GetBossName("Malificus", 1884), 1884 };
+		{ INDENT..ORNG..ALC["L-Parenthesis"]..sBF("Armies of Legionfall")..ALC["R-Parenthesis"] };
+		{ WHIT.."14) "..Atlas_GetBossName("Si'vash", 1885), 1885 };
+		{ WHIT.."15) "..Atlas_GetBossName("Apocron", 1956), 1956 };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Terrors of the Shore", "ac=11786" };
+	};
 	OR_Draenor = {
 		ZoneName = { L["Draenor World Bosses"] };
 		Location = { BZ["Draenor"] };
@@ -106,7 +124,7 @@ local myData = {
 		JournalInstanceID = "557";
 		WorldMapID = "962";
 		LargeMap = "OR_Draenor";
-		Module = "Atlas_WarlordsofDraenor";
+		ALModule = "Atlas_WarlordsofDraenor";
 		{ WHIT.." 1) "..Atlas_GetBossName("Drov the Ruiner", 1291), 1291 };
 		{ WHIT..INDENT..Atlas_GetBossName("Frenzied Rumbler", 1291, 2), 1291 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Tarlna the Ageless", 1211), 1211 };
@@ -128,7 +146,7 @@ local myData = {
 		JournalInstanceID = "322";
 		WorldMapID = "862";
 		LargeMap = "OR_Pandaria";
-		Module = "Atlas_Pandaria";
+		ALModule = "Atlas_MistsofPandaria";
 		{ WHIT.." 1) "..Atlas_GetBossName("Nalak, The Storm Lord", 814), 814 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Oondasta", 826), 826 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Sha of Anger", 691), 691 };

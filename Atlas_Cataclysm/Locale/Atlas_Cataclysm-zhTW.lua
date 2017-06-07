@@ -1,4 +1,4 @@
--- $Id: Atlas_Cataclysm-zhTW.lua 16 2017-01-16 09:55:01Z arith $
+-- $Id: Atlas_Cataclysm-zhTW.lua 24 2017-05-10 09:16:25Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -67,6 +67,7 @@ L["FL"] = "FL"
 L["Forest Frogs"] = "森林樹蛙"
 L["Gazakroth"] = "葛薩克羅司"
 L["GB"] = "GB"
+L["Goblin Teleporter"] = "哥布林傳送器"
 L["Gub <Destroyer of Fish>"] = "古布 <魚類滅殺者>"
 L["Harald <Food Vendor>"] = "哈拉德 <食物商人>"
 L["Haunted Stable Hand"] = "鬼怪獸欄僕人"
@@ -137,4 +138,9 @@ L["Zanzil's Cauldron of Frostburn Formula"] = "贊吉爾的霜燃配方"
 L["Zanzil's Cauldron of Toxic Torment"] = "贊吉爾的毒物折磨大鍋"
 L["ZG"] = "ZG"
 L["Zungam"] = "祖剛"
+
+-- ToC
+L["Description"] = "浩劫與重生副本地圖模組"
+L["Title"] = "|r|cFF0099FF[地圖]|rAtlas 浩劫與重生"
+
 end

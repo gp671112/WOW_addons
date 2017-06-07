@@ -1,4 +1,4 @@
--- $Id: Atlas-ptBR.lua 140 2017-01-16 08:56:14Z arith $
+-- $Id: Atlas-ptBR.lua 240 2017-05-12 17:13:41Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -192,4 +192,9 @@ L["Tunnel"] = "Túnel"
 L["West"] = "Oeste"
 L["Yarley <Armorer>"] = "Yarley <Armoraria>"
 L["Zaladormu"] = "Zaladormu"
+
+-- ToC
+L["Description"] = "Buscador de Mapas de Instância"
+L["Title"] = "Atlas"
+
 end

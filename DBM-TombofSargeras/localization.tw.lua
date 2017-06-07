@@ -7,11 +7,11 @@ local L
 L= DBM:GetModLocalization(1862)
 
 L:SetTimerLocalization({
-	timerComboWamboCD =	"Next Comet/Spike (%d)"
+	timerComboWamboCD =	"下一次彗星/魔刺 (%d)"
 })
 
 L:SetOptionLocalization({
-	timerComboWamboCD =	"Show timer for next Crashing Comet/Infernal Spike"
+	timerComboWamboCD =	"計時條：下一次撞擊彗星/煉獄魔刺"
 })
 
 L:SetMiscLocalization({
@@ -53,7 +53,7 @@ L= DBM:GetModLocalization(1897)
 L= DBM:GetModLocalization(1873)
 
 L:SetOptionLocalization({
-	InfoFrame =	"Show InfoFrame for boss power"
+	InfoFrame =	"顯示首領能量的訊息框架"
 })
 
 ---------------------------

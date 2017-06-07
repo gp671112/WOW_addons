@@ -1,4 +1,4 @@
--- $Id: EJLoot.lua 227 2017-04-25 15:54:36Z arith $
+-- $Id: EJLoot.lua 253 2017-05-25 07:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -34,11 +34,14 @@
 -- Functions
 local _G = getfenv(0)
 local ipairs = _G.ipairs
-local pairs = _G.pairs;
--- Libraries
+local pairs = _G.pairs
+local select = _G.select
+local tonumber = _G.tonumber
 local string = _G.string
-local math = _G.math;
+local math = _G.math
+-- Libraries
 local floor = math.floor
+local format = string.format
 -- ----------------------------------------------------------------------------
 -- AddOn namespace.
 -- ----------------------------------------------------------------------------
@@ -149,13 +152,13 @@ function Atlas_EncounterJournal_OnLoad(self)
 	}
 ]]
 --	NavBar_Initialize(self.navBar, "NavButtonTemplate", homeData, self.navBar.home, self.navBar.overflow);
-	Lib_UIDropDownMenu_Initialize(self.lootScroll.lootFilter, Atlas_EncounterJournal_InitLootFilter, "MENU");
-	Lib_UIDropDownMenu_Initialize(self.lootScroll.lootSlotFilter, Atlas_EncounterJournal_InitLootSlotFilter, "MENU");
+	L_UIDropDownMenu_Initialize(self.lootScroll.lootFilter, Atlas_EncounterJournal_InitLootFilter, "MENU");
+	L_UIDropDownMenu_Initialize(self.lootScroll.lootSlotFilter, Atlas_EncounterJournal_InitLootSlotFilter, "MENU");
 
 	-- initialize tabs
 --	local instanceSelect = base.JournalInstanceID;
 --	local tierName = EJ_GetTierInfo(EJ_GetCurrentTier());
---	UIDropDownMenu_SetText(instanceSelect.tierDropDown, tierName);
+--	L_UIDropDownMenu_SetText(instanceSelect.tierDropDown, tierName);
 
 	-- check if tabs are active
 --	local dungeonInstanceID = EJ_GetInstanceByIndex(1, false);
@@ -215,6 +218,8 @@ function Atlas_EncounterJournal_OnShow(self)
 	PlaySound("igCharacterInfoOpen");
 	Atlas_EncounterJournal_LootUpdate();
 	Atlas_EncounterJournal_UpdateDifficulty();
+	--L_UIDropDownMenu_Initialize(self.lootScroll.lootFilter, Atlas_EncounterJournal_InitLootFilter, "MENU");
+	--L_UIDropDownMenu_Initialize(self.lootScroll.lootSlotFilter, Atlas_EncounterJournal_InitLootSlotFilter, "MENU");
 
 --	local instanceSelect = EncounterJournal.instanceSelect;
 
@@ -443,24 +448,24 @@ end
 
 function Atlas_EncounterJournal_DifficultyInit(self, level)
 	local currDifficulty = EJ_GetDifficulty();
-	local info = Lib_UIDropDownMenu_CreateInfo();
+	local info = L_UIDropDownMenu_CreateInfo();
 	for i=1,#ATLAS_EJ_DIFFICULTIES do
 		local entry = ATLAS_EJ_DIFFICULTIES[i];
 		if EJ_IsValidInstanceDifficulty(entry.difficultyID) then
 			info.func = Atlas_EncounterJournal_SelectDifficulty;
 			if (entry.size) then
-				info.text = string.format(ENCOUNTER_JOURNAL_DIFF_TEXT, entry.size, entry.prefix);
+				info.text = format(ENCOUNTER_JOURNAL_DIFF_TEXT, entry.size, entry.prefix);
 			else
 				info.text = entry.prefix;
 			end
 			info.arg1 = entry.difficultyID;
 			info.checked = currDifficulty == entry.difficultyID;
-			Lib_UIDropDownMenu_AddButton(info);
+			L_UIDropDownMenu_AddButton(info);
 		end
 	end
 end
 function Atlas_EncounterJournal_OnFilterChanged(self)
-	CloseDropDownMenus(1);
+	L_CloseDropDownMenus(1);
 	Atlas_EncounterJournal_LootUpdate();
 end
 
@@ -501,7 +506,7 @@ function Atlas_EncounterJournal_UpdateFilterString()
 	end
 
 	if name then
-		AtlasEJLootFrame.lootScroll.classClearFilter.text:SetText(string.format(EJ_CLASS_FILTER, name));
+		AtlasEJLootFrame.lootScroll.classClearFilter.text:SetText(format(EJ_CLASS_FILTER, name));
 		AtlasEJLootFrame.lootScroll.classClearFilter:Show();
 		AtlasEJLootFrame.lootScroll:SetHeight(360);
 	else
@@ -515,16 +520,16 @@ function Atlas_EncounterJournal_InitLootFilter(self, level)
 	local filterClassID, filterSpecID = EJ_GetLootFilter();
 	local sex = UnitSex("player");
 	local classDisplayName, classTag, classID;
-	local info = Lib_UIDropDownMenu_CreateInfo();
+	local info = L_UIDropDownMenu_CreateInfo();
 	info.keepShownOnClick = nil;
 
-	if (LIB_UIDROPDOWNMENU_MENU_VALUE == CLASS_DROPDOWN) then
+	if (L_UIDROPDOWNMENU_MENU_VALUE == CLASS_DROPDOWN) then
 		info.text = ALL_CLASSES;
 		info.checked = (filterClassID == 0);
 		info.arg1 = 0;
 		info.arg2 = 0;
 		info.func = Atlas_EncounterJournal_SetClassAndSpecFilter;
-		Lib_UIDropDownMenu_AddButton(info, level);
+		L_UIDropDownMenu_AddButton(info, level);
 
 		local numClasses = GetNumClasses();
 		for i = 1, numClasses do
@@ -534,7 +539,7 @@ function Atlas_EncounterJournal_InitLootFilter(self, level)
 			info.arg1 = classID;
 			info.arg2 = 0;
 			info.func = Atlas_EncounterJournal_SetClassAndSpecFilter;
-			Lib_UIDropDownMenu_AddButton(info, level);
+			L_UIDropDownMenu_AddButton(info, level);
 		end
 	end
 
@@ -544,7 +549,7 @@ function Atlas_EncounterJournal_InitLootFilter(self, level)
 		info.notCheckable = true;
 		info.hasArrow = true;
 		info.value = CLASS_DROPDOWN;
-		Lib_UIDropDownMenu_AddButton(info, level)
+		L_UIDropDownMenu_AddButton(info, level)
 
 		if ( filterClassID > 0 ) then
 			classDisplayName, classTag, classID = GetClassInfoByID(filterClassID);
@@ -557,7 +562,7 @@ function Atlas_EncounterJournal_InitLootFilter(self, level)
 		info.arg2 = nil;
 		info.func =  nil;
 		info.hasArrow = false;
-		Lib_UIDropDownMenu_AddButton(info, level);
+		L_UIDropDownMenu_AddButton(info, level);
 
 		info.notCheckable = nil;
 		local numSpecs = GetNumSpecializationsForClassID(classID);
@@ -569,7 +574,7 @@ function Atlas_EncounterJournal_InitLootFilter(self, level)
 			info.arg1 = classID;
 			info.arg2 = specID;
 			info.func = Atlas_EncounterJournal_SetClassAndSpecFilter;
-			Lib_UIDropDownMenu_AddButton(info, level);
+			L_UIDropDownMenu_AddButton(info, level);
 		end
 
 		info.text = ALL_SPECS;
@@ -578,25 +583,25 @@ function Atlas_EncounterJournal_InitLootFilter(self, level)
 		info.arg1 = classID;
 		info.arg2 = 0;
 		info.func = Atlas_EncounterJournal_SetClassAndSpecFilter;
-		Lib_UIDropDownMenu_AddButton(info, level);
+		L_UIDropDownMenu_AddButton(info, level);
 	end
 end
 
 function Atlas_EncounterJournal_InitLootSlotFilter(self, level)
 	local slotFilter = EJ_GetSlotFilter();
 
-	local info = Lib_UIDropDownMenu_CreateInfo();
+	local info = L_UIDropDownMenu_CreateInfo();
 	info.text = ALL_INVENTORY_SLOTS;
 	info.checked = slotFilter == NO_INV_TYPE_FILTER;
 	info.arg1 = NO_INV_TYPE_FILTER;
 	info.func = Atlas_EncounterJournal_SetSlotFilter;
-	Lib_UIDropDownMenu_AddButton(info);
+	L_UIDropDownMenu_AddButton(info);
 
 	for _, slot in ipairs(Atlas_EncounterJournalSlotFilters) do
 		info.text = slot.invTypeName;
 		info.checked = slotFilter == slot.invType;
 		info.arg1 = slot.invType;
-		Lib_UIDropDownMenu_AddButton(info);
+		L_UIDropDownMenu_AddButton(info);
 	end
 end
 

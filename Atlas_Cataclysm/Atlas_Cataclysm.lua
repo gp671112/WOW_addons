@@ -1,4 +1,4 @@
--- $Id: Atlas_Cataclysm.lua 20 2017-04-14 09:45:17Z arith $
+-- $Id: Atlas_Cataclysm.lua 24 2017-05-10 09:16:25Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -21,6 +21,17 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 --]]
+-- ----------------------------------------------------------------------------
+-- Localized Lua globals.
+-- ----------------------------------------------------------------------------
+-- Functions
+local _G = getfenv(0)
+-- ----------------------------------------------------------------------------
+-- AddOn namespace.
+-- ----------------------------------------------------------------------------
+local FOLDER_NAME, private = ...
+local LibStub = _G.LibStub
+local Atlas = LibStub("AceAddon-3.0"):GetAddon("Atlas")
 
 local BZ = Atlas_GetLocaleLibBabble("LibBabble-SubZone-3.0");
 local BF = Atlas_GetLocaleLibBabble("LibBabble-Faction-3.0");
@@ -524,7 +535,7 @@ local myMaps = {
 		WorldMapID = "756";
 		JournalInstanceID = "63";
 		Module = "Atlas_Cataclysm";
-		NextMap = "TheDeadmines";
+		NextMap = "TheDeadminesA";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ GREN..INDENT..ALC["Meeting Stone"] };
 		{ BLUE.." B) "..BZ["The Deadmines"], 10002 };
@@ -532,32 +543,60 @@ local myMaps = {
 		{ ORNG.." 2) "..Atlas_GetBossName("Brainwashed Noble")..ALC["L-Parenthesis"]..ALC["Rare"]..ALC["R-Parenthesis"], 10004 };
 		{ ORNG.." 3) "..Atlas_GetBossName("Foreman Thistlenettle"), 10005 };
 	};
-	TheDeadmines = {
-		ZoneName = { BZ["The Deadmines"] };
+	TheDeadminesA = {
+		ZoneName = { BZ["The Deadmines"]..ALC["MapA"] };
 		Location = { BZ["Westfall"] };
 		DungeonID = "6";
 		DungeonHeroicID = "326";
 		Acronym = L["VC"];
 		WorldMapID = "756";
+		DungeonLevel = "1";
 		JournalInstanceID = "63";
 		Module = "Atlas_Cataclysm";
 		PrevMap = "TheDeadminesEnt";
+		NextMap = "TheDeadminesB";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
-		{ BLUE.." B) "..ALC["Exit"], 10002 };
+		{ BLUE.." B) "..ALC["Connection"], 10002 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Glubtok", 89), 89 };
 		{ WHIT.." 2) "..Atlas_GetBossName("Lumbering Oaf", 90, 2), 90 };
 		{ WHIT..INDENT..Atlas_GetBossName("Helix Gearbreaker", 90), 90 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Foe Reaper 5000", 91), 91 };
+		{ GREN.." 1') "..L["Goblin Teleporter"], 10004 };
+		{ GREN.." 2') "..Atlas:GetCreatureName(L["Lieutenant Horatio Laine"], 46612)..ALC["L-Parenthesis"]..FACTION_ALLIANCE..ALC["R-Parenthesis"], 10003 };
+		{ GREN..INDENT..Atlas:GetCreatureName(L["Quartermaster Lewis <Quartermaster>"], 491)..ALC["L-Parenthesis"]..FACTION_ALLIANCE..ALC["R-Parenthesis"] };
+		{ GREN..INDENT..Atlas:GetCreatureName(L["Slinky Sharpshiv"], 46906)..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] };
+		{ GREN..INDENT..Atlas:GetCreatureName(L["Kagtha"], 46889)..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] };
+		{ GREN..INDENT..Atlas:GetCreatureName(L["Miss Mayhem"], 46902)..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] };
+		{ GREN..INDENT..Atlas:GetCreatureName(L["Vend-O-Tron D-Luxe"], 24935)..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] };
+		{ "" };
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
+		{ "Ready for Raiding", "ac=5366" };
+		{ "Rat Pack", "ac=5367" };
+		{ "Prototype Prodigy", "ac=5368" };
+		{ "It's Frost Damage", "ac=5369" };
+		{ "I'm on a Diet", "ac=5370" };
+		{ "Vigorous VanCleef Vindicator", "ac=5371" };
+		{ "Deadmines", "ac=628" };
+		{ "Heroic: Deadmines", "ac=5083" };
+		{ "Heroic: Deadmines Guild Run", "ac=5141" };
+	};
+	TheDeadminesB = {
+		ZoneName = { BZ["The Deadmines"]..ALC["MapB"] };
+		Location = { BZ["Westfall"] };
+		DungeonID = "6";
+		DungeonHeroicID = "326";
+		Acronym = L["VC"];
+		WorldMapID = "756";
+		DungeonLevel = "2";
+		JournalInstanceID = "63";
+		Module = "Atlas_Cataclysm";
+		PrevMap = "TheDeadminesA";
+		{ BLUE.." B) "..ALC["Connection"], 10002 };
+		{ BLUE.." C) "..ALC["Exit"], 10003 };
 		{ WHIT.." 4) "..Atlas_GetBossName("Admiral Ripsnarl", 92), 92 };
 		{ WHIT..INDENT..Atlas_GetBossName("\"Captain\" Cookie", 93), 93 };
 		{ WHIT..INDENT..Atlas_GetBossName("Vanessa VanCleef", 95)..ALC["L-Parenthesis"]..ALC["Heroic"]..ALC["R-Parenthesis"], 95 };
-		{ GREN.." 1') "..L["Lieutenant Horatio Laine"]..ALC["L-Parenthesis"]..FACTION_ALLIANCE..ALC["R-Parenthesis"], 10003 };
-		{ GREN..INDENT..L["Quartermaster Lewis <Quartermaster>"]..ALC["L-Parenthesis"]..FACTION_ALLIANCE..ALC["R-Parenthesis"] };
-		{ GREN..INDENT..L["Slinky Sharpshiv"]..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] };
-		{ GREN..INDENT..L["Kagtha"]..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] };
-		{ GREN..INDENT..L["Miss Mayhem"]..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] };
-		{ GREN..INDENT..L["Vend-O-Tron D-Luxe"]..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] };
-		{ GREN.." 2') "..ALC["Teleporter"], 10004 };
+		{ GREN.." 1') "..L["Goblin Teleporter"], 10004 };
 		{ "" };
 		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
 		{ "Ready for Raiding", "ac=5366" };

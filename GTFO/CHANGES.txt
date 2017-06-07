@@ -1,5 +1,5 @@
 ------------------------------------------------------------------------
-r319 | Zensunim | 2017-03-30 22:39:59 -0500 (Thu, 30 Mar 2017) | 2 lines
+r327 | Zensunim | 2017-05-01 01:04:51 -0500 (Mon, 01 May 2017) | 4 lines
 Changed paths:
    M /trunk/GTFO.lua
    M /trunk/GTFO.toc
@@ -7,7 +7,9 @@ Changed paths:
    M /trunk/GTFO_Spells_LGN.lua
    M /trunk/ReadMe.txt
 
-Added Legion spells for Cathedral of the Night
+4.42.12
+* Added Legion spells for The Broken Isles (world)
+* Added Legion spells for Tomb of Sargeras
 
 ------------------------------------------------------------------------
 

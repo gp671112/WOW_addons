@@ -1,4 +1,4 @@
--- $Id: IngameLocales.lua 193 2017-03-30 16:53:28Z arith $
+-- $Id: IngameLocales.lua 253 2017-05-25 07:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -24,6 +24,7 @@
 
 --]]
 
+local setmetatable, rawget = setmetatable, rawget
 
 Atlas_IngameLocales = {
 	-- ######################################################################

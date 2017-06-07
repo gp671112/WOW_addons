@@ -67,6 +67,8 @@ L["FL"] = "FL"
 L["Forest Frogs"] = "Urwaldfrösche"
 L["Gazakroth"] = "Gazakroth"
 L["GB"] = "GB"
+--Translation missing 
+-- L["Goblin Teleporter"] = ""
 L["Gub <Destroyer of Fish>"] = "Gub <Fischvernichter>"
 L["Harald <Food Vendor>"] = "Harald <Lebensmittelhändler>"
 L["Haunted Stable Hand"] = "Geisterhafter Stallknecht"
@@ -137,4 +139,9 @@ L["Zanzil's Cauldron of Frostburn Formula"] = "Zanzils Kessel des frierenden Fle
 L["Zanzil's Cauldron of Toxic Torment"] = "Zanzils Kessel der giftigen Grausamkeit"
 L["ZG"] = "ZG"
 L["Zungam"] = "Zungam"
+
+-- ToC
+L["Description"] = "Karten der Instanzen aus Cataclysm"
+L["Title"] = "Atlas |r|cFF0099FF[Cataclysm]|r"
+
 end

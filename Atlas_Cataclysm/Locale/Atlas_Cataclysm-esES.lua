@@ -62,10 +62,14 @@ L["Earthwarden Yrsa <The Earthen Ring>"] = "Celadora de la tierra Yrsa <El Anill
 L["Eulinda <Reagents>"] = "Eulinda <Componentes>"
 L["Farseer Tooranu <The Earthen Ring>"] = "Clarividente Tooranu <El Anillo de la Tierra>"
 L["Fenstalker"] = "Fenstalker"
+--Translation missing 
+-- L["Finkle Einhorn"] = ""
 L["FL"] = "FL"
 L["Forest Frogs"] = "Ranas del bosque"
 L["Gazakroth"] = "Gazakroth"
 L["GB"] = "GB"
+--Translation missing 
+-- L["Goblin Teleporter"] = ""
 L["Gub <Destroyer of Fish>"] = "Gub <Destructor de peces>"
 L["Harald <Food Vendor>"] = "Harald <Vendedor de alimentos>"
 L["Haunted Stable Hand"] = "Mozo de cuadra encantado"
@@ -136,4 +140,11 @@ L["Zanzil's Cauldron of Frostburn Formula"] = "Caldero de fórmula de abrasión 
 L["Zanzil's Cauldron of Toxic Torment"] = "Caldero de tormento tóxico de Zanzil"
 L["ZG"] = "ZG"
 L["Zungam"] = "Zungam"
+
+-- ToC
+--Translation missing 
+-- L["Description"] = ""
+--Translation missing 
+-- L["Title"] = ""
+
 end

@@ -72,4 +72,11 @@ L["ToT"] = "ЗМ"
 L["Unblinking Eye"] = "Немигающий глаз"
 L["Zao'cho <The Emperor's Shield>"] = "Зао'чо <Щит императора>"
 
+-- ToC
+--Translation missing 
+-- L["Description"] = ""
+--Translation missing 
+-- L["Title"] = ""
+
+
 end

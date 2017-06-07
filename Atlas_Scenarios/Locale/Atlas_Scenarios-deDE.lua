@@ -26,21 +26,33 @@ local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas_Scenarios", "deDE", false);
 
 if L then
+--Translation missing 
+-- L["3 Lords slain"] = ""
+--Translation missing 
+-- L["3 Spires of Woe destroyed"] = ""
+--Translation missing 
+-- L["33 Deamons slain"] = ""
 L["Abomination of Anger"] = "Monstrosität des Zorns"
 L["Admiral Hagman"] = "Admiral Hagman"
 L["Admiral Hodgson"] = "Admiral Hodgson"
 L["Admiral Taylor"] = "Admiral Taylor"
 L["Alliance Ships"] = "Allianz-Schiffe"
+--Translation missing 
+-- L["Alliance's final stop"] = ""
 L["Amber Kearnen"] = "Amber Kearnen"
 L["Attackers"] = "Angreifer"
 L["Baldruc and Gryphon"] = "Baldruc und Greif"
 L["Battery"] = "Batterie"
+--Translation missing 
+-- L["Beach"] = ""
 L["Brewing Cauldron"] = "Braukessel"
 L["Brewmaster Boof"] = "Braumeister Boof"
 L["Broken Proto-Drake Egg"] = "Zerbrochenes Protodrachenei"
 L["Broodmaster Noshi"] = "Brutmeister Noshi"
 L["Cannon Balls"] = "Kanonenkugeln"
 L["Cave"] = "Höhle"
+--Translation missing 
+-- L["Command ship"] = ""
 L["Commander Scargash"] = "Kommandant Schlitznarbe"
 L["Commander Tel'vrak"] = "Kommandant Tel'vrak"
 L["Cordfellow Hack"] = "Kabelfreund Hack"
@@ -54,9 +66,12 @@ L["Defeat Maki Waterblade"] = "Bezwingt Maki Wasserklinge"
 L["Defeat Satay Byu"] = "Bezwingt Satay Byu"
 L["Defence Point"] = "Verteidigungspunkt"
 L["Demon Invasion"] = "Dämoneninvasion"
+--Translation missing 
+-- L["Demonic Gateway"] = ""
 L["Den Mother Moof"] = "Höhlenmutter Muuf"
 L["Docking"] = "Andocken"
 L["Door"] = "Tür"
+L["Dread Commander Arganoth"] = "Schreckenskommandant Arganoth"
 L["East Statue"] = "Östliche Statue"
 L["Echo of Y'Sharrj"] = "Echo von Y'Sharrj"
 L["Farastu"] = "Farastu"
@@ -70,6 +85,8 @@ L["Hekima the Wise"] = "Hekima der Weise"
 L["High Marshal Twinbraid"] = "Hochmarschall Doppelzopf"
 L["Highlord Tirion Fordring"] = "Hochlord Tirion Fordring"
 L["Horde Ships"] = "Horde-Schiffe"
+--Translation missing 
+-- L["Horde's final stop"] = ""
 L["Jaina"] = "Jaina"
 L["Jin Ironfist"] = "Jin Eisenfaust"
 L["Joan Lorraine"] = "Joan Lorraine"
@@ -79,6 +96,8 @@ L["Kor'kron Dire Soldier"] = "Terrorsoldat der Kor'kron"
 L["Krosus"] = "Krosus"
 L["Kyparite Quarry Sonic Control Towers"] = "Schallsteuerungstürme des Kyparitsteinbruchs"
 L["Landing"] = "Landung"
+--Translation missing 
+-- L["Landing point"] = ""
 L["Lever"] = "Hebel"
 L["Li Te"] = "Li Te"
 L["Lieutenant Blasthammer"] = "Leutnant Sprenghammer"
@@ -89,6 +108,8 @@ L["Lieutenant Fizzel"] = "Leutnant Zischel"
 L["Lieutenant Fuseblast"] = "Leutnant Luntenschuss"
 L["Lieutenant Parker"] = "Leutnant Parker"
 L["Lieutenant Sparklighter"] = "Leutnant Zündfunken"
+--Translation missing 
+-- L["Lord Kalgorath"] = ""
 L["Mishka"] = "Mishka"
 L["Norushen"] = "Norushen"
 L["Overseer Elaglo"] = "Aufseher Elaglo"
@@ -111,6 +132,10 @@ L["Sealed Gate"] = "Versiegeltes Tor"
 L["Shademaster Kiryn"] = "Schattenmeisterin Kiryn"
 L["Shokia"] = "Shokia"
 L["Squad Leader Bosh"] = "Schwadronsführer Bosh"
+--Translation missing 
+-- L["Stage %d"] = ""
+--Translation missing 
+-- L["Stage area"] = ""
 L["Steal Explosives"] = "Sprengladungen stehlen"
 L["Sully \"The Pickle\" McLeary"] = "Sully \"Die Gurke\" McLeary"
 L["Supply Crates"] = "Vorratskisten"
@@ -138,4 +163,9 @@ L["West Gate"] = "Westtor"
 L["West Statue"] = "Westliche Statue"
 L["Whispering Stones Sonic Control Towers"] = "Schallsteuerungstürme der Flüsternden Steine"
 L["Wolf-Rider Gaja"] = "Wolfsreiterin Gaja"
+
+-- ToC
+L["Description"] = "Szenariokarten"
+L["Title"] = "Atlas |r|cFF0099FF[Szenarien]|r"
+
 end

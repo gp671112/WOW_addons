@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt 229 2017-04-30 10:57:23Z arith $
+$Id: ChangeLog.txt 254 2017-05-25 09:27:28Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
@@ -14,6 +14,47 @@ Known Issues:
 ==============
 = Change Log =
 ==============
+
+v1.41.12 (May 25, 2017)
+------------------------
+- Lib update:
+  - Replace NoTaint_UIDropDownMenu with LibUIDropDownMenu
+
+v1.41.11 (May 20, 2017)
+------------------------
+- Lib update:
+  - NoTaint_UIDropDown
+- Localization update:
+  - German (pas06)
+  
+v1.41.10 (May 18, 2017)
+------------------------
+- Adjusted GetCreatureName function's lookup behavior to ignore BabbleBoss's looking up
+- Adjusted Dropdown menu's formatting
+- Localization update:
+  - Russian (BLizzatron)
+  - Simplified Chinese (ananhaid)
+- Library update:
+  - LibAboutPanel
+
+v1.41.09 (May 14, 2017)
+------------------------
+- Enhanced AtlasLoot integration feature
+
+v1.41.08 (May 12, 2017)
+------------------------
+- Fixed issue in localization files
+
+v1.41.07 (May 12, 2017)
+------------------------
+- Fixed the function call of Lib_CloseDropDownMenus within EJLoot functions
+- Adjusted the loot panel's dropdown initialization
+- Lib update:
+  - NoTaint_UIDropDown
+
+v1.41.06 (May 10, 2017)
+------------------------
+- Updated map data for the Deadmines
 
 v1.41.05 (Apr. 30, 2017)
 ------------------------
@@ -165,6 +206,8 @@ v1.37.03 (Feb. 08, 2017)
 ------------------------
 - Added option to toggle Atlas button on World Map window
 - Updated KeyBindings' category
+- Localization update:
+  - Spanish (maqjav)
 
 v1.37.02 (Jan. 24, 2017)
 ------------------------
@@ -184,6 +227,8 @@ v1.37.00 (Jan. 22, 2017)
   mouse hover the boss button
 - Enhanced tooltip handling
 - Added boss overview's - character role's section details
+- Localization update:
+  - Spanish (Lawghter)
 
 v1.36.04 (Jan. 20, 2017)
 ------------------------

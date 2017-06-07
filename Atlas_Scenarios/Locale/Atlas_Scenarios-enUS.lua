@@ -152,4 +152,9 @@ L["West Statue"] = "West Statue"
 L["Whispering Stones Sonic Control Towers"] = "Whispering Stones Sonic Control Towers"
 L["Wolf-Rider Gaja"] = "Wolf-Rider Gaja"
 
+-- ToC
+L["Description"] = "Scenarios Maps"
+L["Title"] = "Atlas |r|cFF0099FF[Scenarios]|r"
+
+
 end

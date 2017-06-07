@@ -1,4 +1,4 @@
--- $Id: Atlas.lua 225 2017-04-18 08:22:35Z arith $
+-- $Id: Atlas.lua 253 2017-05-25 07:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -29,14 +29,15 @@
 -- ----------------------------------------------------------------------------
 -- Functions
 local _G = getfenv(0);
-local pairs = _G.pairs;
-local select = _G.select;
-local type = _G.type;
+local pairs, select, type, unpack, next = pairs, select, type, unpack, next
+local string, table, math, tonumber = string, table, math, tonumber
 -- Libraries
-local bit = _G.bit;
-local string = _G.string;
-local table = _G.table;
-local math = _G.math;
+local bit = bit
+local strfind, strsub, format, gsub, strlower, strgmatch = string.find, string.sub, string.format, string.gsub, string.lower, string.gmatch
+local strlen, strgfind = string.len, string.gfind
+local strtrim = strtrim
+local floor = math.floor
+local getn, tinsert, tsort = table.getn, table.insert, table.sort
 
 -- ----------------------------------------------------------------------------
 -- AddOn namespace.
@@ -178,18 +179,13 @@ local function getCreatureNamebyID(id)
 end
 
 function addon:GetCreatureName(creatureName, id)
-	if (not id) then return; end
+	if (not creatureName) and (not id) then return end
 	
-	-- Lookup BabbleBoss first
-	if (BB[creatureName]) then
-		creatureName = BB[creatureName];
-	else
-		getCreatureNamebyID(id)
-		creatureName = creature_cache or creatureName
-		creature_cache = nil
-	end
+	getCreatureNamebyID(id)
+	creatureName = creature_cache or creatureName
+	creature_cache = nil
 
-	return creatureName;
+	return creatureName
 end
 
 -- Below to temporarily create a table to store the core map's data
@@ -208,11 +204,11 @@ function Atlas_RegisterPlugin(name, myCategory, myData)
 	Atlas_MapTypes[i] = ATLAS_PLUGINS_COLOR..myCategory; -- Plugin category name to be added with green color, and then added to array
 	
 	for k, v in pairs(myData) do
-		table.insert(ATLAS_PLUGINS[name], k);
+		tinsert(ATLAS_PLUGINS[name], k);
 		AtlasMaps[k] = v;
 	end
 	
-	table.insert(ATLAS_PLUGIN_DATA, myData);
+	tinsert(ATLAS_PLUGIN_DATA, myData);
 	
 	local catName = Atlas_DropDownLayouts_Order[profile.options.dropdowns.menuType];
 	local subcatOrder = Atlas_DropDownLayouts_Order[catName];
@@ -281,7 +277,7 @@ local function Atlas_BossButtonUpdate(button, encounterID, instanceID, b_iconIma
 			while nextSectionID do
 				title, description, _, _, _, siblingID, _, filteredByDifficulty, _, _, flag1 = EJ_GetSectionInfo(nextSectionID);
 				if (role == rolesByFlag[flag1]) then
-					description = string.gsub(description, "$bullet;", "- ");
+					description = gsub(description, "$bullet;", "- ");
 					button.roleOverview = "|cffffffff"..title.."|r".."\n"..description;
 					break;
 				end
@@ -360,7 +356,7 @@ function Atlas_ScrollBar_Update()
 			if (ATLAS_SCROLL_ID[lineplusoffset]) then
 				if (type(ATLAS_SCROLL_ID[lineplusoffset][1]) == "number") then
 					local id = ATLAS_SCROLL_ID[lineplusoffset][1];
-					Atlas_BossButtonUpdate(button, ATLAS_SCROLL_ID[lineplusoffset][1], ATLAS_SCROLL_ID[lineplusoffset][2], false, base.Module);
+					Atlas_BossButtonUpdate(button, ATLAS_SCROLL_ID[lineplusoffset][1], ATLAS_SCROLL_ID[lineplusoffset][2], false, base.Module or base.ALModule);
 				elseif (type(ATLAS_SCROLL_ID[lineplusoffset][1]) == "string") then
 					local spos, epos = strfind(ATLAS_SCROLL_ID[lineplusoffset][1], "ac=");
 					if (spos) then
@@ -389,26 +385,26 @@ function Atlas_ScrollBar_Update()
 end
 
 function Atlas_SimpleSearch(data, text)
-	if (string.trim(text or "") == "") then
+	if (strtrim(text or "") == "") then
 		return data
 	end
 	local new = {}; -- Create a new table
 	local i, v, n;
-	local search_text = string.lower(text);
+	local search_text = strlower(text);
 	search_text = search_text:gsub("([%^%$%(%)%%%.%[%]%+%-%?])", "%%%1");
 	search_text = search_text:gsub("%*", ".*");
-	local match;
+	local fmatch;
 
 	i, v = next(data, nil); -- The i is an index of data, v = data[i]
 	n = i;
 	while i do
 		if ( type(i) == "number" ) then
-			if ( string.gmatch ) then 
-				match = string.gmatch(string.lower(data[i][1]), search_text)();
+			if ( strgmatch ) then 
+				fmatch = strgmatch(strlower(data[i][1]), search_text)();
 			else 
-				match = string.gfind(string.lower(data[i][1]), search_text)(); 
+				fmatch = strgfind(strlower(data[i][1]), search_text)(); 
 			end
-			if ( match ) then
+			if ( fmatch ) then
 				new[n] = {};
 				new[n][1] = data[i][1];
 				n = n + 1;
@@ -429,10 +425,10 @@ function Atlas_PopulateDropdowns()
 		ATLAS_DROPDOWNS[n] = {};
 
 		for k,v in pairs(subcatItems) do
-			table.insert(ATLAS_DROPDOWNS[n], v);
+			tinsert(ATLAS_DROPDOWNS[n], v);
 		end
 
-		table.sort(ATLAS_DROPDOWNS[n], Atlas_SortZonesAlpha);
+		tsort(ATLAS_DROPDOWNS[n], Atlas_SortZonesAlpha);
 
 		i = n + 1;
 	end
@@ -444,11 +440,11 @@ function Atlas_PopulateDropdowns()
 
 			for kb,vb in pairs(va) do
 				if (type(vb) == "table") then
-					table.insert(ATLAS_DROPDOWNS[i], kb);
+					tinsert(ATLAS_DROPDOWNS[i], kb);
 				end
 			end
 
-			table.sort(ATLAS_DROPDOWNS[i], Atlas_SortZonesAlpha);
+			tsort(ATLAS_DROPDOWNS[i], Atlas_SortZonesAlpha);
 
 			i = i + 1;
 		end	
@@ -477,7 +473,7 @@ local function Atlas_Process_Deprecated()
 				oldVersion = false;
 			end
 			if (oldVersion) then
-				table.insert(OldList, v[1]);
+				tinsert(OldList, v[1]);
 			end
 		end
 	end
@@ -507,17 +503,17 @@ end
 -- For example: "The Deadmines" will become "Deadmines"
 -- Thus it will be sorted under D and not under T
 local function Atlas_SanitizeName(text)
-   text = string.lower(text);
+   text = strlower(text);
    if (AtlasSortIgnore) then
 	   for _, v in pairs(AtlasSortIgnore) do
-		   local match; 
-		   if (string.gmatch) then 
-			match = string.gmatch(text, v)();
+		   local fmatch; 
+		   if (strgmatch) then 
+			fmatch = strgmatch(text, v)();
 		   else 
-			match = string.gfind(text, v)(); 
+			fmatch = strgfind(text, v)(); 
 		   end
-		   if (match) and ((string.len(text) - string.len(match)) <= 4) then
-			   return match;
+		   if (fmatch) and ((strlen(text) - strlen(fmatch)) <= 4) then
+			   return fmatch;
 		   end
 	   end
    end
@@ -591,7 +587,7 @@ function Atlas_Check_Modules()
 		local loadable = select(4, GetAddOnInfo(module));
 		local enabled = GetAddOnEnableState(UnitName("player"), module)
 		if ( (enabled == 0) or (not loadable) ) then
-			table.insert(List, module);
+			tinsert(List, module);
 		end
 	end
 	if table.getn(List) > 0 then
@@ -729,13 +725,13 @@ function Atlas_FormatColor(color_array)
 	if (not color_array or type(color_array) ~= "table") then return; end
 	if (not (color_array.r and color_array.g and color_array.b)) then return; end
 	
-	local colortag = string.format("|cff%02x%02x%02x", color_array.r * 255, color_array.g * 255, color_array.b * 255);
+	local colortag = format("|cff%02x%02x%02x", color_array.r * 255, color_array.g * 255, color_array.b * 255);
 	return colortag;
 end
 
 local function round(num, idp)
 	local mult = 10 ^ (idp or 0);
-	return math.floor(num * mult + 0.5) / mult;
+	return floor(num * mult + 0.5) / mult;
 end
 
 -- Calculate the dungeon difficulty based on the dungeon's level and player's level
@@ -1605,16 +1601,16 @@ function Atlas_Refresh(mapID)
 	if (matchFound[1]) then
 		ATLAS_INST_ENT_DROPDOWN = {};
 		for k, v in pairs(matchFound) do
-			table.insert(ATLAS_INST_ENT_DROPDOWN, v);
+			tinsert(ATLAS_INST_ENT_DROPDOWN, v);
 		end
-		table.sort(ATLAS_INST_ENT_DROPDOWN, AtlasSwitchDD_Sort);
+		tsort(ATLAS_INST_ENT_DROPDOWN, AtlasSwitchDD_Sort);
 		if (isEntrance) then
 			AtlasSwitchButton:SetText(ATLAS_ENTRANCE_BUTTON);
 		else
 			AtlasSwitchButton:SetText(ATLAS_INSTANCE_BUTTON);
 		end
 		AtlasSwitchButton:Show();
-		Lib_UIDropDownMenu_Initialize(AtlasSwitchDD, AtlasSwitchDD_OnLoad);
+		L_UIDropDownMenu_Initialize(AtlasSwitchDD, AtlasSwitchDD_OnLoad);
 	else
 		AtlasSwitchButton:Hide();
 	end

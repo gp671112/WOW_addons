@@ -1,4 +1,4 @@
--- $Id: Atlas_ClassOrderHalls-ruRU.lua 76 2017-01-24 09:07:56Z arith $
+-- $Id: Atlas_ClassOrderHalls-ruRU.lua 97 2017-05-18 10:55:14Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -189,4 +189,7 @@ L["Wise Scholar Lianji <Senior Master Serpent>"] = "Мудрая Ляньцзи 
 L["Yancey Grillsen <Bloodsail Recruiter>"] = "Янси Гриллсен <Вербовщик шайки Кровавого Паруса>"
 L["Yaris Darkclaw <Recruiter>"] = "Ярис Чернолап <Вербовщик>"
 L["Zen'kiki"] = "Зен'кики"
+
+-- ToC
+
 end

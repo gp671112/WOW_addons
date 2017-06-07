@@ -1,4 +1,4 @@
--- $Id: Maps_PreSetDB.lua 229 2017-04-30 10:57:23Z arith $
+-- $Id: Maps_PreSetDB.lua 232 2017-05-10 09:10:18Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -615,8 +615,12 @@ Syntax:
 		ZoneName = { BZ["The Bastion of Twilight"] };
 		Module = "Atlas_Cataclysm";
 	};
-	TheDeadmines = {
-		ZoneName = { BZ["The Deadmines"] };
+	TheDeadminesA = {
+		ZoneName = { BZ["The Deadmines"]..L["MapA"] };
+		Module = "Atlas_Cataclysm";
+	};
+	TheDeadminesB = {
+		ZoneName = { BZ["The Deadmines"]..L["MapB"] };
 		Module = "Atlas_Cataclysm";
 	};
 	TheStonecore = {

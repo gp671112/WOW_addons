@@ -1,4 +1,4 @@
--- $Id: Atlas-enUS.lua 227 2017-04-25 15:54:36Z arith $
+-- $Id: Atlas-enUS.lua 246 2017-05-15 07:33:49Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -45,6 +45,11 @@ local L = AceLocale:NewLocale("Atlas", "enUS", true, true);
 
 
 if L then
+L[" 1/2"] = " 1/2"
+L[" 2/2"] = " 2/2"
+L["%s Dungeons"] = "%s Dungeons"
+L["%s Instances"] = "%s Instances"
+L["%s Raids"] = "%s Raids"
 L["Adult"] = "Adult"
 L["AKA"] = "AKA"
 L["Alexston Chrome <Tavern of Time>"] = "Alexston Chrome <Tavern of Time>"
@@ -340,4 +345,9 @@ L["Wave 6"] = "Wave 6"
 L["West"] = "West"
 L["Yarley <Armorer>"] = "Yarley <Armorer>"
 L["Zaladormu"] = "Zaladormu"
+
+-- ToC
+L["Description"] = "Instance Map Browser"
+L["Title"] = "Atlas"
+
 end

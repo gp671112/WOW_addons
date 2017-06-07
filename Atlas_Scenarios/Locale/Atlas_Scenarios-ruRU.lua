@@ -26,6 +26,10 @@ local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas_Scenarios", "ruRU", false);
 
 if L then
+--Translation missing 
+-- L["3 Lords slain"] = ""
+--Translation missing 
+-- L["3 Spires of Woe destroyed"] = ""
 L["33 Deamons slain"] = "Убито 33 демона"
 L["Abomination of Anger"] = "Порождение Гнева"
 L["Admiral Hagman"] = "Адмирал Хагман"
@@ -44,6 +48,8 @@ L["Broken Proto-Drake Egg"] = "Разбитое яйцо протодракон�
 L["Broodmaster Noshi"] = "Праматерь Ноши"
 L["Cannon Balls"] = "Пушечные ядра"
 L["Cave"] = "Пещера"
+--Translation missing 
+-- L["Command ship"] = ""
 L["Commander Scargash"] = "Командир Глубокий Шрам"
 L["Commander Tel'vrak"] = "Командир Тел'врак"
 L["Cordfellow Hack"] = "Каблик Хак"
@@ -57,9 +63,13 @@ L["Defeat Maki Waterblade"] = "Победите Маки Водореза"
 L["Defeat Satay Byu"] = "Победите Сатай Бюя"
 L["Defence Point"] = "Точка обороны"
 L["Demon Invasion"] = "Вторжение демонов"
+--Translation missing 
+-- L["Demonic Gateway"] = ""
 L["Den Mother Moof"] = "Мать логова Муф"
 L["Docking"] = "Швартовка"
 L["Door"] = "Двери"
+--Translation missing 
+-- L["Dread Commander Arganoth"] = ""
 L["East Statue"] = "Статуя - Восток"
 L["Echo of Y'Sharrj"] = "Эхо И'Шараджа"
 L["Farastu"] = "Фарасту"
@@ -83,6 +93,8 @@ L["Kor'kron Dire Soldier"] = "Кор'кронский яростный воин"
 L["Krosus"] = "Крос"
 L["Kyparite Quarry Sonic Control Towers"] = "Кипаритовый карьер - Звуковая колонна"
 L["Landing"] = "Плацдарм"
+--Translation missing 
+-- L["Landing point"] = ""
 L["Lever"] = "Рычаг"
 L["Li Te"] = "Ли Тэ"
 L["Lieutenant Blasthammer"] = "Лейтенант Взрывчер"
@@ -93,6 +105,8 @@ L["Lieutenant Fizzel"] = "Лейтенант Быщ"
 L["Lieutenant Fuseblast"] = "Лейтенант Бумфитиль"
 L["Lieutenant Parker"] = "Лейтенант Паркер"
 L["Lieutenant Sparklighter"] = "Лейтенант Искрожгунстер"
+--Translation missing 
+-- L["Lord Kalgorath"] = ""
 L["Mishka"] = "Мишка"
 L["Norushen"] = "Норусхен"
 L["Overseer Elaglo"] = "Надзиратель Элагло"
@@ -115,6 +129,10 @@ L["Sealed Gate"] = "Закрытые врата"
 L["Shademaster Kiryn"] = "Темный мастер Кирин"
 L["Shokia"] = "Шокиа"
 L["Squad Leader Bosh"] = "Командир роты Бош"
+--Translation missing 
+-- L["Stage %d"] = ""
+--Translation missing 
+-- L["Stage area"] = ""
 L["Steal Explosives"] = "Украдите взрывчатку"
 L["Sully \"The Pickle\" McLeary"] = "Салли \"Рассольный\" Маклири"
 L["Supply Crates"] = "Ящики с припасами"
@@ -142,4 +160,9 @@ L["West Gate"] = "Западные ворота"
 L["West Statue"] = "Статуя - Запад"
 L["Whispering Stones Sonic Control Towers"] = "Шепчущие камни - Звуковая колонна"
 L["Wolf-Rider Gaja"] = "Наездница Гайа"
+
+-- ToC
+L["Description"] = "Карты сценариев"
+L["Title"] = "Atlas |r|cFF0099FF[Сценарии]|r"
+
 end

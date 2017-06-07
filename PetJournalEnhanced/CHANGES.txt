@@ -1,16 +1,10 @@
-tag 7c52193465e78c9a6f746f25bd17a5ae59f0695c 2.9.26
+tag c360cf76e8d510f798233ff383453b0abbb4771d 2.9.27
 Author:	Benjamin Staneck <staneck@gmail.com>
-Date:	Tue Mar 28 17:34:57 2017 +0200
+Date:	Sat May 20 20:46:07 2017 +0200
 
-commit e31388a4c612b78afe3a2bb6086a179c71360208
+commit 8fd5a505df72fa758358089b126596e390d1b6bc
 Author: Benjamin Staneck <staneck@gmail.com>
-Date:   Mon Mar 27 01:42:39 2017 +0200
+Date:   Sat May 20 20:45:11 2017 +0200
 
-    update TOC for patch 7.2
-
-commit b813c342ca68b90ad42e8c5c3223cc1b560586f8
-Author: Benjamin Staneck <staneck@gmail.com>
-Date:   Thu Mar 16 21:06:56 2017 +0100
-
-    cleanup
+    Pull in latest LibPetBreedInfo-1.0 (1.0.30)
 

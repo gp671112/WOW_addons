@@ -1,4 +1,4 @@
-## Interface: 70100
+## Interface: 70200
 ## Title: PetTracker Config
 ## Notes: Load on demand options and tutorial.
 ## Author: Jaliborc (João Cardoso)

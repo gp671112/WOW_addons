@@ -1,0 +1,67 @@
+## Interface: 70200
+## Version: 1.2
+## Author: Cakechart
+
+## Title: TotalAP - Artifact Power Tracker
+## Notes: Summarizes and displays artifact power-related information in a variety of ways
+## Title-zhTW: |cffB973CC[物品]|r 一鍵神兵之力
+## Notes-zhTW: TotalAP - Artifact Power Tracker |n只要按一個按鈕或快速鍵，就能一個接著一個使用背包中所有的神兵之力物品，不用在背包中到處翻找，不會漏掉任何一個。|n還會顯示每個專精的神兵之力進度，按下專精圖示可以在使用前切換專精。|n|cffffd200使用方法：|r從Esc>按鍵設定>插件，設定快速鍵來使用神兵之力和切換顯示插件介面。|n輸入 /ap 查看更多指令用法。
+## DefaultState: disabled
+## LoadOnDemand: 0
+## SavedVariables: TotalArtifactPowerSettings, TotalArtifactPowerCache
+
+## OptionalDeps:LibStub, AceAddon-3.0, AceConsole-3.0, AceLocale-3.0, LibSharedMedia-3.0, Masque
+## X-Embeds: LibStub, AceAddon-3.0, AceConsole-3.0, AceLocale-3.0, LibSharedMedia-3.0
+## X-Website: http://www.curse.com/addons/wow/totalap
+
+#@no-lib-strip@
+Libs\LibStub\LibStub.lua
+Libs\AceAddon-3.0\AceAddon-3.0.xml
+Libs\AceConsole-3.0\AceConsole-3.0.xml
+Libs\AceLocale-3.0\AceLocale-3.0.xml
+Libs\LibSharedMedia-3.0\lib.xml
+#@end-no-lib-strip@
+
+DB\Init.lua
+DB\Artifacts.lua
+DB\ItemEffects.lua
+#DB\UnderlightAngler.lua
+
+Locales\Locales.xml
+Locales\NumberFormats.lua
+
+Core\Init.lua
+Core\ArtifactInterface.lua
+Core\Cache.lua
+Core\DBHandler.lua
+Core\Scanner.lua
+
+Core\GUI\WidgetTypes\DisplayFrame.lua
+Core\GUI\WidgetTypes\BackgroundFrame.lua
+Core\GUI\WidgetTypes\ItemUseButton.lua
+Core\GUI\WidgetTypes\ProgressBar.lua
+Core\GUI\WidgetTypes\SpecIcon.lua
+Core\GUI\WidgetTypes\TextDisplay.lua
+
+Core\GUI\Views\Prototype.lua
+Core\GUI\Views\CompactView.lua
+Core\GUI\Views\DefaultView.lua
+Core\GUI\Views\MinimalisticView.lua
+Core\GUI\Views\PrimarySpecView.lua
+Core\GUI\Views\TabbedView.lua
+
+Core\GUI\Config.lua
+Core\GUI\Tooltips.lua
+
+Core\Controllers\GUI.lua
+Core\Controllers\Keybinds.lua
+Core\Controllers\SlashCommands.lua
+
+
+Core\Utils\Colours.lua
+Core\Utils\Format.lua
+Core\Utils\FQCN.lua
+#Core\Utils\ItemLink.lua
+Core\Utils\TableFunctions.lua
+
+TotalAP.lua

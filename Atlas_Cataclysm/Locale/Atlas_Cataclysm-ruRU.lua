@@ -62,10 +62,13 @@ L["Earthwarden Yrsa <The Earthen Ring>"] = "Хранитель земли Изр
 L["Eulinda <Reagents>"] = "Эулинда <Реагенты>"
 L["Farseer Tooranu <The Earthen Ring>"] = "Предсказатель Тоорану <Служители Земли>"
 L["Fenstalker"] = "Болотный ловец"
+L["Finkle Einhorn"] = "Айс Вентурон"
 L["FL"] = "ОП"
 L["Forest Frogs"] = "Лесная лягушка"
 L["Gazakroth"] = "Газакрот"
 L["GB"] = "ГБ"
+--Translation missing 
+-- L["Goblin Teleporter"] = ""
 L["Gub <Destroyer of Fish>"] = "Габ <Гроза рыб>"
 L["Harald <Food Vendor>"] = "Гаральд <Продавец еды>"
 L["Haunted Stable Hand"] = "Дух помощника смотрителя стойл"
@@ -136,4 +139,9 @@ L["Zanzil's Cauldron of Frostburn Formula"] = "Котел Занзила с ра
 L["Zanzil's Cauldron of Toxic Torment"] = "Котел Занзила с едкой щелочью"
 L["ZG"] = "ЗГ"
 L["Zungam"] = "Зангам"
+
+-- ToC
+L["Description"] = "Карты подземелий Cataclysm"
+L["Title"] = "Atlas |r|cFF0099FF[Cataclysm]|r"
+
 end

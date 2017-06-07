@@ -1,4 +1,4 @@
--- $Id: DropDownConfig.lua 229 2017-04-30 10:57:23Z arith $
+-- $Id: DropDownConfig.lua 232 2017-05-10 09:10:18Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -94,7 +94,8 @@ Atlas_DropDownLayouts = {
 			"BlackrockDepths",		-- Classic WoW
 			"BlackrockMountainEnt",		-- Classic WoW, Catalysm, Draenor
 			"BlackwingLair",		-- Classic WoW
-			"TheDeadmines",			-- Classic WoW, Catalysm
+			"TheDeadminesA",		-- Classic WoW, Catalysm
+			"TheDeadminesB",		-- Classic WoW, Catalysm
 			"TheDeadminesEnt",		-- Classic WoW, Catalysm
 			"Gnomeregan",			-- Classic WoW
 			"GnomereganEnt",		-- Classic WoW
@@ -346,7 +347,8 @@ Atlas_DropDownLayouts = {
 			"ScarletHalls",			-- Classic WoW
 			"ScarletMonastery",		-- Classic WoW
 			"Scholomance",			-- Classic WoW
-			"TheDeadmines",			-- Classic WoW
+			"TheDeadminesA",		-- Classic WoW, Catalysm
+			"TheDeadminesB",		-- Classic WoW, Catalysm
 			"TheDeadminesEnt",		-- Classic WoW
 			"TheStockade",			-- Classic WoW
 			"Uldaman",			-- Classic WoW
@@ -473,7 +475,8 @@ Atlas_DropDownLayouts = {
 			"TheBastionOfTwilight",		-- Catalysm
 			"ThroneOfTheFourWinds",		-- Catalysm
 			"ShadowfangKeep",		-- Catalysm
-			"TheDeadmines",			-- Catalysm
+			"TheDeadminesA",		-- Classic WoW, Catalysm
+			"TheDeadminesB",		-- Classic WoW, Catalysm
 			"TheDeadminesEnt",		-- Catalysm
 			"ZulAman",			-- Catalysm
 			"ZulGurub",			-- Catalysm
@@ -633,7 +636,8 @@ Atlas_DropDownLayouts = {
 			"CourtofStarsA",
 			"CourtofStarsB",
 			"DarkheartThicket",
-			"TheDeadmines",
+			"TheDeadminesA",		-- Classic WoW, Catalysm
+			"TheDeadminesB",		-- Classic WoW, Catalysm
 			"TheDeadminesEnt",
 			"DireMaulEast",
 			"DireMaulEnt",
@@ -924,7 +928,8 @@ Atlas_DropDownLayouts = {
 			"Maraudon",
 			"MaraudonEnt",
 			"MoltenCore",
-			"TheDeadmines",
+			"TheDeadminesA",		-- Classic WoW, Catalysm
+			"TheDeadminesB",		-- Classic WoW, Catalysm
 			"TheDeadminesEnt",
 			"TheTempleofAhnQiraj",
 			"TheRuinsofAhnQiraj",
@@ -1038,7 +1043,8 @@ Atlas_DropDownLayouts = {
 			"LostCityOfTolvir",
 			"ShadowfangKeep",
 			"TheBastionOfTwilight",
-			"TheDeadmines",
+			"TheDeadminesA",		-- Classic WoW, Catalysm
+			"TheDeadminesB",		-- Classic WoW, Catalysm
 			"TheDeadminesEnt",
 			"TheStonecore",
 			"TheVortexPinnacle",
@@ -1192,7 +1198,8 @@ Atlas_DropDownLayouts = {
 			"BlackRookHoldD",
 		},
 		[ATLAS_DDL_TYPE_INSTANCE_CF] = {
-			"TheDeadmines",			-- Classic WoW, Cayalysm
+			"TheDeadminesA",		-- Classic WoW, Catalysm
+			"TheDeadminesB",		-- Classic WoW, Catalysm
 			"DireMaulEast",			-- Classic WoW
 			"DireMaulNorth",		-- Classic WoW
 			"DireMaulWest",			-- Classic WoW

@@ -43,6 +43,7 @@ L["Flesh'rok the Diseased <Primordial Saurok Horror>"] = "感染者弗赖什鲁�
 L["Focused Eye"] = "聚焦之眼"
 L["Forbidden Rites and other Rituals Necromantic"] = "禁忌咒文及其他死灵仪式"
 L["GSS"] = "GSS"
+L["Halls"] = "大厅"
 L["HoF"] = "HoF"
 L["Hooded Crusader"] = "蒙面的十字军战士"
 L["In the Shadow of the Light"] = "光明下的阴影"
@@ -59,8 +60,10 @@ L["Professor Slate"] = "斯雷特教授"
 L["Reinforced Archery Target"] = "强固箭靶"
 L["Rocky Horror"] = "岩石恐魔"
 L["SB"] = "SB"
+L["Scholo"] = "通灵"
 L["Shado-Master Chum Kiu"] = "影踪大师楚秋"
 L["Sinan the Dreamer"] = "梦想家思南"
+L["SM"] = "修道院"
 L["SNT"] = "SNT"
 L["SoO"] = "SoO"
 L["SPM"] = "SPM"
@@ -71,6 +74,11 @@ L["TJS"] = "TJS"
 L["ToT"] = "ToT"
 L["Unblinking Eye"] = "不眠之眼"
 L["Zao'cho <The Emperor's Shield>"] = "曹卓 <皇帝之盾>"
+
+-- ToC
+L["Description"] = "熊猫人之谜副本地图"
+L["Title"] = "Atlas |r|cFF0099FF[熊猫人之谜]|r"
+
 
 --************************************************
 -- Zone Names, Acronyms, and Common Strings

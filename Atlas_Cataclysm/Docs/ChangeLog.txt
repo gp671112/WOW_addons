@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt 20 2017-04-14 09:45:17Z arith $
+$Id: ChangeLog.txt 24 2017-05-10 09:16:25Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
@@ -7,6 +7,16 @@ Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 ==============
 = Change Log =
 ==============
+
+v1.41.01 (May 10, 2017)
+------------------------
+- Revamped the map of the Deadmines
+
+
+v1.41.01 (May 08, 2017)
+------------------------
+- Corrected ToC's version format
+
 
 v1.41.00 (Apr. 14, 2017)
 ------------------------

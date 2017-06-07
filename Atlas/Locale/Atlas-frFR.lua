@@ -1,4 +1,4 @@
--- $Id: Atlas-frFR.lua 174 2017-03-16 05:47:17Z arith $
+-- $Id: Atlas-frFR.lua 246 2017-05-15 07:33:49Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -27,28 +27,20 @@
 local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas", "frFR", false);
 -- Localize file must set above to false, for example:
--- local AL = AceLocale:NewLocale("Atlas", "frFR", false);
+--    local AL = AceLocale:NewLocale("Atlas", "deDE", false);
+-- Sur un travail de Wysiwyg, Khiria, TrAsHeR entre 2007 et 2017. Many thanks to all contributors !
+-- Atlas French Localization.
+if ( GetLocale() ==		"frFR" ) then
+	-- Define the leading strings to be ignored while sorting
+	-- Ex: The Stockade
+	AtlasSortIgnore = {"le (.+)", "la (.+)", "les (.+)"};
 
--- Atlas French Localization
--- Sur un travail de Wysiwyg, Khiria, Trasher entre 2007 et 2014
--- Many thanks to all contributors!
--- $Date: 2017-03-16 00:47:17 -0500 (Thu, 16 Mar 2017) $
--- $Revision: 174 $
-
-if ( GetLocale() == "frFR" ) then
--- Define the leading strings to be ignored while sorting
--- Ex: The Stockade
-AtlasSortIgnore = {
-	"le (.+)", 
-	"la (.+)", 
-	"les (.+)"
-};
-
--- Syntax: ["real_zone_name"] = "localized map zone name"
-AtlasZoneSubstitutions = {
-	["Le temple d'Atal'Hakkar"] = "Le temple d'Atal'Hakkar";
-	["Ahn'Qiraj"] = "Temple d'Ahn'Qiraj";
-};
+	-- Syntax: ["real_zone_name"] = "localized map zone name"
+	AtlasZoneSubstitutions = {
+		["Ahn'Qiraj"] = "Temple d'Ahn'Qiraj";
+		["The Temple of Atal'Hakkar"] = "Le temple d'Atal'Hakkar";
+	--	["Throne of Tides"] = "The Abyssal Maw: Throne of the Tides";
+	};
 end
 
 
@@ -299,4 +291,9 @@ L["Wave 6"] = "Vague 6"
 L["West"] = "Ouest"
 L["Yarley <Armorer>"] = "Yarley <Armurier>"
 L["Zaladormu"] = "Zaladormu"
+
+-- ToC
+L["Description"] = "Navigateur de cartes d'instances"
+L["Title"] = "Atlas"
+
 end

@@ -2,7 +2,7 @@
 ## Title: PetJournal Enhanced
 ## Notes: Enhances the Pet Journal with various functions and filters.
 ## Author: nullberri
-## Version: 2.9.26
+## Version: 2.9.27
 ## LoadOnDemand: 1
 ## LoadWith: Blizzard_Collections
 ## SavedVariables: PetJournalEnhancedDB
@@ -53,7 +53,3 @@ modules\DropdownMenu.lua
 
 #dep: Config, Sorting, DropDown
 modules\HookedFunctions.lua
-
-
-
-

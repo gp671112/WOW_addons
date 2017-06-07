@@ -1,4 +1,4 @@
--- $Id: Atlas-esMX.lua 140 2017-01-16 08:56:14Z arith $
+-- $Id: Atlas-esMX.lua 240 2017-05-12 17:13:41Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -288,4 +288,9 @@ L["Wave 6"] = "Ola 6"
 L["West"] = "Oeste"
 L["Yarley <Armorer>"] = "Yarley <Armero>"
 L["Zaladormu"] = "Zaladormu"
+
+-- ToC
+L["Description"] = "Navegador de Mapas de Mazmorras"
+L["Title"] = "Atlas"
+
 end

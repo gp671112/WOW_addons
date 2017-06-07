@@ -1,4 +1,4 @@
--- $Id: Atlas-zhCN.lua 140 2017-01-16 08:56:14Z arith $
+-- $Id: Atlas-zhCN.lua 240 2017-05-12 17:13:41Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -44,6 +44,11 @@ end
 
 
 if L then
+L[" 1/2"] = "1/2"
+L[" 2/2"] = "2/2"
+L["%s Dungeons"] = "%s地下城"
+L["%s Instances"] = "%s副本"
+L["%s Raids"] = "%s团队"
 L["Adult"] = "成年"
 L["AKA"] = "亦作"
 L["Alexston Chrome <Tavern of Time>"] = "阿历克斯顿·克罗姆 <时间旅店>"
@@ -337,4 +342,9 @@ L["Wave 6"] = "第6波"
 L["West"] = "西"
 L["Yarley <Armorer>"] = "亚尔雷 <护甲商>"
 L["Zaladormu"] = "扎拉多姆"
+
+-- ToC
+L["Description"] = "|cff00CC33副本地图浏览器|r"
+L["Title"] = "Atlas |cFF0099FF[主程序]|r"
+
 end

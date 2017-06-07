@@ -1,4 +1,4 @@
-<!-- $Id: EJLoot.xml 227 2017-04-25 15:54:36Z arith $ -->
+<!-- $Id: EJLoot.xml 251 2017-05-24 17:44:11Z arith $ -->
 <!--
 
 	Atlas, a World of Warcraft instance map browser
@@ -346,7 +346,7 @@
 					<Button name="$parentFilterToggle" parentKey="filter" text="GEAR_FILTER" inherits="AtlasEJButtonTemplate">
 						<Scripts>
 							<OnClick>
-								Lib_ToggleDropDownMenu(1, nil, self:GetParent().lootFilter, self, 5, 0);
+								L_ToggleDropDownMenu(1, nil, self:GetParent().lootFilter, self, 5, 0);
 								PlaySound("igMainMenuOption");
 							</OnClick>
 							<OnLoad inherit="prepend">
@@ -360,7 +360,7 @@
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								Lib_ToggleDropDownMenu(1, nil, self:GetParent().lootSlotFilter, self, 5, 0);
+								L_ToggleDropDownMenu(1, nil, self:GetParent().lootSlotFilter, self, 5, 0);
 								PlaySound("igMainMenuOption");
 							</OnClick>
 							<OnLoad inherit="prepend">
@@ -375,7 +375,7 @@
 						</Anchors>
 						<Scripts>
 							<OnClick>
-								Lib_ToggleDropDownMenu(1, nil, self:GetParent().difficultyDD, self, 5, 0);
+								L_ToggleDropDownMenu(1, nil, self:GetParent().difficultyDD, self, 5, 0);
 								PlaySound("igMainMenuOptionCheckBoxOn");
 							</OnClick>
 							<OnLoad inherit="prepend">
@@ -383,15 +383,15 @@
 							</OnLoad>
 						</Scripts>
 					</Button>
-					<Frame name="$parentDifficultyDD" parentKey="difficultyDD" inherits="Lib_UIDropDownMenuTemplate" clampedToScreen="true" hidden="true">
+					<Frame name="$parentDifficultyDD" parentKey="difficultyDD" inherits="L_UIDropDownMenuTemplate" clampedToScreen="true" hidden="true">
 						<Scripts>
 							<OnLoad>
-								Lib_UIDropDownMenu_Initialize(self, Atlas_EncounterJournal_DifficultyInit, "MENU");
+								L_UIDropDownMenu_Initialize(self, Atlas_EncounterJournal_DifficultyInit, "MENU");
 							</OnLoad>
 						</Scripts>
 					</Frame>
-					<Frame name="$parentLootFilter" inherits="Lib_UIDropDownMenuTemplate" parentKey="lootFilter" hidden="true"/>
-					<Frame name="$parentLootSlotFilter" inherits="Lib_UIDropDownMenuTemplate" parentKey="lootSlotFilter" hidden="true"/>
+					<Frame name="$parentLootFilter" inherits="L_UIDropDownMenuTemplate" parentKey="lootFilter" hidden="true"/>
+					<Frame name="$parentLootSlotFilter" inherits="L_UIDropDownMenuTemplate" parentKey="lootSlotFilter" hidden="true"/>
 					<Slider name="$parentScrollBar" inherits="MinimalHybridScrollBarTemplate" parentKey="scrollBar">
 						<Anchors>
 							<Anchor point="TOPRIGHT" relativeTo="$parent" x="0" y="-18"/>

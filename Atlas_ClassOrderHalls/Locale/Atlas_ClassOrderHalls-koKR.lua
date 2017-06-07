@@ -1,4 +1,4 @@
--- $Id: Atlas_ClassOrderHalls-koKR.lua 76 2017-01-24 09:07:56Z arith $
+-- $Id: Atlas_ClassOrderHalls-koKR.lua 97 2017-05-18 10:55:14Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -28,4 +28,7 @@ local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas_ClassOrderHalls", "koKR", false);
 
 if L then
+
+-- ToC
+
 end

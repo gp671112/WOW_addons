@@ -28,4 +28,97 @@ local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas_MistsofPandaria", "koKR", false);
 
 if L then
+--Translation missing 
+-- L["Archritualist Kelada"] = ""
+--Translation missing 
+-- L["Auntie Stormstout"] = ""
+--Translation missing 
+-- L["Ban Bearheart"] = ""
+--Translation missing 
+-- L["Bowmistress Li <Guard Captain>"] = ""
+--Translation missing 
+-- L["Bucket of Meaty Dog Food"] = ""
+--Translation missing 
+-- L["Chen Stormstout"] = ""
+--Translation missing 
+-- L["Coffer of Forgotten Souls"] = ""
+--Translation missing 
+-- L["Commander Lindon"] = ""
+--Translation missing 
+-- L["Flesh'rok the Diseased <Primordial Saurok Horror>"] = ""
+--Translation missing 
+-- L["Focused Eye"] = ""
+--Translation missing 
+-- L["Forbidden Rites and other Rituals Necromantic"] = ""
+--Translation missing 
+-- L["GSS"] = ""
+--Translation missing 
+-- L["Halls"] = ""
+--Translation missing 
+-- L["HoF"] = ""
+--Translation missing 
+-- L["Hooded Crusader"] = ""
+--Translation missing 
+-- L["In the Shadow of the Light"] = ""
+--Translation missing 
+-- L["Instructor Chillheart's Phylactery"] = ""
+--Translation missing 
+-- L["Kel'Thuzad's Deep Knowledge"] = ""
+--Translation missing 
+-- L["Master Windstrong"] = ""
+--Translation missing 
+-- L["Monara <The Last Queen>"] = ""
+--Translation missing 
+-- L["MP"] = ""
+--Translation missing 
+-- L["MV"] = ""
+--Translation missing 
+-- L["No'ku Stormsayer <Lord of Tempest>"] = ""
+--Translation missing 
+-- L["Polyformic Acid Potion"] = ""
+--Translation missing 
+-- L["Priestess Summerpetal"] = ""
+--Translation missing 
+-- L["Professor Slate"] = ""
+--Translation missing 
+-- L["Reinforced Archery Target"] = ""
+--Translation missing 
+-- L["Rocky Horror"] = ""
+--Translation missing 
+-- L["SB"] = ""
+--Translation missing 
+-- L["Scholo"] = ""
+--Translation missing 
+-- L["Shado-Master Chum Kiu"] = ""
+--Translation missing 
+-- L["Sinan the Dreamer"] = ""
+--Translation missing 
+-- L["SM"] = ""
+--Translation missing 
+-- L["SNT"] = ""
+--Translation missing 
+-- L["SoO"] = ""
+--Translation missing 
+-- L["SPM"] = ""
+--Translation missing 
+-- L["Talking Skull"] = ""
+--Translation missing 
+-- L["TES"] = ""
+--Translation missing 
+-- L["The Dark Grimoire"] = ""
+--Translation missing 
+-- L["TJS"] = ""
+--Translation missing 
+-- L["ToT"] = ""
+--Translation missing 
+-- L["Unblinking Eye"] = ""
+--Translation missing 
+-- L["Zao'cho <The Emperor's Shield>"] = ""
+
+-- ToC
+--Translation missing 
+-- L["Description"] = ""
+--Translation missing 
+-- L["Title"] = ""
+
 end

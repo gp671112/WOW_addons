@@ -1,4 +1,4 @@
--- $Id: Atlas-deDE.lua 140 2017-01-16 08:56:14Z arith $
+-- $Id: Atlas-deDE.lua 240 2017-05-12 17:13:41Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -50,6 +50,11 @@ end
 
 
 if L then
+L[" 1/2"] = " 1/2"
+L[" 2/2"] = " 2/2"
+L["%s Dungeons"] = "%s-Dungeons"
+L["%s Instances"] = "%s-Instanzen"
+L["%s Raids"] = "%s-Schlachtzüge"
 L["Adult"] = "Erwachsen"
 L["AKA"] = "alias"
 L["Alexston Chrome <Tavern of Time>"] = "Alexston Chrom <Taverne der Zeit>"
@@ -193,6 +198,7 @@ L["ATLAS_OPTIONS_COLORINGDROPDOWN_TIP"] = "Färbt die Instanzliste in Abhängigk
 L["ATLAS_OPTIONS_CTRL"] = "Steuerung drücken, um Tooltips anzuzeigen"
 L["ATLAS_OPTIONS_CTRL_TIP"] = "Aktivieren, um die Kartendetails beim Drücken der Strg-Taste und Überfahren eines Eintrages anzuzeigen. Nützlich, falls der dargestellte Text länger als das Fenster groß ist."
 L["ATLAS_OPTIONS_DONTSHOWAGAIN"] = "Diese Information nicht erneut anzeigen."
+L["ATLAS_OPTIONS_HEADER_ADDONCONFIG"] = "Addonkonfigurationen"
 L["ATLAS_OPTIONS_HEADER_DISPLAY"] = "Anzeigeoptionen"
 L["ATLAS_OPTIONS_LOCK"] = "Atlasfenster fixieren"
 L["ATLAS_OPTIONS_LOCK_TIP"] = "Atlasfenster fixieren/freigeben."
@@ -204,6 +210,7 @@ L["ATLAS_OPTIONS_SHOWBUT"] = "Minikartenschalter anzeigen"
 L["ATLAS_OPTIONS_SHOWBUT_TIP"] = "Atlas' Schalter an der Minikarte anzeigen."
 L["ATLAS_OPTIONS_SHOWWMBUT"] = "Button auf dem Weltkartenfenster zeigen."
 L["ATLAS_OPTIONS_TRANS"] = "Transparenz"
+L["ATLAS_REOPEN_LOOT_AGAIN"] = "Bitte öffne das Beutefenster zum Neuladen erneut."
 L["ATLAS_ROPEN_ATLASLOOT_WINDOW"] = "Rechtsklicken, um das AtlasLoot-Fenster zu öffnen."
 L["ATLAS_SEARCH_UNAVAIL"] = "Suche nicht verfügbar"
 L["ATLAS_SLASH"] = "/atlas"
@@ -277,7 +284,7 @@ L["MapsNotFound"] = [=[Für die gewählte Instanz wurde
 keine anzuzeigende Karte gefunden. 
 
 Bitte stellen Sie sicher, dass die erforderlichen 
-Atlas-Kartenmodule installiert sind.]=]
+Atlas-Kartenmodule installiert sind. ]=]
 L["Meeting Stone"] = "Versammlungsstein"
 L["Middle"] = "Mitte"
 L["Midsummer Festival"] = "Sonnenwendfest"
@@ -338,5 +345,10 @@ L["Wave 6"] = "Welle 6"
 L["West"] = "Westen"
 L["Yarley <Armorer>"] = "Yarley <Rüstungsschmied>"
 L["Zaladormu"] = "Zaladormu"
+
+-- ToC
+L["Description"] = "Instanzkarten-Browser"
+L["Title"] = "Atlas"
+
 
 end

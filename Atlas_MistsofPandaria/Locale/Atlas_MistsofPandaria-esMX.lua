@@ -71,6 +71,13 @@ L["TJS"] = "TJS"
 L["ToT"] = "ToT"
 L["Unblinking Eye"] = "Ojo imperturbable"
 L["Zao'cho <The Emperor's Shield>"] = "Zao'cho <El escudo del Emperador>"
+
+-- ToC
+--Translation missing 
+-- L["Description"] = ""
+--Translation missing 
+-- L["Title"] = ""
+
 --************************************************
 -- Zone Names, Acronyms, and Common Strings
 --************************************************

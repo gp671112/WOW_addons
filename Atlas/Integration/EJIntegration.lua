@@ -1,4 +1,4 @@
--- $Id: EJIntegration.lua 225 2017-04-18 08:22:35Z arith $
+-- $Id: EJIntegration.lua 253 2017-05-25 07:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -29,9 +29,10 @@
 -- Localized Lua globals.
 -- ----------------------------------------------------------------------------
 -- Functions
-local _G = getfenv(0);
-local pairs = _G.pairs;
-local select = _G.select;
+local _G = getfenv(0)
+local pairs = _G.pairs
+local select = _G.select
+local GameTooltip = GameTooltip
 -- Libraries
 -- ----------------------------------------------------------------------------
 -- AddOn namespace.
@@ -39,8 +40,8 @@ local select = _G.select;
 local FOLDER_NAME, private = ...
 local LibStub = _G.LibStub
 local addon = LibStub("AceAddon-3.0"):GetAddon(private.addon_name)
-local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name);
-local BB = Atlas_GetLocaleLibBabble("LibBabble-Boss-3.0");
+local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+local BB = Atlas_GetLocaleLibBabble("LibBabble-Boss-3.0")
 
 -- Adopted from EncounterJournal
 local EJ_HTYPE_OVERVIEW = 3;

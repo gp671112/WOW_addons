@@ -1,4 +1,4 @@
--- $Id: Atlas_OutdoorRaids_DB.lua 40 2017-05-04 05:16:39Z arith $
+-- $Id: Atlas_OutdoorRaids_DB.lua 44 2017-06-08 13:41:33Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -36,7 +36,7 @@ local myDB = {
 		{ 1, 10001, 271, 247 };
 	};
 	OR_BrokenIsles = {
-		{  1, 1774, 168, 351, 393, 461 }; -- Calamir
+		{  1, 1774, 114, 378, 327, 499 }; -- Calamir
 		{  2, 1796, 152, 375, 374, 502 }; -- Withered J'im
 		{  3, 1769, 130, 347, 341, 460 }; -- Levantus
 		{  4, 1770,  78, 201, 281, 274 }; -- Humongris

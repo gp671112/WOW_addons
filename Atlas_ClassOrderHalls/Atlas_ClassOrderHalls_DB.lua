@@ -1,4 +1,4 @@
--- $Id: Atlas_ClassOrderHalls_DB.lua 103 2017-05-23 09:33:51Z arith $
+-- $Id: Atlas_ClassOrderHalls_DB.lua 110 2017-06-22 04:52:28Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -77,6 +77,7 @@ local myDB = {
 		{  18, 10016, 375, 249 }; -- Empowered Nether Crucible
 		{  19, 10017, 374, 119 }; -- Cursed Forge of the Nathrezim
 		{  20, 109596, 357, 129 }; -- Seer Akalu
+		{  21, 112992, 339, 275 }; -- Seer Aleis
 	};
 	CH_Druid = {
 		{  "A", 10101, 337, 82 }; -- Portal to Emerald Dreamway
@@ -95,26 +96,31 @@ local myDB = {
 		{   11, 10011, 312, 256 }; -- Scouting Map, Skylord Omnuron <Mission Specialist>, Mylune
 		{   12, 98784, 377, 259 }; -- Zen'kiki
 		{   13, 10013, 474, 282 }; -- Training Dummies
+		{   14, 110810, 215, 131 };-- Almenis
+		{   15, 108391, 126, 209 }; -- Shalorn Star
+		{   16, 111786, 228, 318 }; -- Treant Sapling
 	};
 	CH_Hunter = {
-		{ "A", 10101, 234, 289 }; -- Portal to Dalaran
-		{ 1, 10001, 163, 238 }; -- Flight Master
-		{ 2, 108552, 182, 241 }; -- Great Eagle
-		{ 3, 107317, 209, 230 }; -- Emmarel Shadewarden <Unseen Path>
-		{ 3, 107317, 193, 414 }; -- Emmarel Shadewarden <Unseen Path>
-		{ 4, 10004, 228, 343 }; -- Altar Keeper Biehn
-		{ 5, 103693, 210, 318 }; -- Outfitter Reynolds <Unseen Path>
-		{ 6, 10006, 199, 308 }; -- Tactician Tinderfell <Unseen Path>
-		{ 7, 110424, 208, 302 }; -- Image of Mimiron
-		{ 8, 98737, 252, 338 }; -- Holt Thunderhorn <Lore and Legends>
-		{ 8, 10009, 273, 318 }; -- Training Dummies
-		{ 9, 10009, 207, 291 }; -- Training Dummies
-		{ 9, 10009, 188, 306 }; -- Training Dummies
-		{ 10, 106444, 202, 277 }; -- Lenara <Recruiter>
-		{ 11, 108050, 290, 326 }; -- Survivalist Bahn <Class Hall Upgrades>
-		{ 12, 106446, 283, 257 }; -- Sampson <Recruiter>
-		{ 13, 113688, 324, 471 }; -- Ogdrul <The Seeker>
-		{ 14, 110412, 289, 314 }; -- Berger the Steadfast <Champion Armaments>
+		{ "A", 10101, 256, 219 }; -- Portal to Dalaran
+		{ 1, 10001, 153, 151 }; -- Flight Master
+		{ 2, 108552, 178, 156 }; -- Great Eagle
+		{ 3, 107317, 214, 145 }; -- Emmarel Shadewarden <Unseen Path>
+		{ 3, 107317, 198, 384 }; -- Emmarel Shadewarden <Unseen Path>
+		{ 4, 10004, 246, 294 }; -- Altar Keeper Biehn
+		{ 5, 103693, 228, 261 }; -- Outfitter Reynolds <Unseen Path>
+		{ 6, 10006, 207, 248 }; -- Tactician Tinderfell <Unseen Path>
+		{ 7, 110424, 223, 235 }; -- Image of Mimiron
+		{ 8, 98737, 275, 282 }; -- Holt Thunderhorn <Lore and Legends>
+		{ 9, 10009, 218, 222 }; -- Training Dummies
+		{ 9, 10009, 196, 247 }; -- Training Dummies
+		{ 9, 10009, 303, 261 }; -- Training Dummies
+		{ 10, 106444, 210, 203 }; -- Lenara <Recruiter>
+		{ 11, 108050, 324, 272 }; -- Survivalist Bahn <Class Hall Upgrades>
+		{ 12, 106446, 314, 177 }; -- Sampson <Recruiter>
+		{ 13, 113688, 373, 455 }; -- Ogdrul <The Seeker>
+		{ 14, 110412, 324, 260 }; -- Berger the Steadfast <Champion Armaments>
+		{ 15, 106445, 273, 170 }; -- Nighthuntress Silus
+		{ 16, 110816, 212, 260 }; -- Tu'Las the Gifted
 	};
 	CH_Mage = {
 		{  1, 10001, 408, 129 }; -- Forge of the Guardian
@@ -138,9 +144,12 @@ local myDB = {
 		{ 10, 106377, 307, 296 }; -- Archmage Omniara <Recruiter> 
 		{ 11, 10011, 284, 349 }; -- Scouting map
 		{ 12, 108515, 286, 362 }; -- Archmage Melis <Mistress of Flame>
-		{ 13, 10013,  58, 343 }; -- Training Dummies
-		{ 14, 106433,  77, 259 }; -- Grand Conjurer Mimic
-		{ 15, 110427, 296, 330 }; -- Minuette <Armament Summoner>
+		{ 13, 110427, 296, 330 }; -- Minuette <Armament Summoner>
+		{ 14, 111734, 263, 323 }; -- Conjurer Awlyn
+		{ 15, 10015,  58, 343 }; -- Training Dummies
+		{ 16, 106433,  77, 259 }; -- Grand Conjurer Mimic
+		{ 17, 112982,  52, 227 }; -- Researcher Tulius <Seal of Broken Fate Shipment>
+		{ 18, 106434, 273, 224 }; -- Guardian Alar <Kirin Tor Guardians Recruiter>
 		{  "A", 10200, 164, 350 }; -- Connection
 		{  "B", 10200, 104, 353 }; -- Connection
 		{  "B", 10200, 224, 353 }; -- Connection
@@ -154,13 +163,16 @@ local myDB = {
 		{ 2, 10002, 278, 377 }; -- Master Hsu <Mission Master>
 		{ 3, 105015, 284, 367 }; -- Tianji <Ox Troop Trainer>
 		{ 4, 104744, 273, 344 }; -- High Elder Cloudfall
-		{ 5, 105019, 302, 339 }; -- Gin Lai <Tiger Troop Trainer>
-		{ 6, 101749, 313, 332 }; -- Elder Xang <Monk Trainer>
-		{ 7, 10007, 296, 324 }; -- Training Dummies
-		{ 7, 10007, 286, 256 }; -- Training Dummies
-		{ 7, 10007, 222, 258 }; -- Training Dummies
-		{ 8, 10008, 250, 211 }; -- Iron-Body Ponshu <Senior Master Ox>
-		{ 9, 106942, 160, 203 }; -- Lorewalker Cho <Head Archivist>
+		{ 5, 105019, 308, 334 }; -- Gin Lai <Tiger Troop Trainer>
+		{ 6, 101749, 319, 327 }; -- Elder Xang <Monk Trainer>
+		{ 7, 106538, 310, 356 }; -- Tianili <Celestial Trainer>
+		{ 8, 110817, 291, 343 }; -- Yushi <Seal of Broken Fate Shipment>
+		{ 9, 120145, 262, 315 }; -- Master Swoo <Masters of Serenity Recruiter>
+		{ 10, 10010, 296, 324 }; -- Training Dummies
+		{ 10, 10010, 286, 256 }; -- Training Dummies
+		{ 10, 10010, 222, 258 }; -- Training Dummies
+		{ 11, 10011, 250, 211 }; -- Iron-Body Ponshu <Senior Master Ox>
+		{ 12, 106942, 160, 203 }; -- Lorewalker Cho <Head Archivist>
 	};
 	CH_Paladin = {
 		{ "A", 10101, 128, 444 }; -- Entrance
@@ -180,6 +192,7 @@ local myDB = {
 		{ 13, 10013, 353, 114 }; -- Altar of Ancient Kings
 		{ 14, 111772, 377, 176 }; -- Terric the Illuminator
 		{ 15, 120146, 269, 221 }; -- Crusader Kern <Silver Hand Crusader Recruiter>
+		{ 16, 112986, 165, 397 }; -- Librarian Lightmorne <Seal of Broken Fate Shipment>
 	};
 	CH_Priest = {
 		{ "A", 10101, 250, 374 }; -- Portal to Dalaran

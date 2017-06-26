@@ -1,4 +1,4 @@
--- $Id: Atlas_ClassOrderHalls-enUS.lua 101 2017-05-23 09:06:01Z arith $
+-- $Id: Atlas_ClassOrderHalls-enUS.lua 110 2017-06-22 04:52:28Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -41,6 +41,7 @@ L["Ramp to lower floor"] = "Ramp to lower floor"
 L["Ramp to top floor"] = "Ramp to top floor"
 L["Champion Armaments"] = "Champion Armaments" -- Quest: 44228
 L["Travel to:"] = "Travel to:"
+L["Seal of Broken Fate"] = "Seal of Broken Fate"
 
 -- //////////////////////////
 -- Death Knight
@@ -95,6 +96,8 @@ L["Empowered Rift Core"] = "Empowered Rift Core"
 L["Evelune Soulreaver <Wrath of the Order>"] = "Evelune Soulreaver <Wrath of the Order>" -- 111775
 L["Requires Blades of Death order advancement"] = "Requires Blades of Death order advancement"
 L["Tormented Shivarra <Shivarra Recruiter>"] = "Tormented Shivarra <Shivarra Recruiter>" -- 120140
+L["Seer Aleis <Seal of Broken Fate Shipment>"] = "Seer Aleis <Seal of Broken Fate Shipment>" -- 112992
+L["Requires Focused War Effort order advancement"] = "Requires Focused War Effort order advancement"
 
 -- //////////////////////////
 -- Druid
@@ -117,7 +120,8 @@ L["Requires Wardens of the Grove order advancement"] = "Requires Wardens of the 
 L["Shalorn Star <Dreamgrove Warden Recruiter>"] = "Shalorn Star <Dreamgrove Warden Recruiter>" -- 108391
 L["Treant Sapling <Ancient of War Tender>"] = "Treant Sapling <Ancient of War Tender>" -- 111786
 L["Requires Ancient of War order advancement"] = "Requires Ancient of War order advancement"
---L["Ancient of War"] = "Ancient of War"
+L["Almenis <Seal of Broken Fate Shipment>"] = "Almenis <Seal of Broken Fate Shipment>" -- 110810
+L["Requires Elune's Chosen order advancement"] = "Requires Elune's Chosen order advancement"
 
 -- //////////////////////////
 -- Hunter
@@ -140,6 +144,8 @@ L["Image of Mimiron"] = "Image of Mimiron" -- 110424
 L["Berger the Steadfast <Champion Armaments>"] = "Berger the Steadfast <Champion Armaments>" -- 110412
 L["Requires Born of the Night order advancement"] = "Requires Born of the Night order advancement"
 L["Nighthuntress Silus <Nightborne Hunters Recruiter>"] = "Nighthuntress Silus <Nightborne Hunters Recruiter>" -- 106445
+L["Tu'Las the Gifted <Seal of Broken Fate Shipment>"] = "Tu'Las the Gifted <Seal of Broken Fate Shipment>"
+L["Requires Unseen Path order advancement"] = "Requires Unseen Path order advancement"
 
 -- //////////////////////////
 -- Mage
@@ -164,6 +170,11 @@ L["Ari"] = "Ari" -- 109307
 L["Teleportation Nexus"] = "Teleportation Nexus"
 L["Requires Guardians of the Kirin Tor order advancement"] = "Requires Guardians of the Kirin Tor order advancement"
 L["Guardian Alar <Kirin Tor Guardians Recruiter>"] = "Guardian Alar <Kirin Tor Guardians Recruiter>" -- 106434
+L["Conjurer Awlyn"] = "Conjurer Awlyn" -- 111734
+L["Requires Might of Dalaran order advancement"] = "Requires Might of Dalaran order advancement"
+L["Focusing Crystal"] = "Focusing Crystal"
+L["Researcher Tulius <Seal of Broken Fate Shipment>"] = "Researcher Tulius <Seal of Broken Fate Shipment>" -- 112982
+L["Requires Arcane Divination order advancement"] = "Requires Arcane Divination order advancement"
 
 -- //////////////////////////
 -- Monk
@@ -186,6 +197,8 @@ L["Tianili <Celestial Trainer>"] = "Tianili <Celestial Trainer>" -- 106538
 L["Requires Celestial Favor order advancement"] = "Requires Celestial Favor order advancement"
 L["Master Swoo <Masters of Serenity Recruiter>"] = "Master Swoo <Masters of Serenity Recruiter>" -- 120145
 L["Requires Masters of the Path order advancement"] = "Requires Masters of the Path order advancement"
+L["Yushi <Seal of Broken Fate Shipment>"] = "Yushi <Seal of Broken Fate Shipment>" -- 110817
+L["Requires One with Destiny order advancement"] = "Requires One with Destiny order advancement"
 
 -- //////////////////////////
 -- Paladin
@@ -210,6 +223,8 @@ L["Requires Grand Crusade order advancement"] = "Requires Grand Crusade order ad
 L["Silver Hand Orders"] = "Silver Hand Orders"
 L["Requires Silver Hand Crusaders order advancement"] = "Requires Silver Hand Crusaders order advancement"
 L["Crusader Kern <Silver Hand Crusader Recruiter>"] = "Crusader Kern <Silver Hand Crusader Recruiter>" -- 120146
+L["Librarian Lightmorne <Seal of Broken Fate Shipment>"] = "Librarian Lightmorne <Seal of Broken Fate Shipment>" -- 112986
+L["Requires Holy Purpose order advancement"] = "Requires Holy Purpose order advancement"
 
 -- //////////////////////////
 -- Priest
@@ -228,6 +243,10 @@ L["Delas Moonfang <Priestess of the Moon>"] = "Delas Moonfang <Priestess of the 
 L["Archon Torias <Class Hall Upgrades>"] = "Archon Torias <Class Hall Upgrades>" -- 110725 
 L["Vicar Eliza <Recruiter>"] = "Vicar Eliza <Recruiter>" -- 106451
 L["Lilith <Armament Supplier>"] = "Lilith <Armament Supplier>" -- 110595
+L["Truth <Seal of Broken Fate Shipment>"] = "Truth <Seal of Broken Fate Shipment>" -- 110819
+L["Requires Blessed Seals order advancement"] = "Requires Blessed Seals order advancement"
+L["High Priestess Mourn <Recruiter>"] = "High Priestess Mourn <Recruiter>" -- 120160
+L["Requires Hooded Priests order advancement"] = "Requires Hooded Priests order advancement"
 
 -- //////////////////////////
 -- Rogue
@@ -251,6 +270,11 @@ L["Garona Halforcen"] = "Garona Halforcen" -- 94141
 L["Mal <Weapons Smuggler>"] = "Mal <Weapons Smuggler>" -- 110348
 L["Vanessa VanCleef"] = "Vanessa VanCleef" -- 102550
 L["Knocker - %s"] = "Knocker - %s"
+L["Scythe <Seal of Broken Fate Shipment>"] = "Scythe <Seal of Broken Fate Shipment>" -- 110820
+L["Requires Plunder order advancement"] = "Requires Plunder order advancement"
+L["Laura Stern <Recruiter>"] = "Laura Stern <Recruiter>" -- 120162
+L["Requires Ravenholdt's Finest order advancement"] = "Requires Ravenholdt's Finest order advancement"
+L["Mal <Weapons Smuggler>"] = "Mal <Weapons Smuggler>" -- 110348
 
 -- //////////////////////////
 -- Shaman
@@ -275,6 +299,12 @@ L["Morgl the Oracle <The Earthen Ring>"] = "Morgl the Oracle <The Earthen Ring>"
 L["Summoner Morn <Elemental Summoner>"] = "Summoner Morn <Elemental Summoner>" -- 106457
 L["Neptulon"] = "Neptulon" -- 106291
 L["Felinda Frye <Earthwarden Recruiter>"] = "Felinda Frye <Earthwarden Recruiter>" -- 112208
+L["Alexor <The Ascended>"] = "Alexor <The Ascended>" -- 109829
+L["Requires \"Rise!\" order advancement"] = "Requires \"Rise!\" order advancement"
+L["Bath'rah the Windwatcher <Seal of Broken Fate Shipment>"] = "Bath'rah the Windwatcher <Seal of Broken Fate Shipment>" -- 112299
+L["Requires Spirit Walk order advancement"] = "Requires Spirit Walk order advancement"
+L["Marick Ven <Earthen Ring Protectors Recruiter>"] = "Marick Ven <Earthen Ring Protectors Recruiter>" -- 120165
+L["Requires Ring of Earth order advancement"] = "Requires Ring of Earth order advancement"
 
 -- //////////////////////////
 -- Warlock
@@ -293,6 +323,11 @@ L["Jared <Recruiter>"] = "Jared <Recruiter>" -- 106217
 L["Imp Mother Dyala <Recruiter>"] = "Imp Mother Dyala <Recruiter>" -- 106216
 L["Archivist Melinda <Class Hall Upgrades>"] = "Archivist Melinda <Class Hall Upgrades>" -- 108018
 L["Murr"] = "Murr" -- 110408
+L["Demonia Pickerin"] = "Demonia Pickerin" -- 113371
+L["Requires Unleash Infernal order advancement"] = "Requires Unleash Infernal order advancement"
+L["Demonic Phylactery"] = "Demonic Phylactery"
+L["Galen Foul <Demon Summoner>"] = "Galen Foul <Demon Summoner>" -- 120166
+L["Requires Demonic Brutes order advancement"] = "Requires Demonic Brutes order advancement"
 
 -- //////////////////////////
 -- Warrior

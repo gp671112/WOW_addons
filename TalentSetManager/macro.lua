@@ -1,5 +1,5 @@
-﻿-- Talent Sets
--- by Jadya
+-- Talent Set Manager
+-- by Vildiesel
 -- EU-Well of Eternity
 
 local format, lower = string.format, string.lower

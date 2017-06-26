@@ -1,18 +1,14 @@
-## Interface: 70100
+## Interface: 70200
 ## Title: SavedInstances
 ## Notes: Tracks raid/instance/worldboss lockouts for all your characters, daily/weekly quests, currencies, trade cooldowns, and more!
-## Author: oscarucb
-## Version: 7.0.8
-## X-Build: 550
-## X-ReleaseDate: 2016-12-21T11:22:24Z
-## X-Revision: $Revision: 542 $
-## X-AceForum: 14072
+## Title-zhTW: |cffFF7F00[副本]|r 角色進度
+## Notes-zhTW: SavedInstances |n記錄所有角色的團隊/英雄/世界首領擊殺進度，每日/每週任務、貨幣點數、交易的冷卻計時，還有更多!|n|cffffd200使用方法：|r點小地圖按鈕觀看資訊，從Esc>介面>插件>角色進度，進行設定。
+## Author: @project-author@
+## Version: @project-version@
+## X-ReleaseDate: @project-date-iso@
 ## X-License: All Rights Reserved
 ## X-Category: Raid
 ## OptionalDeps: Ace3, CallbackHandler-1.0, LibDataBroker-1.1, LibDBIcon-1.0, LibQTip-1.0
-#@no-lib-strip@
-## X-Embeds: Ace3, CallbackHandler-1.0, LibDataBroker-1.1, LibDBIcon-1.0, LibQTip-1.0
-#@end-no-lib-strip@ 
 ## SavedVariables: SavedInstancesDB
 ## LoadManagers: AddonLoader
 ## X-LoadOn-Always: delayed
@@ -28,13 +24,13 @@ libs\AceGUI-3.0\AceGUI-3.0.xml
 libs\AceConfig-3.0\AceConfig-3.0.xml
 libs\AceConsole-3.0\AceConsole-3.0.xml
 libs\LibQTip-1.0\lib.xml
-#@end-no-lib-strip@ 
+#@end-no-lib-strip@
 
 libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
 
 #@no-lib-strip@
 libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
-#@end-no-lib-strip@ 
+#@end-no-lib-strip@
 
 locale.lua
 

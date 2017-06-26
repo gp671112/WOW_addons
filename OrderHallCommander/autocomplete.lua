@@ -74,7 +74,7 @@ function module:OnInitialized()
 	local ref=OHFMissions.CompleteDialog.BorderFrame.ViewButton
 	local bt = CreateFrame('BUTTON',nil, ref, 'UIPanelButtonTemplate')
 	bt:SetText(L["HallComander Quick Mission Completion"])
-	bt:SetWidth(bt:GetTextWidth()+10)
+	bt:SetWidth(193)
 	bt:SetPoint("CENTER",0,-50)
 	addon:ActivateButton(bt,"MissionComplete",L["Complete all missions without confirmation"])
 end
@@ -242,7 +242,7 @@ function module:MissionComplete(this,button,skiprescheck)
 			)
 			return
 		end
-		report=self:GenerateMissionCompleteList("任務成果",OHF)
+		report=self:GenerateMissionCompleteList(L["Missions' results"],OHF)
 		report:SetUserData('missions',missions)
 		report:SetUserData('current',1)
 		self:EventsOn()

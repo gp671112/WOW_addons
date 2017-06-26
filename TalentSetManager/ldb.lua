@@ -1,4 +1,4 @@
-﻿-- Talent Set Manager
+-- Talent Set Manager
 -- by Jadya
 -- EU-Well of Eternity
 
@@ -26,7 +26,7 @@ function addonTable.UpdateLDBButton()
    return
   end
  end
- ldbbutton.text = "天賦設定管理"
+ ldbbutton.text = "Talent Set Manager"
  ldbbutton.icon = "Interface\\Icons\\achievement_guildperk_ladyluck_rank2"
 end
 
@@ -252,10 +252,10 @@ function addonTable:InitializeLDB()
   tt = TalentSetManager_Options.ldb_last_selected
  
  
-  ldbbutton = ldb:NewDataObject("天賦設定管理", {
+  ldbbutton = ldb:NewDataObject("Talent Set Manager", {
                       type = "data source",
                       icon = "Interface\\Icons\\achievement_guildperk_ladyluck_rank2",
-                      text = "天賦設定管理",
+                      text = "Talent Set Manager",
                       --label = "TSM",
                       OnClick = onClick,
                       OnEnter = onEnter,})

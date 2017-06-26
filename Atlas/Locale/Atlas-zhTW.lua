@@ -1,4 +1,4 @@
--- $Id: Atlas-zhTW.lua 246 2017-05-15 07:33:49Z arith $
+-- $Id: Atlas-zhTW.lua 256 2017-06-16 16:05:13Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -308,6 +308,7 @@ L["Retribution Paladin"] = "懲戒聖騎"
 L["Rewards"] = "獎勵"
 L["R-Parenthesis"] = "）"
 L["R-SBracket"] = "】"
+L["Scale and Transparency"] = "大小與透明度"
 L["Scarshield Quartermaster <Scarshield Legion>"] = "裂盾軍需官 <裂盾軍團>"
 L["Second Stop"] = "第二停留點"
 L["Semicolon"] = "；"

@@ -1,6 +1,8 @@
 ## Interface: 70200
 ## Title: Plater
 ## Notes: Config the new name plates
+## Title-zhTW: |cffFF2D2D[戰鬥]|r Plater 血條
+## Notes-zhTW: Plater Nameplates |n提供更多的選項讓你可以自訂血條。|n|cffffd200使用方法：|r從Esc>介面>名稱>開啟血條增強設定，或輸入 /血條，進行設定。|n中文化: 彩虹ui
 ## SavedVariables: PlaterDB
 ## SavedVariablesPerCharacter: PlaterDBChr
 

@@ -1,4 +1,4 @@
--- $Id: Atlas.lua 253 2017-05-25 07:22:48Z arith $
+-- $Id: Atlas.lua 264 2017-06-21 05:53:16Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -49,15 +49,17 @@ local addon = LibStub("AceAddon-3.0"):NewAddon(private.addon_name, "AceConsole-3
 addon.constants = private.constants
 addon.constants.addon_name = private.addon_name
 addon.Name = FOLDER_NAME
+addon.LocName = select(2, GetAddOnInfo(addon.Name))
+addon.Notes = select(3, GetAddOnInfo(addon.Name))
 _G.Atlas = addon
 
-local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name);
-local BZ = Atlas_GetLocaleLibBabble("LibBabble-SubZone-3.0");
-local BB = Atlas_GetLocaleLibBabble("LibBabble-Boss-3.0");
-local LibDialog = LibStub("LibDialog-1.0");
+local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
+local BZ = Atlas_GetLocaleLibBabble("LibBabble-SubZone-3.0")
+local BB = Atlas_GetLocaleLibBabble("LibBabble-Boss-3.0")
+local LibDialog = LibStub("LibDialog-1.0")
 local AceDB = LibStub("AceDB-3.0")
 
-local profile;
+local profile
 
 -- Minimap button with LibDBIcon-1.0
 local LDB = LibStub("LibDataBroker-1.1"):NewDataObject("Atlas", {
@@ -68,47 +70,6 @@ local LDB = LibStub("LibDataBroker-1.1"):NewDataObject("Atlas", {
 
 local minimapButton = LibStub("LibDBIcon-1.0");
 
-function addon:OnInitialize()
-	self.db = AceDB:New("AtlasDB", addon.constants.defaults, true)
-	
-	profile = self.db.profile;
-	
-	minimapButton:Register("Atlas", LDB, self.db.profile.minimap);
-	self:RegisterChatCommand("atlasbutton", Atlas_ButtonToggle2);
-	self:RegisterChatCommand("atlas", Atlas_Toggle);
-	--self:RegisterChatCommand("atlas "..ATLAS_SLASH_OPTIONS, AtlasOptions_Toggle);
-
-	self.db.RegisterCallback(self, "OnProfileChanged", "Refresh")
-	self.db.RegisterCallback(self, "OnProfileCopied", "Refresh")
-	self.db.RegisterCallback(self, "OnProfileReset", "Refresh")
-	
-	self:SetupOptions();
-end
-
-function addon:OnEnable()
-
-end
-
-function addon:Refresh()
-	profile = self.db.profile;
-
-	Atlas_PopulateDropdowns();
-	Atlas_Refresh();
-	AtlasFrameDropDownType_OnShow();
-	AtlasFrameDropDown_OnShow();
-	addon:UpdateLock();
-	addon:UpdateAlpha();
-	addon:UpdateScale();
-	AtlasFrame:SetClampedToScreen(profile.options.frames.clamp);
-	AtlasFrameLarge:SetClampedToScreen(profile.options.frames.clamp);
-	AtlasFrameSmall:SetClampedToScreen(profile.options.frames.clamp);
-	if (profile.options.worldMapButton) then
-		AtlasToggleFromWorldMap:Show();
-	else
-		AtlasToggleFromWorldMap:Hide();
-	end
-
-end
 --[[
 function addon:Toggle()
 	self.db.profile.minimap.hide = not self.db.profile.minimap.hide
@@ -457,15 +418,7 @@ local function Atlas_Process_Deprecated()
 	-- Check for outdated modules, build a list of them, then disable them and tell the player
 	local OldList = {};
 	for k, v in pairs(Deprecated_List) do
-		-- name, title, notes, loadable, reason, security, newVersion = GetAddOnInfo(index or "name")
-		--    loadable : Boolean - Indicates if the AddOn is loaded or eligible to be loaded, true if it is, false if it is not.
-		local loadable = select(4, GetAddOnInfo(v[1]));
-		-- GetAddOnEnableState("character", index): 
-		--	0: addon is disabled
-		--	1: partially enabled (only when querying all characters)
-		-- 	2: fully enabled
-		local enabled = GetAddOnEnableState(UnitName("player"), GetAddOnInfo(v[1]))
-		if ( (enabled > 0) and loadable ) then
+		if ( addon:CheckAddonStatus(GetAddOnInfo(v[1])) ) then
 			local oldVersion = true;			
 			if (v[2] ~= nil and GetAddOnMetadata(v[1], "Version") >= v[2]) then
 				oldVersion = false;
@@ -1690,7 +1643,7 @@ function Atlas_AutoSelect()
 		end
 		if (not selected_map) then
 			debug("No subzone matched, now checking if we should specify a default map.");
-			if (currentZone == Atlas_SubZoneAssoc[zoneID]) then
+			if (zoneID and currentZone == Atlas_SubZoneAssoc[zoneID]) then
 				debug("You're in the same instance as the former map. Doing nothing.");
 				return;
 			else
@@ -1705,6 +1658,7 @@ function Atlas_AutoSelect()
 					profile.options.dropdowns.module = k_DropDownType;
 					profile.options.dropdowns.zone = k_DropDownZone;
 					Atlas_Refresh();
+					zoneID = ATLAS_DROPDOWNS[profile.options.dropdowns.module][profile.options.dropdowns.zone];
 					debug("Map selected! Type: "..k_DropDownType..", Zone: "..k_DropDownZone..", "..zoneID);
 					return;
 				end
@@ -1720,20 +1674,21 @@ function Atlas_AutoSelect()
 						profile.options.dropdowns.module = k_DropDownType;
 						profile.options.dropdowns.zone = k_DropDownZone;
 						Atlas_Refresh();
+						zoneID = ATLAS_DROPDOWNS[profile.options.dropdowns.module][profile.options.dropdowns.zone];
 						debug("Map changed to the associated map: "..zoneID);
 						return;
 					end
 				end
 			end
 			debug("Checking if instance/entrance pair can be found.");
-		elseif (Atlas_InstToEntMatches[zoneID]) then
+		elseif (zoneID and Atlas_InstToEntMatches[zoneID]) then
 			for ka, va in pairs(Atlas_InstToEntMatches[zoneID]) do
 				if (currentZone == AtlasMaps[va].ZoneName[1]) then
 					debug("Instance/entrance pair found. Doing nothing.");
 					return;
 				end
 			end
-		elseif (Atlas_EntToInstMatches[zoneID]) then
+		elseif (zoneID and Atlas_EntToInstMatches[zoneID]) then
 			for ka, va in pairs(Atlas_EntToInstMatches[zoneID]) do
 				if (currentZone == AtlasMaps[va].ZoneName[1]) then
 					debug("Instance/entrance pair found. Doing nothing.");
@@ -1809,3 +1764,62 @@ function Atlas_SetEJBackground(instanceID)
 ]]
 end
 
+function addon:CheckAddonStatus(addonName)
+	if not addonName then return nil end
+	-- name, title, notes, loadable, reason, security, newVersion = GetAddOnInfo(index or "name")
+	--    loadable : Boolean - Indicates if the AddOn is loaded or eligible to be loaded, true if it is, false if it is not.
+	local loadable = select(4, GetAddOnInfo(addonName))
+	-- GetAddOnEnableState("character", index): 
+	--	0: addon is disabled
+	--	1: partially enabled (only when querying all characters)
+	-- 	2: fully enabled
+	local enabled = GetAddOnEnableState(UnitName("player"), addonName)
+	if (enabled > 0 and loadable) then
+		return true
+	else
+		return false
+	end
+end
+
+-- ///////////////////////////////////////////////////////
+function addon:OnInitialize()
+	self.db = AceDB:New("AtlasDB", addon.constants.defaults, true)
+	
+	profile = self.db.profile;
+	
+	minimapButton:Register("Atlas", LDB, self.db.profile.minimap);
+	self:RegisterChatCommand("atlasbutton", Atlas_ButtonToggle2);
+	self:RegisterChatCommand("atlas", Atlas_Toggle);
+	--self:RegisterChatCommand("atlas "..ATLAS_SLASH_OPTIONS, AtlasOptions_Toggle);
+
+	self.db.RegisterCallback(self, "OnProfileChanged", "Refresh")
+	self.db.RegisterCallback(self, "OnProfileCopied", "Refresh")
+	self.db.RegisterCallback(self, "OnProfileReset", "Refresh")
+	
+	self:SetupOptions();
+end
+
+function addon:OnEnable()
+
+end
+
+function addon:Refresh()
+	profile = self.db.profile;
+
+	Atlas_PopulateDropdowns();
+	Atlas_Refresh();
+	AtlasFrameDropDownType_OnShow();
+	AtlasFrameDropDown_OnShow();
+	addon:UpdateLock();
+	addon:UpdateAlpha();
+	addon:UpdateScale();
+	AtlasFrame:SetClampedToScreen(profile.options.frames.clamp);
+	AtlasFrameLarge:SetClampedToScreen(profile.options.frames.clamp);
+	AtlasFrameSmall:SetClampedToScreen(profile.options.frames.clamp);
+	if (profile.options.worldMapButton) then
+		AtlasToggleFromWorldMap:Show();
+	else
+		AtlasToggleFromWorldMap:Hide();
+	end
+
+end

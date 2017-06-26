@@ -1,7 +1,241 @@
-changeset:   43:877ffd88a9ee
-tag:         r43-release
+changeset:   39:7c9e70f64241
+tag:         r39-release
 user:        Tercio
-date:        Mon May 08 15:56:11 2017 -0300
+date:        Tue Mar 28 19:42:43 2017 -0300
+summary:     - 7.2 ToC Update.
+
+
+changeset:   38:05f33dc8126a
+user:        Tercio
+date:        Thu Dec 08 13:12:08 2016 -0200
+summary:     - ticket #36
+
+
+changeset:   37:722c192b9c84
+user:        Tercio
+date:        Tue Oct 25 15:50:25 2016 -0200
+summary:     - toc and framework update.
+
+
+changeset:   36:eeb21e59c549
+user:        Tercio
+date:        Sun Sep 25 00:40:18 2016 -0300
+summary:     - added health amount text option for enemy npc.
+
+
+changeset:   35:24fc374871ac
+user:        Tercio
+date:        Sun Sep 04 17:40:43 2016 -0300
+summary:     - fixed an issue where sometimes the addon stop to show enemy bars in Suramar.
+
+
+changeset:   34:2898b5c60787
+user:        Tercio
+date:        Sat Sep 03 13:40:28 2016 -0300
+summary:     - added '/plater debug' slash command.
+
+
+changeset:   33:893152d5419c
+user:        Tercio
+date:        Sat Sep 03 12:44:40 2016 -0300
+summary:     - fixed an issue with some debuffs not showing on manual aura track.
+
+
+changeset:   32:ecbdc9cbf4d2
+user:        Tercio
+date:        Thu Sep 01 18:57:48 2016 -0300
+summary:     - disabling some auto on/off things.
+
+
+changeset:   31:9390233e694a
+user:        Tercio
+date:        Sat Aug 27 00:19:20 2016 -0300
+summary:     - fix for manual debuffs spell override.
+
+
+changeset:   30:3fe79650ff58
+user:        Tercio
+date:        Thu Aug 11 21:02:48 2016 -0300
+summary:     - fix for ticket #9, cc icon not showing.
+
+
+changeset:   29:391336fffac4
+user:        Tercio
+date:        Thu Aug 11 17:34:29 2016 -0300
+summary:     - fix for tickets.
+
+
+changeset:   28:946e41625baa
+user:        Tercio
+date:        Sun Aug 07 14:50:58 2016 -0300
+summary:     - possible fix for name cutoff when showing inside the bar.
+
+
+changeset:   27:edc5a87381b5
+user:        Tercio
+date:        Sun Aug 07 14:47:57 2016 -0300
+summary:     - possible fix for name cutoff when showing inside the bar.
+
+
+changeset:   26:61ea140473fc
+user:        Tercio
+date:        Sun Aug 07 12:50:34 2016 -0300
+summary:     - unit reaction swap.
+
+
+changeset:   25:a600faee91b5
+user:        Tercio
+date:        Sat Aug 06 14:18:31 2016 -0300
+summary:     - framework update to v33 (adds shadow to option panel tooltips).
+
+
+changeset:   24:58c0bd0ab7f1
+user:        Tercio
+date:        Sat Aug 06 13:50:25 2016 -0300
+summary:     - refresh the cache before apply the new profile settings.
+
+
+changeset:   23:07e0c3b12bc9
+user:        Tercio
+date:        Fri Aug 05 18:55:00 2016 -0300
+summary:     - new method to anchor the personal bar.
+
+
+changeset:   22:0517e5c9387e
+user:        Tercio
+date:        Fri Aug 05 17:04:44 2016 -0300
+summary:     - no debug lines please.
+
+
+changeset:   21:34688854af46
+user:        Tercio
+date:        Fri Aug 05 17:03:09 2016 -0300
+summary:     - fix for player buffs when aura is on manual mode.
+
+
+changeset:   20:c4758a3a41b9
+user:        Tercio
+date:        Thu Aug 04 17:11:38 2016 -0300
+summary:     - more updates.
+
+
+changeset:   19:26443f00cb3e
+user:        Tercio
+date:        Tue Aug 02 00:50:55 2016 -0300
+summary:     - more updates.
+
+
+changeset:   18:fd44953a7209
+user:        Tercio
+date:        Sun Jul 31 22:42:03 2016 -0300
+summary:     - r18
+
+
+changeset:   17:41e19e9ac177
+user:        Tercio
+date:        Sat Jul 30 19:24:59 2016 -0300
+summary:     - r17
+
+
+changeset:   16:a5f696969d3f
+user:        Tercio
+date:        Tue Jul 26 20:16:27 2016 -0300
+summary:     - fix for mouseover macros.
+
+
+changeset:   15:c1e240d38f11
+user:        Tercio
+date:        Wed Jul 20 18:44:46 2016 -0300
 summary:     - framework update.
+
+
+changeset:   14:84cbd769a455
+user:        Tercio
+date:        Tue Jul 19 17:19:38 2016 -0300
+summary:     - weakup packpager
+
+
+changeset:   13:ffeeadc683c2
+user:        Tercio
+date:        Tue Jul 19 17:16:04 2016 -0300
+summary:     ...
+
+
+changeset:   12:374d2e7a13a2
+user:        Tercio
+date:        Tue Jul 19 16:57:12 2016 -0300
+summary:     - fix for friend list.
+
+
+changeset:   11:93790b3065c3
+user:        Tercio
+date:        Tue Jul 19 11:44:08 2016 -0300
+summary:     - 7.0.3
+
+
+changeset:   10:03e5e49779e7
+user:        Tercio
+date:        Sun Jul 17 18:45:59 2016 -0300
+summary:     - framework update.
+
+
+changeset:   9:de36769ebde9
+user:        Tercio
+date:        Mon Jul 11 00:45:10 2016 -0300
+summary:     - big framework update.
+
+
+changeset:   8:06778ba728e8
+user:        Tercio
+date:        Mon Jul 04 14:25:40 2016 -0300
+summary:     - added an option to change the personal bar Y position.
+
+
+changeset:   7:c48edc72224f
+user:        Tercio
+date:        Mon Jul 04 14:21:30 2016 -0300
+summary:     - added an option to change the personal bar Y position.
+
+
+changeset:   6:1476d73de005
+user:        Tercio
+date:        Sun Jul 03 00:16:10 2016 -0300
+summary:     - fixed an issue with color by aggro for tanks.
+
+
+changeset:   5:b788072fb78c
+user:        Tercio
+date:        Sat Jul 02 03:52:04 2016 -0300
+summary:     - added a new texture for selection highlight.
+
+
+changeset:   4:de70e83286cd
+user:        Tercio
+date:        Fri Jul 01 18:09:31 2016 -0300
+summary:     - several bug fixes.
+
+
+changeset:   3:03ecd7026240
+user:        Tercio
+date:        Sun Jun 19 23:23:53 2016 -0300
+summary:     - fixes and icons update.
+
+
+changeset:   2:ae81796674a3
+user:        Tercio
+date:        Sun Jun 19 21:55:26 2016 -0300
+summary:     - stable version.
+
+
+changeset:   1:8e730cb350ff
+user:        Tercio
+date:        Wed Jun 15 23:44:09 2016 -0300
+summary:     - added config to aura frame y offset on all character types.
+
+
+changeset:   0:aec20acbfc41
+user:        Tercio
+date:        Tue Jun 14 21:13:25 2016 -0300
+summary:     - 0.1 version
 
 

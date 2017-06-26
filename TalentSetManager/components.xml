@@ -269,7 +269,8 @@
 		<CheckedTexture alphaMode="ADD" file="Interface\Buttons\CheckButtonHilight"/>
 	</CheckButton>
     
-	<Frame name="TalentSetsDialogPopup" hidden="true">
+    <!--
+	<Frame name="TalentSetsDialogPopup" parent="UIParent" frameStrata="HIGH" hidden="true">
 		<Size x="297" y="254"/>
 		<Layers>
 			<Layer level="BACKGROUND">
@@ -452,7 +453,8 @@
 			<OnHide function="TalentSetsDialogPopup_OnHide"/>
 		</Scripts>
     </Frame>
-    
+    -->
+
     <Button name="TSMLDBListButton" virtual="true">
 		<Size x="169" y="22"/>
 		<Layers>

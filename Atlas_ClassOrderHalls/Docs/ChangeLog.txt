@@ -1,10 +1,27 @@
-$Id: ChangeLog.txt 105 2017-05-30 16:00:41Z arith $
+$Id: ChangeLog.txt 110 2017-06-22 04:52:28Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 ==============
 = Change Log =
 ==============
+
+v1.41.06 (Jun. 22, 2017)
+------------------------
+- Added Conjurer Awlyn, Researcher Tulius, and Guardian Alar to Mage's order hall
+- Added Tianili, Yushi, and Master Swoo to Monk's order hall
+- Added Librarian Lightmorne to Paladin's order hall
+- Localization update:
+  - German (pas06)
+
+v1.41.05 (Jun. 21, 2017)
+------------------------
+- Added Seer Aleis to Demon Hunter's order hall
+- Added Almenis, Shalorn Star, and Treant Sapling to Druid's order hall
+- Slightly enlarge Hunter's order hall
+- Added Nighthuntress Silus and Tu'Las the Gifted to Hunter's order hall
+- Localization update:
+  - Russian (fnatiklex)
 
 v1.41.04 (May 30, 2017)
 ------------------------

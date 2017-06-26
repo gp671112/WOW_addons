@@ -1,4 +1,4 @@
-﻿-- Talent Set Manager
+-- Talent Set Manager
 -- by Jadya
 -- EU-Well of Eternity
 
@@ -25,7 +25,7 @@ local function helpButton_OnClick(f)
   
   hf.title = hf:CreateFontString(nil, "BACKGROUND", "SystemFont_Shadow_Med3")
   hf.title:SetPoint("TOP", 0, -10)
-  hf.title:SetText("天賦設定管理 - "..GUILDINFOTAB_INFO)
+  hf.title:SetText(L["Talent Set Manager - "]..GUILDINFOTAB_INFO)
 
   hf.text = hf:CreateFontString(nil, "BACKGROUND", "Game11Font")
   hf.text:SetPoint("TOPLEFT", 10, -40)
@@ -100,3 +100,23 @@ function addonTable:CreateHelpButton(mf)
  
  return f
 end
+
+--[[
+function addonTable:CreateNewsFrame()
+
+ local mf = CreateFrame("Frame", "TalentSetsDialogPopup", TalentSetsMainframe, "InsetFrameTemplate")
+ mf:SetPoint("TOPLEFT", TalentSetsMainframe, "BOTTOMLEFT")
+ mf:SetPoint("TOPRIGHT", TalentSetsMainframe, "BOTTOMRIGHT")
+ mf:SetHeight(80)
+
+ mf.title = mf:CreateFontString(nil, "BACKGROUND", "SystemFont_Shadow_Med3")
+ mf.title:SetPoint("TOP", 0, -5)
+ mf.title:SetText(SPLASH_BASE_HEADER)
+ 
+ local function closedialog()
+  mf:Hide()
+ end
+
+ mf:SetScript("OnMouseUp", function(self, button) if button == "RightButton" then closedialog() end end)
+end
+]]

@@ -1,4 +1,4 @@
-<!-- $Id: Templates.xml 251 2017-05-24 17:44:11Z arith $ -->
+<!-- $Id: Templates.xml 256 2017-06-16 16:05:13Z arith $ -->
 <!--
 
 	Atlas, a World of Warcraft instance map browser
@@ -433,8 +433,8 @@
 						local disabled = not C_AdventureJournal.CanBeShown();
 						if (not disabled) then
 							GameTooltip:AddLine(ATLAS_OPEN_ADVENTURE, 0.5, 0.5, 1, true);
+							GameTooltip:AddLine(ATLAS_TOGGLE_LOOT, 0.5, 0.5, 1, true);
 						end
-						GameTooltip:AddLine(ATLAS_TOGGLE_LOOT, 0.5, 0.5, 1, true);
 					end
 					GameTooltip:SetScale(Atlas.db.profile.options.frames.boss_description_scale * Atlas.db.profile.options.frames.scale);
 					GameTooltip:Show();
@@ -512,6 +512,8 @@
 						ChatEdit_InsertLink(self.link);
 					end
 				else
+					local disabled = not C_AdventureJournal.CanBeShown();
+					if (disabled) then return end
 					if (button == "RightButton") then
 						if (AtlasFrameSmall:IsVisible()) then
 							Atlas:ToggleLegendPanel();

@@ -1,4 +1,4 @@
--- $Id: Atlas-enUS.lua 246 2017-05-15 07:33:49Z arith $
+-- $Id: Atlas-enUS.lua 256 2017-06-16 16:05:13Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -312,6 +312,7 @@ L["Retribution Paladin"] = "Retribution Paladin"
 L["Rewards"] = "Rewards"
 L["R-Parenthesis"] = ") "
 L["R-SBracket"] = "]"
+L["Scale and Transparency"] = "Scale and Transparency"
 L["Scarshield Quartermaster <Scarshield Legion>"] = "Scarshield Quartermaster <Scarshield Legion>"
 L["Second Stop"] = "Second Stop"
 L["Semicolon"] = " "

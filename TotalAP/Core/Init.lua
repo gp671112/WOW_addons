@@ -13,33 +13,35 @@
     -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ----------------------------------------------------------------------------------------------------------------------
 
--- Init.lua
--- Build table structure for modules to rely on
-
-local addonName, T = ...
-
-if not T then return end
+--- Sets up table structure for modules and global/shared vars
+-- @script Init.lua
 
 
+local addonName, TotalAP = ...
 
--- Shared local variables (usually those used by logic AND display, or different modules)
-T.Globals = {} 
-T.Globals.addonVersion = GetAddOnMetadata("TotalAP", "Version")
+if not TotalAP then return end
+
+
+-- Shared local variables (usually those used by logic AND display, or different modules) -> Shared by means of the addon Table
+TotalAP.versionString = GetAddOnMetadata("TotalAP", "Version")
 
 -- Core modules
-T.ArtifactInterface = {}
-T.Scanner = {}
-T.Cache = {}
-T.DBHandler = {} 
+TotalAP.ArtifactInterface = {}
+TotalAP.Scanner = {}
+TotalAP.Cache = {}
+TotalAP.DBHandler = {} 
 
 -- Controllers & Input handling
-T.Controllers = {}
+TotalAP.Controllers = {}
 
 -- User Interface & Views
-T.GUI = {}
+TotalAP.GUI = {}
 
 -- Utility and helper functions
-T.Utils = {}
+TotalAP.Utils = {}
+
+-- Localization table
+TotalAP.L = LibStub("AceLocale-3.0"):GetLocale("TotalAP", false)
 
 
 -- Global functions (TODO: Move to separate file if there will be more?)
@@ -60,7 +62,7 @@ local function ChatMsg(msg)
 end
 
 
-T.Debug = Debug
-T.ChatMsg = ChatMsg
+TotalAP.Debug = Debug
+TotalAP.ChatMsg = ChatMsg
 
-return T
+return TotalAP

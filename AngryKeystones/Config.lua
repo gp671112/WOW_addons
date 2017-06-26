@@ -14,8 +14,6 @@ local configDefaults = {
 	deathTracker = true,
 	recordSplits = false,
 	showLevelModifier = false,
-	persistTracker = false,
-	exclusiveTracker = false,
 	hideTalkingHead = true,
 	resetPopup = false,
 }
@@ -256,12 +254,12 @@ Panel_OnRefresh = function(self)
 		label:SetPoint("TOPLEFT", 16, -16)
 		label:SetJustifyH("LEFT")
 		label:SetJustifyV("TOP")
-		label:SetText( Addon.Name )
+		label:SetText( Addon.Locale.addon_name )
 
 		checkboxes = {}
 		dropdowns = {}
 
-		local checkboxes_order = { "silverGoldTimer", "smallAffixes", "deathTracker", "autoGossip", "progressTooltip", "completionMessage", "hideTalkingHead", "persistTracker", "exclusiveTracker", "resetPopup" }
+		local checkboxes_order = { "silverGoldTimer", "smallAffixes", "deathTracker", "autoGossip", "progressTooltip", "completionMessage", "hideTalkingHead", "resetPopup" }
 		if Addon.Locale:HasRumors() then table.insert(checkboxes_order, 5, "cosRumors") end
 
 		for i,key in ipairs(checkboxes_order) do
@@ -308,7 +306,7 @@ end
 function Config:CreatePanel()
 	self:InitializeDropdown()
 	local panel = CreateFrame("FRAME")
-	panel.name = Addon.Name
+	panel.name = Addon.Locale.addon_name
 	panel.okay = Panel_OnSave
 	panel.cancel = Panel_OnCancel
 	panel.default  = Panel_OnDefaults

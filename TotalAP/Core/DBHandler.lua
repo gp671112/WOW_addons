@@ -17,26 +17,28 @@
 --]]
 
 
--- [[ DB.lua ]]
--- Interface for the addon's static database (= all files stored in the \DB\ folder)
+--- 
+-- @module Core
 
--- TODO: Let AceDB handle TotalArtifactPowerSettings (formerly handled by DBHandler, which is now DB.lua and acts as an interface for TotalAP.DB (formerly TotalArtifactsPowerDB)), and repurpose the DBHandler for the "actual" DB (itemEffects and such), also split into DBHandler and CacheHandler (in Core\Controllers?)
+--- DB.lua.
+-- Provides an interface for the addon's static database (i.e., all files stored in the \DB\ folder)
+-- @section DB
+
 
 local addonName, TotalAP = ...
 
 if not TotalAP then return end
 
--- Returns a reference to the top-level DB object
+--- Returns a reference to the top-level DB object. Temporary crutch for ongoing refactoring/migration of modules :)
 local function GetReference()
 
 	return TotalAP.DB
 	
 end
 
+-- Artifact weapons DB
 
----- Artifact weapons DB
-
--- Returns a reference to the artifact weapons DB object
+--- Returns a reference to the artifact weapons DB object. For internal use only
 local function GetArtifactWeapons()
 
 	local db = GetReference()
@@ -48,7 +50,10 @@ end
 -- local function GetArtifactWeaponsForClass(classID)
 -- end
 
--- Returns the item ID of the artifact weapon for the given class and spec
+--- Returns the item ID of the artifact weapon for the given class and spec
+-- @param classID The class identifier (as returned by UnitClass("player")). Usually, this is a number between 1 and 12
+-- @param specID The specialization identifier (as returned by GetSpecialization()). Usually, this is a number between 1 and 4
+-- @return Item ID of the corresponding artifact weapon; NIL if no DB entry exists
 local function GetArtifactItemID(classID, specID)
 
 	local db = GetArtifactWeapons()
@@ -56,7 +61,7 @@ local function GetArtifactItemID(classID, specID)
 	if not (classID and specID and db[classID] and db[classID][specID] and db[classID][specID]["itemID"]) then -- Invalid parameters
 	
 		TotalAP.Debug("Attempted to retrieve artifact weapon ID, but the class or spec IDs were invalid")
-		return false
+		return
 		
 	end
 
@@ -64,9 +69,9 @@ local function GetArtifactItemID(classID, specID)
 	
 end	
 
----- Artifact items (tokens) DB // TODO: Actually, itemEffectsDB would be a more fitting name... but it serves as DB for the items themselves
+-- Artifact items (tokens) DB // TODO: Actually, itemEffectsDB would be a more fitting name... but it serves as DB for the items themselves
 
--- Returns a reference to the item effects DB (spell effects)
+--- Returns a reference to the item effects DB (spell effects). For internal use only
 local function GetItemEffects()
 	
 	local db = GetReference()
@@ -74,7 +79,9 @@ local function GetItemEffects()
 	
 end
 
--- Returns the item spell effect ID for a given itemID
+--- Returns the item spell effect ID for a given itemID
+-- @param itemID The identifier for a specific artifact power item
+-- @return ID of the spell effect corresponding to the given artifact power item's "Empowering" spell (which is how AP is applied to the currently equipped artifact ingame); NIL if the itemID was invalid or no DB entry exists
 local function GetItemEffectID(itemID)
 
 	local itemEffects = GetItemEffects()
@@ -82,7 +89,7 @@ local function GetItemEffectID(itemID)
 	if not (itemID and itemEffects[itemID]) then
 	
 		TotalAP.Debug("Attempted to retrieve item effect for an invalid itemID")
-		return false
+		return
 	end
 	
 	return itemEffects[itemID]
@@ -92,12 +99,11 @@ end
 ---- ULA items DB (TODO)
 
 
-
 -- Public methods
 TotalAP.DB.GetArtifactItemID = GetArtifactItemID
 TotalAP.DB.GetItemEffectID = GetItemEffectID
 
--- Keep these private, unless they're needed elsewhere
+-- Keep these private, unless they're needed elsewhere?
 -- TotalAP.DB.GetReference = GetReference
 -- TotalAP.DB.GetArtifactWeapons = GetArtifactWeapons
 -- TotalAP.DB.
@@ -158,7 +164,7 @@ local defaultSettings =	{
 													barHeight = 16,
 													border = 1,
 													inset = 1,
-													
+													showMiniBar = true,
 													alignment = "center", -- TODO: Provide option via GUI (AceConfig)
 													
 													progressBar = {
@@ -187,7 +193,7 @@ local defaultSettings =	{
 
 
 
--- Returns a reference to the currently used SavedVars (DB) object
+--- Returns a reference to the currently used SavedVars (DB) object. Temporary crutch for ongoing refactoring/migration of modules :)
 local function GetDB()
 	-- TODO: LoadAddonMetadata("TotalAP", "SavedVars") ?
 	-- TODO: provide interface for AceDB via this handler
@@ -195,11 +201,12 @@ local function GetDB()
 	return TotalArtifactPowerSettings
 end
 
--- TODO: Remove/crutch for migration or actually useful later?
+--- Returns the default settings for the initial startup or manual/automatic resets during verification. Temporary crutch for ongoing refactoring/migration of modules :)
 local function GetDefaults()
 	return defaultSettings
 end
 
+--- Reset settings to their default values. Overwrites the SavedVars part responsible for storing the user's settings
 local function RestoreDefaults()
 	TotalArtifactPowerSettings = defaultSettings;
 	--settings = TotalArtifactPowerSettings;
@@ -207,16 +214,17 @@ end
 
 
 
--- Removes all specs from the ignored specs list for a given character (defaults to currently used character if none is given)
-local function UnignoreAllSpecs(fqCharName)
+--- Removes all specs from the ignored specs list for a given character (defaults to currently used character if none is given)
+-- @param[opt] fqcn  Fully-qualified character name that will have their specs "IsIgnored" setting reset
+local function UnignoreAllSpecs(fqcn)
 	
 	if not TotalArtifactPowerCache then return end -- Skip unignore if cache isn't initialised or this is called before the addon loads
 	
 	-- TODO: DRY
 	local characterName, realm
 	
-	if fqCharName then 
-		characterName, realm = fqCharName:match("(%.+)%s-%s(%.)+")
+	if fqcn then 
+		characterName, realm = fqcn:match("(%.+)%s-%s(%.)+")
 	end
 	
 	if not characterName or not realm then -- Use currently active character
@@ -226,7 +234,7 @@ local function UnignoreAllSpecs(fqCharName)
 		
 	end
 		 
-	key = format("%s - %s", characterName, realm)	 
+	local key = format("%s - %s", characterName, realm)	 
 	
 	for i = 1, GetNumSpecializations() do -- Remove spec from "ignore list" (more precisely, remove "marked as ignored" flag for all cached specs of the active character)
 	
@@ -238,6 +246,7 @@ end
 
 -- TODO: Unignore only one (current) spec
 
+---
 local function SaveDB()
 end
 

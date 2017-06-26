@@ -1,0 +1,20 @@
+Changes since tag 1.10
+
+commit 0f9e0eb6659c3c72028b493756f228d750912df4
+Author: Bernhard Saumweber <b.saumweber@gmail.com>
+Date:   Sun Jun 18 11:25:36 2017 +0200
+
+    Reverted filtering hooks back to old method to enable additional filtering through other addons
+
+commit 56b1fc1d5718ea27ddea041fa4e6a6819f599c08
+Author: Bernhard Saumweber <b.saumweber@gmail.com>
+Date:   Sun Jun 18 11:12:35 2017 +0200
+
+    Updated difficulty fallback list
+
+commit 27677dcc33af0fd6a1ab6a157773c4daf8fcd2ab
+Author: Bernhard Saumweber <b.saumweber@gmail.com>
+Date:   Sun Jun 18 10:50:26 2017 +0200
+
+    Set version to next release version: 1.11
+

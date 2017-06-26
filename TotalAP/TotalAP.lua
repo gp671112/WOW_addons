@@ -3,7 +3,7 @@
     -- it under the terms of the GNU General Public License as published by
     -- the Free Software Foundation, either version 3 of the License, or
     -- (at your option) any later version.
-	
+
     -- This program is distributed in the hope that it will be useful,
     -- but WITHOUT ANY WARRANTY; without even the implied warranty of
     -- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -14,32 +14,34 @@
 ----------------------------------------------------------------------------------------------------------------------
 
 
--- TotalAP.lua (AKA main, core, what have you ...)
--- Sets up the addon, db, libraries etc. - basic startup stuff (TODO: Does much more currently, but migration/refactoring is in progress ;)
+--- Contains low-level interfaces for interacting with the data (DB, SavedVars) and WoW's Lua environment itself
+-- @module Core
+
+--- TotalAP.lua.
+-- This is the addon loader, which performs various startup tasks.
+-- @section TotalAP
+
 
 -- Libraries: If they fail to load, TotalAP shouldn't load either
 local AceAddon = LibStub("AceAddon-3.0"):NewAddon("TotalAP", "AceConsole-3.0"); -- AceAddon object -> local because it's not really needed elsewhere
-local L = LibStub("AceLocale-3.0"):GetLocale("TotalAP", false); -- Localization table; default locale is enGB (=enUS). false to show an error if locale not found (via AceLocale)
 local SharedMedia = LibStub("LibSharedMedia-3.0");  -- TODO: Not implemented yet... But "soon" (TM) -> allow styling of bars and font strings (I'm really just waiting until the config/options are done properly for this -> AceConfig)
 local Masque = LibStub("Masque", true); -- optional (will use default client style if not found)
 
 
+local addonName, T = ...
+if not T then return end
+
+
+TotalAP = T -- Make modules available globally (for keybinds etc.)
+local TotalAP = TotalAP -- ... but use local copy to avoid lookups in global environment
+local L = T.L -- Localization table
+
+
 -- Shorthands: Those don't do anything except save me work :P
-local aUI = C_ArtifactUI
+local aUI = C_ArtifactUI -- also avoids global lookups as a side effect
 
 
--- Addon metadata (used for messages/output, primarily)
-local addonName, T = ...;
-TotalAP = T -- Global container for modularised functions and library instance objects -> contains the addonTable to exchange information between modules
-
-
-
--- Internal vars - TODO: Move these to the appropriate modules
-	-- Load item spell effects & spec artifact list from global (shared) DB
---local itemEffects = TotalAP.DB; -- This isn't strictly necessary, as the DB is in the global namespace. However, it's better to not litter the code with direct references in case of future changes - also, they are static so loading them once (on startup) should suffice
---local artifacts = TotalAP.DB["artifacts"]; -- Ditto
-	
-
+-- Shared variables (TODO: They shouldn't be in this file, but migration is not yet complete)
 local tempItemLink, tempItemID, currentItemLink, currentItemID, currentItemTexture, currentItemAP; -- used for bag scanning and tooltip display
 local numItems, inBagsTotalAP, numTraitsAvailable, artifactProgressPercent = 0, 0, 0, 0; -- used for tooltip text
 local foundKnowledgeTome -- buttonText (TODO -> workaround for display inconsistencies)
@@ -250,8 +252,9 @@ end
 		end
 	end
 
-	TotalAP.Globals.inBagsTotalAP = inBagsTotalAP -- This is so the value can be used by tooltips from the GUI.Tooltips module // TODO			
-	
+	-- Add to shared vars so other modules can access it
+	TotalAP.inBagsTotalAP = inBagsTotalAP
+
 end
 
 -- Toggle spell overlay (glow effect) on an action button
@@ -455,11 +458,11 @@ local function UpdateSpecIcons()
 	
 	local reservedButtonWidth = 0;
 	 if settings.actionButton.enabled then	 -- No longer reposition displays to the left unless button is actually disabled entirely, since the button can be hidden temporarily without being set to invisible (if no items are in the player's inventory/the active spec is set to being ignored)
-			if TotalAPButton:GetWidth() > TotalAPButtonFontString:GetWidth() then -- Use actual button width
-			reservedButtonWidth = TotalAPButton:GetWidth() + 5
-		else -- Use button width + size of the right part of the buttonText's display (this is the only part that overlaps with the infoFrame otherwise)
-			reservedButtonWidth = TotalAPButton:GetWidth() + (TotalAPButtonFontString:GetWidth() - TotalAPButton:GetWidth()) / 2  + 5  -- TODO: 5 = spacing? (settings)
-		end	
+			if settings.actionButton.showText then -- Increase space to the right to avoid buttonText from overlapping in case of large numbers in the summary
+				reservedButtonWidth = TotalAPButton:GetWidth() + 10
+			else
+				reservedButtonWidth = TotalAPButton:GetWidth() + 5
+			end
 	end
 	
 		-- TODO: Proper handling of alignment option / further customization
@@ -481,11 +484,11 @@ local function UpdateSpecIcons()
 		
 		TotalAP.Debug("Hiding spec icon button for spec " .. i .. " because the spec is set to being ignored")
 			TotalAPSpecIconButtons[i]:Hide();
-			TotalAPSpecHighlightFrames[i]:Hide()
+			TotalAPSpecIconHighlightFrames[i]:Hide()
 				
 		else
 		
-			TotalAPSpecHighlightFrames[i]:Show()
+			TotalAPSpecIconHighlightFrames[i]:Show()
 			TotalAPSpecIconButtons[i]:Show()
 			
 		end 
@@ -494,28 +497,28 @@ local function UpdateSpecIcons()
 	   --TotalAPSpecIconButtons[i].NormalTexture(nil)
 	  
 		-- TODO: BG for text and settings for font/size/alignment/sharedmedia
-		TotalAPSpecHighlightFrames[i]:SetSize(settings.specIcons.size + 2 * inset, settings.specIcons.size + 2 * inset); -- TODO 4x or 2x?
-		TotalAPSpecHighlightFrames[i]:ClearAllPoints();
-		TotalAPSpecHighlightFrames[i]:SetPoint("TOPLEFT", TotalAPSpecIconsBackgroundFrame, "TOPLEFT", border, - (border + (displayOrder[i] - 1) * (settings.specIcons.size + 3 * inset + border)));
+		TotalAPSpecIconHighlightFrames[i]:SetSize(settings.specIcons.size + 2 * inset, settings.specIcons.size + 2 * inset); -- TODO 4x or 2x?
+		TotalAPSpecIconHighlightFrames[i]:ClearAllPoints();
+		TotalAPSpecIconHighlightFrames[i]:SetPoint("TOPLEFT", TotalAPSpecIconsBackgroundFrame, "TOPLEFT", border, - (border + (displayOrder[i] - 1) * (settings.specIcons.size + 3 * inset + border)));
 	  
 		-- Reposition spec icons
 		TotalAPSpecIconButtons[i]:SetSize(settings.specIcons.size, settings.specIcons.size); -- TODO: settings.specIconSize. Also, 16 is too small for this?
 		TotalAPSpecIconButtons[i]:ClearAllPoints();
 		--TotalAPSpecIconButtons[i]:SetFrameStrata("HIGH");
-		TotalAPSpecIconButtons[i]:SetPoint("TOPLEFT", TotalAPSpecHighlightFrames[i], "TOPLEFT", math.abs( TotalAPSpecHighlightFrames[i]:GetWidth() - settings.specIcons.size ) / 2, - math.abs( TotalAPSpecHighlightFrames[i]:GetHeight() - TotalAPSpecIconButtons[i]:GetHeight() ) / 2 );
+		TotalAPSpecIconButtons[i]:SetPoint("TOPLEFT", TotalAPSpecIconHighlightFrames[i], "TOPLEFT", math.abs( TotalAPSpecIconHighlightFrames[i]:GetWidth() - settings.specIcons.size ) / 2, - math.abs( TotalAPSpecIconHighlightFrames[i]:GetHeight() - TotalAPSpecIconButtons[i]:GetHeight() ) / 2 );
     
 
 
 
-		--	TotalAPSpecHighlightFrames[i]:SetPoint("BOTTOMRIGHT", TotalAPSpecIconButtons[i], "BOTTOMRIGHT", activeSpecIconBorderWidth, -activeSpecIconBorderWidth);
+		--	TotalAPSpecIconHighlightFrames[i]:SetPoint("BOTTOMRIGHT", TotalAPSpecIconButtons[i], "BOTTOMRIGHT", activeSpecIconBorderWidth, -activeSpecIconBorderWidth);
 		-- TotalAPActiveSpecBackgroundFrame.texture = TotalAPActiveSpecBackgroundFrame:CreateTexture("bgTexture");
 		--  TotalAPActiveSpecBackgroundFrame.texture:SetTexture(255/255, 128/255, 0/255, 1);
 
 
 	if i == GetSpecialization() then
-		TotalAPSpecHighlightFrames[i]:SetBackdropColor(255/255, 128/255, 0/255, 1); -- TODO: This isn't even working? Find a better backdrop texture, perhaps?
+		TotalAPSpecIconHighlightFrames[i]:SetBackdropColor(255/255, 128/255, 0/255, 1); -- TODO: This isn't even working? Find a better backdrop texture, perhaps?
 	else
-		TotalAPSpecHighlightFrames[i]:SetBackdropColor(0/255, 0/255, 0/255, 0.75); -- TODO: Settings
+		TotalAPSpecIconHighlightFrames[i]:SetBackdropColor(0/255, 0/255, 0/255, 0.75); -- TODO: Settings
 	end
 	   --(numSpecs * (specIconSize + 2 * inset) - TotalAPInfoFrame:GetHeight())/2 - (i-1) * (specIconSize + 2) + 2); -- TODO: consider settings.specIconSize to calculate position and spacing<<<!! dynamically
 	   -- TODO: function UpdateSpecIconPosition or something to avoid duplicate code?
@@ -628,7 +631,7 @@ local function UpdateSpecIcons()
 			end
 			
 			specIconFontStrings[k]:ClearAllPoints();
-			specIconFontStrings[k]:SetPoint("TOPLEFT", TotalAPSpecHighlightFrames[k], "TOPRIGHT", settings.specIcons.border + 5,  settings.specIcons.border - math.abs(TotalAPSpecHighlightFrames[k]:GetHeight() - specIconFontStrings[k]:GetHeight()) / 2);
+			specIconFontStrings[k]:SetPoint("TOPLEFT", TotalAPSpecIconHighlightFrames[k], "TOPRIGHT", settings.specIcons.border + 5,  settings.specIcons.border - math.abs(TotalAPSpecIconHighlightFrames[k]:GetHeight() - specIconFontStrings[k]:GetHeight()) / 2);
 			TotalAP.Debug(format("Updating fontString for spec icon %d: %s", k, fontStringText));
 
 		end
@@ -692,13 +695,14 @@ local function UpdateInfoFrame()
 	
 		-- Move bars to the left, but only if action button is actually disabled (and not hidden temporarily from not having any AP items in the player's inventory)
 	local reservedButtonWidth = 0;
-	if settings.actionButton.enabled then -- TODO: DRY / GUI -> GetReservedButtonWidth (only for DefaultView?)
-		if TotalAPButton:GetWidth() > TotalAPButtonFontString:GetWidth() then -- Use button width
-			reservedButtonWidth = TotalAPButton:GetWidth() + 5
-		else -- Use button width + size of the right part of the buttonText's display
-			reservedButtonWidth = TotalAPButton:GetWidth() + (TotalAPButtonFontString:GetWidth() - TotalAPButton:GetWidth()) / 2  + 5  -- TODO: 5 = spacing? (settings)
-		end
-		
+	 -- TODO: DRY / GUI -> GetReservedButtonWidth (only for DefaultView?)
+
+	 if settings.actionButton.enabled then	 -- No longer reposition displays to the left unless button is actually disabled entirely, since the button can be hidden temporarily without being set to invisible (if no items are in the player's inventory/the active spec is set to being ignored)
+			if settings.actionButton.showText then -- Increase space to the right to avoid buttonText from overlapping in case of large numbers in the summary
+				reservedButtonWidth = TotalAPButton:GetWidth() + 10
+			else
+				reservedButtonWidth = TotalAPButton:GetWidth() + 5
+			end
 	end
 	
 	TotalAPInfoFrame:ClearAllPoints(); 
@@ -834,12 +838,11 @@ local function UpdateInfoFrame()
 				TotalAPMiniBars[k].texture = TotalAPMiniBars[k]:CreateTexture();
 			end
 			
-			if maxAttainableRank > v["numTraitsPurchased"] and progressPercent > 0 then -- Display secondary bar
+			if maxAttainableRank > v["numTraitsPurchased"] and progressPercent > 0 and settings.infoFrame.showMiniBar then -- Display secondary bar
 
 				TotalAPMiniBars[k]:SetSize(progressPercent, 2) -- TODO: options....
 				TotalAPMiniBars[k]:ClearAllPoints()
 				TotalAPMiniBars[k]:SetPoint("BOTTOMLEFT", TotalAPProgressBars[k], "BOTTOMLEFT", 0, -1)
-				TotalAPMiniBars[k]:SetFrameStrata("HIGH")
 				TotalAPMiniBars[k].texture:SetAllPoints(TotalAPMiniBars[k]);
 				TotalAPMiniBars[k].texture:SetTexture(barTexture);
 			--	TotalAPMiniBars[k].texture:SetVertexColor(1.0, 0.5, 0.25, 1);  -- TODO: colors variable (settings -> color picker)
@@ -1195,16 +1198,16 @@ local function CreateSpecIcons()
 	
 	
 	-- Create active/inactive spec highlight frames
-	TotalAPSpecIconButtons, TotalAPSpecHighlightFrames = {}, {};
+	TotalAPSpecIconButtons, TotalAPSpecIconHighlightFrames = {}, {};
 	for i = 1, numSpecs do
 		
-		local _, specName = GetSpecializationInfo(i);
+		local _, specName, _, specIcon, _, specRole = GetSpecializationInfo(i)
 		
-			TotalAPSpecHighlightFrames[i] = CreateFrame("Frame", "TotalAPSpec" .. i .. "HighlightFrame", TotalAPSpecIconsBackgroundFrame); -- TODO: Rename var, and frame
-		--	TotalAPSpecHighlightFrames[i]:SetClampedToScreen(true);
-		--TotalAPSpecHighlightFrames[i]:SetFrameStrata("BACKGROUND");
+			TotalAPSpecIconHighlightFrames[i] = CreateFrame("Frame", "TotalAPSpec" .. i .. "HighlightFrame", TotalAPSpecIconsBackgroundFrame); -- TODO: Rename var, and frame
+		--	TotalAPSpecIconHighlightFrames[i]:SetClampedToScreen(true);
+		--TotalAPSpecIconHighlightFrames[i]:SetFrameStrata("BACKGROUND");
 			
-			TotalAPSpecHighlightFrames[i]:SetBackdrop(
+			TotalAPSpecIconHighlightFrames[i]:SetBackdrop(
 				{
 					bgFile = "Interface\\CHATFRAME\\CHATFRAMEBACKGROUND.BLP", 
 				-- edgeFile = "Interface/Tooltips/UI-Tooltip-Border", 
@@ -1215,7 +1218,7 @@ local function CreateSpecIcons()
 		
 		--TotalAP.Debug(format("Created specIcon for spec %d: %s ", i, specName));
 		
-		TotalAPSpecIconButtons[i] = CreateFrame("Button", "TotalAPSpecIconButton" .. i, TotalAPSpecHighlightFrames[i], "ActionButtonTemplate", "SecureActionButtonTemplate");
+		TotalAPSpecIconButtons[i] = CreateFrame("Button", "TotalAPSpecIconButton" .. i, TotalAPSpecIconHighlightFrames[i], "ActionButtonTemplate", "SecureActionButtonTemplate");
 		TotalAPSpecIconButtons[i]:SetFrameStrata("MEDIUM"); -- I don't like this, but Masque screws with the regular parent -> child draw order somehow
 		
 		specIconFontStrings[i] = TotalAPSpecIconButtons[i]:CreateFontString("TotalAPSpecIconFontString" .. i, "OVERLAY", "GameFontNormal"); -- TODO: What frame as parent? There isn't really one other than the respective icon?
@@ -1305,7 +1308,6 @@ local function CreateSpecIcons()
 	--	local classDisplayName, classTag, classID = UnitClass("player");
 		
 		-- Set textures (only needs to be done once, as specs are generally static)
-		local _, specName, _, specIcon, _, specRole = GetSpecializationInfo(i);
 		TotalAPSpecIconButtons[i].icon:SetTexture(specIcon);
 		TotalAP.Debug(format("Setting specIcon texture for spec %d (%s): |T%s:%d|t", i, specIcon,  specIcon, settings.specIconSize));
 		
@@ -1335,7 +1337,7 @@ local function CreateInfoFrame()
 	
 	-- Create anchored container frame for the bar display
 	TotalAPInfoFrame = CreateFrame("Frame", "TotalAPInfoFrame", TotalAPAnchorFrame);
-	--TotalAPInfoFrame:SetFrameStrata("BACKGROUND");
+	TotalAPInfoFrame:SetFrameStrata("BACKGROUND");
 	TotalAPInfoFrame:SetClampedToScreen(true);
 
 	-- Create progress bars for all available specs
@@ -1345,14 +1347,19 @@ local function CreateInfoFrame()
 	
 		-- Empty bar texture
 		TotalAPProgressBars[i] = CreateFrame("Frame", "TotalAPProgressBar" .. i, TotalAPInfoFrame);
+		TotalAPProgressBars[i]:SetFrameStrata("LOW")
+		
 		-- leftmost part: AP used on artifact
 		TotalAPUnspentBars[i] = CreateFrame("Frame", "TotalAPUnspentBar" .. i, TotalAPProgressBars[i]);
-
+		TotalAPUnspentBars[i]:SetFrameStrata("LOW")
+		
 		-- AP in bags 
 		TotalAPInBagsBars[i] = CreateFrame("Frame", "TotalAPInBagsBar" .. i, TotalAPProgressBars[i]);
-
+		TotalAPInBagsBars[i]:SetFrameStrata("LOW")
+		
 		-- Secondary progress bars 
 		TotalAPMiniBars[i] = CreateFrame("Frame", "TotalAPMiniBar" .. i, TotalAPProgressBars[i])
+		TotalAPMiniBars[i]:SetFrameStrata("MEDIUM")
 		
 		-- Tooltip script handlers
 		TotalAPProgressBars[i]:SetScript("OnEnter", TotalAP.GUI.Tooltips.ShowArtifactKnowledgeTooltip)
@@ -1510,7 +1517,7 @@ local function CreateActionButton()
 		end)
 
 		
-		--- Will display the currently mapped item's AP amount (if enabled) later
+		-- Will display the currently mapped item's AP amount (if enabled) later
 		TotalAPButtonFontString = TotalAPButton:CreateFontString("TotalAPButtonFontString", "OVERLAY", "GameFontNormal");
 		--TotalAPButtonFontString:SetTextColor(0x00/255,0xCC/255,0x80/255,1) -- TODO. via settings
 		
@@ -1700,6 +1707,8 @@ end);
  
 -- Standard methods (via AceAddon) -> They use the local object and not the shared container variable (which are for the modularised functions in other lua files)
 -- TODO: Use AceConfig to create slash commands automatically for simplicity?
+
+--- Called on ADDON_LOADED
 function AceAddon:OnInitialize() -- Called on ADDON_LOADED
 	
 	LoadSettings();  -- from saved vars
@@ -1720,22 +1729,24 @@ function AceAddon:OnInitialize() -- Called on ADDON_LOADED
 	TotalAP.Controllers.RegisterKeybinds()
 end
 
-function AceAddon:OnEnable()	-- Called on PLAYER_LOGIN or ADDON_LOADED (if addon is loaded-on-demand)
-	
-	local clientVersion, clientBuild = GetBuildInfo(); 
-			
+--- Called on PLAYER_LOGIN or ADDON_LOADED (if addon is loaded-on-demand)
+function AceAddon:OnEnable()
+
+	local clientVersion, clientBuild = GetBuildInfo();
+
 			-- Those could be created earlier, BUT: Talent info isn't available sooner, and those frames are anchored to the AnchorFrame anyway -> Initial position doesn't matter as it is updated automatically (TODO: TALENT or SPEC info?)
 			
 			CreateInfoFrame();
 			CreateSpecIcons(); 
 			
-			-- if settings.showLoginMessage then TotalAP.ChatMsg(format(L["%s %s for WOW %s loaded!"], addonName, TotalAP.Globals.addonVersion, clientVersion)); end
+			-- if settings.showLoginMessage then TotalAP.ChatMsg(format(L["%s %s for WOW %s loaded!"], addonName, TotalAP.versionString, clientVersion)); end
 			
-			TotalAP.Debug(format("Registering button update events", event));
+			TotalAP.Debug(format("Registering button update events"));
 			RegisterUpdateEvents();
 			
 end
 
+--- Called when addon is unloaded or disabled manually
 function AceAddon:OnDisable()
 	
 	-- Shed a tear because the addon was disabled ;'(

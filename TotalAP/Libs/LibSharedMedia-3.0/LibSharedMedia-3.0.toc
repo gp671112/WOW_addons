@@ -1,9 +1,5 @@
 ## Interface: 70100
 ## LoadOnDemand: 1
-## X-Curse-Packaged-Version: 7.1.0
-## X-Curse-Project-Name: LibSharedMedia-3.0
-## X-Curse-Project-ID: libsharedmedia-3-0
-## X-Curse-Repository-ID: wow/libsharedmedia-3-0/mainline
 
 ## Title: Lib: SharedMedia-3.0
 ## Notes: Shared handling of media data (fonts, sounds, textures, ...) between addons.

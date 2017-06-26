@@ -1,4 +1,4 @@
-﻿-- Talent Set Manager
+-- Talent Set Manager
 -- by Jadya
 -- EU-Well of Eternity
 
@@ -16,18 +16,45 @@ local highlight_icons = {"",
                          "spells\\heartring",
                          "spells\\health_64",
                          }
-
-local chat_filter_entries = {L["options_chat_filter_show"],L["options_chat_filter_group"],L["options_chat_filter_hide"]}
+                         
+local dropdown_menu_entries = { chat_filter = {L["options_chat_filter_show"],L["options_chat_filter_group"],L["options_chat_filter_hide"]},}
 
 local interface_defaults = {
                             highlight_icon = "spells\\star",
                             chat_filter = 2,
                             ignored_tiers_bg = {1, 0, 0, 0.5},
                             hide_info_button = false,
+                            auto_equip_enable = false,
+                            auto_equip_chatmsg = true,
                            }
+                           
+local interface_defaults_c = {
+                               auto_equip1 = 0,
+                               auto_equip2 = 0,
+                               auto_equip3 = 0,
+                               auto_equip4 = 0
+                             }
 
-local options_cache = {}
-local of, O
+local options_cache, options_cache_c = {}, {}
+local of, O, Oc, autoequip_spec_buttons
+
+local function updateCheckbox(f, checked)
+ if f.children then
+  for _,v in pairs(f.children) do
+   v:SetEnabled(checked)
+  end
+ end
+end
+
+local function autoequip_type_text(s)
+ if s == 0 then
+  return GM_SURVEY_NOT_APPLICABLE
+ elseif s == 2 then
+  return COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVP
+ else
+  return COMPACT_UNIT_FRAME_PROFILE_AUTOACTIVATEPVE
+ end
+end
 
 local function refresh_widgets()
  if of.initialized then
@@ -38,9 +65,16 @@ local function refresh_widgets()
     break
    end
   end
-  UIDropDownMenu_SetText(TalentSetManagerChatFilterDropDown, chat_filter_entries[O.chat_filter])
+  UIDropDownMenu_SetText(TalentSetManagerChatFilterDropDown, dropdown_menu_entries.chat_filter[O.chat_filter])
   TalentSetManagerIgnoredTiersBGColorButton.tex:SetColorTexture(unpack(O.ignored_tiers_bg))
+  TalentSetManagerChkAutoEquipEnableButton:SetChecked(O.auto_equip_enable)
+  updateCheckbox(TalentSetManagerChkAutoEquipEnableButton, O.auto_equip_enable)
+  TalentSetManagerChkAutoEquipChagMsgButton:SetChecked(O.auto_equip_chatmsg)
   TalentSetManagerChkInfoButton:SetChecked(O.hide_info_button)
+  
+  for _,v in pairs(autoequip_spec_buttons) do
+   v:SetText(autoequip_type_text(Oc["auto_equip"..v.tag]))
+  end
  end
 end
 
@@ -48,6 +82,10 @@ end
 local function okay_OnClick()
  for k,v in pairs(options_cache) do
   O[k] = v
+ end
+ 
+ for k,v in pairs(options_cache_c) do
+  Oc[k] = v
  end
 
  if TalentSetsMainframe then
@@ -65,14 +103,21 @@ end
 
 local function cancel_OnClick()
  wipe(options_cache)
+ wipe(options_cache_c)
 end
 
 local function default_OnClick()
  for k,v in pairs(interface_defaults) do
   options_cache[k] = v
  end
+ 
+ for k,v in pairs(interface_defaults_c) do
+  options_cache_c[k] = v
+ end
+ 
  okay_OnClick()
  wipe(options_cache)
+ wipe(options_cache_c)
  refresh_widgets()
 end
 --
@@ -99,22 +144,25 @@ local function populate_options_panel()
  local dropdowns_list = {}
  local function dropdown_menubutton_click(self, k, v)
   options_cache[k] = v
-  if k == "chat_filter" then
-   UIDropDownMenu_SetText(dropdowns_list[k], chat_filter_entries[v])
+  if dropdown_menu_entries[k] then
+   UIDropDownMenu_SetText(dropdowns_list[k], dropdown_menu_entries[k][v])
   else
    UIDropDownMenu_SetText(dropdowns_list[k], v)
   end
  end
 
- local mn_chat_filter = {}
- for k,v in pairs(chat_filter_entries) do
-  mn_chat_filter[k] = {
-                          text = v,
-                          notCheckable = true,
-                          arg1 = "chat_filter",
-                          arg2 = k,
-                          func = dropdown_menubutton_click,
-                         }
+ local mn_caches = {}
+ for t,data in pairs(dropdown_menu_entries) do
+  mn_caches[t] = {}
+  for k,v in pairs(data) do
+   mn_caches[t][k] = {
+                      text = v,
+                      notCheckable = true,
+                      arg1 = t,
+                      arg2 = k,
+                      func = dropdown_menubutton_click,
+                     }
+  end
  end
 
  local function dropdown(title, name, v)
@@ -127,8 +175,8 @@ local function populate_options_panel()
   f.relativePoint = "RIGHT"
   f.relativeTo = f
   f.displayMode = "MENU"
-  f.buttons = v
-  dropdowns_list[v[1].arg1] = f
+  f.buttons = mn_caches[v]
+  dropdowns_list[mn_caches[v][1].arg1] = f
 
   last_f:SetPoint("BOTTOMLEFT", f, "TOPLEFT", 15, 2)
  end
@@ -205,7 +253,13 @@ local function populate_options_panel()
  grp:SetPoint("BOTTOMLEFT", of, "BOTTOMLEFT", 15, 15)
  TalentSetManagerOptionsGroup1Title:SetText(L["options_talent_highlight_icon"])
 
- local last_selected
+ local function checkbox_onclick(self)
+  local checked = self:GetChecked()
+  options_cache[self.tag] = checked
+  updateCheckbox(self, checked)
+ end
+ 
+ local last_selectedbr
  local function highlighticon_onclick(self)
   for i = 1, #self.border.Textures do
    if last_selected then
@@ -248,23 +302,91 @@ local function populate_options_panel()
  end
  --
  
- -- Chat Filter
- dropdown(L["options_chat_filter"], "ChatFilter", mn_chat_filter)
+ -- Chat Filter dropdown
+ dropdown(L["options_chat_filter"], "ChatFilter", "chat_filter")
  f:SetPoint("TOPLEFT", of, "TOPLEFT", 0, -105)
  UIDropDownMenu_SetWidth(f, 165)
 
+ -- Auto Equip checkboxes
+ grp = CreateFrame("Frame", "TalentSetManagerOptionsGroup2", of, "OptionsBoxTemplate")
+ grp:SetSize(360, 120)
+ grp:SetPoint("TOPLEFT", TalentSetManagerChatFilterDropDown, "TOPLEFT", 15, -60)
+ TalentSetManagerOptionsGroup2Title:SetText(L["autoequip_equipment_opt"])
+ 
+ -- enable
+ new_widget(nil, CreateFrame, "CheckButton", "TalentSetManagerChkAutoEquipEnableButton", grp, "OptionsCheckButtonTemplate")
+ f:SetPoint("TOPLEFT", grp, "TOPLEFT", 5, -5)
+ _G["TalentSetManagerChkAutoEquipEnableButtonText"]:SetText("|cffffffff"..ENABLE.."|r")
+ f.tag = "auto_equip_enable"
+ f:SetScript("OnClick", checkbox_onclick)
+
+ -- with chat message
+ new_widget(nil, CreateFrame, "CheckButton", "TalentSetManagerChkAutoEquipChagMsgButton", grp, "OptionsCheckButtonTemplate")
+ f:SetPoint("LEFT", last_f, "RIGHT", 90, 0)
+ _G["TalentSetManagerChkAutoEquipChagMsgButtonText"]:SetText("|cffffffff"..L["options_auto_equip_chatmsg"].."|r")
+ f.tag = "auto_equip_chatmsg"
+ f:SetScript("OnClick", checkbox_onclick)
+
+ --- spec groups
+ local anchor
+ autoequip_spec_buttons = {}
+ 
+ local function spec_btn_click(self)
+  local t = options_cache_c["auto_equip"..self.tag] or Oc["auto_equip"..self.tag]
+  t = (tonumber(t) or -1) + 1
+  options_cache_c["auto_equip"..self.tag] = t > 2 and 0 or t
+  self:SetText(autoequip_type_text(options_cache_c["auto_equip"..self.tag]))
+ end
+ 
+ local function createSpecGroup(spec)
+  local _, name, _, icon = GetSpecializationInfo(spec)
+
+  -- pve/pvp button
+  new_widget(nil, CreateFrame, "Button", "TalentSetManagerAutoEquipTypeButton"..spec, grp, "UIPanelButtonTemplate")
+  
+  if spec == 1 then
+   f:SetPoint("TOPLEFT", grp, "TOPLEFT", 120, -60)
+   anchor = f
+  elseif spec % 2 == 1 then
+   f:SetPoint("TOPLEFT", anchor, "BOTTOMLEFT", 0, -5)
+  else
+   f:SetPoint("LEFT", last_f, "RIGHT", 120, 0)
+  end
+  f:SetText(autoequip_type_text(1))
+  f.tag = spec
+  f:SetScript("OnClick", spec_btn_click)
+  
+  f.text = f:CreateFontString(nil, nil, "GameFontHighlight")
+  f.text:SetPoint("RIGHT", f, "LEFT", -5, 0)
+  f.text:SetText("|T"..icon..":12|t "..name..":")
+  
+  autoequip_spec_buttons[#autoequip_spec_buttons + 1] = f
+ end
+
+ new_widget(of, "CreateFontString", nil, nil, "GameFontHighlightSmall")
+ f:SetPoint("TOP", grp, "TOP", 0, -45)
+ f:SetText("|cffFFFFE0"..L["autoequip_specs_description"].."|r")
+ 
+ 
+ for i = 1, GetNumSpecializations() do
+  createSpecGroup(i)
+ end
+
+ TalentSetManagerChkAutoEquipEnableButton.children = {TalentSetManagerAutoEquipTypeButton, TalentSetManagerChkAutoEquipChagMsgButton, unpack(autoequip_spec_buttons)}
+ ---
+
+ 
  -- Ignored tiers background color
  colorbutton(L["options_ignored_tiers_background_color"], "IgnoredTiersBG", "ignored_tiers_bg")
- f:SetPoint("TOPLEFT", TalentSetManagerChatFilterDropDown, "BOTTOMLEFT", 15, -20)
+ f:SetPoint("TOPLEFT", grp, "BOTTOMLEFT", 0, -10)
 
  -- Hide Info Button checkbox
  new_widget(nil, CreateFrame, "CheckButton", "TalentSetManagerChkInfoButton", of, "OptionsCheckButtonTemplate")
  f:SetPoint("TOPLEFT", last_f, "BOTTOMLEFT", 0, -10)
  _G["TalentSetManagerChkInfoButtonText"]:SetText("|cffffffff"..L["options_hide_info_button"].."|r")
- f:SetScript("OnClick", function(self)
-                         options_cache.hide_info_button = self:GetChecked()
-                        end)
- 
+ f.tag = "hide_info_button"
+ f:SetScript("OnClick", checkbox_onclick)
+
  of.initialized = true
  
  refresh_widgets()
@@ -274,28 +396,34 @@ function addonTable:InitializeOptions()
 
  if not TalentSetManager_Options.interface then TalentSetManager_Options.interface = {} end
  
- O = TalentSetManager_Options.interface
- 
+ O  = TalentSetManager_Options.interface -- general options
+ Oc = TalentSetManager_Saves.interface   -- character specific options
 
  for k,v in pairs(interface_defaults) do
   if O[k] == nil then
    O[k] = v
   end
  end
+ 
+ for k,v in pairs(interface_defaults_c) do
+  if Oc[k] == nil then
+   Oc[k] = v
+  end
+ end
 
  of = CreateFrame("Frame", "TalentSetManager_ConfigPanel", UIParent)
  of:Hide()
- of.name = "天賦設定管理"
+ of.name = L["Talent Set Manager"]
 
  -- title
  local f = of:CreateFontString(nil, nil, "GameFontNormalLarge")
  f:SetPoint("TOPLEFT", 15, -15)
  local version = GetAddOnMetadata(addonName, "X-Curse-Packaged-Version")
- f:SetText(GetAddOnMetadata(addonName, "Title")..(version and (" |cffffffff"..version.."|r") or ""))
+ f:SetText(L["addon_name"]..(version and (" |cffffffff"..version.."|r") or ""))
  
  f = of:CreateFontString(nil, nil, "GameFontHighlightSmall")
  f:SetPoint("TOPLEFT", of, "TOPLEFT", 15, -36)
- f:SetText(GetAddOnMetadata(addonName, "Notes"))
+ f:SetText(L["addon_note"])
  
  f = CreateFrame("Button", nil, of, "UIPanelButtonTemplate")
  f:SetSize(100, 30)
@@ -310,7 +438,10 @@ function addonTable:InitializeOptions()
  of.cancel  = cancel_OnClick
  of.default = default_OnClick
  InterfaceOptions_AddCategory(of)
+ 
+ -- debug
+ --InterfaceOptionsFrame_Show()
+ --InterfaceOptionsFrame_OpenToCategory("Talent Set Manager")
 end
-
 
 

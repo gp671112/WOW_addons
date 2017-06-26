@@ -13,6 +13,15 @@ function DF:CreateAddOn (name, global_saved, global_table, options_table, broker
 	addon.__name = name
 	
 	function addon:OnInitialize()
+	-- 加上共用函數的插件名稱
+	local nameLoc
+	if name == "EnemyGrid" then
+		nameLoc = "敵方框架"
+	elseif name == "Plater" then
+		nameLoc = "血條"
+	else
+		nameLoc = name
+	end
 		
 		if (global_saved) then
 			if (broker and broker.Minimap and not global_table.Minimap) then
@@ -23,18 +32,18 @@ function DF:CreateAddOn (name, global_saved, global_table, options_table, broker
 		
 		if (options_table) then
 			LibStub ("AceConfig-3.0"):RegisterOptionsTable (name, options_table)
-			addon.OptionsFrame1 = LibStub ("AceConfigDialog-3.0"):AddToBlizOptions (name, name)
+			addon.OptionsFrame1 = LibStub ("AceConfigDialog-3.0"):AddToBlizOptions (name, nameLoc)
 			
 			LibStub ("AceConfig-3.0"):RegisterOptionsTable (name .. "-Profiles", LibStub ("AceDBOptions-3.0"):GetOptionsTable (self.db))
-			addon.OptionsFrame2 = LibStub ("AceConfigDialog-3.0"):AddToBlizOptions (name .. "-Profiles", "Profiles", name)
+			addon.OptionsFrame2 = LibStub ("AceConfigDialog-3.0"):AddToBlizOptions (name .. "-Profiles", "設定檔", nameLoc)
 		end
 		
 		if (broker) then
 			local broker_click_function = broker.OnClick
 			if (not broker_click_function and options_table) then
 				broker_click_function = function()
-					InterfaceOptionsFrame_OpenToCategory (name)
-					InterfaceOptionsFrame_OpenToCategory (name)
+					InterfaceOptionsFrame:Show()
+					InterfaceOptionsFrame_OpenToCategory (nameLoc)
 				end
 			end
 			

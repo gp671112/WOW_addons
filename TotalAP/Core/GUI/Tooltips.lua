@@ -14,18 +14,26 @@
 ----------------------------------------------------------------------------------------------------------------------
 
 
---	[[ Tooltips.lua ]]
+--- GUI\Tooltips.lua
+-- @module GUI
+
+---	Tooltips.lua.
 --	Dynamic tooltip text functions that can be hooked to the appropriate events by the GUI controller
+-- @section Tooltips
+
 
 local addonName, TotalAP = ...
 
 if not TotalAP then return end
 
-local L = LibStub("AceLocale-3.0"):GetLocale("TotalAP", false)
+-- AceLocale localization table
+local L = TotalAP.L
 
 
--- This is the mouseover-tooltip for progress bars, based on Blizzard's ForgeDisplay (icon to the top-left of the ArtifactFrame)
--- TODO: Split into ProgressTooltip and ArtifactKnowledgeTooltip (once the AK bar is implemented)
+--- This is the mouseover-tooltip for progress bars, based on Blizzard's ForgeDisplay (icon to the top-left of the ArtifactFrame)
+-- @param self The frame the tooltip will be attached to
+-- @param button The button that has been used to toggle the triggering event (Note: This isn't actually relevant here)
+-- @param[opt] hide Whether or not the tooltip will be hidden. Defaults to false
 local function ArtifactKnowledgeTooltipFunction(self, button, hide)
 
 	local specID = tonumber((self:GetName()):match("(%d+)$")) -- Derive spec from frame's name, as they're numbered accordingly -> e.g., TotalAPProgressBar1 for spec = 1
@@ -40,9 +48,10 @@ local function ArtifactKnowledgeTooltipFunction(self, button, hide)
 	
 	-- Load cached values
 	local numTraitsPurchased = TotalAP.Cache.GetValue(fqcn, specID, "numTraitsPurchased")
-	local inBagsTotalAP = TotalAP.Globals.inBagsTotalAP
+	local inBagsTotalAP = TotalAP.inBagsTotalAP
 	local maxAvailableAP = TotalAP.Cache.GetValue(fqcn, specID, "thisLevelUnspentAP") + inBagsTotalAP
 	local tier = TotalAP.Cache.GetValue(fqcn, specID, "artifactTier")
+	local maxKnowledgeLevel = C_ArtifactUI.GetMaxArtifactKnowledgeLevel()
 	
 	-- Calculate progress from cached values
 	local maxAttainableRank = numTraitsPurchased + TotalAP.ArtifactInterface.GetNumRanksPurchasableWithAP(numTraitsPurchased, maxAvailableAP, tier) 
@@ -50,27 +59,37 @@ local function ArtifactKnowledgeTooltipFunction(self, button, hide)
 	local knowledgeLevel = TotalAP.ArtifactInterface.GetArtifactKnowledgeLevel() 
 	
 	-- Calculate shipment data (for Artifact Research Notes)
-	local shipmentsReady = TotalAP.ArtifactInterface.GetNumAvailableResearchNotes()
-	local shipmentsTotal = 2 -- Could use the same interface (maxShipments is returned by the API), but no more than 2 can actually be queued anyway... so, whatever
+	local shipmentsReady, shipmentsTotal = TotalAP.ArtifactInterface.GetNumAvailableResearchNotes()
 	local timeLeft, timeLeftString = TotalAP.ArtifactInterface.GetTimeUntilNextResearchNoteIsReady()
 
-	  GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
+	 GameTooltip:SetOwner(self, "ANCHOR_CURSOR")
 	  
     if artifactName then
 		GameTooltip:AddLine(format("%s", artifactName), 230/255, 204/255, 128/255)
 	end
       
-	  -- TODO: Split into two tooltips -> this => ProgressBarTooltip and AK Tooltip for separate research bar/indicator (not yet implemented)
-    if numTraitsPurchased > 0 then
-		GameTooltip:AddLine(format(L["Total Ranks Purchased: %d"],  numTraitsPurchased), 1, 1, 1)
-	end
+	GameTooltip:AddLine(format(L["Total Ranks Purchased: %d"],  numTraitsPurchased), 1, 1, 1)
 	
      if progressPercent > 0 and maxAttainableRank > numTraitsPurchased then
-		GameTooltip:AddLine(format(L["%.2f%% towards Rank %d"],  progressPercent, maxAttainableRank))
+		GameTooltip:AddLine(format(L["%.2f%% towards Rank %d"],  progressPercent, maxAttainableRank + 1))
 	end
      
-	 GameTooltip:AddLine("\n" .. format(L["Artifact Knowledge Level: %d"], knowledgeLevel), 1, 1, 1)
-     GameTooltip:AddLine(format(L["Shipments ready for pickup: %d/%d"], shipmentsReady, shipmentsTotal))
+	
+	GameTooltip:AddLine("\n" .. format(L["Artifact Knowledge Level: %d"], knowledgeLevel), 1, 1, 1)
+	if maxKnowledgeLevel > knowledgeLevel and shipmentsReady ~= nil then -- Research isn't maxed yet
+		
+		if shipmentsReady > 0 then -- Shipments are available -> Display current work order progress
+			GameTooltip:AddLine(format(L["Shipments ready for pickup: %d/%d"], shipmentsReady, shipmentsTotal))
+		end
+		
+		if (not shipmentsTotal or shipmentsReady == shipmentsTotal) and maxKnowledgeLevel > (knowledgeLevel + shipmentsReady) then -- More work orders could be queued, and available Research Notes aren't enough to reach the maximum level -> Show reminder
+			GameTooltip:AddLine(format(L["Researchers are idle!"]), 255/255, 32/255, 32/255) 
+			
+		end
+		
+	else -- No more research is necessary - yay!
+		GameTooltip:AddLine(L["No further research necessary"], 0/255, 255/255, 0/255)
+	end
 	
 	if timeLeft and timeLeftString then
 		GameTooltip:AddLine(format(L["Next in: %s"],  timeLeftString))
@@ -84,12 +103,18 @@ local function ArtifactKnowledgeTooltipFunction(self, button, hide)
 	
 end
 
+--- Show artifact knowledge tooltip (alias for ArtifactKnowledgeTooltipFunction with hide = false)
+-- @param self The frame the tooltip will be attached to
+-- @param button The button that has been used to toggle the triggering event (Note: This isn't actually relevant here)
 local function ShowArtifactKnowledgeTooltip(self, button)
 
 	ArtifactKnowledgeTooltipFunction(self, button)
 
 end
 
+--- Hide artifact knowledge tooltip (alias for ArtifactKnowledgeTooltipFunction with hide = true)
+-- @param self The frame the tooltip will be attached to
+-- @param button The button that has been used to toggle the triggering event (Note: This isn't actually relevant here)
 local function HideArtifactKnowledgeTooltip(self, button)
 
 	ArtifactKnowledgeTooltipFunction(self, button, true)
@@ -97,7 +122,10 @@ local function HideArtifactKnowledgeTooltip(self, button)
 end
 
 
--- Displayed on mouseover for the spec icons (used to activate/ignore specs)
+--- Tooltip that is displayed on mouseover for the spec icons (used to activate/ignore specs)
+-- @param self The frame the tooltip will be attached to
+-- @param button The button that has been used to toggle the triggering event (Note: This isn't actually relevant here)
+-- @param[opt] hide Whether or not the tooltip will be hidden. Defaults to false
 local function SpecIconTooltipFunction(self, button, hide)  
 	
 	local specID = tonumber((self:GetName()):match("(%d)$")) -- e.g., TotalAPSpecIconButton1 for spec = 1
@@ -128,12 +156,18 @@ local function SpecIconTooltipFunction(self, button, hide)
 	
 end
 
+--- Show spec icon tooltip (alias for SpecIconTooltipFunction with hide = false)
+-- @param self The frame the tooltip will be attached to
+-- @param button The button that has been used to toggle the triggering event (Note: This isn't actually relevant here)
 local function ShowSpecIconTooltip(self, button)
 
 	SpecIconTooltipFunction(self, button)
 
 end
 
+--- Show spec icon tooltip (alias for SpecIconTooltipFunction with hide = true)
+-- @param self The frame the tooltip will be attached to
+-- @param button The button that has been used to toggle the triggering event (Note: This isn't actually relevant here)
 local function HideSpecIconTooltip(self, button)
 
 	SpecIconTooltipFunction(self, button, true)
@@ -147,5 +181,6 @@ TotalAP.GUI.Tooltips = {
 	ShowArtifactKnowledgeTooltip = ShowArtifactKnowledgeTooltip,
 	HideArtifactKnowledgeTooltip = HideArtifactKnowledgeTooltip,
 }
+
 
 return TotalAP.GUI.Tooltips

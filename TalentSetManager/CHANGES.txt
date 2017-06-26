@@ -1,0 +1,10 @@
+lightweight tag caf0103a41772f7567491e5af43039e8d00e4d07 v1.2.1
+Author:	Saregon <n_rhygar@yahoo.it>
+Date:	Fri Jun 16 14:46:55 2017 +0200
+
+commit caf0103a41772f7567491e5af43039e8d00e4d07
+Author: Saregon <n_rhygar@yahoo.it>
+Date:   Fri Jun 16 14:46:55 2017 +0200
+
+    fix issue #2
+

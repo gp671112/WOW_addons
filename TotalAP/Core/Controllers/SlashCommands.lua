@@ -13,9 +13,12 @@
     -- along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ----------------------------------------------------------------------------------------------------------------------
 
+--- Controllers\SlashCommands
+-- @module Controllers
 
--- SlashCommands.lua
--- Handling of slash commands (duh)
+--- SlashCommands.lua.
+-- Handling of slash commands and console-based operations
+-- @section SlashCommands
 
 local addonName, TotalAP = ...
 
@@ -28,7 +31,7 @@ local slashCommand = "totalap"
 local slashCommandAlias = "ap"
 
 -- AceLocale localisation table -> used for console output
-local L = LibStub("AceLocale-3.0"):GetLocale("TotalAP", false); -- Localization table
+local L = TotalAP.L
 
 -- TODO: Use AceDB for this
 --local settings = TotalAP.DBHandler.GetDB() -- TODO: Upvalue / LUA Error
@@ -39,23 +42,24 @@ local L = LibStub("AceLocale-3.0"):GetLocale("TotalAP", false); -- Localization 
 -- Match commands to locale table keys (the actual strings are NOT used, except to look up the correct translation)
 local slashCommands = {
 	
-	["counter"] = "Toggle display of the item counter",
-	["progress"] = "Toggle spell overlay notification (glow effect) when new traits are available",
-	["glow"] = "Toggle spell overlay notification (glow effect) when new traits are available",
-	["buttontext"] = "Toggle short summary of the tooltip information as an additional display next to the action button",
+	["counter"] = L["Toggle display of the item counter"],
+	["progress"] = L["Toggle display of the progress report"],
+	["glow"] = L["Toggle spell overlay notification (glow effect) when new traits are available"],
+	["buttontext"] = L["Toggle short summary of the tooltip information as an additional display next to the action button"],
 	
-	["hide"] = "Toggle all displays (will override the individual display's settings)",
-	["button"] = "Toggle button visibility (tooltip visibility is unaffected)",
-	["bars"] = "Toggle bar display for artifact power progress",
-	["tooltip"] = "Toggle tooltip display for artifact power items",
-	["icons"] = "Toggle icon and text display for artifact power progress",
+	["hide"] = L["Toggle all displays (will override the individual display's settings)"],
+	["button"] = L["Toggle button visibility (tooltip visibility is unaffected)"],
+	["bars"] = L["Toggle bar display for artifact power progress"],
+	["minibar"] = L["Toggle the secondary progress bar"],
+	["tooltip"] = L["Toggle tooltip display for artifact power items"],
+	["icons"] = L["Toggle icon and text display for artifact power progress"],
 	
-	["unignore"] = "Resets ignored specs for the currently active character",
+	["unignore"] = L["Resets ignored specs for the currently active character"],
 	
-	["loginmsg"] = "Toggle login message on load",
-	["combat"] = "Toggle visibility in combat",
-	["reset"] =  "Load default settings (will overwrite any changes made)",
-	["debug"] = "Toggle debug mode (not particularly useful as long as everything is working as expected)",
+	["loginmsg"] = L["Toggle login message on load"],
+	["combat"] = L["Toggle visibility in combat"],
+	["reset"] =  L["Load default settings (will overwrite any changes made)"],
+	["debug"] = L["Toggle debug mode (not particularly useful as long as everything is working as expected)"],
 	
 }
 
@@ -154,6 +158,18 @@ local slashHandlers = {
 
 		TotalAP.Controllers.KeybindHandler("BarDisplayToggle", false);	
 		
+	end,
+	
+	["minibar"] = function(settings) -- Toggle MiniBar (on top of ProgressBars)
+	
+		if settings.infoFrame.showMiniBar then
+			TotalAP.ChatMsg(L["Secondary progress bars are now hidden."]);
+		else
+			TotalAP.ChatMsg(L["Secondary progress bars are now shown."]);
+		end
+		
+		settings.infoFrame.showMiniBar = not settings.infoFrame.showMiniBar;
+	
 	end,
 	
 	["icons"] = function(settings) -- Toggle spec icons
@@ -290,7 +306,7 @@ local function PrintSlashCommands(usedAlias)
 				usedCmd = GetSlashCommandAlias()
 			end
 		
-			TotalAP.ChatMsg("/" .. usedCmd .. " " .. cmd .. " - " .. L[slashCommands[cmd]])
+			TotalAP.ChatMsg("/" .. usedCmd .. " " .. cmd .. " - " .. slashCommands[cmd])
 		
 		end
 end

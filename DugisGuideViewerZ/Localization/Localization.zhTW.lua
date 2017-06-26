@@ -175,7 +175,12 @@ if ( GetLocale() == "zhTW" ) then
 	["More settings.."] = "更多設定選項...",
 	["Home"] = "首頁",
 	
-	
+	["Taxi System"] = "轉運系統",
+	["Use Zone Portals"] = "使用地區傳送門",
+	["Use Player Portals"] = "使用玩家傳送門",
+	["Use Boats"] = "搭船",
+	["Use Class Portals"] = "使用職業傳送門",
+	["Use Flight Master Whistle"] = "使用飛行管理員的哨子",
 	
 	
 ---

@@ -1,5 +1,5 @@
 
-local dversion = 50
+local dversion = 48
 local major, minor = "DetailsFramework-1.0", dversion
 local DF, oldminor = LibStub:NewLibrary (major, minor)
 
@@ -244,9 +244,7 @@ if (symbol_1K) then
 	end
 else
 	function DF.FormatNumber (numero)
-		if (numero > 999999999) then
-			return format ("%.2f", numero/1000000000) .. "B"
-		elseif (numero > 999999) then
+		if (numero > 999999) then
 			return format ("%.2f", numero/1000000) .. "M"
 		elseif (numero > 99999) then
 			return floor (numero/1000) .. "K"
@@ -1162,15 +1160,24 @@ end
 -----------------------------
 
 function DF:OpenInterfaceProfile()
-	InterfaceOptionsFrame_OpenToCategory (self.__name)
-	InterfaceOptionsFrame_OpenToCategory (self.__name)
+-- 加上共用函數的插件名稱
+	local nameLoc
+	if self.__name == "EnemyGrid" then
+		nameLoc = "敵方框架"
+	elseif self.__name == "Plater" then
+		nameLoc = "血條"
+	else
+		nameLoc = self.__name
+	end
+	InterfaceOptionsFrame:Show()
+	InterfaceOptionsFrame_OpenToCategory (nameLoc)
 	for i = 1, 100 do
 		local button = _G ["InterfaceOptionsFrameAddOnsButton" .. i]
 		if (button) then
 			local text = _G ["InterfaceOptionsFrameAddOnsButton" .. i .. "Text"]
 			if (text) then
 				text = text:GetText()
-				if (text == self.__name) then
+				if (text == nameLoc) then
 					local toggle = _G ["InterfaceOptionsFrameAddOnsButton" .. i .. "Toggle"]
 					if (toggle) then
 						if (toggle:GetNormalTexture():GetTexture():find ("PlusButton")) then
@@ -1186,7 +1193,7 @@ function DF:OpenInterfaceProfile()
 				end
 			end
 		else
-			self:Msg ("Couldn't not find the profile panel.")
+			self:Msg ("無法找到設定檔介面。")
 			break
 		end
 	end

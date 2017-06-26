@@ -38,9 +38,9 @@ local strconcat=strconcat
 local tostring=tostring
 local tremove=tremove
 local _G=_G -- Unmodified env
---@debug@
+--[===[@debug@
 -- Checking packager behaviour
---@end-debug@
+--@end-debug@]===]
 
 local me, ns = ...
 local lib=obj --#Lib
@@ -142,13 +142,13 @@ local new, del, add, recursivedel,copy, cached, stats
 do
 	local meta={__metatable="RECYCLE"}
 	local pool = lib.pool
---@debug@
+--[===[@debug@
 	local newcount, delcount,createdcount= 0,0,0
---@end-debug@
+--@end-debug@]===]
 	function new(t)
---@debug@
+--[===[@debug@
 		newcount = newcount + 1
---@end-debug@
+--@end-debug@]===]
 		if type(t)=="table" then
 			local rc=pcall(setmetatable,t,meta)
 			return t
@@ -159,9 +159,9 @@ do
 			pool[t] = nil
 			return t
 		else
---@debug@
+--[===[@debug@
 			createdcount = createdcount + 1
---@end-debug@
+--@end-debug@]===]
 			return setmetatable({},meta)
 		end
 	end
@@ -173,18 +173,18 @@ do
 		return c
 	end
 	function del(t)
---@debug@
+--[===[@debug@
 		delcount = delcount + 1
---@end-debug@
+--@end-debug@]===]
 		if getmetatable(t)=="RECYCLE" then
 			wipe(t)
 			pool[t] = true
 		end
 	end
 	function recursivedel(t)
---@debug@
+--[===[@debug@
 		delcount = delcount + 1
---@end-debug@
+--@end-debug@]===]
 		for k,v in pairs(t) do
 			if type(v)=="table" and getmetatable(v) == "RECYCLE" then
 				recursivedel(v)
@@ -202,19 +202,19 @@ do
 		end
 		return n
 	end
---@debug@
+--[===[@debug@
 	function stats()
 		print("Created:",createdcount)
 		print("Aquired:",newcount)
 		print("Released:",delcount)
 		print("Cached:",cached())
 	end
---@end-debug@
---[===[@non-debug@
+--@end-debug@]===]
+--@non-debug@
 	function stats()
 		return
 	end
---@end-non-debug@]===]
+--@end-non-debug@
 end
 --- Get a new table from the recycle pool
 -- Preferred usage is assigning to a local via wrap function
@@ -747,7 +747,7 @@ local function loadOptionsTable(self)
 				func="Gui",
 				guiHidden=true,
 			},
---@debug@
+--[===[@debug@
 			help = {
 				name="HELP",
 				desc="Show help",
@@ -763,7 +763,7 @@ local function loadOptionsTable(self)
 				guiHidden=true,
 				cmdHidden=true,
 			},
---@end-debug@
+--@end-debug@]===]
 			silent = {
 				name="SILENT",
 				desc="Eliminates startup messages",
@@ -912,6 +912,7 @@ function lib:OnInitialize(...)
 	end
 	if self.db then
 		self.db:RegisterDefaults(self.DbDefaults)
+		--[[
 		if (not self.db.global.silent) then
 			self:Print(format("Version %s %s loaded (%s)",
 				self:Colorize(options.version,'green'),
@@ -920,6 +921,7 @@ function lib:OnInitialize(...)
 			)
 			self:Print("Using profile ",self.db:GetCurrentProfile())
 		end
+		--]]
 		self:SetEnabledState(self:GetBoolean("Active"))
 	else
 		self.db=setmetatable({},{
@@ -957,10 +959,17 @@ function lib:OnInitialize(...)
 	end
 	if (type(self.LoadHelp)=="function") then self:LoadHelp() end
 	local main=options.name
+	-- 選項分類轉換為中文名稱
+	local mainLoc = main
+	if main== "GarrisonCommander" then
+		mainLoc = "任務-要塞"
+	elseif main== "OrderHallCommander" then
+		mainLoc = "任務-職業大廳"
+	end
 	BuildHelp(self)
 	if AceConfig and not options.nogui then
 		AceConfig:RegisterOptionsTable(main,self.OptionsTable,{main,strlower(options.ID)})
-		self.CfgDlg=AceConfigDialog:AddToBlizOptions(main,main )
+		self.CfgDlg=AceConfigDialog:AddToBlizOptions(main,mainLoc )
 		if (not ignoreProfile and not options.noswitch) then
 			if (AceDBOptions) then
 				local profileOpts=AceDBOptions:GetOptionsTable(self.db)
@@ -983,13 +992,13 @@ function lib:OnInitialize(...)
 				local profile=main..PROFILE
 			end
 			AceConfig:RegisterOptionsTable(main .. PROFILE,self.ProfileOpts)
-			AceConfigDialog:AddToBlizOptions(main .. PROFILE,titles.PROFILE,main)
+			AceConfigDialog:AddToBlizOptions(main .. PROFILE,titles.PROFILE,mainLoc)
 		end
 	else
 		self.OptionsTable.args.gui=nil
 	end
 	if (self.help[RELNOTES]~='') then
-		self.CfgRel=AceConfigDialog:AddToBlizOptions(main..RELNOTES,titles.RELNOTES,main)
+		self.CfgRel=AceConfigDialog:AddToBlizOptions(main..RELNOTES,titles.RELNOTES,mainLoc)
 	end
 	if AceDB then
 		self:UpdateVersion()
@@ -2071,9 +2080,9 @@ function lib:coroutineExecute(interval,action,combatSafe,...)
 	c.interval=interval
 	c.combatSafe=combatSafe
 	if c.running then
-	--@debug@
+	--[===[@debug@
 		print("")
-	--@end-debug@ 
+	--@end-debug@ ]===]
 		return signature
 	end
 	if type(c.co)=="thread" and coroutine.status(c.co)=="suspended" then return signature end
@@ -2296,11 +2305,17 @@ do
 	end
 	L=l:NewLocale(me,"zhTW")
 	if (L) then
-	L["Configuration"] = "\233\133\141\231\189\174"
-	L["Description"] = "\232\175\180\230\152\142"
-	L["Libraries"] = "\229\155\190\228\185\166\233\166\134"
-	L["Release Notes"] = "\229\143\145\232\161\140\232\175\180\230\152\142"
-	L["Toggles"] = "\229\136\135\230\141\162"
+	L["Configuration"] = "設定"
+	L["Description"] = "說明"
+	L["Libraries"] = "函式庫"
+	L["Purge1"] = "刪除未使用的設定檔"
+	L["Purge2"] = "刪除所有未被任何一個角色使用的設定檔"
+	L["Purge_Desc"] = "點一下便可刪除所有未使用的設定檔"
+	L["Release Notes"] = "說明"
+	L["Toggles"] = "切換"
+	L["UseDefault1"] = "所有角色都切換成使用 \"%s\" 設定檔"
+	L["UseDefault2"] = "所有分身都用 \"%s\" 設定檔"
+	L["UseDefault_Desc"] = "強制讓你的所有角色都使用 \"%s\" 設定檔，以方便統一管理單一設定。"
 	end
 	L=l:NewLocale(me,"itIT")
 	if (L) then
@@ -2318,6 +2333,3 @@ do
 	end
 end
 L=LibStub("AceLocale-3.0"):GetLocale(me,true)
---@do-not-package@
--- Packager stil not honoring this tag
---@end-do-not-package@

@@ -1,18 +1,17 @@
 ## Interface: 70200
 ## Title: Angry Keystones
 ## Notes: Displays additional information for Mythic Keystone dungeons
-## Title-zhTW: |cFFAA7700[副本]|rAngry Keystones
-## Notes-zhTW: 顯示傳奇鑰石地城2/3箱獎勵時間與敵方部隊占比等資訊。
+## Title-zhTW: |cffFF7F00[副本]|r 傳奇+ 進度時間
+## Notes-zhTW: Angry Keystones |n在傳奇鑰石的副本中，會在任務目標清單顯示兩箱、三箱的時間，以及詞綴難度等額外資訊。|n|cffffd200使用方法：|r從Esc>介面>插件>傳奇+ 進行設定。
 ## Author: Ermad
 ## SavedVariables: AngryKeystones_Config, AngryKeystones_Data
 ## SavedVariablesPerCharacter: AngryKeystones_CharacterConfig
-## X-Packaged-Version: v0.12.0
+## X-Packaged-Version: v0.12.2
 
 Core.lua
 Locale.lua
 Config.lua
 
-Persist.lua
 ObjectiveTracker.lua
 ProgressTracker.lua
 Keystone.lua

@@ -3103,7 +3103,7 @@ end
 function DF:CreateGFrame (parent, w, h, linewidth, onenter, onleave, member, name)
 	local f = CreateFrame ("frame", name, parent)
 	f:SetSize (w or 450, h or 150)
-	--f.CustomLine = [[Interface\AddOns\Details\Libs\LibGraph-2.0\line]]
+	f.CustomLine = [[Interface\AddOns\Details\Libs\LibGraph-2.0\line]]
 	
 	if (member) then
 		parent [member] = f
@@ -3302,11 +3302,11 @@ function DF:CreateTabContainer (parent, title, frame_name, frame_list, options_t
 		DF.TabContainerFunctions.CreateUnderlineGlow (tabButton)
 		
 		if (i == 1) then
-			local right_click_to_back = DF:CreateLabel (f, "right click to close", 10, "gray")
+			local right_click_to_back = DF:CreateLabel (f, "點一下右鍵關閉", 10, "gray")
 			right_click_to_back:SetPoint ("bottomright", f, "bottomright", -1, 0)
 			f.IsFrontPage = true
 		else
-			local right_click_to_back = DF:CreateLabel (f, "right click to go back to main menu", 10, "gray")
+			local right_click_to_back = DF:CreateLabel (f, "點一下右鍵回基本設定", 10, "gray")
 			right_click_to_back:SetPoint ("bottomright", f, "bottomright", -1, 0)
 		end
 		

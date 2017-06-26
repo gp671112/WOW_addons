@@ -1,4 +1,4 @@
--- $Id: Atlas_OutdoorRaids.lua 42 2017-05-14 14:12:18Z arith $
+-- $Id: Atlas_OutdoorRaids.lua 44 2017-06-08 13:41:33Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -74,25 +74,24 @@ local myData = {
 		WorldMapID = "1007";
 		LargeMap = "OR_BrokenIsles";
 		ALModule = "Atlas_Legion";
-		{ WHIT.." 1) "..Atlas_GetBossName("Calamir", 1774), 1774 };				-- (Azsuna)
-		{ WHIT.." 2) "..Atlas_GetBossName("Withered J'im", 1796), 1796 };			-- (Azsuna)
-		{ WHIT.." 3) "..Atlas_GetBossName("Levantus", 1769), 1769 };				-- (Azsuna)
+		{ WHIT.." 1) "..Atlas_GetBossName("Calamir", 1774)..ORNG..ALC["L-Parenthesis"]..sBF("Court of Farondis")..ALC["R-Parenthesis"], 1774 };		-- (Azsuna)
+		{ WHIT.." 2) "..Atlas_GetBossName("Withered J'im", 1796)..ORNG..ALC["L-Parenthesis"]..sBF("The Wardens")..ALC["R-Parenthesis"], 1796 };		-- (Azsuna)
+		{ WHIT.." 3) "..Atlas_GetBossName("Levantus", 1769)..ORNG..ALC["L-Parenthesis"]..sBF("Court of Farondis")..ALC["R-Parenthesis"], 1769 };	-- (Azsuna)
 		{ WHIT.." 4) "..Atlas_GetBossName("Humongris", 1770), 1770 };				-- (Val'sharah)
 		{ WHIT.." 5) "..Atlas_GetBossName("Shar'thos", 1763), 1763 };				-- (Val'sharah)
 		{ WHIT.." 6) "..Atlas_GetBossName("Drugon the Frostblood", 1789), 1789 };		-- (Highmountain)
-		{ WHIT.." 7) "..Atlas_GetBossName("Flotsam", 1795), 1795 };				-- (Highmountain)
-		{ WHIT.." 8) "..Atlas_GetBossName("Ana-Mouz", 1790), 1790 };				-- (Stormheim)
+		{ WHIT.." 7) "..Atlas_GetBossName("Flotsam", 1795)..ORNG..ALC["L-Parenthesis"]..sBF("Highmountain Tribe")..ALC["R-Parenthesis"], 1795 };	-- (Highmountain)
+		{ WHIT.." 8) "..Atlas_GetBossName("Ana-Mouz", 1790)..ORNG..ALC["L-Parenthesis"]..sBF("The Nightfallen")..ALC["R-Parenthesis"], 1790 };		-- (Stormheim)
 		{ WHIT.." 9) "..Atlas_GetBossName("The Soultakers", 1756), 1756 };			-- (Stormheim)
 		{ INDENT..WHIT..Atlas_GetBossName("Soultrapper Mevra", 1756, 1), 1756 };
 		{ INDENT..WHIT..Atlas_GetBossName("Captain Hring", 1756, 2), 1756 };
 		{ INDENT..WHIT..Atlas_GetBossName("Reaver Jdorn", 1756, 3), 1756 };
 		{ WHIT.."10) "..Atlas_GetBossName("Nithogg", 1749), 1749 };				-- (Stormheim)
 		{ WHIT.."11) "..Atlas_GetBossName("Na'zak the Fiend", 1783), 1783 };			-- (Suramar)
-		{ WHIT.."12) "..Atlas_GetBossName("Brutallus", 1883), 1883 };
-		{ WHIT.."13) "..Atlas_GetBossName("Malificus", 1884), 1884 };
-		{ INDENT..ORNG..ALC["L-Parenthesis"]..sBF("Armies of Legionfall")..ALC["R-Parenthesis"] };
-		{ WHIT.."14) "..Atlas_GetBossName("Si'vash", 1885), 1885 };
-		{ WHIT.."15) "..Atlas_GetBossName("Apocron", 1956), 1956 };
+		{ WHIT.."12) "..Atlas_GetBossName("Brutallus", 1883)..ORNG..ALC["L-Parenthesis"]..sBF("Armies of Legionfall")..ALC["R-Parenthesis"], 1883 };
+		{ WHIT.."13) "..Atlas_GetBossName("Malificus", 1884)..ORNG..ALC["L-Parenthesis"]..sBF("Armies of Legionfall")..ALC["R-Parenthesis"], 1884 };
+		{ WHIT.."14) "..Atlas_GetBossName("Si'vash", 1885)..ORNG..ALC["L-Parenthesis"]..sBF("Armies of Legionfall")..ALC["R-Parenthesis"], 1885 };
+		{ WHIT.."15) "..Atlas_GetBossName("Apocron", 1956)..ORNG..ALC["L-Parenthesis"]..sBF("Armies of Legionfall")..ALC["R-Parenthesis"], 1956 };
 		{ "" };
 		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
 		{ "Unleashed Monstrosities", "ac=11160" };

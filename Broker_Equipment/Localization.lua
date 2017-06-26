@@ -9,14 +9,84 @@ end})
 --[==========[
 local locale = GetLocale()
 if(locale == 'deDE') then
+--Translation missing 
+-- L["Enable tooltips in display"] = ""
+--Translation missing 
+-- L["Enable tooltips in menu"] = ""
+--Translation missing 
+-- L["Equipment sets!"] = ""
+
 elseif(locale == 'esES') then
+--Translation missing 
+-- L["Enable tooltips in display"] = ""
+--Translation missing 
+-- L["Enable tooltips in menu"] = ""
+--Translation missing 
+-- L["Equipment sets!"] = ""
+
 elseif(locale == 'esMX') then
+--Translation missing 
+-- L["Enable tooltips in display"] = ""
+--Translation missing 
+-- L["Enable tooltips in menu"] = ""
+--Translation missing 
+-- L["Equipment sets!"] = ""
+
 elseif(locale == 'frFR') then
+--Translation missing 
+-- L["Enable tooltips in display"] = ""
+--Translation missing 
+-- L["Enable tooltips in menu"] = ""
+--Translation missing 
+-- L["Equipment sets!"] = ""
+
 elseif(locale == 'itIT') then
+--Translation missing 
+-- L["Enable tooltips in display"] = ""
+--Translation missing 
+-- L["Enable tooltips in menu"] = ""
+--Translation missing 
+-- L["Equipment sets!"] = ""
+
 elseif(locale == 'koKR') then
+--Translation missing 
+-- L["Enable tooltips in display"] = ""
+--Translation missing 
+-- L["Enable tooltips in menu"] = ""
+--Translation missing 
+-- L["Equipment sets!"] = ""
+
 elseif(locale == 'ptBR') then
+--Translation missing 
+-- L["Enable tooltips in display"] = ""
+--Translation missing 
+-- L["Enable tooltips in menu"] = ""
+--Translation missing 
+-- L["Equipment sets!"] = ""
+
 elseif(locale == 'ruRU') then
+--Translation missing 
+-- L["Enable tooltips in display"] = ""
+--Translation missing 
+-- L["Enable tooltips in menu"] = ""
+--Translation missing 
+-- L["Equipment sets!"] = ""
+
 elseif(locale == 'zhCN') then
+--Translation missing 
+-- L["Enable tooltips in display"] = ""
+--Translation missing 
+-- L["Enable tooltips in menu"] = ""
+--Translation missing 
+-- L["Equipment sets!"] = ""
+
 elseif(locale == 'zhTW') then
+--Translation missing 
+-- L["Enable tooltips in display"] = ""
+--Translation missing 
+-- L["Enable tooltips in menu"] = ""
+--Translation missing 
+-- L["Equipment sets!"] = ""
+
 end
 --]==========]

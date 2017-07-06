@@ -28,4 +28,31 @@ local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas_WarlordsofDraenor", "itIT", false);
 
 if L then
+--Translation missing 
+-- L["BRF"] = ""
+--Translation missing 
+-- L["BSM"] = ""
+--Translation missing 
+-- L["EB"] = ""
+--Translation missing 
+-- L["GD"] = ""
+--Translation missing 
+-- L["HM"] = ""
+--Translation missing 
+-- L["ID"] = ""
+--Translation missing 
+-- L["SBG"] = ""
+--Translation missing 
+-- L["SR"] = ""
+--Translation missing 
+-- L["Train Ride"] = ""
+--Translation missing 
+-- L["UBRS"] = ""
+
+-- ToC
+--Translation missing 
+-- L["Description"] = ""
+--Translation missing 
+-- L["Title"] = ""
+
 end

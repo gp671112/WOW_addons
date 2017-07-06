@@ -37,4 +37,11 @@ L["SBG"] = "SBG"
 L["SR"] = "SR"
 L["Train Ride"] = "Viaje en el tren"
 L["UBRS"] = "UBRS"
+
+-- ToC
+--Translation missing 
+-- L["Description"] = ""
+--Translation missing 
+-- L["Title"] = ""
+
 end

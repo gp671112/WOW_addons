@@ -1,4 +1,4 @@
--- $Id: Atlas-zhTW.lua 256 2017-06-16 16:05:13Z arith $
+-- $Id: Atlas-zhTW.lua 266 2017-06-29 08:28:27Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -78,16 +78,13 @@ L["ATLAS_DDL_EXPANSION_LEGION"] = "軍臨天下副本"
 L["ATLAS_DDL_EXPANSION_LEGION1"] = "軍臨天下地城"
 L["ATLAS_DDL_EXPANSION_LEGION2"] = "軍臨天下團隊副本"
 L["ATLAS_DDL_EXPANSION_MOP"] = "潘達利亞之謎副本"
-L["ATLAS_DDL_EXPANSION_OLD_AO"] = "舊世界副本 1/2"
-L["ATLAS_DDL_EXPANSION_OLD_PZ"] = "舊世界副本 2/2"
+L["ATLAS_DDL_EXPANSION_OLD"] = "舊世界副本"
 L["ATLAS_DDL_EXPANSION_WOD"] = "德拉諾之霸副本"
 L["ATLAS_DDL_EXPANSION_WOTLK"] = "巫妖王之怒副本"
 L["ATLAS_DDL_LEVEL"] = "依等級分類"
 L["ATLAS_DDL_LEVEL_100PLUS"] = "副本等級大於 100"
 L["ATLAS_DDL_LEVEL_100TO110"] = "副本等級介於 100-110"
 L["ATLAS_DDL_LEVEL_110PLUS"] = "副本等級大於 110"
-L["ATLAS_DDL_LEVEL_110PLUS1"] = "副本等級大於 1/2"
-L["ATLAS_DDL_LEVEL_110PLUS2"] = "副本等級大於 2/2"
 L["ATLAS_DDL_LEVEL_45TO60"] = "副本等級介於 45-60"
 L["ATLAS_DDL_LEVEL_60TO70"] = "副本等級介於 60-70"
 L["ATLAS_DDL_LEVEL_70TO80"] = "副本等級介於 70-80"
@@ -96,30 +93,12 @@ L["ATLAS_DDL_LEVEL_85TO90"] = "副本等級介於 85-90"
 L["ATLAS_DDL_LEVEL_90TO100"] = "副本等級介於 90-100"
 L["ATLAS_DDL_LEVEL_UNDER45"] = "副本等級低於 45"
 L["ATLAS_DDL_PARTYSIZE"] = "依隊伍人數分類"
-L["ATLAS_DDL_PARTYSIZE_10_1"] = "10 人團隊副本 1/3"
-L["ATLAS_DDL_PARTYSIZE_10_2"] = "10 人團隊副本 2/3"
-L["ATLAS_DDL_PARTYSIZE_10_3"] = "10 人團隊副本 3/3"
-L["ATLAS_DDL_PARTYSIZE_10_AN"] = "10 人副本 1/2"
-L["ATLAS_DDL_PARTYSIZE_10_OZ"] = "10 人副本 2/2"
-L["ATLAS_DDL_PARTYSIZE_20TO40_1"] = "20-40 人團隊副本 1/3"
-L["ATLAS_DDL_PARTYSIZE_20TO40_2"] = "20-40 人團隊副本 2/3"
-L["ATLAS_DDL_PARTYSIZE_20TO40_3"] = "20-40 人團隊副本 3/3"
-L["ATLAS_DDL_PARTYSIZE_20TO40AH"] = "20-40 人副本 1/2"
-L["ATLAS_DDL_PARTYSIZE_20TO40IZ"] = "20-40 人副本 2/2"
-L["ATLAS_DDL_PARTYSIZE_5_1"] = "5 人地城 1/4"
-L["ATLAS_DDL_PARTYSIZE_5_2"] = "5 人地城 2/4"
-L["ATLAS_DDL_PARTYSIZE_5_3"] = "5 人地城 3/4"
-L["ATLAS_DDL_PARTYSIZE_5_4"] = "5 人地城 4/4"
-L["ATLAS_DDL_PARTYSIZE_5_AE"] = "5 人副本 1/3"
-L["ATLAS_DDL_PARTYSIZE_5_FS"] = "5 人副本 2/3"
-L["ATLAS_DDL_PARTYSIZE_5_TZ"] = "5 人副本 3/3"
+L["ATLAS_DDL_PARTYSIZE_10"] = "10 人團隊副本"
+L["ATLAS_DDL_PARTYSIZE_20TO40"] = "20-40 人團隊副本"
+L["ATLAS_DDL_PARTYSIZE_5"] = "5 人地城"
 L["ATLAS_DDL_TYPE"] = "依地圖類型分類"
 L["ATLAS_DDL_TYPE_ENTRANCE"] = "副本入口"
-L["ATLAS_DDL_TYPE_INSTANCE_AB"] = "副本 1/5"
-L["ATLAS_DDL_TYPE_INSTANCE_CF"] = "副本 2/5"
-L["ATLAS_DDL_TYPE_INSTANCE_GM"] = "副本 3/5"
-L["ATLAS_DDL_TYPE_INSTANCE_NS"] = "副本 4/5"
-L["ATLAS_DDL_TYPE_INSTANCE_TZ"] = "副本 5/5"
+L["ATLAS_DDL_TYPE_INSTANCE"] = "副本"
 L["ATLAS_DEP_MSG1"] = "Atlas 偵測到過期的模組/相依插件。"
 L["ATLAS_DEP_MSG2"] = "這個/這些模組已從這個角色被停用。"
 L["ATLAS_DEP_MSG3"] = [=[請將這個/這些模組從 AddOns 目錄移除，
@@ -155,7 +134,7 @@ L["ATLAS_INFO_12201"] = [=[我們最近新增了一個新的 Atlas 插件 - |cff
 L["ATLAS_INSTANCE_BUTTON"] = "副本"
 L["ATLAS_LDB_HINT"] = [=[左鍵開啟 Atlas。
 中鍵開啟 Atlas 選項。
-右鍵打開顯示選單。]=]
+右鍵打開顯示選單。"]=]
 L["ATLAS_MINIMAPLDB_HINT"] = [=[左鍵開啟 Atlas。
 右鍵開啟 Atlas 選項。
 左鍵並拖曳以移動圖示按鈕位置。]=]
@@ -168,6 +147,12 @@ L["ATLAS_MISSING_MODULE"] = [=[Atlas 已偵測到遺失的模組／插件。
 
 以下是遺失的模組／插件列表：
 ]=]
+L["ATLAS_NO_MODULE_OR_PLUGIN"] = [=[|cffff66ff錯誤：|r
+Atlas 無法偵測到任何的地圖
+模組或插件被安裝且啟用。
+提醒您，Atlas 本身只是個地圖
+瀏覽器，您將必須至少安裝一個
+地圖模組或插件以瀏覽地圖。]=]
 L["ATLAS_OPEN_ACHIEVEMENT"] = "按下以開啟成就細節。"
 L["ATLAS_OPEN_ADDON_LIST"] = "開啟插件列表"
 L["ATLAS_OPEN_ADVENTURE"] = "按下以開啟冒險指南視窗。"
@@ -276,11 +261,9 @@ L["MapG"] = " [7]"
 L["MapH"] = " [8]"
 L["MapI"] = " [9]"
 L["MapJ"] = " [10]"
-L["MapsNotFound"] = [=[目前的副本找不到對應的
-地圖影像檔。
+L["MapsNotFound"] = [=[目前的副本找不到對應的地圖影像檔。
 
-請確認您是否有安裝 Atlas 
-相關的副本地圖模組。]=]
+請確認您是否有安裝 Atlas 相關的副本地圖模組。]=]
 L["Meeting Stone"] = "集合石"
 L["Middle"] = "中間"
 L["Midsummer Festival"] = "仲夏節慶"

@@ -1,4 +1,4 @@
--- $Id: Atlas-enUS.lua 256 2017-06-16 16:05:13Z arith $
+-- $Id: Atlas-enUS.lua 266 2017-06-29 08:28:27Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -81,16 +81,13 @@ L["ATLAS_DDL_EXPANSION_LEGION"] = "Legion Instances"
 L["ATLAS_DDL_EXPANSION_LEGION1"] = "Legion Dungeons"
 L["ATLAS_DDL_EXPANSION_LEGION2"] = "Legion Raids"
 L["ATLAS_DDL_EXPANSION_MOP"] = "Mists of Pandaria Instances"
-L["ATLAS_DDL_EXPANSION_OLD_AO"] = "Old World Instances A-O"
-L["ATLAS_DDL_EXPANSION_OLD_PZ"] = "Old World Instances P-Z"
+L["ATLAS_DDL_EXPANSION_OLD"] = "Old World Instances"
 L["ATLAS_DDL_EXPANSION_WOD"] = "Warlords of Draenor Instances"
 L["ATLAS_DDL_EXPANSION_WOTLK"] = "Wrath of the Lich King Instances"
 L["ATLAS_DDL_LEVEL"] = "Level"
 L["ATLAS_DDL_LEVEL_100PLUS"] = "Instances Level 100+"
 L["ATLAS_DDL_LEVEL_100TO110"] = "Instances Level 100-110"
 L["ATLAS_DDL_LEVEL_110PLUS"] = "Instances Level 110+"
-L["ATLAS_DDL_LEVEL_110PLUS1"] = "Instances Level 110+ 1/2"
-L["ATLAS_DDL_LEVEL_110PLUS2"] = "Instances Level 110+ 2/2"
 L["ATLAS_DDL_LEVEL_45TO60"] = "Instances Level 45-60"
 L["ATLAS_DDL_LEVEL_60TO70"] = "Instances Level 60-70"
 L["ATLAS_DDL_LEVEL_70TO80"] = "Instances Level 70-80"
@@ -99,30 +96,12 @@ L["ATLAS_DDL_LEVEL_85TO90"] = "Instances Level 85-90"
 L["ATLAS_DDL_LEVEL_90TO100"] = "Instances Level 90-100"
 L["ATLAS_DDL_LEVEL_UNDER45"] = "Instances Under Level 45"
 L["ATLAS_DDL_PARTYSIZE"] = "Party Size"
-L["ATLAS_DDL_PARTYSIZE_10_1"] = "Instances for 10 Players 1/3"
-L["ATLAS_DDL_PARTYSIZE_10_2"] = "Instances for 10 Players 2/3"
-L["ATLAS_DDL_PARTYSIZE_10_3"] = "Instances for 10 Players 3/3"
-L["ATLAS_DDL_PARTYSIZE_10_AN"] = "Instances for 10 Players A-N"
-L["ATLAS_DDL_PARTYSIZE_10_OZ"] = "Instances for 10 Players O-Z"
-L["ATLAS_DDL_PARTYSIZE_20TO40_1"] = "Instances for 20-40 Players 1/3"
-L["ATLAS_DDL_PARTYSIZE_20TO40_2"] = "Instances for 20-40 Players 2/3"
-L["ATLAS_DDL_PARTYSIZE_20TO40_3"] = "Instances for 20-40 Players 3/3"
-L["ATLAS_DDL_PARTYSIZE_20TO40AH"] = "Instances for 20-40 Players A-H"
-L["ATLAS_DDL_PARTYSIZE_20TO40IZ"] = "Instances for 20-40 Players I-Z"
-L["ATLAS_DDL_PARTYSIZE_5_1"] = "Instances for 5 Players 1/4"
-L["ATLAS_DDL_PARTYSIZE_5_2"] = "Instances for 5 Players 2/4"
-L["ATLAS_DDL_PARTYSIZE_5_3"] = "Instances for 5 Players 3/4"
-L["ATLAS_DDL_PARTYSIZE_5_4"] = "Instances for 5 Players 4/4"
-L["ATLAS_DDL_PARTYSIZE_5_AE"] = "Instances for 5 Players A-E"
-L["ATLAS_DDL_PARTYSIZE_5_FS"] = "Instances for 5 Players F-S"
-L["ATLAS_DDL_PARTYSIZE_5_TZ"] = "Instances for 5 Players T-Z"
+L["ATLAS_DDL_PARTYSIZE_10"] = "Instances for 10 Players"
+L["ATLAS_DDL_PARTYSIZE_20TO40"] = "Instances for 20-40 Players"
+L["ATLAS_DDL_PARTYSIZE_5"] = "Instances for 5 Players"
 L["ATLAS_DDL_TYPE"] = "Type"
 L["ATLAS_DDL_TYPE_ENTRANCE"] = "Entrances"
-L["ATLAS_DDL_TYPE_INSTANCE_AB"] = "Instances A-B"
-L["ATLAS_DDL_TYPE_INSTANCE_CF"] = "Instances C-F"
-L["ATLAS_DDL_TYPE_INSTANCE_GM"] = "Instances G-M"
-L["ATLAS_DDL_TYPE_INSTANCE_NS"] = "Instances N-S"
-L["ATLAS_DDL_TYPE_INSTANCE_TZ"] = "Instances T-Z"
+L["ATLAS_DDL_TYPE_INSTANCE"] = "Instances"
 L["ATLAS_DEP_MSG1"] = "Atlas has detected outdated plugin(s)/module(s)/addon(s)."
 L["ATLAS_DEP_MSG2"] = "It has / They have been disabled for this character."
 L["ATLAS_DEP_MSG3"] = [=[Delete it/them from your AddOns folder and get the latest one installed.
@@ -172,6 +151,12 @@ If you are sure that you don't need those \"missing\" module(s) / plugin(s) and 
 
 List of missing module(s) / plugin(s): 
 ]=]
+L["ATLAS_NO_MODULE_OR_PLUGIN"] = [=[|cffff66ffError:|r
+Atlas can not detect any of map module 
+or plugin installed and enabled.
+Note that Atlas itself is a map browser, 
+you will have to at least install one 
+map module or plugin to browse the maps.]=]
 L["ATLAS_OPEN_ACHIEVEMENT"] = "Click to open achievement details."
 L["ATLAS_OPEN_ADDON_LIST"] = "Open addon list"
 L["ATLAS_OPEN_ADVENTURE"] = "Click to open Adventure Journal window."

@@ -36,4 +36,9 @@ L["Dungeon Locations"] = "副本区域"
 L["Green"] = "绿色"
 L["Instances"] = "副本"
 L["White"] = "白色"
+
+-- ToC
+L["Description"] = "副本位置地图"
+L["Title"] = "Atlas |r|cFF0099FF[副本位置]|r"
+
 end

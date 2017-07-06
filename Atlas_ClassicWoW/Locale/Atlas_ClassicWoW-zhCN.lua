@@ -194,4 +194,9 @@ L["Weegli Blastfuse"] = "维格利"
 L["Yuka Screwspigot <Engineering Supplies>"] = "尤卡·斯库比格特 <工程学供应商>"
 L["Zeya"] = "泽雅"
 L["ZF"] = "ZF"
+
+-- ToC
+L["Description"] = "经典旧世副本地图"
+L["Title"] = "Atlas |r|cFF0099FF[经典旧世]|r"
+
 end

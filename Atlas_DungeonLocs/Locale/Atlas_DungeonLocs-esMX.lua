@@ -43,4 +43,10 @@ L["Dungeon Locations"] = "Lugares de Mazmorras"
 L["Green"] = "Verde"
 L["Instances"] = "Mazmorras"
 L["White"] = "Blanco"
+
+-- ToC
+L["Description"] = "Lugar de Mazmorras"
+--Translation missing 
+-- L["Title"] = ""
+
 end

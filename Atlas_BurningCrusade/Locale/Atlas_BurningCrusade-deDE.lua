@@ -126,6 +126,7 @@ L["Landing Spot"] = "Landepunkt"
 L["Little Jimmy Vishas"] = "Kleiner Jimmy Vishas"
 L["Lord Crispin Ference"] = "Lord Crispin Ference"
 L["Lord Robin Daris"] = "Lord Robin Daris"
+L["Lydia Accoste"] = "Lydia Accoste"
 L["Madrigosa"] = "Madrigosa"
 L["Mag"] = "Maggi"
 L["Magistrate Henry Maleb"] = "Magistrat Henry Maleb"
@@ -225,5 +226,10 @@ L["Young Blanchy"] = "Kleine Graumähne"
 L["Ythyar"] = "Ythyar"
 L["Zelfan"] = "Zelfan"
 L["Zixil <Aspiring Merchant>"] = "Zixil <Aufstrebender Händler>"
+
+-- ToC
+L["Description"] = "Karten der Instanzen aus Burning Crusade"
+L["Title"] = "Atlas |r|cFF0099FF[Burning Crusade]|r"
+
 
 end

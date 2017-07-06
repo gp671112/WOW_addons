@@ -1,10 +1,10 @@
--- $Id: Atlas_Battlegrounds-zhTW.lua 1538 2016-08-07 15:57:11Z arith $
+-- $Id: Atlas_Battlegrounds-zhTW.lua 1549 2017-06-29 08:12:15Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
-	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
+	Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -156,4 +156,9 @@ L["Wing Commander Vipore"] = "空軍指揮官維波里"
 L["Wintergrasp Graveyard"] = "堡壘墓地"
 L["WSG"] = "WSG/戰歌"
 L["Wyvern Camp"] = "雙足翼龍營地"
+
+-- ToC
+L["Description"] = "Atlas 戰場地圖插件"
+L["Title"] = "|r|cFF0099FF[地圖]|rAtlas 戰場地圖"
+
 end

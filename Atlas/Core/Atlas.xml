@@ -1,4 +1,4 @@
-<!-- $Id: Atlas.xml 251 2017-05-24 17:44:11Z arith $ -->
+<!-- $Id: Atlas.xml 266 2017-06-29 08:28:27Z arith $ -->
 <!--
 
 	Atlas, a World of Warcraft instance map browser
@@ -63,7 +63,7 @@
 						self:SetTextInsets(0, 8, 0, 0);
 					</OnLoad>
 					<OnEnterPressed>
-						Atlas_SearchAndRefresh(self:GetText());
+						addon:SearchAndRefresh(self:GetText());
 						self:ClearFocus();
 					</OnEnterPressed>
 				</Scripts>
@@ -99,7 +99,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						Atlas_SearchAndRefresh(AtlasSearchEditBox:GetText());
+						addon:SearchAndRefresh(AtlasSearchEditBox:GetText());
 						AtlasSearchEditBox:ClearFocus();
 					</OnClick>
 				</Scripts>
@@ -118,7 +118,7 @@
 				<Scripts>
 					<OnClick>
 						AtlasSearchEditBox:SetText("");
-						Atlas_SearchAndRefresh(AtlasSearchEditBox:GetText());
+						addon:SearchAndRefresh(AtlasSearchEditBox:GetText());
 						AtlasSearchEditBox:ClearFocus();
 					</OnClick>
 				</Scripts>
@@ -227,6 +227,11 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
+				<Scripts>
+					<OnEnter>
+						Atlas:DungeonMinGearLevelToolTip(self);
+					</OnEnter>
+				</Scripts>
 			</Frame>
 			<Button name="$parentMapZoneName" parentKey="ZoneName" inherits="AtlasFrameMapZoneNameTemplate"/>
 			<Button name="$parentNextMapButton" parentKey="NextMap" inherits="AtlasFrameNextMapButtonTemplate"/>

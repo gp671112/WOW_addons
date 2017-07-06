@@ -226,6 +226,11 @@ L["Young Blanchy"] = "Young Blanchy"
 L["Ythyar"] = "Ythyar"
 L["Zelfan"] = "Zelfan"
 L["Zixil <Aspiring Merchant>"] = "Zixil <Aspiring Merchant>"
+
+-- ToC
+L["Description"] = "Burning Crusade Instances' Maps"
+L["Title"] = "Atlas |r|cFF0099FF[Burning Crusade]|r"
+
 --************************************************
 -- Zone Names, Acronyms, and Common Strings
 --************************************************

@@ -23,14 +23,14 @@
 # ## Notes-zhCN: 军团再临副本地图
 # ## Notes-zhTW: 軍臨天下副本地圖模組
 #@end-debug@
-## Version: v1.41.05
+## Version: v1.42.00
 ## Author: arith
-## X-Date: 2017-04-30T11:01:57Z
+## X-Date: 2017-06-29T8:24:52Z
 ## X-Email: atlas.addon at gmail dot com
 ## X-Website: http://www.atlasmod.com
 ## X-Category: Map
 ## RequiredDeps: Atlas
 
 Locale\Locales.xml
-Atlas_Legion.lua
-Atlas_Legion_DB.lua
+Core.lua
+Data.lua

@@ -191,6 +191,11 @@ L["Weegli Blastfuse"] = "Weegli Blastfuse"
 L["Yuka Screwspigot <Engineering Supplies>"] = "Yuka Screwspigot <Engineering Supplies>"
 L["Zeya"] = "Zeya"
 L["ZF"] = "ZF"
+
+-- ToC
+L["Description"] = "Classic WoW Instances' Maps"
+L["Title"] = "Atlas |r|cFF0099FF[Classic WoW]|r"
+
 --************************************************
 -- Zone Names, Acronyms, and Common Strings
 --************************************************

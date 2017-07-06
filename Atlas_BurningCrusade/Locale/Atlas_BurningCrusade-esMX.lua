@@ -126,6 +126,8 @@ L["Landing Spot"] = "Punto de Aterrizaje"
 L["Little Jimmy Vishas"] = "Pequeño Jimmy Vishas"
 L["Lord Crispin Ference"] = "Lord Crispin Ference"
 L["Lord Robin Daris"] = "Lord Robin Daris"
+--Translation missing 
+-- L["Lydia Accoste"] = ""
 L["Madrigosa"] = "Madrigosa"
 L["Mag"] = "Mag"
 L["Magistrate Henry Maleb"] = "Magistrado Henry Maleb"
@@ -225,4 +227,11 @@ L["Young Blanchy"] = "Joven Blanchy"
 L["Ythyar"] = "Ythyar"
 L["Zelfan"] = "Zelfan"
 L["Zixil <Aspiring Merchant>"] = "Zixil <Aspirante a mercader>"
+
+-- ToC
+--Translation missing 
+-- L["Description"] = ""
+--Translation missing 
+-- L["Title"] = ""
+
 end

@@ -126,6 +126,8 @@ L["Landing Spot"] = "Место высадки"
 L["Little Jimmy Vishas"] = "Малыш Джимми Вишас"
 L["Lord Crispin Ference"] = "Лорд Криспин Ференс"
 L["Lord Robin Daris"] = "Лорд Робин Дэрис"
+--Translation missing 
+-- L["Lydia Accoste"] = ""
 L["Madrigosa"] = "Мадригоса"
 L["Mag"] = "Маги"
 L["Magistrate Henry Maleb"] = "Мировой судья Генри Малеб"
@@ -225,5 +227,10 @@ L["Young Blanchy"] = "Молодая Савраска"
 L["Ythyar"] = "Айтар"
 L["Zelfan"] = "Зелфан"
 L["Zixil <Aspiring Merchant>"] = "Зиксель <Знаменитый купец>"
+
+-- ToC
+L["Description"] = "Карты подземелий Запределья"
+L["Title"] = "Atlas |r|cFF0099FF[Burning Crusade]|r"
+
 
 end

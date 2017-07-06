@@ -23,8 +23,8 @@ GTFO = {
 		TrivialDamagePercent = 2; -- Minimum % of HP lost required for an alert to be trivial
 		SoundOverrides = { }; -- Override table for GTFO sounds
 	};
-	Version = "4.42.12"; -- Version number (text format)
-	VersionNumber = 44212; -- Numeric version number for checking out-of-date clients
+	Version = "4.42.15"; -- Version number (text format)
+	VersionNumber = 44215; -- Numeric version number for checking out-of-date clients
 	DataLogging = nil; -- Indicate whether or not the addon needs to run the datalogging function (for hooking)
 	DataCode = "4"; -- Saved Variable versioning, change this value to force a reset to default
 	CanTank = nil; -- The active character is capable of tanking
@@ -52,10 +52,6 @@ GTFO = {
 	SoundTimes = { .5, .3, .4, .5 }; -- Length of sound files in seconds (for auto-unmute)
 	PartyMembers = 0;
 	RaidMembers = 0;
-	PowerAuras = nil; -- PowerAuras Integration enabled
-	WeakAuras = nil; -- WeakAuras Integration enabled
-	Recount = nil; -- Recount Integration enabled
-	Skada = nil; -- Skada Integration enabled
 	ShowAlert = nil;
 	Settings = { };
 	UIRendered = nil;
@@ -259,6 +255,7 @@ function GTFO_OnEvent(self, event, ...)
 				return;
 			end
 		end
+		
 		if (SpellType == "ENVIRONMENTAL_DAMAGE") then
 			local environment = string.upper(tostring(misc1))
 			local damage = tonumber(misc2) or 0

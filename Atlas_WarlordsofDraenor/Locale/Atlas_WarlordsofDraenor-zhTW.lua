@@ -39,4 +39,9 @@ L["SR"] = "SR"
 L["Train Ride"] = "登上恐軌列車"
 L["UBRS"] = "UBRS"
 
+-- ToC
+L["Description"] = "德拉諾之霸副本地圖模組"
+L["Title"] = "|r|cFF0099FF[地圖]|rAtlas 德拉諾之霸"
+
+
 end

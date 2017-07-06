@@ -1,0 +1,24 @@
+commit fcf817d539931daa0c0648495039bd9d4d4aa349
+Author: Rythal <illustriousdreamer@gmail.com>
+Date:   Sat Jun 3 13:26:09 2017 -0400
+
+    Added changelog.md for automatic packaging use
+
+commit ddea09e04b345fc356e913b0aaf8b6db76b14865
+Author: Rythal <illustriousdreamer@gmail.com>
+Date:   Sat Jun 3 11:24:40 2017 -0400
+
+    Fixing toc name for new naming
+
+commit 6bf0c90211ee99200b7021f3a5b021a8755b927e
+Author: Rythal <illustriousdreamer@gmail.com>
+Date:   Sat Jun 3 11:13:30 2017 -0400
+
+    Initial Push
+
+commit 54f11ac13102e4d979c8211375969599477c66e8
+Author: Rythal <illustriousdreamer@gmail.com>
+Date:   Sat Jun 3 11:12:21 2017 -0400
+
+    :neckbeard: Added .gitattributes & .gitignore files
+

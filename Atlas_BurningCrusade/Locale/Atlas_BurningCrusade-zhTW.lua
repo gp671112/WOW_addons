@@ -126,6 +126,8 @@ L["Landing Spot"] = "降落點"
 L["Little Jimmy Vishas"] = "小吉米·維希斯"
 L["Lord Crispin Ference"] = "貴族克利斯平·費蘭斯"
 L["Lord Robin Daris"] = "貴族羅賓·達利斯"
+--Translation missing 
+-- L["Lydia Accoste"] = ""
 L["Madrigosa"] = "瑪德里茍沙"
 L["Mag"] = "Mag/瑪瑟"
 L["Magistrate Henry Maleb"] = "赫尼·馬雷布鎮長"
@@ -225,5 +227,10 @@ L["Young Blanchy"] = "小馬布蘭契"
 L["Ythyar"] = "伊斯亞爾"
 L["Zelfan"] = "塞爾汎"
 L["Zixil <Aspiring Merchant>"] = "吉克希爾 <高級商人>"
+
+-- ToC
+L["Description"] = "燃燒的遠征副本地圖模組"
+L["Title"] = "|r|cFF0099FF[地圖]|rAtlas 燃燒的遠征"
+
 
 end

@@ -15,9 +15,9 @@
 # ## Notes: Mists of Pandaria Dungeon Maps
 # ## Notes-zhTW: 潘達利亞之謎副本地圖模組
 #@end-debug@
-## Version: v1.41.00
+## Version: v1.42.01
 ## Author: arith, Dynaletik, dubcat
-## X-Date: 2017-05-08T9:23:13Z
+## X-Date: 2017-06-29T13:35:04Z
 ## X-Credits: Dan Gilbert, Lothaer
 ## X-Email: atlas.addon at gmail dot com
 ## X-Website: http://www.atlasmod.com
@@ -25,5 +25,5 @@
 ## RequiredDeps: Atlas
 
 Locale\Locales.xml
-Atlas_MistsofPandaria.lua
-Atlas_MistsofPandaria_DB.lua
+Core.lua
+Data.lua

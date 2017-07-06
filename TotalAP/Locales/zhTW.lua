@@ -1,6 +1,6 @@
-L = LibStub("AceLocale-3.0"):NewLocale("TotalAP", "zhTW"); 
-
+local L = LibStub("AceLocale-3.0"):NewLocale("TotalAP", "zhTW")
 L = L or {}
+
 L["%.2f%% towards Rank %d"] = "%.2f%% (等級 %d)"
 L["%d new traits available - Use AP now to level up!"] = "可以解鎖 %d 項新特長 - 現在就使用神兵之力來升級!"
 L["%s %s for WOW %s loaded!"] = "%s %s 支援魔獸世界 %s 已載入!"
@@ -36,6 +36,7 @@ L["Login message is now shown."] = "登入時的訊息已經顯示。"
 L["New trait available - Use AP now to level up!"] = "可以解鎖新特長 - 現在就使用神兵之力來升級!"
 L["Next in: %s"] = "下一個：%s"
 L["No further research necessary"] = "不需要再繼續研究"
+L["Number format set to %s"] = "數字單位設定為%s"
 L["Progress report disabled."] = "進度報告已經停用。"
 L["Progress report enabled."] = "進度報告已經啟用。"
 L["Progress towards next trait: %d%%"] = "下一個特長進度：%d%%"
@@ -54,6 +55,7 @@ L["Show/Hide Tooltip Info"] = "顯示/隱藏滑鼠提示資訊"
 L["Spec icons glow effect disabled."] = "專精圖示發光效果已經停用。"
 L["Spec icons glow effect enabled."] = "專精圖示發光效果已經啟用。"
 L["Specialization: %s"] = "專精：%s"
+L["Switches between international and localised number formats for textual output"] = "切換數字顯示為國際單位或中文單位"
 L["This spec is currently active"] = "目前啟用的專精"
 L["Toggle all displays (will override the individual display's settings)"] = "切換顯示主介面（將會取代個別的顯示設定）"
 L["Toggle bar display for artifact power progress"] = "切換顯示神兵之力進度條"
@@ -74,10 +76,7 @@ L["Total Ranks Purchased: %d"] = "啟用的天賦總等級：%d"
 L["TotalAP - Artifact Power Tracker"] = "TotalAP - 一鍵使用神兵之力"
 L["Type %s to reset all currently ignored specs for this character"] = "輸入 %s 重置這個角色所有已忽略的專精"
 L["Use Next AP Token"] = "使用下一個神兵之力"
-L["Toggle additional display of the tooltip information next to the button"] = "切換按鈕旁顯示滑鼠提示中的資訊"
 
 -- ToC - Table of Contents
 L["Notes"] = "只要按一個鍵或按鈕就能使用背包中所有的神兵之力、顯示每個專精的神兵之力進度。供多種方式顯示神兵之力相關的資訊和統計摘要。"
-
-
 

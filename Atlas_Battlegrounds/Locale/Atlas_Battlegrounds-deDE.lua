@@ -1,10 +1,10 @@
--- $Id: Atlas_Battlegrounds-deDE.lua 1538 2016-08-07 15:57:11Z arith $
+-- $Id: Atlas_Battlegrounds-deDE.lua 1549 2017-06-29 08:12:15Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
-	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
+	Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -156,4 +156,9 @@ L["Wing Commander Vipore"] = "Schwadronskommandant Vipore"
 L["Wintergrasp Graveyard"] = "Friedhof der Festung"
 L["WSG"] = "WS"
 L["Wyvern Camp"] = "Flügeldrachenlager"
+
+-- ToC
+L["Description"] = "Schlachtfeldkarten"
+L["Title"] = "Atlas |r|cFF0099FF[Schlachtfelder]|r"
+
 end

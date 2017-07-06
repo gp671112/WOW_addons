@@ -230,6 +230,7 @@ DBM_CORE_SLASHCMD_HELP2				= {
 	"/dbm version2: 進行首領插件的版本檢測同時也密語提醒過期的使用者（也可使用：ver2）。",
 	"/dbm lockout: 向團隊成員請求他們當前的團隊副本鎖定訊息(鎖定訊息、副本id) (需要權限)。",
 	"/dbm lag: 進行團隊範圍內的網路延遲檢測。",
+	"/dbm durability: 進行團隊範圍內的裝備耐久度檢測。"
 }
 DBM_CORE_TIMER_USAGE	= {
 	"DBM計時器指令：",
@@ -345,6 +346,7 @@ DBM_CORE_AUTO_SPEC_WARN_TEXTS.count			= "%s!(%%s)"
 DBM_CORE_AUTO_SPEC_WARN_TEXTS.stack			= "你中了%%d層%s"
 DBM_CORE_AUTO_SPEC_WARN_TEXTS.switch			= "%s - 快更換目標!"
 DBM_CORE_AUTO_SPEC_WARN_TEXTS.switchcount	= "%s - 快更換目標!(%%s)"
+DBM_CORE_AUTO_SPEC_WARN_TEXTS.gtfo			= "你中招了 - 快閃開"
 DBM_CORE_AUTO_SPEC_WARN_TEXTS.Adds			= "小怪出現 - 快更換目標!"
 
 DBM_CORE_AUTO_SPEC_WARN_OPTIONS.spell				= "特別警告：$spell:%s"
@@ -376,6 +378,7 @@ DBM_CORE_AUTO_SPEC_WARN_OPTIONS.count 				= "特別警告：$spell:%s"
 DBM_CORE_AUTO_SPEC_WARN_OPTIONS.stack				= "特別警告：當疊加了>=%d層$spell:%s時"
 DBM_CORE_AUTO_SPEC_WARN_OPTIONS.switch 			= "特別警告：針對$spell:%s需要轉換目標"
 DBM_CORE_AUTO_SPEC_WARN_OPTIONS.switchcount	= "特別警告：針對$spell:%s需要轉換目標 (包含計數)"
+DBM_CORE_AUTO_SPEC_WARN_OPTIONS.gtfo 			= "特別警告：當地板出現糟糕的東西需要躲開時"
 DBM_CORE_AUTO_SPEC_WARN_OPTIONS.Adds				= "特別警告：當小怪出現需要更換目標時"
 
 DBM_CORE_AUTO_TIMER_TEXTS.target			= "%s: %%s"
@@ -424,6 +427,7 @@ DBM_CORE_AUTO_ARROW_OPTION_TEXT3		= "為中了$spell:%s後移動到特定區域�
 DBM_CORE_AUTO_VOICE_OPTION_TEXT			= "為$spell:%s播放語音音效"
 DBM_CORE_AUTO_VOICE2_OPTION_TEXT		= "為階段轉換播放語音音效"
 DBM_CORE_AUTO_VOICE3_OPTION_TEXT		= "為到來的小怪播放語音音效"
+DBM_CORE_AUTO_VOICE4_OPTION_TEXT		= "為地板技能撥放語音音效"
 DBM_CORE_AUTO_COUNTDOWN_OPTION_TEXT		= "為$spell:%s的冷卻播放倒數計時音效"
 DBM_CORE_AUTO_COUNTDOWN_OPTION_TEXT2	= "為$spell:%s的減益播放倒數計時音效"
 DBM_CORE_AUTO_COUNTOUT_OPTION_TEXT		= "為$spell:%s的持續時間播放倒數計時音效"
@@ -484,6 +488,11 @@ DBM_SPEED_CLEAR_TIMER_TEXT	= "最佳紀錄"
 DBM_COMBAT_RES_TIMER_TEXT	= "下一個戰復充能"
 
 DBM_CORE_TIMER_RESPAWN		= "%s 重生"
+
+DBM_CORE_DUR_CHECKING				= "檢測團隊裝備耐久度..."
+DBM_CORE_DUR_HEADER					= "Deadly Boss Mods - 裝備耐久度結果"
+DBM_CORE_DUR_ENTRY					= "%s:耐久度[%d百分比]/裝備損壞[%s]"
+DBM_CORE_LAG_FOOTER					= "無回應:%s"
 
 DBM_REQ_INSTANCE_ID_PERMISSION		= "%s想要查看你的副本ID和進度鎖定情況。\n你想發送該訊息給%s嗎? 在你的當前進程（除非你下線）他可以一直查閱該訊息。"
 DBM_ERROR_NO_RAID					= "你必須在一個團隊中才可以使用這個功能。"

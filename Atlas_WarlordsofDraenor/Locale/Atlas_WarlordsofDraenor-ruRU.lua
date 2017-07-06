@@ -36,6 +36,15 @@ L["HM"] = "ВМ"
 L["ID"] = "ЖД"
 L["SBG"] = "НПЛ"
 L["SR"] = "НП"
+--Translation missing 
+-- L["Train Ride"] = ""
 L["UBRS"] = "ВЧГ"
+
+-- ToC
+--Translation missing 
+-- L["Description"] = ""
+--Translation missing 
+-- L["Title"] = ""
+
 
 end

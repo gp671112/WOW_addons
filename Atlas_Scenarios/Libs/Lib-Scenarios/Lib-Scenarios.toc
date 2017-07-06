@@ -15,14 +15,14 @@
 ## Notes-zhTW: Atlas 史詩情境事件模式地圖插件
 #@end-non-debug@
 #@debug@
-## Title: Lib: Scenarios
-## Notes: A library to get scenario name, step name, and step description with specified language.
+# # ## Title: Lib: Scenarios
+# # ## Notes: A library to get scenario name, step name, and step description with specified language.
 #@end-debug@
 ## Author: Arith
 ## X-eMail: arithmandarjp at yahoo.co.jp
 ## X-Category: Library
 ## X-License: MIT
-## X-Date: @project-date-iso@
+## X-Date: 2017-03-26T18:45:55Z
 ## X-Website: https://wow.curseforge.com/addons/lib-scenarios/
 
 LibStub\LibStub.lua

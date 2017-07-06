@@ -36,5 +36,13 @@ L["HM"] = "HM"
 L["ID"] = "ID"
 L["SBG"] = "SBG"
 L["SR"] = "SR"
+--Translation missing 
+-- L["Train Ride"] = ""
 L["UBRS"] = "UBRS/Pic 2"
+
+-- ToC
+L["Description"] = "Cartes d'instances de Warlords of Draenor"
+--Translation missing 
+-- L["Title"] = ""
+
 end

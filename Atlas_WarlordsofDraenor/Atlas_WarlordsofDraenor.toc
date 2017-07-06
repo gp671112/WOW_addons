@@ -16,14 +16,14 @@
 # ## Notes: Warlords of Draenor Dungeon Maps
 # ## Notes-zhTW: 德拉諾之霸副本地圖模組
 #@end-debug@
-## Version: 1.39.00
+## Version: v1.42.00
 ## Author: arith, Dynaletik, dubcat
-## X-Date: 2017-03-27T8:38:48Z
+## X-Date: 2017-06-29T8:26:37Z
 ## X-Email: atlas.addon at gmail dot com
 ## X-Website: http://www.atlasmod.com
 ## X-Category: Map
 ## RequiredDeps: Atlas
 
 Locale\Locales.xml
-Atlas_WarlordsofDraenor.lua
-Atlas_WarlordsofDraenor_DB.lua
+Core.lua
+Data.lua

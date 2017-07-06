@@ -1,4 +1,81 @@
 ------------------------------------------------------------------------
+r23 | reglohpri | 2017-07-03 16:00:37 -0500 (Mon, 03 Jul 2017) | 5 lines
+Changed paths:
+   M /trunk/ClassSpecStats.toc
+   M /trunk/stats.lua
+
+Stat priorities for the following classes have been updated
+
+Hunter Marksmanship, Brewmaster Monk, 
+Elemental Shaman, Restoration Shaman
+
+------------------------------------------------------------------------
+r21 | reglohpri | 2017-06-21 10:36:06 -0500 (Wed, 21 Jun 2017) | 7 lines
+Changed paths:
+   M /trunk/locale.lua
+
+Stat priorities for the following classes have been updated
+
+Fire Mage, Outlaw Rogue, Affliction Warlock
+Demonology Warlock, Destruction Warlock
+
+And France language added 
+Thx to JackFuret 
+------------------------------------------------------------------------
+r20 | reglohpri | 2017-06-21 10:16:39 -0500 (Wed, 21 Jun 2017) | 5 lines
+Changed paths:
+   M /trunk/ClassSpecStats.toc
+   M /trunk/stats.lua
+
+Stat priorities for the following classes have been updated
+
+Fire Mage, Outlaw Rogue, Affliction Warlock
+Demonology Warlock, Destruction Warlock
+
+------------------------------------------------------------------------
+r18 | reglohpri | 2017-06-14 12:49:32 -0500 (Wed, 14 Jun 2017) | 8 lines
+Changed paths:
+   M /trunk/ClassSpecStats.toc
+
+Stats updated for 7.2.5
+Stat priorities for the following classes have been updated
+
+Demon Hunter - Havoc, Guardian Druid Tank, Restoration Druid Healing,
+Survival Hunter, Arcane Mage, Brewmaster Monk, Holy Paladin Healing,
+Shadow Priest, Assassination Rogue, Outlaw Rogue, Enhancement Shaman,
+Affliction Warlock, Fury Warrior, Protection Warrior
+
+------------------------------------------------------------------------
+r17 | reglohpri | 2017-06-14 12:00:45 -0500 (Wed, 14 Jun 2017) | 8 lines
+Changed paths:
+   M /trunk/ClassSpecStats.lua
+   M /trunk/ClassSpecStats.toc
+   M /trunk/locale.lua
+   M /trunk/stats.lua
+
+Stats updated for 7.2.5
+Stat priorities for the following classes have been updated
+
+Demon Hunter - Havoc, Guardian Druid Tank, Restoration Druid Healing,
+Survival Hunter, Arcane Mage, Brewmaster Monk, Holy Paladin Healing,
+Shadow Priest, Assassination Rogue, Outlaw Rogue, Enhancement Shaman,
+Affliction Warlock, Fury Warrior, Protection Warrior
+
+------------------------------------------------------------------------
+r14 | reglohpri | 2017-05-10 06:46:03 -0500 (Wed, 10 May 2017) | 1 line
+Changed paths:
+   M /trunk/ClassSpecStats.toc
+   M /trunk/stats.lua
+
+Stat Priorities for Frost Dead Knight updated
+------------------------------------------------------------------------
+r13 | reglohpri | 2017-04-02 14:02:26 -0500 (Sun, 02 Apr 2017) | 1 line
+Changed paths:
+   M /trunk/ClassSpecStats.toc
+   M /trunk/stats.lua
+
+Stats updated for 7.2
+------------------------------------------------------------------------
 r12 | reglohpri | 2016-11-19 12:36:21 -0600 (Sat, 19 Nov 2016) | 1 line
 Changed paths:
    M /trunk/ClassSpecStats.lua

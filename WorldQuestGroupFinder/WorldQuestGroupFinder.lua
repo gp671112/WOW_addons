@@ -73,7 +73,7 @@ function RegisteredEvents:PLAYER_LOGIN(event)
 	WorldQuestGroupFinder.SetHooks()
 	WorldQuestGroupFinderConf.CreateConfigMenu()
 	WorldQuestGroupFinder.dprint("World Quest Group Finder - "..L["WQGF_DEBUG_MODE_ENABLED"])
-	C_Timer.After(1, function()
+	C_Timer.After(4, function()
 		local playerRealmInfo = select(4, LibStub("LibRealmInfo"):GetRealmInfoByUnit("player"))
 		if (playerRealmInfo == "PVP" or playerRealmInfo == "RPPVP") then
 			playerRealmType = "PVP"

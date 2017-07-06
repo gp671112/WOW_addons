@@ -3,7 +3,7 @@
 ## Notes: Immersive replacement for quest & gossip
 ## Title-zhTW: |cff00FFFF[任務]|r 內容對話劇情
 ## Notes-zhTW: Immersion |n與NPC對話、接受/交回任務時，會使用軍臨天下 "說話的頭" 風格的對話方式，取代傳統的任務說明，讓你更能享受並融入任務內容的對話劇情。|n|cffffd200使用方法：|r按空白鍵接受任務和繼續下一段對話，按Esc取消對話，按1~9數字鍵選擇對話選項。|n從Esc>介面>插件>任務-對話，進行設定。
-## Version: 0.3.4
+## Version: 0.4.0
 ## SavedVariables: ImmersionSetup
 
 # Locale

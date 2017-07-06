@@ -1,18 +1,21 @@
 ## Interface: 70200
-## Version: 1.3.0 (r21-beta)
+## Version: 1.3.2 (r22-beta-4)
 ## Author: Cakechart
 
 ## Title: TotalAP - Artifact Power Tracker
-## Notes: Summarizes and displays artifact power-related information in a variety of ways
-## Title-zhTW: |cffB973CC[物品]|r 一鍵神兵之力
-## Notes-zhTW: TotalAP - Artifact Power Tracker |n只要按一個按鈕或快速鍵，就能一個接著一個使用背包中所有的神兵之力物品，不用在背包中到處翻找，不會漏掉任何一個。|n還會顯示每個專精的神兵之力進度，按下專精圖示可以在使用前切換專精。|n|cffffd200使用方法：|r從Esc>按鍵設定>插件，設定快速鍵來使用神兵之力和切換顯示插件介面。|n輸入 /ap 查看更多指令用法。
-## DefaultState: disabled
+## Title-deDE: TotalAP – Artefaktmachtverfolgung
+## Title-zhTW: TotalAP - 一鍵使用神兵之力
 
+## Notes: Summarizes and displays artifact power-related information in a variety of ways
+## Notes-deDE: Fasst artefaktmachtbezogene Informationen zusammen und zeigt sie auf verschiedene Weise an.
+## Notes-zhTW: 只要按一個鍵或按鈕就能使用背包中所有的神兵之力、顯示每個專精的神兵之力進度。供多種方式顯示神兵之力相關的資訊和統計摘要。
+
+## DefaultState: Enabled
 ## LoadOnDemand: 0
 ## SavedVariables: TotalArtifactPowerSettings, TotalArtifactPowerCache
 
-## X-Revision: r21-beta
-## X-Date: 2017-06-15T19:27:14Z
+## X-Revision: r22-beta-4
+## X-Date: 2017-07-01T22:45:17Z
 ## X-License: GPL3
 ## X-Embeds: LibStub, AceAddon-3.0, AceConsole-3.0, AceLocale-3.0, LibSharedMedia-3.0
 ## X-Website: http://www.curse.com/addons/wow/totalap

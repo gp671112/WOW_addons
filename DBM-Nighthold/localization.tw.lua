@@ -12,7 +12,7 @@ L= DBM:GetModLocalization(1706)
 L= DBM:GetModLocalization(1725)
 
 L:SetOptionLocalization({
-	InfoFrameBehavior		= "設置此戰鬥訊息框架的顯示方式",
+	InfoFrameBehavior	= "設置此戰鬥訊息框架的顯示方式",
 	TimeRelease					= "顯示中了定時釋放的玩家",
 	TimeBomb					= "顯示中了定時炸彈的玩家"
 })
@@ -35,7 +35,7 @@ L= DBM:GetModLocalization(1762)
 L:SetMiscLocalization({
 	First					= "第一",
 	Second				= "第二",
-	Third				= "第三",
+	Third					= "第三",
 	Adds1				= "手下們！都進來！",
 	Adds2				= "讓這些笨蛋見識真正的戰鬥！"
 })
@@ -67,10 +67,6 @@ L:SetOptionLocalization({
 	warnStarLow				= "為電漿球血量變低時(25%)顯示特別警告"
 })
 
-L:SetMiscLocalization({
-	RadarMessage			= "使用雷達找到無減益的夥伴加上HUD去閃避減益。未來希望能加強此功能並提供更多選項。"
-})
-
 ------------------
 -- Star Augur Etraeus --
 ------------------
@@ -96,7 +92,7 @@ L:SetOptionLocalization({
 })
 
 L:SetMiscLocalization({
-	noCLEU4EchoRings			= "時間的浪潮會粉碎你！",
+	noCLEU4EchoRings		= "時間的浪潮會粉碎你！",
 	noCLEU4EchoOrbs			= "你會發現時光有時很不穩定。",
 	prePullRP							= "我預見了你的到來。命運的絲線帶你來到這裡。你竭盡全力，想阻止燃燒軍團。"
 })

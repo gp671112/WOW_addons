@@ -35,8 +35,12 @@ L["Blue"] = "Blau"
 L["Class Order Halls"] = "Klassenordenshallen"
 L["Class Specific Only"] = "Nur klassenspezifische"
 L["Climbing Rope"] = "Kletterseil"
+--Translation missing 
+-- L["Connection to the Hall of Shadows"] = ""
 L["Death Knight Only"] = "Nur für Todesritter"
 L["Druid Only"] = "Nur für Druiden"
+--Translation missing 
+-- L["Exploration"] = ""
 L["Flight to Trueshot Lodge"] = "Flug zur Volltrefferhütte"
 L["From sea level to ground level"] = "Von Meereshöhe auf Grundhöhe"
 L["Gleep Chatterswitch"] = "Gliep Klatschknips"
@@ -48,6 +52,8 @@ L["Hunter Only"] = "Nur für Jäger"
 L["Illidari Gateway"] = "Illidaritor"
 L["Jump to Skyhold"] = "Zur Himmelsfeste springen"
 L["Legend"] = "Legende"
+--Translation missing 
+-- L["Nutral"] = ""
 L["Only available after winning the PvP battle"] = "Nur nach Sieg in der PvP-Schlacht verfügbar"
 L["Orange"] = "Orange"
 L["Orb of Translocation"] = "Translokationskugel"
@@ -62,7 +68,11 @@ L["Purple"] = "Violett"
 L["Rappelling Rope"] = "Abseilstrick"
 L["Red"] = "Rot"
 L["Require to complete \"Meet the Scout\" quest line first."] = "Erfordert den Abschluss der Questreihe 'Treffen mit der Späherin'."
+--Translation missing 
+-- L["Requires Eagle Ally Advancement"] = ""
 L["Requires honored faction with Sha'tari Skyguard"] = "Benötigt wohlwollenden Ruf bei Himmelswache der Sha'tari"
+--Translation missing 
+-- L["Requires Teleportation Nexus Advancement"] = ""
 L["Seahorse"] = "Seepferdchen"
 L["Shado-Pan Rope"] = "Seil der Shado-Pan"
 L["Ship / Zeppelin sailing path to destination"] = "Schiffs- / Zeppelinpfad zum Ziel"
@@ -86,4 +96,9 @@ L["Wind Rider Master"] = "Windreitermeister"
 L["Won't be available once the Battle for Andorhal chain is finished."] = "Nicht mehr verfügbar, wenn die Schlacht um Andorhal abgeschlossen ist."
 L["Yellow"] = "Gelb"
 L["Zeppelin Towers"] = "Zeppelintürme"
+
+-- ToC
+L["Description"] = "Beförderungsrouten"
+L["Title"] = "Atlas |r|cFF0099FF[Beförderungsrouten]|r"
+
 end

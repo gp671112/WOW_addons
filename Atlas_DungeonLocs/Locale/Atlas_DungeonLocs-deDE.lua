@@ -33,4 +33,9 @@ L["Dungeon Locations"] = "Instanzstandorte"
 L["Green"] = "Grün"
 L["Instances"] = "Instanzen"
 L["White"] = "Weiß"
+
+-- ToC
+L["Description"] = "Karten der Instanzstandorte"
+L["Title"] = "Atlas |r|cFF0099FF[Instanzstandorte]|r"
+
 end

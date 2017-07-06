@@ -21,9 +21,9 @@
 # ## Notes: Battleground Maps
 # ## Notes-zhTW: Atlas 戰場地圖插件
 #@end-debug@
-## Version: 1.39.00
+## Version: v1.42.00
 ## Author: arith, Dynaletik, dubcat
-## X-Date: 2017-03-27T8:39:40Z
+## X-Date: 2017-06-29T8:12:15Z
 ## X-Credits: Dan Gilbert, Lothaer
 ## X-Email: atlas.addon at gmail.com
 ## X-Website: http://www.atlasmod.com
@@ -32,4 +32,3 @@
 
 Locale\Locales.xml
 Atlas_Battlegrounds.lua
-Atlas_Battlegrounds_DB.lua

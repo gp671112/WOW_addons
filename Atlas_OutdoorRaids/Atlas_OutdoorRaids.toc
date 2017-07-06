@@ -22,9 +22,9 @@
 # ## Notes: Outdoor Raid Encounters
 # ## Notes-zhTW: Atlas 戶外首領地圖插件
 #@end-debug@
-## Version: v1.41.05
+## Version: v1.42.00
 ## Author: arith, dubcat
-## X-Date: 2017-06-08T13:41:33Z
+## X-Date: 2017-06-29T8:13:44Z
 ## X-Credits: Dan Gilbert, Lothaer
 ## X-Email: atlas.addon at gmail dot com
 ## X-Website: http://www.atlasmod.com
@@ -33,4 +33,3 @@
 
 Locale\Locales.xml
 Atlas_OutdoorRaids.lua
-Atlas_OutdoorRaids_DB.lua

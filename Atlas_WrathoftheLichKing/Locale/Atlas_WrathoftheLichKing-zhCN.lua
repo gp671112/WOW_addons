@@ -140,4 +140,9 @@ L["Warmage Kaitlyn"] = "战斗法师凯特琳"
 L["Watcher Gashra"] = "看守者加什拉"
 L["Watcher Narjil"] = "看守者纳尔伊"
 L["Watcher Silthik"] = "看守者希尔希克"
+
+-- ToC
+L["Description"] = "巫妖王之怒副本地图"
+L["Title"] = "Atlas |r|cFF0099FF[巫妖王之怒]|r"
+
 end

@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt 264 2017-06-21 05:53:16Z arith $
+$Id: ChangeLog.txt 268 2017-06-29 08:51:38Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
@@ -14,6 +14,32 @@ Known Issues:
 ==============
 = Change Log =
 ==============
+
+v1.42.01 (Jun. 29, 2017)
+------------------------
+- Fixed index error
+
+v1.42.00 (Jun. 29, 2017)
+------------------------
+- Modulized Atlas' module data like map entries and association database. 
+  Now these data won't be kept inside Atlas core addon. Those will be stored
+  and maintained in Atlas modules.
+  For user who didn't install old map modules like Outland, the corresponding
+  map menu also won't appeared. 
+- Renamed Atlas_RegisterPlugin() to Atlas:RegisterPlugin()
+  Plugin author will need to make corresponding changes.
+- Renamed Atlas_DropDownLayouts_Order table to Atlas.dropdowns.DropDownLayouts_Order
+- Renamed Atlas_DropDownLayouts table to Atlas.dropdowns.DropDownLayouts
+- Fixed plugin map image hasn't been set properly
+- Enhanced map menus' presentation. 
+  While one of the map category has more than 30 maps, it will be split to another
+  category automatically
+
+v1.41.18 (Jun. 22, 2017)
+------------------------
+- Added achievement's icon while displaying map's corresponding achievements
+- Enhanced Atlas frame's displaying to not to impact with WorldMap's displaying 
+  and zooming in/out
 
 v1.41.18 (Jun. 21, 2017)
 ------------------------

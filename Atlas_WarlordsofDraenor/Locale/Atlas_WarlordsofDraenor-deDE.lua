@@ -39,4 +39,9 @@ L["SR"] = "HN"
 L["Train Ride"] = "Zugfahrt"
 L["UBRS"] = "OBRS"
 
+-- ToC
+L["Description"] = "Karten der Instanzen aus Warlords of Draenor"
+L["Title"] = "Atlas |r|cFF0099FF[Warlords of Draenor]|r"
+
+
 end

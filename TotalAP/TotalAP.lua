@@ -52,7 +52,7 @@ local specIgnoredWarningGiven = false
 
 local artifactProgressCache = {} -- Used to calculate offspec artifact progress
 
-local maxArtifactTraits = 999; -- TODO: Temporary (before 7.2) - allow it to be set manually (to ignore specs above 35 or 54) - In 7.2 this might be entirely useless as AP will continue to increase exponentially at those levels and beyond - 7.2 TODO: Change to option and allow the user to manually set it (feature request to ignore "inefficient" specs)
+local maxArtifactTraits = 54; -- Only applied to tier 1 artifacts in 7.2 -- TODO: Temporary (before 7.2) - allow it to be set manually (to ignore specs above 35 or 54) - In 7.2 this might be entirely useless as AP will continue to increase exponentially at those levels and beyond - 7.2 TODO: Change to option and allow the user to manually set it (feature request to ignore "inefficient" specs)
 
 
 --local TotalAPFrame, TotalAPInfoFrame, TotalAPButton, TotalAPSpec1IconButton, TotalAPSpec2conButton, TotalAPSpec3IconButton, TotalAPSpec4IconButton; -- UI elements/frames
@@ -86,7 +86,7 @@ local function GetNumAvailableTraits()
 		
 	local thisLevelUnspentAP, numTraitsPurchased, _, _, _, _, _, _, tier = select(5, aUI.GetEquippedArtifactInfo());	
 	--local tier = aUI.GetArtifactTier() or 2; -- Assuming 2 as per usual (see other calls and comments for GetArtifactTier) - only defaults to this when artifact is not available/opened?
-	local numTraitsAvailable = MainMenuBar_GetNumArtifactTraitsPurchasableFromXP(numTraitsPurchased, thisLevelUnspentAP + inBagsTotalAP, tier); -- This is how many times the weapon can be leveled up with AP from bags AND already used (but not spent) AP from this level
+	local numTraitsAvailable = TotalAP.ArtifactInterface.GetNumRanksPurchasableWithAP(numTraitsPurchased, thisLevelUnspentAP + inBagsTotalAP, tier)
 	TotalAP.Debug(format("Called GetNumAvailableTraits -> %s new traits available!", numTraitsAvailable or 0));
 	
 	return numTraitsAvailable or 0;
@@ -147,7 +147,13 @@ local function VerifySettings()
 	-- Check default settings (= always up-to-date) against SavedVars, and add missing keys from the defaults. TODO: This leaves some remnants of deprecated options, also it would be easier with Ace
 	TotalAP.Utils.CompareTables(masterTable, targetTable, targetTable, nil);
 	
-
+	if settings.numberFormat == "default" then -- replace outdated value with one that works in future versions (TODO: This can be avoided if aceDB handles it?)
+	
+		TotalAP.Debug("Replaced invalid value \"default\" for key \"numberFormat\" with updated value \"legacy\"") -- TODO: Do this for all values automatically
+		settings.numberFormat = "legacy"
+		
+	end
+	
 	return true;
 	
 end
@@ -385,7 +391,7 @@ local numSpecs = GetNumSpecializations();
 				end
 				
 				artifactProgressCache[i] = cache[key][i];
-				TotalAP.Debug(format("Cached data exists from a previous session: spec = %i - traits = %i - AP = %i, tier = %i", i, cache[key][i]["numTraitsPurchased"], cache[key][i]["thisLevelUnspentAP"]), cache[key][i]["artifactTier"]);
+				TotalAP.Debug(format("Cached data exists from a previous session: spec = %i - traits = %i - AP = %d, tier = %i", i, cache[key][i]["numTraitsPurchased"], cache[key][i]["thisLevelUnspentAP"], cache[key][i]["artifactTier"]));
 			else  -- Initialise empty cache (for specs that have never been used) -> Necessary to allow them to be ignored/unignored without breaking everything
 					TotalAP.Debug(format("No cached data exists for spec %d!", i));
 		--		cache[key][i] = {}; -- TODO: This is pretty useless, except that it indicates which specs have been recognized but not yet scanned? - ACTUALLY it 
@@ -411,7 +417,7 @@ end
 -- TODO: Helper function
 local function GetSpecDisplayOrder()
 
-	local displayOrder = {}
+	local displayOrder = { 1, 2, 3, 4 } -- default order, used if no specs are being ignored
 	local order = 1 -- 0 is used to indicate ignored displays
 	
 	for i = 1, GetNumSpecializations() do 
@@ -457,12 +463,25 @@ local function UpdateSpecIcons()
 	end 
 	
 	local reservedButtonWidth = 0;
-	 if settings.actionButton.enabled then	 -- No longer reposition displays to the left unless button is actually disabled entirely, since the button can be hidden temporarily without being set to invisible (if no items are in the player's inventory/the active spec is set to being ignored)
-			if settings.actionButton.showText then -- Increase space to the right to avoid buttonText from overlapping in case of large numbers in the summary
-				reservedButtonWidth = TotalAPButton:GetWidth() + 10
-			else
-				reservedButtonWidth = TotalAPButton:GetWidth() + 5
+	
+	if settings.actionButton.enabled then	 -- No longer reposition displays to the left unless button is actually disabled entirely, since the button can be hidden temporarily without being set to invisible (if no items are in the player's inventory/the active spec is set to being ignored)
+		
+		local diff, spacer = 0,  3 -- TODO: Spacer via settings (later; can be part of the view)
+		
+		if settings.actionButton.showText then -- Increase space to the right to avoid buttonText from overlapping in case of large numbers in the summary
+			
+			if TotalAPButtonFontString:GetWidth() > (TotalAPButton:GetWidth() + spacer)  then -- Use buttonText instead of button to calculate the required space
+				diff = TotalAPButtonFontString:GetWidth() - TotalAPButton:GetWidth()
 			end
+			
+			reservedButtonWidth = TotalAPButton:GetWidth() + diff / 2 + spacer
+			
+		else
+		
+			reservedButtonWidth = TotalAPButton:GetWidth() + spacer
+			
+		end
+		
 	end
 	
 		-- TODO: Proper handling of alignment option / further customization
@@ -535,7 +554,7 @@ local function UpdateSpecIcons()
 		
 			TotalAP.Debug(format("Updating spec icons for spec %i from cached data"), i);
 			-- Calculate available traits and progress using the cached data
-			local numTraitsAvailable = MainMenuBar_GetNumArtifactTraitsPurchasableFromXP(v["numTraitsPurchased"],  v["thisLevelUnspentAP"] + inBagsTotalAP, v["artifactTier"]);
+			local numTraitsAvailable = TotalAP.ArtifactInterface.GetNumRanksPurchasableWithAP(v["numTraitsPurchased"],  v["thisLevelUnspentAP"] + inBagsTotalAP, v["artifactTier"])
 			local nextLevelRequiredAP = aUI.GetCostForPointAtRank(v["numTraitsPurchased"], v["artifactTier"]); 
 			local percentageOfCurrentLevelUp = (v["thisLevelUnspentAP"]  + inBagsTotalAP) / nextLevelRequiredAP*100;
 			
@@ -554,7 +573,7 @@ local function UpdateSpecIcons()
 		   MasqueUpdate(TotalAPSpecIconButtons[i], "specIcons");
 		   
 			
-				if numTraitsAvailable > 0 and settings.specIcons.showGlowEffect and v["numTraitsPurchased"] < maxArtifactTraits then -- Text and glow effect are independent of each other; combining them bugs out one or the other (apparently :P)
+				if numTraitsAvailable > 0 and settings.specIcons.showGlowEffect and not (v["artifactTier"] == 1 and v["numTraitsPurchased"] < maxArtifactTraits) then -- Text and glow effect are independent of each other; combining them bugs out one or the other (apparently :P)
 					
 					-- -- TODO: Confusing, comment and naming conventions.
 					-- local ol = TotalAPSpecIconButtons[k].overlay;
@@ -624,7 +643,7 @@ local function UpdateSpecIcons()
 				end
 			
 			-- Make sure the text display is moving accordingly to the frames (or it will detach and look buggy)
-			if v["numTraitsPurchased"] < maxArtifactTraits then
+			if v["numTraitsPurchased"] < maxArtifactTraits or v["artifactTier"] > 1 then
 				specIconFontStrings[k]:SetText(fontStringText);
 			else
 				specIconFontStrings[k]:SetText("---"); -- TODO: MAX? Empty? Anything else?
@@ -698,11 +717,23 @@ local function UpdateInfoFrame()
 	 -- TODO: DRY / GUI -> GetReservedButtonWidth (only for DefaultView?)
 
 	 if settings.actionButton.enabled then	 -- No longer reposition displays to the left unless button is actually disabled entirely, since the button can be hidden temporarily without being set to invisible (if no items are in the player's inventory/the active spec is set to being ignored)
-			if settings.actionButton.showText then -- Increase space to the right to avoid buttonText from overlapping in case of large numbers in the summary
-				reservedButtonWidth = TotalAPButton:GetWidth() + 10
-			else
-				reservedButtonWidth = TotalAPButton:GetWidth() + 5
+			
+		local diff, spacer = 0,  3 -- TODO: Spacer via settings (later; can be part of the view)	
+			
+		if settings.actionButton.showText then -- Increase space to the right to avoid buttonText from overlapping in case of large numbers in the summary
+			
+			if TotalAPButtonFontString:GetWidth() > (TotalAPButton:GetWidth() + spacer) then -- Use buttonText instead of button to calculate the required space
+				diff = TotalAPButtonFontString:GetWidth() - TotalAPButton:GetWidth()
 			end
+			
+			reservedButtonWidth = TotalAPButton:GetWidth() + diff / 2 + spacer
+			
+		else
+		
+			reservedButtonWidth = TotalAPButton:GetWidth() + spacer
+			
+		end
+
 	end
 	
 	TotalAPInfoFrame:ClearAllPoints(); 
@@ -857,7 +888,7 @@ local function UpdateInfoFrame()
 			end
 			
 			-- If artifact is maxed, replace overlay bars with a white one to indicate that fact: TODO: Obsolete in 7.2 -> repurpose as AK Bar
-			if v["numTraitsPurchased"] >= maxArtifactTraits then
+			if v["artifactTier"] == 1 and v["numTraitsPurchased"] >= maxArtifactTraits then
 				TotalAPUnspentBars[k]:SetSize(100, settings.infoFrame.barHeight); -- maximize bar to take up all the available space
 				TotalAPUnspentBars[k].texture:SetVertexColor(239/255, 229/255, 176/255, 1); -- turns it white; TODO: settings.infoFrame.progressBar.maxRed etc to allow setting a custom colour for maxed artifacts (later on)
 				TotalAPInBagsBars[k].texture:SetVertexColor(settings.infoFrame.progressBar.red/255, settings.infoFrame.progressBar.green/255, settings.infoFrame.progressBar.blue/255, 0); -- turns it invisible (alpha = 0%)
@@ -887,15 +918,17 @@ end
 -- TODO: This is quite messy, due to the button being the only and primary component in early addon versions (that was then change to be just one of many)
 local function UpdateActionButton()
 
+	local spec = GetSpecialization()
+
 	-- Hide button if artifact is already maxed (TODO: 7.1 only?)
-	if artifactProgressCache[GetSpecialization()] ~= nil and artifactProgressCache[GetSpecialization()]["numTraitsPurchased"] >= maxArtifactTraits and not InCombatLockdown() then
+	if artifactProgressCache[spec] ~= nil and artifactProgressCache[spec]["artifactTier"] == 1 and artifactProgressCache[spec]["numTraitsPurchased"] >= maxArtifactTraits and not InCombatLockdown() then
 		TotalAP.Debug("Hiding action button due to maxed out artifact weapon");
 		TotalAPButton:Hide();
 		return
 	end
 
 	-- Hide button if spec is being ignored (unless research notes need to be used) -- TODO: Instead of hiding, give visual indicator? (greyed out icon or sth.)
-	if not foundKnowledgeTome and artifactProgressCache[GetSpecialization()] ~= nil and artifactProgressCache[GetSpecialization()]["isIgnored"] then
+	if not foundKnowledgeTome and artifactProgressCache[spec] ~= nil and artifactProgressCache[spec]["isIgnored"] then
 		TotalAP.Debug("Hiding action button because the current spec is set to being ignored")
 		TotalAPButton:Hide();
 		return
@@ -968,9 +1001,9 @@ local function UpdateActionButton()
 		--if settings.actionButton.showText and inBagsTotalAP > 0 and currentItemAP > 0 then
 			
 			if numItems > 1 then -- Display total AP in bags
-				TotalAPButtonFontString:SetText(TotalAP.Utils.FormatShort(currentItemAP, true) .. "\n(" .. TotalAP.Utils.FormatShort(inBagsTotalAP, true) .. ")") -- TODO: More options/HUD setup - planned once advanced config is implemented via AceConfig
+				TotalAPButtonFontString:SetText(TotalAP.Utils.FormatShort(currentItemAP, true, settings.numberFormat) .. "\n(" .. TotalAP.Utils.FormatShort(inBagsTotalAP, true, settings.numberFormat) .. ")") -- TODO: More options/HUD setup - planned once advanced config is implemented via AceConfig
 			else
-				TotalAPButtonFontString:SetText(TotalAP.Utils.FormatShort(currentItemAP, true))
+				TotalAPButtonFontString:SetText(TotalAP.Utils.FormatShort(currentItemAP, true, settings.numberFormat))
 			end
 				
 		else
@@ -1675,9 +1708,9 @@ GameTooltip:HookScript('OnTooltipSetItem', function(self)
 		
 				-- Display AP summary
 				if numItems > 1 and settings.tooltip.showNumItems then
-					self:AddLine(format("\n" .. L["%s Artifact Power in bags (%d items)"], TotalAP.Utils.FormatShort(inBagsTotalAP, true), numItems), 230/255, 204/255, 128/255);
+					self:AddLine(format("\n" .. L["%s Artifact Power in bags (%d items)"], TotalAP.Utils.FormatShort(inBagsTotalAP, true, settings.numberFormat), numItems), 230/255, 204/255, 128/255);
 				else
-					self:AddLine(format("\n" .. L["%s Artifact Power in bags"], TotalAP.Utils.FormatShort(inBagsTotalAP, true)) , 230/255, 204/255, 128/255);
+					self:AddLine(format("\n" .. L["%s Artifact Power in bags"], TotalAP.Utils.FormatShort(inBagsTotalAP, true, settings.numberFormat)) , 230/255, 204/255, 128/255);
 				end
 			
 				-- Calculate progress towards next trait
@@ -1739,7 +1772,7 @@ function AceAddon:OnEnable()
 			CreateInfoFrame();
 			CreateSpecIcons(); 
 			
-			-- if settings.showLoginMessage then TotalAP.ChatMsg(format(L["%s %s for WOW %s loaded!"], addonName, TotalAP.versionString, clientVersion)); end
+			if settings.showLoginMessage then TotalAP.ChatMsg(format(L["%s %s for WOW %s loaded!"], addonName, TotalAP.versionString, clientVersion)); end
 			
 			TotalAP.Debug(format("Registering button update events"));
 			RegisterUpdateEvents();

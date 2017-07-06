@@ -7,11 +7,11 @@ local L
 L= DBM:GetModLocalization(1862)
 
 L:SetTimerLocalization({
-	timerComboWamboCD =	"下一次彗星/魔刺 (%d)"
+	timerComboWamboCD =	"下一次彗星/魔刺(%d)"
 })
 
 L:SetOptionLocalization({
-	timerComboWamboCD =	"計時條：下一次撞擊彗星/煉獄魔刺"
+	timerComboWamboCD =	"為下一次衝擊彗星/煉獄魔刺顯示計時器"
 })
 
 L:SetMiscLocalization({
@@ -53,7 +53,7 @@ L= DBM:GetModLocalization(1897)
 L= DBM:GetModLocalization(1873)
 
 L:SetOptionLocalization({
-	InfoFrame =	"顯示首領能量的訊息框架"
+	InfoFrame =	"為首領能量顯示訊息框架"
 })
 
 ---------------------------

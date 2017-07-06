@@ -138,4 +138,11 @@ L["Watcher Gashra"] = "Дозорный Гашра"
 L["Watcher Narjil"] = "Дозорный Нарджил"
 L["Watcher Silthik"] = "Дозорный Силтик"
 
+-- ToC
+--Translation missing 
+-- L["Description"] = ""
+--Translation missing 
+-- L["Title"] = ""
+
+
 end

@@ -33,4 +33,9 @@ L["Dungeon Locations"] = "副本位置"
 L["Green"] = "綠"
 L["Instances"] = "副本"
 L["White"] = "白"
+
+-- ToC
+L["Description"] = "Atlas 副本位置地圖插件，顯示各個副本、團隊副本所在位置"
+L["Title"] = "|r|cFF0099FF[地圖]|rAtlas 副本位置地圖"
+
 end

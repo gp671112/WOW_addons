@@ -1,10 +1,16 @@
-$Id: ChangeLog.txt 41 2017-05-08 03:55:58Z arith $
+$Id: ChangeLog.txt 43 2017-06-29 08:14:23Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2012 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 ==============
 = Change Log =
 ==============
+
+v1.42.00 (Jun. 29, 2017)
+------------------------
+- Updated to support Atlas 1.42.00
+- Localization update: 
+  - German (pas06)
 
 v1.41.00 (May 08, 2017)
 ------------------------
@@ -18,29 +24,24 @@ v1.39.00 (Mar. 27, 2017)
 - Toc update to support WoW 7.2
 - Library update - Lib-Scenarios
 
-
 v1.38.00 (Mar. 20, 2017)
 ------------------------
 - Added The Assault on Broken Shore scenario (7.2)
 - Corrected Brewmoon Festival scenario's step description
 
-
 v1.35.00 (Oct. 27, 2016)
 ------------------------
 - Toc update to support WoW 7.1.0
-
 
 v1.34.02 (Oct. 06, 2016)
 ------------------------
 - Translation update:
   - Russian (dartraiden)
   
-
 v1.34.01 (Sep. 23, 2016)
 ------------------------
 - Enabled nolib-creation
 - Removed Demon Invasion's leading color
-
 
 v1.34.00 (Aug. 31, 2016)
 ------------------------
@@ -51,13 +52,11 @@ v1.34.00 (Aug. 31, 2016)
   - German (pas06)
 - Corrected the step 8 and 9's name and description in Broken Shore scenario
 
-
 v1.33.01 (Aug. 29, 2016)
 ------------------------
 - Translation update:
   - Traditional Chinese
 - Scenarios database update - now use Lib-Scenarios to get the expected info
-
 
 v1.33.00 (Jul. 19, 2016)
 ------------------------
@@ -67,55 +66,45 @@ v1.33.00 (Jul. 19, 2016)
 - Replace punctuations by using Atlas' localization
 - Translation update:
   - Simplified Chinese (ananhaid)
-
   
 v1.32.05 (Jul. 07, 2016)
 ------------------------
 - Toc title update
-
 
 v1.32.04 (Jul. 07, 2016)
 ------------------------
 - Added Demon Invasion map
 - Fixed English locale
 
-
 v1.32.03 (Jul. 06, 2016)
 ------------------------
 - Update the steps details of The Battle for Broken Shore
   (Hodrde's steps are slightly different)
 
-
 v1.32.02 (Jun. 27, 2016)
 ------------------------
 - Scenario DB translation update (up to 7.0.3.22045)
-
 
 v1.32.01 (Jun. 22, 2016)
 ------------------------
 - Update Scenario DB (up to 21992)
 - Added Broken Shore scenario (Legion)
 
-
 v1.32.00 (Jun. 13, 2015)
 ------------------------
 - TOC update to support WoW 6.2
-
 
 v1.31.01 (Mar. 01, 2015)
 ------------------------
 - TOC update to support WoW 6.1
 
-
 v1.31.00 (Nov. 10, 2014)
 -----------------------
 - Update major number to sync with Atlas core addon
 
-
 v1.30.00 (Oct. 15, 2014)
 -----------------------
 - TOC update to support WoW 6.0
-
 
 v1.26.00 (Sep. 09, 2013)
 -----------------------
@@ -124,7 +113,6 @@ v1.26.00 (Sep. 09, 2013)
     - esES/esMX (maqjav)
     - ruRU (StingerSoft)
 - Fixed esES and esMX Scenario DB now to look up correct localized values
-
 
 v1.25.01 (May 24, 2013)
 -----------------------
@@ -137,8 +125,7 @@ v1.25.01 (May 24, 2013)
     - deDE (Dynaletik)
     - esES/esMX (maqjav)
     - ruRU (StingerSoft)
-    
-    
+        
 v1.25.00 (May 21, 2013)
 -----------------------
 - TOC update to support WoW 5.3
@@ -151,7 +138,6 @@ v1.25.00 (May 21, 2013)
     - Blood in the Snow
     - Dark Heart of Pandaria
     - The Secrets of Ragefire
-
     
 v1.24.00 (Mar. 05, 2013)
 -----------------------
@@ -165,7 +151,6 @@ v1.24.00 (Mar. 05, 2013)
     - Domination Point
     - Lion's Landing
     - Troves of the Thunder King
-
     
 v1.23.0 (Dec. 07, 2012)
 -----------------------
@@ -175,14 +160,13 @@ v1.23.0 (Dec. 07, 2012)
 - Map legend update:
     - Crypt of Forgotten Kings
   
-  
 v1.22.2 (Nov. 01, 2012)
+-----------------------
 - All Maps and legend information updated
 - Maps added: 
     - Arena of Annihilation
     - Crypt of Forgotten Kings
 
-    
 v1.22.1 (Oct. 10, 2012)
 -----------------------
 - Initial version as Scenarios were introduced in WoW 5.0

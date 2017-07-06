@@ -211,7 +211,7 @@ L.HUDAlphaSlider			= "透明度:%0.1f"
 
 -- Tab: Spoken Alerts Frame
 L.Panel_SpokenAlerts		= "語音警告"
-L.Area_VoiceSelection		= "語音選擇"
+L.Area_VoiceSelection		= "語音選擇（用鼠標滾輪滾動選單）"
 L.CountdownVoice			= "設置主要倒數計時語音"
 L.CountdownVoice2			= "設置次要倒數計時語音"
 L.CountdownVoice3			= "設置第三倒數計時語音"

@@ -1,6 +1,24 @@
---	19:58 03.04.2017
+--	13:15 26.06.2017
 
 --[[
+3875
+* Raid cooldowns: Blessing of Sacrifice cd fix
+* Minor fixes
+
+3870
+* Note: new option "Enable when you receive a new note"
+* Note: fixed bug when autoload boss randomly changed if you delete note
+* Note: added flash when you receive a new note
+* Note: added ToS icons
+* Raid cooldowns: set all traits minimum on 4th rank
+* Fight log: healing tab: added filter for targets "only tanks" & "non-tanks"
+* Minor fixes
+
+3860
+* Note: fixed "blackbox" error
+* Note: added support for multilanguage icons
+* Raid cooldowns: added time till next charge for resurrect line
+
 3855
 * Raid Inspect: fixes (weapons still be missing if players in another zone)
 * Raid Inspect: you able to see artifact relics for all players	
@@ -39,7 +57,7 @@
 ]]
 local GlobalAddonName, ExRT = ...
 
-ExRT.V = 3855
+ExRT.V = 3875
 ExRT.T = "R"
 
 ExRT.OnUpdate = {}		--> таймеры, OnUpdate функции

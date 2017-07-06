@@ -192,4 +192,11 @@ L["Yuka Screwspigot <Engineering Supplies>"] = "Юка Крутипроб"
 L["Zeya"] = "Зейя"
 L["ZF"] = "ЗФ"
 
+-- ToC
+--Translation missing 
+-- L["Description"] = ""
+--Translation missing 
+-- L["Title"] = ""
+
+
 end

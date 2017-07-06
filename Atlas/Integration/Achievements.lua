@@ -1,4 +1,4 @@
--- $Id: Achievements.lua 253 2017-05-25 07:22:48Z arith $
+-- $Id: Achievements.lua 266 2017-06-29 08:28:27Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -32,7 +32,7 @@ local _G = getfenv(0);
 -- Libraries
 local bit = _G.bit;
 local format = string.format
-
+local GetAchievementInfo, GetAchievementNumCriteria, GetAchievementCriteriaInfo, GetAchievementLink = GetAchievementInfo, GetAchievementNumCriteria, GetAchievementCriteriaInfo, GetAchievementLink
 -- ----------------------------------------------------------------------------
 -- AddOn namespace.
 -- ----------------------------------------------------------------------------
@@ -45,8 +45,8 @@ function addon:AchievementButtonUpdate(button, achievementID)
 	button.achievementID = achievementID;
 	button.link = GetAchievementLink(achievementID) or nil;
 	-- id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuild, wasEarnedByMe, earnedBy = GetAchievementInfo(achievementID or categoryID, index)
-	local _, name, _, completed, month, day, year, description, _, _, _, _, _, earnedBy = GetAchievementInfo(achievementID);
-	button.tooltiptitle = name;
+	local _, name, _, completed, month, day, year, description, _, icon, _, _, _, earnedBy = GetAchievementInfo(achievementID);
+	button.tooltiptitle = format("|T%d:0:0|t |cFFFFFFFF%s|r", icon, name);
 	local tooltiptext = description;
 	local numCriteria = GetAchievementNumCriteria(achievementID);
 	if (numCriteria and numCriteria > 0) then
@@ -77,10 +77,10 @@ function addon:AchievementButtonUpdate(button, achievementID)
 		end
 	end
 	if (completed) then
-		name = "      |CFFFFFFFF"..name;
+		name = format("      |T%d:0:0|t |CFFFFFFFF%s", icon, name);
 		tooltiptext = tooltiptext.."\n|CFF00FF00"..format(ACHIEVEMENT_TOOLTIP_COMPLETE, earnedBy, month, day, year);
 	else
-		name = "      |CFF808080"..name;
+		name = format("      |T%d:0:0|t |CFF808080%s", icon, name);
 	end
 	button.Text:SetText(name);
 	button.tooltiptext = tooltiptext.."\n|CFF8080FF"..L["ATLAS_OPEN_ACHIEVEMENT"].."|R";

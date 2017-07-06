@@ -39,5 +39,11 @@ L["HM"] = "HM"
 L["ID"] = "ID"
 L["SBG"] = "SBG"
 L["SR"] = "SR"
+L["Train Ride"] = "火车"
 L["UBRS"] = "UBRS"
+
+-- ToC
+L["Description"] = "德拉诺之王副本地图"
+L["Title"] = "Atlas |r|cFF0099FF[德拉诺之王]|r"
+
 end

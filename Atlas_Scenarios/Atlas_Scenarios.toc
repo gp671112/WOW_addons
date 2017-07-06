@@ -19,18 +19,16 @@
 # ## Notes: Scenarios Maps
 # ## Notes-zhTW: Atlas 史詩情境事件模式地圖插件
 #@end-debug@
-## Version: v1.41.00
+## Version: v1.42.00
 ## OptionalDeps: Lib-Scenarios
 ## Author: arith
-## X-Date: 2017-05-08T3:55:58Z
+## X-Date: 2017-06-29T8:14:23Z
 ## X-Email: atlas.addon at gmail.com
 ## X-Website: http://www.atlasmod.com
 ## X-Category: Map
 ## RequiredDeps: Atlas
 # # SavedVariables: ScenariosDB
 
-
 Libs\Libs.xml
-Atlas_ScenariosDB.lua
 Locale\Locales.xml
 Atlas_Scenarios.lua

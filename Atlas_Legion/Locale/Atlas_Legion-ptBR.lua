@@ -29,27 +29,110 @@ if L then
 L["Ancient Widow"] = "Viúva Anciã"
 L["Arcanist Malrodi"] = "Arcanista Malrodi"
 L["Archmage Galeorn"] = "Arquimago Galeorn"
+--Translation missing 
+-- L["Archmage Khadgar"] = ""
+--Translation missing 
+-- L["Archmage Leryda"] = ""
 L["Arthfael"] = "Arthfael"
+--Translation missing 
+-- L["Barnes"] = ""
+--Translation missing 
+-- L["Braxas the Fleshcarver"] = ""
+--Translation missing 
+-- L["Charred Bone Fragment"] = ""
 L["Crate of Corks"] = "Caixa de rolhas"
 L["Dantalionax"] = "Dantalionax"
+--Translation missing 
+-- L["Dog-Eared Page"] = ""
+--Translation missing 
+-- L["Dread Captain Thedon"] = ""
 L["Drelanim Whisperwind"] = "Drelanim Murmuréolo"
+--Translation missing 
+-- L["Earlnoc the Beastbreaker"] = ""
 L["Echoing Horn of the Damned"] = "Trombeta Ecoante dos Malditos"
 L["Fel-Ravaged Tome"] = "Tomo Destroçado pela Vileza"
+--Translation missing 
+-- L["Fenryr's eastern spawn point"] = ""
+--Translation missing 
+-- L["Fenryr's western spawn point"] = ""
+--Translation missing 
+-- L["First Arcanist Thalyssra"] = ""
+--Translation missing 
+-- L["Flightmaster Volnath"] = ""
+--Translation missing 
+-- L["Gilded Guardian"] = ""
+--Translation missing 
+-- L["Gom Crabbar"] = ""
+--Translation missing 
+-- L["Grimoira"] = ""
+--Translation missing 
+-- L["Hastily-Scrawled Page"] = ""
+--Translation missing 
+-- L["Ink-splattered Page"] = ""
+--Translation missing 
+-- L["Jaggen-Ra"] = ""
 L["Kalyndras <Rook's Quartermaster>"] = "Kalyndras <Intendente do Corvo>"
 L["King Bjorn"] = "Rei Bjorn"
 L["King Haldor"] = "Rei Haldor"
 L["King Ranulf"] = "Rei Ranulf"
 L["King Tor"] = "Rei Tor"
+--Translation missing 
+-- L["Koren"] = ""
 L["Kraxa <Mother of Gnashers>"] = "Kraxa <Mãe dos Triscadentes>"
 L["Kudzilla"] = "Kodzilla"
 L["Lady Velandras Ravencrest"] = "Lady Velandras Cristacorvo"
+--Translation missing 
+-- L["Lydia Accoste"] = ""
 L["Ly'leth Lunastre"] = "Ly'leth Lunastre"
+--Translation missing 
+-- L["Mage Darius"] = ""
 L["Malfurion Stormrage"] = "Malfurion Tempesfúria"
+--Translation missing 
+-- L["Medivh's Footlocker"] = ""
 L["Mushroom Merchant"] = "Comerciante de Cogumelos"
+--Translation missing 
+-- L["Mythana"] = ""
+--Translation missing 
+-- L["Nightmare Watcher"] = ""
 L["Portal to Shal'Aran"] = "Portal para Shal'Aran"
+--Translation missing 
+-- L["Put a Cork in It"] = ""
+--Translation missing 
+-- L["Raga'yut"] = ""
 L["Rage Rot"] = "Pútrido Raivoso"
+--Translation missing 
+-- L["Ragoul"] = ""
+--Translation missing 
+-- L["Requires Skaggldrynk"] = ""
+--Translation missing 
+-- L["Shellmaw"] = ""
+--Translation missing 
+-- L["Singed Page"] = ""
+--Translation missing 
+-- L["Sludge Face"] = ""
+--Translation missing 
+-- L["Soul Fragment"] = ""
 L["Spiritwalker Ebonhorn"] = "Andarilho Espiritual Chifre de Ébano"
+--Translation missing 
+-- L["Suramar Leyline Map"] = ""
 L["Teleport to Moonglade"] = "Teleporte para Clareira da Lua"
 L["Teleport to Tichondrius / Grand Magistrix Elisande"] = "Teleporte para Tichondrius / Grand Magistrix Elisande"
+--Translation missing 
+-- L["The Rat King"] = ""
+--Translation missing 
+-- L["Torn Page"] = ""
+--Translation missing 
+-- L["Ultanok"] = ""
+--Translation missing 
+-- L["Understone Lasher"] = ""
+--Translation missing 
+-- L["Velimar"] = ""
 L["Volynd Stormbringer"] = "Volynd Traztormenta"
+--Translation missing 
+-- L["Worn-Edged Page"] = ""
+
+-- ToC
+L["Description"] = "mapas de instâncias do Legion"
+L["Title"] = "Atlas |r|cFF0099FF[Legion]|r"
+
 end

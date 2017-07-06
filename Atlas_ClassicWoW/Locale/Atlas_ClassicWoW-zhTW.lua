@@ -192,4 +192,9 @@ L["Yuka Screwspigot <Engineering Supplies>"] = "尤卡·斯庫比格特 <工程�
 L["Zeya"] = "仄亞"
 L["ZF"] = "ZF/祖法"
 
+-- ToC
+L["Description"] = "艾澤拉斯副本地圖模組"
+L["Title"] = "|r|cFF0099FF[地圖]|rAtlas 艾澤拉斯"
+
+
 end

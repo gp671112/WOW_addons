@@ -42,4 +42,9 @@ L["Dungeon Locations"] = "Расположение подземелий"
 L["Green"] = "Зелёный"
 L["Instances"] = "Подземелья"
 L["White"] = "Белый"
+
+-- ToC
+L["Description"] = "Карты расположений подземелий"
+L["Title"] = "Atlas |r|cFF0099FF[Расп. подземелий]|r"
+
 end

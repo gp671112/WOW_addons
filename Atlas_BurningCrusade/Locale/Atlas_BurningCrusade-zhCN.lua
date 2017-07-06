@@ -129,6 +129,7 @@ L["Landing Spot"] = "着陆点"
 L["Little Jimmy Vishas"] = "吉米·维沙斯"
 L["Lord Crispin Ference"] = "克里斯宾·费伦斯伯爵"
 L["Lord Robin Daris"] = "罗宾·达瑞斯伯爵"
+L["Lydia Accoste"] = "莉迪亚·埃考斯特"
 L["Madrigosa"] = "玛蒂苟萨"
 L["Mag"] = "Mag"
 L["Magistrate Henry Maleb"] = "赫尼·马雷布镇长"
@@ -228,4 +229,9 @@ L["Young Blanchy"] = "小马布兰契"
 L["Ythyar"] = "伊萨尔"
 L["Zelfan"] = "扎尔凡"
 L["Zixil <Aspiring Merchant>"] = "吉克希尔 <有抱负的商人>"
+
+-- ToC
+L["Description"] = "燃烧的远征副本地图"
+L["Title"] = "Atlas |r|cFF0099FF[燃烧的远征]|r"
+
 end

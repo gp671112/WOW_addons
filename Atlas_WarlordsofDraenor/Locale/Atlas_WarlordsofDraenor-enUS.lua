@@ -37,4 +37,9 @@ L["SBG"] = "SBG"
 L["SR"] = "SR"
 L["Train Ride"] = "Train Ride"
 L["UBRS"] = "UBRS"
+
+-- ToC
+L["Description"] = "Warlords of Draenor Instances' Maps"
+L["Title"] = "Atlas |r|cFF0099FF[Warlords of Draenor]|r"
+
 end

@@ -1,4 +1,4 @@
--- $Id: Constants.lua 218 2017-04-13 15:10:34Z arith $
+-- $Id: Constants.lua 266 2017-06-29 08:28:27Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -28,7 +28,7 @@
 -- Localized Lua globals.
 -- ----------------------------------------------------------------------------
 -- Functions
-local _G = getfenv(0);
+local _G = getfenv(0)
 -- Libraries
 -- ----------------------------------------------------------------------------
 -- AddOn namespace.
@@ -37,38 +37,135 @@ local FOLDER_NAME, private = ...
 private.addon_name = "Atlas"
 
 local LibStub = _G.LibStub
-local constants = {}
+local constants = { }
 private.constants = constants
 
 -- Initialization
-ATLAS_VERSION = GetAddOnMetadata(private.addon_name, "Version");
-ATLAS_PLAYER_FACTION = UnitFactionGroup("player");
-ATLAS_DROPDOWNS = {};
-ATLAS_INST_ENT_DROPDOWN = {};
-ATLAS_NUM_LINES = 26;
-ATLAS_CUR_LINES = 0;
-ATLAS_SCROLL_LIST = {};
-ATLAS_SCROLL_ID = {};
-ATLAS_DATA = {};
-ATLAS_SEARCH_METHOD = nil;
-ATLAS_PLUGINS = {};
-ATLAS_PLUGIN_DATA = {};
-Atlas_MapTypes = {};
-AtlasMaps_NPC_DB = {};
-ATLAS_SMALLFRAME_SELECTED = false;
-ATLAS_DROPDOWN_WIDTH = 190;
-ATLAS_PLUGINS_COLOR = "|cff66cc33";
-ATLAS_OLD_TYPE = false;
-ATLAS_OLD_ZONE = false;
+ATLAS_VERSION = GetAddOnMetadata(private.addon_name, "Version")
+ATLAS_PLAYER_FACTION = UnitFactionGroup("player")
+ATLAS_DROPDOWNS = {}
+ATLAS_INST_ENT_DROPDOWN = {}
+ATLAS_NUM_LINES = 26
+ATLAS_CUR_LINES = 0
+ATLAS_SCROLL_LIST = {}
+ATLAS_SCROLL_ID = {}
+ATLAS_DATA = {}
+ATLAS_SEARCH_METHOD = nil
+ATLAS_PLUGINS = {}
+ATLAS_PLUGIN_DATA = {}
+Atlas_MapTypes = {}
+AtlasMaps_NPC_DB = {}
+ATLAS_SMALLFRAME_SELECTED = false
+ATLAS_DROPDOWN_WIDTH = 190
+ATLAS_PLUGINS_COLOR = "|cff66cc33"
+ATLAS_OLD_TYPE = false
+ATLAS_OLD_ZONE = false
+ATLAS_MAX_MENUITEMS = 30
+ATLAS_MODULE_MENUS = 0
+ATLAS_DROPDOWN_TYPES = {}
 
-
-ATLAS_GAMETOOLTIP_ORIGINAL_SCALE = GameTooltip:GetScale();
+ATLAS_GAMETOOLTIP_ORIGINAL_SCALE = GameTooltip:GetScale()
 
 -- Only update this version number when the options have been revised and a force update is needed.
-ATLAS_OLDEST_VERSION_SAME_SETTINGS = "1.24.00"; 
+ATLAS_OLDEST_VERSION_SAME_SETTINGS = "1.24.00" 
 
 -- Turn ON / OFF Atlas debug mode
-ATLAS_DEBUGMODE = false;
+ATLAS_DEBUGMODE = false
+
+--[[
+# Structure of JournalInstance.dbc
+Column	Field		Type		Notes
+------	-------------	--------	----------------------------------------------------------------------------------------------
+1	ID		Integer
+2	Map ID		Integer		Map ID refer to Map.dbc's 1st column
+3	Area ID		Integer		Area ID refer to AreaTable.dbc's 1st column
+4~6			Integer
+7			Integer
+8	Name		String
+9	Description	String
+
+
+# Structure of JournalEncounter.dbc
+Column	Field		Type		Notes
+------	-------------	--------	----------------------------------------------------------------------------------------------
+1	ID		Integer
+2	Map ID?		Integer
+3	Area ID?	Integer
+4~5			Float
+6	Selection ID	Integer
+7	Instance ID	Integer		Refer to JournalInstance.dbc's 1st column
+8	Index		Integer		Boss index
+9
+10	Name		String		Boss name
+11	Description	String		Boss description
+
+
+# Structure of JournalEncounterCreature.dbc
+Column	Field 		Type 		Notes
+------	-------------	--------	----------------------------------------------------------------------------------------------
+1	ID		Integer
+2	encounterID	Integer
+3	modelID		Integer
+4	Index		Integer
+5			Integer
+6	name		String
+
+
+# Structure of LFGDungeons.dbc
+Column	Field 		Type 		Notes
+------	-------------	--------	----------------------------------------------------------------------------------------------
+1 	ID 		Integer 		
+2	Map Name	String		Dungeon Name
+3	level_min 	Integer 	Minimum level to participate. 
+4 	level_max 	Integer 	Maximum level when this dungeon becomes trivial. 
+5	rec_level	Integer
+6	rec_minlevel	Integer
+7	rec_maxlevel	Integer
+8 	Map ID	        Integer 	Here you must add the Map Id where you will be ported
+9	difficulty	Integer
+13	systemname
+14	expansion
+
+]]
+
+AtlasMaps = {
+--[[
+Syntax: 
+	MapName = {
+		ZoneName = { "Map name" };
+		Location = { "Location of this map" };
+		LevelRange = "level range";
+		MinLevel = "minimum level";
+		PlayerLimit = "player limit";
+		Acronym = "acronym";
+		MinGearLevel = "minimum itel level to enter this instance";
+		JournalInstanceID = "journal instance ID"; 	-- ID can be found from JournalInstance.dbc, Column 1 is the dungeon ID, column 8 is dungeon name
+		DungeonID = "LFGDungeon ID"; 			-- ID can be fround from LFGDungeons.dbc.txt
+		DungeonHeoricID = "LFGDungeon ID for Heroic mode";
+		DungeonMythicID = "LFGDungeon ID for Mythic mode";
+		WorldMapID = "worldmap ID";
+		DungeonLevel = "level number of the dungeon map series";
+		Module = "map module name";
+		LargeMap = "large map's prefix name";
+		PrevMap = "previous map name";
+		NextMap = "next map name";
+		{ "list entry 1", id of list entry or encounter id };
+		{ "list entry 2", "achivement id by using the format of ac=12345" };
+		{ "list entry 3" item id, "item", "item's English name"};
+		{ "list entry 4" };
+	};
+]]
+}
+
+AtlasMaps_NPC_DB = {
+--[[
+Syntax: 
+	MapName = {
+		{ number, EJ_BossID, X coordinate, Y coordinate };
+		{ 2, 193,339, 435 };
+	};
+]]
+}
 
 ATLAS_LETTER_MARKS_TCOORDS = {
 	["Atlas_Letter_Blue_A"] 	= {0.00000000, 0.15625000, 0.00000000, 0.15625000},
@@ -107,7 +204,7 @@ ATLAS_LETTER_MARKS_TCOORDS = {
 	["Atlas_Letter_Purple_L"] 	= {0.46875000, 0.62500000, 0.78125000, 0.93750000},
 	["Atlas_Letter_Purple_M"] 	= {0.62500000, 0.78125000, 0.78125000, 0.93750000},
 	["Atlas_Letter_Purple_N"] 	= {0.78125000, 0.93750000, 0.78125000, 0.93750000},
-};
+}
 
 ATLAS_FONT_COLORS = {
 	["White"] 	= {1.00, 1.00, 1.00},
@@ -117,39 +214,13 @@ ATLAS_FONT_COLORS = {
 	["Orange"] 	= {1.00, 0.82, 0.00},
 	["Purple"]	= {0.73, 0.40, 1.00},
 	["Blue"]	= {0.40, 0.40, 1.00},
-};
+}
 
 ATLAS_TAXI_TCOORDS = {
 	["TaxiNeutral"] 	= {0.00000000, 0.31250000, 0.00000000, 0.31250000},
 	["TaxiHorde"] 		= {0.31250000, 0.62500000, 0.00000000, 0.31250000},
 	["TaxiAlliance"] 	= {0.62500000, 0.93750000, 0.00000000, 0.31250000},
-};
-
-
-constants.defaultoptions = {
-	["AtlasVersion"] = ATLAS_OLDEST_VERSION_SAME_SETTINGS,
-	["AtlasAlpha"] = 1.0,			-- Atlas frame's transparency
-	["AtlasLocked"] = false,		-- Lock Atlas frame position
-	["AtlasAutoSelect"] = false,		-- Auto select map
-	-- ["AtlasButtonPosition"] = 26,	-- Minimap button position
-	-- ["AtlasButtonRadius"] = 78,		-- Minimap button radius
-	["AtlasButtonShown"] = true,		-- Show / hide Atlas button
-	["AtlasWorldMapButtonShown"] = true,	-- Show / hide Atlas button on World Map window
-	["AtlasRightClick"] = false,		-- Right click to open world map
-	["AtlasType"] = 1,			-- Default or last selected map type (category)
-	["AtlasZone"] = 1,			-- Default or last selected map / zone
-	["AtlasAcronyms"] = true,		-- Show dungeon's acronyms
-	["AtlasScale"] = 1.0,			-- Atlas frame scale
-	["AtlasClamped"] = true,		-- Clamp to WoW window
-	["AtlasSortBy"] = 1,			-- Maps sorting type, 1: CONTINENT, 2: LEVEL, 3: PARTYSIZE, 4: EXPANSION, 5: TYPE
-	["AtlasCtrl"] = false,			-- Press ctrl and mouse over to show full description text
-	["AtlasBossDesc"] = true,		-- Toggle to show boss description or not
-	["AtlasBossDescScale"] = 0.9,		-- The boss description GameToolTip scale
-	["AtlasDontShowInfo"] = false, 		-- Atlas latest information
-	["AtlasDontShowInfo_12201"] = false,
-	["AtlasCheckModule"] = true,		-- Check if there is missing module / plugin
-	["AtlasColoringDropDown"] = true,	-- Coloring dungeon dropdown list with difficulty colors
-};
+}
 
 constants.defaults = {
 	profile = {
@@ -176,7 +247,7 @@ constants.defaults = {
 			dropdowns = {
 				color = true,			-- AtlasColoringDropDown
 				menuType = 1,			-- AtlasSortBy
-				module = 9,			-- AtlasType (continent menu type's 9th item is Broken Isles - Dungeon)
+				module = 1,			-- AtlasType
 				zone = 1,			-- AtlasZone
 			},
 			worldMapButton = true,			-- AtlasWorldMapButtonShown
@@ -186,7 +257,7 @@ constants.defaults = {
 		},
 		options_copied = false,
 	},
-};
+}
 
 constants.moduleList = {
 	"Atlas_ClassicWoW",
@@ -202,7 +273,7 @@ constants.moduleList = {
 	"Atlas_Transportation",
 	"Atlas_Scenarios",
 	"Atlas_ClassOrderHalls",
-};
+}
 
 constants.deprecatedList = {
 	-- List of deprecated Atlas modules.
@@ -214,25 +285,26 @@ constants.deprecatedList = {
 	-- For example, name it as 2.09 instead of 2.9
 	-- Most recent (working) versions of known modules at time of release
 	-- Atlas Modules
-	{ "Atlas_Legion",	 	"1.40.00" },
-	{ "Atlas_WarlordsofDraenor", 	"1.39.00" },
-	{ "Atlas_MistsofPandaria",	"1.39.00" },
-	{ "Atlas_Cataclysm", 		"1.39.00" },
-	{ "Atlas_WrathoftheLichKing", 	"1.39.00" },
-	{ "Atlas_BurningCrusade", 	"1.39.00" },
-	{ "Atlas_ClassicWoW", 		"1.39.00" },
+	{ "Atlas_Legion",	 	"1.42.00", "r132" },
+	{ "Atlas_WarlordsofDraenor", 	"1.42.00", "r45" },
+	{ "Atlas_MistsofPandaria",	"1.42.00", "r22" },
+	{ "Atlas_Cataclysm", 		"1.42.00", "r27" },
+	{ "Atlas_WrathoftheLichKing", 	"1.42.00", "r25" },
+	{ "Atlas_BurningCrusade", 	"1.42.00", "r29" },
+	{ "Atlas_ClassicWoW", 		"1.42.00", "r24" },
 	-- Atlas Plugins
-	{ "Atlas_Battlegrounds", 	"1.39.00" },
-	{ "Atlas_DungeonLocs", 		"1.39.00" },
-	{ "Atlas_OutdoorRaids", 	"1.39.00" },
-	{ "Atlas_Transportation", 	"1.39.00" },
-	{ "Atlas_Scenarios", 		"1.39.00" },
-	{ "Atlas_ClassOrderHalls",	"1.39.00" },
+	{ "Atlas_Battlegrounds", 	"1.42.00", "r1549" },
+	{ "Atlas_DungeonLocs", 		"1.42.00", "r43" },
+	{ "Atlas_OutdoorRaids", 	"1.42.00", "r46" },
+	{ "Atlas_Transportation", 	"1.42.00", "r90" },
+	{ "Atlas_Scenarios", 		"1.42.00", "r42" },
+	{ "Atlas_ClassOrderHalls",	"1.42.00", "r112" },
 	-- 3rd parties plugins
 	{ "AtlasQuest", 		"4.10.25" },
-	{ "Atlas_Arena", 		"1.06.00" },
-	{ "Atlas_WorldEvents", 		"3.15" },
+	{ "Atlas_Arena", 		"1.07.00", "r75" },
+	{ "Atlas_WorldEvents", 		"3.22", "r102" },
 	{ "AtlasLoot", 			"v8.03.02", "r4615" },
-	{ "AtlasMajorCitiesEnhanced", 	"v1.13" }, 	
+	{ "AtlasMajorCitiesEnhanced", 	"v1.15" }, 	
 	--{ "AtlasWorld", 		"3.3.5.25" }, 	-- updated July 14, 2010 -- comment out because this plugin is no longer maintained
-};
+}
+

@@ -192,4 +192,9 @@ L["Yuka Screwspigot <Engineering Supplies>"] = "Yuka Schraubstutz <Ingenieursbed
 L["Zeya"] = "Zeya"
 L["ZF"] = "ZF"
 
+-- ToC
+L["Description"] = "Karten der Instanzen aus Classic-WoW"
+L["Title"] = "Atlas |r|cFF0099FF[Classic-WoW]|r"
+
+
 end

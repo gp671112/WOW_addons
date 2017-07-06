@@ -191,4 +191,11 @@ L["Weegli Blastfuse"] = "Gigoto Explomèche"
 L["Yuka Screwspigot <Engineering Supplies>"] = "Yuka Fermevanne <Fournitures d'ingénieur>"
 L["Zeya"] = "Zeya"
 L["ZF"] = "ZF"
+
+-- ToC
+--Translation missing 
+-- L["Description"] = ""
+--Translation missing 
+-- L["Title"] = ""
+
 end

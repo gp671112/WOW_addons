@@ -44,8 +44,14 @@ L["Climbing Rope"] = "Канат"
 L["Connection to the Hall of Shadows"] = "Соединение с Оплотом Теней"
 L["Death Knight Only"] = "только рыцарю смерти"
 L["Druid Only"] = "только друиду"
+--Translation missing 
+-- L["Exploration"] = ""
 L["Flight to Trueshot Lodge"] = "Полёт в Приют Стрелка"
 L["From sea level to ground level"] = "От уровня моря к земле"
+--Translation missing 
+-- L["Gleep Chatterswitch"] = ""
+--Translation missing 
+-- L["Great Eagle"] = ""
 L["Green"] = "Зелёный"
 L["Gryphon"] = "Грифон"
 L["Gryphon Master"] = "Укротитель грифонов"
@@ -68,7 +74,11 @@ L["Purple"] = "Пурпурный"
 L["Rappelling Rope"] = "Канат для спуска"
 L["Red"] = "Красный"
 L["Require to complete \"Meet the Scout\" quest line first."] = "Необходимо сначала выполнить серию заданий \"Встреча с разведчицей\"."
+--Translation missing 
+-- L["Requires Eagle Ally Advancement"] = ""
 L["Requires honored faction with Sha'tari Skyguard"] = "Требуется Уважение у фракции Стражи Небес Ша'тар"
+--Translation missing 
+-- L["Requires Teleportation Nexus Advancement"] = ""
 L["Seahorse"] = "Морской конек"
 L["Shado-Pan Rope"] = "Шадопанская веревка"
 L["Ship / Zeppelin sailing path to destination"] = "Путь корабля / дирижабля"
@@ -76,10 +86,14 @@ L["South of the path along Lake Elune'ara"] = "Южный путь вдоль О
 L["Special transportation"] = "Особый транспорт"
 L["Talua <Eagle Keeper>"] = "Талуа <Хозяйка орлов>"
 L["Taxi Nodes"] = "Мастера полетов"
+--Translation missing 
+-- L["Teleportation Nexus"] = ""
 L["The Bogpaddle Bullet"] = "Болотный экспресс"
 L["Transportation Maps"] = "Маршруты полётов"
 L["Transporter"] = "Транспорт"
 L["Transporters by the sea and on the cliff"] = "Транспорт у моря и утёсов"
+--Translation missing 
+-- L["Two ways portal"] = ""
 L["Warning: Drop"] = "Осторожно: упадёте"
 L["Warrior's landing / jumping point (from or back to Skyhold)"] = "Точка приземления / прыжка воинов (из Небесной Цитадели и обратно)"
 L["West of the path to Timbermaw Hold"] = "Западный путь в Крепость Древобрюхов"
@@ -90,4 +104,9 @@ L["Wind Rider Master"] = "Укротитель ветрокрылов"
 L["Won't be available once the Battle for Andorhal chain is finished."] = "Не будет доступна пока не завершена серия заданий битвы за Андорал."
 L["Yellow"] = "Жёлтый"
 L["Zeppelin Towers"] = "Башни дирижаблей"
+
+-- ToC
+L["Description"] = "Карты маршрутов полётов"
+L["Title"] = "Atlas |r|cFF0099FF[Маршруты полётов]|r"
+
 end

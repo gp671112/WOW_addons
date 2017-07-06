@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt 87 2017-04-06 09:14:52Z arith $
+$Id: ChangeLog.txt 90 2017-06-29 08:11:43Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
@@ -7,6 +7,12 @@ Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail.com>
 ==============
 = Change Log =
 ==============
+
+v1.42.00 (Jun. 29, 2017)
+------------------------
+- Updated to support Atlas 1.42.00
+- Translation update:
+  - Korean (netaras)
 
 v1.40.00 (Apr. 06, 2017)
 ------------------------

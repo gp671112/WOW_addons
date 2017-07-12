@@ -912,7 +912,7 @@ function lib:OnInitialize(...)
 	end
 	if self.db then
 		self.db:RegisterDefaults(self.DbDefaults)
-		--[[
+	  --[[
 		if (not self.db.global.silent) then
 			self:Print(format("Version %s %s loaded (%s)",
 				self:Colorize(options.version,'green'),
@@ -921,7 +921,7 @@ function lib:OnInitialize(...)
 			)
 			self:Print("Using profile ",self.db:GetCurrentProfile())
 		end
-		--]]
+	  --]]
 		self:SetEnabledState(self:GetBoolean("Active"))
 	else
 		self.db=setmetatable({},{

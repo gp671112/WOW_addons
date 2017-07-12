@@ -1,4 +1,4 @@
--- $Id: Constants.lua 266 2017-06-29 08:28:27Z arith $
+-- $Id: Constants.lua 270 2017-06-29 14:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -249,6 +249,7 @@ constants.defaults = {
 				menuType = 1,			-- AtlasSortBy
 				module = 1,			-- AtlasType
 				zone = 1,			-- AtlasZone
+				maxItems = 30,
 			},
 			worldMapButton = true,			-- AtlasWorldMapButtonShown
 			checkMissingModules = true,		-- AtlasCheckModule

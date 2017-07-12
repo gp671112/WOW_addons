@@ -1,4 +1,4 @@
--- $Id: DropDownConfig.lua 266 2017-06-29 08:28:27Z arith $
+-- $Id: DropDownConfig.lua 270 2017-06-29 14:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -45,9 +45,9 @@ dropdowns.DropDownLayouts_Order = {
 	[3] = ATLAS_DDL_LEVEL,
 	[4] = ATLAS_DDL_PARTYSIZE,
 	[5] = ATLAS_DDL_TYPE,
---	[ATLAS_DDL_CONTINENT] = { },
---	[ATLAS_DDL_EXPANSION] = { },
---	[ATLAS_DDL_LEVEL] = { },
+	[ATLAS_DDL_CONTINENT] = { },
+	[ATLAS_DDL_EXPANSION] = { },
+	[ATLAS_DDL_LEVEL] = { },
 	[ATLAS_DDL_PARTYSIZE] = {
 		ATLAS_DDL_PARTYSIZE_5,
 		ATLAS_DDL_PARTYSIZE_10,
@@ -59,4 +59,14 @@ dropdowns.DropDownLayouts_Order = {
 	},
 }
 
-dropdowns.DropDownLayouts = { }
+dropdowns.DropDownLayouts = { 
+	[ATLAS_DDL_PARTYSIZE] = {
+		[ATLAS_DDL_PARTYSIZE_5] = { },
+		[ATLAS_DDL_PARTYSIZE_10] = { },
+		[ATLAS_DDL_PARTYSIZE_20TO40] = { },
+	},
+	[ATLAS_DDL_TYPE] = {
+		[ATLAS_DDL_TYPE_INSTANCE] = { },
+		[ATLAS_DDL_TYPE_ENTRANCE] = { },
+	},
+}

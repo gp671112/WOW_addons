@@ -1,4 +1,4 @@
-<!-- $Id: Atlas.xml 266 2017-06-29 08:28:27Z arith $ -->
+<!-- $Id: Atlas.xml 272 2017-06-30 08:21:04Z arith $ -->
 <!--
 
 	Atlas, a World of Warcraft instance map browser
@@ -346,12 +346,12 @@
 			</OnEvent>
 			<OnShow>
 				Atlas_OnShow();
-				PlaySound("igQuestLogOpen");
+				PlaySound(PlaySoundKitID and "igQuestLogOpen" or 844);
 				ATLAS_SMALLFRAME_SELECTED = false;
 			</OnShow>
 			<OnHide>
 				AtlasFrame:StopMovingOrSizing();
-				PlaySound("igQuestLogClose");
+				PlaySound(PlaySoundKitID and "igQuestLogClose" or 845);
 			</OnHide>
 			<OnDragStart>
 				if(button == "LeftButton") then
@@ -764,11 +764,11 @@
 		<Scripts>
 			<OnShow>
 				AtlasFrameLarge_OnShow(self)
-				PlaySound("igQuestLogOpen");
+				PlaySound(PlaySoundKitID and "igQuestLogOpen" or 844);
 			</OnShow>
 			<OnHide>
 				AtlasFrameLarge:StopMovingOrSizing();
-				PlaySound("igQuestLogClose");
+				PlaySound(PlaySoundKitID and "igQuestLogClose" or 845);
 			</OnHide>
 			<OnMouseDown>
 				if(button == "LeftButton") then
@@ -783,9 +783,9 @@
 				if (button == "RightButton") then
 					if (Atlas.db.profile.options.frames.rightClick) then
 						if (AtlasFrameLarge:IsVisible()) then
-							HideUIPanel(AtlasFrameLarge);
+							AtlasFrameLarge:Hide();
 						else
-							ShowUIPanel(AtlasFrameLarge);
+							AtlasFrameLarge:Show();
 						end
 						ToggleFrame(WorldMapFrame);
 					end
@@ -921,11 +921,11 @@
 		<Scripts>
 			<OnShow>
 				ATLAS_SMALLFRAME_SELECTED = true;
-				PlaySound("igQuestLogOpen");
+				PlaySound(PlaySoundKitID and "igQuestLogOpen" or 844);
 			</OnShow>
 			<OnHide>
 				AtlasFrameSmall:StopMovingOrSizing();
-				PlaySound("igQuestLogClose");
+				PlaySound(PlaySoundKitID and "igQuestLogClose" or 845);
 			</OnHide>
 			<OnMouseDown>
 				if(button == "LeftButton") then
@@ -940,9 +940,9 @@
 				if (button == "RightButton") then
 					if (Atlas.db.profile.options.frames.rightClick) then
 						if (AtlasFrameLarge:IsVisible()) then
-							HideUIPanel(AtlasFrameLarge);
+							AtlasFrameLarge:Hide();
 						else
-							ShowUIPanel(AtlasFrameLarge);
+							AtlasFrameLarge:Show();
 						end
 						ToggleFrame(WorldMapFrame);
 					end

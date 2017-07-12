@@ -1,4 +1,4 @@
--- $Id: Atlas-ruRU.lua 240 2017-05-12 17:13:41Z arith $
+-- $Id: Atlas-ruRU.lua 270 2017-06-29 14:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -30,8 +30,8 @@ local L = AceLocale:NewLocale("Atlas", "ruRU", false);
 -- Atlas Russian Localization
 -- Compiled by Eugene Filatov, bigoblin, StingerSoft
 -- Last Update: 23.01.2011
--- $Date: 2017-05-12 12:13:41 -0500 (Fri, 12 May 2017) $
--- $Revision: 240 $
+-- $Date: 2017-06-29 09:22:48 -0500 (Thu, 29 Jun 2017) $
+-- $Revision: 270 $
 
 if ( GetLocale() == "ruRU" ) then
 -- Define the leading strings to be ignored while sorting
@@ -84,6 +84,7 @@ L["ATLAS_DDL_EXPANSION_LEGION"] = "Подземелья Legion"
 L["ATLAS_DDL_EXPANSION_LEGION1"] = "Подземелья Легиона"
 L["ATLAS_DDL_EXPANSION_LEGION2"] = "Рейды Легиона"
 L["ATLAS_DDL_EXPANSION_MOP"] = "Подземелья Mists of Pandaria"
+L["ATLAS_DDL_EXPANSION_OLD"] = "Подземелья Старого Мира"
 L["ATLAS_DDL_EXPANSION_WOD"] = "Подземелья Warlords of Draenor"
 L["ATLAS_DDL_EXPANSION_WOTLK"] = "Подземелья Wrath of the Lich King"
 L["ATLAS_DDL_LEVEL"] = "Уровню"
@@ -98,8 +99,12 @@ L["ATLAS_DDL_LEVEL_85TO90"] = "Подземелья уровня 85-90"
 L["ATLAS_DDL_LEVEL_90TO100"] = "Подземелья уровня 90-100"
 L["ATLAS_DDL_LEVEL_UNDER45"] = "Подземелья уровня ниже 45"
 L["ATLAS_DDL_PARTYSIZE"] = "Размер группы"
+L["ATLAS_DDL_PARTYSIZE_10"] = "Подземелья на 10 игроков"
+L["ATLAS_DDL_PARTYSIZE_20TO40"] = "Подземелья на 20-40 игроков"
+L["ATLAS_DDL_PARTYSIZE_5"] = "Подземелья на 5 игроков"
 L["ATLAS_DDL_TYPE"] = "Типу"
 L["ATLAS_DDL_TYPE_ENTRANCE"] = "Входы"
+L["ATLAS_DDL_TYPE_INSTANCE"] = "Подземелья"
 L["ATLAS_DEP_MSG1"] = "Atlas обнаружил устаревшие плагин(ы)/модуль(и)/аддон(ы)."
 L["ATLAS_DEP_MSG2"] = "Оно / они были отключены для этого персонажа."
 L["ATLAS_DEP_MSG3"] = [=[Удалите это из вашей папки AddOns и установите последнюю версию.

@@ -1,4 +1,4 @@
--- $Id: Atlas-deDE.lua 240 2017-05-12 17:13:41Z arith $
+-- $Id: Atlas-deDE.lua 270 2017-06-29 14:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -42,10 +42,10 @@ AtlasSortIgnore = {
 
 -- Syntax: ["real_zone_name"] = "localized map zone name"
 AtlasZoneSubstitutions = {
-	["Ahn'Qiraj"] = "Tempel von Ahn'Qiraj";
-	["Der Tempel von Atal'Hakkar"] = "Versunkener Tempel";
---	["Throne of Tides"] = "The Abyssal Maw: Throne of the Tides";
-};
+	["Ahn'Qiraj"] = "Tempel von Ahn'Qiraj",
+	["Der Tempel von Atal'Hakkar"] = "Versunkener Tempel",
+--	["Throne of Tides"] = "The Abyssal Maw: Throne of the Tides",
+}
 end
 
 
@@ -86,6 +86,7 @@ L["ATLAS_DDL_EXPANSION_LEGION"] = "Instanzen aus Legion"
 L["ATLAS_DDL_EXPANSION_LEGION1"] = "Dungeons aus Legion"
 L["ATLAS_DDL_EXPANSION_LEGION2"] = "Schlachtzüge aus Legion"
 L["ATLAS_DDL_EXPANSION_MOP"] = "Instanzen aus Mists of Pandaria"
+L["ATLAS_DDL_EXPANSION_OLD"] = "Instanzen der alten Welt"
 L["ATLAS_DDL_EXPANSION_WOD"] = "Instanzen aus Warlords of Draenor"
 L["ATLAS_DDL_EXPANSION_WOTLK"] = "Instanzen aus Wrath of the Lich King"
 L["ATLAS_DDL_LEVEL"] = "Stufe"
@@ -100,8 +101,12 @@ L["ATLAS_DDL_LEVEL_85TO90"] = "Instanzen Stufe 85–90"
 L["ATLAS_DDL_LEVEL_90TO100"] = "Instanzen Stufe 90–100"
 L["ATLAS_DDL_LEVEL_UNDER45"] = "Instanzen unter Stufe 45"
 L["ATLAS_DDL_PARTYSIZE"] = "Gruppengröße"
+L["ATLAS_DDL_PARTYSIZE_10"] = "Instanzen für 10 Spieler"
+L["ATLAS_DDL_PARTYSIZE_20TO40"] = "Instanzen für 20-40 Spieler"
+L["ATLAS_DDL_PARTYSIZE_5"] = "Instanzen für 5 Spieler"
 L["ATLAS_DDL_TYPE"] = "Typ"
 L["ATLAS_DDL_TYPE_ENTRANCE"] = "Eingänge"
+L["ATLAS_DDL_TYPE_INSTANCE"] = "Instanzen"
 L["ATLAS_DEP_MSG1"] = "Atlas hat veraltete Plugins/Module/Addons entdeckt."
 L["ATLAS_DEP_MSG2"] = "Daher wurden diese Module bei diesem Charakter deaktiviert."
 L["ATLAS_DEP_MSG3"] = [=[Entfernen Sie diese(s) aus Ihrem Verzeichnis AddOns und installiere die neuste Version.
@@ -176,6 +181,8 @@ L["ATLAS_OPTIONS_HEADER_ADDONCONFIG"] = "Addonkonfigurationen"
 L["ATLAS_OPTIONS_HEADER_DISPLAY"] = "Anzeigeoptionen"
 L["ATLAS_OPTIONS_LOCK"] = "Atlasfenster fixieren"
 L["ATLAS_OPTIONS_LOCK_TIP"] = "Atlasfenster fixieren/freigeben."
+L["ATLAS_OPTIONS_MAXMENUITEMS"] = "Maximale Zahl Menüeinträge"
+L["ATLAS_OPTIONS_MAXMENUITEMS_TIP"] = "Legt die maximale Zahl an Einträgen im Dropdown-Menü fest, bevor die Einträge in eine andere Menükategorie aufgeteilt werden."
 L["ATLAS_OPTIONS_RCLICK"] = "Rechte Maustaste für Weltkarte drücken"
 L["ATLAS_OPTIONS_RCLICK_TIP"] = "Aktiviert das Rechtsklicken im Atlasfenster, um die WoW-Weltkarte anzuzeigen."
 L["ATLAS_OPTIONS_RESETPOS"] = "Position zurücksetzen"

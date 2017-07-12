@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt 268 2017-06-29 08:51:38Z arith $
+$Id: ChangeLog.txt 282 2017-07-06 13:23:08Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
@@ -9,11 +9,29 @@ Known Issues:
 ==============
 - User might see the boss loots are not fully loaded and showing item info 
   is retrieving. If that's the case, user will need to close and open the
-  loot window again. (this seems to be fixed since v1.40.00)
+  loot window again. 
 
 ==============
 = Change Log =
 ==============
+
+v1.42.03 (Jul. 06, 2017)
+------------------------
+- Fixed issue in Atlas:GetBossName() to through sub-boss' name instead of the boss-category name.
+  For example, in the "Opera Hall" event inside Karazhan, it was presented as "The Big Bad Wolf".
+  Now this will be presented correctly.
+
+v1.42.02 (Jul. 02, 2017)
+------------------------
+- Added option to customize maximum number of menu items
+- Added category icon to dropdown menu
+- Added to show boss icon
+- Fixed version's checking while plugin addon was alpha build
+- Lib Update: LibUIDropDownMenu
+- Updated PlaySound API's usage method to support both 7.2.5 and 7.3.0 of WoW clients
+- Localization update:
+  - Simplified Chinese (ananhaid)
+  - German (pas06)
 
 v1.42.01 (Jun. 29, 2017)
 ------------------------

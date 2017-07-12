@@ -1,4 +1,4 @@
--- $Id: EJIntegration.lua 253 2017-05-25 07:22:48Z arith $
+-- $Id: EJIntegration.lua 282 2017-07-06 13:23:08Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -32,6 +32,7 @@
 local _G = getfenv(0)
 local pairs = _G.pairs
 local select = _G.select
+local tonumber = _G.tonumber
 local GameTooltip = GameTooltip
 -- Libraries
 -- ----------------------------------------------------------------------------
@@ -58,37 +59,35 @@ end
 -- ------------------------------------------------------------
 function addon:GetBossName(bossname, encounterID, creatureIndex)
 	if (encounterID) then
-		local encounter;
-		if (creatureIndex) then
-			if (EJ_GetCreatureInfo(creatureIndex, encounterID)) then
-				local _;
-				_, encounter = EJ_GetCreatureInfo(creatureIndex, encounterID);
-			end
-		else 
-			if (EJ_GetEncounterInfo(encounterID)) then
-				encounter, _, _, _, link = EJ_GetEncounterInfo(encounterID);
-			end
+		local _, encounter, iconImage
+		if (not creatureIndex) then
+			encounter = EJ_GetEncounterInfo(encounterID)
+			_, _, _, _, iconImage = EJ_GetCreatureInfo(1, encounterID)
+		else
+			-- id, name, description, displayInfo, iconImage = EJ_GetCreatureInfo(index[, encounterID])
+			_, encounter, _, _, iconImage = EJ_GetCreatureInfo(creatureIndex or 1, encounterID)
 		end
+
 		if (encounter == nil) then
 			if (bossname and BB[bossname]) then
-				bossname = BB[bossname];
+				bossname = BB[bossname]
 			elseif (bossname and L[bossname]) then
-				bossname = L[bossname];
+				bossname = L[bossname]
 			else
-				--bossname = bossname;
+				--bossname = bossname
 			end
 		else
-			bossname = encounter;
+			bossname = iconImage and format("|T%d:0:2.5|t%s", iconImage, encounter) or encounter
 		end
 	elseif (bossname and BB[bossname]) then
-		bossname = BB[bossname];
+		bossname = BB[bossname]
 	elseif (bossname and L[bossname]) then
-		bossname = L[bossname];
+		bossname = L[bossname]
 	else
-		--bossname = bossname;
+		--bossname = bossname
 	end
 
-	return bossname;
+	return bossname
 end
 
 function Atlas_GetBossName(bossname, encounterID, creatureIndex)
@@ -96,127 +95,115 @@ function Atlas_GetBossName(bossname, encounterID, creatureIndex)
 end
 
 function addon:AdventureJournalButton_OnClick(frame)
-	local instanceID = frame.instanceID;
-	local disabled = not C_AdventureJournal.CanBeShown();
-	if (disabled) then return; end
+	local instanceID = frame.instanceID
+	local disabled = not C_AdventureJournal.CanBeShown()
+	if (disabled) then return end
 	
 	if (not instanceID) then
-		return;
+		return
 	end
 
 	if (not EJ_GetInstanceInfo(instanceID)) then
-		return;
+		return
 	end
 
 	if ( not EncounterJournal or not EncounterJournal:IsShown() ) then
-		ToggleEncounterJournal();
+		ToggleEncounterJournal()
 	end
 	-- EncounterJournal_ListInstances();
-	NavBar_Reset(EncounterJournal.navBar);
-	EncounterJournal_DisplayInstance(instanceID);
+	NavBar_Reset(EncounterJournal.navBar)
+	EncounterJournal_DisplayInstance(instanceID)
 
-	Atlas_Toggle();
-	if (not EncounterJournal:IsShown()) then
-		EncounterJournal:Show();
-	else
-		EncounterJournal:Hide();
-		EncounterJournal:Show();
-	end
+	Atlas_Toggle()
 end
 
 function addon:AdventureJournalButton_OnEnter(frame)
-	local instanceID = frame.instanceID;
-	if (not instanceID) then return; end
+	local instanceID = frame.instanceID
+	if (not instanceID) then return end
 
 	if (MouseIsOver(frame)) then
 		if (EJ_GetInstanceInfo(instanceID)) then
-			EJ_SelectInstance(instanceID);
+			EJ_SelectInstance(instanceID)
 
-			local name, description = EJ_GetInstanceInfo();
-			local disabled = not C_AdventureJournal.CanBeShown();
+			local name, description = EJ_GetInstanceInfo()
+			local disabled = not C_AdventureJournal.CanBeShown()
 
-			GameTooltip:SetOwner(frame, "ANCHOR_RIGHT");
-			GameTooltip:SetText(name);
-			GameTooltipTextLeft1:SetTextColor(1, 1, 1);
-			GameTooltip:AddLine(description, nil, nil, nil, true);
+			GameTooltip:SetOwner(frame, "ANCHOR_RIGHT")
+			GameTooltip:SetText(name)
+			GameTooltipTextLeft1:SetTextColor(1, 1, 1)
+			GameTooltip:AddLine(description, nil, nil, nil, true)
 			if (disabled) then
-				GameTooltip:AddLine(FEATURE_NOT_YET_AVAILABLE, 0.7, 0, 0, true);
+				GameTooltip:AddLine(FEATURE_NOT_YET_AVAILABLE, 0.7, 0, 0, true)
 			else
-				GameTooltip:AddLine(L["ATLAS_OPEN_ADVENTURE"], 0.5, 0.5, 1, true);
+				GameTooltip:AddLine(L["ATLAS_OPEN_ADVENTURE"], 0.5, 0.5, 1, true)
 			end
-			GameTooltip:Show();
+			GameTooltip:Show()
 		end
 	else
-		GameTooltip:Hide();
+		GameTooltip:Hide()
 	end
 end
 
 function addon:AdventureJournal_EncounterButton_OnClick(instanceID, encounterID, keepAtlas)
-	if (not instanceID or not encounterID) then return; end
+	if (not instanceID or not encounterID) then return end
 	
-	local disabled = not C_AdventureJournal.CanBeShown();
-	if (disabled) then return; end
+	local disabled = not C_AdventureJournal.CanBeShown()
+	if (disabled) then return end
 
 	if (not EJ_GetInstanceInfo(instanceID)) then
-		return;
+		return
 	end
 	if (not EJ_GetEncounterInfo(encounterID)) then
-		return;
+		return
 	end
 
 	if ( not EncounterJournal or not EncounterJournal:IsShown() ) then
-		ToggleEncounterJournal();
+		ToggleEncounterJournal()
 	end
 	-- EncounterJournal_ListInstances();
-	NavBar_Reset(EncounterJournal.navBar);
-	EncounterJournal_DisplayInstance(instanceID);
-	EncounterJournal_DisplayEncounter(encounterID);
+	NavBar_Reset(EncounterJournal.navBar)
+	EncounterJournal_DisplayInstance(instanceID)
+	EncounterJournal_DisplayEncounter(encounterID)
 
 	if (not keepAtlas) then
-		Atlas_Toggle();
-	end
-	if (not EncounterJournal:IsShown()) then
-		EncounterJournal:Show();
-	else
-		EncounterJournal:Hide();
-		EncounterJournal:Show();
+		Atlas_Toggle()
 	end
 end
 
 function addon:AdventureJournal_MapButton_OnClick(frame)
-	local mapID = frame.mapID;
-	local dungeonLevel = frame.dungeonLevel;
+	local mapID = frame.mapID
+	local dungeonLevel = frame.dungeonLevel
 
-	HideUIPanel(AtlasFrame);
-	local disabled = not C_AdventureJournal.CanBeShown();
+	HideUIPanel(AtlasFrame)
+	local disabled = not C_AdventureJournal.CanBeShown()
 	if (disabled) then 
-		WorldMapFrame.fromJournal = false;
+		WorldMapFrame.fromJournal = false
 	else
-		WorldMapFrame.fromJournal = true;
+		WorldMapFrame.fromJournal = true
 	end
-	ShowUIPanel(WorldMapFrame);
+	ShowUIPanel(WorldMapFrame)
 	if (mapID) then
-		SetMapByID(mapID);
+		SetMapByID(mapID)
 	end
 	if (dungeonLevel) then
-		SetDungeonMapLevel(dungeonLevel);
+		SetDungeonMapLevel(dungeonLevel)
 	end
 end
 
 local function autoSelect_from_EncounterJournal()
-	local instanceID = EncounterJournal.instanceID;
+	local instanceID = EncounterJournal.instanceID
 	
 	if (not instanceID) then
-		return;
+		return
 	end
 
 	for type_k, type_v in pairs(ATLAS_DROPDOWNS) do
 		for zone_k, zone_v in pairs(type_v) do
 			if (AtlasMaps[zone_v].JournalInstanceID and tonumber(AtlasMaps[zone_v].JournalInstanceID) == instanceID) then
-				Atlas.db.profile.options.dropdowns.module = type_k;
-				Atlas.db.profile.options.dropdowns.zone = zone_k;
-				Atlas_Refresh();
-				return;
+				Atlas.db.profile.options.dropdowns.module = type_k
+				Atlas.db.profile.options.dropdowns.zone = zone_k
+				Atlas_Refresh()
+				return
 			end
 		end
 	end
@@ -224,59 +211,59 @@ end
 
 -- Encounter Journal's button bidding
 local function toggleFromEncounterJournal_OnClick(self)
-	autoSelect_from_EncounterJournal();
-	ToggleFrame(EncounterJournal);
-	Atlas_Toggle();
+	autoSelect_from_EncounterJournal()
+	ToggleFrame(EncounterJournal)
+	Atlas_Toggle()
 end
 
 local function toggleFromEncounterJournal_OnShow(self)
-	local ElvUI = select(4, GetAddOnInfo("ElvUI"));
+	local ElvUI = select(4, GetAddOnInfo("ElvUI"))
 
-	if (not ElvUI) then return; end
-	local ElvUI_BZSkin = false;
+	if (not ElvUI) then return end
+	local ElvUI_BZSkin = false
 
 	if (ElvUI and ElvPrivateDB) then
-		local profileKey;
+		local profileKey
 		if ElvPrivateDB.profileKeys then
-			profileKey = ElvPrivateDB.profileKeys[UnitName("player")..' - '..GetRealmName()];
+			profileKey = ElvPrivateDB.profileKeys[UnitName("player")..' - '..GetRealmName()]
 		end
 
 		if profileKey and ElvPrivateDB.profiles and ElvPrivateDB.profiles[profileKey] then
 			if (ElvPrivateDB.profiles[profileKey]["skins"]["blizzard"]["enable"] and ElvPrivateDB.profiles[profileKey]["skins"]["blizzard"]["encounterjournal"]) then
-				ElvUI_BZSkin = true;
+				ElvUI_BZSkin = true
 			end
 		end
 	end
 	
 	if (ElvUI_BZSkin) then
-		local button = _G["AtlasToggleFromEncounterJournal"];
+		local button = _G["AtlasToggleFromEncounterJournal"]
 		if (button) then
-			button:SetNormalTexture("Interface\\WorldMap\\WorldMap-Icon");
-			button:SetWidth(16);
-			button:SetHeight(16);
-			button:SetPoint("TOPRIGHT", EncounterJournalCloseButton, -28, -6, "TOPRIGHT"); 
+			button:SetNormalTexture("Interface\\WorldMap\\WorldMap-Icon")
+			button:SetWidth(16)
+			button:SetHeight(16)
+			button:SetPoint("TOPRIGHT", EncounterJournalCloseButton, -28, -6, "TOPRIGHT") 
 		end
 	end
 end
 
 function addon:EncounterJournal_Binding()
-	local button = _G["AtlasToggleFromEncounterJournal"];
+	local button = _G["AtlasToggleFromEncounterJournal"]
 	if (not button) then
-		button = CreateFrame("Button","AtlasToggleFromEncounterJournal", EncounterJournal);
-		button:SetWidth(32);
-		button:SetHeight(32);
+		button = CreateFrame("Button","AtlasToggleFromEncounterJournal", EncounterJournal)
+		button:SetWidth(32)
+		button:SetHeight(32)
 		
-		button:SetPoint("TOPRIGHT", EncounterJournalCloseButton, -23, 0, "TOPRIGHT"); 
-		button:SetNormalTexture("Interface\\AddOns\\Atlas\\Images\\AtlasButton-Up");
-		button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight", "ADD");
+		button:SetPoint("TOPRIGHT", EncounterJournalCloseButton, -23, 0, "TOPRIGHT") 
+		button:SetNormalTexture("Interface\\AddOns\\Atlas\\Images\\AtlasButton-Up")
+		button:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight", "ADD")
 
 		button:SetScript("OnEnter", function(self)
-			GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
-			GameTooltip:SetText(L["ATLAS_CLICK_TO_OPEN"], nil, nil, nil, nil, 1);
-		end);
-		button:SetScript("OnLeave", function(self) GameTooltip:Hide(); end);
-		button:SetScript("OnClick", toggleFromEncounterJournal_OnClick);
-		button:SetScript("OnShow", toggleFromEncounterJournal_OnShow);
+			GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT")
+			GameTooltip:SetText(L["ATLAS_CLICK_TO_OPEN"], nil, nil, nil, nil, 1)
+		end)
+		button:SetScript("OnLeave", function(self) GameTooltip:Hide() end)
+		button:SetScript("OnClick", toggleFromEncounterJournal_OnClick)
+		button:SetScript("OnShow", toggleFromEncounterJournal_OnShow)
 	end
 end
 

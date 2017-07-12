@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt 25 2017-06-29 08:24:05Z arith $
+$Id: ChangeLog.txt 27 2017-07-06 14:20:55Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
@@ -7,6 +7,11 @@ Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 ==============
 = Change Log =
 ==============
+
+v1.42.01 (Jul. 06, 2017)
+------------------------
+- Change Atlas_GetBossName() to Atlas:GetBossName()
+- Enhanced sub-boss' presentation by calling Atlas:GetBossName()
 
 v1.42.00 (Jun. 29, 2017)
 ------------------------

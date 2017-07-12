@@ -1,4 +1,4 @@
--- $Id: Atlas-zhTW.lua 266 2017-06-29 08:28:27Z arith $
+-- $Id: Atlas-zhTW.lua 270 2017-06-29 14:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -183,6 +183,8 @@ L["ATLAS_OPTIONS_HEADER_ADDONCONFIG"] = "插件設定"
 L["ATLAS_OPTIONS_HEADER_DISPLAY"] = "顯示選項"
 L["ATLAS_OPTIONS_LOCK"] = "鎖定 Atlas 視窗位置"
 L["ATLAS_OPTIONS_LOCK_TIP"] = "設定將 Atlas 視窗位置鎖定或不鎖定"
+L["ATLAS_OPTIONS_MAXMENUITEMS"] = "選單最大值"
+L["ATLAS_OPTIONS_MAXMENUITEMS_TIP"] = "設定下拉選單最大可顯示的地圖數量，超過後才分割至下一個地圖類別。"
 L["ATLAS_OPTIONS_RCLICK"] = "滑鼠右鍵開啟世界地圖"
 L["ATLAS_OPTIONS_RCLICK_TIP"] = "啟用在 Atlas 視窗中按下滑鼠右鍵自動切換到魔獸的世界地圖"
 L["ATLAS_OPTIONS_RESETPOS"] = "重設位置"

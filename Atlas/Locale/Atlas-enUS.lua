@@ -1,4 +1,4 @@
--- $Id: Atlas-enUS.lua 266 2017-06-29 08:28:27Z arith $
+-- $Id: Atlas-enUS.lua 270 2017-06-29 14:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -40,7 +40,7 @@ local L = AceLocale:NewLocale("Atlas", "enUS", true, true);
 		["Ahn'Qiraj"] = "Temple of Ahn'Qiraj";
 		["The Temple of Atal'Hakkar"] = "Sunken Temple";
 	--	["Throne of Tides"] = "The Abyssal Maw: Throne of the Tides";
-	};
+	}
 --end
 
 
@@ -187,6 +187,8 @@ L["ATLAS_OPTIONS_HEADER_ADDONCONFIG"] = "Addon Configurations"
 L["ATLAS_OPTIONS_HEADER_DISPLAY"] = "Display Options"
 L["ATLAS_OPTIONS_LOCK"] = "Lock Atlas window"
 L["ATLAS_OPTIONS_LOCK_TIP"] = "Toggle lock / unlock of Atlas window."
+L["ATLAS_OPTIONS_MAXMENUITEMS"] = "Maximum Number of Menu Items"
+L["ATLAS_OPTIONS_MAXMENUITEMS_TIP"] = "Configure the maximum number of dropdown menu items to be displayed before spliting to another menu category."
 L["ATLAS_OPTIONS_RCLICK"] = "Right-Click for World Map"
 L["ATLAS_OPTIONS_RCLICK_TIP"] = "Enable the Right-Click in Atlas window to switch to WoW World Map."
 L["ATLAS_OPTIONS_RESETPOS"] = "Reset Position"

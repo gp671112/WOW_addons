@@ -1,4 +1,4 @@
--- $Id: Atlas-frFR.lua 246 2017-05-15 07:33:49Z arith $
+-- $Id: Atlas-frFR.lua 270 2017-06-29 14:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -70,6 +70,7 @@ L["ATLAS_DDL_EXPANSION_BC"] = "Instances Burning Crusade"
 L["ATLAS_DDL_EXPANSION_CATA"] = "Instances Cataclysm"
 L["ATLAS_DDL_EXPANSION_LEGION"] = "Instances Légion"
 L["ATLAS_DDL_EXPANSION_MOP"] = "Instances Mists of Pandaria"
+L["ATLAS_DDL_EXPANSION_OLD"] = "Instances du Vieux Monde"
 L["ATLAS_DDL_EXPANSION_WOD"] = "Instances Warlords of Draenor"
 L["ATLAS_DDL_EXPANSION_WOTLK"] = "Instances Wrath of the Lich King"
 L["ATLAS_DDL_LEVEL"] = "Niveau"
@@ -84,8 +85,12 @@ L["ATLAS_DDL_LEVEL_85TO90"] = "Instances Niveau 85-90"
 L["ATLAS_DDL_LEVEL_90TO100"] = "Instances Niveau 90-100"
 L["ATLAS_DDL_LEVEL_UNDER45"] = "Instances avant Niveau 45"
 L["ATLAS_DDL_PARTYSIZE"] = "Taille de groupe"
+L["ATLAS_DDL_PARTYSIZE_10"] = "Instances pour 10 Joueurs"
+L["ATLAS_DDL_PARTYSIZE_20TO40"] = "Instances pour 20-40 Joueurs"
+L["ATLAS_DDL_PARTYSIZE_5"] = "Instances pour 5 Joueurs"
 L["ATLAS_DDL_TYPE"] = "Type"
 L["ATLAS_DDL_TYPE_ENTRANCE"] = "Entrées"
+L["ATLAS_DDL_TYPE_INSTANCE"] = "Instances"
 L["ATLAS_DEP_MSG1"] = "Atlas a détecté un ou plusieurs module(s) qui ne sont pas à jour."
 L["ATLAS_DEP_MSG2"] = "Ils ont été désactivés pour ce personnage."
 L["ATLAS_DEP_MSG3"] = "Les supprimer de votre dossier AddOns."

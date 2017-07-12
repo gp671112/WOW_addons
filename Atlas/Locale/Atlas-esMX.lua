@@ -1,4 +1,4 @@
--- $Id: Atlas-esMX.lua 240 2017-05-12 17:13:41Z arith $
+-- $Id: Atlas-esMX.lua 270 2017-06-29 14:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -77,6 +77,7 @@ L["ATLAS_DDL_EXPANSION_LEGION"] = "Mazmorras de Legion"
 L["ATLAS_DDL_EXPANSION_LEGION1"] = "Calabozo Legion"
 L["ATLAS_DDL_EXPANSION_LEGION2"] = "Raid de Legion"
 L["ATLAS_DDL_EXPANSION_MOP"] = "Mazmorras de Mists of Pandaria"
+L["ATLAS_DDL_EXPANSION_OLD"] = "Antiguas Mazmorras"
 L["ATLAS_DDL_EXPANSION_WOD"] = "Mazmorras de Warlords of Draenor"
 L["ATLAS_DDL_EXPANSION_WOTLK"] = "Mazmorras Wrath of the Lich King"
 L["ATLAS_DDL_LEVEL"] = "Nivel"
@@ -91,8 +92,12 @@ L["ATLAS_DDL_LEVEL_85TO90"] = "Mazmorras de nivel 85-90"
 L["ATLAS_DDL_LEVEL_90TO100"] = "Mazmorras de nivel 90-100"
 L["ATLAS_DDL_LEVEL_UNDER45"] = "Mazmorras de nivel inferior a 45"
 L["ATLAS_DDL_PARTYSIZE"] = "Tamaño de la party"
+L["ATLAS_DDL_PARTYSIZE_10"] = "Mazmorras para 10 jugadores"
+L["ATLAS_DDL_PARTYSIZE_20TO40"] = "Mazmorras para 20-40 jugadores"
+L["ATLAS_DDL_PARTYSIZE_5"] = "Mazmorras para 5 jugadores"
 L["ATLAS_DDL_TYPE"] = "Tipo"
 L["ATLAS_DDL_TYPE_ENTRANCE"] = "Entradas"
+L["ATLAS_DDL_TYPE_INSTANCE"] = "Mazmorras"
 L["ATLAS_DEP_MSG1"] = "Atlas ha detectado uno o varios modulos sin actualizar."
 L["ATLAS_DEP_MSG2"] = "Se han sido desactivados para este personaje."
 L["ATLAS_DEP_MSG3"] = "Borralos de tu directorio AddOns."

@@ -173,7 +173,7 @@ L["Always counter no bonus loot threat"] = "總是反制沒有額外獎勵的威
 L["Artifact shown value is the base value without considering knowledge multiplier"] = "神兵顯示的值是基礎值，沒有經過神兵知識的加成。"
 L["Attempts to use less champions for missions, in order to fill more missions"] = "嘗試使用較少的勇士來出任務，以便能夠派出更多任務。"
 L["Better parties available in next future"] = "在將來有更好的隊伍"
-L["Building Final report"] = "建立報告"
+L["Building Final report"] = "建立總結報告"
 L["Capped %1$s. Spend at least %2$d of them"] = "%1$s封頂了。花費至少%2$d在它身上"
 L["Changes the sort order of missions in Mission panel"] = "改變任務面板上的任務排列順序"
 L["Combat ally is proposed for missions so you can consider unassigning him"] = "戰鬥盟友被建議到任務，所以你可以考慮取消指派他"
@@ -237,6 +237,7 @@ L["You have no troops"] = "你沒有部隊"
 L["Empty missions sorted as last"] = "空的任務排在最後"
 L["Empty or 0% success mission are sorted as last. Does not apply to \"original\" method"] = "空的或成功率 0% 的任務排列在最後面。不要套用到 \"原始方法\"。"
 L["Missions' results"] = "任務結果"
-
+L["Remove no champions warning"] = "移除部隊不足警告"
+L["Disables warning: "] = "停用警告："
 return
 end

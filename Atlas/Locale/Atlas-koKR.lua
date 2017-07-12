@@ -1,4 +1,4 @@
--- $Id: Atlas-koKR.lua 240 2017-05-12 17:13:41Z arith $
+-- $Id: Atlas-koKR.lua 270 2017-06-29 14:22:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser

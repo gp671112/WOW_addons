@@ -1,4 +1,4 @@
--- $Id: Atlas.lua 266 2017-06-29 08:28:27Z arith $
+-- $Id: Atlas.lua 273 2017-07-02 13:06:18Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -483,7 +483,6 @@ function addon:PopulateDropdowns()
 			for k,v in pairs(subcatItems) do
 				local q1 = (k-(k%ATLAS_MAX_MENUITEMS))/ATLAS_MAX_MENUITEMS
 				if v then tinsert(ATLAS_DROPDOWNS[i+q1], v) end
-				--print(format("n: %d - %s, i:%d, q:%d, - k:%s, v:%s", n, subcatOrder[n], i, q1, k, v))
 			end
 	--		for p = 0, q do
 	--			tsort(ATLAS_DROPDOWNS[i+p], sortZonesAlpha)
@@ -521,9 +520,9 @@ local function process_Deprecated()
 		if ( addon:CheckAddonStatus(GetAddOnInfo(v[1])) ) then
 			local outdated = false
 			local currVer = GetAddOnMetadata(v[1], "Version")
-			if (v[3] and currVer < v[3]) then
+			if (v[3] and (strsub(currVer, 1, 1) == "r") and currVer < v[3]) then
 				outdated = true
-			elseif (v[2] and currVer < v[2]) then
+			elseif (v[2] and (strsub(currVer, 1, 1) ~= "r") and currVer < v[2]) then
 				outdated = true
 			end
 			if (outdated) then
@@ -603,15 +602,15 @@ end
 function Atlas_Toggle()
 	if (ATLAS_SMALLFRAME_SELECTED) then
 		if (AtlasFrameSmall:IsVisible()) then
-			AtlasFrameSmall:Hide()
+			HideUIPanel(AtlasFrameSmall)
 		else
-			AtlasFrameSmall:Show()
+			ShowUIPanel(AtlasFrameSmall)
 		end
 	else
 		if (AtlasFrame:IsVisible()) then
-			AtlasFrame:Hide()
+			HideUIPanel(AtlasFrame)
 		else
-			AtlasFrame:Show()
+			ShowUIPanel(AtlasFrame)
 		end
 	end
 end
@@ -1842,6 +1841,8 @@ local function initialization()
 	AtlasFrame:SetClampRectInsets(12, 0, -12, 0)
 	AtlasFrameLarge:SetClampRectInsets(12, 0, -12, 0)
 	AtlasFrameSmall:SetClampRectInsets(12, 0, -12, 0)
+	
+	ATLAS_MAX_MENUITEMS = profile.options.dropdowns.maxItems or ATLAS_MAX_MENUITEMS
 
 	-- Populate the dropdown lists...yeeeah this is so much nicer!
 	addon:PopulateDropdowns()
@@ -1910,6 +1911,7 @@ end
 function addon:Refresh()
 	profile = self.db.profile
 
+	ATLAS_MAX_MENUITEMS = profile.options.dropdowns.maxItems or ATLAS_MAX_MENUITEMS
 	addon:PopulateDropdowns()
 	Atlas_Refresh()
 	AtlasFrameDropDownType_OnShow()

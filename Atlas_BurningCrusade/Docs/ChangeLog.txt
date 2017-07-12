@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt 32 2017-06-29 13:31:11Z arith $
+$Id: ChangeLog.txt 34 2017-07-06 14:21:38Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
@@ -7,6 +7,12 @@ Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 ==============
 = Change Log =
 ==============
+
+v1.42.01 (Jul. 06, 2017)
+------------------------
+- Change Atlas_GetBossName() to Atlas:GetBossName()
+- Enhanced sub-boss' presentation by calling Atlas:GetBossName()
+- Fixed wrong encounter ID in Karazhan
 
 v1.42.01 (Jun. 29, 2017)
 ------------------------

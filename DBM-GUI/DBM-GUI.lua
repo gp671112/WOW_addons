@@ -43,7 +43,7 @@
 --
 
 
-local revision =("$Revision: 16213 $"):sub(12, -3)
+local revision =("$Revision: 16437 $"):sub(12, -3)
 local FrameTitle = "DBM_GUI_Option_"	-- all GUI frames get automatically a name FrameTitle..ID
 
 local PanelPrototype = {}
@@ -410,7 +410,7 @@ do
 		local spellName = GetSpellInfo(spellId)
 		if not spellName then
 			spellName = DBM_CORE_UNKNOWN
-			DBM:Debug("Spell ID does not exist: "..spellId)
+			DBM:Debug("Spell ID 不存在: "..spellId)
 		end
 		return ("|cff71d5ff|Hspell:%d|h%s|h|r"):format(spellId, spellName)
 	end
@@ -418,7 +418,7 @@ do
 	local function replaceJournalLinks(id)
 		local check = EJ_GetSectionInfo(tonumber(id))
 		if not check then
-			DBM:Debug("Journal ID does not exist: "..id)
+			DBM:Debug("Journal ID 不存在: "..id)
 		end
 		local link = select(9, EJ_GetSectionInfo(tonumber(id))) or DBM_CORE_UNKNOWN
 		return link:gsub("|h%[(.*)%]|h", "|h%1|h")
@@ -1490,9 +1490,9 @@ local function CreateOptionsMenu()
 		-- RaidWarn Sound
 		local Sounds = MixinSharedMedia3("sound", {
 			{	text	= L.NoSound,	value	= "" },
-			{	text	= "RaidWarning",value 	= "Sound\\interface\\RaidWarning.ogg", 		sound=true },
-			{	text	= "Classic",	value 	= "Sound\\Doodad\\BellTollNightElf.ogg", 	sound=true },
-			{	text	= "Ding",		value 	= "Sound\\interface\\AlarmClockWarning3.ogg", 	sound=true }
+			{	text	= "團隊警告",value 	= "Sound\\interface\\RaidWarning.ogg", 		sound=true },
+			{	text	= "經典",	value 	= "Sound\\Doodad\\BellTollNightElf.ogg", 	sound=true },
+			{	text	= "叮",		value 	= "Sound\\interface\\AlarmClockWarning3.ogg", 	sound=true }
 		})
 
 		local RaidWarnSoundDropDown = raidwarnoptions:CreateDropdown(L.RaidWarnSound, Sounds, "DBM", "RaidWarningSound", function(value)
@@ -2653,13 +2653,14 @@ local function CreateOptionsMenu()
 		-- SpecialWarn Sound
 		local Sounds = MixinSharedMedia3("sound", {
 			{	text	= L.NoSound,			value	= "" },
-			{	text	= "Default",			value 	= "Sound\\Spells\\PVPFlagTaken.ogg", 		sound=true },
-			{	text	= "Blizzard",			value 	= "Sound\\interface\\UI_RaidBossWhisperWarning.ogg", 		sound=true },
-			{	text	= "Beware!",			value 	= "Sound\\Creature\\AlgalonTheObserver\\UR_Algalon_BHole01.ogg", 		sound=true },
-			{	text	= "Destruction",		value 	= "Sound\\Creature\\KilJaeden\\KILJAEDEN02.ogg", 		sound=true },
-			{	text	= "NotPrepared",		value 	= "Sound\\Creature\\Illidan\\BLACK_Illidan_04.ogg", 		sound=true },
-			{	text	= "RunAwayLittleGirl",	value 	= "Sound\\Creature\\HoodWolf\\HoodWolfTransformPlayer01.ogg", 		sound=true },
-			{	text	= "NightElfBell",		value 	= "Sound\\Doodad\\BellTollNightElf.ogg", 	sound=true }
+			{	text	= "預設",			value 	= "Sound\\Spells\\PVPFlagTaken.ogg", 		sound=true },
+			{	text	= "暴雪",			value 	= "Sound\\interface\\UI_RaidBossWhisperWarning.ogg", 		sound=true },
+			{	text	= "當心!",			value 	= "Sound\\Creature\\AlgalonTheObserver\\UR_Algalon_BHole01.ogg", 		sound=true },
+			{	text	= "毀滅",		value 	= "Sound\\Creature\\KilJaeden\\KILJAEDEN02.ogg", 		sound=true },
+			{	text	= "還沒準備好",		value 	= "Sound\\Creature\\Illidan\\BLACK_Illidan_04.ogg", 		sound=true },
+			{	text	= "還沒準備好2",		value 	= "Sound\\Creature\\Illidan_Stormrage\\VO_703_Illidan_Stormrage_03.ogg", 		sound=true },
+			{	text	= "快逃阿小女孩",	value 	= "Sound\\Creature\\HoodWolf\\HoodWolfTransformPlayer01.ogg", 		sound=true },
+			{	text	= "夜精靈鐘聲",		value 	= "Sound\\Doodad\\BellTollNightElf.ogg", 	sound=true }
 		})
 
 		local SpecialWarnSoundDropDown = specArea:CreateDropdown(L.SpecialWarnSound, Sounds, "DBM", "SpecialWarningSound", function(value)

@@ -21,6 +21,10 @@ L= DBM:GetModLocalization(1856)
 ---------------------------
 L= DBM:GetModLocalization(1861)
 
+L:SetOptionLocalization({
+	TauntOnPainSuccess	= "在痛苦負擔成功施放時同步計時器與嘲諷提醒而非開始時(對於史詩難度你會刻意讓負擔發出一次，否則不建議使用此選項)"
+})
+
 ---------------------------
 -- Sisters of the Moon --
 ---------------------------
@@ -49,6 +53,10 @@ L:SetOptionLocalization({
 -- Kil'jaeden --
 ---------------------------
 L= DBM:GetModLocalization(1898)
+
+L:SetMiscLocalization({
+	Obelisklasers	= "惡魔石碑雷射"
+})
 
 -------------
 --  Trash  --

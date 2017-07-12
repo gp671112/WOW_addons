@@ -60,7 +60,7 @@ DBM_CORE_COMBAT_STATE_RECOVERED		= "%s的戰鬥在%s前開始，恢復計時器�
 DBM_CORE_TRANSCRIPTOR_LOG_START		= "Transcriptor開始記錄。"
 DBM_CORE_TRANSCRIPTOR_LOG_END		= "Transcriptor結束紀錄。"
 
-DBM_CORE_MOVIE_SKIPPED				= "一個過場動畫已被自動地略過。"
+DBM_CORE_MOVIE_SKIPPED				= "DBM已嘗試自動略過一個過場動畫。"
 
 DBM_CORE_AFK_WARNING				= "你正在暫離並戰鬥中(血量還剩餘%d百分比)所以發出警告。如果你並非暫離，請清除暫離的標籤或是在'額外功能'停用此選項。"
 

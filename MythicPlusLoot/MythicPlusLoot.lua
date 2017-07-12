@@ -140,8 +140,16 @@ function MythicLootItemLevel(mlvl)
 		return "880"
 	elseif (mlvl == "8" or mlvl == "9") then
 		return "885"
-	else
+	elseif (mlvl == "10" or mlvl == "11") then
 		return "890"
+	elseif (mlvl == "12") then
+		return "895"
+	elseif (mlvl == "13") then
+		return "900"
+	elseif (mlvl == "14") then
+		return "905"
+	else
+		return "910"
 	end
 end
 
@@ -160,8 +168,18 @@ function MythicWeeklyLootItemLevel(mlvl)
 		return "895"
 	elseif (mlvl == "9") then
 		return "900"
-	else
+	elseif (mlvl == "10") then
 		return "905"
+	elseif (mlvl == "11") then
+		return "910"
+	elseif (mlvl == "12") then
+		return "915"
+	elseif (mlvl == "13") then
+		return "920"
+	elseif (mlvl == "14") then
+		return "925"
+	else
+		return "930"
 	end
 end
 

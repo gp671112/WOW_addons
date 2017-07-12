@@ -2,8 +2,8 @@
 ## Title: MythicPlusLoot
 ## Version: 1.9
 ## Notes: |cff00ff00Mythic Plus Loot item level for Keystone and Weekly Chest.
-## Title-zhTW: |cff4DD2FF[資訊]|r 傳奇+ 物品等級
-## Notes-zhTW: MythicPlusLoot |n在傳奇鑰石的滑鼠提示中顯示戰利品和每週寶箱的物品等級。
+## Title-zhTW: |cFF00FF80[資訊]|rMythicPlusLoot
+## Notes-zhTW: 提示鑰石與每周寶箱相應的裝備等級。
 ## Author: Artanis
 
 embeds.xml

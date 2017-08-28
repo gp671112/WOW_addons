@@ -4,7 +4,7 @@
 ## Title-zhTW: |cffB973FF[裝備]|r 聖物觀察
 ## Notes-zhTW: RelicInspector |n在聖物和神兵武器的滑鼠提示中顯示更完整的聖物資訊。|n不用切換專精就可以看到聖物提供給其他專精使用時的效果。|n|cffffd200使用方法：|r從Esc>介面>插件>裝備-聖物，進行設定。
 ## Author: Thoralie
-## Version: 1.11.10
+## Version: 1.11.11
 ## SavedVariables: RelicInspectorDB
 
 Libs\LibStub\LibStub.lua

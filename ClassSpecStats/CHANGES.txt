@@ -1,4 +1,15 @@
 ------------------------------------------------------------------------
+r25 | reglohpri | 2017-07-30 10:39:39 -0500 (Sun, 30 Jul 2017) | 5 lines
+Changed paths:
+   M /trunk/ClassSpecStats.toc
+   M /trunk/stats.lua
+
+Stat priorities for the following classes have been updated
+
+Balance Druid, Guardian Druid
+Shadow Priest, Arms Warrior
+
+------------------------------------------------------------------------
 r23 | reglohpri | 2017-07-03 16:00:37 -0500 (Mon, 03 Jul 2017) | 5 lines
 Changed paths:
    M /trunk/ClassSpecStats.toc

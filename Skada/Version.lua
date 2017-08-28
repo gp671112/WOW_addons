@@ -2,7 +2,7 @@ Skada.versions = {
     {
         id = "1.6.7",
         title = "Skada 1.6.7",
-        message = "增加新增益與簡易概述模式，顯示使用的法術。 點擊一個法術顯示相應的玩家。<br/>"
+        message = "Added new Buffs and Debuffs overview modes, showing spells used. Clicking a spell shows the corresponding players.<br/>"
     },
     {
         id = "1.6.4",

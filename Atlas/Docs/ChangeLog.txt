@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt 282 2017-07-06 13:23:08Z arith $
+$Id: ChangeLog.txt 284 2017-07-15 13:48:50Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
@@ -15,9 +15,13 @@ Known Issues:
 = Change Log =
 ==============
 
+v1.42.04 (Jul. 15, 2017)
+------------------------
+- Enhanced map modules / plugins' detection.
+
 v1.42.03 (Jul. 06, 2017)
 ------------------------
-- Fixed issue in Atlas:GetBossName() to through sub-boss' name instead of the boss-category name.
+- Fixed issue in Atlas:GetBossName() to throw sub-boss' name instead of the boss-category name.
   For example, in the "Opera Hall" event inside Karazhan, it was presented as "The Big Bad Wolf".
   Now this will be presented correctly.
 

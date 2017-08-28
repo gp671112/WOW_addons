@@ -23,7 +23,7 @@ local events = {
 	"CHAT_MSG_INSTANCE_CHAT",
 	"CHAT_MSG_INSTANCE_CHAT_LEADER",
 }
---[[ 註解掉轉換鑰石物品連結的功能
+--[[
 local function filter(self, event, msg, ...)
 	local msg2 = msg:gsub("(|Hkeystone:([0-9:]+)|h(%b[])|h)", function(msg, itemString, itemName)
 		local info = { strsplit(":", itemString) }
@@ -46,6 +46,7 @@ for _, v in pairs(events) do
 	ChatFrame_AddMessageEventFilter(v, filter)
 end
 --]]
+
 local function SlotKeystone()
 	for container=BACKPACK_CONTAINER, NUM_BAG_SLOTS do
 		local slots = GetContainerNumSlots(container)

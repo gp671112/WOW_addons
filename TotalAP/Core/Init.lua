@@ -30,9 +30,11 @@ TotalAP.ArtifactInterface = {}
 TotalAP.Scanner = {}
 TotalAP.Cache = {}
 TotalAP.DBHandler = {} 
+TotalAP.Settings = {}
 
 -- Controllers & Input handling
 TotalAP.Controllers = {}
+TotalAP.EventHandlers = {}
 
 -- User Interface & Views
 TotalAP.GUI = {}
@@ -43,12 +45,34 @@ TotalAP.Utils = {}
 -- Localization table
 TotalAP.L = LibStub("AceLocale-3.0"):GetLocale("TotalAP", false)
 
+-- Volatile data storage (caches)
+TotalAP.artifactCache = {} -- formerly "ArtifactProgressCache" -> Will be used to update saved variables cache when the session ends
+TotalAP.bankCache = {
+
+	inBankAP = 0,
+	numItems = 0,
+
+}
+TotalAP.inventoryCache = {
+
+	inBagsAP = 0,
+	numItems = 0,
+	foundTome = false,
+
+	displayItem = {
+		
+	}
+}
+
 
 -- Global functions (TODO: Move to separate file if there will be more?)
 -- TODO: Custom colour codes (in Utils) -> not implemented yet
 -- Print debug messages (if enabled)
 local function Debug(msg)
-	if TotalArtifactPowerSettings.debugMode then
+
+	local settings = TotalAP.Settings.GetReference()
+
+	if settings.debugMode then
 		print(format("|c000072CA" .. "%s-Debug: " .. "|c00E6CC80%s", addonName, msg)); 
 	end
 end
@@ -56,7 +80,10 @@ end
 	
 -- Print regular addon messages (if enabled)
 local function ChatMsg(msg)
-	if TotalArtifactPowerSettings.verbose then
+
+	local settings = TotalAP.Settings.GetReference()
+
+	if settings.verbose then
 		print(format("|c00CC5500" .. "%s: " .. "|c00E6CC80%s", addonName, msg)); 
 	end
 end

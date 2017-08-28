@@ -1,23 +1,116 @@
-Changes since tag 7.2.14
+Changes since tag 7.2.18
 
-commit a429ee601401b122e0ce52a0416be49dd0465f1e
+commit 155d0965d12c51725f0ac03f54ea0eec94f0d4b1
 Author: subversion <svn@deadlybossmods.com>
-Date:   Wed Jul 12 06:44:23 2017 +0200
+Date:   Thu Aug 24 08:46:42 2017 +0200
 
-    Omega via svn r16449:
-    couple timer tweaks
+    Omega via svn r16649:
+    Have source tank of burden of pain yell ?\226?\128?\156Pulse?\226?\128?\157 for first pulse
 
-commit dca99324b408c20fefaa5c1398458dc9cf798a38
+commit 65be31bf8ef56e269202af6f5b425c5d7acae9c6
 Author: subversion <svn@deadlybossmods.com>
-Date:   Wed Jul 12 06:13:57 2017 +0200
+Date:   Thu Aug 24 08:35:30 2017 +0200
 
-    Omega via svn r16448:
-    Scrap souls counter on demonic inquisition, it?\226?\128?\153s not possible to track them until blizzard fixes combat log (no death event)
+    Omega via svn r16648:
+    Fix bug where voice filter didn?\226?\128?\153t work on devouring maw
+    fixed bug where devouring maw timer icon was a gear instead of a shark
 
-commit 292fdb78ecd841b1ddc2318c223ac7fac832d4c8
+commit a1dbe220625699cbae05c6cc22fbfc9fd64ee497
 Author: subversion <svn@deadlybossmods.com>
-Date:   Tue Jul 11 22:21:54 2017 +0200
+Date:   Thu Aug 24 07:42:28 2017 +0200
 
-    tandanu via svn r16447:
+    Omega via svn r16647:
+    Make thundershock warning smarter
+
+commit 6862ad166e140f38a2854b3a7514159892f751b5
+Author: subversion <svn@deadlybossmods.com>
+Date:   Thu Aug 24 06:58:06 2017 +0200
+
+    Omega via svn r16646:
+    Start at 4
+
+commit bfeb95628466002a30e6ec18127918a3b035a1ea
+Author: subversion <svn@deadlybossmods.com>
+Date:   Thu Aug 24 06:51:37 2017 +0200
+
+    Omega via svn r16645:
+    Add yell for when you DROP a buffer fish
+
+commit c20241342bd05e67bef74582cfd0f83043150a65
+Author: subversion <svn@deadlybossmods.com>
+Date:   Thu Aug 24 06:39:27 2017 +0200
+
+    Omega via svn r16644:
+    raise alert level of burden
+
+commit f33491f6a02eddeb74621d8216dacfd5c0e64bd5
+Author: subversion <svn@deadlybossmods.com>
+Date:   Thu Aug 24 06:08:27 2017 +0200
+
+    Omega via svn r16643:
+    Moved ink warning/timer to success instead of start to avoid duplicate warnings when stutter casting
+
+commit 8399832d7088448955ac28661fcb32e634628a33
+Author: subversion <svn@deadlybossmods.com>
+Date:   Thu Aug 24 03:01:03 2017 +0200
+
+    Omega via svn r16642:
+    Add missing berserk
+
+commit ddb749ef9b127e367a17260acc0524b04aea5862
+Author: subversion <svn@deadlybossmods.com>
+Date:   Thu Aug 24 00:55:59 2017 +0200
+
+    Omega via svn r16641:
+    minor DBT debug
+
+commit a146e9b3dc5bbf31d5ef65dc23c6faaa0011d3e2
+Author: subversion <svn@deadlybossmods.com>
+Date:   Thu Aug 24 00:49:42 2017 +0200
+
+    Omega via svn r16640:
+    Test passing spellname off for GTFO
+
+commit d472135eb767fbed705ebe3818bb98ff97b93e21
+Author: subversion <svn@deadlybossmods.com>
+Date:   Thu Aug 24 00:34:28 2017 +0200
+
+    Omega via svn r16639:
+    Possibly fix volley glitch, or at very least fix extend code
+    Debug code added in case it still glitches
+
+commit da86a059fa4a3353b4b358631f2df1d5d9de75ad
+Author: subversion <svn@deadlybossmods.com>
+Date:   Wed Aug 23 23:39:24 2017 +0200
+
+    tandanu via svn r16638:
+    make gtfo special warning spell name configurable with default set to 'bad'
+
+commit 91f27a945b97640209bcf1fd19aceef8b16010b6
+Author: subversion <svn@deadlybossmods.com>
+Date:   Wed Aug 23 23:28:44 2017 +0200
+
+    Omega via svn r16637:
+    Change berserk back to 14. even though some logs weren?\226?\128?\153t berserking at 14, some are. guess it?\226?\128?\153s just variable.
+
+commit 7cd72f987e35c92e4b7147ebe28fd4d77abb3c43
+Author: subversion <svn@deadlybossmods.com>
+Date:   Wed Aug 23 06:43:04 2017 +0200
+
+    Omega via svn r16636:
+    Fix warning being too spammy for healers
+
+commit edd2d2c91245fe7ab04276352b60492d47dbf5ac
+Author: subversion <svn@deadlybossmods.com>
+Date:   Wed Aug 23 06:37:07 2017 +0200
+
+    Omega via svn r16635:
+    some minor timer tweaks
+
+commit 5d3085418288d2d8fa5ddb713443b964ba7e9439
+Author: subversion <svn@deadlybossmods.com>
+Date:   Tue Aug 22 22:58:07 2017 +0200
+
+    tandanu via svn r16634:
     increment alpha version
 

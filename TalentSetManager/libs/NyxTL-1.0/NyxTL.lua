@@ -63,10 +63,10 @@ function ntl:GetList(l)
  return t
 end
 
-function ntl:FilterList(l, s, cache)
+function ntl:FilterList(l, filter, cache)
  local t = ntl:GetList(l)
  
- if not s or s == "" then return t end
+ if not filter or filter == "" then return t end
 
  if not cache then
   cache = {}
@@ -75,7 +75,7 @@ function ntl:FilterList(l, s, cache)
  end
  
  for k,v in pairs(t) do
-  if v:find(lower(s)) then
+  if v:find(lower(filter)) then
    cache[#cache + 1] = v
   end
  end

@@ -4,7 +4,7 @@
 
 local version = 1
 
-local format, tremove, tinsert, lower, floor, ceil = string.format, table.remove, table.insert, string.lower, math.floor, math.ceil
+local C_EquipmentSet, format, tremove, tinsert, lower, floor, ceil = C_EquipmentSet, string.format, table.remove, table.insert, string.lower, math.floor, math.ceil
 
 local addonName, addonTable = ...
 local L = addonTable.L
@@ -12,6 +12,7 @@ local ntl
 
 local icon_filenames, icons_added
 
+local charsvar
 local filtered_filenames = {}
 local current_icons_list
 local ignored_tiers = {}
@@ -26,14 +27,14 @@ local funcs      = { talents     = { check = GetTalentInfo   , learn = LearnTale
                      talents_pvp = { check = GetPvpTalentInfo, learn = LearnPvpTalents } }
 
 local str_no_equipment = "|cffE96969"..NONE.."|r"
-local equipment_cache, equipment_menu_table, equipment_menu_frame, t_menu_close, t_menu_empty
+local equipment_cache, equipment_menu_table, quicktalentselect_menu_table, menu_frame, t_menu_close, t_menu_empty
 local spec, sets
 local tt = "talents"
 
 local function getSetByName(name, t_type)
  local t
  if t_type then
-  t = TalentSetManager_Saves[t_type] and TalentSetManager_Saves[t_type][spec]
+  t = charsvar[t_type] and charsvar[t_type][spec]
  else
   t = sets
  end
@@ -56,7 +57,7 @@ end
 
 local function isEquipped(v)
  if not v then return end
- 
+
  for j = 1, numTiers[v.tt] do
   if v[j] then
    local id, _, _, selected = funcs[v.tt].check(j, v[j], 1)
@@ -158,32 +159,26 @@ local function talentPvPButtonClicked(self, button)
  TalentSetList_Update()
 end
 -------------------------------
-
 local function useEquipmentSet(eq)
  if not eq then return end
 
- if EquipmentSetContainsLockedItems(eq) or UnitCastingInfo("player") then
+ local equipmentSetID = C_EquipmentSet.GetEquipmentSetID(eq)
+ 
+ if not equipmentSetID then return end
+
+ if C_EquipmentSet.EquipmentSetContainsLockedItems(equipmentSetID) or UnitCastingInfo("player") then
   UIErrorsFrame:AddMessage(ERR_CLIENT_LOCKED_OUT, 1.0, 0.1, 0.1, 1.0)
   return
  end
 
- UseEquipmentSet(eq)
+ C_EquipmentSet.UseEquipmentSet(equipmentSetID)
 end
 
 local function checkEquipmentSets()
- local name, found, needUpdate
+ local needUpdate
  for _,v in pairs(sets) do
   if v.equipment then
-   found = false
-   for i = 1, GetNumEquipmentSets() do
-    name = GetEquipmentSetInfo(i)
-    if v.equipment == name then
-     found = true
-     break
-    end
-   end
-   
-   if not found then
+   if not C_EquipmentSet.GetEquipmentSetID(v.equipment) then
     print(L["|cff00ffffTalent Set Manager|r - "]..format(L["equipment_not_found"], "|cff00ff00"..v.equipment.."|r", "|cff00ff00"..v.name.."|r"))
     v.equipment = nil
     needUpdate = true
@@ -199,7 +194,7 @@ end
 local function specChanged_autoEquip()
  if not spec or not TalentSetManager_Options.interface.auto_equip_enable then return end
 
- local opt = TalentSetManager_Saves.interface["auto_equip"..spec]
+ local opt = charsvar.interface["auto_equip"..spec]
  local ae_tt
 
  if     opt == 0 then ae_tt = "none" 
@@ -207,23 +202,20 @@ local function specChanged_autoEquip()
  else                 ae_tt = "talents"
  end
 
- if ae_tt == "none" or not TalentSetManager_Saves[ae_tt] or not TalentSetManager_Saves[ae_tt][spec] then return end
+ if ae_tt == "none" or not charsvar[ae_tt] or not charsvar[ae_tt][spec] then return end
 
- local name, found
- for _,v in pairs(TalentSetManager_Saves[ae_tt][spec]) do
-  found = 1
-  if isEquipped(v) and v.equipment then
-   for i = 1, GetNumEquipmentSets() do
-    name = GetEquipmentSetInfo(i)
-    if v.equipment == name then
-     C_Timer.After(0.5, function() 
-                         if TalentSetManager_Options.interface.auto_equip_chatmsg then
-                          print(L["|cff00ffffTalent Set Manager|r - "]..format(L["autoequip_equipment_msg"], "|cff00ff00"..v.equipment.."|r", "|cff00ff00"..v.name.."|r"))
-                         end
-                         useEquipmentSet(v.equipment) 
-                        end)
-     return
-    end   
+ local found
+ for _,v in pairs(charsvar[ae_tt][spec]) do
+  if v.equipment then
+   found = C_EquipmentSet.GetEquipmentSetID(v.equipment)
+   if found and isEquipped(v) then
+    C_Timer.After(0.5, function() 
+                        if TalentSetManager_Options.interface.auto_equip_chatmsg then
+                         print(L["|cff00ffffTalent Set Manager|r - "]..format(L["autoequip_equipment_msg"], "|cff00ff00"..v.equipment.."|r", "|cff00ff00"..v.name.."|r"))
+                        end
+                        useEquipmentSet(v.equipment) 
+                       end)
+    return
    end
   end
  end
@@ -234,13 +226,13 @@ local function specChanged_autoEquip()
 end
 
 local function specChanged()
- if not spec or not TalentSetManager_Saves then return end
+ if not spec or not charsvar then return end
 
- if not TalentSetManager_Saves[tt][spec] then
-  TalentSetManager_Saves[tt][spec] = {}
+ if not charsvar[tt][spec] then
+  charsvar[tt][spec] = {}
  end
 
- sets = TalentSetManager_Saves[tt][spec]
+ sets = charsvar[tt][spec]
  if TalentSetsList then
   TalentSetsList.selectedSet = nil
   clearIgnoredTierOverlays()
@@ -614,7 +606,7 @@ function TalentSetList_OnEvent(self, event, ...)
   TalentSetsDialogPopup:Hide()
   StaticPopup_Hide("TS_CONFIRM_DELETE_TALENT_SET")
   StaticPopup_Hide("TS_CONFIRM_OVERWRITE_TALENT_SET")
-  equipment_menu_frame:Hide()
+  menu_frame:Hide()
  elseif event == "PLAYER_REGEN_ENABLED" then
   self.in_combat_lockdown:Hide()
  end
@@ -624,7 +616,7 @@ function TalentSetList_OnHide(self)
  TalentSetsDialogPopup:Hide()
  StaticPopup_Hide("TS_CONFIRM_DELETE_TALENT_SET")
  StaticPopup_Hide("TS_CONFIRM_OVERWRITE_TALENT_SET")
- equipment_menu_frame:Hide()
+ menu_frame:Hide()
 end
 
 function TalentSetListButton_Generic_OnLeave(f)
@@ -634,7 +626,7 @@ end
 
 ----- equipment menu -----
 local function equipment_menuitem_onClick(f)
- local set = equipment_menu_frame.editingSet
+ local set = menu_frame.editingSet
  
  if not set then return end
 
@@ -652,6 +644,7 @@ end
 
 function TalentSetListButton_Equipment_OnClick(f)
  local p = f:GetParent()
+ 
  if not p.set then return end
  
  local menu_index = 5
@@ -667,10 +660,10 @@ function TalentSetListButton_Equipment_OnClick(f)
  equipment_menu_table[4].checked = p.set.equipment == nil
  
  local i = 1
- while i <= GetNumEquipmentSets() do
+ local IDs = C_EquipmentSet.GetEquipmentSetIDs()
+ while i <= C_EquipmentSet.GetNumEquipmentSets() do
   local t = get()
-  found = t.text == p.set.equipment
-  t.text = GetEquipmentSetInfo(i)
+  t.text = C_EquipmentSet.GetEquipmentSetInfo(IDs[i])
   t.value = t.text
   t.func = equipment_menuitem_onClick
   t.checked = t.text == p.set.equipment
@@ -684,8 +677,8 @@ function TalentSetListButton_Equipment_OnClick(f)
  equipment_menu_table[menu_index] = t_menu_empty
  equipment_menu_table[menu_index + 1] = t_menu_close
  
- equipment_menu_frame.editingSet = p.set
- EasyMenu(equipment_menu_table, equipment_menu_frame, "cursor", 0 , 0, "MENU")
+ menu_frame.editingSet = p.set
+ EasyMenu(equipment_menu_table, menu_frame, "cursor", 0 , 0, "MENU")
 end
 ---------------------
 
@@ -733,7 +726,7 @@ function TalentSetListButton_OnClick(f)
  end
  StaticPopup_Hide("TS_CONFIRM_DELETE_TALENT_SET")
  StaticPopup_Hide("TS_CONFIRM_OVERWRITE_TALENT_SET")
- equipment_menu_frame:Hide()
+ menu_frame:Hide()
 end
 
 function TalentSetListButton_OnDoubleClick(f)
@@ -896,7 +889,7 @@ local function toggleFrameVisibility(self)
  if not PlayerTalentFramePVPTalents:IsVisible() and not PlayerTalentFrameTalents:IsVisible() then
   TalentSetsMainframe:Hide()
   TalentSetsShowButton:Hide()
-  equipment_menu_frame:Hide()
+  menu_frame:Hide()
  else
   if self == PlayerTalentFramePVPTalents then -- pvp talents
    tt = "talents_pvp"
@@ -1108,23 +1101,79 @@ function TalentSetsDialogPopup_OnHide(self)
  TalentSetsDialogPopupEditBox:SetText("")
  collectgarbage()
 end
+------
+
+----- quick talent selection
+local function quicklearn_talent(data)
+ learnTalents(data.arg1)
+end
+
+local quicktalent_cache
+local function quickTalentSelectPopup_Show()
+
+ if not charsvar or not charsvar[tt][spec] or #charsvar[tt][spec] == 0 then return end
+ 
+ if not quicktalentselect_menu_table then 
+  quicktalentselect_menu_table = {}
+  quicktalentselect_menu_table[1] = {text = L["quick_talent_selection"], isTitle = true, notCheckable = true}
+  quicktalentselect_menu_table[2] = {text = "", isTitle = true, notCheckable = true}
+  quicktalentselect_menu_table[3] = t_menu_empty
+  quicktalent_cache = {}
+ else
+  for i = 4, #quicktalentselect_menu_table do
+   if quicktalentselect_menu_table[i] ~= t_menu_empty and quicktalentselect_menu_table[i] ~= t_menu_close then
+    quicktalent_cache[#quicktalent_cache + 1] = quicktalentselect_menu_table[i]
+   end
+   quicktalentselect_menu_table[i] = nil
+  end
+ end
+
+ local canchange = canChangeTalents(true)
+ local i = 4
+
+ quicktalentselect_menu_table[2].text = canchange and L["quick_talent_selection_canchange"] or L["quick_talent_selection_cannotchange"]
+ 
+ for k,v in pairs(charsvar[tt][spec]) do
+  if quicktalent_cache[1] then
+   quicktalentselect_menu_table[i] = tremove(quicktalent_cache, 1)
+  else
+   quicktalentselect_menu_table[i] = {func = quicklearn_talent}
+  end
+  quicktalentselect_menu_table[i].text = v.name
+  quicktalentselect_menu_table[i].disabled = not canchange
+  quicktalentselect_menu_table[i].checked = isEquipped(v)
+  quicktalentselect_menu_table[i].arg1 = v
+  i = i + 1
+ end
+ 
+ quicktalentselect_menu_table[#quicktalentselect_menu_table + 1] = t_menu_empty
+ quicktalentselect_menu_table[#quicktalentselect_menu_table + 1] = t_menu_close
+ 
+ EasyMenu(quicktalentselect_menu_table, menu_frame, "cursor", 0 , 0, "MENU")
+end
 -----
 
 local function initializeFrame()
 
  local btn = CreateFrame("Checkbutton", "TalentSetsShowButton", PlayerTalentFrame, "SpellBookSkillLineTabTemplate")
  btn.tooltip = L["addon_name"]
+ btn:RegisterForClicks("LeftButtonUp", "RightButtonUp")
  btn:SetPoint("TOPLEFT", PlayerTalentFrame, "TOPRIGHT", 0, -20)
- btn:SetChecked(TalentSetManager_Options.visible)
  btn:SetNormalTexture("interface\\icons\\achievement_guildperk_ladyluck_rank2")
+ btn:SetChecked(TalentSetManager_Options.visible)
  
- btn:SetScript("OnClick", function()
-  TalentSetManager_Options.visible = not TalentSetManager_Options.visible
-  if TalentSetManager_Options.visible then
-   TalentSetsMainframe:Show()
+ btn:SetScript("OnClick", function(self, button)
+  if button == "RightButton" then
+   quickTalentSelectPopup_Show()
   else
-   TalentSetsMainframe:Hide()
+   TalentSetManager_Options.visible = not TalentSetManager_Options.visible
+   if TalentSetManager_Options.visible then
+    TalentSetsMainframe:Show()
+   else
+    TalentSetsMainframe:Hide()
+   end
   end
+  btn:SetChecked(TalentSetManager_Options.visible)
  end)
 
  local mf = CreateFrame("Frame", "TalentSetsMainframe", PlayerTalentFrame, "InsetFrameTemplate")
@@ -1227,12 +1276,9 @@ local function initializeFrame()
 end
 
 local function initialize_equipment_menu()
- equipment_menu_frame = CreateFrame("Frame", "TalentSetManagerEquipmentMenu", UIParent, "UIDropDownMenuTemplate")
+ menu_frame = CreateFrame("Frame", "TalentSetManagerEquipmentMenu", UIParent, "UIDropDownMenuTemplate")
  equipment_cache = {}
  equipment_menu_table = {}
- 
- t_menu_empty = { text = " ", isTitle = true, notCheckable = true }
- t_menu_close = { text = CLOSE, notCheckable = true, func = function() equipment_menu_frame:Hide() end }
  
  equipment_menu_table[1] = { text = "|cffffffad"..L["equipment_menu_title1"].."|r", isTitle = true, notCheckable = true }
  equipment_menu_table[2] = { text = "|cffffffad"..L["equipment_menu_title2"].."|r", isTitle = true, notCheckable = true }
@@ -1254,7 +1300,7 @@ local function initialize()
   end
  end
 
- -- moved the LDB at start because of ElvUI (yes, always that)
+ -- moved the LDB initialization at start because of ElvUI (yes, always that)
  -- now we can refresh the label with the spec available
  addonTable.UpdateLDBButton()
 
@@ -1274,13 +1320,29 @@ local function eventhandler(self, event, ...)
   if not TalentSetManager_Options then TalentSetManager_Options = {} end
   if TalentSetManager_Options.visible == nil then TalentSetManager_Options.visible = true end
   if TalentSetManager_Options.ldb_last_selected == nil then TalentSetManager_Options.ldb_last_selected = "talents" end
-  
+
+  --[[ deprecated
   if not TalentSetManager_Saves then TalentSetManager_Saves = {} end
   if not TalentSetManager_Saves.talents then TalentSetManager_Saves.talents = {} end
   if not TalentSetManager_Saves.talents_pvp then TalentSetManager_Saves.talents_pvp = {} end
-
+  
   -- character specific defaults
   if not TalentSetManager_Saves.interface then TalentSetManager_Saves.interface = {} end
+  ]]
+  
+  local pName = GetUnitName("player")
+  local pRealm = GetRealmName()
+  addonTable.charname = pName.."-"..pRealm
+  
+  if not TalentSetManager_CharacterSaves then TalentSetManager_CharacterSaves = {} end
+  if not TalentSetManager_CharacterSaves[addonTable.charname] then TalentSetManager_CharacterSaves[addonTable.charname] = {} end
+  
+  charsvar = TalentSetManager_CharacterSaves[addonTable.charname]
+  
+  if not charsvar.interface then charsvar.interface = {} end
+  if not charsvar.talents then charsvar.talents = {} end
+  if not charsvar.talents_pvp then charsvar.talents_pvp = {} end
+
   
   -- blizzard interface frame options
   addonTable:InitializeOptions() -- options.lua
@@ -1288,7 +1350,7 @@ local function eventhandler(self, event, ...)
   
   -- version updates
   -- nil -> 1
-  if not TalentSetManager_Saves.version then
+  if TalentSetManager_Saves and not TalentSetManager_Saves.version then
    for _,sp in pairs(TalentSetManager_Saves.talents) do
     for _,v in pairs(sp) do
      v.tt = "talents"
@@ -1299,12 +1361,26 @@ local function eventhandler(self, event, ...)
      v.tt = "talents_pvp"
     end
    end
+   TalentSetManager_Saves.version = version
   end
-  TalentSetManager_Saves.version = version
+ 
+  -- character specific to global svar
+  if TalentSetManager_Saves then
+   for k,v in pairs(TalentSetManager_Saves) do
+    charsvar[k] = v
+   end
+   
+   -- keep a backup in case something goes wrong
+   --TalentSetManager_Saves = nil
+  end
 
-  addonTable:InitializeLDB()
-  initialize_equipment_menu()
+  charsvar.version = 0
   
+  addonTable:InitializeLDB()
+  t_menu_empty = { text = " ", isTitle = true, notCheckable = true }
+  t_menu_close = { text = CLOSE, notCheckable = true, func = function() menu_frame:Hide() end }
+  initialize_equipment_menu()
+
   -- GetSpecialization still not available on the very first login
   C_Timer.After(1, initialize)
  elseif event == "ACTIVE_TALENT_GROUP_CHANGED" then
@@ -1336,7 +1412,7 @@ local function eventhandler(self, event, ...)
   PlayerTalentFramePVPTalents:HookScript("OnShow", delayToggle)
   PlayerTalentFrameSpecialization:HookScript("OnShow", delayToggle)
   PlayerTalentFramePetSpecialization:HookScript("OnShow", delayToggle)
-  
+
   -- unfortunately can't hooksecurefunc PlayerTalentButton_OnClick since it's fired from a virtual XML button
   local f
   for t = 1,numColumns do
@@ -1360,6 +1436,21 @@ local function eventhandler(self, event, ...)
 end
 eventframe:SetScript("OnEvent", eventhandler)
 
+function TalentSetManager_LearnSet(t, name)
+ t = t == "pvp" and "talents_pvp" or "talents"
+
+ local i = getSetByName(name, t)
+
+ if not i then
+  print(L["|cff00ffffTalent Set Manager|r - "]..format(BOSS_BANNER_LOOT_SET, "")..format(ERR_GUILD_PLAYER_NOT_FOUND_S, "|cff00ff00"..name.."|r"))
+  return
+ end
+ 
+ if not charsvar[t][spec] then return end
+
+ addonTable.LearnTalents(charsvar[t][spec][i])
+end
+
 -- slash commands
 local function slashcmd_learn(s)
 
@@ -1367,15 +1458,9 @@ local function slashcmd_learn(s)
   
  local t, _, name = s:match("(%w+)(%s+)(%C+)")
 
- if not t or not name then return end
-
- t = t == "pvp" and "talents_pvp" or "talents"
-
- local i = getSetByName(name, t)
-
- if not i or not TalentSetManager_Saves[t][spec] then return end
-
- addonTable.LearnTalents(TalentSetManager_Saves[t][spec][i])
+ if t and name then
+  TalentSetManager_LearnSet(t, name)
+ end
 end
 
 SLASH_TALENTSETMANAGERLEARN1 = "/talentset"

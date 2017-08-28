@@ -45,7 +45,7 @@ local function GetDefaults() -- TODO Is this even necessary? Surely the ignore m
 end
 
 --- Returns a reference to the underlying SavedVars (cache) object
--- @returns  A reference to the cache database table itself
+-- @return A reference to the cache database table itself
 local function GetReference() -- TODO: AceDB can handle this
 
 	return TotalArtifactPowerCache
@@ -55,7 +55,7 @@ end
 --- Returns the entire cache entry for a given character and spec
 -- @param fqcn Fully-qualified character name, to be used as the key
 -- @param specID Specialization ID, to be used as the secondary key
--- @returns The table representing the cache entry if one exists; nil otherwise
+-- @return The table representing the cache entry if one exists; nil otherwise
 -- @usage GetEntry("Duckwhale - Outland", 1) ->  { ["numTraitsPurchased"] = 15, ["thisLevelUnspentAP"] = 235000, ["artifactTier"] = 1, ["isIgnored"] = false }
 local function GetEntry(fqcn, specID)
 
@@ -76,7 +76,7 @@ end
 -- @param fqcn Fully-qualified character name, to be used as the primary key
 -- @param specID Specialization ID, to be used as the secondary key
 -- @param[opt] defaults A table containing default entries that should be used
--- @returns The newly-created entry (as a table) if creation was successful; nil otherwise
+-- @return The newly-created entry (as a table) if creation was successful; nil otherwise
 -- @usage NewEntry("Duckwhale - Outland", 2) ->  { ["numTraitsPurchased"] = nil, ["thisLevelUnspentAP"] = nil, ["artifactTier"] = nil, ["isIgnored"] = false }
 local function NewEntry(fqcn, specID, defaults)
 	
@@ -102,6 +102,7 @@ local function NewEntry(fqcn, specID, defaults)
 	if not cache[fqcn] then -- Create new entry, without adding spec data
 	
 		cache[fqcn] = {}
+		cache[fqcn]["bankedAP"] = 0
 		
 	end
 	
@@ -171,7 +172,7 @@ local function GetValue(fqcn, specID, key)
 	
 	local entry = GetEntry(fqcn, specID)
 	
-	if not (entry and key and entry[key]) then -- Key is invalid or entry doesn't exist
+	if not (entry ~= nil and key and entry[key]) then -- Key is invalid or entry doesn't exist
 	
 		TotalAP.Debug("Attempted to retrieve cache entry for key = " .. key .. ", but key is invalid or entry doesn't exist")
 		return
@@ -179,6 +180,56 @@ local function GetValue(fqcn, specID, key)
 	end
 	
 	return entry[key]
+
+end
+
+local function SetValue(fqcn, specID, key, value)
+
+end
+
+local function IgnoreSpec(fqcn, spec)
+
+end
+
+--- Returns the amount of banked AP that was saved between sessions
+-- @param[opt] fqcn The fully-qualified character name (defaults to currently logged in character if omitted)
+local function GetBankCache(fqcn)
+
+	local cache = GetReference()
+
+	if not fqcn then -- Use logged in character name/realm
+		fqcn = TotalAP.Utils.GetFQCN()
+	end
+	
+	if not (cache and cache[fqcn] and cache[fqcn]["bankCache"]) then -- Entry does not exist -> Abort
+		
+		TotalAP.Debug("Attempted to retrieve bankCache for cache entry with key = " .. tostring(fqcn))
+		return
+		
+	end
+
+	return cache[fqcn]["bankCache"]
+	
+end
+
+--- Update the bankCache from saved variables if one has been stored in a previous session
+-- @param[opt] fqcn The fully-qualified character name (defaults to currently logged in character if omitted)
+local function UpdateBankCache(fqcn)
+
+	local cache = GetReference()
+
+	if not fqcn then -- Use logged in character name/realm
+		fqcn = TotalAP.Utils.GetFQCN()
+	end
+	
+	if not (cache and cache[fqcn]) then -- Abort, abort!
+	
+		TotalAP.Debug("Failed to update bankCache for key = " .. tostring(fqcn))
+		return
+		
+	end
+	
+	cache[fqcn]["bankCache"] = TotalAP.bankCache
 
 end
 
@@ -212,13 +263,47 @@ local function GetNumIgnoredSpecs(fqcn)
 	
 end
 
+--- Removes all specs from the ignored specs list for a given character (defaults to currently used character if none is given)
+-- @param[opt] fqcn  Fully-qualified character name that will have their specs "IsIgnored" setting reset
+-- TODO: This doesn't belong here
+local function UnignoreAllSpecs(fqcn)
+	
+	if not TotalArtifactPowerCache then return end -- Skip unignore if cache isn't initialised or this is called before the addon loads
+	
+	-- TODO: DRY
+	local characterName, realm
+	
+	if fqcn then 
+		characterName, realm = fqcn:match("(%.+)%s-%s(%.)+")
+	end
+	
+	if not characterName or not realm then -- Use currently active character
+		
+		characterName = UnitName("player")
+		realm = GetRealmName()
+		
+	end
+		 
+	local key = format("%s - %s", characterName, realm)	 
+	
+	for i = 1, GetNumSpecializations() do -- Remove spec from "ignore list" (more precisely, remove "marked as ignored" flag for all cached specs of the active character)
+	
+		if TotalArtifactPowerCache[key] and TotalArtifactPowerCache[key][i] then TotalArtifactPowerCache[key][i]["isIgnored"] = false end
+	
+	end
+	
+end
+
 
 -- Public methods
 TotalAP.Cache.NewEntry = NewEntry
+TotalAP.Cache.GetEntry = GetEntry
 TotalAP.Cache.UpdateEntry = UpdateEntry
 TotalAP.Cache.GetValue = GetValue
+TotalAP.Cache.GetBankCache = GetBankCache
+TotalAP.Cache.UpdateBankCache = UpdateBankCache
 TotalAP.Cache.GetNumIgnoredSpecs = GetNumIgnoredSpecs
-
+TotalAP.Cache.UnignoreAllSpecs = UnignoreAllSpecs
 
 -- Keep these private
 -- TotalAP.Cache.GetReference = GetReference

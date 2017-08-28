@@ -1,10 +1,16 @@
-lightweight tag caf0103a41772f7567491e5af43039e8d00e4d07 v1.2.1
+lightweight tag 65ba51d708dbc1131e165c1d91c3b97d79692bce v1.2.5
 Author:	Saregon <n_rhygar@yahoo.it>
-Date:	Fri Jun 16 14:46:55 2017 +0200
+Date:	Fri Jul 21 20:31:47 2017 +0200
 
-commit caf0103a41772f7567491e5af43039e8d00e4d07
+commit 65ba51d708dbc1131e165c1d91c3b97d79692bce
 Author: Saregon <n_rhygar@yahoo.it>
-Date:   Fri Jun 16 14:46:55 2017 +0200
+Date:   Fri Jul 21 20:31:47 2017 +0200
 
-    fix issue #2
+    try to get the latest version of the icons library from the repository (attempt #2)
+
+commit a48576ecc648ebfd9d9d033c5124a9302e3f10a9
+Author: Saregon <n_rhygar@yahoo.it>
+Date:   Fri Jul 21 19:43:51 2017 +0200
+
+    add quick talent set seleciton mode (right-click on the Talent Set Manager tab icon)
 

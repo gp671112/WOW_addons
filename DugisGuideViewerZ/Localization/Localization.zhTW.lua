@@ -53,6 +53,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Strength"] = "力量",
 	["Versatility"] = "臨機應變",
 	["XP Bonus"] = "經驗值加成",
+	["Gear Upgrade Suggested"] = "建議升級裝備",
 	
 	-- arrow.lua
 	["Waypoint arrow not available. Click here to check the world map"] = "無法使用箭頭導引，點一下查看世界地圖。",
@@ -182,7 +183,18 @@ if ( GetLocale() == "zhTW" ) then
 	["Use Class Portals"] = "使用職業傳送門",
 	["Use Flight Master Whistle"] = "使用飛行管理員的哨子",
 	
-	
+	["Dugi Arrow Colors"] = "Dugi 箭頭顏色",
+	["Default Colors"] = "預設顏色",
+	["Bad Color"] = "錯誤顏色",
+	["Middle Color"] = "尚可顏色",
+	["Good Color"] = "良好顏色",
+	["Exact Color"] = "精確顏色",
+	["Questing Area Color"] = "任務區域內顏色",
+	["Notifications"] = "通知",
+	["Gear Advisor Suggestions as Notifications"] = "顯示裝備建議的通知",
+	["If disabled standard gear suggestion prompts will be shown."] = "停用時，會顯示標準的裝備建議提示。",
+
+
 ---
   ["|TInterface\\AddOns\\DugisGuideViewerZ\\Artwork\\UpgradeArrow:0|t|cff1eff00+%d%%|r upgrade over %s with %s"] = "|TInterface\\AddOns\\DugisGuideViewerZ\\Artwork\\UpgradeArrow:0|t|cff1eff00+%d%%|r 更新 %s 為 %s",
   ["|TInterface\\AddOns\\DugisGuideViewerZ\\Artwork\\UpgradeArrow:0|t|cff1eff00+%d%%|r upgrade over %s"] = "|TInterface\\AddOns\\DugisGuideViewerZ\\Artwork\\UpgradeArrow:0|t|cff1eff00+%d%%|r 更新 %s",
@@ -219,7 +231,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Allow status frame to show all currently relevant quests."] = "允許使用狀態框架，來顯示目前所有相關的任務。",
 	["Allows model viewer to function"] = "允許使用模組檢視器",
 	["Alternative Leveling Guides:"] = "替代的升級指引:",
-	["Always"] = "總是",
+	["Always"] = "永遠",
 	["Amount of time the Map Preview should remain in view (zero to disable).  Enabling this feature will automatically set the world map to windowed mode on reload."] = "地圖預覽顯示的時間 ( 0 代表停用)，啟用這功能將在重新載入時自動將世界地圖設為視窗模式。",
 	["Anchored Small Frame"] = "小框架錨點",
 	["Ant Trail Color"] = "螞蟻路徑顏色",
@@ -271,7 +283,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Customize Target Macro"] = "自訂目標巨集",
 --Dd
   ["Determines how gear should be scored, in order of greatest to least importance."] = "決定裝備評分，按最好的順序來分配重要性。",
-  ["Duration (%.1fs)"] = "預覽時間 (%.1fs)",
+  ["Duration (%.1fs)"] = "預覽時間 (%.1f秒)",
   ["Disable Blizzard's Automatic Quest Tracking feature and use Dugi Automatic Quest Matching feature which will sync your Objective tracker with the current guide"] = "禁用內建自動任務追蹤功能並且使用Dugi自動任務配合將與目前指引同步到你的任務目標清單",
   ["Dugi Smart Set"] = "Dugi智慧型套裝",
   ["Do above for remaining %d items"] = "剩下的%d件物品都相同",
@@ -404,7 +416,7 @@ if ( GetLocale() == "zhTW" ) then
   ["NPC Journal Button"] = "NPC日記按鈕",
   ["Not Collected"] = "未採集",
   ["No"] = "否",
-  ["Never"] = "從不",
+  ["Never"] = "永不",
 	["New Profile"] = "新設定檔",
 	["NightElf Female"] = "女夜精靈",
 	["NightElf Male"] = "男夜精靈",

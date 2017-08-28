@@ -22,7 +22,7 @@ L= DBM:GetModLocalization(1856)
 L= DBM:GetModLocalization(1861)
 
 L:SetOptionLocalization({
-	TauntOnPainSuccess	= "在痛苦負擔成功施放時同步計時器與嘲諷提醒而非開始時(對於史詩難度你會刻意讓負擔發出一次，否則不建議使用此選項)"
+	TauntOnPainSuccess	= "同步痛苦重擔的計時器和嘲諷警告改為施放成功而不是開始施放(為了某些傳奇戰術，否則不建議使用此選項。)"
 })
 
 ---------------------------
@@ -35,6 +35,10 @@ L= DBM:GetModLocalization(1903)
 ---------------------------
 L= DBM:GetModLocalization(1896)
 
+L:SetOptionLocalization({
+	IgnoreTemplarOn3Tank	= "當使用三或更多坦克時忽略再活化的聖殿騎士的骨盾訊息框架/提示/名條(勿在戰鬥變更，這會打亂次數)"
+})
+
 ---------------------------
 -- Maiden of Vigilance --
 ---------------------------
@@ -46,7 +50,11 @@ L= DBM:GetModLocalization(1897)
 L= DBM:GetModLocalization(1873)
 
 L:SetOptionLocalization({
-	InfoFrame =	"為首領能量顯示訊息框架"
+	InfoFrame =	"為戰鬥總覽顯示訊息框架"
+})
+
+L:SetMiscLocalization({
+	FallenAvatarDialog	= "你看到的這個軀殼原本蘊含薩格拉斯的力量，但我們要的是這整座聖殿！只要得到聖殿，就能把你們的世界燒成灰燼！"
 })
 
 ---------------------------
@@ -55,7 +63,7 @@ L:SetOptionLocalization({
 L= DBM:GetModLocalization(1898)
 
 L:SetMiscLocalization({
-	Obelisklasers	= "惡魔石碑雷射"
+	Obelisklasers	= "石碑雷射"
 })
 
 -------------

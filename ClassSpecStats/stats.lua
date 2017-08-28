@@ -1,5 +1,5 @@
 local x = {}
-x["Version"] = "|cFFFAFA44裝備屬性選擇建議:|cFF00EA00 2017.7.4|r"
+x["Version"] = "|cFFFAFA44裝備屬性選擇建議:|cFF00EA00 2017.8.24|r"
 
 --[[ Deathknight Blood]]
 x[250] = "平衡 (推薦)：Str > Haste > Vers > Crit > Mast \n最大輸出：Str > Haste > Crit > Vers > Mast \n生存能力：Str > Haste > Vers > Mast > Crit "
@@ -9,11 +9,11 @@ x[251] = "Str > Crit 20% > (Haste = Crit = Mast > Vers)"
 x[252] = "Str > Mast > Haste 20% > Crit > Vers"
 
 --[[ Druid Balance]]
-x[102] = "Haste > Mast > Int > Crit > Vers"
+x[102] = "Mast > Haste > Int > Crit > Vers"
 --[[ Druid Feral]]
 x[103] =  "Agi > Mast > Crit > Vers > Haste"
 --[[ Druid Guardian]]
-x[104] = "Armor > Vers >= Mast > Haste > Agi > Crit"
+x[104] = "Armor > Vers > Mast > Haste > Crit > Agi"
 --[[ Druid Restoration]]
 x[105] = "補團隊：Int > Mast > Haste >= Crit > Vers \n補坦/傳奇+：Mast >= Haste > Int > Crit > Vers"
 
@@ -50,7 +50,7 @@ x[256] = "Int > Haste > Crit > Mast > Vers"
 --[[ Priest Holy]]
 x[257] = "Int > Mast > Crit > Haste > Vers"
 --[[ Priest Shadow]]
-x[258] = "Haste > Crit >= Mast > Vers > Int"
+x[258] = "Haste > Crit > Mast > Vers > Int"
 
 --[[ Rogue Assassination]]
 x[259] = "標準：Agi > Mast > Vers > Crit > Haste \n放血：Agi > Vers > Crit > Mast > Haste"
@@ -74,7 +74,7 @@ x[266] = "Haste > Int > Crit = Mast > Vers"
 x[267] = "Haste > Crit > Int > Vers > Mast"
 
 --[[ Warrior Arms]]
-x[71] = "Mast > Haste > Vers > Str > Crit"
+x[71] = "Mast > Haste > Vers > Crit > Str"
 --[[ Warrior Fury]]
 x[72] = "Haste > Mast > Vers > Str > Crit >"
 --[[ Warrior Protection]]

@@ -180,9 +180,9 @@ addon.LFRInstances = {
   [1293] = { total=1, base=10, parent=1353,altid=nil, remap={ 1 } }, -- NH4: Betrayer's Rise
   
   [1494] = { total=3, base=1,  parent=1527,altid=nil }, -- ToS1: The Gates of Hell (6/27/17)
-  [1495] = { total=3, base=4,  parent=1527,altid=nil }, -- ToS2: Wailing Halls (7/11/17)
-  [1496] = { total=2, base=7,  parent=1527,altid=nil }, -- ToS3: Chamber of the Avatar (7/25/17)
-  [1497] = { total=1, base=9,  parent=1527,altid=nil }, -- ToS4: Deceiver's Fall (8/8/17)
+  [1495] = { total=3, base=4,  parent=1527,altid=nil, remap={ 1, 2, 3 } }, -- ToS2: Wailing Halls (7/11/17)
+  [1496] = { total=2, base=7,  parent=1527,altid=nil, remap={ 1, 2} }, -- ToS3: Chamber of the Avatar (7/25/17)
+  [1497] = { total=1, base=9,  parent=1527,altid=nil, remap={ 1 } }, -- ToS4: Deceiver's Fall (8/8/17)
 }
 
 local tmp = {}
@@ -746,7 +746,7 @@ vars.defaultDB = {
     MythicKey = true,
     MythicKeyBest = true,
     DailyWorldQuest = true,
-    AbbreviateKeystone = true,
+    AbbreviateKeystone = false,
   },
   Instances = { }, 	-- table key: "Instance name"; value:
   -- Show: boolean
@@ -4499,6 +4499,7 @@ function core:ShowTooltip(anchorframe)
     if not showall then
       hintLine, hintCol = tooltip:AddLine()
       tooltip:SetCell(hintLine, hintCol, L["Hold Alt to show all data"], "LEFT", math.max(1,tooltip:GetColumnCount()-maxcol))
+	  -- 註解掉滑鼠提示中的版本資訊
 	  --[[
       if tooltip:GetColumnCount() < maxcol+1 then
         tooltip:AddLine(addonName.." version "..addon.version)

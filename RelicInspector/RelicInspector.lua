@@ -167,7 +167,6 @@ local function SetupOptions()
 					itemTooltipTraitDesc = {
 						name = "顯示特長說明:",
 						desc = "何時要在物品的滑鼠提示中顯示特長說明",
-						type = "select",
 						width = "single",
 						set = function(info,val) db.profile.hoverTraitDesc = hoverOptions[val] end,
 						get = function(info) return invHoverOptions[db.profile.hoverTraitDesc] end,

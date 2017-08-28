@@ -129,7 +129,7 @@ D["AlreadyKnown"] = {
 D["AngryKeystones"] = {
 	defaultEnable = 1,
 	title = "傳奇+ 進度時間",
-	desc = "在傳奇鑰石的副本中，會在任務目標清單顯示兩箱、三箱的時間，以及詞綴難度等額外資訊。``在傳奇難度地城 (本週最佳成績) 的視窗中，會顯示本週、下週和下下週的詞綴資訊。`",
+	desc = "在傳奇鑰石的副本中，會在任務目標清單顯示兩箱、三箱的時間，以及詞綴難度等額外資訊。`",
 	modifier = "BNS, 彩虹ui",
 	icon = "Interface\\Icons\\spell_mage_altertime",
 	img = true,
@@ -137,6 +137,22 @@ D["AngryKeystones"] = {
         text = "設定選項",
         callback = function(cfg, v, loading) SlashCmdList["AngryKeystones"]("") end,
     },
+};
+D["AngryWorldQuests"] = {
+	defaultEnable = 0,
+	title = "世界任務清單",
+	desc = "在世界地圖旁的任務記錄中顯示世界任務，可以過濾任務和加入追蹤，操作方式和一般的任務完全相同!``使用這個插件時可以關閉 '世界任務追蹤' 插件，地圖畫面會更簡潔。`",
+	modifier = "彩虹ui",
+	icon = "Interface\\Icons\\achievement_quests_completed_daily_07",
+	img = true,
+    {
+        text = "設定選項",
+        callback = function(cfg, v, loading) SlashCmdList["ANGRYWORLDQUESTS"]("") end,
+    },
+	{
+		type = "text",
+        text = "追蹤任務：Shift+左鍵點一下任務標題。",       
+	},
 };
 D["AnyFont"] = { 
 	defaultEnable = 1, 
@@ -161,6 +177,28 @@ D["AppearanceTooltip"] = {
 		type = "text",
         text = "旋轉外觀預覽：滾動滑鼠滾輪。",       
 	},
+};
+D["AstralKeys"] = {
+	defaultEnable = 1,
+	tags = { "BOSSRAID" },
+	title = "傳奇+ 角色和公會鑰石",
+	desc = "列出你的每個角色和公會成員的鑰石，並且會計算每個鑰石地城可以獲得的神兵之力點數。``方便大家決定要打誰的鑰石獲得的神兵之力比較多、效益比較高，也會顯示保底打了沒。`",
+	modifier = "彩虹ui",
+	icon = "Interface\\Icons\\inv_relics_hourglass",
+	img = true,
+    {
+        text = "顯示主視窗",
+        callback = function(cfg, v, loading) SlashCmdList["ASTRALKEYS"]("") end,
+    },
+	{
+		type = "text",
+        text = "點小地圖按鈕也可以顯示主視窗。\n",
+	},
+	{
+		type = "text",
+        text = "要看其他角色的鑰石：需要每週登入角色一次。\n\n要看公會成員的鑰石：公會成員也需要安裝並載入這個插件。\n\n沒有安裝彩虹ui的玩家，可以推薦他到奇樂下載這個單體插件。\n\n",
+	},
+	   
 };
 D["ArtifactProgressionPath"] = { 
 	defaultEnable = 0,
@@ -281,11 +319,11 @@ D["BarrelsOEasy"] = {
     },
 	{
 		type = "text",
-        text = "請先開始玩第一輪，當桶子停止移動時，再將滑鼠指向桶子來幫桶子上標記。",
+        text = "請先開始玩第一輪，當桶子停止移動時，再將滑鼠指向桶子來上標記。\n\n解這個世界任務的時候請 '不要組隊'，否則標記會被自動清除。|n",
 	},
 };
 D["BasicChatMods"] = {
-	defaultEnable = 1,
+	defaultEnable = 0,
 	title = "聊天功能增強",
 	desc = "一個輕量級的聊天視窗功能增強插件。``提供複製聊天內容、複製網址、對當前目標密語、加大歷史記錄...和更多功能。`",
 	modifier = "BNS, 彩虹ui",
@@ -297,7 +335,7 @@ D["BasicChatMods"] = {
     },
 	{
 		type = "text",
-        text = "複製內容：Shift+左鍵 點擊聊天視窗標籤頁。",
+        text = "複製內容：Shift+左鍵 點一下聊天視窗標籤頁。",
 	},
 };
 D["BattlegroundTargets"] = {
@@ -323,6 +361,10 @@ D["BattlePetBreedID"] = {
         text = "設定選項",
         callback = function(cfg, v, loading) SlashCmdList["BATTLEPETBREEDID"]("") end,
     },
+	{
+		type = "text",
+		text = "|cffFF2D2D啟用插件後需要重新載入介面。|r",
+	},
 };
 D["BaudBag"] = {
 	defaultEnable = 0,
@@ -368,6 +410,29 @@ D["BlizzMove"] = {
         text = "移動：拖曳最上方的視窗標題。\n\n縮放：按住 Ctrl 鍵不放在視窗上滾動滑鼠滾輪，可以放大和縮小整個視窗，包括內容文字。",
 	},
 };
+D["BonusRollFilter"] = {
+	defaultEnable = 0,
+	tags = { "BOSSRAID" },
+	title = "骰子過濾",
+	desc = "讓你自行選擇，推倒首領後是否要顯示額外戰利品的骰子面板，每個首領、每種難度的團隊副本都可以單獨設定。``可以將沒有裝備需求的首領或副本的骰子隱藏起來，避免不小心按到，以及提醒自己哪個首領需要骰。`",
+	modifier = "彩虹ui",
+	icon = "Interface\\Icons\\inv_misc_azsharacoin",
+	 {
+        text = "設定選項",
+        callback = function(cfg, v, loading) 
+			InterfaceOptionsFrame_OpenToCategory("骰子過濾")
+			InterfaceOptionsFrame_OpenToCategory("骰子過濾")
+		end,
+    },
+	{
+        text = "顯示骰子",
+        callback = function(cfg, v, loading) SlashCmdList["ACECONSOLE_BONUSROLLFILTER"]("show") end,
+    },
+	{
+		type = "text",
+        text = "只有骰子面板被隱藏時才能顯示骰子。",
+	},
+};
 D["BonusRollPreview"] = {
 	defaultEnable = 1,
 	title = "骰子裝備預覽 (歐洲版!!)",
@@ -390,7 +455,7 @@ D["bosseskilled"] = {
 	img = true,
 };
 D["Broker_ChatAlerts"] = {
-	defaultEnable = 1,
+	defaultEnable = 0,
 	tags = { "SOCIAL" },
 	title = "聊天通知",
 	desc = "在畫面上方顯示聊天對話、拾取物品和系統訊息的文字和音效通知。``可自行選擇要通知的頻道和使用關鍵字過濾，讓你不會錯過任何重要的聊天訊息!`",
@@ -456,12 +521,12 @@ D["BuyEmAll"] = {
 	defaultEnable = 1,
 	tags = { "AUCTION" },
 	title = "大量購買",
-	desc = "在商人視窗按 Shift+左鍵 點擊物品可一次購買多個數量。`",
+	desc = "在商人視窗按 Shift+左鍵 點一下物品可一次購買多個數量。`",
 	icon = "Interface\\Icons\\inv_misc_coin_02",
 	img = true,
 };
 D["ChatBar"] = {
-	defaultEnable = 1,
+	defaultEnable = 0,
 	tags = { "SOCIAL" },
 	title = "聊天頻道按鈕",
 	desc = "在聊天視窗上方顯示一排能夠快速切換聊天頻道的按鈕列。`",
@@ -477,7 +542,7 @@ D["ChatBar"] = {
 	},
 };
 D["ChatEmote"] = {
-	defaultEnable = 1,
+	defaultEnable = 0,
 	tags = { "SOCIAL" },
 	title = "聊天表情圖案",
 	desc = "聊天視窗右上方會多出三個小按鈕，提供插入聊天表情圖案、擲骰子以及開場倒數功能 (需要載入 DBM)。``按住 Ctrl 拖曳按鈕可以移動位置。`",
@@ -501,7 +566,7 @@ D["Clique"] = {
 	defaultEnable = 0,
 	tags = { "CLASSALL" },
 	title = "快速施法",
-	desc = "提供簡單而強大的滑鼠點擊快速施法功能，用滑鼠點一下頭像/框架就能夠立即施放法術。``可以搭配大多數的單位框架一起使用。`",
+	desc = "提供簡單而強大的滑鼠點一下快速施法功能，用滑鼠點一下頭像/框架就能夠立即施放法術。``可以搭配大多數的單位框架一起使用。`",
 	modifier = "彩虹ui",
 	icon = "Interface\\Icons\\ability_monk_counteractmagic",
 	img = true,
@@ -521,7 +586,7 @@ D["Clique"] = {
 	},
 };
 D["CloudyUnitInfo"] = {
-	defaultEnable = 1,
+	defaultEnable = 0,
 	tags = { "ITEM" },
 	title = "裝等提示",
 	desc = "提供快速查看玩家裝等的功能。``滑鼠指向玩家時，在滑鼠提示中顯示玩家已裝備的平均物品等級和專精，並提示 PVP 與帳號綁定 (BOA) 裝備件數。`",
@@ -563,11 +628,31 @@ D["CollectionShop"] = {
 		text = "開始使用：打開拍賣場，點右下角的 '收藏專賣店' 標籤頁面。",
     },
 };
+D["CombatTime"] = {
+	defaultEnable = 0,
+	title = "戰鬥時間",
+	desc = "在小地圖下方顯示這次戰鬥的經過時間。方便觀察戰鬥的時間軸、可以開幾次大招...等等。",
+	modifier = "彩虹ui",
+	icon = "Interface\\Icons\\timelesscoin-bloody",
+	img = true,
+	{
+        text = "顯示/隱藏",
+        callback = function(cfg, v, loading) SlashCmdList["COMBATTIME"]("toggle") end,
+    },
+    {
+        text = "恢復為預設值",
+        callback = function(cfg, v, loading) SlashCmdList["COMBATTIME"]("reset") end,
+    },
+	{
+        type = "text",
+		text = "移動位置：在時間上面點右鍵解鎖位置後，便可拖曳移動。再點一次右鍵鎖定位置。",
+    },
+};
 D["CompactRaid"] = {
 	defaultEnable = 0,
 	tags = { "BOSSRAID" },
 	title = "精簡團隊框架",
-	desc = "簡單好用的團隊框架，可以自訂團隊增益/減益效果圖示，提供滑鼠點擊快速施法的功能。`",
+	desc = "簡單好用的團隊框架，可以自訂團隊增益/減益效果圖示，提供滑鼠點一下快速施法的功能。`",
 	icon = "Interface\\Icons\\inv_gizmo_adamantiteframe",
 	img = true,
 	{
@@ -578,6 +663,20 @@ D["CompactRaid"] = {
 		type = "text",
 		text = "點第一個小旗子圖示也可以開啟設定選項。\n\n移動位置：拖曳團隊框架的外框。",
 	}
+};
+D["CursorCDtimer"] = {
+    defaultEnable = 0,
+	tags = { "MISC" },
+	title = "滑鼠施法條",
+	desc = "在滑鼠游標的位置顯示圓形的施法條，還可以顯示GCD、施法時間和冷卻時間。``方便在戰鬥中觀看施法條、找到滑鼠的位置、監控技能冷卻。",
+	author = "snaomi",
+	modifier = "彩虹ui",
+	icon = "Interface\\Icons\\spell_holy_circleofrenewal",
+	img = true,
+	{
+        text = "設定選項",
+        callback = function(cfg, v, loading) SlashCmdList["ACECONSOLE_CURSORCDTIMER"]("") end,
+    },
 };
 D["DBM-Core"] = {
     defaultEnable = 1,
@@ -810,6 +909,22 @@ D["ExRT"] = {
 		text = "點小地圖按鈕的 'R' 按鈕也可以開啟設定選項。",
 	}
 };
+D["Favorites"] = {
+	defaultEnable = 1,
+	tags = { "SOCIAL" },
+	title = "最愛好友名單",
+	desc = "在遊戲內建的好友名單中新增 '加入最愛' 的功能。可以自訂多個不同的最愛群組，幫好友名單分類。`",
+	modifier = "彩虹ui",
+	icon = "Interface\\Icons\\achievement_guildperk_everybodysfriend",
+    {
+        text = "設定選項",
+        callback = function(cfg, v, loading) SlashCmdList["ACECONSOLE_FAVORITES"]("") end,
+    },
+	{
+		type = "text",
+		text = "加入/移除最愛：按 O 開啟好友名單，在好友的名字上點右鍵 > 加入最愛。\n\n新增/移除群組：在設定選項中設定。",
+	}
+};
 D["FishingBuddy"] = {
 	defaultEnable = 0,
 	title = "釣魚夥伴",
@@ -890,6 +1005,7 @@ D["FlaskFoodCheck"] = {
 		text = "精煉加成屬性最低要求",
 		options = {
 			"1300","1300",
+			"500","500",
 			"250","250",
 		},
         callback = function(cfg, v, loading) SlashCmdList["FFC"]("minflask "..v) end,
@@ -1025,7 +1141,7 @@ D["Focuser"] = {
 	icon = "Interface\\Icons\\ability_eyeoftheowl",
 	{
 		type = "text",
-        text = "快速設為專注目標：Shift+左鍵 點擊人物。\n\n更改按鍵：用記事本或 Notepad++ 編輯 AddOns\\Focuser\\Focuser.lua。",       
+        text = "快速設為專注目標：Shift+左鍵 點一下人物。\n\n更改按鍵：用記事本或 Notepad++ 編輯 AddOns\\Focuser\\Focuser.lua。",       
 	},
 };
 D["FocusInterruptSounds"] = {
@@ -1072,7 +1188,7 @@ D["FriendsMenuXP"] = {
 	defaultEnable = 1,
 	title = "玩家右鍵選單增強",
 	desc = "聊天視窗中的玩家名字上點滑鼠右鍵會有更多方便的功能。`",
-	icon = "Interface\\Icons\\inv_misc_groupneedmore",
+	icon = "Interface\\Icons\\inv_misc_grouplooking",
 	img = true,
 	{
 		type = "text",
@@ -1188,8 +1304,10 @@ D["HandyNotes"] = {
 };
 D["HandyNotes_Achievements"] = { defaultEnable = 0, };
 D["HandyNotes_AzerothsTopTunes"] = { defaultEnable = 0, };
+D["HandyNotes_BrokenShore"] = { defaultEnable = 1, };
 D["HandyNotes_DraenorTreasures"] = { defaultEnable = 0, };
 D["HandyNotes_DungeonLocations"] = { defaultEnable = 1, };
+D["HandyNotes_LegionClassOrderHalls"] = { defaultEnable = 1, };
 D["HandyNotes_LegionRaresTreasures"] = { defaultEnable = 1, };
 D["HandyNotes_TimelessIsleChests"] = { defaultEnable = 0, };
 D["HealBot"] = {
@@ -1328,8 +1446,94 @@ D["InterruptedIn"] = {
 	icon = "Interface\\Icons\\spell_holy_borrowedtime",
 	img = true,
 };
+D["iSquidMod"] = {
+	defaultEnable = 0,
+	tags = { "ACTIONBAR" },
+	title = "變換獅鷲圖案",
+	desc = "更換快捷列左右兩端的獅鷲圖案，有50多種圖案可供選擇，更增添遊戲樂趣!``遊戲內建的快捷列或達美樂快捷列都可以使用。``還可以自行設計圖案，在 AddOns > iSquidMod > templates 資料夾內可以找到 PSD 樣板檔案。``圖案設計好後匯出成 128x128 未壓縮的 TGA 格式圖檔，放到 AddOns > iSquidMod > skin 資料夾內，用相同的檔名取代任意一個檔案即可。`",
+	icon = "Interface\\Icons\\ability_mount_spectralgryphon",
+	img = true,
+	{
+		type = "text",
+		text = "移動位置：載入 '版面配置' 插件，使用裡面的 '暴雪按鈕列 > 左(右)邊獅鷲圖案' 來移動位置。",
+    },
+	{
+        text = "隨機圖案",
+        callback = function(cfg, v, loading) SlashCmdList["SQUID"]("random") end,
+    },
+	{
+		type = "radio",
+		text = "選擇圖案：",
+		callback = function(cfg, v, loading)
+            SlashCmdList["SQUID"](v)
+        end,
+		cols = 1,
+		indent = 1,
+		options = {
+			"隱藏","hide",
+			"獅鷲","griffon",
+			"獅子","lion",
+			"暗黑破壞神 I","diablo1",
+			"暗黑破壞神 I Roth","diablo1_roth",
+			"暗黑破壞神 II","diablo2",
+			"暗黑破壞神 II Roth","diablo2_roth",
+			"暗黑破壞神 III 旗幟","diablo3crest",
+			"魚人 1","murloc",
+			"魚人 2","murloc2",
+			"旗幟","crest",
+			"部落","hordecrest",
+			"獸人","orccrest",
+			"聯盟","allianzcrest",
+			"獵人","huntercrest",
+			"德魯伊","druidcrest",
+			"熊貓人","pandacrest",
+			"夜精靈","nightelfcrest",
+			"牧師","priestcrest",
+			"死亡騎士","dkcrest",
+			"法師 1","magecrest",
+			"法師 2","magecrest2",
+			"武僧","monkcrest",
+			"聖騎士","palacrest",
+			"盜賊","roguecrest",
+			"薩滿 1","shamancrest",
+			"薩滿 2","shamancrest2",
+			"術士","warlockcrest",
+			"戰士","warriorcrest",
+			"不死族","undeadcrest",
+			"十字軍","crusadercrest",
+			"戰斧","axecrest",
+			"狼人","worg",
+			"美艷法師","bfmage",
+			"公熊貓人","panda",
+			"可愛熊貓人","pandakind",
+			"瓦里安","swking",
+			"男德萊尼","draenei",
+			"德魯伊樹人","druidtree",
+			"德魯伊熊","druidbear",
+			"巫妖王","lichking",
+			"女夜精靈","nightelf",
+			"奧尼克希亞","onyxia",
+			"男獸人 1","orc",
+			"男獸人 2","orc2",
+			"伊瑟拉","ysera",
+			"紅龍","drake",
+			"死神 (隔壁棚的)","bleach",
+			"魔獸世界","wowlogo",
+			"血球架子","orbdaemon",
+			"玉蛟","yulon",
+			"白虎","xuen",
+			"玄牛","niuzao",
+			"小紅鶴","minichi",
+			"血靈","minidroplet",
+			"靈獸","miniporcupette",
+			"煞","minisha",
+			"小白虎","minixuen",
+			"小玉蛟","miniyulon",
+		}
+    },
+};
 D["ItemLevelDisplay"] = {
-    defaultEnable = 1,
+    defaultEnable = 0,
 	title = "裝備欄物品等級",
 	desc = "在角色資訊的裝備欄中顯示物品等級。``另外也提供整合背包、暴雪背包顯示物品等級的相關模組。`",
 	modifier = "彩虹ui",
@@ -1341,7 +1545,7 @@ D["ItemLevelDisplay"] = {
     },
 };
 D["ItemLinkLevel"] = {
-    defaultEnable = 1,
+    defaultEnable = 0,
 	title = "物品等級連結",
 	desc = "在聊天視窗的物品連結中顯示裝備等級和種類。例如：``|cffFF8000[歐尼斯的直覺 (940 皮甲 手腕)]|r`",
 	modifier = "彩虹ui",
@@ -1357,7 +1561,7 @@ D["ItemLinkLevel"] = {
 };
 D["KeystoneCommander"] = { defaultEnable = 0, };
 D["KeystoneHelper"] = {
-	defaultEnable = 1,
+	defaultEnable = 0,
 	title = "傳奇+ 詞綴說明",
 	desc = "在傳奇鑰石的滑鼠提示中顯示難度附加詞綴的詳細說明，例如：狂怒 壞死 火山 暴君 膿血 是什麼意思。`",
 	icon = "Interface\\Icons\\ability_racial_bloodrage",
@@ -1384,6 +1588,19 @@ D["Leatrix_Plus"] = {
         text = "點小地圖按鈕的 '功能百寶箱' 按鈕，也可以顯示主視窗。",
     },
 };
+D["ls_Toasts"] = {
+    defaultEnable = 1,
+	tags = { "ENHANCEMENT" },
+	title = "通知面板增強",
+	desc = "可以完全自訂彈出式通知面板，移動位置、調整大小、選擇要顯示哪些通知，還有更多自訂選項。``選擇自己想看的通知，讓彈出的通知不會再擋住快捷列或重要的畫面。`",
+	modifier = "彩虹ui",
+	icon = "Interface\\Icons\\inv_misc_food_100",
+	img = true,
+    {
+        text = "設定選項",
+        callback = function(cfg, v, loading) SlashCmdList["LSTOASTS"]("") end,
+    },
+};
 D["Mapster"] = {
     defaultEnable = 1,
 	title = "世界地圖增強",
@@ -1401,7 +1618,7 @@ D["Masque"] = {
 	tags = { "ACTIONBAR" },
 	title = "按鈕外觀",
 	desc = "讓你可以變換快捷列按鈕和多種插件的按鈕外觀樣式，讓遊戲介面更具風格!``有許多外觀主題可供選擇。`",
-	modifier = "a9012456, ananhaid, BNS, chenyuli, StormFX, yunrong, zhTW",
+	modifier = "a9012456, ananhaid, BNS, chenyuli, StormFX, yunrong, zhTW, 彩虹ui",
 	icon = "Interface\\Icons\\inv_misc_food_36",
 	img = true,
     {
@@ -1455,6 +1672,28 @@ D["MikScrollingBattleText"] = {
     {
         text = "設定選項",
         callback = function(cfg, v, loading) SlashCmdList["MSBT"]("") end,
+    },
+};
+D["Molinari"] = {
+    defaultEnable = 0,
+	title = "一鍵分解物品",
+	desc = "提供快速拆裝分解、研磨草藥、勘探寶石和開鎖的功能!``只要按下 Ctrl+Alt 鍵再點一下物品，立馬分解!``設定選項中可以將要避免不小心被處理掉的物品加入忽略清單`",
+	icon = "Interface\\Icons\\inv_enchant_disenchant",
+	img = true,
+    {
+        text = "設定選項",
+		callback = function(cfg, v, loading) 
+			InterfaceOptionsFrame_OpenToCategory("專業-分解")
+			InterfaceOptionsFrame_OpenToCategory("物品忽略清單")
+		end,
+    },
+	{
+		type = "text",
+        text = "|cffFF2D2D啟用插件後需要重新載入介面。|r",       
+	},
+	{
+		type = "text",
+        text = "分解物品：滑鼠指向背包內要分解或處理的物品，按住 Ctrl+Alt 鍵不放，再用滑鼠左鍵點一下物品，即可執行專業技能的處理動作。\n\n只能分解背包內的物品，銀行中的不行。\n\n|cffFF2D2D使用 'DJ智能分類背包' 時，請勿將一鍵分解物品的快速鍵設為只有 Alt 鍵，以避免和自訂物品分類的快速鍵相衝突。|r",
     },
 };
 D["mOnArs_WardrobeHelper"] = {
@@ -1573,7 +1812,6 @@ D["OmniBar"] = {
 	img = true,
     {
         text = "設定選項",
-        -- callback = function(cfg, v, loading) SlashCmdList["OmniBar"]("") end,
 		callback = function(cfg, v, loading) 
 			InterfaceOptionsFrame_OpenToCategory("PVP 技能監控")
 			InterfaceOptionsFrame_OpenToCategory("PVP 技能監控")
@@ -1591,6 +1829,10 @@ D["OmniCC"] = {
         text = "設定選項",
         callback = function(cfg, v, loading) SlashCmdList["OmniCC"]("") end,
     },
+	{
+		type = "text",
+        text = "|cffFF2D2D啟用插件後需要重新載入介面。|r",       
+	},
 };
 D["OPie"] = {
     defaultEnable = 1,
@@ -1673,6 +1915,21 @@ D["Overachiever"] = {
         callback = function(cfg, v, loading) SlashCmdList["Overachiever"]("") end,
     },
 };
+D["ParagonReputation"] = {
+    defaultEnable = 1,
+	tags = { "ENHANCEMENT" },
+	title = "巔峰聲望條",
+	desc = "在聲望介面中，將崇拜之後的聲望條直接顯示為巔峰，不用點小袋子就可以看到聲望進度。`",
+	icon = "Interface\\Icons\\achievement_reputation_01",
+	img = true,
+	{
+        text = "設定選項",
+		callback = function(cfg, v, loading) 
+			InterfaceOptionsFrame_OpenToCategory("聲望條")
+			InterfaceOptionsFrame_OpenToCategory("聲望條")
+		end,
+    },
+};
 D["Pawn"] = {
     defaultEnable = 1,
 	title = "裝備屬性比較",
@@ -1750,6 +2007,10 @@ D["PhanxBuffs"] = {
         text = "設定選項",
         callback = function(cfg, v, loading) SlashCmdList["PHANXBUFFS"]("") end,
     },
+	{
+		type = "text",
+        text = "使用這個插件時，戰鬥中無法使用右鍵取消BUFF，這是暴雪的限制。\n\n要在戰鬥中取消BUFF，需要建立一個巨集，拉到快捷列上來按，例如：\n\n/cancelaura 保護祝福",       
+	},
 };
 D["Postal"] = {
 	defaultEnable = 1,
@@ -1760,10 +2021,11 @@ D["Postal"] = {
 	img = true,
 };
 D["premade-filter"] = {
-    defaultEnable = 1,
+    defaultEnable = 0,
+	tags = { "BOSSRAID" },
 	title = "預組隊伍增強",
 	desc = "顯示預組隊伍的職業和角色資訊，較新的預組隊伍會排列在上方，還有進階的過濾方式。`",
-	modifier = "BNS",
+	modifier = "彩虹ui",
 	icon = "Interface\\Icons\\ability_dualwieldspecialization",
 	img = true,
     {
@@ -1773,6 +2035,15 @@ D["premade-filter"] = {
 			InterfaceOptionsFrame_OpenToCategory("預組隊伍")
 		end,
     },
+};
+D["PremadeGroupsFilter"] = {
+    defaultEnable = 1,
+	tags = { "BOSSRAID" },
+	title = "預組隊伍過濾",
+	desc = "顯示預組隊伍中的職業角色資訊，提供方便的過濾選項來篩選隊伍，還有進階的過濾方式。`",
+	modifier = "彩虹ui",
+	icon = "Interface\\Icons\\ability_dualwieldspecialization",
+	img = true,
 };
 D["Quartz"] = {
 	defaultEnable = 1,
@@ -1788,6 +2059,21 @@ D["Quartz"] = {
 			InterfaceOptionsFrame_OpenToCategory("施法條")
 			InterfaceOptionsFrame_OpenToCategory("玩家")
 			InterfaceOptionsFrame_OpenToCategory("施法條")
+		end,
+    },
+};
+D["QuickJoinNotifications"] = {
+    defaultEnable = 1,
+	title = "快速加入通知",
+	desc = "取代遊戲內建的快速加入彈出通知，可以自訂位置、大小、持續時間，以及是否要在聊天視窗顯示通知的內容。``留意好友與公會夥伴都加入了什麼隊伍，一起加入吧!`",
+	modifier = "彩虹ui",
+	icon = "Interface\\Icons\\inv_misc_groupneedmore",
+	img = true,
+    {
+        text = "設定選項",
+        callback = function(cfg, v, loading) 
+			InterfaceOptionsFrame_OpenToCategory("快速加入")
+			InterfaceOptionsFrame_OpenToCategory("快速加入")
 		end,
     },
 };
@@ -1822,6 +2108,14 @@ D["RangeDisplay"] = {
 		type = "text",
         text = " ",       
 	},
+};
+D["rCompassCastbar"] = {
+    defaultEnable = 0,
+	tags = { "MISC" },
+	title = "滑鼠施法條 (舊版)",
+	desc = "在滑鼠游標的位置顯示圓形的施法條，包括自己、敵人、專注目標和寵物的施法條。``方便在戰鬥中觀看施法條和找到滑鼠的位置。",
+	icon = "Interface\\Icons\\spell_holy_circleofrenewal",
+	img = true,
 };
 D["ReadySetDing"] = {
     defaultEnable = 1,
@@ -1963,6 +2257,30 @@ D["SexyMap"] = {
         callback = function(cfg, v, loading) SlashCmdList["SexyMap"]("") end,
     },
 };
+D["ShieldTracker"] = {
+    defaultEnable = 0,
+	tags = { "MISC" },
+	title = "盾量監控",
+	desc = "『是誰放的盾！』``想要知道身上的盾還有多少就靠它了!``讓你可以建立出自訂性非常高的進度條來監控身上的盾。``可以選擇要監控哪幾種吸收盾，自訂進度條的大小、顏色、位置。放在頭像旁邊監控自己身上的盾，或是隊伍框架旁監控隊友身上的盾都可以。`",
+	icon = "Interface\\Icons\\spell_holy_powerwordshield",
+	img = true,
+    {
+        text = "設定選項",
+        callback = function(cfg, v, loading) SlashCmdList["ACECONSOLE_SHIELDTRACKER"]("") end,
+    },
+	{
+		type = "text",
+		text = "開始使用：開啟設定選項，建立新的進度條，選擇要監控的盾。\n\n可以建立多個進度條分別監控不同的對象，或不同種類的盾。\n ",
+	},
+	{
+		type = "text",
+		text = "與遊戲內建的團隊框架搭配：進度條設定中，一般選項 > '鎖定進度條' 打勾。對齊 > 對齊 > 選擇 '自訂'。'框架' 輸入 CompactRaidFrameContainer（注意大小寫）。\n ",
+	},
+	{
+		type = "text",
+		text = "與精簡團隊框架搭配：進度條設定中，一般選項 > '鎖定進度條' 打勾。對齊 > 對齊 > 選擇 '自訂'。'框架' 輸入 CompactRaidMainFrame\n（注意大小寫）。\n ",
+	},
+};
 D["Shooter"] = {
 	defaultEnable = 1,
 	title = "成就自動擷圖",
@@ -1991,6 +2309,13 @@ D["SilverPlateTweaks"] = {
 	icon = "Interface\\Icons\\artifactability_feraldruid_openwounds",
 	img = true,
 };
+D["SimpleObjectiveProgress"] = {
+	defaultEnable = 1,
+	tags = { "QUEST" },
+	title = "任務怪進度提示",
+	desc = "在任務怪的滑鼠提示說明中顯示這隻怪所提供的任務目標進度百分比。``一般任務和世界任務都可以使用。`",
+	icon = "Interface\\Icons\\achievement_garrisonquests_0005",
+};
 D["SimpleRaidTargetIcons"] = {
     defaultEnable = 0,
 	title = "快速標記圖示",
@@ -2004,7 +2329,7 @@ D["SimpleRaidTargetIcons"] = {
     },
 	{
 		type = "text",
-		text = "快速加上頭標圖示：在目標身上點兩下，或是使用組合鍵點一下。",
+		text = "快速加上頭標圖示：在目標身上點兩下，或是使用組合鍵點一下。\n\n|cffFF2D2D特別注意：副本中無法使用。|r",
 	}
 };
 D["Skada"] = {
@@ -2019,8 +2344,16 @@ D["Skada"] = {
         callback = function(cfg, v, loading) SlashCmdList["SKADA"]("toggle") end,
     },
     {
-        text = "設定選項",
+        text = "傷害統計設定選項",
         callback = function(cfg, v, loading) SlashCmdList["SKADA"]("config") end,
+    },
+	{
+        text = "顯示公會排名主視窗",
+        callback = function(cfg, v, loading) SlashCmdList["ACECONSOLE_GSHS"]("") end,
+    },
+    {
+        text = "公會排名設定選項",
+        callback = function(cfg, v, loading) SlashCmdList["ACECONSOLE_GSHS"]("config") end,
     },
 };
 D["smartquest"] = {
@@ -2093,7 +2426,7 @@ D["Talentless"] = {
 	}
 };
 D["TalentSetManager"] = {
-    defaultEnable = 0,
+    defaultEnable = 1,
 	tags = { "ENHANCEMENT" },
 	title = "天賦管理員",
 	desc = "讓你可以儲存多組天賦設定，快速切換整組天賦，也可以依據天賦的設定自動換裝。``提供的巨集按鈕可以拉到快捷列上，只要按一下便能立馬換天賦。`",
@@ -2130,7 +2463,7 @@ D["TargetNameplateIndicator"] = {
 	img = true,
 	{
 		type = "text",
-		text = "更改箭頭圖案和位置：用記事本或 Notepad++ 編輯 AddOns\\\nTargetNameplateIndicator\\\nconfig.lua 依照裡面的說明來修改。",
+		text = "顯示箭頭：開啟敵方和友方的名條/血條。\n\n更改箭頭圖案和位置：用記事本或 Notepad++ 編輯 AddOns\\\nTargetNameplateIndicator\\\nconfig.lua 依照裡面的說明來修改，有30種箭頭圖案可供選擇。",
 	}
 };
 D["TidyPlates"] = {
@@ -2159,8 +2492,8 @@ D["TidyPlates"] = {
 	},
 };
 D["TipTac"] = {
-    defaultEnable = 1,
-	title = "滑鼠提示增強",
+    defaultEnable = 0,
+	title = "滑鼠提示增強 (舊版)",
 	desc = "提供更多的選項讓你可以自訂滑鼠提示。`",
 	modifier = "BNS",
 	icon = "Interface\\Icons\\inv_wand_02",
@@ -2178,13 +2511,97 @@ D["TipTac"] = {
 		text = " ",
 	}
 };
+D["TinyChat"] = {
+	defaultEnable = 1,
+	tags = { "SOCIAL" },
+	title = "聊天功能增強",
+	desc = "一個超輕量級的聊天視窗功能增強插件。``提供切換頻道按鈕、複製聊天內容、表情圖案、開怪倒數、擲骰子、顯示物品等級和圖示...還有更多功能。`",
+	modifier = "彩虹ui",
+	icon = "Interface\\Icons\\spell_holy_divineprovidence",
+    img = true,
+	{
+		type = "text",
+        text = "設定選項：右鍵點頻道按鈕最左側的小圖示。\n\n顯示/隱藏聊天視窗：左鍵點頻道按鈕最左側的小圖示。\n\n複製內容：點一下聊天內容最左側的加號。\n\n切換頻道：左鍵點聊天視窗上方的頻道名稱。\n\n開啟/關閉頻道：右鍵點聊天視窗上方的頻道名稱。\n\n快速切換頻道：輸入文字時按 Tab 鍵。\n\n快速輸入之前的內容：輸入文字時按上下鍵。\n\n快速密語好友：輸入 @ 會出現好友名單供選擇。\n\n捲動到最上/下面：按住 Ctrl 滾動滑鼠滾輪。\n\n",
+	},
+	{
+		type = "text",
+        text = "更改開怪倒數的秒數：用記事本或 Notepad++ 編輯 AddOns\\TinyChat\\ChatSwitch.lua，搜尋 PULL 8，更改 8 這個數字。\n",
+	},
+};
 D["TinyInspect"] = {
     defaultEnable = 1,
 	tags = { "ITEM" },
-	title = "裝備觀察清單",
-	desc = "觀察其他玩家和自己時會在角色資訊視窗右方列出已裝備的物品清單，方便查看裝備和物品等級。`",
+	title = "裝備觀察",
+	desc = "觀察其他玩家和自己時會在角色資訊視窗右方列出已裝備的物品清單，方便查看裝備和物品等級。``還包含裝備欄物品等級、背包中物品等級，和滑鼠提示中顯示玩家專精和裝等的功能。`",
 	icon = "Interface\\Icons\\inv_helmet_leather_raiddruid_q_01",
 	img = true,
+	{
+        text = "設定選項",
+        callback = function(cfg, v, loading) SlashCmdList["TinyInspect"]("") end,
+    },
+};
+D["TinyTooltip"] = {
+    defaultEnable = 1,
+	tags = { "ENHANCEMENT" },
+	title = "滑鼠提示增強",
+	desc = "提供更多的選項讓你可以自訂滑鼠指向時所顯示的提示說明。`",
+	modifier = "彩虹ui",
+	icon = "Interface\\Icons\\inv_wand_02",
+	img = true,
+    {
+        text = "設定選項",
+        callback = function(cfg, v, loading) SlashCmdList["TinyTooltip"]("") end,
+    },
+	{
+        text = "恢復為預設值",
+        callback = function(cfg, v, loading) SlashCmdList["TinyTooltip"]("reset") end,
+		reload = true,
+    },
+	{
+		type = "text",
+		text = "查看法術ID：滑鼠提示出現時按住 Alt 鍵。\n\nDIY 模式：在設定選項中按下 DIY，可以分別拖曳每種資訊文字，自行安排呈現的位置。",
+	},
+};
+D["TotalAP"] = {
+    defaultEnable = 0,
+	tags = { "ITEM" },
+	title = "一鍵神兵之力",
+	desc = "只要按一個按鈕或快速鍵，就能一個接著一個使用背包中所有的神兵之力物品，不用在背包中到處翻找，不會漏掉任何一個。``還會顯示每個專精的神兵之力進度，按下專精圖示可以在使用前切換專精。`",
+	modifier = "彩虹ui",
+	icon = "Interface\\Icons\\trade_archaeology_highborne_scroll",
+	img = true,
+    {
+        text = "顯示/隱藏主介面",
+        callback = function(cfg, v, loading) SlashCmdList["ACECONSOLE_TOTALAP"]("hide") end,
+    },
+	{
+        text = "顯示/隱藏進度條",
+        callback = function(cfg, v, loading) SlashCmdList["ACECONSOLE_TOTALAP"]("bars") end,
+    },
+	{
+        text = "顯示/隱藏按鈕",
+        callback = function(cfg, v, loading) SlashCmdList["ACECONSOLE_TOTALAP"]("button") end,
+    },
+	{
+        text = "顯示/隱藏專精圖示",
+        callback = function(cfg, v, loading) SlashCmdList["ACECONSOLE_TOTALAP"]("icons") end,
+    },
+	{
+        text = "恢復忽略的專精",
+        callback = function(cfg, v, loading) SlashCmdList["ACECONSOLE_TOTALAP"]("unignore") end,
+    },
+	{
+        text = "恢復為預設值",
+        callback = function(cfg, v, loading) SlashCmdList["ACECONSOLE_TOTALAP"]("reset") end,
+    },
+	{
+		type = "text",
+		text = "快速鍵：從 Esc > 按鍵設定 > 插件，設定快速鍵來使用神兵之力和切換顯示主介面。\n",
+	},
+	{
+		type = "text",
+		text = "移動位置：按住 Alt 拖曳移動。",
+	}
 };
 D["ToyPlus"] = {
     defaultEnable = 0,
@@ -2275,7 +2692,7 @@ D["WeakAuras"] = {
     defaultEnable = 0,
 	tags = { "MISC" },
 	title = "WA技能提醒",
-	desc = "輕量級，但功能強大實用、全面性的技能提醒工具，會依據增益/減益和各種觸發效果顯示圖形和資訊，以便做醒目的提醒。``使用教學與範例：`https://rainbowui.wordpress.com/tag/wa技能提醒/``各種WA提醒效果字串下載：`https://wago.io`",
+	desc = "輕量級，但功能強大實用、全面性的技能提醒工具，會依據增益/減益和各種觸發效果顯示圖形和資訊，以便做醒目的提醒。``需要手動設定來建立監控的效果。``使用教學與範例：`https://rainbowui.wordpress.com/tag/wa技能提醒/``各種WA提醒效果字串下載：`https://wago.io`",
 	modifier = "a9012456, scars377, sheahoi, Stanzilla, Wowords, 彩虹ui",
 	icon = "Interface\\Icons\\spell_holy_aspiration",
 	img = true,
@@ -2332,12 +2749,47 @@ D["WorldFlightMap"] = {
 	icon = "Interface\\Icons\\ability_mount_warhippogryph",
 	img = true,
 };
+D["WorldMapTrackingEnhanced"] = {
+	defaultEnable = 1,
+	tags = { "MAP" },
+	title = "世界地圖追蹤增強",
+	desc = "加強世界地圖右上角放大鏡的追蹤功能，提供更多的項目，選擇要在地圖上顯示、不顯示哪些圖示。``支援地圖標記各種模組、採集助手和稀有怪，讓你可以快速開關地圖上的圖示，不需要停用模組和重新載入介面。`",
+	icon = "Interface\\Icons\\inv_misc_spyglass_03",
+	img = true,
+	{
+        text = "設定選項",
+        callback = function(cfg, v, loading) 
+			InterfaceOptionsFrame_OpenToCategory("世界地圖-追蹤")
+			InterfaceOptionsFrame_OpenToCategory("世界地圖-追蹤")
+		end,
+    },
+	{
+		type = "text",
+        text = "點世界地圖右上角的放大鏡，選擇要顯示哪些圖示。",
+	},
+};
+D["WorldQuestAssistant"] = {
+	defaultEnable = 1,
+	tags = { "QUEST" },
+	title = "世界任務組隊助手",
+	desc = "輕鬆組隊、快速完成任務!``自動尋找、加入或建立你正在解的世界任務隊伍。在設定選項中可以選擇是否要詢問，或是全自動化。``也許會有意外的邂逅?`",
+	icon = "Interface\\Icons\\inv_misc_groupneedmore",
+	img = true,
+	{
+        text = "設定選項",
+        callback = function(cfg, v, loading) SlashCmdList["ACECONSOLE_WQA"]("Config") end,
+    },
+	{
+		type = "text",
+        text = "尋找/加入隊伍：點一下任務目標清單旁的按鈕，位於世界任務的區域時會出現按鈕。``或是用滑鼠中鍵或 Ctrl+右鍵點一下地圖上的世界任務圖示，在野外才能使用。",
+	},
+};
 D["WorldQuestTracker"] = {
 	defaultEnable = 1,
 	tags = { "QUEST" },
 	title = "世界任務追蹤",
 	desc = "加強地圖上世界任務圖示的相關功能、提供世界任務追蹤清單，更容易找到和追蹤你要的世界任務。`",
-	icon = "Interface\\Icons\\achievement_quests_completed_03",
+	icon = "Interface\\Icons\\achievement_quests_completed_daily_08",
 	img = true,
 	{
 		type = "text",
@@ -2357,12 +2809,13 @@ D["XIV_Databar"] = {
         callback = function(cfg, v, loading) 
 			-- InterfaceOptionsFrame:Show()
 			InterfaceOptionsFrame_OpenToCategory("資訊列")
+			InterfaceOptionsFrame_OpenToCategory("功能模組")
 			InterfaceOptionsFrame_OpenToCategory("資訊列")
 		end,
     },
 	{
 		type = "text",
-        text = "設定功能模組：打開設定選項視窗後，在視窗左側點 '資訊列' 旁的加號將它展開，再選擇 '功能模組'。",
+        text = "設定功能模組：打開設定選項視窗後，在視窗左側點 '資訊列' 旁的加號將它展開，再選擇 '功能模組'。\n",
 	},
 	{
 		type = "text",

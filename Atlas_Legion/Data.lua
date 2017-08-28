@@ -1,4 +1,4 @@
--- $Id: Data.lua 132 2017-06-29 08:24:52Z arith $
+-- $Id: Data.lua 134 2017-07-19 09:56:33Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -1261,7 +1261,7 @@ db.AtlasMaps = {
 		DungeonMythicID = "1527",
 		--Acronym = "",
 		WorldMapID = "1147",
-		DungeonLevel = "4",
+		DungeonLevel = "3",
 		JournalInstanceID = "875",
 		Module = "Atlas_Legion",
 		PrevMap = "TombofSargerasA",
@@ -1312,7 +1312,7 @@ db.AtlasMaps = {
 		DungeonMythicID = "1527",
 		--Acronym = "",
 		WorldMapID = "1147",
-		DungeonLevel = "3",
+		DungeonLevel = "2",
 		JournalInstanceID = "875",
 		Module = "Atlas_Legion",
 		PrevMap = "TombofSargerasC",
@@ -1336,7 +1336,7 @@ db.AtlasMaps = {
 		DungeonMythicID = "1527",
 		--Acronym = "",
 		WorldMapID = "1147",
-		DungeonLevel = "5",
+		DungeonLevel = "4",
 		JournalInstanceID = "875",
 		Module = "Atlas_Legion",
 		PrevMap = "TombofSargerasD",
@@ -1359,7 +1359,7 @@ db.AtlasMaps = {
 		DungeonMythicID = "1527",
 		--Acronym = "",
 		WorldMapID = "1147",
-		DungeonLevel = "6",
+		DungeonLevel = "5",
 		JournalInstanceID = "875",
 		Module = "Atlas_Legion",
 		PrevMap = "TombofSargerasE",
@@ -1382,7 +1382,7 @@ db.AtlasMaps = {
 		DungeonMythicID = "1527",
 		--Acronym = "",
 		WorldMapID = "1147",
-		DungeonLevel = "8",
+		DungeonLevel = "7",
 		JournalInstanceID = "875",
 		Module = "Atlas_Legion",
 		PlayerLimit = { 10, 20, 25, 30 },
@@ -2380,6 +2380,15 @@ db.DropDownLayouts_Order = {
 	[ATLAS_DDL_EXPANSION] = {
 		ATLAS_DDL_EXPANSION_LEGION1,
 		ATLAS_DDL_EXPANSION_LEGION2,
+	},
+	[ATLAS_DDL_PARTYSIZE] = {
+		ATLAS_DDL_PARTYSIZE_5,
+		ATLAS_DDL_PARTYSIZE_10,
+		ATLAS_DDL_PARTYSIZE_20TO40,
+	},
+	[ATLAS_DDL_TYPE] = {
+		ATLAS_DDL_TYPE_INSTANCE,
+		ATLAS_DDL_TYPE_ENTRANCE,
 	},
 }
 db.DropDownLayouts = {

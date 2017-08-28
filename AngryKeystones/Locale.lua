@@ -45,6 +45,7 @@ langs.enUS = {
 	config_resetPopup = "Show popup to reset instances upon leaving a completed Mythic Keystone dungeon",
 	addon_name = "Angry Keystones",
 }
+
 langs.zhCN = {
 	config_characterConfig = "为角色进行独立的配置",
 	config_progressTooltip = "聊天窗口的史诗钥石显示副本名称和等级",
@@ -78,6 +79,7 @@ langs.zhCN = {
 	config_exclusiveTracker = "在副本中隐藏任务和成就追踪（重载插件后生效）",
 	config_hideTalkingHead = "在史诗钥石副本中隐藏NPC情景对话窗口",
 	config_resetPopup = "离开已完成的副本后提示是否重置",
+	addon_name = "Angry Keystones",
 }
 langs.zhTW = {
 	config_characterConfig = "角色專用的設定",
@@ -98,7 +100,7 @@ langs.zhTW = {
 	config_silverGoldTimer = "同時顯示2箱和3箱獎勵的時間",
 	config_completionMessage = "在傳奇鑰石副本完成訊息中顯示完成時間",
 	config_showSplits = "在任務目標清單中分割顯示每個目標的時間",
-	keystoneFormat = "[%s - 傳奇+%d]",
+	keystoneFormat = "[%s：傳奇+%d]",
 	forcesFormat = " - 敵方部隊進度: %s",
 	completion0 = "超過時間，%s 使用 %s。比時間限制超出 %s。",
 	completion1 = "成功完成傳奇+! %s 使用 %s。比時間限制提早 %s，再快 %s 便能達成2箱。",

@@ -1,4 +1,4 @@
- -- $Id: Data.lua 30 2017-07-06 14:22:13Z arith $
+ -- $Id: Data.lua 32 2017-07-15 18:12:33Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -2407,6 +2407,9 @@ db.OutdoorZoneToAtlas = {
 	[BZ["Borean Tundra"]] = 		"TheEyeOfEternity",
 	[BZ["The Storm Peaks"]] = 		"UlduarEnt",
 	[BZ["Dalaran"]] = 			"VioletHold",
+	[BZ["Howling Fjord"]] = 		"UtgardeKeep",
+	[BZ["Zul'Drak"]] = 			"Gundrak",
+	[BZ["The Storm Peaks"]] = 		"UlduarEnt",
 }
 
 -- Entrance maps to instance maps

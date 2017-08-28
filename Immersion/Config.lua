@@ -78,8 +78,8 @@ L.defaults = {
 	disableprogression = false,
 	flipshortcuts = false,
 	delaydivisor = 15,
-	anidivisor = 10,
 	enablenumbers = true,
+	anidivisor = 10,
 
 	inspect = 'SHIFT',
 	accept = 'SPACE',

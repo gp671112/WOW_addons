@@ -397,7 +397,7 @@ function addonTable:InitializeOptions()
  if not TalentSetManager_Options.interface then TalentSetManager_Options.interface = {} end
  
  O  = TalentSetManager_Options.interface -- general options
- Oc = TalentSetManager_Saves.interface   -- character specific options
+ Oc = TalentSetManager_CharacterSaves[addonTable.charname].interface   -- character specific options
 
  for k,v in pairs(interface_defaults) do
   if O[k] == nil then

@@ -1,4 +1,4 @@
--- $Id: Atlas.lua 273 2017-07-02 13:06:18Z arith $
+-- $Id: Atlas.lua 284 2017-07-15 13:48:50Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -600,6 +600,7 @@ end
 
 -- Simple function to toggle the visibility of the Atlas frame
 function Atlas_Toggle()
+	if ATLAS_MODULE_MENUS == 0 and #ATLAS_PLUGIN_DATA == 0 then return end
 	if (ATLAS_SMALLFRAME_SELECTED) then
 		if (AtlasFrameSmall:IsVisible()) then
 			HideUIPanel(AtlasFrameSmall)
@@ -1439,6 +1440,7 @@ end
 -- The zoneID variable represents the internal name used for each map, ex: "BlackfathomDeeps"
 -- Also responsible for updating all the text when a map is changed
 function Atlas_Refresh(mapID)
+	if ATLAS_MODULE_MENUS == 0 and #ATLAS_PLUGIN_DATA == 0 then return end
 	local zoneID
 	local cat = profile.options.dropdowns.module
 	local zone = profile.options.dropdowns.zone
@@ -1831,6 +1833,13 @@ local function isModuleOrPluginLoaded()
 			hide_on_escape = true,
 		})
 		LibDialog:Spawn("NeedModuleOrPlugin")
+		
+		LDB.OnTooltipShow = function(tooltip)
+			if not tooltip or not tooltip.AddLine then return end
+			tooltip:AddLine("|cffffffff"..L["ATLAS_TITLE"])
+			tooltip:AddLine(L["ATLAS_NO_MODULE_OR_PLUGIN"])
+		end
+		
 	end
 end
 

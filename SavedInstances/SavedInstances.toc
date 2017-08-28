@@ -3,8 +3,8 @@
 ## Notes: Tracks raid/instance/worldboss lockouts for all your characters, daily/weekly quests, currencies, trade cooldowns, and more!
 ## Title-zhTW: |cffFF7F00[副本]|r 角色進度
 ## Notes-zhTW: SavedInstances |n記錄所有角色的團隊/英雄/世界首領擊殺進度，每日/每週任務、貨幣點數、交易的冷卻計時，還有更多!|n|cffffd200使用方法：|r點小地圖按鈕觀看資訊，從Esc>介面>插件>角色進度，進行設定。
-## Author: @project-author@
-## Version: @project-version@
+## Author: coremeeko2, AlexSUCF
+## Version: 7.2.5
 ## X-ReleaseDate: @project-date-iso@
 ## X-License: All Rights Reserved
 ## X-Category: Raid

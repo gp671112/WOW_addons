@@ -1,10 +1,14 @@
-$Id: ChangeLog.txt 132 2017-06-29 08:24:52Z arith $
+$Id: ChangeLog.txt 134 2017-07-19 09:56:33Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 ==============
 = Change Log =
 ==============
+
+v1.42.01 (Jul. 19, 2017)
+------------------------
+- Corrected the dungen level values for maps of Tomb of Sargeras
 
 v1.42.00 (Jun. 29, 2017)
 ------------------------

@@ -15,7 +15,7 @@ local tt
 function addonTable.UpdateLDBButton()
  if not ldbbutton or not addonTable.spec then return end
 
- local t = TalentSetManager_Saves[TalentSetManager_Options.ldb_last_selected][addonTable.spec]
+ local t = TalentSetManager_CharacterSaves[addonTable.charname][TalentSetManager_Options.ldb_last_selected][addonTable.spec]
  
  if not t then return end
 
@@ -67,7 +67,7 @@ local function updateList()
  local check
 
  local h = 81
- local sets = addonTable.spec and TalentSetManager_Saves[tt][addonTable.spec]
+ local sets = addonTable.spec and TalentSetManager_CharacterSaves[addonTable.charname][tt][addonTable.spec]
  
  if not sets then
   local f = get()

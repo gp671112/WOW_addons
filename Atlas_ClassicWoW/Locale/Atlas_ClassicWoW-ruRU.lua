@@ -193,10 +193,8 @@ L["Zeya"] = "Зейя"
 L["ZF"] = "ЗФ"
 
 -- ToC
---Translation missing 
--- L["Description"] = ""
---Translation missing 
--- L["Title"] = ""
+L["Description"] = "Карты подземелий: Classic WoW"
+L["Title"] = "Atlas |r|cFF0099FF[Classic WoW]|r"
 
 
 end

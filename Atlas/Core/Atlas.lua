@@ -1,4 +1,4 @@
--- $Id: Atlas.lua 284 2017-07-15 13:48:50Z arith $
+-- $Id: Atlas.lua 287 2017-08-16 15:06:51Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -440,21 +440,21 @@ end
 -- For example: "The Deadmines" will become "Deadmines"
 -- Thus it will be sorted under D and not under T
 local function sanitizeName(text)
-   text = strlower(text)
-   if (AtlasSortIgnore) then
-	   for _, v in pairs(AtlasSortIgnore) do
-		   local fmatch; 
-		   if (strgmatch) then 
-			fmatch = strgmatch(text, v)()
-		   else 
-			fmatch = strgfind(text, v)()
-		   end
-		   if (fmatch) and ((strlen(text) - strlen(fmatch)) <= 4) then
-			   return fmatch
-		   end
-	   end
-   end
-   return text
+	text = strlower(text)
+	if (AtlasSortIgnore) then
+		for _, v in pairs(AtlasSortIgnore) do
+			local fmatch; 
+			if (strgmatch) then 
+				fmatch = strgmatch(text, v)()
+			else 
+				fmatch = strgfind(text, v)()
+			end
+			if (fmatch) and ((strlen(text) - strlen(fmatch)) <= 4) then
+				return fmatch
+			end
+		end
+	end
+	return text
 end
 
 -- Comparator function for alphabetic sorting of maps
@@ -1659,9 +1659,17 @@ function Atlas_AutoSelect()
 		debug("SubZone data isn't relevant here. Checking if it's outdoor zone.")
 		if (addon.assocs.OutdoorZoneToAtlas[currentZone]) then
 			debug("This world zone "..currentZone.." is associated with a map.")
+			local targetZone = addon.assocs.OutdoorZoneToAtlas[currentZone]
+			-- handling exception for Dalaran
+			if addon:GetModule("WrathoftheLichKing") and select(1, GetCurrentMapAreaID()) == 504 then
+				targetZone = "VioletHold"
+			elseif addon:GetModule("Legion") and select(1, GetCurrentMapAreaID()) == 1014 then
+				targetZone = "AssaultonVioletHold"
+			end
+			
 			for k_DropDownType, v_DropDownType in pairs(ATLAS_DROPDOWNS) do
 				for k_DropDownZone, v_DropDownZone in pairs(v_DropDownType) do         
-					if (addon.assocs.OutdoorZoneToAtlas[currentZone] == v_DropDownZone) then
+					if (targetZone == v_DropDownZone) then
 						profile.options.dropdowns.module = k_DropDownType
 						profile.options.dropdowns.zone = k_DropDownZone
 						Atlas_Refresh()

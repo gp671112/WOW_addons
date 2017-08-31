@@ -139,10 +139,8 @@ L["Watcher Narjil"] = "Дозорный Нарджил"
 L["Watcher Silthik"] = "Дозорный Силтик"
 
 -- ToC
---Translation missing 
--- L["Description"] = ""
---Translation missing 
--- L["Title"] = ""
+L["Description"] = "Карты подземелий: Wrath of the Lich King"
+L["Title"] = "Atlas |r|cFF0099FF[Wrath of the Lich King]|r"
 
 
 end

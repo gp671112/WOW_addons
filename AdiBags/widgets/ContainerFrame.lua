@@ -294,7 +294,7 @@ end
 			if mouseButton == "RightButton" then
 				local enable = not addon.db.profile[optionName]
 				addon.db.profile[optionName] = enable
-				return PlaySound(enable and "igMainMenuOptionCheckBoxOn" or "igMainMenuOptionCheckBoxOff")
+				return PlaySound(enable and SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON or SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF)
 			end
 			onClick()
 		end,
@@ -313,7 +313,7 @@ end
 
 function containerProto:CreateDepositButton()
 	local button = self:CreateModuleAutoButton(
-		"存",
+		"D",
 		0,
 		REAGENTBANK_DEPOSIT,
 		L["auto-deposit"],
@@ -331,7 +331,7 @@ end
 
 function containerProto:CreateSortButton()
 	self:CreateModuleButton(
-		"理",
+		"S",
 		10,
 		function()
 			self.bagObject:Sort()
@@ -344,11 +344,11 @@ end
 function containerProto:CreateReagentTabButton()
 	local button
 	button = self:CreateModuleButton(
-		"材",
+		"R",
 		0,
 		function()
 			if not IsReagentBankUnlocked() then
-				PlaySound("igMainMenuOption")
+				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
 				return StaticPopup_Show("CONFIRM_BUY_REAGENTBANK_TAB")
 			end
 			self:ShowReagentTab(not self.isReagentBank)
@@ -406,7 +406,7 @@ end
 
 function containerProto:OnShow()
 	self:Debug('OnShow')
-	PlaySound(self.isBank and "igMainMenuOpen" or "igBackPackOpen")
+	PlaySound(self.isBank and SOUNDKIT.IG_MAINMENU_OPEN or SOUNDKIT.IG_BACKPACK_OPEN)
 	self:RegisterEvent('EQUIPMENT_SWAP_PENDING', "PauseUpdates")
 	self:RegisterEvent('EQUIPMENT_SWAP_FINISHED', "ResumeUpdates")
 	self:RegisterEvent('AUCTION_MULTISELL_START', "PauseUpdates")
@@ -418,7 +418,7 @@ end
 
 function containerProto:OnHide()
 	containerParentProto.OnHide(self)
-	PlaySound(self.isBank and "igMainMenuClose" or "igBackPackClose")
+	PlaySound(self.isBank and SOUNDKIT.IG_MAINMENU_CLOSE or SOUNDKIT.IG_BACKPACK_CLOSE)
 	self:PauseUpdates()
 	self:UnregisterAllEvents()
 	self:UnregisterAllMessages()

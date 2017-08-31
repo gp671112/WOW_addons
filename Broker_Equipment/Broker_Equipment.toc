@@ -1,6 +1,6 @@
-## Interface: 70200
+## Interface: 70300
 ## Author: p3lim
-## Version: 70200.28-Release
+## Version: 70300.29-Release
 ## Title: Broker Equipment
 ## Notes: LDB Equipment Manager plug-in
 ## SavedVariables: Broker_EquipmentDB

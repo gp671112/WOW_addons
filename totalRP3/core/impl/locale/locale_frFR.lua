@@ -28,16 +28,16 @@ local LOCALE = {
 	["ABOUT_TITLE"] = "À propos",
 	["BINDING_NAME_TRP3_TOGGLE"] = "Afficher/cacher la fenêtre principale",
 	["BINDING_NAME_TRP3_TOOLBAR_TOGGLE"] = "Afficher/cacher la barre d'outils",
-	["BROADCAST_10"] = "|cffff9900Vous avez déjà rejoint 10 canaux de discussion. Total RP 3 n'essaiera plus de se connecter au canal de diffusion mais vous ne serrez pas en mesure d'utiliser certaines fonctionnalités, comme l'emplacement des autres utilisateurs sur la carte.",
+	["BROADCAST_10"] = "|cffff9900Vous avez déjà rejoint 10 canaux de discussion. Total RP 3 n'essaiera plus de se connecter au canal de diffusion mais vous ne serez pas en mesure d'utiliser certaines fonctionnalités, comme l'emplacement des autres utilisateurs sur la carte.",
 	["BROADCAST_PASSWORD"] = [=[|cffff0000Un mot de passe a été défini pour le canal de diffusion (%s).
-|cffff9900Total RP 3 n'essaiera plus de se connecter mais vous ne serrez pas en mesure d'utiliser certaines fonctionnalités, comme l'emplacement des autres utilisateurs sur la carte.
+|cffff9900Total RP 3 n'essaiera plus de se connecter mais vous ne serez pas en mesure d'utiliser certaines fonctionnalités, comme l'emplacement des autres utilisateurs sur la carte.
 |cff00ff00Vous pouvez désactiver ou modifier le canal de diffusion dans les réglages de Total RP 3.]=],
 	["BROADCAST_PASSWORDED"] = [=[|cffff0000L'utilisateur |r%s|cffff0000 vient de mettre un mot de passe sur le canal de diffusion (%s).
-|cffff9900Si vous ne connaissiez pas ce mot de passe vous ne serez pas en mesure d'utiliser certaines fonctionnalités, comme l'emplacement des autres utilisateurs sur la carte.
+|cffff9900Si vous ne connaissez pas ce mot de passe vous ne serez pas en mesure d'utiliser certaines fonctionnalités, comme l'emplacement des autres utilisateurs sur la carte.
 ]=],
 	["BW_COLOR_CODE"] = "Code couleur",
 	["BW_COLOR_CODE_ALERT"] = "Mauvais code hexadécimal !",
-	["BW_COLOR_CODE_TT"] = "Vous pouvez coller ici un code couleur hexadecimal à 6 caractères et appuyer sur Entrée pour valider.",
+	["BW_COLOR_CODE_TT"] = "Vous pouvez coller ici un code couleur hexadécimal à 6 caractères et appuyer sur Entrée pour valider.",
 	["CM_ACTIONS"] = "Actions",
 	["CM_ALT"] = "Alt",
 	["CM_APPLY"] = "Appliquer",
@@ -118,7 +118,7 @@ local LOCALE = {
 	["CO_CHAT_MAIN_NAMING_4"] = "Titre court + prénom + nom",
 	["CO_CHAT_MAIN_NPC"] = "Détection des dialogues de PNJ",
 	["CO_CHAT_MAIN_NPC_PREFIX"] = "Schéma de détection des dialogues de PNJ",
-	["CO_CHAT_MAIN_NPC_PREFIX_TT"] = [=[Si un message envoyé sur le canal /dire, /emote, /groupe ou /raid commence par ce préfix, il sera interprété comme dialogue de PNJ.
+	["CO_CHAT_MAIN_NPC_PREFIX_TT"] = [=[Si un message envoyé sur le canal /dire, /emote, /groupe ou /raid commence par ce préfixe, il sera interprété comme dialogue de PNJ.
 
 |cff00ff00Par défaut : "|| "
 (sans les " et avec un espace après le | )]=],
@@ -135,13 +135,13 @@ local LOCALE = {
 	["CO_GENERAL"] = "Général",
 	["CO_GENERAL_BROADCAST"] = "Utiliser le canal de diffusion",
 	["CO_GENERAL_BROADCAST_C"] = "Nom du canal de diffusion",
-	["CO_GENERAL_BROADCAST_TT"] = "Le canal de diffusion est utilisé pour de nombreuses fonctionnalités. Le désactiver désactivera également les fonctionnalités comme la location sur la carte, les sons diffusés localement, l'accès aux planques et aux panneaux, etc.",
+	["CO_GENERAL_BROADCAST_TT"] = "Le canal de diffusion est utilisé pour de nombreuses fonctionnalités. Le désactiver désactivera également les fonctionnalités comme l'emplacement sur la carte, les sons diffusés localement, l'accès aux planques et aux panneaux, etc.",
 	["CO_GENERAL_CHANGELOCALE_ALERT"] = [=[Changer la langue pour %s ?
-Cela provoquera une rechargement de l'interface.]=],
+Cela provoquera un rechargement de l'interface.]=],
 	["CO_GENERAL_COM"] = "Communication",
 	["CO_GENERAL_HEAVY"] = "Alerte de profil lourd",
 	["CO_GENERAL_HEAVY_TT"] = "Afficher une alerte lorsque la taille du profil dépasse une valeur raisonnable",
-	["CO_GENERAL_LOCALE"] = "Langue de l'add-don",
+	["CO_GENERAL_LOCALE"] = "Langue de l'add-on",
 	["CO_GENERAL_MISC"] = "Divers",
 	["CO_GENERAL_NEW_VERSION"] = "Alerte de mise-à-jour",
 	["CO_GENERAL_NEW_VERSION_TT"] = "Afficher une alerte lorsqu'une nouvelle version est disponible.",
@@ -168,9 +168,9 @@ Cela provoquera une rechargement de l'interface.]=],
 	["CO_LOCATION_DISABLE_PVP"] = "Désactiver le scan si PvP",
 	["CO_LOCATION_DISABLE_PVP_TT"] = [=[Vous ne répondrez pas aux requêtes de positions de personnages si vous êtes en mode PvP.
 
-Cette option est particulièrement utile sur les royaume PvP où les utilisateurs de la faction opposée pourraient abuser du système pour vous traquer.]=],
+Cette option est particulièrement utile sur les royaumes PvP où les utilisateurs de la faction opposée pourraient abuser du système pour vous traquer.]=],
 	["CO_MAP_BUTTON"] = "Bouton des recherches sur la carte",
-	["CO_MAP_BUTTON_POS"] = "Position du bouton sur le carte",
+	["CO_MAP_BUTTON_POS"] = "Position du bouton sur la carte",
 	["CO_MINIMAP_BUTTON"] = "Bouton de la minicarte",
 	["CO_MINIMAP_BUTTON_FRAME"] = "Cadre d'ancrage",
 	["CO_MINIMAP_BUTTON_RESET"] = "Réinitialiser la position",
@@ -213,13 +213,15 @@ Statuts possibles:
 	["CO_REGISTER_ABOUT_VOTE"] = "Utiliser le système de vote",
 	["CO_REGISTER_ABOUT_VOTE_TT"] = "Active le système de vote, vous permettant de voter (\"j'aime\" ou \"je n'aime pas\") pour les descriptions des autres et leur permettant de faire de même pour vous.",
 	["CO_REGISTER_AUTO_ADD"] = "Ajouter automatiquement les nouveaux joueurs",
-	["CO_REGISTER_AUTO_ADD_TT"] = "Ajouter automatiquement les nouveaux joueurs que vous rencontrez au registre.",
+	["CO_REGISTER_AUTO_ADD_TT"] = [=[Ajouter automatiquement les nouveaux joueurs que vous rencontrez au registre.
+
+|cffff0000Note: Désactiver cette option vous empêchera de recevoir de nouveaux profils de joueurs vous n'avez pas encore rencontrés ! Utilisez cette option si vous ne voulez pas recevoir de nouveaux profils d'autres joueurs, seulement des mises à jour de joueurs vous avez déjà rencontrés.]=],
 	["CO_REGISTER_AUTO_PURGE"] = "Purge auto. du registre",
 	["CO_REGISTER_AUTO_PURGE_0"] = "Désactiver la purge",
 	["CO_REGISTER_AUTO_PURGE_1"] = "Après %s jours",
-	["CO_REGISTER_AUTO_PURGE_TT"] = [=[Retire automatiquement du registre les profils de personnages que vous n'avez pas croisés depuis un certain temps. Vous pouvez choisir le délais avant la suppression.
+	["CO_REGISTER_AUTO_PURGE_TT"] = [=[Retire automatiquement du registre les profils de personnages que vous n'avez pas croisés depuis un certain temps. Vous pouvez choisir le délai avant la suppression.
 
-|cff00ff00Notez qu'un profil envers le quel un de vos personnage possède une relation ne sera jamais supprimé.
+|cff00ff00Notez qu'un profil envers lequel un de vos personnages possède une relation ne sera jamais supprimé.
 
 |cffff9900Il existe un bug dans WoW supprimant toutes les données sauvegardées si le fichier de sauvegarde atteint une certaine taille. Nous déconseillons donc fortement de désactiver totalement la purge.]=],
 	["CO_SANITIZER"] = "Nettoyer les profils",
@@ -289,11 +291,11 @@ Classe: 50 caractères |r]=],
 	["CO_WIM"] = "|cffff9900Les canaux de chuchotement sont désactivés.",
 	["CO_WIM_TT"] = "Vous utilisez |cff00ff00WIM|r, le support des canaux de chuchotement est désactivé pour des raisons de compatibilité.",
 	["COM_LIST"] = "Liste des commandes :",
-	["COM_RESET_RESET"] = "La position des éléments de l'interface a été ré-initialisée.",
-	["COM_RESET_USAGE"] = "Utilisation : |cff00ff00/trp3 reset frames|r pour ré-initialiser la position des éléments de l'interface.",
+	["COM_RESET_RESET"] = "La position des éléments de l'interface a été réinitialisée.",
+	["COM_RESET_USAGE"] = "Utilisation : |cff00ff00/trp3 reset frames|r pour réinitialiser la position des éléments de l'interface.",
 	["COM_STASH_DATA"] = [=[|cffff0000Êtes-vous certain de vouloir archiver vos données de Total RP 3?|r
 
-Vos profils, les profils de vos compagnons et vos préférences seront temporairement archivés et l'interface sera rechargée avec des données vide, comme après une nouvelle installation de Total RP 3.
+Vos profils, les profils de vos compagnons et vos préférences seront temporairement archivés et l'interface sera rechargée avec des données vides, comme après une nouvelle installation de Total RP 3.
 |cff00ff00Utilisez la même commande à nouveau (|cff999999/trp3 stash|cff00ff00) pour restaurer vos données.|r]=],
 	["COM_SWITCH_USAGE"] = "Utilisation: |cff00ff00/trp3 switch main|r pour afficher ou masquer la fenêtre principale ou |cff00ff00/trp3 switch toolbar|r pour afficher ou masquer la barre d'outils.",
 	["DB_ABOUT"] = "A propos de Total RP 3",
@@ -325,7 +327,7 @@ aux joueurs débutants que vous êtes enclin à les aider.]=],
 aux autres que vous débutez dans le roleplay.]=],
 	["DB_TUTO_1"] = [=[|cffffff00Le statut du personnage|r indique si vous jouez actuellement le rôle de votre personnage ou non.
 
-|cffffff00Le statut rolepay|r vous permet d'indiquer que vous êtes un débutant ou un vétéran désireux d'aider les novices !
+|cffffff00Le statut roleplay|r vous permet d'indiquer que vous êtes un débutant ou un vétéran désireux d'aider les novices !
 
 |cff00ff00Cette information sera placée dans la bulle d'aide de votre personnage.]=],
 	["DICE_HELP"] = "Un ou des jets de dés, séparés par des espaces. Examples: 1d6, 2d12 3d20 ...",
@@ -358,20 +360,23 @@ Le contenu de son profil ne sera plus caché.]=],
 	["MATURE_FILTER_EDIT_DICTIONARY_BUTTON"] = "Éditer",
 	["MATURE_FILTER_EDIT_DICTIONARY_DELETE_WORD"] = "Supprimer le mot du dictionnaire",
 	["MATURE_FILTER_EDIT_DICTIONARY_EDIT_WORD"] = "Éditer ce mot",
+	["MATURE_FILTER_EDIT_DICTIONARY_RESET_BUTTON"] = "Réinitialiser",
+	["MATURE_FILTER_EDIT_DICTIONARY_RESET_TITLE"] = "Réinitialiser le dictionnaire",
+	["MATURE_FILTER_EDIT_DICTIONARY_RESET_WARNING"] = "Êtes-vous certain de vouloir réinitialiser le dictionnaire ? Le dictionnaire actuel sera remplacé par celui par défaut pour la langue active (is disponible).",
 	["MATURE_FILTER_EDIT_DICTIONARY_TITLE"] = "Éditeur de dictionnaire",
-	["MATURE_FILTER_EDIT_DICTIONARY_TT"] = "Éditer le dictionnaire utiliser par le filtre de profils matures.",
+	["MATURE_FILTER_EDIT_DICTIONARY_TT"] = "Éditer le dictionnaire utilisé par le filtre de profils matures.",
 	["MATURE_FILTER_FLAG_PLAYER"] = "Marquer comme mature",
 	["MATURE_FILTER_FLAG_PLAYER_OPTION"] = "Marquer comme mature",
-	["MATURE_FILTER_FLAG_PLAYER_TEXT"] = [=[Confirmez que vous souhaitez marquer le profile de %s comme contenant du contenu mature. Le contenu de ce profil sera masqué.
+	["MATURE_FILTER_FLAG_PLAYER_TEXT"] = [=[Confirmez que vous souhaitez marquer le profil de %s comme contenant du contenu mature. Le contenu de ce profil sera masqué.
 
 |cffffff00Optionnel:|r Indiquez ici les mots inappropriés (séparés par un espace) pour les ajouter au dictionnaire utilisé par le filtre de profils matures.]=],
 	["MATURE_FILTER_FLAG_PLAYER_TT"] = "Marquer ce profil comme contenant du contenu mature. Le contenu sera masqué.",
 	["MATURE_FILTER_OPTION"] = "Filtrer le contenu mature",
-	["MATURE_FILTER_OPTION_TT"] = [=[Cochez cette option pour activer le filtre de contenu mature. Total RP 3 analysera les profils reçu à la réception à la recherche de mots clés considérés comme étant inappropriés et marquera les profils comme mature.
+	["MATURE_FILTER_OPTION_TT"] = [=[Cochez cette option pour activer le filtre de contenu mature. Total RP 3 analysera les profils reçus à la réception à la recherche de mots clés considérés comme étant inappropriés et marquera les profils comme matures.
 
 Un profil marqué comme contenant du contenu mature aura son infobulle censurée et vous devrez confirmer à l'ouverture du profil.]=],
 	["MATURE_FILTER_REMOVE_FROM_WHITELIST"] = "Retirer ce profil de la |cffffffffliste blanche mature|r",
-	["MATURE_FILTER_REMOVE_FROM_WHITELIST_OPTION"] = "Retirer ce profile de la |cffffffffliste blanche mature|r",
+	["MATURE_FILTER_REMOVE_FROM_WHITELIST_OPTION"] = "Retirer ce profil de la |cffffffffliste blanche mature|r",
 	["MATURE_FILTER_REMOVE_FROM_WHITELIST_TEXT"] = [=[Confirmez que vous souhaitez retirer %s de la |cffffffffliste blanche mature|r.
 
 Le contenu de son profile sera à nouveau masqué.]=],
@@ -390,6 +395,9 @@ Ce profil a été marqué comme contenant du contenu mature.
 	["MM_SHOW_HIDE_MAIN"] = "Afficher/cacher la fenêtre principale",
 	["MM_SHOW_HIDE_MOVE"] = "Déplacer le bouton",
 	["MM_SHOW_HIDE_SHORTCUT"] = "Afficher/cacher la barre d'outils",
+	["MO_ADDON_NOT_INSTALLED"] = "L'add-on %s n'est pas installé, l'intégration avec Total RP 3 est désactivée.",
+	["MO_CHAT_CUSTOMIZATIONS_DESCRIPTION"] = "Ajoute la compatibilité avec l'add-on %s, pour que les messages et les noms des joueurs soient modifiés par Total RP 3 dans cet add-on.",
+	["MO_TOOLTIP_CUSTOMIZATIONS_DESCRIPTION"] = "Ajoute la compatibilité avec l'add-on %s, pour que les préférences d'infobulle de l'add-on soient également appliquées aux infobulles de Total RP 3.",
 	["MORE_MODULES_2"] = [=[{h2:c}Modules complémentaires{/h2}
 {h3}Total RP 3: Extended{/h3}
 |cff9999ffTotal RP 3: Extended|r ajoute la création de campagnes avec des quêtes et des dialogues, des objets, des documents (livres, affiches, contrats) et encore bien plus!
@@ -397,7 +405,7 @@ Ce profil a été marqué comme contenant du contenu mature.
 
 {h3}Module Kui |cff9966ffNameplates|r{/h3}
 Le module Kui |cff9966ffNameplates|r ajoute des modifications à l'add-on KuiNameplates :
-• Affichage du nom complet RP des personnages au dessus de leur tête, au lieu du nom par défaut, avec leur couleur personnalisée.
+• Affichage du nom complet RP des personnages au-dessus de leur tête, au lieu du nom par défaut, avec leur couleur personnalisée.
 • Nom des familiers personnalisés.
 • Cachez les noms des joueurs n'ayant pas de profil RP pour n'afficher que les joueurs RP!
 {link*http://mods.curse.com/addons/wow/total-rp-3-kuinameplates-module* Télécharger sur Curse.com}.
@@ -427,7 +435,7 @@ Vous pouvez également laisser le champ vide pour faire une émote sans nom de P
 	["PATTERN_ERROR"] = "Erreur dans le pattern",
 	["PATTERN_ERROR_TAG"] = "Erreur dans le pattern: tag non fermé",
 	["PR_CO_BATTLE"] = "Compagnon",
-	["PR_CO_COUNT"] = "%s familiers/montures liées à ce profil.",
+	["PR_CO_COUNT"] = "%s familiers/montures liés à ce profil.",
 	["PR_CO_EMPTY"] = "Pas de profil compagnon",
 	["PR_CO_MASTERS"] = "Maîtres",
 	["PR_CO_MOUNT"] = "Monture",
@@ -445,7 +453,7 @@ Un profil de familier peut être lié à:
 
 À l'instar des profils de personnages, un |cff00ff00profil de compagnon|r peut être lié à |cffffff00plusieurs familiers|r, et un |cffffff00familier|r peut passer facilement d'un profil à un autre.
 
-|cffff9900Goules:|r Les goules obtenant un nom différent à chaque invocation, il est nécessaire de lié le profil à la goule pour tous les noms générés.]=],
+|cffff9900Goules:|r Les goules obtenant un nom différent à chaque invocation, il est nécessaire de lier le profil à la goule pour tous les noms générés.]=],
 	["PR_CO_PROFILE_HELP2"] = [=[Cliquer ici pour créer un nouveau profil de compagnon.
 
 |cff00ff00Pour lier un profil à un familier, invoquez juste le familier, sélectionnez-le et utilisez le cadre de cible pour le lier à un profil existant (ou en créer un nouveau).|r]=],
@@ -469,7 +477,7 @@ Le lier quand même ?]=],
 	["PR_DUPLICATE_PROFILE"] = "Dupliquer le profil",
 	["PR_EXPORT_IMPORT_HELP"] = [=[Vous pouvez exporter et importer vos profils en utilisant les options du menu.
 
-Utilisez l'option |cffffff00Exporter le profil|r pour générer une version sérialisée de votre profil sous forme de texte. Vous pouvez copier le texte en utilisant Contrôle-C (ou Commande-C sur Mac) pour le copier autre part comme sauvegarde. (|cffff0000Veuillez noter que les éditeurs de texte avancées comme Microsoft Word reformattent les caractères comme les guillemets, modifiant ainsi le contenu. Il est recommandé d'utiliser un logiciel d'édition de text plus simple, comme le Bloc Note.|r)
+Utilisez l'option |cffffff00Exporter le profil|r pour générer une version sérialisée de votre profil sous forme de texte. Vous pouvez copier le texte en utilisant Contrôle-C (ou Commande-C sur Mac) pour le copier autre part comme sauvegarde. (|cffff0000Veuillez noter que les éditeurs de texte avancés comme Microsoft Word reformattent les caractères comme les guillemets, modifiant ainsi le contenu. Il est recommandé d'utiliser un logiciel d'édition de texte plus simple, comme le Bloc Note.|r)
 
 Utilisez l'option |cffffff00Importer un profil|r pour coller le texte d'un export précédent dans le profil. Les données du profil choisi seront écrasées par les données collées. Vous ne pouvez pas importer un profil directement dans celui actuellement utilisé.]=],
 	["PR_EXPORT_IMPORT_TITLE"] = "Exporter/importer un profil",
@@ -484,8 +492,8 @@ Taille maximale : 20 Ko]=],
 	["PR_IMPORT_EMPTY"] = "Aucun profil disponible",
 	["PR_IMPORT_IMPORT_ALL"] = "Tout importer",
 	["PR_IMPORT_PETS_TAB"] = "Importateur de compagnons",
-	["PR_IMPORT_PROFILE"] = "Importer le profile",
-	["PR_IMPORT_PROFILE_TT"] = "Veuillez coller le serial d'un profil dans la boîte de text",
+	["PR_IMPORT_PROFILE"] = "Importer le profil",
+	["PR_IMPORT_PROFILE_TT"] = "Veuillez coller le serial d'un profil dans la boîte de texte",
 	["PR_IMPORT_WILL_BE_IMPORTED"] = "Sera importé",
 	["PR_PROFILE"] = "Profil",
 	["PR_PROFILE_CREATED"] = "Profil %s créé.",
@@ -513,9 +521,9 @@ Cette duplication ne changera pas les liens du personnage à %s.]=],
 	["PR_PROFILEMANAGER_EDIT_POPUP"] = [=[Veuillez entrer un nom pour le nouveau profil.
 Ce nom ne peut pas être vide.
 
-Changer le nom ne changera aucun lien entre ce profil et vos personnages]=],
+Changer le nom ne changera aucun lien entre ce profil et vos personnages.]=],
 	["PR_PROFILEMANAGER_IMPORT_WARNING"] = "Remplacer le contenu du profil %s avec les données importées ?",
-	["PR_PROFILEMANAGER_IMPORT_WARNING_2"] = [=[Attention : le profil que vous voulez importé a été exporté avec une version plus ancienne de Total RP 3.
+	["PR_PROFILEMANAGER_IMPORT_WARNING_2"] = [=[Attention : le profil que vous voulez importer a été exporté avec une version plus ancienne de Total RP 3.
 Des soucis de compatibilité pourraient se présenter.
 
 Remplacer le contenu du profil %s avec les données importées ?]=],
@@ -525,8 +533,15 @@ Remplacer le contenu du profil %s avec les données importées ?]=],
 	["PR_PROFILES"] = "Profils",
 	["PR_SLASH_EXAMPLE"] = "|cffffff00Utilisation de la commande:|r |cffcccccc/trp3 profile Millidan Hurlefromage|r |cffffff00pour utiliser le profil Millidan Hurlefromage.|r",
 	["PR_SLASH_NOT_FOUND"] = "|cffff0000IAucun profil nommé|r |cffffff00%s|r|cffff0000 trouvé.|r",
-	["PR_SLASH_SWITCH_HELP"] = "Passer à un autre profile via son nom.",
+	["PR_SLASH_SWITCH_HELP"] = "Passer à un autre profil via son nom.",
 	["PR_UNUSED_PROFILE"] = "Ce profil n'est actuellement lié à aucun personnage WoW.",
+	["REG_CODE_INSERTION_WARNING"] = [=[Hola, doucement!
+
+Il semblerait que vous ayez essayé d'insérer manuellement des codes non supportés dans votre profil Total RP 3.
+Ce genre de modification n'est pas du tout supporté et nous vous décourageons fortement de le faire.
+Cela peut créer des soucis de stabilité au sein de l'add-on, la corruption de vos données et la perte de vos profils, ou encore des soucis de compatibilité avec les autres add-ons RP (comme MRP).
+
+Les codes que vous aviez insérés dans votre profil ont été retirés pour éviter que vous ne cassiez l'add-on.]=],
 	["REG_COMPANION"] = "Compagnon",
 	["REG_COMPANION_BOUND_TO"] = "Lier à ...",
 	["REG_COMPANION_BOUND_TO_TARGET"] = "Cible",
@@ -583,7 +598,7 @@ Vous pouvez optionnellement entrer la raison ci-dessous. C'est une note personne
 	["REG_LIST_ACTIONS_PURGE_COUNT"] = "%s profils seront supprimés.",
 	["REG_LIST_ACTIONS_PURGE_EMPTY"] = "Pas de profil à purger.",
 	["REG_LIST_ACTIONS_PURGE_IGNORE"] = "Profils de personnages ignorés",
-	["REG_LIST_ACTIONS_PURGE_IGNORE_C"] = [=[Cette purge supprimere tous les profils liés à un personnage WoW ignoré.
+	["REG_LIST_ACTIONS_PURGE_IGNORE_C"] = [=[Cette purge supprimera tous les profils liés à un personnage WoW ignoré.
 
 |cff00ff00%s]=],
 	["REG_LIST_ACTIONS_PURGE_TIME"] = "Profils non vus depuis 1 mois",
@@ -594,7 +609,7 @@ Vous pouvez optionnellement entrer la raison ci-dessous. C'est une note personne
 	["REG_LIST_ACTIONS_PURGE_UNLINKED_C"] = [=[Cette purge supprimera tous les profils qui ne sont pas liés à un personnage WoW.
 
 |cff00ff00%s]=],
-	["REG_LIST_ADDON"] = "Type de profile",
+	["REG_LIST_ADDON"] = "Type de profil",
 	["REG_LIST_CHAR_EMPTY"] = "Aucun personnage",
 	["REG_LIST_CHAR_EMPTY2"] = "Aucun personnage ne correspond à votre sélection",
 	["REG_LIST_CHAR_FILTER"] = "Personnages: %s / %s",
@@ -634,7 +649,7 @@ La dernière colonne correspond aux différents marqueurs. (ignoré ..etc.)]=],
 	["REG_LIST_IGNORE_TT"] = [=[Raison:
 |cff00ff00%s
 
-|cffffff00Cliquer pour supprimer de la ligne des ignorés]=],
+|cffffff00Cliquer pour supprimer de la liste des ignorés]=],
 	["REG_LIST_NAME"] = "Nom du personnage",
 	["REG_LIST_NOTIF_ADD"] = "Nouveau profil découvert pour |cff00ff00%s",
 	["REG_LIST_NOTIF_ADD_CONFIG"] = "Nouveau profil découvert",
@@ -644,7 +659,7 @@ La dernière colonne correspond aux différents marqueurs. (ignoré ..etc.)]=],
 	["REG_LIST_PET_TYPE"] = "Type du compagnon",
 	["REG_LIST_PETS_EMPTY"] = "Aucun compagnon",
 	["REG_LIST_PETS_EMPTY2"] = "Aucun compagnon ne correspond à votre sélection",
-	["REG_LIST_PETS_FILTER"] = "compagnons: %s / %s",
+	["REG_LIST_PETS_FILTER"] = "Compagnons: %s / %s",
 	["REG_LIST_PETS_TITLE"] = "Liste des compagnons",
 	["REG_LIST_PETS_TOOLTIP"] = "A été vu le",
 	["REG_LIST_PETS_TOOLTIP2"] = "A été vu avec",
@@ -700,7 +715,7 @@ Il y a plusieurs moyens de le faire:|c0000ff00
 	["REG_PLAYER_BIRTHPLACE"] = "Lieu de naissance",
 	["REG_PLAYER_BIRTHPLACE_TT"] = [=[Vous pouvez indiquer ici le lieu de naissance de votre personnage. Cela peut être une région, une zone, ou même un continent. C'est à vous de décider la précision avec laquelle vous souhaitez l'indiquer.
 
-|c00ffff00Vous pouvez utiliser le bouton à droite vous régler facilement votre position actuelle comme Lieu de naissance.]=],
+|c00ffff00Vous pouvez utiliser le bouton à droite pour régler facilement votre position actuelle comme Lieu de naissance.]=],
 	["REG_PLAYER_BKG"] = "Format d'arrière-plan",
 	["REG_PLAYER_BKG_TT"] = "Cela représente l'arrière-plan graphique à utiliser pour votre panneau Caractéristiques",
 	["REG_PLAYER_CARACT"] = "Caractéristiques",
@@ -745,7 +760,10 @@ Cependant, vous devriez éviter les répétitions, s'il n'y a aucune information
 	["REG_PLAYER_GLANCE_BAR_SAVE"] = "Sauvegarder comme groupe",
 	["REG_PLAYER_GLANCE_BAR_SAVED"] = "Le groupe d'emplacements |cff00ff00%s|r a été supprimé.",
 	["REG_PLAYER_GLANCE_BAR_TARGET"] = "Groupe de \"Coup d’œil\"",
-	["REG_PLAYER_GLANCE_CONFIG"] = [=[|cffffff00Clic gauche:|r Configurer l'emplacement
+	["REG_PLAYER_GLANCE_CONFIG"] = [=[|cff00ff00"Coup d'œil"|r est un ensemble d'emplacements que vous pouvez utiliser pour définir des informations importantes à propos de ce personnage.
+
+Vous pouvez utiliser ces actions sur les emplacements :
+|cffffff00Clic gauche:|r Configurer l'emplacement
 |cffffff00Clic droit:|r Charger/enregistrer un coup d'œil
 |cffffff00Double-clic:|r Activer/Désactiver l'emplacement
 |cffffff00Glisser-déposer:|r Réorganiser les emplacements]=],
@@ -774,9 +792,9 @@ Il y a plusieurs manières de l'indiquer:|c0000ff00
 	["REG_PLAYER_HERE"] = "Obtenir la position",
 	["REG_PLAYER_HERE_HOME_PRE_TT"] = [=[Coordonnées actuelles:
 |cff00ff00%s|r.]=],
-	["REG_PLAYER_HERE_HOME_TT"] = [=[|cffffff00Clic|r: Utiliser la position actuelle comme coordonnées de résidence
-|cffffff00Clic-droit|r: Effacer les coordonnées de la résidence]=],
-	["REG_PLAYER_HERE_TT"] = "Cliquer pour obtenir votre position actuelle",
+	["REG_PLAYER_HERE_HOME_TT"] = [=[|cffffff00Clic|r: Utiliser la position actuelle comme coordonnées de résidence.
+|cffffff00Clic-droit|r: Effacer les coordonnées de la résidence.]=],
+	["REG_PLAYER_HERE_TT"] = "|cffffff00Clic|r: Obtenir votre position actuelle",
 	["REG_PLAYER_HISTORY"] = "Histoire",
 	["REG_PLAYER_ICON"] = "Icône du personnage",
 	["REG_PLAYER_ICON_TT"] = "Sélectionne une représentation graphique pour votre personnage.",
@@ -787,7 +805,7 @@ Il y a plusieurs manières de l'indiquer:|c0000ff00
 
 |rVous pouvez optionnellement entrer la raison de cette action. Cette note est personnelle et vous servira de rappel.]=],
 	["REG_PLAYER_LASTNAME"] = "Nom",
-	["REG_PLAYER_LASTNAME_TT"] = "C'est le nom de famille de votre personnage",
+	["REG_PLAYER_LASTNAME_TT"] = "C'est le nom de famille de votre personnage.",
 	["REG_PLAYER_LEFTTRAIT"] = "Attribut de gauche",
 	["REG_PLAYER_MISC_ADD"] = "Ajouter un champ additionnel",
 	["REG_PLAYER_MORE_INFO"] = "Informations additionnelles",
@@ -824,7 +842,7 @@ Il y a plusieurs manières de l'indiquer:|c0000ff00
 	["REG_PLAYER_PSYCHO_POINT"] = "Ajouter un point",
 	["REG_PLAYER_PSYCHO_Pragmatique"] = "Pragmatique",
 	["REG_PLAYER_PSYCHO_Rationnel"] = "Rationnel",
-	["REG_PLAYER_PSYCHO_Reflechi"] = "Réflechi",
+	["REG_PLAYER_PSYCHO_Reflechi"] = "Réfléchi",
 	["REG_PLAYER_PSYCHO_Rencunier"] = "Rancunier",
 	["REG_PLAYER_PSYCHO_RIGHTICON_TT"] = "Régler l'icône de l'attribut de droite.",
 	["REG_PLAYER_PSYCHO_Sincere"] = "Sincère",
@@ -960,7 +978,7 @@ Il pourrait par exemple être |c0000ff00mince, gros ou musclé...|r Ou tout simp
 	["REG_TT_NOTIF"] = "Description non-lue",
 	["REG_TT_REALM"] = "Royaume: |cffff9900%s",
 	["REG_TT_TARGET"] = "Cible: |cffff9900%s",
-	["SCRIPT_ERROR"] = "Erreur dans le script",
+	["SCRIPT_ERROR"] = "Erreur dans le script.",
 	["SCRIPT_UNKNOWN_EFFECT"] = "Erreur dans le script, effet inconnu.",
 	["TB_AFK_MODE"] = "Absent",
 	["TB_DND_MODE"] = "Ne pas déranger",
@@ -1006,24 +1024,23 @@ Il pourrait par exemple être |c0000ff00mince, gros ou musclé...|r Ou tout simp
 - Renaud "{twitter*EllypseCelwe*Ellypse}" Parize
 - Sylvain "{twitter*Telkostrasz*Telkostrasz}" Cossement
 
+{h2}{icon:QUEST_KHADGAR:20} Le reste de l'équipe{/h2}
+- Connor "{twitter*Saelorable*Sælorable}" Macleod (Contributeur)
+- {twitter*Solanya_*Solanya} (Community Manager)
 
 {h2}{icon:THUMBUP:20} Remerciements{/h2}
-{col:ffffff}Notre équipe de testt:{/col}
-- Saelora
+{col:ffffff}Notre équipe de test:{/col}
 - Erzan
 - Calian
 - Kharess
 - Alnih
 - 611
 
-{col:ffffff}Merci à tous nos amis pour leur soutient:{/col}
+{col:ffffff}Merci à tous nos amis pour leur soutien:{/col}
 - Pour Telkos: Kharess, Kathryl, Marud, Solona, Stretcher, Lisma...
 - Pour Ellypse: Les guildes Église du Saint Gamon, Maison Celwë'Belore, Mercenaires Atal'ai, et plus particulièrement Erzan, Elenna, Caleb, Siana and Adaeria
 
-{col:ffffff}Remerciement spécial à:{/col}
-- Solanya, pour toute son aide apportée aux autres utilisateurs de Total RP 3 sur notre serveur Discord <3
-
-{col:ffffff}Pour nous avoir aidé à créer la guilde Total RP sur Kirin Tor (EU):{/col}
+{col:ffffff}Pour nous avoir aidés à créer la guilde Total RP sur Kirin Tor (EU):{/col}
 - Azane
 - Hellclaw
 - Leylou
@@ -1059,38 +1076,21 @@ Total RP n'est pas responsable du contenu des liens partagés.]=],
 	["UI_MUSIC_SELECT"] = "Choisir une musique",
 	["UI_TUTO_BUTTON"] = "Mode tutoriel",
 	["UI_TUTO_BUTTON_TT"] = "Cliquer pour afficher ou masquer le mode tutoriel",
-	["WHATS_NEW_11"] = [=[## Améliorations
+	["WHATS_NEW_12"] = [=[Cette mise-à-jour mineur apporte principalement des améliorations et corrections aux fonctionnalités existantes.
 
-- L'option pour couper les textes trop longs dans l'infobulle a été enlevée de l'option de nettoyage des profils pour être une option à part de l'infobulle. Les textes ne sont plus coupés à la réception du profil mais à l'affichage dans l'infobulle. Cette option est toujours activée par défaut et peut être désactivée dans les options d'infobulle (ou en {link*tooltip_cropping*cliquant ici}). Si vous voyez toujours des textes coupés après avoir désactivé cette option, il s'agit probablement de profils ayant été traité par le précédent système. Supprimez le profil du registre pour le télécharger à nouveau.
-- Les émotes commençant par une virgule |cffD3D3D3,|r sont maintenant traitées comme les émotes commençant par un |cffD3D3D3's|r, l'espace entre le nom du joueur et la virgule est supprimé. — [Ticket #100](https://wow.curseforge.com/projects/total-rp-3/issues/100)
+## Améliorations
 
+- Puisque nous continuions à recevoir des rapports de bugs de la part de joueurs insérant des codes de couleur ou d'icône non supportés, Total RP 3 va maintenant automatiquement nettoyé ces codes au chargement de l'add-on et va tenter d'empêcher l'insertion de ces codes en jeu. A partir de maintenant, tout rapport de bug soumis par quelqu'un ayant inséré des codes manuellement dans son profil seront ignorés, que le bug soit en rapport avec l'insertion ou non.
+- Ajout d'un module de compatibilité avec l'add-on [TinyTooltip](https://mods.curse.com/addons/wow/268266-tinytooltip) pour que les préférences d'infobulle définies dans l'add-on soit appliquées aux infobulle de Total RP 3
+- Ajout d'une indication du nombre de charactères maximum pouvant être envoyé dans la fenêtre de dialogue de PNJ. — [Issue #101](https://wow.curseforge.com/projects/total-rp-3/issues/101)
+- Ajout d'un bouton pour réinitialiser le dictionnaire utilisé par le filtre de contenu mature. — [Issue #97](https://wow.curseforge.com/projects/total-rp-3/issues/97)
 
-## Précédents changements, pour la version 1.2.8
+## Corrections de bugs
 
-### Nouvelles fonctionnalités
-
-- Nous avons ajouté une option pour afficher les icônes des joueurs dans leur nom dans les fenêtres de discussion {link*chat_settings*Activer} — [Ticket #91](https://wow.curseforge.com/projects/total-rp-3/issues/91)
-
-![Interface\AddOns\totalRP3\resources\1_2_8_icons](512,128)
-
-### Ressources du patch 7.2 ajoutées
-
-- Nous avons ajoutés 996 nouvelles icônes (pour un total de 17 671 icônes disponibles).
-- Nous avons ajoutés 19 nouvelles images à utiliser dans votre description (pour un total de 449 images disponibles).
-- Nous avons ajoutés 124 nouvelles musiques des patchs 7.1 et 7.2 (pour un total de 2 868 musiques disponibles. À noter que l'ancienne liste de musiques contenait de nombreux doublons qui ont été nettoyés).
-
-### Correction de bugs
-
-- Correction d'une erreur avec les raccourcis clavier — [Ticket #89](https://wow.curseforge.com/projects/total-rp-3/issues/89)
-- Correction d'une erreur Lua dans le module pour l'add-on Prat pour les noms qui ne sont pas personnalisés — [Ticket #95](https://wow.curseforge.com/projects/total-rp-3/issues/95)
-
-### Autre améliorations
-
-- Nous avons supprimé les guillemets entourant le texte "Actuellement" dans l'infobulle (RP et HRP) — [Ticket #88](https://wow.curseforge.com/projects/total-rp-3/issues/88)
-- L'option de nettoyage des profils s'occupe également de couper les textes qui sont beaucoup trop longs — [Ticket #92](https://wow.curseforge.com/projects/total-rp-3/issues/92)
-- Nous avons retiré les parties de code en rapport avec notre poisson d'Avril :)
-
-]=]
+- Correction d'un problème d'alignement des labels des champs de personnalité.
+- Correction d'un problème qui coupait le lien à copier-coller dans le dialogue qui s'ouvre lorsque l'on clique sur un lien dans une description si un autre add-on avait indiqué une taille maximum pour le champ de texte avant Total RP 3 n'ouvre le dialogue. — [Issue #113](https://wow.curseforge.com/projects/total-rp-3/issues/113)
+- Correction d'un problème dans l'intégration avec l'add-on WIM — [Issue #108](https://wow.curseforge.com/projects/total-rp-3/issues/108)
+- Les librairies utilisées par Total RP 3 ont été mis-à-jour afin notamment de corrigé un problème avec certains menus.]=]
 }
 };
 

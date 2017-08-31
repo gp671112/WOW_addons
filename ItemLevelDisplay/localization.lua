@@ -35,6 +35,7 @@ L["Top Right"] = true
 L["Total compatible gems/Total sockets"] = true
 L["You can change this decision on a per character basis in configuration panel."] = true
 L["You can now choose if you want all your character share the same configuration or not."] = true
+
 L=l:NewLocale(me,"ptBR")
 if (L) then
 L["Appearance"] = "aparência"
@@ -70,6 +71,7 @@ L["Top Right"] = true
 L["Total compatible gems/Total sockets"] = "Total de gemas compatíveis / Total soquetes"
 L["You can change this decision on a per character basis in configuration panel."] = "Você pode alterar essa decisão com base no painel de configuração por personagem."
 L["You can now choose if you want all your character share the same configuration or not."] = "Agora você pode escolher se você quer toda a sua quota de caráter a mesma configuração ou não."
+
 return
 end
 L=l:NewLocale(me,"frFR")
@@ -107,6 +109,7 @@ L["Top Right"] = "En haut à droite"
 L["Total compatible gems/Total sockets"] = "Total des gemmes compatibles / Total prises"
 L["You can change this decision on a per character basis in configuration panel."] = "Vous pouvez modifier cette décision sur une base par caractère dans le panneau de configuration."
 L["You can now choose if you want all your character share the same configuration or not."] = "Vous pouvez maintenant choisir si vous voulez que tous vos parts de caractère la même configuration ou pas."
+
 return
 end
 L=l:NewLocale(me,"deDE")
@@ -144,6 +147,7 @@ L["Top Right"] = "Oben rechts"
 L["Total compatible gems/Total sockets"] = "Alle kompatiblen Edelsteine ​​/ Gesamtsockel"
 L["You can change this decision on a per character basis in configuration panel."] = "Sie können diese Entscheidung pro Charakter im Konfigurationsmenü ändern."
 L["You can now choose if you want all your character share the same configuration or not."] = "Sie können nun wählen, ob all Ihre Charaktere die gleichen Konfiguration verwenden oder nicht."
+
 return
 end
 L=l:NewLocale(me,"itIT")
@@ -181,6 +185,7 @@ L["Top Right"] = "In alto a destra"
 L["Total compatible gems/Total sockets"] = "Numero gemme compatibili/Numero incavi"
 L["You can change this decision on a per character basis in configuration panel."] = "Potrai cambiare questa decisone dal pannello di configurazione"
 L["You can now choose if you want all your character share the same configuration or not."] = "Adesso è possibile scegliere fra una configurazione globale e uno specifica per personaggio"
+
 return
 end
 L=l:NewLocale(me,"koKR")
@@ -218,6 +223,7 @@ L["Top Right"] = "오른쪽 위"
 L["Total compatible gems/Total sockets"] = "전체 호환 보석 / 전체 보석홈"
 L["You can change this decision on a per character basis in configuration panel."] = "캐릭터 별 설정 패널에서 이 설정을 변경할 수 있습니다."
 L["You can now choose if you want all your character share the same configuration or not."] = "모든 캐릭터가 같은 설정을 공유할지 선택할 수 있습니다."
+
 return
 end
 L=l:NewLocale(me,"esMX")
@@ -255,6 +261,7 @@ L["Top Right"] = "Arriba a la derecha"
 L["Total compatible gems/Total sockets"] = "Total de gemas compatibles / sockets totales"
 L["You can change this decision on a per character basis in configuration panel."] = "Usted puede cambiar esta decisión en función de cada personaje en el panel de configuración."
 L["You can now choose if you want all your character share the same configuration or not."] = "Ahora puede elegir si desea que todo su parte el carácter de la misma configuración o no."
+
 return
 end
 L=l:NewLocale(me,"ruRU")
@@ -292,6 +299,7 @@ L["Top Right"] = "Вверху справа"
 L["Total compatible gems/Total sockets"] = "Всего совместимые драгоценные камни / Всего розетки"
 L["You can change this decision on a per character basis in configuration panel."] = "Вы можете изменить это решение на на символ основе в панели конфигурации."
 L["You can now choose if you want all your character share the same configuration or not."] = "Теперь вы можете выбрать, если вы хотите, чтобы все свою долю характер и ту же конфигурацию или нет."
+
 return
 end
 L=l:NewLocale(me,"zhCN")
@@ -329,6 +337,7 @@ L["Top Right"] = "右上"
 L["Total compatible gems/Total sockets"] = "总兼容宝石数/总插槽数"
 L["You can change this decision on a per character basis in configuration panel."] = "您仍然可以基于每个角色在界面配置面板中再次更改这一选项。"
 L["You can now choose if you want all your character share the same configuration or not."] = "您现在可以选择，是否想要所有的角色共用相同配置。"
+
 return
 end
 L=l:NewLocale(me,"esES")
@@ -366,6 +375,7 @@ L["Top Right"] = "Arriba a la derecha"
 L["Total compatible gems/Total sockets"] = "Total de gemas compatibles / sockets totales"
 L["You can change this decision on a per character basis in configuration panel."] = "Usted puede cambiar esta decisión en función de cada personaje en el panel de configuración."
 L["You can now choose if you want all your character share the same configuration or not."] = "Ahora puede elegir si desea que todo su parte el carácter de la misma configuración o no."
+
 return
 end
 L=l:NewLocale(me,"zhTW")
@@ -403,5 +413,6 @@ L["Top Right"] = "右上"
 L["Total compatible gems/Total sockets"] = "總相容寶石/總插座"
 L["You can change this decision on a per character basis in configuration panel."] = "你可以在配置面板基於個別角色改變此決定。"
 L["You can now choose if you want all your character share the same configuration or not."] = "現在你可以選擇是否要所有角色共享相同的配置。"
+
 return
 end

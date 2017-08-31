@@ -19,9 +19,9 @@ local strconcat=strconcat
 local tostring=tostring
 local _G=_G -- Unmodified env
 local dprint=function() end
---@debug@
+--[===[@debug@
 -- Checking packager behaviour
---@end-debug@
+--@end-debug@]===]
 --[===[@debug@
 LoadAddOn("LibDebug")
 LoadAddOn("Blizzard_DebugTools")
@@ -2297,6 +2297,3 @@ do
 	end
 end
 L=LibStub("AceLocale-3.0"):GetLocale(me,true)
---@do-not-package@
--- Packager stil not honoring this tag
---@end-do-not-package@

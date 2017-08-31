@@ -1,28 +1,14 @@
-## Interface: 70200
+## Interface: 70300
 ## LoadOnDemand: 1
-#@non-debug@
-## Title: Atlas |r|cFF0099FF[Scenarios]|r
-## Title-deDE: Atlas |r|cFF0099FF[Szenarien]|r
-## Title-ruRU: Atlas |r|cFF0099FF[Сценарии]|r
-## Title-zhCN: Atlas |r|cFF0099FF[场景战役]|r
-## Title-zhTW: |r|cFF0099FF[地圖]|rAtlas 情境地圖
-## Notes: Scenarios Maps
-## Notes-deDE: Szenariokarten
-## Notes-esES: Mapas de gestas
-## Notes-esMX: Mapas de gestas
-## Notes-ruRU: Карты сценариев
-## Notes-zhCN: 场景战役地图
-## Notes-zhTW: Atlas 史詩情境事件模式地圖插件
-#@end-non-debug@
-#@debug@
-# # ## Title: Lib: Scenarios
-# # ## Notes: A library to get scenario name, step name, and step description with specified language.
-#@end-debug@
+## Title: Lib: Scenarios
+## Title-zhCN: Lib: Scenarios
+## Notes: A library to get scenario name, step name, and step description with specified language.
+## Notes-zhCN: 获取特定语言场景战役名称，步骤名称，和步骤描述的库。
 ## Author: Arith
 ## X-eMail: arithmandarjp at yahoo.co.jp
 ## X-Category: Library
 ## X-License: MIT
-## X-Date: 2017-03-26T18:45:55Z
+## X-Date: 2017-08-30T14:13:33Z
 ## X-Website: https://wow.curseforge.com/addons/lib-scenarios/
 
 LibStub\LibStub.lua

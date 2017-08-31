@@ -31,9 +31,9 @@ local globals = TRP3_API.globals;
 local loc = TRP3_API.locale.getText;
 local floor, tinsert, pairs, wipe, assert, _G, tostring, table, type, strconcat = floor, tinsert, pairs, wipe, assert, _G, tostring, table, type, strconcat;
 local math = math;
-local MouseIsOver, CreateFrame, ToggleDropDownMenu = MouseIsOver, CreateFrame, Lib_ToggleDropDownMenu;
-local UIDropDownMenu_Initialize, UIDropDownMenu_CreateInfo, UIDropDownMenu_AddButton = Lib_UIDropDownMenu_Initialize, Lib_UIDropDownMenu_CreateInfo, Lib_UIDropDownMenu_AddButton;
-local CloseDropDownMenus = Lib_CloseDropDownMenus;
+local MouseIsOver, CreateFrame, ToggleDropDownMenu = MouseIsOver, CreateFrame, L_ToggleDropDownMenu;
+local UIDropDownMenu_Initialize, UIDropDownMenu_CreateInfo, UIDropDownMenu_AddButton = L_UIDropDownMenu_Initialize, L_UIDropDownMenu_CreateInfo, L_UIDropDownMenu_AddButton;
+local CloseDropDownMenus = L_CloseDropDownMenus;
 local TRP3_MainTooltip, TRP3_MainTooltipTextRight1, TRP3_MainTooltipTextLeft1, TRP3_MainTooltipTextLeft2 = TRP3_MainTooltip, TRP3_MainTooltipTextRight1, TRP3_MainTooltipTextLeft1, TRP3_MainTooltipTextLeft2;
 local shiftDown = IsShiftKeyDown;
 local UnitIsBattlePetCompanion, UnitIsUnit, UnitIsOtherPlayersPet, UnitIsOtherPlayersBattlePet = UnitIsBattlePetCompanion, UnitIsUnit, UnitIsOtherPlayersPet, UnitIsOtherPlayersBattlePet;
@@ -118,7 +118,7 @@ local function openDropDown(anchoredFrame, values, callback, space, addCancel)
 		dropDownFrame = CreateFrame("Frame", DROPDOWN_FRAME, UIParent, "UIDropDownMenuTemplate");
 	end
 
-	if _G["Lib_DropDownList1"]:IsVisible() then
+	if _G["L_DropDownList1"]:IsVisible() then
 		CloseDropDownMenus();
 		return;
 	end
@@ -161,10 +161,10 @@ local function openDropDown(anchoredFrame, values, callback, space, addCancel)
 						info.menuList = value;
 					elseif value ~= nil then
 						info.func = function()
+							anchoredFrame:GetParent().selectedValue = value;
 							if callback then
 								callback(value, anchoredFrame);
 							end
-							anchoredFrame:GetParent().selectedValue = value;
 							if level > 1 then
 								ToggleDropDownMenu(nil, nil, dropDownFrame);
 							end
@@ -941,6 +941,31 @@ end
 -- Sounds
 --*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
+local PlaySoundFile = PlaySoundFile;
+--- Patch 7.3 compatibility preparation
+local PlaySound = PlaySound;
+
+if select(4, GetBuildInfo()) == 70300 then
+	-- 7.3 uses IDs instead of sound strings. This table is mapping the IDs we need to use instead
+	local FILE_IDS_TO_OLD_PATHS = {
+		["QUESTLOGOPEN"] = 844, -- SOUNDKIT.IG_QUEST_LOG_OPEN
+		["QUESTLOGCLOSE"] = 845, -- SOUNDKIT.IG_QUEST_LOG_CLOSE
+		["igMainMenuOptionCheckBoxOn"] = 856, -- SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON
+		["gsCharacterSelection"] = 856, -- SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON (this one no longer exists)
+		["igCharacterInfoTab"] = 841, -- SOUNDKIT.IG_CHARACTER_INFO_TAB (this one no longer exists)
+		["UChatScrollButton"] = 1115, -- SOUNDKIT.U_CHAT_SCROLL_BUTTON
+		["AchievementMenuClose"] = 13833, -- SOUNDKIT.ACHIEVEMENT_MENU_CLOSE
+		["AchievementMenuOpen"] = 13832, -- SOUNDKIT.ACHIEVEMENT_MENU_OPEN
+		["GAMEDIALOGCLOSE"] = 850, -- SOUNDKIT.IG_MAINMENU_OPEN
+		["GAMEDIALOGOPEN"] = 851, -- SOUNDKIT.IG_MAINMENU_CLOSE
+	}
+
+	local oldPlaySound = PlaySound;
+	PlaySound = function(sound)
+		oldPlaySound(FILE_IDS_TO_OLD_PATHS[sound] or sound);
+	end
+end
+
 function TRP3_API.ui.misc.playUISound(pathToSound, url)
 	if getConfigValue and getConfigValue(CONFIG_UI_SOUNDS) then
 		if url then
@@ -953,7 +978,7 @@ end
 
 function TRP3_API.ui.misc.playSoundKit(soundID, channel)
 	if getConfigValue and getConfigValue(CONFIG_UI_SOUNDS) then
-		local willPlay, handlerID = PlaySoundKitID(soundID, channel or "SFX");
+		local willPlay, handlerID = PlaySound(soundID, channel or "SFX");
 		return handlerID;
 	end
 end

@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt 284 2017-07-15 13:48:50Z arith $
+$Id: ChangeLog.txt 287 2017-08-16 15:06:51Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
@@ -14,6 +14,14 @@ Known Issues:
 ==============
 = Change Log =
 ==============
+
+v1.42.05 (Aug. 16, 2017)
+------------------------
+- Added exception handling for maps' auto-selection while player is in Dalaran. 
+  If Dalaran is in Northrend, then the selection will be Violet Hold.
+- Lib update: Ace3
+- Localization update:
+  - Russian (BLizzatron)
 
 v1.42.04 (Jul. 15, 2017)
 ------------------------

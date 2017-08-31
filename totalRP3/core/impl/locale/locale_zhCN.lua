@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
 -- Total RP 3
--- Chinese locale
+-- Simplified Chinese locale
 --	---------------------------------------------------------------------------
 --	Copyright 2014 Sylvain Cossement (telkostrasz@telkostrasz.be)
 --
@@ -17,9 +17,11 @@
 --	limitations under the License.
 ----------------------------------------------------------------------------------
 
+-- "Chinese" to "Simplified Chinese" - Paul Corlay
+
 local LOCALE = {
 	locale = "zhCN",
-	localeText = "Chinese",
+	localeText = "Simplified Chinese",
     localeContent =
 {
 	["ABOUT_TITLE"] = "关于",
@@ -121,14 +123,38 @@ local LOCALE = {
 	["CO_GENERAL_UI_SOUNDS_TT"] = "激活界面音效（当打开窗口，切换选项卡，点击按键时）",
 	["CO_GLANCE_LOCK"] = "锁定栏",
 	["CO_GLANCE_LOCK_TT"] = "防止栏被拖动",
+	["CO_MINIMAP_BUTTON"] = "小地图按钮",
+	["CO_MINIMAP_BUTTON_FRAME"] = "框架锚点",
+	["CO_MINIMAP_BUTTON_RESET"] = "重置位置",
+	["CO_MINIMAP_BUTTON_RESET_BUTTON"] = "重置",
+	["CO_MINIMAP_BUTTON_SHOW_TITLE"] = "显示小地图按钮",
+	["CO_TOOLBAR"] = "框架设置",
 	["COM_LIST"] = "命令列表：",
 	["COM_RESET_RESET"] = "界面位置已经被重置！",
 	["COM_RESET_USAGE"] = "通途：重置帧数。",
 	["COM_SWITCH_USAGE"] = "用途：重置帧数或者转换工具栏。",
 	["GEN_WELCOME_MESSAGE"] = "感谢您使用Total RP 3 (v %s)！祝您玩的开心！",
+	["REG_COMPANIONS"] = "伙伴",
+	["REG_LIST_IGNORE_EMPTY"] = "尚无忽略角色",
+	["REG_LIST_IGNORE_TITLE"] = "忽略列表",
+	["REG_LIST_NAME"] = "角色名字",
+	["REG_LIST_PET_MASTER"] = "主人姓名",
+	["REG_LIST_PET_NAME"] = "伙伴姓名",
+	["REG_LIST_PET_TYPE"] = "伙伴类型",
+	["REG_PLAYER"] = "角色",
+	["REG_PLAYER_ABOUT"] = "关于",
+	["REG_PLAYER_AGE"] = "年龄",
 	["REG_PLAYER_EYE"] = "眼睛的颜色",
 	["REG_PLAYER_FIRSTNAME"] = "名字",
 	["REG_PLAYER_FULLTITLE"] = "完整标题",
+	["REG_PLAYER_LASTNAME"] = "姓",
+	["REG_PLAYER_RACE"] = "种族",
+	["REG_PLAYER_REGISTER"] = "名录信息",
+	["REG_PLAYER_TITLE"] = "头衔",
+	["REG_PLAYER_TITLE_TT"] = [=[你的角色的常用头衔，这是完整头衔的缩写版。
+例如你的完整头衔是：冬天城堡爵士、鲜血男爵、暮色森林的守夜人、孤独的游侠。
+则常用头衔为：爵士、男爵、守夜人、游侠。]=],
+	["REG_PLAYER_WEIGHT"] = "体型",
 	["TB_STATUS"] = "玩家",
 	["TB_SWITCH_CAPE_2"] = "隐藏披风",
 	["TB_SWITCH_HELM_1"] = "显示头盔",

@@ -1,12 +1,18 @@
-tag fade90da1dc9901f7ee8ee23de40dfe47e57bdc2 2.0.15
+tag 058495a3b8d9e56fdd6b73b699eab2eb585f032c 2.0.16
 Author:	Alar of Runetotem <alar@aspide.it>
-Date:	Tue Mar 28 13:06:43 2017 +0200
+Date:	Tue Aug 29 19:34:35 2017 +0200
 
-Toc updated to 70200
+Toc updated to 70300
 
-commit e6752586c661070888740986dece0e707c9bb64a
+commit ec95ed41866867787cc80baaef77e465aa19d120
 Author: Alar of Runetotem <alar@aspide.it>
-Date:   Tue Mar 28 13:06:34 2017 +0200
+Date:   Tue Aug 29 10:51:50 2017 +0200
 
-    Toc updated to 70200
+    Removed error, still not working
+
+commit 5a16a2175ae068d71c8d3576808b70d45ad75c61
+Author: Alar of Runetotem <alar@aspide.it>
+Date:   Tue Aug 29 10:51:17 2017 +0200
+
+    Toc bump
 

@@ -1,4 +1,4 @@
-## Interface: 70200
+## Interface: 70300
 #@non-debug@
 ## Title: Atlas |r|cFF0099FF[Scenarios]|r
 ## Title-deDE: Atlas |r|cFF0099FF[Szenarien]|r
@@ -19,10 +19,10 @@
 # ## Notes: Scenarios Maps
 # ## Notes-zhTW: Atlas 史詩情境事件模式地圖插件
 #@end-debug@
-## Version: v1.42.00
+## Version: v1.43.00
 ## OptionalDeps: Lib-Scenarios
 ## Author: arith
-## X-Date: 2017-06-29T8:14:23Z
+## X-Date: 2017-08-30T14:13:33Z
 ## X-Email: atlas.addon at gmail.com
 ## X-Website: http://www.atlasmod.com
 ## X-Category: Map

@@ -1,8 +1,8 @@
-## Interface: 70200
+## Interface: 70300
 ## Title: PetJournal Enhanced
 ## Notes: Enhances the Pet Journal with various functions and filters.
 ## Author: nullberri
-## Version: 2.9.27
+## Version: 2.9.29
 ## LoadOnDemand: 1
 ## LoadWith: Blizzard_Collections
 ## SavedVariables: PetJournalEnhancedDB

@@ -45,14 +45,14 @@ TRP3_API = {
 		addon_name_me = "Total RP 3",
 		addon_id_length = 15,
 
-		version = 30,
+		version = 32,
 
 		--[===[@debug@
 		version_display = "-dev",
 		--@end-debug@]===]
 
 		--@non-debug@
-		version_display = "1.2.8.1",
+		version_display = "1.2.9.1",
 	  	--@end-non-debug@
 
 

@@ -1,4 +1,4 @@
-$Id: ChangeLog.txt 287 2017-08-16 15:06:51Z arith $
+$Id: ChangeLog.txt 297 2017-09-19 15:10:04Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
@@ -14,6 +14,24 @@ Known Issues:
 ==============
 = Change Log =
 ==============
+
+v1.43.03 (Sep. 19, 2017)
+------------------------
+- Fixed search function issue
+- Fixed frame's scale won't get adjusted after a new login
+
+v1.43.02 (Sep. 19, 2017)
+------------------------
+- Updated LibDialog and fixed issue in PlaySound function call
+
+v1.43.01 (Aug. 31, 2017)
+------------------------
+- Libraries updtae: LibUIDropDownMenu, LibDialog (temporary fixed)
+
+v1.43.00 (Aug. 30, 2017)
+------------------------
+- ToC update to support WoW 7.3.0
+- Libraries update: Aces, LibBabble-Boss, LibBabble-SubZone, LibUIDropDownMenu
 
 v1.42.05 (Aug. 16, 2017)
 ------------------------

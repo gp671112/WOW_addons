@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(1897, "DBM-TombofSargeras", nil, 875)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 16586 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 17189 $"):sub(12, -3))
 mod:SetCreatureID(118289)
 mod:SetEncounterID(2052)
 mod:SetZone()
@@ -22,13 +22,6 @@ mod:RegisterEventsInCombat(
 	"UNIT_SPELLCAST_SUCCEEDED boss1"
 )
 
---TODO: range frame? seems impractical at moment, if someone shows up range frame it's already too late.
---TODO, new voices, "Fel infusion" and "Light Infusion" and "Jump In Pit"
---TODO, Better taunting system for hammers. I suspect a two camp strat with tank in appropriate camp taunting during hammer cast
---TODO, some kind of shield health tracker
---TODO, wrath of the creators stack counter for when stacks too high and about to wipe
---TODO, Mass instability is in combat log now, but not enough data to fix timers for it yet (except for first on pull)
---TODO, some kind of relevant warning for Spont Fragmentation
 --[[
 (ability.id = 235267 or ability.id = 235271 or ability.id = 241635 or ability.id = 241636) and type = "begincast" or
 (ability.id = 239153 or ability.id = 248812) and type = "cast" or
@@ -40,12 +33,14 @@ local warnMassShit					= mod:NewCountAnnounce(235267, 2)
 local warnInfusion					= mod:NewCastAnnounce(235271, 3)
 --Stage Two
 local warnEssenceFragments			= mod:NewSpellAnnounce(236061, 2)
+--Mythic
+--local warnSpontFrag					= mod:NewTargetAnnounce(239153, 4)
 
 --Stage One: Divide and Conquer
 --local specWarnInfusion				= mod:NewSpecialWarningSpell(235271, nil, nil, nil, 2, 2)
 local yellInfusion					= mod:NewPosYell(235271, DBM_CORE_AUTO_YELL_CUSTOM_POSITION)
-local specWarnFelInfusion			= mod:NewSpecialWarningYou(235240, nil, nil, nil, 1, 7)
-local specWarnLightInfusion			= mod:NewSpecialWarningYou(235213, nil, nil, nil, 1, 7)
+local specWarnFelInfusion			= mod:NewSpecialWarningYouPos(235240, nil, nil, nil, 1, 7)
+local specWarnLightInfusion			= mod:NewSpecialWarningYouPos(235213, nil, nil, nil, 1, 7)
 local specWarnUnstableSoul			= mod:NewSpecialWarningMoveTo(235117, nil, nil, nil, 3, 7)
 local yellUnstableSoul				= mod:NewShortFadesYell(235117)--While learning the fight this will be spammy, but also nessesary
 local specWarnLightHammer			= mod:NewSpecialWarningCount(241635, nil, nil, nil, 2, 2)
@@ -53,6 +48,10 @@ local specWarnFelhammer				= mod:NewSpecialWarningCount(241636, nil, nil, nil, 2
 local specWarnGTFO					= mod:NewSpecialWarningGTFO(238028, nil, nil, nil, 1, 2)
 --Stage Two
 local specWarnWrathofCreators		= mod:NewSpecialWarningInterrupt(234891, "HasInterrupt", nil, nil, 1, 2)
+--
+local specWarnSpontFrag				= mod:NewSpecialWarningCount(239153, false, nil, nil, 2, 2)
+--local yellSpontFrag					= mod:NewShortYell(239153)
+
 
 --Stage One: Divide and Conquer
 local timerInfusionCD				= mod:NewNextCountTimer(37.9, 235271, nil, nil, nil, 3, nil, DBM_CORE_DEADLY_ICON)
@@ -70,21 +69,10 @@ local countdownBomb					= mod:NewCountdown("AltTwo", 235117)
 local countdownLightHammer			= mod:NewCountdown(18, 241635)
 local countdownFelHammer			= mod:NewCountdown("Alt18", 241636)
 
---Stage One: Divide and Conquer
---local voiceInfusion					= mod:NewVoice(235271)--specialsoon
 local voicePhaseChange				= mod:NewVoice(nil, nil, DBM_CORE_AUTO_VOICE2_OPTION_TEXT)
-local voiceFelInfusion				= mod:NewVoice(235240)--felinfusion
-local voiceLightInfusion			= mod:NewVoice(235213)--lightinfusion
-local voiceUnsableSoul				= mod:NewVoice(235117)--jumpinpit
-local voiceLightHammer				= mod:NewVoice(241635)--helpsoak/shockwave
-local voiceFelHammer				= mod:NewVoice(241636)--helpsoak/shockwave
-local voiceGTFO						= mod:NewVoice(238028, nil, DBM_CORE_AUTO_VOICE4_OPTION_TEXT)--runaway
---Stage Two
-local voiceWrathofCreators			= mod:NewVoice(234891, "HasInterrupt")--kickcast
 
 mod:AddSetIconOption("SetIconOnInfusion", 235271, true)
 mod:AddInfoFrameOption(235117, true)
---mod:AddRangeFrameOption("5/8/15")
 
 mod.vb.unstableSoulCount = 0
 mod.vb.hammerCount = 0
@@ -92,10 +80,10 @@ mod.vb.infusionCount = 0
 mod.vb.spontFragmentationCount = 0
 mod.vb.massShitCount = 0
 mod.vb.shieldActive = false
-local AegynnsWard = GetSpellInfo(236420)
-local felDebuff, lightDebuff = GetSpellInfo(235240), GetSpellInfo(235213)
+local AegynnsWard, felDebuff, lightDebuff, shieldname, unstableSoul = DBM:GetSpellInfo(236420), DBM:GetSpellInfo(235240), DBM:GetSpellInfo(235213), DBM:GetSpellInfo(235028), DBM:GetSpellInfo(235117)
 
 function mod:OnCombatStart(delay)
+	AegynnsWard, felDebuff, lightDebuff, shieldname, unstableSoul = DBM:GetSpellInfo(236420), DBM:GetSpellInfo(235240), DBM:GetSpellInfo(235213), DBM:GetSpellInfo(235028), DBM:GetSpellInfo(235117)
 	self.vb.shieldActive = false
 	self.vb.unstableSoulCount = 0
 	self.vb.hammerCount = 2
@@ -120,9 +108,6 @@ function mod:OnCombatStart(delay)
 end
 
 function mod:OnCombatEnd()
---	if self.Options.RangeFrame then
---		DBM.RangeCheck:Hide()
---	end
 	if self.Options.InfoFrame then
 		DBM.InfoFrame:Hide()
 	end
@@ -132,7 +117,6 @@ function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
 	if spellId == 235271 then
 		warnInfusion:Show()
-		--voiceInfusion:Play("specialsoon")
 		if self.vb.infusionCount == 1 then
 			timerInfusionCD:Start(38, 2)
 		end
@@ -144,9 +128,9 @@ function mod:SPELL_CAST_START(args)
 			countdownFelHammer:Start(18)
 		end
 		if UnitDebuff("player", lightDebuff) then
-			voiceLightHammer:Play("helpsoak")
+			specWarnLightHammer:Play("helpsoak")
 		else
-			voiceLightHammer:Play("shockwave")
+			specWarnLightHammer:Play("shockwave")
 		end
 	elseif spellId == 241636 then--Fel Hammer
 		self.vb.hammerCount = self.vb.hammerCount + 1
@@ -156,9 +140,9 @@ function mod:SPELL_CAST_START(args)
 			countdownLightHammer:Start(18)
 		end
 		if UnitDebuff("player", felDebuff) then
-			voiceFelHammer:Play("helpsoak")
+			specWarnFelhammer:Play("helpsoak")
 		else
-			voiceFelHammer:Play("shockwave")
+			specWarnFelhammer:Play("shockwave")
 		end
 	elseif spellId == 235267 then
 		self.vb.massShitCount = self.vb.massShitCount + 1
@@ -193,8 +177,8 @@ function mod:SPELL_AURA_APPLIED(args)
 	local spellId = args.spellId
 	if spellId == 235240 or spellId == 240210 then--Fel Infusion
 		if args:IsPlayer() then
-			specWarnFelInfusion:Show()
-			voiceFelInfusion:Play("felinfusion")
+			specWarnFelInfusion:Show(self:IconNumToTexture(4))
+			specWarnFelInfusion:Play("felinfusion")
 			if spellId == 235213 then--Not LFR
 				yellInfusion:Yell(4, "", 4)
 			end
@@ -205,8 +189,8 @@ function mod:SPELL_AURA_APPLIED(args)
 		end
 	elseif spellId == 235213 or spellId == 240218 then--Light Infusion
 		if args:IsPlayer() then
-			specWarnLightInfusion:Show()
-			voiceLightInfusion:Play("lightinfusion")
+			specWarnLightInfusion:Show(self:IconNumToTexture(1))
+			specWarnLightInfusion:Play("lightinfusion")
 			if spellId == 235213 then--Not LFR
 				yellInfusion:Yell(1, "", 1)
 			end
@@ -228,12 +212,12 @@ function mod:SPELL_AURA_APPLIED(args)
 				yellUnstableSoul:Countdown(8)
 				countdownBomb:Start(8)
 				if self:IsEasy() then
-					voiceUnsableSoul:Schedule(5.75, "jumpinpit")
+					specWarnUnstableSoul:ScheduleVoice(5.75, "jumpinpit")
 				else
-					voiceUnsableSoul:Schedule(6.75, "jumpinpit")
+					specWarnUnstableSoul:ScheduleVoice(6.75, "jumpinpit")
 				end
 			else
-				voiceUnsableSoul:Play("defensive")--Whatever, doens't matter in LFR. LFR doesn't need Aegwynn's Ward/pit
+				specWarnUnstableSoul:Play("defensive")--Whatever, doens't matter in LFR. LFR doesn't need Aegwynn's Ward/pit
 			end
 		end
 		if self.Options.InfoFrame and not DBM.InfoFrame:IsShown() and not self.vb.shieldActive then
@@ -243,7 +227,6 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif spellId == 236061 then
 		warnEssenceFragments:Show()
 	elseif spellId == 234891 then
-		local shieldname = GetSpellInfo(235028)
 		self.vb.shieldActive = true
 		if self.Options.InfoFrame then
 			DBM.InfoFrame:SetHeader(shieldname)
@@ -255,25 +238,10 @@ mod.SPELL_AURA_REFRESH = mod.SPELL_AURA_APPLIED
 
 function mod:SPELL_AURA_REMOVED(args)
 	local spellId = args.spellId
-	if spellId == 235240 then--Fel Infusion
-		--[[if self.Options.SetIconOnInfusion then
-			local uId = DBM:GetRaidUnitId(args.destName)
-			local currentIcon = GetRaidTargetIndex(uId) or 0
-			if self:IsTanking(uId) and currentIcon ~= 1 then--Fel infusion removed but light infusion icon is already set, don't touch it
-				self:SetIcon(args.destName, 0)
-			end
-		end--]]
-	elseif spellId == 235213 then--Light Infusion
-		--[[if self.Options.SetIconOnInfusion then
-			local uId = DBM:GetRaidUnitId(args.destName)
-			local currentIcon = GetRaidTargetIndex(uId) or 0
-			if self:IsTanking(uId) and currentIcon ~= 4 then--Light infusion removed but fel infusion icon is already set, don't touch it
-				self:SetIcon(args.destName, 0)
-			end
-		end-]]
-	elseif spellId == 235117 or spellId == 240209 or spellId == 243276 then
+	if spellId == 235117 or spellId == 240209 or spellId == 243276 then
 		self.vb.unstableSoulCount = self.vb.unstableSoulCount - 1
 		if args:IsPlayer() then
+			specWarnUnstableSoul:Cancel()
 			yellUnstableSoul:Cancel()
 			countdownBomb:Cancel()
 		end
@@ -282,9 +250,17 @@ function mod:SPELL_AURA_REMOVED(args)
 		end
 	elseif spellId == 235028 then--Bulwark Removed
 		specWarnWrathofCreators:Show(args.destName)
-		voiceWrathofCreators:Play("kickcast")
-	elseif spellId == 234891 then--Wrath Interrupted
+		specWarnWrathofCreators:Play("kickcast")
 		self.vb.shieldActive = false
+		if self.Options.InfoFrame then
+			if self.vb.unstableSoulCount > 0 then
+				DBM.InfoFrame:SetHeader(unstableSoul)
+				DBM.InfoFrame:Show(10, "playerdebuffremaining", unstableSoul)
+			else
+				DBM.InfoFrame:Hide()
+			end
+		end
+	elseif spellId == 234891 then--Wrath Interrupted
 		self.vb.hammerCount = 0
 		self.vb.infusionCount = 0
 		self.vb.massShitCount = 0
@@ -304,18 +280,13 @@ function mod:SPELL_AURA_REMOVED(args)
 				timerSpontFragmentationCD:Start(8, 1)
 			end
 		end
-		if self.Options.InfoFrame then
-			local spellName = GetSpellInfo(235117)
-			DBM.InfoFrame:SetHeader(spellName)
-			DBM.InfoFrame:Show(10, "playerdebuffremaining", spellName)
-		end
 	end
 end
 
 function mod:SPELL_PERIODIC_DAMAGE(_, _, _, _, destGUID, _, _, _, spellId)
 	if (spellId == 238408 or spellId == 238028) and destGUID == UnitGUID("player") and self:AntiSpam(2, 1) then
 		specWarnGTFO:Show()
-		voiceGTFO:Play("runaway")
+		specWarnGTFO:Play("runaway")
 	end
 end
 mod.SPELL_PERIODIC_MISSED = mod.SPELL_PERIODIC_DAMAGE
@@ -323,6 +294,8 @@ mod.SPELL_PERIODIC_MISSED = mod.SPELL_PERIODIC_DAMAGE
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, _, spellId)
 	if spellId == 239153 then
 		self.vb.spontFragmentationCount = self.vb.spontFragmentationCount + 1
+		specWarnSpontFrag:Show(self.vb.spontFragmentationCount)
+		specWarnSpontFrag:Play("watchstep")
 		if self.vb.spontFragmentationCount < 4 then
 			timerSpontFragmentationCD:Start(nil, self.vb.spontFragmentationCount+1)
 		end

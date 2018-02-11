@@ -1,6 +1,6 @@
 ﻿-- Pawn by Vger-Azjol-Nerub
 -- www.vgermods.com
--- © 2006-2017 Green Eclipse.  This mod is released under the Creative Commons Attribution-NonCommercial-NoDerivs 3.0 license.
+-- © 2006-2018 Green Eclipse.  This mod is released under the Creative Commons Attribution-NonCommercial-NoDerivs 3.0 license.
 -- See Readme.htm for more information.
 -- 
 -- Gem information
@@ -300,6 +300,20 @@ local PawnGemData110Rare =
 
 
 --========================================
+-- Level 110 crafted epic prismatic gems
+--========================================
+local PawnGemData110Epic =
+{
+
+{ 151580, "CritRating", 200 }, -- Deadly Deep Chemirine
+{ 151583, "HasteRating", 200 }, -- Quick Lightsphene
+{ 151584, "MasteryRating", 200 }, -- Masterful Argulite
+{ 151585, "Versatility", 200 }, -- Versatile Labradorite
+
+}
+
+
+--========================================
 
 -- The master list of all tables of Pawn gem data
 
@@ -313,7 +327,8 @@ local PawnGemData110Rare =
 
 PawnGemQualityLevels =
 {
-	{ 905, PawnGemData110Rare }, -- Higher than Legion world bosses
+	{ 945, PawnGemData110Epic }, -- Heroic Antorus
+	{ 915, PawnGemData110Rare }, -- Heroic Tomb of Sargeras / higher than new Relinquished gear
 	{ 755, PawnGemData110Uncommon }, -- Higher than Mythic Hellfire Citadel gear
 	{ 695, PawnGemData100Epic }, -- Warlords of Draenor Mythic Blackrock Foundry / Heroic Hellfire Citadel
 	{ 680, PawnGemData100Rare }, -- Warlords of Draenor Mythic Highmaul / Heroic Blackrock Foundry / Raid Finder Hellfire Citadel end bosses

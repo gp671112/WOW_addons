@@ -1,3 +1,109 @@
+v1.14.14 01/17/2018
+[Fix]Fix artifact string export issue caused by 7.3.5 changes
+
+v1.14.13 01/04/2018
+[UI]Show T20 and T21 on main screen. T19 still accessible in the option panel
+[Fix]Fix Amanthul detection for legendaries 
+
+v1.14.12 12/12/2017
+[Fix]Fix NC issue with off hand
+
+v1.14.11 11/29/2017
+[UI]updtate ilvl max threshold to 1k
+[UI]Set ilvl max to 1k if it was at 999
+
+v1.14.10 11/08/2017
+[UI]Auto-simc format change
+[Fix]Exclude amanthul from leg count
+
+v1.14.9 11/03/2017
+[UI]Auto-simc format change
+[Fix]Shadow priest relic fix
+
+v1.14.8 09/20/2017
+[UI]New crucible export choice : export all combination of the current shown tree
+[UI]Keep window position when changing module
+[Code]Implement new crucible export format
+[Fix]Reset crucible string when switching between one tree / full weapon
+
+v1.14.7 09/13/2017
+[Fix]Fix Crucible export
+
+v1.14.6 09/13/2017
+[Fix]Fix Crucible export
+[Code]Cleanup
+
+v1.14.5 09/04/2017
+[UI]Added an option for 1 main stat gem
+[Fix]Fix NC T2 icon
+
+v1.14.4 09/04/2017
+[UI]added more crucible options
+[UI]added 7.3 gems
+[Fix]added t21 to autosimc export
+
+v1.14.3 08/31/2017
+[UI]Added an option for small UI (option panel)
+[UI]Added a way to add simc parameters (option panel)
+[Fix]Fix crucible stuff
+[FIX]Added some debug text for T21
+[Code]cleanup
+
+v1.14.1 08/30/2017
+[UI]Netherlight Crucible generator
+[UI]Add T21 (only in the option frame)
+[Fix]Fixed a number of wrongly labelled relics
+[Code]toc update
+
+v1.13.3 08/08/2017
+[Fix]Fixed size of an otpion that would sometimes cut itself
+[Fix]Fixed timewalking items
+
+v1.13.2 07/06/2017
+[Fix]Fix autosimc export
+
+v1.13.1 07/06/2017
+[UI]Added an option to add gear from a link to permut
+[FIX]Fix copy names with weird caracters
+[FIX]Fix items with multiple gem slots
+[FIX]Fix ilvl threshold for equiped items
+[Code]Added security to some places where you get lua error in some rare cases
+
+v1.12.5 06/28/2017
+[FIX]Corrected artifact in off-hand
+[UI]Added TOS relics
+
+v1.12.4 06/07/2017
+[UI]Added T20 selection
+[UI]Added tier print for autosimc export
+[FIX]Option pannel error with replace checkbox
+
+v1.12.3 05/31/2017
+[UI]Added an artifact generator/comparison
+[UI]Added more classes to relic comparison
+[UI]Added report type selection near generate button
+[UI]Added default report types for relics and talents in option pannel
+[CODE]Update artifact lib
+[CODE]Added some more security check for atifact
+[CODE]Added some more security check when 3rd relic slot is not unlocked
+[FIX]Show an error when no profiles printed
+
+v1.11.1 05/13/2017
+[FIX]Fix generation
+
+v1.11 05/12/2017
+[UI]Added command line support to pre-select an entire slot
+[UI]Added an option panel to personalize default parameters
+[FIX]Fixed Heirloom not listing
+
+v1.10.1 05/06/2017
+[FIX]Fixed talent permutation
+[UI]don't print current talents with the talent permut
+
+v1.10 05/05/2017
+[UI]Minor UI adjustment
+[UI]Added an option to make a talent permutation
+
 v1.9.2 04/22/2017
 [UI]Minor UI adjustment
 [UI]Auto set min leg with equiped legendaries

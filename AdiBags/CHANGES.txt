@@ -1,14 +1,14 @@
-tag ae882c02d44989e2bb9b2d1c6d643cb1ce28f99e v1.9.7
+tag 114c87b20848e37b23af573633121af15197b75e v1.9.8
 Author:	Talyrius <contact@talyrius.net>
-Date:	Wed Aug 30 15:17:23 2017 -0700
+Date:	Thu Aug 31 00:13:41 2017 -0700
 
-Updated for Patch 7.3: Shadows of Argus.
+Tagging as v1.9.8.
 
-commit 5e6a839a342fe3a992974476b790bcccf7b1acc1
-Author: mdklein <mdklein@gmail.com>
-Date:   Wed Aug 30 22:29:05 2017 +0200
+commit 10a4840c051011d70e32c1fbbd3da77c0bcc583b
+Author: Talyrius <contact@talyrius.net>
+Date:   Thu Aug 31 00:11:38 2017 -0700
 
-    Updated for Patch 7.3: Shadows of Argus.
+    Pull request #219 omitted some PlaySound calls.
     
-    Fixes #217.
+    Fixes #222.
 

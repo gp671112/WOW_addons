@@ -307,6 +307,34 @@ module.db.artifactTraitsSpells = {
 [201929]=1,[222644]=1,[190529]=1,[207778]=1,[238094]=1,[214914]=1,[203563]=1,[199380]=1,[191593]=1,[210637]=1,[227688]=1,[214372]=1,[195399]=1,[195351]=1,[209459]=1,[185086]=1,[191494]=1,[205209]=1,[209216]=1,[238044]=1,[200296]=1,[192310]=1,[202890]=1,[196779]=1,[221882]=1,[227481]=1,[238108]=1,[238092]=1,[210030]=1,[214903]=1,[214913]=1,[190467]=1,[201469]=1,[214664]=1,[238148]=1,[186927]=1,[216272]=1,[199153]=1,[193643]=1,[200430]=1,[209566]=1,[194007]=1,[213161]=1,[241047]=1,[194312]=1,[197779]=1,[199112]=1,[201921]=1,[238125]=1,[216212]=1,[200871]=1,[189059]=1,[211106]=1,[238136]=1,[215322]=1,[221844]=1,[239304]=1,[194026]=1,[201457]=1,[203524]=1,[166305]=1,[201882]=1,[192538]=1,[196492]=1,[212894]=1,[214326]=1,[197231]=1,[238055]=1,[200302]=1,[213047]=1,[196358]=1,[213340]=1,[200857]=1,[200860]=1,[197708]=1,[241145]=1,[210593]=1,[199282]=1,[195380]=1,[189092]=1,[222646]=1,[211915]=1,[210571]=1,[197815]=1,[191577]=1,[212827]=1,[225092]=1,[200847]=1,[209218]=1,[191328]=1,[195300]=1,[188647]=1,[198505]=1,[199420]=1,[187313]=1,[209224]=1,[215779]=1,[238062]=1,[211913]=1,[195323]=1,[211126]=1,[202940]=1,[224468]=1,[202628]=1,[204219]=1,[204089]=1,[195243]=1,[201927]=1,[197610]=1,[219195]=1,[198247]=1,[197160]=1,[227683]=1,[192923]=1,[193213]=1,[202918]=1,[207285]=1,[214919]=1,[216273]=1,[239294]=1,[238098]=1,[209554]=1,[195269]=1,[238114]=1,[190778]=1,[224764]=1,[238049]=1,[238048]=1,[193647]=1,[202665]=1,[198736]=1,[216274]=1,[189754]=1,[200298]=1,[212821]=1,[192345]=1,[198361]=1,[202533]=1,[203673]=1,[203638]=1,[213010]=1,[201459]=1,[208598]=1,[196355]=1,[189097]=1,[189787]=1,[199372]=1,[241149]=1,[202897]=1,[208795]=1,[200851]=1,[238143]=1,[242652]=1,[207357]=1,[238067]=1,[238071]=1,[241205]=1,[203577]=1,[207360]=1,[199887]=1,[207206]=1,[214626]=1,[238069]=1,[207348]=1,[200845]=1,[238086]=1,[213571]=1,[201881]=1,[214996]=1,[202769]=1,[214933]=1,[214930]=1,[213050]=1,[203018]=1,[211530]=1,[211144]=1,[238113]=1,[241121]=1,[207088]=1,[191584]=1,[238111]=1,[208762]=1,[214938]=1,[166733]=1,[207255]=1,[238122]=1,[199163]=1,[224467]=1,[238060]=1,[238126]=1,[241146]=1,[193058]=1,[210033]=1,[214368]=1,[213062]=1,[214826]=1,[189870]=1,[241269]=1,[188672]=1,[202522]=1,[214910]=1,[238064]=1,[238141]=1,[210031]=1,[209835]=1,[200440]=1,[210029]=1,[200326]=1,[238686]=1,[203566]=1,[214508]=1,[238089]=1,[166732]=1,[238063]=1,[214923]=1,[238088]=1,[210570]=1,[198349]=1,[205406]=1,[189080]=1,[189147]=1,[201891]=1,[193644]=1,[195352]=1,[200409]=1,[197343]=1,[238099]=1,[238052]=1,[213055]=1,[200414]=1,[239306]=1,[213573]=1,[238072]=1,[219655]=1,[238057]=1,[186944]=1,[197715]=1,[197716]=1,[196222]=1,[201473]=1,[198068]=1,[194016]=1,[200402]=1,[189744]=1,[199212]=1,[211158]=1,[197766]=1,[238124]=1,[238047]=1,[201944]=1,[194378]=1,[197235]=1,[196211]=1,[194224]=1,[199367]=1,[214925]=1,[190462]=1,[216122]=1,[194314]=1,[241253]=1,[197713]=1,[211720]=1,[213049]=1,[238100]=1,[179226]=1,[201471]=1,[210032]=1,[242707]=1,[207092]=1,[186393]=1,[189186]=1,[196430]=1,[196684]=1,[196434]=1,[196419]=1,[196429]=1,[214926]=1,[187304]=1,[196227]=1,[196236]=1,[196489]=1,[202521]=1,[241090]=1,[192422]=1,[201463]=1,[238084]=1,[196578]=1,[194431]=1,[241050]=1,[207358]=1,[194331]=1,[198367]=1,[195266]=1,[241100]=1,[197162]=1,[238133]=1,[196422]=1,[238073]=1,[239042]=1,[191602]=1,[224968]=1,[238112]=1,[201946]=1,[191048]=1,[198296]=1,[214516]=1,[214928]=1,[212817]=1,[216698]=1,[187318]=1,[210145]=1,[210725]=1,[210730]=1,[187287]=1,[197727]=1,[187310]=1,[179227]=1,[186320]=1,[202302]=1,[187264]=1,[187680]=1,[215463]=1,[197178]=1,[187276]=1,[191760]=1,[209285]=1,[192464]=1,[210716]=1,[207604]=1,[209574]=1,[241154]=1,[196418]=1,[211914]=1,[238140]=1,[209202]=1,[238068]=1,[207407]=1,[221856]=1,[209782]=1,[192657]=1,[197369]=1,[197234]=1,[241131]=1,[197604]=1,[209781]=1,[197386]=1,[239291]=1,[179497]=1,[238078]=1,[210148]=1,[209559]=1,[201470]=1,[197244]=1,[238132]=1,[210663]=1,[191499]=1,[201932]=1,[214922]=1,[195244]=1,[227686]=1,[200859]=1,[207343]=1,[192460]=1,[210144]=1,[195650]=1,[238059]=1,[197241]=1,[227689]=1,[192630]=1,[212829]=1,[241099]=1,[202445]=1,[186372]=1,[197762]=1,[197256]=1,[210147]=1,[205495]=1,[197239]=1,[189857]=1,[194018]=1,[207355]=1,[188683]=1,[216230]=1,[199573]=1,[197406]=1,[238142]=1,[238106]=1,[190514]=1,[199220]=1,[241125]=1,[238070]=1,[202755]=1,[200854]=1,[218910]=1,[215381]=1,[241203]=1,[204945]=1,[198238]=1,[218572]=1,[198228]=1,[189184]=1,[198299]=1,[185368]=1,[221773]=1,[198248]=1,[207068]=1,[166734]=1,[191861]=1,[211119]=1,[200315]=1,[224103]=1,[198434]=1,[196258]=1,[195419]=1,[192318]=1,[238130]=1,[199377]=1,[189154]=1,[214932]=1,[179499]=1,[214428]=1,[201887]=1,[198292]=1,[196217]=1,[200850]=1,[238095]=1,[238144]=1,[186934]=1,[198236]=1,[178162]=1,[238090]=1,[238058]=1,[201458]=1,[241134]=1,[210579]=1,[203754]=1,[201424]=1,[199563]=1,[215183]=1,[198074]=1,[199384]=1,[192567]=1,[199366]=1,[192543]=1,[199485]=1,[207362]=1,[199640]=1,[199401]=1,[199364]=1,[199365]=1,[214921]=1,[207375]=1,[209376]=1,[214744]=1,[200853]=1,[239290]=1,[238042]=1,[239295]=1,[192558]=1,[210146]=1,[202767]=1,[203261]=1,[241252]=1,[186941]=1,[166735]=1,[241115]=1,[191717]=1,[200400]=1,[200474]=1,[189086]=1,[238687]=1,[207118]=1,[208794]=1,[189164]=1,[238116]=1,[208793]=1,[192544]=1,[238138]=1,[192542]=1,[192557]=1,[205223]=1,[221775]=1,[192548]=1,[199665]=1,[192570]=1,[192450]=1,[238127]=1,[192428]=1,[203230]=1,[192457]=1,[211123]=1,[201922]=1,[215773]=1,[200870]=1,[238085]=1,[199214]=1,[191488]=1,[241101]=1,[238121]=1,[241110]=1,[202426]=1,[200395]=1,[197729]=1,[203749]=1,[192447]=1,[200515]=1,[211131]=1,[214904]=1,[193371]=1,[215061]=1,[218607]=1,[189849]=1,[200399]=1,[191339]=1,[191594]=1,[204875]=1,[213183]=1,[200855]=1,[203578]=1,[194466]=1,[199257]=1,[207356]=1,[200872]=1,[238135]=1,[214911]=1,[238145]=1,[214937]=1,[210666]=1,[239106]=1,[210650]=1,[214912]=1,[238097]=1,[209494]=1,[199152]=1,[238061]=1,[189179]=1,[186396]=1,[214924]=1,[209539]=1,[241264]=1,[200863]=1,[203757]=1,[209220]=1,[201454]=1,[221841]=1,[209229]=1,[166737]=1,[209474]=1,[197138]=1,[192424]=1,[197233]=1,[201455]=1,[241018]=1,[213017]=1,[211916]=1,[196432]=1,[211912]=1,[214909]=1,[192514]=1,[239293]=1,[241102]=1,[213574]=1,[213572]=1,[241152]=1,[192453]=1,[209226]=1,[238053]=1,[209341]=1,[209389]=1,[238051]=1,[207352]=1,[238123]=1,[191598]=1,[201952]=1,[241148]=1,[197080]=1,[206910]=1,[221862]=1,[209548]=1,[197047]=1,[188006]=1,[241114]=1,[238054]=1,[197248]=1,[190503]=1,[197199]=1,[197140]=1,[197344]=1,[197139]=1,[214935]=1,[238074]=1,[238110]=1,[218931]=1,[214917]=1,[211309]=1,[214936]=1,[238045]=1,[201467]=1,[196586]=1,[214634]=1,[215273]=1,[238066]=1,[196301]=1,[209492]=1,[238102]=1,[200407]=1,[191582]=1,[196675]=1,[191485]=1,[191741]=1,[200294]=1,[200849]=1,[192326]=1,[238050]=1,[207354]=1,[189760]=1,[200415]=1,[199158]=1,[189772]=1,[203415]=1,[201883]=1,[208253]=1,[214907]=1,[202530]=1,[188632]=1,[189749]=1,[147709]=1,[187258]=1,[218567]=1,[189757]=1,[227684]=1,[210676]=1,[191419]=1,[195298]=1,[241124]=1,[238091]=1,[205273]=1,[196082]=1,[200861]=1,[194234]=1,[197781]=1,[194315]=1,[213136]=1,[194239]=1,[238079]=1,[194313]=1,[194318]=1,[215796]=1,[222648]=1,[213570]=1,[214918]=1,[199471]=1,[201464]=1,[201925]=1,[195354]=1,[188778]=1,[201945]=1,[218280]=1,[200482]=1,[202464]=1,[239107]=1,[201926]=1,[214915]=1,[203669]=1,[195315]=1,[201930]=1,[239307]=1,[200856]=1,[191565]=1,[238080]=1,[238115]=1,[214736]=1,[216424]=1,[201460]=1,[238118]=1,[238083]=1,[210638]=1,[201923]=1,[202753]=1,[188639]=1,[214927]=1,[201880]=1,[191721]=1,[238149]=1,[227692]=1,[209480]=1,[196416]=1,[201943]=1,[209577]=1,[191740]=1,[238077]=1,[241270]=1,[205065]=1,[203576]=1,[213180]=1,[203225]=1,[188644]=1,[238129]=1,[238101]=1,[202907]=1,[201456]=1,[227685]=1,[195291]=1,[241150]=1,[184843]=1,[188651]=1,[191504]=1,[227687]=1,[188635]=1,[195317]=1,[201884]=1,[214931]=1,[209217]=1,[214939]=1,[238117]=1,[241147]=1,[205320]=1,[238134]=1,[215223]=1,[179546]=1,[211099]=1,[227690]=1,[209481]=1,[192323]=1,[204147]=1,[202384]=1,[202524]=1,[187301]=1,[238105]=1,[238120]=1,[199107]=1,[209573]=1,[214776]=1,[214081]=1,[186773]=1,[186945]=1,[200875]=1,[214514]=1,[184778]=1,[184759]=1,[194093]=1,[195322]=1,[200373]=1,[186788]=1,[220143]=1,[200421]=1,[191637]=1,[194487]=1,[209223]=1,[189185]=1,[238065]=1,[202466]=1,[195345]=1,[201924]=1,[194179]=1,[191731]=1,[194024]=1,[238103]=1,[193645]=1,[194002]=1,[207351]=1,[238043]=1,[197038]=1,[191493]=1,[193642]=1,[200327]=1,[202433]=1,[192349]=1,[238109]=1,[211219]=1,[214916]=1,[211105]=1,[192759]=1,[190852]=1,[195265]=1,[195448]=1,[200846]=1,[238119]=1,[191647]=1,[210590]=1,[241136]=1,[201928]=1,[209462]=1,[215414]=1,[238076]=1,[213051]=1,[192376]=1,[195615]=1,[213116]=1,[211108]=1,[192329]=1,[197711]=1,[189144]=1,[238146]=1,[239296]=1,[203670]=1,[207946]=1,[243188]=1,[209541]=1,[238096]=1,[210125]=1,[195263]=1,[191747]=1,[238137]=1,[202820]=1,[191569]=1,[191572]=1,[189768]=1,[187321]=1,[238093]=1,[214920]=1,[190567]=1,[196437]=1,[200316]=1,[200311]=1,[207387]=1,[238139]=1,[210557]=1,[224466]=1,[190457]=1,[199111]=1,[190520]=1,[241257]=1,[210575]=1,[199120]=1,[238056]=1,[166738]=1,[209483]=1,[197354]=1,[202386]=1,[191512]=1,[208065]=1,[210722]=1,[195267]=1,[209472]=1,[210182]=1,[196305]=1,[209225]=1,[201931]=1,[239305]=1,[201948]=1,[202507]=1,[202514]=1,[226829]=1,[215799]=1,[241202]=1,[202463]=1,[238131]=1,[238046]=1,[205545]=1,[192315]=1,[210702]=1,[203752]=1,[214934]=1,[238128]=1,[241091]=1,[199472]=1,[214906]=1,[212816]=1,[214929]=1,[203755]=1,[224841]=1,[212819]=1,[207347]=1,[182234]=1,[241153]=1,[191442]=1,[190449]=1,[214795]=1,[210631]=1,[192384]=1,[200652]=1,[214629]=1,[191592]=1,[189180]=1,[219415]=1,[213133]=1,[238087]=1,[213682]=1,[203227]=1,[201468]=1,[238075]=1,[202996]=1,[227691]=1,[213428]=1,[195295]=1,[238147]=1,[211714]=1,[238082]=1,[220817]=1,[201472]=1,
 }
 
+module.db.artifactTraitsSpellsSpecReq = {	--spec restrictions for multispec abilities
+	[211131] = 266,
+	[192345] = 259,
+	[200402] = 104,
+	[209218] = 66,
+	[197343] = 253,
+	[225092] = 255,
+	[203230] = 73,
+	[200298] = 65,
+	[203752] = 255,
+	[238046] = 581,
+	[209483] = 71,
+	[210557] = 103,
+	[238065] = 258,
+	[186945] = 70,
+	[207357] = 264,
+	[187301] = 62,
+	[200326] = 65,
+	[192323] = 259,
+	[215223] = 267,
+	[209285] = 66,
+	[201460] = 577,
+	[200407] = 65,
+	[200399] = 104,
+	[200870] = 72,
+}
+
+
 module.db.spell_talentsList = {
 --19:11 09.06.2017 Build 24287 [7.2.5 PTR Release]
 	["WARRIOR"] = {
@@ -749,7 +777,7 @@ module.db.spell_durationByTalent_fix = {	--Изменение длительно
 	[5217] = {202021,4},
 	[187827] = {238046,{0.5,1,1.5,2,2.5,3,3.5,4}},
 	[208253] = {238050,{1,2,3,4,5,6,7,8}},
-	[190319] = {238055,{1,2,3,4,5,6,7,8}}, 
+	[190319] = {238055,{1,2,3,4,5,6,7,8},251857,2}, 
 	[200174] = {238065,{1,2,3,4,5,6,7,8}},
 	[34433] = {238065,{4.5,9,13.5,18,22.5,27,31.5,36}},
 	[79206] = {238071,{2,4,6,8,10,12,14,16}},
@@ -837,6 +865,10 @@ module.db.tierSetsSpells = {	--[specID.tierID.tierMark] = {2P Bonus Spell ID, 4P
 	[10191] = {nil,{211417,nil,nil}},	--> Monk T19
 	[12191] = {nil,{nil,211077}},		--> DH T19
 	[8191] = {nil,{211386,nil,nil}},	--> Mage T19
+	[6211] = {251876,nil},			--> DK T21
+	[12211] = {nil,251774},			--> DH T21
+	[3211] = {nil,251756},			--> Hunter T21
+	[8211] = {251857,nil},			--> Mage T21
 }
 module.db.tierSetsList = {	-- [itemID] = specID.tierID.tierMark
 	[124155] = 5181, [124161] = 5181, [124166] = 5181, [124172] = 5181, [124178] = 5181,
@@ -849,6 +881,10 @@ module.db.tierSetsList = {	-- [itemID] = specID.tierID.tierMark
 	[138331] = 10191, [138325] = 10191, [138328] = 10191, [138334] = 10191, [138337] = 10191, [138367] = 10191, 
 	[138378] = 12191, [138375] = 12191, [138376] = 12191, [138377] = 12191, [138379] = 12191, [138380] = 12191, 
 	[138312] = 8191, [138309] = 8191, [138315] = 8191, [138318] = 8191, [138321] = 8191, [138365] = 8191, 
+	[152112] = 6211, [152113] = 6211, [152115] = 6211, [152116] = 6211, [152117] = 6211, [152114] = 6211,
+	[152118] = 12211, [152119] = 12211, [152120] = 12211, [152121] = 12211, [152122] = 12211, [152123] = 12211,
+	[152130] = 3211, [152132] = 3211, [152134] = 3211, [152135] = 3211, [152131] = 3211, [152133] = 3211,
+	[152136] = 8211, [152137] = 8211, [152138] = 8211, [152139] = 8211, [152140] = 8211, [152141] = 8211,
 }
 
 module.db.spell_talentReplaceOther = {		--Спелы, показ которых нужно убрать при наличии таланта (талант заменяет эти спелы) [spellID] = [talent Spell ID]
@@ -935,6 +971,7 @@ module.db.spell_afterCombatNotReset = {	--Запрещать сброс кд п�
 	[67826]=true,
 	
 	[199740]=true,
+	[160452]=true,
 }
 module.db.spell_reduceCdByHaste = {	--Заклинания, кд которых уменьшается хастой
 	[20473]=true,
@@ -1124,6 +1161,8 @@ module.db.spell_reduceCdCast = {	--Заклинания, применение к
 	[210152]={{191427,209354},-1.166},
 	
 	[194466]={{190319,235940},-9},
+	
+	[34026]={{193530,251756},-1.5},
 }
 module.db.spell_increaseDurationCast = {	--Заклинания, продляющие время действия
 	[23922]={{2565,203177},1.5},
@@ -1220,6 +1259,10 @@ module.db.spell_isRacial = {		--Расовые заклинания
 	[25046]="BloodElf",
 	[50613]="BloodElf",
 	[202719]="BloodElf",
+	[256948]="VoidElf",
+	[260364]="Nightborne",
+	[255647]="LightforgedDraenei",
+	[255654]="HighmountainTauren",
 }
 
 module.db.def_col = {			--Стандартные положения в колонках
@@ -1299,7 +1342,8 @@ module.db.petsAbilities = {	--> PetTypes = HUNTERS[ Tenacity [1], Cunning = [2],
 	[L.creatureNames["Hyena"]] = 		{3,	{128432,90},	},
 	[L.creatureNames["Monkey"]] = 		{2,	{160044,120},	},
 	[L.creatureNames["Moth"]] = 		{3,	{159956,600},	},
-	[L.creatureNames["Nether Ray"]] = 		{2,	{90355,360,40},	},
+	--[L.creatureNames["Nether Ray"]] = 		{2,	{90355,360,40},	},
+	[L.creatureNames["Nether Ray"]] = 		{2, 	{160452,360,40}, },
 	[L.creatureNames["Porcupine"]] = 		{1,	},
 	[L.creatureNames["Quilen"]] = 		{3,	{126393,600},	},
 	[L.creatureNames["Raptor"]] = 		{3,	{160052,45},	},
@@ -1326,7 +1370,7 @@ module.db.petsAbilities = {	--> PetTypes = HUNTERS[ Tenacity [1], Cunning = [2],
 	[L.creatureNames["Ghoul"]] = 		{0,	{91837,45,10},	{91802,30},	{91797,60},	},
 	[L.creatureNames["Felguard"]] = 		{0,	{89751,45,6},	{89766,30},	{30151,15},	},
 	[L.creatureNames["Felhunter"]] = 		{0,	{19647,24},	{19505,15},	},
-	[L.creatureNames["Fel Imp"]] = 		{0,	{115276,30},	},
+	[L.creatureNames["Fel Imp"]] = 		{0,	{115276,10},	},
 	[L.creatureNames["Imp"]] = 		{0,	{89808,10},	{119899,30,12},	{89792,20},	},
 	[L.creatureNames["Observer"]] = 		{0,	{115781,24},	{115284,15},	},
 	[L.creatureNames["Shivarra"]] = 		{0,	{115770,25},	{115268,30},	},
@@ -1433,6 +1477,8 @@ module.db.itemsToSpells = {	-- Тринкеты вида [item ID] = spellID
 	[144293] = 235605,
 	[144355] = 235940,
 	[144242] = 235039,
+	
+	[151978] = 251946,
 }
 module.db.itemsArtifacts = {	-- Artifacts & First trait
 	[127857] = 224968,
@@ -2281,6 +2327,33 @@ local function LineIconOnClick(self)
 	local chat_type = ExRT.F.chatType(true)
 	SendChatMessage(text,chat_type)
 end
+local function LineIconOnClickWhisper(self)
+	local parent = self:GetParent()
+	if not parent.data then	return end
+	if parent.data.specialClick then
+		parent.data.specialClick(parent.data)
+		return
+	end	
+	local time = parent.data.lastUse + parent.data.cd - GetTime()
+	if time > 0 then return end
+	local spellLink = GetSpellLink(parent.data.db[1])
+	if not spellLink or spellLink == "" then
+		spellLink = parent.data.spellName
+	end
+	local text = "Use "..spellLink
+	local chat_type = ExRT.F.chatType(true)
+	SendChatMessage(text,"WHISPER",nil,parent.data.fullName)
+end
+local function LineIconOnClickBoth(self)
+	local parent = self:GetParent()
+	if not parent.data then	return end
+	local time = parent.data.lastUse + parent.data.cd - GetTime()
+	if time > 0 then 
+		return LineIconOnClick(self)
+	else
+		return LineIconOnClickWhisper(self)
+	end
+end
 
 local function UpdateBarStyle(self)
 	local parent = self.parent
@@ -2397,9 +2470,16 @@ local function UpdateBarStyle(self)
 		self.icon:SetScript("OnLeave",nil)	
 	end
 	
-	if parent.methodsLineClick then
+	
+	if parent.methodsLineClick and parent.methodsLineClickWhisper then
+		self.clickFrame:SetScript("OnClick",LineIconOnClickBoth)
+		self.clickFrame:Show()	
+	elseif parent.methodsLineClick then
 		self.clickFrame:SetScript("OnClick",LineIconOnClick)
 		self.clickFrame:Show()
+	elseif parent.methodsLineClickWhisper then
+		self.clickFrame:SetScript("OnClick",LineIconOnClickWhisper)
+		self.clickFrame:Show()		
 	else
 		self.clickFrame:SetScript("OnClick",nil)
 		self.clickFrame:Hide()	
@@ -3516,6 +3596,15 @@ do
 		end
 		module.db.spell_dispellsFix[ data.fullName ] = nil
 	end
+	function module:CheckArtifactTraitForUnit(spellID,fullName)
+		if module.db.artifactTraitsSpells[spellID] then
+			if not module.db.artifactTraitsSpellsSpecReq[spellID] then
+				return true
+			elseif module.db.artifactTraitsSpellsSpecReq[spellID] == globalGUIDs[fullName] then
+				return true
+			end
+		end
+	end
 	function CLEUstartCD(i)
 		local currTime = GetTime()
 		local data = nil
@@ -3547,7 +3636,7 @@ do
 		local durationTable = module.db.spell_durationByTalent_fix[spellID]
 		if durationTable then
 			for j=1,#durationTable,2 do
-				if module.db.session_gGUIDs[fullName][ durationTable[j] ] or module.db.artifactTraitsSpells[ durationTable[j] ] then
+				if module.db.session_gGUIDs[fullName][ durationTable[j] ] or module:CheckArtifactTraitForUnit(durationTable[j],fullName) then
 					local timeReduce = durationTable[j+1]
 					if type(timeReduce) == 'table' then
 						local traits = GetArtifactTraitsKnown(fullName,durationTable[j])
@@ -3569,11 +3658,11 @@ do
 		local cdTable = module.db.spell_cdByTalent_fix[spellID]
 		if cdTable then
 			for j=1,#cdTable,2 do
-				if module.db.session_gGUIDs[fullName][ cdTable[j] ] or module.db.artifactTraitsSpells[ cdTable[j] ] then
+				if module.db.session_gGUIDs[fullName][ cdTable[j] ] or module:CheckArtifactTraitForUnit(cdTable[j],fullName) then
 					local timeReduce = cdTable[j+1]
 					if type(timeReduce) == 'table' then
 						local traits = GetArtifactTraitsKnown(fullName,cdTable[j])
-						if traits == 0 and (spellID ~= 6940 or (uSpecID == 4 and cdTable[j] == 200298)) then
+						if traits == 0 then
 							traits = max(traits,4)		--Set all traits minimum at 4
 						end
 						if traits > 0 then
@@ -3940,11 +4029,11 @@ do
 	local session_PetOwner = _db.session_PetOwner
 	local CDList = _db.cdsNav
 	
-	function module.main:COMBAT_LOG_EVENT_UNFILTERED(_,_,event,_,sourceGUID,sourceName,sourceFlags,_,destGUID,destName,destFlags,_,spellID,_,_,_,_,_,_,_,_,critical)
+	function module.main:COMBAT_LOG_EVENT_UNFILTERED(_,_,event,_,sourceGUID,sourceName,sourceFlags,_,destGUID,destName,destFlags,_,spellID,_,_,missType,_,_,_,_,_,critical)
 		--dtime()
 		local func = eventsView[event]
 		if func then
-			func(self,sourceGUID,sourceName,sourceFlags,destGUID,destName,destFlags,spellID,critical)
+			func(self,sourceGUID,sourceName,sourceFlags,destGUID,destName,destFlags,spellID,critical,missType)
 		end
 		--dtime(ExRT.Debug,'ExCD2',event)
 	end
@@ -4023,6 +4112,19 @@ do
 				UpdateAllData()
 				SortAllData()
 			end
+			
+			line = CDList[sourceName][49028]
+			if line and session_gGUIDs[sourceName][251876] then
+				line.lastUse = line.lastUse - 3
+				if line.charge then
+					line.charge = line.charge - 3
+				end
+				if line.bar and line.bar.data == line then
+					line.bar:UpdateStatus()
+				end
+				UpdateAllData()
+				SortAllData()
+			end
 		elseif spellID == 206005 then	--Xavius: Dream Simulacrum
 			for i=1,#_C do
 				local unitSpellData = _C[i]		
@@ -4053,6 +4155,19 @@ do
 				line.lastUse = line.lastUse - 1
 				if line.charge then
 					line.charge = line.charge - 1
+				end
+				if line.bar and line.bar.data == line then
+					line.bar:UpdateStatus()
+				end
+				UpdateAllData()
+				SortAllData()
+			end
+			
+			line = CDList[sourceName][49028]
+			if line and session_gGUIDs[sourceName][251876] then
+				line.lastUse = line.lastUse - 3
+				if line.charge then
+					line.charge = line.charge - 3
 				end
 				if line.bar and line.bar.data == line then
 					line.bar:UpdateStatus()
@@ -4234,6 +4349,56 @@ do
 	function module.main:SPELL_DISPEL(sourceGUID,sourceName,sourceFlags,destGUID,destName,destFlags,spellID)
 		if spell_dispellsList[spellID] and sourceName then
 			_db.spell_dispellsFix[ sourceName ] = true
+		end
+	end
+	
+	local spell251774_var = 0
+	function module.main:SWING_MISSED(sourceGUID,sourceName,sourceFlags,destGUID,destName,destFlags,missType)
+		if not destName then
+			return
+		elseif missType == "PARRY" and session_gGUIDs[destName][251774] then
+			local line = CDList[sourceName][187827]
+			if line then
+				local t = GetTime()
+				if t - spell251774_var < 1 then
+					return
+				end
+				spell251774_var = t
+				
+				line.cd = line.cd - 5
+				if line.cd < 0 then 
+					line.cd = 0 
+				end
+				if line.bar and line.bar.data == line then
+					line.bar:UpdateStatus()
+				end
+				UpdateAllData()
+				SortAllData()
+			end
+		end
+	end
+	function module.main:SPELL_MISSED(sourceGUID,sourceName,sourceFlags,destGUID,destName,destFlags,spellID,_,missType)
+		if not destName then
+			return
+		elseif missType == "PARRY" and session_gGUIDs[destName][251774] then
+			local line = CDList[sourceName][187827]
+			if line then
+				local t = GetTime()
+				if t - spell251774_var < 1 then
+					return
+				end
+				spell251774_var = t
+				
+				line.cd = line.cd - 5
+				if line.cd < 0 then 
+					line.cd = 0 
+				end
+				if line.bar and line.bar.data == line then
+					line.bar:UpdateStatus()
+				end
+				UpdateAllData()
+				SortAllData()
+			end
 		end
 	end
 	
@@ -4455,6 +4620,8 @@ do
 		SPELL_CAST_SUCCESS=module.main.SPELL_CAST_SUCCESS,
 		SPELL_DISPEL=module.main.SPELL_DISPEL,
 		--SPELL_DAMAGE=module.main.SPELL_DAMAGE,
+		SWING_MISSED=module.main.SWING_MISSED,
+		SPELL_MISSED=module.main.SPELL_MISSED,
 	}
 	
 	local isSpellDamageAdded = nil
@@ -4558,14 +4725,15 @@ function module.options:Load()
 	local function fastSetupFrameListLeave(self)
 		ELib.Tooltip:Hide()
 	end
-	local function fastSetupFrameListClick2(self)
+	self.fastSetupFrame = ELib:ListButton(self.tab.tabs[1],L.cd2fastSetupTitle..":",200,7):Size(18,18):Point("TOPRIGHT",-15,-9):Left():OnClick(function(self)
 		local list = {
 			{L.cd2fastSetupTitle1,{31821,204150,62618,98008,97462,31842,64843,108280,740,115310,196718,207399}},					--Raid Save
 			{L.cd2fastSetupTitle2,{102342,47788,33206,6940,633,116849,1022,204018}},								--Direct Save
 			{L.cd2fastSetupTitle3,{20484,20707,61999,20608,161642}},										--Battle Res
 			{L.cd2fastSetupTitle4,{6552,96231,147362,1766,15487,47528,47476,57994,2139,116705,106839,19647,91802,115781,78675,183752,}},	--Kicks
 			{L.cd2fastSetupTitle5,{114192,355,62124,56222,49576,115546,6795,185245,}},								--Taunts
-			{L.cd2fastSetupTitle6,{4987,32375,527,51886,115450,2782,475,115276,89808}},							--Dispels			
+			{L.cd2fastSetupTitle6,{4987,32375,527,51886,115450,2782,475,115276,89808}},							--Dispels	
+			{STUN,	{46968,109248,205369,192058,30283,119381,179057,	221562,108194,853,408,5211,}},		--Stuns
 		}
 		for i=1,#list do
 			local tooltip = {list[i][1]..":"}
@@ -4586,8 +4754,7 @@ function module.options:Load()
 			}
 		end
 		self.OnClick = nil
-	end
-	self.fastSetupFrame = ELib:ListButton(self.tab.tabs[1],L.cd2fastSetupTitle..":",200,6):Size(18,18):Point("TOPRIGHT",-15,-9):Left():OnClick(fastSetupFrameListClick2)
+	end)
 	self.fastSetupFrame.text:FontSize(11):Color(GameFontNormal:GetTextColor())
 	
 	self.borderList = CreateFrame("Frame",nil,self.tab.tabs[1])
@@ -4937,7 +5104,7 @@ function module.options:Load()
 		line.userSpellName:SetScript("OnEnter",SpellsListUserSpellNameOnEnter)
 		line.userSpellName:SetScript("OnLeave",ELib.Tooltip.Hide)
 		
-		line.userClass = ELib:DropDown(line,130,12):Size(140):Point("LEFT",225,0):SetText(L.cd2Class)
+		line.userClass = ELib:DropDown(line,130,13):Size(140):Point("LEFT",225,0):SetText(L.cd2Class)
 		line.userClass._i = i
 		line.userClass.List = SpellsListClassDropDownList
 	
@@ -4961,6 +5128,7 @@ function module.options:Load()
 		module.options.addSpellFrame:Show()
 	end) 
 	self.butSpellsFrame:Hide()
+	self.butSpellsFrame.Texture:SetGradientAlpha("VERTICAL",0.05,0.26,0.09,1, 0.20,0.41,0.25,1)
 	
 	self.spellsModifyFrame = ELib:Popup():Size(560,180)
 	self.spellsModifyFrame.isDefaultSpell = nil
@@ -5180,75 +5348,294 @@ function module.options:Load()
 		line.add:SetScript("OnLeave", function(self) self.hl:Hide() end)
 	end
 	
-	self.addSpellFrame = ELib:Popup(L.cd2AddSpellFrameName):Size(550,422+10)
+	self.addSpellFrame = ELib:Popup(L.cd2AddSpellFrameName):Size(750,422+10)
 
 	self.addSpellFrame.backClassColor = self.addSpellFrame:CreateTexture(nil, "BORDER",nil,0)
-	self.addSpellFrame.backClassColor:SetPoint("TOP",0,-20)
-	self.addSpellFrame.backClassColor:SetSize(550,40)
+	self.addSpellFrame.backClassColor:SetPoint("TOPLEFT",0,-72)
+	self.addSpellFrame.backClassColor:SetPoint("RIGHT",0,0)
+	self.addSpellFrame.backClassColor:SetHeight(40)
 	self.addSpellFrame.backClassColor:SetColorTexture( 1, 1, 1, 1)
 	self.addSpellFrame.backClassColor:Hide()
 	
 	self.addSpellFrame.backClassColorBottom = self.addSpellFrame:CreateTexture(nil, "BORDER",nil,0)
-	self.addSpellFrame.backClassColorBottom:SetPoint("BOTTOM",0,0)
-	self.addSpellFrame.backClassColorBottom:SetSize(550,15)
+	self.addSpellFrame.backClassColorBottom:SetPoint("BOTTOMLEFT",0,0)
+	self.addSpellFrame.backClassColorBottom:SetPoint("RIGHT",0,0)
+	self.addSpellFrame.backClassColorBottom:SetHeight(15)
 	self.addSpellFrame.backClassColorBottom:SetColorTexture( 1, 1, 1, 1)
 	self.addSpellFrame.backClassColorBottom:Hide()
 	
+	self.addSpellFrame.backVertical = self.addSpellFrame:CreateTexture(nil, "BORDER",nil,-2)
+	self.addSpellFrame.backVertical:SetPoint("TOPLEFT",200,-72)
+	self.addSpellFrame.backVertical:SetPoint("BOTTOM",0,0)
+	self.addSpellFrame.backVertical:SetWidth(7)
+	self.addSpellFrame.backVertical:SetColorTexture( 1, 1, 1, 1)
+	self.addSpellFrame.backVertical:SetGradientAlpha("HORIZONTAL", 0,0,0, .7, 0,0,0, 0)
+	
+	self.addSpellFrame.classButtons = {}
+	for i=1,#module.db.classNames+1 do
+		local button = CreateFrame("Button",nil,self.addSpellFrame)
+		self.addSpellFrame.classButtons[i] = button
+		
+		button:SetSize(57,57)
+		if i==1 then
+			button:SetPoint("TOPLEFT",3,-15)
+		else
+			button:SetPoint("LEFT",self.addSpellFrame.classButtons[i-1],"RIGHT",0,0)
+		end
+		
+		button.icon = button:CreateTexture(nil, "ARTWORK")
+		button.icon:SetPoint("BOTTOM",0,15)
+		button.icon:SetSize(32,32)
+		
+		local isOtherCategory = i > #module.db.classNames
+				
+		local class = module.db.classNames[i]
+		if isOtherCategory then
+			button.icon:SetTexture("Interface\\Icons\\spell_priest_divinestar_holy")		
+		elseif CLASS_ICON_TCOORDS[class] then
+			button.icon:SetTexture("Interface\\GLUES\\CHARACTERCREATE\\UI-CHARACTERCREATE-CLASSES")
+			button.icon:SetTexCoord(unpack(CLASS_ICON_TCOORDS[class]))
+		end
+		
+		button.text = button:CreateFontString(nil,"ARTWORK","GameFontNormal")
+		button.text:SetPoint("BOTTOM",0,3)
+		if isOtherCategory then
+			button.text:SetText("|cffb2b2b2"..L.classLocalizate[ "NO" ])
+		elseif class then
+			button.text:SetText("|c"..ExRT.F.classColor(class)..L.classLocalizate[ class ])
+		end
+		button.text:SetWidth(57)
+		button.text:SetMaxLines(1)
+		button.text:SetFont(button.text:GetFont(),10)
+		
+		button:SetScript("OnEnter",function(self)
+			if self.selected then
+				return
+			end
+			self.icon:SetSize(42,42)
+		end)
+		button:SetScript("OnLeave",function(self)
+			if self.selected then
+				return
+			end
+			self.icon:SetSize(32,32)
+		end)
+		button:SetScript("OnClick",function(self)
+			module.options.addSpellFrame.dropDown:SetValue(self.token)
+		end)
+		
+		button.token = class
+		if isOtherCategory then
+			button.token = "OTHER"	
+		end
+	end
+	
+	self.addSpellFrame.specButtons = {}
+	for i=1,4 do
+		local button = CreateFrame("Button",nil,self.addSpellFrame)
+		self.addSpellFrame.specButtons[i] = button
+		
+		button:SetSize(200,60)
+		
+		local cR,cG,cB = .35,.32,.44
+		
+		button.tGt = button:CreateTexture(nil, "BACKGROUND",nil,0)
+		button.tGt:SetPoint("TOPLEFT",0,0)
+		button.tGt:SetPoint("RIGHT",0,0)
+		button.tGt:SetHeight(10)
+		button.tGt:SetColorTexture( 1, 1, 1, 1)
+		button.tGt:SetGradientAlpha("VERTICAL", cR,cG,cB, 0, cR,cG,cB, 0.5)
+		
+		button.tGb = button:CreateTexture(nil, "BACKGROUND",nil,0)
+		button.tGb:SetPoint("BOTTOMLEFT",0,0)
+		button.tGb:SetPoint("RIGHT",0,0)
+		button.tGb:SetHeight(10)
+		button.tGb:SetColorTexture( 1, 1, 1, 1)
+		button.tGb:SetGradientAlpha("VERTICAL", cR,cG,cB, 0.5, cR,cG,cB, 0)
+		
+		button.b = button:CreateTexture(nil, "BACKGROUND",nil,-5)
+		button.b:SetPoint("TOPLEFT")
+		button.b:SetPoint("BOTTOMRIGHT")
+		button.b:SetColorTexture( .06, .06, .12, 1)
+		
+		button.icon = button:CreateTexture(nil, "ARTWORK")
+		button.icon:SetPoint("LEFT",4,0)
+		button.icon:SetSize(48,48)
+		
+		button.text = button:CreateFontString(nil,"ARTWORK","GameFontNormal")
+		button.text:SetPoint("LEFT",button.icon,"RIGHT",3,0)
+		button.text:SetPoint("RIGHT",-5,0)
+		
+		button.SetState = function(self,selected)
+			local cR,cG,cB
+			if selected then
+				cR,cG,cB = 1,.95,.44
+			else
+				cR,cG,cB = .35,.32,.44
+			end
+			self.tGt:SetGradientAlpha("VERTICAL", cR,cG,cB, 0, cR,cG,cB, 0.5)
+			self.tGb:SetGradientAlpha("VERTICAL", cR,cG,cB, 0.5, cR,cG,cB, 0)
+		end
+		button:SetScript("OnEnter",function(self)
+			if self.selected then
+				return
+			end
+			self.b:SetColorTexture( .12, .12, .22, 1)
+		end)
+		button:SetScript("OnLeave",function(self)
+			if self.selected then
+				return
+			end
+			self.b:SetColorTexture( .06, .06, .12, 1)
+		end)
+		button:SetScript("OnClick",function(self)
+			module.options.addSpellFrame.CURR_SPEC[module.options.addSpellFrame.CURR_CLASS] = i
+			module.options.addSpellFrame.dropDown:SetValue(module.options.addSpellFrame.CURR_CLASS)
+		end)
+	end
+	self.addSpellFrame.CURR_CLASS = nil
+	self.addSpellFrame.CURR_SPEC = {}
+	
+	function self.addSpellFrame:SetSpecButtons(class)
+	  	local specByClassTable = module.db.specByClass[class] or {0,-1,-2,-3}
+	  	local addSpellFrame = module.options.addSpellFrame
+	  	
+	  	local height = addSpellFrame:GetHeight() - 72
+	  	for i=2,#specByClassTable do
+	  		local button = addSpellFrame.specButtons[i-1]
+	  		button:SetPoint("LEFT",addSpellFrame,"TOPLEFT",0,-72-height/(#specByClassTable)*(i-1))
+	  		
+		  	local specID = specByClassTable[i]
+	  		if class == "OTHER" then
+	  			if specID == -1 then
+		  			button.text:SetText(L.cd2Racial)
+		  			button.icon:SetTexture("Interface\\Icons\\achievement_character_bloodelf_female")
+		  		elseif specID == -2 then	
+		  			button.text:SetText(L.cd2Items)
+		  			button.icon:SetTexture("Interface\\Icons\\inv_inscription_tarot_volcanocard")
+		  		elseif specID == -3 then	
+		  			button.text:SetText(L.classLocalizate["PET"])
+		  			button.icon:SetTexture("Interface\\Icons\\ability_hunter_aspectofthefox")	 
+		  		end
+	  		else
+		  		local role = ExRT.GDB.ClassSpecializationRole[specID]
+		  		if role then
+		  			role = "\n|cffffffff"..(role == 'TANK' and TANK or role == 'HEAL' and HEALER or DAMAGER)
+		  		end
+		  		
+		  		button.text:SetText(L.specLocalizate[ module.db.specInLocalizate[specID] ]..(role or ""))
+		  		button.icon:SetTexture(module.db.specIcons[specID])	  		
+	  		end
+	  		
+	  		if addSpellFrame.CURR_SPEC[addSpellFrame.CURR_CLASS] == i-1 then
+	  			button:SetState(true)
+	  		else
+	  			button:SetState(false)
+	  		end
+	  		
+	  		button:Show()
+	  	end
+	  	for i=#specByClassTable,4 do
+	  		addSpellFrame.specButtons[i]:Hide()
+	  	end
+	end
+	
 	self.addSpellFrame.sortedClasses = {}
 	
+	self.addSpellFrame.classNameText = self.addSpellFrame:CreateFontString(nil,"ARTWORK","GameFontWhite")
+	self.addSpellFrame.classNameText:SetPoint("TOP",self.addSpellFrame,"TOPLEFT",100,-80)
+	self.addSpellFrame.classNameText:SetWidth(190)
+	self.addSpellFrame.classNameText:SetMaxLines(1)
+	self.addSpellFrame.classNameText:SetFont(self.addSpellFrame.classNameText:GetFont(),18,"OUTLINE")
+	
 	self.addSpellFrame.dropDown = ELib:DropDown(self.addSpellFrame,200,10):Size(210):Point("TOPRIGHT",-5,-25)
+	self.addSpellFrame.dropDown:Hide()
 	function self.addSpellFrame.dropDown:SetValue(newValue)
 		local addSpellFrame = module.options.addSpellFrame
-		addSpellFrame.dropDown:SetText("|c"..ExRT.F.classColor(newValue)..(L.classLocalizate[newValue] or newValue == "RACIAL" and L.cd2Racial or newValue == "ITEMS" and L.cd2Items or "Unk"))
+		--addSpellFrame.dropDown:SetText("|c"..ExRT.F.classColor(newValue)..(L.classLocalizate[newValue] or newValue == "RACIAL" and L.cd2Racial or newValue == "ITEMS" and L.cd2Items or "Unk"))
 		ELib:DropDownClose()
-		if not addSpellFrame.sortedClasses[newValue] then
-			for i=1,#module.db.allClassSpells[newValue] do
-				local spellName = GetSpellInfo(module.db.allClassSpells[newValue][i][1])
-				module.db.allClassSpells[newValue][i].spellName = spellName or tostring(module.db.allClassSpells[newValue][i][1])
+		for i=1,#module.db.classNames+1 do
+			local button = addSpellFrame.classButtons[i]
+			if button.token == newValue then
+				button.selected = true
+				button.icon:SetSize(42,42)
+			else
+				button.selected = false
+				button.icon:SetSize(32,32)
 			end
-			sort(module.db.allClassSpells[newValue],function(a,b) return a.spellName < b.spellName end)
+		end
+		addSpellFrame.CURR_CLASS = newValue
+		addSpellFrame.CURR_SPEC[newValue] = addSpellFrame.CURR_SPEC[newValue] or 1
+		addSpellFrame:SetSpecButtons(newValue)
+		
+		addSpellFrame.classNameText:SetText(newValue == "OTHER" and "" or L.classLocalizate[newValue] or "")
+		
+		local specNum = addSpellFrame.CURR_SPEC[newValue]
+		
+		if newValue == "OTHER" then
+			if specNum == 1 then
+				newValue = "RACIAL"
+			elseif specNum == 2 then
+				newValue = "ITEMS"
+			elseif specNum == 3 then
+				newValue = "PET"
+			end
+		end
+		local classDB = module.db.allClassSpells[newValue]
+		
+		if not addSpellFrame.sortedClasses[newValue] then
+			for i=1,#classDB do
+				local spellName = GetSpellInfo(classDB[i][1])
+				classDB[i].spellName = spellName or tostring(classDB[i][1])
+			end
+			sort(classDB,function(a,b) return a.spellName < b.spellName end)
 			addSpellFrame.sortedClasses[newValue] = true
 		end
 		
-		for i=1,#module.db.allClassSpells[newValue] do
-			if i <= addSpellFrame.buttonsMax then
-				local SpellID = module.db.allClassSpells[newValue][i][1]
-				local spellName, _, spellTexture = GetSpellInfo(SpellID)
-				if module.db.differentIcons[ SpellID ] then
-					spellTexture = module.db.differentIcons[SpellID]
-				end
-				local buttonFrame = module.options.addSpellFrame.buttons[i]
-				
-				buttonFrame.icon:SetTexture(spellTexture or "Interface\\Icons\\INV_MISC_QUESTIONMARK")
-				buttonFrame.text:SetText(spellName or "?")
-				buttonFrame.spellID = SpellID
-				buttonFrame.spellLink = GetSpellLink(SpellID)
-				buttonFrame.colNum = module.db.allClassSpells[newValue][i][2]
-				
-				buttonFrame.line = module.db.allClassSpells[newValue][i]
-				
-				if newValue == "PET" then
-					buttonFrame.text:SetText("|c"..ExRT.F.classColor(module.db.allClassSpells[newValue][i][3])..L.classLocalizate[module.db.allClassSpells[newValue][i][3]].."|r "..(spellName or "?"))
-				end
-				
-				buttonFrame.disabled = nil
-				for j=1,#module.db.spellDB do
-					if module.db.spellDB[j][1] == SpellID then
-							buttonFrame.icon:SetDesaturated(true)
-							buttonFrame.text:SetTextColor(0.5,0.5,0.5,1)
-							buttonFrame.disabled = true
-						break
+		local buttonCount = 0
+		for i=1,#classDB do
+			local spellDB = classDB[i]
+			if spellDB[3] or spellDB[3+specNum] then
+				buttonCount = buttonCount + 1
+				local buttonFrame = module.options.addSpellFrame.buttons[buttonCount]
+				if buttonFrame then
+					local SpellID = spellDB[1]
+					local spellName, _, spellTexture = GetSpellInfo(SpellID)
+					if module.db.differentIcons[ SpellID ] then
+						spellTexture = module.db.differentIcons[SpellID]
 					end
+					
+					buttonFrame.icon:SetTexture(spellTexture or "Interface\\Icons\\INV_MISC_QUESTIONMARK")
+					buttonFrame.text:SetText(spellName or "?")
+					buttonFrame.spellID = SpellID
+					buttonFrame.spellLink = GetSpellLink(SpellID)
+					buttonFrame.colNum = spellDB[2]
+					
+					buttonFrame.line = spellDB
+					
+					if newValue == "PET" then
+						buttonFrame.text:SetText("|c"..ExRT.F.classColor(spellDB[3])..L.classLocalizate[spellDB[3]].."|r "..(spellName or "?"))
+					end
+					
+					buttonFrame.disabled = nil
+					for j=1,#module.db.spellDB do
+						if module.db.spellDB[j][1] == SpellID then
+								buttonFrame.icon:SetDesaturated(true)
+								buttonFrame.text:SetTextColor(0.5,0.5,0.5,1)
+								buttonFrame.disabled = true
+							break
+						end
+					end
+					if not buttonFrame.disabled then
+						buttonFrame.icon:SetDesaturated(nil)
+						buttonFrame.text:SetTextColor(1,1,1,1)
+					end
+		
+					buttonFrame:Show()
 				end
-				if not buttonFrame.disabled then
-					buttonFrame.icon:SetDesaturated(nil)
-					buttonFrame.text:SetTextColor(1,1,1,1)
-				end
-	
-				buttonFrame:Show()
 			end
 		end
-		for i=#module.db.allClassSpells[newValue]+1,addSpellFrame.buttonsMax do
+		for i=buttonCount+1,addSpellFrame.buttonsMax do
 			addSpellFrame.buttons[i]:Hide()
 		end
 		addSpellFrame.class = newValue
@@ -5451,13 +5838,14 @@ function module.options:Load()
 		self.addSpellFrame.buttonsMax = max(self.addSpellFrame.buttonsMax,now)
 	end
 	self.addSpellFrame.buttonsMax = max(self.addSpellFrame.buttonsMax,#module.db.allClassSpells["PET"])
-	self.addSpellFrame:SetHeight( 82 + 35 * ceil( self.addSpellFrame.buttonsMax / 4 ) )
+	--self.addSpellFrame:SetHeight( 82 + 35 * ceil( self.addSpellFrame.buttonsMax / 4 ) )
+	self.addSpellFrame:SetHeight( 420 )
 	
 	self.addSpellFrame.buttons = {}
 	for i=1,self.addSpellFrame.buttonsMax do
 		local buttonFrame = CreateFrame("Button",nil,self.addSpellFrame)
 		self.addSpellFrame.buttons[i] = buttonFrame
-		buttonFrame:SetPoint("TOPLEFT",(i-1)%4 * 130 + 15,-floor((i-1)/4) * 35 - 60)
+		buttonFrame:SetPoint("TOPLEFT",(i-1)%4 * 130 + 15 + 200,-floor((i-1)/4) * 35 - 60 - 57)
 		buttonFrame:SetSize(130,35)
 		buttonFrame:SetBackdrop({edgeFile = ExRT.F.defBorder, edgeSize = 8})
 		buttonFrame:SetBackdropBorderColor(1,1,1,0)
@@ -5513,7 +5901,7 @@ function module.options:Load()
 	end
 	
 	self.addSpellFrame.OnShow = function (self)
-		self.dropDown:SetValue(self.class or "WARRIOR")
+		self.dropDown:SetValue(self.CURR_CLASS or module.db.classNames[math.random(1,#module.db.classNames)])
 	end
 	
 	self.tab.tabs[1].decorationLine = CreateFrame("Frame",nil,self.tab.tabs[1])
@@ -5826,6 +6214,7 @@ function module.options:Load()
 		end
 		module.options.optColSet.chkIconTooltip:SetChecked(VExRT.ExCD2.colSet[i].methodsIconTooltip)
 		module.options.optColSet.chkLineClick:SetChecked(VExRT.ExCD2.colSet[i].methodsLineClick)
+		module.options.optColSet.chkLineClickWhisper:SetChecked(VExRT.ExCD2.colSet[i].methodsLineClickWhisper)
 		module.options.optColSet.chkNewSpellNewLine:SetChecked(VExRT.ExCD2.colSet[i].methodsNewSpellNewLine)
 		module.options.optColSet.chkHideOwnSpells:SetChecked(VExRT.ExCD2.colSet[i].methodsHideOwnSpells)
 		module.options.optColSet.chkAlphaNotInRange:SetChecked(VExRT.ExCD2.colSet[i].methodsAlphaNotInRange)
@@ -6615,8 +7004,16 @@ function module.options:Load()
 		module:ReloadAllSplits()
 	end)
 	
+	self.optColSet.chkLineClickWhisper = ELib:Check(self.optColSet.superTabFrame.tab[6],L.cd2OtherSetLineClickWhisper):Point(10,-180):OnClick(function(self) 
+		if self:GetChecked() then
+			VExRT.ExCD2.colSet[module.options.optColTabs.selected].methodsLineClickWhisper = true
+		else
+			VExRT.ExCD2.colSet[module.options.optColTabs.selected].methodsLineClickWhisper = nil
+		end
+		module:ReloadAllSplits()
+	end)	
 	
-	self.optColSet.chkNewSpellNewLine = ELib:Check(self.optColSet.superTabFrame.tab[6],L.cd2NewSpellNewLine):Point(10,-180):Tooltip(L.cd2NewSpellNewLineTooltip):OnClick(function(self) 
+	self.optColSet.chkNewSpellNewLine = ELib:Check(self.optColSet.superTabFrame.tab[6],L.cd2NewSpellNewLine):Point(10,-205):Tooltip(L.cd2NewSpellNewLineTooltip):OnClick(function(self) 
 		if self:GetChecked() then
 			VExRT.ExCD2.colSet[module.options.optColTabs.selected].methodsNewSpellNewLine = true
 		else
@@ -6625,8 +7022,8 @@ function module.options:Load()
 		module:ReloadAllSplits()
 	end)
 	
-	self.optColSet.textSortingRules= ELib:Text(self.optColSet.superTabFrame.tab[6],L.cd2MethodsSortingRules..":",11):Size(200,20):Point(10,-205)
-	self.optColSet.dropDownSortingRules = ELib:DropDown(self.optColSet.superTabFrame.tab[6],405,6):Size(220):Point(180,-205)
+	self.optColSet.textSortingRules= ELib:Text(self.optColSet.superTabFrame.tab[6],L.cd2MethodsSortingRules..":",11):Size(200,20):Point(10,-230)
+	self.optColSet.dropDownSortingRules = ELib:DropDown(self.optColSet.superTabFrame.tab[6],405,6):Size(220):Point(180,-230)
 	self.optColSet.dropDownSortingRules.Rules = {L.cd2MethodsSortingRules1,L.cd2MethodsSortingRules2,L.cd2MethodsSortingRules3,L.cd2MethodsSortingRules4,L.cd2MethodsSortingRules5,L.cd2MethodsSortingRules6}
 	for i=1,#self.optColSet.dropDownSortingRules.Rules do
 		self.optColSet.dropDownSortingRules.List[i] = {
@@ -6642,7 +7039,7 @@ function module.options:Load()
 		}
 	end
 	
-	self.optColSet.chkHideOwnSpells = ELib:Check(self.optColSet.superTabFrame.tab[6],L.cd2MethodsDisableOwn):Point(10,-230):OnClick(function(self) 
+	self.optColSet.chkHideOwnSpells = ELib:Check(self.optColSet.superTabFrame.tab[6],L.cd2MethodsDisableOwn):Point(10,-255):OnClick(function(self) 
 		if self:GetChecked() then
 			VExRT.ExCD2.colSet[module.options.optColTabs.selected].methodsHideOwnSpells = true
 		else
@@ -6651,7 +7048,7 @@ function module.options:Load()
 		module:ReloadAllSplits()
 	end)
 	
-	self.optColSet.chkAlphaNotInRange = ELib:Check(self.optColSet.superTabFrame.tab[6],L.cd2MethodsAlphaNotInRange):Point(10,-255):OnClick(function(self) 
+	self.optColSet.chkAlphaNotInRange = ELib:Check(self.optColSet.superTabFrame.tab[6],L.cd2MethodsAlphaNotInRange):Point(10,-280):OnClick(function(self) 
 		if self:GetChecked() then
 			VExRT.ExCD2.colSet[module.options.optColTabs.selected].methodsAlphaNotInRange = true
 		else
@@ -6668,7 +7065,7 @@ function module.options:Load()
 		self:tooltipReload(self)
 	end)
 	
-	self.optColSet.chkDisableActive = ELib:Check(self.optColSet.superTabFrame.tab[6],L.cd2ColSetDisableActive):Point(10,-280):OnClick(function(self) 
+	self.optColSet.chkDisableActive = ELib:Check(self.optColSet.superTabFrame.tab[6],L.cd2ColSetDisableActive):Point(10,-305):OnClick(function(self) 
 		if self:GetChecked() then
 			VExRT.ExCD2.colSet[module.options.optColTabs.selected].methodsDisableActive = true
 		else
@@ -6677,7 +7074,7 @@ function module.options:Load()
 		module:ReloadAllSplits()
 	end)
 	
-	self.optColSet.chkOneSpellPerCol = ELib:Check(self.optColSet.superTabFrame.tab[6],L.cd2ColSetOneSpellPerCol):Point(10,-305):OnClick(function(self) 
+	self.optColSet.chkOneSpellPerCol = ELib:Check(self.optColSet.superTabFrame.tab[6],L.cd2ColSetOneSpellPerCol):Point(10,-330):OnClick(function(self) 
 		if self:GetChecked() then
 			VExRT.ExCD2.colSet[module.options.optColTabs.selected].methodsOneSpellPerCol = true
 		else
@@ -6696,10 +7093,10 @@ function module.options:Load()
 		self:doAlphas()
 	end)
 	function self.optColSet.chkGeneralMethods:doAlphas()
-		ExRT.lib.SetAlphas(VExRT.ExCD2.colSet[module.options.optColTabs.selected].methodsGeneral and module.options.optColTabs.selected ~= (module.db.maxColumns + 1) and 0.5 or 1,module.options.optColSet.chkShowOnlyOnCD,module.options.optColSet.chkBotToTop,module.options.optColSet.dropDownStyleAnimation,module.options.optColSet.dropDownTimeLineAnimation,module.options.optColSet.chkIconTooltip,module.options.optColSet.chkLineClick,module.options.optColSet.chkNewSpellNewLine,module.options.optColSet.dropDownSortingRules,module.options.optColSet.textSortingRules,module.options.optColSet.textStyleAnimation,module.options.optColSet.textTimeLineAnimation,module.options.optColSet.chkHideOwnSpells,module.options.optColSet.chkAlphaNotInRange,module.options.optColSet.sliderAlphaNotInRange,module.options.optColSet.chkDisableActive,module.options.optColSet.chkOneSpellPerCol)
+		ExRT.lib.SetAlphas(VExRT.ExCD2.colSet[module.options.optColTabs.selected].methodsGeneral and module.options.optColTabs.selected ~= (module.db.maxColumns + 1) and 0.5 or 1,module.options.optColSet.chkShowOnlyOnCD,module.options.optColSet.chkBotToTop,module.options.optColSet.dropDownStyleAnimation,module.options.optColSet.dropDownTimeLineAnimation,module.options.optColSet.chkIconTooltip,module.options.optColSet.chkLineClick,module.options.optColSet.chkNewSpellNewLine,module.options.optColSet.dropDownSortingRules,module.options.optColSet.textSortingRules,module.options.optColSet.textStyleAnimation,module.options.optColSet.textTimeLineAnimation,module.options.optColSet.chkHideOwnSpells,module.options.optColSet.chkAlphaNotInRange,module.options.optColSet.sliderAlphaNotInRange,module.options.optColSet.chkDisableActive,module.options.optColSet.chkOneSpellPerCol,module.options.optColSet.chkLineClickWhisper)
 	end
 	
-	self.optColSet.chkSortByAvailability = ELib:Check(self.optColSet.superTabFrame.tab[6],L.cd2SortByAvailability,VExRT.ExCD2.SortByAvailability):Point(10,-330):OnClick(function(self) 
+	self.optColSet.chkSortByAvailability = ELib:Check(self.optColSet.superTabFrame.tab[6],L.cd2SortByAvailability,VExRT.ExCD2.SortByAvailability):Point(10,-355):OnClick(function(self) 
 		if self:GetChecked() then
 			VExRT.ExCD2.SortByAvailability = true
 		else
@@ -7908,6 +8305,7 @@ function module:ReloadAllSplits(argScaleFix)
 		
 		columnFrame.methodsIconTooltip = (not VExRT_ColumnOptions[i].methodsGeneral and VExRT_ColumnOptions[i].methodsIconTooltip) or (VExRT_ColumnOptions[i].methodsGeneral and VExRT_ColumnOptions[module.db.maxColumns+1].methodsIconTooltip) 
 		columnFrame.methodsLineClick = (not VExRT_ColumnOptions[i].methodsGeneral and VExRT_ColumnOptions[i].methodsLineClick) or (VExRT_ColumnOptions[i].methodsGeneral and VExRT_ColumnOptions[module.db.maxColumns+1].methodsLineClick)
+		columnFrame.methodsLineClickWhisper = (not VExRT_ColumnOptions[i].methodsGeneral and VExRT_ColumnOptions[i].methodsLineClickWhisper) or (VExRT_ColumnOptions[i].methodsGeneral and VExRT_ColumnOptions[module.db.maxColumns+1].methodsLineClickWhisper)
 		columnFrame.methodsNewSpellNewLine = (not VExRT_ColumnOptions[i].methodsGeneral and VExRT_ColumnOptions[i].methodsNewSpellNewLine) or (VExRT_ColumnOptions[i].methodsGeneral and VExRT_ColumnOptions[module.db.maxColumns+1].methodsNewSpellNewLine)
 		columnFrame.methodsSortingRules = (not VExRT_ColumnOptions[i].methodsGeneral and VExRT_ColumnOptions[i].methodsSortingRules) or (VExRT_ColumnOptions[i].methodsGeneral and VExRT_ColumnOptions[module.db.maxColumns+1].methodsSortingRules) or module.db.colsDefaults.methodsSortingRules
 		columnFrame.methodsHideOwnSpells = (not VExRT_ColumnOptions[i].methodsGeneral and VExRT_ColumnOptions[i].methodsHideOwnSpells) or (VExRT_ColumnOptions[i].methodsGeneral and VExRT_ColumnOptions[module.db.maxColumns+1].methodsHideOwnSpells)
@@ -8206,8 +8604,8 @@ module.db.allClassSpells = {
 	{193530,3,	nil,			{193530,120,	10},	nil,			nil,			},	--Дух дикой природы
 	{186289,3,	nil,			nil,			nil,			{186289,120,	10},	},	--Дух орла
 	{186265,4,	{186265,180,	8},	nil,			nil,			nil,			},	--Дух черепахи
-	{194291,4,	nil,			nil,			{194291,120,	0},	nil,			},	--Живость
-	{109304,4,	nil,			{109304,120,	0},	nil,			{109304,120,	0},	},	--Живость
+	--{194291,4,	nil,			nil,			{194291,120,	0},	nil,			},	--Живость
+	{109304,4,	nil,			{109304,120,	0},	{109304,120,	0},	{109304,120,	0},	},	--Живость
 	{187650,3,	{187650,30,	0},	nil,			nil,			nil			},	--Замораживающая ловушка
 	{19574,	3,	nil,			{19574,	90,	15},	nil,			nil,			},	--Звериный гнев
 	{201430,3,	nil,			{201430,180,	12},	nil,			nil,			},	--Звериный натиск
@@ -8574,7 +8972,34 @@ module.db.allClassSpells = {
 },
 
 ["PET"] = {
-
+	{90355,	3,	"HUNTER"},
+	{159931,3,	"HUNTER"},
+	{26064,	3,	"HUNTER"},
+	{159956,3,	"HUNTER"},
+	{55709,	3,	"HUNTER"},
+	{53480,	2,	"HUNTER"},
+	{53478,	3,	"HUNTER"},
+	{61685,	3,	"HUNTER"},
+	{126393,3,	"HUNTER"},
+	{137798,3,	"HUNTER"},
+	{90361,	3,	"HUNTER"},
+	{91802,	5,	"DEATHKNIGHT"},
+	{91797,	3,	"DEATHKNIGHT"},
+	{89751,	3,	"WARLOCK"},
+	{89766,	5,	"WARLOCK"},
+	{115276,5,	"WARLOCK"},
+	{17767,	3,	"WARLOCK"},
+	{89808,	5,	"WARLOCK"},
+	{119899,4,	"WARLOCK"},
+	{89792,	3,	"WARLOCK"},
+	{115781,5,	"WARLOCK"},
+	{115831,3,	"WARLOCK"},
+	{115268,3,	"WARLOCK"},
+	{6358,	3,	"WARLOCK"},
+	{19647,	5,	"WARLOCK"},
+	{19505,	3,	"WARLOCK"},
+	{135029,3,	"MAGE"},
+	{33395,	3,	"MAGE"},
 },
 ["RACIAL"] = {
 	{68992,	3,	{68992,	120,	10},	},	--Worgen
@@ -8592,6 +9017,10 @@ module.db.allClassSpells = {
 	{26297,	3,	{26297,	180,	10},	},	--Troll
 	{28730,	3,	{28730,	90,	0},	},	--BloodElf
 	{107079,3,	{107079,120,	4},	},	--Pandaren
+	{256948,3,	{256948,120,	0},	},	--VoidElf
+	{260364,3,	{260364,180,	12},	},	--Nightborne
+	{255647,3,	{255647,150,	0},	},	--LightforgedDraenei
+	{255654,3,	{255654,120,	0},	},	--HighmountainTauren
 },
 ["ITEMS"] = {
 	{67826,	3,	{67826,	3600,	0},	},	--Jeevs
@@ -8631,7 +9060,9 @@ module.db.allClassSpells = {
 	{221803,3,	{221803,60,	10},	},	--Ravaged Seed Pod
 	{235169,3,	{235169,75,	10},	},	--Archimonde's Hatred Reborn
 	{235966,3,	{235966,75,	10},	},	--Velen's Future Sight
-	{235991,3,	{235991,75,	0},	},	--Kil'jaeden's Burning Wish	
+	{235991,3,	{235991,75,	0},	},	--Kil'jaeden's Burning Wish
+	{251946,3,	{251946,120,	3},	},	--ABT Bulwark of Flame
+	
 },
 }
 ]]
@@ -9493,7 +9924,7 @@ local function Artifact_ScanTimer()
 end
 
 function moduleInspect.main:ARTIFACT_XP_UPDATE()
-	Artifact_ScanTimer()
+	--Artifact_ScanTimer()		--Stop Updating This
 end
 
 local function Inspect_ParseArtifactString(db,string)
@@ -9682,5 +10113,3 @@ function moduleInspect:addonMessage(sender, prefix, prefix2, ...)
 		end
 	end
 end
-
-

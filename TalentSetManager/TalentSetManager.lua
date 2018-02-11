@@ -712,7 +712,8 @@ end
 
 function TalentSetListButton_OnClick(f)
  if f.set then
-  PlaySound("igMainMenuOptionCheckBoxOn")
+  --PlaySound("igMainMenuOptionCheckBoxOn")
+  PlaySound(856)
   TalentSetsList.selectedSet = f.set
   setIgnoredTierOverlays(f.set)
   TalentSetList_Update()
@@ -731,7 +732,8 @@ end
 
 function TalentSetListButton_OnDoubleClick(f)
  if f.set then
-  PlaySound("igCharacterInfoTab")
+  --PlaySound("igCharacterInfoTab")
+  PlaySound(841)
   learnTalents(f.set)
   TalentSetsList.queuedUpdate = true
  end
@@ -867,7 +869,8 @@ end
 
 local function equipSet_OnClick(f)
  if TalentSetsList.selectedSet then
-  PlaySound("igCharacterInfoTab")
+  --PlaySound("igCharacterInfoTab")
+  PlaySound(841)
   learnTalents(TalentSetsList.selectedSet)
   TalentSetsList.queuedUpdate = true
  end

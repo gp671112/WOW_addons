@@ -1,36 +1,22 @@
-lightweight tag 4e2fb2ba78e7e01c325e391875f8db9e7c6b59f5 1.9.2-release
+lightweight tag 7d3e2365b5ee10647a58926588dc99beaed2d10c 1.14.14-release
 Author:	Julien Rechaussat <Kutikuti@users.noreply.github.com>
-Date:	Sat Apr 22 12:35:58 2017 +0200
+Date:	Wed Jan 17 10:33:40 2018 +0100
 
-commit 4e2fb2ba78e7e01c325e391875f8db9e7c6b59f5
+commit 7d3e2365b5ee10647a58926588dc99beaed2d10c
 Author: Julien Rechaussat <Kutikuti@users.noreply.github.com>
-Date:   Sat Apr 22 12:35:58 2017 +0200
+Date:   Wed Jan 17 10:33:40 2018 +0100
 
-    Version bump
+    Small bump
 
-commit bee6166ab00829b22d9e58ea082001ac7624dfd1
+commit f0662d2f8c9ada92c680640525320989e2daae35
 Author: Julien Rechaussat <Kutikuti@users.noreply.github.com>
-Date:   Sat Apr 22 12:35:48 2017 +0200
+Date:   Wed Jan 17 10:33:16 2018 +0100
 
-    Auto set min leg with equiped legendaries
+    Fix artifact string issue with 7.3.5
 
-commit 3e53482984a6b675a3bfc0ce2bec782cf76807cb
+commit 25bf3570bfe46dcb75871a29632433b16517da8e
 Author: Julien Rechaussat <Kutikuti@users.noreply.github.com>
-Date:   Sat Apr 22 12:33:51 2017 +0200
+Date:   Fri Jan 5 10:52:06 2018 +0100
 
-    Revert "Set min leg qith number of q"
-    
-    This reverts commit 76e84516e8f468312f598b16a27df2e327a2545b.
-
-commit 76e84516e8f468312f598b16a27df2e327a2545b
-Author: Julien Rechaussat <Kutikuti@users.noreply.github.com>
-Date:   Sat Apr 22 12:33:43 2017 +0200
-
-    Set min leg qith number of q
-
-commit c7d209a5ef9dbfd92e270f21b865545aef317c84
-Author: Julien Rechaussat <Kutikuti@users.noreply.github.com>
-Date:   Sat Apr 22 12:21:56 2017 +0200
-
-    Fix lua error + minor ui adjustment
+    test commit
 

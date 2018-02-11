@@ -7,7 +7,7 @@ local pHooked = false
 local elapsedTime = 0
 
 local function CPrint(msg)
-	print("|cFF99FF99裝備屬性選擇建議：|r"..msg)
+	print("|cFF99FF99裝備屬性建議：|r"..msg)
 end
 
 stats_Frame = CreateFrame("Frame",stats_Frame,UIParent)

@@ -1,10 +1,10 @@
--- $Id: Atlas_Transportation.lua 90 2017-06-29 08:11:43Z arith $
+-- $Id: Atlas_Transportation.lua 94 2018-01-19 15:31:54Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail.com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail.com>
 
 	This file is part of Atlas.
 
@@ -2295,7 +2295,7 @@ local myData = {
 		{ INDENT..INDENT.._RED..ALC["L-Parenthesis"]..L["Warning: Drop"]..ALC["R-Parenthesis"] },
 		{ INDENT..GREY.."  -> "..BZ["Karazhan"]..ALC["Comma"]..BZ["Deadwind Pass"]..ALC["Comma"]..BZ["Eastern Kingdoms"] },
 		{ PURP.." C) "..format(ALC["Portal to %s"], BZ["Dalaran"])..GREY.." (30.1, 40.7)", 10042 },
-		{ NUTL.."37) "..BZ["Deliverance Point"]..ALC["Hyphen"].._G["72_BROKENSHORE_BUILDING_MAGETOWER"]..GREY.." (46.3, 61.9)" },
+		{ NUTL.."37) "..BZ["Deliverance Point"]..ALC["Hyphen"].._G["BROKENSHORE_BUILDING_MAGETOWER"]..GREY.." (46.3, 61.9)" },
 		{ INDENT..GREY.."  -> "..BZ["Meredil"]..ALC["Comma"]..BZ["Suramar"] },
 		{ INDENT..GREY.."  -> "..BZ["Valdisdall"]..ALC["Comma"]..BZ["Stormheim"] },
 		{ INDENT..GREY.."  -> "..BZ["Lorlathil"]..ALC["Comma"]..BZ["Val'sharah"] },
@@ -2467,7 +2467,7 @@ local myData = {
 		{ INDENT..INDENT.._RED..ALC["L-Parenthesis"]..L["Warning: Drop"]..ALC["R-Parenthesis"] },
 		{ INDENT..GREY.."  -> "..BZ["Karazhan"]..ALC["Comma"]..BZ["Deadwind Pass"]..ALC["Comma"]..BZ["Eastern Kingdoms"] },
 		{ PURP.." C) "..format(ALC["Portal to %s"], BZ["Dalaran"])..GREY.." (30.1, 40.7)", 10042 },
-		{ NUTL.."37) "..BZ["Deliverance Point"]..ALC["Hyphen"].._G["72_BROKENSHORE_BUILDING_MAGETOWER"]..GREY.." (46.3, 61.9)" },
+		{ NUTL.."37) "..BZ["Deliverance Point"]..ALC["Hyphen"].._G["BROKENSHORE_BUILDING_MAGETOWER"]..GREY.." (46.3, 61.9)" },
 		{ INDENT..GREY.."  -> "..BZ["Meredil"]..ALC["Comma"]..BZ["Suramar"] },
 		{ INDENT..GREY.."  -> "..BZ["Valdisdall"]..ALC["Comma"]..BZ["Stormheim"] },
 		{ INDENT..GREY.."  -> "..BZ["Lorlathil"]..ALC["Comma"]..BZ["Val'sharah"] },

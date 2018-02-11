@@ -1,4 +1,4 @@
-﻿## Interface: 70200
+﻿## Interface: 70300
 ## X-Min-Interface: 50400
 ## Title:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff69ccf0Challenges|r
 ## Title-zhTW:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff69ccf0神器挑戰|r
@@ -16,7 +16,7 @@
 ## X-DBM-Mod-Name: Challenges
 ## X-DBM-Mod-Name-zhTW: 神器挑戰
 ## X-DBM-Mod-Name-zhCN: 白虎试练场
-## X-DBM-Mod-Sort: 140
+## X-DBM-Mod-Sort: 516
 ## X-DBM-Mod-MapID: 1148, 1698, 1710, 1703, 1702, 1684, 1673, 1616
 ## X-DBM-Mod-MinCoreRevision: 16130
 localization.en.lua

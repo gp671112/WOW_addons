@@ -42,7 +42,16 @@
 ---------------
 DBT = {}
 DBT_PersistentOptions = {}
+_, _, _, DBMKarma, _, _, _ = GetAddOnInfo("DBM-Karma-Skin")
 
+if DBMKarma == false and Check == false then
+	DBM.Bars:SetOption("Skin","Default")
+	DBM.Bars:SetOption("Template","DBMDefaultSkinTimerTemplate")
+	Check = true
+else if DBMKarma == true then
+	Check = false
+	end
+end
 
 --------------
 --  Locals  --
@@ -84,7 +93,6 @@ else
 	standardFont = "Fonts\\FRIZQT__.TTF"
 end
 
-
 -----------------------
 --  Default Options  --
 -----------------------
@@ -107,11 +115,11 @@ options = {
 	},
 	ExpandUpwards = {
 		type = "boolean",
-		default = false,
+		default = true,
 	},
 	ExpandUpwardsLarge = {
 		type = "boolean",
-		default = false,
+		default = true,
 	},
 	Flash = {
 		type = "boolean",
@@ -434,11 +442,11 @@ options = {
 	},
 	FillUpBars = {
 		type = "boolean",
-		default = true,
+		default = false,
 	},
 	FillUpLargeBars = {
 		type = "boolean",
-		default = true,
+		default = false,
 	},
 	ClickThrough = {
 		type = "boolean",
@@ -796,6 +804,9 @@ do
 			if (importantBar or (timer <= enlargeTime or huge)) and self:GetOption("HugeBarsEnabled") then -- start enlarged
 				newBar.enlarged = true
 				newBar.huge = true
+				if huge then
+					self.enlargeHack = true
+				end
 				self.hugeBars:Append(newBar)
 			else
 				newBar.huge = nil
@@ -906,6 +917,7 @@ function barPrototype:ResetAnimations()
 	self.enlarged = nil
 	self.moving = nil
 	self.owner.smallBars:Append(self)
+	self:ApplyStyle()
 end
 
 function barPrototype:Pause()
@@ -1010,6 +1022,7 @@ function barPrototype:Update(elapsed)
 			elseif colorCount == 6 then--Phase
 				r = barOptions.StartColorPR  + (barOptions.EndColorPR - barOptions.StartColorPR) * (1 - timerValue/totaltimeValue)
 				g = barOptions.StartColorPG  + (barOptions.EndColorPG - barOptions.StartColorPG) * (1 - timerValue/totaltimeValue)
+
 				b = barOptions.StartColorPB  + (barOptions.EndColorPB - barOptions.StartColorPB) * (1 - timerValue/totaltimeValue)
 			elseif colorCount == 7 then--Important
 				if barOptions.Bar7ForceLarge then
@@ -1204,9 +1217,14 @@ function DBT:ApplyStyle()
 	for bar in self:GetBarIterator() do
 		bar:ApplyStyle()
 	end
+	if applyFailed then
+		applyFailed = false
+		DBM:AddMsg(DBM_CORE_LOAD_SKIN_COMBAT)
+	end
 end
 
 function barPrototype:ApplyStyle()
+	applyFailed = true
 	local frame = self.frame
 	local frame_name = frame:GetName()
 	local bar = _G[frame_name.."Bar"]
@@ -1260,13 +1278,25 @@ function barPrototype:ApplyStyle()
 	if barOptions.IconLeft then icon1:Show() else icon1:Hide() end
 	if barOptions.IconRight then icon2:Show() else icon2:Hide() end
 	if enlarged then bar:SetWidth(barHugeWidth); bar:SetHeight(barHeight); else bar:SetWidth(barWidth) bar:SetHeight(barHeight); end
+	if DBMKarma == true then
+		if self.enlarged then bar:SetWidth(self.owner.options.HugeWidth); bar:SetHeight(6); else bar:SetWidth(self.owner.options.Width) bar:SetHeight(6); end
+	else
+		if self.enlarged then bar:SetWidth(barHugeWidth); bar:SetHeight(barHeight); else bar:SetWidth(barWidth) bar:SetHeight(barHeight); end
+	end
 	if enlarged then frame:SetScale(barOptions.HugeScale) else frame:SetScale(barOptions.Scale) end
 	if barOptions.IconLocked then
 		if enlarged then frame:SetWidth(barHugeWidth); frame:SetHeight(barHeight); else frame:SetWidth(barWidth); frame:SetHeight(barHeight); end
-		icon1:SetWidth(barHeight)
-		icon1:SetHeight(barHeight)
-		icon2:SetWidth(barHeight)
-		icon2:SetHeight(barHeight)
+		if DBMKarma == true then
+			icon1:SetWidth(22)
+			icon1:SetHeight(22)
+			icon2:SetWidth(22)
+			icon2:SetHeight(22)
+		else
+			icon1:SetWidth(barHeight)
+			icon1:SetHeight(barHeight)
+			icon2:SetWidth(barHeight)
+			icon2:SetHeight(barHeight)
+		end
 	end
 	self.frame:Show()
 	if sparkEnabled then
@@ -1275,11 +1305,23 @@ function barPrototype:ApplyStyle()
 	texture:SetAlpha(1)
 	bar:SetAlpha(1)
 	frame:SetAlpha(1)
-	local barFont, barFontSize, barFontFlag = barOptions.Font, barOptions.FontSize, barOptions.FontFlag
-	name:SetFont(barFont, barFontSize, barFontFlag)
-	name:SetPoint("LEFT", bar, "LEFT", 3, 0)
-	timer:SetFont(barFont, barFontSize, barFontFlag)
+	if DBMKarma == true then
+		name:SetPoint("LEFT", 0, 8) 
+		name:SetFont("Fonts\\blei00d.TTF", 12, "THINOUTLINE")
+		timer:SetPoint("RIGHT", 0, 10) 
+		timer:SetFont("Fonts\\blei00d.TTF", 10, "THINOUTLINE")
+	else 
+		local barFont, barFontSize = self.owner.options.Font, self.owner.options.FontSize
+		name:SetFont(barFont, barFontSize)
+		name:SetPoint("LEFT", bar, "LEFT", 3, 0)
+		timer:SetFont(barFont, barFontSize)
+	end
+	--local barFont, barFontSize, barFontFlag = barOptions.Font, barOptions.FontSize, barOptions.FontFlag
+	--name:SetFont(barFont, barFontSize, barFontFlag)
+	--name:SetPoint("LEFT", bar, "LEFT", 3, 0)
+	--timer:SetFont(barFont, barFontSize, barFontFlag)
 	self:Update(0)
+	applyFailed = false--Got to end with no script ran too long
 end
 
 local function updateOrientation(self)

@@ -1,0 +1,24 @@
+tag c8ef9f8985e0980dbb6bde9a0960b110f3baf2e4 v7.3.0
+Author:	funkydude <funkydude@users.noreply.github.com>
+Date:	Sun Nov 19 21:09:19 2017 +0000
+
+Tagging as v7.3.0
+
+commit 604f57afa0a70ca2f12f65d81ee0752e36a6ca16
+Author: funkydude <funkydude@users.noreply.github.com>
+Date:   Sun Nov 19 21:08:20 2017 +0000
+
+    Fix missing )
+
+commit 0f8f69a5ff5b1ef4861ec6104a2b662b92aa88ec
+Author: funkydude <funkydude@users.noreply.github.com>
+Date:   Sun Nov 19 21:06:15 2017 +0000
+
+    cleanups
+
+commit 8fea7ec9d0a123e3ee0bd01cf8486076ef94d528
+Author: funkydude <funkydude@users.noreply.github.com>
+Date:   Sun Nov 19 20:47:58 2017 +0000
+
+    update metadata
+

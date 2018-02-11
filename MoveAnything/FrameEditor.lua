@@ -256,7 +256,7 @@ function MovAny:CreateFrameEditor(id, name)
 		if fe.opt and fe.opt.disabled then
 			fe.opt.hidden = self:GetChecked() and true or nil
 		else
-			if not MovAny:ToggleHide(fe.editFrame:GetName()) then
+			if fe.editFrame and not MovAny:ToggleHide(fe.editFrame:GetName()) then
 				self:SetChecked(nil)
 			end
 		end

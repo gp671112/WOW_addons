@@ -137,7 +137,7 @@ function module:BagHide()
 end
 function module:DrawItem(frame,quality,itemlink,class)
 	--pp("DrawItem",quality,itemlink,class)
-	if not frame:IsVisible() then return end
+	--if not frame:IsVisible() then return end
 	local layer=frameLayers[frame]
 	local t=layer.ilevel
 	if itemlink and not class then

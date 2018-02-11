@@ -1,10 +1,10 @@
-## Interface: 70200
+## Interface: 70300
 ## Title: AdiBags Legion Filters
 ## Notes: Adds filters for Legion items to AdiBags
 ## Title-zhTW: |cFFFF8000[背包/銀行]|rAdiBags - 軍臨天下分類
 ## Notes-zhTW: 增加軍臨天下相關物品的分類。
 ## Author: Selvanis@Uldum
-## Version: 1.5
+## Version: 1.6.2
 ## Dependencies: AdiBags
 Localization.lua
 data\ItemTables.lua
@@ -12,3 +12,7 @@ data\ArtifactPowerTable.lua
 AdiBags_Legion_Filters.lua
 Artifact_Power_Plugin.lua
 Artifact_Power_Currency.lua
+#@debug@
+# data\!zArtifactPowerPreParse.lua
+# data\DevTools.lua
+#@end-debug@

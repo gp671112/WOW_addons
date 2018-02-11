@@ -1,11 +1,8 @@
-## Interface: 70100
+## Interface: 70300
 ## Title: Grail
 ## Author: Scott M Harrison
 ## Notes: Knows about quests
-## Title-zhTW: |cff00FFFF[任務]|r 資料庫-主程式
-## Notes-zhTW: Grail |n提供任務資訊，在地圖上顯示所有可接的任務。|n|cffffd200使用方法：|r輸入 /任務資料庫，或 /grail 重新整理任務資料庫，輸入 /grail help 取得更多指令說明。|n輸入 /任務記錄，或 /wholly 顯示任務資料庫視窗。|n|cffFF2D2D特別注意：|r升級解任務時不需要載入，解很低等的任務，或完全找不到任務可以接時才會需要使用。|n這個插件的記憶體使用量較大。電腦較慢，或不需要使用時請勿載入。
-## DefaultState: disabled
-## Version: 083
+## Version: 092
 ## SavedVariables: GrailDatabase
 ## SavedVariablesPerCharacter: GrailDatabasePlayer
 
@@ -15,6 +12,14 @@ Grail-Quests.lua
 
 Grail-NPCs.lua
 Grail-NPCs-enUS.lua
+Grail-NPCs-deDE.lua
+Grail-NPCs-esES.lua
+Grail-NPCs-esMX.lua
+Grail-NPCs-frFR.lua
+Grail-NPCs-itIT.lua
+Grail-NPCs-koKR.lua
+Grail-NPCs-ptBR.lua
+Grail-NPCs-ruRU.lua
 Grail-NPCs-zhCN.lua
 Grail-NPCs-zhTW.lua
 

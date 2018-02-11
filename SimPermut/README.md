@@ -1,30 +1,43 @@
 # SimPermut
-
+ 
 ## Overview
 
-This repository is for the addon SimPermut which make a string usable by SimulationCraft with all the different permutations for the items you have in your inventory. This makes easy comparing stuff.
+This repository is for the addon SimPermut which make a string usable by SimulationCraft with all the different permutations for the items you have in your inventory. This makes comparing stuff easy.
 
+Also handle talent permutation, relic comparison, crucible comparison. 
+
+Latest updates also add talents permutations and Artifact generator, aswell as more control over the profiles created. 
+
+Don't hesitate to go on the [SimcMinMax](https://discordapp.com/invite/tFR2uvK) Discord in the #simpermut-autosimc Channel to ask about specific stuff.
 
 Get it on curse : https://mods.curse.com/addons/wow/254069-simpermut
 
 ## How Can I Use It?
 
-/SimPermut
+>**/SimPermut** [X[+Y[+Z...]]]
 
+- Select which items you want to sim.
 
-Select the slots to permut from the dropdown on the top left.
+- Add enchants and gems on items that don't have any (you can force replace enchant and gem by ticking the checkbox).
 
-Select which items you want to sim.
+- Click Generate.
 
-Add enchants and gems on items that don't have any (you can force replace enchant and gem by selecting the force checkbox).
+- Copy the text and paste in simc.
 
-Click Generate.
+ 
 
-Copy the text and paste in simc.
+>**Note:**
+
+>You can also add parameters to pre-select an entire slot.
+
+>ie: /SimPermut finger+trinket
+
+>Will auto-select every ring and trinket and do a permutation with default parameters. 
+
 
 ## AutoSimC Export
 
-You can now export selected gear to an AutoSimC data (settings.ini) to externalize simc string generation. For a large number of items, it will be faster.
+You can now export selected gear to an **AutoSimC** data (settings.ini) to externalize simc string generation. For a large number of items, it will be faster.
 
 See [AutoSimC on GitHub](https://github.com/SimCMinMax/AutoSimC)
 
@@ -32,19 +45,11 @@ See [AutoSimC on GitHub](https://github.com/SimCMinMax/AutoSimC)
 
 ## Known issues and developement plan
 
-- Add relic comparison
+- Fix Warforged TW items
 
-- Detect number of equiped leg to auto set min
-
-[- Better way of detecting sets]
- 
-[-Faster algorithm for string generation]
-
-[-Rename copy to add stat rating for a better overlook in simc]
-
-
+-[Rework code]
 
 ## Credits
 Kutikuti 
 
-[Quichons guild](http://www.quichons.fr/) from EU-Elune (fr).
+[Quichons guild](http://www.quichons.fr/) from EU-Elune (fr)

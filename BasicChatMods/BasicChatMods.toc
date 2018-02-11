@@ -1,9 +1,11 @@
-## Interface: 70100
+## Interface: 70300
 ## Title: BasicChatMods
 ## Author: Funkydude
-## Version: v7.1.8
+## Version: v7.3.0
 ## Notes: Basic Chat Mods
 ## Title-zhTW: |cFF00FF80[聊天增強]|rBasicChatMods
+## Notes-zhCN: Basic Chat Mods
+## Notes-zhTW: Basic Chat Mods
 ## SavedVariables: bcmDB
 
 ## X-Credits: Rabbit & Ammo (SimpleChatMods)

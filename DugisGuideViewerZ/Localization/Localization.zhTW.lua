@@ -29,7 +29,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Suggest Trinkets"] = "建議飾品",
 	["A trinket is scored by its stats and item level but not the 'use' or special effect which can make the trinket suggestion inaccurate.\n\nUnticking this setting will disable the trinkets suggestion."] = "飾品是根據屬性和等級評分，而不是使用或觸發的特效，因此飾品的建議不是那麼精準。\n\n停用這個設定將會停用飾品的建議。",
 	["Display All Stats"] = "顯示所有屬性",
-	["Display unused stats for gear scoring"] = "顯示裝備評分未用到的屬性",
+	["Display unused stats for gear scoring"] = "顯示裝備評分未用到的屬性。",
 	["Reset Scores"] = "重置分數",
 	
 	-- GearAdvisor.lua
@@ -55,6 +55,7 @@ if ( GetLocale() == "zhTW" ) then
 	["XP Bonus"] = "經驗值加成",
 	["Gear Upgrade Suggested"] = "建議升級裝備",
 	
+	
 	-- arrow.lua
 	["Waypoint arrow not available. Click here to check the world map"] = "無法使用箭頭導引，點一下查看世界地圖。",
 	["Waypoint reached."] = "到達目的地。",
@@ -66,10 +67,13 @@ if ( GetLocale() == "zhTW" ) then
 	["Dugi Arrow"] = "Dugi 箭頭",
 	["Remove Waypoint"] = "取消路線導引",
 	["Remove All Waypoints"] = "取消所有路線導引",
+	["Refresh"] = "重新整理",
 	["Waypoint is on a different floor"] = "路線導引在另一個樓層",
 	["Lock Arrow"] = "鎖定箭頭",
 	["Unlock Arrow"] = "解除鎖定箭頭",
 	["Arrow Scale"] = "箭頭大小",
+	["Lock Zone Map"] = "鎖定地圖大小",
+	["Unlock Zone Map"] = "解除鎖定地圖大小",
 	["Text Scale"] = "文字大小",
 	
 	-- Libs\menu.lua
@@ -114,7 +118,7 @@ if ( GetLocale() == "zhTW" ) then
 	["|cff11ff11/dugi automount - |rToogle Auto Mount on/off."] = "|cff11ff11/dugi automount - |r啟用/停用自動坐騎。",
 	["|cff11ff11" .. "Dugi: Frame Reset"] = "|cff11ff11" .. "Dugi: 已經重置框架",
 	["|cff11ff11" .. "Dugi: Cleared Saved Variables"] = "|cff11ff11" .. "Dugi: 已經清除儲存的變數",
-	["|cff11ff11" .. "Dugi Guides Essential Mode"] = "Dugi 任務高手精簡版 已啟用",
+	["|cff11ff11" .. "Dugi Guides Essential Mode"] = "Dugi 任務高手核心版 已啟用",
 	["|cff11ff11" .. "Dugi Guides Off"] = "|cff11ff11" .. "Dugi 任務高手 已停用",
 	["|cff11ff11" .. "Dugi Guides On"] = "|cff11ff11" .. "Dugi 任務高手 已啟用",
 	["|cff11ff11Auto Mount is ON|r"] = "|cff11ff11自動坐騎 已啟用|r",
@@ -136,8 +140,8 @@ if ( GetLocale() == "zhTW" ) then
 	["Ignore Daily Quest Items"] = "忽略每日任務物品",
 	["Don't suggest to replace quest items for completing daily quest"] = "不要建議替換每日任務所需要的物品。",
 	["Demon Hunter"] = "惡魔獵人",
-	["|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|tWaypoint Reached Sound"] = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|t到達目的地音效",
-	["Plays a ping sound upon reaching each waypoint"] = "到達每一個路線導引終點時播放音效",
+	["Waypoint Reached Sound"] = "到達目的地音效",
+	["Plays a ping sound upon reaching each waypoint"] = "到達每一個路線導引終點時播放音效。",
 	["Hide Model Preview in World Map"] = "隱藏世界地圖中的模組預覽",
 	["|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|tDisable suggestions if the highlighted\nsets are equipped:"] = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|t已裝備下方選取 (亮起來) 的\n　套裝設定時停用建議裝備：",
 	
@@ -147,7 +151,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Cancel"] = "取消",
 	
 	["Auto Mount"] = "自動坐騎",
-	["|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|tEnabled auto mount"] = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|t啟用自動坐騎",
+	["Enable auto mount"] = "啟用自動坐騎",
 	["Automatically mounts the fastest available mount."] = "自動騎乘可以使用的最快速坐騎。",
 	["Prefered mount in flyable areas"] = "可飛行區域的偏好坐騎",
 	["Prefered mount in non-flyable areas"] = "不可飛行區域的偏好坐騎",
@@ -165,7 +169,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Enabled Map Preview"] = "啟用地圖預覽",
 	["Addon"] = "插件",
 	["Guide Mode"] = "啟用完整版",
-	["Essential Mode"] = "啟用精簡版",
+	["Essential Mode"] = "啟用",
 	["Off Mode"] = "暫時停用",
 	["Quick Settings"] = "快速設定",
 	["Auto Mount"] = "自動坐騎",
@@ -193,6 +197,31 @@ if ( GetLocale() == "zhTW" ) then
 	["Notifications"] = "通知",
 	["Gear Advisor Suggestions as Notifications"] = "顯示裝備建議的通知",
 	["If disabled standard gear suggestion prompts will be shown."] = "停用時，會顯示標準的裝備建議提示。",
+	["Ant Trail"] = "螞蟻路徑",
+	["Dotted"] = "圓點",
+	["Solid"] = "直線",
+	
+	["Dugi Zone Map"] = "Dugi 區域地圖",
+	["Enable Zone Map"] = "啟用區域地圖",
+	["Turn on / off the Dugi Zone Map feature"] = "開啟/關閉 Dugi 區域地圖功能。",
+	["Enable Auto Zoom"] = "啟用自動縮放",
+	["Automatically Zoom in / out the map based on the current waypoint"] = "自動根據目前的導引路線放大/縮小地圖。",
+	["Show Quests POI"] = "顯示任務標示",
+	["Turn on /off the point of interest icons for quests on the map"] = "開啟/關閉地圖上的任務標記圖示。",
+	["Auto Hide Zone Map"] = "自動隱藏區域地圖",
+	["Automatically hides Dugi Map in case there are no waypoints."] = "沒有導引路線時自動隱藏 Dugi 區域地圖。",
+	["Merge With Dugi Arrow"] = "整合 Dugi 箭頭",
+	["Dugi Arrow text is displayed underneath the Zone Map and Dugi arrow is automatically shown within close range of the waypoints"] = "Dugi 箭頭文字會顯示在區域地圖下方，Dugi 箭頭會變小，自動顯示在區域地圖裡面、導引路線的附近。",
+	["Minimap Terrain Detail"] = "小地圖地形細節",
+	["Turns minimap terrain details on."] = "開啟小地圖的地形細節。",
+	["Zone Map Border Opacity (%.1f)"] = "區域地圖邊框透明度 (%.1f)",
+	["Zone Map Opacity (%.1f)"] = "區域地圖透明度 (%.1f)",
+	["Zone Map Size (%.1f)"] = "區域地圖大小 (%.1f)",
+	["Character Arrow Size (%.1f)"] = "角色箭頭大小 (%.1f)",
+	["Zone Map Border"] = "區域地圖邊框",
+	["TextPanel"] = "文字面板",
+	["Default Setting"] = "預設值",
+	
 
 
 ---
@@ -214,12 +243,12 @@ if ( GetLocale() == "zhTW" ) then
   ["Add waypoint"] = "新增路線導引",
   ["Add %s to ban list"] = "將 %s 加入到忽略清單",
   ["Archaeology"] = "考古學",
-  ["Automatically repair all damaged equipment at repair NPC"] = "與有修理裝備能力的NPC對話時自動修理所有裝備",
+  ["Automatically repair all damaged equipment at repair NPC"] = "與有修理裝備能力的NPC對話時自動修理所有裝備。",
   ["Auto Repair"] = "自動修裝",
   ["Automatically maintain the best item for each slot as player level, active spec and inventory changes occur."] = "各部位自動保持裝備最佳物品，根據玩家等級、目前專精和背包內容。",
   ["Auto Equip Smart Set"] = "自動裝備智慧型套裝 (含建議更換裝備)",
   ["Allow movement of the watch frame, not available if other incompatible addons are loaded."] = "允許移動觀察框架，如果使用其它不相容的插件則無法移動。", 
-  ["Add a border for the Objective Tracker Frame"] = "替任務目標清單加上外框",
+  ["Add a border for the Objective Tracker Frame"] = "替任務目標清單加上外框。",
   ["Active Talent Specialization"] = "已啟用的專精",
   ["Add"] = "新增",  
 	["Account Wide Achievement"] = "帳號共通成就",
@@ -368,7 +397,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Human Male"] = "男人類",
 --Ii
   ["Item Button Size (%.1f)"] = "物品按鈕大小 (%.1f)",
-  ["Item has the following stats:"] = "物品有以下狀態:",
+  ["Item has the following stats:"] = "物品的屬性為:",
   ["Ignore Cooking Items"] = "忽略烹飪物品",
   ["Ignore Fishing Items"] = "忽略釣魚物品",
   ["Inactive Talent Specialization"] = "未啟用的專精",
@@ -426,7 +455,7 @@ if ( GetLocale() == "zhTW" ) then
 	["NPC Name Database"] = "NPC名稱資料庫",
 --Oo
   ["Only Quests In Current Guide"] = "在目前指引只有任務",
-  ["Or leave slot empty:"] = "或是留下插槽空的:",
+  ["Or leave slot empty:"] = "或是讓裝備欄位空著:",
   ["Or keep equipped item:"] = "或是保留已裝備物品:",
   ["OK"] = "確認",
   ["Objective Tracker Frame Border"] = "任務目標清單框架邊框",

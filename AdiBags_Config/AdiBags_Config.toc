@@ -2,9 +2,11 @@
 
 ## Title: AdiBags Configuration
 ## Notes: Adirelle's bag addon.
+## Title-zhTW: |cFFFF8000[背包/銀行]|rAdiBags 設置
+## Notes-zhTW: AdiBags的設置選項
 ## Author: Adirelle
-## Version: v1.9.7
-## X-Date: 2017-08-31T1:29:05Z
+## Version: v1.9.8
+## X-Date: 2017-08-31T12:11:38Z
 ## X-Part-Of: AdiBags
 ## LoadOnDemand: 1
 ## Dependencies: AdiBags

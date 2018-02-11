@@ -1,13 +1,7 @@
 ﻿if GetLocale() ~= "zhTW" then return end
 
-DBM_CORE_NEED_LOCALS				= "你是否擁有良好的程式開發或語言能力? 如果是的話, DBM團隊真的需要你的幫助以翻譯成更多的語言。如果您願意幫助，|HDBM:localizersneeded|h|cff3588ff點擊這裡|r拜訪我們的論壇。"
-DBM_CORE_NEED_LOGS					= "DBM需要Transcriptor (http://www.wowace.com/addons/transcriptor/) 去紀錄測試伺服器的戰鬥紀錄讓插件更加完美。如果你願意幫忙，請使用transcriptor去紀錄這些戰鬥過程然後將記錄或意見發佈在DBM論壇。"
-DBM_HOW_TO_USE_MOD				= "歡迎使用DBM。在聊天頻道輸入 /dbm 打開設定開始設定。你可以載入特定區域後為任何首領設定你喜歡的特別設置。DBM會在第一次啟動時嘗試掃描你的職業天賦，但有些選項你可能想打開。"
+DBM_HOW_TO_USE_MOD				= "歡迎使用DBM。在聊天頻道輸入 /dbm 打開設定開始設定。你可以載入特定區域後為任何首領設定你喜歡的特別設置。DBM會在設定你的職業天賦的預設值，但有些選項可能需要調整。"
 DBM_SILENT_REMINDER					= "提醒：DBM正處於無聲模式。"
-
-DBM_FORUMS_MESSAGE							= "發現臭蟲或錯誤的計時器?你希望要讓某些模組有新的警告，計時器或是特別功能?\nDeadly Boss Mods討論，臭蟲回報與功能要求論壇 |HDBM:forums|h|cff3588ffhttp://www.deadlybossmods.com|r (你可以點擊連結去複製網址)"
-DBM_FORUMS_COPY_URL_DIALOG			= "來拜訪我們新的討論與支援論壇"
-DBM_FORUMS_COPY_URL_DIALOG_NEWS		= "想知道新功能以及如何運作，拜訪我們的討論區"
 
 DBM_CORE_LOAD_MOD_ERROR				= "載入%s模組時發生錯誤：%s"
 DBM_CORE_LOAD_MOD_SUCCESS			= "成功載入%s模組。更多選項例如自訂警告音效或是個人提醒註記請輸入/dbm或/dbm help。"
@@ -19,11 +13,10 @@ DBM_CORE_LOAD_MOD_VER_MISMATCH		= "%s不能被讀取因為你的DBM核心未達�
 DBM_CORE_LOAD_MOD_DISABLED			= "%s已安裝但目前停用中。此模組不會載入除非你啟用它。"
 DBM_CORE_LOAD_MOD_DISABLED_PLURAL	= "%s已安裝但目前停用中。這些模組不會載入除非你啟用它們。"
 
-DBM_CORE_WHATS_NEW					= "'計時條向上延伸'和'填滿計時條'選項能夠獨立設定計時條類型(小大計時條)而非統一設定。試試看！"
-DBM_CORE_WHATS_NEW_LINK				= "記得：你可以到DBM Discord裡回報臭蟲，給些回饋或是只是到這看看：|HDBM:forumsnews|h|cff3588ffDiscord連結|r"
+DBM_COPY_URL_DIALOG					= "複製網址"
 
 --Post Patch 7.1
-DBM_CORE_NO_RANGE					= "距離雷達不能在副本中使用，使用傳統文字距離框架代替"
+DBM_CORE_NO_RANGE					= "距離雷達不能在副本中使用，使用傳統文字距離框架取代"
 DBM_CORE_NO_ARROW					= "箭頭不能在副本中使用"
 DBM_CORE_NO_HUD						= "HUDMap不能在副本中使用"
 
@@ -35,7 +28,7 @@ DBM_CORE_LOOT_SPEC_REMINDER			= "你目前的專精為:%s。而你目前的拾�
 
 DBM_CORE_BIGWIGS_ICON_CONFLICT		= "DBM偵測到你同時開啟BigWigs和DBM的團隊圖示。請關閉其中之一的團隊圖示功能以免產生衝突。"
 
-DBM_CORE_MOD_AVAILABLE				= "%s此模組已經可用。您可以在此 |HDBM:forums|h|cff3588ffdeadlybossmods.com|r 或在Curse找到。 此訊息只會顯示一次。"
+DBM_CORE_MOD_AVAILABLE				= "%s此模組已經可用。您可以在deadlybossmods.com或Curse上下載。 此訊息只會顯示一次。"
 
 DBM_CORE_COMBAT_STARTED				= "%s開戰。祝好運與盡興! :)"
 DBM_CORE_COMBAT_STARTED_IN_PROGRESS	= "與%s開戰已進行的戰鬥。祝好運與盡興! :)"
@@ -89,7 +82,6 @@ DBM_CORE_MPROFILE_DELETE_SELF_ERROR	= "不能刪除使用中的模組設定。"
 DBM_CORE_MPROFILE_DELETE_S_ERROR	= "配置檔來源已經損毀，設定不能被刪除或是部分刪除，刪除已失敗。"
 
 DBM_CORE_NOTE_SHARE_SUCCESS			= "%s已分享他的%s的註記"
-DBM_CORE_NOTE_SHARE_LINK			= "點擊這裡打開註記"
 DBM_CORE_NOTE_SHARE_FAIL			= "%s嘗試與你分享%s的註記。模組相關的技能沒有安裝或是載入。請確定你載入此模組並請求他們在分享一次。"
 
 DBM_CORE_NOTEHEADER					= "為%s輸入你的註記。在><插入腳色名稱可套用職業顏色。多個註記請使用'/'分開"
@@ -124,7 +116,6 @@ DBM_CORE_GENERIC_TIMER_BERSERK		= "狂暴"
 DBM_CORE_OPTION_TIMER_BERSERK			= "為$spell:26662顯示計時器"
 DBM_CORE_GENERIC_TIMER_COMBAT		= "戰鬥開始"
 DBM_CORE_OPTION_TIMER_COMBAT			= "為戰鬥開始顯示計時器"
-DBM_CORE_OPTION_HEALTH_FRAME			= "顯示首領血量框架"
 DBM_CORE_BAD						= "不好的"
 
 DBM_CORE_OPTION_CATEGORY_TIMERS			= "計時條"
@@ -158,11 +149,11 @@ DBM_CORE_VERSIONCHECK_OUTDATED		= "下列有%d玩家正在使用過期的首領�
 DBM_CORE_YOUR_VERSION_OUTDATED		= "你的 Deadly Boss Mod 已經過期。請到http://dev.deadlybossmods.com下載最新版本。"
 DBM_CORE_VOICE_PACK_OUTDATED		= "你的DBM語音包可能缺少在這個版本的DBM需要的語音。部分警告音效已經被停用。請下載新版本的語音包或是聯絡語音包作者更新並加入缺少的語音。"
 DBM_CORE_VOICE_MISSING				= "DBM找不到你所選取的語音包。你的語音包選項已經被重置為'None'。請確定你的語音包已正確的安裝與啟用。"
-DBM_CORE_VOICE_DISABLED				= "您目前至少安裝了一個DBM語音包，但沒有啟用。如果您打算使用語音包，請確認在'語音提醒'中勾選它，否則卸載未使用的語音包以隱藏此訊息。"
+DBM_CORE_VOICE_DISABLED				= "你的語音包已安裝但是尚未啟用。如果你想使用語音包，請確定語言包已在語音警告中被選取，或是刪除不使用的語音包去隱藏此訊息。"
 DBM_CORE_VOICE_COUNT_MISSING		= "所選取的語音/倒數語音包%d找不到倒數語音。設定已被重置回預設值：%s。"
 DBM_BIG_WIGS						= "BigWigs"
 
-DBM_CORE_UPDATEREMINDER_HEADER			= "你的Deadly Boss Mod已經過期。\n你可以在Curse網站或是wowinterface網站以及此網址下載到新版本%s(r%d)："
+DBM_CORE_UPDATEREMINDER_HEADER			= "你的Deadly Boss Mod已經過期。\n你可以在Curse/Twitch網站或是wowinterface網站以及此網址下載到新版本%s(r%d)："
 DBM_CORE_UPDATEREMINDER_HEADER_ALPHA	= "你的Deadly Boss Mods測試版已經過期。\n 你至少落後%d個測試版本。建議DBM使用者如果選擇使用測試版請用最新的版本，不然應該用最新的正式版本。過期的測試版本有更嚴密的版本檢查因為這是DBM的開發版本。"
 DBM_CORE_UPDATEREMINDER_FOOTER			= "按下" .. (IsMacClient() and "Cmd-C" or "Ctrl-C")  ..  "：複製下載網址到剪貼簿。"
 DBM_CORE_UPDATEREMINDER_FOOTER_GENERIC	= "按下" .. (IsMacClient() and "Cmd-C" or "Ctrl-C")  ..  "：複製網址到剪貼簿。"
@@ -176,16 +167,13 @@ DBM_CORE_3RDPROFILES					= "警告: DBM-Profiles不相容此版本DBM。請移�
 DBM_CORE_DPMCORE						= "警告:Deadly PvP 模組已經停止更新而且不相容此版本的DBM。請先移除以避免衝突。"
 DBM_CORE_UPDATE_REQUIRES_RELAUNCH		= "警告: 如果你沒有重啟你的遊戲，這次DBM更新可能無法正確運作。這次更新包含了新的檔案或是.toc檔更新而不能使用ReloadUI載入。如果沒有將遊戲完全重啟可能會導致錯誤或功能不完整。"
 DBM_CORE_OUT_OF_DATE_NAG				= "你的DBM版本已經過期你設定忽略彈出更新提示。還是建議你更新避免缺少一些重要的警告或是計時器，而其他人也看不到從你發出的大喊警告。"
-
 DBM_CORE_MOVABLE_BAR				= "拖動我!"
-
-DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h向你發送了一個倒數計時：'%2$s'\n|HDBM:cancel:%2$s:nil|h|cff3588ff[取消該計時]|r|h  |HDBM:ignore:%2$s:%1$s|h|cff3588ff[忽略來自%1$s的計時]|r|h"
+DBM_PIZZA_SYNC_INFO					= "|Hplayer:%1$s|h[%1$s]|h向你發送了一個倒數計時"
 DBM_PIZZA_CONFIRM_IGNORE			= "是否要在該次遊戲連結中忽略來自%s的計時？"
 DBM_PIZZA_ERROR_USAGE				= "命令：/dbm [broadcast] timer <時間（秒）> <文字>。<時間>必須大於1"
 
 --DBM_CORE_MINIMAP_TOOLTIP_HEADER (Same as English locales)
 DBM_CORE_MINIMAP_TOOLTIP_FOOTER		= "Shift+左鍵或右鍵點擊即可移動，Alt+Shift+點擊即可拖放"
-
 DBM_CORE_RANGECHECK_HEADER			= "距離監視(%d碼)"
 DBM_CORE_RANGECHECK_SETRANGE		= "設置距離"
 DBM_CORE_RANGECHECK_SETTHRESHOLD	= "設置玩家數量門檻"
@@ -246,8 +234,6 @@ DBM_CORE_TIMER_USAGE	= {
 
 DBM_ERROR_NO_PERMISSION				= "無權進行此操作。"
 
-DBM_CORE_BOSSHEALTH_HIDE_FRAME		= "關閉血量框架"
-
 --Common Locals
 DBM_NEXT									= "下一次%s"
 DBM_COOLDOWN						= "%s冷卻"
@@ -255,12 +241,14 @@ DBM_CORE_UNKNOWN			= "未知"
 DBM_CORE_LEFT						= "左"
 DBM_CORE_RIGHT						= "右"
 DBM_CORE_BACK						= "後"
+DBM_CORE_TOP							= "上"
+DBM_CORE_BOTTOM				= "下"
 DBM_CORE_MIDDLE					= "中"
 DBM_CORE_FRONT					= "前"
 DBM_CORE_EAST						= "東"
 DBM_CORE_WEST						= "西"
-DBM_CORE_NORTH						= "北"
-DBM_CORE_SOUTH						= "南"
+DBM_CORE_NORTH					= "北"
+DBM_CORE_SOUTH					= "南"
 DBM_CORE_INTERMISSION	= "中場時間"
 DBM_CORE_ORB						= "球"
 DBM_CHEST									= "獎勵箱"
@@ -268,7 +256,9 @@ DBM_NO_DEBUFF						= "沒有%s"
 DBM_ALLY									= "隊友"
 DBM_ADDS									= "小怪"
 DBM_CORE_ROOM_EDGE		= "房間邊緣"
+DBM_CORE_FAR_AWAY			= "遠離"
 DBM_CORE_SAFE						= "安全"
+DBM_CORE_SHIELD					= "護盾"
 DBM_INCOMING						= "%s 來了"
 --Common Locals end
 
@@ -348,6 +338,7 @@ DBM_CORE_AUTO_SPEC_WARN_TEXTS.moveto		= "%s - 快跑向>%%s<"
 DBM_CORE_AUTO_SPEC_WARN_TEXTS.jump			= "%s - 快跳躍"
 DBM_CORE_AUTO_SPEC_WARN_TEXTS.run				= "%s - 快跑開"
 DBM_CORE_AUTO_SPEC_WARN_TEXTS.cast				= "%s - 停止施法"
+DBM_CORE_AUTO_SPEC_WARN_TEXTS.lookaway	= "%s - 快轉頭"
 DBM_CORE_AUTO_SPEC_WARN_TEXTS.reflect			= "%s - 停止攻擊"
 DBM_CORE_AUTO_SPEC_WARN_TEXTS.count			= "%s!(%%s)"
 DBM_CORE_AUTO_SPEC_WARN_TEXTS.stack			= "你中了%%d層%s"
@@ -355,7 +346,7 @@ DBM_CORE_AUTO_SPEC_WARN_TEXTS.switch			= "%s - 快更換目標!"
 DBM_CORE_AUTO_SPEC_WARN_TEXTS.switchcount	= "%s - 快更換目標!(%%s)"
 DBM_CORE_AUTO_SPEC_WARN_TEXTS.gtfo			= "%%s 注意腳下 - 快移動"
 DBM_CORE_AUTO_SPEC_WARN_TEXTS.Adds			= "小怪出現 - 快更換目標!"
-DBM_CORE_AUTO_SPEC_WARN_TEXTS.Addscustom	= "小怪來了 - %s"
+DBM_CORE_AUTO_SPEC_WARN_TEXTS.Addscustom	= "小怪來了 - %s%s"
 DBM_CORE_AUTO_SPEC_WARN_OPTIONS.spell				= "特別警告：$spell:%s"
 DBM_CORE_AUTO_SPEC_WARN_OPTIONS.ends				= "特別警告：$spell:%s結束"
 DBM_CORE_AUTO_SPEC_WARN_OPTIONS.fades				= "特別警告：$spell:%s消退"
@@ -380,6 +371,7 @@ DBM_CORE_AUTO_SPEC_WARN_OPTIONS.moveaway		= "特別警告：當你中了$spell:%
 DBM_CORE_AUTO_SPEC_WARN_OPTIONS.moveto			= "特別警告：當中了$spell:%s並需要你去靠近某人或某地點時"
 DBM_CORE_AUTO_SPEC_WARN_OPTIONS.run					= "特別警告：$spell:%s"
 DBM_CORE_AUTO_SPEC_WARN_OPTIONS.cast					= "特別警告：$spell:%s的施放（停止施法）"
+DBM_CORE_AUTO_SPEC_WARN_OPTIONS.lookaway		= "特別警告：當需要為$spell:%s轉頭時"
 DBM_CORE_AUTO_SPEC_WARN_OPTIONS.reflect 			= "特別警告：$spell:%s需要停止攻擊"
 DBM_CORE_AUTO_SPEC_WARN_OPTIONS.count 				= "特別警告：$spell:%s"
 DBM_CORE_AUTO_SPEC_WARN_OPTIONS.stack				= "特別警告：當疊加了>=%d層$spell:%s時"
@@ -395,17 +387,17 @@ DBM_CORE_AUTO_TIMER_TEXTS.active				= "%s結束"
 DBM_CORE_AUTO_TIMER_TEXTS.fades				= "%s消退"
 DBM_CORE_AUTO_TIMER_TEXTS.ai					= "%s AI"
 DBM_CORE_AUTO_TIMER_TEXTS.cd					= "%s冷卻"
-DBM_CORE_AUTO_TIMER_TEXTS.cdcount			= "%s冷卻 (%%d)"
+DBM_CORE_AUTO_TIMER_TEXTS.cdcount			= "%s冷卻 (%%s)"
 DBM_CORE_AUTO_TIMER_TEXTS.cdsource		= "%s冷卻:>%%s<"
-DBM_CORE_AUTO_TIMER_TEXTS.cdspecial		= "特別技能冷卻"
+DBM_CORE_AUTO_TIMER_TEXTS.cdspecial		= "特別冷卻"
 DBM_CORE_AUTO_TIMER_TEXTS.next 				= "下一次%s"
 DBM_CORE_AUTO_TIMER_TEXTS.nextcount 		= "下一次%s (%%s)"
 DBM_CORE_AUTO_TIMER_TEXTS.nextsource		= "下一次%s: >%%s<"
-DBM_CORE_AUTO_TIMER_TEXTS.nextspecial		= "下一次特別技能"
+DBM_CORE_AUTO_TIMER_TEXTS.nextspecial		= "下一次特別"
 DBM_CORE_AUTO_TIMER_TEXTS.achievement		= "%s"
 DBM_CORE_AUTO_TIMER_TEXTS.stage				= "下一個階段"
-DBM_CORE_AUTO_TIMER_TEXTS.adds				= "下一次小怪"
-DBM_CORE_AUTO_TIMER_TEXTS.addscustom  		= "小怪出現(%s)"
+DBM_CORE_AUTO_TIMER_TEXTS.adds				= "小怪到來"
+DBM_CORE_AUTO_TIMER_TEXTS.addscustom  		= "小怪出現(%s%s)"
 DBM_CORE_AUTO_TIMER_TEXTS.roleplay			= GUILD_INTEREST_RP
 
 DBM_CORE_AUTO_TIMER_OPTIONS.target				= "計時條：$spell:%s減益效果持續時間"
@@ -448,8 +440,8 @@ DBM_CORE_AUTO_YELL_OPTION_TEXT.shortfade	= "當$spell:%s正消退時大喊(倒�
 DBM_CORE_AUTO_YELL_OPTION_TEXT.iconfade		= "當$spell:%s正消退時大喊(倒數與圖示)"
 DBM_CORE_AUTO_YELL_OPTION_TEXT.position	= "當你中了$spell:%s時大喊(包含位置)"
 DBM_CORE_AUTO_YELL_ANNOUNCE_TEXT.shortyell	= "%s"
-DBM_CORE_AUTO_YELL_ANNOUNCE_TEXT.yell	= "" .. UnitName("player") .. "中了%s!"
-DBM_CORE_AUTO_YELL_ANNOUNCE_TEXT.count	= "" .. UnitName("player") .. "中了%s!(%%d)"
+DBM_CORE_AUTO_YELL_ANNOUNCE_TEXT.yell	= "" .. UnitName("player") .. "中了%s"
+DBM_CORE_AUTO_YELL_ANNOUNCE_TEXT.count	= "" .. UnitName("player") .. "中了%s(%%d)"
 DBM_CORE_AUTO_YELL_ANNOUNCE_TEXT.fade	= "%s %%d秒後消退!"
 DBM_CORE_AUTO_YELL_ANNOUNCE_TEXT.shortfade	= "%%d"
 DBM_CORE_AUTO_YELL_ANNOUNCE_TEXT.iconfade		= "{rt%%2$d}%%1$d"

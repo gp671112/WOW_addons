@@ -37,7 +37,8 @@ local function initializeButtons(self)
 end
 
 function TalentSetsDialogPopup_OnShow(self)
- PlaySound("igCharacterInfoOpen")
+ --PlaySound("igCharacterInfoOpen")
+ PlaySound(839)
  self.name = nil
  self.id = nil
  self.isEdit = false

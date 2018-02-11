@@ -1,14 +1,15 @@
 local _, L = ...
 local Timer = CreateFrame('Frame')
+local GetTime = GetTime
 
 -- Borrowed fixes from Storyline :)
 local LINE_FEED_CODE = string.char(10)
 local CARRIAGE_RETURN_CODE = string.char(13)
 local WEIRD_LINE_BREAK = LINE_FEED_CODE .. CARRIAGE_RETURN_CODE .. LINE_FEED_CODE
 
-local DELAY_DIVISOR
-local DELAY_PADDING = 2
-local MAX_UNTIL_SPLIT = 200
+local DELAY_DIVISOR -- set later as baseline divisor for (text length / time).
+local DELAY_PADDING = 2 -- static padding, feels more natural with a pause to breathe.
+local MAX_UNTIL_SPLIT = 200 -- start recursive string splitting if the text is too long.
 
 Timer.Texts = {}
 L.TextMixin = {}
@@ -23,8 +24,8 @@ function Text:SetText(text)
 		local strings, delays = {}, {}
 		local timeToFinish = 0
 		text = text:gsub(LINE_FEED_CODE .. '+', '\n'):gsub(WEIRD_LINE_BREAK, '\n')
-		for i, str in pairs({strsplit('\n', text)}) do
-			timeToFinish = timeToFinish + self:AddString(str, strings, delays)
+		for _, paragraph in ipairs({strsplit('\n', text)}) do
+			timeToFinish = timeToFinish + self:AddString(paragraph, strings, delays)
 		end
 		self.numTexts = #strings
 		self.timeToFinish = timeToFinish
@@ -50,8 +51,8 @@ function Text:AddString(str, strings, delays)
 		if ( new == str ) then
 			force = true
 		else -- recursively split the altered string
-			for i, short in pairs({strsplit('\n', new)}) do
-				delay = delay + self:AddString(short, strings, delays)
+			for _, sentence in ipairs({strsplit('\n', new)}) do
+				delay = delay + self:AddString(sentence, strings, delays)
 			end
 			return delay
 		end
@@ -112,21 +113,29 @@ function Text:GetProgressPercent()
 	return 1
 end
 
+function Text:GetCurrentProgress()
+	local delayCounter = self.delays and self.delays[1]
+	local fullDelay = self.currentDelay
+	if delayCounter and fullDelay then
+		return (1 - delayCounter / fullDelay)
+	end
+end
+
 function Text:GetNumTexts() return self.numTexts or 0 end
 
 function Text:OnFinished()
 	self.strings = nil
 	self.delays = nil
-	self.timeToFinish = nil
-	self.timeStarted = nil
+--	self.timeToFinish = nil
+--	self.timeStarted = nil
 end
 
 function Text:ForceNext()
 	if self.delays and self.strings then
-		tremove(self.delays, 1)
+		self.timeToFinish = self.timeToFinish - tremove(self.delays, 1)
 		tremove(self.strings, 1)
 		if self.strings[1] then
-			self:SetNext(self.strings[1])
+			self:SetNext(self.strings[1], self.delays[1])
 		else
 			self:StopProgression()
 			self:RepeatTexts()
@@ -148,7 +157,7 @@ function Text:StopTexts()
 	self:SetNext()
 end
 
-function Text:SetNext(text)
+function Text:SetNext(text, currentDelay)
 	if not self:GetFont() then
 		if not self.fontObjectsToTry then
 			error('No fonts applied to TextMixin, call SetFontObjectsToTry first')
@@ -157,6 +166,7 @@ function Text:SetNext(text)
 	end
 
 	getmetatable(self).__index.SetText(self, text)
+	self:SetCurrentDelay(currentDelay)
 	self:ApplyFontObjects()
 end
 
@@ -180,6 +190,10 @@ function Text:ApplyFontObjects()
 	end
 end
 
+function Text:SetCurrentDelay(delay)
+	self.currentDelay = delay or 0
+end
+
 function Text:SetFormattedText(format, ...)
 	if not self:GetFont() then
 		if not self.fontObjectsToTry then
@@ -195,9 +209,6 @@ end
 function Timer:AddText(fontString)
 	if fontString then
 		self.Texts[fontString] = true
-		if not self:GetScript('OnUpdate') then
-			self.elapsed = 0
-		end
 		self:SetScript('OnUpdate', self.OnUpdate)
 	end
 end
@@ -224,17 +235,17 @@ function Timer:OnUpdate(elapsed)
 		if 	( text.strings and text.delays ) and
 		 	( next(text.strings) and next(text.delays) ) then
 			if not text:GetText() then
-				text:SetNext(text.strings[1])
+				text:SetNext(text.strings[1], text.delays[1])
 			end
 			-- deduct elapsed time since update from current delay
 			text.delays[1] = text.delays[1] - elapsed
-			-- delay is below zero, move on to next line
+			-- delay is below/equal to zero, move on to next line
 			if text.delays[1] <= 0 then
 				tremove(text.delays, 1)
 				tremove(text.strings, 1)
 				-- check if there's another line waiting
 				if text.strings[1] then
-					text:SetNext(text.strings[1])
+					text:SetNext(text.strings[1], text.delays[1])
 				else
 					self:OnTextFinished(text)
 				end

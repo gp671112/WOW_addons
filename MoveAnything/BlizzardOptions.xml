@@ -417,7 +417,7 @@
 					<OnLeave function="MovAny_TooltipHide"/>
 					<OnClick>
 						if MADB.playSound then
-							PlaySound("igMainMenuOption")
+							PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
 						end
 						StaticPopup_Show("MOVEANYTHING_PROFILE_RESET_CONFIRM")
 					</OnClick>
@@ -444,7 +444,7 @@
 					<OnLeave function="MovAny_TooltipHide"/>
 					<OnClick>
 						if MADB.playSound then
-							PlaySound("igMainMenuOption")
+							PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
 						end
 						MovAny:PortDialog(2)
 					</OnClick>
@@ -471,7 +471,7 @@
 					<OnLeave function="MovAny_TooltipHide"/>
 					<OnClick>
 						if MADB.playSound then
-							PlaySound("igMainMenuOption")
+							PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
 						end
 						MovAny:PortDialog(1)
 					</OnClick>
@@ -498,7 +498,7 @@
 					<OnLeave function="MovAny_TooltipHide"/>
 					<OnClick>
 						if MADB.playSound then
-							PlaySound("igMainMenuOption")
+							PlaySound(852)
 						end
 						StaticPopup_Show("MOVEANYTHING_RESET_ALL_CONFIRM")
 					</OnClick>

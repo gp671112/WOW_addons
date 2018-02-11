@@ -1,11 +1,11 @@
-## Interface: 70200
+## Interface: 70300
 ## Title: SavedInstances
-## Notes: Tracks raid/instance/worldboss lockouts for all your characters, daily/weekly quests, currencies, trade cooldowns, and more!
-## Title-zhTW: |cffFF7F00[副本]|r 角色進度
-## Notes-zhTW: SavedInstances |n記錄所有角色的團隊/英雄/世界首領擊殺進度，每日/每週任務、貨幣點數、交易的冷卻計時，還有更多!|n|cffffd200使用方法：|r點小地圖按鈕觀看資訊，從Esc>介面>插件>角色進度，進行設定。
-## Author: coremeeko2, AlexSUCF
-## Version: 7.2.5
-## X-ReleaseDate: @project-date-iso@
+## Notes: Tracks Raid, Instance, World Boss lockouts for all your characters, daily/weekly quests, currencies, trade cooldowns, and more!
+## Title-zhTW: |cFFAA7700[副本]|rSavedInstances
+## Notes-zhTW: 記錄所有角色的團隊/英雄/世界首領擊殺進度，每日/每週任務、貨幣點數、交易的冷卻計時，還有更多!。
+## Author: Trid3nt
+## Version: v7.0.13
+## X-ReleaseDate: 2017-12-20T18:47:11Z
 ## X-License: All Rights Reserved
 ## X-Category: Raid
 ## OptionalDeps: Ace3, CallbackHandler-1.0, LibDataBroker-1.1, LibDBIcon-1.0, LibQTip-1.0

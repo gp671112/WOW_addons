@@ -42,24 +42,29 @@ local L = TotalAP.L
 local slashCommands = {
 	
 	["counter"] = L["Toggle display of the item counter"],
+	["relics"] = L["Toggle display of relic recommendations"],
+	
 	["progress"] = L["Toggle display of the progress report"],
 	["glow"] = L["Toggle spell overlay notification (glow effect) when new traits are available"],
-	["buttontext"] = L["Toggle short summary of the tooltip information as an additional display next to the action button"],
+	["buttontext"] = L["Toggle text display next to the action button"],
 	["scanbank"] = L["Include items stored in the bank and show an additional progress bar for them"],
+	["ranks"] = L["Toggle additional display of the weapon's rank next to the icons"],
+	
+	["stateicons"] = L["Toggle icons to indicate when artifact power items can't be used"],
 	
 	["hide"] = L["Toggle all displays (will override the individual display's settings)"],
 	["button"] = L["Toggle button visibility (tooltip visibility is unaffected)"],
 	["bars"] = L["Toggle bar display for artifact power progress"],
 	["minibar"] = L["Toggle the secondary progress bar"],
 	["tooltip"] = L["Toggle tooltip display for artifact power items"],
-	["icons"] = L["Toggle icon and text display for artifact power progress"],
+	["specicons"] = L["Toggle icon and text display for artifact power progress"],
 	
 	["numberformat"] = L["Switches between international and localised number formats for textual output"],
 	
 	["unignore"] = L["Resets ignored specs for the currently active character"],
 	
 	["loginmsg"] = L["Toggle login message on load"],
-	["combat"] = L["Toggle visibility in combat"],
+	["autohide"] = L["Toggle visibility while items are unable to be used"],
 	["reset"] =  L["Load default settings (will overwrite any changes made)"],
 	["debug"] = L["Toggle debug mode (not particularly useful as long as everything is working as expected)"],
 	
@@ -84,6 +89,18 @@ local slashHandlers = {
 		end
 		
 		settings.tooltip.showNumItems = not settings.tooltip.showNumItems;
+	
+	end,
+	
+	["relics"] = function(settings) -- Toggle display of relic recommendations in tooltip
+
+		if not settings.tooltip.showRelicRecommendations then
+			TotalAP.ChatMsg(L["Relic recommendations enabled."])
+		else
+			TotalAP.ChatMsg(L["Relic recommendations disabled."])
+		end
+		
+		settings.tooltip.showRelicRecommendations = not settings.tooltip.showRelicRecommendations
 	
 	end,
 	
@@ -185,9 +202,33 @@ local slashHandlers = {
 	
 	end,
 	
-	["icons"] = function(settings) -- Toggle spec icons
+	["specicons"] = function(settings) -- Toggle spec icons
 
 		TotalAP.Controllers.KeybindHandler("SpecIconsToggle", false);	
+
+	end,
+	
+	["ranks"] = function(settings) -- Toggle an additional display of artifact rank next to the spec icons
+		
+		if settings.specIcons.showNumTraits then
+			TotalAP.ChatMsg(L["Artifact rank is now hidden."]);
+		else
+			TotalAP.ChatMsg(L["Artifact rank is now shown."]);
+		end
+		
+	settings.specIcons.showNumTraits = not settings.specIcons.showNumTraits;
+
+	end,
+	
+	["stateicons"] = function(settings) -- Toggle the icons that indicate AP can't be used due to being in combat, on a flight path, in a vehicle, or in a pet battle
+		
+		if settings.stateIcons.enabled then
+			TotalAP.ChatMsg(L["State icons are now hidden."]);
+		else
+			TotalAP.ChatMsg(L["State icons are now shown."]);
+		end
+		
+	settings.stateIcons.enabled = not settings.stateIcons.enabled;
 
 	end,
 	
@@ -224,14 +265,15 @@ local slashHandlers = {
 	
 	end,
 	
-	["combat"] =  function(settings) -- Toggle automatic hiding of the display while player is in combat (also: vehicle/pet battle but those can't be turned off here)
-		if settings.hideInCombat then
-			TotalAP.ChatMsg(L["Display will now remain visible in combat."]);
+	["autohide"] =  function(settings) -- Toggle automatic hiding of the display while player is unable to use AP items
+	
+		if settings.autoHide then
+			TotalAP.ChatMsg(L["Display will now remain visible at all times."])
 		else
-			TotalAP.ChatMsg(L["Display will now be hidden in combat."]);
+			TotalAP.ChatMsg(L["Display will now be hidden while items can't be used."])
 		end
 		
-	settings.hideInCombat = not settings.hideInCombat;
+	settings.autoHide = not settings.autoHide
 
 	end,
 	
@@ -241,8 +283,8 @@ local slashHandlers = {
 		--RestoreDefaultSettings();
 		TotalAP.ChatMsg(L["Default settings loaded."]);
 		-- TODO: Run UnignoreAllSpecs() also?
-		TotalAPAnchorFrame:ClearAllPoints();
-		TotalAPAnchorFrame:SetPoint("CENTER", UIParent, "CENTER");
+		TotalAP_DefaultView_AnchorFrame:ClearAllPoints(); -- TODO: Support other views (if I ever get around to adding them...)
+		TotalAP_DefaultView_AnchorFrame:SetPoint("CENTER", UIParent, "CENTER");
 
 	end,
 	
@@ -377,9 +419,21 @@ local function SlashCommandHandler(input, usedAlias)
 		
 			local slashHandlerFunction = slashHandlers[command]
 			slashHandlerFunction() -- Parameter is nil -> There's no need to submit the DB for test commands, really
+		
+			-- Disable keybinds to avoid spreading taint if display is toggled while in combat
+			if InCombatLockdown() or UnitAffectingCombat("player") then	return end -- Only the aligment options are being set here, so it needn't be as sophisticated (just skip Render to avoid taint issues)
+				
+			-- Always update displays to make sure any changes will be displayed immediately (if possible/not locked) -< TODO. DRY
+			TotalAP.Controllers.RenderGUI() 
+			
 			return
 		
 		elseif command == validCommand then -- Execute individual handler function for this slash command
+			
+			if InCombatLockdown() or UnitAffectingCombat("player") then -- Disable keybinds to avoid spreading taint if display is toggled while in combat
+				TotalAP.ChatMsg(L["You cannot use slash commands while in combat."]) -- TODO: Only deactive commands that actually affect the GUI? (But then, which command does NOT do that?)
+				return
+			end
 			
 			local slashHandlerFunction = slashHandlers[command]
 			TotalAP.Debug("Recognized slash command: " .. command .. " - executing handler function..." )
@@ -387,8 +441,7 @@ local function SlashCommandHandler(input, usedAlias)
 			slashHandlerFunction(settings)
 			
 			-- Always update displays to make sure any changes will be displayed immediately (if possible/not locked)
-			TotalAP.Controllers.UpdateGUI()
-			
+			TotalAP.Controllers.RenderGUI() 
 			return
 	
 		end	

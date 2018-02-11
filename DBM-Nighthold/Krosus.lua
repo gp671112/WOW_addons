@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(1713, "DBM-Nighthold", nil, 786)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision(("$Revision: 16046 $"):sub(12, -3))
+mod:SetRevision(("$Revision: 17112 $"):sub(12, -3))
 mod:SetCreatureID(101002)
 mod:SetEncounterID(1842)
 mod:SetZone()
@@ -17,17 +17,15 @@ mod:RegisterEventsInCombat(
 	"SPELL_AURA_APPLIED_DOSE 206677",
 	"SPELL_AURA_REMOVED 205344",
 	"UNIT_DIED",
-	"CHAT_MSG_ADDON",
 	"UNIT_SPELLCAST_SUCCEEDED boss1"
 )
 
 --(ability.id = 205368 or ability.id = 205370 or ability.id = 205420 or ability.id = 205361) and type = "begincast"
---TODO, improve info frame to show active mob count on top of burning pitch on player true/false? instead of just being burning pitch list for entire raid?
 local warnExpelOrbDestro			= mod:NewTargetCountAnnounce(205344, 4)
 local warnSlamSoon					= mod:NewAnnounce("warnSlamSoon", 4, 205862, nil, nil, true)
 local warnSlam						= mod:NewCountAnnounce(205862, 2)--Regular slams don't need special warn, only bridge smashing ones
 
-local specWarnSearingBrand			= mod:NewSpecialWarningStack(206677, nil, 4, nil, 2, 1, 2)--Lets go with 4 for now
+local specWarnSearingBrand			= mod:NewSpecialWarningStack(206677, nil, 4, nil, 2, 1, 6)--Lets go with 4 for now
 local specWarnSearingBrandOther		= mod:NewSpecialWarningTaunt(206677, nil, nil, nil, 1, 2)
 local specWarnFelBeam				= mod:NewSpecialWarningDodge(205368, nil, nil, nil, 2, 2)
 local specWarnOrbDestro				= mod:NewSpecialWarningMoveAway(205344, nil, nil, nil, 3, 2)
@@ -48,19 +46,11 @@ local berserkTimer					= mod:NewBerserkTimer(360)--technically not a berserk, bu
 local countdownBigSlam				= mod:NewCountdown(90, 205862)
 local countdownOrbDestro			= mod:NewCountdownFades("AltTwo5", 205344)
 
-local voiceSearingBrand				= mod:NewVoice(206677)--tauntboss
-local voiceFelBeam					= mod:NewVoice(205368)--shockwave/moveleft/moveright
-local voiceOrbDestro				= mod:NewVoice(205344)--runout
-local voiceBurningPitch				= mod:NewVoice(205420)--watchstep/helpsoak(new)
-local voiceSlam						= mod:NewVoice(205862)--justrun
-local voiceFelBlast					= mod:NewVoice(209017, false, nil, 2)--kickcast
-local voiceFelBurst					= mod:NewVoice(206351, "HasInterrupt")--kickcast
-
 mod:AddRangeFrameOption(5, 206351)
 mod:AddSetIconOption("SetIconOnAdds", "ej12914", true, true)
 mod:AddArrowOption("ArrowOnBeam3", 205368, true)
 
-local burningPitchDebuff = GetSpellInfo(215944)
+local burningPitchDebuff = DBM:GetSpellInfo(215944)
 local mobGUIDs = {}
 --Beams (205370/205368 Combined)
 local lolBeamTimers = {5, 15, 30, 30, 23, 27, 30, 44, 14, 16, 14, 16, 22, 60}--LFR & Normal
@@ -100,6 +90,7 @@ function DBMUpdateKrosusBeam(wasLeft)
 end
 
 function mod:OnCombatStart(delay)
+	burningPitchDebuff = DBM:GetSpellInfo(215944)
 	table.wipe(mobGUIDs)
 	self.vb.burningEmbers = 0
 	self.vb.slamCount = 0
@@ -107,11 +98,7 @@ function mod:OnCombatStart(delay)
 	self.vb.orbCount = 0
 	self.vb.pitchCount = 0
 	self.vb.firstBeam = 0
-	warnSlamSoon:Schedule(85, 5)
-	warnSlamSoon:Schedule(86, 4)
-	warnSlamSoon:Schedule(87, 3)
-	warnSlamSoon:Schedule(88, 2)
-	warnSlamSoon:Schedule(89, 1)
+	warnSlamSoon:Countdown(90)
 	timerSlamCD:Start(-delay, 1)
 	countdownBigSlam:Start(-delay)
 	berserkTimer:Start(-delay)
@@ -145,13 +132,13 @@ function mod:SPELL_CAST_START(args)
 		local timerText = nextCount
 		if self.vb.firstBeam == 2 then--First Beam Right
 			if self.vb.beamCount % 2 == 0 then--Coming from left (facing boss)
-				voiceFelBeam:Play("moveright")
+				specWarnFelBeam:Play("moveright")
 				timerText = L.MoveLeft--Timer text is backwards cause it's for NEXT beam
 				if self.Options.ArrowOnBeam3 then
 					DBM.Arrow:ShowStatic(270, 4)
 				end
 			else--coming from right (facing boss)
-				voiceFelBeam:Play("moveleft")
+				specWarnFelBeam:Play("moveleft")
 				timerText = L.MoveRight--Timer text is backwards cause it's for NEXT beam
 				if self.Options.ArrowOnBeam3 then
 					DBM.Arrow:ShowStatic(90, 4)
@@ -159,20 +146,20 @@ function mod:SPELL_CAST_START(args)
 			end
 		elseif self.vb.firstBeam == 1 then--First Beam Left
 			if self.vb.beamCount % 2 == 0 then--Coming from right (facing boss)
-				voiceFelBeam:Play("moveleft")
+				specWarnFelBeam:Play("moveleft")
 				timerText = L.MoveRight--Timer text is backwards cause it's for NEXT beam
 				if self.Options.ArrowOnBeam3 then
 					DBM.Arrow:ShowStatic(90, 4)
 				end
 			else--coming from left (facing boss)
-				voiceFelBeam:Play("moveright")
+				specWarnFelBeam:Play("moveright")
 				timerText = L.MoveLeft--Timer text is backwards cause it's for NEXT beam
 				if self.Options.ArrowOnBeam3 then
 					DBM.Arrow:ShowStatic(270, 4)
 				end
 			end
 		else
-			voiceFelBeam:Play("shockwave")
+			specWarnFelBeam:Play("shockwave")
 		end
 		local timers = self:IsMythic() and mythicBeamTimers[nextCount] or self:IsHeroic() and heroicBeamTimers[nextCount] or lolBeamTimers[nextCount]
 		if timers then
@@ -182,20 +169,18 @@ function mod:SPELL_CAST_START(args)
 		self.vb.pitchCount = self.vb.pitchCount+ 1
 		specWarnBurningPitch:Show(self.vb.pitchCount)
 		if UnitDebuff("player", burningPitchDebuff) then
-			voiceBurningPitch:Play("watchstep")
+			specWarnBurningPitch:Play("watchstep")
 		else
-			voiceBurningPitch:Play("helpsoak")
+			specWarnBurningPitch:Play("helpsoak")
 		end
 		local nextCount = self.vb.pitchCount + 1
 		local timers = self:IsMythic() and mythicBurningPitchTimers[nextCount] or self:IsHeroic() and heroicBurningPitchTimers[nextCount] or lolBurningPitchTimers[nextCount]
 		if timers then
 			timerBurningPitchCD:Start(timers, nextCount)
 		end
-	elseif spellId == 209017 then
-		if self:CheckInterruptFilter(args.sourceGUID) then
-			specWarnFelBlast:Show(args.sourceName)
-			voiceFelBlast:Play("kickcast")
-		end
+	elseif spellId == 209017 and self:CheckInterruptFilter(args.sourceGUID) then
+		specWarnFelBlast:Show(args.sourceName)
+		specWarnFelBlast:Play("kickcast")
 	elseif spellId == 206351 then
 		if not mobGUIDs[args.sourceGUID] then
 			mobGUIDs[args.sourceGUID] = true
@@ -209,26 +194,22 @@ function mod:SPELL_CAST_START(args)
 		end
 		if self:CheckInterruptFilter(args.sourceGUID) then
 			specWarnFelBurst:Show(args.sourceName)
-			voiceFelBurst:Play("kickcast")
+			specWarnFelBurst:Play("kickcast")
 		end
 	elseif spellId == 205862 then
 		self.vb.slamCount = self.vb.slamCount + 1
 		timerSlamCD:Start(nil, self.vb.slamCount+1)
 		if self.vb.slamCount % 3 == 0 then
 			specWarnSlam:Show()
-			voiceSlam:Play("justrun")
+			specWarnSlam:Play("justrun")
 			countdownBigSlam:Start()
-			warnSlamSoon:Schedule(85, 5)
-			warnSlamSoon:Schedule(86, 4)
-			warnSlamSoon:Schedule(87, 3)
-			warnSlamSoon:Schedule(88, 2)
-			warnSlamSoon:Schedule(89, 1)
+			warnSlamSoon:Countdown(90)
 		else
 			warnSlam:Show(self.vb.slamCount)
 			if self:IsTank() then
-				voiceSlam:Play("helpsoak")
+				specWarnSlam:Play("helpsoak")
 			else
-				voiceSlam:Play("watchstep")
+				specWarnSlam:Play("watchstep")
 			end
 		end
 	elseif spellId == 205361 then
@@ -252,12 +233,12 @@ function mod:SPELL_AURA_APPLIED(args)
 				if args:IsPlayer() then
 					if amount >= 4 then
 						specWarnSearingBrand:Show(amount)
-						voiceSearingBrand:Play("stackhigh")
+						specWarnSearingBrand:Play("stackhigh")
 					end
 				else
 					if not UnitDebuff("player", args.spellName) and not UnitIsDeadOrGhost("player") then
 						specWarnSearingBrandOther:Show(args.destName)
-						voiceSearingBrand:Play("tauntboss")
+						specWarnSearingBrandOther:Play("tauntboss")
 					end
 				end
 			end
@@ -265,7 +246,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif spellId == 205344 then
 		if args:IsPlayer() then--Still do yell and range frame here, in case DK
 			specWarnOrbDestro:Show()
-			voiceOrbDestro:Play("runout")
+			specWarnOrbDestro:Play("runout")
 			yellOrbDestro:Yell(5)
 			yellOrbDestro:Schedule(4, 1)
 			yellOrbDestro:Schedule(3, 2)
@@ -309,24 +290,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, _, spellGUID)
 end
 
 --Listen for Krosus Assist on Bigwigs Comms to make compat with mod much easier for elvador
-function mod:CHAT_MSG_ADDON(prefix, msg, channel, targetName)
-	if prefix ~= "BigWigs" then return end
-	local bwPrefix, bwMsg, extra = strsplit("^", msg)
-	if bwPrefix == "B" then
-		if bwMsg == "firstBeamWasLeft" then
-			self.vb.firstBeam = 1
-			DBM:Debug("Recieved Left Beam Sync")
-		elseif bwMsg == "firstBeamWasRight" then
-			self.vb.firstBeam = 2
-			DBM:Debug("Recieved Right Beam Sync")
-		end
-	end
-end
-
---[[
---Not funcitonal yet. Might not even be worth effort to hack a handler together for something used so rarely
 function mod:OnBWSync(msg)
-	if not self:IsInCombat() then return end
 	if msg == "firstBeamWasLeft" then
 		self.vb.firstBeam = 1
 		DBM:Debug("Recieved Left Beam Sync")
@@ -335,5 +299,4 @@ function mod:OnBWSync(msg)
 		DBM:Debug("Recieved Right Beam Sync")
 	end
 end
---]]
 	

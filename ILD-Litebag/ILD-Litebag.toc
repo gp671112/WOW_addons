@@ -3,8 +3,8 @@
 ## Notes: Displays item's levels in LiteBag bags
 ## Notes-itIT: Mostra il livello degli items nelle borse di LiteBag
 ## Author: Alar of Daggerspine
-## Version: 2.0.16 70200
-## X-Revision: ec95ed4
+## Version: 2.0.18 70200
+## X-Revision: 5f9eaf2
 ## eMail: alar@aspide.it
 ## Dependencies: ItemLevelDisplay,LiteBag
 ## DefaultState: Enabled
@@ -12,6 +12,6 @@
 ## X-Category: Bags and Inventory
 ## X-License: GPL v3
 ## X-eMail: alar@aspide.it
-## X-Date: 2017-08-29T13:51:50Z
+## X-Date: 2017-11-19T23:58:32Z
 ..\ItemLevelDisplay\Bags.lua
 core.lua

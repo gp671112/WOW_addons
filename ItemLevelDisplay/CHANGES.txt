@@ -1,18 +1,18 @@
-tag 058495a3b8d9e56fdd6b73b699eab2eb585f032c 2.0.16
+tag c49748dd1f322e55381806a3295223a7e3ca572a 2.0.18
 Author:	Alar of Runetotem <alar@aspide.it>
-Date:	Tue Aug 29 19:34:35 2017 +0200
+Date:	Sun Nov 19 18:58:52 2017 +0100
 
-Toc updated to 70300
+Fix: Small fixes to ArkInventory and Combuctor
 
-commit ec95ed41866867787cc80baaef77e465aa19d120
+commit 5f9eaf2672a6a4c53ed69d68d4c0d93c1f7b0343
 Author: Alar of Runetotem <alar@aspide.it>
-Date:   Tue Aug 29 10:51:50 2017 +0200
+Date:   Sun Nov 19 18:58:32 2017 +0100
 
-    Removed error, still not working
+    Fix: Small fixes to ArkInventory and Combuctor
 
-commit 5a16a2175ae068d71c8d3576808b70d45ad75c61
+commit 10370be6e306a601619d779524a45e2bc5170cc2
 Author: Alar of Runetotem <alar@aspide.it>
-Date:   Tue Aug 29 10:51:17 2017 +0200
+Date:   Sun Nov 19 18:57:34 2017 +0100
 
-    Toc bump
+    Changed LibInit source
 

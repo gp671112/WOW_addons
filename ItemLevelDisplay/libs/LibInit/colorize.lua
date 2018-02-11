@@ -3,7 +3,9 @@
 -- @name Colorize
 -- @class module
 -- @author Alar of Daggerspine
--- @release 2
+
+---
+-- @type C
 -- @usage
 -- local C=LibStub("LibInit"):GetColorTable()
 -- C.Azure.c --returns a string "rrggbb"
@@ -18,10 +20,13 @@
 -- -- For a list of available color check Colors
 -- -- Each color became the name of a method
 --
+local LibStub=LibStub
+local libinit,MINOR_VERSION = LibStub("LibInit")
+if not libinit then return end
 
 local C
 -- Color system related function
-local lib=LibStub:NewLibrary("LibInit-Colorize",5)
+local lib=LibStub:NewLibrary("LibInit-Colorize",MINOR_VERSION)
 if (not lib) then return end
 local setmetatable=setmetatable
 local tonumber=tonumber
@@ -38,6 +43,7 @@ local UIERRORS_HOLD_TIME=UIERRORS_HOLD_TIME or 1
 local UIErrorsFrame=UIErrorsFrame
 local ChatTypeInfo=ChatTypeInfo
 local GetItemQualityColor=GetItemQualityColor
+
 lib.colors={
 azure                   ="0c92dc"
 ,aqua					="00ffff"
@@ -207,3 +213,4 @@ function lib:example()
 		print(format("%s Quality: %2d|r",v.hex,k))
 	end
 end
+libinit:_SetColorize(lib())

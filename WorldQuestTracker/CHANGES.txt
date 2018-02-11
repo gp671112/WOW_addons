@@ -1,7 +1,7 @@
-changeset:   198:947e08d817b1
-tag:         v7.3.0.198-release
+changeset:   269:5191256b0807
+tag:         v7.3.2.269-release
 user:        Tercio
-date:        Tue Aug 29 15:08:24 2017 -0300
-summary:     - ToC Update.
+date:        Fri Jan 26 14:28:13 2018 -0200
+summary:     - Added an option to reset the position of the tracker. This should solve problems where users drag the tracker outside the screen space.
 
 

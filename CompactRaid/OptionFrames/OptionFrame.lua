@@ -10,7 +10,7 @@ local type = type
 local pairs = pairs
 local _
 
-local addonName, addon = ...
+local _, addon = ...
 local L = addon.L
 local templates = addon.optionTemplates
 
@@ -44,7 +44,7 @@ function frame:OnCategorySelect(category)
 		category.page:Hide()
 	end
 
-	LibMsgBox:Clear()
+	addon:PopupHide()
 end
 
 function frame:GetSelectedPage()
@@ -53,7 +53,7 @@ function frame:GetSelectedPage()
 end
 
 frame:SetScript("OnHide", function(self)
-	LibMsgBox:Clear()
+	addon:PopupHide()
 end)
 
 -------------------------------------------------------
@@ -64,6 +64,7 @@ local module = {}
 module.title = L["core module"]
 module.desc = L["desc"]
 module.Print = addon.Print
+module.requestReload = 1
 
 function addon:GetCoreModule()
 	return module
@@ -268,13 +269,20 @@ nameXOffSlider:SetPoint("TOPLEFT", nameLenSlider, "BOTTOMLEFT", 0, -34)
 local nameYOffSlider = templates:CreateOptionSlider(page, "nameYOffset", L["y-offset"], -20, 20)
 nameYOffSlider:SetPoint("LEFT", nameXOffSlider, "RIGHT", 20, 0)
 
+local nameColorSwatch = group.colorSwatch
+group = templates:CreateOptionMultiSelectionGroup(page)
+
+local nameOutlineCheck = group:AddButton(L["font outline"], "nameFontOutline")
+nameOutlineCheck:ClearAllPoints()
+nameOutlineCheck:SetPoint("LEFT", nameColorSwatch, "RIGHT", 14, 0)
+
 ------------------------------------------------------------
 -- Container options
 ------------------------------------------------------------
 
 group = templates:CreateOptionMultiSelectionGroup(page, L["frame container options"])
 group:SetPoint("TOPLEFT", anchor, "BOTTOMLEFT", 0, -176)
-group:AddButton(L["show tool buttons"], "hideToolboxes", 1)
+group:AddButton(L["show tool buttons"], "showToolboxes", 1)
 
 anchor = group
 
@@ -371,11 +379,8 @@ local function LoadOptionColor(option, defaultR, defaultG, defaultB)
 end
 
 local function ReverseShowHide(db, name)
-	if db["hide"..name] then
-		db["hide"..name] = nil
-	else
-		db["show"..name] = 1
-	end
+	db["hide"..name] = nil
+	db["show"..name] = 1
 end
 
 local function InitOptionData(db, chardb)
@@ -419,14 +424,15 @@ local function InitOptionData(db, chardb)
 	LoadOption("outrangeAlpha", 40, 0, 100)
 	LoadOptionColor("unitBkColor", 0, 0, 0)
 
-	LoadOption("hidePrivIcons")
-	LoadOption("hideRoleIcon")
-	LoadOption("hideRaidIcon")
-	LoadOption("hideDirectionArrow")
+	LoadOption("showPrivIcons")
+	LoadOption("showRoleIcon")
+	LoadOption("showRaidIcon")
+	--LoadOption("showDirectionArrow")
 	LoadOption("tooltipPosition", 1, 0, 1)
-	LoadOption("hideToolboxes")
+	LoadOption("showToolboxes")
 
-	LoadOption("hidebarbkgnd")
+	LoadOption("showbarbkgnd")
+	LoadOption("lock")
 	LoadOption("showSolo")
 	LoadOption("showParty")
 	LoadOption("showPartyPets", nil, nil, nil, 1)
@@ -442,6 +448,7 @@ local function InitOptionData(db, chardb)
 	LoadOption("nameHeight", 12, 4, 20)
 	LoadOption("nameXOffset", 0, -20, 20)
 	LoadOption("nameYOffset", 0, -20, 20)
+	LoadOption("nameFontOutline")
 
 	LoadOption("forceNameColor")
 	LoadOptionColor("nameColor", 1, 1, 1)
@@ -468,15 +475,52 @@ end
 addon:RegisterEventCallback("OnInitialize", InitOptionData)
 
 function module:OnRestoreDefaults()
-	local modules = addon.db.modules
-	wipe(addon.db)
-	addon.db.modules = modules
+	addon.db.lock = nil
+	addon.db.grouphoriz = nil
+	addon.db.keepgroupstogether = 1
+	addon.db.raidFilter = "CLASS"
+	addon.db.clickDownMode = 1
+	addon.db.showtooltip = 1
+	addon.db.tooltipPosition = 0
+	addon.db.showPrivIcons = 1
+	addon.db.showRoleIcon = 1
+	addon.db.showRaidIcon = 1
+	addon.db.invertColor = nil
+	addon.db.showbarbkgnd = 1
+	addon.db.unitBkColor = nil
+	addon.db.scale = nil
+	addon.db.spacing = nil
+	addon.db.width = nil
+	addon.db.height = nil
+	addon.db.powerBarHeight = nil
+	addon.db.outrangeAlpha = nil
+	addon.db.forceHealthColor = nil
+	addon.db.healthColor = nil
+	addon.db.healthtextmode = nil
+	addon.db.forcePowerColor = nil
+	addon.db.powerColor = nil
+	addon.db.forceNameColor = nil
+	addon.db.nameColor = nil
+	addon.db.nameWidthLimit = 75
+	addon.db.nameHeight = nil
+	addon.db.nameXOffset = nil
+	addon.db.nameYOffset = nil
+	addon.db.nameFontOutline = nil
+	addon.db.showToolboxes = 1
+	addon.db.containerAlpha = nil
+	addon.db.containerBorderSize = nil
+	addon.db.showBuffs = 1
+	addon.db.showDebuffs = 1
+	addon.db.onlyDispellable = 1
+	addon.db.showDispels = 1
+	addon.db.groupSwapNoNotify = nil
 
-	modules = addon.chardb.modules
-	wipe(addon.chardb)
-	addon.chardb.modules = modules
-
-	addon:InitializeUserData(addon.db, addon.chardb)
+	local _, profile
+	for _, profile in pairs(addon.db.profiles) do
+		profile.showPartyPets = 1
+		profile.showRaidPets = nil
+		profile.showFriendlyNpc = 1
+	end
 end
 
 ------------------------------------------------------------
@@ -516,7 +560,7 @@ local function UpdateMemoryUsage()
 	end
 
 	UpdateAddOnMemoryUsage()
-	monitorText:SetFormattedText(L["memory monitor info"], color, buttons, color, GetAddOnMemoryUsage(addonName))
+	monitorText:SetFormattedText(L["memory monitor info"], color, buttons, color, GetAddOnMemoryUsage(addon.name))
 end
 
 monitor:SetScript("OnShow", UpdateMemoryUsage)
@@ -529,14 +573,8 @@ monitor:SetScript("OnUpdate", function(self, elapsed)
 	end
 end)
 
-------------------------------------------------------------
--- Register slash command to toggle the option frame
-------------------------------------------------------------
-SLASH_COMPACTRAID1 = "/compactraid"
-SLASH_COMPACTRAID2 = "/craid"
-
-SlashCmdList["COMPACTRAID"] = function(cmd)
-	if cmd and strlower(cmd) == "debug" then
+function addon:OnSlashCmd(cmd)
+	if strlower(cmd) == "debug" then
 		addon:SetDebugMode(not addon:IsDebugMode())
 	else
 		frame:Toggle()

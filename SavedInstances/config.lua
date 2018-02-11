@@ -23,6 +23,7 @@ SavedInstances.diff_strings = {
   R7 = GetDifficultyInfo(15), -- "Heroic raid"
   R8 = GetDifficultyInfo(16), -- "Mythic raid"
 }
+
 local FONTEND = FONT_COLOR_CODE_CLOSE
 local GOLDFONT = NORMAL_FONT_COLOR_CODE
 
@@ -34,8 +35,7 @@ function module:OnInitialize()
 end
 
 BINDING_NAME_SAVEDINSTANCES = L["Show/Hide the SavedInstances tooltip"]
-BINDING_HEADER_SAVEDINSTANCES = L["SavedInstances"]
-
+BINDING_HEADER_SAVEDINSTANCES = "SavedInstances"
 
 -- general helper functions
 
@@ -139,7 +139,7 @@ function module:BuildOptions()
   }
   local opts = {
     type = "group",
-    name = L["SavedInstances"],
+    name = "SavedInstances",
     handler = SavedInstances,
     get = function(info)
       return db.Tooltip[info[#info]]
@@ -233,13 +233,13 @@ function module:BuildOptions()
           },
           HistoryText = {
             type = "toggle",
-            name = L["Instance limit in broker"],
+            name = L["Instance limit in Broker"],
             order = 4.8,
           },
           AbbreviateKeystone = {
             type = "toggle",
             name = L["Abbreviate keystones"],
-            desc = L["Abbreviate mythic keystone dungeon names"],
+            desc = L["Abbreviate Mythic keystone dungeon names"],
             order = 4.85
           },
           DebugMode = {
@@ -277,7 +277,6 @@ function module:BuildOptions()
           CategorySort = {
             order = 15,
             type = "select",
-            --	style = "radio",
             name = L["Sort categories by"],
             values = {
               ["EXPANSION"] = L["Expansion"],
@@ -320,7 +319,6 @@ function module:BuildOptions()
             bigStep = 0.1,
             isPercent = true,
           },
-
           InstancesHeader = {
             order = 20,
             type = "header",
@@ -423,13 +421,13 @@ function module:BuildOptions()
             type = "toggle",
             order = 37,
             name = L["Mythic Keystone"],
-            desc = L["Track mythic keystone acquisition"],
+            desc = L["Track Mythic keystone acquisition"],
           },
           MythicKeyBest = {
             type = "toggle",
             order = 37.5,
             name = L["Mythic Best"],
-            desc = L["Track mythic keystone best run"],
+            desc = L["Track Mythic keystone best run"],
           },
           BindHeader = {
             order = -0.6,
@@ -437,7 +435,6 @@ function module:BuildOptions()
             name = "",
             cmdHidden = true,
           },
-
           ToggleBind = {
             desc = L["Bind a key to toggle the SavedInstances tooltip"],
             type = "keybinding",
@@ -623,7 +620,6 @@ function module:BuildOptions()
                   ["interleave"] = L["Interleave"],
                 },
               },
-
             }
           },
           Manage = {
@@ -829,13 +825,6 @@ end
 
 -- global functions
 
-local lockoutgroup
---function module:ShowLockoutWindow(lockout)
---	print(tostring(lockout))
---	module.selectedLockout = arg
---	InterfaceOptionsFrame_OpenToCategory(lockoutgroup)
---end
-
 function module:table_clone(t)
   if not t then return nil end
   local r = {}
@@ -867,7 +856,7 @@ function module:SetupOptions()
   local namespace = "SavedInstances"
   module:BuildOptions()
   LibStub("AceConfig-3.0"):RegisterOptionsTable(namespace, core.Options, { "si", "savedinstances" })
-  local fgen = ACD:AddToBlizOptions(namespace, L[namespace], nil, "General")
+  local fgen = ACD:AddToBlizOptions(namespace, nil, nil, "General")
   firstoptiongroup = fgen
   fgen.default = function()
     SavedInstances.debug("RESET: General")
@@ -875,15 +864,15 @@ function module:SetupOptions()
     db.MinimapIcon = module:table_clone(vars.defaultDB.MinimapIcon)
     module:ReopenConfigDisplay(fgen)
   end
-  local fcur = ACD:AddToBlizOptions(namespace, CURRENCY, L[namespace], "Currency")
+  local fcur = ACD:AddToBlizOptions(namespace, CURRENCY, namespace, "Currency")
   fcur.default = fgen.default
-  local find = ACD:AddToBlizOptions(namespace, L["Indicators"], L[namespace], "Indicators")
+  local find = ACD:AddToBlizOptions(namespace, L["Indicators"], namespace, "Indicators")
   find.default = function()
     SavedInstances.debug("RESET: Indicators")
     db.Indicators = module:table_clone(vars.defaultDB.Indicators)
     module:ReopenConfigDisplay(find)
   end
-  local finst = ACD:AddToBlizOptions(namespace, L["Instances"], L[namespace], "Instances")
+  local finst = ACD:AddToBlizOptions(namespace, L["Instances"], namespace, "Instances")
   finst.default = function()
     SavedInstances.debug("RESET: Instances")
     for _,i in pairs(db.Instances) do
@@ -891,7 +880,7 @@ function module:SetupOptions()
     end
     module:ReopenConfigDisplay(finst)
   end
-  local ftoon = ACD:AddToBlizOptions(namespace, L["Characters"], L[namespace], "Characters")
+  local ftoon = ACD:AddToBlizOptions(namespace, L["Characters"], namespace, "Characters")
   lastoptiongroup = ftoon
   module.ftoon = ftoon
   ftoon.default = function()

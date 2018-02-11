@@ -57,50 +57,54 @@ local CLASSIC_RAID_AC_TABLE = {	--[Classic Raider]
 	},
 }
 
-local BLACKFATHON_DEEPS_LOOT1 = {
+local BLACKFATHOM_DEEPS_LOOT1 = {
 	{ 1, "INV_Box_01", nil, EJ_GetEncounterInfo(368), nil },	--Ghamoo-ra
 	{ 2, 6908 },	-- Ghamoo-Ra's Bind
 	{ 3, 6907 },	-- Tortoise Armor
 	{ 5, "INV_Box_01", nil, EJ_GetEncounterInfo(436), nil },	--Domina
-	{ 6, 888 },	-- Naga Battle Gloves
-	{ 7, 11121 },	-- Darkwater Talwar
+	{ 6, 888 },		-- Naga Battle Gloves
+	{ 7, 132554 },	-- Deadly Serpentine Grips
 	{ 8, 3078 },	-- Naga Heartpiercer
-	{ 10, "INV_Box_01", nil, EJ_GetEncounterInfo(426), nil },	--Subjugator Kor'ul
-	{ 11, 6906 },	-- Algae Fists
-	{ 12, 6905 },	-- Reef Axe
+	{ 9, 11121 },	-- Darkwater Talwar
+	{ 11, "INV_Box_01", nil, EJ_GetEncounterInfo(426), nil },	--Subjugator Kor'ul
+	{ 12, 6906 },	-- Algae Fists
+	{ 13, 6905 },	-- Reef Axe
 	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(1145), nil },	--Thruk
 	{ 17, 120165 },	-- Thruk's Fillet Knife
 	{ 18, 120164 },	-- Thruk's Heavy Duty Fishing Pole
-	{ 19, 120163 },	-- Thruk's Fishing Rod
-	{ 21, "INV_Box_01", nil, EJ_GetEncounterInfo(447), nil },	--Guardian of the Deep
-	{ 22, 6901 },	-- Glowing Thresher Cape
-	{ 23, 6902 },	-- Bands of Serra'kis
-	{ 24, 6904 },	-- Bite of Serra'kis
-	{ 26, "INV_Box_01", nil, EJ_GetEncounterInfo(1144), nil },	--Executioner Gore
-	{ 27, 120167 },	-- Bloody Twilight Cloak
-	{ 28, 120166 },	-- Gorestained Garb
+	{ 20, 120163 },	-- Thruk's Fishing Rod
+	{ 22, "INV_Box_01", nil, EJ_GetEncounterInfo(447), nil },	--Guardian of the Deep
+	{ 23, 6901 },	-- Glowing Thresher Cape
+	{ 24, 6902 },	-- Bands of Serra'kis
+	{ 25, 132555 },	-- Serra'kis Scale Wraps
+	{ 26, 6904 },	-- Bite of Serra'kis
+	{ 28, "INV_Box_01", nil, EJ_GetEncounterInfo(1144), nil },	--Executioner Gore
+	{ 29, 120167 },	-- Bloody Twilight Cloak
+	{ 30, 120166 },	-- Gorestained Garb
 }
-local BLACKFATHON_DEEPS_LOOT2 = {
+local BLACKFATHOM_DEEPS_LOOT2 = {
 	{ 1, "INV_Box_01", nil, EJ_GetEncounterInfo(437), nil },	--Twilight Lord Bathiel
 	{ 2, 6903 },	-- Gaze Dreamer Pants
 	{ 3, 1155 },	-- Rod of the Sleepwalker
 	{ 5, "INV_Box_01", nil, EJ_GetEncounterInfo(444), nil },	--Aku'mai
 	{ 6, 6910 },	-- Leech Pants
 	{ 7, 6911 },	-- Moss Cinch
-	{ 8, 6909 },	-- Strike of the Hydra
-	{ 10, "ac632" },
-	{ 16, "INV_Box_01", nil, AL["Trash Mobs"], nil },
-	{ 17, 1486 },	-- Tree Bark Jacket
-	{ 18, 3416 },	-- Martyr's Chain
-	{ 19, 1491 },	-- Ring of Precision
-	{ 20, 3413 },	-- Doomspike
-	{ 21, 2567 },	-- Evocator's Blade
-	{ 22, 3417 },	-- Onyx Claymore
-	{ 23, 1454 },	-- Axe of the Enforcer
-	{ 24, 1481 },	-- Grimclaw
-	{ 25, 3414 },	-- Crested Scepter
-	{ 26, 3415 },	-- Staff of the Friar
-	{ 27, 2271 },	-- Staff of the Blessed Seer
+	{ 8, 132553 },	-- Algae-Twined Waistcord
+	{ 9, 6909 },	-- Strike of the Hydra
+	{ 16, "ac632" },
+}
+local BLACKFATHOM_DEEPS_LOOT3 = {
+	{ 1, 1486 },	-- Tree Bark Jacket
+	{ 2, 3416 },	-- Martyr's Chain
+	{ 3, 1491 },	-- Ring of Precision
+	{ 4, 3413 },	-- Doomspike
+	{ 5, 2567 },	-- Evocator's Blade
+	{ 6, 3417 },	-- Onyx Claymore
+	{ 7, 1454 },	-- Axe of the Enforcer
+	{ 8, 1481 },	-- Grimclaw
+	{ 9, 3414 },	-- Crested Scepter
+	{ 10, 3415 },	-- Staff of the Friar
+	{ 11, 2271 },	-- Staff of the Blessed Seer
 }
 data["BlackfathomDeeps"] = {
 	EncounterJournalID = 227,
@@ -110,40 +114,40 @@ data["BlackfathomDeeps"] = {
 	items = {
 		{	--Ghamoo-ra
 			EncounterJournalID = 368,
-			[NORMAL_DIFF] = BLACKFATHON_DEEPS_LOOT1,
+			[NORMAL_DIFF] = BLACKFATHOM_DEEPS_LOOT1,
 		},
 		{	--Domina
 			EncounterJournalID = 436,
-			[NORMAL_DIFF] = BLACKFATHON_DEEPS_LOOT1,
+			[NORMAL_DIFF] = BLACKFATHOM_DEEPS_LOOT1,
 		},
 		{	--Subjugator Kor'ul
 			EncounterJournalID = 426,
-			[NORMAL_DIFF] = BLACKFATHON_DEEPS_LOOT1,
+			[NORMAL_DIFF] = BLACKFATHOM_DEEPS_LOOT1,
 		},
 		{	--Throk
 			EncounterJournalID = 1145,
-			[NORMAL_DIFF] = BLACKFATHON_DEEPS_LOOT1,
+			[NORMAL_DIFF] = BLACKFATHOM_DEEPS_LOOT1,
 		},
 		{	--Guardian of the Deep
 			EncounterJournalID = 447,
-			[NORMAL_DIFF] = BLACKFATHON_DEEPS_LOOT1,
+			[NORMAL_DIFF] = BLACKFATHOM_DEEPS_LOOT1,
 		},
 		{	--Executioner Gore
 			EncounterJournalID = 1144,
-			[NORMAL_DIFF] = BLACKFATHON_DEEPS_LOOT1,
+			[NORMAL_DIFF] = BLACKFATHOM_DEEPS_LOOT1,
 		},
 		{	--Twilight Lord Bathiel
 			EncounterJournalID = 437,
-			[NORMAL_DIFF] = BLACKFATHON_DEEPS_LOOT2,
+			[NORMAL_DIFF] = BLACKFATHOM_DEEPS_LOOT2,
 		},
 		{	--Aku'mai
 			EncounterJournalID = 444,
-			[NORMAL_DIFF] = BLACKFATHON_DEEPS_LOOT2,
+			[NORMAL_DIFF] = BLACKFATHOM_DEEPS_LOOT2,
 		},
 		{	--Trash Mobs
 			name = AL["Trash Mobs"],
 			ExtraList = true,
-			[NORMAL_DIFF] = BLACKFATHON_DEEPS_LOOT2,
+			[NORMAL_DIFF] = BLACKFATHOM_DEEPS_LOOT3,
 		},
 		CLASSIC_INSTANCE_AC_TABLE,
 	}
@@ -171,7 +175,6 @@ data["BlackrockDepths"] = {
 				{ 2, 11632 },	-- Earthslag Shoulders
 				{ 3, 11631 },	-- Stoneshell Guard
 				{ 16, 45050, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Smoking Heart of the Mountain
-				{ 17, 11811, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Smoking Heart of the Mountain
 			},
 		},
 		{	--BRDHoundmaster
@@ -207,25 +210,26 @@ data["BlackrockDepths"] = {
 			[NORMAL_DIFF] = {
 				{ 1, 11839 },	-- Chief Architect's Monocle
 				{ 2, 11841 },	-- Senior Designer's Pantaloons
-				{ 3, 11842 },	-- Lead Surveyor's Mantle
-				{ 4, 22223 },	-- Foreman's Head Protector
-				{ 6, 11840, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Master Builder's Shirt
+				{ 3, 151406 },	-- Belt of the Eminent Mason
+				{ 4, 11842 },	-- Lead Surveyor's Mantle
+				{ 5, 22223 },	-- Foreman's Head Protector
+				{ 7, 11840, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Master Builder's Shirt
 			},
 		},
 		{	--BRDTheVault
 			name = AL["The Vault"],
 			[NORMAL_DIFF] = {
 				{ 1, "INV_Box_01", nil, AL["The Vault"], nil },
-				{ 2, 11309 },	-- The Heart of the Mountain
+				{ 2, 11309, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- The Heart of the Mountain
 				{ 4, "INV_Box_01", nil, AL["The Secret Safe"], nil },
 				{ 5, 22256 },	-- Mana Shaping Handwraps
-				{ 8, 22205 },	-- Black Steel Bindings
-				{ 9, 22255 },	-- Magma Forged Band
-				{ 12, 22254 },	-- Wand of Eternal Light
+				{ 6, 22205 },	-- Black Steel Bindings
+				{ 7, 22255 },	-- Magma Forged Band
+				{ 8, 22254 },	-- Wand of Eternal Light
 				{ 16, "INV_Box_01", nil, BB["Dark Coffer"], nil },
-				{ 17, 11752 },	-- Black Blood of the Tormented
-				{ 18, 11751 },	-- Burning Essence
-				{ 19, 11753 },	-- Eye of Kajal
+				{ 17, 11752, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Black Blood of the Tormented
+				{ 18, 11751, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Burning Essence
+				{ 19, 11753, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Eye of Kajal
 			},
 		},
 		{	--BRDWarderStilgiss
@@ -234,7 +238,8 @@ data["BlackrockDepths"] = {
 				{ 1, 11782 },	-- Boreal Mantle
 				{ 2, 22241 },	-- Dark Warder's Pauldrons
 				{ 3, 11783 },	-- Chillsteel Girdle
-				{ 4, 11784 },	-- Arbiter's Blade
+				{ 4, 151405 },	-- Cold-Forged Chestplate
+				{ 5, 11784 },	-- Arbiter's Blade
 			},
 		},
 		{	--BRDVerek
@@ -249,8 +254,9 @@ data["BlackrockDepths"] = {
 			[NORMAL_DIFF] = {
 				{ 1, 11747 },	-- Flamestrider Robes
 				{ 2, 11749 },	-- Searingscale Leggings
-				{ 3, 11750 },	-- Kindling Stave
-				{ 4, 11748 },	-- Pyric Caduceus
+				{ 3, 22270 },	-- Entrenching Boots
+				{ 4, 11750 },	-- Kindling Stave
+				{ 5, 11748 },	-- Pyric Caduceus
 				{ 16, 11207, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Enchant Weapon - Fiery Weapon
 				{ 18, 63469, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Breath of Cenarius
 				{ 19, 64305, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Loregrain's Grimoire
@@ -259,31 +265,37 @@ data["BlackrockDepths"] = {
 		{	--BRDArena
 			EncounterJournalID = 372,
 			[NORMAL_DIFF] = {
-				{ 1, 11677 },	-- Graverot Cape
-				{ 2, 11675 },	-- Shadefiend Boots
-				{ 3, 11731 },	-- Savage Gladiator Greaves
-				{ 4, 11678 },	-- Carapace of Anub'shiah
-				{ 6, 11685 },	-- Splinthide Shoulders
-				{ 7, 11686 },	-- Girdle of Beastial Fury
-				{ 8, 11679 },	-- Rubicund Armguards
-				{ 9, 11730 },	-- Savage Gladiator Grips
-				{ 11, 11726 },	-- Savage Gladiator Chain
-				{ 12, 22271 },	-- Leggings of Frenzied Magic
-				{ 13, 22257 },	-- Bloodclot Band
-				{ 14, 22266 },	-- Flarethorn
-				{ 16, 11722 },	-- Dregmetal Spaulders
-				{ 17, 11703 },	-- Stonewall Girdle
-				{ 18, 22270 },	-- Entrenching Boots
-				{ 19, 11702 },	-- Grizzle's Skinner
-				{ 20, 11610 },	-- Plans: Dark Iron Pulverizer
-				{ 22, 11634 },	-- Silkweb Gloves
-				{ 23, 11729 },	-- Savage Gladiator Helm
-				{ 24, 11633 },	-- Spiderfang Carapace
-				{ 25, 11635 },	-- Hookfang Shanker
-				{ 27, 11662 },	-- Ban'thok Sash
-				{ 28, 11665 },	-- Ogreseer Fists
-				{ 29, 11728 },	-- Savage Gladiator Leggings
-				{ 30, 11824 },	-- Cyclopean Band
+				{ 1, "INV_Box_01", nil, BB["Anub'shiah"], nil },			--Anub'shiah
+				{ 2, 11677 },	-- Graverot Cape
+				{ 3, 11675 },	-- Shadefiend Boots
+				{ 4, 11731 },	-- Savage Gladiator Greaves
+				{ 5, 11678 },	-- Carapace of Anub'shiah
+				{ 7, "INV_Box_01", nil, BB["Eviscerator"], nil },			--Eviscerator
+				{ 8, 11685 },	-- Splinthide Shoulders
+				{ 9, 11686 },	-- Girdle of Beastial Fury
+				{ 10, 11730 },	-- Savage Gladiator Grips
+				{ 11, 11679 },	-- Rubicund Armguards
+				{ 16, "INV_Box_01", nil, BB["Gorosh the Dervish"], nil },	--Gorosh the Dervish
+				{ 17, 11726 },	-- Savage Gladiator Chain
+				{ 19, 11662 },	-- Ban'thok Sash
+				{ 20, 22271 },	-- Leggings of Frenzied Magic
+				{ 21, 22257 },	-- Bloodclot Band
+				{ 22, 22266 },	-- Flarethorn
+				{ 24, "INV_Box_01", nil, BB["Grizzle"], nil },				--Grizzle
+				{ 25, 11722 },	-- Dregmetal Spaulders
+				{ 26, 22270 },	-- Entrenching Boots
+				{ 27, 11703 },	-- Stonewall Girdle
+				{ 28, 11702 },	-- Grizzle's Skinner
+				{ 30, 11610, [ATLASLOOT_IT_FILTERIGNORE] = true },			-- Plans: Dark Iron Pulverizer
+				{ 101, "INV_Box_01", nil, BB["Hedrum the Creeper"], nil },	--Hedrum the Creeper
+				{ 102, 11634 },	-- Silkweb Gloves
+				{ 103, 11729 },	-- Savage Gladiator Helm
+				{ 104, 11633 },	-- Spiderfang Carapace
+				{ 105, 11635 },	-- Hookfang Shanker
+				{ 107, "INV_Box_01", nil, BB["Ok'thor the Breaker"], nil },	--Ok'thor the Breaker
+				{ 108, 11665 },	-- Ogreseer Fists
+				{ 109, 11728 },	-- Savage Gladiator Leggings
+				{ 110, 11824 },	-- Cyclopean Band
 			},
 		},
 		{	--BRDGeneralAngerforge
@@ -314,24 +326,27 @@ data["BlackrockDepths"] = {
 				{ 1, "INV_Box_01", nil, EJ_GetEncounterInfo(380), nil },	--Hurley Blackbreath
 				{ 2, 11735 },	-- Ragefury Eyepatch
 				{ 3, 18043 },	-- Coal Miner Boots
-				{ 4, 22275 },	-- Firemoss Boots
-				{ 5, 18044 },	-- Hurley's Tankard
-				{ 6, 11312 },	-- Lost Thunderbrew Recipe
-				{ 8, "INV_Box_01", nil, EJ_GetEncounterInfo(381), nil },	--Phalanx
-				{ 9, 22212 },	-- Golem Fitted Pauldrons
-				{ 10, 11745 },	-- Fists of Phalanx
-				{ 11, 11744 },	-- Bloodfist
-				{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(382), nil },	--Ribbly Screwspigot
-				{ 17, 11612 },	-- Plans: Dark Iron Plate
+				{ 4, 151407 },	-- Blackened Pit Trousers
+				{ 5, 151408 },	-- Dark Iron Dredger's Pauldrons
+				{ 6, 18044 },	-- Hurley's Tankard
+				{ 8, 11312, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Lost Thunderbrew Recipe
+				{ 10, "INV_Box_01", nil, EJ_GetEncounterInfo(381), nil },	--Phalanx
+				{ 11, 151409 },	-- Ferrous Cord
+				{ 12, 22212 },	-- Golem Fitted Pauldrons
+				{ 13, 11745 },	-- Fists of Phalanx
+				{ 14, 11744 },	-- Bloodfist
+				{ 16, "INV_Box_01", nil, BB["Ribbly Screwspigot"], nil },	--Ribbly Screwspigot
+				{ 17, 11612, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Plans: Dark Iron Plate
 				{ 18, 11742 },	-- Wayfarer's Knapsack
 				{ 20, "INV_Box_01", nil, EJ_GetEncounterInfo(383), nil },	--Plugger Spazzring
 				{ 21, 12793 },	-- Mixologist's Tunic
-				{ 22, 12791 },	-- Barman Shanker
-				{ 23, 13483 },	-- Recipe: Transmute Fire to Earth
-				{ 24, 18653 },	-- Schematic: Goblin Jumper Cables XL
-				{ 25, 15759 },	-- Pattern: Black Dragonscale Breastplate
-				{ 26, 11602 },	-- Grim Guzzler Key
-				{ 27, 11325 },	-- Dark Iron Ale Mug
+				{ 22, 151410 },	-- Bottle-Popper Ring
+				{ 23, 12791 },	-- Barman Shanker
+				{ 25, 13483, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Recipe: Transmute Fire to Earth
+				{ 26, 18653, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Goblin Jumper Cables XL
+				{ 27, 15759, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Pattern: Black Dragonscale Breastplate
+				{ 28, 11602, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Grim Guzzler Key
+				{ 29, 11325, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Dark Iron Ale Mug
 			},
 		},
 		{	--BRDFlamelash
@@ -349,30 +364,39 @@ data["BlackrockDepths"] = {
 			[NORMAL_DIFF] = {
 				{ 1, 22245 },	-- Soot Encrusted Footwear
 				{ 2, 11787 },	-- Shalehusk Boots
-				{ 3, 11786 },	-- Stone of the Earth
-				{ 4, 11785 },	-- Rock Golem Bulwark
+				{ 3, 11785 },	-- Rock Golem Bulwark
+				{ 4, 11786 },	-- Stone of the Earth
 			},
 		},
 		{	--BRDTomb
 			EncounterJournalID = 385,
 			[NORMAL_DIFF] = {
-				{ 1, "INV_Box_01", nil, BB["Chest of The Seven"], nil },
-				{ 2, 11929 },	-- Haunting Specter Leggings
-				{ 3, 11925 },	-- Ghostshroud
-				{ 4, 11926 },	-- Deathdealer Breastplate
-				{ 5, 11927 },	-- Legplates of the Eternal Guardian
-				{ 6, 11922 },	-- Blood-Etched Blade
-				{ 7, 11920 },	-- Wraith Scythe
-				{ 8, 11923 },	-- The Hammer of Grace
-				{ 9, 11921 },	-- Impervious Giant
+				{ 1, 11929 },	-- Haunting Specter Leggings
+				{ 2, 11925 },	-- Ghostshroud
+				{ 3, 11926 },	-- Deathdealer Breastplate
+				{ 4, 11927 },	-- Legplates of the Eternal Guardian
+				{ 5, 11922 },	-- Blood-Etched Blade
+				{ 6, 11920 },	-- Wraith Scythe
+				{ 7, 11923 },	-- The Hammer of Grace
+				{ 8, 11921 },	-- Impervious Giant
 			},
 		},
 		{	--BRDMagmus
 			EncounterJournalID = 386,
 			[NORMAL_DIFF] = {
-				{ 1, 11746 },	-- Golem Skull Helm
-				{ 2, 11935 },	-- Magmus Stone
-				{ 3, 22208 },	-- Lavastone Hammer
+				{ 1, 151411 },	-- Molten-Warder Leggings
+				{ 2, 11746 },	-- Golem Skull Helm
+				{ 3, 11935 },	-- Magmus Stone
+				{ 4, 22208 },	-- Lavastone Hammer
+			},
+		},
+		{	--BRDHighPriestessofThaurissan; formerly PrincessMoira
+			name = BB["High Priestess of Thaurissan"],
+			[NORMAL_DIFF] = {
+				{ 1, 12556 },	-- High Priestess Boots
+				{ 2, 12554 },	-- Hands of the Exalted Herald
+				{ 3, 12553 },	-- Swiftwalker Boots
+				{ 4, 12557 },	-- Ebonsteel Spaulders
 			},
 		},
 		{	--BRDImperatorDagranThaurissan
@@ -383,23 +407,14 @@ data["BlackrockDepths"] = {
 				{ 4, 11924 },	-- Robes of the Royal Crown
 				{ 5, 22204 },	-- Wristguards of Renown
 				{ 6, 22207 },	-- Sash of the Grand Hunt
-				{ 7, 11933 },	-- Imperial Jewel
 				{ 8, 11934 },	-- Emperor's Seal
-				{ 9, 11815 },	-- Hand of Justice
-				{ 16, 11931 },	-- Dreadforge Retaliator
+				{ 9, 11933 },	-- Imperial Jewel	
+				{ 10, 11815 },	-- Hand of Justice
+				{ 16, 11928 },	-- Thaurissan's Royal Scepter
 				{ 17, 11932 },	-- Guiding Stave of Wisdom
-				{ 18, 11928 },	-- Thaurissan's Royal Scepter
+				{ 18, 11931 },	-- Dreadforge Retaliator
 				{ 20, 12033, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Thaurissan Family Jewels
 				{ 22, "ac642" },
-			},
-		},
-		{	--BRDPrincess
-			name = BB["Princess Moira Bronzebeard"],
-			[NORMAL_DIFF] = {
-				{ 1, 12554 },	-- Hands of the Exalted Herald
-				{ 2, 12556 },	-- High Priestess Boots
-				{ 3, 12557 },	-- Ebonsteel Spaulders
-				{ 4, 12553 },	-- Swiftwalker Boots
 			},
 		},
 		{	--BRDTrash
@@ -419,18 +434,18 @@ data["BlackrockDepths"] = {
 				{ 11, 12527 },	-- Ribsplitter
 				{ 12, 12528 },	-- The Judge's Gavel
 				{ 13, 12532 },	-- Spire of the Stoneshaper
-				{ 16, 15781 },	-- Pattern: Black Dragonscale Leggings
-				{ 17, 15770 },	-- Pattern: Black Dragonscale Shoulders
-				{ 18, 16053 },	-- Schematic: Master Engineer's Goggles
-				{ 19, 16049 },	-- Schematic: Dark Iron Bomb
-				{ 20, 16048 },	-- Schematic: Dark Iron Rifle
-				{ 21, 18654 },	-- Schematic: Gnomish Alarm-o-Bot
-				{ 22, 18661 },	-- Schematic: World Enlarger
-				{ 24, 11754 },	-- Black Diamond
-				{ 25, 11078 },	-- Relic Coffer Key
-				{ 26, 18945 },	-- Dark Iron Residue
-				{ 27, 64304 },	-- Elemental Module
-				{ 28, 64313 },	-- Elemental-Imbued Weapon
+				{ 16, 15781, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Pattern: Black Dragonscale Leggings
+				{ 17, 15770, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Pattern: Black Dragonscale Shoulders
+				{ 18, 16053, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Master Engineer's Goggles
+				{ 19, 16049, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Dark Iron Bomb
+				{ 20, 16048, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Dark Iron Rifle
+				{ 21, 18654, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Gnomish Alarm-o-Bot
+				{ 22, 18661, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: World Enlarger
+				{ 24, 11754, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Black Diamond
+				{ 25, 11078, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Relic Coffer Key
+				{ 26, 18945, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Dark Iron Residue
+				{ 27, 64304, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Elemental Module
+				{ 28, 64313, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Elemental-Imbued Weapon
 			},
 		},
 		{	--Miscellaneous Sets
@@ -454,6 +469,12 @@ data["Deadmines"] = {
 	ContentType = DUNGEON_CONTENT,
 	LoadDifficulty = NORMAL_DIFF,
 	items = {
+		{	--DeadminesMarisaDuPaige
+			name = BB["Marisa du'Paige"].." ("..AL["Rare"]..")",
+			[NORMAL_DIFF] = {
+				{ 1, 4660 },	-- Walking Boots
+			},
+		},
 		{	--DeadminesGlubtok
 			EncounterJournalID = 89,
 			[NORMAL_DIFF] = {
@@ -467,9 +488,10 @@ data["Deadmines"] = {
 			EncounterJournalID = 90,
 			[NORMAL_DIFF] = {
 				{ 1, 5199 },	-- Smelting Pants
-				{ 2, 5191 },	-- Cruel Barb
-				{ 3, 5200 },	-- Impaling Harpoon
-				{ 4, 5443 },	-- Gold-Plated Buckler
+				{ 2, 132556 },	-- Smelter's Britches
+				{ 3, 5443 },	-- Gold-Plated Buckler
+				{ 4, 5191 },	-- Cruel Barb
+				{ 5, 5200 },	-- Impaling Harpoon	
 			},
 			[HEROIC_DIFF] = "AtlasLoot_Cataclysm",
 		},
@@ -477,8 +499,8 @@ data["Deadmines"] = {
 			EncounterJournalID = 91,
 			[NORMAL_DIFF] = {
 				{ 1, 1937 },	-- Buzz Saw
-				{ 2, 5187 },	-- Foe Reaper
-				{ 3, 5201 },	-- Emberstone Staff
+				{ 2, 5201 },	-- Emberstone Staff
+				{ 3, 5187 },	-- Foe Reaper
 			},
 			[HEROIC_DIFF] = "AtlasLoot_Cataclysm",
 		},
@@ -487,7 +509,7 @@ data["Deadmines"] = {
 			[NORMAL_DIFF] = {
 				{ 1, 1156 },	-- Lavishly Jeweled Ring
 				{ 2, 5196 },	-- Smite's Reaver
-				{ 3, 872 },	-- Rockslicer
+				{ 3, 872 },		-- Rockslicer
 			},
 			[HEROIC_DIFF] = "AtlasLoot_Cataclysm",
 		},
@@ -496,8 +518,8 @@ data["Deadmines"] = {
 			[NORMAL_DIFF] = {
 				{ 1, 5193 },	-- Cape of the Brotherhood
 				{ 2, 5202 },	-- Corsair's Overshirt
-				{ 3, 5192 },	-- Thief's Blade
-				{ 4, 5197 },	-- Cookie's Tenderizer
+				{ 3, 5197 },	-- Cookie's Tenderizer
+				{ 4, 5192 },	-- Thief's Blade
 				{ 5, 5198 },	-- Cookie's Stirring Rod
 				{ 16, "ac628" },
 			},
@@ -508,61 +530,32 @@ data["Deadmines"] = {
 			ExtraList = true,
 			[NORMAL_DIFF] = {
 				{ 1, 1930 },	-- Stonemason Cloak
-				{ 2, 1951 },	-- Blackwater Cutlass
-				{ 3, 1926 },	-- Weighted Sap
-				{ 16, "INV_Box_01", nil, BB["Marisa du'Paige"].." ("..AL["Rare"]..", "..AL["Entrance"]..")", nil },
-				{ 17, 4660 },	-- Walking Boots
+				{ 2, 1926 },	-- Weighted Sap
+				{ 3, 1951 },	-- Blackwater Cutlass
+				
 			},
 		},
 		CLASSIC_INSTANCE_AC_TABLE,
 	}
 }
 
-local DMN_GUARD_LOOT = {
-	{ 1, 18496 },	-- Heliotrope Cloak
-	{ 2, 18450 },	-- Robe of Combustion
-	{ 3, 18497 },	-- Sublime Wristguards
-	{ 4, 18451 },	-- Hyena Hide Belt
-	{ 5, 18494 },	-- Denwatcher's Shoulders
-	{ 6, 18458 },	-- Modest Armguards
-	{ 7, 18493 },	-- Bulky Iron Spaulders
-	{ 8, 18459 },	-- Gallant's Wristguards
-	{ 16, 18464 },	-- Gordok Nose Ring
-	{ 18, 18498 },	-- Hedgecutter
-	{ 19, 18462 },	-- Jagged Bone Fist
-	{ 20, 18463 },	-- Ogre Pocket Knife
-	{ 21, 18460 },	-- Unsophisticated Hand Cannon
-}
-data["DireMaul"] = {
-	EncounterJournalID = 230,
-	MapID = 699,
-	AtlasMapID = "DireMaulEnt",
-	ContentType = DUNGEON_CONTENT,
-	items = {
-		{	--DMEZevrimThornhoof
-			EncounterJournalID = 402,
-			[NORMAL_DIFF] = {
+local DIREMAULENT_LOOT1 = {
 				{ 1, 18306 },	-- Gloves of Shadowy Mist
 				{ 2, 18308 },	-- Clever Hat
 				{ 3, 18319 },	-- Fervent Helm
 				{ 4, 18313 },	-- Helm of Awareness
 				{ 5, 18323 },	-- Satyr's Bow
-			},
-		},
-		{	--DMEHydro
-			EncounterJournalID = 403,
-			[NORMAL_DIFF] = {
+}
+local DIREMAULENT_LOOT2 = {
 				{ 1, 18307 },	-- Riptide Shoes
 				{ 2, 18322 },	-- Waterspout Boots
 				{ 3, 18305 },	-- Breakwater Legguards
 				{ 4, 18317 },	-- Tempest Talisman
 				{ 5, 18324 },	-- Waveslicer
-				{ 7, 18299, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Hydrospawn Essence
-			},
-		},
-		{	--DMELethtendrisPimgib
-			EncounterJournalID = 404,
-			[NORMAL_DIFF] = {
+				{ 16, 19268, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Ace of Elementals
+				{ 18, 18299, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Hydrospawn Essence
+}
+local DIREMAULENT_LOOT3 = {
 				{ 1, 18325 },	-- Felhide Cap
 				{ 2, 18302 },	-- Band of Vigor
 				{ 3, 18311 },	-- Quel'dorei Channeling Rod
@@ -570,73 +563,52 @@ data["DireMaul"] = {
 				{ 6, 18426, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Lethtendris' Web
 				{ 16, "INV_Box_01", nil, BB["Pimgib"], nil },
 				{ 17, 18354, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Pimgib's Collar
-			},
-		},
-		{	--DMEPusillin
-			name = BB["Pusillin"],
-			[NORMAL_DIFF] = {
-				{ 1, 18267 },	-- Recipe: Runn Tum Tuber Surprise
-				{ 3, 18261 },	-- Book of Incantations
-			},
-		},
-		{	--DMEAlzzin
-			EncounterJournalID = 405,
-			[NORMAL_DIFF] = {
+}
+local DIREMAULENT_LOOT4 = {
+				{ 1, 18267, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Recipe: Runn Tum Tuber Surprise
+				{ 3, 18261, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Book of Incantations
+}
+local DIREMAULENT_LOOT5 = {
 				{ 1, 18328 },	-- Shadewood Cloak
 				{ 2, 18327 },	-- Whipvine Cord
-				{ 3, 18309 },	-- Gloves of Restoration
-				{ 4, 18318 },	-- Merciful Greaves
+				{ 3, 18318 },	-- Merciful Greaves
+				{ 4, 18309 },	-- Gloves of Restoration
 				{ 5, 18312 },	-- Energized Chestplate
 				{ 6, 18326 },	-- Razor Gauntlets
 				{ 16, 18314 },	-- Ring of Demonic Guile
 				{ 17, 18315 },	-- Ring of Demonic Potency
-				{ 19, 18321 },	-- Energetic Rod
-				{ 20, 18310 },	-- Fiendish Machete
+				{ 19, 18310 },	-- Fiendish Machete
+				{ 20, 18321 },	-- Energetic Rod
 				{ 22, "INV_Box_01", nil, AL["Felvine Shard"], nil },
 				{ 23, 18501, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Felvine Shard
 				{ 25, "ac644" },
-			},
-		},
-		{	--DMWTendrisWarpwood
-			EncounterJournalID = 406,
-			[NORMAL_DIFF] = {
+}
+local DIREMAULWEST_LOOT1 = {
 				{ 1, 18390 },	-- Tanglemoss Leggings
 				{ 2, 18393 },	-- Warpwood Binding
-				{ 3, 18353 },	-- Stoneflower Staff
-				{ 4, 18352 },	-- Petrified Bark Shield
-			},
-		},
-		{	--DMWIllyannaRavenoak
-			EncounterJournalID = 407,
-			[NORMAL_DIFF] = {
+				{ 3, 18352 },	-- Petrified Bark Shield
+				{ 4, 18353 },	-- Stoneflower Staff
+}
+local DIREMAULWEST_LOOT2 = {
 				{ 1, 18386 },	-- Padre's Trousers
 				{ 2, 18349 },	-- Gauntlets of Accuracy
 				{ 3, 18383 },	-- Force Imbued Gauntlets
 				{ 4, 18347 },	-- Well Balanced Axe
-			},
-		},
-		{	--DMWMagisterKalendris
-			EncounterJournalID = 408,
-			[NORMAL_DIFF] = {
+}
+local DIREMAULWEST_LOOT3 = {
 				{ 1, 18350 },	-- Amplifying Cloak
 				{ 2, 18374 },	-- Flamescarred Shoulders
 				{ 3, 18351 },	-- Magically Sealed Bracers
 				{ 4, 18397 },	-- Elder Magus Pendant
 				{ 5, 18371 },	-- Mindtap Talisman
 				{ 7, 22309, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Pattern: Big Bag of Enchantment
-			},
-		},
-		{	--DMWTsuzee
-			name = BB["Tsu'zee"].." ("..AL["Rare"]..")",
-			[NORMAL_DIFF] = {
+}
+local DIREMAULWEST_LOOT4 = {
 				{ 1, 18387 },	-- Brightspark Gloves
 				{ 2, 18346 },	-- Threadbare Trousers
 				{ 3, 18345 },	-- Murmuring Ring
-			},
-		},
-		{	--DMWImmolthar
-			EncounterJournalID = 409,
-			[NORMAL_DIFF] = {
+}
+local DIREMAULWEST_LOOT5 = {
 				{ 1, 18389 },	-- Cloak of the Cosmos
 				{ 2, 18385 },	-- Robe of Everlasting Night
 				{ 3, 18377 },	-- Quickdraw Gloves
@@ -648,132 +620,72 @@ data["DireMaul"] = {
 				{ 17, 18370 },	-- Vigilance Charm
 				{ 19, 18372 },	-- Blade of the New Moon
 				{ 21, "ac644" },
-			},
-		},
-		{	--DMWHelnurath
-			name = BB["Lord Hel'nurath"].." ("..AL["Summon"]..")",
-			[NORMAL_DIFF] = {
+}
+local DIREMAULWEST_LOOT6 = {
 				{ 1, 18757 },	-- Diabolic Mantle
-				{ 2, 18755 },	-- Xorothian Firestick
-				{ 3, 18756 },	-- Dreadguard's Protector
-			},
-		},
-		{	--DMWPrinceTortheldrin
-			EncounterJournalID = 410,
-			[NORMAL_DIFF] = {
+				{ 2, 18754 },	-- Fel Hardened Bracers
+				{ 3, 18755 },	-- Xorothian Firestick
+				{ 4, 18756 },	-- Dreadguard's Protector
+}
+local DIREMAULWEST_LOOT7 = {
 				{ 1, 18382 },	-- Fluctuating Cloak
 				{ 2, 18373 },	-- Chestplate of Tranquility
 				{ 3, 18375 },	-- Bracers of the Eclipse
 				{ 4, 18378 },	-- Silvermoon Leggings
 				{ 5, 18380 },	-- Eldritch Reinforced Legplates
 				{ 7, 18395 },	-- Emerald Flame Ring
-				{ 16, 18392 },	-- Distracting Dagger
-				{ 17, 18396 },	-- Mind Carver
-				{ 18, 18388 },	-- Stoneshatter
-				{ 19, 18376 },	-- Timeworn Mace
-			},
-		},
-		{	--DMNGuardMoldar
-			EncounterJournalID = 411,
-			[NORMAL_DIFF] = DMN_GUARD_LOOT
-		},
-		{	--DMNStomperKreeg
-			EncounterJournalID = 412,
-			[NORMAL_DIFF] = {
+				{ 16, 18388 },	-- Stoneshatter
+				{ 17, 18392 },	-- Distracting Dagger
+				{ 18, 18376 },	-- Timeworn Mace
+				{ 19, 18396 },	-- Mind Carver
+}
+local DIREMAULNORTH_LOOT1 = {
+				{ 1, 18496 },	-- Heliotrope Cloak
+				{ 2, 18450 },	-- Robe of Combustion
+				{ 3, 18497 },	-- Sublime Wristguards
+				{ 4, 18451 },	-- Hyena Hide Belt
+				{ 5, 18494 },	-- Denwatcher's Shoulders
+				{ 6, 18458 },	-- Modest Armguards
+				{ 7, 18493 },	-- Bulky Iron Spaulders
+				{ 8, 18459 },	-- Gallant's Wristguards
+				{ 16, 18464 },	-- Gordok Nose Ring
+				{ 18, 18462 },	-- Jagged Bone Fist
+				{ 19, 18460 },	-- Unsophisticated Hand Cannon
+				{ 20, 18498 },	-- Hedgecutter
+				{ 21, 18463 },	-- Ogre Pocket Knife
+}
+local DIREMAULNORTH_LOOT2 = {
 				{ 1, 18425 },	-- Kreeg's Mug
 				{ 3, 18269, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Gordok Green Grog
 				{ 4, 18284, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Kreeg's Stout Beatdown
 				{ 5, 18287, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Evermurky
 				{ 6, 18288, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Molasses Firewater
-			},
-		},
-		{	--DMNGuardFengus
-			EncounterJournalID = 413,
-			[NORMAL_DIFF] = DMN_GUARD_LOOT
-		},
-		{	--DMNGuardSlipkik
-			EncounterJournalID = 414,
-			[NORMAL_DIFF] = DMN_GUARD_LOOT
-		},
-		{	--DMNCaptainKromcrush
-			EncounterJournalID = 415,
-			[NORMAL_DIFF] = {
+}
+local DIREMAULNORTH_LOOT3 = {
 				{ 1, 18507 },	-- Boots of the Full Moon
 				{ 2, 18505 },	-- Mugger's Belt
 				{ 3, 18503 },	-- Kromcrush's Chestplate
 				{ 4, 18502 },	-- Monstrous Glaive
-			},
-		},
-		{	--DMNChoRush
-			EncounterJournalID = 416,
-			[NORMAL_DIFF] = {
-				{ 1, 18490 },	-- Insightful Hood
-				{ 2, 18484 },	-- Cho'Rush's Blade
-				{ 3, 18483 },	-- Mana Channeling Wand
-				{ 4, 18485 },	-- Observer's Shield
-			},
-		},
-		{	--DMNKingGordok
-			EncounterJournalID = 417,
-			[NORMAL_DIFF] = {
+}
+local DIREMAULNORTH_LOOT4 = {
 				{ 1, 18526 },	-- Crown of the Ogre King
 				{ 2, 18525 },	-- Bracers of Prosperity
 				{ 3, 18527 },	-- Harmonious Gauntlets
 				{ 4, 18524 },	-- Leggings of Destruction
 				{ 5, 18521 },	-- Grimy Metal Boots
 				{ 7, 18522 },	-- Band of the Ogre King
-				{ 16, 18520 },	-- Barbarous Blade
-				{ 17, 18523 },	-- Brightly Glowing Stone
+				{ 16, 18523 },	-- Brightly Glowing Stone
+				{ 17, 18520 },	-- Barbarous Blade
 				{ 19, 19258, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Ace of Warlords
 				{ 21, "ac644" },
-			},
-		},
-		{	--DMETrash / DMWTrash
-			name = AL["Trash Mobs"],
-			ExtraList = true,
-			[NORMAL_DIFF] = {
-				{ 1, 18295 },	-- Phasing Boots
-				{ 2, 18344 },	-- Stonebark Gauntlets
-				{ 3, 18298 },	-- Unbridled Leggings
-				{ 4, 18296 },	-- Marksman Bands
-				{ 5, 18289 },	-- Barbed Thorn Necklace
-				{ 6, 18340 },	-- Eidolon Talisman
-				{ 7, 18338 },	-- Wand of Arcane Potency
-				{ 16, "INV_Box_01", nil, AL["Shen'dralar Provisioner"], nil },
-				{ 17, 18487 },	-- Pattern: Mooncloth Robe
-			},
-		},
-		{	--DMBooks
-			name = AL["Dire Maul Books"],
-			ExtraList = true,
-			[NORMAL_DIFF] = {
-				{ 1, 18364 },	-- The Emerald Dream
-				{ 2, 18361 },	-- The Greatest Race of Hunters
-				{ 3, 18358 },	-- The Arcanist's Cookbook
-				{ 4, 18359 },	-- The Light and How to Swing It
-				{ 5, 18362 },	-- Holy Bologna: What the Light Won't Tell You
-				{ 6, 18356 },	-- Garona: A Study on Stealth and Treachery
-				{ 7, 18363 },	-- Frost Shock and You
-				{ 8, 18360 },	-- Harnessing Shadows
-				{ 9, 18357 },	-- Codex of Defense
-				{ 11, 18333 },	-- Libram of Focus
-				{ 12, 18334 },	-- Libram of Protection
-				{ 13, 18332 },	-- Libram of Rapidity
-				{ 16, 18470 },	-- Royal Seal of Eldre'Thalas
-				{ 17, 18473 },	-- Royal Seal of Eldre'Thalas
-				{ 18, 18468 },	-- Royal Seal of Eldre'Thalas
-				{ 19, 18472 },	-- Royal Seal of Eldre'Thalas
-				{ 20, 18469 },	-- Royal Seal of Eldre'Thalas
-				{ 21, 18465 },	-- Royal Seal of Eldre'Thalas
-				{ 22, 18471 },	-- Royal Seal of Eldre'Thalas
-				{ 23, 18467 },	-- Royal Seal of Eldre'Thalas
-				{ 24, 18466 },	-- Royal Seal of Eldre'Thalas
-			},
-		},
-		{	--DMNTRIBUTERUN
-			name = AL["Dire Maul North Tribute Chest"],
-			ExtraList = true,
-			[NORMAL_DIFF] = {
+}
+local DIREMAULNORTH_LOOT5 = {
+				{ 1, 18490 },	-- Insightful Hood
+				{ 2, 18485 },	-- Observer's Shield
+				{ 3, 18484 },	-- Cho'Rush's Blade
+				{ 4, 18483 },	-- Mana Channeling Wand
+}
+local DIREMAULNORTH_LOOT6 = {
 				{ 1, 18538 },	-- Treant's Bane
 				{ 3, 18495 },	-- Redoubt Cloak
 				{ 4, 18532 },	-- Mindsurge Robe
@@ -794,38 +706,112 @@ data["DireMaul"] = {
 				{ 21, 18534 },	-- Rod of the Ogre Magi
 				{ 22, 18499 },	-- Barrier Shield
 				{ 23, 18482 },	-- Ogre Toothpick Shooter
-				{ 25, 18655 },	-- Schematic: Major Recombobulator
-			},
+				{ 25, 18655, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Major Recombobulator
+}
+local DIREMAUL_LOOT1 = {
+				{ 1, 9434 },	-- Elemental Raiment
+				{ 2, 18295 },	-- Phasing Boots
+				{ 3, 18344 },	-- Stonebark Gauntlets
+				{ 4, 18298 },	-- Unbridled Leggings
+				{ 5, 18296 },	-- Marksman Bands
+				{ 6, 18289 },	-- Barbed Thorn Necklace
+				{ 7, 18340 },	-- Eidolon Talisman
+				{ 8, 18338 },	-- Wand of Arcane Potency
+				{ 16, "INV_Box_01", nil, AL["Shen'dralar Provisioner"], nil },
+				{ 17, 18487, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Pattern: Mooncloth Robe
+}
+
+data["DireMaul"] = {
+	EncounterJournalID = 230,
+	MapID = 699,
+	AtlasMapID = "DireMaulEnt",
+	ContentType = DUNGEON_CONTENT,
+	items = {
+		{	--Dire Maul East - Zevrim Thornhoof
+			EncounterJournalID = 402,
+			[NORMAL_DIFF] = DIREMAULENT_LOOT1,
 		},
-		{	--DMNThimblejack
-			name = AL["Knot Thimblejack"],
+		{	--Dire Maul East - Hydrospawn
+			EncounterJournalID = 403,
+			[NORMAL_DIFF] = DIREMAULENT_LOOT2,
+		},
+		{	--Dire Maul East - Lethtendris Pimgib
+			EncounterJournalID = 404,
+			[NORMAL_DIFF] = DIREMAULENT_LOOT3,
+		},
+		{	--Dire Maul East - Pusillin
+			name = BB["Pusillin"],
+			[NORMAL_DIFF] = DIREMAULENT_LOOT4,
+		},
+		{	--Dire Maul East - Alzzin the Windshaper
+			EncounterJournalID = 405,
+			[NORMAL_DIFF] = DIREMAULENT_LOOT5,
+		},
+		{	--Dire Maul West - Tendris Warpwood
+			EncounterJournalID = 406,
+			[NORMAL_DIFF] = DIREMAULWEST_LOOT1,
+		},
+		{	--Dire Maul West - Illyanna Ravenoak
+			EncounterJournalID = 407,
+			[NORMAL_DIFF] = DIREMAULWEST_LOOT2,
+		},
+		{	--Dire Maul West - Magister Kalendris
+			EncounterJournalID = 408,
+			[NORMAL_DIFF] = DIREMAULWEST_LOOT3,
+		},
+		{	--Dire Maul West - Tsuzee
+			name = BB["Tsu'zee"].." ("..AL["Rare"]..")",
+			[NORMAL_DIFF] = DIREMAULWEST_LOOT4,
+		},
+		{	--Dire Maul West - Immolthar
+			EncounterJournalID = 409,
+			[NORMAL_DIFF] = DIREMAULWEST_LOOT5,
+		},
+		{	--Dire Maul West - Lord Helnurath
+			name = BB["Lord Hel'nurath"].." ("..AL["Summon"]..")",
+			[NORMAL_DIFF] = DIREMAULWEST_LOOT6,
+		},
+		{	--Dire Maul West - Prince Tortheldrin
+			EncounterJournalID = 410,
+			[NORMAL_DIFF] = DIREMAULWEST_LOOT7,
+		},
+		{	--Dire Maul North - Guard Moldar
+			EncounterJournalID = 411,
+			[NORMAL_DIFF] = DIREMAULNORTH_LOOT1,
+		},
+		{	--Dire Maul North - Stomper Kreeg
+			EncounterJournalID = 412,
+			[NORMAL_DIFF] = DIREMAULNORTH_LOOT2,
+		},
+		{	--Dire Maul North - Guard Fengus
+			EncounterJournalID = 413,
+			[NORMAL_DIFF] = DIREMAULNORTH_LOOT1,
+		},
+		{	--Dire Maul North - Guard Slipkik
+			EncounterJournalID = 414,
+			[NORMAL_DIFF] = DIREMAULNORTH_LOOT1,
+		},
+		{	--Dire Maul North - Captain Kromcrush
+			EncounterJournalID = 415,
+			[NORMAL_DIFF] = DIREMAULNORTH_LOOT3,
+		},
+		{	--Dire Maul North - King Gordok
+			EncounterJournalID = 417,
+			[NORMAL_DIFF] = DIREMAULNORTH_LOOT4,
+		},
+		{	--Dire Maul North - Cho'Rush the Observer
+			EncounterJournalID = 416,
+			[NORMAL_DIFF] = DIREMAULNORTH_LOOT5,
+		},
+		{	--Dire Maul - Trash Mobs
+			name = AL["Trash Mobs"],
 			ExtraList = true,
-			[NORMAL_DIFF] = {
-				{ 1, 18517 },	-- Pattern: Chromatic Cloak
-				{ 2, 18518 },	-- Pattern: Hide of the Wild
-				{ 3, 18519 },	-- Pattern: Shifting Cloak
-				{ 4, 18414 },	-- Pattern: Belt of the Archmage
-				{ 6, 18418 },	-- Pattern: Cloak of Warding
-				{ 7, 18415 },	-- Pattern: Felcloth Gloves
-				{ 8, 18416 },	-- Pattern: Inferno Gloves
-				{ 9, 18417 },	-- Pattern: Mooncloth Gloves
-				{ 10, 18514 },	-- Pattern: Girdle of Insight
-				{ 11, 18515 },	-- Pattern: Mongoose Boots
-				{ 12, 18516 },	-- Pattern: Swift Flight Bracers
-				{ 14, "INV_Box_01", nil, AL["Ogre Tannin Basket"], nil },
-				{ 15, 18240 },	-- Ogre Tannin
-				{ 16, 18509 },	-- Chromatic Cloak
-				{ 17, 18510 },	-- Hide of the Wild
-				{ 18, 18511 },	-- Shifting Cloak
-				{ 19, 18405 },	-- Belt of the Archmage
-				{ 21, 18413 },	-- Cloak of Warding
-				{ 22, 18407 },	-- Felcloth Gloves
-				{ 23, 18408 },	-- Inferno Gloves
-				{ 24, 18409 },	-- Mooncloth Gloves
-				{ 25, 18504 },	-- Girdle of Insight
-				{ 26, 18506 },	-- Mongoose Boots
-				{ 27, 18508 },	-- Swift Flight Bracers
-			},
+			[NORMAL_DIFF] = DIREMAUL_LOOT1,
+		},
+		{	--Dire Maul North - Tribute Chest
+			name = AL["Dire Maul North Tribute Chest"],
+			ExtraList = true,
+			[NORMAL_DIFF] = DIREMAULNORTH_LOOT6,
 		},
 		CLASSIC_INSTANCE_AC_TABLE,
 
@@ -834,50 +820,58 @@ data["DireMaul"] = {
 
 local GNOMEREGAN_LOOT1 = {
 	{ 1, "INV_Box_01", nil, EJ_GetEncounterInfo(419), nil },	--Grubbis
-	{ 2, 9445 },	-- Grubbis Paws
-	{ 4, "INV_Box_01", nil, EJ_GetEncounterInfo(420), nil },	--Viscous Fallout
-	{ 5, 9454 },	-- Acidic Walkers
-	{ 6, 9453 },	-- Toxic Revenger
-	{ 7, 9452 },	-- Hydrocane
-	{ 9, "INV_Box_01", nil, EJ_GetEncounterInfo(421), nil },	--Electrocutioner 6000
-	{ 10, 9448 },	-- Spidertank Oilrag
-	{ 11, 9447 },	-- Electrocutioner Lagnut
-	{ 12, 9446 },	-- Electrocutioner Leg
-	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(418), nil },	--Crowd Pummeler 9-60
-	{ 17, 9450 },	-- Gnomebot Operating Boots
-	{ 18, 9449 },	-- Manual Crowd Pummeler
-	{ 20, "INV_Box_01", nil, BB["Dark Iron Ambassador"].." ("..AL["Rare"]..")", nil },
-	{ 21, 9455 },	-- Emissary Cuffs
-	{ 22, 9457 },	-- Royal Diplomatic Scepter
-	{ 23, 9456 },	-- Glass Shooter
+	{ 2, 151078 },	-- Shabby Trogg Britches
+	{ 3, 151079 },	-- Chomper-Hide Belt
+	{ 4, 151080 },	-- Grubbis' Protective Pail
+	{ 5, 9445 },	-- Grubbis Paws
+	{ 7, "INV_Box_01", nil, EJ_GetEncounterInfo(420), nil },	--Viscous Fallout
+	{ 8, 9454 },	-- Acidic Walkers
+	{ 9, 151081 },	-- Gnomish Rebreather
+	{ 10, 151082 },	-- Lead Apron
+	{ 11, 151083 },	-- Hazmat Galoshes
+	{ 12, 9453 },	-- Toxic Revenger
+	{ 13, 9452 },	-- Hydrocane
+	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(421), nil },	--Electrocutioner 6000
+	{ 17, 9448 },	-- Spidertank Oilrag
+	{ 18, 9447 },	-- Electrocutioner Lagnut
+	{ 19, 9446 },	-- Electrocutioner Leg
+	{ 21, "INV_Box_01", nil, EJ_GetEncounterInfo(418), nil },	--Crowd Pummeler 9-60
+	{ 22, 151084 },	-- Grease-Smudged Sash
+	{ 23, 9450 },	-- Gnomebot Operating Boots
+	{ 24, 132558 },	-- Bot Operator's Threads
+	{ 25, 9449 },	-- Manual Crowd Pummeler
+	{ 27, "INV_Box_01", nil, BB["Dark Iron Ambassador"].." ("..AL["Rare"]..")", nil },
+	{ 28, 9455 },	-- Emissary Cuffs
+	{ 29, 9456 },	-- Glass Shooter
+	{ 30, 9457 },	-- Royal Diplomatic Scepter
 }
 local GNOMEREGAN_LOOT2 = {
-	{ 1, "INV_Box_01", nil, EJ_GetEncounterInfo(422), nil },	--Mekgineer Thermaplugg
-	{ 2, 9492 },	-- Electromagnetic Gigaflux Reactivator
-	{ 3, 9461 },	-- Charged Gear
+	{ 1, 9492 },	-- Electromagnetic Gigaflux Reactivator
+	{ 2, 9461 },	-- Charged Gear
+	{ 3, 9458 },	-- Thermaplugg's Central Core
 	{ 4, 9459 },	-- Thermaplugg's Left Arm
-	{ 5, 9458 },	-- Thermaplugg's Central Core
-	{ 6, 4415, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Craftsman's Monocle
-	{ 7, 11828, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Pet Bombling
-	{ 8, 4413, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Discombobulator Ray
-	{ 9, 4411, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Flame Deflector
-	{ 10, 7742, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Gnomish Cloaking Device
-	{ 12, "ac634" },
-	{ 16, "INV_Box_01", nil, AL["Trash Mobs"], nil },
-	{ 17, 9508 },	-- Mechbuilder's Overalls
-	{ 18, 9491 },	-- Hotshot Pilot's Gloves
-	{ 19, 9509 },	-- Petrolspill Leggings
-	{ 20, 9510 },	-- Caverndeep Trudgers
-	{ 21, 9490 },	-- Gizmotron Megachopper
-	{ 22, 9485 },	-- Vibroblade
-	{ 23, 9486 },	-- Supercharger Battle Axe
-	{ 24, 9488 },	-- Oscillating Power Hammer
-	{ 25, 9487 },	-- Hi-Tech Supergun
-	{ 26, 11827 },	-- Schematic: Lil' Smoky
-	{ 27, 9327 },	-- Security DELTA Data Access Card
-	{ 28, 9326 },	-- Grime-Encrusted Ring
-	{ 29, 9538 },	-- Talvash's Gold Ring
-	{ 30, 9362 },	-- Brilliant Gold Ring
+	{ 16, 4415, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Craftsman's Monocle
+	{ 17, 11828, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Pet Bombling
+	{ 18, 4413, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Discombobulator Ray
+	{ 19, 4411, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Flame Deflector
+	{ 20, 7742, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Gnomish Cloaking Device
+	{ 22, "ac634" },
+}
+local GNOMEREGAN_LOOT3 = {
+	{ 1, 9508 },	-- Mechbuilder's Overalls
+	{ 2, 9491 },	-- Hotshot Pilot's Gloves
+	{ 3, 9509 },	-- Petrolspill Leggings
+	{ 4, 9510 },	-- Caverndeep Trudgers
+	{ 5, 9487 },	-- Hi-Tech Supergun
+	{ 6, 9485 },	-- Vibroblade
+	{ 7, 9488 },	-- Oscillating Power Hammer
+	{ 8, 9486 },	-- Supercharger Battle Axe
+	{ 9, 9490 },	-- Gizmotron Megachopper
+	{ 11, 9538 },	-- Talvash's Gold Ring
+	{ 13, 9362 },	-- Brilliant Gold Ring
+	{ 16, 11827, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Lil' Smoky
+	{ 17, 9327, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Security DELTA Data Access Card
+	{ 18, 9326, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Grime-Encrusted Ring
 }
 data["Gnomeregan"] = {
 	EncounterJournalID = 231,
@@ -912,7 +906,7 @@ data["Gnomeregan"] = {
 		{	--Trash
 			name = AL["Trash Mobs"],
 			ExtraList = true,
-			[NORMAL_DIFF] = GNOMEREGAN_LOOT2,
+			[NORMAL_DIFF] = GNOMEREGAN_LOOT3,
 		},
 		CLASSIC_INSTANCE_AC_TABLE,
 	}
@@ -943,10 +937,11 @@ data["LowerBlackrockSpire"] = {
 			[NORMAL_DIFF] = {
 				{ 1, 13170 },	-- Skyshroud Leggings
 				{ 2, 13169 },	-- Tressermane Leggings
-				{ 3, 13168 },	-- Plate of the Shaman King
-				{ 4, 13166 },	-- Slamshot Shoulders
-				{ 5, 13167 },	-- Fist of Omokk
-				{ 7, 12534, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Omokk's Head
+				{ 3, 151412 },	-- Ogre Highlord's Casque
+				{ 4, 13168 },	-- Plate of the Shaman King
+				{ 5, 13166 },	-- Slamshot Shoulders
+				{ 6, 13167 },	-- Fist of Omokk
+				{ 8, 12534, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Omokk's Head
 			},
 		},
 		{	--LBRSSpirestoneLord
@@ -970,8 +965,9 @@ data["LowerBlackrockSpire"] = {
 				{ 1, 12626 },	-- Funeral Cuffs
 				{ 2, 13257 },	-- Demonic Runed Spaulders
 				{ 3, 13255 },	-- Trueaim Gauntlets
-				{ 4, 12651 },	-- Blackcrow
+				{ 4, 151413 },	-- Smolderthorn Greatbelt
 				{ 5, 12653 },	-- Riphook
+				{ 6, 12651 },	-- Blackcrow
 			},
 		},
 		{	--LBRSVoone
@@ -989,17 +985,17 @@ data["LowerBlackrockSpire"] = {
 				{ 1, 12634 },	-- Chiselbrand Girdle
 				{ 2, 12637 },	-- Backusarian Gauntlets
 				{ 3, 12621 },	-- Demonfork
-				{ 5, 12838 },	-- Plans: Arcanite Reaper
-				{ 6, 12784 },	-- Arcanite Reaper
+				{ 5, 12838, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Plans: Arcanite Reaper
 			},
 		},
 		{	--LBRSSmolderweb
 			EncounterJournalID = 391,
 			[NORMAL_DIFF] = {
-				{ 1, 13244 },	-- Gilded Gauntlets
-				{ 2, 13213 },	-- Smolderweb's Eye
-				{ 3, 13183 },	-- Venomspitter
-				{ 5, 68673, "pet90" },	-- Smolderweb Egg
+				{ 1, 151414 },	-- Arachnophile's Greatcloak
+				{ 2, 13244 },	-- Gilded Gauntlets
+				{ 3, 13213 },	-- Smolderweb's Eye
+				{ 4, 13183 },	-- Venomspitter
+				{ 6, 68673, "pet90" },	-- Smolderweb Egg
 			},
 		},
 		{	--LBRSCrystalFang
@@ -1024,10 +1020,21 @@ data["LowerBlackrockSpire"] = {
 			[NORMAL_DIFF] = {
 				{ 1, 13253 },	-- Hands of Power
 				{ 2, 13252 },	-- Cloudrunner Girdle
-				{ 4, 12835, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Plans: Annihilator
-				{ 5, 12798, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Annihilator
+				{ 3, 151415 },	-- Veteran Spearman's Chain Boots
+				{ 4, 151416 },	-- Dark Horde Grunt's Legplates
+				{ 6, 12835, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Plans: Annihilator
 				{ 7, 21955, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Design: Black Diamond Crab
 				{ 16, 12264, "pet89" },	-- Worg Carrier
+			},
+		},
+		{	--LBRSSlavener
+			EncounterJournalID = 395,
+			[NORMAL_DIFF] = {
+				{ 1, 13206 },	-- Wolfshear Leggings
+				{ 2, 13208 },	-- Bleak Howler Armguards
+				{ 3, 151417 },	-- Worg-Keeper's Spaulders
+				{ 4, 151418 },	-- Raider Aspirant's Helm
+				{ 5, 13205 },	-- Rhombeard Protector
 			},
 		},
 		{	--LBRSHalycon
@@ -1037,14 +1044,6 @@ data["LowerBlackrockSpire"] = {
 				{ 2, 13210 },	-- Pads of the Dread Wolf
 				{ 3, 13211 },	-- Slashclaw Bracers
 				{ 4, 13212 },	-- Halycon's Spiked Collar
-			},
-		},
-		{	--LBRSSlavener
-			EncounterJournalID = 395,
-			[NORMAL_DIFF] = {
-				{ 1, 13206 },	-- Wolfshear Leggings
-				{ 2, 13208 },	-- Bleak Howler Armguards
-				{ 3, 13205 },	-- Rhombeard Protector
 			},
 		},
 		{	--LBRSBashguud
@@ -1061,8 +1060,8 @@ data["LowerBlackrockSpire"] = {
 				{ 1, 13143 },	-- Mark of the Dragon Lord
 				{ 3, 13162 },	-- Reiver Claws
 				{ 4, 22321 },	-- Heart of Wyrmthalak
-				{ 5, 13163 },	-- Relentless Scythe
-				{ 6, 13161 },	-- Trindlehaven Staff
+				{ 5, 13161 },	-- Trindlehaven Staff
+				{ 6, 13163 },	-- Relentless Scythe
 				{ 16, "ac643" },
 			},
 		},
@@ -1070,12 +1069,11 @@ data["LowerBlackrockSpire"] = {
 			name = AL["Trash Mobs"],
 			ExtraList = true,
 			[NORMAL_DIFF] = {
-				{ 1, 14513 },	-- Pattern: Robe of the Archmage
-				{ 2, 14152 },	-- Robe of the Archmage
-				{ 4, 13494 },	-- Recipe: Greater Fire Protection Potion
-				{ 5, 16250 },	-- Formula: Enchant Weapon - Superior Striking
-				{ 6, 15749 },	-- Pattern: Volcanic Breastplate
-				{ 7, 15775 },	-- Pattern: Volcanic Shoulders
+				{ 1, 14513, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Pattern: Robe of the Archmage
+				{ 3, 13494, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Recipe: Greater Fire Protection Potion
+				{ 4, 16250, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Enchant Weapon - Superior Striking
+				{ 5, 15749, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Pattern: Volcanic Breastplate
+				{ 6, 15775, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Pattern: Volcanic Shoulders
 			},
 		},
 		CLASSIC_INSTANCE_AC_TABLE,
@@ -1088,47 +1086,52 @@ local MARAUDON_LOOT1 = {
 	{ 3, 17744 },	-- Heart of Noxxion
 	{ 4, 17745 },	--" Noxious Shooter
 	{ 6, "INV_Box_01", nil, EJ_GetEncounterInfo(424), nil },	--Razorlash
-	{ 7, 17750 },	-- Chloromesh Girdle
-	{ 8, 17748 },	-- Vinerot Sandals
-	{ 9, 17749 },	-- Phytoskin Spaulders
-	{ 10, 17751 },	-- Brusslehide Leggings
-	{ 12, "INV_Box_01", nil, BB["Meshlok the Harvester"].." ("..AL["Rare"]..")", nil },
-	{ 13, 17741 },	-- Nature's Embrace
-	{ 14, 17742 },	-- Fungus Shroud Armor
-	{ 15, 17767 },	-- Bloomsprout Headpiece
-	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(427), nil },	--Lord Vyletongue
-	{ 17, 17755 },	-- Satyrmane Sash
-	{ 18, 17754 },	-- Infernal Trickster Leggings
-	{ 19, 17752 },	-- Satyr's Lash
-	{ 21, "INV_Box_01", nil, EJ_GetEncounterInfo(425), nil },	--Tinkerer Gizlock
-	{ 22, 17719 },	-- Inventor's Focal Sword
-	{ 23, 17718 },	-- Gizlock's Hypertech Buckler
-	{ 24, 17717 },	-- Megashot Rifle
+	{ 7, 17748 },	-- Vinerot Sandals
+	{ 8, 17750 },	-- Chloromesh Girdle
+	{ 9, 17751 },	-- Brusslehide Leggings
+	{ 10, 17749 },	-- Phytoskin Spaulders
+	{ 11, 132563 },	-- Chloro-Stained Britches
+	{ 12, 132562 },	-- Leaf-Scale Pauldrons
+	{ 16, "INV_Box_01", nil, BB["Meshlok the Harvester"].." ("..AL["Rare"]..")", nil },
+	{ 17, 17741 },	-- Nature's Embrace
+	{ 18, 17742 },	-- Fungus Shroud Armor
+	{ 19, 17767 },	-- Bloomsprout Headpiece
+	{ 21, "INV_Box_01", nil, EJ_GetEncounterInfo(427), nil },	--Lord Vyletongue
+	{ 22, 17755 },	-- Satyrmane Sash
+	{ 23, 17754 },	-- Infernal Trickster Leggings
+	{ 24, 17752 },	-- Satyr's Lash
+	{ 26, "INV_Box_01", nil, EJ_GetEncounterInfo(425), nil },	--Tinkerer Gizlock
+	{ 27, 17717 },	-- Megashot Rifle
+	{ 28, 17718 },	-- Gizlock's Hypertech Buckler
+	{ 29, 17719 },	-- Inventor's Focal Sword
 }
 local MARAUDON_LOOT2 = {
 	{ 1, "INV_Box_01", nil, EJ_GetEncounterInfo(428), nil },	--Celebras the Cursed
 	{ 2, 17739 },	-- Grovekeeper's Drape
 	{ 3, 17740 },	-- Soothsayer's Headdress
-	{ 4, 17738 },	-- Claw of Celebras
-	{ 6, "INV_Box_01", nil, EJ_GetEncounterInfo(429), nil },	--Landslide
-	{ 7, 17736 },	-- Rockgrip Gauntlets
-	{ 8, 17734 },	-- Helm of the Mountain
-	{ 9, 17737 },	-- Cloud Stone
-	{ 10, 17943 },	-- Fist of Stone
-	{ 12, "INV_Box_01", nil, EJ_GetEncounterInfo(430), nil },	--Rotgrip
-	{ 13, 17732 },	-- Rotgrip Mantle
-	{ 14, 17728 },	-- Albino Crocscale Boots
-	{ 15, 17730 },	-- Gatorbite Axe
-	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(431), nil },	--Princess Theradras
-	{ 17, 17780 },	-- Blade of Eternal Darkness
-	{ 18, 17715 },	-- Eye of Theradras
-	{ 19, 17714 },	-- Bracers of the Stone Princess
-	{ 20, 17711 },	-- Elemental Rockridge Leggings
-	{ 21, 17707 },	-- Gemshard Heart
-	{ 22, 17713 },	-- Blackstone Ring
-	{ 23, 17710 },	-- Charstone Dirk
-	{ 24, 17766 },	-- Princess Theradras' Scepter
-	{ 26, "ac640" },
+	{ 4, 132561 },	-- Corrupted Keeper's Band
+	{ 5, 17738 },	-- Claw of Celebras
+	{ 7, "INV_Box_01", nil, EJ_GetEncounterInfo(429), nil },	--Landslide
+	{ 8, 17736 },	-- Rockgrip Gauntlets
+	{ 9, 17734 },	-- Helm of the Mountain
+	{ 10, 17737 },	-- Cloud Stone
+	{ 11, 17943 },	-- Fist of Stone
+	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(430), nil },	--Rotgrip
+	{ 17, 17732 },	-- Rotgrip Mantle
+	{ 18, 17728 },	-- Albino Crocscale Boots
+	{ 19, 132564 },	-- Albino Crocscale Waders
+	{ 20, 17730 },	-- Gatorbite Axe
+}
+local MARAUDON_LOOT3 = {
+	{ 1, 17780 },	-- Blade of Eternal Darkness
+	{ 3, 17715 },	-- Eye of Theradras
+	{ 4, 17714 },	-- Bracers of the Stone Princess
+	{ 5, 17711 },	-- Elemental Rockridge Leggings
+	{ 6, 17707 },	-- Gemshard Heart
+	{ 7, 17713 },	-- Blackstone Ring
+	{ 8, 17710 },	-- Charstone Dirk
+	{ 9, 17766 },	-- Princess Theradras' Scepter
+	{ 16, "ac640" },
 }
 data["Maraudon"] = {
 	EncounterJournalID = 232,
@@ -1170,7 +1173,7 @@ data["Maraudon"] = {
 		},
 		{	--Princess Theradras
 			EncounterJournalID =431,
-			[NORMAL_DIFF] = MARAUDON_LOOT2,
+			[NORMAL_DIFF] = MARAUDON_LOOT3,
 		},
 		CLASSIC_INSTANCE_AC_TABLE,
 	}
@@ -1185,15 +1188,17 @@ local RAGEFIRE_CHASM_LOOT = {
 	{ 7, 82882 },	-- Dark Ritual Cape
 	{ 8, 82881 },	-- Cuffs of Black Elements
 	{ 9, 82877 },	-- Grasp of the Broken Totem
+	{ 10, 132551 }, -- Dark Shaman's Jerkin
 	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(696), nil },	--Slagmaw
 	{ 17, 82878 },	-- Fireworm Robes
 	{ 18, 82884 },	-- Chitonous Bracers
-	{ 19, 82885 },	-- Flameseared Carapace
-	{ 21, "INV_Box_01", nil, EJ_GetEncounterInfo(697), nil },	--Lava Guard Gordoth
-	{ 22, 82886 },	-- Gorewalker Treads
-	{ 23, 82883 },	-- Bloodcursed Felblade
-	{ 24, 82888 },	-- Heartboiler Staff
-	{ 26, "ac629" },
+	{ 19, 132552 },	-- Chitonous Bindings
+	{ 20, 82885 },	-- Flameseared Carapace
+	{ 22, "INV_Box_01", nil, EJ_GetEncounterInfo(697), nil },	--Lava Guard Gordoth
+	{ 23, 82886 },	-- Gorewalker Treads
+	{ 24, 82883 },	-- Bloodcursed Felblade
+	{ 25, 82888 },	-- Heartboiler Staff
+	{ 27, "ac629" },
 }
 data["RagefireChasm"] = {
 	EncounterJournalID = 226,
@@ -1236,9 +1241,9 @@ local RAZORFEN_DOWNS_LOOT1 = {
 	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(1146), nil },	--Death Speaker Blackthorn
 	{ 17, 10760 },	-- Swine Fists
 	{ 18, 10768 },	-- Boar Champion's Belt
-	{ 19, 10758 },	-- X'caliboar
-	{ 20, 10766 },	-- Plaguerot Sprig
-	{ 21, 10767 },	-- Savage Boar's Guard
+	{ 19, 10767 },	-- Savage Boar's Guard
+	{ 20, 10758 },	-- X'caliboar
+	{ 21, 10766 },	-- Plaguerot Sprig
 	{ 23, "INV_Box_01", nil, EJ_GetEncounterInfo(1141), nil },	--Amnennar the Coldbringer
 	{ 24, 10762 },	-- Robes of the Lich
 	{ 25, 10765 },	-- Bonefingers
@@ -1248,18 +1253,17 @@ local RAZORFEN_DOWNS_LOOT1 = {
 	{ 30, "ac636" },
 }
 local RAZORFEN_DOWNS_LOOT2 = {
-	{ 1, "INV_Box_01", nil, AL["Trash Mobs"], nil },
-	{ 2, 10574 },	-- Corpseshroud
-	{ 3, 10581 },	-- Death's Head Vestment
-	{ 4, 10578 },	-- Thoughtcast Boots
-	{ 5, 10583 },	-- Quillward Harness
-	{ 6, 10582 },	-- Briar Tredders
-	{ 7, 10584 },	-- Stormgale Fists
-	{ 8, 10573 },	-- Boneslasher
-	{ 9, 10570 },	-- Manslayer
-	{ 10, 10571 },	-- Ebony Boneclub
-	{ 11, 10567 },	-- Quillshooter
-	{ 12, 10572 },	-- Freezing Shard
+	{ 1, 10581 },	-- Death's Head Vestment
+	{ 2, 10578 },	-- Thoughtcast Boots
+	{ 3, 10574 },	-- Corpseshroud
+	{ 4, 10583 },	-- Quillward Harness
+	{ 5, 10582 },	-- Briar Tredders
+	{ 6, 10584 },	-- Stormgale Fists
+	{ 7, 10567 },	-- Quillshooter
+	{ 8, 10571 },	-- Ebony Boneclub
+	{ 9, 10573 },	-- Boneslasher
+	{ 10, 10570 },	-- Manslayer
+	{ 11, 10572 },	-- Freezing Shard
 }
 data["RazorfenDowns"] = {
 	EncounterJournalID = 233,
@@ -1297,40 +1301,70 @@ data["RazorfenDowns"] = {
 }
 
 local RAZORFEN_KRAUL_LOOT1 = {
-	{ 1, "INV_Box_01", nil, EJ_GetEncounterInfo(896), nil },	--Hunter Bonetusk
-	{ 2, 6681 },	-- Thornspike
-	{ 4, "INV_Box_01", nil, EJ_GetEncounterInfo(895), nil },	--Roogug
-	{ 5, 6690 },	-- Ferine Leggings
-	{ 6, 6691 },	-- Swinetusk Shank
-	{ 8, "INV_Box_01", nil, EJ_GetEncounterInfo(899), nil },	--Warlord Ramtusk
-	{ 9, 6686 },	-- Tusken Helm
-	{ 10, 6687 },	-- Corpsemaker
-	{ 16, "INV_Box_01", nil, BB["Earthcaller Halmgar"].." ("..AL["Rare"]..")", nil },
-	{ 17, 6688 },	-- Whisperwind Headdress
-	{ 18, 6689 },	-- Wind Spirit Staff
-	{ 20, "INV_Box_01", nil, EJ_GetEncounterInfo(900), nil },	--Groyat, the Blind Hunter
-	{ 21, 6697 },	-- Batwing Mantle
-	{ 22, 6695 },	-- Stygian Bone Amulet
-	{ 23, 6696 },	-- Nightstalker Bow
+	{ 1, "INV_Box_01", nil, "Kraulshaper Tukaar", nil }, -- Kraulshaper Tukaar
+	{ 2, 6688 },	-- Whisperwind Headdress
+	{ 3, 6689 },	-- Wind Spirit Staff
+	{ 5, "INV_Box_01", nil, EJ_GetEncounterInfo(896), nil },	--Hunter Bonetusk
+	{ 6, 6681 },	-- Thornspike
+	{ 8, "INV_Box_01", nil, EJ_GetEncounterInfo(895), nil },	--Roogug
+	{ 9, 6690 },	-- Ferine Leggings
+	{ 10, 132565 },	-- Carnal Britches
+	{ 11, 6691 },	-- Swinetusk Shank
+	{ 13, "INV_Box_01", nil, EJ_GetEncounterInfo(899), nil },	--Warlord Ramtusk
+	{ 14, 6686 },	-- Tusken Helm
+	{ 15, 6687 },	-- Corpsemaker
+	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(900), nil },	--Groyat, the Blind Hunter
+	{ 17, 6697 },	-- Batwing Mantle
+	{ 18, 6695 },	-- Stygian Bone Amulet
+	{ 19, 6696 },	-- Nightstalker Bow
 }
 local RAZORFEN_KRAUL_LOOT2 = {
+	{ 1, "INV_Box_01", nil, "Enormous Bullfrog (Rare)", nil },	--Enormous Bullfrog
+	{ 2, 13108 },	-- Tigerstrike Mantle
+	{ 3, 9395 },	-- Gloves of Old
+	{ 4, 2721 },	-- Holy Shroud
+	{ 5, 2277 },	-- Necromancer Leggings
+	{ 6, 13106 },	-- Glowing Magical Bracers
+	{ 7, 3020 },	-- Enduring Cap
+	{ 8, 2278 },	-- Forest Tracker Epaulets
+	{ 9, 13124 },	-- Ravasaur Scale Boots
+	{ 10, 13127 },	-- Frostreaver Boots
+	{ 11, 9405 },	-- Girdle of Golem Strength
+	{ 13, 13084 },	-- Kaleidoscope Chain
+	{ 14, 13087 },	-- River Pride Choker
+	{ 16, 13019 },	-- Harpyclaw Short Bow
+	{ 17, 13037 },	-- Crystalpine Stinger
+	{ 18, 2912 },	-- Claw of the Shadowmancer
+	{ 19, 2565 },	-- Rod of Molten Fire
+	{ 20, 13137 },	-- Ironweaver
+	{ 21, 13048 },	-- Looming Gavel
+	{ 22, 12974 },	-- The Black Knight
+	{ 23, 13033 },	-- Zealot Blade
+	{ 24, 791 },	-- Gnarled Ash Staff
+	{ 25, 2299 },	-- Burning War Axe
+	{ 26, 13045 },	-- Viscous Hammer
+	{ 27, 2877 },	-- Combatant Claymore
+	{ 28, 13063 },	-- Starfaller
+}
+local RAZORFEN_KRAUL_LOOT3 = {
 	{ 1, "INV_Box_01", nil, EJ_GetEncounterInfo(901), nil },	--Charlga Razorflank
 	{ 2, 6693 },	-- Agamaggan's Clutch
-	{ 3, 6692 },	-- Pronged Reaver
-	{ 4, 6694 },	-- Heart of Agamaggan
-	{ 5, 5793, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Razorflank's Heart
-	{ 7, "ac635" },
-	{ 16, "INV_Box_01", nil, AL["Trash Mobs"], nil },
-	{ 17, 2264 },	-- Mantle of Thieves
-	{ 18, 1978 },	-- Wolfclaw Gloves
-	{ 19, 1488 },	-- Avenger's Armor
-	{ 20, 4438 },	-- Pugilist Bracers
-	{ 21, 2039 },	-- Plains Ring
-	{ 22, 776 },	-- Vendetta
-	{ 23, 1727 },	-- Sword of Decay
-	{ 24, 1975 },	-- Pysan's Old Greatsword
-	{ 25, 1976 },	-- Slaghammer
-	{ 26, 2549 },	-- Staff of the Shade
+	{ 3, 6694 },	-- Heart of Agamaggan
+	{ 4, 6692 },	-- Pronged Reaver
+	{ 6, 5793, [ATLASLOOT_IT_FILTERIGNORE] = true },			-- Razorflank's Heart
+	{ 16, "ac635" },
+}
+local RAZORFEN_KRAUL_LOOT4 = {
+	{ 1, 2264 },	-- Mantle of Thieves
+	{ 2, 1978 },	-- Wolfclaw Gloves
+	{ 3, 1488 },	-- Avenger's Armor
+	{ 4, 4438 },	-- Pugilist Bracers
+	{ 5, 2039 },	-- Plains Ring
+	{ 6, 776 },	-- Vendetta
+	{ 7, 1727 },	-- Sword of Decay
+	{ 8, 2549 },	-- Staff of the Shade
+	{ 9, 1976 },	-- Slaghammer
+	{ 10, 1975 },	-- Pysan's Old Greatsword
 }
 data["RazorfenKraul"] = {
 	EncounterJournalID = 234,
@@ -1338,6 +1372,10 @@ data["RazorfenKraul"] = {
 	AtlasMapID = "RazorfenKraul",
 	ContentType = DUNGEON_CONTENT,
 	items = {
+		{	--Kraulshaper Tukaar
+			name = "Kraulshaper Tukaar",
+			[NORMAL_DIFF] = RAZORFEN_KRAUL_LOOT1,
+		},
 		{	--Hunter Bonetusk
 			EncounterJournalID = 896,
 			[NORMAL_DIFF] = RAZORFEN_KRAUL_LOOT1,
@@ -1350,22 +1388,22 @@ data["RazorfenKraul"] = {
 			EncounterJournalID = 899,
 			[NORMAL_DIFF] = RAZORFEN_KRAUL_LOOT1,
 		},
-		{	--Earthcaller Halmgar
-			name = BB["Earthcaller Halmgar"].." ("..AL["Rare"]..")",
-			[NORMAL_DIFF] = RAZORFEN_KRAUL_LOOT1,
-		},
 		{	--Groyat, the Blind Hunter
 			EncounterJournalID = 900,
 			[NORMAL_DIFF] = RAZORFEN_KRAUL_LOOT1,
 		},
+		{	--Enormous Bullfrog
+			name = "Enormous Bullfrog (Rare)",
+			[NORMAL_DIFF] = RAZORFEN_KRAUL_LOOT2,
+		},
 		{	--Charlga Razorflank
 			EncounterJournalID = 901,
-			[NORMAL_DIFF] = RAZORFEN_KRAUL_LOOT2,
+			[NORMAL_DIFF] = RAZORFEN_KRAUL_LOOT3,
 		},
 		{	--Trash
 			name = AL["Trash Mobs"],
 			ExtraList = true,
-			[NORMAL_DIFF] = RAZORFEN_KRAUL_LOOT2,
+			[NORMAL_DIFF] = RAZORFEN_KRAUL_LOOT4,
 		},
 		CLASSIC_INSTANCE_AC_TABLE,
 	}
@@ -1394,10 +1432,11 @@ data["ScarletHalls"] = {
 			[NORMAL_DIFF] = {
 				{ 1, 88269 },	-- Scarlet Sandals
 				{ 2, 88270 },	-- Lightblade Bracer
-				{ 3, 88271 },	-- Harlan's Shoulders
-				{ 4, 88273 },	-- Armsmaster's Sealed Locket
-				{ 5, 88272 },	-- The Gleaming Ravager
-				{ 7, 23192, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Tabard of the Scarlet Crusade
+				{ 3, 132550 },	-- Scarlet Chain Footpads
+				{ 4, 88271 },	-- Harlan's Shoulders
+				{ 5, 88273 },	-- Armsmaster's Sealed Locket
+				{ 6, 88272 },	-- The Gleaming Ravager
+				{ 8, 23192, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Tabard of the Scarlet Crusade
 			},
 			[HEROIC_DIFF] = "AtlasLoot_MistsofPandaria",
 		},
@@ -1406,13 +1445,13 @@ data["ScarletHalls"] = {
 			[NORMAL_DIFF] = {
 				{ 1, 88279 },	-- Robes of Koegler
 				{ 2, 88282 },	-- Vellum-Ripper Gloves
-				{ 3, 88276 },	-- Bindburner Belt
-				{ 4, 88283 },	-- Bradbury's Entropic Legguards
+				{ 3, 88283 },	-- Bradbury's Entropic Legguards
+				{ 4, 88276 },	-- Bindburner Belt
 				{ 5, 88277 },	-- Pyretic Legguards
 				{ 6, 88275 },	-- Scorched Scarlet Key
 				{ 7, 88281 },	-- Temperature-Sensing Necklace
-				{ 8, 88280 },	-- Melted Hypnotic Blade
-				{ 9, 88274 },	-- Koegler's Ritual Knife
+				{ 8, 88274 },	-- Koegler's Ritual Knife
+				{ 9, 88280 },	-- Melted Hypnotic Blade
 				{ 10, 88278 },	-- Mograine's Immaculate Might
 				{ 12, 87267, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Codex of the Crusade
 				{ 16, "ac7413" },	
@@ -1437,7 +1476,6 @@ data["ScarletMonastery"] = {
 				{ 3, 88286 },	-- Legguards of the Crimson Magus
 				{ 4, 88287 },	-- Bracers of the Fallen Crusader
 				{ 5, 88285 },	-- Signet of the Hidden Door
-				{ 16, "ac6946" },
 			},
 			[HEROIC_DIFF] = "AtlasLoot_MistsofPandaria",
 		},
@@ -1457,14 +1495,15 @@ data["ScarletMonastery"] = {
 			[NORMAL_DIFF] = {
 				{ 1, 88299 },	-- Whitemane's Embroidered Chapeau
 				{ 2, 88298 },	-- Leggings of Hallowed Fire
-				{ 3, 88302 },	-- Incarnadine Scarlet Spaulders
-				{ 4, 88295 },	-- Dashing Strike Treads
-				{ 5, 88303 },	-- Crown of Holy Flame
-				{ 6, 88296 },	-- Waistplate of Imminent Resurrection
-				{ 7, 88300 },	-- Triune Signet
-				{ 8, 88294 },	-- Flashing Steel Talisman
-				{ 9, 88297 },	-- Lightbreaker Greatsword
+				{ 3, 88295 },	-- Dashing Strike Treads
+				{ 4, 88302 },	-- Incarnadine Scarlet Spaulders
+				{ 5, 132549 },	-- Deft Strike Treads
+				{ 6, 88303 },	-- Crown of Holy Flame
+				{ 7, 88296 },	-- Waistplate of Imminent Resurrection
+				{ 8, 88300 },	-- Triune Signet
+				{ 9, 88294 },	-- Flashing Steel Talisman
 				{ 10, 88301 },	-- Greatstaff of Righteousness
+				{ 11, 88297 },	-- Lightbreaker Greatsword
 				{ 16, "ac637" },
 			},
 			[HEROIC_DIFF] = "AtlasLoot_MistsofPandaria",
@@ -1513,8 +1552,9 @@ data["Scholomance"] = {
 				{ 1, 88340 },	-- Deadwalker Bracers
 				{ 2, 88342 },	-- Rattling Gloves
 				{ 3, 88343 },	-- Bone Golem Boots
-				{ 4, 88344 },	-- Goresoaked Headreaper
-				{ 5, 88341 },	-- Necromantic Wand
+				{ 4, 88357 },	-- Vigorsteel Spaulders
+				{ 5, 88344 },	-- Goresoaked Headreaper
+				{ 6, 88341 },	-- Necromantic Wand
 			},
 			[HEROIC_DIFF] = "AtlasLoot_MistsofPandaria",
 		},
@@ -1555,6 +1595,13 @@ data["ShadowfangKeep"] = {
 	ContentType = DUNGEON_CONTENT,
 	LoadDifficulty = NORMAL_DIFF,
 	items = {
+		{	--ShadowfangDeathswornCaptain
+			name = BB["Deathsworn Captain"].." ("..AL["Rare"]..")",
+			[NORMAL_DIFF] = {
+				{ 1, 6642 },    -- Phantom Armor
+				{ 2, 6641 },    -- Haunting Blade
+			},
+		},
 		{	--ShadowfangAshbury
 			EncounterJournalID = 96,
 			[NORMAL_DIFF] = {
@@ -1567,12 +1614,12 @@ data["ShadowfangKeep"] = {
 		{	--ShadowfangSilverlaine
 			EncounterJournalID = 97,
 			[NORMAL_DIFF] = {
-				{ 1, 132568 }, -- Shadowfang Pauldrons
-				{ 2, 5254 }, -- Rugged Spaulders
-				{ 3, 132567 }, -- Blindwatcher's Chain
-				{ 4, 6319 }, -- Girdle of the Blindwatcher
-				{ 5, 6321 }, -- Silverlaine's Family Seal
-				{ 6, 5943 }, -- Rift Bracers
+				{ 1, 5254 }, -- Rugged Spaulders
+				{ 2, 6319 }, -- Girdle of the Blindwatcher
+				{ 3, 132568 }, -- Shadowfang Pauldrons
+				{ 4, 132567 }, -- Blindwatcher's Chain
+				{ 5, 5943 }, -- Rift Bracers
+				{ 6, 6321 }, -- Silverlaine's Family Seal
 				{ 8, 60885, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Silverlaine Family Sword
 				{ 9, 60878, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Silverlaine's Enchanted Crystal
 			},
@@ -1581,8 +1628,8 @@ data["ShadowfangKeep"] = {
 		{	--ShadowfangSpringvale
 			EncounterJournalID = 98,
 			[NORMAL_DIFF] = {
-				{ 1, 3191 },	-- Arced War Axe
-				{ 2, 6320 },	-- Commander's Crest", "=ds=#w8#" };
+				{ 1, 6320 },	-- Commander's Crest", "=ds=#w8#" };
+				{ 2, 3191 },	-- Arced War Axe
 				{ 4, 60879, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Commander's Holy Symbol
 				{ 5, 60880, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Springvale's Sharpening Stone
 			},
@@ -1592,10 +1639,10 @@ data["ShadowfangKeep"] = {
 			EncounterJournalID = 99,
 			[NORMAL_DIFF] = {
 				{ 1, 3230 },	-- Black Wolf Bracers
-				{ 2, 6642 },	-- Phantom Armor
-				{ 3, 6341 },	-- Eerie Stable Lantern
-				{ 4, 1292 },	-- Butcher's Cleaver
-				{ 5, 132566 },	-- Dark Lupine Wraps
+				{ 2, 132566 },	-- Dark Lupine Wraps
+				{ 3, 6642 },	-- Phantom Armor
+				{ 4, 6341 },	-- Eerie Stable Lantern
+				{ 5, 1292 },	-- Butcher's Cleaver
 				{ 7, 60876, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Walden's Elixirs
 				{ 8, 60881, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Walden's Talisman
 			},
@@ -1606,8 +1653,8 @@ data["ShadowfangKeep"] = {
 			[NORMAL_DIFF] = {
 				{ 1, 3748 },	-- Feline Mantle
 				{ 2, 6220 },	-- Meteor Shard
-				{ 3, 6641 },	-- Haunting Blade
-				{ 4, 6318 },	-- Odo's Ley Staff
+				{ 3, 6318 },	-- Odo's Ley Staff
+				{ 4, 6641 },	-- Haunting Blade
 				{ 6, 60877, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Godfrey's Crystal Scope
 				{ 7, 60882, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Tenebrous Orb
 				{ 16, "ac631" },
@@ -1619,11 +1666,11 @@ data["ShadowfangKeep"] = {
 			ExtraList = true,
 			[NORMAL_DIFF] = {
 				{ 1, 1974 },	-- Mindthrust Bracers
-				{ 2, 3194 },	-- Black Malice
-				{ 3, 1483 },	-- Face Smasher
-				{ 4, 2807 },	-- Guillotine Axe
+				{ 2, 2807 },	-- Guillotine Axe
+				{ 3, 1484 },	-- Witching Stave
+				{ 4, 1483 },	-- Face Smasher
 				{ 5, 1318 },	-- Night Reaver
-				{ 6, 1484 },	-- Witching Stave
+				{ 6, 3194 },	-- Black Malice
 				{ 16, 60977 },	-- Orders from High Command
 				{ 17, 60874 },	-- Deathless Sinew
 				{ 18, 60875 },	-- Ghostly Essence
@@ -1657,26 +1704,29 @@ data["Stratholme"] = {
 			[NORMAL_DIFF] = {
 				{ 1, 13409 },	-- Tearfall Bracers
 				{ 2, 13404 },	-- Mask of the Unforgiven
-				{ 3, 13405 },	-- Wailing Nightbane Pauldrons
-				{ 4, 13408 },	-- Soul Breaker
+				{ 3, 151404 },	-- Gauntlets of Purged Sanity
+				{ 4, 13405 },	-- Wailing Nightbane Pauldrons
+				{ 5, 13408 },	-- Soul Breaker
+				{ 6, 22406 },	-- Redemption
 			},
 		},
 		{	--STRATHearthsingerForresten
+			name = BB["Hearthsinger Forresten"].." ("..AL["Rare"]..")",
 			EncounterJournalID = 443,
 			[NORMAL_DIFF] = {
 				{ 1, 13378 },	-- Songbird Blouse
 				{ 2, 13383 },	-- Woollies of the Prancing Minstrel
 				{ 3, 13384 },	-- Rainbow Girdle
-				{ 4, 13379 },	-- Piccolo of the Flaming Fire
+				{ 5, 13379 },	-- Piccolo of the Flaming Fire
 			},
 		},
 		{	--STRATPostmasterMalown
 			name = BB["Postmaster Malown"],
 			[NORMAL_DIFF] = {
-				{ 1, 13390 },	-- The Postmaster's Band
-				{ 2, 13388 },	-- The Postmaster's Tunic
-				{ 3, 13389 },	-- The Postmaster's Trousers
-				{ 4, 13391 },	-- The Postmaster's Treads
+				{ 1, 13391 },	-- The Postmaster's Treads
+				{ 2, 13390 },	-- The Postmaster's Band
+				{ 3, 13388 },	-- The Postmaster's Tunic
+				{ 4, 13389 },	-- The Postmaster's Trousers
 				{ 16, 13392 },	-- The Postmaster's Seal
 				{ 18, 13393 },	-- Malown's Slam
 			},
@@ -1685,9 +1735,10 @@ data["Stratholme"] = {
 			EncounterJournalID = 445,
 			[NORMAL_DIFF] = {
 				{ 1, 13403 },	-- Grimgore Noose
-				{ 2, 13402 },	-- Timmy's Galoshes
-				{ 3, 13400 },	-- Vambraces of the Sadist
-				{ 4, 13401 },	-- The Cruel Hand of Timmy
+				{ 2, 151403 },	-- Fetid Stranglers
+				{ 3, 13402 },	-- Timmy's Galoshes
+				{ 4, 13400 },	-- Vambraces of the Sadist
+				{ 5, 13401 },	-- The Cruel Hand of Timmy
 			},
 		},
 		{	--STRATWilleyHopebreaker
@@ -1700,10 +1751,9 @@ data["Stratholme"] = {
 				{ 5, 22403 },	-- Diana's Pearl Necklace
 				{ 6, 13382 },	-- Cannonball Runner
 				{ 7, 22404 },	-- Willey's Back Scratcher
-				{ 8, 22406 },	-- Redemption
-				{ 9, 13380 },	-- Willey's Portable Howitzer
+				{ 8, 13380 },	-- Willey's Portable Howitzer
+				{ 9, 22406 },	-- Redemption
 				{ 16, 12839, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Plans: Heartseeker
-				{ 17, 12783, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Heartseeker
 			},
 		},
 		{	--STRATInstructorGalford
@@ -1722,17 +1772,16 @@ data["Stratholme"] = {
 			EncounterJournalID = 449,
 			[NORMAL_DIFF] = {
 				{ 1, 13353 },	-- Book of the Dead
-				{ 2, 14512 },	-- Pattern: Truefaith Vestments
-				{ 3, 14154 },	-- Truefaith Vestments
+				{ 2, 14512, [ATLASLOOT_IT_FILTERIGNORE] = true  },	-- Pattern: Truefaith Vestments
+				{ 4, 13369 },	-- Fire Striders
 				{ 5, 18720 },	-- Shroud of the Nathrezim
-				{ 6, 13369 },	-- Fire Striders
-				{ 7, 13358 },	-- Wyrmtongue Shoulders
-				{ 8, 13359 },	-- Crown of Tyranny
-				{ 9, 18718 },	-- Grand Crusader's Helm
-				{ 10, 12103 },	-- Star of Mystaria
-				{ 11, 13360 },	-- Gift of the Elven Magi
+				{ 6, 13358 },	-- Wyrmtongue Shoulders
+				{ 7, 13359 },	-- Crown of Tyranny
+				{ 8, 18718 },	-- Grand Crusader's Helm
+				{ 9, 12103 },	-- Star of Mystaria
+				{ 10, 13360 },	-- Gift of the Elven Magi
+				{ 11, 18717 },	-- Hammer of the Grand Crusader
 				{ 12, 13348 },	-- Demonshear
-				{ 13, 18717 },	-- Hammer of the Grand Crusader
 				{ 16, 13520, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Recipe: Flask of Distilled Wisdom
 				{ 18, "ac646" },
 			},
@@ -1754,22 +1803,22 @@ data["Stratholme"] = {
 				{ 4, 13538 },	-- Windshrieker Pauldrons
 				{ 5, 13539 },	-- Banshee's Touch
 				{ 6, 18728 },	-- Anastari Heirloom
-				{ 7, 13534 },	-- Banshee Finger
-				{ 8, 18729 },	-- Screeching Bow
+				{ 7, 18729 },	-- Screeching Bow
+				{ 8, 13534 },	-- Banshee Finger
 				{ 10, 13514, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Wail of the Banshee
 			},
 		},
 		{	--STRATNerubenkan
 			EncounterJournalID = 452,
 			[NORMAL_DIFF] = {
-				{ 1, 18740 },	-- Thuzadin Sash
-				{ 2, 18739 },	-- Chitinous Plate Legguards
-				{ 3, 13529 },	-- Husk of Nerub'enkan
-				{ 4, 18738 },	-- Carapace Spine Crossbow
-				{ 6, 13530 },	-- Fangdrip Runners
-				{ 7, 13531 },	-- Crypt Stalker Leggings
-				{ 8, 13532 },	-- Darkspinner Claws
-				{ 9, 13533 },	-- Acid-Etched Pauldrons
+				{ 1, 13530 },	-- Fangdrip Runners
+				{ 2, 18740 },	-- Thuzadin Sash
+				{ 3, 13531 },	-- Crypt Stalker Leggings
+				{ 4, 13532 },	-- Darkspinner Claws
+				{ 5, 18739 },	-- Chitinous Plate Legguards
+				{ 6, 13533 },	-- Acid-Etched Pauldrons
+				{ 7, 18738 },	-- Carapace Spine Crossbow
+				{ 8, 13529 },	-- Husk of Nerub'enkan
 				{ 10, 13508, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Eye of Arachnida
 			},
 		},
@@ -1777,8 +1826,8 @@ data["Stratholme"] = {
 			EncounterJournalID = 453,
 			[NORMAL_DIFF] = {
 				{ 1, 18734 },	-- Pale Moon Cloak
-				{ 2, 13525 },	-- Darkbind Fingers
-				{ 3, 18735 },	-- Maleki's Footwraps
+				{ 2, 18735 },	-- Maleki's Footwraps
+				{ 3, 13525 },	-- Darkbind Fingers
 				{ 4, 13526 },	-- Flamescarred Girdle
 				{ 5, 13528 },	-- Twilight Void Bracers
 				{ 6, 13527 },	-- Lavawalker Greaves
@@ -1786,7 +1835,6 @@ data["Stratholme"] = {
 				{ 8, 18737 },	-- Bone Slicing Hatchet
 				{ 10, 13509, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Clutch of Foresight
 				{ 16, 12833, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Plans: Hammer of the Titans
-				{ 17, 12796, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Hammer of the Titans
 			},
 		},
 		{	--STRATMagistrateBarthilas
@@ -1803,11 +1851,11 @@ data["Stratholme"] = {
 			EncounterJournalID = 455,
 			[NORMAL_DIFF] = {
 				{ 1, 13374 },	-- Soulstealer Mantle
-				{ 2, 18723 },	-- Animated Chain Necklace
-				{ 3, 13373 },	-- Band of Flesh
+				{ 2, 13373 },	-- Band of Flesh
+				{ 3, 18723 },	-- Animated Chain Necklace
 				{ 4, 13515 },	-- Ramstein's Lightning Bolts
-				{ 5, 13372 },	-- Slavedriver's Cane
-				{ 6, 13375 },	-- Crest of Retribution
+				{ 5, 13375 },	-- Crest of Retribution
+				{ 6, 13372 },	-- Slavedriver's Cane
 			},
 		},
 		{	--STRATLordAuriusRivendare
@@ -1816,16 +1864,16 @@ data["Stratholme"] = {
 				{ 1, 13505 },	-- Runeblade of Baron Rivendare
 				{ 2, 13335, "mount" },	-- Deathcharger's Reins
 				{ 4, 13340 },	-- Cape of the Black Baron
-				{ 5, 22412 },	-- Thuzadin Mantle
-				{ 6, 13346 },	-- Robes of the Exalted
+				{ 5, 13346 },	-- Robes of the Exalted
+				{ 6, 22412 },	-- Thuzadin Mantle
 				{ 7, 22409 },	-- Tunic of the Crescent Moon
 				{ 8, 13344 },	-- Dracorian Gauntlets
 				{ 9, 22410 },	-- Gauntlets of Deftness
 				{ 10, 22411 },	-- Helm of the Executioner
-				{ 11, 13345 },	-- Seal of Rivendare
+				{ 12, 13345 },	-- Seal of Rivendare
 				{ 16, 13368 },	-- Bonescraper
-				{ 17, 13361 },	-- Skullforge Reaver
-				{ 18, 13349 },	-- Scepter of the Unholy
+				{ 17, 13349 },	-- Scepter of the Unholy
+				{ 18, 13361 },	-- Skullforge Reaver
 				{ 19, 22408 },	-- Ritssyn's Wand of Bad Mojo
 				{ 21, "ac646" },
 			},
@@ -1840,17 +1888,17 @@ data["Stratholme"] = {
 				{ 4, 18744 },	-- Plaguebat Fur Gloves
 				{ 5, 18736 },	-- Plaguehound Leggings
 				{ 6, 18742 },	-- Stratholme Militia Shoulderguard
-				{ 7, 18741 },	-- Morlune's Bracer
-				{ 9, 12811 },	-- Righteous Orb
-				{ 16, 16249 },	-- Formula: Enchant 2H Weapon - Major Intellect
-				{ 17, 16248 },	-- Formula: Enchant Weapon - Unholy
-				{ 18, 18658 },	-- Schematic: Ultra-Flash Shadow Reflector
-				{ 19, 16052 },	-- Schematic: Voice Amplification Modulator
-				{ 20, 15777 },	-- Pattern: Runic Leather Shoulders
-				{ 21, 15768 },	-- Pattern: Wicked Leather Belt
-				{ 22, 14495 },	-- Pattern: Ghostweave Pants
-				{ 24, "INV_Box_01", nil, BB["Fras Siabi"], nil },
-				{ 25, 13172 },	-- Siabi's Premium Tobacco
+				{ 7, 13071 },	-- Plated Fist of Hakoo
+				{ 8, 18741 },	-- Morlune's Bracer
+				{ 10, 12811 },	-- Righteous Orb
+				{ 16, 16249, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Enchant 2H Weapon - Major Intellect
+				{ 17, 16248, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Enchant Weapon - Unholy
+				{ 18, 18658, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Ultra-Flash Shadow Reflector
+				{ 19, 16052, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Voice Amplification Modulator
+				{ 20, 15777, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Pattern: Runic Leather Shoulders
+				{ 21, 15768, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Pattern: Wicked Leather Belt
+				{ 23, "INV_Box_01", nil, BB["Fras Siabi"], nil },
+				{ 24, 13172 },	-- Siabi's Premium Tobacco
 			},
 		},
 		{	--Miscellaneous Sets
@@ -1866,17 +1914,19 @@ local STOCKADE_LOOT = {
 	{ 1, "INV_Box_01", nil, EJ_GetEncounterInfo(464), nil },	--Hogger
 	{ 2, 2168 },	-- Corpse Rompers
 	{ 3, 1934 },	-- Hogger's Trousers
-	{ 4, 1959 },	-- Cold Iron Pick
-	{ 6, "ac633" },
-	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(465), nil },	--Lord Overheat
-	{ 17, 1929 },	-- Silk-Threaded Trousers
-	{ 18, 5967 },	-- Girdle of Nobility
-	{ 19, 4676 },	-- Skeletal Gauntlets
-	{ 20, 62305, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Lord Overheat's Fiery Core
-	{ 22, "INV_Box_01", nil, EJ_GetEncounterInfo(466), nil },	--Randolph Moloch
-	{ 23, 63345 },	-- Noble's Robe
-	{ 24, 63344 },	-- Standard Issue Prisoner Shoes
-	{ 25, 63346 },	-- Wicked Dagger
+	{ 4, 132569 },	-- Stolen Jailer's Greaves
+	{ 5, 1959 },	-- Cold Iron Pick
+	{ 7, "INV_Box_01", nil, EJ_GetEncounterInfo(465), nil },	--Lord Overheat
+	{ 8, 1929 },	-- Silk-Threaded Trousers
+	{ 9, 5967 },	-- Girdle of Nobility
+	{ 10, 4676 },	-- Skeletal Gauntlets
+	{ 12, 62305, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Lord Overheat's Fiery Core
+	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(466), nil },	--Randolph Moloch
+	{ 17, 63345 },	-- Noble's Robe
+	{ 18, 63344 },	-- Standard Issue Prisoner Shoes
+	{ 19, 132570 },	-- Stolen Guards Chain Boots
+	{ 20, 63346 },	-- Wicked Dagger
+	{ 22, "ac633" },
 }
 data["TheStockade"] = {
 	EncounterJournalID = 238,
@@ -1940,8 +1990,8 @@ data["TheSunkenTemple"] = {
 				{ 4, 10795 },	-- Drakeclaw Band
 				{ 5, 10796 },	-- Drakestone
 				{ 6, 10797 },	-- Firebreather
-				{ 7, 12463 },	-- Drakefang Butcher
-				{ 8, 12243 },	-- Smoldering Claw
+				{ 7, 12243 },	-- Smoldering Claw
+				{ 8, 12463 },	-- Drakefang Butcher
 			},
 		},
 		{	--STEranikus
@@ -1951,8 +2001,8 @@ data["TheSunkenTemple"] = {
 				{ 3, 10833 },	-- Horns of Eranikus
 				{ 4, 10829 },	-- The Dragon's Eye
 				{ 5, 10828 },	-- Dire Nail
-				{ 6, 10837 },	-- Tooth of Eranikus
-				{ 7, 10835 },	-- Crest of Supremacy
+				{ 6, 10835 },	-- Crest of Supremacy
+				{ 7, 10837 },	-- Tooth of Eranikus
 				{ 8, 10836 },	-- Rod of Corrosion
 				{ 16, "ac641" },
 			},
@@ -1967,7 +2017,7 @@ data["TheSunkenTemple"] = {
 				{ 4, 10631 },	-- Murkwater Gauntlets
 				{ 5, 10633 },	-- Silvershell Leggings
 				{ 6, 10634 },	-- Mindseye Circle
-				{ 8, 15733 },	-- Pattern: Green Dragonscale Leggings
+				{ 8, 15733, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Pattern: Green Dragonscale Leggings
 				{ 16, 10623 },	-- Winter's Bite
 				{ 17, 10625 },	-- Stealthblade
 				{ 18, 10628 },	-- Deathblow
@@ -1980,34 +2030,90 @@ data["TheSunkenTemple"] = {
 	}
 }
 
-local ULDAMAN_LOOT = {
+local ULDAMAN_LOOT1 = {
+	{ 1, "INV_Box_01", nil, BB["Baelog"], nil },
+	{ 2, 9400 },	-- Baelog's Shortbow
+	{ 3, 9401 },	-- Nordic Longshank
+	{ 5, "INV_Box_01", nil, BB["Eric \"The Swift\""], nil },
+	{ 6, 9398 },	-- Worn Running Boots
+	{ 7, 9394 },	-- Horned Viking Helmet
+	{ 9, 2459, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Swiftness Potion
+	{ 16, "INV_Box_01", nil, BB["Olaf"], nil },
+	{ 17, 9403 },	-- Battered Viking Shield
+	{ 18, 9404 },	-- Olaf's All Purpose Shield
+	{ 20, 1177, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Oil of Olaf
+}
+
+local ULDAMAN_LOOT2 = {
 	{ 1, "INV_Box_01", nil, EJ_GetEncounterInfo(467), nil },	--Revelosh
 	{ 2, 9390 },	-- Revelosh's Gloves
 	{ 3, 9389 },	-- Revelosh's Spaulders
-	{ 4, 9388 },	-- Revelosh's Armguards
-	{ 5, 9387 },	-- Revelosh's Boots
-	{ 7, "INV_Box_01", nil, EJ_GetEncounterInfo(469), nil },	--Ironaya
-	{ 8, 9407 },	-- Stoneweaver Leggings
-	{ 9, 9409 },	-- Ironaya's Bracers
-	{ 10, 9408 },	-- Ironshod Bludgeon
-	{ 12, "INV_Box_01", nil, EJ_GetEncounterInfo(470), nil },	--Ancient Stone Keeper
-	{ 13, 9411 },	-- Rockshard Pauldrons
-	{ 14, 9410 },	-- Cragfists
-	{ 15, 62055, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Titan Power Core
-	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(471), nil },	--Galgann Firehammer
-	{ 17, 11311 },	-- Emberscale Cape
-	{ 18, 11310 },	-- Flameseer Mantle
-	{ 19, 9419 },	-- Galgann's Firehammer
-	{ 20, 9412 },	-- Galgann's Fireblaster
-	{ 21, "INV_Box_01", nil, EJ_GetEncounterInfo(472), nil },	--Grimlok
-	{ 22, 9415 },	-- Grimlok's Tribal Vestments
-	{ 23, 9414 },	-- Oilskin Leggings
-	{ 24, 9416 },	-- Grimlok's Charge
-	{ 25, "INV_Box_01", nil, EJ_GetEncounterInfo(473), nil },	--Archaedas
-	{ 26, 11118 },	-- Archaedic Stone
-	{ 27, 9418 },	-- Stoneslayer
-	{ 28, 9413 },	-- The Rockpounder
-	{ 30, "ac638" },
+	{ 4, 9387 },	-- Revelosh's Boots
+	{ 5, 132736 },	-- Revelosh's Pauldrons
+	{ 6, 9388 },	-- Revelosh's Armguards
+	{ 7, 151395 },	-- Revelosh's Girdle
+	{ 9, "INV_Box_01", nil, EJ_GetEncounterInfo(469), nil },	--Ironaya
+	{ 10, 9407 },	-- Stoneweaver Leggings
+	{ 11, 151398 },	-- Hood of the Idle Architect
+	{ 12, 9409 },	-- Ironaya's Bracers
+	{ 13, 151420 },	-- Vault-Watcher's Breastplate
+	{ 14, 9408 },	-- Ironshod Bludgeon
+	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(470), nil },	--Ancient Stone Keeper
+	{ 17, 151400 },	-- Sand-Scoured Treads
+	{ 18, 9411 },	-- Rockshard Pauldrons
+	{ 19, 9410 },	-- Cragfists
+	{ 20, 132733 },	-- Stone Keeper's Mantle
+	{ 21, 151401 },	-- Titanic Stone Leggards
+	{ 23, 62055, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Titan Power Core
+	{ 25, "INV_Box_01", nil, EJ_GetEncounterInfo(471), nil },	--Galgann Firehammer
+	{ 26, 11311 },	-- Emberscale Cape
+	{ 27, 11310 },	-- Flameseer Mantle
+	{ 28, 9412 },	-- Galgann's Fireblaster
+	{ 29, 9419 },	-- Galgann's Firehammer
+}
+
+local ULDAMAN_LOOT3 = {
+	{ 1, "INV_Box_01", nil, EJ_GetEncounterInfo(472), nil },	--Grimlok
+	{ 2, 9415 },	-- Grimlok's Tribal Vestments
+	{ 3, 9414 },	-- Oilskin Leggings
+	{ 4, 132735 },	-- Grimlok's Chain Chaps
+	{ 5, 151402 },	-- Grimlok's Jagged Wristguards
+	{ 6, 9416 },	-- Grimlok's Charge
+	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(473), nil },	--Archaedas
+	{ 17, 11118 },	-- Archaedic Stone
+	{ 18, 9413 },	-- The Rockpounder
+	{ 19, 9418 },	-- Stoneslayer
+	{ 21, "ac638" },
+}
+local ULDAMAN_LOOT4 = {
+	{ 1, 9397 },	-- Energy Cloak
+	{ 2, 9429 },	-- Miner's Hat of the Deep
+	{ 3, 9431 },	-- Papal Fez
+	{ 4, 9406 },	-- Spirewind Fetter
+	{ 5, 9420 },	-- Adventurer's Pith Helmet
+	{ 6, 9430 },	-- Spaulders of a Lost Age
+	{ 7, 9428 },	-- Unearthed Bands
+	{ 8, 9396 },	-- Legguards of the Vault
+	{ 9, 9432 },	-- Skullplate Bracers
+	{ 10, 9393 },	-- Beacon of Hope
+	{ 12, "INV_Box_01", nil, EJ_GetEncounterInfo(748), nil },	--Obsidian Sentinel
+	{ 13, 151399 },	-- Splintered Obsidian Shard
+	{ 15, 62053, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Obsidian Power Core
+	{ 16, 9426 },	-- Monolithic Bow
+	{ 18, 9384 },	-- Stonevault Shiv
+	{ 17, 9422 },	-- Shadowforge Bushmaster
+	{ 19, 9465 },	-- Digmaster 5000
+	{ 20, 9386 },	-- Excavator's Brand
+	{ 21, 9427 },	-- Stonevault Bonebreaker
+	{ 22, 9392 },	-- Annealed Blade
+	{ 23, 9424 },	-- Ginn-Su Sword
+	{ 24, 9383 },	-- Obsidian Cleaver
+	{ 25, 9425 },	-- Pendulum of Doom
+	{ 26, 9423 },	-- The Jackhammer
+	{ 27, 9391 },	-- The Shoveler
+	{ 28, 9381 },	-- Earthen Rod
+	
+	
 }
 data["Uldaman"] = {
 	EncounterJournalID = 239,
@@ -2015,76 +2121,39 @@ data["Uldaman"] = {
 	AtlasMapID = "Uldaman",
 	ContentType = DUNGEON_CONTENT,
 	items = {
-		{	--UldDwarves
+		{	--The Lost Dwarves
+			name = "The Lost Dwarves",
 			EncounterJournalID = 468,
-			[NORMAL_DIFF] = {
-				{ 1, "INV_Box_01", nil, BB["Baelog"], nil },
-				{ 2, 9401 },	-- Nordic Longshank
-				{ 3, 9400 },	-- Baelog's Shortbow
-				{ 5, "INV_Box_01", nil, BB["Eric \"The Swift\""], nil },
-				{ 6, 9394 },	-- Horned Viking Helmet
-				{ 7, 9398 },	-- Worn Running Boots
-				{ 8, 2459 },	-- Swiftness Potion
-				{ 16, "INV_Box_01", nil, BB["Olaf"], nil },
-				{ 17, 9404 },	-- Olaf's All Purpose Shield
-				{ 18, 9403 },	-- Battered Viking Shield
-				{ 19, 1177 },	-- Oil of Olaf
-			},
+			[NORMAL_DIFF] = ULDAMAN_LOOT1,
 		},
 		{	--Revelosh
 			EncounterJournalID = 467,
-			[NORMAL_DIFF] = ULDAMAN_LOOT,
+			[NORMAL_DIFF] = ULDAMAN_LOOT2,
 		},
 		{	--Ironaya
 			EncounterJournalID = 469,
-			[NORMAL_DIFF] = ULDAMAN_LOOT,
+			[NORMAL_DIFF] = ULDAMAN_LOOT2,
 		},
 		{	--Ancient Stone Keeper
 			EncounterJournalID = 470,
-			[NORMAL_DIFF] = ULDAMAN_LOOT,
+			[NORMAL_DIFF] = ULDAMAN_LOOT2,
 		},
 		{	--Galgann Firehammer
 			EncounterJournalID = 471,
-			[NORMAL_DIFF] = ULDAMAN_LOOT,
+			[NORMAL_DIFF] = ULDAMAN_LOOT2,
 		},
 		{	--Grimlok
 			EncounterJournalID = 472,
-			[NORMAL_DIFF] = ULDAMAN_LOOT,
+			[NORMAL_DIFF] = ULDAMAN_LOOT3,
 		},
 		{	--Archaedas
 			EncounterJournalID = 473,
-			[NORMAL_DIFF] = ULDAMAN_LOOT,
+			[NORMAL_DIFF] = ULDAMAN_LOOT3,
 		},
-		{	--UldTrash
+		{	--Trash
 			name = AL["Trash Mobs"],
 			ExtraList = true,
-			[NORMAL_DIFF] = {
-				{ 1, 9397 },	-- Energy Cloak
-				{ 2, 9431 },	-- Papal Fez
-				{ 3, 9429 },	-- Miner's Hat of the Deep
-				{ 4, 9420 },	-- Adventurer's Pith Helmet
-				{ 5, 9430 },	-- Spaulders of a Lost Age
-				{ 6, 9406 },	-- Spirewind Fetter
-				{ 7, 9428 },	-- Unearthed Bands
-				{ 8, 9396 },	-- Legguards of the Vault
-				{ 9, 9432 },	-- Skullplate Bracers
-				{ 10, 9393 },	-- Beacon of Hope
-				{ 12, "INV_Box_01", nil, EJ_GetEncounterInfo(748), nil },	--Obsidian Sentinel
-				{ 13, 62053 },	-- Obsidian Power Core
-				{ 16, 9384 },	-- Stonevault Shiv
-				{ 17, 9392 },	-- Annealed Blade
-				{ 18, 9424 },	-- Ginn-Su Sword
-				{ 19, 9465 },	-- Digmaster 5000
-				{ 20, 9383 },	-- Obsidian Cleaver
-				{ 21, 9425 },	-- Pendulum of Doom
-				{ 22, 9386 },	-- Excavator's Brand
-				{ 23, 9427 },	-- Stonevault Bonebreaker
-				{ 24, 9423 },	-- The Jackhammer
-				{ 25, 9391 },	-- The Shoveler
-				{ 26, 9381 },	-- Earthen Rod
-				{ 27, 9426 },	-- Monolithic Bow
-				{ 28, 9422 },	-- Shadowforge Bushmaster
-			},
+			[NORMAL_DIFF] = ULDAMAN_LOOT4,
 		},
 		CLASSIC_INSTANCE_AC_TABLE,
 	}
@@ -2093,24 +2162,28 @@ data["Uldaman"] = {
 local WAILING_CAVERNS_LOOT1 = {
 	{ 1, "INV_Box_01", nil, BB["Boahn"].." ("..AL["Rare"]..", "..AL["Entrance"]..")", nil },
 	{ 2, 5423 },	-- Boahn's Fang
-	{ 3, 5422 },	-- Brambleweed Leggings
-	{ 5, "INV_Box_01", nil, BB["Trigore the Lasher"].." ("..AL["Rare"]..", "..AL["Entrance"]..")", nil },
-	{ 6, 5425 },	-- Runescale Girdle
-	{ 7, 5426 },	-- Serpent's Kiss
-	{ 9, "INV_Box_01", nil, EJ_GetEncounterInfo(474), nil },	--Lady Anacondra
-	{ 10, 5404 },	-- Serpent's Shoulders
-	{ 11, 10412 },	-- Belt of the Fang
-	{ 12, 6446 },	-- Snakeskin Bag
+	{ 4, 5422 },	-- Brambleweed Leggings
+	{ 6, "INV_Box_01", nil, BB["Trigore the Lasher"].." ("..AL["Rare"]..", "..AL["Entrance"]..")", nil },
+	{ 7, 5425 },	-- Runescale Girdle
+	{ 8, 5426 },	-- Serpent's Kiss
+	{ 10, "INV_Box_01", nil, EJ_GetEncounterInfo(474), nil },	--Lady Anacondra
+	{ 11, 5404 },	-- Serpent's Shoulders
+	{ 12, 10412 },	-- Belt of the Fang
+	{ 13, 132737 },	-- Cavern Slitherer Pauldrons
+	{ 14, 132740 },	-- Slither-Scale Cord
+	{ 15, 6446 },	-- Snakeskin Bag
 	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(476), nil },	--Lord Pythas
 	{ 17, 6473 },	-- Armor of the Fang
-	{ 18, 6472 },	-- Stinging Viper
-	{ 20, "INV_Box_01", nil, EJ_GetEncounterInfo(475), nil },	--Lord Cobrahn
-	{ 21, 6465 },	-- Robe of the Moccasin
-	{ 22, 10410 },	-- Leggings of the Fang
-	{ 23, 6460 },	-- Cobrahn's Grasp
-	{ 25, "INV_Box_01", nil, EJ_GetEncounterInfo(477), nil },	--Kres-h
-	{ 26, 13245 },	-- Kresh's Back
-	{ 27, 6447 },	-- Worn Turtle Shell Shield
+	{ 18, 132739 },	-- Slither-Scale Hauberk
+	{ 19, 6472 },	-- Stinging Viper
+	{ 21, "INV_Box_01", nil, EJ_GetEncounterInfo(475), nil },	--Lord Cobrahn
+	{ 22, 6465 },	-- Robe of the Moccasin
+	{ 23, 10410 },	-- Leggings of the Fang
+	{ 24, 132742 },	-- Slither-Scale Britches
+	{ 25, 6460 },	-- Cobrahn's Grasp
+	{ 27, "INV_Box_01", nil, EJ_GetEncounterInfo(477), nil },	--Kres-h
+	{ 28, 13245 },	-- Kresh's Back
+	{ 29, 6447 },	-- Worn Turtle Shell Shield
 }
 local WAILING_CAVERNS_LOOT2 = {
 	{ 1, "INV_Box_01", nil, EJ_GetEncounterInfo(478), nil },	--Skum
@@ -2122,20 +2195,23 @@ local WAILING_CAVERNS_LOOT2 = {
 	{ 9, "INV_Box_01", nil, EJ_GetEncounterInfo(479), nil },	--Lord Serpentis
 	{ 10, 5970 },	-- Serpent Gloves
 	{ 11, 10411 },	-- Footpads of the Fang
-	{ 12, 6459 },	-- Savage Trodders
-	{ 13, 6469 },	-- Venomstrike
+	{ 12, 132741 },	-- Slither-Scale Boots
+	{ 13, 6459 },	-- Savage Trodders
+	{ 14, 6469 },	-- Venomstrike
 	{ 16, "INV_Box_01", nil, EJ_GetEncounterInfo(480), nil },	--Verdan the Everliving
 	{ 17, 6629 },	-- Sporid Cape
-	{ 18, 6631 },	-- Living Root
-	{ 19, 6630 },	-- Seedcloud Buckler
+	{ 18, 6630 },	-- Seedcloud Buckler
+	{ 19, 6631 },	-- Living Root
 	{ 21, "INV_Box_01", nil, EJ_GetEncounterInfo(481), nil },	--Mutanus the Devourer
 	{ 22, 6461 },	-- Slime-Encrusted Pads
 	{ 23, 6627 },	-- Mutant Scale Breastplate
 	{ 24, 6463 },	-- Deep Fathom Ring
 	{ 26, "ac630" },
-	{ 28, "INV_Box_01", nil, AL["Trash Mobs"], nil },
-	{ 29, 10413 },	-- Gloves of the Fang
-
+}
+local WAILING_CAVERNS_LOOT3 = {
+	{ 1, 12987 },	-- Darkweave Breeches
+	{ 2, 10413 },	-- Gloves of the Fang
+	{ 3, 132743 },	-- Slither-Scale Gauntlets
 }
 data["WailingCaverns"] = {
 	EncounterJournalID = 240,
@@ -2190,7 +2266,7 @@ data["WailingCaverns"] = {
 		{	--Trash Mobs
 			name = AL["Trash Mobs"],
 			ExtraList = true,
-			[NORMAL_DIFF] = WAILING_CAVERNS_LOOT2,
+			[NORMAL_DIFF] = WAILING_CAVERNS_LOOT3,
 		},
 		{	--Miscellaneous Sets
 			name = AL["Miscellaneous"].." "..AL["Sets"],
@@ -2211,6 +2287,23 @@ data["ZulFarrak"] = {
 			name = BB["Zerillis"].." ("..AL["Rare"]..")",
 			[NORMAL_DIFF] = {
 				{ 1, 12470 },	-- Sandstalker Ankleguards
+			},
+		},
+		{	--ZFAntusul
+			EncounterJournalID = 484,
+			[NORMAL_DIFF] = {
+				{ 1, 9640 },	-- Vice Grips
+				{ 2, 9641 },	-- Lifeblood Amulet
+				{ 3, 9639 },	-- The Hand of Antu'sul
+				{ 5, 9379 },	-- Sang'thraze the Deflector
+				{ 6, 9372, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Sul'thraze the Lasher
+			},
+		},
+		{	--ZFWitchDoctorZumrah
+			EncounterJournalID = 486,
+			[NORMAL_DIFF] = {
+				{ 1, 18083 },	-- Jumanza Grips
+				{ 2, 18082 },	-- Zum'rah's Vexing Cane
 			},
 		},
 		{	--ZFHydromancerVelratha
@@ -2242,23 +2335,6 @@ data["ZulFarrak"] = {
 				{ 1, 12471 },	-- Desertwalker Cane
 			},
 		},
-		{	--ZFWitchDoctorZumrah
-			EncounterJournalID = 486,
-			[NORMAL_DIFF] = {
-				{ 1, 18083 },	-- Jumanza Grips
-				{ 2, 18082 },	-- Zum'rah's Vexing Cane
-			},
-		},
-		{	--ZFAntusul
-			EncounterJournalID = 484,
-			[NORMAL_DIFF] = {
-				{ 1, 9640 },	-- Vice Grips
-				{ 2, 9641 },	-- Lifeblood Amulet
-				{ 3, 9639 },	-- The Hand of Antu'sul
-				{ 5, 9379 },	-- Sang'thraze the Deflector
-				{ 6, 9372, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Sul'thraze the Lasher
-			},
-		},
 		{	--ZFChiefUkorzSandscalp
 			EncounterJournalID = 489,
 			[NORMAL_DIFF] = {
@@ -2278,7 +2354,7 @@ data["ZulFarrak"] = {
 				{ 1, 9512 },	-- Blackmetal Cape
 				{ 2, 9484 },	-- Spellshock Leggings
 				{ 3, 9243 },	-- Shriveled Troll Heart
-				{ 4, 862 },	-- Runed Ring
+				{ 4, 862  },	-- Runed Ring
 				{ 5, 6440 },	-- Brainlash
 				{ 16, 5616 },	-- Gutwrencher
 				{ 17, 9511 },	-- Bloodletter Scalpel
@@ -2294,13 +2370,13 @@ data["ZulFarrak"] = {
 }
 
 local AQ_ENCHANTS = {
-	{ 1, 20728 },	-- Formula: Enchant Gloves - Frost Power
-	{ 2, 20731 },	-- Formula: Enchant Gloves - Superior Agility
-	{ 3, 20734 },	-- Formula: Enchant Cloak - Stealth
-	{ 4, 20729 },	-- Formula: Enchant Gloves - Fire Power
-	{ 5, 20736 },	-- Formula: Enchant Cloak - Dodge
-	{ 6, 20730 },	-- Formula: Enchant Gloves - Healing Power
-	{ 7, 20727 },	-- Formula: Enchant Gloves - Shadow Power
+	{ 1, 20728, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Enchant Gloves - Frost Power
+	{ 2, 20731, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Enchant Gloves - Superior Agility
+	{ 3, 20734, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Enchant Cloak - Stealth
+	{ 4, 20729, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Enchant Gloves - Fire Power
+	{ 5, 20736, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Enchant Cloak - Dodge
+	{ 6, 20730, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Enchant Gloves - Healing Power
+	{ 7, 20727, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Enchant Gloves - Shadow Power
 }
 data["AhnQiraj"] = {
 	name = ALIL["Ahn'Qiraj"],
@@ -2335,7 +2411,7 @@ data["AhnQiraj"] = {
 				{ 23, 21272 },	-- Blessed Qiraji Musket
 				{ 24, 21244 },	-- Blessed Qiraji Pugio
 				{ 25, 21269 },	-- Blessed Qiraji Bulwark
-				{ 27, 22222 },	-- Plans: Thick Obsidian Breastplate
+				{ 27, 22222, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Plans: Thick Obsidian Breastplate
 				{ 29, 93041, "pet1156" },	-- Jewel of Maddening Whispers
 			},
 		},
@@ -2480,7 +2556,7 @@ data["AhnQiraj"] = {
 				{ 5, 21598 },	-- Royal Qiraji Belt
 				{ 6, 21597 },	-- Royal Scepter of Vek'lor
 				{ 7, 21601 },	-- Ring of Emperor Vek'lor
-				{ 8, 20735 },	-- Formula: Enchant Cloak - Subtlety
+				{ 8, 20735, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Enchant Cloak - Subtlety
 				{ 9, 93040, "pet1155" },	-- Anubisath Idol
 				{ 11, 21232 },	-- Imperial Qiraji Armaments
 				{ 12, 21242 },	-- Blessed Qiraji War Axe
@@ -2495,7 +2571,7 @@ data["AhnQiraj"] = {
 				{ 21, 21606 },	-- Belt of the Fallen Emperor
 				{ 22, 21679 },	-- Kalimdor's Revenge
 				{ 23, 21608 },	-- Amulet of Vek'nilash
-				{ 24, 20726 },	-- Formula: Enchant Gloves - Threat
+				{ 24, 20726, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Enchant Gloves - Threat
 				{ 26, 21237 },	-- Imperial Qiraji Regalia
 				{ 27, 21273 },	-- Blessed Qiraji Acolyte Staff
 				{ 28, 21275 },	-- Blessed Qiraji Augur Staff
@@ -3035,8 +3111,8 @@ data["MoltenCore"] = {
 				{ 16, 16797 },	-- Arcanist Mantle
 				{ 17, 16807 },	-- Felheart Shoulder Pads
 				{ 18, 16836 },	-- Cenarion Spaulders
-				{ 19, 16856 },	-- Lawbringer Spaulders
-				{ 20, 16844 },	-- Earthfury Epaulets
+				{ 19, 16844 },	-- Earthfury Epaulets
+				{ 20, 16856 },	-- Lawbringer Spaulders
 				{ 22, 18563 },	-- Bindings of the Windseeker
 				{ 23, 19019 },	-- Thunderfury, Blessed Blade of the Windseeker
 			},
@@ -3146,9 +3222,9 @@ data["MoltenCore"] = {
 				{ 8, 16962 },	-- Legplates of Wrath
 				{ 9, 16954 },	-- Judgement Legplates
 				{ 11, 17204 },	-- Eye of Sulfuras
-				{ 12, 17182 },	-- Sulfuras, Hand of Ragnaros
+				{ 12, 17182, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Sulfuras, Hand of Ragnaros
 				{ 14, 19017 },	-- Essence of the Firelord
-				{ 15, 19019 },	-- Thunderfury, Blessed Blade of the Windseeker
+				{ 15, 19019, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Thunderfury, Blessed Blade of the Windseeker
 				{ 16, 17102 },	-- Cloak of the Shrouded Mists
 				{ 17, 17107 },	-- Dragon's Blood Cape
 				{ 18, 18817 },	-- Crown of Destruction
@@ -3169,24 +3245,24 @@ data["MoltenCore"] = {
 			name = AL["Shared Boss Loot"],
 			ExtraList = true,
 			[NORMAL_DIFF] = {
-				{ 1, 18264 },	-- Plans: Elemental Sharpening Stone
-				{ 2, 18262 },	-- Elemental Sharpening Stone
-				{ 4, 18292 },	-- Schematic: Core Marksman Rifle
-				{ 5, 18282 },	-- Core Marksman Rifle
-				{ 7, 18291 },	-- Schematic: Force Reactive Disk
-				{ 8, 18168 },	-- Force Reactive Disk
-				{ 10, 18290 },	-- Schematic: Biznicks 247x128 Accurascope
-				{ 11, 18283 },	-- Biznicks 247x128 Accurascope
-				{ 13, 18259 },	-- Formula: Enchant Weapon - Spell Power
-				{ 16, 18252 },	-- Pattern: Core Armor Kit
-				{ 17, 18251 },	-- Core Armor Kit
-				{ 19, 18265 },	-- Pattern: Flarecore Wraps
-				{ 20, 18263 },	-- Flarecore Wraps
-				{ 22, 21371 },	-- Pattern: Core Felcloth Bag
-				{ 23, 21342 },	-- Core Felcloth Bag
-				{ 25, 18257 },	-- Recipe: Major Rejuvenation Potion
-				{ 26, 18253 },	-- Major Rejuvenation Potion
-				{ 28, 18260 },	-- Formula: Enchant Weapon - Healing Power
+				{ 1, 18264, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Plans: Elemental Sharpening Stone
+				{ 2, 18262, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Elemental Sharpening Stone
+				{ 4, 18292, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Core Marksman Rifle
+				{ 5, 18282, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Core Marksman Rifle
+				{ 7, 18291, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Force Reactive Disk
+				{ 8, 18168, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Force Reactive Disk
+				{ 10, 18290, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Schematic: Biznicks 247x128 Accurascope
+				{ 11, 18283, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Biznicks 247x128 Accurascope
+				{ 13, 18259, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Enchant Weapon - Spell Power
+				{ 16, 18252, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Pattern: Core Armor Kit
+				{ 17, 18251, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Core Armor Kit
+				{ 19, 18265, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Pattern: Flarecore Wraps
+				{ 20, 18263, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Flarecore Wraps
+				{ 22, 21371, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Pattern: Core Felcloth Bag
+				{ 23, 21342, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Core Felcloth Bag
+				{ 25, 18257, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Recipe: Major Rejuvenation Potion
+				{ 26, 18253, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Major Rejuvenation Potion
+				{ 28, 18260, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Formula: Enchant Weapon - Healing Power
 			},
 		},
 		{	--MCTrashMobs
@@ -3269,8 +3345,8 @@ data["TheRuinsofAhnQiraj"] = {
 				{ 18, 20884 },	-- Qiraji Magisterial Ring
 				{ 19, 20888 },	-- Qiraji Ceremonial Ring
 				{ 21, "INV_Box_01", nil, BB["Lieutenant General Andorov"], nil },
-				{ 22, 22221 },	-- Plans: Obsidian Mail Tunic
-				{ 23, 22219 },	-- Plans: Jagged Obsidian Shield
+				{ 22, 22221, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Plans: Obsidian Mail Tunic
+				{ 23, 22219, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Plans: Jagged Obsidian Shield
 			},
 		},
 		{	--AQ20Moam
@@ -3294,7 +3370,7 @@ data["TheRuinsofAhnQiraj"] = {
 				{ 17, 20890 },	-- Qiraji Ornate Hilt
 				{ 18, 20884 },	-- Qiraji Magisterial Ring
 				{ 19, 20888 },	-- Qiraji Ceremonial Ring
-				{ 21, 22220 },	-- Plans: Black Grasp of the Destroyer
+				{ 21, 22220, [ATLASLOOT_IT_FILTERIGNORE] = true },	-- Plans: Black Grasp of the Destroyer
 				{ 22, 22194 },	-- Black Grasp of the Destroyer
 			},
 		},

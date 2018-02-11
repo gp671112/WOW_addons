@@ -21,10 +21,12 @@
 
 ## Title: AdiBags
 ## Notes: Adirelle's bag addon.
+## Title-zhTW: |cFFFF8000[背包/銀行]|rAdiBags
+## Notes-zhTW: Adirelle的背包插件。
 ## Author: Adirelle
-## Version: v1.9.7
+## Version: v1.9.8
 ## SavedVariables: AdiBagsDB
-## X-Date: 2017-08-31T1:29:05Z
+## X-Date: 2017-08-31T12:11:38Z
 ## X-License: GPL v3
 ## OptionalDeps: LibStub, CallbackHandler-1.0, Ace3, LibSharedMedia-3.0, LibItemUpgradeInfo-1.0, Scrap, BrainDead, !BugGrabber, SyLevel
 #@alpha@

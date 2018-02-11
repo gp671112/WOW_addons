@@ -29,7 +29,7 @@ ERROR_FRAME_FAILED = "同步 %s 時發生錯誤。再次修改這個框架之前
 -- Needs review
 ERROR_MODULE_FAILED = "調整 %s - %s 時發生錯誤。選項設定中可以停用這個訊息，若問題一直發生，請向作者回報下列資訊： %s %s %s",
 ERROR_NOT_A_TABLE = " \"%s\"  為不支援的類型",
-FE_FORCED_LOCK_POSITION_CONFIRM = "是否要強制鎖定位置? 請於5秒內點擊以確認這個動作。",
+FE_FORCED_LOCK_POSITION_CONFIRM = "是否確定要強制鎖定位置? 請於5秒內再次點擊以確認這項操作。",
 FE_FORCED_LOCK_POSITION_TOOLTIP = [=[覆寫這個元素的 SetPoint 定位方法，
 使用空的程序來取代。
 

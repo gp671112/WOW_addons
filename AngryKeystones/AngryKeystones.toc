@@ -1,4 +1,4 @@
-## Interface: 70200
+## Interface: 70300
 ## Title: Angry Keystones
 ## Notes: Displays additional information for Mythic Keystone dungeons
 ## Title-zhTW: |cffFF7F00[副本]|r 傳奇+ 進度時間
@@ -6,7 +6,7 @@
 ## Author: Ermad
 ## SavedVariables: AngryKeystones_Config, AngryKeystones_Data
 ## SavedVariablesPerCharacter: AngryKeystones_CharacterConfig
-## X-Packaged-Version: v0.12.5
+## X-Packaged-Version: v0.12.9
 
 Core.lua
 Locale.lua

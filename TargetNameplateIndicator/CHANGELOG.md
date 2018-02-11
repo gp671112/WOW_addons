@@ -1,3 +1,25 @@
+## 1.22
+- Add support for separate friendly and hostile target indicator configurations
+
+## 1.21
+- Bump TOC Interface version to 7.3
+
+## 1.20
+- Another new release to try and fix CurseForge packager error. MrFlamegoat says it should be fixed now.
+
+## 1.19
+- New release to try and fix CurseForge packager error.
+
+## 1.18
+- Use consistent spelling of reticule in config.lua
+- Fix comment of RedChevronArrow texture not mentioning OligoFriends' Curse profile
+- Add Red Hunter's Mark Arrow texture provided by thisguyyouknow of Curse
+
+## 1.17
+- Bump TOC Interface version to 7.2
+- Add textures from ContinuousQ of Curse
+- Fix Notes tag in TOC to mention options in config.lua instead of core.lua
+
 ## 1.16
 - Add explanation of when changes will take effect to config.lua
 
@@ -47,29 +69,29 @@
 
 ## 1.07
 - Added red/green 3D arrow and skull and crossbones textures provided by OligoFriends of Curse/WoWI
-- Not updating LibNameplate for now, the latest alpha versions don't seem to work very well. 
+- Not updating LibNameplate for now, the latest alpha versions don't seem to work very well.
 
 ## 1.06
-- Added red inverted chevron textures provided by OligoFriends of Curse/WoWI 
+- Added red inverted chevron textures provided by OligoFriends of Curse/WoWI
 
 ## 1.05
-- Updated LibNameplate-1.0 to r145 for the nameplate changes in 5.1. This version of the library is still in alpha, so please report any errors or strange behaviour. 
+- Updated LibNameplate-1.0 to r145 for the nameplate changes in 5.1. This version of the library is still in alpha, so please report any errors or strange behaviour.
 
 ## 1.04
 - Added neon textures provided by mezmorizedck of Curse
-- Renamed the reticule texture to Reticule.tga and changed the TEXTURE_PATH variable's default value to match 
+- Renamed the reticule texture to Reticule.tga and changed the TEXTURE_PATH variable's default value to match
 
 ## 1.03
 - Updated LibNameplate to version 1.0.36, which should fix the GetNumRaidMembers error
-- Updated TOC to 5.0 
+- Updated TOC to 5.0
 
 ## 1.02
 - Added a red arrow texture provided by DohNotAgain of WoWI
-- Added more detail to the comments at the top of core.lua, including stuff about custom textures, GIMP and texture contribution. 
+- Added more detail to the comments at the top of core.lua, including stuff about custom textures, GIMP and texture contribution.
 
 ## 1.01
 - Changed default texture to read targeting reticule contributed by Dridzt of WoW Interface.
-- Doubled the default width/height 
+- Doubled the default width/height
 
 ## 1.00
 - AddOn created. Hooray!

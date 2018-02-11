@@ -1,11 +1,11 @@
-## Interface: 70200
+## Interface: 70300
 
 ## Title: Bartender4
 ## Notes: Simple and Advanced combined - Bartender4 ActionBar AddOn
 ## Title-zhTW: |cFF0080FF[動作列]|rBartender4
 ## Notes-zhTW: 老牌動作條，指令：/bt
 
-## Version: 4.7.9
+## Version: 4.7.10
 
 ## Author: Nevcairiel
 ## X-Email: h.leppkes at gmail dot com

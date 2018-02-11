@@ -313,7 +313,7 @@ end
 
 function containerProto:CreateDepositButton()
 	local button = self:CreateModuleAutoButton(
-		"D",
+		"存",
 		0,
 		REAGENTBANK_DEPOSIT,
 		L["auto-deposit"],
@@ -331,7 +331,7 @@ end
 
 function containerProto:CreateSortButton()
 	self:CreateModuleButton(
-		"S",
+		"理",
 		10,
 		function()
 			self.bagObject:Sort()
@@ -344,7 +344,7 @@ end
 function containerProto:CreateReagentTabButton()
 	local button
 	button = self:CreateModuleButton(
-		"R",
+		"材",
 		0,
 		function()
 			if not IsReagentBankUnlocked() then

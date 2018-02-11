@@ -1,28 +1,24 @@
-lightweight tag 7db8fe644b1f0949a6b06e9666c5c15675d88592 1.14
+lightweight tag cb45aa5bb51a3a3378379613ac1e164fe73fa26c 1.17
 Author:	Bernhard Saumweber <b.saumweber@gmail.com>
-Date:	Wed Aug 30 22:47:16 2017 +0200
+Date:	Tue Dec 26 13:55:19 2017 +0100
 
-commit 7db8fe644b1f0949a6b06e9666c5c15675d88592
+commit cb45aa5bb51a3a3378379613ac1e164fe73fa26c
+Author: peti446 <peti446@users.noreply.github.com>
+Date:   Tue Dec 26 12:55:19 2017 +0000
+
+    Added Spanish localization (#9)
+    
+    * Create esES.lua: Spanish translation
+    * Update esES.lua
+    * fixed space error
+    * Added Spanish Localization
+    * Removed MX
+    * Changed place so it actually loads now
+    * Update esES.lua
+
+commit 2a1f08ed83fd791fdabb1f744ac469d7f5bbb070
 Author: Bernhard Saumweber <b.saumweber@gmail.com>
-Date:   Wed Aug 30 22:47:16 2017 +0200
+Date:   Thu Dec 14 22:31:28 2017 +0100
 
-    Added keywords sott for the dungeon Seat of the Triumvirate and atbt for the raid Antorus, the Burning Throne
-
-commit 6acc4b422550fc4c4688ba97525f54099a43f9bc
-Author: Bernhard Saumweber <b.saumweber@gmail.com>
-Date:   Wed Aug 30 22:35:24 2017 +0200
-
-    Updated difficulty fallback list with the new dungeon and raid
-
-commit 7c2aa71e898fb568b68d75dc57bd5dfa8cb4e147
-Author: Bernhard Saumweber <b.saumweber@gmail.com>
-Date:   Wed Aug 30 22:32:44 2017 +0200
-
-    Skirmishes can now be filtered with arena2v2 and arena3v3 keywords
-
-commit c9083019d3e59282021d969b6d48686e8965a331
-Author: Bernhard Saumweber <b.saumweber@gmail.com>
-Date:   Wed Aug 30 22:31:48 2017 +0200
-
-    Set version to next release version: 1.14
+    Set version to next release version: 1.17
 

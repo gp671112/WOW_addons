@@ -4,59 +4,15 @@ local PersoLib = LibStub:NewLibrary(MAJOR, MINOR)
 if not PersoLib then return end
 
 local ArtifactUI          	= _G.C_ArtifactUI
+local ArtifactRelicForgeUI  = _G.C_ArtifactRelicForgeUI
+local ArtifactRelicForgeFrame = _G.ArtifactRelicForgeFrame
 local HasArtifactEquipped 	= _G.HasArtifactEquipped
 local SocketInventoryItem 	= _G.SocketInventoryItem
-local Timer               	= _G.C_Timer
-local artifactTable 	  	= {
-	-- Death Knight
-	[128402] = 15,
-	[128292] = 12,
-	[128403] = 16,
-	-- Demon Hunter
-	[127829] = 3,
-	[128832] = 60,
-	-- Druid
-	[128858] = 59,
-	[128860] = 58,
-	[128821] = 57,
-	[128306] = 13,
-	-- Hunter
-	[128861] = 56,
-	[128826] = 55,
-	[128808] = 34,
-	-- Mage
-	[127857] = 4,
-	[128820] = 54,
-	[128862] = 53,
-	-- Monk
-	[128938] = 52,
-	[128937] = 51,
-	[128940] = 50,
-	-- Paladin
-	[128823] = 48,
-	[128866] = 49,
-	[120978] = 2,
-	-- Priest
-	[128868] = 46,
-	[128825] = 45,
-	[128827] = 47,
-	-- Rogue
-	[128870] = 43,
-	[128872] = 44,
-	[128476] = 17,
-	-- Shaman
-	[128935] = 40,
-	[128819] = 41,
-	[128911] = 32,
-	-- Warlock
-	[128942] = 39,
-	[128943] = 37,
-	[128941] = 38,
-	-- Warrior
-	[128910] = 36,
-	[128908] = 35,
-	[128289] = 11
-}
+local ExtraData			
+
+function PersoLib:Init(Datas)
+	ExtraData=Datas
+end
 
 -- First letter in caps
 function PersoLib:firstToUpper(str)
@@ -101,7 +57,6 @@ function PersoLib:doCartesianALACON(tableToPermut)
 															--trinket
 															tableReturn[#tableReturn][13]=tableToPermut[13][i13]
 															tableReturn[#tableReturn][14]=tableToPermut[14][i14]
-															--print(tableToPermut[1][i1].." "..tableToPermut[2][i2].." "..tableToPermut[3][i3].." "..tableToPermut[4][i4].." "..tableToPermut[5][i5].." "..tableToPermut[6][i6].." "..tableToPermut[7][i7].." "..tableToPermut[8][i8].." "..tableToPermut[9][i9].." "..tableToPermut[10][i10].." "..tableToPermut[11][i11].." "..tableToPermut[12][i12])
 														end
 													end
 												end
@@ -128,26 +83,40 @@ function PersoLib:tokenize(str)
   -- convert to lowercase and remove spaces
   str = string.lower(str)
   str = string.gsub(str, ' ', '_')
+  str = string.gsub(str, ',', '_')
 
-  -- keep stuff we want, dumpster everything else
-  local s = ""
-  for i=1,str:len() do
-    -- keep digits 0-9
-    if str:byte(i) >= 48 and str:byte(i) <= 57 then
-      s = s .. str:sub(i,i)
-      -- keep lowercase letters
-    elseif str:byte(i) >= 97 and str:byte(i) <= 122 then
-      s = s .. str:sub(i,i)
-      -- keep %, +, ., _
-    elseif str:byte(i)==37 or str:byte(i)==43 or str:byte(i)==46 or str:byte(i)==95 then
-      s = s .. str:sub(i,i)
-    end
-  end
   -- strip trailing spaces
-  if string.sub(s, s:len())=='_' then
-    s = string.sub(s, 0, s:len()-1)
+  if string.sub(str, str:len())=='_' then
+    str = string.sub(str, 0, str:len()-1)
   end
-  return s
+  return str
+end
+
+function PersoLib:Split(str, delim, maxNb)
+   -- Eliminate bad cases...
+   if string.find(str, delim) == nil then
+      return { str }
+   end
+   if maxNb == nil or maxNb < 1 then
+      maxNb = 0    -- No limit
+   end
+   local result = {}
+   local pat = "(.-)" .. delim .. "()"
+   local nb = 0
+   local lastPos
+   for part, pos in string.gmatch(str, pat) do
+      nb = nb + 1
+      result[nb] = part
+      lastPos = pos
+      if nb == maxNb then
+         break
+      end
+   end
+   -- Handle the last field
+   if nb ~= maxNb then
+      result[nb + 1] = string.sub(str, lastPos)
+   end
+   return result
 end
 
 -- simc, method for constructing the talent string
@@ -177,18 +146,14 @@ function PersoLib:CreateSimcTalentString()
 end
 
 -- simc, function that translates between the game's role values and ours
-function PersoLib:translateRole(str)
-  if str == 'TANK' then
-    return PersoLib:tokenize(str)
-  elseif str == 'DAMAGER' then
-    return 'attack'
-  elseif str == 'HEALER' then
-    return 'healer'
-  else
-    return 'spell'
+function PersoLib:translateRole(spec_id)
+  local spec_role = ExtraData.RoleTable[spec_id]
+  if spec_role ~= nil then
+    return spec_role
   end
 end
 
+-- simc, function that reforulate race for simc
 function PersoLib:getRace()
 	-- Race info
 	local _, playerRace = UnitRace('player')
@@ -204,59 +169,235 @@ function PersoLib:getRace()
 	return playerRace
 end
 
+-- simc, function that returns spec ID
 function PersoLib:getSpecID()
-	local role, globalSpecID
+	local globalSpecID
 	local specId = GetSpecialization()
 	if specId then
-		globalSpecID,_,_,_,_,role = GetSpecializationInfo(specId)
+		globalSpecID = GetSpecializationInfo(specId)
 	end
 	return globalSpecID
 end
 
--- simc, Artifact Information
 function PersoLib:IsArtifactFrameOpen()
-  local ArtifactFrame 	  = _G.ArtifactFrame
-  return ArtifactFrame and ArtifactFrame:IsShown() or false
+	local ArtifactFrame = _G.ArtifactFrame
+	return ArtifactFrame and ArtifactFrame:IsShown() or false
+end
+
+function PersoLib:IsCrucibleFrameOpen()
+	local ArtifactRelicForgeFrame = _G.ArtifactRelicForgeFrame
+	return ArtifactRelicForgeFrame and ArtifactRelicForgeFrame:IsShown() or false
+end
+
+function PersoLib:GetPowerData(powerId)
+	if not powerId then
+		return 0, 0
+	end
+
+	local powerInfo = ArtifactUI.GetPowerInfo(powerId)
+	if powerInfo == nil then
+		return powerId, 0
+	end
+
+	return powerId, powerInfo.currentRank - powerInfo.bonusRanks
+end
+
+function PersoLib:OpenArtifact()
+	if not HasArtifactEquipped() then
+		return false, false, 0
+	end
+
+	local artifactFrameOpen = PersoLib:IsArtifactFrameOpen()
+	if not artifactFrameOpen then
+		SocketInventoryItem(INVSLOT_MAINHAND)
+	end
+
+	local ArtifactFrame = _G.ArtifactFrame
+
+	local itemId = select(1, ArtifactUI.GetArtifactInfo())
+	if itemId == nil or itemId == 0 then
+		if not artifactFrameOpen then
+			HideUIPanel(ArtifactFrame)
+		end
+		return false, false, 0
+	end
+
+	-- if not select(1, IsUsableItem(itemId)) then
+		-- if not artifactFrameOpen then
+			-- HideUIPanel(ArtifactFrame)
+		-- end
+		-- return false, false, 0
+	-- end
+
+	local mhId = select(1, GetInventoryItemID("player", GetInventorySlotInfo("MainHandSlot")))
+	local ohId = select(1, GetInventoryItemID("player", GetInventorySlotInfo("SecondaryHandSlot")))
+	local correctArtifactOpen = (mhId ~= nil and mhId == itemId) or (ohId ~= nil and ohId == itemId)
+
+	if not correctArtifactOpen then
+		print("|cFFFF0000Warning, attempting to generate Simulationcraft artifact output for the wrong item (expected " .. (mhId or 0) .. " or " .. (ohId or 0) .. ", got " .. itemId .. ")")
+		HideUIPanel(ArtifactFrame)
+		SocketInventoryItem(INVSLOT_MAINHAND)
+		itemId = select(1, ArtifactUI.GetArtifactInfo())
+	end
+
+	return artifactFrameOpen, correctArtifactOpen, itemId
+end
+
+function PersoLib:CloseArtifactFrame(wasOpen, correctOpen)
+	local ArtifactFrame = _G.ArtifactFrame
+
+	if ArtifactFrame and (not wasOpen or not correctOpen) then
+		HideUIPanel(ArtifactFrame)
+	end
 end
 
 -- simc, generates artifact string
 function PersoLib:GetArtifactString()
-  if not HasArtifactEquipped() then
-    return nil
-  end
-    
-  -- Unregister the events to prevent unwanted call. (thx Aethys :o)
-  --UIParent:UnregisterEvent("ARTIFACT_UPDATE");
-  UIParent:UnregisterEvent("ARTIFACT_UPDATE");
-  if not PersoLib:IsArtifactFrameOpen() then
-    SocketInventoryItem(INVSLOT_MAINHAND)
-  end
+	local artifactFrameOpen, correctArtifactOpen, itemId = self:OpenArtifact()
 
-  local item_id = select(1, ArtifactUI.GetArtifactInfo())
-  if item_id == nil or item_id == 0 then
-    return nil
-  end
+	if not itemId then
+		self:CloseArtifactFrame(artifactFrameOpen, correctArtifactOpen)
+		return nil
+	end
 
-  local artifact_id = artifactTable[item_id]
-  if artifact_id == nil then
-    return nil
-  end
+	local artifactId = ExtraData.ArtifactTable[itemId]
+	if artifactId == nil then
+		self:CloseArtifactFrame(artifactFrameOpen, correctArtifactOpen)
+		return nil
+	end
 
-  -- Note, relics are handled by the item string
-  local str = 'artifact=' .. artifact_id .. ':0:0:0:0'
+	-- Note, relics are handled by the item string
+	local str = artifactId .. ':0:0:0:0'
 
-  local powers = ArtifactUI.GetPowers()
-  for i = 1, #powers do
-    local power_id = powers[i]
-    local info = ArtifactUI.GetPowerInfo(power_id)
-    if info.currentRank > 0 and info.currentRank - info.bonusRanks > 0 then
-      str = str .. ':' .. power_id .. ':' .. (info.currentRank - info.bonusRanks)
-    end
-  end
+	local baseRanks = {}
+	local crucibleRanks = {}
+
+	local powers = ArtifactUI.GetPowers()
+	for i = 1, #powers do
+		local powerId, powerRank = PersoLib:GetPowerData(powers[i])
+
+		if powerRank > 0 then
+			baseRanks[#baseRanks + 1] = powerId
+			baseRanks[#baseRanks + 1] = powerRank
+		end
+	end
+
+	if #baseRanks > 0 then
+		str = str .. ':' .. table.concat(baseRanks, ':')
+	end
+
+	self:CloseArtifactFrame(artifactFrameOpen, correctArtifactOpen)
+
+	return str
+end
+
+-- simc, generates crucible string
+function PersoLib:GetCrucibleString(RelicSlot)
+	local artifactFrameOpen, correctArtifactOpen, itemId = self:OpenArtifact()
+
+	if not itemId then
+		self:CloseArtifactFrame(artifactFrameOpen, correctArtifactOpen)
+		return nil
+	end
+
+	local artifactId = ExtraData.ArtifactTable[itemId]
+	if artifactId == nil then
+		self:CloseArtifactFrame(artifactFrameOpen, correctArtifactOpen)
+		return nil
+	end
+
   
-  --ArtifactFrame:Hide()
-  --CloseSocketInfo()
-  UIParent:RegisterEvent("ARTIFACT_UPDATE");
+	local crucibleData = {}
+	for ridx = 1, ArtifactUI.GetNumRelicSlots() do
+		crucibleData[ridx] = PersoLib:GetCrucibleStringForSlot(ridx)
+	end
+
+	local crucibleStrings = {}
+	for ridx = 1, #crucibleData do
+		crucibleStrings[ridx] = table.concat(crucibleData[ridx], ':')
+	end
+
+	self:CloseArtifactFrame(artifactFrameOpen, correctArtifactOpen)
+
+	return table.concat(crucibleStrings, '/')
+end
+
+-- simc generates crucible string for a specific slot
+function PersoLib:GetCrucibleStringForSlot(RelicSlot,ForceOpenArtifact)
+	if ForceOpenArtifact then
+		local artifactFrameOpen, correctArtifactOpen, itemId = self:OpenArtifact()
+
+		if not itemId then
+			self:CloseArtifactFrame(artifactFrameOpen, correctArtifactOpen)
+			return nil
+		end
+
+		local artifactId = ExtraData.ArtifactTable[itemId]
+		if artifactId == nil then
+			self:CloseArtifactFrame(artifactFrameOpen, correctArtifactOpen)
+			return nil
+		end
+	end
+
+	local link = select(4, ArtifactUI.GetRelicInfo(RelicSlot))
+	if link ~= nil then
+		local relicSplit     = PersoLib:LinkSplit(link)
+		local baseLink       = select(2, GetItemInfo(relicSplit[1]))
+		local basePowers     = { ArtifactUI.GetPowersAffectedByRelicItemLink(baseLink) }
+		local relicPowers    = { ArtifactUI.GetPowersAffectedByRelic(RelicSlot) }
+		local cruciblePowers = {}
+
+		for rpidx = 1, #relicPowers do
+			local found = false
+			for bpidx = 1, #basePowers do
+				if relicPowers[rpidx] == basePowers[bpidx] then
+					found = true
+					break
+				end
+			end
+
+			if not found then
+				cruciblePowers[#cruciblePowers + 1] = relicPowers[rpidx]
+			end
+		end
+		
+		if ForceOpenArtifact then
+			self:CloseArtifactFrame(artifactFrameOpen, correctArtifactOpen)
+		end
+
+		if #cruciblePowers == 0 then
+			return { 0 }
+		else
+			return cruciblePowers
+		end
+	else
+		if ForceOpenArtifact then
+			self:CloseArtifactFrame(artifactFrameOpen, correctArtifactOpen)
+		end
+		return { 0 }
+	end
+end
+
+function PersoLib:ExtractCurrentCrucibleTree()
+	local currentTree={}
+	if ArtifactRelicForgeUI.IsAtForge() then
+		if _G.ArtifactRelicForgeFrame.relicSlot and _G.ArtifactRelicForgeFrame.relicSlot <=3 then--relic slot
+			local treeData={}
+			treeData = ArtifactRelicForgeUI.GetSocketedRelicTalents(_G.ArtifactRelicForgeFrame.relicSlot)
+			for k,v in pairs(treeData) do
+				if not currentTree[treeData[k].tier] then currentTree[treeData[k].tier]={} end
+				table.insert(currentTree[treeData[k].tier],treeData[k].powerID)
+			end
+		else -- preview slot
+			local treeData={}
+			treeData = ArtifactRelicForgeUI.GetPreviewRelicTalents()
+			for k,v in pairs(treeData) do
+				if not currentTree[treeData[k].tier] then currentTree[treeData[k].tier]={} end
+				table.insert(currentTree[treeData[k].tier],treeData[k].powerID)
+			end
+		end
+	end
+	return currentTree
 end
 
 -- get item id from link
@@ -273,11 +414,98 @@ function PersoLib:GetIDFromLink(itemLink)
 		end
 	end
 
-	return itemSplit[1]
+	return tonumber(itemSplit[1])
+end
+
+-- get item id from link
+function PersoLib:GetILVLFromLink(itemLink)
+	local ilvl
+	_,_,_,ilvl = GetItemInfo(itemLink)
+	return ilvl
 end
 
 function PersoLib:debugPrint(str,affichedebug)
 	if affichedebug then
 		print(str)
 	end
+end
+
+function PersoLib:MergeTables(tableDefault,tableVars,tablereception)
+	for k,v in pairs(tableDefault) do
+		if tableVars[k] == nil then
+			tablereception[k]=v
+		else
+			tablereception[k]=tableVars[k]
+		end
+	end
+	return tablereception
+end
+
+function PersoLib:GetRealIlvl(itemLink)
+	local itemString = string.match(itemLink, "item:([%-?%d:]+)")
+	local itemSplit = {}
+	
+	-- Split data into a table
+	for _, v in ipairs({strsplit(":", itemString)}) do
+		if v == "" then
+		  itemSplit[#itemSplit + 1] = 0
+		else
+		  itemSplit[#itemSplit + 1] = tonumber(v)
+		end
+	end
+	_,_,itemRarity,ilvl = GetItemInfo(itemLink)
+	if itemRarity==7 then --heirloom
+		ilvl = 815
+	elseif tonumber(itemSplit[11])==512 and tonumber(itemSplit[12])==22 and tonumber(itemSplit[15])==110 then --timewalking
+		ilvl = 850
+		--todo : 895 if warforged
+	end
+	
+	return ilvl
+end
+
+function PersoLib:LinkSplit(link)
+  local itemString = string.match(link, "item:([%-?%d:]+)")
+  local itemSplit = {}
+
+  -- Split data into a table
+  for _, v in ipairs({strsplit(":", itemString)}) do
+    if v == "" then
+      itemSplit[#itemSplit + 1] = 0
+    else
+      itemSplit[#itemSplit + 1] = tonumber(v)
+    end
+  end
+
+  return itemSplit
+end
+
+function PersoLib:GetNameFromTraitID(traitID,artifactID)
+	local name=""
+	if ExtraData.NetherlightData[1][traitID] then --crucible trait
+		name = ExtraData.NetherlightData[1][traitID]
+	elseif  ExtraData.NetherlightData[2][traitID] then--artifact trait
+		name = ExtraData.NetherlightData[2][traitID]
+	elseif ExtraData.NetherlightData[3][artifactID][traitID] then
+		name = ExtraData.NetherlightData[3][artifactID][traitID]
+	else
+		name = ""
+	end
+	
+	return name
+end
+
+function PersoLib:DumpTable(tbl, indent)
+  if not indent then indent = 0 end
+  for k, v in pairs(tbl) do
+    formatting = string.rep("  ", indent) .. k .. ": "
+    if type(v) == "table" then
+      print(formatting)
+      PersoLib:DumpTable(v, indent+1)
+    elseif type(v) == 'boolean' then
+      print(formatting .. tostring(v))      
+    else
+      print(formatting .. v)
+    end
+  end
 end

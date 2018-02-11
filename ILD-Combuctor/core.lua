@@ -10,15 +10,12 @@ end
 
 function module:OnInitialized()
 	Combuctor=LibStub("AceAddon-3.0"):GetAddon("Combuctor",true)
-	_G.Combuctor=Combuctor
 end
 function module:OnEnabled()
-	self:SecureHook(Combuctor.ItemFrame,"Update","Display")
+  self:SecureHook(Combuctor.ItemSlot,"Update","Display")
 end
-function module:Display(frame,bag,slot)
-	local index = ToIndex(bag, slot)
-	local item = frame.items[index]
-	if not item then return end --filtered bag
-	local quality,itemlink,class=self:GetInfo(nil,bag,slot)
-	return self:DrawItem(item,quality,itemlink,class)
+function module:Display(frame)
+  if not frame then return end --Cant update
+  local icon, count, locked, quality, readable, lootable, itemlink = frame:GetInfo()
+	self:DrawItem(frame,quality,itemlink)
 end

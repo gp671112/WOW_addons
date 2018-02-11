@@ -108,7 +108,7 @@ local function AppendFriendlyNpcMatrix(cols, rows, hasPet, group, show)
 	end
 
 	local reserve = 1
-	if group == addon:GetGroupStats() and not show then
+	if group == addon.group and not show then
 		reserve = 0
 	end
 
@@ -153,7 +153,7 @@ end
 
 local function UpdateLayout()
 	local horiz, spacing = addon:GetLayoutData()
-	local group = addon:GetGroupStats()
+	local group = addon.group
 	local anchor = anchors[group] or anchors.solo
 
 	frame:ClearAllPoints()
@@ -208,14 +208,14 @@ end)
 
 addon:RegisterOptionCallback("showRaidPets", function(value)
 	frame:SetAttribute("showRaidPets", value)
-	if addon:GetGroupStats() == "raid" then
+	if addon.group == "raid" then
 		UpdateLayout()
 	end
 end)
 
 addon:RegisterOptionCallback("showPartyPets", function(value)
 	frame:SetAttribute("showPartyPets", value)
-	if addon:GetGroupStats() == "party" then
+	if addon.group == "party" then
 		UpdateLayout()
 	end
 end)

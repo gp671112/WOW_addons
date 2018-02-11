@@ -1,10 +1,11 @@
-## Interface: 70200
+## Interface: 70300
 ## Title: SimPermut
 ## Notes: Constructs SimC export strings with permutations for items in inventory. Based on SimulationCraft's Addon. 
 ## Title-zhTW: |cFF0080FF[裝備比較]|rSimPermut
 ## Notes-zhTW: 選擇背包中的裝備生成與匯出Simc代碼，幫助你使用Simc軟體模擬比較。
 ## Author: Kutikuti
-## Version: 1.9.2
+## Version: 1.14.14
+## SavedVariablesPerCharacter: SimPermutVars
 ## OptionalDependencies: Ace3
 
 libs\LibStub\LibStub.lua

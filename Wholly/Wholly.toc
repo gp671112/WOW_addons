@@ -1,11 +1,8 @@
-## Interface: 70100
+## Interface: 70300
 ## Title: Wholly
 ## Author: Scott M Harrison
 ## Notes: Shows quest database and map pins
-## Title-zhTW: |cff00FFFF[任務]|r 資料庫-任務圖示
-## Notes-zhTW: Wholly |n顯示任務資料和地圖上的任務圖示。|n|cffffd200使用方法：|r世界地圖左上角的按鈕可以切換顯示/隱藏任務圖示。|n從Esc>介面>插件>Wholly，進行設定。|n輸入 /任務記錄，或 /wholly 顯示任務資料庫視窗。
-## DefaultState: disabled
-## Version: 060
+## Version: 065
 ## Dependencies: Grail
 ## OptionalDeps: LibStub, LibDataBroker, TomTom, Gatherer, OmegaMap, Carbonite
 ## SavedVariablesPerCharacter: WhollyDatabase

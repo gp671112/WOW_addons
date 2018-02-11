@@ -1,10 +1,10 @@
--- $Id: Atlas_Transportation-enUS.lua 71 2017-01-24 14:23:35Z arith $
+-- $Id: Atlas_Transportation-enUS.lua 94 2018-01-19 15:31:54Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail.com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail.com>
 
 	This file is part of Atlas.
 

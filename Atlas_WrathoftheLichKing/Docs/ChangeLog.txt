@@ -1,12 +1,16 @@
-$Id: ChangeLog.txt 34 2017-08-30 14:25:38Z arith $
+$Id: ChangeLog.txt 36 2018-01-21 15:43:43Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 ==============
 = Change Log =
 ==============
+
+v1.43.01 (Jan. 30, 2018)
+------------------------
+- Update Ulduar info as it's now only in Normal mode and TimeWalking mode to reflect 7.3.5 changes
 
 v1.43.00 (Aug. 30, 2017)
 ------------------------

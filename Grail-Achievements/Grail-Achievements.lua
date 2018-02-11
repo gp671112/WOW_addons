@@ -33,6 +33,10 @@ local Grail_Achievements_File_Version = 010
 if Grail.achievementsVersionNumber < Grail_Achievements_File_Version then
 	Grail.achievementsVersionNumber = Grail_Achievements_File_Version
 
+local originalMem = gcinfo()
+local debugStartTime = debugprofilestop()
+local supportedFactions = {'Alliance', 'Horde'}
+
 --	These are the achievements organized by zone for completing the "loremaster" achievements (basically completing a specific number of quests in each zone).
 Grail.loremasterAchievements = {
 	['Alliance'] = {
@@ -6856,8 +6860,10 @@ G[37422]={509674}
 end
 
 if Grail.inLegion then
-Grail.loremasterAchievements['Alliance'][8] = { 510617, 510698, 510763, 510059, 510790, }
-Grail.loremasterAchievements['Horde'][8] = { 510617, 510698, 510763, 510059, 510790, }
+Grail.loremasterAchievements['Alliance'][8] = { 511124, 510698, 510763, 510059, 510790, }
+Grail.loremasterAchievements['Horde'][8] = { 511124, 510698, 510763, 510059, 510790, }
+Grail.extraAchievements['Alliance'][8] = { 510617, 510756, }
+Grail.extraAchievements['Horde'][8] = { 510617, 510756, }
 G[37449]={510763}	-- needed for Behind Legion Lines part of Azsuna Matata
 G[37470]={510763}	-- needed for Azsuna vs Azshara part of Azsuna Matata
 G[37566]={510763}	-- needed for Against the Giants part of Azsuna Matata
@@ -6873,6 +6879,7 @@ G[38753]={510698}	-- needed for Into the Nightmare part of That's 'Val'sharah Fo
 G[38818]={510790}	-- needed for The Trial of Valor of Vrykul Story, Bro
 G[38882]={510790}	-- needed for Secrets of the Shieldmaidens of Vrykul Story, Bro
 G[38909]={510059}	-- needed for Riverbend of Ain't No Mountain High Enough
+G[39122]={510790}	-- needed for Secrets of the Shieldmaidens of Vrykul Story, Bro
 G[39387]={510059}	-- needed for The Skyhorn Tribe of Ain't No Mountain High Enough
 G[39426]={510059}	-- needed for The Bloodtotem Tribe of Ain't No Mountain High Enough
 G[39487]={510059}	-- needed for The Rivermane Tribe of Ain't No Mountain High Enough
@@ -6883,14 +6890,52 @@ G[39800]={510790}	-- needed for Greymane's Gambit part of Vrykul Story, Bro
 G[39801]={510790}	-- needed for Greymane's Gambit of Vrykul Story, Bro
 G[39855]={510790}	-- needed for To Helheim and Back of Vrykul Story, Bro
 G[39992]={510059}	-- needed for Huln's War of Ain't No Mountain High Enough
+G[40005]={510790}	-- needed for The Champion of Stormheim of Vrykul Story, Bro
 G[40009]={510617}	-- needed for Nightfall of Nightfallen But Not Forgotten
+G[40321]={511124}	-- needed for Tidying Tel'anor of Good Suramaritan
+G[40336]={511124}	-- needed for Jandvik's Jarl of Good Suramaritan
+G[40412]={511124}	-- needed for Breaking the Lightbreaker of Good Suramaritan
 G[40573]={510698}	-- needed for Archdruid of the Vale part of That's 'Val'sharah Folks!
 G[40794]={510763}	-- needed for Mak'rana and the Fate of the Queen's Reprisal part of Azsuna Matata
+G[40956]={510617}	-- needed for Chief Telemancer Oculeth of Nightfallen But Not Forgotten
+G[40972]={511124}	-- needed for Moon Guard Stronghold of Good Suramaritan
+G[41028]={510756}	-- needed for Anora Hollow of Leyline Bling
+G[41138]={510617}	-- needed for Feeding Shal'Aran of Nightfallen But Not Forgotten
+G[41494]={511124}	-- needed for Eminent Grow-main of Good Suramaritan
 G[41760]={510617}	-- needed for Arcanist Kel'danath of Nightfallen But Not Forgotten
 G[42147]={510617}	-- needed for Masquerade of Nightfallen But Not Forgotten
+G[42230]={510617,511124}	-- needed for The Light Below of Nightfallen But Not Forgotten and An Ancient Gift of Good Suramaritan
 G[42244]={510763}	-- needed for Mak'rana and the Fate of the Queen's Reprisal part of Azsuna Matata
+G[42488]={511124}	-- needed for The Waning Crescent of Good Suramaritan
 G[42756]={510763}	-- needed for Defending Azurewing Repose part of Azsuna Matata
+G[43318]={511124}	-- needed for Statecraft of Good Suramaritan
+G[43568]={511124}	-- needed for A Change of Seasons of Good Suramaritan
+G[43587]={510756}	-- needed for Elor'shan of Leyline Bling
+G[43588]={510756}	-- needed for Kel'balor of Leyline Bling
+G[43590]={510756}	-- needed for Moonwhisper Gulch of Leyline Bling
+G[43591]={510756}	-- needed for Moon Guard of Leyline Bling
+G[43592]={510756}	-- needed for Falanaar North of Leyline Bling
+G[43593]={510756}	-- needed for Falanaar South of Leyline Bling
+G[43594]={510756}	-- needed for Halls of the Eclipse of Leyline Bling
+G[44052]={511124}	-- needed for Blood and Wine of Good Suramaritan
 end
+
+if Grail.exists73 then
+Grail.loremasterAchievements['Alliance'][9] = {  }
+Grail.loremasterAchievements['Horde'][9] = {  }
+Grail.extraAchievements['Alliance'][9] = {  }
+Grail.extraAchievements['Horde'][9] = {  }
+-- G[47182]={}			-- Needed for Fel Heart of Argus (Locked and Loaded)
+--G[47287]={}			-- needed for Light's Judgment
+-- G[48929]={}			-- needed for The Assault Begins
+-- G[47994]={}			-- needed for Lightforged Warframe
+-- G[48107]={}				-- needed for Dark Awakenings, Shroud...
+-- G[47220]={}			-- needed for War of Light and Shadon, You Are Now Prepared!
+-- G[49224]={}			-- needed for achievement Now You're Cooking With Netherlight
+end
+
+Grail.timings.AchievementsInitialSetup = debugprofilestop() - debugStartTime
+debugStartTime = debugprofilestop()
 
 Grail.questsLoremaster = {}
 
@@ -6898,7 +6943,7 @@ Grail.questsLoremaster = {}
 
 -- Now create Grail.achievements by combining Grail.loremasterAchievements and Grail.extraAchievements
 Grail.achievements = {}
-for _, faction in pairs({'Alliance','Horde'}) do
+for _, faction in pairs(supportedFactions) do
 	Grail.achievements[faction] = {}
 	for index, table in pairs(Grail.loremasterAchievements[faction]) do
 		Grail.achievements[faction][index] = Grail:_TableAppend({}, table)
@@ -6908,7 +6953,9 @@ for _, faction in pairs({'Alliance','Horde'}) do
 	end
 end
 
-local debugStartTime = debugprofilestop()
+Grail.timings.AchievementsFactionCreation = debugprofilestop() - debugStartTime
+debugStartTime = debugprofilestop()
+
 for questId, achs in pairs(G) do
 	if achs ~= nil then
 		-- Add this quest to its achievements
@@ -6937,7 +6984,7 @@ Grail.timings.AchievementsInternalConversion = debugprofilestop() - debugStartTi
 -- that are required and add all the quests that are prerequisites for those.
 debugStartTime = debugprofilestop()
 local achievementsDone = {}
-local achievementsToZoneMapping = { [506300] = 806, [506301] = 807, [506534] = 806, [506535] = 857, [506536] = 857, [506537] = 809, [506538] = 809, [506539] = 810, [506540] = 858, [508671] = 941, [508845] = 947, [508919] = 946, [508920] = 946, [508923] = 949, [508924] = 949, [508925] = 948, [508926] = 948, [508927] = 950, [508928] = 950, [509528] = 947, [509529] = 941, [509602] = 947, [509605] = 948, [509606] = 941, [509607] = 949, [509615] = 950, [510617] = 1033, [509618] = 19, [509674] = 946, [510698] = 1018, [510763] = 1015, [510059] = 1024, [510790] = 1017, }
+local achievementsToZoneMapping = { [506300] = 806, [506301] = 807, [506534] = 806, [506535] = 857, [506536] = 857, [506537] = 809, [506538] = 809, [506539] = 810, [506540] = 858, [508671] = 941, [508845] = 947, [508919] = 946, [508920] = 946, [508923] = 949, [508924] = 949, [508925] = 948, [508926] = 948, [508927] = 950, [508928] = 950, [509528] = 947, [509529] = 941, [509602] = 947, [509605] = 948, [509606] = 941, [509607] = 949, [509615] = 950, [510617] = 1033, [509618] = 19, [509674] = 946, [510698] = 1018, [510763] = 1015, [510059] = 1024, [510756] = 1033, [510790] = 1017, [511124] = 1033, }
 local expansions = { 6 }
 if release >= 18505 then
 	tinsert(expansions, 7)
@@ -6945,7 +6992,10 @@ end
 if Grail.inLegion then
 	tinsert(expansions, 8)
 end
-for _, faction in pairs({'Alliance', 'Horde'}) do
+if Grail.exists73 then
+	tinsert(expansions, 9)
+end
+for _, faction in pairs(supportedFactions) do
 	for _, expansion in pairs(expansions) do
 		for _, achievement in pairs(Grail.loremasterAchievements[faction][expansion]) do
 			if not tContains(achievementsDone, achievement) then
@@ -6961,7 +7011,7 @@ for _, faction in pairs({'Alliance', 'Horde'}) do
 					end
 				end
 				Grail.indexedQuests[achievement] = newTable
-				Grail.loremasterQuests[achievementsToZoneMapping[achievement]] = newTable
+				Grail.loremasterQuests[achievementsToZoneMapping[achievement]] = Grail:_SetAppend(newTable, Grail.loremasterQuests[achievementsToZoneMapping[achievement]])
 				tinsert(achievementsDone, achievement)
 			end
 		end
@@ -6970,5 +7020,6 @@ end
 wipe(achievementsDone)
 achievementsDone = nil
 Grail.timings.AchievementsPandariaLoremaster = debugprofilestop() - debugStartTime
+Grail.memoryUsage.Achievements = gcinfo() - originalMem
 
 end

@@ -1,12 +1,12 @@
-## Interface: 70200
+## Interface: 70300
 ## Title: OrderHallCommander
 ## Notes: Sending all follower to missions with just one click and more
 ## Notes-zhCN: 發送所有的追隨者與點擊多任務
 ## Title-zhTW: |cff00FFFF[任務]|r 職業大廳指揮官
 ## Notes-zhTW: OrderHallCommander |n自動幫你挑選出最佳的隊伍組合，讓你可以輕鬆的一鍵派出職業大廳追隨者任務，還有更多功能。
 ## Author: Alar of Runetotem
-## Version: 1.4.0 70200
-## X-Revision: 02025bb
+## Version: 1.5.13 70300
+## X-Revision: cd8ebf6
 ## eMail: alar@aspide.it
 ## URL: http://wow.aspide.it
 ## OptionalDeps: Ace3,LibInit
@@ -21,9 +21,10 @@
 ## X-Category: Garrison
 ## X-License: GPL v3
 ## X-eMail: alar@aspide.it
-## X-Date: 2017-07-10T1:32:08Z
+## X-Date: 2017-12-11T20:00:46Z
 ## X-Embeds: LibInit
 embeds.xml
+forcelocale.lua
 localization.lua
 OrderHallCommander.xml
 core.lua
@@ -33,6 +34,7 @@ cache.lua
 followerpage.lua
 matchmaker.lua
 missionlist.lua
+tutorials.lua
 missionpage.lua
 widgets.xml
 RelNotes.lua

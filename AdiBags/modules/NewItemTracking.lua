@@ -101,7 +101,7 @@ end
 function mod:OnBagFrameCreated(bag)
 	if bag.isBank then return end
 	self.container = bag:GetFrame()
-	self.button = self.container:CreateModuleButton("N", 10, ResetButton_OnClick, {
+	self.button = self.container:CreateModuleButton("新", 10, ResetButton_OnClick, {
 		L["Reset new items"],
 		L["Click to reset item status."],
 		L["Right-click to configure."]

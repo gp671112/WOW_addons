@@ -5,7 +5,7 @@ local L = DBM_GUI_Translations
 L.MainFrame	= "Deadly Boss Mods"
 
 L.TranslationByPrefix		= "翻譯:"
-L.TranslationBy 				= "Imbav@聖光之願&三皈依@世界之樹"
+L.TranslationBy 				= "Imbav@聖光之願 & 三皈依@暗影之月"
 L.Website					= "拜訪討論/支援論壇:|cFF73C2FBwww.deadlybossmods.com|r 請在推特上關注@deadlybossmods或@MysticalOS"
 L.WebsiteButton				= "論壇"
 
@@ -86,7 +86,7 @@ L.Warn_FontType				= "選擇字型"
 L.Warn_FontStyle			= "字型風格"
 L.Warn_FontShadow			= "陰影"
 L.Warn_FontSize				= "字型大小:%d"
-L.Warn_Duration				= "警告持續時間:%d秒"
+L.Warn_Duration				= "警告持續時間：%0.1f秒"
 L.None						= "無"
 L.Outline					= "描邊"
 L.ThickOutline				= "厚描邊"
@@ -103,11 +103,13 @@ L.CombatMessages			= "戰鬥訊息選項"
 L.ShowEngageMessage 		= "在聊天視窗顯示開戰訊息"
 L.ShowDefeatMessage 		= "在聊天視窗顯示戰勝/滅團訊息"
 L.ShowGuildMessages 		= "在聊天視窗顯示公會的開戰/戰勝/滅團的訊息"
+L.ShowGuildMessagesPlus		= "同時也顯示公會史詩鑰石的開戰/戰勝/滅團的訊息(需要團隊選項)"
 L.WhisperMessages			= "密語訊息選項"
 L.AutoRespond 				= "啟用戰鬥中自動密語回覆"
 L.EnableStatus 				= "回覆'status'的密語"
 L.WhisperStats 				= "在密語回應中加入戰勝/滅團狀態"
 L.DisableStatusWhisper 		= "停用整個團隊的狀態密語(需要為團隊領隊)。只適用於普通/英雄/傳奇難度與挑戰模式/傳奇地城"
+L.DisableGuildStatus 		= "停用整個隊伍的公會進度訊息發佈(需要為隊伍領隊)。"
 
 -- Tab: Barsetup
 L.BarSetup   				= "計時條樣式"
@@ -193,22 +195,6 @@ L.SpecialWarnSound3			= "設定作用於極度重要的特別警告音效"
 L.SpecialWarnSound4			= "設定作用於快逃啊小女孩的特別警告音效"
 L.SpecialWarnSound5			= "設定註記中包含你名字的特別警告音效"
 
--- Tab: Heads Up Display Frame
-L.Panel_HUD					= "抬頭顯示設置(HUD)"
-L.Area_HUDOptions			= "HUD 選項"
-L.HUDColorOverride			= "選擇通用HUD顏色"
-L.HUDSizeOverride			= "選擇通用HUD大小"
-L.HUDAlphaOverride			= "選擇通用HUD透明度"
-
-L.HUDTextureOverride		= "選擇通用HUD材質 (這不套用到'圖示'材質選項)"
-L.HUDColorSelect			= "HUD顏色 %d"
-L.HUDTextureSelect1			= "選擇主要HUD材質"
-L.HUDTextureSelect2			= "選擇次要HUD材質"
-L.HUDTextureSelect3			= "選擇第三HUD材質"
-L.HUDTextureSelect4			= "選擇'跑向'HUD材質"
-L.HUDSizeSlider				= "圓形半徑:%0.1f"
-L.HUDAlphaSlider			= "透明度:%0.1f"
-
 -- Tab: Spoken Alerts Frame
 L.Panel_SpokenAlerts		= "語音警告"
 L.Area_VoiceSelection		= "語音選擇（用鼠標滾輪滾動選單）"
@@ -223,20 +209,20 @@ L.SWFNever					= "絕不"
 L.SWFDefaultOnly			= "當特別警告使用預設音效。(允許自訂音效繼續撥放)"
 L.SWFAll					= "當特別警告使用所有音效"
 L.SpecWarn_AlwaysVoice		= "總是播放所有語音警告(覆蓋所有特定首領選項)"
---TODO, maybe add URLS right to GUI panel on where to acquire 3rd party voice packs?
 
--- Tab: HealthFrame
-L.Panel_HPFrame				= "血量框架"
-L.Area_HPFrame				= "血量框架選項"
-L.HP_Enabled				= "總是顯示血量框架 (覆蓋特定首領選項)"
-L.HP_GrowUpwards			= "血量框架向上延伸"
-L.HP_ShowDemo				= "顯示血量框架"
-L.BarWidth					= "寬度:%d"
+--TODO, maybe add URLS right to GUI panel on where to acquire 3rd party voice packs?
+L.Area_GetVEM				= "獲得VEM語音包"
+L.VEMDownload				= "|cFF73C2FBhttps://wow.curseforge.com/projects/dbm-voicepack-vem|r"
+L.Area_BrowseOtherVP		= "在Curse上瀏覽其他語音包"
+L.BrowseOtherVPs			= "|cFF73C2FBhttps://wow.curseforge.com/search?search=dbm+voice|r"
+L.Area_BrowseOtherCT		= "在Curse上瀏覽倒數語音包"
+L.BrowseOtherCTs			= "|cFF73C2FBhttps://wow.curseforge.com/search?search=dbm+count+pack|r"
 
 -- Tab: Global Filter
 L.Panel_SpamFilter			= "DBM全局禁用及過濾"
 L.Area_SpamFilter_Outgoing	= "DBM全局禁用及過濾選項"
-L.SpamBlockNoShowAnnounce	= "不顯示提示或播放警告音效"
+L.SpamBlockNoShowAnnounce	= "『任何』一般警告都不顯示文字或播放音效"
+L.SpamBlockNoShowTgtAnnounce= "『目標』的一般警告都不顯示文字或播放音效 (上面的選項會覆蓋此項)"
 L.SpamBlockNoSpecWarn		= "不顯示特別警告或播放特別警告音效"
 L.SpamBlockNoShowTimers		= "不顯示計時器"
 L.SpamBlockNoShowUTimers	= "不顯示玩家送出的計時器(自訂/拉怪/休息)"
@@ -245,13 +231,12 @@ L.SpamBlockNoRangeFrame		= "不顯示距離框架"
 L.SpamBlockNoInfoFrame		= "不顯示訊息框架"
 L.SpamBlockNoHudMap			= "不要顯示HudMap"
 L.SpamBlockNoNameplate		= "不要顯示名條光環"
-L.SpamBlockNoHealthFrame	= "不顯示血量框架"
 L.SpamBlockNoCountdowns		= "不播放倒數音效"
 L.SpamBlockNoYells			= "不送出大喊至頻道"
 L.SpamBlockNoNoteSync		= "不接受註記分享"
 L.SpamBlockNoReminders		= "不顯示任何登入，建議或更新消息（不推薦）"
 
-L.Area_Restore				= "DBM復原選項(當模組完成後DBM將恢復以前的使用者狀態)"
+L.Area_Restore				= "DBM還原選項(DBM是否還原至使用者過去狀態)"
 L.SpamBlockNoIconRestore	= "不在戰鬥結束後記住和還原團隊圖示狀態"
 L.SpamBlockNoRangeRestore	= "不因模組預設值還原距離框架的狀態"
 
@@ -259,7 +244,6 @@ L.SpamBlockNoRangeRestore	= "不因模組預設值還原距離框架的狀態"
 L.Area_SpamFilter			= "垃圾過濾選項"
 L.DontShowFarWarnings		= "不發送距離過遠的事件提示/計時器"
 L.StripServerName			= "隱藏警告和計時器的玩家伺服器名稱"
-L.SpamBlockBossWhispers		= "當戰鬥時過濾 &lt;DBM&gt; 密語警告"
 L.BlockVersionUpdateNotice	= "在聊天頻道顯示較高頻率的過期通知而非彈出視窗。"
 
 L.Area_SpecFilter			= "專精過濾選項"
@@ -286,7 +270,6 @@ L.HideGuildChallengeUpdates	= "首領戰鬥時隱藏公會挑戰完成提示"
 L.HideQuestTooltips			= "首領戰鬥時隱藏任務目標提示"
 L.HideTooltips				= "首領戰鬥時完全地隱藏滑鼠提示"
 L.DisableSFX				= "首領戰鬥時禁用音效頻道"
-L.SpamBlockSayYell			= "從聊天頻道隱藏聊天泡泡提示"
 L.DisableCinematics			= "禁用遊戲中的過場動畫"
 L.AfterFirst				= "在每次動畫播放一次之後"
 L.Always					= ALWAYS
@@ -358,4 +341,4 @@ L.SelectModProfileCopyNote	= "只複製註記設定"
 L.SelectModProfileDelete	= "刪除模組設定"
 
 -- Misc
-L.FontHeight	= 18
+L.FontHeight	= 16

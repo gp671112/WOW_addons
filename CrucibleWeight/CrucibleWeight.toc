@@ -1,0 +1,10 @@
+## Interface: 70300
+## Author: Alea
+## Title: CrucibleWeight
+## Version: 18
+## Notes: 
+## Title-zhTW: |cFFFF8C00[界面]|rCrucibleWeight
+## Notes-zhTW: 虛空熔爐配點介面，告訴你什麼特長比較優秀。
+## SavedVariables: CrucibleWeightDB
+
+core.lua

@@ -1,12 +1,14 @@
-lightweight tag f345601f66d2347d0a7a8b52fa0c647bdbb50055 1.5
+tag 97d04e8a632498d62d934b62438044c06c174552 1.6.2
 Author:	legowxelab2z8 <legowxelab2z8@Gmail.com>
-Date:	Fri Mar 31 19:34:44 2017 -0700
+Date:	Wed Sep 6 15:09:21 2017 -0700
 
-commit 14163de034282e6d261c92c9633745b9a388ca26
+ItemTables.lua updated for WoW Patch 7.3
+
+commit 95f2ce3cef30691357299f3b2c7a4712db2779f8
 Author: legowxelab2z8 <legowxelab2z8@Gmail.com>
-Date:   Fri Mar 31 19:30:59 2017 -0700
+Date:   Wed Sep 6 15:08:50 2017 -0700
 
-    Localization change
+    .pkgmeta to ignore devtools.lua
     
-    Localization trick Uses GetMapNameByID(1021) to get the name of Broken Shore.
+    DevToos.lua was renamed to DevTools.lua but .pkgmeta was still ignoring the old name and not the new name.
 

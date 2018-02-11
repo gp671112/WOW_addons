@@ -1,34 +1,47 @@
 ------------------------------------------------------------------------
-## TotalAP v1.4.1 - Recent changes (3 releases)
+## TotalAP v1.5.5 - Recent changes (3 releases)
 ------------------------------------------------------------------------
 
-r24:
+r28:
+	Added the /ap stateicons command, which can be used to toggle the icons that are shown to indicate combat, flight, pet battles, and vehicle status
 	
-	Artifact Research Notes and similar items (catch-up tomes for alts) will now be ignored for players that haven't reached level 110 yet
-
-	Fixed an issue that could prevent the displays from being dragged to the very bottom of the player's interface
-	Fixed an issue where dropping from an instance group could cause the detection of ignored specs to fail temporarily
-	Fixed a minor graphics glitch pertaining to the buttonText, manifesting only when AP items were stored in the bank
-	Fixed the broken /ap reset slash command (caused by the changes made to saved variables handling in r23)
+	Renamed the former /ap icons command to /ap specicons to make it less ambiguous
+	Changed the SpecIcon text to also display the current rank. This can be toggled with the newly-added /ap ranks command
+	Changed the automatic hiding (/ap autohide setting) to be disabled by default, as it turned out confusing for at least some users
+	Relic recommendations are now disabled by default. Some users have (rightfully) lamented their inaccuracy, and as they're not useful to everbody they are now opt-in (Type /ap relics to enable)
 	
-
-r23:
-	Added support for artifact power items that are stored in the player's bank (experimental). They will be cached whenever the bank tab is opened, and the respective progress bars/tooltip lines can be disabled with the /ap scanbank command
-	Added quest reward from the "Pillars of Creation" (Tomb of Sargeras) quest line to the addon's database. Somehow this wasn't added with all the other items from 7.2.5
-	
-	Saved variables are now managed differently. They should be migrated to the new format automatically; if something unexpectedly goes wrong, simply resetting them should fix it
-	The progress bar tooltip will now indicate when a tier 1 artifact can be updated to its maximum rank. Additionally, the respective miniBar will no longer be displayed in those cases
-	
-	Fixed an issue where glow effects for the specIcons would not be applied correctly for tier 1 artifacts when too many traits were available
+	Fixed a graphics glitch that caused the SpecIcon text to be aligned improperly at times. It still can seem a bit wonky, but that may just be due to UI scaling...
+	Fixed an issue that could sometimes cause the ActionButton to not update with the correct item (causing it to display the wrong item and become unusable) if the server didn't return valid data when it was queried
+	Fixed the /ap reset command that was broken by the GUI rework. It should once again reset the display's position and restore all settings to their default values
+	Fixed an issue that would lead tier 1 artifacts (e.g., from newly-leveled characters) to display the wrong number of available traits until they reached artifact tier 2 at 35 purchased traits
+	Fixed a glitch that could occur when vehicles were not exited properly. Most notably, this should fix the unexpected behaviour manifesting when using the Lightforged Warframe on Argus
 	
 
-r22:
-	Added option to toggle between using the international and localised number formats for each locale (experimental). It is accessible via slash command: /ap numberformat
+r27:
+	Added relic recommendations to tooltip (based on icy-veins.com - don't take them for gospel). These can be toggled with the newly-introduced /ap relics slash command
+
+	The item tooltip now also displays the percentage that an an artifact power item will add to the currently equipped artifact (experimental)
 	
-	Updated detection for maxed artifact weapons (was disabled after tier 2 became available, but now applies to only tier 1 artifacts). They now show as "maxed" once again
+	Fixed missing space between ActionButton and its text - it seems to have gone AWOL, but now it's back
+	Fixed item tooltip to no longer display that "0 items" are in the player's inventory when there aren't any. It's true, but not very useful...
+	Fixed /ap autohide command, which was broken by the recently implemented anti-taint measures. The display should once again hide if this is enabled
+	Fixed a glitch with the vehicle StateIcon that resulted in it showing and hiding at seemingly random times
 	
-	Fixed an issue that could cause high numbers of artifact power (> 2.14b) to break the addon's output under certain circumstances
-	Fixed a bug that would cause tier 1 artifacts (those that haven't yet been upgraded via the Dalaran Council's quest chain) to display inaccurate values beyond the final, 54th trait
-	Fixed a graphics glitch that caused the buttonText to collide with the bar display when using locales with a larger-than-normal default font size (koKR, zhCN, zhTW mainly) - this workaround is not ideal, and somewhat experimental
+
+r26:
+	Added partial translation for the Korean (koKR) locale - Since this is still incomplete (~58% done), any help is welcome!
 	
+	Updated database to include 7.3 AP items
+	Updated Artifact Knowledge tooltip to account for the global AK progress added in 7.3
+	Removed obsolete Artifact Research status info from progress bar tooltips
+	Removed highlighting of Artifact Research Notes (will no longer be displayed prominently, as they are now unusable/grey vendor trash)
+	Removed obscure "artifact power" items from the DB that did nothing but crash the scanning algorithm (Cookie's Old Stew... really, Blizzard!?)
+	Removed obsolete artifact power items from the DB that were removed from the game some time after 7.3 (via hotfix?)
 	
+	Fixed number format for the Russian (ruRU) locale
+	Fixed number format for the Korean (koKR) locale
+	Fixed number format for the Spanish (esES and esMX) locales
+	Added some workarounds that should (hopefully) prevent the remaining taint issues
+	Added a workaround for the invalid artifact tier issues (this is currently being investigated further)
+	
+

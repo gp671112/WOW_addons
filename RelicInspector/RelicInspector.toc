@@ -1,11 +1,12 @@
-## Interface: 70200
+## Interface: 70300
 ## Title: RelicInspector
 ## Notes: Displays artifact weapon relics in the tooltip
 ## Title-zhTW: |cffB973FF[裝備]|r 聖物觀察
 ## Notes-zhTW: RelicInspector |n在聖物和神兵武器的滑鼠提示中顯示更完整的聖物資訊。|n不用切換專精就可以看到聖物提供給其他專精使用時的效果。|n|cffffd200使用方法：|r從Esc>介面>插件>裝備-聖物，進行設定。
 ## Author: Thoralie
-## Version: 1.11.11
+## Version: 2.0.6
 ## SavedVariables: RelicInspectorDB
+## SavedVariablesPerCharacter: RelicInspectorCharDB
 
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml

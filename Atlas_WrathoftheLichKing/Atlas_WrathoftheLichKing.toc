@@ -17,9 +17,9 @@
 # ## Notes: Wrath of the Lich King Dungeon Maps
 # ## Notes-zhTW: 巫妖王之怒副本地圖模組
 #@end-debug@
-## Version: v1.43.00
+## Version: v1.43.01
 ## Author: arith, Dynaletik, dubcat
-## X-Date: 2017-08-30T14:25:38Z
+## X-Date: 2018-01-21T15:43:43Z
 ## X-Credits: Dan Gilbert, Lothaer
 ## X-Email: atlas.addon at gmail dot com
 ## X-Website: http://www.atlasmod.com

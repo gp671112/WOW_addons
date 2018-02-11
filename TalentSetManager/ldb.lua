@@ -136,7 +136,8 @@ local function updateList()
 end
 
 function TSMLDBListButton_OnClick(f)
- PlaySound("igMainMenuOptionCheckBoxOn")
+ --PlaySound("igMainMenuOptionCheckBoxOn")
+ PlaySound(856)
 
  if not f.data then return end
 

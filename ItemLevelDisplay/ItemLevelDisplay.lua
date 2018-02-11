@@ -740,7 +740,7 @@ function addon:OnInitialized()
 	self:AddSelect('BAGSCORNER',"tr",bagPositionScheme,L['Level text aligned to'],L['Position']).width="full"
 	self:AddSelect('BAGSFONT',"Fritz Quadrata TT",LSM:HashTable('font'),L["Choose a font"]).dialogControl="LSM30_Font"
 	self:AddRange('BAGSFONTSIZE',11,9,15,L["Choose a font size"])
-	self:AddSelect('BAGSFONTOUTLINE',outlineScheme[1],outlineScheme,L["Choose a shadow"])
+	self:AddSelect('BAGSFONTOUTLINE',outlineScheme["OUTLINE"],outlineScheme,L["Choose a shadow"])
 	local default, classes=classList(self)
 	self:AddMultiSelect("CLASSES",default,classes,L['Only show iLevel for selected classes'])
 	self:AddOpenCmd('showinfo',"cmdInfo",L["Debug info"],L["Show raw item info.Please post the screenshot to Curse Forum"]).width="full"

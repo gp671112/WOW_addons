@@ -19,6 +19,7 @@ function module:Display(frame)
 --[===[@debug@
 		if not rc then
 			print(message,i)
+		  return
 		end
 --@end-debug@]===]
 	else

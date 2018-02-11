@@ -21,131 +21,6 @@ function NPC:OnEvent(event, ...)
 end
 
 ----------------------------------
--- Events
-----------------------------------
-function NPC:GOSSIP_SHOW(...)
-	self:UpdateTalkingHead(GetUnitName('npc'), GetGossipText(), 'GossipGossip')
-	if self:IsGossipAvailable() then
-		self:PlayIntro('GOSSIP_SHOW')
-	end
-end
-
-function NPC:GOSSIP_CLOSED(...)
-	CloseGossip()
-	self:PlayOutro()
-	if self:IsGossipOnTheFly() and self.lastEvent == 'GOSSIP_SHOW' then
-		return self:OnEvent('GOSSIP_ONTHEFLY')
-	end
-end
-
-function NPC:GOSSIP_ONTHEFLY(...)
-	self.TalkBox:SetExtraOffset(0)
-	self:PlayIntro('GOSSIP_ONTHEFLY', true)
-	return 'GOSSIP_ONTHEFLY'
-end
-
-function NPC:QUEST_GREETING(...)
-	self:PlayIntro('QUEST_GREETING')
-	self:UpdateTalkingHead(GetUnitName('questnpc') or GetUnitName('npc'), GetGreetingText(), 'AvailableQuest')
-end
-
-function NPC:QUEST_PROGRESS(...) -- special case, doesn't use QuestInfo
-	self:PlayIntro('QUEST_PROGRESS')
-	self:UpdateTalkingHead(GetTitleText(), GetProgressText(), IsQuestCompletable() and 'ActiveQuest' or 'IncompleteQuest')
-	local elements = self.TalkBox.Elements
-	local hasItems = elements:ShowProgress('Stone')
-	elements:UpdateBoundaries()
-	if hasItems then
-		local width, height = elements.Progress:GetSize()
-		-- Extra: 32 padding + 8 offset from talkbox + 8 px bottom offset
-		self.TalkBox:SetExtraOffset((height + 48) * L('elementscale')) 
-		return
-	end
-	self:ResetElements()
-end
-
-function NPC:QUEST_COMPLETE(...)
-	self:PlayIntro('QUEST_COMPLETE')
-	self:UpdateTalkingHead(GetTitleText(), GetRewardText(), 'ActiveQuest')
-	self:AddQuestInfo('QUEST_REWARD')
-end
-
-function NPC:QUEST_ACCEPTED(...)
-	if self:IsGossipOnTheFly() then
-		return self:OnEvent('GOSSIP_ONTHEFLY')
-	end
-end
-
-function NPC:QUEST_FINISHED(...)
-	CloseQuest()
-	self:PlayOutro()
-end
-
-function NPC:QUEST_DETAIL(...)
-	if self:IsQuestAutoAccept(...) then
-		self:PlayOutro()
-		return
-	end
-	self:PlayIntro('QUEST_DETAIL')
-	self:UpdateTalkingHead(GetTitleText(), GetQuestText(), 'AvailableQuest')
-	self:AddQuestInfo('QUEST_DETAIL')
-end
-
-
-function NPC:QUEST_ITEM_UPDATE()
-	local questEvent = (self.lastEvent ~= 'QUEST_ITEM_UPDATE') and self.lastEvent or self.questEvent
-	self.questEvent = questEvent
-
-	if questEvent and self[questEvent] then
-		self[questEvent](self)
-		return questEvent
-	end
-end
-
-function NPC:ITEM_TEXT_BEGIN()
-	local title = ItemTextGetItem()
-	local creator = ItemTextGetCreator()
-	if creator then
-		title = title .. ' (' .. FROM .. ' ' .. creator .. ')'
-	end
-	DoEmote('read')
-	self:RegisterEvent('PLAYER_STARTED_MOVING')
-	self:PlayIntro('ITEM_TEXT_BEGIN')
-	self:UpdateTalkingHead(title, '', 'TrainerGossip', 'player')
-	-- add book model? (75431)
-end
-
-function NPC:ITEM_TEXT_READY()
-	-- special case: pages need to be concatened together before displaying them.
-	-- each new page re-triggers this event, so keep changing page until we run out.
-	self.itemText = (self.itemText or '') .. '\n' .. (ItemTextGetText() or '')
-	if ItemTextHasNextPage() then
-		ItemTextNextPage()
-		return
-	end
-	-- set text directly instead of updating talking head
-	self.TalkBox.TextFrame.Text:SetText(self.itemText)
-end
-
-
-function NPC:ITEM_TEXT_CLOSED()
-	local time = GetTime()
-	if not self.readEmoteCancelled and ( self.lastTextClosed ~= time ) then
-		DoEmote('read')
-	end
-	self.lastTextClosed = time
-	self.readEmoteCancelled = nil
-	self.itemText = nil
-	self:UnregisterEvent('PLAYER_STARTED_MOVING')
-	self:PlayOutro()
-end
-
-function NPC:PLAYER_STARTED_MOVING()
-	self.readEmoteCancelled = true
-	return 'ITEM_TEXT_READY'
-end
-
-----------------------------------
 -- Content handler (gossip & quest)
 ----------------------------------
 function NPC:AddQuestInfo(template)
@@ -169,10 +44,11 @@ end
 
 function NPC:IsGossipAvailable()
 	-- if there is only a non-gossip option, then go to it directly
-	if ( (GetNumGossipAvailableQuests() == 0) and 
+	if 	(GetNumGossipAvailableQuests() == 0) and 
 		(GetNumGossipActiveQuests() == 0) and 
 		(GetNumGossipOptions() == 1) and
-		not ForceGossip() ) then
+		not ForceGossip() then
+		----------------------------
 		local text, gossipType = GetGossipOptions()
 		if ( gossipType ~= 'gossip' ) then
 			SelectGossipOption(1)
@@ -182,12 +58,44 @@ function NPC:IsGossipAvailable()
 	return true
 end
 
-function NPC:IsQuestAutoAccept(...)
-	return ( QuestIsFromAdventureMap() ) or
-		( QuestGetAutoAccept() and QuestIsFromAreaTrigger() ) or
-		( questStartItemID ~= nil and questStartItemID ~= 0 )
+function NPC:IsQuestAutoAccepted(questStartItemID)
+	-- Annoying concept to handle, but auto-accepted quests need to be treated differently 
+	-- from other quests, and different from eachother depending on the source of the quest. 
+	-- Handling here is prone to cause bugs/weird behaviour, update with caution.
+
+	local questID = GetQuestID()
+	local isFromAdventureMap = QuestIsFromAdventureMap()
+	local isFromAreaTrigger = QuestGetAutoAccept() and QuestIsFromAreaTrigger()
+	local isFromItem = (questStartItemID ~= nil and questStartItemID ~= 0)
+
+	-- the quest came from an adventure map, so user has already seen and accepted it.
+	if isFromAdventureMap then
+		return true
+	end
+
+	-- an item pickup by loot caused this quest to show up, don't intrude on the user.
+	if isFromItem then
+		-- add a new quest tracker popup and close the quest dialog
+		if AddAutoQuestPopUp(questID, 'OFFER') then
+			PlayAutoAcceptQuestSound()
+		end
+		CloseQuest()
+		return true
+	end
+
+	-- triggered from entering an area, but also from forced campaign quests.
+	-- let's not intrude on the user; just add a tracker popup.
+	if isFromAreaTrigger then
+		-- add a new quest tracker popup and close the quest dialog
+		if AddAutoQuestPopUp(questID, 'OFFER') then
+			PlayAutoAcceptQuestSound()
+		end
+		CloseQuest()
+		return true
+	end
 end
 
+-- Iterate through gossip options and simulate a click on the best option.
 function NPC:SelectBestOption()
 	local titles = self.TitleButtons.Buttons
 	local numActive = self.TitleButtons.numActive
@@ -201,7 +109,7 @@ function NPC:SelectBestOption()
 			button.Hilite:SetAlpha(1)
 			button:Click()
 			button:OnLeave()
-			PlaySound(PlaySoundKitID and 'igQuestListSelect' or SOUNDKIT.IG_QUEST_LIST_SELECT)
+			PlaySound(SOUNDKIT.IG_QUEST_LIST_SELECT)
 		end
 	end
 end
@@ -215,23 +123,18 @@ function NPC:IsGossipOnTheFly()
 		L('onthefly') and 
 		( self:GetRemainingSpeechTime() > 0 ) and
 		self.lastEvent ~= 'QUEST_DETAIL' and
-		not self:IsQuestAutoAccept()
+		not self:IsQuestAutoAccepted()
 end
 
 function NPC:ResetElements(event)
-	if event == 'QUEST_ACCEPTED' then
-		return -- do not reset elements on this event,
-		--------- because it fires on auto-accepted quests.
-	end
+	-- Do not reset elements on this event,
+	-- because it fires on auto-accepted quests.
+	-- E.g. QUEST_DETAIL is immediately followed by
+	-- QUEST_ACCEPTED, closing the elements frame.
+	if event == 'QUEST_ACCEPTED' then return end
+	
 	self.Inspector:Hide()
-	local elements = self.TalkBox.Elements
-	for _, frame in pairs(elements.Active) do
-		frame:Hide()
-	end
-	wipe(elements.Active)
-	elements:Hide()
-	elements.Content:Hide()
-	elements.Progress:Hide()
+	self.TalkBox.Elements:Reset()
 end
 
 function NPC:UpdateTalkingHead(title, text, npcType, explicitUnit)
@@ -247,11 +150,15 @@ function NPC:UpdateTalkingHead(title, text, npcType, explicitUnit)
 	end
 	local talkBox = self.TalkBox
 	talkBox:SetExtraOffset(0)
-	talkBox.StatusBar:Show()
+	talkBox.ReputationBar:Show()
 	talkBox.MainFrame.Indicator:SetTexture('Interface\\GossipFrame\\' .. npcType .. 'Icon')
 	talkBox.MainFrame.Model:SetUnit(unit)
 	talkBox.NameFrame.Name:SetText(title)
-	talkBox.TextFrame.Text:SetText(text)
+	local textFrame = talkBox.TextFrame
+	textFrame.Text:SetText(text)
+	if textFrame.Text:IsSequence() and L('showprogressbar') and not L('disableprogression') then
+		talkBox.ProgressionBar:Show()
+	end
 end
 
 
@@ -295,7 +202,7 @@ function NPC:ShowItems()
 	local items, hasChoice, hasExtra = inspector.Items
 	local extras, choices = inspector.Extras, inspector.Choices
 	inspector:Show()
-	for id, item in pairs(items) do
+	for id, item in ipairs(items) do
 		local tooltip = inspector.tooltipFramePool:Acquire()
 		local owner = item.type == 'choice' and choices or extras
 		local columnID = ( id % 3 == 0 ) and 3 or ( id % 3 )
@@ -350,12 +257,14 @@ end
 function NPC:UpdateItems()
 	local items = self.Inspector.Items
 	wipe(items)
-	for _, item in pairs(self.TalkBox.Elements.Content.RewardsFrame.Buttons) do
+	-- count item rewards
+	for _, item in ipairs(self.TalkBox.Elements.Content.RewardsFrame.Buttons) do
 		if item:IsVisible() then
 			items[#items + 1] = item
 		end
 	end
-	for _, item in pairs(self.TalkBox.Elements.Progress.Buttons) do
+	-- count necessary quest progress items
+	for _, item in ipairs(self.TalkBox.Elements.Progress.Buttons) do
 		if item:IsVisible() then
 			items[#items + 1] = item
 		end
@@ -369,7 +278,7 @@ end
 ----------------------------------
 function NPC:PlayIntro(event, ignoreFrameFade)
 	local isShown = self:IsVisible()
-	local shouldAnimate = isShown and not L('disableglowani')
+	local shouldAnimate = not isShown and not L('disableglowani')
 	self:Show()
 	if IsOptionFrameOpen() then
 		self:ForceClose()
@@ -377,10 +286,12 @@ function NPC:PlayIntro(event, ignoreFrameFade)
 		self:EnableKeyboard(true)
 		self:FadeIn(nil, shouldAnimate, ignoreFrameFade)
 		local box = self.TalkBox
-		local point = L('boxpoint')
 		local x, y = L('boxoffsetX'), L('boxoffsetY')
 		box:ClearAllPoints()
 		box:SetOffset(box.offsetX or x, box.offsetY or y)
+		if not shouldAnimate and not L('disableglowani') then
+			self.TalkBox.MainFrame.SheenOnly:Play()
+		end
 	end
 end
 
@@ -428,12 +339,25 @@ local inputs = {
 		CloseQuest()
 	end,
 	number = function(self, id)
-		local button = self.TitleButtons.Buttons[id]
-		if button then
-			button.Hilite:SetAlpha(1)
-			button:Click()
-			button:OnLeave()
-			PlaySound(PlaySoundKitID and 'igQuestListSelect' or SOUNDKIT.IG_QUEST_LIST_SELECT)
+		if self.hasItems then
+			local choiceIterator = 0
+			for _, item in ipairs(self.TalkBox.Elements.Content.RewardsFrame.Buttons) do
+				if item:IsVisible() and item.type == 'choice' then
+					choiceIterator = choiceIterator + 1
+					if choiceIterator == id then
+						item:Click()
+						return
+					end
+				end
+			end
+		else
+			local button = self.TitleButtons.Buttons[id]
+			if button then
+				button.Hilite:SetAlpha(1)
+				button:Click()
+				button:OnLeave()
+				PlaySound(SOUNDKIT.IG_QUEST_LIST_SELECT)
+			end
 		end
 	end,
 }
@@ -449,6 +373,7 @@ function NPC:OnKeyDown(button)
 	end
 	local input
 	for action, func in pairs(inputs) do
+		-- run through input handlers and check if button matches a configured key.
 		if L.cfg[action] == button then
 			input = func
 			break
@@ -472,7 +397,7 @@ function NPC:OnKeyUp(button)
 end
 
 ----------------------------------
--- TalkBox button
+-- TalkBox "button"
 ----------------------------------
 function TalkBox:SetOffset(x, y)
 	local point = L('boxpoint')
@@ -489,7 +414,7 @@ function TalkBox:SetOffset(x, y)
 
 	local comp = y
 
-	if ( not isBottom ) or ( anidivisor <= 1 ) then
+	if ( not isBottom ) or ( anidivisor <= 1 ) or ( not self:IsVisible() ) then
 		self:SetPoint(point, UIParent, x, y)
 		return
 	end
@@ -506,6 +431,16 @@ function TalkBox:SetOffset(x, y)
 			self:SetPoint(point, UIParent, x, offset + ( diff / anidivisor ))
 		end
 	end)
+end
+
+-- Temporarily increase the frame offset, in case we want to show extra stuff,
+-- like quest descriptions, quest rewards, items needed for quest progress, etc.
+function TalkBox:SetExtraOffset(newOffset)
+	local currX = ( self.offsetX or L('boxoffsetX') )
+	local currY = ( self.offsetY or L('boxoffsetY') )
+	local allowExtra = L('anidivisor') > 0
+	self.extraY = allowExtra and newOffset or 0
+	self:SetOffset(currX, currY)
 end
 
 function TalkBox:OnEnter()
@@ -539,7 +474,7 @@ function TalkBox:OnDragStop()
 	if ( point == 'Center' ) then
 		point = 'Bottom'
 
-		local cX, cY = self:GetCenter()
+		local cX = self:GetCenter()
 
 		x = ( cX * self:GetScale() ) - ( GetScreenWidth() / 2 ) 
 		y = self:GetBottom()
@@ -613,14 +548,6 @@ end
 
 function TalkBox:Undim()
 	L.UIFrameFadeIn(self, 0.15, self:GetAlpha(), 1)
-end
-
-function TalkBox:SetExtraOffset(newOffset)
-	local currX = ( self.offsetX or L('boxoffsetX') )
-	local currY = ( self.offsetY or L('boxoffsetY') )
-	local allowExtra = L('anidivisor') > 0
-	self.extraY = allowExtra and newOffset or 0
-	self:SetOffset(currX, currY)
 end
 
 ----------------------------------

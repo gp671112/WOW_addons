@@ -66,5 +66,5 @@ elseif locale == "zhTW" then do end
 	La["Sta"] = "耐力"
 	La["Str"] = "力量"
 	La["Vers"] = "臨機"
-	La["Armor"] = "盔甲"
+	La["Armor"] = "護甲"
 end

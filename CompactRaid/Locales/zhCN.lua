@@ -29,6 +29,7 @@ addon.L = {
 	["edit prompt multiline"] = "按Enter使输入的内容立即生效，按Esc取消变更，按Shift+Enter换行输入。",
 	["mana height"] = "法力条高度",
 	["restore defaults text"] = "这将恢复|cff00ff00%s|r到初始状态，现有的一切设置都将被永久覆盖。你确定吗？",
+	["restore defaults text reloadui"] = "这将恢复|cff00ff00%s|r到初始状态，现有的一切设置都将被永久覆盖，并且需要重载游戏界面。你确定吗？",
 	["defaults restored"] = "所有设置已被恢复到初始状态。",
 	["frame scale"] = "框体缩放",
 	["show tooltips"] = "鼠标提示信息",
@@ -112,4 +113,5 @@ addon.L = {
 	["show direction arrow"] = "显示方向箭头（需要TomTom）",
 	["character profiles"] = "角色配置数据",
 	["deleting profile"] = "删除角色配置数据|cff00ff00%s|r，你确定吗？",
+	["font outline"] = "字体描边",
 }

@@ -60,6 +60,7 @@ local UnitIsGroupLeader = UnitIsGroupLeader
 local GetLootMethod = GetLootMethod
 local UnitIsTapDenied = UnitIsTapDenied
 local max = max
+local min = min
 
 local _, addon = ...
 
@@ -75,13 +76,35 @@ function addon:NumButtons()
 	return #unitFrames
 end
 
-local modulesInitDone
-addon:RegisterEventCallback("OnModulesInitDone", function()
-	modulesInitDone = 1
-end)
+function addon:GetButton(index)
+	return unitFrames[index]
+end
+
+function addon:FindUnitFrame(unit, byGuid)
+	if type(unit) ~= "string" then
+		return
+	end
+
+	local i
+	for i = 1, #unitFrames do
+		local button = unitFrames[i]
+		local displayedUnit = button.displayedUnit
+		if displayedUnit and button:IsVisible() then
+			if byGuid then
+				if UnitGUID(displayedUnit) == unit then
+					return button
+				end
+			else
+				if UnitIsUnit(unit, displayedUnit) then
+					return button
+				end
+			end
+		end
+	end
+end
 
 local function BroadcastUnitNotify(frame, event, ...)
-	if modulesInitDone then
+	if addon:Initialized() then
 		addon:BroadcastEvent("OnUnitNotify", frame, event, ...)
 	end
 end
@@ -314,26 +337,27 @@ local function UnitFrame_UpdateRole(self)
 	end
 end
 
+local UNIT_PREDICTION_THRESHOLD = 0.02
+
 local function UnitFrame_UpdatePredictionBar(self, func, bar)
 	local unit = self.displayedUnit
 	if not unit or self.unitFlag then
 		bar:Hide()
-		return
+		return 0, 0, 0
 	end
 
 	local width = 0
 	local healthBar = self.healthBar
-	local _, maxHealth = healthBar:GetMinMaxValues()
 	local health = healthBar:GetValue()
+	local _, maxHealth = healthBar:GetMinMaxValues()
+	local value = func(unit) or 0
+	if value / maxHealth < UNIT_PREDICTION_THRESHOLD then
+		value = 0
+	end
+
 	local lacks = maxHealth - health
-	if lacks > 1 then
-		local value = func(unit) or 0
-		if value > 1 then
-			if value > lacks then
-				value = lacks
-			end
-			width = value / maxHealth * healthBar:GetWidth()
-		end
+	if lacks > 1 and value > 1 then
+		width = min(value, lacks) / maxHealth * healthBar:GetWidth()
 	end
 
 	if width > 1 then
@@ -342,6 +366,8 @@ local function UnitFrame_UpdatePredictionBar(self, func, bar)
 	else
 		bar:Hide()
 	end
+
+	return value, health, maxHealth
 end
 
 local function UnitFrame_UpdateHealthPrediction(self)
@@ -349,7 +375,12 @@ local function UnitFrame_UpdateHealthPrediction(self)
 end
 
 local function UnitFrame_UpdateShieldAbsorbs(self)
-	UnitFrame_UpdatePredictionBar(self, UnitGetTotalAbsorbs, self.shieldBar)
+	local value, health, maxHealth = UnitFrame_UpdatePredictionBar(self, UnitGetTotalAbsorbs, self.shieldBar)
+	if value > 1 and value + health >= maxHealth then
+		self.overShieldGlow:Show()
+	else
+		self.overShieldGlow:Hide()
+	end
 end
 
 local function UnitFrame_UpdateHealthAbsorbs(self)
@@ -366,7 +397,7 @@ local function UnitFrame_UpdateHealthAbsorbs(self)
 		absorbs = healthMax
 	end
 
-	if absorbs / healthMax > 0.01 then
+	if absorbs / healthMax > UNIT_PREDICTION_THRESHOLD then
 		absorbsBar:SetValue(absorbs)
 		absorbsBar:Show()
 	else
@@ -493,11 +524,7 @@ local function UnitFrame_UpdateNameColor(self)
 		self.nameText:SetTextColor(nameTextColor.r, nameTextColor.g, nameTextColor.b)
 	else
 		local r, g, b = GetUnitColor(unit, 1)
-		if addon.db.invertColor then
-			self.nameText:SetTextColor(r * 0.5, g * 0.5, b * 0.5)
-		else
-			self.nameText:SetTextColor(r, g, b)
-		end
+		self.nameText:SetTextColor(r, g, b)
 	end
 end
 
@@ -717,7 +744,9 @@ local GHOST_AURA, _, GHOST_TEXTURE = GetSpellInfo(8326)
 local DEATH_TEXTURE = "Interface\\TargetingFrame\\UI-TargetingFrame-Skull"
 local SPIRIT_OF_REDEMPTION = GetSpellInfo(27827)
 local SPIRIT_TEXTURE = "Interface\\Icons\\Spell_Holy_GuardianSpirit"
-local CAUTERIZE_AURA, _, CAUTERIZE_TEXTURE = GetSpellInfo(87023)
+local CAUTERIZE_AURA, _, CAUTERIZE_TEXTURE = GetSpellInfo(87023) -- mage
+local PURGATORY_AURA, _, PURGATORY_TEXTURE = GetSpellInfo(116888) -- death knight
+local CHEATING_DEATH_AURA, _, CHEATING_DEATH_TEXTURE = GetSpellInfo(45182) -- rogue
 
 local function UnitFrame_UpdateFlags(self)
 	local unit = self.unit
@@ -744,6 +773,14 @@ local function UnitFrame_UpdateFlags(self)
 		flag = "dying"
 		texture = CAUTERIZE_TEXTURE
 		text = CAUTERIZE_AURA
+	elseif self.unitClass == "DEATHKNIGHT" and UnitDebuff(unit, PURGATORY_AURA) then
+		flag = "dying"
+		texture = PURGATORY_TEXTURE
+		text = PURGATORY_AURA
+	elseif self.unitClass == "ROGUE" and UnitBuff(unit, CHEATING_DEATH_AURA) then
+		flag = "dying"
+		texture = CHEATING_DEATH_TEXTURE
+		text = CHEATING_DEATH_AURA
 	end
 
 	self.flagIcon:SetTexture(texture)
@@ -780,7 +817,7 @@ end
 
 local function UnitFrame_UpdateFont(self)
 	local font = addon:GetMedia("font")
-	self.nameText:SetFont(font, addon.db.nameHeight)
+	self.nameText:SetFont(font, addon.db.nameHeight, addon.db.nameFontOutline and "OUTLINE" or nil)
 	self.statusText:SetFont(font, addon.db.nameHeight * 0.84)
 	UnitFrame_UpdateNameSize(self)
 end
@@ -1140,6 +1177,10 @@ local optionTable = {
 		UnitFrame_UpdateNameColor(frame)
 	end,
 
+	nameFontOutline = function(frame, value)
+		frame.nameText:SetFont(addon:GetMedia("font"), addon.db.nameHeight, value and "OUTLINE" or nil)
+	end,
+
 	nameXOffset = function(frame, value)
 		local name = frame.nameText
 		name:ClearAllPoints()
@@ -1149,7 +1190,6 @@ local optionTable = {
 	invertColor = function(frame, value)
 		UnitFrame_UpdateHealthColor(frame)
 		UnitFrame_UpdatePowerType(frame)
-		UnitFrame_UpdateNameColor(frame)
 	end,
 
 	showBuffs = function(frame, value)
@@ -1236,7 +1276,7 @@ local function CheckAndApplyDynamicOptions(frame)
 end
 
 function addon._UnitButton_OnLoad(frame)
-	frame:RegisterForClicks(addon.db.clickDownMode and "AnyDown" or "AnyUp")
+	frame:RegisterForClicks(addon.db and addon.db.clickDownMode and "AnyDown" or "AnyUp")
 	local name = frame:GetName()
 
 	-- Art frame
@@ -1304,6 +1344,16 @@ function addon._UnitButton_OnLoad(frame)
 	frame.layerFrame = layerFrame
 	layerFrame:SetAllPoints(artFrame)
 	layerFrame:SetFrameLevel(50)
+
+	-- Over-shield glow
+	local overShieldGlow = layerFrame:CreateTexture(name.."overShieldGlow", "ARTWORK")
+	frame.overShieldGlow = overShieldGlow
+	overShieldGlow:SetTexture("Interface\\RaidFrame\\Shield-Overshield")
+	overShieldGlow:SetBlendMode("ADD")
+	overShieldGlow:SetPoint("BOTTOMLEFT", healthBar, "BOTTOMRIGHT", -4, 0)
+	overShieldGlow:SetPoint("TOPLEFT", healthBar, "TOPRIGHT", -4, 0)
+	overShieldGlow:SetWidth(8)
+	overShieldGlow:Hide()
 
 	-- Highlight texture
 	local highlight = layerFrame:CreateTexture(name.."Highlight", "BACKGROUND")
@@ -1389,7 +1439,7 @@ function addon._UnitButton_OnLoad(frame)
 	lootIcon:Hide()
 
 	-- Aggro highlight
-	local aggroHighlight = layerFrame:CreateTexture(name.."AggroHighlight", "BORDER")
+	local aggroHighlight = layerFrame:CreateTexture(name.."AggroHighlight", "BACKGROUND")
 	frame.aggroHighlight = aggroHighlight
 	aggroHighlight:SetAllPoints(frame)
 	aggroHighlight:SetTexture("Interface\\RaidFrame\\Raid-FrameHighlights")
@@ -1397,7 +1447,7 @@ function addon._UnitButton_OnLoad(frame)
 	aggroHighlight:Hide()
 
 	-- Selection highlight
-	local selectionHighlight = layerFrame:CreateTexture(name.."SelectionHighlight", "ARTWORK")
+	local selectionHighlight = layerFrame:CreateTexture(name.."SelectionHighlight", "BORDER")
 	frame.selectionHighlight = selectionHighlight
 	selectionHighlight:SetAllPoints(frame)
 	selectionHighlight:SetTexture("Interface\\RaidFrame\\Raid-FrameHighlights")

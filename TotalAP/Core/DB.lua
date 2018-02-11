@@ -69,11 +69,6 @@ local function GetArtifactItemID(classID, specID)
 	
 end	
 
--- TODO: Not really needed right now?
-local function IsArtifactWeapon(itemID)
-
-end
-
 -- Artifact items (tokens) DB // TODO: Actually, itemEffectsDB would be a more fitting name... but it serves as DB for the items themselves
 
 --- Returns a reference to the item effects DB (spell effects). For internal use only
@@ -110,7 +105,7 @@ local function IsArtifactPowerToken(itemID)
 					
 	local spellID = GetItemSpellEffect(itemID)
 	
-	return spellID and type(spellID) == "number"
+	return spellID ~= nil and spellID and type(spellID) == "number"
 	
 end
 
@@ -137,12 +132,29 @@ local function IsResearchTome(itemID)
 
 end
 
+--- Returns the recommended artifact traits (based on icy-veins.com) for a given class and spec
+-- @param class The class number (1-12)
+-- @param spec The specialization no. (1-4)
+-- @return A table containing the three "best" artifact traits (in order of importance) as tables containing spellID and icon
+local function GetRecommendedRelicTraits(class, spec)
+
+	-- Use currently logged in character's class and spec if none was given
+	class = class or select(3, UnitClass("player")) -- numeric ID, not string or STRING, to be used as key for the table lookup
+	spec = spec or GetSpecialization()
+	
+	if not TotalAP.DB.RelicTraits[class] then return end
+	return TotalAP.DB.RelicTraits[class][spec]
+
+end
+
 
 -- Public methods
 TotalAP.DB.GetArtifactItemID = GetArtifactItemID
 TotalAP.DB.GetItemSpellEffect = GetItemSpellEffect
 TotalAP.DB.IsResearchTome = IsResearchTome
 TotalAP.DB.IsArtifactPowerToken = IsArtifactPowerToken
+TotalAP.DB.GetRecommendedRelicTraits = GetRecommendedRelicTraits
+
 
 -- Keep these private, unless they're needed elsewhere?
 -- TotalAP.DB.GetArtifactWeapons = GetArtifactWeapons

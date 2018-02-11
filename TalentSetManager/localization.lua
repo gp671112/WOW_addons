@@ -140,6 +140,7 @@ L["search_icon"] = "Search Icon"
 L["set_already_exists"] = "A talent set with that name already exists"
 L["sets_limit_reached"] = "You cannot create any more new talent sets."
 L["talents_changed"] = "Talents Changed"
+
 L["addon_name"] = "Talent Set Manager"
 L["addon_note"] = "Allows you to store and learn entire sets of talents"
 L["Talent Set Manager"] = true

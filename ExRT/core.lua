@@ -1,6 +1,33 @@
---	23:54 04.08.2017
+--	3:31 03.02.2018
 
 --[[
+3910
+* Raid cooldowns: Added allied racial abilities
+* Raid cooldowns: Small redesign for custom spell frame
+* Raid cooldowns: Added whisper-to-use option
+* Minor fixes
+
+3905
+* Raid cooldowns: Added stuns to quick setup
+* Note: Added Antorus icons
+* Raid Check: added 1% versatility food
+* Minor fixes
+
+3900
+* Note: "Only trusted" option set to enabled for all users
+* Raid Check: added vantus runes checker
+* 7.3.2 & ABT raid Updates
+* Raid cooldowns: fixes for cd time for some abilities
+
+3890
+* Raid Inspect: added new gems
+* Raid Inspect: added 7.2.5 & 7.3.5 raid achievements
+* Minor fixes
+
+3885
+* 7.3.0 Update
+* Saving log: added options for difficulties
+
 3880
 * Note: added custom Weak Auras event for updating note: "EXRT_NOTE_UPDATE"
 * Fight log: minor fixes (powers gain, report for named mobs (KJ for ex.))
@@ -11,7 +38,7 @@
 ]]
 local GlobalAddonName, ExRT = ...
 
-ExRT.V = 3880
+ExRT.V = 3910
 ExRT.T = "R"
 
 ExRT.OnUpdate = {}		--> таймеры, OnUpdate функции
@@ -23,6 +50,7 @@ ExRT.ModulesLoaded = {}		--> список загруженных модулей 
 ExRT.ModulesOptions = {}
 ExRT.Debug = {}
 ExRT.RaidVersions = {}
+ExRT.Temp = {}
 
 ExRT.A = {}			--> ссылки на все модули
 
@@ -57,10 +85,10 @@ end
 -------------> global DB <------------
 ExRT.GDB = {}
 -------------> upvalues <-------------
-local pcall, unpack, pairs = pcall, unpack, pairs
+local pcall, unpack, pairs, coroutine, assert = pcall, unpack, pairs, coroutine, assert
 local GetTime, IsEncounterInProgress = GetTime, IsEncounterInProgress
 local SendAddonMessage, strsplit = SendAddonMessage, strsplit
-local C_Timer_NewTicker = C_Timer.NewTicker
+local C_Timer_NewTicker, debugprofilestop = C_Timer.NewTicker, debugprofilestop
 
 if ExRT.T == "D" then
 	pcall = function(func,...)
@@ -143,7 +171,6 @@ function ExRT.mod:Event(event,...)
 end
 if ExRT.T == "DU" then
 	local ExRTDebug = ExRT.Debug
-	local debugprofilestop = debugprofilestop
 	function ExRT.mod:Event(event,...)
 		local dt = debugprofilestop()
 		self[event](self,...)
@@ -281,6 +308,23 @@ do
 	function ExRT.mod:RegisterHideOnPetBattle(frame)
 		hideOnPetBattle[#hideOnPetBattle + 1] = frame
 	end
+end
+
+
+ExRT.Coroutinies = {}
+function ExRT.mod:AddCoroutine(func)
+	local c = coroutine.create(func)
+	ExRT.Coroutinies[func] = c
+	
+	return c
+end
+
+function ExRT.mod:GetCoroutine(func)
+	return ExRT.Coroutinies[func]
+end
+
+function ExRT.mod:RemoveCoroutine(func)
+	ExRT.Coroutinies[func] = nil
 end
 
 ---------------> Mods <---------------
@@ -534,11 +578,27 @@ do
 			end
 			frameElapsed = 0
 		end
+		
+		--[[
+		local start = debugprofilestop()
+		local hasData = true
+		
+		while (debugprofilestop() - start < 16 and hasData) do
+			hasData = false
+			for func,c in pairs(ExRT.Coroutinies) do
+				hasData = true
+				if coroutine.status(c) ~= "dead" then
+					local err = assert(coroutine.resume(c))
+				else
+					ExRT.Coroutinies[func] = nil
+				end
+			end
+		end
+		]]
 	end
 	
 	if ExRT.T == "DU" then
 		local ExRTDebug = ExRT.Debug
-		local debugprofilestop = debugprofilestop
 		function ExRT.frame:OnUpdate(elapsed)
 			frameElapsed = frameElapsed + elapsed
 			if frameElapsed > reloadTimer then
@@ -616,3 +676,40 @@ end
 _G["GExRT"] = ExRT
 ExRT.frame:RegisterEvent("CHAT_MSG_ADDON")
 ExRT.frame:RegisterEvent("ADDON_LOADED") 
+--泰坦之途檢測
+SlashCmdList.CheckTitan = function(arg)
+    if not IsAddOnLoaded('ExRT') then
+        print('需要exrt才能檢測')
+        return
+    end
+    local toRaid = arg ~= ''
+    local find, format = string.find, string.format
+    local t = {0, 0, 0, 0, 0, 0}
+    for name, data in pairs(GExRT.A.Inspect.db.inspectDB) do
+        if UnitName(name) then
+            if not data.items[13] or not data.items[14] then
+                GExRT.A.Inspect:AddToQueue(name)
+            elseif find(data.items[13], '154172') or find(data.items[14], '154172') then
+                t[1] = t[1] + 1
+            elseif find(data.items[13], '154173') or find(data.items[14], '154173') then
+                t[2] = t[2] + 1
+            elseif find(data.items[13], '154175') or find(data.items[14], '154175') then
+                t[3] = t[3] + 1  
+            elseif find(data.items[13], '154176') or find(data.items[14], '154176') then
+                t[4] = t[4] + 1
+            elseif find(data.items[13], '154174') or find(data.items[14], '154174') then
+                t[5] = t[5] + 1
+            elseif find(data.items[13], '154177') or find(data.items[14], '154177') then
+                t[6] = t[6] + 1    
+            end
+        end
+    end
+    if toRaid then
+        SendChatMessage(format('泰坦之途飾品統計: %d||%d/%d/%d/%d/%d/%d (總計||水晶/坦克/治療/力量/敏捷/智力)',
+            t[1]+t[2]+t[3]+t[4]+t[5]+t[6], t[1], t[2], t[3], t[4], t[5], t[6]), 'RAID')
+    end
+    local s = '|cFFAAAAAA/|r'
+    print(format('%d |cFFAAAAAA|||r |cFFFF8000%d|r '..s..' |cFF6495ED%d|r '..s..' |cFF90EE90%d|r '..s..' |cFFFF0000%d|r '..s..' |cFF00FF00%d|r '..s..' |cFF0000FF%d|r',
+        t[1]+t[2]+t[3]+t[4]+t[5]+t[6], t[1], t[2], t[3], t[4], t[5], t[6]))
+end
+SLASH_CheckTitan1 = '/ct'

@@ -1442,3 +1442,7 @@ function GUIUtils:ShowColorPicker(r, g, b, a, changedCallback)
 	ColorPickerFrame:Hide(); 
 	ColorPickerFrame:Show();
 end
+
+function GUIUtils:GetRealFeamePos(frame)
+	return (frame:GetLeft() or 0), -((GetScreenHeight() or 0)  - (frame:GetTop() or 0))
+end

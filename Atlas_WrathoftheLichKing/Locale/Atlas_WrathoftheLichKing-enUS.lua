@@ -138,10 +138,6 @@ L["Watcher Gashra"] = "Watcher Gashra"
 L["Watcher Narjil"] = "Watcher Narjil"
 L["Watcher Silthik"] = "Watcher Silthik"
 
--- ToC
-L["Description"] = "Wrath of the Lich King Instances' Maps"
-L["Title"] = "Atlas |r|cFF0099FF[Wrath of the Lich King]|r"
-
 --************************************************
 -- Zone Names, Acronyms, and Common Strings
 --************************************************

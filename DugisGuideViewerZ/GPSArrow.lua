@@ -12,12 +12,17 @@ local lastActivePointY = -1
 local lastActivePointM = -1
 local lastActivePointF = -1
 
+local currentMapUId = lastMapUId
+
+local showWorldQuestsOnMapsWithoutPlayer = true
+
 local lastEnabled = -1
 
 local DGV = DugisGuideViewer
 if not DGV then return end
 
 local GPS = DGV:RegisterModule("GPSArrowModule")
+local HBDMigrate = LibStub("HereBeDragons-Migrate")
 
 if GPS then
 	GPS.visualMapOverlays = {}
@@ -58,8 +63,16 @@ GPS.Options = {
 	minimapArea = 4, --bigger => bigger minimap area is shown => performance is lower. If minimapShowTreshold will be lower then this parameter should be increased. Integers only.
 };
 
+--Returns map Id (format 8.0) that should be used for GPS map
+--Determines currently displayed map id for GPS map
+function GPS.GetMapIdForGPSMap()
+	return DGV:GetDisplayedOrPlayerMapId()
+end
+
+local lastMapUId = GPS.GetMapIdForGPSMap()
+
 function GPS.GetScaleYdFactor()
-	return (DGV:GetCurrentMapDimension()/500) / GPS.Scale()
+	return (DGV:GetMapDimensionCached(GPS.GetMapIdForGPSMap())/500) / GPS.Scale()
 end
 
 function GPS.RefreshAndCenter()
@@ -118,6 +131,56 @@ GPS.ShouldLoad = function()
 	return true
 end
 
+function GPS.CreateBigTextures()
+	if not GPSArrow.bigTextures then
+		GPSArrow.bigTextures = {}
+	end
+	
+	local i = 1
+	for y = 1, 10 do
+		for x = 1, 15 do
+			if not GPSArrow.bigTextures["GPSArrowBig"..i] then
+				local texture = GPSArrow:CreateTexture("GPSArrowBig"..i, "BACKGROUND");
+				GPSArrow.bigTextures["GPSArrowBig"..i] = texture
+			end
+			i = i + 1
+		end
+	end
+
+	GPS.UpdateBigTexturesPositions()
+end
+
+function GPS.UpdateBigTexturesPositions()
+	local dX = 0
+	local dY = 0
+	local w = 1
+	local h = 1
+	
+	if GPS.GetMapIdForGPSMap() == 947 then
+		dX = 0
+		dY = 4
+		w = 0.98
+		h = 0.9
+	end
+
+	local bigTileWidth = w * 14.933333333 --(GPSArrow1:GetWidth() * 4) / 15
+	local bigTileHeight = h * 16.8 --(GPSArrow1:GetHeight() * 3) / 10
+	
+	local i = 1
+	for y = 1, 10 do
+		for x = 1, 15 do
+			local texture = GPSArrow.bigTextures["GPSArrowBig"..i]
+			if texture then
+				texture:ClearAllPoints()
+				texture:SetWidth(bigTileWidth)
+				texture:SetHeight(bigTileHeight)
+				texture:SetPoint("TOPLEFT", GPSArrow, (x-1) * bigTileWidth + dX , -((y-1) * bigTileHeight) + dY )
+			end
+			i = i + 1
+		end
+	end
+end
+
 function GPS:Initialize()
 	
 	lastSize = DGV:GetDB(DGV_GPS_MAPS_SIZE) or DGV:GetDefaultValue(DGV_GPS_MAPS_SIZE)
@@ -131,16 +194,6 @@ function GPS:Initialize()
 	
 	function GPS.Scale()
 		return (GPSArrow.scale or 1 ) --*UIParent:GetScale()
-	end
-
-	function GPS.GetRealMapPx()
-		--0.871287
-		return 4 * GPSArrow1:GetWidth()* GPS.Scale() * 0.99, 3 * GPSArrow1:GetHeight() * 0.871287 * GPS.Scale()
-	end
-
-	function GPS.GetMapPxCenter()
-		local w, h = GPS.GetRealMapPx()
-		return 0.5 * w, -0.5 * h
 	end
 
 	function GPS.UpdatePlayerArrow(force)
@@ -159,9 +212,20 @@ function GPS:Initialize()
 		GPSArrowIcon.Texture:SetRotation(angleRadians)
 		
 		local angle = 0
+        
+        local mapId = GPS.GetMapIdForGPSMap()
+        
+        if not mapId then
+            return
+        end
 		
-		local unitX, unitY = GetPlayerMapPosition("player")
-		local mapFileName, textureHeight, _, isMicroDungeon, microDungeonMapName = GetMapInfo();
+		local unitX, unitY = DGV:GetPlayerPositionOnMap(mapId)
+		
+		local info = C_Map.GetMapInfo(mapId)
+		
+		if info then
+			local mapFileName = info.name
+		end
 		
 		if angle ~= lastAngle or GPSArrow.scale ~= lastScale or unitX ~= lastUnitX or  unitY ~= lastUnitY or lastMapFileName~=mapFileName then
 			lastForceCounter = 100
@@ -179,9 +243,9 @@ function GPS:Initialize()
 	end
 
 	function GPS.CenterPlayerOnMap()
-		local unitX, unitY = GetPlayerMapPosition("player")
+		local unitX, unitY = DGV:GetPlayerPositionOnMap(GPS.GetMapIdForGPSMap())
 		
-		if unitX == 0 and unitY == 0 then
+		if (unitX == 0 and unitY == 0) or DGV:IsPointOutOfTheMap(unitX, unitY) then
 			unitX, unitY = 0.5, 0.5
 			GPSArrowIcon:SetAlpha(0)
 		else
@@ -194,9 +258,10 @@ function GPS:Initialize()
 		end
 		
 		lastUnitX, lastUnitY = unitX, unitY
-		if unitX == 0 and unitY == 0 or unitX == nil then
+		if unitX == 0 and unitY == 0 or DGV:IsPointOutOfTheMap(unitX, unitY) then
 			unitX, unitY = 0.5, 0.5
 		end
+		
 		GPS.MoveMapToPoint(unitX, unitY)
 	end
 
@@ -207,7 +272,7 @@ function GPS:Initialize()
 			GPSArrow.scale = GPSArrow.scale * 0.9
 		end
 		
-		local maxZoomFactor = GPS.Options.zoomMax * (DGV:GetCurrentMapDimension()/5000)
+		local maxZoomFactor = GPS.Options.zoomMax * (DGV:GetMapDimensionCached(GPS.GetMapIdForGPSMap())/5000)
 		
 		if  GPSArrow.scale > maxZoomFactor then
 			GPSArrow.scale = maxZoomFactor
@@ -225,21 +290,27 @@ function GPS:Initialize()
 	function GPS.RefreshQuests()
 		-------------PLAYER
 		--taking into account player position	
-		local unitX, unitY = GetPlayerMapPosition("player")	
+		if not DGV:UserSetting(DGV_GPS_ARROW_POIS) then return end
+		local unitX, unitY = DGV:GetPlayerPositionOnMap(GPS.GetMapIdForGPSMap())
 		
-		if not unitX or not unitY or (unitX == 0 or unitY == 0)then
+		if (DGV:IsPointOutOfTheMap(unitX, unitY) or (unitX == 0 and unitY == 0))  and not showWorldQuestsOnMapsWithoutPlayer then
 			needToUpdateMap = true
 			return
 		end
 		
-		---------------------------------------	
+		local w, h = GPSArrowPOI:GetWidth(), -GPSArrowPOI:GetHeight()
+		
 		--Transform positions
 		LuaUtils:foreach(visualQuests, function(poiButton)
-			local posX, posY = poiButton.originalX, poiButton.originalY
-			posX = posX * GPSArrowPOI:GetWidth()
-			posY = posY * GPSArrowPOI:GetHeight()
-			poiButton:ClearAllPoints()
-			poiButton:SetPoint("CENTER", GPSArrowPOI, "TOPLEFT", posX, -posY)
+			local x, y = DGV:TranslateWorldMapPosition(poiButton.mapID, _, poiButton.originalX, poiButton.originalY,  GPS.GetMapIdForGPSMap())
+			if x and y and w and h then
+				poiButton:ClearAllPoints()
+				poiButton:SetPoint("CENTER", GPSArrowPOI, "TOPLEFT", x * w,  y * h)
+				
+				if poiButton.mapID ~= GPS.GetMapIdForGPSMap() or DGV:IsPointOutOfTheMap(x, y) then
+					poiButton:Hide()
+				end
+			end
 		end)
 	end
 
@@ -271,6 +342,7 @@ function GPS:Initialize()
 	end
 
 	function GPS.RefreshPOIs()
+		if not DGV:UserSetting(DGV_ENABLED_GPS_ARROW) then return end
 		QuestPOI_ResetUsage(GPSArrowPOI)
 
 		local detailQuestID = QuestMapFrame_GetDetailQuestID()
@@ -288,7 +360,11 @@ function GPS:Initialize()
 						-- if a quest is being viewed there is only going to be one POI and it's going to have number 1
 						poiButton = QuestPOI_GetButton(GPSArrowPOI, questID, "numeric", (detailQuestID and 1) or index)
 					end
-					GPS.AddPOIButton(poiButton, posX, posY, WORLD_MAP_POI_FRAME_LEVEL_OFFSETS.TRACKED_QUEST, questID)
+					
+					poiButton.mapID = GetQuestUiMapID(questID)
+					
+					--1200 taken from old  WORLD_MAP_POI_FRAME_LEVEL_OFFSETS.TRACKED_QUEST
+					GPS.AddPOIButton(poiButton, posX, posY, 1200, questID)
 				end
 			end
 		end
@@ -303,6 +379,14 @@ function GPS:Initialize()
 		--SetMapToCurrentZone();
 		GPS.Update();
 		GPS.UpdateOpacity();
+		GPS.UpdateBorder();
+		GPS.RemoveFogForNewMaps()
+		
+		GPS.UpdateFrameSize()
+		LuaUtils:Delay(2, function()
+			GPS.UpdateFrameSize()
+			GPS.Zoom(GPSArrow.scale)
+		end)	
 	end
 
 	function GPS.OnHide(self)
@@ -365,7 +449,7 @@ function GPS:Initialize()
 	end
 
 	function GPS.UpdateQuestsVisibility()
-		local unitX, unitY = GetPlayerMapPosition("player")	
+		local unitX, unitY = DGV:GetPlayerPositionOnMap(GPS.GetMapIdForGPSMap())
 		if unitX == 0 and unitY == 0 then
 			GPSArrowPOI.hidden = true
 		else
@@ -373,6 +457,123 @@ function GPS:Initialize()
 			GPSArrowPOI.hidden = false
 		end
 		GPS.UpdatePOISVisibility()
+	end
+	
+	local gpsOverlays = {}
+	function GPS.RemoveFogForNewMaps()
+		--Hidding all textures
+		LuaUtils:foreach(gpsOverlays, function(texture)
+			texture:Hide()
+		end)
+		
+		local mapID = GPS.GetMapIdForGPSMap()
+		
+		--Old maps are processed in the old way in MapOverlays.lua
+		if not DGV:IsBigMap(mapID) then
+			return
+		end	
+		
+		local exploredMapTextures = C_MapExplorationInfo.GetExploredMapTextures(mapID);
+		if exploredMapTextures then
+			local  layerIndex = WorldMapFrame.ScrollContainer:GetCurrentLayerIndex();
+			local layers = C_Map.GetMapArtLayers(mapID);
+			if not layers then
+				return
+			end
+			local layerInfo = layers[layerIndex];
+			
+			if not layerInfo then
+				return
+			end
+			
+			local tileW = layerInfo.tileWidth;
+			local tileH = layerInfo.tileHeight;		
+			
+			local layerW = layerInfo.layerWidth;
+			local layerH = layerInfo.layerHeight;
+
+			local textureIndex = 1
+			
+			for i, exploredTextureInfo in ipairs(exploredMapTextures) do
+				local numTexturesX = ceil(exploredTextureInfo.textureWidth/tileW);
+				local numTexturesY = ceil(exploredTextureInfo.textureHeight/tileH);
+				local texturePixelWidth, textureFileWidth, texturePixelHeight, textureFileHeight;
+				for j = 1, numTexturesY do
+					local info, y, z = C_Map.GetMapArtLayerTextures(mapID, textureIndex)
+				
+					if ( j < numTexturesY ) then
+						texturePixelHeight = tileH;
+						textureFileHeight = tileH;
+					else
+						texturePixelHeight = mod(exploredTextureInfo.textureHeight, tileH);
+						if ( texturePixelHeight == 0 ) then
+							texturePixelHeight = tileH;
+						end
+						textureFileHeight = 16;
+						while(textureFileHeight < texturePixelHeight) do
+							textureFileHeight = textureFileHeight * 2;
+						end
+					end
+					
+					for k = 1, numTexturesX do
+						local texture = gpsOverlays[textureIndex] 
+						
+						if not texture then
+							texture = GPSArrow:CreateTexture(nil, "OVERLAY");
+							gpsOverlays[textureIndex] = texture
+						end
+						
+						if ( k < numTexturesX ) then
+							texturePixelWidth = tileW;
+							textureFileWidth = tileW;
+						else
+							texturePixelWidth = mod(exploredTextureInfo.textureWidth, tileW);
+							if ( texturePixelWidth == 0 ) then
+								texturePixelWidth = tileW;
+							end
+							textureFileWidth = 16;
+							while(textureFileWidth < texturePixelWidth) do
+								textureFileWidth = textureFileWidth * 2;
+							end
+						end
+						
+						local oneHpx =  texturePixelHeight /  numTexturesY
+						local oneWpx = texturePixelWidth /  numTexturesX
+						
+						local oneWnorm = oneWpx / texturePixelWidth
+						local oneHnorm = oneHpx / texturePixelHeight
+						
+						local mapW, mapH
+						mapW = nativeMapWidthPx
+						mapH = nativeMapHeightPx
+						
+						local worldMapWidth, worldMapHeight = WorldMapFrame.ScrollContainer.Child:GetSize()
+						
+						local wRatio = nativeMapWidthPx/worldMapWidth
+						local hRatio = 1.15 * nativeMapHeightPx/worldMapHeight
+						
+						texture:SetWidth(texturePixelWidth * wRatio)
+						texture:SetHeight(texturePixelHeight * hRatio) 
+						
+						local xRatio1 = texturePixelWidth/textureFileWidth
+						local yRatio1 = texturePixelHeight/textureFileHeight
+						
+						texture:SetTexCoord(0, xRatio1, 0, yRatio1);
+						local x, y = exploredTextureInfo.offsetX + (tileW * (k-1)), -(exploredTextureInfo.offsetY + (tileH * (j - 1)))
+			
+						local normalizedX, normalizedY = x/layerW, y/layerH
+						
+						local x1, y1 = exploredTextureInfo.offsetX + (tileW * (k-1)), -(exploredTextureInfo.offsetY + (tileH * (j - 1)))	
+						texture:SetPoint("TOPLEFT", x1 *wRatio , y1 * hRatio);
+						texture:SetTexture(exploredTextureInfo.fileDataIDs[((j - 1) * numTexturesX) + k]);
+						
+						textureIndex = textureIndex + 1
+						
+						texture:Show();
+					end
+				end
+			end
+		end	
 	end
 
 	--Scale of the internal map (internal map dimentions)
@@ -385,9 +586,11 @@ function GPS:Initialize()
 			LuaUtils:foreach(overlayTexturesGPS, function(texture)
 				if type(texture) == "table" then
 					texture:ClearAllPoints()
-					texture:SetPoint("TOPLEFT", GPSArrow, texture.orgX * factor, texture.orgY * factor)
-					texture:SetWidth(texture.orgW * factor)
-					texture:SetHeight(texture.orgH * factor)
+					if texture.orgX then
+						texture:SetPoint("TOPLEFT", GPSArrow, texture.orgX * factor, texture.orgY * factor)
+						texture:SetWidth(texture.orgW * factor)
+						texture:SetHeight(texture.orgH * factor)
+					end
 					
 					if not GPS.Options.removeFog then
 						texture:Hide()
@@ -434,7 +637,8 @@ function GPS:Initialize()
 	end
 
 	function GPS.MoveMapToPoint(nx, ny)
-		local scaledMapPointPixelX, scaledMapPointPixelY = GPS.LocalMapPoint2ScaledPixelMapPoint(nx, ny)
+		local scaledMapPointPixelX, scaledMapPointPixelY = GPS.LocalMapPoint2ScaledPixelMapPoint(nx , ny )
+		
 		local scrollBoxW = GPSArrowScroll:GetWidth()
 		local scrollBoxH = GPSArrowScroll:GetHeight()
 		
@@ -454,17 +658,20 @@ function GPS:Initialize()
 		lastIndoors = IsIndoors()
 	end
 	
-	local lastC, lastZ, lastM, lastF =  GetCurrentMapContinent(), GetCurrentMapZone(), GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+	
 	function GPS.OnEvent(self, event, ...)
+		currentMapUId = GPS.GetMapIdForGPSMap()
+	
 		if ( event == "PLAYER_ENTERING_WORLD" or event == "ZONE_CHANGED" or event == "ZONE_CHANGED_NEW_AREA" or event == "NEW_WMO_CHUNK" ) then
 			if GPSArrow:IsShown() then
 				if ( not WorldMapFrame:IsShown() ) then
-					SetMapToCurrentZone();
+					LuaUtils:DugiSetMapToCurrentZone()
 					GPS.Update();
 				end
 			end
 			
 			GPS.CheckIndoorsChange() 
+			GPS.UpdateBigTexturesPositions()
 		elseif ( event == "WORLD_MAP_UPDATE" ) then
 			if ( GPSArrow:IsVisible() ) then
 				GPS.Update();
@@ -474,10 +681,13 @@ function GPS:Initialize()
 				DGV:OnMapChangeUpdateGPSArrow( )
 			end
 			
-			local c, z, m, f = GetCurrentMapContinent(), GetCurrentMapZone(), GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+			--local c, z, m, f = GetCurrentMapContinent(), GetCurrentMapZone(), (), GetCurrentMapDungeonLevel()
 			
-			if lastM ~= m or lastF ~= f or lastC ~= c or lastZ ~= z then
+			
+			if lastMapUId ~= currentMapUId then
 				OverrideMapOverlays()
+				
+				GPS.RemoveFogForNewMaps()
 				
 				GPS.UpdateMinimapTextures()
 				GPSArrowMinimap:SetAlpha(0)
@@ -486,13 +696,18 @@ function GPS:Initialize()
 				GPS.ZoomMapTo0()
 				
 				GPS.zoneChanged = true
+				
+				GPS:OnEvent("ZONE_CHANGED")
+				
+				GPS.UpdateVisibility()
 			else
 				GPS.CheckIndoorsChange() 
 			end
 			
-			lastM, lastF, lastC, lastZ = m, f, c, z
+			lastMapUId = currentMapUId
 			
 			GPS.UpdateOpacity()
+			
 			
 		elseif event == "MINIMAP_UPDATE_ZOOM" then
 			GPS.CheckIndoorsChange() 
@@ -502,11 +717,11 @@ function GPS:Initialize()
 	end
 	
 	function GPS.ZoomMapTo0()
-		local playerX, playerY = GetPlayerMapPosition("player")
+		local playerX, playerY = DGV:GetPlayerPositionOnMap(GPS.GetMapIdForGPSMap())
 		
-		local mapW_yd = DGV:GetCurrentMapDimension()
+		local mapW_yd = DGV:GetMapDimensionCached(GPS.GetMapIdForGPSMap())
 		
-		if (playerX == 0 and playerY == 0) or mapW_yd == 1 then
+		if ((playerX == 0 and playerY == 0) or DGV:IsPointOutOfTheMap(playerX, playerY)) or mapW_yd == 1 then
 			GPS.Zoom(1)
 			GPS.RefreshAndCenter()
 			return true
@@ -515,7 +730,7 @@ function GPS:Initialize()
 	
 	local currentZooming = nil
 	function GPS.ZoomSmoothly(newScale, duration, onEnd, breakFunction, targetChanged)
-		local initM, initF = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+		local initM, initF = GPS.GetMapIdForGPSMap()
 		
 		if GPS.zooming then
 			if targetChanged then
@@ -535,9 +750,9 @@ function GPS:Initialize()
 			GPS.Zoom(currentZoom + (diff * value))
 			GPS.RefreshAndCenter()
 			
-			local currentM, currentF = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+			local currentM = GPS.GetMapIdForGPSMap()
 			
-			if currentM ~= initM or currentF~=initF then
+			if currentM ~= initM then
 				GPS.zooming = false
 				GPS.ZoomMapTo0()
 				return "break"
@@ -553,7 +768,7 @@ function GPS:Initialize()
 	end
 	
 	function GPS.CurrentDistanceToEdges(dx_yd, dy_yd)
-		local mapW_yd, mapH_yd = DGV:GetCurrentMapDimension()
+		local mapW_yd, mapH_yd = DGV:GetMapDimensionCached(GPS.GetMapIdForGPSMap())
 		
 		--For scale = 1
 		local viewportW_yd = (GPS.Options.initialWidth / nativeMapWidthPx) * mapW_yd
@@ -570,7 +785,7 @@ function GPS:Initialize()
 	end
 	
 	function GPS.ResolveScale(dx_yd, dy_yd, distanceXtoEdge_yd, distanceYtoEdge_yd)
-		local mapW_yd, mapH_yd = DGV:GetCurrentMapDimension()
+		local mapW_yd, mapH_yd = DGV:GetMapDimensionCached(GPS.GetMapIdForGPSMap())
 		
 		--For scale = 1
 		local viewportW_yd = (GPS.Options.initialWidth / nativeMapWidthPx) * mapW_yd
@@ -587,22 +802,33 @@ function GPS:Initialize()
 	end
 	
 	function GPS.CalculatedAutoZoomDistanceFromEdge()
-		local mapW_yd = DGV:GetCurrentMapDimension()
+		local mapW_yd = DGV:GetMapDimensionCached(GPS.GetMapIdForGPSMap())
 		--Limiting to 6000 to prevent useless very high zoom in on large maps
 		if mapW_yd > 6000 then
 			mapW_yd = 6000
 		end
+		
+		if mapW_yd == 0 then
+			mapW_yd = 1000
+		end
+		
 		return GPS.Options.autoZoomDistanceFromEdge / (mapW_yd / 1000)
 	end
 		
 	--Current distances
 	local dist_yd, dx_yd, dy_yd, pointM, pointF
-	function GPS.UpdateMode(force, onlyMode)
+	function GPS.UpdateMode(force, onlyMode, onWaypointChanged)
+	
+		local duration = 0.7
+		if onWaypointChanged then
+			duration = 0
+		end
+		
 		if (dist_yd and dist_yd > GPS.Options.oldArrowThesholdDistance and DGV:UserSetting(DGV_ENABLED_GPS_ARROW))
 			and not DGV.wayframe.button:IsShown()  then
-			GPS.SetMode("GPS-arrow", force)
+			GPS.SetMode("GPS-arrow", force, duration)
 		else
-			GPS.SetMode("old-arrow", force)
+			GPS.SetMode("old-arrow", force, duration)
 		end
 		
 		if onlyMode then
@@ -610,13 +836,13 @@ function GPS:Initialize()
 		end
 		
 		-------AUTOZOOM-------
-		if not GPS.Options.autoZoom() then
+		if not GPS.Options.autoZoom() or not GPS.ShuldBeGPSShown() then --should be off if Zone Map is not active or visible. 
 			return
 		end
   
 		local DugisArrow = DugisArrowGlobal
   
-		local playerX, playerY = GetPlayerMapPosition("player")
+		local playerX, playerY = DGV:GetPlayerPositionOnMap(GPS.GetMapIdForGPSMap())
 		
 		local active_point = DugisArrow:GetActivePoint()
 		
@@ -639,24 +865,25 @@ function GPS:Initialize()
 			local DugisArrow = DugisArrowGlobal
 			
 			local pointX, pointY = DugisArrow:GetActivePoint().x * nativeMapWidthPx, DugisArrow:GetActivePoint().y * nativeMapHeightPx
-			local playerX, playerY = GetPlayerMapPosition("player")
+			local playerXOrg, playerYOrg = DGV:GetPlayerPositionOnMap(GPS.GetMapIdForGPSMap())
 			
-			if not playerX then
+			if not playerXOrg then
 				return
 			end
 			
-			playerX, playerY = playerX * nativeMapWidthPx, playerY * nativeMapHeightPx
+			local playerX, playerY = playerXOrg * nativeMapWidthPx, playerYOrg * nativeMapHeightPx
 			
 			local viewportW, viewportH = GPSArrowScroll:GetWidth(), GPSArrowScroll:GetHeight()
 			
 			local needZoomOut, needZoomIn
 			local distanceXtoEdge_yd, distanceYtoEdge_yd = GPS.CurrentDistanceToEdges(dx_yd, dy_yd)
 			
-			local m, f = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+			local m = GPS.GetMapIdForGPSMap()
 			local mapW_yd, mapH_yd = DGV:GetMapDimension(m, f)
 			
 			--Player is on some different map so let him zoom
-			if  (pointM ~= m or pointF ~= f) and (playerX == 0 and playerY == 0) then
+			if  (playerX == 0 and playerY ==  0) or DGV:IsPointOutOfTheMap(playerXOrg, playerYOrg) then
+			
 				return
 			end
 			
@@ -697,7 +924,12 @@ function GPS:Initialize()
 		GPS.UpdateMode()
 	end	
 	
-	function GPS.SetMode(mode, force)
+	function GPS.SetMode(mode, force, duration)
+		
+		if duration == nil then
+			duration = 0.7
+		end
+		
 		if GPS.currentMode == mode and mode == "GPS-arrow" and GPSArrowScroll:GetAlpha() ~= 0 and not force then
 			return
 		end
@@ -712,7 +944,7 @@ function GPS:Initialize()
 		local initialGPSAlpha = GPSArrowScroll:GetAlpha()
 		
 		if mode == "GPS-arrow" then
-			LuaUtils:ProcessInTime(0.7, function(value)
+			LuaUtils:ProcessInTime(duration, function(value)
 				if DGV:UserSetting(DGV_GPS_MERGE_WITH_DUGI_ARROW) then
 					DGV.wayframe:SetAlpha(initialWayframeAlpha * (1-value))
 					local delta = 1 - initialGPSAlpha
@@ -725,7 +957,7 @@ function GPS:Initialize()
 		end
 		
 		if mode == "old-arrow" then
-			LuaUtils:ProcessInTime(0.7, function(value)
+			LuaUtils:ProcessInTime(duration, function(value)
 				local delta = 1 - initialWayframeAlpha
 				if DGV:UserSetting(DGV_GPS_MERGE_WITH_DUGI_ARROW) then
 					DGV.wayframe:SetAlpha(initialWayframeAlpha + delta * value)
@@ -741,12 +973,17 @@ function GPS:Initialize()
 		local screenW, screenH = GetScreenWidth(), GetScreenHeight()
 		local onOffX, onOffY = frameToBePlaced:GetLeft(), frameToBePlaced:GetTop()
 		local mapX, mapY = GPSArrowScroll:GetLeft(), GPSArrowScroll:GetTop()
+        
+        if not mapX or not mapY then
+            return
+        end
 		
 		--Map box 
 		local mW = GPSArrowScroll:GetWidth()
 		local mH = GPSArrowScroll:GetHeight()
 		
-		if onOffX + margin > mapX 
+		if onOffX 
+		and onOffX + margin > mapX 
 		and (onOffX - margin) < (mapX + mW)
 		and onOffY - margin < mapY 
 		and (onOffY + margin) > (mapY - mH)
@@ -756,7 +993,13 @@ function GPS:Initialize()
 		end
 	end
 	
+
+	
 	function GPS.FixTopPosition()
+		if not GPSArrowTab:GetTop() then
+			return
+		end
+	
 		local top = GetScreenHeight() - GPSArrowTab:GetTop()
 		if top < -10 then
 			if DGV:UserSetting(DGV_GPS_MERGE_WITH_DUGI_ARROW) then
@@ -783,8 +1026,8 @@ function GPS:Initialize()
 	end
 
 	function GPS.UpdatePOISVisibility()
-		--POIs
-		if DGV:UserSetting(DGV_GPS_ARROW_POIS) and not GPSArrowPOI.hidden then
+		--todo: check GPSArrowPOI.hidden
+		if DGV:UserSetting(DGV_GPS_ARROW_POIS) --[[and not GPSArrowPOI.hidden]] then
 			GPSArrowPOI:Show()
 		else
 			GPSArrowPOI:Hide()
@@ -796,8 +1039,10 @@ function GPS:Initialize()
 	end
 	
 	function GPS.ShuldBeGPSShown()
-		return (GPS.HasSomeWaypoints() or not DGV:UserSetting(DGV_GPS_AUTO_HIDE)) 
+		return (GPS.HasSomeWaypoints() or not DGV:UserSetting(DGV_GPS_AUTO_HIDE)) and not DugisGuideUser.PetBattleOn == true
 		and DGV:UserSetting(DGV_ENABLED_GPS_ARROW)
+		--Please uncomment line below if you want to hide Zone Map on "World" map
+		--and GPS.GetMapIdForGPSMap() ~= 946
 	end
 	
 	function GPS.UpdateMerged(resetPosition)
@@ -837,7 +1082,7 @@ function GPS:Initialize()
 	end
 	
 	function GPS.WaypointsChanged()
-		GPS.UpdateMode(true, true)
+		GPS.UpdateMode(true, true, true)
 		
 		if not GPS.HasSomeWaypoints() then
 			lastActivePointX = nil
@@ -845,7 +1090,9 @@ function GPS:Initialize()
 	end
 	
 	function GPS.UpdateBorder()
-		GPSArrowBorder:SetBackdrop({edgeFile = DGV:GetGPSBorderPath(), tile = false, tileSize = 32, edgeSize = 16})
+		LuaUtils:Delay(0.3, function()
+		    GPSArrowBorder:SetBackdrop({edgeFile = DGV:GetGPSBorderPath(), tile = false, tileSize = 32, edgeSize = 16})
+		end)
 	end
 	
 	function GPS.UpdateVisibility()
@@ -898,44 +1145,54 @@ function GPS:Initialize()
 	--Updates 
 	function GPS.Update()
 		-- Fill in map tiles
-		local mapFileName, textureHeight, _, isMicroDungeon, microDungeonMapName = GetMapInfo();
-		if (isMicroDungeon and (not microDungeonMapName or microDungeonMapName == "")) then
-			return;
-		end
-
-		if ( not mapFileName ) then
-			if ( GetCurrentMapContinent() == WORLDMAP_COSMIC_ID ) then
-				mapFileName = "Cosmic";
-			else
-				-- Temporary Hack (copy of a "temporary" 6 year hack)
-				mapFileName = "World";
-			end
-		end
-		local texName;
-		local dungeonLevel = GetCurrentMapDungeonLevel();
-		if (DungeonUsesTerrainMap()) then
-			dungeonLevel = dungeonLevel - 1;
-		end
-
-		local path;
-		if (not isMicroDungeon) then
-			path = "Interface\\WorldMap\\"..mapFileName.."\\"..mapFileName;
-		else
-			path = "Interface\\WorldMap\\MicroDungeon\\"..mapFileName.."\\"..microDungeonMapName.."\\"..microDungeonMapName;
-		end
-
-		if dungeonLevel > 0 then
-			path = path..dungeonLevel.."_";
+        local mapId = GPS.GetMapIdForGPSMap()
+        
+        if not mapId then
+            return
+        end
+        
+		local mapInfo = C_Map.GetMapInfo(mapId)
+		
+		if not mapInfo then
+			return
 		end
 		
-		local numDetailTiles = GetNumberOfDetailTiles();
-		for i=1, numDetailTiles do
-			texName = path..i;
-			_G["GPSArrow"..i]:SetTexture(texName);
+		local textureIds = C_Map.GetMapArtLayerTextures(mapId, 1)
+		local isBigMap = DGV:IsBigMap(mapId)
+		
+		local i = 1
+		local textute = _G["GPSArrow"..i]
+		while textute do
+			if isBigMap then
+				textute:Hide()
+			else
+				textute:Show()
+			end
+			
+			textute:SetTexture(textureIds[i]);
+			i = i + 1
+			textute = _G["GPSArrow"..i]
+		end	
+		
+		local i = 1
+		local textute = _G["GPSArrowBig"..i]
+		while textute do
+			if isBigMap then
+				textute:Show()
+			else
+				textute:Hide()
+			end
+		
+			textute:SetTexture(textureIds[i]);
+			i = i + 1
+			textute = _G["GPSArrowBig"..i]
 		end
+	
 
 		-- Setup the POI's
 		local iconSize = DEFAULT_POI_ICON_SIZE * GetBattlefieldMapIconScale();
+		
+		--[[ todo: find replacement
 		local numPOIs = GetNumMapLandmarks();
 		
 		if ( NUM_BATTLEFIELDMAP_POIS < numPOIs ) then
@@ -970,6 +1227,8 @@ function GPS:Initialize()
 			end
 		end
 		
+		]]
+		
 		needToUpdateMap = true
 		GPS.UpdatePlayerArrow()
 	end
@@ -978,10 +1237,14 @@ function GPS:Initialize()
 		for i=1, GPSArrow:GetAttribute("NUM_BATTLEFIELDMAP_OVERLAYS") do
 			_G["GPSArrowOverlay"..i]:SetTexture(nil);
 		end
+		
+		--todo
+		--[[
 		local numDetailTiles = GetNumberOfDetailTiles();
 		for i=1, numDetailTiles do
 			_G["GPSArrow"..i]:SetTexture(nil);
 		end
+		]]
 	end
 
 	function GPS.CreatePOI(index)
@@ -996,7 +1259,16 @@ function GPS:Initialize()
 
 	local lastMouseOverCheck = GetTime()
 	local hovering = false
+	local lastMap = -1
 	function GPS.OnUpdate(self, elapsed)
+		
+		local bestMap = GPS.GetMapIdForGPSMap()
+		if lastMap ~= bestMap then
+			GPS.OnEvent(nil, "WORLD_MAP_UPDATE")
+			GPS.RefreshQuests()
+		end
+		lastMap = bestMap
+	
 		if needToUpdateMap then
 			GPS.UpdatePlayerArrow()
 			GPS.RefreshQuests()
@@ -1039,13 +1311,35 @@ function GPS:Initialize()
 	end
 	
 	function GPS.SetMapsAlpha(value)
-		local numDetailTiles = GetNumberOfDetailTiles();
-		for i=1, numDetailTiles do
-			_G["GPSArrow"..i]:SetAlpha(value);
+	
+		for i=1, 500 do
+			local frame = _G["GPSArrow"..i]
+			if frame then
+				frame:SetAlpha(value)
+			else
+				break;
+			end
+		end
+		
+		for i=1, 500 do
+			local frame = _G["GPSArrowBig"..i]
+			if frame then
+				frame:SetAlpha(value)
+			else
+				break;
+			end
 		end
 		
 		if overlayTexturesGPS then
 			LuaUtils:foreach(overlayTexturesGPS, function(texture)
+				if type(texture) == "table" then
+					texture:SetAlpha(value);
+				end
+			end)	
+		end	
+		
+		if gpsOverlays then
+			LuaUtils:foreach(gpsOverlays, function(texture)
 				if type(texture) == "table" then
 					texture:SetAlpha(value);
 				end
@@ -1094,8 +1388,58 @@ function GPS:Initialize()
 	----------------------------------------------
 	-------------- System Event Handler ----------
 	----------------------------------------------
-	function GPS.RefreshWorldQuests()
-		local mapAreaID     = GetCurrentMapAreaID()
+	function GPS.RefreshWorldQuests()	
+		if not DGV:UserSetting(DGV_GPS_ARROW_POIS) then return end
+		--Scan only Watched Quest to reduce FPS drop 
+		local mapAreaID     = GPS.GetMapIdForGPSMap()
+		
+		if not mapAreaID then
+            return
+        end		
+	
+		local hasWorldQuests = false
+		local taskIconIndex = 1
+		
+		for i = 1, GetNumWorldQuestWatches() do
+			local watchedWorldQuestID = GetWorldQuestWatchInfo(i);
+			if ( watchedWorldQuestID ) then
+				local taskPOI		
+				
+				local info = {}
+				info.questId = watchedWorldQuestID					
+				info.x, info.y = C_TaskQuest.GetQuestLocation(watchedWorldQuestID, mapAreaID);
+				info.mapID = mapAreaID
+				info.numObjectives = select(3, GetTaskInfo(watchedWorldQuestID))
+				
+				local isWorldQuest = QuestUtils_IsQuestWorldQuest(info.questId)
+				if isWorldQuest then
+					taskPOI = GPS.TryCreatingWorldQuestPOIDD(info, taskIconIndex)
+				end							
+				
+				taskPOI = GPS.TryCreatingWorldQuestPOIDD(info, taskIconIndex)
+				
+				if taskPOI and isWorldQuest then
+					GPS.AddPOIButton(taskPOI, info.x, info.y, 1200, info.questId)
+					taskPOI.questID = info.questId
+					taskPOI.numObjectives = info.numObjectives
+					taskPOI.mapID = info.mapID
+					taskPOI:Show()
+
+					taskIconIndex = taskIconIndex + 1
+
+					if ( isWorldQuest ) then
+						hasWorldQuests = true
+					end
+				end	
+			end
+		end
+		--Old Method Scans all quests can have high drop in FPS 
+		--[[local mapAreaID     = GPS.GetMapIdForGPSMap()
+        
+        if not mapAreaID then
+            return
+        end
+        
 		local taskInfo      = C_TaskQuest.GetQuestsForPlayerByMapID(mapAreaID)
 		local numTaskPOIs   = taskInfo and #taskInfo or 0
 
@@ -1112,9 +1456,10 @@ function GPS:Initialize()
 					end
 
 					if taskPOI then
-						GPS.AddPOIButton(taskPOI, info.x, info.y, isWorldQuest and WORLD_MAP_POI_FRAME_LEVEL_OFFSETS.WORLD_QUEST or WORLD_MAP_POI_FRAME_LEVEL_OFFSETS.BONUS_OBJECTIVE, info.questId)
+						GPS.AddPOIButton(taskPOI, info.x, info.y, isWorldQuest and 1200, info.questId)
 						taskPOI.questID = info.questId
 						taskPOI.numObjectives = info.numObjectives
+						taskPOI.mapID = info.mapID
 						taskPOI:Show()
 
 						taskIconIndex = taskIconIndex + 1
@@ -1125,12 +1470,13 @@ function GPS:Initialize()
 					end
 				end
 			end
-		end
+		end ]]
 
 		-- Hide unused icons in the pool
 		for i = taskIconIndex, #GPS.TaskPOIArray do
 			GPS.TaskPOIArray[i]:Hide()
 		end
+		
 	end
 
 	function GPS.GetTaskPOI(index)
@@ -1175,7 +1521,8 @@ function GPS:Initialize()
 			button.TimeLowFrame.Texture:SetAllPoints(button.TimeLowFrame)
 			button.TimeLowFrame.Texture:SetAtlas("worldquest-icon-clock")
 
-			WorldMap_ResetPOI(button, true, false)
+			--todo: find replacement
+			--WorldMap_ResetPOI(button, true, false)
 
 			GPS.TaskPOIArray[#GPS.TaskPOIArray + 1] = button
 		end
@@ -1184,7 +1531,7 @@ function GPS:Initialize()
 	end
 
 	function GPS.TryCreatingWorldQuestPOIDD(info, taskIconIndex)
-		if ( WorldMap_IsWorldQuestSuppressed(info.questId) or not WorldMap_DoesWorldQuestInfoPassFilters(info) ) then
+		if not WorldMap_DoesWorldQuestInfoPassFilters(info) then
 			return nil
 		end
 
@@ -1193,7 +1540,12 @@ function GPS:Initialize()
 		local taskPOI = GPS.GetTaskPOI(taskIconIndex)
 		local selected = info.questId == GetSuperTrackedQuestID()
 
-		local isCriteria = WorldMapFrame.UIElementsFrame.BountyBoard:IsWorldQuestCriteriaForSelectedBounty(info.questId)
+		--todo: find replacement
+		if not WorldMapBountyBoardMixin then
+			return
+		end
+		
+		local isCriteria = WorldMapBountyBoardMixin:IsWorldQuestCriteriaForSelectedBounty(info.questId)
 		local isSpellTarget = SpellCanTargetQuest() and IsQuestIDValidSpellTarget(info.questId)
 
 		taskPOI.worldQuest = true
@@ -1227,7 +1579,14 @@ function GPS:Initialize()
 	end
 	
 	local GPSMinimapTextures = {}
-
+    
+    --Some maps are dungeons (Enum.UIMapType.Dungeon) but have terrain map
+    function GPS.HasDungeonMapATerrain(uiMapID)
+        if uiMapID == 627 then --Dalaran
+            return true
+        end
+    end
+ 
 	function GPS.UpdateMinimapTextures()
 		if not GPSArrowMinimap then
 			GPSArrowMinimap = CreateFrame("Frame", "GPSArrowMinimap", GPSArrow)
@@ -1242,19 +1601,27 @@ function GPS:Initialize()
 		local TERRAIN_PATH = 'world/minimaps/%s/map%02d_%02d'
 		local UNDERWATER_PATH = 'world/minimaps/%s/noliquid_map%02d_%02d'
 		
-		local areaID = GetCurrentMapAreaID()
+		local uiMapID = GPS.GetMapIdForGPSMap()
+        
+        if not uiMapID then
+            return
+        end
+        
 		GPSArrowMinimap.isDisplayed = false
-		local _, _, _, isMicroDungeon = GetMapInfo()
-		local floorNum, dBRx, dBRy, dTLx, dTLy = GetCurrentMapDungeonLevel()
+		local noTerrainMap = ((C_Map.GetMapInfo(uiMapID).mapType == Enum.UIMapType.Micro 
+        or C_Map.GetMapInfo(uiMapID).mapType  == Enum.UIMapType.Dungeon))
+        and not GPS.HasDungeonMapATerrain(uiMapID)
 		
-		if not isMicroDungeon and not IsIndoors() then
-			local terrainMapID = GetAreaMapInfo(areaID) or -1
+		local floorNum, dBRx, dBRy, dTLx, dTLy = DGV:GetCurrentMapDungeonLevel_dugiDetails(uiMapID)
+        
+        floorNum = floorNum or 0
+		
+		if not noTerrainMap and not IsIndoors() then
+			local terrainMapID = DGV:GetAreaMapInfo_dugi(uiMapID) or -1
 			
-			--print("terrainMapID", terrainMapID, "areaID", areaID, "floorNum", floorNum)
+			local _, TLx, TLy, BRx, BRy = DGV:GetCurrentMapZone_dugi(uiMapID)
 			
-			local _, TLx, TLy, BRx, BRy = GetCurrentMapZone()
-			
-			if DungeonUsesTerrainMap() then
+			if DGV:DungeonUsesTerrainMap_dugi(uiMapID) then
 				floorNum = floorNum - 1
 			end
 			
@@ -1265,8 +1632,9 @@ function GPS:Initialize()
 			if TLx 
 			and TLx ~= 0 
 			and DGV.TERRAIN_MAPS[terrainMapID]
-			and areaID ~= 1184 --Argus
-			and areaID ~= 613 --Vashj'ir
+			and uiMapID ~= 905 --Argus
+			and uiMapID ~= 994 --Argus
+			and uiMapID ~= 203 --Vashj'ir
 			and (floorNum ~= 0 or TLx ~=0 or  TLy ~=0 or  BRx ~=0 or BRy ~=0)
 			then
 				local areaWidth, areaHeight = abs(BRx-TLx), abs(BRy-TLy)	
@@ -1284,12 +1652,11 @@ function GPS:Initialize()
 				for y=1,numTilesY do
 					for x=1,numTilesX do
 					
-						--For optimization purposes. Displayed is only close area to current player position. Check minimapArea option for more details
 						local playerIn = false
 						
-						local unitX, unitY = GetPlayerMapPosition("player")
+						local unitX, unitY = DGV:GetPlayerPositionOnMap(GPS.GetMapIdForGPSMap())
 					
-						if (unitX == 0 or unitX == nil) and (unitY == 0 or unitY == nil) then
+						if ((unitX == 0 or unitX == nil) and (unitY == 0 or unitY == nil)) or DGV:IsPointOutOfTheMap(unitX, unitY) then
 							unitX, unitY = 0.5, 0.5
 						end
 					
@@ -1370,7 +1737,11 @@ function GPS:Initialize()
 							texture:SetTexCoord(left, right, top, bottom)
 							texture:SetPoint('TOPLEFT', textureOffsetX, textureOffsetY)
 							
-							local paf = (areaID == 610 or areaID == 614 or areaID == 615) and UNDERWATER_PATH or TERRAIN_PATH
+							local paf = (
+                            uiMapID == 201 
+                            or uiMapID == 204 
+                            or uiMapID == 205
+                            ) and UNDERWATER_PATH or TERRAIN_PATH
 							local texturePath = paf:format(DGV.TERRAIN_MAPS[terrainMapID], iTileX+(x-1), iTileY+(y-1))
 							texture:SetTexture(texturePath, false)
 							texture:SetSize(textureWidth, textureHeight)
@@ -1460,6 +1831,19 @@ function GPS:Initialize()
 		end
 	end
 	
+	GPS.UpdateFrameSize = function()
+		if DGV:IsBigMap(GPS.GetMapIdForGPSMap()) then
+			local bigTileWidth = (GPSArrow1:GetWidth() * 4) 
+			local bigTileHeight = (GPSArrow1:GetHeight() * 3) 
+			GPSArrow:SetSize( bigTileWidth,  bigTileHeight ) --* 0.8
+		else
+			local worldMapWidth, worldMapHeight = WorldMapFrame.ScrollContainer.Child:GetSize()
+			local tileSize = GPSArrow1:GetWidth()
+			local worldTileSize = 256
+			GPSArrow:SetSize(worldMapWidth / worldTileSize * tileSize, worldMapHeight / worldTileSize * tileSize)
+		end
+	end
+	
 	GPS.Load = function()
 		lastUnitY = -1
 		GPS.loaded = true
@@ -1472,7 +1856,9 @@ function GPS:Initialize()
 			GPSArrow:RegisterEvent("PLAYER_ENTERING_WORLD");
 			GPSArrow:RegisterEvent("ZONE_CHANGED");
 			GPSArrow:RegisterEvent("ZONE_CHANGED_NEW_AREA");
-			GPSArrow:RegisterEvent("WORLD_MAP_UPDATE");
+			
+			--todo: find replacement
+			--GPSArrow:RegisterEvent("WORLD_MAP_UPDATE");
 			GPSArrow:RegisterEvent("NEW_WMO_CHUNK");
 			GPSArrow:RegisterEvent("MINIMAP_UPDATE_ZOOM");
 			GPSArrow:RegisterEvent("ZONE_CHANGED_INDOORS");
@@ -1481,6 +1867,12 @@ function GPS:Initialize()
 			GPSArrow:SetScript("OnHide", GPS.OnHide)
 			GPSArrow:SetScript("OnEvent", GPS.OnEvent)
 			GPSArrow:SetScript("OnUpdate", GPS.OnUpdate)
+			
+			hooksecurefunc(WorldMapFrame, "OnMapChanged", function()
+				if GPSArrowOptions then
+					GPS.OnEvent(nil, "WORLD_MAP_UPDATE")
+				end
+			end)
 			
 			GPSArrow.registeredEvents = true
 		end
@@ -1499,11 +1891,12 @@ function GPS:Initialize()
 		end
 		
 		--Fixing oryginal Zoom Map player position
-		local worldMapWidth, worldMapHeight = WorldMapDetailFrame:GetSize()
-		local tileSize = GPSArrow1:GetWidth()
-		local worldTileSize = WorldMapDetailTile1:GetWidth()
-		GPSArrow:SetSize(worldMapWidth / worldTileSize * tileSize, worldMapHeight / worldTileSize * tileSize)
 		
+		if not WorldMapFrame:IsShown() then
+			WorldMapFrame:Show()
+			WorldMapFrame:Hide()
+		end
+
 		if ( not GPSArrowOptions ) then
 			GPSArrowOptions = GPS.Options;
 		end
@@ -1578,7 +1971,10 @@ function GPS:Initialize()
 			CreateFrame("QuestPOIFrame", "GPSArrowBlobFrame", GPSArrowPOI)
 			GPSArrowBlob = GPSArrowBlobFrame
 			GPSArrowBlob:SetAllPoints(GPSArrowPOI)
+			
+			--[[ todo: find replacement
 			WorldMapBlobFrame_OnLoad(GPSArrowBlob)
+			]]
 			
 			local function WorldMapPOIButton_Init(self)
 			end
@@ -1621,7 +2017,10 @@ function GPS:Initialize()
 		GPSArrowTab:EnableMouse(true)
 		GPSArrowScroll:SetMovable(true)
 		
-		GPSArrowTab:SetScript("OnMouseDown", function()  
+		GPSArrowTab:SetScript("OnMouseDown", function() 
+			if DugisArrowGlobal:GetSetting("gps_locked") then
+				return
+			end
 			if DGV:UserSetting(DGV_GPS_MERGE_WITH_DUGI_ARROW) then
 				DugisArrowFrame:StartMoving()  
 			else
@@ -1642,6 +2041,8 @@ function GPS:Initialize()
 		end)
 	
 		GPS.UpdateSize()
+		
+		DugisGuideViewer.Modules.GPSArrowModule.CreateBigTextures()
 	
 		GPSArrowScroll:Hide()
 		GPSArrowTab:SetAlpha(0)
@@ -1660,6 +2061,9 @@ function GPS:Initialize()
 			GPS.UpdateMinimapTextures()
 		end
 		
+		GPS.UpdateFrameSize()
+		
+	
 	end
 end
 

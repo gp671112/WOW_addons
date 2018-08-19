@@ -4,7 +4,6 @@ QuestPOI.essential = true
 
 local QuestPOIFrame
 
-local astrolabe = DongleStub("Astrolabe-1.0-Dugi")
 local lastWaypoint
 local scanning 
 local IsLegionPatch = select(4, GetBuildInfo()) >= 70100
@@ -16,13 +15,13 @@ function QuestPOI:Initialize()
 		return DGV:IterateQuestPOIs(function(poi)
 			local id = poi.questID or (poi.quest and poi.quest.questId)
 			if id==qid then return poi end
-		end, WorldMapPOIFrame)
+		end, QuestScrollFrame.Contents)
 	end
 
 	--WatchFrameLines
 	--WorldMapPOIFrame
 	function DGV:IterateQuestPOIs(delegate, parent, numericPoiType, poiType)
-		if not parent then parent=WorldMapPOIFrame end
+		if not parent then parent=QuestScrollFrame.Contents end
 		if not numericPoiType then numericPoiType=QUEST_POI_NUMERIC end
 		local numEntries = QuestMapUpdateAllQuests()
 		local breakVal = false
@@ -102,12 +101,11 @@ function QuestPOI:Initialize()
 			scanning = true
 		end
 
-		local map = GetCurrentMapAreaID()
+		local map = DGV:GetCurrentMapID() 
 		local floor = GetCurrentMapDungeonLevel()
-		--local floors = astrolabe:GetNumFloors(map)
 		--floor = (floors == 0 and 0 or 1)
 	
-		local px, py = GetPlayerMapPosition("player")
+		local px, py = DGV:GetPlayerMapPosition()
 	
 		if not px or not py or px <= 0 or py <= 0 then
 			scanning = false
@@ -134,7 +132,6 @@ function QuestPOI:Initialize()
 			local completed, x, y, objective = QuestPOIGetIconInfo(qid)
 	
 			if x and y then
-				local dist, xd, yd = astrolabe:ComputeDistance(map, floor, px, py, map, floor, x, y)
 				if dist < closestdist then
 					closest = watchIndex
 					closestdist = dist
@@ -178,11 +175,11 @@ function QuestPOI:Initialize()
 		if worldQuestID then
 			--reset = true
 			local title = C_TaskQuest.GetQuestInfoByQuestID(worldQuestID);
-			_, map = C_TaskQuest.GetQuestZoneID(worldQuestID)
-			if GetCurrentMapAreaID() ~= map then return end
+			map = C_TaskQuest.GetQuestZoneID(worldQuestID)
+			if DGV:GetCurrentMapID()  ~= map then return end
 			--LuaUtils:DugiSetMapByID(map)
 			--floor = GetCurrentMapDungeonLevel()
-			local x, y = C_TaskQuest.GetQuestLocation(worldQuestID)
+			local x, y = C_TaskQuest.GetQuestLocation(worldQuestID, map)
 			
 			if title then 
 				title = "|cffffd200"..title.."|r"..L[" (World Quest)"]
@@ -253,7 +250,7 @@ end
 
 -- this hooksecurefunc is here otherwise it doesn't seem to work with the objective tracker after a /reload
 
-local function onPOIClick(self)
+local function onPOIClick(self, landmark)
 	DugisGuideUser.PreviewPointx = nil
 	DugisGuideUser.PreviewPointy = nil	
 	if QuestPOI.loaded and DGV:UserSetting(DGV_MANUALWAYPOINT) then
@@ -261,7 +258,7 @@ local function onPOIClick(self)
 			(not WorldMapFrame:IsShown() or DGV.MapPreview:IsAnimating())
 			and DGV:GetDB(DGV_MAPPREVIEWDURATION)~=0 and not DGV.carboniteloaded
 
-		if self and not self.landmarkType then
+		if self and not self.landmarkType and not landmark then
 			DGV.DugisArrow:QuestPOIWaypoint(self, true)
 		else
 			DGV.DugisArrow:LandMarkPOIWaypoint(self, true)
@@ -269,33 +266,73 @@ local function onPOIClick(self)
 	end
 end
 
-local CurrentMap
-
-hooksecurefunc("TaskPOI_OnClick", function(self) --not needed already triggered with hooksecurefunc "WorldMap_SetupWorldQuestButton" --still need this for bonus quest
-	if not QuestUtils_IsQuestWorldQuest(self.questID) then
-	    onPOIClick(self)
+hooksecurefunc("QuestPOIButton_OnClick", function(self)
+	if self:GetParent():GetParent() == ObjectiveTrackerBlocksFrame
+		or self:GetParent():GetParent() == QuestScrollFrame
+		or (not self.worldQuest and self:GetParent() == GPSArrowPOIFrame) then
+		onPOIClick(self)
 	end
 end)
 
-hooksecurefunc("QuestPOIButton_OnClick", function(self)
-    onPOIClick(self)
-end)
+local CurrentMap
 
-hooksecurefunc("WorldMapPOI_OnClick", function(self)
-	if CurrentMap ~= GetCurrentMapAreaID() then return end
-	onPOIClick(self)
-end)
+function HookLandMarks()
+	LuaUtils:foreach(WorldMapFrame.pinPools, function(pool)
+		local allObjects = {}
+		
+		LuaUtils:foreach(pool.inactiveObjects, function(_true, button)
+			if type(button) ~= "number" then
+				allObjects[#allObjects + 1] = button
+			end
+		end)
+		
+		LuaUtils:foreach(pool.activeObjects, function(_true, button)
+			allObjects[#allObjects + 1] = button
+		end)
+	
+		LuaUtils:foreach(allObjects, function(button)
+			if not button.hooked then
+				if  button.pinFrameLevelType == "PIN_FRAME_LEVEL_ACTIVE_QUEST"         or
+                    button.pinFrameLevelType == "PIN_FRAME_LEVEL_AREA_POI"             or
+                    button.pinFrameLevelType == "PIN_FRAME_LEVEL_DIG_SITE"             or
+                    button.pinFrameLevelType == "PIN_FRAME_LEVEL_ENCOUNTER"            or
+                    button.pinFrameLevelType == "PIN_FRAME_LEVEL_FLIGHT_POINT"         or
+                    button.pinFrameLevelType == "PIN_FRAME_LEVEL_PET_TAMER"            or
+                    button.pinFrameLevelType == "PIN_FRAME_LEVEL_SUPER_TRACKED_QUEST"  or
+                    button.pinFrameLevelType == "PIN_FRAME_LEVEL_TOPMOST"              or
+                    button.pinFrameLevelType == "PIN_FRAME_LEVEL_WORLD_QUEST"          
+				then
+					local scriptExists = button:GetScript("OnMouseUp")
+					
+					local hookSetFunction
+					if scriptExists then
+						hookSetFunction = button.HookScript
+					else
+						hookSetFunction = button.SetScript
+					end
+				
+					hookSetFunction(button, "OnMouseUp", function(self, button_)
+						if button_ == "LeftButton" then
+							if not IsCurrentMapContinent() then
+								onPOIClick(button, true)
+							end
+						end
+					end)
+				end
+				button.hooked = true
+			end
+		end)
+	end)
+end
 
-hooksecurefunc("WorldMapPOI_OnEnter", function(...) --Need this because the waypoint is inaccurate if user click on Landmark outside currentmap
-	CurrentMap = GetCurrentMapAreaID()
-end)
+
 
 allWorldQuestButtons = {}
 
 hooksecurefunc("WorldMap_SetupWorldQuestButton", function(button, worldQuestType, rarity, isElite, tradeskillLineIndex, inProgress, selected, isCriteria, isSpellTarget)
     if not button.alreadyHooked then
     
-        button:HookScript("OnClick", function(self)
+        button:HookScript("OnMouseUp", function(self)
             if self.questID then
 				if IsLegionPatch then 
 					if QuestUtils_IsQuestWorldQuest(self.questID) then
@@ -310,6 +347,7 @@ hooksecurefunc("WorldMap_SetupWorldQuestButton", function(button, worldQuestType
             end
         end)
         
+		--todo: test this
         if button:GetParent():GetName() == "WorldMapPOIFrame" then
             allWorldQuestButtons[#allWorldQuestButtons + 1] = button
         end
@@ -324,7 +362,7 @@ hooksecurefunc("WorldMap_SetupWorldQuestButton", function(button, worldQuestType
 				print("|cff11ff11" .. "Dugi: Disabled WorldQuestTracker's \"Auto World Map\" option, this needs to be off for Dugi waypoint.")
 			end	
 		end	
-        LuaUtils:foreach({WorldMapPOIFrame:GetChildren()}, function(poi)
+        LuaUtils:foreach({QuestScrollFrame.Contents:GetChildren()}, function(poi)
             if not poi.wasHoockedByDugi then
                 if poi.worldQuest and poi.timeBlipRed then
                     poi:HookScript("OnClick", function(self)
@@ -358,7 +396,11 @@ hooksecurefunc("WorldMap_SetupWorldQuestButton", function(button, worldQuestType
 end)
 
 LuaUtils:Delay(1, function()
+
+--[[   todo: find replacement
     hooksecurefunc("WorldMapButton_OnClick", function(self)
         DugisGuideViewer:WatchLocalQuest()
     end)
+	
+	]]
 end)

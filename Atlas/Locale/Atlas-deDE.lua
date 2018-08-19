@@ -1,10 +1,10 @@
--- $Id: Atlas-deDE.lua 270 2017-06-29 14:22:48Z arith $
+-- $Id: Atlas-deDE.lua 299 2018-02-22 15:07:35Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 	Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -151,6 +151,8 @@ Wenn du jetzt alle aktualisiert hast, öffne deine Addonliste, um nachzusehen, o
 Wenn du dir sicher bist, dass du diese "fehlenden" Module/Plugins nicht benötigst und du daher diese Meldung nicht sehen willst, kannst du die Meldung im Optionsmenü deaktivieren.
 
 Liste fehlender Module/Plugins:]=]
+L["ATLAS_NO_MODULE_OR_PLUGIN"] = [=[|cffff66ffError:|r
+Atlas kann kein Kartenmodul oder Plugin ermitteln was installiert und aktiviert ist. Beachte, dass Atlas selbst ein Kartenbrowser ist. Du musst mindestens ein Kartenmodul oder ein Plugin installieren, um die Karten durchsuchen zu können.]=]
 L["ATLAS_OPEN_ACHIEVEMENT"] = "Klicken, um das Erfolgsfenster zu öffnen."
 L["ATLAS_OPEN_ADDON_LIST"] = "Addon-Liste öffnen"
 L["ATLAS_OPEN_ADVENTURE"] = "Klicken, um den Abenteuerführer zu öffnen."
@@ -327,10 +329,6 @@ L["Wave 6"] = "Welle 6"
 L["West"] = "Westen"
 L["Yarley <Armorer>"] = "Yarley <Rüstungsschmied>"
 L["Zaladormu"] = "Zaladormu"
-
--- ToC
-L["Description"] = "Instanzkarten-Browser"
-L["Title"] = "Atlas"
 
 
 end

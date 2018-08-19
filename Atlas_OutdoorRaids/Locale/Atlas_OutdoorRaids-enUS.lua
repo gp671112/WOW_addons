@@ -1,10 +1,10 @@
--- $Id: Atlas_OutdoorRaids-enUS.lua 40 2017-05-04 05:16:39Z arith $
+-- $Id: Atlas_OutdoorRaids-enUS.lua 50 2018-08-08 17:30:20Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -54,9 +54,5 @@ L["Talonpriest Skizzik"] = "Talonpriest Skizzik"
 L["Talonpriest Zellek"] = "Talonpriest Zellek"
 L["Terokk"] = "Terokk"
 L["Vakkiz the Windrager"] = "Vakkiz the Windrager"
-
--- ToC
-L["Description"] = "Maps for Outdoor Raid Encounters"
-L["Title"] = "Atlas |r|cFF0099FF[Outdoor Raids]|r"
 
 end

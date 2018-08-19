@@ -1262,13 +1262,26 @@ end
 --Returns the score of the guide (takes into account only not owned items)
 function DGF:ScoreGuide(guideTitle, noThread, yields)
     local guideScore = 0
+	
+	if DGV.GearFinderScoreGuide_cache_v1 == nil then
+		DGV.GearFinderScoreGuide_cache_v1 = {}
+	end
+
+    local gearIds = DGF.guideTitle2GearIds_map[guideTitle] or {}
+	
+	local gearControlSum = 0;
+	
+	LuaUtils:foreach(gearIds, function(gearId)
+		gearControlSum = gearControlSum + (tonumber(gearId) or 0)
+	end)
+	
+	if DGV.GearFinderScoreGuide_cache_v1[guideTitle..gearControlSum] then
+		return DGV.GearFinderScoreGuide_cache_v1[guideTitle..gearControlSum]
+	end
 
     if not yields then
         yields = 0
     end
-
-   -- local metadata = DGV.guidemetadata[guideTitle]
-    local gearIds = DGF.guideTitle2GearIds_map[guideTitle] or {}
 
     local level = UnitLevel("player")
 
@@ -1304,6 +1317,7 @@ function DGF:ScoreGuide(guideTitle, noThread, yields)
        end
     end)
 
+	DGV.GearFinderScoreGuide_cache_v1[guideTitle..gearControlSum] = guideScore
     return guideScore
 end
 

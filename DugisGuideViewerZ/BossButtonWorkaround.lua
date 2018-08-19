@@ -17,9 +17,7 @@ function BBW:Initialize()
 	
 	-- hooksecurefunc("SetDungeonMapLevel", function(f) --doesn't work for world minidungeons
 		-- if f==GetCurrentMapDungeonLevel() then return end
-		-- local m = GetCurrentMapAreaID()
 		-- SetMapToCurrentZone()
-		-- local playerMap,playerFloor = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
 		-- if playerMap==m and playerFloor==f then return end
 		-- SetMapByID(m)
 	-- end)

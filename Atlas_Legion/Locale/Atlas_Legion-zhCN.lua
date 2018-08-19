@@ -1,8 +1,8 @@
--- $Id: Atlas_Legion-zhCN.lua 87 2017-01-16 09:16:53Z arith $
+-- $Id: Atlas_Legion-zhCN.lua 145 2018-08-09 14:03:43Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2016 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -90,9 +90,5 @@ L["Understone Lasher"] = "顶石鞭笞者"
 L["Velimar"] = "威利玛"
 L["Volynd Stormbringer"] = "沃伦德·风暴使者"
 L["Worn-Edged Page"] = "边缘破损的书页"
-
--- ToC
-L["Description"] = "军团再临副本地图"
-L["Title"] = "Atlas |r|cFF0099FF[军团再临]|r"
 
 end

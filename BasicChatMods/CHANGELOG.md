@@ -1,7 +1,8 @@
 # BasicChatMods
 
-## [v7.3.0](https://github.com/funkydude/BasicChatMods/tree/v7.3.0) (2017-08-29)
-[Full Changelog](https://github.com/funkydude/BasicChatMods/compare/v7.2.1...v7.3.0)
+## [v8.0.4](https://github.com/funkydude/BasicChatMods/tree/v8.0.4) (2018-07-27)
+[Full Changelog](https://github.com/funkydude/BasicChatMods/compare/v8.0.3...v8.0.4)
 
-- bump toc  
-- remove compat code  
+- config: Fix some of the sliders erroring.  
+- Fix not being able to drag some chat frames to the very edge since BfA.  
+- channelnames: Replacements for channel names now work with more than 10 custom channels.  

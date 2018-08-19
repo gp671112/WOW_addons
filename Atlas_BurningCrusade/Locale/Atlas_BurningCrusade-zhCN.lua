@@ -1,10 +1,10 @@
--- $Id: Atlas_BurningCrusade-zhCN.lua 20 2017-01-16 10:36:39Z arith $
+-- $Id: Atlas_BurningCrusade-zhCN.lua 38 2018-08-09 13:56:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -229,9 +229,5 @@ L["Young Blanchy"] = "小马布兰契"
 L["Ythyar"] = "伊萨尔"
 L["Zelfan"] = "扎尔凡"
 L["Zixil <Aspiring Merchant>"] = "吉克希尔 <有抱负的商人>"
-
--- ToC
-L["Description"] = "燃烧的远征副本地图"
-L["Title"] = "Atlas |r|cFF0099FF[燃烧的远征]|r"
 
 end

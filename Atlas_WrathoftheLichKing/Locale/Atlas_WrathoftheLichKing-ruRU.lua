@@ -138,9 +138,5 @@ L["Watcher Gashra"] = "Дозорный Гашра"
 L["Watcher Narjil"] = "Дозорный Нарджил"
 L["Watcher Silthik"] = "Дозорный Силтик"
 
--- ToC
-L["Description"] = "Карты подземелий: Wrath of the Lich King"
-L["Title"] = "Atlas |r|cFF0099FF[Wrath of the Lich King]|r"
-
 
 end

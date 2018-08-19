@@ -10,7 +10,7 @@ Data function  A function that returns a string block containing the actual guid
 
 Example
 
-DugisGuideViewer:RegisterGuide("Tanaris (47-48)", "Hinterlands (48)", "Alliance", "L", function()
+DugisGuideViewer:RegisterGuide("Tanaris (47-48)", "Hinterlands (48)", "Alliance", nil, "L", function()
 return [[
 F Gadgetzan
 A The Thirsty Goblin |QID|2605|
@@ -89,8 +89,40 @@ Tags are appended onto an objective line. They are optional, and any number can 
 |Z|Darnassus|
     Overrides the mapping zone for the objective. If not defined the objective's waypoints will use the guide title for the zone. If the title isn't a valid zone name, the player's current zone is used. These should not be used heavily, if the player is changing locations to another zone and doing more than turnins, accepts and maybe one or two completes, a new guide should be started. Remember, relocation to a new quest hub usually means you should start a new guide! 
 |QID|1234| |QO|Some Mob slain: 10/10|
-    Completes when a sub-objective of the quest matches the QO tag. Both values must be specified. Works with Note and Kill objectives. Like quest titles, this is case-sensitive and must match the quest log text EXACTLY. 
-    
+	Completes when a sub-objective of the quest matches the QO tag. Both values must be specified. Works with Note and Kill objectives. Like quest titles, this is case-sensitive and must match the quest log text EXACTLY. 
+|FAC|Alliance|
+	Step is active is character is Alliance 
+|V|
+	Vehicle detection, tick the step if player is in vehicle. 
+|PL|1|
+	Player Level,  eg if player is level 1, tick the step
+|PRE|12343|
+	Pre-quest, requires 12343 to be in-log (accepted) or completed for the step to be active otherwise skip. 
+|POI|
+	Try to use Blizzard Point of Interest instead of step waypoint
+|REACH|
+	Tick the step after player reach the final waypoint
+|REACH|79.95,72.54|
+	Tick the step after player reach 79.95,72.54
+|OID|1234|
+	Other quest ID, tick the step[ if quest id in OID is in-log (accepted) or completed, can use up to 4 quest ids eg |OID|1, 2, 3, 4|
+|PPOS|
+	Place waypoint in player's current position
+|OBJ|
+	Use objective display id for model viewer
+|AID|
+	Tick step if Achievement ID is completed 
+|F|100 1| 
+	Tick step if player is in Map 100 Floor 1
+|CHOICE| 
+	Starts with something like (choice:1:Shadow)<br/>(choice:2:Holy)<br/>(choice:3:Discipline)
+	If player click (choice:1:Shadow) then all steps with |CHOICE|1| will become active. 
+|E|
+	Used for quests that accept and completes at the same time
+|TID|1235|
+	Tick step with quest id 1235 is turned in (completed and no longer in quest log)
+
+
 Map Guides 
 
 Map guides are in SimpleHTML format, to be used to write text and images style guides.  eg 

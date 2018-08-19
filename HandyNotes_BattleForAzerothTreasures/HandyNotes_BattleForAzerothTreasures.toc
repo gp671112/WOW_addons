@@ -1,0 +1,16 @@
+## Interface: 80000
+## Title: HandyNotes: Battle for Azeroth Treasures
+## Notes: Where are the hidden treasures in Battle For Azeroth?
+## Title-zhTW: |cff4DFF4D[地圖]|r 地圖標記-決戰艾澤拉斯財寶與稀有
+## Author: Kemayo
+## Version: 1
+## DefaultState: enabled
+## X-Category: Map
+## X-eMail: kemayo @ gmail DOT com
+## SavedVariables: HandyNotes_BattleForAzerothTreasuresDB
+## RequiredDeps: HandyNotes
+
+handler.lua
+config.lua
+Treasure.lua
+Rares.lua

@@ -1,22 +1,26 @@
-lightweight tag 7d3e2365b5ee10647a58926588dc99beaed2d10c 1.14.14-release
+lightweight tag ce6d2b2688c2bece0518472b597a01d88bf4f567 1.15.0
 Author:	Julien Rechaussat <Kutikuti@users.noreply.github.com>
-Date:	Wed Jan 17 10:33:40 2018 +0100
+Date:	Thu Jul 19 15:39:47 2018 +0200
 
-commit 7d3e2365b5ee10647a58926588dc99beaed2d10c
+commit ce6d2b2688c2bece0518472b597a01d88bf4f567
 Author: Julien Rechaussat <Kutikuti@users.noreply.github.com>
-Date:   Wed Jan 17 10:33:40 2018 +0100
+Date:   Thu Jul 19 15:39:47 2018 +0200
 
-    Small bump
+    BFA Release
 
-commit f0662d2f8c9ada92c680640525320989e2daae35
-Author: Julien Rechaussat <Kutikuti@users.noreply.github.com>
-Date:   Wed Jan 17 10:33:16 2018 +0100
+commit 40f608a1c9cba14317bb5cb2a7bac3db079d50f6
+Author: Watcheur <moriceau.mathieu@gmail.com>
+Date:   Wed Jul 18 21:30:40 2018 +0200
 
-    Fix artifact string issue with 7.3.5
+    BFA Update
+    
+    Remove artifact & relics info, remove Lib ArtifactData library
 
-commit 25bf3570bfe46dcb75871a29632433b16517da8e
-Author: Julien Rechaussat <Kutikuti@users.noreply.github.com>
-Date:   Fri Jan 5 10:52:06 2018 +0100
+commit 40f608a1c9cba14317bb5cb2a7bac3db079d50f6
+Author: Watcheur <moriceau.mathieu@gmail.com>
+Date:   Wed Jul 18 21:30:40 2018 +0200
 
-    test commit
+    BFA Update
+    
+    Remove artifact & relics info, remove Lib ArtifactData library
 

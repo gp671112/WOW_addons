@@ -58,7 +58,6 @@ function TitanPanelLocationButton_OnLoad(self)
 	self:RegisterEvent("ZONE_CHANGED");
 	self:RegisterEvent("ZONE_CHANGED_INDOORS");
 	self:RegisterEvent("ZONE_CHANGED_NEW_AREA");
-	self:RegisterEvent("MINIMAP_ZONE_CHANGED");
 	self:RegisterEvent("PLAYER_ENTERING_WORLD");
 end
 
@@ -67,7 +66,10 @@ end
 -- DESC : Display button when plugin is visible
 -- **************************************************************************
 function TitanPanelLocationButton_OnShow()
-	SetMapToCurrentZone();
+	local mapID = C_Map.GetBestMapForUnit("player");
+	if mapID ~= nil then
+    	WorldMapFrame:SetMapID(mapID);
+	end
 	TitanPanelLocation_HandleUpdater();
 end
 
@@ -88,7 +90,7 @@ end
 function TitanPanelLocationButton_GetButtonText(id)
 	local button, id = TitanUtils_GetButton(id, true);
 
-	button.px, button.py = GetPlayerMapPosition("player");
+	button.px, button.py = TitanPanelGetPlayerMapPosition();
 	-- cache coordinates for update checking later on
 	cachedX = button.px;
 	cachedY = button.py;
@@ -109,6 +111,9 @@ function TitanPanelLocationButton_GetButtonText(id)
 
 	if (TitanGetVar(TITAN_LOCATION_ID, "ShowZoneText")) then
 		if (TitanUtils_ToString(button.subZoneText) == '') then
+			if (button.zoneText == '') then
+				_, _, button.zoneText = C_Map.GetMapInfo(C_Map.GetBestMapUnit("player"));
+			end
 			locationText = TitanUtils_ToString(button.zoneText)..' '..locationText;
 		else
 			locationText = TitanUtils_ToString(button.subZoneText)..' '..locationText;
@@ -151,9 +156,9 @@ function TitanPanelLocationButton_GetTooltipText()
 		pvpInfoRichText = TitanUtils_GetGreenText(SANCTUARY_TERRITORY);
 	elseif (TitanPanelLocationButton.pvpType == "arena") then
 		TitanPanelLocationButton.subZoneText = TitanUtils_GetRedText(TitanPanelLocationButton.subZoneText);
-	pvpInfoRichText = TitanUtils_GetRedText(CONTESTED_TERRITORY);
+		pvpInfoRichText = TitanUtils_GetRedText(CONTESTED_TERRITORY);
 		elseif (TitanPanelLocationButton.pvpType == "friendly") then
-	pvpInfoRichText = TitanUtils_GetGreenText(format(FACTION_CONTROLLED_TERRITORY, TitanPanelLocationButton.factionName));
+		pvpInfoRichText = TitanUtils_GetGreenText(format(FACTION_CONTROLLED_TERRITORY, TitanPanelLocationButton.factionName));
 	elseif (TitanPanelLocationButton.pvpType == "hostile") then
 		pvpInfoRichText = TitanUtils_GetRedText(format(FACTION_CONTROLLED_TERRITORY, TitanPanelLocationButton.factionName));
 	elseif (TitanPanelLocationButton.pvpType == "contested") then
@@ -184,7 +189,10 @@ function TitanPanelLocationButton_OnEvent(self, event, ...)
 		end
 	end
 	if TitanGetVar(TITAN_LOCATION_ID, "UpdateWorldmap") then
-		SetMapToCurrentZone();
+		local mapID = C_Map.GetBestMapForUnit("player")
+		if mapID ~= nil then
+    		WorldMapFrame:SetMapID(mapID);
+		end
 	end
 	TitanPanelLocationButton_UpdateZoneInfo(self);
 	TitanPanelPluginHandle_OnUpdate(updateTable);
@@ -193,7 +201,8 @@ end
 
 -- function to throttle down unnecessary updates
 function TitanPanelLocationButton_CheckForUpdate()
-	local tempx, tempy = GetPlayerMapPosition("player");
+	local mapID = C_Map.GetBestMapForUnit("player")
+	local tempx, tempy = TitanPanelGetPlayerMapPosition();
 	if tempx ~= cachedX or tempy ~= cachedY then
 		TitanPanelPluginHandle_OnUpdate(updateTable);
 	end
@@ -234,7 +243,7 @@ function TitanPanelLocationButton_OnClick(self, button)
 		else
 			--WorldMap_ToggleSizeUp();
 			if (not GetCVarBool("miniWorldMap")) then
-				WorldMap_ToggleSizeUp();
+				--/; # Deprecated in WoW 8.0.1
 			end
 			ToggleFrame(WorldMapFrame);
 		end
@@ -439,14 +448,15 @@ end
 -- **************************************************************************
 function TitanMapFrame_OnUpdate(self, elapsed)
 	-- using :Hide / :Show prevents coords from running
-	--	TitanMapFrame:Hide() -- hide parent
+	-- TitanMapFrame:Hide() -- hide parent
 
 	-- Determine the text to show for player coords
-	--
-	if WorldMapFrame_InWindowedMode() then
+
+--[[
+	if WorldMapFrame:IsVisible() then
 		TitanMapPlayerLocation:SetText("");
 	else
-		self.px, self.py = GetPlayerMapPosition("player");
+		self.px, self.py = TitanPanelGetPlayerMapPosition();
 		if self.px == nil then self.px = 0 end
 		if self.py == nil then self.py = 0 end
 		if self.px == 0 and self.py == 0 then
@@ -462,18 +472,38 @@ function TitanMapFrame_OnUpdate(self, elapsed)
 		end
 		TitanMapPlayerLocation:SetText(format(L["TITAN_LOCATION_MAP_PLAYER_COORDS_TEXT"], TitanUtils_GetHighlightText(playerLocationText)));
 	end
+]]
+	if WorldMapFrame:IsMaximized() then
+		self.px, self.py = TitanPanelGetPlayerMapPosition();
+		if self.px == nil then self.px = 0 end
+		if self.py == nil then self.py = 0 end
+		if self.px == 0 and self.py == 0 then
+			playerLocationText = L["TITAN_LOCATION_NO_COORDS"]
+		else
+			if (TitanGetVar(TITAN_LOCATION_ID, "CoordsFormat1")) then
+				playerLocationText = format(L["TITAN_LOCATION_FORMAT"], 100 * self.px, 100 * self.py);
+			elseif (TitanGetVar(TITAN_LOCATION_ID, "CoordsFormat2")) then
+				playerLocationText = format(L["TITAN_LOCATION_FORMAT2"], 100 * self.px, 100 * self.py);
+			elseif (TitanGetVar(TITAN_LOCATION_ID, "CoordsFormat3")) then
+				playerLocationText = format(L["TITAN_LOCATION_FORMAT3"], 100 * self.px, 100 * self.py);
+			end
+		end
+		TitanMapPlayerLocation:SetText(format(L["TITAN_LOCATION_MAP_PLAYER_COORDS_TEXT"], TitanUtils_GetHighlightText(playerLocationText)));
+	else
+		TitanMapPlayerLocation:SetText("");
+	end
 
 	-- Determine the text to show for cursor coords
 
 		-- calc cursor position on the map
 		local cursorLocationText, playerLocationText;
 		local x, y = GetCursorPosition();
-		x = x / WorldMapDetailFrame:GetEffectiveScale();
-		y = y / WorldMapDetailFrame:GetEffectiveScale();
+		x = x / WorldMapFrame:GetEffectiveScale();
+		y = y / WorldMapFrame:GetEffectiveScale();
 
-		local centerX, centerY = WorldMapDetailFrame:GetCenter();
-		local width = WorldMapDetailFrame:GetWidth();
-		local height = WorldMapDetailFrame:GetHeight();
+		local centerX, centerY = WorldMapFrame:GetCenter();
+		local width = WorldMapFrame:GetWidth();
+		local height = WorldMapFrame:GetHeight();
 		local cx = ((x - (centerX - (width/2))) / width) -- OFFSET_X 
 		local cy = ((centerY + (height/2) - y ) / height) --  OFFSET_Y
 		-- cut off if the cursor coords are beyond the map, show 0,0
@@ -500,12 +530,40 @@ function TitanMapFrame_OnUpdate(self, elapsed)
 
 	-- *
 	TitanMapPlayerLocation:ClearAllPoints()
-	if ( WorldMapFrame_InWindowedMode() ) then
+--[[
+	if ( WorldMapFrame:IsVisible() ) then
 		-- **
 		TitanMapPlayerLocation:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 75, -12)
 	else
-		x_offset = (WorldMapDetailFrame:GetWidth() / 1.6) -- left fifth of map
+		x_offset = (WorldMapFrame:GetWidth() / 1.6) -- left fifth of map
 			- (TitanMapPlayerLocation:GetWidth() / 1.8) -- center of coords
 		TitanMapPlayerLocation:SetPoint("BOTTOMLEFT", WorldMapFrame, "BOTTOMLEFT", x_offset, 10)
+	end
+]]
+	if WorldMapFrame:IsMaximized() then
+		x_offset = (WorldMapFrame:GetWidth() / 1.6) -- left fifth of map
+			- (TitanMapPlayerLocation:GetWidth() / 1.8) -- center of coords
+		TitanMapPlayerLocation:SetPoint("BOTTOMLEFT", WorldMapFrame, "BOTTOMLEFT", x_offset, 10)
+	else
+		TitanMapPlayerLocation:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 75, -12)
+	end
+end
+
+-- **************************************************************************
+-- NAME : TitanPanelGetPlayerMapPosition()
+-- DESC : Get the player coordinates
+-- VARS : x = location on x axis, y = location on y axis
+-- **************************************************************************
+function TitanPanelGetPlayerMapPosition()
+    local mapID = C_Map.GetBestMapForUnit("player")
+    if mapID == nil then
+        return nil, nil
+    end
+
+    local position = C_Map.GetPlayerMapPosition(mapID, "player")
+    if position == nil then
+        return nil, nil
+    else
+    	return position:GetXY()
 	end
 end

@@ -1,10 +1,15 @@
-$Id: ChangeLog.txt 114 2017-08-30 14:21:41Z arith $
+$Id: ChangeLog.txt 116 2018-08-08 17:32:29Z arith $
 Atlas, a World of Warcraft instance map browser
-Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+Copyright 2016 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 ==============
 = Change Log =
 ==============
+
+v1.44.00 (Aug. 09, 2018)
+------------------------
+- ToC update to support WoW 8.0.1
+- MapID convert to uiMapID
 
 v1.43.00 (Aug. 30, 2017)
 ------------------------

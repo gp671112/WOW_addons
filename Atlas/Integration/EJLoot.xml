@@ -1,10 +1,10 @@
-<!-- $Id: EJLoot.xml 295 2017-09-19 13:11:08Z arith $ -->
+<!-- $Id: EJLoot.xml 306 2018-08-07 16:40:11Z arith $ -->
 <!--
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 	Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -161,7 +161,7 @@
 		</Scripts>
 	</Button>
 
-	<Button name="AtlasEncounterItemTemplate" virtual="true">
+	<Button name="AtlasEncounterItemTemplate" registerForClicks="LeftButtonUp, RightButtonUp" virtual="true">
 		<Size x="321" y="45"/>
 		<Layers>
 			<Layer level="BACKGROUND">
@@ -216,6 +216,15 @@
 			</Layer>
 			<Layer level="OVERLAY" textureSubLevel="1">
 				<Texture parentKey="IconBorder" file="Interface\Common\WhiteIconFrame" hidden="true">
+					<Size x="37" y="37"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeKey="$parent.icon"/>
+						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.icon"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY" textureSubLevel="2">
+				<Texture parentKey="IconOverlay" hidden="true">
 					<Size x="37" y="37"/>
 					<Anchors>
 						<Anchor point="TOPLEFT" relativeKey="$parent.icon"/>

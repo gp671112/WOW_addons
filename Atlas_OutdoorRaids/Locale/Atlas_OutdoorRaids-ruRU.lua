@@ -1,10 +1,10 @@
--- $Id: Atlas_OutdoorRaids-ruRU.lua 25 2017-01-19 07:42:24Z arith $
+-- $Id: Atlas_OutdoorRaids-ruRU.lua 50 2018-08-08 17:30:20Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -39,8 +39,8 @@ local L = AceLocale:NewLocale("Atlas_OutdoorRaids", "ruRU", false);
 if L then
 L["Ancient Skull Pile"] = "Груда древних черепов"
 L["Broken Isles World Bosses"] = "Мировые боссы Расколотого острова"
---Translation missing 
--- L["Broken Shore World Bosses"] = ""
+--[[Translation missing --]]
+--[[ L["Broken Shore World Bosses"] = ""--]] 
 L["Darkscreecher Akkarai"] = "Темный Крикун Аккарай"
 L["Draenor World Bosses"] = "Боссы Дренора"
 L["Gezzarak the Huntress"] = "Геззарак Охотница"
@@ -62,9 +62,5 @@ L["Talonpriest Skizzik"] = "Жрец Когтя Скиззик"
 L["Talonpriest Zellek"] = "Жрец Когтя Зеллек"
 L["Terokk"] = "Терокк"
 L["Vakkiz the Windrager"] = "Ваккиз Ветроярость"
-
--- ToC
-L["Description"] = "Карты на наружные рейдовые схватки"
-L["Title"] = "Atlas |r|cFF0099FF[Внешние Рейды]|r"
 
 end

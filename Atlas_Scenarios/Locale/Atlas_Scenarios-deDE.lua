@@ -1,8 +1,8 @@
--- $Id: Atlas_Scenarios-deDE.lua 36 2017-03-20 15:19:48Z arith $
+-- $Id: Atlas_Scenarios-deDE.lua 51 2018-04-24 09:19:35Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2012 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2012 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -26,25 +26,25 @@ local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas_Scenarios", "deDE", false);
 
 if L then
---Translation missing 
--- L["3 Lords slain"] = ""
---Translation missing 
--- L["3 Spires of Woe destroyed"] = ""
---Translation missing 
--- L["33 Deamons slain"] = ""
+--[[Translation missing --]]
+--[[ L["3 Lords slain"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["3 Spires of Woe destroyed"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["33 Deamons slain"] = ""--]] 
 L["Abomination of Anger"] = "Monstrosität des Zorns"
 L["Admiral Hagman"] = "Admiral Hagman"
 L["Admiral Hodgson"] = "Admiral Hodgson"
 L["Admiral Taylor"] = "Admiral Taylor"
 L["Alliance Ships"] = "Allianz-Schiffe"
---Translation missing 
--- L["Alliance's final stop"] = ""
+--[[Translation missing --]]
+--[[ L["Alliance's final stop"] = ""--]] 
 L["Amber Kearnen"] = "Amber Kearnen"
 L["Attackers"] = "Angreifer"
 L["Baldruc and Gryphon"] = "Baldruc und Greif"
 L["Battery"] = "Batterie"
---Translation missing 
--- L["Beach"] = ""
+--[[Translation missing --]]
+--[[ L["Beach"] = ""--]] 
 L["Brewing Cauldron"] = "Braukessel"
 L["Brewmaster Boof"] = "Braumeister Boof"
 L["Broken Proto-Drake Egg"] = "Zerbrochenes Protodrachenei"
@@ -83,8 +83,8 @@ L["Hekima the Wise"] = "Hekima der Weise"
 L["High Marshal Twinbraid"] = "Hochmarschall Doppelzopf"
 L["Highlord Tirion Fordring"] = "Hochlord Tirion Fordring"
 L["Horde Ships"] = "Horde-Schiffe"
---Translation missing 
--- L["Horde's final stop"] = ""
+--[[Translation missing --]]
+--[[ L["Horde's final stop"] = ""--]] 
 L["Jaina"] = "Jaina"
 L["Jin Ironfist"] = "Jin Eisenfaust"
 L["Joan Lorraine"] = "Joan Lorraine"
@@ -94,8 +94,8 @@ L["Kor'kron Dire Soldier"] = "Terrorsoldat der Kor'kron"
 L["Krosus"] = "Krosus"
 L["Kyparite Quarry Sonic Control Towers"] = "Schallsteuerungstürme des Kyparitsteinbruchs"
 L["Landing"] = "Landung"
---Translation missing 
--- L["Landing point"] = ""
+--[[Translation missing --]]
+--[[ L["Landing point"] = ""--]] 
 L["Lever"] = "Hebel"
 L["Li Te"] = "Li Te"
 L["Lieutenant Blasthammer"] = "Leutnant Sprenghammer"
@@ -129,10 +129,10 @@ L["Sealed Gate"] = "Versiegeltes Tor"
 L["Shademaster Kiryn"] = "Schattenmeisterin Kiryn"
 L["Shokia"] = "Shokia"
 L["Squad Leader Bosh"] = "Schwadronsführer Bosh"
---Translation missing 
--- L["Stage %d"] = ""
---Translation missing 
--- L["Stage area"] = ""
+--[[Translation missing --]]
+--[[ L["Stage %d"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["Stage area"] = ""--]] 
 L["Steal Explosives"] = "Sprengladungen stehlen"
 L["Sully \"The Pickle\" McLeary"] = "Sully \"Die Gurke\" McLeary"
 L["Supply Crates"] = "Vorratskisten"
@@ -160,9 +160,5 @@ L["West Gate"] = "Westtor"
 L["West Statue"] = "Westliche Statue"
 L["Whispering Stones Sonic Control Towers"] = "Schallsteuerungstürme der Flüsternden Steine"
 L["Wolf-Rider Gaja"] = "Wolfsreiterin Gaja"
-
--- ToC
-L["Description"] = "Szenariokarten"
-L["Title"] = "Atlas |r|cFF0099FF[Szenarien]|r"
 
 end

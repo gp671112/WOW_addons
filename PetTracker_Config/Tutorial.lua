@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2017 João Cardoso
+Copyright 2012-2018 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -32,20 +32,22 @@ function Tutorial:Start()
 end
 
 function Tutorial:Split()
-	self:Trigger('Journal', 1)
-
 	WorldMapFrame:HookScript('OnShow', function()
 		self:Trigger('Main', 6)
 	end)
 
-	if PetJournal then
-		self:HookJournal()
-	else
-		hooksecurefunc('LoadAddOn', function(addon)
-			if addon == 'Blizzard_Collections' then
-				self:HookJournal()
-			end
-		end)
+	if GetAddOnEnableState(UnitName('player'), ADDON .. '_Journal') > 0 then
+		self:Trigger('Journal', 1)
+
+		if PetJournal then
+			self:HookJournal()
+		else
+			hooksecurefunc('LoadAddOn', function(addon)
+				if addon == 'Blizzard_Collections' then
+					self:HookJournal()
+				end
+			end)
+		end
 	end
 end
 
@@ -61,18 +63,16 @@ function Tutorial:HookJournal()
 		self:Trigger('Journal', 4)
 	end)
 
-	if PetTrackerTamerJournal then
-		local function RivalJournal()
-			if Addon.Sets.JournalTutorial >= 3 then
-				self:Trigger('Journal', 4, true)
-				self:Trigger('Journal', 7)
-			else
-				PetTrackerTamerJournal:HookScript('OnShow', RivalJournal)
-			end
+	local function RivalJournal()
+		if Addon.Sets.JournalTutorial >= 3 then
+			self:Trigger('Journal', 4, true)
+			self:Trigger('Journal', 7)
+		else
+			_G[ADDON .. 'RivalJournal']:HookScript('OnShow', RivalJournal)
 		end
-
-		PetTrackerTamerJournal:HookScript('OnShow', RivalJournal)
 	end
+
+	_G[ADDON .. 'RivalJournal']:HookScript('OnShow', RivalJournal)
 end
 
 function Tutorial:Restart()
@@ -138,8 +138,6 @@ Tutorial:Register('Main', {
 		text = L.Tutorial[5],
 		point = 'TOPLEFT', relPoint = 'BOTTOMRIGHT',
 		shineLeft = -2, shineTop = 2,
-		shine = WorldMapFrame.UIElementsFrame.TrackingOptionsButton,
-		anchor = WorldMapFrame.UIElementsFrame.TrackingOptionsButton,
 		y = 5
 	},
 	{
@@ -159,6 +157,9 @@ Tutorial:Register('Main', {
 			self[i].shine = header
 		elseif i == 4 then
 			Tutorial:Split()
+		elseif i == 5 then
+			self[i].anchor = Addon.MapFilter.frames[WorldMapFrame]
+			self[i].shine = Addon.MapFilter.frames[WorldMapFrame]
 		end
 	end
 })
@@ -167,8 +168,8 @@ Tutorial:Register('Journal', {
 	{
 		text = L.JournalTutorial[1],
 		point = 'BOTTOM', relPoint = 'TOP',
-		shineRight = 6, shineLeft = -6,
-		shineTop = -20, shineBottom = -2,
+		shineRight = 2, shineLeft = -2,
+		shineTop = 2, shineBottom = -2,
 		anchor = CollectionsMicroButton,
 		shine = CollectionsMicroButton,
 		y = 10
@@ -182,7 +183,7 @@ Tutorial:Register('Journal', {
 	},
 	{
 		text = L.JournalTutorial[2],
-		point = 'BOTTOMLEFT', relPoint = 'BOTTOMRIGHT', 
+		point = 'BOTTOMLEFT', relPoint = 'BOTTOMRIGHT',
 		shineLeft = -4, shineRight = 4,
 		shineBottom = -4, shineTop = 3,
 		x = 20
@@ -221,16 +222,16 @@ Tutorial:Register('Journal', {
 			self[i].shine = _G[ADDON .. 'TrackToggle']
 			self[i].anchor = CollectionsJournal
 		elseif i == 4 then
-			self[i].shine = PetTrackerTamerJournal.Tab
-			self[i].anchor = PetTrackerTamerJournal.Tab
+			self[i].shine = _G[ADDON .. 'RivalJournal'].Tab
+			self[i].anchor = _G[ADDON .. 'RivalJournal'].Tab
 		elseif i == 5 then
 			self[i].anchor = CollectionsJournal
 		elseif i == 6 then
-			self[i].anchor = PetTrackerTamerJournal.SearchBox
-			self[i].shine = PetTrackerTamerJournal.SearchBox
+			self[i].anchor = _G[ADDON .. 'RivalJournal'].SearchBox
+			self[i].shine = _G[ADDON .. 'RivalJournal'].SearchBox
 		elseif i == 7 then
 			self[i].anchor = CollectionsJournal
-			self[i].shine = PetTrackerTamerJournal.Tab3
+			self[i].shine = _G[ADDON .. 'RivalJournal'].Tab3
 		end
 	end
 })

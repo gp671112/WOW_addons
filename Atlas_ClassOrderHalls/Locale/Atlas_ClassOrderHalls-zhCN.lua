@@ -1,10 +1,10 @@
--- $Id: Atlas_ClassOrderHalls-zhCN.lua 97 2017-05-18 10:55:14Z arith $
+-- $Id: Atlas_ClassOrderHalls-zhCN.lua 116 2018-08-08 17:32:29Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2016 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -232,9 +232,5 @@ L["Wise Scholar Lianji <Senior Master Serpent>"] = "神机妙算连继 <青龙�
 L["Yancey Grillsen <Bloodsail Recruiter>"] = "扬希·格里尔森 <血帆征兵员>"
 L["Yaris Darkclaw <Recruiter>"] = "亚里斯·黑爪 <征募官>"
 L["Zen'kiki"] = "赞吉吉 <私人助理>"
-
--- ToC
-L["Description"] = "职业大厅地图"
-L["Title"] = "Atlas |r|cFF0099FF[职业大厅]|r"
 
 end

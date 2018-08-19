@@ -1,5 +1,4 @@
-local _, L = ...
-L.locale = GetLocale()
+local _, L = ... L.locale = GetLocale()
 
 L["Behavior"] = "Behavior"
 L["Change the placement and scale of your dialogue options."] = "Change the placement and scale of your dialogue options."
@@ -8,6 +7,8 @@ L["Customize the talking head frame."] = "Customize the talking head frame."
 L["Dialog"] = "Dialog"
 L["Disable automatic text progress"] = "Disable automatic text progress"
 L["Disable horizontal drag"] = "Disable horizontal drag"
+L["Disable model animations"] = "Disable model animations"
+L["Disable mouseover highlight"] = "Disable mouseover highlight"
 L["Disable portrait border"] = "Disable portrait border"
 L["Disable sheen animation"] = "Disable sheen animation"
 L["Dynamic offset"] = "Dynamic offset"
@@ -20,6 +21,7 @@ L["Hide interface"] = "Hide interface"
 L["Hide minimap"] = "Hide minimap"
 L["Hide my user interface when interacting with an NPC."] = "Hide my user interface when interacting with an NPC."
 L["Hide objective tracker"] = "Hide objective tracker"
+L["Hide tooltip"] = "Hide tooltip"
 L["High"] = "High"
 L["Hook talking head"] = "Hook talking head"
 L["How are you doing today?"] = "How are you doing today?"
@@ -39,6 +41,8 @@ L["The quest/gossip text doesn't vanish when you stop interacting with the NPC o
 L["The regular talking head frame appears in the same place as Immersion when you're not interacting with anything and on top of Immersion if they are visible at the same time."] = "The regular talking head frame appears in the same place as Immersion when you're not interacting with anything and on top of Immersion if they are visible at the same time."
 L["Tooltip"] = "Tooltip"
 L["Use your primary mouse button to read through text, accept/turn in quests and select the best available gossip option."] = "Use your primary mouse button to read through text, accept/turn in quests and select the best available gossip option."
-L['Immersion Options'] = "Immersion"
-L['Immersion'] = "Immersion"
+
+L["Immersion Options"] = "Immersion" 
+L["Immersion"] = "Immersion" 
 L["INSTANT"] = "Instant"
+L["Hide tooltip"] = "Hide tooltip"

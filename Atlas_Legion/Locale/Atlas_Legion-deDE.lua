@@ -1,8 +1,8 @@
--- $Id: Atlas_Legion-deDE.lua 87 2017-01-16 09:16:53Z arith $
+-- $Id: Atlas_Legion-deDE.lua 145 2018-08-09 14:03:43Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2016 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -91,9 +91,5 @@ L["Understone Lasher"] = "Peitscher des Tiefgesteins"
 L["Velimar"] = "Velimar"
 L["Volynd Stormbringer"] = "Volynd Sturmbringer"
 L["Worn-Edged Page"] = "Seite mit abgenutztem Rand"
-
--- ToC
-L["Description"] = "Karten der Instanzen aus Legion"
-L["Title"] = "Atlas |r|cFF0099FF[Legion]|r"
 
 end

@@ -114,6 +114,7 @@ function Titles:OnHide()
 		button:UnlockHighlight()
 		button:Hide()
 	end
+	wipe(self.Active)
 	self.numActive = 0
 	self.idx = 1
 end
@@ -136,10 +137,12 @@ end
 
 function Titles:UpdateActive()
 	local newHeight, numActive = 0, 0
+	wipe(self.Active)
 	for i, button in pairs(self.Buttons) do
-		if button:IsVisible() then
+		if button:IsShown() then
 			newHeight = newHeight + button:GetHeight()
 			numActive = numActive + 1
+			self.Active[i] = button
 		end
 	end
 	ANI_DIVISOR = L('anidivisor')
@@ -147,6 +150,21 @@ function Titles:UpdateActive()
 	self.numActive = numActive
 	self:ResetPosition()
 	self:AdjustHeight(newHeight)
+	if self.SetFocus then
+		local _, bestOptionIndex = self:GetBestOption()
+		self:SetFocus(bestOptionIndex)
+	end
+end
+
+function Titles:GetBestOption()
+	local numActive = self:GetNumActive()
+	if numActive > 0 then
+		local option = self.Buttons[1]
+		for i=2, numActive do
+			option = option:ComparePriority(self.Buttons[i])
+		end
+		return option, option.idx
+	end
 end
 
 ----------------------------------

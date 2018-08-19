@@ -48,6 +48,10 @@ function DGV:CreateDropdown(dropdownName, frame, labelText, optionsIndex, func, 
 					info.text 	= L[value.text]
 					info.value   = value.value or value.text 
 					info.colorCode = value.colorCode
+					
+					if value.textFunc then
+						info.text =  L[value.textFunc()]
+					end
 				else
 					info.text = L[value]
 					info.value = value

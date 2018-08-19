@@ -2,6 +2,9 @@ local DGV = DugisGuideViewer
 if not DGV then return end
 
 local Ants = DGV:RegisterModule("Ants")
+
+local HBD = LibStub("HereBeDragons-2.0", true)
+
 Ants.essential = true
 local _
 local DebugPrint = DGV.DebugPrint
@@ -135,8 +138,7 @@ function Ants:Initialize()
 		local icon = parent:CreateTexture()
 		icon:SetTexture([[Interface\AddOns\DugisGuideViewerZ\Artwork\Indicator-White.tga]])
 		icon:ClearAllPoints()
-		icon:SetDrawLayer("ARTWORK")
-		icon:SetBlendMode("BLEND")
+		icon:SetDrawLayer("ARTWORK", 0)
 		icon:SetWidth(8)
 		icon:SetHeight(8)
 		icon:Show()
@@ -144,8 +146,13 @@ function Ants:Initialize()
 		return icon
 	end
 	
-	local function SetWaypointDotTextureAlpha(waypoint, element, f)
-		element:SetAlpha((waypoint.floor~=f and .35) or 0.90)
+	local function SetWaypointDotTextureAlpha(waypoint, element, playerFloor)
+		if WorldMapFrame:GetMapID() == 947 then
+			element:SetAlpha(0.90)
+			return
+		end
+		local floor = UiMapId2Floor(waypoint.map)
+		element:SetAlpha((floor~=playerFloor and .35) or 0.90)
 	end
 	
 	Ants.miniant_points = {}
@@ -208,20 +215,23 @@ end)
 				 wGPS, hGPS = GPSArrow.map_overlay:GetWidth(), -GPSArrow.map_overlay:GetHeight()
 			end
             
-			local c, z, m, f = GetCurrentMapContinent(), GetCurrentMapZone(), GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
-			if c and c == 0 then m = 0 end
+			local m =  DGV:GetDisplayedOrPlayerMapId()
+			local mapDotScale = DGV:GetAntScale(m)
+            local last_x, last_y = DGV:GetPlayerPositionOnMap(m, true)
+			
+			local f = GetCurrentMapDungeonLevel_dugi()
 			local out = 1
 			local outGPSArrow = 1
             
 			-- Get Player Position
-			local last_x, last_y = DugisGuideViewer:TranslateWorldMapPosition(DGV.DugisArrow.map, DGV.DugisArrow.floor, DGV.DugisArrow.pos_x, DGV.DugisArrow.pos_y, m, f)
 			local last_mx, last_my = mw/2, -mh/2
 			
 			local color = Ants:GetWaySegmentColor() 
 
 			-- Draw Trails To Each Objective
 			for index, waypoint in ipairs(DGV.DugisArrow.waypoints) do
-				local new_x, new_y = DugisGuideViewer:TranslateWorldMapPosition(waypoint.map, waypoint.floor, waypoint.x/100, waypoint.y/100, m, f)
+				local new_x, new_y = DugisGuideViewer:TranslateWorldMapPositionGlobal(waypoint.map, waypoint.x/100, waypoint.y/100, m)
+                
 				if not (new_x == last_x and new_y == last_y) then
 					local x1, y1, x2, y2 = Ants:ClampLine(last_x, last_y, new_x, new_y)
 					last_x, last_y = new_x, new_y
@@ -240,12 +250,13 @@ end)
 						if DugisGuideViewer:UserSetting(DGV_SHOWANTS) and not DugisGuideViewer.WrongInstanceFloor and len > 0.0001 then
 
 							-- World Map
-							if WorldMapFrame:IsVisible() then
+							--todo: check this out
+							--if WorldMapFrame:IsVisible() then
                                 if AntsConfig.solidLine() then
                                     local visualLine = LuaUtils:GetNextVisualLine("WorldMapFrame", DGV.DugisArrow.map_overlay, AntsConfig.solidLineTexture)
-                                    LuaUtils:DrawLineDugi(visualLine, DGV.DugisArrow.map_overlay, x1 * w, y1 * h, x2 * w, y2 * h, AntsConfig.solidLineWidth, 32/30, "TOPLEFT")
+                                    LuaUtils:DrawLineDugi(visualLine, DGV.DugisArrow.map_overlay, x1 * w, y1 * h, x2 * w, y2 * h, AntsConfig.solidLineWidth * mapDotScale, 32/30, "TOPLEFT")
                                     visualLine:Show()
-                                    visualLine:SetDrawLayer("BACKGROUND")
+                                    visualLine:SetDrawLayer("ARTWORK", 0)
 									visualLine:SetDesaturated(true)
 									visualLine:SetVertexColor(unpack(color))	
 									
@@ -256,27 +267,30 @@ end)
                                         if not dot or ChangeAntTrailColor == true then
                                             -- Create New Dot
                                             dot = CreateDotTexture(DGV.DugisArrow.map_overlay)
-                                            dot:SetDrawLayer("BACKGROUND")
+                                            dot:SetDrawLayer("ARTWORK", 0)
                                             self.ant_dots[out] = dot
                                         end
                                         SetWaypointDotTextureAlpha(waypoint, dot, f)
                                         dot:Show();
 										dot:SetDesaturated(true)
-										dot:SetVertexColor(unpack(color))	
+										dot:SetVertexColor(unpack(color))
+										
+										dot:SetWidth(8 * mapDotScale)
+										dot:SetHeight(8 * mapDotScale)
                                         dot:ClearAllPoints()
                                         dot:SetPoint("CENTER", DGV.DugisArrow.map_overlay, "TOPLEFT", x1*w*(1-p)+x2*w*p, y1*h*(1-p)+y2*h*p)
                                         out = out + 1
                                         p = p + interval
                                     end
                                 end
-							end	
+						--	end	
 
                             if GPSArrow and GPSArrow:IsVisible() then
                                 if AntsConfig.solidLine() then
                                     local visualLine = LuaUtils:GetNextVisualLine("GPSArrow", GPSArrow.map_overlay, AntsConfig.solidLineTexture)
                                     LuaUtils:DrawLineDugi(visualLine, GPSArrow.map_overlay, x1 * wGPS, y1 * hGPS, x2 * wGPS, y2 * hGPS, AntsConfig.solidLineWidth / GPSArrow.scale, 32/30, "TOPLEFT")
                                     visualLine:Show()
-                                    visualLine:SetDrawLayer("BACKGROUND")
+                                    visualLine:SetDrawLayer("ARTWORK", 0)
 									visualLine:SetDesaturated(true)
 									visualLine:SetVertexColor(unpack(color))	
 									
@@ -290,7 +304,7 @@ end)
                                         if not dot or ChangeAntTrailColor == true then
                                             -- Create New Dot
                                             dot = CreateDotTexture(GPSArrow.map_overlay)
-                                            dot:SetDrawLayer("BACKGROUND")
+                                            dot:SetDrawLayer("ARTWORK", 0)
                                             self.ant_dotsGPSArrow[outGPSArrow] = dot
                                         end
                                         SetWaypointDotTextureAlpha(waypoint, dot, f)
@@ -334,7 +348,7 @@ end)
                                     local visualLine = LuaUtils:GetNextVisualLine("Minimap", DGV.DugisArrow.minimap_overlay, AntsConfig.solidLineTexture)
                                     LuaUtils:DrawLineDugi(visualLine, DGV.DugisArrow.minimap_overlay, mx1, my1, mx2, my2, AntsConfig.solidLineWidth, 32/30, "TOPLEFT")
                                     visualLine:Show()
-                                    visualLine:SetDrawLayer("BACKGROUND")
+                                    visualLine:SetDrawLayer("ARTWORK", 0)
 									visualLine:SetDesaturated(true)
 									visualLine:SetVertexColor(unpack(color))	
 
@@ -348,12 +362,14 @@ end)
                                         if not minimapdot or ChangeAntTrailColor == true then
                                             -- Create New Dot
                                             minimapdot = CreateDotTexture(DGV.DugisArrow.minimap_overlay)
-                                            minimapdot:SetDrawLayer("BACKGROUND")
+                                            minimapdot:SetDrawLayer("ARTWORK", 7)
                                             self.miniant_dots[out2] = minimapdot
                                         end
                                         SetWaypointDotTextureAlpha(waypoint, minimapdot, f)
 										
                                         minimapdot:Show()
+										minimapdot:SetWidth(8)
+										minimapdot:SetHeight(8)
 										minimapdot:SetDesaturated(true)
 										minimapdot:SetVertexColor(unpack(color))	
                                         minimapdot:ClearAllPoints()

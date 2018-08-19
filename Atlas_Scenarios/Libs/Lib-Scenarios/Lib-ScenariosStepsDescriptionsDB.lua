@@ -1,4 +1,10 @@
--- $Id: Lib-ScenariosStepsDescriptionsDB.lua 10 2017-03-20 14:37:52Z arith $
+-- $Id: Lib-ScenariosStepsDescriptionsDB.lua 17 2018-04-24 09:17:50Z arith $
+local FOLDER_NAME, private = ...
+
+local Descriptions = {}
+if not private.Scenarios then private.Scenarios = {} end
+private.Scenarios.Descriptions = Descriptions
+
 --[[
 LibScenariosDescriptionsTempDB = { --{ "Scenario ID", "Step ID", "Steps", "enUS", "deDE", "esES", "esMX", "frFR", "itIT", "koKR", "ptBR", "ruRU", "zhCN", "zhTW" };
 { "15", "24", "0", "Bring Brewmaster Bo to the Unga Ingoo Brewing Cauldron.", "Bringt Braumeister Bo zum Braukessel von Unga Ingu.", "Lleva al maestro cervecero Bo hasta el caldero de fermentación de Unga Ingoo.", "Lleva al maestro cervecero Bo hasta el caldero de fermentación de Unga Ingoo.", "Amenez le maître brasseur Bo au chaudron de brassage d’Unga Ingou.", "Scorta il Mastro Birraio Bo al Tino di Fermentazione a Unga Ingu.", "양조사 보를 웅가 잉구 양조 가마솥에 데려가야 합니다.", "Escolte o Mestre Cervejeiro Bô até o Caldeirão de Brassagem de Ungá Ingô.", "Проведите хмелевара Бо к кипящему котлу Унга-Ингу.", "护送珀酒仙去盎迦猴岛的酿酒大锅。", "帶釀酒大師阿波到仰加印古的釀酒鍋。" };
@@ -9,7 +15,7 @@ LibScenariosDescriptionsTempDB = { --{ "Scenario ID", "Step ID", "Steps", "enUS"
 };
 ]]
 
-LibScenariosDescriptionsDB = { 
+Descriptions.DB = { 
 ["53"] = {
 { "Defeat the forces of the Scarlet Crusade inside their monastery.", "Bezwingt die Streitkräfte des Scharlachroten Kreuzzugs in ihrem Kloster.", "Derrota a las fuerzas de la Cruzada Escarlata que están en el Monasterio Escarlata.", "Derrota a las fuerzas de la Cruzada Escarlata que están en el Monasterio Escarlata.", "Terrassez les troupes de la Croisade écarlate dans leur monastère.", "Sconfiggi le forze della Crociata Scarlatta nel monastero.", "붉은십자군 수도원에 있는 붉은십자군을 처치해야 합니다.", "Derrote as forças da Cruzada Escarlate dentro do monastério.", "Победите силы Алого ордена в их собственном монастыре.", "击败修道院里的血色十字军。", "消滅修道院裡的血色十字軍。", }, 
 },

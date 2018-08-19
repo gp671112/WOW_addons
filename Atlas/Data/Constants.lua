@@ -1,10 +1,10 @@
--- $Id: Constants.lua 270 2017-06-29 14:22:48Z arith $
+-- $Id: Constants.lua 312 2018-08-09 16:26:59Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 	Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -132,28 +132,28 @@ AtlasMaps = {
 --[[
 Syntax: 
 	MapName = {
-		ZoneName = { "Map name" };
-		Location = { "Location of this map" };
-		LevelRange = "level range";
-		MinLevel = "minimum level";
-		PlayerLimit = "player limit";
-		Acronym = "acronym";
-		MinGearLevel = "minimum itel level to enter this instance";
-		JournalInstanceID = "journal instance ID"; 	-- ID can be found from JournalInstance.dbc, Column 1 is the dungeon ID, column 8 is dungeon name
-		DungeonID = "LFGDungeon ID"; 			-- ID can be fround from LFGDungeons.dbc.txt
-		DungeonHeoricID = "LFGDungeon ID for Heroic mode";
-		DungeonMythicID = "LFGDungeon ID for Mythic mode";
-		WorldMapID = "worldmap ID";
-		DungeonLevel = "level number of the dungeon map series";
-		Module = "map module name";
-		LargeMap = "large map's prefix name";
-		PrevMap = "previous map name";
-		NextMap = "next map name";
-		{ "list entry 1", id of list entry or encounter id };
-		{ "list entry 2", "achivement id by using the format of ac=12345" };
-		{ "list entry 3" item id, "item", "item's English name"};
-		{ "list entry 4" };
-	};
+		ZoneName = { "Map name" },
+		Location = { "Location of this map" },
+		LevelRange = "level range",
+		MinLevel = "minimum level",
+		PlayerLimit = "player limit",
+		Acronym = "acronym",
+		MinGearLevel = "minimum itel level to enter this instance",
+		JournalInstanceID = journal instance ID, 	-- ID can be found from JournalInstance.dbc, Column 1 is the dungeon ID, column 8 is dungeon name
+		DungeonID = LFGDungeon ID, 			-- ID can be fround from LFGDungeons.dbc.txt
+		DungeonHeoricID = LFGDungeon ID for Heroic mode,
+		DungeonMythicID = LFGDungeon ID for Mythic mode,
+		WorldMapID = uiMapID,
+		DungeonLevel = level number of the dungeon map series, 
+		Module = "map module name",
+		LargeMap = "large map's prefix name",
+		PrevMap = "previous map name",
+		NextMap = "next map name",
+		{ "list entry 1", id of list entry or encounter id },
+		{ "list entry 2", "achivement id by using the format of ac=12345" },
+		{ "list entry 3" item id, "item", "item's English name"},
+		{ "list entry 4" },
+	},
 ]]
 }
 
@@ -286,24 +286,24 @@ constants.deprecatedList = {
 	-- For example, name it as 2.09 instead of 2.9
 	-- Most recent (working) versions of known modules at time of release
 	-- Atlas Modules
-	{ "Atlas_Legion",	 	"1.42.00", "r132" },
-	{ "Atlas_WarlordsofDraenor", 	"1.42.00", "r45" },
-	{ "Atlas_MistsofPandaria",	"1.42.00", "r22" },
-	{ "Atlas_Cataclysm", 		"1.42.00", "r27" },
-	{ "Atlas_WrathoftheLichKing", 	"1.42.00", "r25" },
-	{ "Atlas_BurningCrusade", 	"1.42.00", "r29" },
-	{ "Atlas_ClassicWoW", 		"1.42.00", "r24" },
+	{ "Atlas_Legion",	 	"1.44.00", "r144" },
+	{ "Atlas_WarlordsofDraenor", 	"1.44.00", "r49" },
+	{ "Atlas_MistsofPandaria",	"1.44.00", "r29" },
+	{ "Atlas_Cataclysm", 		"1.44.00", "r31" },
+	{ "Atlas_WrathoftheLichKing", 	"1.44.00", "r38" },
+	{ "Atlas_BurningCrusade", 	"1.44.00", "r38" },
+	{ "Atlas_ClassicWoW", 		"1.44.00", "r31" },
 	-- Atlas Plugins
-	{ "Atlas_Battlegrounds", 	"1.42.00", "r1549" },
-	{ "Atlas_DungeonLocs", 		"1.42.00", "r43" },
-	{ "Atlas_OutdoorRaids", 	"1.42.00", "r46" },
-	{ "Atlas_Transportation", 	"1.42.00", "r90" },
-	{ "Atlas_Scenarios", 		"1.42.00", "r42" },
-	{ "Atlas_ClassOrderHalls",	"1.42.00", "r112" },
+	{ "Atlas_Battlegrounds", 	"1.44.00", "r1553" },
+	{ "Atlas_DungeonLocs", 		"1.44.00", "r48" },
+	{ "Atlas_OutdoorRaids", 	"1.44.00", "r50" },
+	{ "Atlas_Transportation", 	"1.44.00", "r97" },
+	{ "Atlas_Scenarios", 		"1.44.00", "r53" },
+	{ "Atlas_ClassOrderHalls",	"1.44.00", "r116" },
 	-- 3rd parties plugins
 	{ "AtlasQuest", 		"4.10.25" },
-	{ "Atlas_Arena", 		"1.07.00", "r75" },
-	{ "Atlas_WorldEvents", 		"3.22", "r102" },
+	{ "Atlas_Arena", 		"1.07.02", "r80" },
+	{ "Atlas_WorldEvents", 		"3.24", "r107" },
 	{ "AtlasLoot", 			"v8.03.02", "r4615" },
 	{ "AtlasMajorCitiesEnhanced", 	"v1.15" }, 	
 	--{ "AtlasWorld", 		"3.3.5.25" }, 	-- updated July 14, 2010 -- comment out because this plugin is no longer maintained

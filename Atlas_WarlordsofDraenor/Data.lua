@@ -1,8 +1,8 @@
--- $Id: Data.lua 45 2017-06-29 08:26:37Z arith $
+-- $Id: Data.lua 49 2018-08-09 14:02:33Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -32,7 +32,7 @@ local pairs = _G.pairs
 -- AddOn namespace.
 -- ----------------------------------------------------------------------------
 local FOLDER_NAME, private = ...
-local LibStub = _G.LibStub;
+local LibStub = _G.LibStub
 local BZ = Atlas_GetLocaleLibBabble("LibBabble-SubZone-3.0")
 local BF = Atlas_GetLocaleLibBabble("LibBabble-Faction-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
@@ -43,28 +43,28 @@ local WoD = Atlas:GetModule(private.module_name)
 local db = {}
 WoD.db = db
 
-local BLUE = "|cff6666ff";
-local GREN = "|cff66cc33";
-local GREY = "|cff999999";
-local LBLU = "|cff33cccc";
-local _RED = "|cffcc3333";
-local ORNG = "|cffcc9933";
-local PINK = "|ccfcc33cc";
-local PURP = "|cff9900ff";
-local WHIT = "|cffffffff";
-local YLOW = "|cffcccc33";
-local INDENT = "      ";
+local BLUE = "|cff6666ff"
+local GREN = "|cff66cc33"
+local GREY = "|cff999999"
+local LBLU = "|cff33cccc"
+local _RED = "|cffcc3333"
+local ORNG = "|cffcc9933"
+local PINK = "|ccfcc33cc"
+local PURP = "|cff9900ff"
+local WHIT = "|cffffffff"
+local YLOW = "|cffcccc33"
+local INDENT = "      "
 
 db.AtlasMaps = {
 	Auchindoun = {
 		ZoneName = { BZ["Auchindoun"] },
 		Location = { BZ["Talador"] },
-		DungeonID = "820",
-		DungeonHeroicID = "845",
-		DungeonMythicID = "1008",
+		DungeonID = 820,
+		DungeonHeroicID = 845,
+		DungeonMythicID = 1008,
 		Acronym = ALC["Auch"], -- taken from BC
-		WorldMapID = "984",
-		JournalInstanceID = "547",
+		WorldMapID = 539,
+		JournalInstanceID = 547,
 		Module = "Atlas_WarlordsofDraenor",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas_GetBossName("Vigilant Kaathar", 1185), 1185 },
@@ -88,16 +88,17 @@ db.AtlasMaps = {
 		{ "Auchindoun: Silver", "ac=8881" },
 		{ "Auchindoun: Gold", "ac=8882" },
 	},
+--    [988] = { mapFile = "FoundryRaid", [1] = 596, [2] = 597, [3] = 598, [4] = 599, [5] = 600},
 	BlackrockFoundryA = {
 		ZoneName = { BZ["Blackrock Foundry"]..ALC["MapA"] },
 		Location = { BZ["Gorgrond"] },
-		DungeonID = "898",
-		DungeonHeroicID = "899",
-		DungeonMythicID = "900",
+		DungeonID = 898,
+		DungeonHeroicID = 899,
+		DungeonMythicID = 900,
 		Acronym = L["BRF"],
 		PlayerLimit = { 10, 20, 25, 30 },
-		WorldMapID = "988",
-		JournalInstanceID = "457",
+		WorldMapID = 596,
+		JournalInstanceID = 457,
 		Module = "Atlas_WarlordsofDraenor",
 		NextMap = "BlackrockFoundryB",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -135,13 +136,13 @@ db.AtlasMaps = {
 	BlackrockFoundryB = {
 		ZoneName = { BZ["Blackrock Foundry"]..ALC["MapB"] },
 		Location = { BZ["Gorgrond"] },
-		DungeonID = "898",
-		DungeonHeroicID = "899",
-		DungeonMythicID = "900",
+		DungeonID = 898,
+		DungeonHeroicID = 899,
+		DungeonMythicID = 900,
 		Acronym = L["BRF"],
 		PlayerLimit = { 10, 20, 25, 30 },
-		WorldMapID = "988",
-		JournalInstanceID = "457",
+		WorldMapID = 596,
+		JournalInstanceID = 457,
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "BlackrockFoundryA",
 		{ BLUE.." C) "..ALC["Connection"], 10001 },
@@ -169,12 +170,12 @@ db.AtlasMaps = {
 	BloodmaulSlagMines = {
 		ZoneName = { BZ["Bloodmaul Slag Mines"] },
 		Location = { BZ["Frostfire Ridge"] },
-		DungeonID = "787",
-		DungeonHeroicID = "859",
-		DungeonMythicID = "1005",
+		DungeonID = 787,
+		DungeonHeroicID = 859,
+		DungeonMythicID = 1005,
 		Acronym = L["BSM"],
-		WorldMapID = "964",
-		JournalInstanceID = "385",
+		WorldMapID = 596,
+		JournalInstanceID = 385,
 		Module = "Atlas_WarlordsofDraenor",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas_GetBossName("Magmolatus", 893), 893 },
@@ -199,13 +200,13 @@ db.AtlasMaps = {
 	TheEverbloomA = {
 		ZoneName = { BZ["The Everbloom"]..ALC["MapA"] },
 		Location = { BZ["Gorgrond"] },
-		DungeonID = "824",
-		DungeonHeroicID = "866",
-		DungeonMythicID = "1003",
+		DungeonID = 824,
+		DungeonHeroicID = 866,
+		DungeonMythicID = 1003,
 		Acronym = L["EB"],
-		WorldMapID = "1008",
-		DungeonLevel = "1",
-		JournalInstanceID = "556",
+		WorldMapID = 620,
+		DungeonLevel = 1,
+		JournalInstanceID = 556,
 		Module = "Atlas_WarlordsofDraenor",
 		NextMap = "TheEverbloomB",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -232,13 +233,13 @@ db.AtlasMaps = {
 	TheEverbloomB = {
 		ZoneName = { BZ["The Everbloom"]..ALC["MapB"] },
 		Location = { BZ["Gorgrond"] },
-		DungeonID = "824",
-		DungeonHeroicID = "866",
-		DungeonMythicID = "1003",
+		DungeonID = 824,
+		DungeonHeroicID = 866,
+		DungeonMythicID = 1003,
 		Acronym = L["EB"],
-		WorldMapID = "1008",
-		DungeonLevel = "2",
-		JournalInstanceID = "556",
+		WorldMapID = 621,
+		DungeonLevel = 2,
+		JournalInstanceID = 556,
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "TheEverbloomA",
 		{ BLUE.." B) "..ALC["Connection"].. ALC["L-Parenthesis"]..ALC["Portal"]..ALC["R-Parenthesis"], 10001 },
@@ -257,12 +258,12 @@ db.AtlasMaps = {
 	GrimrailDepot = {
 		ZoneName = { BZ["Grimrail Depot"] },
 		Location = { BZ["Gorgrond"] },
-		DungeonID = "822",
-		DungeonHeroicID = "858",
-		DungeonMythicID = "1006",
+		DungeonID = 822,
+		DungeonHeroicID = 858,
+		DungeonMythicID = 1006,
 		Acronym = L["GD"],
-		WorldMapID = "993",
-		JournalInstanceID = "536",
+		WorldMapID = 606,
+		JournalInstanceID = 536,
 		Module = "Atlas_WarlordsofDraenor",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ BLUE.." B) "..L["Train Ride"]..ALC["L-Parenthesis"]..ALC["Event"]..ALC["R-Parenthesis"], 10002 },
@@ -288,14 +289,14 @@ db.AtlasMaps = {
 	HellfireA = {
 		ZoneName = { BZ["Hellfire Citadel"]..ALC["MapA"] },
 		Location = { BZ["Tanaan Jungle"] },
-		DungeonID = "987",
-		DungeonHeroicID = "988",
-		DungeonMythicID = "989",
+		DungeonID = 987,
+		DungeonHeroicID = 988,
+		DungeonMythicID = 989,
 		Acronym = L["HC"],
 		PlayerLimit = { 10, 20, 25, 30 },
-		WorldMapID = "1026",
-		DungeonLevel = "1",
-		JournalInstanceID = "669",
+		WorldMapID = 661,
+		DungeonLevel = 1,
+		JournalInstanceID = 669,
 		Module = "Atlas_WarlordsofDraenor",
 		NextMap = "HellfireB",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -313,14 +314,14 @@ db.AtlasMaps = {
 	HellfireB = {
 		ZoneName = { BZ["Hellfire Citadel"]..ALC["MapB"] },
 		Location = { BZ["Tanaan Jungle"] },
-		DungeonID = "987",
-		DungeonHeroicID = "988",
-		DungeonMythicID = "989",
+		DungeonID = 987,
+		DungeonHeroicID = 988,
+		DungeonMythicID = 989,
 		Acronym = L["HC"],
 		PlayerLimit = { 10, 20, 25, 30 },
-		WorldMapID = "1026",
-		DungeonLevel = "5",
-		JournalInstanceID = "669",
+		WorldMapID = 665,
+		DungeonLevel = 5,
+		JournalInstanceID = 669,
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "HellfireA",
 		NextMap = "HellfireC",
@@ -340,14 +341,14 @@ db.AtlasMaps = {
 	HellfireC = {
 		ZoneName = { BZ["Hellfire Citadel"]..ALC["MapC"] },
 		Location = { BZ["Tanaan Jungle"] },
-		DungeonID = "987",
-		DungeonHeroicID = "988",
-		DungeonMythicID = "989",
+		DungeonID = 987,
+		DungeonHeroicID = 988,
+		DungeonMythicID = 989,
 		Acronym = L["HC"],
 		PlayerLimit = { 10, 20, 25, 30 },
-		WorldMapID = "1026",
-		DungeonLevel = "4",
-		JournalInstanceID = "669",
+		WorldMapID = 664,
+		DungeonLevel = 4,
+		JournalInstanceID = 669,
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "HellfireB",
 		NextMap = "HellfireD",
@@ -361,14 +362,14 @@ db.AtlasMaps = {
 	HellfireD = {
 		ZoneName = { BZ["Hellfire Citadel"]..ALC["MapD"] },
 		Location = { BZ["Tanaan Jungle"] },
-		DungeonID = "987",
-		DungeonHeroicID = "988",
-		DungeonMythicID = "989",
+		DungeonID = 987,
+		DungeonHeroicID = 988,
+		DungeonMythicID = 989,
 		Acronym = L["HC"],
 		PlayerLimit = { 10, 20, 25, 30 },
-		WorldMapID = "1026",
-		DungeonLevel = "6",
-		JournalInstanceID = "669",
+		WorldMapID = 666,
+		DungeonLevel = 6,
+		JournalInstanceID = 669,
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "HellfireC",
 		NextMap = "HellfireE",
@@ -395,14 +396,14 @@ db.AtlasMaps = {
 	HellfireE = {
 		ZoneName = { BZ["Hellfire Citadel"]..ALC["MapE"] },
 		Location = { BZ["Tanaan Jungle"] },
-		DungeonID = "987",
-		DungeonHeroicID = "988",
-		DungeonMythicID = "989",
+		DungeonID = 987,
+		DungeonHeroicID = 988,
+		DungeonMythicID = 989,
 		Acronym = L["HC"],
 		PlayerLimit = { 10, 20, 25, 30 },
-		WorldMapID = "1026",
-		DungeonLevel = "9",
-		JournalInstanceID = "669",
+		WorldMapID = 669,
+		DungeonLevel = 9,
+		JournalInstanceID = 669,
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "HellfireD",
 		NextMap = "HellfireF",
@@ -415,14 +416,14 @@ db.AtlasMaps = {
 	HellfireF = { 
 		ZoneName = { BZ["Hellfire Citadel"]..ALC["MapF"] },
 		Location = { BZ["Tanaan Jungle"] },
-		DungeonID = "987",
-		DungeonHeroicID = "988",
-		DungeonMythicID = "989",
+		DungeonID = 987,
+		DungeonHeroicID = 988,
+		DungeonMythicID = 989,
 		Acronym = L["HC"],
 		PlayerLimit = { 10, 20, 25, 30 },
-		WorldMapID = "1026",
-		DungeonLevel = "10",
-		JournalInstanceID = "669",
+		WorldMapID = 670,
+		DungeonLevel = 10,
+		JournalInstanceID = 669,
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "HellfireE",
 		{ BLUE.." D) "..ALC["Connection"], 10001 },
@@ -437,14 +438,14 @@ db.AtlasMaps = {
 	HighmaulA = {
 		ZoneName = { BZ["Highmaul"]..ALC["MapA"] },
 		Location = { BZ["Nagrand"] },
-		DungeonID = "895",
-		DungeonHeroicID = "896",
-		DungeonMythicID = "897",
+		DungeonID = 895,
+		DungeonHeroicID = 896,
+		DungeonMythicID = 897,
 		Acronym = L["HM"],
 		PlayerLimit = { 10, 20, 25, 30 },
-		WorldMapID = "994",
-		DungeonLevel = "1",
-		JournalInstanceID = "477",
+		WorldMapID = 610,
+		DungeonLevel = 1,
+		JournalInstanceID = 477,
 		Module = "Atlas_WarlordsofDraenor",
 		NextMap = "HighmaulB",
 		{ BLUE.." A) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Lower"]..ALC["R-Parenthesis"], 10001 },
@@ -468,14 +469,14 @@ db.AtlasMaps = {
 	HighmaulB = {
 		ZoneName = { BZ["Highmaul"]..ALC["MapB"] },
 		Location = { BZ["Nagrand"] },
-		DungeonID = "895",
-		DungeonHeroicID = "896",
-		DungeonMythicID = "897",
+		DungeonID = 895,
+		DungeonHeroicID = 896,
+		DungeonMythicID = 897,
 		Acronym = L["HM"],
 		PlayerLimit = { 10, 20, 25, 30 },
-		WorldMapID = "994",
-		DungeonLevel = "4",
-		JournalInstanceID = "477",
+		WorldMapID = 613,
+		DungeonLevel = 4,
+		JournalInstanceID = 477,
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "HighmaulA",
 		{ BLUE.." B-D) "..ALC["Connection"], 10001 },
@@ -497,12 +498,12 @@ db.AtlasMaps = {
 	IronDocks = {
 		ZoneName = { BZ["Iron Docks"] },
 		Location = { BZ["Gorgrond"] },
-		DungeonID = "821",
-		DungeonHeroicID = "857",
-		DungeonMythicID = "1007",
+		DungeonID = 821,
+		DungeonHeroicID = 857,
+		DungeonMythicID = 1007,
 		Acronym = L["ID"],
-		WorldMapID = "987",
-		JournalInstanceID = "558",
+		WorldMapID = 595,
+		JournalInstanceID = 558,
 		Module = "Atlas_WarlordsofDraenor",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas_GetBossName("Fleshrender Nok'gar", 1235), 1235 },
@@ -531,12 +532,12 @@ db.AtlasMaps = {
 	ShadowmoonBurialGrounds = {
 		ZoneName = { BZ["Shadowmoon Burial Grounds"] },
 		Location = { BZ["Shadowmoon Valley"] },
-		DungeonID = "783",
-		DungeonHeroicID = "784",
-		DungeonMythicID = "1009",
+		DungeonID = 783,
+		DungeonHeroicID = 784,
+		DungeonMythicID = 1009,
 		Acronym = L["SBG"],
-		WorldMapID = "969",
-		JournalInstanceID = "537",
+		WorldMapID = 574,
+		JournalInstanceID = 537,
 		Module = "Atlas_WarlordsofDraenor",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ BLUE.." B) "..ALC["Connection"].. ALC["L-Parenthesis"]..ALC["Portal"]..ALC["R-Parenthesis"], 10002 },
@@ -563,12 +564,12 @@ db.AtlasMaps = {
 	Skyreach = {
 		ZoneName = { BZ["Skyreach"] },
 		Location = { BZ["Spires of Arak"] },
-		DungeonID = "779",
-		DungeonHeroicID = "780",
-		DungeonMythicID = "1010",
+		DungeonID = 779,
+		DungeonHeroicID = 780,
+		DungeonMythicID = 1010,
 		Acronym = L["SR"],
-		WorldMapID = "989",
-		JournalInstanceID = "476",
+		WorldMapID = 601,
+		JournalInstanceID = 476,
 		Module = "Atlas_WarlordsofDraenor",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas_GetBossName("Ranjit", 965), 965 },
@@ -601,7 +602,7 @@ db.AtlasMaps = {
 		MinLevel = "47",
 		PlayerLimit = { 5, 10, 25, 40 },
 		Acronym = L["BRM"],
-		Module = "Atlas_WarlordsofDraenor";
+		Module = "Atlas_WarlordsofDraenor",
 		{ BLUE.." A) "..BZ["Searing Gorge"], 10001 },
 		{ BLUE.." B) "..BZ["Burning Steppes"], 10002 },
 		{ BLUE.." C) "..BZ["Blackrock Depths"], 10003 },
@@ -620,41 +621,41 @@ db.AtlasMaps = {
 		{ GREN.." 2') "..L["Meeting Stone"]..ALC["L-Parenthesis"]..BZ["Lower Blackrock Spire"]..ALC["Comma"]..BZ["Upper Blackrock Spire"]..ALC["R-Parenthesis"], 10012 },
 	},
 	UpperBlackrockSpire = {
-		ZoneName = { BZ["Blackrock Mountain"]..ALC["Colon"]..BZ["Upper Blackrock Spire"] };
-		Location = { BZ["Searing Gorge"]..ALC["Slash"]..BZ["Burning Steppes"] };
-		DungeonID = "828";
-		DungeonHeroicID = "860";
-		DungeonMythicID = "1004";
-		Acronym = L["UBRS"];
-		WorldMapID = "995";
-		JournalInstanceID = "559";
-		Module = "Atlas_WarlordsofDraenor";
-		{ BLUE.." A) "..ALC["Entrance"], 10001 };
-		{ BLUE.." B-C) "..ALC["Connection"], 10002 };
-		{ WHIT.." 1) "..Atlas_GetBossName("Orebender Gor'ashan", 1226), 1226 };
-		{ WHIT.." 2) "..Atlas_GetBossName("Kyrak", 1227), 1227 };
-		{ WHIT..INDENT..Atlas_GetBossName("Drakonid Monstrosity", 1227, 2), 1227 };
-		{ WHIT.." 3) "..Atlas_GetBossName("Commander Tharbek", 1228), 1228 };
-		{ WHIT..INDENT..Atlas_GetBossName("Black Iron Guard", 1228, 3), 1228 };
-		{ WHIT..INDENT..Atlas_GetBossName("Ironbarb Skyreaver", 1228, 2), 1228 };
-		{ WHIT.." 4) "..Atlas_GetBossName("Ragewing the Untamed", 1229), 1229 };
-		{ WHIT..INDENT..Atlas_GetBossName("Ragewind Whelp", 1229, 2), 1229 };
-		{ WHIT.." 5) "..Atlas_GetBossName("Warlord Zaela", 1234), 1234 };
-		{ "" };
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
-		{ "Magnets, How Do They Work?", "ac=9045" };
-		{ "Leeeeeeeeeeeeeroy...?", "ac=9058" };
-		{ "Bridge Over Troubled Fire", "ac=9056" };
-		{ "Dragonmaw? More Like Dragonfall!", "ac=9057" };
-		{ "Upper Blackrock Spire", "ac=9042" };
-		{ "Heroic: Upper Blackrock Spire", "ac=9055" };
-		{ "Heroic: Upper Blackrock Spire Guild Run", "ac=9376" };
-		{ "Mythic: Upper Blackrock Spire", "ac=10085" };
-		{ "Upper Blackrock Spire Challenger", "ac=8891" };
-		{ "Upper Blackrock Spire: Bronze", "ac=8892" };
-		{ "Upper Blackrock Spire: Silver", "ac=8893" };
-		{ "Upper Blackrock Spire: Gold", "ac=8894" };
-	};
+		ZoneName = { BZ["Blackrock Mountain"]..ALC["Colon"]..BZ["Upper Blackrock Spire"] },
+		Location = { BZ["Searing Gorge"]..ALC["Slash"]..BZ["Burning Steppes"] },
+		DungeonID = 828,
+		DungeonHeroicID = 860,
+		DungeonMythicID = 1004,
+		Acronym = L["UBRS"],
+		WorldMapID = 616,
+		JournalInstanceID = 559,
+		Module = "Atlas_WarlordsofDraenor",
+		{ BLUE.." A) "..ALC["Entrance"], 10001 },
+		{ BLUE.." B-C) "..ALC["Connection"], 10002 },
+		{ WHIT.." 1) "..Atlas_GetBossName("Orebender Gor'ashan", 1226), 1226 },
+		{ WHIT.." 2) "..Atlas_GetBossName("Kyrak", 1227), 1227 },
+		{ WHIT..INDENT..Atlas_GetBossName("Drakonid Monstrosity", 1227, 2), 1227 },
+		{ WHIT.." 3) "..Atlas_GetBossName("Commander Tharbek", 1228), 1228 },
+		{ WHIT..INDENT..Atlas_GetBossName("Black Iron Guard", 1228, 3), 1228 },
+		{ WHIT..INDENT..Atlas_GetBossName("Ironbarb Skyreaver", 1228, 2), 1228 },
+		{ WHIT.." 4) "..Atlas_GetBossName("Ragewing the Untamed", 1229), 1229 },
+		{ WHIT..INDENT..Atlas_GetBossName("Ragewind Whelp", 1229, 2), 1229 },
+		{ WHIT.." 5) "..Atlas_GetBossName("Warlord Zaela", 1234), 1234 },
+		{ "" },
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ "Magnets, How Do They Work?", "ac=9045" },
+		{ "Leeeeeeeeeeeeeroy...?", "ac=9058" },
+		{ "Bridge Over Troubled Fire", "ac=9056" },
+		{ "Dragonmaw? More Like Dragonfall!", "ac=9057" },
+		{ "Upper Blackrock Spire", "ac=9042" },
+		{ "Heroic: Upper Blackrock Spire", "ac=9055" },
+		{ "Heroic: Upper Blackrock Spire Guild Run", "ac=9376" },
+		{ "Mythic: Upper Blackrock Spire", "ac=10085" },
+		{ "Upper Blackrock Spire Challenger", "ac=8891" },
+		{ "Upper Blackrock Spire: Bronze", "ac=8892" },
+		{ "Upper Blackrock Spire: Silver", "ac=8893" },
+		{ "Upper Blackrock Spire: Gold", "ac=8894" },
+	},
 }
 
 -- Atlas Map NPC Description Data
@@ -804,17 +805,17 @@ db.AtlasMaps_NPC_DB = {
 		{ "2'", 10012, 341, 391},
 	},
 	UpperBlackrockSpire = {
-		{ 1, 1226, 193, 87 }; -- Orebender Gor'ashan
-		{ 2, 1227, 251, 144 }; -- Kyrak
-		{ 3, 1228, 361, 233 }; -- Commander Tharbek
-		{ 4, 1229, 340, 331 }; -- Ragewing the Untamed
-		{ 5, 1234, 110, 342 }; -- Warlord Zaela
-		{ "A", 10001, 100, 192};
-		{ "B", 10002, 50, 111};
-		{ "B", 10002, 200, 37};
-		{ "C", 10002, 192, 164};
-		{ "C", 10002, 225, 313};
-	};
+		{ 1, 1226, 193, 87 }, -- Orebender Gor'ashan
+		{ 2, 1227, 251, 144 }, -- Kyrak
+		{ 3, 1228, 361, 233 }, -- Commander Tharbek
+		{ 4, 1229, 340, 331 }, -- Ragewing the Untamed
+		{ 5, 1234, 110, 342 }, -- Warlord Zaela
+		{ "A", 10001, 100, 192},
+		{ "B", 10002, 50, 111},
+		{ "B", 10002, 200, 37},
+		{ "C", 10002, 192, 164},
+		{ "C", 10002, 225, 313},
+	},
 }
 
 --[[

@@ -53,7 +53,7 @@
 			</OnLoad>
 			<OnClick>
 				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-				PetTrackerTamerJournal.History:SetSelected(self:GetID())
+				PetTrackerRivalJournal.History:SetSelected(self:GetID())
 			</OnClick>
 			<OnMouseDown>
 				if self:IsEnabled() then

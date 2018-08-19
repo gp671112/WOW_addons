@@ -1,17 +1,10 @@
-## Interface: 70300
+## Interface: 80000
 ## Title: PetTracker Switcher
 ## Notes: Displays all battle information at a glance.
 ## Author: Jaliborc (João Cardoso)
 
 ## Dependencies: PetTracker
 ## X-Category: Battle Pets
-## Version: 7.3.0
-
-..\PetTracker\Combat\StatusBar.xml
-
-..\PetTracker\Combat\SlotHighlight.xml
-..\PetTracker\Combat\SlotBorder.xml
-..\PetTracker\Combat\Slot.xml
-..\PetTracker\Combat\Slot.lua
+## Version: 8.0.5
 
 Switcher.lua

@@ -1,8 +1,8 @@
--- $Id: Atlas_Legion-enUS.lua 130 2017-04-30 11:01:57Z arith $
+-- $Id: Atlas_Legion-enUS.lua 145 2018-08-09 14:03:43Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2016 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 

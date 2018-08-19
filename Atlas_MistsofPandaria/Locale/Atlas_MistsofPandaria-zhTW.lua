@@ -1,10 +1,10 @@
--- $Id: Atlas_MistsofPandaria-zhTW.lua 15 2017-01-16 09:41:12Z arith $
+-- $Id: Atlas_MistsofPandaria-zhTW.lua 29 2018-08-09 14:01:25Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -71,10 +71,6 @@ L["TJS"] = "TJS"
 L["ToT"] = "ToT"
 L["Unblinking Eye"] = "堅定無畏之眼"
 L["Zao'cho <The Emperor's Shield>"] = "趙仇 <帝王之盾>"
-
--- ToC
-L["Description"] = "潘達利亞之謎副本地圖模組"
-L["Title"] = "|r|cFF0099FF[地圖]|rAtlas 潘達利亞之謎"
 
 
 end

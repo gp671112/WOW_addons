@@ -1,8 +1,8 @@
--- $Id: Atlas_Scenarios.lua 43 2017-06-29 08:14:23Z arith $
+-- $Id: Atlas_Scenarios.lua 53 2018-08-08 17:27:31Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2012 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2012 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -22,6 +22,7 @@
 
 --]]
 local _G = getfenv(0)
+local FOLDER_NAME, private = ...
 local LibStub = _G.LibStub
 local Atlas = LibStub("AceAddon-3.0"):GetAddon("Atlas")
 
@@ -548,7 +549,7 @@ local myData = {
 		Location = { BZ["Broken Isles"] },
 		LevelRange = "100",
 		MinLevel = "100",
-		WorldMapID = "1021",
+		--WorldMapID = 858,
 		LargeMap = "SC_BrokenShore",
 		{ YELL.."- "..SS(786, 1) },
 		{ INDENT..GREY..SD(786, 1) },
@@ -671,7 +672,7 @@ local myData = {
 		Location = { BZ["Broken Shore"]..ALC["Comma"]..BZ["Broken Isles"] },
 		LevelRange = "110",
 		MinLevel = "110",
-		WorldMapID = "1021",
+		WorldMapID = 858,
 		LargeMap = "SC_AssaultonBrokenShore",
 		{ YELL.."- "..SS(1280, 1) }, -- Into the Fray
 		{ INDENT..GREY..SD(1280, 1) }, -- Reach the Broken Shore

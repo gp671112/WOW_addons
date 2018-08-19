@@ -138,9 +138,5 @@ L["Watcher Gashra"] = "看守者賈西拉"
 L["Watcher Narjil"] = "看守者納吉爾"
 L["Watcher Silthik"] = "看守者席爾希克"
 
--- ToC
-L["Description"] = "巫妖王之怒副本地圖模組"
-L["Title"] = "|r|cFF0099FF[地圖]|rAtlas 巫妖王之怒"
-
 
 end

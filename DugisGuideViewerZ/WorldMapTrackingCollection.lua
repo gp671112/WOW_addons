@@ -3,7 +3,9 @@ if not DGV then return end
 
 local WMTCollection, WMT, L = DGV:RegisterModule("WMTCollection"), DGV.Modules.WorldMapTracking, DugisLocals
 local BC = LibStub("LibBabble-Class-3.0")
+local HBDMigrate = LibStub("HereBeDragons-Migrate")
 local BCR = BC:GetReverseLookupTable()
+local harvestingDataMode = false
 WMTCollection.essential = true
 local _
 local mailReaction, auctionReaction, bankReaction, battlemasterReaction, trainerReaction, vendorReaction, confirmBindReaction, dataTooltip
@@ -93,14 +95,23 @@ function WMTCollection:Initialize()
 				local pointTrackingTypeString, pointCoords, pointNpc = strsplit(":", point)
 				if trackingType==tonumber(pointTrackingTypeString) and npc==tonumber(pointNpc) then
 					if npc then return true end
-					local m, f = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+					local m, f = DGV:GetCurrentMapID()
 					if DGV:ComputeDistance(m, f , x, y, m, f, DGV:UnpackXY(pointCoords)) < 20 then return true end
 				end
 			end
 		end
 		
-		local function PointExists(mapName, level, trackingType, x, y, npc)
-			local mapKey = mapName..":"..level
+        --In case mapNameOrId is a number it cannot be string type
+		local function PointExists(mapNameOrId, level, trackingType, x, y, npc)
+			local mapKey = ""
+            
+            if tonumber(mapNameOrId) == nil and level then
+                mapKey = mapNameOrId..":"..level
+            else
+                --BFA maps
+                mapKey = mapNameOrId
+            end
+            
 			local found = SearchPoint(collectedPoints[playerFaction][mapKey], trackingType, x, y, npc)
 			if found then return true end
 			found = SearchPoint(DugisWorldMapTrackingPoints[playerFaction][mapKey], trackingType, x, y, npc)
@@ -157,9 +168,20 @@ function WMTCollection:Initialize()
 			or npcId == 64515 -- Grand Expedition Yak
 			then return end
 			local x,y = GetCoords()
-			local mapName, level = GetMapInfo(), GetCurrentMapDungeonLevel()
-			if x and not PointExists(mapName, level, trackingType, x, y, npcId) then
-				local mapKey = mapName..":"..level
+			
+			local m, level, mapName = HBDMigrate:GetLegacyMapInfo(WorldMapFrame:GetMapID())
+         
+            level = level or 0
+            
+			if x and not PointExists(mapName or WorldMapFrame:GetMapID(), level or 0, trackingType, x, y, npcId) then
+				local mapKey = ""
+                if mapName then
+                    mapKey = mapName..":"..(level or 0)
+                else
+                    --BFA maps
+                    mapKey = WorldMapFrame:GetMapID()
+                end
+                
 				if not collectedPoints[playerFaction][mapKey] then
 					collectedPoints[playerFaction][mapKey] = {}
 				end
@@ -168,7 +190,9 @@ function WMTCollection:Initialize()
 		end
 		
 		local function MailOpen()
-			--CreateIfNew(8)
+            if harvestingDataMode then
+                CreateIfNew(8, GetNpcId(), "", GetNpcSex())
+            end
 		end
 		
 		local function AuctionOpen()
@@ -189,10 +213,7 @@ function WMTCollection:Initialize()
 		
 		local function CreateIfTrainsService(serviceItemIdOrIcon, spellOrName)
 			for i=1,GetNumTrainerServices() do
-				local itemLink = GetTrainerServiceItemLink(i)
-				if 
-					(itemLink and DGV:GetItemIdFromLink(itemLink)==serviceItemIdOrIcon) or
-					serviceItemIdOrIcon==GetTrainerServiceIcon(i)
+				if serviceItemIdOrIcon==GetTrainerServiceIcon(i)
 				then
 					CreateIfNew(10, GetNpcId(), spellOrName, GetNpcSex())
 					return true
@@ -214,22 +235,23 @@ function WMTCollection:Initialize()
 			end
 			
 			--trades & other
-			if CreateIfTrainsService(2581, "3273") then return end --First Aid
-			if CreateIfTrainsService(2841, "2575") then return end --Mining
-			if CreateIfTrainsService(4359, "4036") then return end --Engineering
-			if CreateIfTrainsService(2852, "3100") then return end --Blacksmithing
-			if CreateIfTrainsService(2303, "2108") then return end --Leatherworking
-			if CreateIfTrainsService("Interface\\Icons\\Spell_Arcane_PortalDalaran", "Portal") then return end
-			if CreateIfTrainsService("Interface\\Icons\\INV_Misc_Pelt_Wolf_01", "8613") then return end --Skinning
-			if CreateIfTrainsService("INTERFACE\\ICONS\\trade_archaeology", "Archaeology") then return end
-			if CreateIfTrainsService("Interface\\Icons\\Spell_Nature_Swiftness", "Riding") then return end
-			if CreateIfTrainsService(21932, "25229") then return end --Jewelcrafting
-			if CreateIfTrainsService(2576, "3908") then return end --Tailoring
-			if CreateIfTrainsService(3382, "2259") then return end --Alchemy
-			if CreateIfTrainsService(11289, "7411") then return end --Enchanting
-			if CreateIfTrainsService(39469, "45357") then return end --Inscription
-			if CreateIfTrainsService(30816, "2550") then return end --Cooking
-			if CreateIfTrainsService("Interface\\Icons\\Trade_Fishing", "131474") then return end --Fishing
+			if CreateIfTrainsService(135966, "3273") then return end --First Aid
+			if CreateIfTrainsService(136248, "2575") then return end --Mining
+			if CreateIfTrainsService(136243, "4036") then return end --Engineering
+			if CreateIfTrainsService(158737, "3100") then return end --Blacksmithing
+			if CreateIfTrainsService(133611, "2108") then return end --Leatherworking
+			if CreateIfTrainsService(237508, "Portal") then return end
+			if CreateIfTrainsService(134366, "8613") then return end --Skinning
+			if CreateIfTrainsService(441139, "158762") then return end
+			if CreateIfTrainsService(136103, "33388") then return end
+			if CreateIfTrainsService(134071, "25229") then return end --Jewelcrafting
+			if CreateIfTrainsService(136249, "3908") then return end --Tailoring
+			if CreateIfTrainsService(136240, "2259") then return end --Alchemy
+			if CreateIfTrainsService(136244, "7411") then return end --Enchanting
+			if CreateIfTrainsService(237171, "45357") then return end --Inscription
+			if CreateIfTrainsService(133971, "2550") then return end --Cooking
+			if CreateIfTrainsService(136245, "131474") then return end --Fishing
+			if CreateIfTrainsService(441139, "195127") then return end --Archeology
 		end
 		
 		local function VendorOpen()

@@ -1,10 +1,10 @@
--- $Id: Atlas_Cataclysm-enUS.lua 24 2017-05-10 09:16:25Z arith $
+-- $Id: Atlas_Cataclysm-enUS.lua 31 2018-08-09 13:59:41Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -138,10 +138,6 @@ L["Zanzil's Cauldron of Frostburn Formula"] = "Zanzil's Cauldron of Frostburn Fo
 L["Zanzil's Cauldron of Toxic Torment"] = "Zanzil's Cauldron of Toxic Torment"
 L["ZG"] = "ZG"
 L["Zungam"] = "Zungam"
-
--- ToC
-L["Description"] = "Cataclysm Instances' Maps"
-L["Title"] = "Atlas |r|cFF0099FF[Cataclysm]|r"
 
 --************************************************
 -- Zone Names, Acronyms, and Common Strings

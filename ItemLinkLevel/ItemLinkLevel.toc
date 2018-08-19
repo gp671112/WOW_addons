@@ -1,7 +1,0 @@
-## Interface: 70100
-## Title: ItemLinkLevel
-## Title-zhTW: |cFF00FF80[資訊]|r物品等級-聊天連結
-## Notes-zhTW: ItemLinkLevel |n在聊天視窗的物品連結中顯示裝備等級和種類。|n|cffffd200使用方法：|r從Esc>介面>插件>裝備-聊天連結，進行設定。
-## Version: 1.6
-## SavedVariables: SavedData
-main.lua

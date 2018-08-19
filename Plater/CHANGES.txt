@@ -1,7 +1,7 @@
-changeset:   57:f9359cfcbbdd
-tag:         v7.3.2.057
+changeset:   104:99ebaeb620c4
+tag:         v8.0.1.104
 user:        Tercio
-date:        Sat Dec 09 10:52:47 2017 -0200
-summary:     - framework update.
+date:        Mon Aug 13 17:04:30 2018 -0300
+summary:     - Adjust correctly the point of the 6th rogue combo point.
 
 

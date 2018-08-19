@@ -1,10 +1,10 @@
--- $Id: Atlas_Cataclysm-zhCN.lua 16 2017-01-16 09:55:01Z arith $
+-- $Id: Atlas_Cataclysm-zhCN.lua 31 2018-08-09 13:59:41Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -66,8 +66,8 @@ L["FL"] = "FL"
 L["Forest Frogs"] = "森林蛙"
 L["Gazakroth"] = "卡扎克洛斯"
 L["GB"] = "GB"
---Translation missing 
--- L["Goblin Teleporter"] = ""
+--[[Translation missing --]]
+--[[ L["Goblin Teleporter"] = ""--]] 
 L["Gub <Destroyer of Fish>"] = "伽布 <鲜鱼毁灭者>"
 L["Harald <Food Vendor>"] = "阿拉尔德 <食物商人>"
 L["Haunted Stable Hand"] = "鬼怪马夫"
@@ -138,9 +138,5 @@ L["Zanzil's Cauldron of Frostburn Formula"] = "赞吉尔的霜灼药方坩埚"
 L["Zanzil's Cauldron of Toxic Torment"] = "赞吉尔的剧毒折磨坩埚"
 L["ZG"] = "ZG"
 L["Zungam"] = "苏加姆"
-
--- ToC
-L["Description"] = "大地的裂变副本地图"
-L["Title"] = "Atlas |r|cFF0099FF[大地的裂变]|r"
 
 end

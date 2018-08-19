@@ -1,10 +1,10 @@
--- $Id: Atlas_Cataclysm-zhTW.lua 24 2017-05-10 09:16:25Z arith $
+-- $Id: Atlas_Cataclysm-zhTW.lua 31 2018-08-09 13:59:41Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -138,9 +138,5 @@ L["Zanzil's Cauldron of Frostburn Formula"] = "贊吉爾的霜燃配方"
 L["Zanzil's Cauldron of Toxic Torment"] = "贊吉爾的毒物折磨大鍋"
 L["ZG"] = "ZG"
 L["Zungam"] = "祖剛"
-
--- ToC
-L["Description"] = "浩劫與重生副本地圖模組"
-L["Title"] = "|r|cFF0099FF[地圖]|rAtlas 浩劫與重生"
 
 end

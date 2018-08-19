@@ -25,7 +25,22 @@ function WMT:Initialize()
 		["Interface\\Minimap\\Tracking\\Profession"] = 10,
 		["Interface\\Minimap\\Tracking\\Reagents"] = 11,
 		["Interface\\Minimap\\Tracking\\Repair"] = 12,
-		["Interface\\Icons\\tracking_wildpet"] = 13
+		["Interface\\Icons\\tracking_wildpet"] = 13,
+		
+		[136452] = 1,  -- Auctioneer
+		[136453] = 2,  -- Banker
+		[136454] = 3,  -- BattleMaster
+		[136455] = 4,  -- Class
+		[136456] = 5,  -- FlightMaster
+		[136457] = 6,  -- Food
+		[136458] = 7,  -- Innkeeper
+		[136459] = 8,  -- Mailbox
+		[136462] = 9,  -- Poisons
+		[136463] = 10, -- Profession
+		[136464] = 11, -- Reagents
+		[136465] = 12, -- Repair
+		[613074] = 13  -- tracking_wildpet
+		
 	}
 
 	local trackingMap = {}
@@ -106,6 +121,20 @@ function WMT:Initialize()
 		["PetBattles"] = {},
 	}
 	WMT.DataProviders = DataProviders
+	
+	--Type petType index = {identifier, type icon postfix}
+	local allPetTypes = {
+		[1] = {"Humanoid"   , "Humanoid"       },
+		[2] = {"Dragon"     , "Dragon"         },
+		[3] = {"Flying"     , "Flying"         },
+		[4] = {"Undead"     , "Undead"         },
+		[5] = {"Critter"    , "Critter"        },
+		[6] = {"Magical"    , "Magical"        },
+		[7] = {"Elemental"  , "Elemental"      },
+		[8] = {"Beast"      , "Beast"          },
+		[9] = {"Aquatic"    , "Water"          },
+		[10] = {"Mechanical" , "Mechanical"    },
+	}
 
 	function DataProviders.IterateProviders(invariant, control)
 		while true do
@@ -578,23 +607,36 @@ function WMT:Initialize()
         
             local value = petJournalLookup[tonumber(speciesID)]
             if not value and speciesID then
-               local speciesName, speciesIcon, petType, companionID, tooltipSource, tooltipDescription, isWild, canBattle, isTradeable, isUnique, obtainable, creatureDisplayID = C_PetJournal.GetPetInfoBySpeciesID(tonumber(speciesID))
+               local speciesName, speciesIcon, petTypeIndex, companionID, tooltipSource, tooltipDescription, isWild, canBattle, isTradeable, isUnique, obtainable, creatureDisplayID = C_PetJournal.GetPetInfoBySpeciesID(tonumber(speciesID))
 				petJournalLookup[tonumber(speciesID)] = 
-					string.format("%d:%s:%s:%d:%d", companionID, speciesName, tooltipDescription:gsub("(:)", "%%3A"), petType, nil)
+					string.format("%d:%s:%s:%d:%d", companionID, speciesName, tooltipDescription:gsub("(:)", "%%3A"), petTypeIndex, nil)
 				value = petJournalLookup[tonumber(speciesID)]
 			elseif not speciesID then
 				return false
             end
             
-            local _, _, petType = C_PetJournal.GetPetInfoBySpeciesID(speciesID)
-            petType = _G['BATTLE_PET_NAME_' .. petType]
+            local _, _, petTypeIndex = C_PetJournal.GetPetInfoBySpeciesID(speciesID)
+            petType = _G['BATTLE_PET_NAME_' .. petTypeIndex]
             
             local _, _, _, _, collected = strsplit(":", value)
             collected = tonumber(collected)~=0 
-            
+			
+			--For backward compatibility
+			local petTypeName = allPetTypes[petTypeIndex][1]
+			
             if (DugisGuideViewer.chardb["showCollectedPets"] and collected) or (DugisGuideViewer.chardb["showNotCollectedPets"] and not collected) then
-                if petType and getPetTypeFilters()[petType] then
-                    return true
+                if petType then
+					if getPetTypeFilters()[petTypeIndex] ~= nil then
+						return getPetTypeFilters()[petTypeIndex]
+					end
+					
+					if getPetTypeFilters()[petType] ~= nil then
+						return getPetTypeFilters()[petType]
+					end
+					
+					if getPetTypeFilters()[petTypeName] ~= nil then
+						return getPetTypeFilters()[petTypeName]
+					end
                 end
             end  
 
@@ -672,7 +714,7 @@ function WMT:Initialize()
 	local trackingPoints = {}
 	WMT.trackingPoints = trackingPoints
 	local function UpdateTrackingFilters()
-		local mapID, level = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+		local mapID, level = WorldMapFrame:GetMapID()
 		for _,point in ipairs(trackingPoints) do
 			local trackingType, coord = unpack(point.args)
             local id = point.args[3]
@@ -693,13 +735,13 @@ function WMT:Initialize()
 					if trackingType == "P" then
 						point.icon:SetTexture(icon)
 						point.icon:SetTexCoord(0.79687500, 0.49218750, 0.50390625, 0.65625000)
-						point:SetFrameLevel(502)
+						point:SetFrameLevel(602)
 					elseif trackingType == "A" then --make achievement higher priority 
 						point.icon:SetTexture(icon)
 						point.icon:SetTexCoord(0, 1, 0, 1)
-						point:SetFrameLevel(503)
+						point:SetFrameLevel(603)
 					else
-						point:SetFrameLevel(502)					
+						point:SetFrameLevel(602)					
 						point.icon:SetTexture(icon)
 						point.icon:SetTexCoord(0, 1, 0, 1)
 					end
@@ -711,10 +753,14 @@ function WMT:Initialize()
 						point.minimapPoint:SetHeight(14)
 						point.minimapPoint:SetWidth(14)
 						point.minimapPoint:Show()
+							
+						local x, y = DGV:UnpackXY(coord)
 						DugisGuideViewer:PlaceIconOnMinimap(
-							point.minimapPoint, mapID, level, DGV:UnpackXY(coord))
+							
+							point.minimapPoint, mapID, level, x, y, true, false)
 					end
-					DGV:PlaceIconOnWorldMap(WorldMapButton, point, mapID, level, DGV:UnpackXY(coord) )
+					local x, y = DGV:UnpackXY(coord)
+					DGV:PlaceIconOnWorldMap(WorldMapButton, point, mapID, level, x, y , nil, nil, HBD_PINS_WORLDMAP_SHOW_PARENT)
 				end
 			else
 				point:Hide()
@@ -744,10 +790,10 @@ function WMT:Initialize()
 		local x, y = DGV:UnpackXY(point.args[2])
 		DGV:AddCustomWaypoint(
 			x, y, DataProviders:GetTooltipText(point.provider, unpack(point.args)),
-			GetCurrentMapAreaID(), GetCurrentMapDungeonLevel())
+			DGV:GetCurrentMapID() )
 	end
 
-	function WMT:GetAchievementProgress(achievementID)
+--[[	function WMT:GetAchievementProgress(achievementID)
 		local numCompleted = 0
 		
 		if achievementID and achievementID ~= "" then
@@ -761,7 +807,7 @@ function WMT:Initialize()
 			end)
 		end
 		return numCompleted
-	end
+	end ]] -- This create stuttering issue with some character, removed for now
 	
 	local function point_OnClick(self, button)
 		self = self.point or self
@@ -783,7 +829,11 @@ function WMT:Initialize()
 			local removeTracking = DGV.ArrowMenu:CreateMenuItem(menu, L["Remove tracking"])
 			removeTracking:SetFunction(function () 
                 DugisGuideUser.excludedTrackingPoints[pointKey] = true
-                WorldMapFrame_UpdateMap()
+                if self.minimapPoint then
+                    DGV:RemoveIconFromMinimap(self.minimapPoint)
+                end
+                DGV:RemoveWorldMapIcon(self)    
+                WMT:UpdateTrackingMap()
             end)
             
 			local trackingTypeText = (GetTrackingInfo(self.args[1]))
@@ -849,12 +899,13 @@ function WMT:Initialize()
         DugisWaypointTooltip:SetClampedToScreen(true)
        
         local screenWidth = GetScreenWidth()
-        local mapWidth = WorldMapPOIFrame:GetWidth()
+        local mapWidth = WorldMapFrame.ScrollContainer.Child:GetWidth() 
         local xOffset = (screenWidth - mapWidth) / 2
-        if WORLDMAP_SETTINGS.size == WORLDMAP_FULLMAP_SIZE then
-            DugisWaypointTooltip:SetClampRectInsets(-xOffset - 13,0,0,-35)  
-        else
+        
+        if WorldMapFrame:IsMaximized() then
             DugisWaypointTooltip:SetClampRectInsets(0,0,0,0) 
+        else
+            DugisWaypointTooltip:SetClampRectInsets(-xOffset + 180,0,0,-35)  
         end
     end
 	
@@ -956,7 +1007,7 @@ function WMT:Initialize()
         
         --GetModel is missing. More info: http://eu.battle.net/wow/en/forum/topic/17612062455
 		if not modelFrame:GetModelFileID() or modelFrame:GetModelFileID()=="" then 
-            print(modelFrame:GetModelFileID())
+           -- print(modelFrame:GetModelFileID())
             modelFrame:Hide() 
         end    
     
@@ -1005,6 +1056,7 @@ function WMT:Initialize()
 	end
 	
 	local function minimapPoint_OnUpdate(self)
+	--[[ todo: find replcement, test for API 8.0
 		local dist,x,y = DugisGuideViewer.astrolabe:GetDistanceToIcon(self)
 		if not dist then
 			self:Hide()
@@ -1016,6 +1068,7 @@ function WMT:Initialize()
 		else
 			self.icon:Show()
 		end
+		]]
 	end
 
 	local trackingPointPool = {}
@@ -1073,7 +1126,6 @@ function WMT:Initialize()
 		local DugisArrow = DGV.Modules.DugisArrow
 		--local x, y = GetXY(point.args[2])
 		local x, y = DGV:UnpackXY(point[4])
-		--return DGV:ComputeDistance(GetCurrentMapAreaID(), GetCurrentMapDungeonLevel(), x, y,
 		--	DugisArrow.map, DugisArrow.floor, DugisArrow.pos_x, DugisArrow.pos_y)
 		return DGV:ComputeDistance(point[1], point[2] or  DugisArrow.floor, x, y,
 			DugisArrow.map, DugisArrow.floor, DugisArrow.pos_x, DugisArrow.pos_y)
@@ -1083,8 +1135,7 @@ function WMT:Initialize()
 	local function IterateZonePoints(mapName, pointData, ofType, allContinents, IterateZonePoints, dontCheckDistance)
 		if not pointData then return end
 		local DugisArrow = DGV.Modules.DugisArrow
-		--local currentSystem =  DGV.astrolabe:GetMapInfo(DugisArrow.map)
-		local currentContinent = GetCurrentMapContinent()
+		local currentContinent = GetCurrentMapContinent_dugi()
 		local mapName,level = strsplit(":",mapName)
 		local nsMapName = UnspecifyMapName(mapName)
 		if nsMapName then
@@ -1100,7 +1151,7 @@ function WMT:Initialize()
 		level = tonumber(level)
 		if 
 			currentContinent~=DGV:GetCZByMapId(map) and 
-			mapName~=GetMapInfo() and
+			mapName~=DGV:GetDisplayedMapNameOld() and
 			not allContinents
 		then
 			return
@@ -1186,7 +1237,7 @@ function WMT:Initialize()
 					end
 					if ofType and ofType~="5" then return end
 					local fullData = DGV.Modules.TaxiData:GetFullData()
-					local continent = GetCurrentMapContinent()
+					local continent = GetCurrentMapContinent_dugi()
 					flightPointIterator, flightPointInvariant = IterateFlightPoints, fullData[continent]
 				elseif key==faction then
 					factionTable = value
@@ -1229,7 +1280,7 @@ function WMT:Initialize()
 		end
 	end
 
-	local function AddPointData(pointData)
+	local function AddPointsToTheMap(pointData)
 		if not pointData then return end
 		local data
 		for _,data in ipairs(pointData) do
@@ -1248,7 +1299,9 @@ function WMT:Initialize()
 		if DugisFlightmasterDataTable then 
 			characterData = DugisFlightmasterDataTable
 		end
-		local continent, map, level = GetCurrentMapContinent(), GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+		local map = DGV:GetCurrentMapID() 
+		if map == 876 or map == 875 then return end		
+		local continent = GetCurrentMapContinent_dugi()		
 		if fullData and fullData[continent] then
 			for npc,data in pairs(fullData[continent]) do
 				local requirements = data and data.requirements
@@ -1258,7 +1311,6 @@ function WMT:Initialize()
 				end
 				if 
 					data.m==map and 
-					data.f==level and
 					(not requirements or DGV:CheckRequirements(strsplit(":", requirements)))
 				then
 					GetCreatePoint("5", data.coord, npc, name)
@@ -1300,7 +1352,7 @@ function WMT:Initialize()
 		end
         
         if LuaUtils:IsElvUIInstalled() then
-            L_DropDownList1.showTimer = 1
+            DropDownList1.showTimer = 1
         else
             LibDugi_DropDownList1.showTimer = 1
         end        
@@ -1311,11 +1363,7 @@ function WMT:Initialize()
 
 	local function IterateDropdownLevel(level)
 		local listFrame = _G["DropDownList"..level];
-        
-        if LuaUtils:IsElvUIInstalled() then
-            listFrame = _G["L_DropDownList"..level];
-        end
-        
+               
 		local listFrameName = listFrame:GetName();
 		local count = listFrame.numButtons
 		local i = 0
@@ -1328,7 +1376,7 @@ function WMT:Initialize()
 
 	
 	local function UpdateCurrentMapVersion()
-		local currentMapName = GetMapInfo()
+		local currentMapName = DGV:GetDisplayedMapNameOld()
 		local nsMapName = UnspecifyMapName(currentMapName)
 		if nsMapName then
 			if not DugisGuideUser.CurrentMapVersions then
@@ -1338,6 +1386,8 @@ function WMT:Initialize()
 		end
 	end
 
+	
+	--[[ todo: find replacement
 	hooksecurefunc("WorldMapFrame_UpdateMap",
 		function()
 			if WMT.loaded then
@@ -1346,6 +1396,7 @@ function WMT:Initialize()
 			end
 		end)
           
+	]]
 
 		
 	function DGV:MINIMAP_UPDATE_TRACKING()
@@ -1361,34 +1412,58 @@ function WMT:Initialize()
 		end
 	end
 
+	function WMT:OnMapChangedOrOpen()
+		WMT:UpdateTrackingMap()
+	end
+	
 	function WMT:Load()
 		LuaUtils:Delay(3, function()
             DGV:PopulatePetJournalLookup()
         end)
 		function WMT:UpdateTrackingMap()
 			if not WMT.loaded then return end
-			local mapName, level = GetMapInfo(), GetCurrentMapDungeonLevel()
+			
+			local mapName = DGV:GetDisplayedMapNameOld()
+			local level = DGV:UiMapID2DungeonLevel(WorldMapFrame:GetMapID())
+			
 			RemoveAllPoints()
-			if not mapName or not DGV:UserSetting(DGV_WORLDMAPTRACKING) then return end
-			AddPointData(DugisWorldMapTrackingPoints[UnitFactionGroup("player")][mapName..":"..level]);
-			AddPointData(DugisWorldMapTrackingPoints[mapName])
-			AddPointData(DugisWorldMapTrackingPoints[mapName..":"..level])
+			if not DGV:UserSetting(DGV_WORLDMAPTRACKING) then return end
             
-            --Using map ID
-            local mapId = ""..GetCurrentMapAreaID()
-            AddPointData(DugisWorldMapTrackingPoints[mapId])
-            AddPointData(DugisWorldMapTrackingPoints[mapId..":"..level])
+            local faction = UnitFactionGroup("player")
             
+            if mapName and level then
+                AddPointsToTheMap(DugisWorldMapTrackingPoints[faction][mapName..":"..level]);
+                AddPointsToTheMap(DugisWorldMapTrackingPoints[mapName])
+                AddPointsToTheMap(DugisWorldMapTrackingPoints[mapName..":"..level])
+            end
+            
+            --Using map ID - BFA maps
+            local mapId = WorldMapFrame:GetMapID()
+            
+            if not mapId then
+                return
+            end
+            
+            AddPointsToTheMap(DugisWorldMapTrackingPoints[mapId])
+            AddPointsToTheMap(DugisWorldMapTrackingPoints[faction][mapId])
+
 			if not trackingPoints[1] then
 				local nsMapName = UnspecifyMapName(mapName)
 				if nsMapName then
-					AddPointData(DugisWorldMapTrackingPoints[UnitFactionGroup("player")][nsMapName..":"..level]);
-					AddPointData(DugisWorldMapTrackingPoints[nsMapName])
-					AddPointData(DugisWorldMapTrackingPoints[nsMapName..":"..level])
+					AddPointsToTheMap(DugisWorldMapTrackingPoints[faction][nsMapName..":"..level]);
+					AddPointsToTheMap(DugisWorldMapTrackingPoints[nsMapName])
+					AddPointsToTheMap(DugisWorldMapTrackingPoints[nsMapName..":"..level])
 				end
 			end
-			if CollectedWorldMapTrackingPoints_v2 and CollectedWorldMapTrackingPoints_v2[UnitFactionGroup("player")] then
-				AddPointData(CollectedWorldMapTrackingPoints_v2[UnitFactionGroup("player")][mapName..":"..level])
+			if CollectedWorldMapTrackingPoints_v2 and CollectedWorldMapTrackingPoints_v2[faction] then
+                if mapName then
+                    AddPointsToTheMap(CollectedWorldMapTrackingPoints_v2[faction][mapName..":"..level])
+                end
+                
+                if mapId then
+                    AddPointsToTheMap(CollectedWorldMapTrackingPoints_v2[faction][mapId])
+                end
+				
 			end
 			AddFlightPointData()
 			
@@ -1401,10 +1476,6 @@ function WMT:Initialize()
             local result = false
             
             local dropDownPrefix = ""
-            
-            if LuaUtils:IsElvUIInstalled() then
-                dropDownPrefix = "L_"
-            end
             
             LuaUtils:loop(_G[dropDownPrefix.."DropDownList1"].numButtons, function(buttonIndex)
                 local buttonIcon = _G[dropDownPrefix.."DropDownList1Button"..buttonIndex.."Icon"]
@@ -1429,10 +1500,6 @@ function WMT:Initialize()
             local result = 0
             
             local dropDownPrefix = ""
-            
-            if LuaUtils:IsElvUIInstalled() then
-                dropDownPrefix = "L_"
-            end
             
             LuaUtils:loop(_G[dropDownPrefix.."DropDownList1"].numButtons, function(buttonIndex)
                 local button = _G[dropDownPrefix.."DropDownList1Button"..buttonIndex]
@@ -1460,37 +1527,34 @@ function WMT:Initialize()
             return result
         end
         
-        --Type identifier, type icon postfix
-        local allPetTypes = {
-            {"Humanoid"   , "Humanoid"     },
-            {"Dragon"     , "Dragon"       },
-            {"Flying"     , "Flying"       },
-            {"Undead"     , "Undead"       },
-            {"Critter"    , "Critter"      },
-            {"Magical"    , "Magical"      },
-            {"Elemental"  , "Elemental"    },
-            {"Beast"      , "Beast"        },
-            {"Aquatic"    , "Water"        },
-            {"Mechanical" , "Mechanical"   },
-        }
+
         
         local function PetFilterMenuItemClicked(item)
             local menuType = item.arg1
-            local petType = item.arg2
+            local petTypeIndex = item.arg2
             
-            if petType then
-                getPetTypeFilters()[petType] = not getPetTypeFilters()[petType]
+            if petTypeIndex then
+                getPetTypeFilters()[petTypeIndex] = not getPetTypeFilters()[petTypeIndex]
+				
+				--Clearing old convention
+				getPetTypeFilters()[allPetTypes[petTypeIndex][1]] = nil
             end
             
             if menuType == "check-all" then
-                LuaUtils:foreach(allPetTypes, function(itemType)
-                    getPetTypeFilters()[itemType[1]] = true
+                LuaUtils:foreach(allPetTypes, function(itemType, itemTypeIndex)
+                    getPetTypeFilters()[itemTypeIndex] = true
+					
+					--Clearing old convention
+					getPetTypeFilters()[allPetTypes[itemTypeIndex][1]] = nil
                 end)
             end
             
             if menuType == "uncheck-all" then
-                LuaUtils:foreach(allPetTypes, function(itemType)
-                    getPetTypeFilters()[itemType[1]] = false
+                LuaUtils:foreach(allPetTypes, function(itemType, itemTypeIndex)
+                    getPetTypeFilters()[itemTypeIndex] = false
+					
+					--Clearing old convention
+					getPetTypeFilters()[allPetTypes[itemTypeIndex][1]] = nil
                 end)
             end  
             
@@ -1535,19 +1599,28 @@ function WMT:Initialize()
                 }
             end
             
-            local function AddPetFilterItemToMenu(name, menuType, petType, checkable, icon)
+            local function AddPetFilterItemToMenu(name, menuType, petTypeIndex, checkable, icon)
                 local info = {}
                 info.func = PetFilterMenuItemClicked
                 info.text = name
                 info.icon = icon
                 info.arg1 = menuType
-                info.arg2 = petType
+                info.arg2 = petTypeIndex
                 info.notCheckable = not checkable
                 info.keepShownOnClick = true
                 info.isNotRadio = true
                 
-                if petType then
-                    info.checked = function(button) return getPetTypeFilters()[button.arg2] end
+                if petTypeIndex then
+                    info.checked = function(button) 
+						local petTypeIndex = button.arg2
+						--petType for backward compatibility
+						local petType = allPetTypes[button.arg2][1]
+						
+						if getPetTypeFilters()[petTypeIndex] ~= nil then
+							return getPetTypeFilters()[petTypeIndex]
+						end
+						return getPetTypeFilters()[petType] == true
+					end
                 end
                 
                 if menuType == "collected" then
@@ -1568,10 +1641,10 @@ function WMT:Initialize()
             AddPetFilterItemToMenu("Collected",         "collected",      nil, true)     
             AddPetFilterItemToMenu("Not Collected",     "not-collected",  nil, true)  
 
-            LuaUtils:foreach(allPetTypes, function(petType)
+            LuaUtils:foreach(allPetTypes, function(petType, petTypeIndex)
                 local petTypeName = petType[1]
                 local petTypeIcon = petType[2]
-                AddPetFilterItemToMenu(petTypeName, "pet-type", petTypeName, true, iconPathDir..petTypeIcon) 
+                AddPetFilterItemToMenu(petTypeName, "pet-type", petTypeIndex, true, iconPathDir..petTypeIcon) 
             end)
 
             local added = {}
@@ -1663,25 +1736,14 @@ function WMT:Initialize()
             MinimapExtraMenuFrame.point = "TOPRIGHT"
             MinimapExtraMenuFrame.relativePoint = "BOTTOMRIGHT"
 
-            local yMenuOffset = 0
-            
-            if LuaUtils:IsElvUIInstalled() then
-                local top = L_DropDownList1:GetTop()
-                if top ~= nil and top < GetScreenHeight() * 0.5 then
-                    MinimapExtraMenuFrame.point = "BOTTOMRIGHT"
-                    MinimapExtraMenuFrame.relativePoint = "TOPRIGHT"
-                    yMenuOffset = 10
-                end
-            else
-                local top = DropDownList1:GetTop()
-                if top ~= nil and top < GetScreenHeight() * 0.5 then
-                    MinimapExtraMenuFrame.point = "BOTTOMRIGHT"
-                    MinimapExtraMenuFrame.relativePoint = "TOPRIGHT"
-                end
-            end
-
+			local top = DropDownList1:GetTop()
+			if top ~= nil and top < GetScreenHeight() * 0.5 then
+				MinimapExtraMenuFrame.point = "BOTTOMRIGHT"
+				MinimapExtraMenuFrame.relativePoint = "TOPRIGHT"
+			end
+			
              if LuaUtils:IsElvUIInstalled() then
-                LibDugi_EasyMenu(menu, MinimapExtraMenuFrame, L_DropDownList1, 0 , -5 + yMenuOffset, "MENU"); 
+                LibDugi_EasyMenu(menu, MinimapExtraMenuFrame, DropDownList1, 0 , -3, "MENU"); 
                 LuaUtils:TransferBackdropFromElvUI()
              else
                 LibDugi_EasyMenu(menu, MinimapExtraMenuFrame, DropDownList1, 0 , 0, "MENU");
@@ -1692,10 +1754,6 @@ function WMT:Initialize()
 
                 local DropDownList = DropDownList1
                 
-                if LuaUtils:IsElvUIInstalled() then
-                    DropDownList = L_DropDownList1
-                end
-            
                 LibDugi_DropDownList1:HookScript("OnEnter", function()
                     DropDownList.showTimer = 10000
                 end)            
@@ -1772,8 +1830,8 @@ function WMT:Initialize()
     local pressedAbandonIndex = nil
     StaticPopupDialogs["GROUP_ABANDON_CONFIRMATION"] = {
         text = L["Abandon All Quests?"],
-        button1 = L["Yes"],
-        button2 = L["No"],
+        button1 = YES,
+        button2 = NO,
         OnHide = function()
             pressedAbandonIndex = nil
         end,
@@ -1801,10 +1859,15 @@ function WMT:Initialize()
     }
 
     hooksecurefunc("QuestLogQuests_Update", function(...)
-        LuaUtils:foreach(QuestMapFrame.QuestsFrame.Contents.Headers, function(parentButton)
+	
+		if not QuestScrollFrame.headerFramePool then
+			return
+		end
+		
+        for parentButton in QuestScrollFrame.headerFramePool:EnumerateActive() do
             if parentButton.abandonGroupButton == nil then
                 local buttonFrame = GUIUtils:AddButton(parentButton, "", 231, 6, 28, 28, 28, 28, function(self)  
-                    StaticPopupDialogs["GROUP_ABANDON_CONFIRMATION"].text = L["Abandon All "] .. GetQuestLogTitle(self.abandonGroupButton.questLogIndex) .. L[" Quests?"] 
+                    StaticPopupDialogs["GROUP_ABANDON_CONFIRMATION"].text = L["Abandon All "] .. GetQuestLogTitle(self.abandonGroupButton.questLogIndex) .. L[" Quests?"]
                     if pressedAbandonIndex == nil then
                         pressedAbandonIndex = self.abandonGroupButton.questLogIndex
                         StaticPopup_Show ("GROUP_ABANDON_CONFIRMATION")
@@ -1820,7 +1883,8 @@ function WMT:Initialize()
                     parentButton.abandonGroupButton.button:Show()
                 end
             end
-        end)   
+        end
+		
     end)
 end
 

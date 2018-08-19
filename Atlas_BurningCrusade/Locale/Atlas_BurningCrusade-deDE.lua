@@ -1,10 +1,10 @@
--- $Id: Atlas_BurningCrusade-deDE.lua 20 2017-01-16 10:36:39Z arith $
+-- $Id: Atlas_BurningCrusade-deDE.lua 38 2018-08-09 13:56:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -226,10 +226,6 @@ L["Young Blanchy"] = "Kleine Graumähne"
 L["Ythyar"] = "Ythyar"
 L["Zelfan"] = "Zelfan"
 L["Zixil <Aspiring Merchant>"] = "Zixil <Aufstrebender Händler>"
-
--- ToC
-L["Description"] = "Karten der Instanzen aus Burning Crusade"
-L["Title"] = "Atlas |r|cFF0099FF[Burning Crusade]|r"
 
 
 end

@@ -2,6 +2,9 @@ local MOD = DugisGuideViewer
 local _
 local MapOverlays = MOD:RegisterModule("MapOverlays")
 MapOverlays.essential = true
+local harvestingDataMode = false
+
+local HBDMigrate = LibStub("HereBeDragons-Migrate")
 
 function MapOverlays:Initialize()
 	local defaults = {
@@ -1616,7 +1619,515 @@ function MapOverlays:Initialize()
 					["SHATTEREDFIELDS"] = 148215712242,
 				},						
 				['*'] = {},
-			},
+				
+				
+				
+				----------- Content of DataExport: ----------------
+				[863] = {
+					{
+						["offsetX"] = 620,
+						["textureHeight"] = 1249,
+						["textureWidth"] = 1225,
+						["offsetY"] = 565,
+						["fileDataIDs"] = {
+							2024017, -- [1]
+							2024028, -- [2]
+							2024035, -- [3]
+							2024036, -- [4]
+							2024037, -- [5]
+							2024038, -- [6]
+							2024039, -- [7]
+							2024040, -- [8]
+							2024041, -- [9]
+							2024018, -- [10]
+							2024019, -- [11]
+							2024020, -- [12]
+							2024021, -- [13]
+							2024022, -- [14]
+							2024023, -- [15]
+							2024024, -- [16]
+							2024025, -- [17]
+							2024026, -- [18]
+							2024027, -- [19]
+							2024029, -- [20]
+							2024030, -- [21]
+							2024031, -- [22]
+							2024032, -- [23]
+							2024033, -- [24]
+							2024034, -- [25]
+						},
+					}, -- [1]
+					{
+						["offsetX"] = 1072,
+						["textureHeight"] = 809,
+						["textureWidth"] = 1289,
+						["offsetY"] = 1676,
+						["fileDataIDs"] = {
+							2023943, -- [1]
+							2023954, -- [2]
+							2023960, -- [3]
+							2023961, -- [4]
+							2023962, -- [5]
+							2023963, -- [6]
+							2023964, -- [7]
+							2023965, -- [8]
+							2023966, -- [9]
+							2023944, -- [10]
+							2023945, -- [11]
+							2023946, -- [12]
+							2023947, -- [13]
+							2023948, -- [14]
+							2023949, -- [15]
+							2023950, -- [16]
+							2023951, -- [17]
+							2023952, -- [18]
+							2023953, -- [19]
+							2023955, -- [20]
+							2023956, -- [21]
+							2023957, -- [22]
+							2023958, -- [23]
+							2023959, -- [24]
+						},
+					}, -- [2]
+					{
+						["offsetX"] = 484,
+						["textureHeight"] = 967,
+						["textureWidth"] = 1157,
+						["offsetY"] = 1539,
+						["fileDataIDs"] = {
+							2023923, -- [1]
+							2023934, -- [2]
+							2023936, -- [3]
+							2023937, -- [4]
+							2023938, -- [5]
+							2023939, -- [6]
+							2023940, -- [7]
+							2023941, -- [8]
+							2023942, -- [9]
+							2023924, -- [10]
+							2023925, -- [11]
+							2023926, -- [12]
+							2023927, -- [13]
+							2023928, -- [14]
+							2023929, -- [15]
+							2023930, -- [16]
+							2023931, -- [17]
+							2023932, -- [18]
+							2023933, -- [19]
+							2023935, -- [20]
+						},
+					}, -- [3]
+					{
+						["offsetX"] = 1511,
+						["textureHeight"] = 991,
+						["textureWidth"] = 800,
+						["offsetY"] = 1043,
+						["fileDataIDs"] = {
+							2023713, -- [1]
+							2023721, -- [2]
+							2023722, -- [3]
+							2023723, -- [4]
+							2023724, -- [5]
+							2023725, -- [6]
+							2023726, -- [7]
+							2023727, -- [8]
+							2023728, -- [9]
+							2023714, -- [10]
+							2023715, -- [11]
+							2023716, -- [12]
+							2023717, -- [13]
+							2023718, -- [14]
+							2023719, -- [15]
+							2023720, -- [16]
+						},
+					}, -- [4]
+				},
+				[862] = {
+					{
+						["offsetX"] = 2409,
+						["textureHeight"] = 912,
+						["textureWidth"] = 979,
+						["offsetY"] = 0,
+						["fileDataIDs"] = {
+							2034400, -- [1]
+							2034408, -- [2]
+							2034409, -- [3]
+							2034410, -- [4]
+							2034411, -- [5]
+							2034412, -- [6]
+							2034413, -- [7]
+							2034414, -- [8]
+							2034415, -- [9]
+							2034401, -- [10]
+							2034402, -- [11]
+							2034403, -- [12]
+							2034404, -- [13]
+							2034405, -- [14]
+							2034406, -- [15]
+							2034407, -- [16]
+						},
+					}, -- [1]
+					{
+						["offsetX"] = 1046,
+						["textureHeight"] = 1287,
+						["textureWidth"] = 1243,
+						["offsetY"] = 1273,
+						["fileDataIDs"] = {
+							2034370, -- [1]
+							2034381, -- [2]
+							2034392, -- [3]
+							2034394, -- [4]
+							2034395, -- [5]
+							2034396, -- [6]
+							2034397, -- [7]
+							2034398, -- [8]
+							2034399, -- [9]
+							2034371, -- [10]
+							2034372, -- [11]
+							2034373, -- [12]
+							2034374, -- [13]
+							2034375, -- [14]
+							2034376, -- [15]
+							2034377, -- [16]
+							2034378, -- [17]
+							2034379, -- [18]
+							2034380, -- [19]
+							2034382, -- [20]
+							2034383, -- [21]
+							2034384, -- [22]
+							2034385, -- [23]
+							2034386, -- [24]
+							2034387, -- [25]
+							2034388, -- [26]
+							2034389, -- [27]
+							2034390, -- [28]
+							2034391, -- [29]
+							2034393, -- [30]
+						},
+					}, -- [2]
+					{
+						["offsetX"] = 2631,
+						["textureHeight"] = 617,
+						["textureWidth"] = 726,
+						["offsetY"] = 1023,
+						["fileDataIDs"] = {
+							2034361, -- [1]
+							2034362, -- [2]
+							2034363, -- [3]
+							2034364, -- [4]
+							2034365, -- [5]
+							2034366, -- [6]
+							2034367, -- [7]
+							2034368, -- [8]
+							2034369, -- [9]
+						},
+					}, -- [3]
+					{
+						["offsetX"] = 1825,
+						["textureHeight"] = 1344,
+						["textureWidth"] = 999,
+						["offsetY"] = 1216,
+						["fileDataIDs"] = {
+							2034337, -- [1]
+							2034348, -- [2]
+							2034354, -- [3]
+							2034355, -- [4]
+							2034356, -- [5]
+							2034357, -- [6]
+							2034358, -- [7]
+							2034359, -- [8]
+							2034360, -- [9]
+							2034338, -- [10]
+							2034339, -- [11]
+							2034340, -- [12]
+							2034341, -- [13]
+							2034342, -- [14]
+							2034343, -- [15]
+							2034344, -- [16]
+							2034345, -- [17]
+							2034346, -- [18]
+							2034347, -- [19]
+							2034349, -- [20]
+							2034350, -- [21]
+							2034351, -- [22]
+							2034352, -- [23]
+							2034353, -- [24]
+						},
+					}, -- [4]
+					{
+						["offsetX"] = 2107,
+						["textureHeight"] = 967,
+						["textureWidth"] = 769,
+						["offsetY"] = 327,
+						["fileDataIDs"] = {
+							2034321, -- [1]
+							2034329, -- [2]
+							2034330, -- [3]
+							2034331, -- [4]
+							2034332, -- [5]
+							2034333, -- [6]
+							2034334, -- [7]
+							2034335, -- [8]
+							2034336, -- [9]
+							2034322, -- [10]
+							2034323, -- [11]
+							2034324, -- [12]
+							2034325, -- [13]
+							2034326, -- [14]
+							2034327, -- [15]
+							2034328, -- [16]
+						},
+					}, -- [5]
+					{
+						["offsetX"] = 2144,
+						["textureHeight"] = 1559,
+						["textureWidth"] = 943,
+						["offsetY"] = 0,
+						["fileDataIDs"] = {
+							2034293, -- [1]
+							2034304, -- [2]
+							2034314, -- [3]
+							2034315, -- [4]
+							2034316, -- [5]
+							2034317, -- [6]
+							2034318, -- [7]
+							2034319, -- [8]
+							2034320, -- [9]
+							2034294, -- [10]
+							2034295, -- [11]
+							2034296, -- [12]
+							2034297, -- [13]
+							2034298, -- [14]
+							2034299, -- [15]
+							2034300, -- [16]
+							2034301, -- [17]
+							2034302, -- [18]
+							2034303, -- [19]
+							2034305, -- [20]
+							2034306, -- [21]
+							2034307, -- [22]
+							2034308, -- [23]
+							2034309, -- [24]
+							2034310, -- [25]
+							2034311, -- [26]
+							2034312, -- [27]
+							2034313, -- [28]
+						},
+					}, -- [6]
+					{
+						["offsetX"] = 1312,
+						["textureHeight"] = 1512,
+						["textureWidth"] = 888,
+						["offsetY"] = 82,
+						["fileDataIDs"] = {
+							2034269, -- [1]
+							2034280, -- [2]
+							2034286, -- [3]
+							2034287, -- [4]
+							2034288, -- [5]
+							2034289, -- [6]
+							2034290, -- [7]
+							2034291, -- [8]
+							2034292, -- [9]
+							2034270, -- [10]
+							2034271, -- [11]
+							2034272, -- [12]
+							2034273, -- [13]
+							2034274, -- [14]
+							2034275, -- [15]
+							2034276, -- [16]
+							2034277, -- [17]
+							2034278, -- [18]
+							2034279, -- [19]
+							2034281, -- [20]
+							2034282, -- [21]
+							2034283, -- [22]
+							2034284, -- [23]
+							2034285, -- [24]
+						},
+					}, -- [7]
+					{
+						["offsetX"] = 2325,
+						["textureHeight"] = 830,
+						["textureWidth"] = 934,
+						["offsetY"] = 1270,
+						["fileDataIDs"] = {
+							2034253, -- [1]
+							2034261, -- [2]
+							2034262, -- [3]
+							2034263, -- [4]
+							2034264, -- [5]
+							2034265, -- [6]
+							2034266, -- [7]
+							2034267, -- [8]
+							2034268, -- [9]
+							2034254, -- [10]
+							2034255, -- [11]
+							2034256, -- [12]
+							2034257, -- [13]
+							2034258, -- [14]
+							2034259, -- [15]
+							2034260, -- [16]
+						},
+					}, -- [8]
+					{
+						["offsetX"] = 1815,
+						["textureHeight"] = 1207,
+						["textureWidth"] = 699,
+						["offsetY"] = 260,
+						["fileDataIDs"] = {
+							2034238, -- [1]
+							2034245, -- [2]
+							2034246, -- [3]
+							2034247, -- [4]
+							2034248, -- [5]
+							2034249, -- [6]
+							2034250, -- [7]
+							2034251, -- [8]
+							2034252, -- [9]
+							2034239, -- [10]
+							2034240, -- [11]
+							2034241, -- [12]
+							2034242, -- [13]
+							2034243, -- [14]
+							2034244, -- [15]
+						},
+					}, -- [9]
+					{
+						["offsetX"] = 1357,
+						["textureHeight"] = 672,
+						["textureWidth"] = 1130,
+						["offsetY"] = 0,
+						["fileDataIDs"] = {
+							2034223, -- [1]
+							2034230, -- [2]
+							2034231, -- [3]
+							2034232, -- [4]
+							2034233, -- [5]
+							2034234, -- [6]
+							2034235, -- [7]
+							2034236, -- [8]
+							2034237, -- [9]
+							2034224, -- [10]
+							2034225, -- [11]
+							2034226, -- [12]
+							2034227, -- [13]
+							2034228, -- [14]
+							2034229, -- [15]
+						},
+					}, -- [10]
+					{
+						["offsetX"] = 2685,
+						["textureHeight"] = 668,
+						["textureWidth"] = 793,
+						["offsetY"] = 633,
+						["fileDataIDs"] = {
+							2034211, -- [1]
+							2034215, -- [2]
+							2034216, -- [3]
+							2034217, -- [4]
+							2034218, -- [5]
+							2034219, -- [6]
+							2034220, -- [7]
+							2034221, -- [8]
+							2034222, -- [9]
+							2034212, -- [10]
+							2034213, -- [11]
+							2034214, -- [12]
+						},
+					}, -- [11]
+					{
+						["offsetX"] = 321,
+						["textureHeight"] = 1565,
+						["textureWidth"] = 1650,
+						["offsetY"] = 378,
+						["fileDataIDs"] = {
+							2034162, -- [1]
+							2034173, -- [2]
+							2034184, -- [3]
+							2034195, -- [4]
+							2034206, -- [5]
+							2034207, -- [6]
+							2034208, -- [7]
+							2034209, -- [8]
+							2034210, -- [9]
+							2034163, -- [10]
+							2034164, -- [11]
+							2034165, -- [12]
+							2034166, -- [13]
+							2034167, -- [14]
+							2034168, -- [15]
+							2034169, -- [16]
+							2034170, -- [17]
+							2034171, -- [18]
+							2034172, -- [19]
+							2034174, -- [20]
+							2034175, -- [21]
+							2034176, -- [22]
+							2034177, -- [23]
+							2034178, -- [24]
+							2034179, -- [25]
+							2034180, -- [26]
+							2034181, -- [27]
+							2034182, -- [28]
+							2034183, -- [29]
+							2034185, -- [30]
+							2034186, -- [31]
+							2034187, -- [32]
+							2034188, -- [33]
+							2034189, -- [34]
+							2034190, -- [35]
+							2034191, -- [36]
+							2034192, -- [37]
+							2034193, -- [38]
+							2034194, -- [39]
+							2034196, -- [40]
+							2034197, -- [41]
+							2034198, -- [42]
+							2034199, -- [43]
+							2034200, -- [44]
+							2034201, -- [45]
+							2034202, -- [46]
+							2034203, -- [47]
+							2034204, -- [48]
+							2034205, -- [49]
+						},
+					}, -- [12]
+				},
+				[895] = {
+					{
+						["offsetX"] = 2451,
+						["textureHeight"] = 944,
+						["textureWidth"] = 1242,
+						["offsetY"] = 1035,
+						["fileDataIDs"] = {
+							2033605, -- [1]
+							2033616, -- [2]
+							2033618, -- [3]
+							2033619, -- [4]
+							2033620, -- [5]
+							2033621, -- [6]
+							2033622, -- [7]
+							2033623, -- [8]
+							2033624, -- [9]
+							2033606, -- [10]
+							2033607, -- [11]
+							2033608, -- [12]
+							2033609, -- [13]
+							2033610, -- [14]
+							2033611, -- [15]
+							2033612, -- [16]
+							2033613, -- [17]
+							2033614, -- [18]
+							2033615, -- [19]
+							2033617, -- [20]
+						},
+					}, -- [1]
+				},
+				---------------------------
+				
+			}
+
 		}
 	}
 
@@ -1629,10 +2140,139 @@ function MapOverlays:Initialize()
 	defaults.global.overlayData.TwilightHighlands_terrain1 = defaults.global.overlayData.TwilightHighlands
 	defaults.global.overlayData.BlastedLands_terrain1 = defaults.global.overlayData.BlastedLands	
 
+	local function FindTilesFrame()
+		local allMapFrames = {WorldMapFrame.ScrollContainer.Child:GetChildren()}
+		for i = 1, #allMapFrames do
+			local frame = allMapFrames[i]
+			if frame.detailTilePool then
+				return frame 
+			end
+		end
+	end
 	local db
+	
+	C_MapExplorationInfo.GetExploredMapTextures_org = C_MapExplorationInfo.GetExploredMapTextures
+	
+	C_MapExplorationInfo.GetExploredMapTextures = function(mapId)
+		local result = C_MapExplorationInfo.GetExploredMapTextures_org(mapId)
+		
+		if not DugisGuideViewer:UserSetting(DGV_REMOVEMAPFOG) 
+		or DugisGuideViewer.mapsterloaded 
+		or not MOD.GuideOn 
+		or not DugisGuideViewer:IsBigMap(mapId) --for old maps we don't make any changes as we have stored old overrides
+		then
+			return result
+		end
+		
+		result = result or {}
+		
+		if db and db.global.overlayData then
+			if db.global.overlayData[mapId] then
+				local internalOverlayData = db.global.overlayData[mapId]
+				for i=1, #internalOverlayData do
+					if not result[i] then
+						result[i] = internalOverlayData[i]
+									
+						result[i]["hitRect"] = {
+							["top"] = 0,
+							["right"] = 0,
+							["left"] = 0,
+							["bottom"] = 0,
+						}
+						result[i]["isShownByMouseOver"] = false
+					end
+				end
+			end
+		end
+		
+		return result
+	end
+	
+	--[[Returns:
+		{
+			mapDirectory = "",
+			texData = {
+				[mapName1] = 09812341,
+				[mapName2] = 98745632
+			}
+		}
+	]]
+	local function GetCurrentMapOverlayData(mapId)
+		local result = {texData = {}}
+        
+        if not mapId then
+            return result
+        end
+		
+		--For new maps we use another mechanism - overriden GetExploredMapTextures function
+		if DugisGuideViewer:IsBigMap(mapId) then
+			return result
+		end
+		
+		local mapInfo = C_Map.GetMapInfo(mapId)
+		
+		if not mapInfo then
+			return
+		end
+		
+		local isMicroDungeon = (mapInfo.mapType == Enum.UIMapType.Micro)
+		local _, _, mapName = HBDMigrate:GetLegacyMapInfo(mapId)
+		
+		if not mapName then
+			return result
+		end
+		
+		local mapDirectory
+		if isMicroDungeon then
+			--todo: reimplement microdungeons
+			return result
+		else
+			mapDirectory = "Interface\\Worldmap\\"..mapName.."\\"
+		end
+
+		if db == nil then
+			return result
+		end
+		
+		if db.global.overlayData[mapName] == nil then
+			db.global.overlayData[mapName] = {}
+		end
+		
+		result = {texData = LuaUtils:clone(db.global.overlayData[mapName] or {})}
+		result.mapDirectory = mapDirectory
+		return result
+	end
+	
+	local function HarvestCurrentMapOverlayInfo()
+		local exploredMaps = C_MapExplorationInfo.GetExploredMapTextures_org(WorldMapFrame:GetMapID())
+		
+		if exploredMaps and DugisGuideViewer:IsBigMap(WorldMapFrame:GetMapID()) then
+			if not DataExport then
+				DataExport = {}
+			end
+			
+			--Currently displayed map
+			local currentMapId = WorldMapFrame:GetMapID()
+			
+			if not DataExport[currentMapId] then
+				DataExport[currentMapId] = {}
+			end
+		
+			if exploredMaps then
+				for i=1, #exploredMaps do
+					local exploredMap = LuaUtils:clone(exploredMaps[i])
+					exploredMap.hitRect = nil
+					exploredMap.isShownByMouseOver = nil
+					DataExport[currentMapId][i] = exploredMap
+				end
+			end
+		end
+	end
+	
 	local overlayTextures  = {}
 	overlayTexturesGPS  = {}
-	function OverrideMapOverlays()
+
+	function OverrideMapOverlaysUniversal(forWMap)
 		if db == nil then
 			return
 		end
@@ -1649,58 +2289,56 @@ function MapOverlays:Initialize()
 			return
 		end
 
+	  if forWMap then
 		for i = 1, #overlayTextures  do
 			overlayTextures[i]:Hide()
 		end
-		
+	  else
 		for i = 1, #overlayTexturesGPS  do
 			if type(overlayTexturesGPS[i]) == "table" then
 				overlayTexturesGPS[i]:Hide()
 			end
 		end
+	  end
 		
+		if forWMap then
 		wipe(overlayTextures)
+		else
 		wipe(overlayTexturesGPS)
+		end
 
-		for i = 1, NUM_WORLDMAP_OVERLAYS do
-			tinsert(overlayTextures, _G[format("WorldMapOverlay%d", i)])
-			tinsert(overlayTexturesGPS, _G[format("WorldMapOverlay%d", i)]:GetTexture())
+		local itemIndex = 1
+		local item = _G[format("WorldMapOverlay%d", itemIndex)]
+		while item do
+		  if forWMap then
+			tinsert(overlayTextures, item)
+		  else
+			tinsert(overlayTexturesGPS, item:GetTexture())
+		  end
+			itemIndex = itemIndex + 1
+		    item = _G[format("WorldMapOverlay%d", itemIndex)]
 		end
 		
-		local mapName, _, _, _, microDungeonMapName = GetMapInfo();
-		if not mapName then
-			return
+		if harvestingDataMode then
+			HarvestCurrentMapOverlayInfo()
 		end
-		local mapDirectory
-		if microDungeonMapName then
-			mapDirectory = "Interface\\WorldMap\\MicroDungeon\\"..mapName.."\\"..microDungeonMapName.."\\"
-			mapName = mapName..":"..microDungeonMapName
+		
+		local texInfo
+		
+		if forWMap then
+			texInfo = GetCurrentMapOverlayData(WorldMapFrame:GetMapID())
 		else
-			mapDirectory = "Interface\\WorldMap\\"..mapName.."\\"
+			texInfo = GetCurrentMapOverlayData(DugisGuideViewer.Modules.GPSArrowModule.GetMapIdForGPSMap())
 		end
-
-		if db.global.overlayData[mapName]==nil then
-			db.global.overlayData[mapName] = {}
-		end
-		local overlayData = db.global.overlayData[mapName]
-
-		local numOverlayTextures = GetNumMapOverlays_original()
-        
-
-		for i=1, numOverlayTextures do
-			local texName, texWidth, texHeight, offsetX, offsetY = GetMapOverlayInfo_original(i)
-			texName = strsub(texName, strlen(mapDirectory) + 1)
-			local texData = texWidth + texHeight * 2^10 + offsetX * 2^20 + offsetY * 2^30
-			if texData ~= 0 and texData ~= 131200 and texName ~= "" and strlower(texName) ~= "pixelfix" then
-				discoveredOverlayData[texName] = texData
-				overlayData[texName] = texData
-			end
-		end
+		
+		local tilesFrame = FindTilesFrame()
 
 		local textureCount = 0
 		numOverlayTextures  = #overlayTextures
-		for texName, texData in pairs(overlayData) do
-			local texturePath = mapDirectory .. texName
+		local texturePixelWidth, textureFileWidth, texturePixelHeight, textureFileHeight
+		
+		for texName, texData in pairs(texInfo.texData) do
+			local texturePath = texInfo.mapDirectory .. texName
 			local textureWidth, textureHeight, offsetX, offsetY = mod(texData, 2^10), mod(floor(texData / 2^10), 2^10), mod(floor(texData / 2^20), 2^10), floor(texData / 2^30)
 
 			local numTexturesWide = ceil(textureWidth / 256)
@@ -1708,17 +2346,18 @@ function MapOverlays:Initialize()
 			local neededTextures = textureCount + (numTexturesWide * numTexturesTall)
 			if neededTextures > numOverlayTextures  then
 				for j = numOverlayTextures  + 1, neededTextures do
-					local texture = WorldMapDetailFrame:CreateTexture(format("DugiWorldMapOverlay%d", j), "ARTWORK")
+				  if forWMap then
+					local texture = tilesFrame:CreateTexture(format("DugiWorldMapOverlay%d", j), "ARTWORK")
 					tinsert(overlayTextures , texture)
-					
+				  else
 					if GPSArrow then
 						local textureGPS = GPSArrow:CreateTexture(format("DugiWorldMapOverlayGPS%d", j), "ARTWORK")
 						tinsert(overlayTexturesGPS , textureGPS)
 					end
+				  end
 				end
 				numOverlayTextures  = neededTextures
 			end
-			local texturePixelWidth, textureFileWidth, texturePixelHeight, textureFileHeight
 			for j = 1, numTexturesTall do
 				if j < numTexturesTall then
 					texturePixelHeight = 256
@@ -1734,9 +2373,10 @@ function MapOverlays:Initialize()
 					end
 				end
 				for k = 1, numTexturesWide do
-					textureCount = textureCount + 1
-					local texture = overlayTextures [textureCount]
-					local textureGPS = overlayTexturesGPS[textureCount]
+				  textureCount = textureCount + 1
+					local texture
+					local textureGPS
+					
 					if k < numTexturesWide then
 						texturePixelWidth = 256
 						textureFileWidth = 256
@@ -1750,21 +2390,24 @@ function MapOverlays:Initialize()
 							textureFileWidth = textureFileWidth * 2
 						end
 					end
+					
+				  if forWMap then
+					texture = overlayTextures [textureCount]
+
 					texture:SetWidth(texturePixelWidth)
 					texture:SetHeight(texturePixelHeight)
 					texture:SetTexCoord(0, texturePixelWidth / textureFileWidth, 0, texturePixelHeight / textureFileHeight)
 					texture:ClearAllPoints()
 					texture:SetPoint("TOPLEFT", (offsetX + (256 * (k-1))), -(offsetY + (256 * (j - 1))))
 					texture:SetTexture(format(texturePath.."%d", ((j - 1) * numTexturesWide) + k))
-					
+				  else
+				    textureGPS = overlayTexturesGPS[textureCount]
 					if DugisGuideViewer.Modules.GPSArrowModule then
 						if type(textureGPS) ~= "table" then
 							overlayTexturesGPS[textureCount] = GPSArrow:CreateTexture(format("DugiWorldMapOverlayGPS%d", textureCount), "ARTWORK")
 							overlayTexturesGPS[textureCount]:SetTexture(textureGPS)
 							textureGPS = overlayTexturesGPS[textureCount]
-						end
 						
-						if type(textureGPS) == "table" then
 							local factor = DugisGuideViewer.Modules.GPSArrowModule.GetMapOverlaysFactor()
 							textureGPS:SetWidth(texturePixelWidth * factor)
 							textureGPS:SetHeight(texturePixelHeight * factor)
@@ -1781,12 +2424,13 @@ function MapOverlays:Initialize()
 							textureGPS.orgH = texturePixelHeight
 						end
 					end
-
+                  end
 					if discoveredOverlayData[texName] then
+					  if forWMap then
 						texture:SetVertexColor(1, 1, 1)
 						texture:SetDrawLayer("ARTWORK")
 						texture:Show()
-						
+					  else
 						if type(textureGPS) == "table" then
 							textureGPS:SetVertexColor(1, 1, 1)
 							textureGPS:SetDrawLayer("ARTWORK")
@@ -1796,11 +2440,13 @@ function MapOverlays:Initialize()
 								textureGPS:Hide()
 							end
 						end
+					  end
 					elseif DugisGuideViewer:UserSetting(DGV_REMOVEMAPFOG) or not DugisGuideViewer.mapsterloaded and MOD.GuideOn then
+					  if forWMap then
 						texture:SetVertexColor(.5, .5, .5)
 						texture:SetDrawLayer("BORDER")
 						texture:Show()
-						
+					  else
 						if type(textureGPS) == "table" then
 							textureGPS:SetVertexColor(.5, .5, .5)
 							textureGPS:SetDrawLayer("BORDER")
@@ -1810,33 +2456,47 @@ function MapOverlays:Initialize()
 								textureGPS:Hide()
 							end
 						end
+					  end
 					else
+					  if forWMap then
 						texture:Hide()
+					  else
 						if type(textureGPS) == "table" then
 							textureGPS:Hide()
 						end
+					  end
 					end
 
 
 				end
 			end
 		end
+		
+	  if forWMap then
 		for i = textureCount+1, numOverlayTextures  do
 			overlayTextures [i]:Hide()
 		end	
-		
+	  else
 		for i = textureCount+1, numOverlayTextures  do
 			if type(overlayTexturesGPS[i]) == "table" then
 				overlayTexturesGPS[i]:Hide()
 			end
 		end
-
+      end
 		wipe(discoveredOverlayData)
 
 		if not DugisGuideViewer:UserSetting(DGV_REMOVEMAPFOG) or not MOD.GuideOn or DugisGuideViewer.mapsterloaded then
+		  if forWMap then
 			wipe(overlayTextures)
+		  else
 			wipe(overlayTexturesGPS)
+		  end
 		end
+	end
+	
+	function OverrideMapOverlays()
+		OverrideMapOverlaysUniversal(true)
+		OverrideMapOverlaysUniversal(false)
 	end
 
 	-- Code courtesy ckknight
@@ -1861,24 +2521,16 @@ function MapOverlays:Initialize()
 	local UpdateWorldMapFrame = MOD.NoOp
 	function MOD:InitializeMapOverlays()
 		db = LibStub("AceDB-3.0"):New("MapOverlaysDugis", defaults)
-		hooksecurefunc("WorldMapFrame_Update", UpdateWorldMapFrame);
+		
+		-- todo: find replacement
+		--hooksecurefunc("WorldMapFrame_Update", UpdateWorldMapFrame);
+		hooksecurefunc(WorldMapFrame, "OnMapChanged", UpdateWorldMapFrame);
+		
 	end
 
 	function MOD:MapHasOverlays()
-		local mapFileName, _, _, _, microDungeonMapName = GetMapInfo();
-		if not mapFileName then return false end
-		
-		local mapDirectory
-		if microDungeonMapName then
-			mapDirectory = "Interface\\WorldMap\\MicroDungeon\\"..mapFileName.."\\"..microDungeonMapName.."\\"
-			mapFileName = mapFileName..":"..microDungeonMapName
-		else
-			mapDirectory = "Interface\\WorldMap\\"..mapFileName.."\\"
-		end
-
-		local overlayMap = db.global.overlayData[mapFileName]
-		if overlayMap and next(overlayMap) then return true end
-		return false
+		local overlayMap = db.global.overlayData[WorldMapFrame:GetMapID()]
+		return overlayMap and next(overlayMap)
 	end
 
 	function MapOverlays:Load()
@@ -1888,25 +2540,26 @@ function MapOverlays:Initialize()
 				MOD.CoordsFrame.Player = MOD.CoordsFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
 				MOD.CoordsFrame.Cursor = MOD.CoordsFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
 				MOD.CoordsFrame:SetScript("OnUpdate", function()
-					if MOD:UserSetting(DGV_DISPLAYMAPCOORDINATES) and MOD.CoordsFrame:IsShown()
+					if MOD:UserSetting(DGV_DISPLAYMAPCOORDINATES)
 						and not DugisGuideViewer.mapsterloaded
 						and not DugisGuideViewer.tomtomloaded
 					then
-						local _, _, x, y  = DugisGuideViewer.astrolabe:GetUnitPosition("player", true)
+						local _, _, x, y  = DugisGuideViewer:GetUnitPosition("player", true)
 						if not x or not y then
 							MOD.CoordsFrame.Player:SetText("|cffffd200玩家:|r ---")
 						else
 							MOD.CoordsFrame.Player:SetFormattedText("|cffffd200玩家:|r %s", formatCoords:format(x*100, y*100))
 						end
 
-						if WorldMapButton:GetLeft() then --prevents error on early load
-							local cX, cY = MOD:GetCurrentCursorPosition(WorldMapButton)
+						if WorldMapFrame.ScrollContainer.Child:GetLeft() then --prevents error on early load
+							local cX, cY = MOD:GetCurrentCursorPosition(WorldMapFrame.ScrollContainer.Child)
 							if not cX or not cY then
 								MOD.CoordsFrame.Cursor:SetText("|cffffd200游標:|r ---")
 							else
 								MOD.CoordsFrame.Cursor:SetFormattedText("|cffffd200游標:|r %s", formatCoords:format(cX*100, cY*100))
 							end
 						end
+                        MOD.CoordsFrame:Show()
 					else
 						MOD.CoordsFrame:Hide()
 					end
@@ -1914,11 +2567,7 @@ function MapOverlays:Initialize()
 					if DugisGuideViewer.tomtomloaded
 						or MOD:UserSetting(DGV_DISPLAYMAPCOORDINATES)
 					then
-						if WORLDMAP_SETTINGS.size == WORLDMAP_WINDOWED_SIZE then
-							--WorldMapTrackQuest:Hide()
-						else
-							--WorldMapTrackQuest:Show()
-						end
+					
 					end
 				end)
 				MOD.CoordsFrame:Show()
@@ -1926,17 +2575,20 @@ function MapOverlays:Initialize()
 
 			MOD.CoordsFrame.Player:ClearAllPoints()
 			MOD.CoordsFrame.Cursor:ClearAllPoints()
-					
-			if WORLDMAP_SETTINGS.size == WORLDMAP_WINDOWED_SIZE then
+			
+			if not WorldMapFrame:IsMaximized() then
 				MOD.CoordsFrame.Player:SetPoint("TOPLEFT", WorldMapFrame, "BOTTOMLEFT", 4, -5)
 				MOD.CoordsFrame.Cursor:SetPoint("TOPLEFT", WorldMapFrame, "BOTTOMLEFT", 150, -5)
-			else
-				MOD.CoordsFrame.Player:SetPoint("TOPLEFT", WorldMapPositioningGuide, "BOTTOM", -150, 20)
-				MOD.CoordsFrame.Cursor:SetPoint("TOPLEFT", WorldMapPositioningGuide, "BOTTOM", 20, 20)
+	     	else
+				MOD.CoordsFrame.Player:SetPoint("TOPLEFT", WorldMapFrame, "BOTTOM", -150, -30)
+				MOD.CoordsFrame.Cursor:SetPoint("TOPLEFT", WorldMapFrame, "BOTTOM", 20, -30)
 			end
+            
 			OverrideMapOverlays()
 		end
 		MOD:InitializeMapOverlays()
+        
+        UpdateWorldMapFrame()
 	end
 
 	function MapOverlays:Unload()

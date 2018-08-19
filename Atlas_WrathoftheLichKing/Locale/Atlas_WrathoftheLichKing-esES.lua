@@ -138,10 +138,4 @@ L["Watcher Gashra"] = "Vigía Gashra"
 L["Watcher Narjil"] = "Vigía Narjil"
 L["Watcher Silthik"] = "Vigía Silthik"
 
--- ToC
---Translation missing 
--- L["Description"] = ""
---Translation missing 
--- L["Title"] = ""
-
 end

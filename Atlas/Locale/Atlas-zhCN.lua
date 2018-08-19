@@ -1,10 +1,10 @@
--- $Id: Atlas-zhCN.lua 240 2017-05-12 17:13:41Z arith $
+-- $Id: Atlas-zhCN.lua 299 2018-02-22 15:07:35Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 	Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -325,9 +325,5 @@ L["Wave 6"] = "第6波"
 L["West"] = "西"
 L["Yarley <Armorer>"] = "亚尔雷 <护甲商>"
 L["Zaladormu"] = "扎拉多姆"
-
--- ToC
-L["Description"] = "|cff00CC33副本地图浏览器|r"
-L["Title"] = "Atlas |cFF0099FF[主程序]|r"
 
 end

@@ -1,10 +1,10 @@
--- $Id: Atlas_ClassOrderHalls-esES.lua 97 2017-05-18 10:55:14Z arith $
+-- $Id: Atlas_ClassOrderHalls-esES.lua 116 2018-08-08 17:32:29Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2016 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -188,7 +188,5 @@ L["Wise Scholar Lianji <Senior Master Serpent>"] = "Sabia erudita Lianji <Maestr
 L["Yancey Grillsen <Bloodsail Recruiter>"] = "Yancey Grillsen <Reclutador Velasangre>"
 L["Yaris Darkclaw <Recruiter>"] = "Yaris Garra Oscura <Reclutador>"
 L["Zen'kiki"] = "Zen'kiki"
-
--- ToC
 
 end

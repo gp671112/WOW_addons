@@ -34,6 +34,20 @@ local TitanPanelAce = LibStub("AceAddon-3.0"):NewAddon("TitanPanel", "AceHook-3.
 --	menuBarTop = 75;
 --end
 
+--[[From Resike to prevent tainting stuff to override the SetPoint calls securely.
+hooksecurefunc(FrameRef, "SetPoint", function(self)
+	if self.moving then
+		return
+	end
+	self.moving = true
+	self:SetMovable(true)
+	self:SetUserPlaced(true)
+	self:ClearAllPoints()
+	self:SetPoint("CENTER", UIParent, "CENTER", 0, 0)
+	self:SetMovable(false)
+	self.moving = nil
+end)
+--]]
 
 --[[ Titan
 TitanMovable is a local table that is cleared then filled with the frames Titan needs to check and adjust, if necessary, with each 'adjust frame' check.
@@ -65,13 +79,15 @@ local TitanMovableData = {
 		position = TITAN_PANEL_PLACE_TOP, addonAdj = false},
 	MinimapCluster = {frameName = "MinimapCluster", frameArchor = "TOPRIGHT", xArchor = "RIGHT", y = 0, 
 		position = TITAN_PANEL_PLACE_TOP, addonAdj = false},
-	WorldStateAlwaysUpFrame = {frameName = "WorldStateAlwaysUpFrame", frameArchor = "TOP", xArchor = "CENTER", y = -15, 
-		position = TITAN_PANEL_PLACE_TOP, addonAdj = false},
+--	WorldStateAlwaysUpFrame = {frameName = "WorldStateAlwaysUpFrame", frameArchor = "TOP", xArchor = "CENTER", y = -15, 
+--		position = TITAN_PANEL_PLACE_TOP, addonAdj = false},
 	MainMenuBar = {frameName = "MainMenuBar", frameArchor = "BOTTOM", xArchor = "CENTER", y = 0, 
 		position = TITAN_PANEL_PLACE_BOTTOM, addonAdj = false},
 	MultiBarRight = {frameName = "MultiBarRight", frameArchor = "BOTTOMRIGHT", xArchor = "RIGHT", y = 98, 
 		position = TITAN_PANEL_PLACE_BOTTOM, addonAdj = false},
 	OverrideActionBar = {frameName = "OverrideActionBar", frameArchor = "BOTTOM", xArchor = "CENTER", y = 0, 
+		position = TITAN_PANEL_PLACE_BOTTOM, addonAdj = false},
+	MicroButtonAndBagsBar = {frameName = "MicroButtonAndBagsBar", frameArchor = "BOTTOMRIGHT", xArchor = "RIGHT", y = 0,
 		position = TITAN_PANEL_PLACE_BOTTOM, addonAdj = false},
 }
 
@@ -243,8 +259,8 @@ function TitanMovableFrame_CheckFrames(position)
 		-- Move BuffFrame
 		TitanMovableFrame_CheckThisFrame(BuffFrame:GetName())
 
-		-- Move WorldStateAlwaysUpFrame
-		TitanMovableFrame_CheckThisFrame(WorldStateAlwaysUpFrame:GetName());
+		-- Move UIWidgetTopCenterContainerFrame
+		TitanMovableFrame_CheckThisFrame(UIWidgetTopCenterContainerFrame:GetName());
 
 --[[		-- Move OrderHallCommandBar
 		if OrderHallCommandBar then
@@ -261,6 +277,9 @@ function TitanMovableFrame_CheckFrames(position)
 	
 		-- Move OverrideActionBar
 		TitanMovableFrame_CheckThisFrame(OverrideActionBar:GetName());
+
+		-- Move MicroButtonAndBagsBar
+		TitanMovableFrame_CheckThisFrame(MicroButtonAndBagsBar:GetName());
 	end
 end
 
@@ -280,6 +299,16 @@ function TitanMovableFrame_MoveFrames(position)
 	
 	-- move them...
 	if not InCombatLockdown() then
+--[[ Urnati - A bit of a kludge by DDCorkum.  This scales the WorldMapFrame but will not
+fix the issue if there are two bars at the top.  There should be a programatic solution
+to this rather than simple scaling.]]
+		-- modification by DDCorkum to shrink the maximized world map in WoW 8.0 Battle for Azeroth
+			if (WorldMapFrame:IsShown() and WorldMapFrame:IsMaximized()) then
+				WorldMapFrame:ClearAllPoints();
+				WorldMapFrame:SetScale(0.94)
+				WorldMapFrame:SetPoint("CENTER",UIParent,"CENTER",0,0);
+			end
+		-- end modification by DDCorkum
 		local adj_frame = true
 		for index, value in pairs(TitanMovable) do
 			adj_frame = true -- assume the frame is to be adjusted
@@ -331,6 +360,11 @@ function TitanMovableFrame_MoveFrames(position)
 				if frameName == "MainMenuBar" and MainMenuBar:IsVisible() then
 					local framescale = MainMenuBar:GetScale() or 1;
 					yOffset =  yOffset / framescale;
+					if ( StatusTrackingBarManager:GetNumberVisibleBars() == 2 ) then
+						yOffset = yOffset + 17;
+					elseif ( StatusTrackingBarManager:GetNumberVisibleBars() == 1 ) then
+						yOffset = yOffset + 14;
+					end
 				end
 				
 				-- account for Reputation Status Bar (doh)
@@ -574,6 +608,7 @@ function Titan_ManageFramesTest1()
 	if Titan__InitializedPEW then
 		-- We know the desired bars are now drawn so we can adjust
 		if InCombatLockdown() then
+			-- nothing
 		else
 --TitanDebug ("Titan_ManageFramesTest1 ")
 	left = floor(OverrideActionBar:GetLeft() + 0.5)
@@ -587,7 +622,7 @@ TitanDebug("... OverrideActionBar "
 	OverrideActionBar:ClearAllPoints()
 	OverrideActionBar:SetPoint("BOTTOM", TitanPanelBottomAnchor, "TOP", left, 0)
 	OverrideActionBar:SetPoint(point, relFrame, relPoint, xOff, TitanPanelBottomAnchor:GetTop()+0)
-	left, _ = OverrideActionBar:GetCenter()
+	left = OverrideActionBar:GetCenter()
 	bot = OverrideActionBar:GetBottom()
 TitanDebug("... OverrideActionBar "
 ..(bot or "?").." "
@@ -663,7 +698,7 @@ TitanDebug("... OverrideActionBar "
 	OverrideActionBar:ClearAllPoints()
 	OverrideActionBar:SetPoint("BOTTOM", TitanPanelBottomAnchor, "TOP", left, 0)
 --	OverrideActionBar:SetPoint(point, relFrame, relPoint, xOff, TitanPanelBottomAnchor:GetTop()+0)
-	left, _ = OverrideActionBar:GetCenter()
+	left = OverrideActionBar:GetCenter()
 	bot = OverrideActionBar:GetBottom()
 TitanDebug("... OverrideActionBar "
 ..(bot or "?").." "
@@ -734,6 +769,11 @@ function TitanMovable_SecureFrames()
 --		TitanPanelAce:SecureHook(OverrideActionBar, "Hide", Titan_ManageFramesTest1) -- HelpFrame.xml
 		TitanPanelAce:SecureHook("UpdateContainerFrameAnchors", Titan_ContainerFrames_Relocate) -- ContainerFrame.lua
 		TitanPanelAce:SecureHook(WorldMapFrame, "Hide", Titan_Hook_Adjust_Both) -- WorldMapFrame.lua
+--[[ Urnati - Another quick kludge by DDCorkum.  This hooks the WorldMapFrame.]]
+		-- modification by DDCorkum to shrink the maximized world map in WoW 8.0 Battle for Azeroth
+					TitanPanelAce:SecureHook(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton, "Show", Titan_Hook_Adjust_Both) -- WorldMapFrame.lua
+					TitanPanelAce:SecureHook(WorldMapFrame, "Show", Titan_Hook_Adjust_Both) -- WorldMapFrame.lua
+		-- end modification by DDCorkum
 		TitanPanelAce:SecureHook("BuffFrame_Update", Titan_Hook_Adjust_Both) -- BuffFrame.lua
 	end
 		

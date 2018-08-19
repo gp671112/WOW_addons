@@ -93,6 +93,7 @@ do
 	end
 end
 
+local firstTimeFlash = true
 -- Background quest's tooltip scanning
 do
 	local fTGBgScan = CreateFrame( "Frame", "DugisBackgroundScan" )
@@ -112,7 +113,12 @@ do
 						DugisGuideViewer:SetQuestText(i)
 					end
 
-					DugisGuideViewer.UpdateSmallFrame()
+					--Prevented unwanted flash on game load
+					if not firstTimeFlash then
+						DugisGuideViewer.UpdateSmallFrame()
+					end
+					
+					firstTimeFlash = false
 				end
 				
 				LocalizePrint ( "Translating guide:  Try:"..Reiterations.."Fails".. fails)

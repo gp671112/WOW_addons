@@ -127,7 +127,7 @@ function TitanPanel_SaveCustomProfile()
 	StaticPopupDialogs["TITAN_RELOADUI"] = {
 		text = TitanUtils_GetNormalText(L["TITAN_PANEL_MENU_TITLE"]).."\n\n"
 			..L["TITAN_PANEL_MENU_PROFILE_RELOADUI"],
-		button1 = TEXT(OKAY),
+		button1 = "OKAY",
 		OnAccept = function(self)
 			ReloadUI(); -- ensure profile is written to disk
 		end,
@@ -1885,7 +1885,7 @@ local function TitanPanel_PlayerSettingsMenu()
 			info.func = function()			  
 				if TitanSettings.Players[info.value] then
 					TitanSettings.Players[info.value] = nil;
-					profname, _ = TitanUtils_ParseName(index)
+					profname = TitanUtils_ParseName(index)
 					TitanPrint(
 						L["TITAN_PANEL_MENU_PROFILE"]
 						.." '"..profname.."' "
@@ -2151,23 +2151,4 @@ function TitanPanel_GetPluginSide(id)
 	else
 		return TITAN_LEFT;
 	end
-end
-
--- Below are deprecated routines.
--- They will be here for a couple releases then deleted.
-
---[[ Titan
-NAME: TitanPanel_LoadError
-DESC: Display a 'loading' error. Does not appear to be used.
-VAR: ErrorMsg - message to display
-OUT:  None
---]]
-function TitanPanel_LoadError(ErrorMsg) 
-	StaticPopupDialogs["LOADING_ERROR"] = {
-		text = ErrorMsg,
-		button1 = TEXT(OKAY),
-		showAlert = 1,
-		timeout = 0,
-	};
-	StaticPopup_Show("LOADING_ERROR");
 end

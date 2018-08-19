@@ -49,6 +49,13 @@ local function InitFrame(frame, other)
 	frame:SetUserPlaced(true)
 	frame:SetClampedToScreen(true)
 	frame:SetScript("OnDragStart", function(self)
+		if DugisGuideViewer:UserSetting(DGV_TRGET_BUTTON_FIXED_MODE) 
+			and DugisGuideViewer.Modules.ModelViewer 
+			and DugisGuideViewer.Modules.ModelViewer.Frame.model 
+			and DugisGuideViewer.Modules.ModelViewer.Frame.model:IsVisible() then
+			return
+		end
+	
 		if not InCombatLockdown() then
 			self.IsMoving = true
 			self:StartMoving()
@@ -63,8 +70,10 @@ local function InitFrame(frame, other)
 			other:ClearAllPoints()
 			other:SetPoint("LEFT", self)
 			if DugisGuideViewer:IsModuleLoaded("Target") then
-				DugisGuideViewer_TargetFrame:ClearAllPoints()
-				DugisGuideViewer_TargetFrame:SetPoint("LEFT", self, "RIGHT", "5", "0")
+				if not DugisGuideViewer:UserSetting(DGV_TRGET_BUTTON_FIXED_MODE) then
+					DugisGuideViewer_TargetFrame:ClearAllPoints()
+					DugisGuideViewer_TargetFrame:SetPoint("LEFT", self, "RIGHT", "5", "0")
+				end
 			end
 		end
 	end)

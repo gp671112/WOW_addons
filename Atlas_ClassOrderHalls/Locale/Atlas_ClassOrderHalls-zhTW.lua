@@ -1,10 +1,10 @@
--- $Id: Atlas_ClassOrderHalls-zhTW.lua 110 2017-06-22 04:52:28Z arith $
+-- $Id: Atlas_ClassOrderHalls-zhTW.lua 116 2018-08-08 17:32:29Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2016 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -300,10 +300,6 @@ L["Yancey Grillsen <Bloodsail Recruiter>"] = "楊希·貴爾森 <血帆招募員
 L["Yaris Darkclaw <Recruiter>"] = "亞里斯·暗爪 <招募員>"
 L["Yushi <Seal of Broken Fate Shipment>"] = "遊曦 <破碎命運徽印貨物>"
 L["Zen'kiki"] = "贊基奇"
-
--- ToC
-L["Description"] = "Atlas 職業大廳地圖"
-L["Title"] = "|r|cFF0099FF[地圖]|rAtlas 職業大廳地圖"
 
 end
 

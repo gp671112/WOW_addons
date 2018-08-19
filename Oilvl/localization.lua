@@ -21,6 +21,7 @@ OILVL_L = GetLocale() == "zhCN" and {
 	["Low level enchanted"] = "低等级附魔",
 	["Low level socketed"] = "低等级宝石",
 	["Auto Scan"] = "自动扫描",
+	["BEST"] = "最佳",
 
 } or GetLocale() == "zhTW" and {
 	-- translated by olzenkhaw & BNS
@@ -45,6 +46,7 @@ OILVL_L = GetLocale() == "zhCN" and {
 	["Low level enchanted"] = "低等級附魔",
 	["Low level socketed"] = "低等級寶石",
 	["Auto Scan"] = "自動掃描",
+	["BEST"] = "最佳",
 
 	} or { }
 

@@ -1,10 +1,10 @@
--- $Id: Atlas_ClassOrderHalls.lua 112 2017-06-29 08:12:41Z arith $
+-- $Id: Atlas_ClassOrderHalls.lua 116 2018-08-08 17:32:29Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2016 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -104,8 +104,8 @@ local myData = {
 	CH_DeathKnightLower = {
 		ZoneName = { CL["DEATHKNIGHT"]..Atlas_GetClassName("DEATHKNIGHT")..ALC["Hyphen"]..BZ["Acherus: The Ebon Hold"]..ALC["L-Parenthesis"]..ALC["Lower"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Acherus: The Ebon Hold"]..ALC["Comma"]..BZ["Broken Shore"] },
-		WorldMapID = "1021",
-		DungeonLevel = "2",
+		WorldMapID = 648,
+		DungeonLevel = 2,
 		NextMap = "CH_DeathKnightUpper",
 		{ ORNG..ALC["Lower"]..ALC["Hyphen"]..BZ["Hall of Command"] },
 		{ INDENT..PURP.." A) "..format(ALC["Portal to %s"], BZ["Dalaran"]), 10101 },
@@ -167,8 +167,8 @@ local myData = {
 	CH_DeathKnightUpper = {
 		ZoneName = { CL["DEATHKNIGHT"]..Atlas_GetClassName("DEATHKNIGHT")..ALC["Hyphen"]..BZ["Acherus: The Ebon Hold"]..ALC["L-Parenthesis"]..ALC["Upper"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Acherus: The Ebon Hold"]..ALC["Comma"]..BZ["Broken Shore"] },
-		WorldMapID = "1021",
-		DungeonLevel = "1",
+		WorldMapID = 647,
+		DungeonLevel = 1,
 		PrevMap = "CH_DeathKnightLower",
 		{ ORNG..ALC["Upper"]..ALC["Hyphen"]..BZ["The Heart of Acherus"] },
 		{ INDENT..PURP.." B) "..L["Portal to another floor"], 10102 },
@@ -222,7 +222,7 @@ local myData = {
 	CH_DemonHunter = {
 		ZoneName = { CL["DEMONHUNTER"]..Atlas_GetClassName("DEMONHUNTER")..ALC["Hyphen"]..BZ["The Fel Hammer"] },
 		Location = { BZ["The Fel Hammer"]..ALC["Comma"]..BZ["Mardum, the Shattered Abyss"] },
-		WorldMapID = "1052",
+		WorldMapID = 720,
 		{ ORNG..ALC["Upper"] },
 		{ INDENT..PURP.." A) "..L["Illidari Gateway"], 10101 },
 		{ INDENT..INDENT..GREY..L["Travel to Dalaran"] },
@@ -298,7 +298,7 @@ local myData = {
 	CH_Druid = {
 		ZoneName = { CL["DRUID"]..Atlas_GetClassName("DRUID")..ALC["Hyphen"]..BZ["The Dreamgrove"] },
 		Location = { BZ["The Dreamgrove"]..ALC["Comma"]..BZ["Val'sharah"] },
-		WorldMapID = "1077",
+		WorldMapID = 747,
 		{ PURP.." A) "..format(ALC["Portal to %s"], BZ["Emerald Dreamway"]), 10101 },
 		{ PURP.." B) "..format(ALC["Portal to %s"], BZ["Dalaran"]), 10102 },
 		{ BLUE.." A) "..BZ["Tel'Andu Barrow Den"], 10103 },
@@ -367,7 +367,7 @@ local myData = {
 	CH_Hunter = {
 		ZoneName = { CL["HUNTER"]..Atlas_GetClassName("HUNTER")..ALC["Hyphen"]..BZ["Trueshot Lodge"] },
 		Location = { BZ["Trueshot Lodge"]..ALC["Comma"]..BZ["Highmountain"] },
-		WorldMapID = "1072",
+		WorldMapID = 739,
 		{ PURP.." A) "..format(ALC["Portal to %s"], BZ["Dalaran"]), 10101 },
 		{ WHIT.." 1) "..I_FLIGHT..MINIMAP_TRACKING_FLIGHTMASTER, 10001 },
 		{ WHIT.." 2) "..I_FLIGHT..LC("Great Eagle", 108552), 108552 },
@@ -435,7 +435,7 @@ local myData = {
 	CH_Mage = {
 		ZoneName = { CL["MAGE"]..Atlas_GetClassName("MAGE")..ALC["Hyphen"]..BZ["Hall of the Guardian"] },
 		Location = { BZ["Hall of the Guardian"]..ALC["Comma"]..BZ["Dalaran"] },
-		WorldMapID = "1068",
+		WorldMapID = 734,
 		{ BLUE.." A-B) "..ALC["Connection"], 10200 },
 		{ ORNG..BZ["Guardian's Library"]..ALC["L-Parenthesis"]..ALC["Upper"]..ALC["R-Parenthesis"] },
 		{ INDENT..WHIT.." 1) "..I_PROFF..L["Forge of the Guardian"]..GREY..ALC["L-Parenthesis"]..ARTIFACT_POWER..ALC["R-Parenthesis"], 10001 },
@@ -512,7 +512,7 @@ local myData = {
 	CH_Monk = {
 		ZoneName = { CL["MONK"]..Atlas_GetClassName("MONK")..ALC["Hyphen"]..BZ["Temple of Five Dawns"] },
 		Location = { BZ["Temple of Five Dawns"]..ALC["Comma"]..BZ["The Wandering Isle"] },
-		WorldMapID = "1044",
+		WorldMapID = 709,
 		{ PURP.." A) "..format(ALC["Portal to %s"], BZ["Dalaran"]), 10101 },
 		{ PURP.." B) "..format(ALC["Portal to %s"], BZ["Peak of Serenity"]), 10102 },
 		{ PURP.." C) "..L["Transportation Mandala"], 10103 },
@@ -578,7 +578,7 @@ local myData = {
 	CH_Paladin = {
 		ZoneName = { CL["PALADIN"]..Atlas_GetClassName("PALADIN")..ALC["Hyphen"]..BZ["Sanctum of Light"] },
 		Location = { BZ["Sanctum of Light"]..ALC["Comma"]..BZ["Light's Hope Chapel"] },
-		--WorldMapID = "23",
+		WorldMapID = 676,
 		{ BLUE.." A) "..L["Entrance"], 10101 },
 		{ PURP.." A) "..format(ALC["Portal to %s"], BZ["Dalaran"]), 10102 },
 		{ WHIT.." 1) "..I_RESEARCH..LC("Sister Elda <Keeper of the Ancient Tomes>", 91190), 91190 },
@@ -647,7 +647,7 @@ local myData = {
 	CH_Priest = {
 		ZoneName = { CL["PRIEST"]..Atlas_GetClassName("PRIEST")..ALC["Hyphen"]..BZ["Netherlight Temple"] },
 		Location = { BZ["Netherlight Temple"]..ALC["Comma"]..BZ["Dalaran"] },
-		WorldMapID = "1040",
+		WorldMapID = 702,
 		{ PURP.." A) "..format(ALC["Portal to %s"], BZ["Dalaran"]), 10101 },
 		{ WHIT.." 1) "..I_PROFF..L["Altar of Light and Shadow"]..GREY..ALC["L-Parenthesis"]..ARTIFACT_POWER..ALC["R-Parenthesis"].."\n"..WHIT..LC("Betild Deepanvil <Master Artificer>", 102709), 10001 },
 		{ INDENT..WHIT..LC("Betild Deepanvil <Master Artificer>", 102709), 102709 },
@@ -707,8 +707,8 @@ local myData = {
 	CH_Rogue = {
 		ZoneName = { CL["ROGUE"]..Atlas_GetClassName("ROGUE")..ALC["Hyphen"]..BZ["The Hall of Shadows"] },
 		Location = { BZ["The Hall of Shadows"]..ALC["Comma"]..BZ["Dalaran"] },
-		WorldMapID = "1014",
-		DungeonLevel = "4",
+		WorldMapID = 626,
+		DungeonLevel = 4,
 		{ BLUE.." A) "..ALC["Connection"]..ALC["Hyphen"]..BZ["Glorious Goods"], 10101 },
 		{ BLUE.." B) "..ALC["Connection"]..ALC["Hyphen"]..BZ["One More Glass"], 10102 },
 		{ BLUE.." C) "..ALC["Connection"]..ALC["Hyphen"]..BZ["Tanks for Everything"], 10103 },
@@ -776,7 +776,7 @@ local myData = {
 	CH_Shaman = {
 		ZoneName = { CL["SHAMAN"]..Atlas_GetClassName("SHAMAN")..ALC["Hyphen"]..BZ["The Heart of Azeroth"] },
 		Location = { BZ["The Heart of Azeroth"]..ALC["Comma"]..BZ["The Maelstrom"] },
-		WorldMapID = "1057",
+		WorldMapID = 726,
 		{ PURP.." A) "..format(ALC["Portal to %s"], BZ["Dalaran"]).."\n"..WHIT..L["Farseer Nobundo <The Earthen Ring>"], 10101 },
 		{ INDENT..WHIT..LC("Farseer Nobundo <The Earthen Ring>", 96528), 96528 },
 		{ PURP.." B) "..L["Vortex Pinnacle Portal"], 10102 },
@@ -842,7 +842,7 @@ local myData = {
 	CH_Warlock = {
 		ZoneName = { CL["WARLOCK"]..Atlas_GetClassName("WARLOCK")..ALC["Hyphen"]..BZ["Dreadscar Rift"] },
 		Location = { BZ["Dreadscar Rift"] },
-		WorldMapID = "1050",
+		WorldMapID = 717,
 		{ PURP.." A) "..format(ALC["Portal to %s"], BZ["Dalaran"]), 10101 },
 		{ PURP.." B) "..L["Demonic Gateway"], 10102 },
 		{ WHIT.." 1) "..I_PROFF..L["Felblood Altar"]..GREY..ALC["L-Parenthesis"]..ARTIFACT_POWER..ALC["R-Parenthesis"], 10001 },
@@ -902,7 +902,7 @@ local myData = {
 	CH_Warrior = {
 		ZoneName = { CL["WARRIOR"]..Atlas_GetClassName("WARRIOR")..ALC["Hyphen"]..BZ["Skyhold"] },
 		Location = { BZ["Skyhold"]..ALC["Comma"]..BZ["Halls of Valor"]..ALC["Comma"]..BZ["Stormheim"] },
-		WorldMapID = "1035",
+		WorldMapID = 695,
 		{ PURP.." A) "..LC("Aerylia <Stormflight Master>", 96679), 96679 },
 		{ INDENT..GREY..L["Travel to:"] },
 		{ INDENT..INDENT..GREY..BZ["Dalaran"] },

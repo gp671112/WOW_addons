@@ -59,7 +59,7 @@ function Astrolabe:GetVersion()
 	return LIBRARY_VERSION_MAJOR, LIBRARY_VERSION_MINOR;
 end
 
-local HBD = LibStub("HereBeDragons-1.0", true)
+local HBD = LibStub("HereBeDragons-2.0", true)
 
 --------------------------------------------------------------------------------------------------------------
 -- Config Constants
@@ -409,7 +409,7 @@ end
 -- Map Zoom is returned to its previous setting before this function returns.  
 --*****************************************************************************
 function Astrolabe:GetUnitPosition( unit, noMapChange )
-	local x, y = GetPlayerMapPosition(unit);
+	local x, y = C_Map.GetPlayerMapPositionCM(unit);
     if x == nil then
         x, y = 0, 0 
     end
@@ -422,7 +422,7 @@ function Astrolabe:GetUnitPosition( unit, noMapChange )
 		end
 		local lastMapID, lastFloor = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel();
 		LuaUtils:DugiSetMapToCurrentZone();
-		x, y = GetPlayerMapPosition(unit);
+		x, y = C_Map.GetPlayerMapPositionCM(unit);
         if x == nil then
             x, y = 0, 0 
         end
@@ -436,7 +436,7 @@ function Astrolabe:GetUnitPosition( unit, noMapChange )
 				else
 					SetMapZoom(WORLDMAP_WORLD_ID);
 				end
-			x, y = GetPlayerMapPosition(unit);
+			x, y = C_Map.GetPlayerMapPositionCM(unit);
             if x == nil then
                 x, y = 0, 0 
             end
@@ -466,7 +466,7 @@ end
 -- setting before this function returns, in order to provide better performance.  
 --*****************************************************************************
 function Astrolabe:GetCurrentPlayerPosition()
-	local x, y = GetPlayerMapPosition("player");
+	local x, y = C_Map.GetPlayerMapPositionCM("player");
     if x == nil then
         x, y = 0, 0 
     end
@@ -478,7 +478,7 @@ function Astrolabe:GetCurrentPlayerPosition()
 			return;
 		end
 		LuaUtils:DugiSetMapToCurrentZone();
-		x, y = GetPlayerMapPosition("player");
+		x, y = C_Map.GetPlayerMapPositionCM("player");
         if x == nil then
             x, y = 0, 0 
         end
@@ -492,7 +492,7 @@ function Astrolabe:GetCurrentPlayerPosition()
 				else
 					SetMapZoom(WORLDMAP_WORLD_ID);
 				end
-			x, y = GetPlayerMapPosition("player");
+			x, y = C_Map.GetPlayerMapPositionCM("player");
             if x == nil then
                 x, y = 0, 0 
             end

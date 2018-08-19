@@ -18,42 +18,38 @@ function Corpse:Initialize()
 	function Corpse:Load()
 	
 		local function GetCorpsePositionDisruptive()
-			local orig_mapId, orig_level = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+			local orig_mapId, orig_level = DGV:GetCurrentMapID()
 			LuaUtils:DugiSetMapToCurrentZone()
-			local corpseX, corpseY = GetCorpseMapPosition()
-			local m1, f1, x1, y1 =  DGV.astrolabe:GetUnitPosition("player")
+			local corpseX, corpseY = GetCorpseMapPosition_dugi()
+			local m1, f1, x1, y1 =  DGV:GetUnitPosition()
 			if corpseX and corpseX~=0 then
 				if orig_mapId~=m1 or orig_level~=f1 then
 					LuaUtils:DugiSetMapByID(orig_mapId)
-					SetDungeonMapLevel(orig_level)
 				end
 				return m1, f1, corpseX, corpseY
 			end
-			local c = DGV:GetCZByMapId(GetCurrentMapAreaID())
+			local c = GetMapContinent_dugi()
 			if c then
 				for mapID in DGV.ContinentMapIterator,c do
 					LuaUtils:DugiSetMapByID(mapID)
-					corpseX, corpseY = GetCorpseMapPosition()
+					corpseX, corpseY = GetCorpseMapPosition_dugi()
 					if corpseX and corpseX~=0 then
 						local corpseFloor = GetCurrentMapDungeonLevel()
 						LuaUtils:DugiSetMapByID(orig_mapId)
-						SetDungeonMapLevel(orig_level)
 						return mapID, corpseFloor, corpseX, corpseY
 					end
 				end
 			end
 			LuaUtils:DugiSetMapByID(orig_mapId)
-			SetDungeonMapLevel(orig_level)
 		end
 		
 		function Corpse:GetPosition()
 			if not UnitIsDeadOrGhost("player") then return end
-			local corpseX, corpseY = GetCorpseMapPosition()
+			local corpseX, corpseY = GetCorpseMapPosition_dugi()
 			if not corpseX or corpseX==0 then
 				return GetCorpsePositionDisruptive()
 			end
-			local m = GetCurrentMapAreaID()
-			local f = GetCurrentMapDungeonLevel()
+			local m = DGV:GetCurrentMapID() 
 			return m, f, corpseX, corpseY
 		end
 	
@@ -61,8 +57,8 @@ function Corpse:Initialize()
 			function()
 				DebugPrint("PLAYER_ALIVE")
 				--DGV.DugisArrow:Show()
-				local corpseX, corpseY = GetCorpseMapPosition()
-				DebugPrint("corpseX:"..corpseX.." corpseY:"..corpseY)
+				--local corpseX, corpseY = GetCorpseMapPosition_dugi()
+				--DebugPrint("corpseX:"..corpseX.." corpseY:"..corpseY)
 			end)
 			
 		playerDeadReaction = DGV.RegisterReaction("PLAYER_DEAD"):WithPredicate(PlayerEventPredicate):WithAction(

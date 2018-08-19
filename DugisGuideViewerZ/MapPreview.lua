@@ -11,33 +11,46 @@ local function GetNextIndex()
     return elementIndex
 end
 
+--name: tracking, level
+local function GetWorldMapButton(name)
+    local result
+    LuaUtils:foreach({WorldMapFrame:GetChildren()}, function(v, k) 
+        if type(v) == "table" and v.Hide and v.InitializeDropDown then 
+            if v.selectedValue and name == "level" then
+                result = v
+            end
+
+            if not v.selectedValue and name == "tracking" then
+                result = v
+            end
+        end 
+    end)
+    return result
+end
+
 function MP:Initialize()
 	DGV.MapPreview = MP
 
 	local function IterateNonPreviewElements(delegate, unconditional)
         elementIndex = 0
-		delegate(WorldMapFrameTitle, GetNextIndex())
-		delegate(WorldMapFrameMiniBorderLeft, GetNextIndex())
-		delegate(WorldMapFrameMiniBorderRight, GetNextIndex())
-		delegate(WorldMapFrameSizeUpButton, GetNextIndex())
-		delegate(WorldMapFrameSizeDownButton, GetNextIndex())
 		delegate(WorldMapFrameCloseButton, GetNextIndex())
-		delegate(WorldMapShowDropDown, GetNextIndex())
-		delegate(WorldMapFrameAreaLabel, GetNextIndex())
 		if DGV.CoordsFrame then
 			delegate(DGV.CoordsFrame, GetNextIndex())
 		end
-		delegate(WorldMapTrackQuest, GetNextIndex())
         delegate(WorldMapFrame.BorderFrame, GetNextIndex())
         delegate(WorldMapFrame.NavBar, GetNextIndex())
-        delegate(WorldMapFrame.UIElementsFrame, GetNextIndex())
-        delegate(WorldMapFrame.MainHelpButton, GetNextIndex())
+        
+        delegate(GetWorldMapButton("tracking"), GetNextIndex())
+        delegate(GetWorldMapButton("level"), GetNextIndex())
+        
+        delegate(WorldMapFrame.BorderFrame.Bg, GetNextIndex())
+        delegate(WorldMapFrame.SidePanelToggle, GetNextIndex())
+        
         delegate(QuestMapFrame, GetNextIndex())
 		if DugisGuideViewer.whollyloaded then delegate(Wholly.mapFrame, GetNextIndex())	end
 		delegate(MapsterOptionsButton, GetNextIndex())
 		delegate(Mapster_CoordsFrame, GetNextIndex())
 		delegate(TomTomWorldFrame, GetNextIndex())
-		delegate(WorldQuestTrackerDoubleTapFrame, GetNextIndex())
         
         local poiIndex = 1
         while _G["WorldMapFramePOI"..poiIndex] do 
@@ -45,17 +58,20 @@ function MP:Initialize()
             poiIndex = poiIndex + 1  
         end     
 
-		local numDetails = GetNumberOfDetailTiles()
+		local numDetails = 0--GetNumberOfDetailTiles()
+        --[[
 		if unconditional or (GetCurrentMapZone() > 0 and DGV:MapHasOverlays()) then
 			for i=1, numDetails do
 				delegate(_G["WorldMapDetailTile"..i], GetNextIndex())
 			end
 		end
+        ]]
         
         LuaUtils:foreach(DugisGuideViewer.Modules.WorldMapTracking.trackingPoints, function(point)
             delegate(point, GetNextIndex())
         end) 
         
+        --[[
 		local levels
 		if IsLegion then
 			levels = #{ GetNumDungeonMapLevels() }
@@ -64,7 +80,7 @@ function MP:Initialize()
 		end		
 		if levels and levels > 0 then
 			delegate(WorldMapLevelDropDown, elementIndex + numDetails + 1)
-		end
+		end]]
 	end
 
 	local nonPreviewElementsShown = {}
@@ -112,15 +128,15 @@ function MP:Initialize()
 
 	local function IteratePreviewElements(delegate, unconditional)
 		local lastWaypoint
-		local numDetail = GetNumberOfDetailTiles()
+		local numDetail = 0 --GetNumberOfDetailTiles()
 		--[[if unconditional or GetCurrentMapZone() == 0 or not DGV:MapHasOverlays() then
 			for i=1, numDetail do
 				delegate(_G["WorldMapDetailTile"..i], i)
 			end
 		end]]
-		--if DGV.CoordsFrame then
-		--	delegate(DGV.CoordsFrame, numDetail+1)
-		--end
+		if DGV.CoordsFrame then
+            delegate(DGV.CoordsFrame, numDetail+1)
+		end
 		if DGV.DugisArrow.map_overlay then
 			delegate(DGV.DugisArrow.map_overlay, numDetail+1)
 		end
@@ -129,60 +145,20 @@ function MP:Initialize()
 			delegate(DGV.DugisArrow.waypoints[lastWaypoint].worldmap, numDetail+2)
 		end
 		delegate(WorldMapDetailFrame, numDetail+3)
-		delegate(WorldMapBlobFrame, numDetail+4)
-		--delegate(WorldMapArchaeologyDigSites, numDetail+5)
 
 		if unconditional or not DugisGuideViewer:GetDB(DGV_MAPPREVIEWHIDEBORDER) then
 			IterateNonPreviewElements(function(frame, index)
-				delegate(frame, index + numDetail+5)
+				delegate(frame, index + numDetail+4)
 			end)
 		end
 	end
 
-	--[[local orig_PlaySound = PlaySound
-	local function OverridePlaySound(sound)
-		--DGV:DebugFormat("PlaySound", "sound", sound, "MP.DisableMapSound", MP.DisableMapSound, "stack", debugstack(2, 20))
-		if (sound=="igQuestLogOpen" or sound=="igQuestLogClose") then return
-		else
-			orig_PlaySound(sound)
-		end
-	end
-
-	function MP:SetAnimationHooks()
-		if not InCombatLockdown() then
-			DGV:DebugFormat("SetAnimationHooks")
-			PlaySound = OverridePlaySound
-		end
-	end
-
-	function MP:ResetAnimationHooks()
-		DGV:DebugFormat("ResetAnimationHooks")
-		PlaySound = orig_PlaySound
-	end]]
-
-	local orig_WorldMapBlobFrameShow = nil
 	local orig_WorldMapArchaeologyDigSites = nil
 	local no_op = function()end
 	function MP:SetCombatHooks()
-		if orig_WorldMapBlobFrameShow==nil and WorldMapBlobFrame then
-			orig_WorldMapBlobFrameShow = WorldMapBlobFrame.Show
-			--WorldMapFrameSizeUpButton:Disable()
-		end
-		--if orig_WorldMapArchaeologyDigSites==nil and WorldMapArchaeologyDigSites then
-			--orig_WorldMapArchaeologyDigSites = WorldMapArchaeologyDigSites.Show
-		--end
-		WorldMapBlobFrame.Show = no_op
-		--WorldMapArchaeologyDigSites.Show = no_op
 	end
 
 	function MP:ResetCombatHooks()
-		if orig_WorldMapBlobFrameShow~=nil then
-			WorldMapBlobFrame.Show = orig_WorldMapBlobFrameShow
-			--WorldMapFrameSizeUpButton:Enable()
-		end
-		--if orig_WorldMapArchaeologyDigSites~=nil then
-			--WorldMapArchaeologyDigSites.Show = orig_WorldMapArchaeologyDigSites
-		--end
 	end
 
 	--local resetWindowToggle = false
@@ -194,7 +170,6 @@ function MP:Initialize()
 			MP.FadeOutAnimationGroup:Stop()
 			RestoreNonPreviewElements()
 			WorldMapFrame:SetAlpha(1)
-			WorldMapBlobFrame_OnLoad(WorldMapBlobFrame)
             --JU 2016-10-17
 		    --WorldMapArchaeologyDigSites:GetScript("OnLoad")(WorldMapArchaeologyDigSites)
 		    --WorldMapArchaeologyDigSites:SetBorderAlpha(192)
@@ -287,7 +262,6 @@ function MP:Initialize()
 					end
 				end			
 				if id==questId then 
-					if not InCombatLockdown() then WorldMapBlobFrame:Show() end
 				end	
 			end
             DGV:IterateQuestPOIs(hidePoiFunc, WorldMapPOIFrame, QUEST_POI_NUMERIC)
@@ -319,7 +293,7 @@ function MP:Initialize()
 		local lastWaypoint = #DGV.DugisArrow.waypoints
 		local wp = DGV.DugisArrow.waypoints[lastWaypoint]
 		local wpx, wpy, wpm, wpf = wp.x/100, wp.y/100, wp.map, wp.floor
-		if wp.map~=GetCurrentMapAreaID() then return end
+		if wp.map~= DGV:GetCurrentMapID()  then return end
 		local wpx, wpy = DGV:TranslateWorldMapPosition(wpm, wpf, wpx, wpy, wpm, GetCurrentMapDungeonLevel())
 		return wpx > 0 and wpy > 0 and wpx < 1 and wpy < 1
 	end
@@ -331,11 +305,13 @@ function MP:Initialize()
     local fadeInMapFirstTime = true
 	function MP:FadeInMap()
         if fadeInMapFirstTime then
+		--[[todo: find replacement
             WorldMapPOIFrame:HookScript("OnHide", function(self)
                 LuaUtils:foreach(allWorldQuestButtons, function(button)
                    button:SetAlpha(1)
                 end)
             end)
+			]]
             fadeInMapFirstTime = false
         end
     
@@ -344,7 +320,7 @@ function MP:Initialize()
 			or DGV:GetDB(DGV_MAPPREVIEWDURATION)==0
 			or not DGV:GetDB(DGV_ENABLED_MAPPREVIEW)
 			or DGV.carboniteloaded
-			or WORLDMAP_SETTINGS.size ~= WORLDMAP_WINDOWED_SIZE
+			or WorldMapFrame:IsMaximized()
 			or QuestFrame:IsShown()
 			or GossipFrame:IsShown()
 			or MerchantFrame:IsShown()
@@ -393,7 +369,7 @@ function MP:Initialize()
 				ResetMapFade(true)
 			end)]]
 
-			MP.FadeInAnimationGroup = WorldMapButton:CreateAnimationGroup()
+			MP.FadeInAnimationGroup = WorldMapFrame.ScrollContainer.Child:CreateAnimationGroup()
 			MP.FadeInAnimationGroup:SetLooping("NONE")
 			local fadeInAnimation = MP.FadeInAnimationGroup:CreateAnimation("DGV_FadeInMap")
 			fadeInAnimation:SetDuration(.1)
@@ -407,14 +383,11 @@ function MP:Initialize()
 				end)
 				--DGV:DebugFormat("Debug FadeInMap: playing")
 				WorldMapFrame:SetAlpha(.01)
-				WorldMapBlobFrame:SetBorderAlpha(.01)
-				WorldMapBlobFrame:SetFillAlpha(.01)
 				if DGV.DugisArrow.waypoints and #DGV.DugisArrow.waypoints>0 then
 					lastWaypoint = #DGV.DugisArrow.waypoints
 					if not IsWaypointWithinCurrentFloorArea() then
 						local m,f = DGV.DugisArrow.waypoints[lastWaypoint].map, DGV.DugisArrow.waypoints[lastWaypoint].floor or 0
 						LuaUtils:DugiSetMapByID(m)
-						SetDungeonMapLevel(f)
 					end
 				end
 				HideNonPreviewElements()
@@ -422,19 +395,14 @@ function MP:Initialize()
 			fadeInAnimation:SetScript("OnFinished", function()
 				--WorldMapFrame:SetAlpha(1)
 				MP.FadeOutAnimationGroup:Play()
-                WorldMapBlobFrame:SetAlpha(1)
-				WorldMapBlobFrame:SetFillAlpha(255)
-				WorldMapBlobFrame:SetBorderAlpha(255)
 			end)
 			fadeInAnimation:SetScript("OnUpdate", function(self)
 				SupressNonPreviewElements()
 				local progress = self:GetSmoothProgress()
 				WorldMapFrame:SetAlpha(progress*0.5)
-				WorldMapBlobFrame:SetBorderAlpha(progress*1*255)
-				WorldMapBlobFrame:SetFillAlpha(progress*1*255)
 			end)
 
-			MP.FadeOutAnimationGroup = WorldMapButton:CreateAnimationGroup()
+			MP.FadeOutAnimationGroup = WorldMapFrame.ScrollContainer.Child:CreateAnimationGroup()
 			MP.WaitAnimation = MP.FadeOutAnimationGroup:CreateAnimation("DGV_FadeInMapWait")
 			MP.WaitAnimation:SetDuration(DugisGuideViewer:GetDB(DGV_MAPPREVIEWDURATION))
 			MP.WaitAnimation:SetOrder(1)
@@ -445,7 +413,6 @@ function MP:Initialize()
 				end
 				--WorldMapFrame_UpdateMap()
 				if MP.IsAnimating and MP:IsAnimating() then
-					if not InCombatLockdown() then --[[WorldMapBlobFrame:Hide()]] end
 					HideNonWaypointPOIs()
 				end
 				IteratePreviewElements(function(frame, index)
@@ -480,7 +447,6 @@ function MP:Initialize()
 					DGV.DugisArrow.waypoints[lastWaypoint].worldmap:SetAlpha(1)
 					if not IsWaypointWithinCurrentFloorArea() then
 						LuaUtils:DugiSetMapByID(DGV.DugisArrow.waypoints[lastWaypoint].map)
-						SetDungeonMapLevel(DGV.DugisArrow.waypoints[lastWaypoint].floor or 0)
 					end
 				end
 				MP.WaypointMapPing:SetAlpha(255)
@@ -512,8 +478,6 @@ function MP:Initialize()
 				SupressNonPreviewElements()
 				local progress = self:GetSmoothProgress()
 				WorldMapFrame:SetAlpha((1-progress)*mapAlpha)
-				WorldMapBlobFrame:SetBorderAlpha((1-progress)*mapAlpha*192)
-				WorldMapBlobFrame:SetFillAlpha((1-progress)*mapAlpha*128)
 			end)
 		else
 			--WorldMapFrame:Hide()
@@ -541,19 +505,20 @@ function MP:Initialize()
     
     function MP:InitializeWaypointMapPing()
         --prevents error on early load
-        if not WorldMapButton:GetLeft() then
+		
+        if not WorldMapFrame.ScrollContainer:GetLeft() then
             if MP.FadeOutAnimationGroup then
                 MP.FadeOutAnimationGroup:Stop()
             end
             HideUIPanel(WorldMapFrame)
             return
         end
-        MP.WaypointMapPing = CreateFrame("Model", nil, WorldMapButton)
+        MP.WaypointMapPing = CreateFrame("Model", nil, WorldMapFrame.ScrollContainer)
         MP.WaypointMapPing:SetModel([[Interface\MiniMap\Ping\MinimapPing.mdx]])
         MP.WaypointMapPing:SetWidth(100)
         MP.WaypointMapPing:SetHeight(100)
         --MP.WaypointMapPing:SetModelScale(.4)
-        MP.WaypointMapPing:SetPoint("CENTER", WorldMapButton)
+        MP.WaypointMapPing:SetPoint("CENTER", WorldMapFrame.ScrollContainer)
         local scale = UIParent:GetEffectiveScale();
         local hypotenuse = ( ( GetScreenWidth() * scale ) ^ 2 + ( GetScreenHeight() * scale ) ^ 2 ) ^ 0.5;
         --DGV:DebugFormat("Debug FadeInMap: create MP.WaypointMapPing","WorldMapDetailFrame:GetLeft()", WorldMapDetailFrame:GetLeft())
@@ -573,20 +538,6 @@ function MP:Initialize()
 		if frame==WorldMapFrame then
 			ResetMapFade()
 		end
-	end)
-
-	hooksecurefunc("WorldMapFrame_UpdateMap", function()
-        if MP.IsAnimating and MP:IsAnimating() then
-            if not InCombatLockdown() then WorldMapBlobFrame:Hide() end			
-            HideNonWaypointPOIs()
-        end
-    
-        RunInTheNextFrame(function()
-            if MP.IsAnimating and MP:IsAnimating() then
-                if not InCombatLockdown() then WorldMapBlobFrame:Hide() end			
-                HideNonWaypointPOIs()
-            end
-        end)
 	end)
 
 	hooksecurefunc("QuestLogPopupDetailFrame_Show", function()

@@ -371,7 +371,7 @@
   ["Warlock"] = "術士",
   ["Warrior"] = "戰士",
 	["Watch Frame Border"] = "觀看框架邊框",
-	["Waypoints"] = "指引",
+	["Dugi Arrow"] = "指引",
 	["War Drums"] = "戰爭打鼓",
 	["Wider Objective Tracker"] = "寬一點物件追蹤",
 	["Window Close"] = "視窗關閉",

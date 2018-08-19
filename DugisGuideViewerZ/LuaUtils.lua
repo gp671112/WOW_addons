@@ -10,6 +10,8 @@ DugisGuideUser = {
 
 DugisGuideUser.NoQuestLogUpdateTrigger = nil
 
+
+
 --Vector
 local function NormalizeVector(x, y)
     local length = math.sqrt(x * x + y * y)
@@ -84,6 +86,16 @@ function LuaUtils:matchString(input, pattern)
     return val
 end
 
+function LuaUtils:isTableEmpty(t)
+    if t == nil then
+        return true
+    end
+    for v in pairs (t) do
+        return false
+    end 
+    return true
+end
+
 --Breaks in case func returns "break" string
 function LuaUtils:foreach(items, func)
     local index = 1
@@ -132,6 +144,42 @@ function LuaUtils:isInTable(item, tbl)
         if value == item then return key end
     end
     return false
+end
+
+--Returns table
+function LuaUtils:RemoveDuplicates(inputTable)
+	local hash = {}
+	local res = {}
+
+	for _,v in ipairs(inputTable) do
+	   if (not hash[v]) then
+		   res[#res+1] = v
+		   hash[v] = true
+	   end
+	end
+	
+	return res
+end
+
+--Modifies inputTable table
+function LuaUtils:SortTable(inputTable)
+	table.sort(inputTable, function(a,b)  
+		return tostring(a) > tostring(b)
+	end)
+end
+
+function LuaUtils:AreTablesEqual(A, B)
+	if #A ~= #B then
+		return false
+	end
+	
+	for i = 1, #A do
+		if A[i] ~= B[i] then
+			return false
+		end
+	end
+	
+	return true
 end
 
 function LuaUtils:Avg(list, getValueFunction)
@@ -188,7 +236,7 @@ function LuaUtils:dumpVar ( t, skipFunctions )
                         print(indent..string.rep(" ",string.len(pos)+6).."}")
                     else
                         if type(val)~="function" or not skipFunctions then
-                            print(indent.."["..pos.."] => "..tostring(val))
+                            print(indent.."["..tostring(pos).."] => "..tostring(val))
                         end
                     end
                 end
@@ -268,10 +316,7 @@ local function AngleBetween(_x1, _x2, _y1, _y2)
 end
 
 local function CalculateCurrentFacing()
-    if not GetPlayerMapPosition then
-        return
-    end
-    local unitX, unitY = GetPlayerMapPosition("player")
+    local unitX, unitY = DugisGuideViewer:GetPlayerMapPosition()
     
     if not unitX then
         return
@@ -321,6 +366,11 @@ function LuaUtils:CreateThread(threadName, threadFunction, onEnd, resumeAmountPe
     CreateFrame("Frame", "DugiThreadFrame")
     
 	DugiThreadFrame:SetScript("OnUpdate" , function(self, elapsed)
+	
+		if DugisGuideViewer and DugisGuideViewer.Modules and  DugisGuideViewer.Modules.DugisWatchFrame then
+			DugisGuideViewer.Modules.DugisWatchFrame:OnFrameUpdate()
+		end
+	
 		LuaUtils:CheckWindowActive()
 	
 		collectgarbage("step", 100)
@@ -334,7 +384,7 @@ function LuaUtils:CreateThread(threadName, threadFunction, onEnd, resumeAmountPe
             if thread ~= nil then
                 if coroutine.status(thread.thread) ~= "dead" then
                     for i=1, thread.resumeAmountPerFrame do
-                        if coroutine.status(thread.thread) ~= "dead" then
+                        if coroutine.status(thread.thread) ~= "dead" and not UnitAffectingCombat("player") then
                             local result, message = coroutine.resume(thread.thread, unpack(thread.arguments))
                             local status = coroutine.status(thread.thread)
                             if status=="dead"and result == false then
@@ -441,6 +491,12 @@ function LuaUtils:MergeTables(t1, t2)
     end)    
        
     return result
+end
+
+function LuaUtils:AddTableToTable(srcTbl, dstTbl)
+    LuaUtils:foreach(srcTbl, function(v, k)
+        dstTbl[k] = v
+    end)
 end
 
 function LuaUtils:Delay(timeSec, function_)
@@ -621,22 +677,30 @@ end
 
 ------Patch 7.0.3 legion GetQuestWorldMapAreaID, SetMapByID, SetMapToCurrentZone now triggers QUEST_LOG_UPDATE which spam our hook.
 
+--Returns uiMapID
 function LuaUtils:DugiGetQuestWorldMapAreaID(questId)
 	DugisGuideUser.NoQuestLogUpdateTrigger = true
-	return GetQuestWorldMapAreaID(questId)
+	return GetQuestUiMapID(questId)
 end 
 
 function LuaUtils:DugiSetMapByID(mapId)
 	DugisGuideUser.NoQuestLogUpdateTrigger = true
     if tonumber(mapId) ~= nil then
-        return SetMapByID(mapId)
+		if WorldMapFrame then
+			if C_Map.GetMapArtLayers(mapId) then
+				return WorldMapFrame:SetMapID(mapId)
+			end
+		end
     end
 end 
 
 function LuaUtils:DugiSetMapToCurrentZone()
-	if not GetPlayerFacing() then return end
-	DugisGuideUser.NoQuestLogUpdateTrigger = true
-	SetMapToCurrentZone()
+	local id = C_Map.GetBestMapForUnit("player")
+	LuaUtils:DugiSetMapByID(id)
+	
+	if WorldMapFrame and WorldMapFrame.mapID and  C_Map.GetMapArtLayers(WorldMapFrame.mapID) then
+		WorldMapFrame:RefreshAll()
+	end
 end
 
 ----Post combat loading
@@ -694,6 +758,8 @@ function LuaUtils:IsElvUIInstalled()
 end  
 
 function LuaUtils:TransferBackdropFromElvUI()
+
+
     LuaUtils:loop(5, function(index)
         local sourceBackdrop = _G["DropDownList1".."".."MenuBackdrop"]
         local targetBackdrop = _G["LibDugi_DropDownList"..index.."MenuBackdrop"]
@@ -709,13 +775,23 @@ function LuaUtils:TransferBackdropFromElvUI()
             local r, g, b, a = sourceBackdrop:GetBackdropColor(); 
             targetBackdrop:SetBackdropColor(r, g, b, a)
         end
-    end)        
+    end)
+
+	
 end
 
 local lastProcessId = 0
 
 --Test: /run LuaUtils:ProcessInTime(2, print)
 function LuaUtils:ProcessInTime(durationInSec, function_, endFunction)
+	if durationInSec == 0 then
+		function_(1)
+		if endFunction then
+			endFunction()
+		end
+		return
+	end
+
     local threadName = "thread_"..lastProcessId
 
     local thread = LuaUtils:CreateThread(lastProcessId, function()

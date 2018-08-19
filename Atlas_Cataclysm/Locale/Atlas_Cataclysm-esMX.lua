@@ -1,10 +1,10 @@
--- $Id: Atlas_Cataclysm-esMX.lua 16 2017-01-16 09:55:01Z arith $
+-- $Id: Atlas_Cataclysm-esMX.lua 31 2018-08-09 13:59:41Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -62,14 +62,14 @@ L["Earthwarden Yrsa <The Earthen Ring>"] = "Celadora de la tierra Yrsa <El Anill
 L["Eulinda <Reagents>"] = "Eulinda <Componentes>"
 L["Farseer Tooranu <The Earthen Ring>"] = "Clarividente Tooranu <El Anillo de la Tierra>"
 L["Fenstalker"] = "Fenstalker"
---Translation missing 
--- L["Finkle Einhorn"] = ""
+--[[Translation missing --]]
+--[[ L["Finkle Einhorn"] = ""--]] 
 L["FL"] = "FL"
 L["Forest Frogs"] = "Ranas del bosque"
 L["Gazakroth"] = "Gazakroth"
 L["GB"] = "GB"
---Translation missing 
--- L["Goblin Teleporter"] = ""
+--[[Translation missing --]]
+--[[ L["Goblin Teleporter"] = ""--]] 
 L["Gub <Destroyer of Fish>"] = "Gub <Destructor de peces>"
 L["Harald <Food Vendor>"] = "Harald <Vendedor de alimentos>"
 L["Haunted Stable Hand"] = "Mozo de cuadra encantado"
@@ -140,11 +140,5 @@ L["Zanzil's Cauldron of Frostburn Formula"] = "Caldero de fórmula de abrasión 
 L["Zanzil's Cauldron of Toxic Torment"] = "Caldero de tormento tóxico de Zanzil"
 L["ZG"] = "ZG"
 L["Zungam"] = "Zungam"
-
--- ToC
---Translation missing 
--- L["Description"] = ""
---Translation missing 
--- L["Title"] = ""
 
 end

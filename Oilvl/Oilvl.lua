@@ -3042,7 +3042,7 @@ function OGetRaidProgression(RaidName, OSTAT, NumRaidBosses)
 		return -1; 
 	end
 	if orp["unitname"] == nil then 
-		--ClearAchievementComparisonUnit();
+		ClearAchievementComparisonUnit();
 		OILVL:RegisterEvent("INSPECT_ACHIEVEMENT_READY")
 		SetAchievementComparisonUnit("target");
 		rpunit = "target";
@@ -3050,7 +3050,7 @@ function OGetRaidProgression(RaidName, OSTAT, NumRaidBosses)
 		return -1; 
 	end
 	if orp["unitid"] == nil then 
-		--ClearAchievementComparisonUnit();
+		ClearAchievementComparisonUnit();
 		OILVL:RegisterEvent("INSPECT_ACHIEVEMENT_READY")
 		SetAchievementComparisonUnit("target");
 		rpunit = "target";
@@ -3058,7 +3058,7 @@ function OGetRaidProgression(RaidName, OSTAT, NumRaidBosses)
 		return -1; 
 	end	
 	if UnitGUID(rpunit) ~= UnitGUID(orp["unitid"]) then 
-		--ClearAchievementComparisonUnit();
+		ClearAchievementComparisonUnit();
 		OILVL:RegisterEvent("INSPECT_ACHIEVEMENT_READY")
 		SetAchievementComparisonUnit("target");
 		rpunit = "target";
@@ -3657,7 +3657,7 @@ function OGetRaidProgression3(RaidName, OSTAT, NumRaidBosses)
 		if oframe ~= otooltip6rpd then return -1 end				
 		if CheckInteractDistance(otooltip6rpdunit, 1) and UnitExists(otooltip6rpdunit) and cfg.oilvlms then
 			Omover2=2;
-			--ClearAchievementComparisonUnit();
+			ClearAchievementComparisonUnit();
 			OILVL:RegisterEvent("INSPECT_ACHIEVEMENT_READY")
 			rpsw=true;
 			rpunit=otooltip6rpdunit;
@@ -3905,7 +3905,7 @@ function OGetRaidProgression3(RaidName, OSTAT, NumRaidBosses)
 				if oframe ~= otooltip6rpd then otooltip6rpd=nil; otooltip6rpdunit=nil; otooltip6rpdid=nil; return -1 end				
 				if not rpsw and CheckInteractDistance(otooltip6rpdunit, 1) and UnitExists(otooltip6rpdunit) and cfg.oilvlms then
 					Omover2=2;
-					--ClearAchievementComparisonUnit();
+					ClearAchievementComparisonUnit();
 					OILVL:RegisterEvent("INSPECT_ACHIEVEMENT_READY")
 					rpsw=true;
 					rpunit=otooltip6rpdunit;
@@ -4528,7 +4528,7 @@ function otooltip6func()
 				OilvlTooltip:Show()					
 				if CheckInteractDistance(ounit, 1) and UnitExists(ounit) and cfg.oilvlms then
 					Omover2=2;
-					--ClearAchievementComparisonUnit();
+					ClearAchievementComparisonUnit();
 					OILVL:RegisterEvent("INSPECT_ACHIEVEMENT_READY")
 					rpsw=true;
 					rpunit=ounit;
@@ -5924,7 +5924,7 @@ function OMouseover()
 				NotifyInspect("target");
 				Omover=1;
 				if not rpsw then
-					--ClearAchievementComparisonUnit();
+					ClearAchievementComparisonUnit();
 					OILVL:RegisterEvent("INSPECT_ACHIEVEMENT_READY")
 					SetAchievementComparisonUnit("target");
 					rpunit = "target";
@@ -5936,7 +5936,7 @@ function OMouseover()
 					NotifyInspect("target");
 					Omover=1;
 					if not rpsw then
-						--ClearAchievementComparisonUnit();
+						ClearAchievementComparisonUnit();
 						OILVL:RegisterEvent("INSPECT_ACHIEVEMENT_READY")
 						SetAchievementComparisonUnit("target");
 						rpunit = "target";
@@ -6117,7 +6117,7 @@ function OilvlConfigFrame()
 	if cfg.oilvlcharilvl then cfilvlcb:SetChecked(true) end	
 
 	-- best enchant option 
-	local eercb2 = createCheckbutton(cfg.frame, 16+25, -290, "oilvlbestenchant", " "..BEST.." "..ENSCRIBE);
+	local eercb2 = createCheckbutton(cfg.frame, 16+25, -290, "oilvlbestenchant", " "..L["BEST"].." "..ENSCRIBE);
 	eercb2:SetSize(30,30);
 	eercb2:SetScript("PostClick", function()
 		cfg.oilvlme2 = oilvlbestenchant:GetChecked() 

@@ -1,10 +1,10 @@
--- $Id: Atlas.lua 297 2017-09-19 15:10:04Z arith $
+-- $Id: Atlas.lua 313 2018-08-09 16:39:00Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 	Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -38,7 +38,7 @@ local strlen, strgfind = string.len, string.gfind
 local strtrim = strtrim
 local floor, fmod = math.floor, math.fmod
 local getn, tinsert, tsort = table.getn, table.insert, table.sort
-
+local GetAddOnInfo, GetAddOnEnableState = _G.GetAddOnInfo, _G.GetAddOnEnableState
 -- ----------------------------------------------------------------------------
 -- AddOn namespace.
 -- ----------------------------------------------------------------------------
@@ -254,6 +254,10 @@ local function bossButtonCleanUp(button)
 	button.tooltiptext = nil
 	button.link = nil
 	button.displayInfo = nil
+	button.name = nil
+	button.id = nil
+	button.description = nil
+	button.uiModelSceneID = nil
 	if (button.bgImage) then button.bgImage:SetTexture(nil) end
 	if (button.TaxiImage) then button.TaxiImage:SetTexture(nil) end
 end
@@ -277,12 +281,30 @@ local function bossButtonUpdate(button, encounterID, instanceID, b_iconImage, mo
 		button.tooltiptitle = ejbossname
 		button.tooltiptext = description
 		button.link = link
-		if (addon:EncounterJournal_CheckForOverview(rootSectionID)) then
-			-- title, description, depth, abilityIcon, displayInfo, 
-			-- siblingID, nextSectionID, filteredByDifficulty, link, 
-			-- startsOpen, flag1, flag2, flag3, flag4 = EJ_GetSectionInfo(sectionID)
-			local _, overviewDescription, _, _, _, _, nextSectionID = EJ_GetSectionInfo(rootSectionID)
-			button.overviewDescription = overviewDescription or nil
+
+		local sectionInfo = C_EncounterJournal.GetSectionInfo(rootSectionID)
+--[[
+      Name = "EncounterJournalSectionInfo",
+      Type = "Structure",
+      Fields =
+      {
+        { Name = "spellID", Type = "number", Nilable = false },
+        { Name = "title", Type = "string", Nilable = false },
+        { Name = "description", Type = "string", Nilable = true },
+        { Name = "headerType", Type = "number", Nilable = false },
+        { Name = "abilityIcon", Type = "number", Nilable = false },
+        { Name = "creatureDisplayID", Type = "number", Nilable = false },
+        { Name = "uiModelSceneID", Type = "number", Nilable = false },
+        { Name = "siblingSectionID", Type = "number", Nilable = true },
+        { Name = "firstChildSectionID", Type = "number", Nilable = true },
+        { Name = "filteredByDifficulty", Type = "bool", Nilable = false },
+        { Name = "link", Type = "string", Nilable = false },
+        { Name = "startsOpen", Type = "bool", Nilable = false },
+      },
+]]
+		if (sectionInfo and addon:EncounterJournal_IsHeaderTypeOverview(sectionInfo.headerType)) then
+			button.overviewDescription = sectionInfo.description or nil
+			local nextSectionID = sectionInfo.firstChildSectionID or nil
 
 			local spec, role
 
@@ -293,25 +315,30 @@ local function bossButtonUpdate(button, encounterID, instanceID, b_iconImage, mo
 				role = "DAMAGER"
 			end
 
-			local title, description, siblingID, filteredByDifficulty, flag1
+			local description
 			local i = 1
 			while nextSectionID do
-				title, description, _, _, _, siblingID, _, filteredByDifficulty, _, _, flag1 = EJ_GetSectionInfo(nextSectionID)
+				local flag1 = C_EncounterJournal.GetSectionIconFlags(nextSectionID)
+				sectionInfo = C_EncounterJournal.GetSectionInfo(nextSectionID)
 				if (role == rolesByFlag[flag1]) then
-					description = gsub(description, "$bullet;", "- ")
-					button.roleOverview = "|cffffffff"..title.."|r".."\n"..description
+					description = gsub(sectionInfo.description, "$bullet;", "- ")
+					button.roleOverview = "|cffffffff"..sectionInfo.title.."|r".."\n"..description
 					break
 				end
 				i = i + 1
-				nextSectionID = siblingID
+				nextSectionID = sectionInfo.firstChildSectionID
 			end
 		end
 		
 		if (b_iconImage) then
-			local _, _, _, displayInfo, iconImage = EJ_GetCreatureInfo(1, encounterID)
+			local id, name, description, displayInfo, iconImage, uiModelSceneID = EJ_GetCreatureInfo(1, encounterID)
+			button.name = name
+			button.id = id
 			button.displayInfo = displayInfo
+			button.description = description
+			button.uiModelSceneID = uiModelSceneID
 			if ( iconImage ) then
-				SetPortraitTexture(button.bgImage, displayInfo)
+				SetPortraitTextureFromCreatureDisplayID(button.bgImage, displayInfo)
 			end
 		end
 	end
@@ -360,7 +387,7 @@ local function parse_entry_strings(typeStr, id, preStr, index, lineplusoffset)
 end
 
 function Atlas_ScrollBar_Update()
-	local zoneID = ATLAS_DROPDOWNS[profile.options.dropdowns.module][profile.options.dropdowns.zone]
+	local zoneID = ATLAS_DROPDOWNS[profile.options.dropdowns.module] and ATLAS_DROPDOWNS[profile.options.dropdowns.module][profile.options.dropdowns.zone] or ATLAS_DROPDOWNS[1][1]
 	local mapdata = AtlasMaps
 	local base = mapdata[zoneID]
 
@@ -1600,7 +1627,7 @@ end
 function Atlas_AutoSelect()
 	local currentZone = getFixedZoneText()
 	local currentSubZone = GetSubZoneText()
-	local zoneID = ATLAS_DROPDOWNS[profile.options.dropdowns.module][profile.options.dropdowns.zone]
+	local zoneID = ATLAS_DROPDOWNS[profile.options.dropdowns.module] and ATLAS_DROPDOWNS[profile.options.dropdowns.module][profile.options.dropdowns.zone] or ATLAS_DROPDOWNS[1][1]
 --[[
 	local factionGroup = UnitFactionGroup("player")
 	if ( factionGroup and factionGroup ~= "Neutral" ) then
@@ -1661,12 +1688,13 @@ function Atlas_AutoSelect()
 			debug("This world zone "..currentZone.." is associated with a map.")
 			local targetZone = addon.assocs.OutdoorZoneToAtlas[currentZone]
 			-- handling exception for Dalaran
+--[[ we don't need these exception handling since WoW 8.0.1 as mapID now changed to uiMapID
 			if addon:GetModule("WrathoftheLichKing") and select(1, GetCurrentMapAreaID()) == 504 then
 				targetZone = "VioletHold"
 			elseif addon:GetModule("Legion") and select(1, GetCurrentMapAreaID()) == 1014 then
 				targetZone = "AssaultonVioletHold"
 			end
-			
+]]			
 			for k_DropDownType, v_DropDownType in pairs(ATLAS_DROPDOWNS) do
 				for k_DropDownZone, v_DropDownZone in pairs(v_DropDownType) do         
 					if (targetZone == v_DropDownZone) then

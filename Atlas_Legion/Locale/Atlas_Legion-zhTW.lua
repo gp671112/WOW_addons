@@ -1,8 +1,8 @@
--- $Id: Atlas_Legion-zhTW.lua 130 2017-04-30 11:01:57Z arith $
+-- $Id: Atlas_Legion-zhTW.lua 145 2018-08-09 14:03:43Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2016 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -66,12 +66,12 @@ L["Lydia Accoste"] = "黎蒂雅·艾柯斯塔"
 L["Ly'leth Lunastre"] = "黎利斯·路納斯特"
 L["Mage Darius"] = "法師達瑞亞斯"
 L["Malfurion Stormrage"] = "瑪法里恩·怒風"
---Translation missing 
--- L["Medivh's Footlocker"] = ""
+--[[Translation missing --]]
+--[[ L["Medivh's Footlocker"] = ""--]] 
 L["Mushroom Merchant"] = "蘑菇商人"
 L["Mythana"] = "秘薩納"
---Translation missing 
--- L["Nightmare Watcher"] = ""
+--[[Translation missing --]]
+--[[ L["Nightmare Watcher"] = ""--]] 
 L["Portal to Shal'Aran"] = "沙亞蘭傳送門"
 L["Put a Cork in It"] = "塞進木栓"
 L["Raga'yut"] = "蕾佳雅特"
@@ -93,10 +93,6 @@ L["Understone Lasher"] = "底石奴隸監工"
 L["Velimar"] = "威利瑪"
 L["Volynd Stormbringer"] = "沃林德風暴召喚者"
 L["Worn-Edged Page"] = "邊緣磨損的書頁"
-
--- ToC
-L["Description"] = "軍臨天下副本地圖模組"
-L["Title"] = "|r|cFF0099FF[地圖]|rAtlas 軍臨天下"
 
 
 end

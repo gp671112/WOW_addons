@@ -33,8 +33,8 @@ local L = AceLocale:NewLocale("Atlas_Transportation", "zhCN", false);
 if L then
 L["Abandoned Kite"] = "被遗弃的风筝"
 L["Airship"] = "飞船"
---Translation missing 
--- L["Aludane Whitecloud <Flight Master>"] = ""
+--[[Translation missing --]]
+--[[ L["Aludane Whitecloud <Flight Master>"] = ""--]] 
 L["Blue"] = "蓝"
 L["Class Order Halls"] = "职业大厅"
 L["Class Specific Only"] = "职业特定专用"
@@ -77,8 +77,8 @@ L["Shado-Pan Rope"] = "影踪派绳索"
 L["Ship / Zeppelin sailing path to destination"] = "船只 / 飞船航向目的地的路径"
 L["South of the path along Lake Elune'ara"] = "月神湖旁小径的南方"
 L["Special transportation"] = "特殊交通"
---Translation missing 
--- L["Talua <Eagle Keeper>"] = ""
+--[[Translation missing --]]
+--[[ L["Talua <Eagle Keeper>"] = ""--]] 
 L["Taxi Nodes"] = "飞行点"
 L["Teleportation Nexus"] = "传送中枢"
 L["The Bogpaddle Bullet"] = "沼桨弹头"
@@ -96,9 +96,5 @@ L["Wind Rider Master"] = "双足飞龙管理员"
 L["Won't be available once the Battle for Andorhal chain is finished."] = "“安多哈尔之战”任务链完成之前不可使用。"
 L["Yellow"] = "黄"
 L["Zeppelin Towers"] = "飞艇塔"
-
--- ToC
-L["Description"] = "交通地图"
-L["Title"] = "Atlas |r|cFF0099FF[交通]|r"
 
 end

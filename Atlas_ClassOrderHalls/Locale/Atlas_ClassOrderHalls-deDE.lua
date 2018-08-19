@@ -1,10 +1,10 @@
--- $Id: Atlas_ClassOrderHalls-deDE.lua 97 2017-05-18 10:55:14Z arith $
+-- $Id: Atlas_ClassOrderHalls-deDE.lua 116 2018-08-08 17:32:29Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2016 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -300,9 +300,5 @@ L["Yancey Grillsen <Bloodsail Recruiter>"] = "Yancey Grillsen <Anwerber der Bl
 L["Yaris Darkclaw <Recruiter>"] = "Yaris Dunkelklaue <Rekrutierer>"
 L["Yushi <Seal of Broken Fate Shipment>"] = "Yushi <Lieferung: Siegel des verheerten Schicksals>"
 L["Zen'kiki"] = "Zen'kiki"
-
--- ToC
-L["Description"] = "Karten der Klassenordenshallen"
-L["Title"] = "Atlas |r|cFF0099FF[Klassenordenshallen]|r"
 
 end

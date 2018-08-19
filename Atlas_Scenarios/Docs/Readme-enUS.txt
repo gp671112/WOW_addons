@@ -1,5 +1,5 @@
 Atlas, a World of Warcraft instance map browser
-Copyright 2012 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+Copyright 2012 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 
 =====================

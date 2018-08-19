@@ -1,8 +1,8 @@
--- $Id: Atlas_Scenarios-zhCN.lua 36 2017-03-20 15:19:48Z arith $
+-- $Id: Atlas_Scenarios-zhCN.lua 51 2018-04-24 09:19:35Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2012 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2012 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -151,9 +151,5 @@ L["West Gate"] = "西边城门"
 L["West Statue"] = "西部雕像"
 L["Whispering Stones Sonic Control Towers"] = "低语之石声波控制塔"
 L["Wolf-Rider Gaja"] = "狼骑兵格夏"
-
--- ToC
-L["Description"] = "场景战役地图"
-L["Title"] = "Atlas |r|cFF0099FF[场景战役]|r"
 
 end

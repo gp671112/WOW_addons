@@ -1,14 +1,14 @@
-## Interface: 70300
+## Interface: 80000
 ## Title: HandyNotes
 ## Notes: Handy notes for your maps
-## Title-zhTW: |cFF008844[地圖]|r|cFF9966FF[HandyNotes]|r 地圖標記
-## Notes-zhTW: 提供地圖標記功能
+## Title-zhTW: |cff4DFF4D[地圖]|r 地圖標記-主程式
+## Notes-zhTW: Handy Notes |n在地圖上提供方便的標註功能，搭配相關模組一起使用，可以在地圖上顯示寶箱、稀有怪...的位置。|n|cffffd200使用方法：|r從Esc>介面>插件>地圖標記，進行設定。
 ## Author: Xinhuan
-## Version: v1.4.15
+## Version: v1.5.3
 ## DefaultState: enabled
 ## X-Category: Map
 ## X-eMail: xinhuan @ gmail DOT com
-## OptionalDeps: Ace3, TomTom, HereBeDragons-1.0
+## OptionalDeps: Ace3, TomTom, HereBeDragons
 
 ## LoadManagers: AddonLoader
 ## X-LoadOn-Always: delayed
@@ -27,9 +27,9 @@ Libs\AceLocale-3.0\AceLocale-3.0.xml
 Libs\AceGUI-3.0\AceGUI-3.0.xml
 Libs\AceConsole-3.0\AceConsole-3.0.xml
 Libs\AceConfig-3.0\AceConfig-3.0.xml
-Libs\AceHook-3.0\AceHook-3.0.xml
-Libs\HereBeDragons-1.0\HereBeDragons-1.0.lua
-Libs\HereBeDragons-1.0\HereBeDragons-Pins-1.0.lua
+Libs\HereBeDragons\HereBeDragons-2.0.lua
+Libs\HereBeDragons\HereBeDragons-Pins-2.0.lua
+Libs\HereBeDragons\HereBeDragons-Migrate.lua
 #@end-no-lib-strip@
 
 # Locale files
@@ -39,5 +39,6 @@ Locales\Locale-zhTW.lua
 
 # Core files
 HandyNotes.lua
+HandyNotes.xml
 HandyNotes_HandyNotes.lua
 HandyNotes_EditFrame.lua

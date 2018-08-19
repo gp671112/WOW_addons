@@ -378,7 +378,6 @@ L["enabled"] = true
 ------------------------ zhTW ------------------------
 local locale = GetLocale()
 if locale == 'zhTW' then
-L["6.0"] = "6.0"
 L["Add a dropdown menu to bags that allow to hide the sections."] = "增加下拉式選單來隱藏類別"
 L["Add association"] = "新增關聯"
 L["Add more information in tooltips related to items in your bags."] = "顯示物品的額外資訊提示"

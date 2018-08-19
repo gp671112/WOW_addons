@@ -1,7 +1,7 @@
-changeset:   269:5191256b0807
-tag:         v7.3.2.269-release
+changeset:   299:416d41a9d67e
+tag:         v8.0.1.299
 user:        Tercio
-date:        Fri Jan 26 14:28:13 2018 -0200
-summary:     - Added an option to reset the position of the tracker. This should solve problems where users drag the tracker outside the screen space.
+date:        Thu Aug 16 15:33:52 2018 -0300
+summary:     - Show blizzard pins if failed to retrive quest information.
 
 

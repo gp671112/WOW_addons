@@ -50,8 +50,8 @@ L["Hunter Only"] = "Nur für Jäger"
 L["Illidari Gateway"] = "Illidaritor"
 L["Jump to Skyhold"] = "Zur Himmelsfeste springen"
 L["Legend"] = "Legende"
---Translation missing 
--- L["Nutral"] = ""
+--[[Translation missing --]]
+--[[ L["Nutral"] = ""--]] 
 L["Only available after winning the PvP battle"] = "Nur nach Sieg in der PvP-Schlacht verfügbar"
 L["Orange"] = "Orange"
 L["Orb of Translocation"] = "Translokationskugel"
@@ -92,9 +92,5 @@ L["Wind Rider Master"] = "Windreitermeister"
 L["Won't be available once the Battle for Andorhal chain is finished."] = "Nicht mehr verfügbar, wenn die Schlacht um Andorhal abgeschlossen ist."
 L["Yellow"] = "Gelb"
 L["Zeppelin Towers"] = "Zeppelintürme"
-
--- ToC
-L["Description"] = "Beförderungsrouten"
-L["Title"] = "Atlas |r|cFF0099FF[Beförderungsrouten]|r"
 
 end

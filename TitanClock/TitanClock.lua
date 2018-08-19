@@ -188,12 +188,12 @@ function TitanPanelClockButton_GetTime(displaytype, offset)
 			hour = 12;
 		end
 		if (isAM) then
-			return nil, format(TEXT(TIME_TWELVEHOURAM), hour, minute);
+			return nil, format(TIME_TWELVEHOURAM, hour, minute);
 		else
-			return nil, format(TEXT(TIME_TWELVEHOURPM), hour, minute);
+			return nil, format(TIME_TWELVEHOURPM, hour, minute);
 		end
 	else
-		twentyfour = format(TEXT(TIME_TWENTYFOURHOURS), hour, minute);
+		twentyfour = format(TIME_TWENTYFOURHOURS, hour, minute);
 		if (hour < 10) then
 			twentyfour = "0" .. twentyfour
 		end

@@ -48,4 +48,5 @@ L["Syntax:"] = true
 L["Portal"] = true
 L["(No Title)"] = true
 
+L["HandyNotes"] = true
 -- vim: ts=4 noexpandtab

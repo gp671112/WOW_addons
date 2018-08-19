@@ -1,8 +1,8 @@
--- $Id: Data.lua 27 2017-06-29 08:22:51Z arith $
+-- $Id: Data.lua 31 2018-08-09 13:59:41Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -32,7 +32,7 @@ local pairs = _G.pairs
 -- AddOn namespace.
 -- ----------------------------------------------------------------------------
 local FOLDER_NAME, private = ...
-local LibStub = _G.LibStub;
+local LibStub = _G.LibStub
 local BZ = Atlas_GetLocaleLibBabble("LibBabble-SubZone-3.0")
 local BF = Atlas_GetLocaleLibBabble("LibBabble-Faction-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
@@ -43,17 +43,17 @@ local Cata = Atlas:GetModule(private.module_name)
 local db = {}
 Cata.db = db
 
-local BLUE = "|cff6666ff";
-local GREN = "|cff66cc33";
-local GREY = "|cff999999";
-local LBLU = "|cff33cccc";
-local _RED = "|cffcc3333";
-local ORNG = "|cffcc9933";
-local PINK = "|ccfcc33cc";
-local PURP = "|cff9900ff";
-local WHIT = "|cffffffff";
-local YLOW = "|cffcccc33";
-local INDENT = "      ";
+local BLUE = "|cff6666ff"
+local GREN = "|cff66cc33"
+local GREY = "|cff999999"
+local LBLU = "|cff33cccc"
+local _RED = "|cffcc3333"
+local ORNG = "|cffcc9933"
+local PINK = "|ccfcc33cc"
+local PURP = "|cff9900ff"
+local WHIT = "|cffffffff"
+local YLOW = "|cffcccc33"
+local INDENT = "      "
 
 db.AtlasMaps = {
 	BlackrockMountainEnt = {
@@ -84,12 +84,12 @@ db.AtlasMaps = {
 	BaradinHold = {
 		ZoneName = { BZ["Baradin Hold"] },
 		Location = { BZ["Tol Barad"] },
-		DungeonID = "328",
-		DungeonHeroicID = "329",
+		DungeonID = 328,
+		DungeonHeroicID = 329,
 		Acronym = L["BH"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "752",
-		JournalInstanceID = "75",
+		WorldMapID = 282,
+		JournalInstanceID = 75,
 		Module = "Atlas_Cataclysm",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Baradin's Wardens"]..ALC["L-Parenthesis"]..FACTION_ALLIANCE..ALC["R-Parenthesis"] },
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Hellscream's Reach"]..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] },
@@ -106,11 +106,11 @@ db.AtlasMaps = {
 	BlackrockCaverns = {
 		ZoneName = { BZ["Blackrock Mountain"]..ALC["Colon"]..BZ["Blackrock Caverns"] },
 		Location = { BZ["Searing Gorge"]..ALC["Slash"]..BZ["Burning Steppes"] },
-		DungeonID = "303",
-		DungeonHeroicID = "323",
+		DungeonID = 303,
+		DungeonHeroicID = 323,
 		Acronym = L["BRC"],
-		WorldMapID = "753",
-		JournalInstanceID = "66",
+		WorldMapID = 283,
+		JournalInstanceID = 66,
 		Module = "Atlas_Cataclysm",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas_GetBossName("Rom'ogg Bonecrusher", 105), 105 },
@@ -134,12 +134,12 @@ db.AtlasMaps = {
 	BlackwingDescent = {
 		ZoneName = { BZ["Blackrock Mountain"]..ALC["Colon"]..BZ["Blackwing Descent"] },
 		Location = { BZ["Searing Gorge"]..ALC["Slash"]..BZ["Burning Steppes"] },
-		DungeonID = "313",
-		DungeonHeroicID = "314",
+		DungeonID = 313,
+		DungeonHeroicID = 314,
 		Acronym = L["BWD"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "754",
-		JournalInstanceID = "73",
+		WorldMapID = 285,
+		JournalInstanceID = 73,
 		Module = "Atlas_Cataclysm",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas_GetBossName("Magmaw", 170), 170 },
@@ -201,15 +201,16 @@ db.AtlasMaps = {
 		{ GREN.."10') "..L["Andormu <Keepers of Time>"]..ALC["L-Parenthesis"]..ALC["Adult"]..ALC["R-Parenthesis"], 10019 },
 		{ GREN..INDENT..L["Nozari <Keepers of Time>"]..ALC["L-Parenthesis"]..ALC["Adult"]..ALC["R-Parenthesis"] },
 	},
+--    [824] = { mapFile = "DragonSoul", [1] = 410, [2] = 411, [3] = 412, [4] = 413, [5] = 414, [6] = 415, [0] = 409},
 	CoTDragonSoulA = {
 		ZoneName = { BZ["Caverns of Time"]..ALC["Colon"]..BZ["Dragon Soul"]..ALC["MapA"] },
 		Location = { BZ["Tanaris"] },
-		DungeonID = "447",
-		DungeonHeroicID = "448",
+		DungeonID = 447,
+		DungeonHeroicID = 448,
 		Acronym = L["CoT-DS"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "824",
-		JournalInstanceID = "187",
+		WorldMapID = 410,
+		JournalInstanceID = 187,
 		Module = "Atlas_Cataclysm",
 		NextMap = "CoTDragonSoulB",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -245,12 +246,12 @@ db.AtlasMaps = {
 	CoTDragonSoulB = {
 		ZoneName = { BZ["Caverns of Time"]..ALC["Colon"]..BZ["Dragon Soul"]..ALC["MapB"] },
 		Location = { BZ["Tanaris"] },
-		DungeonID = "447",
-		DungeonHeroicID = "448",
+		DungeonID = 447,
+		DungeonHeroicID = 448,
 		Acronym = L["CoT-DS"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "824",
-		JournalInstanceID = "187",
+		WorldMapID = 410,
+		JournalInstanceID = 187,
 		Module = "Atlas_Cataclysm",
 		PrevMap = "CoTDragonSoulA",
 		NextMap = "CoTDragonSoulC",
@@ -285,12 +286,12 @@ db.AtlasMaps = {
 	CoTDragonSoulC = {
 		ZoneName = { BZ["Caverns of Time"]..ALC["Colon"]..BZ["Dragon Soul"]..ALC["MapC"] },
 		Location = { BZ["Tanaris"] },
-		DungeonID = "447",
-		DungeonHeroicID = "448",
+		DungeonID = 447,
+		DungeonHeroicID = 448,
 		Acronym = L["CoT-DS"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "824",
-		JournalInstanceID = "187",
+		WorldMapID = 410,
+		JournalInstanceID = 187,
 		Module = "Atlas_Cataclysm",
 		PrevMap = "CoTDragonSoulB",
 		{ WHIT.." 6) "..Atlas_GetBossName("Warmaster Blackhorn", 332), 332 },
@@ -320,13 +321,14 @@ db.AtlasMaps = {
 		{ "Heroic: Deathwing Guild Run", "ac=6125" },
 		{ "Realm First! Deathwing", "ac=6126" },
 	},
+--    [820] = { mapFile = "EndTime", [1] = 402, [2] = 403, [3] = 404, [4] = 405, [5] = 406, [0] = 401},
 	CoTEndTime = {
 		ZoneName = { BZ["Caverns of Time"]..ALC["Colon"]..BZ["End Time"] },
 		Location = { BZ["Tanaris"] },
-		DungeonID = "435",
+		DungeonID = 435,
 		Acronym = L["CoT-ET"],
-		WorldMapID = "820",
-		JournalInstanceID = "184",
+		WorldMapID = 401,
+		JournalInstanceID = 184,
 		Module = "Atlas_Cataclysm",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Alurmi"] },
@@ -348,10 +350,10 @@ db.AtlasMaps = {
 	CoTHourOfTwilight = {
 		ZoneName = { BZ["Caverns of Time"]..ALC["Colon"]..BZ["Hour of Twilight"] },
 		Location = { BZ["Tanaris"] },
-		DungeonID = "439",
+		DungeonID = 439,
 		Acronym = L["CoT-HoT"],
-		WorldMapID = "819",
-		JournalInstanceID = "186",
+		WorldMapID = 399,
+		JournalInstanceID = 186,
 		Module = "Atlas_Cataclysm",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Thrall"] },
@@ -368,10 +370,10 @@ db.AtlasMaps = {
 	CoTWellOfEternity = {
 		ZoneName = { BZ["Caverns of Time"]..ALC["Colon"]..BZ["Well of Eternity"] },
 		Location = { BZ["Tanaris"] },
-		DungeonID = "437",
+		DungeonID = 437,
 		Acronym = L["CoT-WoE"],
-		WorldMapID = "816",
-		JournalInstanceID = "185",
+		WorldMapID = 398,
+		JournalInstanceID = 185,
 		Module = "Atlas_Cataclysm",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Alurmi"] },
@@ -393,12 +395,12 @@ db.AtlasMaps = {
 	Firelands = {
 		ZoneName = { BZ["Firelands"] },
 		Location = { BZ["Mount Hyjal"] },
-		DungeonID = "361",
-		DungeonHeroicID = "362",
+		DungeonID = 361,
+		DungeonHeroicID = 362,
 		Acronym = L["FL"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "800",
-		JournalInstanceID = "78",
+		WorldMapID = 367,
+		JournalInstanceID = 78,
 		Module = "Atlas_Cataclysm",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Avengers of Hyjal"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -432,11 +434,11 @@ db.AtlasMaps = {
 	GrimBatol = {
 		ZoneName = { BZ["Grim Batol"] },
 		Location = { BZ["Twilight Highlands"] },
-		DungeonID = "304",
-		DungeonHeroicID = "322",
+		DungeonID = 304,
+		DungeonHeroicID = 322,
 		Acronym = L["GB"],
-		WorldMapID = "757",
-		JournalInstanceID = "71",
+		WorldMapID = 293,
+		JournalInstanceID = 71,
 		Module = "Atlas_Cataclysm",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas_GetBossName("General Umbriss", 131), 131 },
@@ -457,11 +459,11 @@ db.AtlasMaps = {
 	HallsOfOrigination = {
 		ZoneName = { BZ["Halls of Origination"] },
 		Location = { BZ["Uldum"] },
-		DungeonID = "305",
-		DungeonHeroicID = "321",
+		DungeonID = 305,
+		DungeonHeroicID = 321,
 		Acronym = L["HoO"],
-		WorldMapID = "759",
-		JournalInstanceID = "70",
+		WorldMapID = 297,
+		JournalInstanceID = 70,
 		Module = "Atlas_Cataclysm",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas_GetBossName("Temple Guardian Anhuur", 124), 124 },
@@ -487,11 +489,11 @@ db.AtlasMaps = {
 	LostCityOfTolvir = {
 		ZoneName = { BZ["Lost City of the Tol'vir"] },
 		Location = { BZ["Uldum"] },
-		DungeonID = "312",
-		DungeonHeroicID = "325",
+		DungeonID = 312,
+		DungeonHeroicID = 325,
 		Acronym = L["LCoT"],
-		WorldMapID = "747",
-		JournalInstanceID = "69",
+		WorldMapID = 277,
+		JournalInstanceID = 69,
 		Module = "Atlas_Cataclysm",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Captain Hadan"] },
@@ -513,11 +515,11 @@ db.AtlasMaps = {
 	ShadowfangKeep = {
 		ZoneName = { BZ["Shadowfang Keep"] },
 		Location = { BZ["Silverpine Forest"] },
-		DungeonID = "8",
-		DungeonHeroicID = "327",
+		DungeonID = 8,
+		DungeonHeroicID = 327,
 		Acronym = L["SFK"],
-		WorldMapID = "764",
-		JournalInstanceID = "64",
+		WorldMapID = 310,
+		JournalInstanceID = 64,
 		Module = "Atlas_Cataclysm",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ BLUE.." B-C) "..ALC["Connection"], 10002 },
@@ -550,12 +552,12 @@ db.AtlasMaps = {
 	TheBastionOfTwilight = {
 		ZoneName = { BZ["The Bastion of Twilight"] },
 		Location = { BZ["Twilight Highlands"] },
-		DungeonID = "315",
-		DungeonHeroicID = "316",
+		DungeonID = 315,
+		DungeonHeroicID = 316,
 		Acronym = L["BoT"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "758",
-		JournalInstanceID = "72",
+		WorldMapID = 294,
+		JournalInstanceID = 72,
 		Module = "Atlas_Cataclysm",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ BLUE.." B) "..ALC["Connection"], 10002 },
@@ -592,8 +594,8 @@ db.AtlasMaps = {
 		MinLevel = "15",
 		PlayerLimit = { 5 },
 		Acronym = L["VC"],
-		WorldMapID = "756",
-		JournalInstanceID = "63",
+		WorldMapID = 291,
+		JournalInstanceID = 63,
 		Module = "Atlas_Cataclysm",
 		NextMap = "TheDeadminesA",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -606,12 +608,12 @@ db.AtlasMaps = {
 	TheDeadminesA = {
 		ZoneName = { BZ["The Deadmines"]..ALC["MapA"] },
 		Location = { BZ["Westfall"] },
-		DungeonID = "6",
-		DungeonHeroicID = "326",
+		DungeonID = 6,
+		DungeonHeroicID = 326,
 		Acronym = L["VC"],
-		WorldMapID = "756",
-		DungeonLevel = "1",
-		JournalInstanceID = "63",
+		WorldMapID = 291,
+		DungeonLevel = 1,
+		JournalInstanceID = 63,
 		Module = "Atlas_Cataclysm",
 		PrevMap = "TheDeadminesEnt",
 		NextMap = "TheDeadminesB",
@@ -643,12 +645,12 @@ db.AtlasMaps = {
 	TheDeadminesB = {
 		ZoneName = { BZ["The Deadmines"]..ALC["MapB"] },
 		Location = { BZ["Westfall"] },
-		DungeonID = "6",
-		DungeonHeroicID = "326",
+		DungeonID = 6,
+		DungeonHeroicID = 326,
 		Acronym = L["VC"],
-		WorldMapID = "756",
-		DungeonLevel = "2",
-		JournalInstanceID = "63",
+		WorldMapID = 292,
+		DungeonLevel = 2,
+		JournalInstanceID = 63,
 		Module = "Atlas_Cataclysm",
 		PrevMap = "TheDeadminesA",
 		{ BLUE.." B) "..ALC["Connection"], 10002 },
@@ -672,11 +674,11 @@ db.AtlasMaps = {
 	TheStonecore = {
 		ZoneName = { BZ["The Stonecore"] },
 		Location = { BZ["Deepholm"] },
-		DungeonID = "307",
-		DungeonHeroicID = "320",
+		DungeonID = 307,
+		DungeonHeroicID = 320,
 		Acronym = L["TSC"],
-		WorldMapID = "768",
-		JournalInstanceID = "67",
+		WorldMapID = 324,
+		JournalInstanceID = 67,
 		Module = "Atlas_Cataclysm",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Earthwarden Yrsa <The Earthen Ring>"] },
@@ -696,11 +698,11 @@ db.AtlasMaps = {
 	TheVortexPinnacle = {
 		ZoneName = { BZ["The Vortex Pinnacle"] },
 		Location = { BZ["Uldum"] },
-		DungeonID = "311",
-		DungeonHeroicID = "319",
+		DungeonID = 311,
+		DungeonHeroicID = 319,
 		Acronym = L["VP"],
-		WorldMapID = "769",
-		JournalInstanceID = "68",
+		WorldMapID = 325,
+		JournalInstanceID = 68,
 		Module = "Atlas_Cataclysm",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Itesh"] },
@@ -720,12 +722,12 @@ db.AtlasMaps = {
 	ThroneOfTheFourWinds = {
 		ZoneName = { BZ["Throne of the Four Winds"] },
 		Location = { BZ["Uldum"] },
-		DungeonID = "317",
-		DungeonHeroicID = "318",
+		DungeonID = 317,
+		DungeonHeroicID = 318,
 		Acronym = L["TWT"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "773",
-		JournalInstanceID = "74",
+		WorldMapID = 328,
+		JournalInstanceID = 74,
 		Module = "Atlas_Cataclysm",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas_GetBossName("The Conclave of Wind", 154), 154 },
@@ -747,11 +749,11 @@ db.AtlasMaps = {
 	ThroneOfTheTides = {
 		ZoneName = { BZ["The Abyssal Maw"]..ALC["Colon"]..BZ["Throne of the Tides"] },
 		Location = { BZ["Abyssal Depths"]..ALC["Slash"]..BZ["The Abyssal Maw"] },
-		DungeonID = "302",
-		DungeonHeroicID = "324",
+		DungeonID = 302,
+		DungeonHeroicID = 324,
 		Acronym = L["ToTT"],
-		WorldMapID = "767",
-		JournalInstanceID = "65",
+		WorldMapID = 322,
+		JournalInstanceID = 65,
 		Module = "Atlas_Cataclysm",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Captain Taylor"]..ALC["L-Parenthesis"]..FACTION_ALLIANCE..ALC["R-Parenthesis"] },
@@ -774,10 +776,10 @@ db.AtlasMaps = {
 	ZulAman = {
 		ZoneName = { BZ["Zul'Aman"] },
 		Location = { BZ["Ghostlands"] },
-		DungeonID = "340",
+		DungeonID = 340,
 		Acronym = L["ZA"],
-		WorldMapID = "781",
-		JournalInstanceID = "77",
+		WorldMapID = 333,
+		JournalInstanceID = 77,
 		Module = "Atlas_Cataclysm",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Vol'jin"] },
@@ -829,66 +831,66 @@ db.AtlasMaps = {
 		{ "Heroic: Zul'Aman Guild Run", "ac=5771" },
 	},	
 	ZulGurub = {
-		ZoneName = { BZ["Zul'Gurub"] };
-		Location = { BZ["Northern Stranglethorn"] };
-		DungeonID = "334";
-		Acronym = L["ZG"];
-		WorldMapID = "793";
-		JournalInstanceID = "76";
-		Module = "Atlas_Cataclysm";
-		{ BLUE.." A) "..ALC["Entrance"], 10001 };
-		{ GREN.." 1') "..ALC["Meeting Stone"], 10002 };
-		{ GREN.." 2') "..L["Briney Boltcutter <Blackwater Financial Interests>"], 10003 };
-		{ GREN.." 3') "..L["Vehini <Assault Provisions>"], 10004 };
-		{ GREN..INDENT..L["Overseer Blingbang"] };
-		{ GREN..INDENT..L["Bloodslayer T'ara <Darkspear Veteran>"] };
-		{ GREN..INDENT..L["Bloodslayer Vaena <Darkspear Veteran>"] };
-		{ GREN..INDENT..L["Bloodslayer Zala <Darkspear Veteran>"] };
-		{ GREN..INDENT..L["Helpful Jungle Monkey"] };
-		{ GREN..INDENT..L["Voodoo Pile"] };
-		{ WHIT.." 1) "..L["Venomancer Mauri <The Snake's Whisper>"], 10005 };
-		{ GREN..INDENT..L["Zanzil's Cauldron of Toxic Torment"] };
-		{ WHIT.." 2) "..L["Tiki Lord Mu'Loa"], 10006 };
-		{ WHIT.." 3) "..L["Gub <Destroyer of Fish>"], 10007 };
-		{ WHIT.." 4) "..L["Venomancer T'Kulu <The Toxic Bite>"], 10008 };
-		{ GREN..INDENT..L["Zanzil's Cauldron of Toxic Torment"] };
-		{ WHIT.." 5) "..Atlas_GetBossName("High PRIEST Venoxis", 175), 175 };
-		{ WHIT.." 6) "..L["Tor-Tun <The Slumberer>"], 10009 };
-		{ WHIT.." 7) "..L["Kaulema the Mover"], 10010 };
-		{ WHIT.." 8) "..L["Berserking Boulder Roller"], 10011 };
-		{ GREN.." 4') "..L["Zanzil's Cauldron of Frostburn Formula"], 10012 };
-		{ WHIT.." 9) "..Atlas_GetBossName("Bloodlord Mandokir", 176), 176 };
-		{ WHIT.."10) "..L["Mor'Lek the Dismantler"], 10013 };
-		{ WHIT.."11) "..L["Witch Doctor Qu'in <Medicine Woman>"], 10014 };
-		{ GREN.." 5') "..L["Zanza the Restless"], 10015 };
-		{ WHIT.."12) "..BZ["The Cache of Madness"], 10016 };
-		{ WHIT..INDENT..Atlas_GetBossName("Gri'lek", 177)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 177 };
-		{ WHIT..INDENT..Atlas_GetBossName("Hazza'rah", 178)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 178 };
-		{ WHIT..INDENT..Atlas_GetBossName("Renataki", 179)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 179 };
-		{ WHIT..INDENT..Atlas_GetBossName("Wushoolay", 180)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 180 };
-		{ WHIT.."13) "..L["Mortaxx <The Tolling Bell>"], 10017 };
-		{ WHIT.."14) "..L["Tiki Lord Zim'wae"], 10018 };
-		{ GREN..INDENT..L["Zanzil's Cauldron of Burning Blood"] };
-		{ WHIT.."15) "..Atlas_GetBossName("High PRIESTess Kilnara", 181)..ALC["L-Parenthesis"]..ALC["Basement"]..ALC["R-Parenthesis"], 181 };
-		{ GREN.." 6') "..L["Zanzil's Cauldron of Frostburn Formula"], 10019 };
-		{ WHIT.."16) "..Atlas_GetBossName("Zanzil", 184), 184 };
-		{ GREN..INDENT..L["Zanzil's Cauldron of Toxic Torment"] };
-		{ GREN..INDENT..L["Zanzil's Cauldron of Frostburn Formula"] };
-		{ GREN..INDENT..L["Zanzil's Cauldron of Burning Blood"] };
-		{ WHIT.."17) "..Atlas_GetBossName("Jin'do the Godbreaker", 185), 185 };
-		{ "" };
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
-		{ "Gurubashi Headhunter", "ac=5744" };
-		{ "It's Not Easy Being Green", "ac=5743" };
-		{ "Ohganot So Fast!", "ac=5762" };
-		{ "Spirit Twister", "ac=5759" };
-		{ "Swift Zulian Tiger", "ac=880" };
-		{ "Swift Razzashi Raptor", "ac=881" };
-		{ "Deadliest Catch", "ac=560" };
-		{ "Zul'Gurub", "ac=688" };
-		{ "Heroic: Zul'Gurub", "ac=5768" };
-		{ "Heroic: Zul'Gurub Guild Run", "ac=5770" };
-	};
+		ZoneName = { BZ["Zul'Gurub"] },
+		Location = { BZ["Northern Stranglethorn"] },
+		DungeonID = 334,
+		Acronym = L["ZG"],
+		WorldMapID = 337,
+		JournalInstanceID = 76,
+		Module = "Atlas_Cataclysm",
+		{ BLUE.." A) "..ALC["Entrance"], 10001 },
+		{ GREN.." 1') "..ALC["Meeting Stone"], 10002 },
+		{ GREN.." 2') "..L["Briney Boltcutter <Blackwater Financial Interests>"], 10003 },
+		{ GREN.." 3') "..L["Vehini <Assault Provisions>"], 10004 },
+		{ GREN..INDENT..L["Overseer Blingbang"] },
+		{ GREN..INDENT..L["Bloodslayer T'ara <Darkspear Veteran>"] },
+		{ GREN..INDENT..L["Bloodslayer Vaena <Darkspear Veteran>"] },
+		{ GREN..INDENT..L["Bloodslayer Zala <Darkspear Veteran>"] },
+		{ GREN..INDENT..L["Helpful Jungle Monkey"] },
+		{ GREN..INDENT..L["Voodoo Pile"] },
+		{ WHIT.." 1) "..L["Venomancer Mauri <The Snake's Whisper>"], 10005 },
+		{ GREN..INDENT..L["Zanzil's Cauldron of Toxic Torment"] },
+		{ WHIT.." 2) "..L["Tiki Lord Mu'Loa"], 10006 },
+		{ WHIT.." 3) "..L["Gub <Destroyer of Fish>"], 10007 },
+		{ WHIT.." 4) "..L["Venomancer T'Kulu <The Toxic Bite>"], 10008 },
+		{ GREN..INDENT..L["Zanzil's Cauldron of Toxic Torment"] },
+		{ WHIT.." 5) "..Atlas_GetBossName("High PRIEST Venoxis", 175), 175 },
+		{ WHIT.." 6) "..L["Tor-Tun <The Slumberer>"], 10009 },
+		{ WHIT.." 7) "..L["Kaulema the Mover"], 10010 },
+		{ WHIT.." 8) "..L["Berserking Boulder Roller"], 10011 },
+		{ GREN.." 4') "..L["Zanzil's Cauldron of Frostburn Formula"], 10012 },
+		{ WHIT.." 9) "..Atlas_GetBossName("Bloodlord Mandokir", 176), 176 },
+		{ WHIT.."10) "..L["Mor'Lek the Dismantler"], 10013 },
+		{ WHIT.."11) "..L["Witch Doctor Qu'in <Medicine Woman>"], 10014 },
+		{ GREN.." 5') "..L["Zanza the Restless"], 10015 },
+		{ WHIT.."12) "..BZ["The Cache of Madness"], 10016 },
+		{ WHIT..INDENT..Atlas_GetBossName("Gri'lek", 177)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 177 },
+		{ WHIT..INDENT..Atlas_GetBossName("Hazza'rah", 178)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 178 },
+		{ WHIT..INDENT..Atlas_GetBossName("Renataki", 179)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 179 },
+		{ WHIT..INDENT..Atlas_GetBossName("Wushoolay", 180)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 180 },
+		{ WHIT.."13) "..L["Mortaxx <The Tolling Bell>"], 10017 },
+		{ WHIT.."14) "..L["Tiki Lord Zim'wae"], 10018 },
+		{ GREN..INDENT..L["Zanzil's Cauldron of Burning Blood"] },
+		{ WHIT.."15) "..Atlas_GetBossName("High PRIESTess Kilnara", 181)..ALC["L-Parenthesis"]..ALC["Basement"]..ALC["R-Parenthesis"], 181 },
+		{ GREN.." 6') "..L["Zanzil's Cauldron of Frostburn Formula"], 10019 },
+		{ WHIT.."16) "..Atlas_GetBossName("Zanzil", 184), 184 },
+		{ GREN..INDENT..L["Zanzil's Cauldron of Toxic Torment"] },
+		{ GREN..INDENT..L["Zanzil's Cauldron of Frostburn Formula"] },
+		{ GREN..INDENT..L["Zanzil's Cauldron of Burning Blood"] },
+		{ WHIT.."17) "..Atlas_GetBossName("Jin'do the Godbreaker", 185), 185 },
+		{ "" },
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ "Gurubashi Headhunter", "ac=5744" },
+		{ "It's Not Easy Being Green", "ac=5743" },
+		{ "Ohganot So Fast!", "ac=5762" },
+		{ "Spirit Twister", "ac=5759" },
+		{ "Swift Zulian Tiger", "ac=880" },
+		{ "Swift Razzashi Raptor", "ac=881" },
+		{ "Deadliest Catch", "ac=560" },
+		{ "Zul'Gurub", "ac=688" },
+		{ "Heroic: Zul'Gurub", "ac=5768" },
+		{ "Heroic: Zul'Gurub Guild Run", "ac=5770" },
+	},
 }
 
 -- Atlas Map NPC Description Data
@@ -1155,32 +1157,32 @@ db.AtlasMaps_NPC_DB = {
 		{ "2'", 10003, 180, 282 },
 	},	
 	ZulGurub = {
-		{ 1, 10005, 164, 236 };
-		{ 2, 10006, 255, 254 };
-		{ 3, 10007, 251, 220 };
-		{ 4, 10008, 305, 272 };
-		{ 5, 175, 323, 293 }; -- High Priest Venoxis
-		{ 6, 10009, 283, 290 };
-		{ 7, 10010, 349, 333 };
-		{ 8, 10011, 379, 397 };
-		{ 9, 176, 414, 445 }; -- Bloodlord Mandokir
-		{ 10, 10013, 371, 289 };
-		{ 11, 10015, 350, 269 };
-		{ 12, 10016, 402, 231 };
-		{ 13, 10017, 429, 151 };
-		{ 14, 10018, 289, 104 };
-		{ 15, 181, 288, 72 }; -- High Priestess Kilnara
-		{ 16, 184, 141, 103 }; -- Zanzil
-		{ 17, 185, 306, 194 }; -- Jin'do the Godbreaker
-		{ "A", 10001, 125, 245 };
-		{ "1'", 10002, 114, 258 };
-		{ "2'", 10003, 138, 254 };
-		{ "3'", 10004, 137, 234 };
-		{ "4'", 10012, 387, 432 };
-		{ "5'", 10014, 383, 268 };
-		{ "6'", 10019, 200, 115 };
-	};
-};
+		{ 1, 10005, 164, 236 },
+		{ 2, 10006, 255, 254 },
+		{ 3, 10007, 251, 220 },
+		{ 4, 10008, 305, 272 },
+		{ 5, 175, 323, 293 }, -- High Priest Venoxis
+		{ 6, 10009, 283, 290 },
+		{ 7, 10010, 349, 333 },
+		{ 8, 10011, 379, 397 },
+		{ 9, 176, 414, 445 }, -- Bloodlord Mandokir
+		{ 10, 10013, 371, 289 },
+		{ 11, 10015, 350, 269 },
+		{ 12, 10016, 402, 231 },
+		{ 13, 10017, 429, 151 },
+		{ 14, 10018, 289, 104 },
+		{ 15, 181, 288, 72 }, -- High Priestess Kilnara
+		{ 16, 184, 141, 103 }, -- Zanzil
+		{ 17, 185, 306, 194 }, -- Jin'do the Godbreaker
+		{ "A", 10001, 125, 245 },
+		{ "1'", 10002, 114, 258 },
+		{ "2'", 10003, 138, 254 },
+		{ "3'", 10004, 137, 234 },
+		{ "4'", 10012, 387, 432 },
+		{ "5'", 10014, 383, 268 },
+		{ "6'", 10019, 200, 115 },
+	},
+}
 
 --[[
 	AssocDefaults{}

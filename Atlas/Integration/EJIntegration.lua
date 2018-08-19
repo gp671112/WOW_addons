@@ -1,10 +1,10 @@
--- $Id: EJIntegration.lua 282 2017-07-06 13:23:08Z arith $
+-- $Id: EJIntegration.lua 308 2018-08-08 17:28:30Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 	Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -45,10 +45,10 @@ local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
 local BB = Atlas_GetLocaleLibBabble("LibBabble-Boss-3.0")
 
 -- Adopted from EncounterJournal
-local EJ_HTYPE_OVERVIEW = 3;
+local EJ_HTYPE_OVERVIEW = 3
 
-function addon:EncounterJournal_CheckForOverview(rootSectionID)
-	return select(3,EJ_GetSectionInfo(rootSectionID)) == EJ_HTYPE_OVERVIEW;
+function addon:EncounterJournal_IsHeaderTypeOverview(headerType)
+	return headerType == EJ_HTYPE_OVERVIEW
 end
 
 -- ------------------------------------------------------------
@@ -171,7 +171,7 @@ function addon:AdventureJournal_EncounterButton_OnClick(instanceID, encounterID,
 end
 
 function addon:AdventureJournal_MapButton_OnClick(frame)
-	local mapID = frame.mapID
+	local uiMapID = frame.mapID
 	local dungeonLevel = frame.dungeonLevel
 
 	HideUIPanel(AtlasFrame)
@@ -182,12 +182,12 @@ function addon:AdventureJournal_MapButton_OnClick(frame)
 		WorldMapFrame.fromJournal = true
 	end
 	ShowUIPanel(WorldMapFrame)
-	if (mapID) then
-		SetMapByID(mapID)
+	if (uiMapID) then
+		WorldMapFrame:SetMapID(uiMapID)
 	end
-	if (dungeonLevel) then
-		SetDungeonMapLevel(dungeonLevel)
-	end
+--	if (dungeonLevel) then
+--		SetDungeonMapLevel(dungeonLevel)
+--	end
 end
 
 local function autoSelect_from_EncounterJournal()

@@ -682,7 +682,7 @@
                     <Anchors>
                         <Anchor point="TOPLEFT">
                             <Offset>
-                                <AbsDimension x="" y=""/>
+                                <AbsDimension x="0" y="0"/>
                             </Offset>
                         </Anchor>
                     </Anchors>
@@ -735,7 +735,7 @@
         </Scripts>
     </Frame>
     
-	<Button name="DugisOnOffButton" parent = "UIParent"  movable="true" enableMouse='true' frameStrata="HIGH"  frameLevel = "1" >
+	<Button name="DugisOnOffButton" parent = "UIParent"  movable="true" enableMouse='true' frameStrata="MEDIUM"  frameLevel = "3" >
 		<Size x="32" y="32"/>
 		<NormalTexture file ="Interface\AddOns\DugisGuideViewerZ\Artwork\iconbutton.tga"/>
 		<HighlightTexture alphaMode ="ADD" file ="Interface\Minimap\UI-Minimap-ZoomButton-Highlight"/>
@@ -1073,7 +1073,7 @@
 					</Anchor>
 					</Anchors>
 				</FontString>
-                <Texture file="" name="$parentImage" parentKey="GuideImage" setAllPoints="true" >
+                <Texture name="$parentImage" parentKey="GuideImage" setAllPoints="true" >
                     <Size>
                         <AbsDimension x="283" y="140"/>
                     </Size>
@@ -1430,23 +1430,6 @@
 	<CheckButton name = "DugisSelectionTemplate" inherits="DugisSelectionPanelTemplate" virtual="true" hidden="false">
 		<HighlightTexture alphaMode ="ADD" file ="Interface\AddOns\DugisGuideViewerZ\Artwork\highlight"/>
 		<CheckedTexture alphaMode ="ADD" file ="Interface\AddOns\DugisGuideViewerZ\Artwork\highlight"/>
-
-		<Scripts>
-			<OnClick>
-				self.tabInfo:Activate()
-                if self.tabInfo.text == "Help" then
-                    TutorialFrameDugisReset()
-                end
-				LuaUtils:PlaySound("igCharacterInfoTab");
-			</OnClick>
-			<OnEnter>
-				GameTooltip:SetOwner(self, "ANCHOR_RIGHT");
-				GameTooltip:SetText(self.tooltip);
-			</OnEnter>
-			<OnLeave>
-				GameTooltip:Hide();
-			</OnLeave>
-		</Scripts>
 	</CheckButton>
 
 	<Button name="TopTabTemplate" virtual="true">
@@ -1651,128 +1634,6 @@
 					</Layer>
 				</Layers>
 				<Frames>
-                    <Frame  parentKey="MacrosWrapper"  setAllPoints="true" visible="true">
-                        <Frames>
-                            <Frame  parentKey="MacroInfo"  setAllPoints="true" visible="true">
-                                <Layers>
-                                    <Layer level="BACKGROUND" visible="true">
-                                        <!--  <Texture parentKey="Background" setAllPoints="true" >
-                                          <Color a="0.0" r="1" g="1" b="0" />
-                                        </Texture>-->
-
-                                        <Texture  parentKey="CategoryIcon"  file ="Interface/Icons/INV_Misc_Orb_05" >
-                                            <Size x="32" y="32" />
-                                            <Anchors>
-                                                <Anchor point="TOPLEFT" x="12" y="-49"/>
-                                            </Anchors>
-                                            <TexCoords left="0" right="1" top="0" bottom="1"/>
-                                        </Texture>
-                                        <FontString parentKey="CategoryName"  inherits="QuestFont_Super_Huge" justifyH="LEFT"  visible="true" text="Macros">
-                                            <Size x="289"/>
-                                            <Anchors>
-                                                <Anchor relativeKey="$parent.CategoryIcon" point="TOPLEFT" x="40" y="-5"/>
-                                            </Anchors>
-                                        </FontString>
-                                    </Layer>
-                                </Layers>
-                             </Frame>
-                            <Button parentKey="BackToCategoriesButton" frameLevel="1000" hidden="true">
-                                <Size x="32" y="32"/>
-                                <Anchors>
-                                    <Anchor relativeKey="$parent.MacroInfo.CategoryIcon" point="TOPLEFT" x="-40" y="-2"/>
-                                </Anchors>
-                                <Scripts>
-                                    <OnClick>
-                                        self:Hide()
-                                        DugisGuideViewer.Modules.Guides.macrolist.frame:Hide()
-                                        macrocategorieswrapper:Show()
-
-                                        local MacroInfo = self:GetParent().MacroInfo
-
-                                        MacroInfo.CategoryIcon:SetTexture("Interface/Icons/INV_Misc_Orb_05")
-                                        MacroInfo.CategoryIcon:ClearAllPoints()
-                                        MacroInfo.CategoryIcon:SetPoint("TOPLEFT", 12, -49)
-                                        MacroInfo.CategoryName:SetText("Macros")
-
-                                        DugisGuideViewer.Modules.Guides.macrolist.scrollBar:Hide()
-
-                                        self:GetParent().MacroEditor:Hide()
-
-                                        DugisGuideViewer.Modules.Guides.textEditor.frame:Hide()
-
-                                        --MacroEditor.MacroInfo.:GetParent()
-                                    </OnClick>
-                                </Scripts>
-                                <NormalTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Up"/>
-                                <PushedTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Down"/>
-                                <DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Disabled"/>
-                                <HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
-                            </Button>
-                            <Frame  parentKey="MacroEditor"  setAllPoints="true" visible="true">
-                                <Layers>
-                                    <Layer level="BACKGROUND" visible="true">
-                                        <!--  <Texture parentKey="Background" setAllPoints="true" >
-                                          <Color a="0.0" r="1" g="1" b="0" />
-                                        </Texture>-->
-                                        <FontString parentKey="MacroName"  maxLines="1"  wordwrap="true" wraponspaces="true"  inherits="GameFontNormal" justifyH="LEFT"  visible="true" text="Macro name">
-                                            <Size x="289"/>
-                                            <Anchors>
-                                                <Anchor point="TOPLEFT" x="384" y="-51"/>
-                                            </Anchors>
-                                        </FontString>
-
-                                        <FontString parentKey="MacroDescription" maxLines="2"  wordwrap="true" wraponspaces="true"  inherits="GameFontNormal" justifyH="LEFT"  visible="true" text="Macro description">
-                                            <Size x="289"/>
-                                            <Anchors>
-                                                <Anchor point="TOPLEFT" x="384" y="-71"/>
-                                            </Anchors>
-                                            <Color r="1" g="1" b="1"/>
-                                        </FontString>
-
-                                        <FontString wordwrap="true" wraponspaces="true"  inherits="GameFontNormal" justifyH="LEFT"  visible="true" text="Macro code:">
-                                            <Size x="289"/>
-                                            <Anchors>
-                                                <Anchor point="TOPLEFT" x="384" y="-111"/>
-                                            </Anchors>
-                                        </FontString>
-                                        <FontString name="MacroCode" maxLines="13" parentKey="MacroCode"  wordwrap="true" wraponspaces="true"  inherits="GameFontNormal" justifyH="LEFT"  visible="true" text="Macro code /run...; end">
-                                            <Size x="289"/>
-                                            <Anchors>
-                                                <Anchor point="TOPLEFT" x="384" y="-131"/>
-                                            </Anchors>
-                                            <Color r="1" g="1" b="1"/>
-                                        </FontString>
-                                    </Layer>
-                                </Layers>
-                                <Frames>
-                                    <Button parentKey = "AddToSlotButton" inherits="UIPanelButtonTemplate" text = "Add this macro to slot" hidden="false">
-                                         <Size>
-                                            <AbsDimension x="155" y="23"/>
-                                        </Size>
-                                        <Anchors>
-                                            <Anchor point="BOTTOMLEFT" relativeTo="MacroCode">
-                                                <Offset>
-                                                    <AbsDimension x="0" y="-40"/>
-                                                </Offset>
-                                            </Anchor>
-                                        </Anchors>
-                                    </Button>
-                                    <Button parentKey = "ResetToDefault" inherits="UIPanelButtonTemplate" text = "Reset to default" hidden="false">
-                                         <Size>
-                                            <AbsDimension x="155" y="23"/>
-                                        </Size>
-                                        <Anchors>
-                                            <Anchor point="BOTTOMLEFT" relativeTo="MacroCode">
-                                                <Offset>
-                                                    <AbsDimension x="160" y="-40"/>
-                                                </Offset>
-                                            </Anchor>
-                                        </Anchors>
-                                    </Button>
-                                </Frames>
-                            </Frame>
-                        </Frames>
-                    </Frame>
 					<Frame name="DGVHomeFrame" >
 						<Size x="350" y="356"/>
 						<Frames>
@@ -2296,61 +2157,10 @@
 			<OnDragStop> self:StopMovingOrSizing(); </OnDragStop>
 		</Scripts>
 	</Frame>
-	<!-- Shazzam XML_1 -->
-	<Frame name="DugisRecordFrame" parent='UIParent' movable ="true" visible="false">
-		<Size x="840" y="400"/>
-		<Anchors>
-            <Anchor point="CENTER" x="0" y="0"/>
-        </Anchors>
-		<Frames>
-			<ScrollFrame name="$parentScrollFrame" parentKey="scroll" inherits="UIPanelScrollFrameCodeTemplate" visible="false">
-				<Size x="840" y="360"/>
-				<Anchors>
-                       <Anchor point="CENTER" />
-                </Anchors>
-				<Frames>
-					<Slider name="$parentScrollBar" inherits="MinimalScrollBarTemplate" parentKey="bar">
-						<Anchors>
-							<Anchor point="TOPRIGHT" x="-10" y="-10"/>
-							<Anchor point="BOTTOMRIGHT" x="-10" y="10"/>
-						</Anchors>
-						<Scripts>
-							<OnLoad>
-								self.trackBG:SetVertexColor(0.2, 0.13, 0.08, 0);
-							</OnLoad>
-						</Scripts>
-					</Slider>
-				</Frames>
-				<ScrollChild >
-					<Frame parentKey="child">
-						<Size x="550" y="360"/>
-						<Anchors>
-							<Anchor point="TOPLEFT" relativeTo="DugisRecordFrame"/>
-						</Anchors>
-					</Frame>
-				</ScrollChild>
-				<Scripts>
-					<OnMouseWheel>
-                        if Dugis_OnMouseWheel then
-                            Dugis_OnMouseWheel(self, delta);
-                        end
-					</OnMouseWheel>
-				</Scripts>
-			</ScrollFrame>
-		</Frames>
-		<Scripts>
-			<OnLoad> tinsert(UISpecialFrames,self:GetName());self:SetClampedToScreen(true); </OnLoad>
-			<OnMouseDown> self:StartMoving();  </OnMouseDown>
-			<OnMouseUp>  self:StopMovingOrSizing(); </OnMouseUp>
-			<OnDragStop> self:StopMovingOrSizing(); </OnDragStop>
-		</Scripts>
-	</Frame>
-
-
 	<Frame name = "DGVCurrentGuideFrame">
 		<Size x="400" y="10000"/>
 	</Frame>
-
+	
 	<Button name="DugisSecureQuestButtonTemplate" inherits="SecureActionButtonTemplate" virtual='true'>
 		<Size x="26" y="26"/>
         <Layers>
@@ -2411,7 +2221,7 @@
         <HighlightTexture file="Interface\Buttons\ButtonHilight-Square" alphaMode="ADD"/>
 	</Button>
 
-    <Button name="DugisTargetButtonTemplate" inherits="SecureActionButtonTemplate" virtual='true' frameStrata="HIGH"  frameLevel = "2" >
+    <Button name="DugisTargetButtonTemplate" inherits="SecureActionButtonTemplate" virtual='true' frameStrata="MEDIUM"  frameLevel = "3" >
         <Layers>
             <Layer level="ARTWORK">
                 <FontString parentKey="HotKey" inherits="NumberFontNormalSmallGray" justifyH="LEFT" text="">
@@ -2424,508 +2234,10 @@
         </Layers>
 	</Button>
 
-	<Button name="DugisSecureQuestButton" inherits="DugisSecureQuestButtonTemplate" parent="UIParent"  frameStrata="HIGH"  frameLevel = "3">
+	<Button name="DugisSecureQuestButton" inherits="DugisSecureQuestButtonTemplate" parent="UIParent"  frameStrata="MEDIUM"  frameLevel = "3">
 	</Button>
 
-    <Script file="TutorialFrameDugis.lua"/>
-    <Frame name="TutorialFrameDugis" toplevel="true" parent="UIParent" movable="true" clampedToScreen="true" enableMouse="true" frameLevel="100" frameStrata="TOOLTIP" hidden="true" propagateKeyboardInput="true">
-        <Animations>
-            <AnimationGroup name="AnimateMouseDugis" looping="BOUNCE">
-                <Alpha target="TutorialFrameDugisMouse" change="1" duration="0.8" smoothing="IN_OUT"/>
-            </AnimationGroup>
-            <AnimationGroup name="AnimateCalloutA" looping="BOUNCE">
-                <Alpha target="TutorialFrameCallOut" change="-0.5" duration="0.8" smoothing="IN_OUT"/>
-            </AnimationGroup>
-        </Animations>
-        <Anchors>
-            <Anchor point="BOTTOM" x="0" y="100"/>
-        </Anchors>
-        <Layers>
-            <Layer level="BACKGROUND">
-                <Texture name="TutorialFrameDugiTexture">
-                    <Color a="1.0" r="1" g="1" b="1" />
-                    <Anchors>
-                        <Anchor point="TOPLEFT" x="5" y="-5" />
-                        <Anchor point="BOTTOMRIGHT" x="-5" y="3" />
-                    </Anchors>
-                </Texture>
-              <!--  <Texture name="FFF" file="Interface\LevelUp\LevelUpTex">
-                    <Anchors>
-                        <Anchor point="TOPLEFT" x="-125" y="100" />
-                        <Anchor point="BOTTOMRIGHT" x="125" />
-                    </Anchors>
-                    <TexCoords left="0.00195313" right="0.6386719" top="0.03710938" bottom="0.23828125" />
-                </Texture>-->
-            </Layer>
-
-            <Layer level="ARTWORK">
-                <Texture name="$parentMouseLeftClick" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="76" y="101"/>
-                    <TexCoords left="0.0019531" right="0.1484375" top="0.4257813" bottom="0.6210938"/>
-                </Texture>
-                <Texture name="$parentMouseRightClick" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="76" y="101"/>
-                    <TexCoords left="0.0019531" right="0.1484375" top="0.6269531" bottom="0.8222656"/>
-                </Texture>
-                <Texture name="$parentMouseBothClick" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="76" y="101"/>
-                    <TexCoords left="0.1542969" right="0.3007813" top="0.2246094" bottom="0.4199219"/>
-                </Texture>
-                <Texture name="$parentMouseWheel" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="76" y="101"/>
-                    <TexCoords left="0.0019531" right="0.1484375" top="0.2246094" bottom="0.4199219"/>
-                </Texture>
-
-                <Texture name="$parentArrowUp" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="68" y="89"/>
-                    <TexCoords left="0.1542969" right="0.2851563" top="0.6269531" bottom="0.7988281"/>
-                </Texture>
-                <Texture name="$parentArrowDown" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="68" y="89"/>
-                    <TexCoords left="0.1542969" right="0.2851563" top="0.7988281" bottom="0.6269531"/>
-                </Texture>
-                <Texture name="$parentArrowRight" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="89" y="68"/>
-                    <TexCoords left="0.3066406" right="0.4785156" top="0.2246094" bottom="0.3554688"/>
-                </Texture>
-                <Texture name="$parentArrowLeft" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="89" y="68"/>
-                    <TexCoords left="0.4785156" right="0.3066406" top="0.2246094" bottom="0.3554688"/>
-                </Texture>
-
-                <Texture name="$parentArrowCurveUpRight" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="66" y="81"/>
-                    <TexCoords left="0.3066406" right="0.4335938" top="0.3613281" bottom="0.5175781"/>
-                </Texture>
-                <Texture name="$parentArrowCurveUpLeft" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="66" y="81"/>
-                    <TexCoords left="0.4335938" right="0.3066406" top="0.3613281" bottom="0.5175781"/>
-                </Texture>
-                <Texture name="$parentArrowCurveDownRight" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="66" y="81"/>
-                    <TexCoords left="0.3066406" right="0.4335938" top="0.5175781" bottom="0.3613281"/>
-                </Texture>
-                <Texture name="$parentArrowCurveDownLeft" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="66" y="81"/>
-                    <TexCoords left="0.4335938" right="0.3066406" top="0.5175781" bottom="0.3613281"/>
-                </Texture>
-
-                <Texture name="$parentArrowCurveRightDown" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="82" y="66"/>
-                    <TexCoords left="0.4843750" right="0.6425781" top="0.2246094" bottom="0.3515625"/>
-                </Texture>
-                <Texture name="$parentArrowCurveRightUp" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="82" y="66"/>
-                    <TexCoords left="0.4843750" right="0.6425781" top="0.3515625" bottom="0.2246094"/>
-                </Texture>
-                <Texture name="$parentArrowCurveLeftDown" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="82" y="66"/>
-                    <TexCoords left="0.6425781" right="0.4843750" top="0.2246094" bottom="0.3515625"/>
-                </Texture>
-                <Texture name="$parentArrowCurveLeftUp" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="82" y="66"/>
-                    <TexCoords left="0.6425781" right="0.4843750" top="0.3515625" bottom="0.2246094"/>
-                </Texture>
-
-                <FontString name="$parentTitle" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP">
-                    <Anchors>
-                        <Anchor point="TOP" x="15" y="-22"/>
-                    </Anchors>
-                    <Color r="1.0" g="0.82" b="0"/>
-                </FontString>
-            </Layer>
-            <Layer level="OVERLAY">
-                <Texture name="TutorialFrameDugisMouse" file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <Size x="76" y="101"/>
-                    <TexCoords left="0.1542969" right="0.3007813" top="0.4257813" bottom="0.6210938"/>
-                    <Color r="1.0" g="1.0" b="1.0" a="0.0"/>
-                </Texture>
-            </Layer>
-        </Layers>
-        <Frames>
-            <Frame name="Tutorial_PointerUp" virtual="true">
-                <Size x="64" y="64" />
-                <Anchors>
-                    <Anchor point="TOP" y="0" />
-                </Anchors>
-                <Layers>
-                    <Layer level="BACKGROUND">
-                        <Texture atlas="NPE_ArrowUp" />
-                    </Layer>
-                    <Layer level="OVERLAY">
-                        <Texture atlas="NPE_ArrowUpGlow" alpha="0.75" alphaMode="ADD" />
-                    </Layer>
-                </Layers>
-                <Animations>
-                    <AnimationGroup parentKey="Anim" ignoreFramerateThrottle="1">
-                        <Translation offsetY="50" duration="1" order="1" smoothing="OUT"/>
-                        <Alpha fromAlpha="0" toAlpha="1" duration="0.1" order="1"/>
-                        <Alpha fromAlpha="1" toAlpha="0" duration="0.9" startDelay="0.1" order="1"/>
-                        <Scripts>
-                            <OnFinished>
-                                self:Play();
-                            </OnFinished>
-                        </Scripts>
-                    </AnimationGroup>
-                </Animations>
-            </Frame>
-            <Frame name="Tutorial_PointerLeft" virtual="true">
-                <Size x="64" y="64" />
-                <Anchors>
-                    <Anchor point="LEFT" x="0" />
-                </Anchors>
-                <Layers>
-                    <Layer level="BACKGROUND">
-                        <Texture atlas="NPE_ArrowLeft" />
-                    </Layer>
-                    <Layer level="OVERLAY">
-                        <Texture atlas="NPE_ArrowLeftGlow" alpha="0.75" alphaMode="ADD" />
-                    </Layer>
-                </Layers>
-                <Animations>
-                    <AnimationGroup parentKey="Anim" ignoreFramerateThrottle="1">
-                        <Translation offsetX="-50" duration="1" order="1" smoothing="OUT"/>
-                        <Alpha fromAlpha="0" toAlpha="1" duration="0.1" order="1"/>
-                        <Alpha fromAlpha="1" toAlpha="0" duration="0.9" startDelay="0.1" order="1"/>
-                        <Scripts>
-                            <OnFinished>
-                                self:Play();
-                            </OnFinished>
-                        </Scripts>
-                    </AnimationGroup>
-                </Animations>
-            </Frame>
-            <Frame name="Tutorial_PointerDown" virtual="true">
-                <Size x="64" y="64" />
-                <Anchors>
-                    <Anchor point="BOTTOM" y="0" />
-                </Anchors>
-                <Layers>
-                    <Layer level="BACKGROUND">
-                        <Texture atlas="NPE_ArrowDown" />
-                    </Layer>
-                    <Layer level="OVERLAY">
-                        <Texture atlas="NPE_ArrowDownGlow" alpha="0.75" alphaMode="ADD" />
-                    </Layer>
-                </Layers>
-                <Animations>
-                    <AnimationGroup parentKey="Anim" ignoreFramerateThrottle="1">
-                        <Translation offsetY="-50" duration="1" order="1" smoothing="OUT"/>
-                        <Alpha fromAlpha="0" toAlpha="1" duration="0.1" order="1"/>
-                        <Alpha fromAlpha="1" toAlpha="0" duration="0.9" startDelay="0.1" order="1"/>
-                        <Scripts>
-                            <OnFinished>
-                                self:Play();
-                            </OnFinished>
-                        </Scripts>
-                    </AnimationGroup>
-                </Animations>
-            </Frame>
-            <Frame name="Tutorial_PointerRight" virtual="true">
-                <Size x="64" y="64" />
-                <Anchors>
-                    <Anchor point="RIGHT" y="0" />
-                </Anchors>
-                <Layers>
-                    <Layer level="BACKGROUND">
-                        <Texture atlas="NPE_ArrowRight" />
-                    </Layer>
-                    <Layer level="OVERLAY">
-                        <Texture atlas="NPE_ArrowRightGlow" alpha="0.75" alphaMode="ADD" />
-                    </Layer>
-                </Layers>
-                <Animations>
-                    <AnimationGroup parentKey="Anim" ignoreFramerateThrottle="1">
-                        <Translation offsetX="50" duration="1" order="1" smoothing="OUT"/>
-                        <Alpha fromAlpha="0" toAlpha="1" duration="0.1" order="1"/>
-                        <Alpha fromAlpha="1" toAlpha="0" duration="0.9" startDelay="0.1" order="1"/>
-                        <Scripts>
-                            <OnFinished>
-                                self:Play();
-                            </OnFinished>
-                        </Scripts>
-                    </AnimationGroup>
-                </Animations>
-            </Frame>
-            <Frame parentKey="Content" name="$parentContent" clampedToScreen="true" inherits="GlowBoxTemplate" >
-                <Size x="240" y="100" />
-                <Layers>
-                    <Layer level="ARTWORK">
-                        <FontString parentKey="Text" setAllPoints="true" inherits="GameFontNormalLarge" justifyH="LEFT">
-                            <Size x="200" />
-                            <Anchors>
-                                <Anchor point="CENTER" />
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-            </Frame>
-
-
-            <Frame parentKey="Glow">
-                <Anchors>
-                    <Anchor point="TOPLEFT" relativeKey="$parent" x="-13" y="9"/>
-                    <Anchor point="BOTTOMRIGHT" relativeKey="$parent" x="13" y="-11"/>
-                </Anchors>
-                <Animations>
-                    <AnimationGroup looping="BOUNCE">
-                        <Alpha fromAlpha="0.25" toAlpha="1" duration="0.5" />
-                        <Scripts>
-                            <OnLoad>
-                                self:Play();
-                            </OnLoad>
-                        </Scripts>
-                    </AnimationGroup>
-                </Animations>
-                <Backdrop edgeFile="Interface\TutorialFrame\UI-TutorialFrame-CalloutGlow" alphaMode="ADD">
-                    <EdgeSize val="25"/>
-                </Backdrop>
-            </Frame>
-            <Frame parentKey="Glow1">
-                <Anchors>
-                    <Anchor point="TOPLEFT" relativeKey="$parent" x="-13" y="9"/>
-                    <Anchor point="BOTTOMRIGHT" relativeKey="$parent" x="13" y="-11"/>
-                </Anchors>
-                <Animations>
-                    <AnimationGroup looping="BOUNCE">
-                        <Alpha fromAlpha="0" toAlpha="0.2" duration="0.5" />
-                        <Scripts>
-                            <OnLoad>
-                                self:Play();
-                            </OnLoad>
-                        </Scripts>
-                    </AnimationGroup>
-                </Animations>
-                <Backdrop edgeFile="Interface\TutorialFrame\UI-TutorialFrame-CalloutGlow" alphaMode="ADD">
-                    <EdgeSize val="35"/>
-                </Backdrop>
-            </Frame>
-
-
-
-            <!--
-
-            <Frame parentKey="ArrowA_UP1" hidden="true" inherits="Tutorial_PointerUp" frameLevel="100"/>
-            <Frame parentKey="ArrowA_UP2" hidden="true" inherits="Tutorial_PointerUp" frameLevel="100"/>
-            <Frame parentKey="ArrowA_DOWN1" hidden="true" inherits="Tutorial_PointerDown" frameLevel="100"/>
-            <Frame parentKey="ArrowA_DOWN2" hidden="true" inherits="Tutorial_PointerDown" frameLevel="100"/>
-            <Frame parentKey="ArrowA_LEFT1" hidden="true" inherits="Tutorial_PointerLeft" frameLevel="100"/>
-            <Frame parentKey="ArrowA_LEFT2" hidden="true" inherits="Tutorial_PointerLeft" frameLevel="100"/>
-            <Frame parentKey="ArrowA_RIGHT1" hidden="true" inherits="Tutorial_PointerRight" frameLevel="100"/>
-            <Frame parentKey="ArrowA_RIGHT2" hidden="true" inherits="Tutorial_PointerRight" frameLevel="100"/>
-                    -->
-
-
-            <Frame name="TutorialATextBorder" frameStrata="TOOLTIP" hidden="true">
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <Texture name="tomtestA" setAllPoints="true">
-                            <Color r="1.0" g="0" b="0"/>
-                        </Texture>
-                    </Layer>
-                </Layers>
-            </Frame>
-            <Frame name="$parentCallOut" frameStrata="TOOLTIP" frameLevel="99" hidden="true">
-                <Animations>
-                    <AnimationGroup looping="BOUNCE">
-                        <Alpha name="$parentPulser" change="-.7" duration=".75"/>
-                    </AnimationGroup>
-                </Animations>
-                <Backdrop edgeFile="Interface\TutorialFrame\UI-TutorialFrame-CalloutGlow" alphaMode="ADD">
-                    <EdgeSize>
-                        <AbsValue val="16"/>
-                    </EdgeSize>
-                </Backdrop>
-            </Frame>
-
-            <Button name="$parentOkayButton">
-                <Size>
-                    <AbsDimension x="108" y="22"/>
-                </Size>
-                <Anchors>
-                    <Anchor point="BOTTOMRIGHT">
-                        <Offset>
-                            <AbsDimension x="-9" y="13"/>
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-                <Scripts>
-                    <OnClick function="TutorialFrameDugis_Hide"/>
-                </Scripts>
-                <NormalTexture inherits="DialogButtonNormalTexture"/>
-                <PushedTexture inherits="DialogButtonPushedTexture"/>
-                <HighlightTexture inherits="DialogButtonHighlightTexture"/>
-                <ButtonText text="CLOSE"/>
-                <NormalFont style="GameFontNormal"/>
-                <HighlightFont style="GameFontHighlight"/>
-            </Button>
-
-             <Button name="$parentOkayButton" parentKey="YesButton">
-                <Size>
-                    <AbsDimension x="58" y="22"/>
-                </Size>
-                <Anchors>
-                    <Anchor point="BOTTOMRIGHT">
-                        <Offset>
-                            <AbsDimension x="-179" y="23"/>
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-                <Scripts>
-                    <OnClick>
-                        TutorialFrameDugis_NewTutorial(2, true)
-                    </OnClick>
-                </Scripts>
-                <NormalTexture inherits="DialogButtonNormalTexture"/>
-                <PushedTexture inherits="DialogButtonPushedTexture"/>
-                <HighlightTexture inherits="DialogButtonHighlightTexture"/>
-                <ButtonText text="Yes"/>
-                <NormalFont style="GameFontNormal"/>
-                <HighlightFont style="GameFontHighlight"/>
-            </Button>
-             <Button name="$parentOkayButton" parentKey="NoButton">
-                <Size>
-                    <AbsDimension x="58" y="22"/>
-                </Size>
-                <Anchors>
-                    <Anchor point="BOTTOMRIGHT">
-                        <Offset>
-                            <AbsDimension x="-110" y="23"/>
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-                <Scripts>
-                    <OnClick>
-                        TutorialFrameDugis_Hide(true)
-                    </OnClick>
-                </Scripts>
-                <NormalTexture inherits="DialogButtonNormalTexture"/>
-                <PushedTexture inherits="DialogButtonPushedTexture"/>
-                <HighlightTexture inherits="DialogButtonHighlightTexture"/>
-                <ButtonText text="No"/>
-                <NormalFont style="GameFontNormal"/>
-                <HighlightFont style="GameFontHighlight"/>
-            </Button>
-            <Button name="$parentPrevButton">
-                <Size x="26" y="26"/>
-                <Anchors>
-                    <Anchor point="BOTTOMLEFT" x="30" y="10"/>
-                </Anchors>
-                <Layers>
-                    <Layer level="BACKGROUND">
-                        <FontString inherits="GameFontHighlightSmall" justifyH="LEFT" text="PREV">
-                            <Size x="60" y="10"/>
-                            <Anchors>
-                                <Anchor point="LEFT" relativePoint="RIGHT"/>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-                <Scripts>
-                    <OnClick>
-                        TutorialFrameDugisPrevButton_OnClick(self);
-                    </OnClick>
-                </Scripts>
-                <NormalTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Up"/>
-                <PushedTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Down"/>
-                <DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-PrevPage-Disabled"/>
-                <HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
-            </Button>
-            <Button name="$parentNextButton">
-                <Size x="26" y="26"/>
-                <Anchors>
-                    <Anchor point="BOTTOMRIGHT" x="-132" y="10"/>
-                </Anchors>
-                <Layers>
-                    <Layer level="BACKGROUND">
-                        <FontString inherits="GameFontHighlightSmall" justifyH="RIGHT" text="NEXT">
-                            <Size x="60" y="10"/>
-                            <Anchors>
-                                <Anchor point="RIGHT" relativePoint="LEFT"/>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-                <Scripts>
-                    <OnClick>
-                        TutorialFrameDugisNextButton_OnClick(self);
-                    </OnClick>
-                </Scripts>
-                <NormalTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Up"/>
-                <PushedTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Down"/>
-                <DisabledTexture file="Interface\Buttons\UI-SpellbookIcon-NextPage-Disabled"/>
-                <HighlightTexture file="Interface\Buttons\UI-Common-MouseHilight" alphaMode="ADD"/>
-            </Button>
-            <PlayerModel name="TutorialANPCModel" hidden="true">
-                <Size x="300" y="220"/>
-                <Anchors>
-                    <Anchor point="TOP" x="0" y="-35"/>
-                </Anchors>
-                <Scripts>
-                    <OnLoad>
-                        self:SetPortraitZoom(0.6);
-                        self:SetRotation(0);
-                        self:RegisterEvent("DISPLAY_SIZE_CHANGED");
-                    </OnLoad>
-                    <OnEvent>
-                        self:RefreshUnit();
-                    </OnEvent>
-                </Scripts>
-            </PlayerModel>
-        </Frames>
-        <Scripts>
-            <OnLoad function="TutorialFrameDugis_OnLoad"/>
-            <OnEvent function="TutorialFrameDugis_OnEvent"/>
-            <OnShow function="TutorialFrameDugis_OnShow"/>
-            <OnHide function="TutorialFrameDugis_OnHide"/>
-            <OnKeyDown function="TutorialFrameDugis_OnKeyDown"/>
-            <OnMouseDown function="TutorialFrameDugis_OnMouseDown"/>
-        </Scripts>
-    </Frame>
-    <Button name="TutorialFrameDugisAlertButton" parent="UIParent" frameStrata="DIALOG" hidden="true" >
-        <Size x="116" y="71"/>
-        <Anchors>
-            <Anchor point="BOTTOM" x="0" y="0"/>
-        </Anchors>
-        <Scripts>
-            <OnLoad>
-                self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
-            </OnLoad>
-            <OnClick>
-                TutorialFrameDugis_AlertButton_OnClick(self);
-            </OnClick>
-        </Scripts>
-        <NormalTexture file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-            <TexCoords left="0.7167969" right="0.9414063" top="0.0019531" bottom="0.1386719"/>
-        </NormalTexture>
-        <HighlightTexture file="Interface\TutorialFrame\UI-TUTORIAL-FRAME" alphaMode="ADD">
-            <Size x="51" y="50"/>
-            <Anchors>
-                <Anchor point="CENTER" x="2" y="4"/>
-            </Anchors>
-            <TexCoords left="0.7558594" right="0.853515625" top="0.2246094" bottom="0.3203125"/>
-        </HighlightTexture>
-    </Button>
-    <Frame name="TutorialFrameDugisAlertButtonBadge" frameStrata="TOOLTIP" hidden="true">
-        <Size x="53" y="52"/>
-        <Anchors>
-            <Anchor point="CENTER" relativeTo="TutorialFrameDugisAlertButton" x="30" y="20"/>
-        </Anchors>
-        <Layers>
-            <Layer level="OVERLAY">
-                <Texture file="Interface\TutorialFrame\UI-TUTORIAL-FRAME">
-                    <TexCoords left="0.6484375" right="0.7500000" top="0.2246094" bottom="0.3242188"/>
-                </Texture>
-                <FontString name="TutorialFrameDugisAlertButtonBadgeText" inherits="GameFontNormal" justifyH="CENTER" justifyV="MIDDLE" hidden="true">
-                    <Anchors>
-                        <Anchor point="CENTER" relativeTo="TutorialFrameDugisAlertButtonBadge" x="0" y="1"/>
-                    </Anchors>
-                    <Color r="1.0" g="1.0" b="1.0"/>
-                </FontString>
-            </Layer>
-        </Layers>
-    </Frame>
-    <StatusBar name="DugisProgressBarTemplate"   virtual="true">
+   <StatusBar name="DugisProgressBarTemplate"   virtual="true">
         <Size x="122" y="10"/>
         <Anchors>
         <Anchor point="TOPLEFT" x="102" y="19"/>
@@ -3000,8 +2312,8 @@
 		<HighlightTexture file="Interface\PaperDollInfoFrame\UI-GearManager-FlyoutButton"/>
 	</Button>
     
-    <!--  SimpleHTML with improved hovering.  -->
-    <SimpleHTML name="InteractiveSimpleHTML"  enableMouse='false' inherits="SimpleHTML"  virtual="true">
+    <!--  SimpleHTML with improved hovering.  inherits="SimpleHTML"  Cannot inherit from SimpleHTML anymore -->
+    <SimpleHTML name="InteractiveSimpleHTML"  enableMouse='false'  virtual="true">
         <Scripts>
             <OnLoad>
                 local parent = self:GetParent()
@@ -3097,7 +2409,49 @@
                 self.iconsFrame:Show()
             </OnLoad>
         </Scripts>
-    </SimpleHTML>    
-    
-    
+    </SimpleHTML>  
+	<Frame Name="HeaderMenuTemplate" hidden="true" virtual="true">
+		<Size x="10" y="10"/>
+		<Anchors>
+			<Anchor point="TOPRIGHT"/>
+		</Anchors>
+		<Frames>
+			<Button parentKey="MinimizeButton">
+				<Size x="16" y="16"/>
+				<Anchors>
+					<Anchor point="TOPRIGHT" x="0" y="-4"/>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DugisGuideViewer.SmallFrame.collapsed = not DugisGuideViewer.SmallFrame.collapsed
+						PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON);
+						if 	DugisGuideViewer.SmallFrame.collapsed then
+							ObjectiveTracker_Collapse();
+							DugisSmallFrame:Hide()
+						else
+							ObjectiveTracker_Expand();
+							DugisSmallFrame:Show()
+						end 
+					</OnClick>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\UI-Panel-QuestHideButton">
+					<TexCoords left="0" right="0.5" top="0.5" bottom="1"/>
+				</NormalTexture>
+				<PushedTexture file="Interface\Buttons\UI-Panel-QuestHideButton">
+					<TexCoords left="0.5" right="1" top="0.5" bottom="1"/>
+				</PushedTexture>
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD" />
+				<DisabledTexture file="Interface\Buttons\UI-Panel-QuestHideButton-disabled" />
+			</Button>
+		</Frames>
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString parentKey="Title" inherits="GameFontNormal" hidden="false" text="OBJECTIVES_TRACKER_LABEL">
+					<Anchors>
+						<Anchor point="RIGHT" relativeKey="$parent.MinimizeButton" relativePoint="LEFT" x="-3" y="1"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Frame>
 </Ui>

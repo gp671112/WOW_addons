@@ -1,10 +1,10 @@
--- $Id: Atlas_ClassicWoW-enUS.lua 18 2017-01-16 10:57:05Z arith $
+-- $Id: Atlas_ClassicWoW-enUS.lua 31 2018-08-09 13:55:36Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -191,10 +191,6 @@ L["Weegli Blastfuse"] = "Weegli Blastfuse"
 L["Yuka Screwspigot <Engineering Supplies>"] = "Yuka Screwspigot <Engineering Supplies>"
 L["Zeya"] = "Zeya"
 L["ZF"] = "ZF"
-
--- ToC
-L["Description"] = "Classic WoW Instances' Maps"
-L["Title"] = "Atlas |r|cFF0099FF[Classic WoW]|r"
 
 --************************************************
 -- Zone Names, Acronyms, and Common Strings

@@ -1,3 +1,20 @@
+--[[
+Copyright 2012-2018 João Cardoso
+PetTracker is distributed under the terms of the GNU General Public License (Version 3).
+As a special exception, the copyright holders of this addon do not give permission to
+redistribute and/or modify it.
+
+This addon is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
+
+This file is part of PetTracker.
+--]]
+
 local Addon = PetTracker
 local Record = Addon:NewClass('Button', 'Record', 'PetTrackerRecord')
 local L = Addon.Locals
@@ -22,7 +39,7 @@ function Record:Display(entry)
 			local texture = select(9, C_PetJournal.GetPetInfoByPetID(pet.id))
 			button:SetNormalTexture(texture or 'Interface/Icons/INV_Misc_QuestionMark')
 			button.id = texture and pet.id
-			
+
 			local alive = pet.health > 0
 			button.Health:SetWidth(pet.health * 36)
 			button.Health:SetShown(alive)
@@ -37,7 +54,7 @@ function Record:Unpack(entry)
 	local winner, date, petData = entry:match('^(%d)(%w%w%w)(.+)$')
 
 	self.won = tonumber(winner) == LE_BATTLE_PET_ALLY
-	self.day, self.month, self.year = Addon:UnpackDate(tonumber(date, 16))
+	self.day, self.month, self.year = Addon.UnpackDate(tonumber(date, 16))
 	self.pets = {}
 
 	for health, spell1, spell2, spell3, id in petData:gmatch(PetMatch) do

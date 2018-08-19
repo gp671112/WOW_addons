@@ -1,8 +1,8 @@
--- $Id: Data.lua 27 2017-07-06 14:20:55Z arith $
+-- $Id: Data.lua 31 2018-08-09 13:55:36Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -44,17 +44,17 @@ local addon = Atlas:GetModule(private.module_name)
 local db = {}
 addon.db = db
 
-local BLUE = "|cff6666ff";
-local GREN = "|cff66cc33";
-local GREY = "|cff999999";
-local LBLU = "|cff33cccc";
-local _RED = "|cffcc3333";
-local ORNG = "|cffcc9933";
-local PINK = "|ccfcc33cc";
-local PURP = "|cff9900ff";
-local WHIT = "|cffffffff";
-local YLOW = "|cffcccc33";
-local INDENT = "      ";
+local BLUE = "|cff6666ff"
+local GREN = "|cff66cc33"
+local GREY = "|cff999999"
+local LBLU = "|cff33cccc"
+local _RED = "|cffcc3333"
+local ORNG = "|cffcc9933"
+local PINK = "|ccfcc33cc"
+local PURP = "|cff9900ff"
+local WHIT = "|cffffffff"
+local YLOW = "|cffcccc33"
+local INDENT = "      "
 
 db.AtlasMaps = {
 --************************************************
@@ -92,8 +92,8 @@ db.AtlasMaps = {
 		MinLevel = "47",
 		PlayerLimit = { 5 },
 		Acronym = L["BRD"],
-		WorldMapID = "704",
-		JournalInstanceID = "228",
+		WorldMapID = 242,
+		JournalInstanceID = 228,
 		Module = "Atlas_ClassicWoW",
 		{ ORNG..ALC["Key"]..ALC["Colon"]..ALIL["Relic Coffer Key"] },
 		{ ORNG..ALC["Key"]..ALC["Colon"]..ALIL["Dark Keeper Key"] },
@@ -169,10 +169,10 @@ db.AtlasMaps = {
 	BlackwingLair = {
 		ZoneName = { BZ["Blackrock Mountain"]..ALC["Colon"]..BZ["Blackwing Lair"] },
 		Location = { BZ["Searing Gorge"]..ALC["Slash"]..BZ["Burning Steppes"] },
-		DungeonID = "50",
+		DungeonID = 50,
 		PlayerLimit = { 40 },
-		WorldMapID = "755",
-		JournalInstanceID = "742",
+		WorldMapID = 287,
+		JournalInstanceID = 742,
 		Acronym = L["BWL"],
 		Module = "Atlas_ClassicWoW",
 		{ ORNG..ALC["Attunement Required"] },
@@ -193,10 +193,10 @@ db.AtlasMaps = {
 	GnomereganEnt = {
 		ZoneName = { BZ["Gnomeregan"]..ALC["L-Parenthesis"]..ALC["Entrance"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Dun Morogh"] },
-		DungeonID = "14",
+		DungeonID = 14,
 		Acronym = L["Gnome"],
-		WorldMapID = "691",
-		JournalInstanceID = "231",
+		WorldMapID = 226,
+		JournalInstanceID = 231,
 		Module = "Atlas_ClassicWoW",
 		NextMap = "Gnomeregan",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -210,10 +210,10 @@ db.AtlasMaps = {
 	Gnomeregan = {
 		ZoneName = { BZ["Gnomeregan"] },
 		Location = { BZ["Dun Morogh"] },
-		DungeonID = "14",
+		DungeonID = 14,
 		Acronym = L["Gnome"],
-		WorldMapID = "691",
-		JournalInstanceID = "231",
+		WorldMapID = 226,
+		JournalInstanceID = 231,
 		Module = "Atlas_ClassicWoW",
 		PrevMap = "GnomereganEnt",
 		{ BLUE.." A) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Front"]..ALC["R-Parenthesis"], 10001 },
@@ -238,10 +238,10 @@ db.AtlasMaps = {
 	LowerBlackrockSpire = {
 		ZoneName = { BZ["Blackrock Mountain"]..ALC["Colon"]..BZ["Lower Blackrock Spire"] },
 		Location = { BZ["Searing Gorge"]..ALC["Slash"]..BZ["Burning Steppes"] },
-		DungeonID = "32",
+		DungeonID = 32,
 		Acronym = L["LBRS"],
-		WorldMapID = "721",
-		JournalInstanceID = "229",
+		WorldMapID = 906,
+		JournalInstanceID = 229,
 		Module = "Atlas_ClassicWoW",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ BLUE.." B) "..BZ["Blackrock Mountain"], 10002 },
@@ -271,11 +271,11 @@ db.AtlasMaps = {
 	MoltenCore = {
 		ZoneName = { BZ["Blackrock Mountain"]..ALC["Colon"]..BZ["The Molten Core"] },
 		Location = { BZ["Searing Gorge"]..ALC["Slash"]..BZ["Burning Steppes"] },
-		DungeonID = "48",
+		DungeonID = 48,
 		Acronym = L["MC"],
 		PlayerLimit = { 40 },
-		WorldMapID = "696",
-		JournalInstanceID = "741",
+		WorldMapID = 232,
+		JournalInstanceID = 741,
 		Module = "Atlas_ClassicWoW",
 		{ ORNG..ALC["Attunement Required"] },
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Hydraxian Waterlords"] },
@@ -310,11 +310,11 @@ db.AtlasMaps = {
 	ScarletHalls = {
 		ZoneName = { BZ["Scarlet Monastery"]..ALC["Colon"]..BZ["Scarlet Halls"] },
 		Location = { BZ["Tirisfal Glades"] },
-		DungeonID = "163",
-		DungeonHeroicID = "473",
+		DungeonID = 163,
+		DungeonHeroicID = 473,
 		Acronym = L["Halls"],
-		WorldMapID = "874",
-		JournalInstanceID = "311",
+		WorldMapID = 435,
+		JournalInstanceID = 311,
 		Module = "Atlas_ClassicWoW",
 		PrevMap = "ScarletMonasteryEnt",
 		NextMap = "ScarletMonastery",
@@ -333,11 +333,11 @@ db.AtlasMaps = {
 	ScarletMonastery = {
 		ZoneName = { BZ["Scarlet Monastery"]..ALC["Colon"]..BZ["Scarlet Monastery"] },
 		Location = { BZ["Tirisfal Glades"] },
-		DungeonID = "164",
-		DungeonHeroicID = "474",
+		DungeonID = 164,
+		DungeonHeroicID = 474,
 		Acronym = L["SM"],
-		WorldMapID = "874",
-		JournalInstanceID = "316",
+		WorldMapID = 436,
+		JournalInstanceID = 316,
 		Module = "Atlas_ClassicWoW",
 		PrevMap = "ScarletHalls",
 		NextMap = "ScarletMonasteryEnt",
@@ -354,11 +354,11 @@ db.AtlasMaps = {
 	Scholomance = {
 		ZoneName = { BZ["Scholomance"] },
 		Location = { BZ["Western Plaguelands"] },
-		DungeonID = "2",
-		DungeonHeroicID = "472",
+		DungeonID = 2,
+		DungeonHeroicID = 472,
 		Acronym = L["Scholo"],
-		WorldMapID = "898",
-		JournalInstanceID = "246",
+		WorldMapID = 476,
+		JournalInstanceID = 246,
 		Module = "Atlas_ClassicWoW",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ BLUE.." B-D) "..ALC["Connection"], 10002 },
@@ -382,11 +382,11 @@ db.AtlasMaps = {
 	ShadowfangKeep = {
 		ZoneName = { BZ["Shadowfang Keep"] },
 		Location = { BZ["Silverpine Forest"] },
-		DungeonID = "8",
-		DungeonHeroicID = "327",
+		DungeonID = 8,
+		DungeonHeroicID = 327,
 		Acronym = L["SFK"],
-		WorldMapID = "764",
-		JournalInstanceID = "64",
+		WorldMapID = 310,
+		JournalInstanceID = 64,
 		Module = "Atlas_ClassicWoW",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ BLUE.." B-C) "..ALC["Connection"], 10002 },
@@ -419,11 +419,11 @@ db.AtlasMaps = {
 	StratholmeCrusader = {
 		ZoneName = { BZ["Stratholme"]..ALC["Hyphen"]..BZ["Crusaders' Square"] },
 		Location = { BZ["Eastern Plaguelands"] },
-		DungeonID = "40",
+		DungeonID = 40,
 		Acronym = L["Strat"],
-		WorldMapID = "765",
-		DungeonLevel = "1",
-		JournalInstanceID = "236",
+		WorldMapID = 317,
+		DungeonLevel = 1,
+		JournalInstanceID = 236,
 		Module = "Atlas_ClassicWoW",
 		NextMap = "StratholmeGauntlet",
 		{ BLUE.." A) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Front"]..ALC["R-Parenthesis"], 10001 },
@@ -451,11 +451,11 @@ db.AtlasMaps = {
 	StratholmeGauntlet = {
 		ZoneName = { BZ["Stratholme"]..ALC["Hyphen"]..BZ["The Gauntlet"] },
 		Location = { BZ["Eastern Plaguelands"] },
-		DungeonID = "274",
+		DungeonID = 274,
 		Acronym = L["Strat"],
-		WorldMapID = "765",
-		DungeonLevel = "2",
-		JournalInstanceID = "236",
+		WorldMapID = 318,
+		DungeonLevel = 2,
+		JournalInstanceID = 236,
 		Module = "Atlas_ClassicWoW",
 		PrevMap = "StratholmeCrusader",
 		{ BLUE.." A) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Front"]..ALC["R-Parenthesis"], 10001 },
@@ -480,8 +480,8 @@ db.AtlasMaps = {
 		MinLevel = "15",
 		PlayerLimit = { 5 },
 		Acronym = L["VC"],
-		WorldMapID = "756",
-		JournalInstanceID = "63",
+		WorldMapID = 291,
+		JournalInstanceID = 63,
 		Module = "Atlas_ClassicWoW",
 		NextMap = "TheDeadminesA",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -494,12 +494,12 @@ db.AtlasMaps = {
 	TheDeadminesA = {
 		ZoneName = { BZ["The Deadmines"]..ALC["MapA"] },
 		Location = { BZ["Westfall"] },
-		DungeonID = "6",
-		DungeonHeroicID = "326",
+		DungeonID = 6,
+		DungeonHeroicID = 326,
 		Acronym = L["VC"],
-		WorldMapID = "756",
-		DungeonLevel = "1",
-		JournalInstanceID = "63",
+		WorldMapID = 291,
+		DungeonLevel = 1,
+		JournalInstanceID = 63,
 		Module = "Atlas_ClassicWoW",
 		PrevMap = "TheDeadminesEnt",
 		NextMap = "TheDeadminesB",
@@ -531,12 +531,12 @@ db.AtlasMaps = {
 	TheDeadminesB = {
 		ZoneName = { BZ["The Deadmines"]..ALC["MapB"] },
 		Location = { BZ["Westfall"] },
-		DungeonID = "6",
-		DungeonHeroicID = "326",
+		DungeonID = 6,
+		DungeonHeroicID = 326,
 		Acronym = L["VC"],
-		WorldMapID = "756",
-		DungeonLevel = "2",
-		JournalInstanceID = "63",
+		WorldMapID = 292,
+		DungeonLevel = 2,
+		JournalInstanceID = 63,
 		Module = "Atlas_ClassicWoW",
 		PrevMap = "TheDeadminesA",
 		{ BLUE.." B) "..ALC["Connection"], 10002 },
@@ -560,10 +560,10 @@ db.AtlasMaps = {
 	TheStockade = {
 		ZoneName = { BZ["The Stockade"] },
 		Location = { BZ["Stormwind City"] },
-		DungeonID = "12",
+		DungeonID = 12,
 		Acronym = L["Stocks"],
-		WorldMapID = "690",
-		JournalInstanceID = "238",
+		WorldMapID = 225,
+		JournalInstanceID = 238,
 		Module = "Atlas_ClassicWoW",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas:GetBossName("Randolph Moloch", 466), 466 },
@@ -576,10 +576,10 @@ db.AtlasMaps = {
 	TheSunkenTempleEnt = {
 		ZoneName = { BZ["Sunken Temple"]..ALC["L-Parenthesis"]..ALC["Entrance"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Swamp of Sorrows"] },
-		DungeonID = "28",
+		DungeonID = 28,
 		Acronym = L["ST"],
-		WorldMapID = "687",
-		JournalInstanceID = "237",
+		WorldMapID = 220,
+		JournalInstanceID = 237,
 		Module = "Atlas_ClassicWoW",
 		NextMap = "TheSunkenTemple",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -594,10 +594,10 @@ db.AtlasMaps = {
 	TheSunkenTemple = {
 		ZoneName = { BZ["Sunken Temple"] },
 		Location = { BZ["Swamp of Sorrows"] },
-		DungeonID = "28",
+		DungeonID = 28,
 		Acronym = L["ST"],
-		WorldMapID = "687",
-		JournalInstanceID = "237",
+		WorldMapID = 220,
+		JournalInstanceID = 237,
 		Module = "Atlas_ClassicWoW",
 		PrevMap = "TheSunkenTempleEnt",
 		{ ORNG..ALC["AKA"]..ALC["Colon"]..BZ["The Temple of Atal'Hakkar"] },
@@ -616,10 +616,10 @@ db.AtlasMaps = {
 	UldamanEnt = {
 		ZoneName = { BZ["Uldaman"]..ALC["L-Parenthesis"]..ALC["Entrance"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Badlands"] },
-		DungeonID = "22",
+		DungeonID = 22,
 		Acronym = L["Ulda"],
-		WorldMapID = "692",
-		JournalInstanceID = "239",
+		WorldMapID = 230,
+		JournalInstanceID = 239,
 		Module = "Atlas_ClassicWoW",
 		NextMap = "Uldaman",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -628,10 +628,10 @@ db.AtlasMaps = {
 	Uldaman = {
 		ZoneName = { BZ["Uldaman"] },
 		Location = { BZ["Badlands"] },
-		DungeonID = "22",
+		DungeonID = 22,
 		Acronym = L["Ulda"],
-		WorldMapID = "692",
-		JournalInstanceID = "239",
+		WorldMapID = 230,
+		JournalInstanceID = 239,
 		Module = "Atlas_ClassicWoW",
 		PrevMap = "UldamanEnt",
 		{ BLUE.." A) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Front"]..ALC["R-Parenthesis"], 10001 },
@@ -668,8 +668,8 @@ db.AtlasMaps = {
 		MinLevel = "20",
 		PlayerLimit = { 5 },
 		Acronym = L["BFD"],
-		WorldMapID = "688",
-		JournalInstanceID = "227",
+		WorldMapID = 221,
+		JournalInstanceID = 227,
 		Module = "Atlas_ClassicWoW",
 		NextMap = "BlackfathomDeeps",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -678,10 +678,10 @@ db.AtlasMaps = {
 	BlackfathomDeeps = {
 		ZoneName = { BZ["Blackfathom Deeps"] },
 		Location = { BZ["Ashenvale"] },
-		DungeonID = "10",
+		DungeonID = 10,
 		Acronym = L["BFD"],
-		WorldMapID = "688",
-		JournalInstanceID = "227",
+		WorldMapID = 221,
+		JournalInstanceID = 227,
 		Module = "Atlas_ClassicWoW",
 		PrevMap = "BlackfathomDeepsEnt",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -711,8 +711,8 @@ db.AtlasMaps = {
 		MinLevel = "36",
 		PlayerLimit = { 5 },
 		Acronym = L["DM"],
-		WorldMapID = "699",
-		JournalInstanceID = "230",
+		WorldMapID = 235,
+		JournalInstanceID = 230,
 		Module = "Atlas_ClassicWoW",
 		NextMap = "DireMaulEast",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -726,11 +726,11 @@ db.AtlasMaps = {
 	DireMaulEast = {
 		ZoneName = { BZ["Dire Maul"]..ALC["L-Parenthesis"]..ALC["East"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Feralas"] },
-		DungeonID = "34",
+		DungeonID = 34,
 		Acronym = L["DM"],
-		WorldMapID = "699",
-		DungeonLevel = "6",
-		JournalInstanceID = "230",
+		WorldMapID = 239,
+		DungeonLevel = 6,
+		JournalInstanceID = 230,
 		Module = "Atlas_ClassicWoW",
 		PrevMap = "DireMaulEnt",
 		NextMap = "DireMaulNorth",
@@ -753,11 +753,11 @@ db.AtlasMaps = {
 	DireMaulNorth = {
 		ZoneName = { BZ["Dire Maul"]..ALC["L-Parenthesis"]..ALC["North"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Feralas"] },
-		DungeonID = "36",
+		DungeonID = 36,
 		Acronym = L["DM"],
-		WorldMapID = "699",
-		DungeonLevel = "1",
-		JournalInstanceID = "230",
+		WorldMapID = 234,
+		DungeonLevel = 1,
+		JournalInstanceID = 230,
 		Module = "Atlas_ClassicWoW",
 		PrevMap = "DireMaulEast",
 		NextMap = "DireMaulWest",
@@ -776,11 +776,11 @@ db.AtlasMaps = {
 	DireMaulWest = {
 		ZoneName = { BZ["Dire Maul"]..ALC["L-Parenthesis"]..ALC["West"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Feralas"] },
-		DungeonID = "38",
+		DungeonID = 38,
 		Acronym = L["DM"],
-		WorldMapID = "699",
-		DungeonLevel = "4",
-		JournalInstanceID = "230",
+		WorldMapID = 237,
+		DungeonLevel = 4,
+		JournalInstanceID = 230,
 		Module = "Atlas_ClassicWoW",
 		PrevMap = "DireMaulNorth",
 		{ ORNG..ALC["Key"]..ALC["Colon"]..ALIL["J'eevee's Jar"]..ALC["L-Parenthesis"]..Atlas:GetBossName("Lord Hel'nurath")..ALC["R-Parenthesis"] },
@@ -814,8 +814,8 @@ db.AtlasMaps = {
 		MinLevel = "30",
 		PlayerLimit = { 5 },
 		Acronym = L["Mara"],
-		WorldMapID = "750",
-		JournalInstanceID = "232",
+		WorldMapID = 280,
+		JournalInstanceID = 232,
 		Module = "Atlas_ClassicWoW",
 		NextMap = "Maraudon",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -833,8 +833,8 @@ db.AtlasMaps = {
 		MinLevel = "30",
 		PlayerLimit = { 5 },
 		Acronym = L["Mara"],
-		WorldMapID = "750",
-		JournalInstanceID = "232",
+		WorldMapID = 280,
+		JournalInstanceID = 232,
 		Module = "Atlas_ClassicWoW",
 		PrevMap = "MaraudonEnt",
 		{ BLUE.." A) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Orange"]..ALC["R-Parenthesis"], 10001 },
@@ -855,10 +855,10 @@ db.AtlasMaps = {
 	RagefireChasm = {
 		ZoneName = { BZ["Ragefire Chasm"] },
 		Location = { BZ["Orgrimmar"] },
-		DungeonID = "4",
+		DungeonID = 4,
 		Acronym = L["RFC"],
-		WorldMapID = "680",
-		JournalInstanceID = "226",
+		WorldMapID = 213,
+		JournalInstanceID = 226,
 		Module = "Atlas_ClassicWoW",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas:GetBossName("Adarogg", 694), 694 },
@@ -872,10 +872,10 @@ db.AtlasMaps = {
 	RazorfenDowns = {
 		ZoneName = { BZ["Razorfen Downs"] },
 		Location = { BZ["Thousand Needles"] },
-		DungeonID = "20",
+		DungeonID = 20,
 		Acronym = L["RFD"],
-		WorldMapID = "760",
-		JournalInstanceID = "233",
+		WorldMapID = 300,
+		JournalInstanceID = 233,
 		Module = "Atlas_ClassicWoW",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Koristrasza"] },
@@ -890,10 +890,10 @@ db.AtlasMaps = {
 	RazorfenKraul = {
 		ZoneName = { BZ["Razorfen Kraul"] },
 		Location = { BZ["Southern Barrens"] },
-		DungeonID = "16",
+		DungeonID = 16,
 		Acronym = L["RFK"],
-		WorldMapID = "761",
-		JournalInstanceID = "234",
+		WorldMapID = 301,
+		JournalInstanceID = 234,
 		Module = "Atlas_ClassicWoW",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Auld Stonespire"] },
@@ -908,11 +908,11 @@ db.AtlasMaps = {
 	TheRuinsofAhnQiraj = {
 		ZoneName = { BZ["Ahn'Qiraj"]..ALC["Colon"]..BZ["Ruins of Ahn'Qiraj"] },
 		Location = { BZ["Ahn'Qiraj: The Fallen Kingdom"] },
-		DungeonID = "160",
+		DungeonID = 160,
 		Acronym = L["AQ10"],
 		PlayerLimit = { 10 },
-		WorldMapID = "717",
-		JournalInstanceID = "743",
+		WorldMapID = 247,
+		JournalInstanceID = 743,
 		Module = "Atlas_ClassicWoW",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Cenarion Circle"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -936,11 +936,11 @@ db.AtlasMaps = {
 	TheTempleofAhnQiraj = {
 		ZoneName = { BZ["Ahn'Qiraj"]..ALC["Colon"]..BZ["Temple of Ahn'Qiraj"] },
 		Location = { BZ["Ahn'Qiraj: The Fallen Kingdom"] },
-		DungeonID = "161",
+		DungeonID = 161,
 		Acronym = L["AQ40"],
 		PlayerLimit = { 40 },
-		WorldMapID = "766",
-		JournalInstanceID = "744",
+		WorldMapID = 319,
+		JournalInstanceID = 744,
 		Module = "Atlas_ClassicWoW",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Brood of Nozdormu"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -972,10 +972,10 @@ db.AtlasMaps = {
 	WailingCavernsEnt = {
 		ZoneName = { BZ["Wailing Caverns"]..ALC["L-Parenthesis"]..ALC["Entrance"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Northern Barrens"] },
-		DungeonID = "1",
+		DungeonID = 1,
 		Acronym = L["WC"],
-		WorldMapID = "749",
-		JournalInstanceID = "240",
+		WorldMapID = 279,
+		JournalInstanceID = 240,
 		Module = "Atlas_ClassicWoW",
 		NextMap = "WailingCaverns",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -986,11 +986,11 @@ db.AtlasMaps = {
 	WailingCaverns = {
 		ZoneName = { BZ["Wailing Caverns"] },
 		Location = { BZ["Northern Barrens"] },
-		DungeonID = "1",
+		DungeonID = 1,
 		Acronym = L["WC"],
-		WorldMapID = "749",
-		DungeonLevel = "1",
-		JournalInstanceID = "240",
+		WorldMapID = 279,
+		DungeonLevel = 1,
+		JournalInstanceID = 240,
 		Module = "Atlas_ClassicWoW",
 		PrevMap = "WailingCavernsEnt",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -1009,36 +1009,36 @@ db.AtlasMaps = {
 		{ GREN..INDENT..L["Muyoh <Disciple of Naralex>"] },
 	},
 	ZulFarrak = {
-		ZoneName = { BZ["Zul'Farrak"] };
-		Location = { BZ["Tanaris"] };
-		DungeonID = "24";
-		Acronym = L["ZF"];
-		WorldMapID = "686";
-		JournalInstanceID = "241";
-		Module = "Atlas_ClassicWoW";
-		{ BLUE.." A) "..ALC["Entrance"], 10001 };
-		{ GREN..INDENT..L["Chief Engineer Bilgewhizzle <Gadgetzan Water Co.>"] };
-		{ GREN..INDENT..L["Mazoga's Spirit"] };
-		{ GREN..INDENT..L["Tran'rek"] };
-		{ WHIT.." 1) "..Atlas:GetBossName("Gahz'rilla", 483)..ALC["L-Parenthesis"]..ALC["Summon"]..ALC["R-Parenthesis"], 483 };
-		{ WHIT.." 2) "..Atlas:GetBossName("Sandfury Executioner") };
-		{ WHIT..INDENT..L["Weegli Blastfuse"] };
-		{ WHIT..INDENT..Atlas:GetBossName("Sergeant Bly") };
-		{ WHIT..INDENT..L["Raven"] };
-		{ WHIT..INDENT..Atlas:GetBossName("Oro Eyegouge") };
-		{ WHIT..INDENT..Atlas:GetBossName("Murta Grimgut") };
-		{ WHIT.." 3) "..Atlas:GetBossName("Nekrum Gutchewer and Shadow Priest Sezz'ziz", 487), 487 };
-		{ WHIT.." 4) "..Atlas:GetBossName("Chief Ukorz Sandscalp", 489), 489 };
-		{ WHIT..INDENT..Atlas:GetBossName("Ruuzlu") };
-		{ WHIT.." 5) "..Atlas:GetBossName("Witch Doctor Zum'rah", 486), 486 };
-		{ WHIT.." 6) "..Atlas:GetBossName("Antu'sul", 484), 484 };
-		{ ORNG.." 1) "..Atlas:GetBossName("Sandarr Dunereaver")..ALC["L-Parenthesis"]..ALC["Rare"]..ALC["R-Parenthesis"], 10002 };
-		{ ORNG.." 2) "..Atlas:GetBossName("Hydromancer Velratha", 482), 482 };
-		{ ORNG.." 3) "..Atlas:GetBossName("Theka the Martyr", 485), 485 };
-		{ ORNG.." 4) "..Atlas:GetBossName("Dustwraith")..ALC["L-Parenthesis"]..ALC["Rare"]..ALC["Comma"]..ALC["Varies"]..ALC["R-Parenthesis"], 10003 };
-		{ ORNG.." 5) "..Atlas:GetBossName("Zerillis")..ALC["L-Parenthesis"]..ALC["Rare"]..ALC["Comma"]..ALC["Wanders"]..ALC["R-Parenthesis"], 10004 };
-		{ GREN.." 1') "..L["Elder Wildmane"]..ALC["L-Parenthesis"]..ALC["Lunar Festival"]..ALC["R-Parenthesis"], 10005 };
-	};
+		ZoneName = { BZ["Zul'Farrak"] },
+		Location = { BZ["Tanaris"] },
+		DungeonID = 24,
+		Acronym = L["ZF"],
+		WorldMapID = 219,
+		JournalInstanceID = 241,
+		Module = "Atlas_ClassicWoW",
+		{ BLUE.." A) "..ALC["Entrance"], 10001 },
+		{ GREN..INDENT..L["Chief Engineer Bilgewhizzle <Gadgetzan Water Co.>"] },
+		{ GREN..INDENT..L["Mazoga's Spirit"] },
+		{ GREN..INDENT..L["Tran'rek"] },
+		{ WHIT.." 1) "..Atlas:GetBossName("Gahz'rilla", 483)..ALC["L-Parenthesis"]..ALC["Summon"]..ALC["R-Parenthesis"], 483 },
+		{ WHIT.." 2) "..Atlas:GetBossName("Sandfury Executioner") },
+		{ WHIT..INDENT..L["Weegli Blastfuse"] },
+		{ WHIT..INDENT..Atlas:GetBossName("Sergeant Bly") },
+		{ WHIT..INDENT..L["Raven"] },
+		{ WHIT..INDENT..Atlas:GetBossName("Oro Eyegouge") },
+		{ WHIT..INDENT..Atlas:GetBossName("Murta Grimgut") },
+		{ WHIT.." 3) "..Atlas:GetBossName("Nekrum Gutchewer and Shadow Priest Sezz'ziz", 487), 487 },
+		{ WHIT.." 4) "..Atlas:GetBossName("Chief Ukorz Sandscalp", 489), 489 },
+		{ WHIT..INDENT..Atlas:GetBossName("Ruuzlu") },
+		{ WHIT.." 5) "..Atlas:GetBossName("Witch Doctor Zum'rah", 486), 486 },
+		{ WHIT.." 6) "..Atlas:GetBossName("Antu'sul", 484), 484 },
+		{ ORNG.." 1) "..Atlas:GetBossName("Sandarr Dunereaver")..ALC["L-Parenthesis"]..ALC["Rare"]..ALC["R-Parenthesis"], 10002 },
+		{ ORNG.." 2) "..Atlas:GetBossName("Hydromancer Velratha", 482), 482 },
+		{ ORNG.." 3) "..Atlas:GetBossName("Theka the Martyr", 485), 485 },
+		{ ORNG.." 4) "..Atlas:GetBossName("Dustwraith")..ALC["L-Parenthesis"]..ALC["Rare"]..ALC["Comma"]..ALC["Varies"]..ALC["R-Parenthesis"], 10003 },
+		{ ORNG.." 5) "..Atlas:GetBossName("Zerillis")..ALC["L-Parenthesis"]..ALC["Rare"]..ALC["Comma"]..ALC["Wanders"]..ALC["R-Parenthesis"], 10004 },
+		{ GREN.." 1') "..L["Elder Wildmane"]..ALC["L-Parenthesis"]..ALC["Lunar Festival"]..ALC["R-Parenthesis"], 10005 },
+	},
 }
 
 
@@ -1536,20 +1536,20 @@ db.AtlasMaps_NPC_DB = {
 		{ "1", 10003, 332, 190 }, -- Trigore the Lasher
 	},
 	ZulFarrak = {
-		{ 1, 483, 178, 218 }; -- Gahz'rilla
-		{ 3, 487, 166, 112 }; -- Nekrum Gutchewer and Shadow Priest Sezz'ziz
-		{ 4, 489, 260, 190 }; -- Chief Ukorz Sandscalp
-		{ 5, 486, 259, 101 }; -- Witch Doctor Zum'rah
-		{ 6, 484, 399, 147 }; -- Antu'sul
-		{ 2, 482, 160, 197 }; -- Hydromancer Velratha
-		{ 3, 485, 324, 150 }; -- Theka the Martyr
-		{ "A", 10001, 338, 424 };
-		{ "1", 10002, 264, 261 };
-		{ "4", 10003, 183, 114 };
-		{ "5", 10004, 296, 219 };
-		{ "1'", 10005, 197, 206 };
-	};
-};
+		{ 1, 483, 178, 218 }, -- Gahz'rilla
+		{ 3, 487, 166, 112 }, -- Nekrum Gutchewer and Shadow Priest Sezz'ziz
+		{ 4, 489, 260, 190 }, -- Chief Ukorz Sandscalp
+		{ 5, 486, 259, 101 }, -- Witch Doctor Zum'rah
+		{ 6, 484, 399, 147 }, -- Antu'sul
+		{ 2, 482, 160, 197 }, -- Hydromancer Velratha
+		{ 3, 485, 324, 150 }, -- Theka the Martyr
+		{ "A", 10001, 338, 424 },
+		{ "1", 10002, 264, 261 },
+		{ "4", 10003, 183, 114 },
+		{ "5", 10004, 296, 219 },
+		{ "1'", 10005, 197, 206 },
+	},
+}
 
 --[[
 	AssocDefaults{}

@@ -345,7 +345,7 @@ function LFG:Initialize()
 				if not zone then
 					DGV:DebugFormat("GetMapIDFromLFGName", "title", title, "zone", zone)
 				end
-				local blizzConversion = GetMapNameByID(zone)
+				local blizzConversion = DGV:GetMapNameFromID(zone)
 				local dgvConversion = DGV:GetMapNameFromID(zone)
 				if zone and 
 					(destName==blizzConversion or destName=="The "..blizzConversion or "The "..destName==blizzConversion or

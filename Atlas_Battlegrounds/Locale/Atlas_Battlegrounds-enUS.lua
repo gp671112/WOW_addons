@@ -1,10 +1,10 @@
--- $Id: Atlas_Battlegrounds-enUS.lua 1549 2017-06-29 08:12:15Z arith $
+-- $Id: Atlas_Battlegrounds-enUS.lua 1553 2018-08-09 13:51:18Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 	Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 

@@ -1,10 +1,10 @@
--- $Id: Atlas-frFR.lua 270 2017-06-29 14:22:48Z arith $
+-- $Id: Atlas-frFR.lua 299 2018-02-22 15:07:35Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 	Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -282,9 +282,5 @@ L["Wave 6"] = "Vague 6"
 L["West"] = "Ouest"
 L["Yarley <Armorer>"] = "Yarley <Armurier>"
 L["Zaladormu"] = "Zaladormu"
-
--- ToC
-L["Description"] = "Navigateur de cartes d'instances"
-L["Title"] = "Atlas"
 
 end

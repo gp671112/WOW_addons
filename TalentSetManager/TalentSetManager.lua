@@ -9,7 +9,7 @@ local C_EquipmentSet, format, tremove, tinsert, lower, floor, ceil = C_Equipment
 local addonName, addonTable = ...
 local L = addonTable.L
 local ntl
-
+ 
 local icon_filenames, icons_added
 
 local charsvar
@@ -20,7 +20,7 @@ local max_talent_sets = 30
 local numColumns = 3
 
 local buff_IDs   = { tome = {227563,227565,227041,226234}, prep = {32727,44521,228128} }
-local buff_names = { tome = {}, prep = {} }
+--local buff_names = { tome = {}, prep = {} }
 local numTiers   = { talents = MAX_TALENT_TIERS,
                      talents_pvp = MAX_PVP_TALENT_TIERS }
 local funcs      = { talents     = { check = GetTalentInfo   , learn = LearnTalents    },
@@ -47,8 +47,8 @@ end
 addonTable.getSetByName = getSetByName
 
 local function has_buff(k)
- for _,v in pairs(buff_names[k]) do
-  local name, _, _, _, _, _, t, _, _, _, spellID = UnitBuff("player", v)
+ for i = 1,BUFF_MAX_DISPLAY do
+  local name, _, _, _, _, _, t, _, _, spellID = UnitBuff("player", i)
   if name and tContains(buff_IDs[k], spellID) then
    return name, t
   end
@@ -889,7 +889,7 @@ local function saveSet_OnClick(self)
 end
 
 local function toggleFrameVisibility(self)
- if not PlayerTalentFramePVPTalents:IsVisible() and not PlayerTalentFrameTalents:IsVisible() then
+ if not PlayerTalentFrameTalents:IsVisible() then
   TalentSetsMainframe:Hide()
   TalentSetsShowButton:Hide()
   menu_frame:Hide()
@@ -1182,7 +1182,9 @@ local function initializeFrame()
  local mf = CreateFrame("Frame", "TalentSetsMainframe", PlayerTalentFrame, "InsetFrameTemplate")
  mf:SetSize(200, 346)
  mf:SetPoint("TOPLEFT", btn, "BOTTOMLEFT", -1, -6)
- mf:SetFrameStrata(PlayerTalentFrame:GetFrameStrata())
+ --mf:SetFrameStrata(PlayerTalentFrame:GetFrameStrata())
+ mf:SetFrameStrata("LOW")
+ mf:SetFrameLevel(0)
 
  -- need a higher frame because of ElvUI and its button strata behavior
  mf.overlay = CreateFrame("Frame")
@@ -1297,11 +1299,13 @@ local function initialize()
 
  if addonTable.initialized then return end
 
+ --[[
  for k,v in pairs(buff_IDs) do
   for i,id in pairs(v) do
    buff_names[k][i] = GetSpellInfo(id)
   end
  end
+ ]]
 
  -- moved the LDB initialization at start because of ElvUI (yes, always that)
  -- now we can refresh the label with the spec available
@@ -1412,7 +1416,7 @@ local function eventhandler(self, event, ...)
   end
   
   PlayerTalentFrameTalents:HookScript("OnShow", delayToggle)
-  PlayerTalentFramePVPTalents:HookScript("OnShow", delayToggle)
+  --PlayerTalentFramePVPTalents:HookScript("OnShow", delayToggle)
   PlayerTalentFrameSpecialization:HookScript("OnShow", delayToggle)
   PlayerTalentFramePetSpecialization:HookScript("OnShow", delayToggle)
 
@@ -1426,7 +1430,7 @@ local function eventhandler(self, event, ...)
     end
    end
   end
-
+--[[
   for t = 1,numColumns do
    for r = 1,numTiers.talents_pvp do
     f = PlayerTalentFramePVPTalents.Talents["Tier"..r] and PlayerTalentFramePVPTalents.Talents["Tier"..r]["Talent"..t]
@@ -1434,7 +1438,7 @@ local function eventhandler(self, event, ...)
      f:HookScript("OnClick", talentPvPButtonClicked)
     end
    end
-  end
+  end]]
  end
 end
 eventframe:SetScript("OnEvent", eventhandler)

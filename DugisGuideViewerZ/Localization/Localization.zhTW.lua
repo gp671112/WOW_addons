@@ -2,7 +2,8 @@ if ( GetLocale() == "zhTW" ) then
 	DugisLocals = {	
 
 	PART_TEXT = "單方面",
-	
+
+-- Missing translations, also need adding L[] to relevant code.
 --自行加入的翻譯	
 	["Dugi Guides"] = "Dugi 任務高手", -- BINDING_HEADER_DUGI 要加上 L[]
 	["Dugi Guides Off"] = "Dugi 任務高手 已停用",
@@ -118,7 +119,7 @@ if ( GetLocale() == "zhTW" ) then
 	["|cff11ff11/dugi automount - |rToogle Auto Mount on/off."] = "|cff11ff11/dugi automount - |r啟用/停用自動坐騎。",
 	["|cff11ff11" .. "Dugi: Frame Reset"] = "|cff11ff11" .. "Dugi: 已經重置框架",
 	["|cff11ff11" .. "Dugi: Cleared Saved Variables"] = "|cff11ff11" .. "Dugi: 已經清除儲存的變數",
-	["|cff11ff11" .. "Dugi Guides Essential Mode"] = "Dugi 任務高手核心版 已啟用",
+	["|cff11ff11" .. "Dugi Guides Essential Mode"] = "|cff11ff11" .. "Dugi 任務高手基本版 已啟用",
 	["|cff11ff11" .. "Dugi Guides Off"] = "|cff11ff11" .. "Dugi 任務高手 已停用",
 	["|cff11ff11" .. "Dugi Guides On"] = "|cff11ff11" .. "Dugi 任務高手 已啟用",
 	["|cff11ff11Auto Mount is ON|r"] = "|cff11ff11自動坐騎 已啟用|r",
@@ -177,6 +178,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Auto Quest Accept/Turn in"] = "自動接交任務",
 	["Map Preview"] = "地圖預覽",
 	["Auto Select Flight Path"] = "自動選擇飛行路線",
+	["Nameplates Tracking"] = "名條提示",
 	["More settings.."] = "更多設定選項...",
 	["Home"] = "首頁",
 	
@@ -197,6 +199,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Notifications"] = "通知",
 	["Gear Advisor Suggestions as Notifications"] = "顯示裝備建議的通知",
 	["If disabled standard gear suggestion prompts will be shown."] = "停用時，會顯示標準的裝備建議提示。",
+	["Large Frame Background"] = "大型框架背景",
 	["Ant Trail"] = "螞蟻路徑",
 	["Dotted"] = "圓點",
 	["Solid"] = "直線",
@@ -207,7 +210,8 @@ if ( GetLocale() == "zhTW" ) then
 	["Enable Auto Zoom"] = "啟用自動縮放",
 	["Automatically Zoom in / out the map based on the current waypoint"] = "自動根據目前的導引路線放大/縮小地圖。",
 	["Show Quests POI"] = "顯示任務標示",
-	["Turn on /off the point of interest icons for quests on the map"] = "開啟/關閉地圖上的任務標記圖示。",
+	["|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|tShow Quests POI"] = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|t顯示任務標示",
+	["Turn on /off the point of interest icons for quests on the map.\n\nNOTE: May reduce FPS"] = "開啟/關閉地圖上的任務標記圖示。\n\n注意: 可能會降低FPS",
 	["Auto Hide Zone Map"] = "自動隱藏區域地圖",
 	["Automatically hides Dugi Map in case there are no waypoints."] = "沒有導引路線時自動隱藏 Dugi 區域地圖。",
 	["Merge With Dugi Arrow"] = "整合 Dugi 箭頭",
@@ -221,6 +225,26 @@ if ( GetLocale() == "zhTW" ) then
 	["Zone Map Border"] = "區域地圖邊框",
 	["TextPanel"] = "文字面板",
 	["Default Setting"] = "預設值",
+	["Dual Wield Preference"] = "雙持武器偏好設定",
+	
+	["Void Elf Male"] = "男虛無精靈",
+	["Void Elf Female"] = "女虛無精靈",
+	["Highmountain Tauren Male"] = "男高嶺牛頭人",
+	["Highmountain Tauren Female"] = "女高嶺牛頭人",
+	["Lightforged Draenei Male"] = "男光鑄德萊尼",
+	["Lightforged Draenei Female"] = "女光鑄德萊尼",
+	["Nightborne Male"] = "男夜裔精靈",
+	["Nightborne Female"] = "女夜裔精靈",
+
+	["|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|tNameplates Tracking"] = "名條提示",
+	["Show icon"] = "顯示圖示",
+	["Show text"] = "顯示文字",
+	["|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|tNameplate icon size (%.1f)"] = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|t名條圖示大小 (%.1f)",
+	["|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|tNameplate text size (%.1f)"] = "|TInterface\\OptionsFrame\\UI-OptionsFrame-NewFeatureIcon:0:0:0:-1|t名條文字大小 (%.1f)",
+	
+	["Auto Quest Tracking"] = "自動追蹤任務",
+	["Automatically add quest to the Objective Tracker on accept or objective update"] = "接受任務或任務目標更新時，自動將任務加入到任務目標清單。",
+	["|cff11ff11Dugi Guides: |r|cffcc0000Cannot open settings during combat.|r Please try again."] = "|cff11ff11Dugi 任務高手: |r|cffcc0000戰鬥中無法開啟設定。|r 請於戰鬥結束後再開啟。",
 	
 
 
@@ -306,7 +330,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Color Code Quest"] = "著色密碼任務",
 	["Color code quest against your character's level"] = "對比你的角色等級著色密碼任務。",
 	["Cooking"] = "烹飪",	
-	["Copy From"] = "複製設定檔，從",
+	["Copy From"] = "複製設定檔，來自",
 	["Current Guide"] = "目前指引",
 	["Customize Macro"] = "自訂巨集",
 	["Customize Target Macro"] = "自訂目標巨集",
@@ -363,7 +387,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Fishing"] = "釣魚",	
 	["Fixed Width Small Frame"] = "固定寬度小框架",
 	["Flash"] = "閃爍",  
-	["Floating Item Button"] = "可移動的物品按鈕",
+	["Floating Item Button"] = "可移動的任務物品按鈕",
 	["Floating Small Frame won't adjust size horizontally and remain the same width as the Objective Tracker."] = "可任意移動的小框架和任務目標清單的寬度相同，無法調整水平大小。",
 	["Fly to"] = "飛到",
 	["Frames"] = "框架",
@@ -396,7 +420,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Human Female"] = "女人類",
 	["Human Male"] = "男人類",
 --Ii
-  ["Item Button Size (%.1f)"] = "物品按鈕大小 (%.1f)",
+  ["Item Button Size (%.1f)"] = "任務物品按鈕大小 (%.1f)",
   ["Item has the following stats:"] = "物品的屬性為:",
   ["Ignore Cooking Items"] = "忽略烹飪物品",
   ["Ignore Fishing Items"] = "忽略釣魚物品",
@@ -496,7 +520,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Right"] = "右",
 --Ss
   ["Size of the target button."] = "目標按鈕大小。",
-  ["Size of the item button."] = "物品按鈕大小。",
+  ["Size of the item button."] = "任務物品按鈕大小。",
   ["Small Frame Font Size (%.1f)"] = "小框架字型大小 (%.1f)",
   ["Small Frame Behavior"] = "小框架行為",
   ["Standard - Anchored"] = "標準 - 錨點",

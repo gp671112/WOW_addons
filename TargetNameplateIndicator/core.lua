@@ -4,19 +4,17 @@
 ------------------------------------------------------
 
 -- List globals here for Mikk's FindGlobals script
--- GLOBALS: UnitGUID, UnitIsFriend, print
+-- GLOBALS: UnitIsUnit, UnitGUID, UnitIsFriend, UnitExists, CreateFrame, Mixin, print, pairs
 
 local addon, ns = ...
-local FRIENDLY, HOSTILE = ns.CONFIG.FRIENDLY, ns.CONFIG.HOSTILE
 
 local TNI = CreateFrame("Frame", "TargetNameplateIndicator")
+local LNR = LibStub("LibNameplateRegistry-1.0")
 
-LibStub("LibNameplateRegistry-1.0"):Embed(TNI)
-
-local texture = TNI:CreateTexture("$parentTexture", "OVERLAY")
+LNR:Embed(TNI)
 
 --[===[@debug@
-local DEBUG = false
+local DEBUG = true
 
 local function debugprint(...)
 	if DEBUG then
@@ -57,58 +55,163 @@ TNI:LNR_RegisterCallback("LNR_ERROR_FATAL_INCOMPATIBILITY", "OnError_FatalIncomp
 ------
 -- Nameplate callbacks
 ------
-local CurrentNameplate
+local Indicators = {}
 
-function TNI:UpdateIndicator(nameplate)
-	CurrentNameplate = nameplate
-	texture:ClearAllPoints()
+local Indicator = {}
 
-	local config = UnitIsFriend("player", "target") and FRIENDLY or HOSTILE
-	
-	if nameplate then
-		texture:Show()
-		texture:SetTexture(config.TEXTURE_PATH)
-		texture:SetSize(config.TEXTURE_WIDTH, config.TEXTURE_HEIGHT)
-		texture:SetPoint(config.TEXTURE_POINT, nameplate, config.ANCHOR_POINT, config.OFFSET_X, config.OFFSET_Y)
+function Indicator:Update(nameplate)
+	self.currentNameplate = nameplate
+	self.Texture:ClearAllPoints()
+
+	local config = UnitIsUnit("player", self.unit) and self.config.SELF or UnitIsFriend("player", self.unit) and self.config.FRIENDLY or self.config.HOSTILE
+
+	if nameplate and config.ENABLED then
+		self.Texture:Show()
+		self.Texture:SetTexture(config.TEXTURE_PATH)
+		self.Texture:SetSize(config.TEXTURE_WIDTH, config.TEXTURE_HEIGHT)
+		self.Texture:SetAlpha(config.OPACITY)
+		self.Texture:SetPoint(config.TEXTURE_POINT, nameplate, config.ANCHOR_POINT, config.OFFSET_X, config.OFFSET_Y)
 	else
-		texture:Hide()
+		self.Texture:Hide()
 	end
 end
 
-function TNI:OnTargetPlateOnScreen(callback, nameplate, plateData)
+function Indicator:OnRecyclePlate(callback, nameplate, plateData)
 	--[===[@debug@
-	debugprint("Callback fired (target found)")
+	debugprint("Callback fired (recycle)", self.unit, nameplate == self.currentNameplate)
 	--@end-debug@]===]
 
-	self:UpdateIndicator(nameplate)
-end
-
-function TNI:OnRecyclePlate(callback, nameplate, plateData)
-	--[===[@debug@
-	debugprint("Callback fired (recycle)", nameplate == CurrentNameplate)
-	--@end-debug@]===]
-
-	if nameplate == CurrentNameplate then
-		self:UpdateIndicator()
+	if nameplate == self.currentNameplate then
+		self:Update()
 	end
 end
 
-function TNI:PLAYER_TARGET_CHANGED()
-	local nameplate, plateData = TNI:GetPlateByGUID(UnitGUID("target"))
-
-	--[===[@debug@
-	debugprint("Player target changed", nameplate)
-	--@end-debug@]===]
-
-	if not nameplate then
-		TNI:UpdateIndicator()
+-- Are other indicators already displaying on this indicator's unit?
+function Indicator:AreOtherIndicatorsDisplayed()
+	for unit, indicator in pairs(Indicators) do
+		if self.unit ~= indicator.unit and UnitIsUnit(self.unit, unit) then -- If the indicator is for a different unit token but it's the same unit, return true
+			return true
+		end
 	end
+	
+	return false
 end
 
-TNI:LNR_RegisterCallback("LNR_ON_TARGET_PLATE_ON_SCREEN", "OnTargetPlateOnScreen")
-TNI:LNR_RegisterCallback("LNR_ON_RECYCLE_PLATE", "OnRecyclePlate")
+local function CreateIndicator(unit, config)
+	local indicator = CreateFrame("Frame", "TargetNameplateIndicator_" .. unit)
+	indicator:SetFrameStrata("BACKGROUND")
+	indicator.Texture = indicator:CreateTexture("$parentTexture", "OVERLAY")
 
-TNI:RegisterEvent("PLAYER_TARGET_CHANGED")
-TNI:SetScript("OnEvent", function(self, event, ...)
-	self[event](self, ...)
-end)
+	indicator.unit = unit
+	indicator.config = config
+
+	LNR:Embed(indicator)
+	Mixin(indicator, Indicator)
+
+	indicator:LNR_RegisterCallback("LNR_ON_RECYCLE_PLATE", "OnRecyclePlate")
+
+	indicator:SetScript("OnEvent", function(self, event, ...)
+		self[event](self, ...)
+	end)
+	
+	Indicators[unit] = indicator
+
+	return indicator
+end
+
+------
+-- Target Indicator
+------
+
+if ns.TARGET_CONFIG.ENABLED then
+	local TargetIndicator = CreateIndicator("target", ns.TARGET_CONFIG)
+
+	function TargetIndicator:PLAYER_TARGET_CHANGED()
+		local nameplate, plateData = self:GetPlateByGUID(UnitGUID("target"))
+
+		--[===[@debug@
+		debugprint("Player target changed", nameplate)
+		--@end-debug@]===]
+
+		if not nameplate then
+			self:Update()
+		end
+	end
+
+	function TargetIndicator:OnTargetPlateOnScreen(callback, nameplate, plateData)
+		--[===[@debug@
+		debugprint("Callback fired (target found)")
+		--@end-debug@]===]
+
+		self:Update(nameplate)
+	end
+
+	TargetIndicator:RegisterEvent("PLAYER_TARGET_CHANGED")
+	TargetIndicator:LNR_RegisterCallback("LNR_ON_TARGET_PLATE_ON_SCREEN", "OnTargetPlateOnScreen")
+end
+
+------
+-- Mouseover Indicator
+------
+
+if ns.MOUSEOVER_CONFIG.ENABLED then
+	local MouseoverIndicator = CreateIndicator("mouseover", ns.MOUSEOVER_CONFIG)
+
+	function MouseoverIndicator:OnUpdate()
+		-- If there's a current nameplate and it's still the mouseover unit, do nothing
+		if self.currentNameplate and UnitIsUnit("mouseover", self.currentNameplate.namePlateUnitToken) then return end
+
+		-- If there isn't a current nameplate and there's no mouseover unit, do nothing
+		if not self.currentNameplate and not UnitExists("mouseover") then return end
+
+		local nameplate, plateData = self:GetPlateByGUID(UnitGUID("mouseover"))
+
+		local areOtherIndicatorsDisplayed = self:AreOtherIndicatorsDisplayed()
+
+		--[===[@debug@
+		debugprint("Player mouseover changed", nameplate, "areOtherIndicatorsDisplayed?", areOtherIndicatorsDisplayed)
+		--@end-debug@]===]
+
+		-- If the player has their mouse over a unit that doesn't already have an indicator displaying on it, update the mouseover indicator; otherwise hide it 
+		if not areOtherIndicatorsDisplayed then
+			self:Update(nameplate)
+		else
+			self:Update(nil)
+		end
+	end
+
+	MouseoverIndicator:SetScript("OnUpdate", MouseoverIndicator.OnUpdate)
+end
+
+------
+-- Focuus Indicator
+------
+
+if ns.FOCUS_CONFIG.ENABLED then
+	local FocusIndicator = CreateIndicator("focus", ns.FOCUS_CONFIG)
+	
+	function FocusIndicator:OnUpdate()
+		-- If there's a current nameplate and it's still the focus unit, do nothing
+		if self.currentNameplate and UnitIsUnit("focus", self.currentNameplate.namePlateUnitToken) then return end
+
+		-- If there isn't a current nameplate and there's no focus unit, do nothing
+		if not self.currentNameplate and not UnitExists("focus") then return end
+
+		local nameplate, plateData = self:GetPlateByGUID(UnitGUID("focus"))
+
+		local areOtherIndicatorsDisplayed = self:AreOtherIndicatorsDisplayed()
+
+		--[===[@debug@
+		debugprint("Player focus changed", nameplate, "areOtherIndicatorsDisplayed?", areOtherIndicatorsDisplayed)
+		--@end-debug@]===]
+
+		-- If the player has their focus set to a unit that doesn't already have an indicator displaying on it, update the focus indicator; otherwise hide it
+		if not areOtherIndicatorsDisplayed then
+			self:Update(nameplate)
+		else
+			self:Update(nil)
+		end
+	end
+	
+	FocusIndicator:SetScript("OnUpdate", FocusIndicator.OnUpdate)
+end

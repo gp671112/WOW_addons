@@ -237,16 +237,13 @@ local function DugiGuidesOnLoadingEnd()
     DugisGuideViewer:UpdateIconStatus()
    
     if DugisGuideViewer.Modules.DugisWatchFrame then
-        DugisGuideViewer.Modules.DugisWatchFrame:DelayUpdate()
-        
         LuaUtils:Delay(1, function()
-            DugisGuideViewer.Modules.DugisWatchFrame:DelayUpdate()
+            DGV.Modules.DugisWatchFrame:DelayUpdate()
+			DGV.shouldUpdateObjectiveTracker = true
         end)        
-        
-        LuaUtils:Delay(2, function()
-            DugisGuideViewer.Modules.DugisWatchFrame:DelayUpdate()
-        end)
     end
+	
+	
 end
 
 local function UpdateGameLoadingProgress(threading, currentNormalizedProgress)

@@ -62,7 +62,7 @@ function searchAchievementWaypointsByMapName(mapName)
             local mapId = DGV:GetMapIDFromName(zoneName)
 
             if mapId and tonumber(mapId) then
-                localizedMapName =  GetMapNameByID(mapId)
+                localizedMapName =  DGV:GetMapNameFromID(mapId)
             end
             
             if tonumber(achievementIdORLabel) and criteriaIndex then

@@ -1,8 +1,8 @@
--- $Id: Data.lua 34 2017-07-06 14:21:38Z arith $
+-- $Id: Data.lua 38 2018-08-09 13:56:48Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -44,17 +44,17 @@ local addon = Atlas:GetModule(private.module_name)
 local db = {}
 addon.db = db
 
-local BLUE = "|cff6666ff";
-local GREN = "|cff66cc33";
-local GREY = "|cff999999";
-local LBLU = "|cff33cccc";
-local _RED = "|cffcc3333";
-local ORNG = "|cffcc9933";
-local PINK = "|ccfcc33cc";
-local PURP = "|cff9900ff";
-local WHIT = "|cffffffff";
-local YLOW = "|cffcccc33";
-local INDENT = "      ";
+local BLUE = "|cff6666ff"
+local GREN = "|cff66cc33"
+local GREY = "|cff999999"
+local LBLU = "|cff33cccc"
+local _RED = "|cffcc3333"
+local ORNG = "|cffcc9933"
+local PINK = "|ccfcc33cc"
+local PURP = "|cff9900ff"
+local WHIT = "|cffffffff"
+local YLOW = "|cffcccc33"
+local INDENT = "      "
 
 db.AtlasMaps = {
 	AuchindounEnt = {
@@ -85,11 +85,11 @@ db.AtlasMaps = {
 	AuchAuchenaiCrypts = {
 		ZoneName = { BZ["Auchindoun"]..ALC["Colon"]..BZ["Auchenai Crypts"] },
 		Location = { BZ["Terokkar Forest"] },
-		DungeonID = "149",
-		DungeonHeroicID = "178",
+		DungeonID = 149,
+		DungeonHeroicID = 178,
 		Acronym = L["AC"],
-		WorldMapID = "722",
-		JournalInstanceID = "247",
+		WorldMapID = 256,
+		JournalInstanceID = 247,
 		Module = "Atlas_BurningCrusade",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Lower City"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -103,11 +103,11 @@ db.AtlasMaps = {
 	AuchManaTombs = {
 		ZoneName = { BZ["Auchindoun"]..ALC["Colon"]..BZ["Mana-Tombs"] },
 		Location = { BZ["Terokkar Forest"] },
-		DungeonID = "148",
-		DungeonHeroicID = "179",
+		DungeonID = 148,
+		DungeonHeroicID = 179,
 		Acronym = L["MT"],
-		WorldMapID = "732",
-		JournalInstanceID = "250",
+		WorldMapID = 272,
+		JournalInstanceID = 250,
 		Module = "Atlas_BurningCrusade",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["The Consortium"] },
 		{ ORNG..L["Key"]..ALC["Colon"]..ALIL["The Eye of Haramad"]..ALC["L-Parenthesis"]..ALC["Exalted"]..ALC["Comma"]..Atlas:GetBossName("Yor")..ALC["R-Parenthesis"] },
@@ -126,11 +126,11 @@ db.AtlasMaps = {
 	AuchSethekkHalls = {
 		ZoneName = { BZ["Auchindoun"]..ALC["Colon"]..BZ["Sethekk Halls"] },
 		Location = { BZ["Terokkar Forest"] },
-		DungeonID = "150",
-		DungeonHeroicID = "180",
+		DungeonID = 150,
+		DungeonHeroicID = 180,
 		Acronym = L["Seth"],
-		WorldMapID = "723",
-		JournalInstanceID = "252",
+		WorldMapID = 258,
+		JournalInstanceID = 252,
 		Module = "Atlas_BurningCrusade",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Lower City"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -145,11 +145,11 @@ db.AtlasMaps = {
 	AuchShadowLabyrinth = {
 		ZoneName = { BZ["Auchindoun"]..ALC["Colon"]..BZ["Shadow Labyrinth"] },
 		Location = { BZ["Terokkar Forest"] },
-		DungeonID = "151",
-		DungeonHeroicID = "181",
+		DungeonID = 151,
+		DungeonHeroicID = 181,
 		Acronym = L["SL"],
-		WorldMapID = "724",
-		JournalInstanceID = "253",
+		WorldMapID = 260,
+		JournalInstanceID = 253,
 		Module = "Atlas_BurningCrusade",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Lower City"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -167,12 +167,12 @@ db.AtlasMaps = {
 	BlackTempleStart = {
 		ZoneName = { BZ["Black Temple"]..ALC["MapA"]..ALC["L-Parenthesis"]..ALC["Start"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Shadowmoon Valley"] },
-		DungeonID = "196",
+		DungeonID = 196,
 		Acronym = L["BT"],
 		PlayerLimit = { 25 },
-		WorldMapID = "796",
-		DungeonLevel = "1",
-		JournalInstanceID = "751",
+		WorldMapID = 339,
+		DungeonLevel = 1,
+		JournalInstanceID = 751,
 		PlayerLimit = { 10, 30 },
 		Module = "Atlas_BurningCrusade",
 		NextMap = "BlackTempleBasement",
@@ -193,12 +193,12 @@ db.AtlasMaps = {
 	BlackTempleBasement = {
 		ZoneName = { BZ["Black Temple"]..ALC["MapB"]..ALC["L-Parenthesis"]..ALC["Basement"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Shadowmoon Valley"] },
-		DungeonID = "196",
+		DungeonID = 196,
 		Acronym = L["BT"],
 		PlayerLimit = { 25 },
-		WorldMapID = "796",
-		DungeonLevel = "4",
-		JournalInstanceID = "751",
+		WorldMapID = 342,
+		DungeonLevel = 4,
+		JournalInstanceID = 751,
 		PlayerLimit = { 10, 30 },
 		Module = "Atlas_BurningCrusade",
 		PrevMap = "BlackTempleStart",
@@ -216,12 +216,12 @@ db.AtlasMaps = {
 	BlackTempleTop = {
 		ZoneName = { BZ["Black Temple"]..ALC["MapC"]..ALC["L-Parenthesis"]..ALC["Top"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Shadowmoon Valley"] },
-		DungeonID = "196",
+		DungeonID = 196,
 		Acronym = L["BT"],
 		PlayerLimit = { 25 },
-		WorldMapID = "796",
-		DungeonLevel = "8",
-		JournalInstanceID = "751",
+		WorldMapID = 346,
+		DungeonLevel = 8,
+		JournalInstanceID = 751,
 		PlayerLimit = { 10, 30 },
 		Module = "Atlas_BurningCrusade",
 		PrevMap = "BlackTempleBasement",
@@ -255,11 +255,11 @@ db.AtlasMaps = {
 	CFRSerpentshrineCavern = {
 		ZoneName = { BZ["Coilfang Reservoir"]..ALC["Colon"]..BZ["Serpentshrine Cavern"] },
 		Location = { BZ["Zangarmarsh"] },
-		DungeonID = "194",
+		DungeonID = 194,
 		Acronym = L["SSC"],
 		PlayerLimit = { 25 },
-		WorldMapID = "780",
-		JournalInstanceID = "748",
+		WorldMapID = 332,
+		JournalInstanceID = 748,
 		Module = "Atlas_BurningCrusade",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Cenarion Expedition"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -275,11 +275,11 @@ db.AtlasMaps = {
 	CFRTheSlavePens = {
 		ZoneName = { BZ["Coilfang Reservoir"]..ALC["Colon"]..BZ["The Slave Pens"] },
 		Location = { BZ["Zangarmarsh"] },
-		DungeonID = "140",
-		DungeonHeroicID = "184",
+		DungeonID = 140,
+		DungeonHeroicID = 184,
 		Acronym = L["SP"],
-		WorldMapID = "728",
-		JournalInstanceID = "260",
+		WorldMapID = 265,
+		JournalInstanceID = 260,
 		Module = "Atlas_BurningCrusade",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Cenarion Expedition"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -296,11 +296,11 @@ db.AtlasMaps = {
 	CFRTheSteamvault = {
 		ZoneName = { BZ["Coilfang Reservoir"]..ALC["Colon"]..BZ["The Steamvault"] },
 		Location = { BZ["Zangarmarsh"] },
-		DungeonID = "147",
-		DungeonHeroicID = "185",
+		DungeonID = 147,
+		DungeonHeroicID = 185,
 		Acronym = L["SV"],
-		WorldMapID = "727",
-		JournalInstanceID = "261",
+		WorldMapID = 263,
+		JournalInstanceID = 261,
 		Module = "Atlas_BurningCrusade",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Cenarion Expedition"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -318,11 +318,11 @@ db.AtlasMaps = {
 	CFRTheUnderbog = {
 		ZoneName = { BZ["Coilfang Reservoir"]..ALC["Colon"]..BZ["The Underbog"] },
 		Location = { BZ["Zangarmarsh"] },
-		DungeonID = "146",
-		DungeonHeroicID = "186",
+		DungeonID = 146,
+		DungeonHeroicID = 186,
 		Acronym = L["UB"],
-		WorldMapID = "726",
-		JournalInstanceID = "262",
+		WorldMapID = 262,
+		JournalInstanceID = 262,
 		Module = "Atlas_BurningCrusade",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Cenarion Expedition"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -378,8 +378,8 @@ db.AtlasMaps = {
 		MinLevel = "68",
 		PlayerLimit = { 5 },
 		Acronym = L["CoT2"],
-		WorldMapID = "733",
-		JournalInstanceID = "255",
+		WorldMapID = 273,
+		JournalInstanceID = 255,
 		Module = "Atlas_BurningCrusade",
 		{ PURP..ALC["Event"]..ALC["Colon"]..BZ["Opening of the Dark Portal"] },
 		{ ORNG..ALC["Attunement Required"] },
@@ -417,8 +417,8 @@ db.AtlasMaps = {
 		MinLevel = "70",
 		PlayerLimit = { 25 },
 		Acronym = L["CoT3"],
-		WorldMapID = "775",
-		JournalInstanceID = "750",
+		WorldMapID = 329,
+		JournalInstanceID = 750,
 		Module = "Atlas_BurningCrusade",
 		{ PURP..ALC["Event"]..ALC["Colon"]..BZ["The Battle for Mount Hyjal"] },
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["The Scale of the Sands"] },
@@ -441,8 +441,8 @@ db.AtlasMaps = {
 		MinLevel = "66",
 		PlayerLimit = { 5 },
 		Acronym = L["CoT1"],
-		WorldMapID = "734",
-		JournalInstanceID = "251",
+		WorldMapID = 274,
+		JournalInstanceID = 251,
 		Module = "Atlas_BurningCrusade",
 		{ PURP..ALC["Event"]..ALC["Colon"]..BZ["The Escape From Durnholde"] },
 		{ ORNG..ALC["Attunement Required"] },
@@ -514,11 +514,11 @@ db.AtlasMaps = {
 	GruulsLair = {
 		ZoneName = { BZ["Gruul's Lair"] },
 		Location = { BZ["Blade's Edge Mountains"] },
-		DungeonID = "177",
+		DungeonID = 177,
 		Acronym = L["GL"],
 		PlayerLimit = { 25 },
-		WorldMapID = "776",
-		JournalInstanceID = "746",
+		WorldMapID = 330,
+		JournalInstanceID = 746,
 		Module = "Atlas_BurningCrusade",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas:GetBossName("High King Maulgar", 1564), 1564 },
@@ -548,11 +548,11 @@ db.AtlasMaps = {
 	HCBloodFurnace = {
 		ZoneName = { BZ["Hellfire Citadel"]..ALC["Colon"]..BZ["The Blood Furnace"] },
 		Location = { BZ["Hellfire Peninsula"] },
-		DungeonID = "137",
-		DungeonHeroicID = "187",
+		DungeonID = 137,
+		DungeonHeroicID = 187,
 		Acronym = L["BF"],
-		WorldMapID = "725",
-		JournalInstanceID = "256",
+		WorldMapID = 261,
+		JournalInstanceID = 256,
 		Module = "Atlas_BurningCrusade",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Honor Hold"]..ALC["L-Parenthesis"]..FACTION_ALLIANCE..ALC["R-Parenthesis"] },
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Thrallmar"]..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] },
@@ -566,11 +566,11 @@ db.AtlasMaps = {
 	HCHellfireRamparts = {
 		ZoneName = { BZ["Hellfire Citadel"]..ALC["Colon"]..BZ["Hellfire Ramparts"] },
 		Location = { BZ["Hellfire Peninsula"] },
-		DungeonID = "136",
-		DungeonHeroicID = "188",
+		DungeonID = 136,
+		DungeonHeroicID = 188,
 		Acronym = L["Ramp"],
-		WorldMapID = "797",
-		JournalInstanceID = "248",
+		WorldMapID = 347,
+		JournalInstanceID = 248,
 		Module = "Atlas_BurningCrusade",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Honor Hold"]..ALC["L-Parenthesis"]..FACTION_ALLIANCE..ALC["R-Parenthesis"] },
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Thrallmar"]..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] },
@@ -586,11 +586,11 @@ db.AtlasMaps = {
 	HCMagtheridonsLair = {
 		ZoneName = { BZ["Hellfire Citadel"]..ALC["Colon"]..BZ["Magtheridon's Lair"] },
 		Location = { BZ["Hellfire Peninsula"] },
-		DungeonID = "176",
+		DungeonID = 176,
 		Acronym = L["Mag"],
 		PlayerLimit = { 25 },
-		WorldMapID = "779",
-		JournalInstanceID = "747",
+		WorldMapID = 331,
+		JournalInstanceID = 747,
 		Module = "Atlas_BurningCrusade",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas:GetBossName("Magtheridon", 1566), 1566 },
@@ -598,11 +598,11 @@ db.AtlasMaps = {
 	HCTheShatteredHalls = {
 		ZoneName = { BZ["Hellfire Citadel"]..ALC["Colon"]..BZ["The Shattered Halls"] },
 		Location = { BZ["Hellfire Peninsula"] },
-		DungeonID = "138",
-		DungeonHeroicID = "189",
+		DungeonID = 138,
+		DungeonHeroicID = 189,
 		Acronym = L["SH"],
-		WorldMapID = "710",
-		JournalInstanceID = "259",
+		WorldMapID = 246,
+		JournalInstanceID = 259,
 		Module = "Atlas_BurningCrusade",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Honor Hold"]..ALC["L-Parenthesis"]..FACTION_ALLIANCE..ALC["R-Parenthesis"] },
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Thrallmar"]..ALC["L-Parenthesis"]..FACTION_HORDE..ALC["R-Parenthesis"] },
@@ -628,11 +628,11 @@ db.AtlasMaps = {
 	KarazhanEnt = {
 		ZoneName = { BZ["Karazhan"]..ALC["L-Parenthesis"]..ALC["Entrance"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Deadwind Pass"] },
-		DungeonID = "175",
+		DungeonID = 175,
 		PlayerLimit = { 10 },
 		Acronym = L["Kara"],
-		WorldMapID = "32",
-		JournalInstanceID = "745",
+		WorldMapID = 42,
+		JournalInstanceID = 745,
 		Module = "Atlas_BurningCrusade",
 		NextMap = "KarazhanStart",
 		{ BLUE.." A) "..BZ["Karazhan"]..ALC["L-Parenthesis"]..ALC["Front"]..ALC["R-Parenthesis"], 10001 },
@@ -646,14 +646,15 @@ db.AtlasMaps = {
 		{ GREN.." 6') "..ALC["Graveyard"], 10008 },
 		{ GREN.." 7') "..L["Lydia Accoste"], 66255 },
 	},
+--    [799] = { mapFile = "Karazhan", [1] = 350, [2] = 351, [3] = 352, [4] = 353, [5] = 354, [6] = 355, [7] = 356, [8] = 357, [9] = 358, [10] = 359, [11] = 360, [12] = 361, [13] = 362, [14] = 363, [15] = 364, [16] = 365, [17] = 366},
 	KarazhanStart = {
 		ZoneName = { BZ["Karazhan"]..ALC["MapA"]..ALC["L-Parenthesis"]..ALC["Start"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Deadwind Pass"] },
-		DungeonID = "175",
+		DungeonID = 175,
 		Acronym = L["Kara"],
 		PlayerLimit = { 10 },
-		WorldMapID = "799",
-		JournalInstanceID = "745",
+		WorldMapID = 350,
+		JournalInstanceID = 745,
 		Module = "Atlas_BurningCrusade",
 		PrevMap = "KarazhanEnt",
 		NextMap = "KarazhanEnd",
@@ -702,11 +703,11 @@ db.AtlasMaps = {
 	KarazhanEnd = {
 		ZoneName = { BZ["Karazhan"]..ALC["MapB"]..ALC["L-Parenthesis"]..ALC["End"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Deadwind Pass"] },
-		DungeonID = "175",
+		DungeonID = 175,
 		Acronym = L["Kara"],
 		PlayerLimit = { 10 },
-		WorldMapID = "799",
-		JournalInstanceID = "745",
+		WorldMapID = 350, -- which level?
+		JournalInstanceID = 745,
 		Module = "Atlas_BurningCrusade",
 		PrevMap = "KarazhanStart",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["The Violet Eye"] },
@@ -735,11 +736,11 @@ db.AtlasMaps = {
 	MagistersTerrace = {
 		ZoneName = { BZ["Magisters' Terrace"] },
 		Location = { BZ["Isle of Quel'Danas"] },
-		DungeonID = "198",
-		DungeonHeroicID = "201",
+		DungeonID = 198,
+		DungeonHeroicID = 201,
 		Acronym = L["MaT"],
-		WorldMapID = "798",
-		JournalInstanceID = "249",
+		WorldMapID = 348,
+		JournalInstanceID = 249,
 		Module = "Atlas_BurningCrusade",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["Shattered Sun Offensive"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -767,11 +768,11 @@ db.AtlasMaps = {
 	SunwellPlateau = {
 		ZoneName = { BZ["Sunwell Plateau"] },
 		Location = { BZ["Isle of Quel'Danas"] },
-		DungeonID = "199",
+		DungeonID = 199,
 		Acronym = L["SuP"],
 		PlayerLimit = { 25 },
-		WorldMapID = "789",
-		JournalInstanceID = "752",
+		WorldMapID = 335,
+		JournalInstanceID = 752,
 		Module = "Atlas_BurningCrusade",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas:GetBossName("Kalecgos", 1591), 1591 },
@@ -802,11 +803,11 @@ db.AtlasMaps = {
 	TempestKeepArcatraz = {
 		ZoneName = { BZ["Tempest Keep"]..ALC["Colon"]..BZ["The Arcatraz"] },
 		Location = { BZ["Netherstorm"] },
-		DungeonID = "174",
-		DungeonHeroicID = "190",
+		DungeonID = 174,
+		DungeonHeroicID = 190,
 		Acronym = L["Arca"],
-		WorldMapID = "731",
-		JournalInstanceID = "254",
+		WorldMapID = 269,
+		JournalInstanceID = 254,
 		Module = "Atlas_BurningCrusade",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["The Sha'tar"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -823,11 +824,11 @@ db.AtlasMaps = {
 	TempestKeepBotanica = {
 		ZoneName = { BZ["Tempest Keep"]..ALC["Colon"]..BZ["The Botanica"] },
 		Location = { BZ["Netherstorm"] },
-		DungeonID = "173",
-		DungeonHeroicID = "191",
+		DungeonID = 173,
+		DungeonHeroicID = 191,
 		Acronym = L["Bota"],
-		WorldMapID = "729",
-		JournalInstanceID = "257",
+		WorldMapID = 266,
+		JournalInstanceID = 257,
 		Module = "Atlas_BurningCrusade",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["The Sha'tar"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -841,11 +842,11 @@ db.AtlasMaps = {
 	TempestKeepMechanar = {
 		ZoneName = { BZ["Tempest Keep"]..ALC["Colon"]..BZ["The Mechanar"] },
 		Location = { BZ["Netherstorm"] },
-		DungeonID = "172",
-		DungeonHeroicID = "192",
+		DungeonID = 172,
+		DungeonHeroicID = 192,
 		Acronym = L["Mech"],
-		WorldMapID = "730",
-		JournalInstanceID = "258",
+		WorldMapID = 267,
+		JournalInstanceID = 258,
 		Module = "Atlas_BurningCrusade",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["The Sha'tar"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -859,25 +860,25 @@ db.AtlasMaps = {
 		{ GREN.." 1') "..Atlas:GetBossName("Cache of the Legion"), 10005 },
 	},
 	TempestKeepTheEye = {
-		ZoneName = { BZ["Tempest Keep"]..ALC["Colon"]..BZ["Tempest Keep"] };
-		Location = { BZ["Netherstorm"] };
-		DungeonID = "193";
-		Acronym = L["TK"];
-		PlayerLimit = "25";
-		WorldMapID = "729";
-		JournalInstanceID = "749";
-		Module = "Atlas_BurningCrusade";
-		{ ORNG..REPUTATION..ALC["Colon"]..BF["The Sha'tar"] };
-		{ BLUE.." A) "..ALC["Entrance"], 10001 };
-		{ WHIT.." 1) "..Atlas:GetBossName("Al'ar", 1573), 1573 };
-		{ WHIT.." 2) "..Atlas:GetBossName("Void Reaver", 1574), 1574 };
-		{ WHIT.." 3) "..Atlas:GetBossName("High Astromancer Solarian", 1575), 1575 };
-		{ WHIT.." 4) "..Atlas:GetBossName("Kael'thas Sunstrider", 1576), 1576 };
-		{ WHIT..INDENT..Atlas:GetBossName("Thaladred the Darkener", 1576, 2)..ALC["L-Parenthesis"]..Atlas_GetClassName("WARRIOR")..ALC["R-Parenthesis"] };
-		{ WHIT..INDENT..Atlas:GetBossName("Master Engineer Telonicus", 1576, 5)..ALC["L-Parenthesis"]..Atlas_GetClassName("HUNTER")..ALC["R-Parenthesis"] };
-		{ WHIT..INDENT..Atlas:GetBossName("Grand Astromancer Capernian", 1576, 4)..ALC["L-Parenthesis"]..Atlas_GetClassName("MAGE")..ALC["R-Parenthesis"] };
-		{ WHIT..INDENT..Atlas:GetBossName("Lord Sanguinar", 1576, 3)..ALC["L-Parenthesis"]..Atlas_GetClassName("PALADIN")..ALC["R-Parenthesis"] };
-	};
+		ZoneName = { BZ["Tempest Keep"]..ALC["Colon"]..BZ["Tempest Keep"] },
+		Location = { BZ["Netherstorm"] },
+		DungeonID = "193",
+		Acronym = L["TK"],
+		PlayerLimit = "25",
+		WorldMapID = 266,
+		JournalInstanceID = "749",
+		Module = "Atlas_BurningCrusade",
+		{ ORNG..REPUTATION..ALC["Colon"]..BF["The Sha'tar"] },
+		{ BLUE.." A) "..ALC["Entrance"], 10001 },
+		{ WHIT.." 1) "..Atlas:GetBossName("Al'ar", 1573), 1573 },
+		{ WHIT.." 2) "..Atlas:GetBossName("Void Reaver", 1574), 1574 },
+		{ WHIT.." 3) "..Atlas:GetBossName("High Astromancer Solarian", 1575), 1575 },
+		{ WHIT.." 4) "..Atlas:GetBossName("Kael'thas Sunstrider", 1576), 1576 },
+		{ WHIT..INDENT..Atlas:GetBossName("Thaladred the Darkener", 1576, 2)..ALC["L-Parenthesis"]..Atlas_GetClassName("WARRIOR")..ALC["R-Parenthesis"] },
+		{ WHIT..INDENT..Atlas:GetBossName("Master Engineer Telonicus", 1576, 5)..ALC["L-Parenthesis"]..Atlas_GetClassName("HUNTER")..ALC["R-Parenthesis"] },
+		{ WHIT..INDENT..Atlas:GetBossName("Grand Astromancer Capernian", 1576, 4)..ALC["L-Parenthesis"]..Atlas_GetClassName("MAGE")..ALC["R-Parenthesis"] },
+		{ WHIT..INDENT..Atlas:GetBossName("Lord Sanguinar", 1576, 3)..ALC["L-Parenthesis"]..Atlas_GetClassName("PALADIN")..ALC["R-Parenthesis"] },
+	},
 }
 
 -- Atlas Map NPC Description Data
@@ -1222,13 +1223,13 @@ db.AtlasMaps_NPC_DB = {
 		{ "1'", 10005, 162, 153 },
 	},
 	TempestKeepTheEye = {
-		{ "A", 10001, 230, 481 };
-		{ 1, 1573, 250, 283 };
-		{ 2, 1574, 61, 233 };
-		{ 3, 1575, 438, 231 };
-		{ 4, 1576, 251, 52 };
-	};
-};
+		{ "A", 10001, 230, 481 },
+		{ 1, 1573, 250, 283 },
+		{ 2, 1574, 61, 233 },
+		{ 3, 1575, 438, 231 },
+		{ 4, 1576, 251, 52 },
+	},
+}
 
 db.AssocDefaults = {
 	[BZ["Black Temple"]] =			"BlackTempleBasement",

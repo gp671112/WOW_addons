@@ -1,10 +1,10 @@
--- $Id: Atlas_OutdoorRaids.lua 46 2017-06-29 08:13:44Z arith $
+-- $Id: Atlas_OutdoorRaids.lua 50 2018-08-08 17:30:20Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -73,8 +73,8 @@ local myData = {
 		Location = { BZ["Broken Isles"] },
 		LevelRange = "110+",
 		PlayerLimit = "40",
-		JournalInstanceID = "822",
-		WorldMapID = "1007",
+		JournalInstanceID = 822,
+		WorldMapID = 619,
 		LargeMap = "OR_BrokenIsles",
 		ALModule = "Atlas_Legion",
 		{ WHIT.." 1) "..Atlas_GetBossName("Calamir", 1774)..ORNG..ALC["L-Parenthesis"]..sBF("Court of Farondis")..ALC["R-Parenthesis"], 1774 },		-- (Azsuna)
@@ -105,8 +105,8 @@ local myData = {
 		Location = { BZ["Broken Shore"] },
 		LevelRange = "110+",
 		PlayerLimit = "40",
-		JournalInstanceID = "822",
-		WorldMapID = "1021",
+		JournalInstanceID = 822,
+		WorldMapID = 646,
 		LargeMap = "OR_BrokenShore",
 		ALModule = "Atlas_Legion",
 		{ WHIT.."12) "..Atlas_GetBossName("Brutallus", 1883), 1883 },
@@ -123,8 +123,8 @@ local myData = {
 		Location = { BZ["Draenor"] },
 		LevelRange = "100-110",
 		PlayerLimit = "--",
-		JournalInstanceID = "557",
-		WorldMapID = "962",
+		JournalInstanceID = 557,
+		WorldMapID = 572,
 		LargeMap = "OR_Draenor",
 		ALModule = "Atlas_WarlordsofDraenor",
 		{ WHIT.." 1) "..Atlas_GetBossName("Drov the Ruiner", 1291), 1291 },
@@ -145,8 +145,8 @@ local myData = {
 		Location = { BZ["Pandaria"] },
 		LevelRange = "90-100",
 		PlayerLimit = "--",
-		JournalInstanceID = "322",
-		WorldMapID = "862",
+		JournalInstanceID = 322,
+		WorldMapID = 424,
 		LargeMap = "OR_Pandaria",
 		ALModule = "Atlas_MistsofPandaria",
 		{ WHIT.." 1) "..Atlas_GetBossName("Nalak, The Storm Lord", 814), 814 },

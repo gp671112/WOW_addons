@@ -1,8 +1,8 @@
--- $Id: Core.lua 132 2017-06-29 08:24:52Z arith $
+-- $Id: Core.lua 145 2018-08-09 14:03:43Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2016 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2016 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 

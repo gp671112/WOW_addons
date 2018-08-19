@@ -1,6 +1,12 @@
--- $Id: Lib-ScenariosStepIDDB.lua 10 2017-03-20 14:37:52Z arith $
+-- $Id: Lib-ScenariosStepIDDB.lua 17 2018-04-24 09:17:50Z arith $
+local FOLDER_NAME, private = ...
 
-LibScenariosStepIDDB = { 
+local StepID = {}
+if not private.Scenarios then private.Scenarios = {} end
+private.Scenarios.StepID = StepID
+
+
+StepID.DB = { 
 ["53"] = { { 133, 21134 } },
 ["63"] = { { 154, 21845 }, { 157, 21853 }, { 155, 21849 }, { 156, 21851 } },
 ["537"] = { { 972, 36317 } },

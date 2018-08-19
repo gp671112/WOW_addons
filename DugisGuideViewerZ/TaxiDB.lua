@@ -35,7 +35,13 @@ function TaxiDB:Initialize()
 
 	local function UpdateLookupTable(cont, x, y)
 		local npc = DGV:GuidToNpcId(UnitGUID("npc"))
-		local lookup = DGV.Modules.TaxiData:GetLookupTable()[cont]
+		local tbl =  DGV.Modules.TaxiData:GetLookupTable()
+		local lookup = tbl[cont]
+		
+		if not lookup then
+		    tbl[cont] = {}
+			lookup = tbl[cont]
+		end
 		local coord = DGV:PackXY(x,y)
 		--[[for key,value in pairs(lookup) do
 			if value==npc then
@@ -133,7 +139,7 @@ function TaxiDB:Initialize()
 				if waypoint.flightMasterID then
 					for i=1,NumTaxiNodes() do
 						local x,y = TaxiNodePosition(i)
-						local cont = GetCurrentMapContinent()
+						local cont = GetCurrentMapContinent_dugi()
                         
                         --Prevent Lua error on max zoom out
                         if DGV.Modules.TaxiData:GetLookupTable()[cont] == nil then
@@ -143,7 +149,7 @@ function TaxiDB:Initialize()
 						if loopNPC and waypoint.flightMasterID==loopNPC then
                             if WorldFlightMapFrame == nil then
                                 --For Broken Isles or Argus
-                                if cont == 8 or cont == 9 then
+                                if cont == 8 or cont == 9 or cont == 875 or cont == 876 then
                                     local activePool = FlightMapFrame.pinPools["FlightMap_FlightPointPinTemplate"]
                                     for pin in activePool:EnumerateActive() do 
                                         local pinSlot = pin.taxiNodeData.slotIndex
@@ -197,7 +203,7 @@ function TaxiDB:Initialize()
         
 		--if WorldMapFrame:IsShown() then HideUIPanel(WorldMapFrame) end
 		LuaUtils:DugiSetMapToCurrentZone()
-		local cont = GetCurrentMapContinent()
+		local cont, newContId = GetCurrentMapContinent_dugi()
 		local recalulateRoute = false
 		if not DugisFlightmasterDataTable then 
 			DugisFlightmasterDataTable = {}
@@ -210,6 +216,9 @@ function TaxiDB:Initialize()
 		end
 
 		local key = DGV:GuidToNpcId(UnitGUID("npc"))
+        
+        local isCurrentMasterAFerryMaster = DGV.Modules.TaxiData:IsFerryMaster(key)
+
 		if not key then return end
 		local direct = {}
 		local indirect = {}
@@ -219,7 +228,17 @@ function TaxiDB:Initialize()
 			local nodeType = TaxiNodeGetType(i)
 			local name = TaxiNodeName(i)
 			
-			local npc = DGV.Modules.TaxiData:GetLookupTable()[cont][DGV:PackXY(x,y)]
+			y = 1 - y
+			
+			local tbl =  DGV.Modules.TaxiData:GetLookupTable()
+			local packed = DGV:PackXY(x,y)
+			local contitnentTable = tbl[cont]
+			
+			local npc = contitnentTable and contitnentTable[packed]
+            
+            local isCurrentNodeAFerryMaster = DGV.Modules.TaxiData:IsFerryMaster(npc)
+            if isCurrentNodeAFerryMaster == isCurrentMasterAFerryMaster then
+                        
 			if npc and not DugisFlightmasterDataTable[cont][npc] and nodeType=="REACHABLE" then
 				DugisFlightmasterDataTable[cont][npc] = {}
 			end
@@ -255,6 +274,8 @@ function TaxiDB:Initialize()
 				end
 				tinsert(indirect, PackStrings(unpack(path)))
 			end
+           
+            end
 		end
 
 		local globalData = fullData[cont] and fullData[cont][key]
@@ -263,7 +284,7 @@ function TaxiDB:Initialize()
 		then
 			DugisFlightmasterDataTable[cont][key] =
 			{
-				m = (globalData and globalData.m) or GetCurrentMapAreaID(),
+				m = (globalData and globalData.m) or DGV:GetCurrentMapID() ,
 				f = (globalData and globalData.f) or GetCurrentMapDungeonLevel(),
 				coord = (globalData and globalData.coord) or GetCoord(),
 
@@ -281,16 +302,19 @@ function TaxiDB:Initialize()
 			end
 		end
 		
-		for key,globalData in pairs(fullData[cont]) do
-			if globalData.overridePlayerData then
-				DugisFlightmasterDataTable[cont][key] = globalData
+		local fullDataContTable = fullData[cont]
+		if fullDataContTable then
+			for key,globalData in pairs(fullDataContTable) do
+				if globalData.overridePlayerData then
+					DugisFlightmasterDataTable[cont][key] = globalData
+				end
 			end
 		end
 		
 		if recalulateRoute or (DGV:IsModuleLoaded("Guides") and DGV.actions[DugisGuideUser.CurrentQuestIndex] == "f") then
 			CloseTaxiMap()
 			PlaySoundFile("sound\\interface\\magicclick.ogg")
-			UIErrorsFrame:AddMessage(L["DG: Flight master data updated!"],1,1,0,1)
+			UIErrorsFrame:AddMessage(L["DG: Flight master data updated!"],1,1,0,1)			
 			if recalulateRoute then
 				DGV:RemoveAllWaypoints()	
 				DGV.Modules.DugisArrow:VisitFlightmaster(key)
@@ -316,7 +340,7 @@ function TaxiDB:Initialize()
     end)
     
 	function TaxiDB:GetPackedPlayerLocation()
-		local mapId,level = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+		local mapId,level = DGV:GetCurrentMapID() 
 		local coord = GetCoord()
 		if coord then
 			return PackStrings(mapId, level, coord)
@@ -325,7 +349,7 @@ function TaxiDB:Initialize()
 	
 	--/run DugisGuideViewer.Modules.TaxiDB:ShowLocation()
 	function TaxiDB:ShowLocation(forceMapZone, forceLevel)
-		local mapId,level = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+		local mapId,level = DGV:GetCurrentMapID() 
 		local coord = GetCoord()
 		if coord then
 			DGV:DebugFormat("ShowLocation", "player location", PackStrings(mapId, level, coord))
@@ -339,13 +363,14 @@ function TaxiDB:Initialize()
 				mapId = forceMapZone
 			end
 			DGV:DebugFormat("ShowLocation", "pointer location", PackStrings(mapId, level, coord))
-			local zoneName = UpdateMapHighlight(x,y)
-			if zoneName then
-				local zoneId = DGV:GetZoneIdByName(zoneName)
+			
+            local positionMapInfo = C_Map.GetMapInfoAtPosition(mapId, x,y);	
+			if positionMapInfo and positionMapInfo.mapID then
+				local zoneId = positionMapInfo.mapID
 				DGV:DebugFormat("ShowLocation", "pointer map trans", zoneId)
 				DGV:DebugFormat("ShowLocation", "pointer map trans relative", 
-						PackStrings(level, DGV:PackXY(DGV:TranslateWorldMapPosition(
-							mapId, level, x, y, zoneId, level))))
+						PackStrings(level, DGV:PackXY(DGV:TranslateWorldMapPositionGlobal(
+							mapId, x, y, zoneId))))
 			end
 		end
 	end
@@ -368,7 +393,6 @@ function TaxiDB:Initialize()
 	end
 	
 	--[[local function StoreZoneDataPostTeleport()
-		local currentMapId = GetCurrentMapAreaID()
 		local currentLevel = GetCurrentMapDungeonLevel()
 		DGV:DebugFormat("OnZoneChanged", "currentMapId", currentMapId, "lastCast", DugisUnboundTeleports.lastCast)
 		for portId,data in pairs(DGV.Modules.TaxiData.UnboundTeleportData) do
@@ -401,7 +425,7 @@ function TaxiDB:Initialize()
 	end
 	
 	function TaxiDB:OnZoneChanged()
-		local mapId = GetCurrentMapAreaID()
+		local mapId = DGV:GetCurrentMapID() 
 		if not TaxiDataCollection then
 			TaxiDataCollection = {}
 		end
@@ -414,9 +438,9 @@ function TaxiDB:Initialize()
 	function TaxiDB:OnModulesLoaded()
 		if authorMode then
 			hooksecurefunc("TaxiNodeCost", function(event)
-				local cont = GetCurrentMapContinent()
+				local cont = GetCurrentMapContinent_dugi()
 				--if ( event == "TAXIMAP_OPENED" ) then
-					if cont == 8 or cont == 9 then
+					if cont == 8 or cont == 9 or cont == 875 or cont == 876 then
 					for i=1,NumTaxiNodes() do
 						local xyKey = DGV:PackXY(TaxiNodePosition(i))
 						local lookup = DGV.Modules.TaxiData:GetLookupTable()[cont][xyKey]				
@@ -492,15 +516,15 @@ function TaxiDB:Initialize()
 				contData[mTrans][mDest] = nil
 			end
 		
-			hooksecurefunc("WorldMapFrame_UpdateMap", function()
+			function TaxiDB:OnMapChangedOrOpen()
 				if not WorldMapFrame:IsShown() then return end
 				while #(previewPoints)>0 do
 					local ppt = tremove(previewPoints)
 					ppt:Hide()
 					tinsert(previewPointPool, ppt)
 				end
-				local mapId = GetCurrentMapAreaID()
-				local c = DGV:GetCZByMapId(mapId)
+				local mapId = DGV:GetCurrentMapID() 
+				local c = GetMapContinent_dugi(mapId)
 				local contData = TaxiDataCollection.ZoneTransData[c]
 				if contData and contData[mapId] then
 					for mDest,data in pairs(contData[mapId]) do
@@ -538,7 +562,7 @@ function TaxiDB:Initialize()
 						end
 					end
 				end
-			end)
+			end
 			
 			local function AddValue(contData, mTrans, mDest, level, coord)
 				local newVal = PackStrings(level, coord)
@@ -548,36 +572,6 @@ function TaxiDB:Initialize()
 					newVal = PackStrings(existing, newVal)
 				end
 				contData[mTrans][mDest] = newVal
-			end
-			
-			--/run DugisGuideViewer.Modules.TaxiDB:SetZoneTransition()
-			function TaxiDB:SetZoneTransition()
-				local mapId,level = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
-				local c = DGV:GetCZByMapId(mapId)
-				local allContData = TaxiDataCollection.ZoneTransData
-				if not allContData[c] then allContData[c] = {} end
-				local contData = allContData[c]
-				local coord = GetPointerCoord()
-				if coord then
-					local x,y = DGV:UnpackXY(coord)
-					local zoneName = UpdateMapHighlight(x,y)
-					if zoneName then
-						local zoneId = DGV:GetZoneIdByName(zoneName)
-						if zoneId then
-							AddValue(contData, mapId, zoneId, level, coord)
-							AddValue(contData, zoneId, mapId, level, 
-									DGV:PackXY(DGV:TranslateWorldMapPosition(
-										mapId, level, x, y, zoneId, level)))
-						end
-					end
-				end
-				DGV:SafeMapUpdate()
-			end
-			
-			--/run DugisGuideViewer.Modules.TaxiDB:ResetCollectedData()
-			function TaxiDB:ResetCollectedData()
-				TaxiDataCollection.ZoneTransData = nil
-				DugisFlightmasterLookupTable = nil
 			end
 		else
 			if TaxiDataCollection then
@@ -612,8 +606,13 @@ function TaxiDB:Initialize()
 						for _, val in ipairs({strsplit(":", data.direct)}) do
 							if strsub(val, 1, 3)=="XY-" then
 								local loc = strsub(val, 4)
-								local lookup =  DGV.Modules.TaxiData:GetLookupTable()[cont][tonumber(loc)]
-								tinsert(direct, lookup or val)
+								if cont and tonumber(loc) then
+									local contData = DGV.Modules.TaxiData:GetLookupTable()[cont]
+									if contData then
+										local lookup =  contData[tonumber(loc)]
+										tinsert(direct, lookup or val)
+									end
+								end
 							else
 								tinsert(direct, val)
 							end
@@ -628,9 +627,13 @@ function TaxiDB:Initialize()
 						for _, val in ipairs({strsplit(":", hops)}) do
 							if strsub(val, 1, 3)=="XY-" then
 								local loc = strsub(val, 4)
-								local lookup =  DGV.Modules.TaxiData:GetLookupTable()[cont][tonumber(loc)]
-								--DGV:DebugFormat("TaxiDB:Load", "lookup", lookup )
-								tinsert(indirect, lookup or val)
+								if cont and tonumber(loc) then
+									local contData = DGV.Modules.TaxiData:GetLookupTable()[cont]
+									if contData then
+										local lookup =  contData[tonumber(loc)]
+										tinsert(indirect, lookup or val)
+									end
+								end
 							else
 								tinsert(indirect, val)
 							end

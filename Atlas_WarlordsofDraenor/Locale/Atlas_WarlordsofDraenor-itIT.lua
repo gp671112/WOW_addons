@@ -1,10 +1,10 @@
--- $Id: Atlas_WarlordsofDraenor-itIT.lua 38 2017-01-16 09:27:19Z arith $
+-- $Id: Atlas_WarlordsofDraenor-itIT.lua 49 2018-08-09 14:02:33Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -28,31 +28,25 @@ local AceLocale = LibStub:GetLibrary("AceLocale-3.0");
 local L = AceLocale:NewLocale("Atlas_WarlordsofDraenor", "itIT", false);
 
 if L then
---Translation missing 
--- L["BRF"] = ""
---Translation missing 
--- L["BSM"] = ""
---Translation missing 
--- L["EB"] = ""
---Translation missing 
--- L["GD"] = ""
---Translation missing 
--- L["HM"] = ""
---Translation missing 
--- L["ID"] = ""
---Translation missing 
--- L["SBG"] = ""
---Translation missing 
--- L["SR"] = ""
---Translation missing 
--- L["Train Ride"] = ""
---Translation missing 
--- L["UBRS"] = ""
-
--- ToC
---Translation missing 
--- L["Description"] = ""
---Translation missing 
--- L["Title"] = ""
+--[[Translation missing --]]
+--[[ L["BRF"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["BSM"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["EB"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["GD"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["HM"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["ID"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["SBG"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["SR"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["Train Ride"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["UBRS"] = ""--]] 
 
 end

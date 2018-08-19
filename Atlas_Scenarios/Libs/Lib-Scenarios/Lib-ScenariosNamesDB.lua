@@ -1,5 +1,11 @@
--- $Id: Lib-ScenariosNamesDB.lua 8 2017-03-16 17:09:17Z arith $
-LibScenariosNames = {
+-- $Id: Lib-ScenariosNamesDB.lua 17 2018-04-24 09:17:50Z arith $
+local FOLDER_NAME, private = ...
+
+local Names = {}
+if not private.Scenarios then private.Scenarios = {} end
+private.Scenarios.Names = Names
+
+Names.DB = {
 ["15"] = { "Unga Ingoo", "Unga Ingu", "Unga Ingoo", "Unga Ingoo", "Unga Ingou", "Unga Ingu", "웅가 잉구", "Ungá Ingô", "Унга-Ингу", "盎迦猴岛", "仰加印古" };
 ["39"] = { "Crypt of Forgotten Kings", "Gruft der Vergessenen Könige", "Cripta de los Reyes Olvidados", "Cripta de los Reyes Olvidados", "Crypte des Rois oubliés", "Cripta degli Imperatori Dimenticati", "잊혀진 왕의 납골당", "Cripta dos Reis Esquecidos", "Гробница Забытых Королей", "遗忘之王古墓", "遺忘諸王墓穴" };
 ["40"] = { "Greenstone Village", "Grünstein", "Aldea Verdemar", "Aldea Verdemar", "Pierre-Verte", "Pietraverde", "녹옥 마을", "Aldeia Rocha Verde", "Деревня Зеленой Скалы", "绿石村", "綠石村" };

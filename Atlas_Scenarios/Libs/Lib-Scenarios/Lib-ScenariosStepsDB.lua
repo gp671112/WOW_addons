@@ -1,4 +1,10 @@
--- $Id: Lib-ScenariosStepsDB.lua 10 2017-03-20 14:37:52Z arith $
+-- $Id: Lib-ScenariosStepsDB.lua 17 2018-04-24 09:17:50Z arith $
+local FOLDER_NAME, private = ...
+
+local Steps = {}
+if not private.Scenarios then private.Scenarios = {} end
+private.Scenarios.Steps = Steps
+
 --[[
 LibScenariosStepsTempDB = { --{ "Scenario ID", "Step ID", "Steps", "enUS", "deDE", "esES", "esMX", "frFR", "itIT", "koKR", "ptBR", "ruRU", "zhCN", "zhTW" };
 { "15", "24", "0", "Escort Brewmaster Bo", "Eskortiert Braumeister Bo", "Escolta al maestro cervecero Bo", "Escolta al maestro cervecero Bo", "Escorter le maître brasseur Bo", "Scorta il Mastro Birraio Bo", "양조사 보 호위", "Escolte o Mestre Cervejeiro Bô", "Сопровождение хмелевара Бо", "护送珀酒仙", "護送釀酒大師阿波" };
@@ -7,7 +13,7 @@ LibScenariosStepsTempDB = { --{ "Scenario ID", "Step ID", "Steps", "enUS", "deDE
 };
 ]]
 
-LibScenariosStepsDB = { 
+Steps.DB = { 
 ["53"] = { 
 { "Scarlet Monastery", "Scharlachrotes Kloster", "Monasterio Escarlata", "Monasterio Escarlata", "Monastère Écarlate", "Monastero Scarlatto", "붉은십자군 수도원", "Monastério Escarlate", "Монастырь Алого ордена", "血色修道院", "血色修道院", }, 
 },

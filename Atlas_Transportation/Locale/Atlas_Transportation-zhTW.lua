@@ -92,9 +92,5 @@ L["Won't be available once the Battle for Andorhal chain is finished."] = "安�
 L["Yellow"] = "黃"
 L["Zeppelin Towers"] = "飛船空塔"
 
--- ToC
-L["Description"] = "|cff00CC33Atlas 交通網路圖插件，顯示各大陸的海陸空交通節點|r"
-L["Title"] = "|r|cFF0099FF[地圖]|rAtlas 交通網路圖"
-
 end
 

@@ -252,7 +252,7 @@ local function AutoroutinesOnUpdate()
 				local status = coroutine.status(autoroutine.coroutine)
 				local result, message
 				
-				if status ~="dead" then
+				if status ~="dead" and not UnitAffectingCombat("player") then
 					result, message = coroutine.resume(autoroutine.coroutine, Unpack(autoroutine))
 				end
 				
@@ -292,8 +292,16 @@ local function AutoroutinesOnUpdate()
                     timeLimit = functionKey2TimeLimit[autoroutine.key]
                 end
                 
-				if (now-startTime)>=timeLimit then
+				--Mechanism to keep the FPS not below certain level (about 30 FPS) during working on heavy tasks. For example Path searching, Gear Finder.
+				--Thanks to this mechanism we make sure it is comfortable to play the game with FPS not below about 30FPS and at the same time the given process/tasks 
+				--ends as quickly aspossible. 
+                if (now-startTime)>=timeLimit then
 					return
+				end
+				
+				--Preventing low FPS during a combat (when all threads/coroutines are "paused" anyway)
+				if UnitAffectingCombat("player") then
+					return 
 				end
 			else
 				Pool(autoroutines)

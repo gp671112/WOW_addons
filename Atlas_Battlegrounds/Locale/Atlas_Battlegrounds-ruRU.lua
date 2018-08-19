@@ -1,10 +1,10 @@
--- $Id: Atlas_Battlegrounds-ruRU.lua 1549 2017-06-29 08:12:15Z arith $
+-- $Id: Atlas_Battlegrounds-ruRU.lua 1553 2018-08-09 13:51:18Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 	Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -165,9 +165,5 @@ L["Wing Commander Vipore"] = "Командир звена Сквороц"
 L["Wintergrasp Graveyard"] = "Кладбище Озера Ледяных Оков"
 L["WSG"] = "УПВ"
 L["Wyvern Camp"] = "Гнездо виверн"
-
--- ToC
-L["Description"] = "Карты Полей Сражений"
-L["Title"] = "Atlas |r|cFF0099FF[Поля Сражений]|r"
 
 end

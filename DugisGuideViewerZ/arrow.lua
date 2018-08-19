@@ -10,6 +10,9 @@ if DugisGuideViewer.carboniteloaded then
 	CarboniteVersion = GetAddOnMetadata("Carbonite", "Version"):match("^([%d.]+)");
 end
 
+local HBD = LibStub("HereBeDragons-2.0")
+local pins = LibStub("HereBeDragons-Pins-2.0")
+
 local DugisArrow, L = DGV:RegisterModule("DugisArrow"), DugisLocals
 DugisArrowGlobal = DugisArrow 
 
@@ -370,6 +373,7 @@ function DugisArrow:Initialize()
         
         if not DugisArrow.foundRoute then
             setTexture = DugisArrow.NOROUTE
+			DugisArrow:SetScale()
             arrow:SetTexCoord(0,1,0,1)
             DugisArrowFrame.arrow:SetVertexColor(1,1,1)
        
@@ -391,7 +395,7 @@ function DugisArrow:Initialize()
                     local firstWaypoint = DugisArrow:getFirstWaypoint()
                     
                     if firstWaypoint and firstWaypoint.map then
-                        SetMapByID(firstWaypoint.map, firstWaypoint.floor)
+						LuaUtils:DugiSetMapByID(firstWaypoint.map)
                         DGV:UpdateMapPingForNoRoutePath()
                     end
                 end
@@ -423,10 +427,12 @@ function DugisArrow:Initialize()
 		local highest = 0
 		if DugisArrow.waypoints then
 			for k, v in ipairs(DugisArrow.waypoints) do
-				local match = v.desc:match(DESCRIPTION_PATTERN)
-				if match then
-					local num = tonumber(match)
-					highest = math.max(highest, num)
+				if v.desc then
+					local match = v.desc:match(DESCRIPTION_PATTERN)
+					if match then
+						local num = tonumber(match)
+						highest = math.max(highest, num)
+					end
 				end
 			end
 		end
@@ -477,7 +483,7 @@ function DugisArrow:Initialize()
 		end
 
 		DugisWaypointTooltip:SetOwner(self, "ANCHOR_BOTTOMLEFT")
-		DugisWaypointTooltip:AddLine(string.format("%s (%.2f, %.2f)", self.point.desc, self.point.x, self.point.y))
+		DugisWaypointTooltip:AddLine(string.format("%s (%.2f, %.2f)", self.point.desc or "", self.point.x or 0, self.point.y or 0))
 		DugisWaypointTooltip:Show()
 	end
 
@@ -551,6 +557,23 @@ function DugisArrow:Initialize()
 		
 		minipoint.arrow:Hide()
 		minipoint.icon:Show()
+        
+        if not minipoint.GetName_org then
+            minipoint.GetName_org = minipoint.GetName
+            minipoint.GetName = function()
+            
+                local stack = debugstack()
+                local isCalledByMinimapButtonFrameAddon = (string.find(stack, "MinimapButtonFrame") ~= nil)
+                
+                --To prevent MinimapButtonFrame addon anchoring waypoints
+                if isCalledByMinimapButtonFrameAddon then
+                    return "ActionBar"
+                else
+                    return minipoint:GetName_org()
+                end
+                
+            end
+        end
 
 		return minipoint
 	end
@@ -583,8 +606,14 @@ function DugisArrow:Initialize()
 		InterruptAutoroutine("RecalculateRoutes")
 	end
 	
+	local function SetGPSArrowPointPos(point, x, y)
+		point.GPSArrowPoint:ClearAllPoints()
+		point.GPSArrowPoint:SetPoint("CENTER", GPSArrow.map_overlay, "TOPLEFT", x,  y)	
+	end
+	
 	local function PlaceWaypoint(point)
-		local mapID, mapFloor, x, y, desc = point.map, point.floor, point.x, point.y, point.desc
+		local mapID, _, x, y, desc = point.map, point.floor, point.x, point.y, point.desc
+		local mapFloor = UiMapId2Floor(mapID)
         if not x then return end
 		point.worldmap = GetCreatePoint()
 		point.minimap = GetCreateMinimapPoint()
@@ -603,13 +632,16 @@ function DugisArrow:Initialize()
 		local guideIndex = DugisGuideUser.WaypointGuideIndex		
 		local virtual = 0
 		
-		if guideIndex and DugisGuideViewer:GuideOn() and DugisGuideViewer.chardb.EssentialsMode ~= 1 and DGV:isValidGuide(CurrentTitle) then 
+		if guideIndex and DugisGuideViewer:GuideOn() and DugisGuideViewer.chardb.EssentialsMode ~= 1 and DGV:isValidGuide(CurrentTitle) and DugisGuideViewer.tags then 
 			if #DGV:getCoords(guideIndex) == 1 and not DugisGuideUser.FinalizeWaypoint then 
 				virtual = 1 
 			end
 			lastWaypoint = #DGV:getCoords(guideIndex) - 1 + DugisArrow:GetTotalRouteWaypoints()
-			isWTag = DugisGuideViewer.tags[guideIndex]:match("(|LOOP|)")~=nil
-			isCircular = DugisGuideViewer.tags[guideIndex]:match("(|W|)")~=nil
+			local tag = DugisGuideViewer.tags[guideIndex]
+			if tag then
+				isWTag = tag:match("(|LOOP|)")~=nil
+				isCircular = tag:match("(|W|)")~=nil
+			end
 		end --need this for single waypoints with routes. 
 		
 		if isCircular and lastWaypoint and DugisArrow:getNumWaypoints() + virtual == lastWaypoint then
@@ -627,18 +659,26 @@ function DugisArrow:Initialize()
 			minimapSize = 16.5
 		end
 		point.worldmap.icon:SetTexture(texture)
-		point.worldmap.icon:SetDrawLayer("ARTWORK", -1)
-		local alpha = (GetCurrentMapDungeonLevel()~=mapFloor and .5) or 1
+		point.worldmap.icon:SetDrawLayer("ARTWORK", 5)
+		local alpha = (GetCurrentMapDungeonLevel_dugi()~=mapFloor and .5) or 1
 		point.worldmap.icon:SetAlpha(alpha)
 		point.worldmap:Show()
 		point.worldmap:SetHeight(worldmapSize)
 		point.worldmap:SetWidth(worldmapSize)
+		point.worldmap.baseSize = worldmapSize
+
+		function point:UpdateSize()
+			self.worldmap:SetWidth(self.worldmap.baseSize)
+			self.worldmap:SetHeight(self.worldmap.baseSize)
+		end
+		
+		point:UpdateSize()
         
         if GPSArrow then
 			point.GPSArrowPoint.icon:SetTexture(texture)
 		end
 		
-		local alpha = (GetCurrentMapDungeonLevel()~=mapFloor and .5) or 1
+		local alpha = (GetCurrentMapDungeonLevel_dugi()~=mapFloor and .5) or 1
 		
 		if GPSArrow then
 			point.GPSArrowPoint.icon:SetAlpha(1)
@@ -664,7 +704,8 @@ function DugisArrow:Initialize()
 			DugisGuideViewer:PlaceIconOnWorldMap( WorldMapButton, point.worldmap, mapID, mapFloor, x/100, y/100 )
             
 			if GPSArrow then
-				DugisGuideViewer:PlaceIconOnWorldMap(GPSArrow.map_overlay, point.GPSArrowPoint, mapID, mapFloor, x/100, y/100 )
+				local w, h = GPSArrow.map_overlay:GetWidth(), -GPSArrow.map_overlay:GetHeight()
+				SetGPSArrowPointPos(point, (x/100) * w,  (y/100) * h)
 			end
             
 			DugisGuideViewer:PlaceIconOnMinimap( point.minimap, mapID, mapFloor, x/100, y/100 )
@@ -709,7 +750,13 @@ function DugisArrow:Initialize()
 		return point
 	end
 	
-	local function AddWaypoint(mapID, mapFloor, x, y, desc)
+	function DugisArrow:OnMapChanged() 
+		LuaUtils:foreach(DugisArrow.waypoints or {}, function(waypoint)
+			waypoint:UpdateSize()
+		end)
+	end
+	
+	local function AddWaypoint(mapID, x, y, desc)
 		if DGV.currentAutoroutine and DGV.currentAutoroutine.key=="RecalculateRoutes" then
 			local point = DGV.GetCreateTable()
 			point.desc = desc
@@ -737,7 +784,7 @@ function DugisArrow:Initialize()
 	end
 	
 	function DGV:AddRouteWaypoint(mapID, mapFloor, x, y, desc, cue)
-		local point = AddWaypoint(mapID, mapFloor, x*100, y*100, desc)
+		local point = AddWaypoint(mapID, (x or 0)*100, (y or 0)*100, desc)
 		point.isRouteWaypoint = true
 		point.cue = cue
 		return point
@@ -755,12 +802,12 @@ function DugisArrow:Initialize()
 	end
 	
 	function DGV:AddCorpseWaypointChecked(mapID, mapFloor, x, y, desc)
-		local point = AddWaypoint(mapID, mapFloor, x*100, y*100, desc)
+		local point = AddWaypoint(mapID, x*100, y*100, desc)
 		point.isCorpseWaypoint = true
 		return point
 	end
 	
-	function DGV:AddRouteWaypointWithNoTrigger(mapID, mapFloor, x, y, desc)
+	function DGV:AddRouteWaypointWithNoTrigger(mapID, x, y, desc)
 		local point = DGV:AddRouteWaypoint(mapID, mapFloor, x, y, desc)
 		point.noTrigger = true
 		return point
@@ -799,7 +846,7 @@ function DugisArrow:Initialize()
 
     
     function DGV:AddCustomRouteWaypoint(x, y, desc, zoneNameOrId, mapFloor)
-		local m,f = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+		local m,f = DGV:GetCurrentMapID()
      
 		if m==-1 then m=0 end
 		if zoneNameOrId then
@@ -817,7 +864,7 @@ function DugisArrow:Initialize()
 	end
     
 	function DGV:AddCustomWaypoint(x, y, desc, zoneNameOrId, mapFloor, qid)
-		local m,f = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+		local m,f = DGV:GetCurrentMapID()
 		if m==-1 then m=0 end
 		if zoneNameOrId then
 			local id = DugisGuideViewer:GetZoneIdByName(zoneNameOrId)
@@ -842,30 +889,31 @@ function DugisArrow:Initialize()
 	end
 	
 	function DugisArrow:LocalCoordinate(m, f, x, y)
+    
+        local TaxiData = DugisGuideViewer.Modules.TaxiData
+    
 		--DGV:DebugFormat("LocalCoordinate", "args", {m, f, x, y})
 		if m==-1 then return end
-		local currentId,currentFloor = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+		local currentId,currentFloor = DGV:GetCurrentMapID()
 		if currentId~=m then
 			LuaUtils:DugiSetMapByID(m)
-			SetDungeonMapLevel(f)
 		end
-		local actualMapName = UpdateMapHighlight(x,y)
+        
+        local positionMapInfo = C_Map.GetMapInfoAtPosition(m, x,y);	
+        
 		if currentId~=m then
 			LuaUtils:DugiSetMapByID(currentId)
-			SetDungeonMapLevel(currentFloor)
 		end
-		if actualMapName then
-			local altId = DGV:GetZoneIdByName(actualMapName)
+		if positionMapInfo and positionMapInfo.mapID then
+			local altId = positionMapInfo.mapID
 			if altId then
 				local altFloor = f
-				if altId==321 and f==0 then --orgrimmar is the only map i know of w/0 a floor 0
+				if TaxiData.NonZeroOpenWorldFloors[altId] then
 					altFloor=1
 				end
-				x,y = DGV:TranslateWorldMapPosition(
-					m, f, 
-					x, y, 
-					altId, 
-					altFloor)
+				x,y = DGV:TranslateWorldMapPositionGlobal(
+					m,x, y, 
+					altId)
 				m = altId
 				f = altFloor
 			end
@@ -884,9 +932,8 @@ function DugisArrow:Initialize()
 			if mouseButton == "RightButton" then
 				local cX, cY = DugisGuideViewer:GetCurrentCursorPosition(DugisMapOverlayFrame)
 				if IsControlKeyDown() then DugisGuideViewer:RemoveAllWaypoints() end
-				local f = GetCurrentMapDungeonLevel()
-				local actualID = GetCurrentMapAreaID()
-				actualID, f, cX, cY = DugisArrow:LocalCoordinate(actualID, f, cX, cY)
+				local actualID = DGV:GetCurrentMapID()
+                actualID, f, cX, cY = DugisArrow:LocalCoordinate(actualID, f, cX, cY)
 				if not cY then return end
 				DGV:AddManualWaypoint(cX, cY, actualID, f)
 			elseif mouseButton == "LeftButton" then
@@ -932,9 +979,18 @@ function DugisArrow:Initialize()
 	hooksecurefunc("TakeTaxiNode", function(id)
 		if DugisArrow.loaded then
 			local x,y = TaxiNodePosition(id)
-			local cont = GetCurrentMapContinent()
-			local destNpc = DGV.Modules.TaxiData:GetLookupTable()[cont][DGV:PackXY(x,y)]
-			DugisArrow:VisitFlightmaster(destNpc)
+			y = 1 - y
+			local cont = GetCurrentMapContinent_dugi()
+			local lookupTable = DGV.Modules.TaxiData:GetLookupTable()
+			if lookupTable then
+				local conttable = lookupTable[cont]
+				if conttable then
+					local destNpc = conttable[DGV:PackXY(x,y)]
+					if destNpc then
+						DugisArrow:VisitFlightmaster(destNpc)
+					end
+				end
+			end
 		end
 	end)
 
@@ -971,12 +1027,12 @@ function DugisArrow:Initialize()
 				if desc then 
 					desc = "|cffffd200"..desc.."|r"..L[" (World Quest)"]
 				end				
-				_, m = C_TaskQuest.GetQuestZoneID(questId)
+				m = C_TaskQuest.GetQuestZoneID(questId)
 				if m then LuaUtils:DugiSetMapByID(m) end
-				f = GetCurrentMapDungeonLevel()
-                posX, posY = C_TaskQuest.GetQuestLocation(questId)
+				--f = GetCurrentMapDungeonLevel()
+                posX, posY = C_TaskQuest.GetQuestLocation(questId, m)
             elseif posX then 
-				m, f = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel() --needed for quest in microdungeons
+				m, f = DGV:GetCurrentMapID() --needed for quest in microdungeons
             else
                 m, f = LuaUtils:DugiGetQuestWorldMapAreaID(questId)
             end
@@ -992,32 +1048,14 @@ function DugisArrow:Initialize()
 			if posX and posX > 0 then
 				DGV:AddCustomWaypoint(posX, posY, desc, m, f, questId)
 				if DugisGuideViewer:IsModuleLoaded("Target") then DoOutOfCombat(DugisGuideViewer.Modules.Target.Frame.Hide, DugisGuideViewer.Modules.Target.Frame) end
-				--DGV:AddRouteWaypointWithNoTrigger(m, f, posX, posY, desc)
-				--DoOutOfCombat(SetUseItemByQID, questId)
 			end
 		end
 	end
 	--local landmarkType, name, description, textureIndex, x, y, mapLinkID, inBattleMap, graveyardID, areaID, poiID, isObjectIcon, atlasIcon = GetMapLandmarkInfo(i);	
 	function DugisArrow:LandMarkPOIWaypoint(poiButton, reset)
 		if not poiButton then return end
-		local posX, posY 
-		for i=1, GetNumMapLandmarks() do 
-			local landmarkType, name, description, textureIndex, x, y 
-            
-            if GetMapLandmarkInfo then
-                landmarkType, name, description, textureIndex, x, y = GetMapLandmarkInfo(i)
-            else
-                --For 7.2.0
-                landmarkType, name, description, textureIndex, x, y = C_WorldMap.GetMapLandmarkInfo(i)
-            end
-            
-			if name == poiButton.name then 
-				posX = x
-				posY = y
-				break
-			end
-		end
-		local m, f = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+		local posX, posY = poiButton.normalizedX, poiButton.normalizedY
+		local m, f = DGV:GetCurrentMapID()
 		if reset then DugisGuideViewer:RemoveAllWaypoints() end
 		if posX then 
 			DGV:AddCustomWaypoint(posX, posY, poiButton.name, m, f) 
@@ -1059,8 +1097,8 @@ function DugisArrow:Initialize()
 	function DugisArrow:EnableMapClicks()
         disabledClicksDugisArrow = false
 		if not DugisGuideViewer.carboniteloaded and not DugisArrow.old_WorldMapButtonOnClick then
-            DugisArrow.old_WorldMapButtonOnClick = WorldMapButton:GetScript("OnClick")
-            WorldMapButton:SetScript("OnClick", function(...)
+            DugisArrow.old_WorldMapButtonOnClick = WorldMapFrame.ScrollContainer:GetScript("OnMouseDown")
+            WorldMapFrame.ScrollContainer:SetScript("OnMouseDown", function(...)
                 if not disabledClicksDugisArrow then
                     DugisMapOverlayFrame_OnMouseUp(...)
                 end
@@ -1068,44 +1106,39 @@ function DugisArrow:Initialize()
 		end
 	end
 	
-	local function UpdatePosition()
+	local function UpdatePosition(setMapToCurrentZone)
 
 		local prev_map, prev_floor = DugisArrow.map, DugisArrow.floor
+		local _,_,_,x =  DugisGuideViewer:GetPlayerPosition()
 
 		if not WorldMapFrame:IsVisible() and not 
-			(DugisGuideViewer.carboniteloaded and NxMap1 and NxMap1:IsVisible())
+			(DugisGuideViewer.carboniteloaded and NxMap1 and NxMap1:IsVisible()) and x
 		then --NxMap1 is the Carbonite map
 			DugisArrow.map, DugisArrow.floor, DugisArrow.pos_x, DugisArrow.pos_y = DugisGuideViewer:GetPlayerPosition()
 
 		else --World Map Minimized
-			local x, y = GetPlayerMapPosition("player")
-			local floors
-			if IsLegion then
-				floors = #{ GetNumDungeonMapLevels() }
-			else
-				floors = GetNumDungeonMapLevels();
-			end						
-			local floor, map = GetCurrentMapDungeonLevel(), GetCurrentMapAreaID()
-			if (x and y) and (x > 0 and x < 1) and (y > 0 and y < 1) and (floors == 0 or floor > 0) and map ~= - 1 then
-				DugisArrow.pos_x, DugisArrow.pos_y = x, y
-				DugisArrow.map, DugisArrow.floor = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
-			end
+			local x, y = DGV:GetPlayerMapPosition()
+			local floors = 0
+			
+			DugisArrow.pos_x, DugisArrow.pos_y = x, y
 		end
 
 		local isInInstance = IsInInstance()
 
-		--hack to prevent astrolabe from lagging out in GetUnitPosition when floor changing or zone changing
-		GetCurrentMapAreaID()
-		if isInInstance and (DugisArrow.map ~= prev_map or DugisArrow.floor ~= prev_floor) then
-			DebugPrint("Map Change Detected")
-			LuaUtils:DugiSetMapToCurrentZone()
+		if setMapToCurrentZone then
+			if isInInstance and (DugisArrow.map ~= prev_map or DugisArrow.floor ~= prev_floor) then
+				DebugPrint("Map Change Detected")
+				LuaUtils:DugiSetMapToCurrentZone()
+			end
 		end
 	end
 
 	function DugisArrow:initArrow()
 		if not DugisMapOverlayFrame then
-			DugisArrow.map_overlay = CreateFrame("FRAME", "DugisMapOverlayFrame", WorldMapButton)
+			DugisArrow.map_overlay = CreateFrame("FRAME", "DugisMapOverlayFrame", WorldMapFrame.ScrollContainer.Child)
 			DugisArrow.map_overlay:SetAllPoints()
+			DugisArrow.map_overlay:SetFrameLevel(1000)
+			DugisArrow.map_overlay:SetFrameStrata("TOOLTIP")
 		end
 
 		if not DugisMinimapOverlayFrame then
@@ -1136,7 +1169,7 @@ function DugisArrow:Initialize()
 
 		DugisMapOverlayFrame:Show()
 		DugisMinimapOverlayFrame:Show()
-		UpdatePosition()
+		UpdatePosition(true)
 
 	end
 
@@ -1268,9 +1301,10 @@ function DugisArrow:Initialize()
 		local fmap,_ = DugisGuideViewer:ReturnTag("F")
 		
 		if lfgId and (DugisArrow.map~=lfgMap or (DugisArrow.map~=lfgMap and fmap==lfgMap)) and not DGV:IsLFGQueued() then
-			GetCreateArrowLFGFrame()
-			lfgFrame.button.queue = lfgId
-			lfgFrame:Show()
+			--Disable for now, sometime it appears for some map even though character is the correct map
+			--GetCreateArrowLFGFrame()
+			--lfgFrame.button.queue = lfgId
+			--lfgFrame:Show()
 		else
 			if lfgFrame then lfgFrame:Hide() end
 		end
@@ -1287,9 +1321,10 @@ function DugisArrow:Initialize()
 	local function OnUpdate(self, elapsed)
 
 		local text = ""
-		--print("Map="..DugisArrow.map.."Floor="..DugisArrow.floor.."xpos="..DugisArrow.pos_x.."ypos="..DugisArrow.pos_y.."map="..active_point.m.."floor="..active_point.f.."ap_x="..active_point.x.."ap_y"..active_point.y)
 
-		local dist, dx, dy = DugisGuideViewer:ComputeDistance(DugisArrow.map, DugisArrow.floor, DugisArrow.pos_x, DugisArrow.pos_y, active_point.m, active_point.f, active_point.x, active_point.y)
+		local playerX, playerY, playerM = DGV:GetPlayerLocalPosition(true)
+		
+		local dist, dx, dy = DugisGuideViewer:ComputeDistance(playerM, nil, playerX, playerY, active_point.m, nil, active_point.x, active_point.y)
 
 		if DGV.Modules.GPSArrowModule then
 			DGV.Modules.GPSArrowModule.DistanceChanged(dist, dx, dy, active_point.m, active_point.f)
@@ -1459,12 +1494,14 @@ function DugisArrow:Initialize()
 				end
 			end
             DugisArrow.foundRoute = true
-		elseif active_point.m == 1048 or --To force teleport portal regardless of cooldown
-		DugisArrow.map == 1048 or
-		active_point.m == 1044 or
-		DugisArrow.map == 1044 or
-		active_point.m == 1068 or
-		DugisArrow.map == 1068		
+		elseif active_point.m == 715 or --To force teleport portal regardless of cooldown
+		DugisArrow.map == 715 or
+		active_point.m == 709 or
+		DugisArrow.map == 709 or
+		active_point.m == 734 or
+		DugisArrow.map == 734 or		
+		active_point.m == 735 or
+		DugisArrow.map == 735		
 		then
 			wayframe.arrow:Hide()
 			DugisArrow:setArrowTexture( )
@@ -1478,9 +1515,11 @@ function DugisArrow:Initialize()
 		end
 	end
 
+	--[[ todo: find replacement
 	hooksecurefunc("WorldMapLevelDropDown_Update", function()
 		DGV:OnMapChangeUpdateArrow( )
 	end)
+	]]
 
 	--[[function DugisGuideViewer:GetPlayerPosition()
 		--DugisGuideViewer.astrolabe:GetCurrentPlayerPosition()--astrolabe initialization workaround
@@ -1488,9 +1527,8 @@ function DugisArrow:Initialize()
 	end]]
 
 	function DugisGuideViewer:CheckForArrowChange()
-		if DugisArrow.map == active_point.m and
-			IsInInstance() and
-			(DugisArrow.floor ~= active_point.f or (WorldMapFrame:IsVisible() and GetCurrentMapDungeonLevel() ~= active_point.f) ) then
+		if DugisArrow.map ~= active_point.m and
+			IsInInstance() then
 			self.WrongInstanceFloor = true
 		else
 			self.WrongInstanceFloor = nil
@@ -1500,7 +1538,7 @@ function DugisArrow:Initialize()
 	local lastElapsed = 0
 	local function AlwaysUpdate(reaction, event, elapsed)
 		-- Update Player Position
-		UpdatePosition()
+		UpdatePosition(false)
 	
 		if ((elapsed - DugisArrow.updatelast) > 1 ) then
 			DugisArrow:UPDATE()
@@ -1675,7 +1713,7 @@ function DugisArrow:Initialize()
 	local function SetWaypointMembersPostCalculation(mapID, mapFloor, x, y, desc, point, guideIndex, isWTag, questId)
 		if not point then
 			--DGV:DebugFormat("DugisArrow:AddWaypoint No route found")
-			point = AddWaypoint(mapID, mapFloor, x, y, desc)
+			point = AddWaypoint(mapID, x, y, desc)
 		end
 		point.isRouteWaypoint = nil
 		point.isRouteDestination = true
@@ -1717,7 +1755,7 @@ function DugisArrow:Initialize()
 
         local disabledTaxiSystem = not DGV:UserSetting(DGV_USETAXISYSTEM) or isWTag
 		if disabledTaxiSystem or (DugisArrow:getNumWaypoints()>0 and not forceCalculation) then
-			local point = AddWaypoint(mapID, mapFloor, x, y, desc)
+			local point = AddWaypoint(mapID, x, y, desc)
 			SetWaypointMembers(point, guideIndex, isWTag, questId)
 			return true
 		else
@@ -1842,7 +1880,7 @@ function DugisArrow:Initialize()
 			then
 				local pmap, pfloor, px, py = DGV:GetPlayerPosition()
 --DGV:DebugFormat("DidPlayerReachWaypoint", "pfloor", pfloor, "waypoint", waypoint)
-				if pfloor==waypoint.floor then
+				if pmap==waypoint.map then
 					return waypoint
 				end
 			end
@@ -1871,10 +1909,8 @@ function DugisArrow:Initialize()
         end
     end
 
-	function DugisArrow:GetDistanceToWaypoint(waypoint)
-		return DugisGuideViewer.astrolabe:GetDistanceToIcon(waypoint.minimap)
-	end
-
+	--was not used
+	
 	function DugisGuideViewer:PrintCoords()
 		for _, waypoint in pairs(DugisArrow.waypoints) do
 			DebugPrint("waypoints uid:"..waypoint.uid.." M:"..waypoint.map.." F:"..waypoint.floor.." X:"..waypoint.x.." Y:"..waypoint.y.." desc:"..waypoint.desc)
@@ -1884,9 +1920,12 @@ function DugisArrow:Initialize()
 	function RemoveWaypointAt(index)
 		local waypoint = table.remove(DugisArrow.waypoints, index)
 		if waypoint.tomtom then DugisArrow:RemoveTomTomWaypoint(waypoint.tomtom) end
-		DugisGuideViewer:RemoveMinimapIcon(waypoint.minimap)
+
 		waypoint.worldmap.icon:Hide()
 		waypoint.worldmap:Hide()
+        
+		DugisGuideViewer:RemoveMinimapIcon(waypoint.minimap)
+		DugisGuideViewer:RemoveWorldMapIcon(waypoint.worldmap)
         
 		if DGV.Modules.GPSArrowModule then 
 			waypoint.GPSArrowPoint.icon:Hide()
@@ -1986,7 +2025,7 @@ function DugisArrow:Initialize()
 	end
 
 	function DugisGuideViewer:RemoveMinimapIcon(point)
-		DugisGuideViewer.astrolabe:RemoveIconFromMinimap(point)
+		DugisGuideViewer:RemoveIconFromMinimap(point)
 	end
 	
 	function DugisArrow.UpdateWaypointsVisibility()
@@ -2021,8 +2060,8 @@ function DugisArrow:Initialize()
 	local square_half = math.sqrt(0.5)
 	function DugisArrow.Minimap_OnUpdate(self, elapsed)
 
-
-		local dist,x,y = DugisGuideViewer.astrolabe:GetDistanceToIcon(self)
+		--todo
+		local dist,x,y = 0 --DugisGuideViewer.astrolabe:GetDistanceToIcon(self)
 		if not dist then
 			self:Hide()
 			return
@@ -2036,8 +2075,7 @@ function DugisArrow:Initialize()
 		
 		minimap_counts[self] = 0
 
-		local edge = DugisGuideViewer.astrolabe:IsIconOnEdge(self)
-		
+		local edge = pins:IsMinimapIconOnEdge(self) 
 		self.edge = edge
 		
 		if ShouldShowStairs() then
@@ -2047,9 +2085,9 @@ function DugisArrow:Initialize()
 			self.icon:Hide()
 			self.arrow:Show()
 
-			local angle = DugisGuideViewer.astrolabe:GetDirectionToIcon(self)
+			local angle = pins:GetVectorToIcon(self)
 
-			angle = angle + rad_135
+			angle = (angle or 0) + rad_135
 			if GetCVar("rotateMinimap") == "1" then
 				local cring = GetPlayerFacing_dugi()
 				angle = angle - cring
@@ -2226,6 +2264,38 @@ function DugisArrow:Initialize()
         wayframe.noRouteButton.button:Hide()
 	end
 
+	local function HideInvisibleGPSWaypoints()
+		--Hidding GPS waypoints that should not be visible
+		LuaUtils:foreach(DugisArrowGlobal.waypoints, function(waypoint)
+			if not (waypoint.worldmap.icon:IsShown() and waypoint.worldmap:GetTop() and waypoint.worldmap:GetLeft()) then
+				waypoint.GPSArrowPoint:Hide()
+			end
+		end)
+	end	
+
+	function DugisGuideViewer:OnMapChangeUpdateGPSArrow( )
+		if DugisArrow.waypoints  then
+			local oldContinentId, continentId = GetCurrentMapContinent_dugi()
+			for index, waypoint in pairs(DugisArrow.waypoints) do
+				local w, h = GPSArrow.map_overlay:GetWidth(), -GPSArrow.map_overlay:GetHeight()
+				local x, y = DGV:TranslateWorldMapPosition(waypoint.map, _, waypoint.x/100, waypoint.y/100,  DGV:GetDisplayedOrPlayerMapId())
+				if x and y and w and h then
+					SetGPSArrowPointPos(waypoint, x * w,  y * h)
+					
+					if x > 1 or x < 0 or y > 1 or y < 0 then
+						waypoint.GPSArrowPoint:Hide()
+					else
+						waypoint.GPSArrowPoint:Show()
+					end
+                else
+                    waypoint.GPSArrowPoint:Hide()
+                end
+			end
+			
+			HideInvisibleGPSWaypoints()
+		end
+	end	
+	
 	function DugisArrow:WaypointsChanged()
 		wayframe.progress:Hide()
 		wayframe.title:Show()
@@ -2404,6 +2474,10 @@ function DugisArrow:Initialize()
 			DGV.Modules.GPSArrowModule.WaypointsChanged()
 		end
 		
+		DugisGuideViewer:OnMapChangeUpdateGPSArrow( )
+		
+		DGV:WorldMapFrameOnHide()
+		
 	end
 
 	--Notify us when TomTom removes waypoints, so we can delete our ant trail
@@ -2435,7 +2509,7 @@ function DugisArrow:Initialize()
 		if unit=="player" and DugisArrow.waypoints then
 			--DGV:DebugFormat("UNIT_SPELLCAST_SUCCEEDED", "spellName", spellName, "spellId", spellId)
 			for _, waypoint in pairs(DugisArrow.waypoints) do
-				if waypoint.spellRequirement==spellId or waypoint.spellID==spellId then
+				if spellId and (waypoint.spellRequirement==spellId or waypoint.spellID==spellId) then
 					DugisArrow:SetNextWaypoint(waypoint)
 					break
 				end
@@ -2444,8 +2518,8 @@ function DugisArrow:Initialize()
 	end
 
     function DGV:UpdateMapPingForNoRoutePath(hideOnly)
-        local currentMapId = GetCurrentMapAreaID()
-        local currentFloor = GetCurrentMapDungeonLevel()
+        local currentMapId = DGV:GetCurrentMapID()
+        --local currentFloor = GetCurrentMapDungeonLevel()
 
         if not DugisGuideViewer.Modules.MapPreview.WaypointMapPing then
             DugisGuideViewer.Modules.MapPreview:InitializeWaypointMapPing()
@@ -2457,7 +2531,7 @@ function DugisArrow:Initialize()
             local x, y = DugisGuideViewer:Waypoint2MapCoordinates(lastWaypoint)
             DugisGuideViewer.Modules.MapPreview.WaypointMapPing:SetPoint("CENTER", DugisMapOverlayFrame, "TOPLEFT", x, y)
             
-            if currentMapId == lastWaypoint.map and currentFloor == lastWaypoint.floor and not DugisArrow.foundRoute then
+            if currentMapId == lastWaypoint.map  and not DugisArrow.foundRoute then
                 if not hideOnly then
                     DugisGuideViewer.Modules.MapPreview.WaypointMapPing:Show()
                 end
@@ -2489,30 +2563,10 @@ function DugisArrow:Initialize()
             DGV:UpdateMapPingForNoRoutePath(true)
 			--DebugPrint("##################onMapChangeUpdateArrow")
 			if DugisArrow.waypoints and not UseCarboniteArrow() then
-                local c, z, m, f = GetCurrentMapContinent(), GetCurrentMapZone(), GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
+				local oldContinentId, continentId = GetCurrentMapContinent_dugi()
+                local c, z, m = oldContinentId, 0, DGV:GetCurrentMapID()
 				for index, waypoint in pairs(DugisArrow.waypoints) do
-                    if c ~= 0 then
-                        DugisGuideViewer:PlaceIconOnWorldMap( WorldMapButton, waypoint.worldmap, waypoint.map, waypoint.floor, waypoint.x/100, waypoint.y/100)
-                    else
-                        local new_x, new_y = DugisGuideViewer:TranslateWorldMapPosition(waypoint.map, waypoint.floor, waypoint.x/100, waypoint.y/100, 0, f)
-                        DugisGuideViewer:PlaceIconOnWorldMap( WorldMapButton, waypoint.worldmap, waypoint.map, waypoint.floor, waypoint.x/100, waypoint.y/100, new_x, new_y )
-                    end
-                    
-                    DugisGuideViewer:PlaceIconOnMinimap( waypoint.minimap, waypoint.map, waypoint.floor, waypoint.x/100, waypoint.y/100 )
-				end
-			end
-		end
-        
-		function DugisGuideViewer:OnMapChangeUpdateGPSArrow( )
-			if DugisArrow.waypoints  then
-                local c, z, m, f = GetCurrentMapContinent(), GetCurrentMapZone(), GetCurrentMapAreaID(), GetCurrentMapDungeonLevel()
-				for index, waypoint in pairs(DugisArrow.waypoints) do
-                    if c ~= 0 then
-                        DugisGuideViewer:PlaceIconOnWorldMap( GPSArrow.map_overlay, waypoint.GPSArrowPoint, waypoint.map, waypoint.floor, waypoint.x/100, waypoint.y/100)
-                    else
-                        local new_x, new_y = DugisGuideViewer:TranslateWorldMapPosition(waypoint.map, waypoint.floor, waypoint.x/100, waypoint.y/100, 0, f)
-                        DugisGuideViewer:PlaceIconOnWorldMap( GPSArrow.map_overlay, waypoint.GPSArrowPoint, waypoint.map, waypoint.floor, waypoint.x/100, waypoint.y/100, new_x, new_y )
-                    end
+					DugisGuideViewer:PlaceIconOnWorldMap( WorldMapButton, waypoint.worldmap, waypoint.map, waypoint.floor, waypoint.x/100, waypoint.y/100)
 				end
 			end
 		end
@@ -2615,13 +2669,13 @@ function DugisArrow:Initialize()
 						last and last.x, 
 						last and last.y)
 					if not point then
-						point = AddWaypoint(mapID, mapFloor, x, y, desc)
+						point = AddWaypoint(mapID, x, y, desc)
 					else
 						point.isRouteWaypoint = nil
 						point.isRouteDestination = true
 					end
 				else
-					point = AddWaypoint(mapID, mapFloor, x, y, desc)
+					point = AddWaypoint(mapID, x, y, desc)
 				end
 				last = location
 				point.guideIndex = guideIndex
@@ -2683,10 +2737,10 @@ function DugisArrow:Initialize()
 		local lastM, lastF
 		local function MapChangedPredicate()
 			if not WorldMapFrame or WorldMapFrame:IsShown() then return end
-			local x,y = GetPlayerMapPosition("player")
+			local x,y = DGV:GetPlayerMapPosition()
 			if not x or not y or (x==0 and y==0) then return end
 			if UnitOnTaxi("player") then return end
-			local m, f = GetCurrentMapAreaID(), GetCurrentMapDungeonLevel();
+			local m, f = DGV:GetCurrentMapID()
 			local isContinent = (DGV:GetCZByMapId(m))==0 and not IsInInstance()
 			if isContinent then return end
             
@@ -2696,8 +2750,9 @@ function DugisArrow:Initialize()
 			return changed
 		end
 		
-		RegisterReaction("WORLD_MAP_UPDATE"):WithPredicate(MapChangedPredicate):WithAction(RecalculateRoutes)
-			:DisposeOn(RegisterMemberFunctionReaction("DugisGuideViewer.Modules.DugisArrow", "Unload"))
+		--todo: find replacement
+		--RegisterReaction("WORLD_MAP_UPDATE"):WithPredicate(MapChangedPredicate):WithAction(RecalculateRoutes)
+		--	:DisposeOn(RegisterMemberFunctionReaction("DugisGuideViewer.Modules.DugisArrow", "Unload"))
 		
 		local function NotFlyingPredicate()
 			return not UnitOnTaxi("player")
@@ -2707,7 +2762,11 @@ function DugisArrow:Initialize()
 			:Or(RegisterReaction("ZONE_CHANGED_INDOORS"))
 			:Or(RegisterReaction("MINIMAP_UPDATE_ZOOM"))			
 			:WithPredicate(NotFlyingPredicate)
-			:WithAction(RecalculateRoutes)
+			:WithAction(function()
+                LuaUtils:Delay(5, function()
+                    RecalculateRoutes()
+                end)
+            end)
 			:DisposeOn(RegisterMemberFunctionReaction("DugisGuideViewer.Modules.DugisArrow", "Unload"))
 			
 		local function TaxiLandingPredicate()
@@ -2762,7 +2821,8 @@ function DugisArrow:Initialize()
 		end
         
         --WorldMapFrame
-        if WorldMapFrame and WorldMapFrame:IsShown() then
+        --[[ todo: find replacement
+		if WorldMapFrame and WorldMapFrame:IsShown() then
             local numPOIs = GetNumMapLandmarks();
             for i=1, numPOIs do
                 local _, name, _, _, x, y = C_WorldMap.GetMapLandmarkInfo(i)
@@ -2771,7 +2831,7 @@ function DugisArrow:Initialize()
                 y =  LuaUtils:Round(y, 7)
                 
                 --Antoran Wastes
-                if GetCurrentMapAreaID() == 1171 then
+                if DGV:GetCurrentMapID() == 1171 then
                     if x == 0.726423 and y == 0.7616945 then
                         TaxiData.currentBeaconMode = "lights-purchase"
                     end
@@ -2780,22 +2840,25 @@ function DugisArrow:Initialize()
                     end
                 end
             end               
-        end
+        end]]
 	end
 	
+	--[[  todo: find replacement
 	hooksecurefunc("WorldMapFrame_Update", function()
             UpdateCurrentBeaconMode()
             
 			if not DugisMapOverlayFrame then return end
-			if GetCurrentMapContinent() == WORLDMAP_COSMIC_ID 
-				and GetCurrentMapAreaID() == WORLDMAP_COSMIC_ID
-				and not select(4,GetMapInfo()) --mini dungeons falsely resolving WORLDMAP_COSMIC_ID
+			
+			local info = C_Map.GetCurrentMapInfo()
+			
+			if info.mapType == Enum.UIMapType.Cosmic
 			then
 				DugisMapOverlayFrame:Hide()
 			else
 				DugisMapOverlayFrame:Show()
 			end
 		end)
+	]]
 end
 
 function DugisArrow.RefreshRoute(delay)
@@ -2820,12 +2883,10 @@ end
 
 function DugisArrow.DetectTeleportUsage()
 	LuaUtils:Delay(2, function()
-		if not (GetCurrentMapZone() == 0 and GetCurrentMapDungeonLevel() == 0) then
-			if DugisLastPosition.z ~= GetCurrentMapZone() or DugisLastPosition.f ~= GetCurrentMapDungeonLevel() then
-				--Teleport or portal used
-				OnTeleportUsed()
-				DugisLastPosition.z, DugisLastPosition.f = GetCurrentMapZone(),  GetCurrentMapDungeonLevel()
-			end
-		end
+        if DugisLastPosition.mapId ~= nil and DugisLastPosition.mapId ~= C_Map.GetBestMapForUnit("player") then
+            --Teleport or portal used
+            OnTeleportUsed()
+        end
+        DugisLastPosition.mapId = C_Map.GetBestMapForUnit("player")
 	end)
 end

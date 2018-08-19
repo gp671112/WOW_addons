@@ -141,16 +141,18 @@ function NPCJournalFrame:Initialize()
 	end
 
 	function NPCJournalFrame:GetPlayersAllMountIds()
+		if not DGV:IsModuleRegistered("MountDataModule") then return end
 		local result = {}
+		
+		local ids = C_MountJournal.GetMountIDs()
 
-		for i=1,C_MountJournal.GetNumMounts() do
-			--Legion beta cheap fix
-			local _, spellID, _, _, _, _, _, _, _, _, isCollected =  C_MountJournal.GetMountInfoByID(i)
-			
+		LuaUtils:foreach(ids, function(id)
+			local _, spellID, _, _, _, _, _, _, _, _, isCollected = C_MountJournal.GetMountInfoByID(id)
+			MountJournalIndices[spellID] = id
 			if isCollected then
 				result[spellID] = true 
 			end
-		end
+		end)
 		
 		return result
 	end
@@ -210,10 +212,8 @@ function NPCJournalFrame:Initialize()
         local index = MountJournalIndices[spellId]
 		if not index then return end
 		--Legion beta cheap fix\
-        local creatureDisplayID, descriptionText, sourceText, isSelfMount, mountType = C_MountJournal.GetMountInfoByID(index)
+        local creatureDisplayID, descriptionText, sourceText, isSelfMount, mountType
 
-		--GetMountInfoByID doesn't work correctly for Legion Beta so the GetMountInfoExtraByID is used
-        
         if index ~= nil then
             creatureDisplayID, descriptionText, sourceText, isSelfMount, mountType = C_MountJournal.GetMountInfoExtraByID(index)
         end
@@ -850,7 +850,7 @@ function NPCJournalFrame:Initialize()
 			local id = tag_id[2]
 			--local name = GetCurrencyInfo(id)
 			local icon = select(3, GetCurrencyInfo(id))
-			local link = GetCurrencyLink(id)
+			local link = GetCurrencyLink(id, 1)
 			
 			if icon == nil and link then 
 				return link
@@ -894,7 +894,9 @@ function NPCJournalFrame:Initialize()
 			newText = string.gsub(newText, '%(', '')
 			local tag_id = LuaUtils:split(newText, ':')
 			local id = tag_id[2]
-			local name = GetMapNameByID(id)
+			
+			local UiMapID = DGV:OldMapId2UiMapID(id)
+			local name = DGV:GetMapNameFromID(id) 
 			if name then
                 if noColoring == true then
                     return LuaUtils:trim(name)
@@ -998,6 +1000,9 @@ function NPCJournalFrame:Initialize()
                     NPCObjects[NPCID].LVL =  LuaUtils:matchString(content, "|LVL|([^|]*)|")
                     NPCObjects[NPCID].ABIL =  LuaUtils:matchString(content, "|ABIL|([^|]*)|")
                     NPCObjects[NPCID].ABIL =  LuaUtils:split(NPCObjects[NPCID].ABIL, ',')
+                    
+                    --Prevented game crash/stack overflow
+                    content = content:gsub("|NDIS| |", "|NDIS||")
                     NPCObjects[NPCID].NDIS =  LuaUtils:matchString(content, "|NDIS|([^|]*)|")
                     NPCObjects[NPCID].NDIS =  LuaUtils:split(NPCObjects[NPCID].NDIS, ',')
                     NPCObjects[NPCID].ST =  LuaUtils:matchString(content, "|ST|([^|]*)|")
@@ -1277,7 +1282,9 @@ function NPCJournalFrame:Initialize()
 				local boss = BossObjects[item]
                 if not boss.alternative then
                     local title = DugisGuideViewer:GetLocalizedNPC(item)
-                    local map = GetMapNameByID(tonumber(BossObjects[item].MAPID))
+				--print("x", tonumber(BossObjects[item].MAPID))
+					local UiMapID = DGV:OldMapId2UiMapID(tonumber(BossObjects[item].MAPID))
+                    local map = DGV:GetMapNameFromID(UiMapID)
                     if not title then
                         title = "Boss: "..item
                     end
@@ -1491,7 +1498,7 @@ function NPCJournalFrame:Initialize()
 		self.strategyContent:SetFontObject(GameFontHighlight)
 		self.strategyContent:SetWidth(282)
 		self.strategyContent:SetHeight(510)
-		self.strategyContent:SetJustifyH("CENTER")
+		self.strategyContent:SetJustifyH("LEFT")
 		self.strategyContent:SetJustifyV("TOP")    
 		self.strategyContent:SetPoint("TOPLEFT", npcModelContainer, "TOPLEFT", 0, -170) 
 		self.strategyContent:SetSpacing(2)
@@ -1540,7 +1547,7 @@ function NPCJournalFrame:Initialize()
 		self.guideContent:SetFontObject(GameFontHighlight)
 		self.guideContent:SetWidth(282)
 		self.guideContent:SetHeight(510)
-		self.guideContent:SetJustifyH("CENTER")
+		self.guideContent:SetJustifyH("LEFT")
 		self.guideContent:SetJustifyV("TOP")    
 		self.guideContent:SetPoint("TOPLEFT", guideModelContainer, "TOPLEFT", 0, -170) 
 		self.guideContent:SetSpacing(2)
@@ -1553,7 +1560,7 @@ function NPCJournalFrame:Initialize()
 			self[item.name]:SetFontObject(GameFontHighlight)
 			self[item.name]:SetWidth(282)
 			self[item.name]:SetHeight(510)
-			self[item.name]:SetJustifyH("CENTER")
+			self[item.name]:SetJustifyH("LEFT")
 			self[item.name]:SetJustifyV("TOP")    
 			self[item.name]:SetPoint("TOPLEFT", contents[item.tab], "TOPLEFT", 7, -40) 
 			self[item.name]:SetSpacing(2)  

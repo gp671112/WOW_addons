@@ -1,10 +1,10 @@
--- $Id: Atlas-ruRU.lua 270 2017-06-29 14:22:48Z arith $
+-- $Id: Atlas-ruRU.lua 299 2018-02-22 15:07:35Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 	Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -30,8 +30,8 @@ local L = AceLocale:NewLocale("Atlas", "ruRU", false);
 -- Atlas Russian Localization
 -- Compiled by Eugene Filatov, bigoblin, StingerSoft
 -- Last Update: 23.01.2011
--- $Date: 2017-06-29 09:22:48 -0500 (Thu, 29 Jun 2017) $
--- $Revision: 270 $
+-- $Date: 2018-02-22 15:07:35 +0000 (Thu, 22 Feb 2018) $
+-- $Revision: 299 $
 
 if ( GetLocale() == "ruRU" ) then
 -- Define the leading strings to be ignored while sorting
@@ -335,10 +335,6 @@ L["Wave 6"] = "6-ая волна"
 L["West"] = "Запад"
 L["Yarley <Armorer>"] = "Ярли <Бронник>"
 L["Zaladormu"] = "Заладорму"
-
--- ToC
-L["Description"] = "Обозреватель подземелий"
-L["Title"] = "Atlas"
 
 
 end

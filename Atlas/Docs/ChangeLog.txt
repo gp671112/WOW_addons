@@ -1,8 +1,8 @@
-$Id: ChangeLog.txt 297 2017-09-19 15:10:04Z arith $
+$Id: ChangeLog.txt 318 2018-08-11 17:23:35Z arith $
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert at gmail dot com>
 Copyright 2010 - Lothaer <lothayer at gmail dot com>, Atlas Team
-Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 ==============
 Known Issues:
@@ -14,6 +14,48 @@ Known Issues:
 ==============
 = Change Log =
 ==============
+
+v1.44.03 (Aug. 12, 2018)
+------------------------
+- Lib Update: LibBabble-SubZone-3.0
+
+v1.44.02 (Aug. 11, 2018)
+------------------------
+- Libs update: 
+  - LibUIDropDownMenu
+
+v1.44.01 (Aug. 11, 2018)
+------------------------
+- Fixed old function call GetCurrentMapAreaID() and remove it as no longer needed
+- Fixed issues when Atlas was previously loaded with more map modules and was selected in the later one 
+  from the dropdown, but then less map modules were loaded in the fresh login
+- Libs update: 
+  - LibDBIcon
+
+v1.44.00 (Aug. 09, 2018)
+------------------------
+- ToC update to support WoW 8.0.1
+- Libraries update
+- WorldMap integration fixed
+- Update EJ related functions
+- Splitting the development-used-only lib folder and release one
+- Update the function to bring up WoW's default map from Atlas
+
+v1.43.06 (Apr. 24, 2018)
+------------------------
+- Library updtae: LibUIDropDownMenu
+
+v1.43.05 (Mar. 04, 2018)
+------------------------
+- Libs update: 
+  - LibDBIcon
+  - AceConfig
+
+v1.43.04 (Feb. 22, 2018)
+------------------------
+- Libs update: 
+  - LibBabble-Boss
+  - LibBabble-Faction
 
 v1.43.03 (Sep. 19, 2017)
 ------------------------

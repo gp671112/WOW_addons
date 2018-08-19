@@ -1,3 +1,27 @@
+## 1.28
+- Change indicators to display below most UI elements
+- Prevent multiple indicators from displaying on the same unit
+- Add separate config files for each unit
+- Add config options to control the opacity of indicators
+
+## 1.27
+- Add support for a separate focus indicator
+
+## 1.26
+- Fix LibNameplateRegistry not being packaged correctly by the BigWigs packager script
+
+## 1.25
+- Bump TOC Interface version to 8.0
+- Add .travis.yml file and TOC properties for the BigWigs packager script
+	- https://www.wowinterface.com/forums/showthread.php?t=55801
+
+## 1.24
+- Add support for a separate mouseover indicator
+
+## 1.23
+- Add support for separate self target indicator options (for the class resource bars, which are implemented as a nameplate)
+- Add per-target type option to show/hide target indicator
+
 ## 1.22
 - Add support for separate friendly and hostile target indicator configurations
 

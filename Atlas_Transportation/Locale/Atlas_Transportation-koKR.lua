@@ -78,8 +78,8 @@ L["Taxi Nodes"] = "비행 경로"
 L["Teleportation Nexus"] = "순간이동 거점"
 L["The Bogpaddle Bullet"] = "수렁진흙탕 총알로켓"
 L["Transportation Maps"] = "탈것 지도"
---Translation missing 
--- L["Transporter"] = ""
+--[[Translation missing --]]
+--[[ L["Transporter"] = ""--]] 
 L["Transporters by the sea and on the cliff"] = "바닷가 절벽 위에 있는 순간이동기"
 L["Two ways portal"] = "양방향 차원문"
 L["Warning: Drop"] = "경고: 낙하"
@@ -92,9 +92,5 @@ L["Wind Rider Master"] = "와이번 조련사"
 L["Won't be available once the Battle for Andorhal chain is finished."] = "일단 안돌할 전투 연계 퀘스트를 완료하면 이용할 수 없습니다."
 L["Yellow"] = "노란색"
 L["Zeppelin Towers"] = "비행선 탑승장"
-
--- ToC
-L["Description"] = "탈것 지도"
-L["Title"] = "Atlas |r|cFF0099FF[탈것]|r"
 
 end

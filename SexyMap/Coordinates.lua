@@ -18,6 +18,7 @@ local options = {
 			type = "toggle",
 			name = L["Enable Coordinates"],
 			order = 1,
+			width = "full",
 			get = function()
 				return mod.db.enabled
 			end,
@@ -33,70 +34,38 @@ local options = {
 			end,
 			disabled = false,
 		},
-		lock = {
-			type = "toggle",
-			name = L["Lock Coordinates"],
+		xOffset = {
+			type = "range",
+			name = L["Horizontal Position"],
 			order = 2,
-			width = "double",
-			get = function()
-				return mod.db.locked
-			end,
-			set = function(info, v)
-				mod.db.locked = v
-			end,
+			min = -250,
+			max = 250,
+			step = 1,
+			bigStep = 5,
+			get = function() return mod.db.xOffset end,
+			set = function(info, v) mod.db.xOffset = v mod:Update() end
 		},
-		fontColor = {
-			type = "color",
-			name = L["Font Color"],
+		yOffset = {
+			type = "range",
+			name = L["Vertical Position"],
 			order = 3,
-			hasAlpha = true,
-			get = function()
-				local c = mod.db.fontColor
-				local r, g, b, a = c.r or 0, c.g or 0, c.b or 0, c.a or 1
-				return r, g, b, a
-			end,
-			set = function(info, r, g, b, a)
-				local c = mod.db.fontColor
-				c.r, c.g, c.b, c.a = r, g, b, a
-				mod:Update()
-			end
+			min = -250,
+			max = 250,
+			step = 1,
+			bigStep = 5,
+			get = function() return mod.db.yOffset end,
+			set = function(info, v) mod.db.yOffset = v mod:Update() end
 		},
-		backgroundColor = {
-			type = "color",
-			name = L["Backdrop Color"],
+		spacer1 = {
 			order = 4,
-			hasAlpha = true,
-			get = function()
-				local c = mod.db.backgroundColor
-				local r, g, b, a = c.r or 0, c.g or 0, c.b or 0, c.a or 1
-				return r, g, b, a
-			end,
-			set = function(info, r, g, b, a)
-				local c = mod.db.backgroundColor
-				c.r, c.g, c.b, c.a = r, g, b, a
-				mod:Update()
-			end
-		},
-		borderColor = {
-			type = "color",
-			name = L["Border Color"],
-			order = 5,
-			hasAlpha = true,
-			get = function()
-				local c = mod.db.borderColor
-				local r, g, b, a = c.r or 0, c.g or 0, c.b or 0, c.a or 1
-				return r, g, b, a
-			end,
-			set = function(info, r, g, b, a)
-				local c = mod.db.borderColor
-				c.r, c.g, c.b, c.a = r, g, b, a
-				mod:Update()
-			end
+			type = "description",
+			width = "normal",
+			name = " ",
 		},
 		fontSize = {
 			type = "range",
 			name = L["Font Size"],
-			order = 6,
+			order = 5,
 			min = 8,
 			max = 30,
 			step = 1,
@@ -112,39 +81,90 @@ local options = {
 		font = {
 			type = "select",
 			name = L["Font"],
-			order = 7,
-			dialogControl = "LSM30_Font",
-			values = AceGUIWidgetLSMlists.font,
+			order = 6,
+			values = media:List("font"),
+			itemControl = "DDI-Font",
 			get = function()
-				if not coordsText then return end
-				local font = nil
-				local curFont = coordsText:GetFont()
-				for k,v in pairs(AceGUIWidgetLSMlists.font) do
-					if v == curFont then
-						font = k
-						break
-					end
+				for i, v in next, media:List("font") do
+					if v == mod.db.font then return i end
 				end
-				return mod.db.font or font
 			end,
-			set = function(info, v)
-				mod.db.font = v
+			set = function(_, value)
+				local list = media:List("font")
+				local font = list[value]
+				mod.db.font = font
+				mod:Update()
+			end,
+		},
+		spacer2 = {
+			order = 7,
+			type = "description",
+			width = "normal",
+			name = " ",
+		},
+		fontColor = {
+			type = "color",
+			name = L["Font Color"],
+			order = 8,
+			hasAlpha = true,
+			get = function()
+				local c = mod.db.fontColor
+				local r, g, b, a = c.r or 1, c.g or 1, c.b or 1, c.a or 1
+				return r, g, b, a
+			end,
+			set = function(info, r, g, b, a)
+				local c = mod.db.fontColor
+				c.r, c.g, c.b, c.a = r, g, b, a
 				mod:Update()
 			end
 		},
-		spacer = {
-			order = 8,
-			type = "description",
-			width = "normal",
-			name = "",
-		},
-		reset = {
-			type = "execute",
-			name = L["Reset Position"],
+		backgroundColor = {
+			type = "color",
+			name = L["Backdrop Color"],
 			order = 9,
-			func = function()
-				mod:ResetPosition()
+			hasAlpha = true,
+			get = function()
+				local c = mod.db.backgroundColor
+				local r, g, b, a = c.r or 0, c.g or 0, c.b or 0, c.a or 1
+				return r, g, b, a
 			end,
+			set = function(info, r, g, b, a)
+				local c = mod.db.backgroundColor
+				c.r, c.g, c.b, c.a = r, g, b, a
+				mod:Update()
+			end
+		},
+		borderColor = {
+			type = "color",
+			name = L["Border Color"],
+			order = 10,
+			hasAlpha = true,
+			get = function()
+				local c = mod.db.borderColor
+				local r, g, b, a = c.r or 0, c.g or 0, c.b or 0, c.a or 1
+				return r, g, b, a
+			end,
+			set = function(info, r, g, b, a)
+				local c = mod.db.borderColor
+				c.r, c.g, c.b, c.a = r, g, b, a
+				mod:Update()
+			end
+		},
+		updateRate = {
+			type = "range",
+			name = L.updateRate,
+			desc = L.updateRateDesc,
+			order = 11,
+			width = "full",
+			min = 0.1,
+			max = 1,
+			step = 0.1,
+			get = function()
+				return mod.db.updateRate
+			end,
+			set = function(info, v)
+				mod.db.updateRate = v
+			end
 		},
 	}
 }
@@ -154,12 +174,30 @@ function mod:OnInitialize(profile)
 		profile.coordinates = {
 			borderColor = {},
 			backgroundColor = {},
-			locked = false,
 			fontColor = {},
 			enabled = false,
+			updateRate = 1,
+			xOffset = 0,
+			yOffset = 10,
+			font = media:GetDefault("font"),
 		}
 	end
 	self.db = profile.coordinates
+	-- XXX temp 7.3.5
+	if not profile.coordinates.updateRate then
+		profile.coordinates.updateRate = 1
+	end
+	-- XXX temp 8.0.1
+	if not profile.coordinates.xOffset then
+		profile.coordinates.xOffset = 0
+		profile.coordinates.yOffset = 10
+		profile.coordinates.x = nil
+		profile.coordinates.y = nil
+		profile.coordinates.locked = nil
+	end
+	if not profile.coordinates.font then
+		profile.coordinates.font = media:GetDefault("font")
+	end
 end
 
 function mod:OnEnable()
@@ -177,45 +215,25 @@ function mod:CreateFrame()
 		coordsText = coordFrame:CreateFontString(nil, nil, "GameFontNormalSmall")
 		coordsText:SetPoint("CENTER", coordFrame, "CENTER")
 		coordsText:SetJustifyH("CENTER")
-		coordsText:SetText("00.0, 00.0")
+		coordsText:SetText("0.0, 0.0")
+		coordFrame:SetClampedToScreen(true)
 
-		coordFrame:SetMovable(true)
-		coordFrame:EnableMouse()
-
-		coordFrame:SetScript("OnMouseDown", function(self)
-			if not mod.db.locked then
-				self:StartMoving()
-				self.moving = true
-			end
-		end)
-		coordFrame:SetScript("OnMouseUp", function(self)
-			if self.moving then
-				self.moving = nil
-				self:StopMovingOrSizing()
-				local x, y = self:GetCenter()
-				local mx, my = Minimap:GetCenter()
-				local dx, dy = mx - x, my - y
-				self:ClearAllPoints()
-				self:SetPoint("CENTER", Minimap, "CENTER", -dx, -dy)
-				mod.db.x = dx
-				mod.db.y = dy
-			end
-		end)
-
-		local GetPlayerMapPosition = GetPlayerMapPosition
+		local GetPlayerMapPosition = C_Map.GetPlayerMapPosition
+		local GetBestMapForUnit = C_Map.GetBestMapForUnit
 		local CTimerAfter = C_Timer.After
 		local function updateCoords()
-			CTimerAfter(0.1, updateCoords)
-			local x, y = GetPlayerMapPosition"player"
-			coordsText:SetFormattedText("%.1f, %.1f", x and x*100 or 0, y and y*100 or 0)
+			CTimerAfter(mod.db.updateRate, updateCoords)
+			local uiMapID = GetBestMapForUnit"player"
+			if uiMapID then
+				local tbl = GetPlayerMapPosition(uiMapID, "player")
+				if tbl then
+					coordsText:SetFormattedText("%.1f, %.1f", tbl.x*100, tbl.y*100)
+				else
+					coordsText:SetText("0.0, 0.0")
+				end
+			end
 		end
 		updateCoords()
-	end
-	if mod.db.x then
-		coordFrame:ClearAllPoints()
-		coordFrame:SetPoint("CENTER", Minimap, "CENTER", -mod.db.x, -mod.db.y)
-	else
-		coordFrame:SetPoint("CENTER", Minimap, "BOTTOM", 0, 10)
 	end
 
 	coordFrame:Show()
@@ -223,6 +241,8 @@ function mod:CreateFrame()
 end
 
 function mod:Update()
+	coordFrame:SetPoint("CENTER", Minimap, "BOTTOM", mod.db.xOffset, mod.db.yOffset)
+
 	if mod.db.borderColor then
 		local c = mod.db.borderColor
 		coordFrame:SetBackdropBorderColor(c.r or 0, c.g or 0, c.b or 0, c.a or 1)
@@ -238,16 +258,11 @@ function mod:Update()
 		coordsText:SetTextColor(c.r or 1, c.g or 1, c.b or 1, c.a or 1)
 	end
 
-	local a, b, c = coordsText:GetFont()
-	coordsText:SetFont(mod.db.font and media:Fetch("font", mod.db.font) or a, mod.db.fontSize or b, c)
+	local _, b, c = coordsText:GetFont()
+	coordsText:SetFont(media:Fetch("font", mod.db.font), mod.db.fontSize or b, c)
 
+	coordsText:SetText("99.9, 99.9")
 	coordFrame:SetWidth(coordsText:GetStringWidth() * 1.2)
 	coordFrame:SetHeight(coordsText:GetStringHeight() + 10)
-end
-
-function mod:ResetPosition()
-	coordFrame:ClearAllPoints()
-	coordFrame:SetPoint("CENTER", Minimap, "BOTTOM")
-	mod.db.x, mod.db.y = nil, nil
 end
 

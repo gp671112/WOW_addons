@@ -1,6 +1,0 @@
-## Interface: 70100
-## Title: SkadaPlus
-## Title-zhTW: |cFFFFBB00[傷害統計]|rSkada中文單位
-## Author: 苏彩彩
-## Dependencies: Skada
-SkadaPlus.lua

@@ -1,10 +1,10 @@
- -- $Id: Atlas_OutdoorRaids-itIT.lua 25 2017-01-19 07:42:24Z arith $
+ -- $Id: Atlas_OutdoorRaids-itIT.lua 50 2018-08-08 17:30:20Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -29,10 +29,10 @@ local L = AceLocale:NewLocale("Atlas_OutdoorRaids", "frFR", false);
 
 if L then
 L["Ancient Skull Pile"] = "Ancienne pile de crânes"
---Translation missing 
--- L["Broken Isles World Bosses"] = ""
---Translation missing 
--- L["Broken Shore World Bosses"] = ""
+--[[Translation missing --]]
+--[[ L["Broken Isles World Bosses"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["Broken Shore World Bosses"] = ""--]] 
 L["Darkscreecher Akkarai"] = "Akkarai le Hurle-sombre"
 L["Draenor World Bosses"] = "Boss de Monde de Draenor"
 L["Gezzarak the Huntress"] = "Gezzarak la Chasseresse"
@@ -54,10 +54,5 @@ L["Talonpriest Skizzik"] = "Prêtre de la serre Skizzik"
 L["Talonpriest Zellek"] = "Prêtre de la serre Zellek"
 L["Terokk"] = "Terokk"
 L["Vakkiz the Windrager"] = "Vakkiz le Ragevent"
-
--- ToC
-L["Description"] = "Rencontres de Raid"
---Translation missing 
--- L["Title"] = ""
 
 end

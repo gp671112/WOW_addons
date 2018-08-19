@@ -1,7 +1,6 @@
-Copyright (c) 2017, Titan Panel Development Team 
+Copyright (c) 2018, Titan Panel Development Team 
 
 All rights reserved.
-
 
 Redistribution without modification, is permitted under the following conditions:
 
@@ -10,14 +9,17 @@ Redistribution without modification, is permitted under the following conditions
     * Redistributions in binary form must reproduce the above copyright notice, 
       this list of conditions and the following disclaimer in the documentation 
       and/or other materials provided with the distribution.
-    * Redistribution or providing means for redistribution of a release package (in compressed form or otherwise)
-      is prohibited without prior written authorization from a representative of the Titan Panel Development Team. 
-      Release versions (packages) hosted on officially endorsed websites are excluded from this clause.
-      The Titan Panel Development Team reserves the right, at its sole discretion, to authorize additional websites
-      to host the Software at their location and provide redistribution services. In addition, the Titan Panel
-      Development Team reserves the right to cease Software updates without prior notice or ask for removal of versions
-      of the Software, from specific Internet locations that were previously authorized to host the Software.
-
+    * Redistribution or providing means for redistribution of a release package
+      (in compressed form or otherwise) is prohibited without prior written
+      authorization from a representative of the Titan Panel Development Team. 
+      Release versions (packages) hosted on officially endorsed websites are
+      excluded from this clause.  The Titan Panel Development Team reserves the
+      right, at its sole discretion, to authorize additional websites to host
+      the Software at their location and provide redistribution services. In
+      addition, the Titan Panel Development Team reserves the right to cease
+      Software updates without prior notice or ask for removal of versions of
+      the Software, from specific Internet locations that were previously
+      authorized to host the Software.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT

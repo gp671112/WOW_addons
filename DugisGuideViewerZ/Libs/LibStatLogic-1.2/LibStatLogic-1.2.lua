@@ -1212,10 +1212,10 @@ StatLogic.PlayerHasAura = PlayerHasAura
 
 
 local function GetPlayerAuraRankStack(buff)
-	--name, rank, icon, stack, debuffType, duration, expirationTime, isMine, isStealable = UnitAura("player", buff)
-	local name, rank, _, stack = UnitBuff("player", buff)
+	--name, icon, stack, debuffType, duration, expirationTime, isMine, isStealable = UnitAura("player", buff)
+	local name, _, stack = UnitBuff("player", buff)
 	if not name then -- if not a buff, check for debuff
-		name, rank, _, stack = UnitDebuff("player", buff)
+		name, _, stack = UnitDebuff("player", buff)
 	end
 	if name then
 		if not stack or stack == 0 then

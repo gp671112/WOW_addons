@@ -7,7 +7,7 @@
 --		Banjankri of Blackrock, Predeter of Proudmoore, Xenyr of Aszune
 
 -- Currently maintained by
--- Cybeloras of Aerie Peak/Detheroc/Mal'Ganis
+-- Cybeloras of Aerie Peak
 
 -- This file's code is heavily modified from Blizzard's UIDropDownMenu code.
 -- --------------------
@@ -274,16 +274,21 @@ function DD:AddButton(info, level)
 			width = width - 30;
 		end
 		-- Set icon
-		if ( info.icon ) then
-			icon:SetTexture(info.icon);
-			icon:ClearAllPoints();
-			icon:SetPoint("RIGHT");
+		if ( info.icon or info.atlas ) then
+			if info.icon then
+				icon:SetTexture(info.icon);
 
+			elseif info.atlas then
+				icon:SetAtlas(info.atlas);
+			end
+			
 			if ( info.tCoordLeft ) then
 				icon:SetTexCoord(info.tCoordLeft, info.tCoordRight, info.tCoordTop, info.tCoordBottom);
 			else
 				icon:SetTexCoord(0, 1, 0, 1);
 			end
+			icon:ClearAllPoints();
+			icon:SetPoint("RIGHT");
 			icon:Show();
 			-- Add padding for the icon
 			width = width + 10;
@@ -436,28 +441,6 @@ end
 
 
 
-
-function DD:SetIconImage(icon, texture, info)
-	icon:SetTexture(texture);
-	if ( info.tCoordLeft ) then
-		icon:SetTexCoord(info.tCoordLeft, info.tCoordRight, info.tCoordTop, info.tCoordBottom);
-	else
-		icon:SetTexCoord(0, 1, 0, 1);
-	end
-	if ( info.tSizeX ) then
-		icon:SetWidth(info.tSizeX);
-	else
-		icon:SetWidth(16);
-	end
-	if ( info.tSizeY ) then
-		icon:SetHeight(info.tSizeY);
-	else
-		icon:SetHeight(16);
-	end
-	icon:Show();
-end
-
-
 function DD.Button_OnClick(self)
 	local checked = self.checked;
 	if ( type (checked) == "function" ) then
@@ -488,7 +471,7 @@ function DD.Button_OnClick(self)
 	local func = self.func;
 	if ( func ) then
 		func(self, self.arg1, self.arg2, checked);
-		PlaySound(SOUNDKIT and SOUNDKIT.U_CHAT_SCROLL_BUTTON or "UChatScrollButton") -- SOUNDKIT is patch 7.3 compat
+		PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON)
 	end
 
 end
@@ -937,7 +920,7 @@ TMW:NewClass("Config_DropDownMenu_Icon", "Config_DropDownMenu"){
 	SetUIDropdownGUIDText = function(self, GUID, text)
 		self.selectedValue = GUID
 
-		local owner = TMW.GUIDToOwner[GUID]
+		local owner = TMW:GetDataOwner(GUID)
 		local type = TMW:ParseGUID(GUID)
 
 		if owner then
@@ -959,6 +942,11 @@ TMW:NewClass("Config_DropDownMenu_Icon", "Config_DropDownMenu"){
 		elseif GUID and GUID ~= "" then
 			if type == "icon" then
 				text = L["UNKNOWN_ICON"]
+
+				local ics = TMW:GetSettingsFromGUID(GUID)
+				if ics then
+					text = TMW:GetIconMenuText(ics)
+				end
 			elseif type == "group" then
 				text = L["UNKNOWN_GROUP"]
 			else
@@ -969,21 +957,39 @@ TMW:NewClass("Config_DropDownMenu_Icon", "Config_DropDownMenu"){
 		self:SetText(text)
 	end,
 
-	SetIconPreviewIcon = function(self, icon)
-		if not icon or not icon.IsIcon then
-			self.IconPreview:Hide()
+	SetIconPreviewIcon = function(self, GUID)
+		local icon = TMW:GetDataOwner(GUID)
+		local type = TMW:ParseGUID(GUID)
+
+		self.IconPreview:Hide()
+		if type ~= "icon" then
 			return
 		end
 
-		local desc = L["ICON_TOOLTIP2NEWSHORT"]
+		local title, desc, texture
+		if not icon then
+			local ics, _, gs, domain, groupID, iconID = TMW:GetSettingsFromGUID(GUID)
+			if not ics then return end
 
-		if TMW.db.global.ShowGUIDs then
-			desc = desc .. "\r\n\r\n|cffffffff" .. (not icon.TempGUID and (icon:GetGUID() .. "\r\n") or "") .. icon.group:GetGUID()
+			texture = TMW:GuessIconTexture(ics)
+			title = L["GROUPICON"]:format(TMW:GetGroupName(gs.Name, groupID, 1), iconID)
+
+			self.IconPreview.texture:SetTexture(tex)
+		else
+			desc = L["ICON_TOOLTIP2NEWSHORT"]
+			title = icon:GetIconName()
+			texture = icon and icon.attributes.texture
 		end
 
-		TMW:TT(self.IconPreview, icon:GetIconName(), desc, 1, 1)
+		if TMW.db.global.ShowGUIDs then
+			if not desc then
+				desc = ""
+			end
+			desc = desc .. "\r\n\r\n|cffffffff" .. GUID .. (icon and ("\r\n" .. icon.group:GetGUID()) or "")
+		end
+		TMW:TT(self.IconPreview, title, desc, 1, 1)
 		self.IconPreview.icon = icon
-		self.IconPreview.texture:SetTexture(icon and icon.attributes.texture)
+		self.IconPreview.texture:SetTexture(texture)
 		self.IconPreview:Show()
 	end,
 
@@ -991,14 +997,14 @@ TMW:NewClass("Config_DropDownMenu_Icon", "Config_DropDownMenu"){
 		local icon = TMW.GUIDToOwner[GUID]
 
 		self:SetUIDropdownGUIDText(GUID, L["CHOOSEICON"])
-		self:SetIconPreviewIcon(icon)
+		self:SetIconPreviewIcon(GUID)
 	end,
 
 	SetIcon = function(self, icon)
 		local GUID = icon:GetGUID()
 
 		self:SetUIDropdownGUIDText(GUID, L["CHOOSEICON"])
-		self:SetIconPreviewIcon(icon)
+		self:SetIconPreviewIcon(GUID)
 	end,
 
 }

@@ -1,10 +1,10 @@
--- $Id: Atlas_OutdoorRaids-zhTW.lua 40 2017-05-04 05:16:39Z arith $
+-- $Id: Atlas_OutdoorRaids-zhTW.lua 50 2018-08-08 17:30:20Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -52,9 +52,5 @@ L["Talonpriest Skizzik"] = "魔爪祭司史奇吉克"
 L["Talonpriest Zellek"] = "魔爪祭司札列克"
 L["Terokk"] = "泰洛克"
 L["Vakkiz the Windrager"] = "『風怒者』瓦奇茲"
-
--- ToC
-L["Description"] = "Atlas 戶外首領地圖插件"
-L["Title"] = "|r|cFF0099FF[地圖]|rAtlas 戶外首領地圖"
 
 end

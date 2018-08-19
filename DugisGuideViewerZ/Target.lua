@@ -9,6 +9,72 @@ function Target:ShouldLoad()
 	return DGV:UserSetting(DGV_TARGETBUTTON) and DugisGuideViewer.GuideOn()
 end
 
+local currentMode = nil
+function Target:UpdateMode()
+  DGV.DoOutOfCombat(function()
+
+	if currentMode == DugisGuideViewer:UserSetting(DGV_TRGET_BUTTON_FIXED_MODE) 
+	and not DugisGuideViewer:UserSetting(DGV_TRGET_BUTTON_FIXED_MODE) then
+		return
+	end
+	
+	currentMode = DugisGuideViewer:UserSetting(DGV_TRGET_BUTTON_FIXED_MODE)
+
+	Target.Frame:ClearAllPoints()
+	
+	if DugisGuideViewer:UserSetting(DGV_TRGET_BUTTON_FIXED_MODE) then
+		if MV and MV.Frame and MV.Frame.model then
+			Target.Frame:SetParent(MV.Frame.model)
+			
+			local scale = DGV:GetDB(DGV_TARGETBUTTONSCALE)
+			
+			local top = -12
+			local left =  -22 - 2.4 * scale
+			
+			local targetDeltaY = scale * 0.65 
+			local targetYCorrection = -(((scale - 5.5) * (scale - 5.5)) * 0.0495 - 1)
+			
+			Target.Frame:SetPoint("TOPRIGHT", MV.Frame.model, "BOTTOMRIGHT", 6 - scale * 0.2, top + targetDeltaY + targetYCorrection)
+			
+			DugisGuideViewerActionItemFrame:ClearAllPoints()
+			DugisGuideViewerActionItemFrame:SetPoint("TOPRIGHT", MV.Frame.model, "BOTTOMRIGHT", left, top)
+			
+			DugisSecureQuestButton:ClearAllPoints()
+			DugisSecureQuestButton:SetPoint("TOPRIGHT", MV.Frame.model, "BOTTOMRIGHT", left, top)
+		end
+	else
+		local left = DugisGuideViewerActionItemFrame:GetLeft()
+		local top = -(GetScreenHeight() - DugisGuideViewerActionItemFrame:GetTop())
+		
+		DugisGuideViewerActionItemFrame:SetParent(UIParent)
+		DugisGuideViewerActionItemFrame:ClearAllPoints()
+		DugisGuideViewerActionItemFrame:SetPoint("TOPLEFT", UIParent, "TOPLEFT", left, top)
+		
+		DugisSecureQuestButton:SetParent(UIParent)
+		DugisSecureQuestButton:ClearAllPoints()
+		DugisSecureQuestButton:SetPoint("TOPLEFT", UIParent, "TOPLEFT", left, top)
+		
+		Target.Frame:SetParent(UIParent)
+		
+		if DugisGuideViewerActionItemFrame:IsVisible() or DugisSecureQuestButton:IsVisible() then
+			Target.Frame:SetPoint("LEFT", DugisSecureQuestButton, "RIGHT", 2, 0)
+		else
+			Target.Frame:SetPoint("TOPLEFT", DugisSecureQuestButton, 2, 0)
+		end
+	end
+	
+	if Target.animation then
+		Target.animation:ClearAllPoints();
+		Target.animation:SetParent(Target.Frame)
+		Target.animation:SetPoint("TOPLEFT", Target.Frame, "TOPLEFT", -2, 2);
+		Target.animation:SetPoint("BOTTOMRIGHT", Target.Frame, "BOTTOMRIGHT", 2, -2);	
+		
+		Target.animation:SetWidth(30)
+		Target.animation:SetHeight(30)
+	end
+  end)
+end
+
 function Target:Initialize()
 
 	--Updates target button's size
@@ -18,6 +84,10 @@ function Target:Initialize()
         
         local scale = (DugisGuideViewer:UserSetting(DGV_TARGETBUTTONSCALE)-1)/10 + 1
         Target.Frame:SetScale(scale)
+		
+		if DugisGuideViewer:UserSetting(DGV_TRGET_BUTTON_FIXED_MODE) then
+			Target:UpdateMode()
+		end
 	end
     
     local function UpdateHotKey()
@@ -189,9 +259,14 @@ function Target:Initialize()
         UpdateHotKey()
         
         Target.Frame:SetScript("OnEnter", function()    
-			if DGV:UserSetting(DGV_TARGETTOOLTIP) then 
+			if DGV:UserSetting(DGV_TARGETTOOLTIP) 
+			and not DugisGuideViewer:UserSetting(DGV_TRGET_BUTTON_FIXED_MODE) then 
           	  Target:ShowTooltip( )    
 			end
+        end)     
+
+        Target.Frame:HookScript("OnShow", function()    
+			Target:UpdateMode()
         end)
         
         Target.Frame:SetScript("OnLeave", function()
@@ -201,6 +276,10 @@ function Target:Initialize()
         end)
         
 		Target.Frame:SetScript("OnDragStart", function(frame)
+			if DugisGuideViewer:UserSetting(DGV_TRGET_BUTTON_FIXED_MODE) then
+				return
+			end
+		
 			if not InCombatLockdown() then
 				frame:StartMoving();
 				frame.IsMoving = true
@@ -215,6 +294,8 @@ function Target:Initialize()
 		Target.Frame.icon:SetTexture("Interface\\Icons\\Ability_Hunter_SniperShot")
 		Target.Frame.icon:SetSize("28", "28")
 		Target.Frame.icon:SetAllPoints(Target.Frame)
+		
+		Target:UpdateMode()
 	end
    
     -- duration (duration factor):  1 - standard duration , 2 - 2 x longer, 0.5 - 2 x slower
@@ -247,6 +328,9 @@ function Target:Initialize()
 		Target.animation:ClearAllPoints();
 		Target.animation:SetPoint("TOPLEFT", Target.Frame, "TOPLEFT", -5, 5);
 		Target.animation:SetPoint("BOTTOMRIGHT", Target.Frame, "BOTTOMRIGHT", 5, -5);
+		
+		Target:UpdateMode()
+		
         Target.animation:Show()
         Target.animation.animIn:Play();
         Target.animation.startTime = GetTime()
@@ -329,7 +413,7 @@ function Target:Initialize()
 
 	--Sticky frames target and item button
 	function Target:OnUpdate(self, elapsed)
-		if not InCombatLockdown() and self.IsMoving then
+		if not InCombatLockdown() and self.IsMoving and not DugisGuideViewer:UserSetting(DGV_TRGET_BUTTON_FIXED_MODE) then
 			DugisGuideViewerActionItemFrame:ClearAllPoints()
 			DugisGuideViewerActionItemFrame:SetPoint("RIGHT", self, "LEFT", "-5", "0")
 			DugisSecureQuestButton:ClearAllPoints()

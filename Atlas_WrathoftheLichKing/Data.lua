@@ -1,4 +1,4 @@
- -- $Id: Data.lua 36 2018-01-21 15:43:43Z arith $
+ -- $Id: Data.lua 38 2018-08-09 13:58:26Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -32,7 +32,7 @@ local pairs = _G.pairs
 -- AddOn namespace.
 -- ----------------------------------------------------------------------------
 local FOLDER_NAME, private = ...
-local LibStub = _G.LibStub;
+local LibStub = _G.LibStub
 local BZ = Atlas_GetLocaleLibBabble("LibBabble-SubZone-3.0")
 local BF = Atlas_GetLocaleLibBabble("LibBabble-Faction-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
@@ -43,27 +43,27 @@ local WoLK = Atlas:GetModule(private.module_name)
 local db = {}
 WoLK.db = db
 
-local BLUE = "|cff6666ff";
-local GREN = "|cff66cc33";
-local GREY = "|cff999999";
-local LBLU = "|cff33cccc";
-local _RED = "|cffcc3333";
-local ORNG = "|cffcc9933";
-local PINK = "|ccfcc33cc";
-local PURP = "|cff9900ff";
-local WHIT = "|cffffffff";
-local YLOW = "|cffcccc33";
-local INDENT = "      ";
+local BLUE = "|cff6666ff"
+local GREN = "|cff66cc33"
+local GREY = "|cff999999"
+local LBLU = "|cff33cccc"
+local _RED = "|cffcc3333"
+local ORNG = "|cffcc9933"
+local PINK = "|ccfcc33cc"
+local PURP = "|cff9900ff"
+local WHIT = "|cffffffff"
+local YLOW = "|cffcccc33"
+local INDENT = "      "
 
 db.AtlasMaps = {
 	AhnKahet = {
 		ZoneName = { BZ["Ahn'kahet: The Old Kingdom"] },
 		Location = { BZ["Dragonblight"] },
-		DungeonID = "218",
-		DungeonHeroicID = "219",
+		DungeonID = 218,
+		DungeonHeroicID = 219,
 		Acronym = L["AK, Kahet"],
-		WorldMapID = "522",
-		JournalInstanceID = "271",
+		WorldMapID = 132,
+		JournalInstanceID = 271,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Seer Ixit"] },
@@ -86,11 +86,11 @@ db.AtlasMaps = {
 	AzjolNerub = {
 		ZoneName = { BZ["Azjol-Nerub"] },
 		Location = { BZ["Dragonblight"] },
-		DungeonID = "204",
-		DungeonHeroicID = "241",
+		DungeonID = 204,
+		DungeonHeroicID = 241,
 		Acronym = L["AN, Nerub"],
-		WorldMapID = "533",
-		JournalInstanceID = "272",
+		WorldMapID = 157,
+		JournalInstanceID = 272,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Reclaimer A'zak"] },
@@ -149,11 +149,11 @@ db.AtlasMaps = {
 	CoTOldStratholme = {
 		ZoneName = { BZ["Caverns of Time"]..ALC["Colon"]..BZ["The Culling of Stratholme"] },
 		Location = { BZ["Tanaris"] },
-		DungeonID = "209",
-		DungeonHeroicID = "210",
+		DungeonID = 209,
+		DungeonHeroicID = 210,
 		Acronym = L["CoT-Strat"],
-		WorldMapID = "521",
-		JournalInstanceID = "279",
+		WorldMapID = 130,
+		JournalInstanceID = 279,
 		Module = "Atlas_WrathoftheLichKing",
 		{ PURP..ALC["Event"]..ALC["Colon"]..L["The Culling of Stratholme"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -178,11 +178,11 @@ db.AtlasMaps = {
 	DrakTharonKeep = {
 		ZoneName = { BZ["Drak'Tharon Keep"] },
 		Location = { BZ["Grizzly Hills"] },
-		DungeonID = "214",
-		DungeonHeroicID = "215",
+		DungeonID = 214,
+		DungeonHeroicID = 215,
 		Acronym = L["DTK"],
-		WorldMapID = "534",
-		JournalInstanceID = "273",
+		WorldMapID = 160,
+		JournalInstanceID = 273,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Image of Drakuru"] },
@@ -206,11 +206,11 @@ db.AtlasMaps = {
 	FHHallsOfReflection = {
 		ZoneName = { BZ["The Frozen Halls"]..ALC["Colon"]..BZ["Halls of Reflection"] },
 		Location = { BZ["Icecrown Citadel"] },
-		DungeonID = "255",
-		DungeonHeroicID = "256",
+		DungeonID = 255,
+		DungeonHeroicID = 256,
 		Acronym = L["HoR"]..ALC["Comma"]..L["FH3"],
-		WorldMapID = "603",
-		JournalInstanceID = "276",
+		WorldMapID = 185,
+		JournalInstanceID = 276,
 		Module = "Atlas_WrathoftheLichKing",
 		{ ORNG..ALC["Attunement Required"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -233,11 +233,11 @@ db.AtlasMaps = {
 	FHPitOfSaron = {
 		ZoneName = { BZ["The Frozen Halls"]..ALC["Colon"]..BZ["Pit of Saron"] },
 		Location = { BZ["Icecrown Citadel"] },
-		DungeonID = "253",
-		DungeonHeroicID = "254",
+		DungeonID = 253,
+		DungeonHeroicID = 254,
 		Acronym = L["PoS"]..ALC["Comma"]..L["FH2"],
-		WorldMapID = "602",
-		JournalInstanceID = "278",
+		WorldMapID = 184,
+		JournalInstanceID = 278,
 		Module = "Atlas_WrathoftheLichKing",
 		{ ORNG..ALC["Attunement Required"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -265,11 +265,11 @@ db.AtlasMaps = {
 	FHTheForgeOfSouls = {
 		ZoneName = { BZ["The Frozen Halls"]..ALC["Colon"]..BZ["The Forge of Souls"] },
 		Location = { BZ["Icecrown Citadel"] },
-		DungeonID = "251",
-		DungeonHeroicID = "252",
+		DungeonID = 251,
+		DungeonHeroicID = 252,
 		Acronym = L["FoS"]..ALC["Comma"]..L["FH1"],
-		WorldMapID = "601",
-		JournalInstanceID = "280",
+		WorldMapID = 183,
+		JournalInstanceID = 280,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ BLUE.." B) "..ALC["Portal"]..ALC["L-Parenthesis"]..BZ["Pit of Saron"]..ALC["R-Parenthesis"], 10002 },
@@ -292,11 +292,11 @@ db.AtlasMaps = {
 	Gundrak = {
 		ZoneName = { BZ["Gundrak"] },
 		Location = { BZ["Zul'Drak"] },
-		DungeonID = "216",
-		DungeonHeroicID = "217",
+		DungeonID = 216,
+		DungeonHeroicID = 217,
 		Acronym = L["Gun"],
-		WorldMapID = "530",
-		JournalInstanceID = "274",
+		WorldMapID = 153,
+		JournalInstanceID = 274,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Chronicler Bah'Kini"]..ALC["Slash"]..L["Tol'mar"] },
@@ -335,13 +335,13 @@ db.AtlasMaps = {
 	IcecrownCitadelA = {
 		ZoneName = { BZ["Icecrown Citadel"]..ALC["MapA"]..ALC["L-Parenthesis"]..ALC["Lower"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Icecrown"] },
-		DungeonID = "279",
-		DungeonHeroicID = "280",
+		DungeonID = 279,
+		DungeonHeroicID = 280,
 		Acronym = L["IC"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "604",
-		DungeonLevel = "1",
-		JournalInstanceID = "758",
+		WorldMapID = 186,
+		DungeonLevel = 1,
+		JournalInstanceID = 758,
 		Module = "Atlas_WrathoftheLichKing",
 		NextMap = "IcecrownCitadelB",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["The Ashen Verdict"] },
@@ -414,13 +414,13 @@ db.AtlasMaps = {
 	IcecrownCitadelB = {
 		ZoneName = { BZ["Icecrown Citadel"]..ALC["MapB"]..ALC["L-Parenthesis"]..ALC["Upper"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Icecrown"] },
-		DungeonID = "279",
-		DungeonHeroicID = "280",
+		DungeonID = 279,
+		DungeonHeroicID = 280,
 		Acronym = L["IC"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "604",
-		DungeonLevel = "5",
-		JournalInstanceID = "758",
+		WorldMapID = 190,
+		DungeonLevel = 5,
+		JournalInstanceID = 758,
 		Module = "Atlas_WrathoftheLichKing",
 		PrevMap = "IcecrownCitadelA",
 		NextMap = "IcecrownCitadelC",
@@ -501,13 +501,13 @@ db.AtlasMaps = {
 	IcecrownCitadelC = {
 		ZoneName = { BZ["Icecrown Citadel"]..ALC["MapC"]..ALC["L-Parenthesis"]..BZ["The Frozen Throne"]..ALC["R-Parenthesis"] },
 		Location = { BZ["Icecrown"] },
-		DungeonID = "279",
-		DungeonHeroicID = "280",
+		DungeonID = 279,
+		DungeonHeroicID = 280,
 		Acronym = L["IC"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "604",
-		DungeonLevel = "7",
-		JournalInstanceID = "758",
+		WorldMapID = 192,
+		DungeonLevel = 7,
+		JournalInstanceID = 758,
 		Module = "Atlas_WrathoftheLichKing",
 		PrevMap = "IcecrownCitadelB",
 		{ ORNG..REPUTATION..ALC["Colon"]..BF["The Ashen Verdict"] },
@@ -567,12 +567,12 @@ db.AtlasMaps = {
 	Naxxramas = {
 		ZoneName = { BZ["Naxxramas"] },
 		Location = { BZ["Dragonblight"] },
-		DungeonID = "159",
-		DungeonHeroicID = "227",
+		DungeonID = 159,
+		DungeonHeroicID = 227,
 		Acronym = L["Nax"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "535",
-		JournalInstanceID = "754",
+		WorldMapID = 162,
+		JournalInstanceID = 754,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Mr. Bigglesworth"]..ALC["L-Parenthesis"]..ALC["Wanders"]..ALC["R-Parenthesis"] },
@@ -652,12 +652,12 @@ db.AtlasMaps = {
 	ObsidianSanctum = {
 		ZoneName = { BZ["Wyrmrest Temple"]..ALC["Colon"]..BZ["The Obsidian Sanctum"] },
 		Location = { BZ["Dragonblight"] },
-		DungeonID = "224",
-		DungeonHeroicID = "238",
+		DungeonID = 224,
+		DungeonHeroicID = 238,
 		Acronym = L["OS"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "531",
-		JournalInstanceID = "755",
+		WorldMapID = 155,
+		JournalInstanceID = 755,
 		Module = "Atlas_WrathoftheLichKing",
 		{ ORNG..ALC["AKA"]..ALC["Colon"]..L["Black Dragonflight Chamber"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -685,12 +685,12 @@ db.AtlasMaps = {
 	OnyxiasLair = {
 		ZoneName = { BZ["Onyxia's Lair"] },
 		Location = { BZ["Dustwallow Marsh"] },
-		DungeonID = "46",
-		DungeonHeroicID = "257",
+		DungeonID = 46,
+		DungeonHeroicID = 257,
 		Acronym = L["Ony"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "718",
-		JournalInstanceID = "760",
+		WorldMapID = 248,
+		JournalInstanceID = 760,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas:GetBossName("Onyxia", 1651), 1651 },
@@ -709,12 +709,12 @@ db.AtlasMaps = {
 	RubySanctum = {
 		ZoneName = { BZ["Wyrmrest Temple"]..ALC["Colon"]..BZ["The Ruby Sanctum"] },
 		Location = { BZ["Dragonblight"] },
-		DungeonID = "293",
-		DungeonHeroicID = "294",
+		DungeonID = 293,
+		DungeonHeroicID = 294,
 		Acronym = L["RS"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "609",
-		JournalInstanceID = "761",
+		WorldMapID = 200,
+		JournalInstanceID = 761,
 		Module = "Atlas_WrathoftheLichKing",
 		{ ORNG..ALC["AKA"]..ALC["Colon"]..L["Red Dragonflight Chamber"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -733,12 +733,12 @@ db.AtlasMaps = {
 	TheEyeOfEternity = {
 		ZoneName = { BZ["The Nexus"]..ALC["Colon"]..BZ["The Eye of Eternity"] },
 		Location = { BZ["Borean Tundra"] },
-		DungeonID = "223",
-		DungeonHeroicID = "237",
+		DungeonID = 223,
+		DungeonHeroicID = 237,
 		Acronym = L["TEoE"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "527",
-		JournalInstanceID = "756",
+		WorldMapID = 141,
+		JournalInstanceID = 756,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"]..ALC["Slash"]..ALC["Exit"]..ALC["L-Parenthesis"]..ALC["Portal"]..ALC["R-Parenthesis"], 10001 },
 		{ WHIT.." 1) "..Atlas:GetBossName("Malygos", 1617), 1617 },
@@ -758,11 +758,11 @@ db.AtlasMaps = {
 	TheNexus = {
 		ZoneName = { BZ["The Nexus"]..ALC["Colon"]..BZ["The Nexus"] },
 		Location = { BZ["Borean Tundra"] },
-		DungeonID = "225",
-		DungeonHeroicID = "226",
+		DungeonID = 225,
+		DungeonHeroicID = 226,
 		Acronym = L["Nex, Nexus"],
-		WorldMapID = "520",
-		JournalInstanceID = "281",
+		WorldMapID = 129,
+		JournalInstanceID = 281,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Warmage Kaitlyn"] },
@@ -786,11 +786,11 @@ db.AtlasMaps = {
 	TheOculus = {
 		ZoneName = { BZ["The Nexus"]..ALC["Colon"]..BZ["The Oculus"] },
 		Location = { BZ["The Nexus"] },
-		DungeonID = "206",
-		DungeonHeroicID = "211",
+		DungeonID = 206,
+		DungeonHeroicID = 211,
 		Acronym = L["Ocu"],
-		WorldMapID = "528",
-		JournalInstanceID = "282",
+		WorldMapID = 142,
+		JournalInstanceID = 282,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ BLUE.." B) "..ALC["Portal"], 10002 },
@@ -817,11 +817,11 @@ db.AtlasMaps = {
 	TrialOfTheChampion = {
 		ZoneName = { L["Crusaders' Coliseum"]..ALC["Colon"]..BZ["Trial of the Champion"] },
 		Location = { BZ["Icecrown"] },
-		DungeonID = "245",
-		DungeonHeroicID = "249",
+		DungeonID = 245,
+		DungeonHeroicID = 249,
 		Acronym = L["Champ"],
-		WorldMapID = "542",
-		JournalInstanceID = "284",
+		WorldMapID = 171,
+		JournalInstanceID = 284,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas:GetBossName("Grand Champions", 834), 834 },
@@ -855,12 +855,12 @@ db.AtlasMaps = {
 	TrialOfTheCrusader = {
 		ZoneName = { L["Crusaders' Coliseum"]..ALC["Colon"]..BZ["Trial of the Crusader"] },
 		Location = { BZ["Icecrown"] },
-		DungeonID = "246",
-		DungeonHeroicID = "248",
+		DungeonID = 246,
+		DungeonHeroicID = 248,
 		Acronym = L["Crus"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "543",
-		JournalInstanceID = "757",
+		WorldMapID = 172,
+		JournalInstanceID = 757,
 		Module = "Atlas_WrathoftheLichKing",
 		{ ORNG..L["Heroic: Trial of the Grand Crusader"] },
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -925,13 +925,13 @@ db.AtlasMaps = {
 	UlduarA = {
 		ZoneName = { BZ["Ulduar"]..ALC["MapA"]..ALC["L-Parenthesis"]..L["The Siege"]..ALC["R-Parenthesis"] },
 		Location = { BZ["The Storm Peaks"] },
-		DungeonID = "243",
---		DungeonHeroicID = "244",
+		DungeonID = 243,
+--		DungeonHeroicID = 244,
 		Acronym = L["Uldu"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "529",
-		DungeonLevel = "1",
-		JournalInstanceID = "759",
+		WorldMapID = 147,
+		DungeonLevel = 1,
+		JournalInstanceID = 759,
 		Module = "Atlas_WrathoftheLichKing",
 		NextMap = "UlduarB",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
@@ -1029,13 +1029,13 @@ db.AtlasMaps = {
 	UlduarB = {
 		ZoneName = { BZ["Ulduar"]..ALC["MapB"]..ALC["L-Parenthesis"]..BZ["The Antechamber"]..ALC["R-Parenthesis"] },
 		Location = { BZ["The Storm Peaks"] },
-		DungeonID = "243",
---		DungeonHeroicID = "244",
+		DungeonID = 243,
+--		DungeonHeroicID = 244,
 		Acronym = L["Uldu"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "529",
-		DungeonLevel = "2",
-		JournalInstanceID = "759",
+		WorldMapID = 148,
+		DungeonLevel = 2,
+		JournalInstanceID = 759,
 		Module = "Atlas_WrathoftheLichKing",
 		PrevMap = "UlduarA",
 		NextMap = "UlduarC",
@@ -1131,13 +1131,13 @@ db.AtlasMaps = {
 	UlduarC = {
 		ZoneName = { BZ["Ulduar"]..ALC["MapC"]..ALC["L-Parenthesis"]..L["The Keepers"]..ALC["R-Parenthesis"] },
 		Location = { BZ["The Storm Peaks"] },
-		DungeonID = "243",
---		DungeonHeroicID = "244",
+		DungeonID = 243,
+--		DungeonHeroicID = 244,
 		Acronym = L["Uldu"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "529",
-		DungeonLevel = "3",
-		JournalInstanceID = "759",
+		WorldMapID = 149,
+		DungeonLevel = 3,
+		JournalInstanceID = 759,
 		Module = "Atlas_WrathoftheLichKing",
 		PrevMap = "UlduarB",
 		NextMap = "UlduarD",
@@ -1235,13 +1235,13 @@ db.AtlasMaps = {
 	UlduarD = {
 		ZoneName = { BZ["Ulduar"]..ALC["MapD"]..ALC["L-Parenthesis"]..BZ["The Spark of Imagination"]..ALC["R-Parenthesis"] },
 		Location = { BZ["The Storm Peaks"] },
-		DungeonID = "243",
---		DungeonHeroicID = "244",
+		DungeonID = 243,
+--		DungeonHeroicID = 244,
 		Acronym = L["Uldu"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "529",
-		DungeonLevel = "5",
-		JournalInstanceID = "759",
+		WorldMapID = 151,
+		DungeonLevel = 5,
+		JournalInstanceID = 759,
 		Module = "Atlas_WrathoftheLichKing",
 		PrevMap = "UlduarC",
 		NextMap = "UlduarE",
@@ -1329,13 +1329,13 @@ db.AtlasMaps = {
 	UlduarE = {
 		ZoneName = { BZ["Ulduar"]..ALC["MapE"]..ALC["L-Parenthesis"]..BZ["The Descent into Madness"]..ALC["R-Parenthesis"] },
 		Location = { BZ["The Storm Peaks"] },
-		DungeonID = "243",
---		DungeonHeroicID = "244",
+		DungeonID = 243,
+--		DungeonHeroicID = 244,
 		Acronym = L["Uldu"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "529",
-		DungeonLevel = "4",
-		JournalInstanceID = "759",
+		WorldMapID = 150,
+		DungeonLevel = 4,
+		JournalInstanceID = 759,
 		Module = "Atlas_WrathoftheLichKing",
 		PrevMap = "UlduarD",
 		{ BLUE.." E) "..L["The Keepers"], 10001 },
@@ -1424,11 +1424,11 @@ db.AtlasMaps = {
 	UlduarHallsofLightning = {
 		ZoneName = { BZ["Ulduar"]..ALC["Colon"]..BZ["Halls of Lightning"] },
 		Location = { BZ["The Storm Peaks"] },
-		DungeonID = "207",
-		DungeonHeroicID = "212",
+		DungeonID = 207,
+		DungeonHeroicID = 212,
 		Acronym = L["HoL"],
-		WorldMapID = "525",
-		JournalInstanceID = "275",
+		WorldMapID = 138,
+		JournalInstanceID = 275,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Stormherald Eljrrin"] },
@@ -1448,11 +1448,11 @@ db.AtlasMaps = {
 	UlduarHallsofStone = {
 		ZoneName = { BZ["Ulduar"]..ALC["Colon"]..BZ["Halls of Stone"] },
 		Location = { BZ["The Storm Peaks"] },
-		DungeonID = "208",
-		DungeonHeroicID = "213",
+		DungeonID = 208,
+		DungeonHeroicID = 213,
 		Acronym = L["HoS"],
-		WorldMapID = "526",
-		JournalInstanceID = "277",
+		WorldMapID = 140,
+		JournalInstanceID = 277,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Kaldir Ironbane"] },
@@ -1475,11 +1475,11 @@ db.AtlasMaps = {
 	UtgardeKeep = {
 		ZoneName = { BZ["Utgarde Keep"]..ALC["Colon"]..BZ["Utgarde Keep"] },
 		Location = { BZ["Howling Fjord"] },
-		DungeonID = "202",
-		DungeonHeroicID = "242",
+		DungeonID = 202,
+		DungeonHeroicID = 242,
 		Acronym = L["UK, Keep"],
-		WorldMapID = "523",
-		JournalInstanceID = "285",
+		WorldMapID = 133,
+		JournalInstanceID = 285,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Defender Mordun"]..ALC["L-Parenthesis"]..FACTION_ALLIANCE..ALC["R-Parenthesis"] },
@@ -1499,11 +1499,11 @@ db.AtlasMaps = {
 	UtgardePinnacle = {
 		ZoneName = { BZ["Utgarde Keep"]..ALC["Colon"]..BZ["Utgarde Pinnacle"] },
 		Location = { BZ["Utgarde Keep"] },
-		DungeonID = "203",
-		DungeonHeroicID = "205",
+		DungeonID = 203,
+		DungeonHeroicID = 205,
 		Acronym = L["UP, Pinn"],
-		WorldMapID = "524",
-		JournalInstanceID = "286",
+		WorldMapID = 136,
+		JournalInstanceID = 286,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ GREN..INDENT..L["Brigg Smallshanks"] },
@@ -1527,12 +1527,12 @@ db.AtlasMaps = {
 	VaultOfArchavon = {
 		ZoneName = { BZ["Vault of Archavon"] },
 		Location = { BZ["Wintergrasp"] },
-		DungeonID = "239",
-		DungeonHeroicID = "240",
+		DungeonID = 239,
+		DungeonHeroicID = 240,
 		Acronym = L["VoA"],
 		PlayerLimit = { 10, 25 },
-		WorldMapID = "532",
-		JournalInstanceID = "753",
+		WorldMapID = 156,
+		JournalInstanceID = 753,
 		Module = "Atlas_WrathoftheLichKing",
 		{ BLUE.." A) "..ALC["Entrance"], 10001 },
 		{ WHIT.." 1) "..Atlas:GetBossName("Archavon the Stone Watcher", 1597), 1597 },
@@ -1553,33 +1553,33 @@ db.AtlasMaps = {
 		{ "Earth, Wind & Fire (25 player)", "ac=4017" },
 	},
 	VioletHold = {
-		ZoneName = { BZ["The Violet Hold"] };
-		Location = { BZ["Dalaran (Northrend)"] };
-		DungeonID = "220";
-		DungeonHeroicID = "221";
-		Acronym = L["VH"];
-		WorldMapID = "536";
-		JournalInstanceID = "283";
-		Module = "Atlas_WrathoftheLichKing";
-		{ BLUE.." A) "..ALC["Entrance"], 10001 };
-		{ GREN..INDENT..L["Lieutenant Sinclari"] };
-		{ WHIT.." 1) "..Atlas:GetBossName("Erekem", 626)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 626 };
-		{ WHIT.." 2) "..Atlas:GetBossName("Zuramat the Obliterator", 631)..ALC["L-Parenthesis"]..ALC["Upper"]..ALC["Comma"]..ALC["Random"]..ALC["R-Parenthesis"], 631 };
-		{ WHIT..INDENT..Atlas:GetBossName("Xevozz", 629)..ALC["L-Parenthesis"]..ALC["Lower"]..ALC["Comma"]..ALC["Random"]..ALC["R-Parenthesis"], 629 };
-		{ WHIT.." 3) "..Atlas:GetBossName("Ichoron", 628)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 628 };
-		{ WHIT.." 4) "..Atlas:GetBossName("Moragg", 627)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 627 };
-		{ WHIT.." 5) "..Atlas:GetBossName("Lavanthor", 630)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 630 };
-		{ WHIT.." 6) "..Atlas:GetBossName("Cyanigosa", 632)..ALC["L-Parenthesis"]..ALC["Wave 18"]..ALC["R-Parenthesis"], 632 };
-		{ "" };
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] };
-		{ "Defenseless", "ac=1816" };
-		{ "Lockdown!", "ac=1865" };
-		{ "Dehydration", "ac=2041" };
-		{ "A Void Dance", "ac=2153" };
-		{ "The Violet Hold", "ac=483" };
-		{ "Heroic: The Violet Hold", "ac=494" };
-		{ "Heroic: The Violet Hold Guild Run", "ac=5100" };
-	};
+		ZoneName = { BZ["The Violet Hold"] },
+		Location = { BZ["Dalaran (Northrend)"] },
+		DungeonID = 220,
+		DungeonHeroicID = 221,
+		Acronym = L["VH"],
+		WorldMapID = 168,
+		JournalInstanceID = 283,
+		Module = "Atlas_WrathoftheLichKing",
+		{ BLUE.." A) "..ALC["Entrance"], 10001 },
+		{ GREN..INDENT..L["Lieutenant Sinclari"] },
+		{ WHIT.." 1) "..Atlas:GetBossName("Erekem", 626)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 626 },
+		{ WHIT.." 2) "..Atlas:GetBossName("Zuramat the Obliterator", 631)..ALC["L-Parenthesis"]..ALC["Upper"]..ALC["Comma"]..ALC["Random"]..ALC["R-Parenthesis"], 631 },
+		{ WHIT..INDENT..Atlas:GetBossName("Xevozz", 629)..ALC["L-Parenthesis"]..ALC["Lower"]..ALC["Comma"]..ALC["Random"]..ALC["R-Parenthesis"], 629 },
+		{ WHIT.." 3) "..Atlas:GetBossName("Ichoron", 628)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 628 },
+		{ WHIT.." 4) "..Atlas:GetBossName("Moragg", 627)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 627 },
+		{ WHIT.." 5) "..Atlas:GetBossName("Lavanthor", 630)..ALC["L-Parenthesis"]..ALC["Random"]..ALC["R-Parenthesis"], 630 },
+		{ WHIT.." 6) "..Atlas:GetBossName("Cyanigosa", 632)..ALC["L-Parenthesis"]..ALC["Wave 18"]..ALC["R-Parenthesis"], 632 },
+		{ "" },
+		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ "Defenseless", "ac=1816" },
+		{ "Lockdown!", "ac=1865" },
+		{ "Dehydration", "ac=2041" },
+		{ "A Void Dance", "ac=2153" },
+		{ "The Violet Hold", "ac=483" },
+		{ "Heroic: The Violet Hold", "ac=494" },
+		{ "Heroic: The Violet Hold Guild Run", "ac=5100" },
+	},
 }
 
 -- Atlas Map NPC Description Data
@@ -1924,15 +1924,15 @@ db.AtlasMaps_NPC_DB = {
 		{ 4, 1600, 363, 149 }, -- Toravon the Ice Watcher
 	},
 	VioletHold = {
-		{ 1, 626, 74, 266 }; -- Erekem
-		{ 2, 631, 106, 132 }; -- Zuramat the Obliterator
-		{ 3, 628, 345, 117 }; -- Ichoron
-		{ 4, 627, 383, 216 }; -- Moragg
-		{ 5, 630, 338, 323 }; -- Lavanthor
-		{ 6, 632, 229, 227 }; -- Cyanigosa
-		{ "A", 10001, 230, 467 };
-	};
-};
+		{ 1, 626, 74, 266 }, -- Erekem
+		{ 2, 631, 106, 132 }, -- Zuramat the Obliterator
+		{ 3, 628, 345, 117 }, -- Ichoron
+		{ 4, 627, 383, 216 }, -- Moragg
+		{ 5, 630, 338, 323 }, -- Lavanthor
+		{ 6, 632, 229, 227 }, -- Cyanigosa
+		{ "A", 10001, 230, 467 },
+	},
+}
 
 --[[
 	AssocDefaults{}

@@ -1,11 +1,11 @@
-lightweight tag 4533adf02f4d3db57dc73cff5dd42022b340a3e9 v1.2.6
+lightweight tag 39b930bef550f2c20c61ebc46e20723f9cc1d157 v1.3.0
 Author:	Saregon <n_rhygar@yahoo.it>
-Date:	Wed Aug 30 06:28:09 2017 +0200
+Date:	Sun Jul 22 12:31:48 2018 +0200
 
-commit 4533adf02f4d3db57dc73cff5dd42022b340a3e9
+commit 39b930bef550f2c20c61ebc46e20723f9cc1d157
 Author: Saregon <n_rhygar@yahoo.it>
-Date:   Wed Aug 30 06:28:09 2017 +0200
+Date:   Sun Jul 22 12:31:48 2018 +0200
 
-    Fix PlaySound API 7.3 changes
-    7.3 Toc file update
+    frame strata set to LOW to avoid covering the pvp talent frame
+    fix UnitBuff function
 

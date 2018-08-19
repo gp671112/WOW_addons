@@ -1,5 +1,5 @@
-## Interface: 70300
-## Version: 17.10.10
+﻿## Interface: 80000
+## Version: 18.07.22
 ## Title: TipTacItemRef
 ## Author: Aezay (Earthen Ring EU)
 ## Notes: Improved ItemRefTooltip
@@ -9,4 +9,4 @@
 ## Notes-zhTW: 增強物品提示訊息
 ## OptionalDeps: TipTac
 LibItemString.lua
-core.lua
+ttItemRef.lua

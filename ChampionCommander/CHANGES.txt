@@ -1,0 +1,14 @@
+tag 9086d22113dfb0759efea96e9ec3959dcc12ff09 1.0.2
+Author:	Alar of Runetotem <alar@aspide.it>
+Date:	Sat Aug 18 11:18:52 2018 +0200
+
+Fix: Next round of fixes
+
+commit 29132a6f1622816ea64d6016712a4acf966ffec8
+Author: Alar of Runetotem <alar@aspide.it>
+Date:   Sat Aug 18 11:17:48 2018 +0200
+
+    Next round of fixes
+    
+    More reference to orderHallCommander removed
+

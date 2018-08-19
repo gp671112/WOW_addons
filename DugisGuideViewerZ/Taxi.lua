@@ -6,6 +6,9 @@ local Taxi = DGV:RegisterModule("Taxi")
 Taxi.essential = true
 local _
 
+local WORLDMAP_ARGUS_ID = 9
+local BacktrackCharacterPath_buff = {}
+
 local B = LibStub("LibBabble-SubZone-3.0")
 local BR = B:GetReverseLookupTable()
 local BF = LibStub("LibBabble-Faction-3.0")
@@ -139,29 +142,30 @@ function Taxi:Initialize()
 		return math.acos(dotProduct / (aLen * bLen))
 	end
 	
-	local function CoordsToAngle(m1, f1, x1, y1, mData, fData, selectedX, selectedY, m2, f2, x2, y2)
-		local xTrans,yTrans = DGV:TranslateWorldMapPosition(
-				mData, fData, selectedX, selectedY, m1, f1)
+    --m1 and m2 must be new map ids
+	local function CoordsToAngle(m1, _, x1, y1, mData, _, selectedX, selectedY, m2, _, x2, y2)
+		local xTrans,yTrans = DGV:TranslateWorldMapPositionGlobal(
+				mData, selectedX, selectedY, m1)
 		xTrans,yTrans = DGV.Modules.Ants:ClampLine(xTrans,yTrans,x1,y1)
 		
-		local xDest,yDest = DGV:TranslateWorldMapPosition(
-			m2, f2, x2, y2, m1, f1)
+		local xDest,yDest = DGV:TranslateWorldMapPositionGlobal(
+			m2, x2, y2, m1)
 		xDest,yDest = DGV.Modules.Ants:ClampLine(xDest,yDest,x1,y1)
 		
 		return GetAngle(xTrans, yTrans, x1, y1, xDest, yDest)
 	end
 	
-	local function GetSmallestAngle(m1, f1, x1, y1, mData, fData, pointData, m2, f2, x2, y2)
+	local function GetSmallestAngle(m1, _, x1, y1, mData, _, pointData, m2, _, x2, y2)
 		local shortestX, shortestY, shortestDist, shortestData
 		if type(pointData)=="number" then
 			local selectedX,selectedY = DGV:UnpackXY(pointData)
-			return selectedX, selectedY, CoordsToAngle(m1, f1, x1, y1, mData, fData, selectedX, selectedY, m2, f2, x2, y2)
+			return selectedX, selectedY, CoordsToAngle(m1, nil, x1, y1, mData, nil, selectedX, selectedY, m2, nil, x2, y2)
 		end
 		local data = GetCreateTable(strsplit("|", pointData))
 		for i=1,#(data) do
 			local firstCoords = strmatch(data[i], "([^%-]*)%-?")
 			local selectedX,selectedY = DGV:UnpackXY(firstCoords)
-			local angle = CoordsToAngle(m1, f1, x1, y1, mData, fData, selectedX, selectedY, m2, f2, x2, y2)
+			local angle = CoordsToAngle(m1, nil, x1, y1, mData, nil, selectedX, selectedY, m2, nil, x2, y2)
 			if angle and (not shortestDist or angle < shortestDist) then
 				shortestX,shortestY,shortestData = selectedX,selectedY,data[i]
 				shortestDist = angle
@@ -235,36 +239,38 @@ function Taxi:Initialize()
 		return CheckRequirements(1, ...)
 	end
 	
+    --m1, m2 - new map ids
+    function AreOldMapsTheSame(m1, m2)
+        local m1_old = DGV:UiMapID2OldMapId(m1)
+        local m2_old = DGV:UiMapID2OldMapId(m2)
+        
+        return m1_old == m2_old
+    end
+	
 	local function QuickPathExists(contData, m1, m2, ...)
-		if m1==m2 then return true end
-		if not contData then return end
-		if not contData[m1] then return end
+		
+		if AreOldMapsTheSame(m1, m2) then 
+		    return true
+		end
+		if not contData then 
+			return 
+		end
+		if not contData[m1] then 
+			return 
+		end
 		local requirements = contData[m2] and contData[m2].requirements
 		if requirements and not CheckRequirements(1, strsplit(":", requirements)) 
 		then 
 			return 
 		end
-		if contData[m1][m2] then return true end
+		if contData[m1][m2] then 
+			return true 
+		end
 		for m in pairs(contData[m1]) do
 			if m~="requirements" then
 				if not ListContains(m, ...) and 
 					QuickPathExists(contData, m, m2, m1, ...)
 				then return true end
-			end
-		end
-	end
-	
-	local function CorrectMouseOverZoneFloor(m, x, y)
-		local curMap = GetCurrentMapAreaID()
-		if m==curMap then
-			local actualZoneName = UpdateMapHighlight(x,y)
-			if actualZoneName then
-				m = DGV:GetZoneIdByName(actualZoneName)
-				local f = 0
-				if m==321 or m==504 then --orgrimmar or dalaran is the only map i know of w/0 a floor 0
-					f=1
-				end
-				return m,f
 			end
 		end
 	end
@@ -292,37 +298,54 @@ function Taxi:Initialize()
 	end
 	
 	local function sortFunc(a,b)
-		return a[5] == nil or b[5] == nil or a[5]<b[5]
-	end
+		return a == nil or b == nil or a[5] == nil or b[5] == nil or a[5]<b[5]
+	end    
+    
 	local function BacktrackCharacterPath(contData, m1, f1, x1, y1, mTrans, fTrans, m2, f2, x2, y2, ...)
+    
 		if not contData or not x1 then return end
+        
+        local key = ""..(m1 or 0)..(f1 or 0).. (x1 or 0)..(y1 or 0)..(mTrans or 0)..(fTrans or 0)..(m2 or 0)..(f2 or 0)..(x2 or 0)..(y2 or 0)
+            
+        BacktrackCharacterPath_buff[key] = (BacktrackCharacterPath_buff[key] or 0) + 1
+      
+        if  BacktrackCharacterPath_buff[key] > 10 then
+            return
+        end
+        
+        f1 = UiMapId2Floor(m1)
+        f2 = UiMapId2Floor(m2)
+        
 		if not mTrans then 
 			mTrans = m1 
-			fTrans = f1
 		end
+        
+        fTrans = UiMapId2Floor(mTrans)
+
 		local transKey
-		if mTrans==m2 then  --destination map reached
+		if AreOldMapsTheSame(mTrans, m2) then  --destination map reached
 			if fTrans==f2 then --destination floor reached
 				return m2, f2, x2, y2
 			end
-			transKey = (fTrans==0 and mTrans) or mTrans..":"..fTrans
+			transKey = tonumber(mTrans)
+			
 			if not contData[transKey] then --no entry for source floor
 				if not contData[mTrans] then return end --no entry for source map
 				return m2, f2, x2, y2 --legacy data support
 			end
-			local destTransKey = (f2==0 and mTrans) or mTrans..":"..f2
+			local destTransKey = tonumber(mTrans)
 			if not contData[destTransKey] then --no entry for destination floor.  This is likely because we have no trans for it or it doesn not exist.  Fail gracefully.
 				return m2, f2, x2, y2 --legacy data support
 			end
 		end
 		if not transKey then
-			transKey = (fTrans==0 and mTrans) or mTrans..":"..fTrans
+			transKey = tonumber(mTrans)
 		end
 		if not contData[transKey] then return end
 			local distTable = GetCreateTable()
 			
 			for mZoneData,data in pairs(contData[transKey]) do
-				local destinationFound = distTable[1] and distTable[1][1]==m2 and distTable[1][2]==f2
+				local destinationFound = distTable[1] and distTable[1][1]==m2 --and distTable[1][2]==f2
 				local requirements = contData[mZoneData] and contData[mZoneData].requirements
 				if mZoneData~="requirements" and 
 					(not requirements or 
@@ -350,7 +373,7 @@ function Taxi:Initialize()
 							tPool(tremove(distTable))
 						end
 					end
-					if not contains and (mZone==m2 or not destinationFound) then
+					if not contains and (AreOldMapsTheSame(mZone, m2) or not destinationFound) then
 						tinsert(distTable, 
 							GetCreateTable(mZone, fZone,
 							GetSmallestAngle(m1, f1, x1, y1, mTrans, fTrans, data, m2, f2, x2, y2)))
@@ -515,37 +538,43 @@ function Taxi:Initialize()
 		return landMult * GetMountedBonusMultiplier()
 
 	end
-
-	local kalimdor = 1
-	local easternKingdoms = 2
-	local outland = 3
-	local northrend = 4
-	local theMaelstrom = 5
-	local pandaria = 6
-	local draenor = 7
-	local brokenIsles = 8
-	local groundedMaps = {499, 463, 462, 480, 476, 464, 471, 708, 709, 795, 928, 951,
-    1135, 1170, 1171 --Argus
+	
+	local kalimdor = 12
+	local easternKingdoms = 13
+	local outland = 101
+	local northrend = 113
+	local theMaelstrom = 948
+	local pandaria = 424
+	local draenor = 572
+	local brokenIsles = 619
+	local zandalar = 875
+	local kultiras = 876
+	local groundedMaps = {122, 95, 94, 110, 106, 97, 103, 244, 245, 338, 504, 554,
+    830, 882, 885 --Argus
     }
 	local spellFlightMastersLicense = 90267
-	local spellColdWeatherFlying = 54197
-	local spellWisdomOfTheFourWinds = 115913
 	local draenorPathFinderAchievement = select(4, GetAchievementInfo(10018))
-	local brokenIslePathFinderAchievement = select(4, GetAchievementInfo(11446))		
+	local brokenIslePathFinderAchievement = select(4, GetAchievementInfo(11446))
+
+	--	mapId - new mapId
 	function IsFlyableMapId(mapId)
 		local result = true
-		local c = DGV:GetCZByMapId(mapId)
+		local c = GetMapContinent_dugiNew(mapId)
 		if (c==kalimdor or c==easternKingdoms or c==theMaelstrom) and not
-			GetSpellBookItemInfo(GetSpellInfo(spellFlightMastersLicense))
+			(GetFlightMultiplier() >= multNormFlying)
 		then result = false
-		elseif c==northrend and not GetSpellBookItemInfo(GetSpellInfo(spellColdWeatherFlying))
+		elseif c==northrend and not (GetFlightMultiplier() >= multEpicFlying)
 		then result = false
-		elseif c==pandaria and not GetSpellBookItemInfo(GetSpellInfo(spellWisdomOfTheFourWinds))
-		then result = false 
+		elseif c==pandaria and not (GetFlightMultiplier() >= multEpicFlying)
+		then result = false 		
 		elseif c==draenor and (draenorPathFinderAchievement ~= true)
 		then result = false 
 		elseif c==brokenIsles and (brokenIslePathFinderAchievement ~= true)
 		then result = false
+		elseif c==zandalar
+		then result = false
+		elseif c==kultiras
+		then result = false				
 		end
 		if tContains(groundedMaps, mapId) then result=false end
 		if DGV:IsDungeon(mapId) then result=false end
@@ -560,9 +589,10 @@ function Taxi:Initialize()
 	end
 	
 	local function SetMovementCharacteristics(mapId, f)
+		f = UiMapId2Floor(mapId)
 		local cacheKey = mapId
 		if f and f~=0 then
-			cacheKey = mapId..":"..f
+			--cacheKey = mapId..":"..f
 		end
 		if movementCache[cacheKey] then
 			return movementCache[cacheKey], groundedCache[cacheKey]
@@ -589,7 +619,7 @@ function Taxi:Initialize()
 	
 	function RouteBuilders.Character.Iterate(best, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2, lastRoute)
 		if lastRoute then return end
-		local c1,c2 = (DGV:GetCZByMapId(m1)), DGV:GetCZByMapId(m2)
+		local c1, c2 = GetMapContinent_dugiOld(m1), GetMapContinent_dugiOld(m2)
 		if c1==c2 then
 			local route = RouteBuilders.Character:Build(
 				best, parentRoute, c1, m1, f1, x1, y1, m2, f2, x2, y2)
@@ -613,12 +643,12 @@ function Taxi:Initialize()
 		return IsBest(checkRoute) and (not parentRoute or IsBest(parentRoute, checkRoute))
 	end
 	
+	--c - must be old map id
 	function RouteBuilders.Character:Build(best, parentRoute, c, m1, f1, x1, y1, m2, f2, x2, y2)
 		--DGV:DebugFormat("Character:Build", "x2", x2, "y2", y2)
 		--DGV:DebugFormat("Character:Build", "m1", m1, "m2", m2, "stack", debugstack())
 		local movementSpeed,grounded = SetMovementCharacteristics(m1, f1)
 		grounded = grounded or select(2,SetMovementCharacteristics(m2, f2))
-		--DGV:DebugFormat("Character:Build ComputeDistance", "args", {m1, f1 , x1, y1, m2, f2, x2, y2})		
 		local dist, dx, dy= DGV:ComputeDistance(m1, f1 , x1, y1, m2, f2, x2, y2)
 		if not dist or not dx or not dy then
 			return
@@ -662,7 +692,8 @@ function Taxi:Initialize()
 		for i=5,select("#", ...),5 do
 			local m,f,x,y,cue = select(i, ...)
 			if lastY then
-				sum = sum + DGV:ComputeDistance(m, f, x, y, lastM, lastF, lastX, lastY)
+                local distance = DGV:ComputeDistance(m, f, x, y, lastM, lastF, lastX, lastY)
+				sum = sum + (distance or 0)
 			end
 			lastM,lastF,lastX,lastY = m,f,x,y
 		end
@@ -683,6 +714,9 @@ function Taxi:Initialize()
 			then 
 				contData = TaxiData.ZoneTransData[10] --hack to force use InstanceTransData
 			end 		]]
+            
+            BacktrackCharacterPath_buff = {}
+            
 			route.estimate = SumDistances(m1, f1, x1, y1,
 					BacktrackCharacterPath(contData, 
 						m1, f1, x1, y1, nil, nil, select(6, unpack(route))))
@@ -716,9 +750,12 @@ function Taxi:Initialize()
 			then 
 				contData = TaxiData.ZoneTransData[10] --hack to force use InstanceTransData
 			end 		]]
-			local walkRoute = AddCharacterPoints(description,
-					BacktrackCharacterPath(contData, 
-						m1, f1, x1, y1, nil, nil, m2, f2, x2, y2))
+			
+			local backTrack = {BacktrackCharacterPath(contData, 
+						m1, f1, x1, y1, nil, nil, m2, f2, x2, y2)}
+			
+			local walkRoute = AddCharacterPoints(description, unpack(backTrack))
+						
 			if walkRoute then return walkRoute end
 			DGV:DebugFormat("Character:AddWaypoint failed to find walking route for the following coordinates.  Check zone transitions.", "m1", m1, "f1", f1, "x1", x1, "y1", y1, "m2", m2, "f2", f2, "x2", x2, "y2", y2)
 			return AddCharacterPoints(description, m2, f2, x2, y2)
@@ -738,7 +775,10 @@ function Taxi:Initialize()
 		
 		local argusMult = 1
 		
-		if GetCurrentMapContinent()	== WORLDMAP_ARGUS_ID then 
+		local oldContinentId = GetCurrentMapContinent_dugi()
+		
+        --WORLDMAP_ARGUS_ID
+		if oldContinentId == 9 then 
 			argusMult = 1000
 		end
 		
@@ -823,10 +863,11 @@ function Taxi:Initialize()
 		return nextOrderedPair, t
 	end
 	
+	--c must be old map id
 	local function ValidatePath(c, isRoot, ...)
 		local fullData = TaxiData:GetFullData()
 		for i=1,select("#",...) do
-			if c ~= 8 or (i == 1 or i==select("#",...)) then
+			if (c ~= 8 and c~= 875 and c~= 876) or (i == 1 or i==select("#",...)) then
 				local id = tonumber((select(i,...)))
 				--	DGV:DebugFormat("ValidatePath", "id", id, "DugisFlightmasterDataTable[c]~=nil", DugisFlightmasterDataTable[c]~=nil, "(select(i,...))", (select(i,...)))
 				if not id or
@@ -836,11 +877,13 @@ function Taxi:Initialize()
 					return
 				end
 				local DugisArrow = DGV.Modules.DugisArrow
-				local cPlayer = DGV:GetCZByMapId(DGV.Modules.DugisArrow.map)
+				local cPlayer = GetMapContinent_dugiOld(DGV.Modules.DugisArrow.map)				
 				if (not DugisFlightmasterDataTable or
 					not DugisFlightmasterDataTable[c]) and
 					(cPlayer==c or isRoot) 
-				then return true end
+				then 
+					return true 
+				end
 				if not DugisFlightmasterDataTable or
 					not DugisFlightmasterDataTable[c] or
 					not DugisFlightmasterDataTable[c][id]
@@ -855,6 +898,8 @@ function Taxi:Initialize()
 	local allowHeadCandidates = 3
 	local allowTailCandidates = 3
 	local countFmIters = 0
+	
+	--c is old map id
 	local function FlightMasterRouteBuildSelector(best, parentRoute, c, m1, f1, x1, y1, m2, f2, x2, y2, t)
 		if not t or not t[c] then return end
 		
@@ -887,7 +932,10 @@ function Taxi:Initialize()
 				tail = nil
 			end
 			local startId = headNPCs[startDist]
-			if ValidatePath(c, isRoot, startId) then
+			
+			local valid = ValidatePath(c, isRoot, startId)
+			
+			if valid then
 				if lastAllowedHead~=startId then
 					lastAllowedHead = startId
 					allowedHeads = allowedHeads + 1
@@ -1041,10 +1089,11 @@ end
 		return route
 	end
 	
+	--c - old map id
 	function RouteBuilders.FlightMaster.Iterate(best, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2, lastRoute, c, tableSelect)
 		if not lastRoute then
-			c = DGV:GetCZByMapId(m1)
-			local c2 = DGV:GetCZByMapId(m2)
+			c = GetMapContinent_dugiOld(m1)
+			local c2 = GetMapContinent_dugiOld(m2)
 			if c~=c2 then return end
 			
 			--Quick Failure Opportunity: best is better than a direct flight betweeen points
@@ -1076,6 +1125,7 @@ end
 		end
 	end
 
+	--c is old map id
 	function RouteBuilders.FlightMaster:Build(best, parentRoute, c, m1, f1, x1, y1, m2, f2, x2, y2, head, tail, ...)
 		--DGV:DebugFormat("FlightMaster:Build", "hasBest", best~=nil)
 		--DGV:DebugFormat("FlightMaster:Build", "c", c)
@@ -1142,7 +1192,7 @@ end
 			not DugisFlightmasterDataTable[route.c] 
 		then
 			local chDesc = format(L["Talk to %s to get flight master data."], 
-				DGV:GetFlightMasterName(route.headId))
+				DGV:GetFlightMasterName(route.headId) or "?")
 			local point = headRoute.builder:AddWaypoint(headRoute, chDesc)
 			point.flightMasterID = route.headId
 			local routeToRecalculate = DGV.Modules.TaxiDB.routeToRecalculate
@@ -1157,13 +1207,15 @@ end
 		
 		local mapName = DGV:GetMapNameFromID(route.tailMap)
 		local chDesc = format(L["Talk to %s and fly to %s"], 
-			DGV:GetFlightMasterName(route.headId), mapName)
+			DGV:GetFlightMasterName(route.headId) or "?", mapName or "?")
 			
-		local continent = GetCurrentMapContinent()	
-		if continent == WORLDMAP_ARGUS_ID then 
+		local oldContinentId = GetCurrentMapContinent_dugi()
+		
+		--WORLDMAP_ARGUS_ID or BOAT in KulTiras
+		if oldContinentId == 9 or oldContinentId == 876 then 
 			local fullData = TaxiData:GetFullData()
 			
-			local point = fullData[continent][route.headId]
+			local point = fullData[oldContinentId][route.headId]
 			
 			if point and point.isBeacon then
 				chDesc = L["Use Beacon"]
@@ -1171,7 +1223,12 @@ end
 			
 			if point and point.isSpaceship then
 				chDesc = L["Navigation Console"]
-			end			
+			end		
+
+			if point and point.isBoat then
+				chDesc = format(L["Talk to %s and boat to %s"], 
+			DGV:GetFlightMasterName(route.headId) or "?", mapName or "?")
+			end				
 		end
 			
 		--headRoute.builder:AddWaypoint(headRoute, chDesc)
@@ -1179,7 +1236,7 @@ end
 		local headRouteWaypoint = headRoute.builder:AddWaypoint(headRoute, chDesc)
 		headRouteWaypoint.flightMasterID = route.tailId
 		lastHopRoute.builder:AddWaypoint(lastHopRoute, string.format("%s, %s",
-				DGV:GetFlightMasterName(route.tailId), mapName))
+				DGV:GetFlightMasterName(route.tailId) or "?", mapName or "?"))
 		local tailRoute = route[#(route)]
 		return tailRoute.builder:AddWaypoint(tailRoute, description)
 	end
@@ -1244,9 +1301,14 @@ end
 	end)
 	
 	local function GetUsableItem(itemId)
+		if PlayerHasToy(itemId) then 
+			return GetItemCooldown(itemId)==0 and
+			itemId
+		else 		
 		return GetItemCount(itemId)~=0 and
 			GetItemCooldown(itemId)==0 and
 			itemId
+		end
 	end
 	
 	function RouteBuilders.BoundTeleport.Iterate(best, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2, lastRoute)
@@ -1265,6 +1327,7 @@ end
 	local itemInnkeepersDaughter = 64488
 	local itemRubySlippers = 28585
 	local itemEtherealPortal = 54452
+	local itemTomeTownPortal = 142542
 	local spellAstralRecall = 556
 	function RouteBuilders.BoundTeleport:Build(best, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2)
 		--DGV:DebugFormat("BoundTeleport:Build", "m1", m1, "f1", f1,"x1", x1, "y1", y1, "m2", m2, "f2", f2, "x2",  x2, "y2", y2)
@@ -1296,6 +1359,7 @@ end
 			route.spell = spellAstralRecall
 		else
 			route.item = GetUsableItem(itemInnkeepersDaughter) or
+					GetUsableItem(itemTomeTownPortal) or
 					GetUsableItem(itemEtherealPortal) or
 					GetUsableItem(itemHearthstone) or
 					(UnitLevel("player") <= 40 and GetUsableItem(itemSoR1)) or
@@ -1324,11 +1388,13 @@ end
 	end
 	
 	local hearthCast = 10
-	local innkeepersDaughterCast = 3
-	local loadConstant = 5
+	local innkeepersDaughterCast = 9
+	local tomeTownPortalCast = 9
+	local loadConstant = 20
 	local penaltyConstant = 20
 	function RouteBuilders.BoundTeleport:Estimate(route)
 		local cast = (route.item == itemInnkeepersDaughter and innkeepersDaughterCast) or 
+			(route.item == itemTomeTownPortal and tomeTownPortalCast) or 
 			hearthCast
 		local tailEst = (route.tail and route.tail.builder:Estimate(route.tail)) or 0
 		return tailEst + cast + loadConstant + penaltyConstant
@@ -1355,7 +1421,7 @@ end
 	end
 	
 	function RouteBuilders.UnboundTeleport.Iterate(prevBest, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2, lastRoute, key, chunk)
-		local c2 = DGV:GetCZByMapId(m2)
+		local c2 = GetMapContinent_dugiOld(m2)
 		if c2==0 then return end
 		while true do
 			if not chunk then --check for chunk containing additional record(s)
@@ -1469,7 +1535,7 @@ end
 		elseif route.item == 50977 then -- DK Deathgate
 			est = est + 15
 		elseif route.item == 141605 then -- Flightmaster Whistle
-			est = est + 15			
+			est = est			
 		end		
 		return est
 	end
@@ -1509,13 +1575,20 @@ end
 	
 	function RouteBuilders.ZenPilgrimageReturn:Build(best, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2)
 		local class = select(2, UnitClass("player"))
-		local currentMap = GetCurrentMapAreaID()
-		local currentFloor = GetCurrentMapDungeonLevel()
+		local currentMap = DGV.GetCurrentMapID()
 		local subzone = GetSubZoneText()
 		local ebonHold = DugisGuideViewer:localize("Acherus: The Ebon Hold", "ZONE")
- 		local inClassHall = subzone == ebonHold or (currentMap == 1021 and (currentFloor == 1 or currentFloor == 2)) or currentMap == 1048
-
-		if (class == "MONK" and not UnitBuff("player", GetSpellInfo(126895)))
+ 		local inClassHall = subzone == ebonHold or (currentMap == 647 or  currentMap == 648) or currentMap == 715
+		local zenreturn 
+		
+		for i=1,10 do
+			local name = UnitBuff("player",i)
+			if (name and name == GetSpellInfo(126895)) then zenreturn = true end
+		end
+		
+		--todo: find replacement
+		-- UnitBuff("player", GetSpellInfo(126895))
+		if (class == "MONK" and zenreturn)
 			or not DugisGuideUser.ZenPilgrimageReturnPoint 
 			or not DugisGuideUser.ZenPilgrimageReturnPoint.m 
 			or (class == "DEATHKNIGHT" and not inClassHall)
@@ -1554,12 +1627,19 @@ end
 	RouteBuilders.ZenPilgrimageReturn.Estimate = RouteBuilders.UnboundTeleport.Estimate
 	RouteBuilders.ZenPilgrimageReturn.AddWaypoint = RouteBuilders.UnboundTeleport.AddWaypoint
 		
-
 	function RouteBuilders.FlightMasterWhistle.Iterate(best, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2, lastRoute)
 		if lastRoute or parentRoute then return end
-		local c1, c2 = DGV:GetCZByMapId(m1), DGV:GetCZByMapId(m2)
+
+        --c1, c2 - old map ids
+		local c1, c2 = GetMapContinent_dugiOld(m1), GetMapContinent_dugiOld(m2)
 		local validcont
-		if GetCurrentMapContinent() == 8 or (GetCurrentMapContinent() == 9 and IsQuestFlaggedCompleted(49006)) then --Argus need Krokul Flute
+		
+		local currCont = GetCurrentMapContinent_dugi()
+		if currCont == 8 
+		or (currCont == 9 and IsQuestFlaggedCompleted(49006))  --Argus need Krokul Flute
+		or (currCont == 875 and (IsQuestFlaggedCompleted(51916) or IsQuestFlaggedCompleted(51918))) --Zandalar after unlocking world quest
+		or (currCont == 876 and (IsQuestFlaggedCompleted(51916) or IsQuestFlaggedCompleted(51918))) --Kul'Tiras after unlocking world quest
+		then
 			validcont = true
 		end 
 		if validcont ~= true --only valid within the broken isles / argus
@@ -1575,12 +1655,14 @@ end
 		end
 	end
 
+    --todo: test
 	function RouteBuilders.FlightMasterWhistle:Build(best, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2)
 		local route = GetCreateRoute(self, best, parentRoute)
 		route.builder = self
 		local fullData = TaxiData:GetFullData()
 		local t = DugisFlightmasterDataTable
-		local cont = GetCurrentMapContinent()
+
+		local cont = GetCurrentMapContinent_dugi()
 		if not t or not t[cont] or IsInInstance() then return end
 		local headDistances,headNPCs = GetDistances(m1, f1, x1, y1, t[cont], fullData[cont])
 		local startDist = headDistances[1]
@@ -1637,11 +1719,12 @@ end
 		--if IsInInstance() then 
 			if not control then control = 0 end
 			control = control + 1
-			if m1~=m2 then
+			if not AreOldMapsTheSame(m1,m2) then
 				if IsInLFGDungeon() and DGV:IsLFGTeleportAvailable() and DugisGuideUser.LFGWorldLocation and control==1 then
 					return RouteBuilders.InstanceExit:Build(prevBest, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2), control
 				elseif not (IsInLFGDungeon() and DGV:IsLFGTeleportAvailable()) then
-					local multData, data = TaxiData.InstancePortals[m1]
+					local m1BaseMapId = DGV:UiMapID2BaseMapId(m1)
+					local multData, data = TaxiData.InstancePortals[m1BaseMapId]
 					if multData then
 						data = select(control, strsplit("/", multData))
 					end
@@ -1669,7 +1752,7 @@ end
 			mSource,fSource,xSouce,ySource =
 				tonumber(sourceMapIdString), tonumber(sourceFloorString),
 				DGV:UnpackXY(sourceLocString)
-			if mSource~=m1 then return end
+			if not AreOldMapsTheSame(mSource, m1) then return end
 			fSource = fSource or f1
 		else
 			destMapIdString, destFloorString, destLocString = strsplit(":", DugisGuideUser.LFGWorldLocation)
@@ -1728,8 +1811,9 @@ end
 	function RouteBuilders.InstancePortals.Iterate(prevBest, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2, lastRoute, control)
 		if not control then control = 0 end
 		control = control + 1
-		local multData, data = TaxiData.InstancePortals[m2]
-		if m1~=m2 and multData then
+		local m2BaseMapId = DGV:UiMapID2BaseMapId(m2)
+		local multData, data = TaxiData.InstancePortals[m2BaseMapId]
+		if not AreOldMapsTheSame(m1, m2) and multData then
 			data = select(control, strsplit("/", multData))
 		end
 		if not data then return	end
@@ -1812,7 +1896,9 @@ end
 	end
 
 	function RouteBuilders.LocalPortals.Iterate(prevBest, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2, lastRoute)
-		local dataTable, c1, c2 = TaxiData.LocalPortalData, (DGV:GetCZByMapId(m1)), DGV:GetCZByMapId(m2)
+        local c1 = GetMapContinent_dugiOld(m1)
+        local c2 = GetMapContinent_dugiOld(m2)
+		local dataTable = TaxiData.LocalPortalData
 		if lastRoute or c1~=c2 or not dataTable[c2] then return end
 		local validPortals = GetCreateTable()
 		for _, data in ipairs(dataTable[c2]) do
@@ -1846,7 +1932,7 @@ end
 	function RouteBuilders.StaticPortals.Iterate(prevBest, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2, lastRoute, control, c2)
 		local dataTable = TaxiData.StaticPortalData
 		if not c2 then
-			c2 = DGV:GetCZByMapId(m2)
+			c2 = GetMapContinent_dugiOld(m2)
 		end
 		if not control then control = 0 end
 		control = control + 1
@@ -1870,7 +1956,7 @@ end
 			tonumber(sourceMapIdString), tonumber(sourceFloorString),
 			DGV:UnpackXY(sourceLocString)
 			
-		local cSource = DGV:GetCZByMapId(mSource)
+		local cSource = GetMapContinent_dugiOld(mSource)
 		
 		local route = GetCreateRoute(self, best, parentRoute)
 		route.builder = self
@@ -1934,7 +2020,7 @@ end
 			tonumber(sourceMapIdString), tonumber(sourceFloorString),
 			DGV:UnpackXY(sourceLocString)
 			
-		local cSource = DGV:GetCZByMapId(mSource)
+		local cSource = GetMapContinent_dugiOld(mSource)
 		if cSource==c2 then return end
 			
 		local fPort,xPort,yPort = 
@@ -2008,8 +2094,8 @@ end
 			DGV:AddRouteWaypointWithSpellRequirement(route.mSource, route.fSource,
 			route.xSouce, route.ySource,
 			L["Use"].." "..portDesc, route.spell)
-		elseif route.mSource==route.mPort then
-			DGV:AddRouteWaypointWithNoTrigger(route.mSource, route.fSource,
+		elseif AreOldMapsTheSame(route.mSource, route.mPort) then
+			DGV:AddRouteWaypointWithNoTrigger(route.mSource,
 				route.xSouce, route.ySource,
 				L["Use"].." "..portDesc)
 			DGV:AddRouteWaypoint(route.mPort, route.fPort,
@@ -2027,7 +2113,7 @@ end
 	
 	function RouteBuilders.Boats.Iterate(prevBest, parentRoute, m1, f1, x1, y1, m2, f2, x2, y2, lastRoute, control, continentZoom, c1, c2)
 		if not c1 then
-			c1,c2 = (DGV:GetCZByMapId(m1)), DGV:GetCZByMapId(m2)
+			c1,c2 = GetMapContinent_dugiOld(m1), GetMapContinent_dugiOld(m2)
 		end
 		if c1==0 or c2==0 then return end
 		
@@ -2051,7 +2137,7 @@ end
 			end
 		end
 		local sourceMapId = tonumber(strmatch(data, "(%d*):"))
-		local cSource = DGV:GetCZByMapId(sourceMapId)
+		local cSource = GetMapContinent_dugiOld(sourceMapId)
 		if (continentZoom==0 and cSource==c1) or (continentZoom==1 and cSource~=c1) then
 			local portBuild = RouteBuilders.Boats:Build(
 				prevBest, parentRoute, 
@@ -2075,8 +2161,8 @@ end
 		local mSource,fSource,xSouce,ySource =
 			tonumber(sourceMapIdString), tonumber(sourceFloorString),
 			DGV:UnpackXY(sourceLocString)
-		local cSource =  DGV:GetCZByMapId(mSource)
-		if cSource==DGV:GetCZByMapId(mPort) and (cSource~=c1 or cSource~=DGV:GetCZByMapId(m2)) then return end
+		local cSource =  GetMapContinent_dugiOld(mSource)
+		if cSource==GetMapContinent_dugiOld(mPort) and (cSource~=c1 or cSource~=GetMapContinent_dugiOld(m2)) then return end
 		--if cSource~=c1 then return end
 		local fPort,xPort,yPort = 
 			tonumber(destFloorString), 
@@ -2152,7 +2238,7 @@ end
 		route.head.builder:AddWaypoint(route.head, boatDesc)
 		
 		if route.mSource==route.mPort then
-			DGV:AddRouteWaypointWithNoTrigger(route.mSource, route.fSource,
+			DGV:AddRouteWaypointWithNoTrigger(route.mSource,
 				route.xSouce, route.ySource,
 				L["Use"].." "..locVehicle)
 			DGV:AddRouteWaypoint(route.mPort, route.fPort,
@@ -2182,6 +2268,10 @@ end
     
     function Taxi:IsBuilderEnabled(builderKey)
         local result = false
+		
+		if not DGV:UserSetting(DGV_USETAXISYSTEM) then
+			return result
+		end		
         
         if (builderKey == "Boats" and DGV:UserSetting(DGV_TAXISYSTEM_BOATS))
               or (builderKey == "FlightMasterWhistle" and DGV:UserSetting(DGV_TAXISYSTEM_WHISTLE))
@@ -2255,18 +2345,56 @@ end
 -- 		[893] = 462,
 -- 		[894] = 464,
 -- 		[895] = 27,
-		[27] = "866:895",
-		[30] = 864,
-		[41] = 888,
-		[4] = "889:891",
-		[20] = 892,
-		[462] = 893,
-		[464] = 894,
-		[9] = 890,
+		
+		--New Map IDs
+		[27] = "427:428:469:470",
+		[28] = "427:428:469:470",
+		[29] = "427:428:469:470",
+		[30] = "427:428:469:470",
+		[31] = "427:428:469:470",
+		
+		[37] = "425:426",
+		[38] = "425:426",
+		[39] = "425:426",
+		[40] = "425:426",
+		[41] = "425:426",
+		
+		[57] = 460,
+		[58] = 460,
+		[59] = 460,
+		[60] = 460,
+		[61] = 460,
+		
+		[1] = "461:463:464",
+		[2] = "461:463:464",
+		[3] = "461:463:464",
+		[4] = "461:463:464",
+		[5] = "461:463:464",
+		[6] = "461:463:464",
+		
+		[18] = "465:466",
+		[19] = "465:466",
+		[20] = "465:466",
+		
+		[94] = 467,
+		
+		[97] = 468,
+		[98] = 468,
+		[99] = 468,
+		
+		[7] = 462,
+		[8] = 462,
+		[9] = 462,
+        
+		[1165] = "1163:1164:1166:1167",
+		[862] = "1165:1177:1176",
+		[895] = 1161,
+		[539] = 582,
+		[525] = 590,		
 	}
 		
 	local function CheckBoundsOfTranslation(m1, f1, x1, y1, m2, f2)
-		local chkX, chkY = DGV:TranslateWorldMapPosition(m1, f1, x1, y1, m2, f2)
+		local chkX, chkY = DGV:TranslateWorldMapPositionGlobal(m1, x1, y1, m2)
 		if chkX and chkY and 
 			chkX>=0 and chkX<=1 and 
 			chkY>=0 and chkY <=1 
@@ -2275,11 +2403,15 @@ end
 	end
 	
 	local function CheckEncapsulatedZones(playerM, m, f, x, y)
-		if f~=0 then return m, f, x, y end
+		local f = UiMapId2Floor(m)
+	
+		if (f or 0)~=0 then return m, f, x, y end
+		
+		--todo: check if the rest is needed
 		local encMs = encapsulatedZones[m]
 		local encM = tonumber(encMs)
 		if encM then
-			if encM==playerM then
+			if AreOldMapsTheSame(encM, playerM) then
 				local chkM, chkF, chkX, chkY = CheckBoundsOfTranslation(m, f, x, y, encM, 0)
 				if chkM then return chkM, chkF, chkX, chkY end
 			end
@@ -2287,7 +2419,7 @@ end
 			local encs = GetCreateTable(strsplit(":", encMs))
 			for _, encM in ipairs(encs) do
 				local m2, f2, x2, y2 = tonumber(encM)
-				if m2==playerM then
+				if AreOldMapsTheSame(m2, playerM) then
 					m2, f2, x2, y2 =  CheckBoundsOfTranslation(m, f, x, y, m2, 0)
 					if m2 then
 						m, f, x, y = m2, f2, x2, y2
@@ -2300,14 +2432,16 @@ end
 		return m, f, x, y
 	end
 
+	--SetSmartWaypoint second argument can be not used anymore
+	--mapID must be a new map id
 	function DGV:SetSmartWaypoint(mapID, mapFloor, x, y, desc, originMap, originFloor, originX, originY)
 		DGV.startCalculationsTime = GetTime()
 		currentRouteStackLimit = routeStackDefaultLimit
 	
 		originX, originY = originX and originX/100, originY and originY/100
-		if not mapID then mapID = GetCurrentMapAreaID() end
+		if not mapID then mapID = DGV.GetCurrentMapID() end
 		if not mapFloor then
-			mapFloor = (mapID==321 and 1) or (mapID==504 and 1) or 0 --again with Orgrimmar or Dalaran
+			mapFloor = (mapID==85 and 1) or (mapID==125 and 1) or 0 --again with Orgrimmar or Dalaran
 		end
 		
 		pm, pf, px, py =  DGV:GetPlayerMapPositionDisruptive()
@@ -2356,22 +2490,22 @@ end
     function Taxi:CanWalkTo(m1, f1, m2, f2)
     
         local blockedWays = {
-            {m1 = 1171, m2 = 1171, f1 = 5, f2 = 0},
-            {m1 = 1171, m2 = 1171, f1 = 0, f2 = 5},
-            {m1 = 1171, m2 = 1171, f1 = 6, f2 = 0},
-            {m1 = 1171, m2 = 1171, f1 = 0, f2 = 6},			
-            {m1 = 1170, m2 = 1170, f1 = 3, f2 = 0},
-            {m1 = 1170, m2 = 1170, f1 = 0, f2 = 3},
-            {m1 = 1170, m2 = 1170, f1 = 4, f2 = 0},
-            {m1 = 1170, m2 = 1170, f1 = 0, f2 = 4},			
-            {m1 = 1135, m2 = 1135, f1 = 1, f2 = 0},
-            {m1 = 1135, m2 = 1135, f1 = 0, f2 = 1},
-			{m1 = 1135, m2 = 1135, f1 = 2, f2 = 0},
-			{m1 = 1135, m2 = 1135, f1 = 0, f2 = 2},
+            {m1 = 886, m2 = 885},
+            {m1 = 885, m2 = 886},
+            {m1 = 887, m2 = 885},
+            {m1 = 885, m2 = 887},			
+            {m1 = 883, m2 = 882},
+            {m1 = 882, m2 = 883},
+            {m1 = 884, m2 = 882},
+            {m1 = 882, m2 = 884},			
+            {m1 = 831, m2 = 830},
+            {m1 = 830, m2 = 831},
+			{m1 = 832, m2 = 830},
+			{m1 = 830, m2 = 832},
         }
 
         for _, val in pairs(blockedWays) do
-            if val.m1 == m1 and val.m2 == m2 and val.f1 == f1 and val.f2 == f2 then
+            if val.m1 == m1 and val.m2 == m2 then
                 return false
             end
         end
@@ -2381,7 +2515,7 @@ end
 	
 	local function GetMapIDFromDungeonName(destName)
 		for key in pairs(TaxiData.InstancePortals) do
-			if destName==GetMapNameByID(key) then
+			if destName==DGV:GetMapNameFromID(key) then
 				return key
 			end
 		end

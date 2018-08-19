@@ -1,5 +1,5 @@
-## Interface: 70300
-## Version: 17.10.10
+﻿## Interface: 80000
+## Version: 18.07.24
 ## Title: TipTac
 ## Author: Aezay (Earthen Ring EU)
 ## Notes: Highly Customizable Tooltip Enhancement Addon
@@ -13,4 +13,4 @@ Libs\LibStub\LibStub.lua
 Local_enUS.lua
 Local_zhCN.lua
 Local_zhTW.lua
-core.lua
+ttCore.lua

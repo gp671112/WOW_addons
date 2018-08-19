@@ -52,7 +52,7 @@ function TitanPanelLootTypeButton_OnLoad(self)
 		}
 	};
 
-	self:RegisterEvent("PARTY_MEMBERS_CHANGED");
+	self:RegisterEvent("GROUP_ROSTER_UPDATE");
 	self:RegisterEvent("RAID_ROSTER_UPDATE");
 	self:RegisterEvent("PARTY_LOOT_METHOD_CHANGED");
 	self:RegisterEvent("CHAT_MSG_SYSTEM");

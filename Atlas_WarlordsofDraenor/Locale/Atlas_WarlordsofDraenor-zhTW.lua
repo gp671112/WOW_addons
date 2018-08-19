@@ -1,10 +1,10 @@
--- $Id: Atlas_WarlordsofDraenor-zhTW.lua 38 2017-01-16 09:27:19Z arith $
+-- $Id: Atlas_WarlordsofDraenor-zhTW.lua 49 2018-08-09 14:02:33Z arith $
 --[[
 
 	Atlas, a World of Warcraft instance map browser
 	Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 	Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+	Copyright 2011 ~ 2018 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -38,10 +38,6 @@ L["SBG"] = "SBG"
 L["SR"] = "SR"
 L["Train Ride"] = "登上恐軌列車"
 L["UBRS"] = "UBRS"
-
--- ToC
-L["Description"] = "德拉諾之霸副本地圖模組"
-L["Title"] = "|r|cFF0099FF[地圖]|rAtlas 德拉諾之霸"
 
 
 end

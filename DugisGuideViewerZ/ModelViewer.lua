@@ -67,7 +67,9 @@ function MV:Initialize()
         MV.Frame.model.modelId = modelId
 			
 		--DebugPrint("modelPage="..modelPage.." modelId="..modelId.." modelType="..modelType)
-		MV.Frame:Show()
+		DGV.DoOutOfCombat(function()
+			MV.Frame:Show()
+		end)
 		--MV.Frame.model:ClearModel()
 		if modelType == "NPC" and MV.npcDB[modelId] then
 			MV.Frame.model:SetDisplayInfo(MV.npcDB[modelId])
@@ -225,6 +227,16 @@ function MV:Initialize()
 		self:SetPortraitZoom(zoomLevel);
 		self.zoomLevel = zoomLevel;
 	end
+	
+	local function UpdateCloseButton()
+		if not MV.Frame.close:IsMouseOver()
+		and not MV.Frame.model:IsMouseOver() 
+		and not DugisGuideViewer_ModelViewer_ModelControlFrame:IsMouseOver() then
+			MV.Frame.close:Hide()
+		else
+			MV.Frame.close:Show()
+		end				
+	end
 
 	function MV:CreateFrame()
 		if MV.Frame or not DGV:UserSetting(DGV_ENABLEMODELDB) then return end
@@ -281,6 +293,19 @@ function MV:Initialize()
 			DugisGuideUser.ModelDataOn = false
 			if DugisSmallFrameStatus1ModelButton then DugisSmallFrameStatus1ModelButton:SetButtonState("NORMAL") end
 			end)
+			
+			MV.Frame.model:HookScript("OnEnter", UpdateCloseButton)	
+			MV.Frame.model:HookScript("OnLeave", UpdateCloseButton)
+			MV.Frame.close:HookScript("OnLeave", UpdateCloseButton)
+			DugisGuideViewer_ModelViewer_ModelControlFrameZoomInButton:SetScript("OnLeave", UpdateCloseButton)
+			DugisGuideViewer_ModelViewer_ModelControlFrameZoomOutButton:SetScript("OnLeave", UpdateCloseButton)
+			DugisGuideViewer_ModelViewer_ModelControlFrameRotateLeftButton:SetScript("OnLeave", UpdateCloseButton)
+			DugisGuideViewer_ModelViewer_ModelControlFrameRotateRightButton:SetScript("OnLeave", UpdateCloseButton)
+			DugisGuideViewer_ModelViewer_ModelControlFramePanButton:SetScript("OnLeave", UpdateCloseButton)
+			DugisGuideViewer_ModelViewer_ModelControlFrameRotateResetButton:SetScript("OnLeave", UpdateCloseButton)
+			MV.Frame.model:HookScript("OnShow", UpdateCloseButton)
+			
+			MV.Frame.close:Hide()
 			
 			--[[MV.Frame.rotateLeft = CreateFrame("Button", "DugisGuideViewer_ModelViewer_ModelRotateLeftButton", MV.Frame.model, "UIPanelCloseButton")
 			MV.Frame.rotateLeft:SetSize(25, 25)
@@ -364,29 +389,31 @@ function MV:Initialize()
 	end
 
 	function MV:Finalize()
+	  DGV.DoOutOfCombat(function()
 		ToggleModelPage()
 		
 		if DGV.chardb.ModelViewer.pos_x == false then
-			if  DGV.SmallFrame.IsFloating() then
-				MV.Frame:SetPoint("TOPRIGHT", "DugisSmallFrameContainer", "TOPLEFT")
-			else 
-				MV.Frame:SetPoint("TOPRIGHT", "DugisWatchBackground", "TOPLEFT")
-			end
+			MV.Frame:SetPoint("TOPLEFT", "DugisSmallFrameContainer", "TOPLEFT")
+			MV.Frame:SetWidth(170)
 		elseif not MV.Frame.moving then
 			MV.Frame:SetPoint(DGV.chardb.ModelViewer.relativePoint, DGV.chardb.ModelViewer.pos_x, DGV.chardb.ModelViewer.pos_y)
 		end
 		-- ModelViewerChanged()
+	  end)
 	end
 
 	--Used for toggle on/off guide viewer
 	function MV:ShowCurrentModel( )	
+	  DGV.DoOutOfCombat(function()
 		if MV.data.models and #MV.data.models~=0 then
 			MV.Frame:Show()
 		end	
+	  end)
 	end
 
 	function MV:HideModel()
 		if MV.Frame then
+			if InCombatLockdown() then return end
 			MV.Frame.model.title:SetText("")
 			MV.Frame.model:ClearModel()
 			MV.Frame:Hide()
@@ -660,11 +687,8 @@ function MV:Initialize()
 	
 	function MV:ResetPosition()
 		MV.Frame:ClearAllPoints()
-		if  DGV.SmallFrame.IsFloating() then
-		    MV.Frame:SetPoint("TOPRIGHT", "DugisSmallFrameContainer", "TOPLEFT")
-		else 
-			MV.Frame:SetPoint("TOPRIGHT", "DugisWatchBackground", "TOPLEFT")
-		end
+		MV.Frame:SetPoint("TOPLEFT", "DugisSmallFrameContainer", "TOPLEFT", -173, 0)
+		MV.Frame:SetWidth(170)
 		DGV.chardb.ModelViewer.pos_x = false
    end
 end

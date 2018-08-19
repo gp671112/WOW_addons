@@ -1,5 +1,5 @@
 --[[
-Copyright 2012-2017 João Cardoso
+Copyright 2012-2018 João Cardoso
 PetTracker is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -20,30 +20,23 @@ local Menus = Addon:NewModule('Menus')
 local Questions = Addon.Locals.FAQ
 
 function Menus:Startup()
-	local Options = self:CreatePanel(ADDON)
-	Options:SetChildren(function(self)
+	local options = self:CreatePanel(ADDON)
+	options:SetChildren(function(self)
 		Addon:ForAllModules('AddOptions', self)
 	end)
 
-	local Help = self:CreatePanel(HELP_LABEL, ADDON)
-	Help:SetChildren(function(self)
+	local help = self:CreatePanel(HELP_LABEL, ADDON)
+	help:SetChildren(function(self)
 		for i = 1, #Questions, 2 do
-			local question = self:CreateChild('Header')
-			question:SetWidth(400)
-			question:SetFont('GameFontNormal')
-			question:SetText(Questions[i])
-
-			local answer = self:CreateChild('Header')
-			answer:SetWidth(400)
-			answer:SetFont('GameFontHighlight')
-			answer:SetText(Questions[i+1])
+			self:CreateHeader(Questions[i], 'GameFontHighlight', true)
+			self:CreateHeader(Questions[i+1], 'GameFontDisable').bottom = 15
 		end
 	end)
 
-	local ShowTutorial = SushiButton(Help)
-	ShowTutorial:SetText(RESET_TUTORIALS)
-	ShowTutorial:SetPoint('LEFT', Help, 'TOP', 170, -70)
-	ShowTutorial:SetCall('OnClick', function()
+	local resetTutorials = SushiButton(help)
+	resetTutorials:SetText(RESET_TUTORIALS)
+	resetTutorials:SetPoint('BOTTOMLEFT', help, 5, 5)
+	resetTutorials:SetCall('OnClick', function()
 		Addon.Tutorial:Restart()
 		HideUIPanel(InterfaceOptionsFrame)
 		HideUIPanel(GameMenuFrame)
@@ -55,7 +48,7 @@ function Menus:CreatePanel(name, parent)
 	local group = SushiMagicGroup(panel)
 
 	group:SetAddon(ADDON)
-	group:SetFooter('Copyright 2012-2017 João Cardoso')
+	group:SetFooter('Copyright 2012-2018 João Cardoso')
 	panel.parent = parent
 	panel.name = name
 

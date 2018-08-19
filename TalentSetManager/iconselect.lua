@@ -37,7 +37,6 @@ local function initializeButtons(self)
 end
 
 function TalentSetsDialogPopup_OnShow(self)
- --PlaySound("igCharacterInfoOpen")
  PlaySound(839)
  self.name = nil
  self.id = nil
@@ -107,7 +106,7 @@ function addonTable:CreateIconSelectionFrame()
  mf.edt_search = CreateFrame("EditBox", "TalentSetsDialogPopupEditBox", mf, "InputBoxTemplate")
  mf.edt_search:SetSize(182, 20)
  mf.edt_search:SetPoint("TOPLEFT", mf, "TOPLEFT", 289, -55)
- mf.edt_search:SetMaxLetters(16)
+ --mf.edt_search:SetMaxLetters(16)
  mf.edt_search:SetFontObject("ChatFontNormal")
  mf.edt_search:SetAutoFocus(true)
  mf.edt_search:SetScript("OnTextChanged", function(self)

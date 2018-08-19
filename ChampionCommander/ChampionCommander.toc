@@ -1,0 +1,42 @@
+## Interface: 80000
+## Title: ChampionCommander (BFA mission assistant)
+## Notes: Sending all follower to missions with just one click and more
+## Title-zhTW: |cff00FFFF[任務]|r 艾澤拉斯指揮官
+## Notes-zhTW: ChampionCommander |n自動幫你挑選出最佳的隊伍組合，讓你可以輕鬆的一鍵派出追隨者任務，還有更多功能。
+## Notes-zhCN: 發送所有的追隨者與點擊多任務
+## Author: Alar of Runetotem
+## Version: 1.0.2 80000
+## X-Revision: 29132a6
+## eMail: alar@aspide.it
+## URL: http://wow.aspide.it
+## OptionalDeps: Ace3,LibInit
+## Dependencies: Blizzard_GarrisonUI,Blizzard_GarrisonTemplates
+## DefaultState: Enabled
+## LoadOnDemand: 1
+## LoadWith: Blizzard_GarrisonUI
+## SavedVariables: dbBFA
+## SavedVariablesPerCharacter: dbBFAperChar
+## X-ID: BFA
+## X-Database:dbBFA
+## X-Category: Garrison
+## X-License: GPL v3
+## X-eMail: alar@aspide.it
+## X-Date: 2018-08-18T9:17:48Z
+## X-Embeds: LibInit
+## X-Reboot: 1
+embeds.xml
+localization.lua
+ChampionCommander.xml
+core.lua
+autocomplete.lua
+autopilot.lua
+cache.lua
+followerpage.lua
+matchmaker.lua
+missionlist.lua
+tutorials.lua
+missionpage.lua
+widgets.xml
+RelNotes.lua
+wowhead.lua
+data.lua

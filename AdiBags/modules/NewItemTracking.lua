@@ -101,7 +101,7 @@ end
 function mod:OnBagFrameCreated(bag)
 	if bag.isBank then return end
 	self.container = bag:GetFrame()
-	self.button = self.container:CreateModuleButton("新", 10, ResetButton_OnClick, {
+	self.button = self.container:CreateModuleButton("N", 10, ResetButton_OnClick, {
 		L["Reset new items"],
 		L["Click to reset item status."],
 		L["Right-click to configure."]
@@ -210,6 +210,7 @@ end
 
 function mod:ShowBlizzardGlow(button, enable)
 	if enable then
+		local _, _, _, quality = GetContainerItemInfo(button.bag, button.slot)
 		if quality and NEW_ITEM_ATLAS_BY_QUALITY[quality] then
 			button.NewItemTexture:SetAtlas(NEW_ITEM_ATLAS_BY_QUALITY[quality])
 		else

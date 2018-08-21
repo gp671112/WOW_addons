@@ -24,7 +24,7 @@ ns.defaults = {
 
 ns.options = {
     type = "group",
-    name = myname:gsub("HandyNotes_", ""),
+    name = "決戰艾澤拉斯寶藏",
     get = function(info) return ns.db[info[#info]] end,
     set = function(info, v)
         ns.db[info[#info]] = v
@@ -33,99 +33,99 @@ ns.options = {
     args = {
         icon = {
             type = "group",
-            name = "圖示設置",
+            name = "圖示設定",
             inline = true,
             args = {
                 desc = {
-                    name = "這些設置控制圖示的外觀。",
+                    name = "這些設定控制圖示的外觀及風格。",
                     type = "description",
                     order = 0,
                 },
                 icon_scale = {
                     type = "range",
-                    name = "圖示縮放",
-                    desc = "The scale of the icons",
+                    name = "圖示大小",
+                    desc = "圖示的縮放大小",
                     min = 0.25, max = 2, step = 0.01,
                     order = 20,
                 },
                 icon_alpha = {
                     type = "range",
                     name = "圖示透明度",
-                    desc = "The alpha transparency of the icons",
+                    desc = "圖示的透明度",
                     min = 0, max = 1, step = 0.01,
                     order = 30,
                 },
                 show_on_world = {
                     type = "toggle",
                     name = "世界地圖",
-                    desc = "在世界地圖顯示圖示",
+                    desc = "在世界地圖上顯示圖示",
                     order = 40,
                 },
                 show_on_minimap = {
                     type = "toggle",
                     name = "小地圖",
-                    desc = "在小地圖顯示圖示",
+                    desc = "在小地圖上顯示圖示",
                     order = 50,
                 },
             },
         },
         display = {
             type = "group",
-            name = "顯示什麼",
+            name = "選擇要顯示什麼",
             inline = true,
             args = {
                 icon_item = {
                     type = "toggle",
                     name = "使用物品圖示",
-                    desc = "顯示物品的圖示（如果已知）; 否則將使用成就圖示",
+                    desc = "如果可以的話使用物品的圖示，否則使用成就圖示",
                     order = 0,
                 },
                 tooltip_item = {
                     type = "toggle",
-                    name = "使用物品提示",
-                    desc = "顯示物品的完整提示",
+                    name = "使用物品滑鼠提示",
+                    desc = "顯示物品的完整滑鼠提示",
                     order = 10,
                 },
                 found = {
                     type = "toggle",
-                    name = "顯示已發現",
-                    desc = "顯示已經發現的物品路徑點？",
+                    name = "顯示發現的",
+                    desc = "顯示路線導引到已經發現的物品",
                     order = 20,
                 },
                 show_npcs = {
                     type = "toggle",
-                    name = "顯示稀有NPC",
-                    desc = "顯示要殺的稀有NPC，通常用於物品或成就",
+                    name = "顯示 NPC",
+                    desc = "顯示可以擊殺的稀有 NPC，通常會掉落物品或有相關成就",
                     order = 30,
                 },
                 show_treasure = {
                     type = "toggle",
-                    name = "顯示財寶",
-                    desc = "Show treasure that can be looted",
+                    name = "顯示寶藏",
+                    desc = "顯示可以拾取的寶藏",
                     order = 30,
                 },
                 show_junk = {
                     type = "toggle",
                     name = "垃圾",
-                    desc = "顯示不包含在任何成就的物品",
+                    desc = "顯示沒有任何相關成就的物品",
                     order = 40,
                 },
                 -- repeatable = {
                 --     type = "toggle",
-                --     name = "顯示可重複的",
-                --     desc = "顯示可重複的物品？ 這通常意味著附加了每日追踪任務的那些",
+                --     name = "Show repeatable",
+                --     desc = "Show items which are repeatable? This generally means ones which have a daily tracking quest attached",
                 --     order = 40,
                 -- },
                 tooltip_questid = {
                     type = "toggle",
-                    name = "顯示任務ID",
-                    desc = "Show the internal id of the quest associated with this node. Handy if you want to report a problem with it.",
+                    name = "顯示任務 ID",
+                    desc = "顯示相關任務的內部 ID，方便回報錯誤使用。",
                     order = 40,
                 },
                 unhide = {
                     type = "execute",
-                    name = "重設隱藏的節點",
-                    desc = "顯示您手動透由通過右鍵單擊並選擇“隱藏”隱藏的所有節點。",
+                    name = "重置隱藏的點",
+                    desc = "顯示所有曾經手動點右鍵隱藏過的點。",
                     func = function()
                         for map,coords in pairs(ns.hidden) do
                             wipe(coords)

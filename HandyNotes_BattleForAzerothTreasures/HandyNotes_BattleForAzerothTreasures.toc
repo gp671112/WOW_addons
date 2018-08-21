@@ -1,7 +1,7 @@
 ## Interface: 80000
 ## Title: HandyNotes: Battle for Azeroth Treasures
 ## Notes: Where are the hidden treasures in Battle For Azeroth?
-## Title-zhTW: |cff4DFF4D[地圖]|r 地圖標記-決戰艾澤拉斯財寶與稀有
+## Title-zhTW: |cff4DFF4D[地圖]|r 地圖標記-決戰艾澤拉斯寶藏
 ## Author: Kemayo
 ## Version: 1
 ## DefaultState: enabled

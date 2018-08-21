@@ -86,7 +86,7 @@ ns.points = {
         [57746464] = {quest=51136, achievement=12849, criteria=40971,}, -- Excavator's Greed
         [56696469] = path(51136),
         [57061120] = {quest=52992, achievement=12849, criteria=41002, note="進入神廟頂部",}, -- Lost Offerings of Kimbul
-        -- [] = {quest=53004, achievement=12849, criteria=41004, note="",}, -- Sandsunken Treasure
+        [26504530] = {quest=53004, achievement=12849, criteria=41004,}, -- Sandsunken Treasure
     },
     [895] = { -- Tiragarde Sound
         [61515233] = {quest=49963, achievement=12852, criteria=41012, note="騎上守衛",}, -- Hay Covered Chest
@@ -106,23 +106,27 @@ ns.points = {
         [90507551] = {quest=52836, hide_before=52859, achievement=12852, criteria=41020, note="殺死自由港的海盜直到地圖掉落",}, -- Yellowed Treasure Map 162581 (q:52859)
         [29222534] = {quest=52833, hide_before=52854, achievement=12852, criteria=41019, note="殺死自由港的海盜直到地圖掉落",}, -- Fading Treasure Map 162580 (q:52854)
         [48983759] = {quest=52845, hide_before=52860, achievement=12852, criteria=41021, note="殺死自由港的海盜直到地圖掉落",}, -- Singed Treasure Map 162584 (q:52860)
-        -- [] = {quest=52195, achievement=12852, criteria=41017, note="",}, -- Secret of the Depths
+        -- junk:
         [76967543] = {quest=48593, junk=true, label="Small Treasure Chest",},
         [78008050] = {quest=48595, junk=true, label="Small Treasure Chest",},
         [76358090] = {quest=48595, junk=true, label="Small Treasure Chest",},
         [75758283] = {quest=48596, junk=true, label="Small Treasure Chest",},
+        [38432868] = {quest=48598, junk=true, label="Small Treasure Chest",},
+        [38762673] = {quest=48599, junk=true, label="Small Treasure Chest",},
         [78114901] = {quest=48607, junk=true, label="Small Treasure Chest",},
         [79205050] = {quest=48607, junk=true, label="Small Treasure Chest",},
         [81344938] = {quest=48607, junk=true, label="Small Treasure Chest",},
         [76126733] = {quest=48608, junk=true, label="Small Treasure Chest",},
         [68635108] = {quest=48609, junk=true, label="Small Treasure Chest",},
         [50842310] = {quest=48611, junk=true, label="Small Treasure Chest",},
+        [47442365] = {quest=48611, junk=true, label="Small Treasure Chest",},
         [61212836] = {quest=48612, junk=true, label="Small Treasure Chest",},
         [57311757] = {quest=48617, junk=true, label="Small Treasure Chest",},
         [87347379] = {quest=48618, junk=true, label="Small Treasure Chest",},
         [88387840] = {quest=48618, junk=true, label="Small Treasure Chest",},
         [69801270] = {quest=48619, junk=true, label="Small Treasure Chest",},
-    },
+        [46481829] = {quest=48621, junk=true, label="Small Treasure Chest",},
+        },
     [896] = { -- Drustvar
         [33713008] = {quest=53356, achievement=12995, criteria=41697,}, -- Web-Covered Chest
         [63306585] = {quest=53385, achievement=12995, criteria=41699, note="左下上右",}, -- Runebound Cache
@@ -133,11 +137,11 @@ ns.points = {
         [44222770] = {quest=53386, achievement=12995, criteria=41700, note="左右下上",}, -- Runebound Chest
         [18515133] = {quest=53471, achievement=12995, criteria=41702, note="點擊巫術火炬",}, -- Hexed Chest
         [67767367] = {quest=53473, achievement=12995, criteria=41704, note="點擊巫術火炬",}, -- Ensorcelled Chest
-        -- [] = {quest=53475, achievement=12995, criteria=41752}, -- Stolen Thornspeaker Cache
+        [24304840] = {quest=53475, achievement=12995, criteria=41752,}, -- Stolen Thornspeaker Cache
     },
     [942] = { -- Stormsong Valley
-        [53524173] = {quest=51449, achievement=12853, criteria=41061,}, -- Weathered Treasure Chest
-        [50118623] = {quest=50526, achievement=12853, criteria=41063,}, -- Frosty Treasure Chest
+        [66901200] = {quest=51449, achievement=12853, criteria=41061,}, -- Weathered Treasure Chest
+        [48968407] = {quest=50526, achievement=12853, criteria=41063,}, -- Frosty Treasure Chest
         [59913907] = {quest=50937, achievement=12853, criteria=41065, note="屋頂上",}, -- Hidden Scholar's Chest
         [58216368] = {quest=52326, achievement=12853, criteria=41067, note="在棚子內的架子上層",}, -- Discarded Lunchbox
         [36692323] = {quest=52976, achievement=12853, criteria=41069, note="爬梯子上船",}, -- Venture Co. Supply Chest
@@ -146,16 +150,19 @@ ns.points = {
         [58608388] = {quest=49811, achievement=12853, criteria=41066, note="平台下",}, -- Smuggler's Stash
         [44447353] = {quest=52429, achievement=12853, criteria=41068, note="跳去平台",}, -- Carved Wooden Chest
         [46003069] = {quest=52980, achievement=12853, criteria=41070, note="柱子後面",}, -- Forgotten Chest
+        -- junk
+        [64366899] = {quest=51939, junk=true, label="Small Treasure Chest",},
+        [62056563] = {quest=51184, junk=true, label="Small Treasure Chest",},
     },
     [1161] = { -- Boralus
         [61901010] = {quest=52870, achievement=12852, criteria=41016, note="在洞穴",}, -- Scrimshaw Cache
         -- Secret of the Depths:
         [61518382] = {quest=52195, atlas="MagePortalAlliance", minimap=true, achievement=12852, criteria=41017, note="Entrance to the underwater cave",},
-        [55979126] = {quest=52134, atlas="poi-workorders", minimap=true, achievement=12852, criteria=41017, note="閱讀浸濕的卷軸; 水下洞穴，入口在修道院",},
-        [61527772] = {quest=52135, atlas="poi-workorders", minimap=true, achievement=12852, criteria=41017, note="閱讀浸濕的卷軸; 地下",},
-        [63078186] = {quest=52136, atlas="poi-workorders", minimap=true, achievement=12852, criteria=41017, note="閱讀浸濕的卷軸; 樓上",},
-        [70328576] = {quest=52137, atlas="poi-workorders", minimap=true, achievement=12852, criteria=41017, note="閱讀浸濕的卷軸; 地下",},
-        [67147982] = {quest=52138, atlas="poi-workorders", minimap=true, achievement=12852, criteria=41017, note="閱讀浸濕的卷軸",},
+        [55979126] = {quest=52134, atlas="poi-workorders", minimap=true, achievement=12852, criteria=41017, note="閱讀潮濕的卷軸; 水下洞穴，入口在修道院",},
+        [61527772] = {quest=52135, atlas="poi-workorders", minimap=true, achievement=12852, criteria=41017, note="閱讀潮濕的卷軸; 地下",},
+        [63078186] = {quest=52136, atlas="poi-workorders", minimap=true, achievement=12852, criteria=41017, note="閱讀潮濕的卷軸; 樓上",},
+        [70328576] = {quest=52137, atlas="poi-workorders", minimap=true, achievement=12852, criteria=41017, note="閱讀潮濕的卷軸; 地下",},
+        [67147982] = {quest=52138, atlas="poi-workorders", minimap=true, achievement=12852, criteria=41017, note="閱讀潮濕的卷軸",},
         [55769095] = {quest=52195, atlas="DemonInvasion2", scale=1.4, minimap=true, hide_before={52134, 52135, 52136, 52137, 52138}, item=161342, achievement=12852, criteria=41017, note="Ominous Altar; use it, get teleported, pick up the gem",}, -- Secret of the Depths
         -- junk
         [66758031] = {quest=50952, junk=true, label="Small Treasure Chest",},

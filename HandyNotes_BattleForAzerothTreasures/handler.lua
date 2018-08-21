@@ -286,10 +286,6 @@ local function handle_tooltip(tooltip, point)
             end
             comparison:Show()
         end
-
-        if point.npc then
-            tooltip:AddLine("|cffeda55f點擊來搜尋隊伍")
-        end
     else
         tooltip:SetText(UNKNOWN)
     end
@@ -343,14 +339,14 @@ do
         if (level == 1) then
             -- Create the title of the menu
             info.isTitle      = 1
-            info.text         = "HandyNotes - " .. myname:gsub("HandyNotes_", "")
+            info.text         = "地圖標記 - 決戰艾澤拉斯寶藏"
             info.notCheckable = 1
             UIDropDownMenu_AddButton(info, level)
             wipe(info)
 
             if TomTom then
                 -- Waypoint menu item
-                info.text = "Create waypoint"
+                info.text = "建立路線導引"
                 info.notCheckable = 1
                 info.func = createWaypoint
                 info.arg1 = currentZone
@@ -360,7 +356,7 @@ do
             end
 
             -- Hide menu item
-            info.text         = "Hide node"
+            info.text         = "隱藏這個點"
             info.notCheckable = 1
             info.func         = hideNode
             info.arg1         = currentZone
@@ -369,7 +365,7 @@ do
             wipe(info)
 
             -- Close menu item
-            info.text         = "Close"
+            info.text         = "關閉"
             info.func         = closeAllDropdowns
             info.notCheckable = 1
             UIDropDownMenu_AddButton(info, level)
@@ -387,21 +383,6 @@ do
         local point = ns.points[currentZone] and ns.points[currentZone][currentCoord]
         if button == "RightButton" and not down then
             ToggleDropDownMenu(1, nil, HL_Dropdown, self, 0, 0)
-        elseif button == "LeftButton" and down and point.npc then
-            if InCombatLockdown() then
-                print("|cFF33FF99" .. myname .. "|r: Can't search in combat")
-            else
-                local name = mob_name(point.npc)
-                PVEFrame_ShowFrame("GroupFinderFrame", LFGListPVEStub)
-                local panel = LFGListFrame.CategorySelection
-                LFGListCategorySelection_SelectCategory(panel, 6, 0)
-                LFGListCategorySelection_StartFindGroup(panel, name)
-                -- LFGListEntryCreation_SetAutoCreateMode(panel:GetParent().EntryCreation, "quest", activityID, questID)
-
-                -- C_LFGList.Search(6, LFGListSearchPanel_ParseSearchTerms(npcName), 0, 4)
-                -- LFG_LIST_SEARCH_RESULTS_RECEIVED
-                -- local number, ids = C_LFGList.GetSearchResults()
-            end
         end
     end
 end
@@ -469,7 +450,7 @@ function HL:OnInitialize()
     ns.db = self.db.profile
     ns.hidden = self.db.char.hidden
     -- Initialize our database with HandyNotes
-    HandyNotes:RegisterPluginDB(myname:gsub("HandyNotes_", ""), HLHandler, ns.options)
+    HandyNotes:RegisterPluginDB("決戰艾澤拉斯寶藏", HLHandler, ns.options)
 
     -- watch for LOOT_CLOSED
     self:RegisterEvent("LOOT_CLOSED", "Refresh")

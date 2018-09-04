@@ -1,14 +1,14 @@
 local checkNeedToQueue = false
 local EasyScrap = EasyScrap
 
-EasyScrapMainFrame:SetScript('OnShow', function()
-    EasyScrapMainFrame:RegisterEvent('BAG_UPDATE_DELAYED')
-	EasyScrapMainFrame:RegisterEvent("SCRAPPING_MACHINE_CLOSE")
-	EasyScrapMainFrame:RegisterEvent("SCRAPPING_MACHINE_PENDING_ITEM_CHANGED")
-	EasyScrapMainFrame:RegisterEvent("SCRAPPING_MACHINE_SCRAPPING_FINISHED")
-	EasyScrapMainFrame:RegisterUnitEvent("UNIT_SPELLCAST_START", "player")
-	EasyScrapMainFrame:RegisterUnitEvent("UNIT_SPELLCAST_INTERRUPTED", "player")
-	EasyScrapMainFrame:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "player")
+EasyScrap.parentFrame:SetScript('OnShow', function()
+    EasyScrap.parentFrame:RegisterEvent('BAG_UPDATE_DELAYED')
+	EasyScrap.parentFrame:RegisterEvent("SCRAPPING_MACHINE_CLOSE")
+	EasyScrap.parentFrame:RegisterEvent("SCRAPPING_MACHINE_PENDING_ITEM_CHANGED")
+	EasyScrap.parentFrame:RegisterEvent("SCRAPPING_MACHINE_SCRAPPING_FINISHED")
+	EasyScrap.parentFrame:RegisterUnitEvent("UNIT_SPELLCAST_START", "player")
+	EasyScrap.parentFrame:RegisterUnitEvent("UNIT_SPELLCAST_INTERRUPTED", "player")
+	EasyScrap.parentFrame:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "player")
  
     EasyScrap.queueItems = {}
     EasyScrap:getScrappableItems()
@@ -17,22 +17,32 @@ EasyScrapMainFrame:SetScript('OnShow', function()
 
     EasyScrapItemFrame.switchContentState(2)
     checkNeedToQueue = false
+    EasyScrap.addingItems = false
     EasyScrap.scrapCastLineID = nil
     EasyScrap.scrapInProgress = false
+    
+    if EasyScrap.saveData.showWhatsNew then
+        EasyScrap.mainFrame:Hide()
+        EasyScrap.updateOverlay.content:SetText(EasyScrap.whatsNewText[EasyScrap.saveData.showWhatsNew])
+        EasyScrap.updateOverlay:Show()
+    else
+        EasyScrap.updateOverlay:Hide()
+        EasyScrap.mainFrame:Show()
+    end
 end)
 
-EasyScrapMainFrame:SetScript('OnHide', function()
+EasyScrap.parentFrame:SetScript('OnHide', function()
     EasyScrap.scrapCastLineID = nil
-    EasyScrapMainFrame:UnregisterEvent('BAG_UPDATE_DELAYED')
-	EasyScrapMainFrame:UnregisterEvent("UNIT_SPELLCAST_START", "player")
-	EasyScrapMainFrame:UnregisterEvent("UNIT_SPELLCAST_INTERRUPTED", "player")
-	EasyScrapMainFrame:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED", "player")
+    EasyScrap.parentFrame:UnregisterEvent('BAG_UPDATE_DELAYED')
+	EasyScrap.parentFrame:UnregisterEvent("UNIT_SPELLCAST_START", "player")
+	EasyScrap.parentFrame:UnregisterEvent("UNIT_SPELLCAST_INTERRUPTED", "player")
+	EasyScrap.parentFrame:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED", "player")
 end)
 --[[
 --At some point on beta SCRAPPING_MACHINE_SCRAPPING_FINISHED stopped firing reliably for one speficic highmountain tauren character.
 --Could never reproduce it on any other character but keeping the ugly workaround of using ITEM_CHANGED for now.
 --]]
-EasyScrapMainFrame:SetScript('OnEvent', function(self, event, ...)
+EasyScrap.parentFrame:SetScript('OnEvent', function(self, event, ...)
     --print('Easy Scrap Event: '..event)
     if event == 'BAG_UPDATE_DELAYED' then
         EasyScrap:getScrappableItems()
@@ -54,16 +64,12 @@ EasyScrapMainFrame:SetScript('OnEvent', function(self, event, ...)
         
         if checkNeedToQueue and #EasyScrap.itemsInScrapper == 0 and #EasyScrap.queueItems > 0 then
             checkNeedToQueue = false
-            if #EasyScrap.queueItems > 9 then
-                EasyScrap.queueItemsToAdd = 9
-            else
-                EasyScrap.queueItemsToAdd = #EasyScrap.queueItems
-            end   
+            EasyScrap.addingItems = true
         else
             checkNeedToQueue = false
         end
         
-        if EasyScrap.queueItemsToAdd > 0 then
+        if EasyScrap.addingItems then
             C_Timer.After(0, function() EasyScrap:addQueueItems() end)
         end    
 	elseif (event == "UNIT_SPELLCAST_START") then
@@ -87,21 +93,28 @@ EasyScrapMainFrame:SetScript('OnEvent', function(self, event, ...)
     elseif event == 'ADDON_LOADED' then
         local name = ...
         if name == 'EasyScrap' then
+            if EasyScrap_IgnoreList then
+                EasyScrap.itemIgnoreList = EasyScrap_IgnoreList
+            end       
+        
             if EasyScrap_SaveData then
                 EasyScrap.saveData = EasyScrap_SaveData
 
                 if EasyScrap.saveData.addonVersion < EasyScrap.addonVersion then
                     EasyScrap:updateAddonSettings()
                 end     
+                
+                 --Ignore list changed to only name
+                if EasyScrap.saveData.addonVersion < 7 then
+                    --Reset ignore list
+                    EasyScrap.itemIgnoreList = {}
+                    EasyScrap.saveData.showWhatsNew = 6
+                end                    
             else
                 EasyScrap:initializeSaveData()        
             end
-            
-            if EasyScrap_IgnoreList then
-                EasyScrap.itemIgnoreList = EasyScrap_IgnoreList
-            end
-           
-            EasyScrapMainFrame:UnregisterEvent('ADDON_LOADED')
+        
+            EasyScrap.parentFrame:UnregisterEvent('ADDON_LOADED')
         end
     elseif event == 'PLAYER_LOGOUT' then
         EasyScrap.saveData.addonVersion = EasyScrap.addonVersion

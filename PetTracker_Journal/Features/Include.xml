@@ -1,6 +1,0 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Script file="TrackingToggle.lua"/>
-
-	<Include file="RivalJournal.xml"/>
-	<Script file="RivalJournal.lua"/>
-</Ui>

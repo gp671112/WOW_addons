@@ -1,0 +1,21 @@
+lightweight tag 69673e096b26b85f9843f65a8356625885db7d8b 8.0.8
+Author:	Unknown <40722602+ahakola@users.noreply.github.com>
+Date:	Tue Sep 4 03:50:35 2018 +0300
+
+commit 69673e096b26b85f9843f65a8356625885db7d8b
+Author: Unknown <40722602+ahakola@users.noreply.github.com>
+Date:   Tue Sep 4 03:50:35 2018 +0300
+
+    Fixed the missing traits for some specializations, if you are still missing specialization specific traits, let me know
+    
+    Updated the Default-scales, now they should be little bit more accurate, but still can't promise 100%
+    
+    More translations:
+    - French by tthegarde
+    - Korean by Killberos
+    - More Simplified Chinese by plok245
+    
+    !!! Translators ahoy, L.PowersScoreString has changed. Go check your translations if you need to fix it !!!
+    
+    - Small bug fixes
+

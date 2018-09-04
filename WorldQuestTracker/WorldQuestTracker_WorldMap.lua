@@ -57,12 +57,11 @@ local worldFramePOIs = WorldQuestTrackerWorldMapPOI
 --store the amount os quests for each faction on each map
 local factionAmountForEachMap = {}
 
-
 --local onenter function for worldmap buttons
 local questButton_OnEnter = function (self)
 	if (self.questID) then
 		WorldQuestTracker.CurrentHoverQuest = self.questID
-		self.UpdateTooltip = function()end
+		self.UpdateTooltip = TaskPOI_OnEnter -- function()end
 		TaskPOI_OnEnter (self)
 	end
 end
@@ -598,13 +597,14 @@ function WorldQuestTracker.UpdateWorldQuestsOnWorldMap (noCache, showFade, isQue
 		end
 		return
 	
-	elseif (not IsQuestFlaggedCompleted (WORLD_QUESTS_AVAILABLE_QUEST_ID)) then
+--[=[	elseif (not IsQuestFlaggedCompleted (WORLD_QUESTS_AVAILABLE_QUEST_ID)) then
 		WorldQuestTracker.HideWorldQuestsOnWorldMap()
 		--print ("quest nao completada...")
 		if (not isQuestFlaggedRecheck) then
 			C_Timer.After (3, re_check_for_questcompleted)
 		end
 		return
+--]=]
 	
 	elseif (WorldQuestTracker.db.profile.disable_world_map_widgets) then
 		WorldQuestTracker.HideWorldQuestsOnWorldMap()

@@ -1,7 +1,7 @@
 --[[
     Appreciate what others people do. (c) Usoltsev
 
-    Copyright (c) <2016-2017>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
+    Copyright (c) <2016-2018>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
 
     Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
     Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -107,6 +107,9 @@ function Pet:PetFrameUpdate(frame, override)
             RefreshDebuffs(frame, frame.unit, nil, nil, true);
 
             PetFrame.portrait:SetTexCoord(0, 1, 0, 1)
+            if (frame.unit == "player") then
+                EasyFrames:GetModule("Player"):MakeClassPortraits(frame)
+            end
 
             if (db.pet.customPoints) then
                 frame:ClearAllPoints()
@@ -159,7 +162,7 @@ function Pet:ResetFramePosition()
     local frame = PetFrame;
 
     frame:ClearAllPoints()
-    frame:SetPoint("TOPLEFT", PlayerFrame, "TOPLEFT", 90, -65)
+    frame:SetPoint("TOPLEFT", PlayerFrame, "TOPLEFT", 60, -75)
 
     db.pet.customPoints = false
 end

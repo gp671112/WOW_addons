@@ -20,8 +20,10 @@ function EasyScrap:getScrappableItems()
          local itemID = GetContainerItemID(bag, i)
 
          if itemID and EasyScrap:itemScrappable(itemID) then
-            local texture, itemCount, locked, quality, readable, lootable, itemLink, isFiltered = GetContainerItemInfo(bag, i)  
-            table.insert(self.scrappableItems, {itemRef = itemRef, bag = bag, slot = i, itemLink = itemLink, itemTexture = texture, itemCount = itemCount, itemID = itemID, itemQuality = quality, itemName = string.match(itemLink, "%[(.+)%]")})
+            local texture, itemCount, locked, quality, readable, lootable, itemLink, isFiltered = GetContainerItemInfo(bag, i)
+            local itemName, _, _, itemLevel = GetItemInfo(itemLink)
+            --table.insert(self.scrappableItems, {itemRef = itemRef, bag = bag, slot = i, itemLink = itemLink, itemTexture = texture, itemCount = itemCount, itemID = itemID, itemQuality = quality, itemName = string.match(itemLink, "%[(.+)%]")})
+            table.insert(self.scrappableItems, {itemRef = itemRef, bag = bag, slot = i, itemLink = itemLink, itemTexture = texture, itemCount = itemCount, itemID = itemID, itemQuality = quality, itemName = itemName, itemLevel = itemLevel})
             itemRef = itemRef + 1
          end
       end
@@ -69,21 +71,29 @@ function EasyScrap:itemScrappable(itemID)
 end
 
 function EasyScrap:addQueueItems()
-    ScrappingMachineFrame.ScrapButton:SetEnabled(false)
-    ScrappingMachineFrame.ScrapButton.SetEnabled = function() end
-    if self.queueItemsToAdd > 0 then
-        self.queueItemsToAdd = self.queueItemsToAdd - 1
-        local key, nextItemRef = next(self.queueItems)
-        UseContainerItem(self.scrappableItems[nextItemRef].bag, self.scrappableItems[nextItemRef].slot)
-        table.remove(self.queueItems, key)
+    if ScrappingMachineFrame:IsVisible() and not EasyScrap.scrapInProgress then
+        ScrappingMachineFrame.ScrapButton:SetEnabled(false)
+        ScrappingMachineFrame.ScrapButton.SetEnabled = function() end
+        if #self.itemsInScrapper < 9 and #self.queueItems > 0 then
+        --if self.queueItemsToAdd > 0 then
+            --self.queueItemsToAdd = self.queueItemsToAdd - 1
+            local key, nextItemRef = next(self.queueItems)
+            table.remove(self.queueItems, key)
+            UseContainerItem(self.scrappableItems[nextItemRef].bag, self.scrappableItems[nextItemRef].slot)
 
-        if self.queueItemsToAdd == 0 then
+            if #self.itemsInScrapper == 9 or #self.queueItems == 0 then
+            --if self.queueItemsToAdd == 0 then
+                ScrappingMachineFrame.ScrapButton.SetEnabled = ScrappingMachineFrame.ScrapButton.SetEnabledBackup
+                ScrappingMachineFrame.ScrapButton:SetEnabled(true) 
+                EasyScrap.addingItems = false
+            end
+        else
             ScrappingMachineFrame.ScrapButton.SetEnabled = ScrappingMachineFrame.ScrapButton.SetEnabledBackup
-            ScrappingMachineFrame.ScrapButton:SetEnabled(true)       
+            ScrappingMachineFrame.ScrapButton:SetEnabled(true)
+            EasyScrap.addingItems = false
         end
     else
-        ScrappingMachineFrame.ScrapButton.SetEnabled = ScrappingMachineFrame.ScrapButton.SetEnabledBackup
-        ScrappingMachineFrame.ScrapButton:SetEnabled(true)  
+        EasyScrap.addingItems = false
     end
 end
 
@@ -98,16 +108,17 @@ function EasyScrap:searchItem(text)
 end
 
 function EasyScrap:itemInWardrobeSet(itemID, bag, slot)
-    for i = 0, C_EquipmentSet.GetNumEquipmentSets()-1 do
-        local setName = C_EquipmentSet.GetEquipmentSetInfo(i)
+    for i = 0, MAX_EQUIPMENT_SETS_PER_PLAYER-1 do
         local items = C_EquipmentSet.GetItemIDs(i)
-        for z = 1, 19 do --would be nicer to get the slot id beforehand so we don't have to loop over all the items in a set
-            if items[z] then
-                if itemID == items[z] then
-                    local equipmentSetInfo = C_EquipmentSet.GetItemLocations(i)
-                    local onPlayer, inBank, inBags, inVoidStorage, slotNumber, bagNumber = EquipmentManager_UnpackLocation(equipmentSetInfo[z])
-                    if bag == bagNumber and slot == slotNumber then
-                        return true
+        if items then
+            for z = 1, 19 do --would be nicer to get the slot id beforehand so we don't have to loop over all the items in a set
+                if items[z] then
+                    if itemID == items[z] then
+                        local equipmentSetInfo = C_EquipmentSet.GetItemLocations(i)
+                        local onPlayer, inBank, inBags, inVoidStorage, slotNumber, bagNumber = EquipmentManager_UnpackLocation(equipmentSetInfo[z])
+                        if bag == bagNumber and slot == slotNumber then
+                            return true
+                        end
                     end
                 end
             end
@@ -116,52 +127,63 @@ function EasyScrap:itemInWardrobeSet(itemID, bag, slot)
     return false
 end
 
+function EasyScrap:itemMatchesFilter(i)
+    --In next version we will be able to change the filters 
+    if self:itemInWardrobeSet(self.scrappableItems[i].itemID, self.scrappableItems[i].bag, self.scrappableItems[i].slot) then
+        self.scrappableItems[i].filterReason = 'Easy Scrap: Filtered because item is used in wardrobe set.'
+        return true
+    else
+        return false
+    end
+end
+
+
 function EasyScrap:filterScrappableItems()
     --Filter items
-    --Example fitler for items that are in wardrobe
     local ignoredItems = {}
     local eligibleItems = {}
+    local filteredItems = {}
     
 
-    for i = 1, #self.scrappableItems do
-        --Check filter to see if we go to ignored or eligible then check if it's a searchmatch and put it in there. Queue can be build up later
-        
-        local insertionOrder = nil    
-        if self.scrappableItems[i].searchMatch then
-            insertionOrder = 1
-        end
-        
-        if not EasyScrap:itemInIgnoreList(self.scrappableItems[i].itemID, self.scrappableItems[i].itemLink) then
-            if insertionOrder then
-                table.insert(eligibleItems, insertionOrder, i)      
-            else
-                table.insert(eligibleItems, i)     
-            end       
+    for i = 1, #self.scrappableItems do        
+        if EasyScrap:itemInIgnoreList(self.scrappableItems[i].itemID, self.scrappableItems[i].itemName) then
+            table.insert(ignoredItems, i)     
+        elseif EasyScrap:itemMatchesFilter(i) then
+            table.insert(filteredItems, i)            
         else
-             if insertionOrder then
-                table.insert(ignoredItems, insertionOrder, i)      
-            else
-                table.insert(ignoredItems, i)     
-            end          
+            table.insert(eligibleItems, i)     
         end
-
-
-            --[[
-        if self:itemInWardrobeSet(self.scrappableItems[i].itemID, self.scrappableItems[i].bag, self.scrappableItems[i].slot) then
-            table.insert(ignoredItems, self.scrappableItems[i])
-        else
-            table.insert(eligibleItems, self.scrappableItems[i])
-        end
-            --]]
     end
 
     self.eligibleItems = eligibleItems
     self.ignoredItems = ignoredItems
+    self.filteredItems = filteredItems
+    
+    EasyScrap:sortItems()
 end
 
---DETERMINE IF STILL NEEDED
-function EasyScrap:inIgnoreList(link)
-    for k,v in pairs(self.itemIgnoreList) do if v == link then return k end end return false
+function EasyScrap:sortItems()
+    local function sortFunction(a, b)
+        local qualityA = self.scrappableItems[a].itemQuality
+        local qualityB = self.scrappableItems[b].itemQuality
+        --local searchMatchA = self.scrappableItems[a].searchMatch
+        --local searchMatchB = self.scrappableItems[b].searchMatch
+        
+        if qualityA == qualityB then
+            if self.scrappableItems[a].itemLevel == self.scrappableItems[b].itemLevel then
+                return self.scrappableItems[a].itemName < self.scrappableItems[b].itemName
+            else
+                return self.scrappableItems[a].itemLevel > self.scrappableItems[b].itemLevel
+            end
+        else
+            return qualityA > qualityB 
+        end
+
+    end
+
+    table.sort(self.eligibleItems, sortFunction)   
+    table.sort(self.ignoredItems, sortFunction) 
+    table.sort(self.filteredItems, sortFunction) 
 end
 
 function EasyScrap:printEligibleItems()
@@ -199,39 +221,43 @@ function EasyScrap:itemInScrapper(bag, slot)
     end
 end
 
-function EasyScrap:addItemToIgnoreList(itemID, itemLink)
+function EasyScrap:addItemToIgnoreList(itemID, itemName)
     if not self.itemIgnoreList[itemID] then
         self.itemIgnoreList[itemID] = {}
     end
  
     local duplicate = false
     for k,v in pairs(self.itemIgnoreList[itemID]) do
-        if v == itemLink then
+        if v == itemName then
             duplicate = true
-            break
         end
     end
     
     if not duplicate then
-        table.insert(self.itemIgnoreList[itemID], itemLink)
+        table.insert(self.itemIgnoreList[itemID], itemName)
     end
 end
 
-function EasyScrap:removeItemFromIgnoreList(itemID, itemLink)
+function EasyScrap:removeItemFromIgnoreList(itemID, itemName)
     if self.itemIgnoreList[itemID] then
         for k,v in pairs(self.itemIgnoreList[itemID]) do
-            if v == itemLink then
+            if v == itemName then
                 table.remove(self.itemIgnoreList[itemID], k)
-                break
             end
         end
     end
+    
+    if #self.itemIgnoreList[itemID] == 0 then self.itemIgnoreList[itemID] = nil end
 end
 
-function EasyScrap:itemInIgnoreList(itemID, itemLink)
+function EasyScrap:itemInIgnoreList(itemID, itemName)
     if self.itemIgnoreList[itemID] then
         for k,v in pairs(self.itemIgnoreList[itemID]) do
-            if v == itemLink then
+            --local itemString = string.match(itemLink, "item[%-?%d:]+")
+            --local storedItemString = string.match(v, "item[%-?%d:]+")
+            --string.find(itemLink, "|?c?f?f?(%x*)|?H?([^:]*):?(%d+):?(%d*):?(%d*):?(%d*):?(%d*):?(%d*):?(%-?%d*):?(%-?%d*):?(%d*):?(%d*)|?h?%[?([^%[%]]*)%]?|?h?|?r?")
+            
+            if v == itemName then
                 return true
             end
         end

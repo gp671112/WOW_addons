@@ -299,16 +299,6 @@ function TitanMovableFrame_MoveFrames(position)
 	
 	-- move them...
 	if not InCombatLockdown() then
---[[ Urnati - A bit of a kludge by DDCorkum.  This scales the WorldMapFrame but will not
-fix the issue if there are two bars at the top.  There should be a programatic solution
-to this rather than simple scaling.]]
-		-- modification by DDCorkum to shrink the maximized world map in WoW 8.0 Battle for Azeroth
-			if (WorldMapFrame:IsShown() and WorldMapFrame:IsMaximized()) then
-				WorldMapFrame:ClearAllPoints();
-				WorldMapFrame:SetScale(0.94)
-				WorldMapFrame:SetPoint("CENTER",UIParent,"CENTER",0,0);
-			end
-		-- end modification by DDCorkum
 		local adj_frame = true
 		for index, value in pairs(TitanMovable) do
 			adj_frame = true -- assume the frame is to be adjusted
@@ -768,12 +758,9 @@ function TitanMovable_SecureFrames()
 --		TitanPanelAce:SecureHook(OverrideActionBar, "Show", Titan_ManageFramesTest1) -- HelpFrame.xml
 --		TitanPanelAce:SecureHook(OverrideActionBar, "Hide", Titan_ManageFramesTest1) -- HelpFrame.xml
 		TitanPanelAce:SecureHook("UpdateContainerFrameAnchors", Titan_ContainerFrames_Relocate) -- ContainerFrame.lua
-		TitanPanelAce:SecureHook(WorldMapFrame, "Hide", Titan_Hook_Adjust_Both) -- WorldMapFrame.lua
---[[ Urnati - Another quick kludge by DDCorkum.  This hooks the WorldMapFrame.]]
-		-- modification by DDCorkum to shrink the maximized world map in WoW 8.0 Battle for Azeroth
-					TitanPanelAce:SecureHook(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton, "Show", Titan_Hook_Adjust_Both) -- WorldMapFrame.lua
-					TitanPanelAce:SecureHook(WorldMapFrame, "Show", Titan_Hook_Adjust_Both) -- WorldMapFrame.lua
-		-- end modification by DDCorkum
+		TitanPanelAce:SecureHook(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton, "Show", Titan_Hook_Adjust_Both) -- WorldMapFrame.lua
+--		TitanPanelAce:SecureHook(WorldMapFrame, "Show", Titan_Hook_Adjust_Both) -- WorldMapFrame.lua
+--		TitanPanelAce:SecureHook(WorldMapFrame, "Hide", Titan_Hook_Adjust_Both) -- WorldMapFrame.lua
 		TitanPanelAce:SecureHook("BuffFrame_Update", Titan_Hook_Adjust_Both) -- BuffFrame.lua
 	end
 		

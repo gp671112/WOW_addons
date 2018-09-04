@@ -121,6 +121,7 @@ local titleanis = {
 
 L.options = {
 	type = 'group',
+	name = L['Immersion '],
 	args = {		
 		general = {
 			type = 'group',
@@ -545,6 +546,66 @@ L.options = {
 								L.cfg.inspect = val
 							end,
 							style = 'dropdown',
+						},
+					},
+				},
+			},
+		},	
+		experimental = {
+			type = 'group',
+			name = L['Experimental'],
+			order = 5,
+			args = {
+				nameplatemodebox = {
+					type = 'group',
+					name = L['Anchor to NPC nameplate'],
+					inline = true,
+					order = 0,
+					args = {
+						nameplatemode = {
+							type = 'toggle',
+							name = VIDEO_OPTIONS_ENABLED,
+							order = 0,
+							get = L.GetFromSV,
+							set = function(_, val) L.cfg.nameplatemode = val end,
+						},						
+						nameplatemodecvar = {
+							type = 'execute',
+							name = L['Toggle CVar'],
+							order = 1,
+							func = function(self)
+								local state = GetCVarBool('nameplateShowFriends')
+								SetCVar('nameplateShowFriends', not state)
+								local msg = state and NAMEPLATES_MESSAGE_FRIENDLY_OFF or NAMEPLATES_MESSAGE_FRIENDLY_ON
+								UIErrorsFrame:AddMessage(msg, YELLOW_FONT_COLOR.r, YELLOW_FONT_COLOR.g, YELLOW_FONT_COLOR.b)
+							end,
+						},
+						nameplatemodedesc = {
+							type = 'description',
+							fontSize = 'medium',
+							order = 2,
+							name = L['Show frame on NPC nameplate. This feature requires a CVar to be enabled (nameplateShowFriends).\nClick on the button above to toggle this CVar on/off.\n\nNote that you might have to press Cancel in the interface options for the CVar changes to take effect.'],
+						},
+					},
+				},
+				supertrackedbox = {
+					type = 'group',
+					name = L['Toast when quest is supertracked'],
+					inline = true,
+					order = 1,
+					args = {
+						supertracked = {
+							type = 'toggle',
+							name = VIDEO_OPTIONS_ENABLED,
+							order = 0,
+							get = L.GetFromSV,
+							set = function(_, val) L.cfg.supertracked = val end,
+						},
+						supertrackeddesc = {
+							type = 'description',
+							fontSize = 'medium',
+							order = 1,
+							name = L['When a quest is supertracked (clicked on in the objective tracker, or set automatically by proximity), the quest text will play if nothing else is obstructing it.'],
 						},
 					},
 				},

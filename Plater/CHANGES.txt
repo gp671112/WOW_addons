@@ -1,7 +1,7 @@
-changeset:   104:99ebaeb620c4
-tag:         v8.0.1.104
+changeset:   117:b7b2056c38ac
+tag:         v8.0.1.117
 user:        Tercio
-date:        Mon Aug 13 17:04:30 2018 -0300
-summary:     - Adjust correctly the point of the 6th rogue combo point.
+date:        Sat Sep 01 15:50:10 2018 -0300
+summary:     - Second performance pass, Plater should use less CPU.
 
 

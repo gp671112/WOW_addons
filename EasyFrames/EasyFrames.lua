@@ -1,7 +1,7 @@
 --[[
     Appreciate what others people do. (c) Usoltsev
 
-    Copyright (c) <2016-2017>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
+    Copyright (c) <2016-2018>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
 
     Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
     Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -66,7 +66,7 @@ end
 local function ReadableNumber(num)
     local ret
 
-   if not num then
+    if not num then
         return 0
     elseif num >= 1000000000 then
         ret = string.format("%.1f", num / 100000000) .. "億" -- billion
@@ -491,11 +491,19 @@ end
 function EasyFrames.Utils.GetFramesHealthBar()
     return {
         PlayerFrameHealthBar,
+        PetFrameHealthBar,
+
         TargetFrameHealthBar,
         TargetFrameToTHealthBar,
+
         FocusFrameHealthBar,
         FocusFrameToTHealthBar,
-        PetFrameHealthBar,
+
+        PartyMemberFrame1HealthBar,
+        PartyMemberFrame2HealthBar,
+        PartyMemberFrame3HealthBar,
+        PartyMemberFrame4HealthBar,
+
     }
 end
 
@@ -503,11 +511,18 @@ function EasyFrames.Utils.GetFramesManaBar()
     return {
         PlayerFrameManaBar,
         PlayerFrameAlternateManaBar,
+        PetFrameManaBar,
+
         TargetFrameManaBar,
         TargetFrameToTManaBar,
+
         FocusFrameManaBar,
         FocusFrameToTManaBar,
-        PetFrameManaBar,
+
+        PartyMemberFrame1ManaBar,
+        PartyMemberFrame2ManaBar,
+        PartyMemberFrame3ManaBar,
+        PartyMemberFrame4ManaBar,
     }
 end
 

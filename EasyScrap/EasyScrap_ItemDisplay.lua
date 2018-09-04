@@ -95,8 +95,21 @@ local function createItemButton(i)
     frame:SetScale(0.95, 0.95)
     frame:RegisterForClicks('LeftButtonUp', 'RightButtonUp')
     frame:SetScript('OnClick', itemButtonOnClick)
-    frame:SetScript('OnEnter', function(self) if self.itemRef > 0 then GameTooltip:SetOwner(self, "ANCHOR_RIGHT"); GameTooltip:SetHyperlink(EasyScrap.scrappableItems[self.itemRef].itemLink) GameTooltip:Show() end end)
-    frame:SetScript('OnLeave', function(self) GameTooltip_Hide() end)
+    frame:SetScript('OnEnter', function(self)
+        if self.itemRef > 0 then 
+            GameTooltip:SetOwner(self, "ANCHOR_NONE")
+            --GameTooltip:SetHyperlink(EasyScrap.scrappableItems[self.itemRef].itemLink)
+            GameTooltip:SetBagItem(EasyScrap.scrappableItems[self.itemRef].bag, EasyScrap.scrappableItems[self.itemRef].slot)
+            if EasyScrap.scrappableItems[self.itemRef].filterReason then GameTooltip:AddLine('|cFFFF0000'..EasyScrap.scrappableItems[self.itemRef].filterReason..'|r') end
+            GameTooltip:SetPoint("BOTTOMLEFT", frame, "TOPRIGHT");
+            GameTooltip:Show()
+            if ( (IsModifiedClick("COMPAREITEMS") or GetCVarBool("alwaysCompareItems")) ) then
+                GameTooltip_ShowCompareItem(GameTooltip);
+            end
+        end
+        EasyScrap.mouseInItem = true
+    end)
+    frame:SetScript('OnLeave', function(self) GameTooltip_Hide() EasyScrap.mouseInItem = false end)
     
     frame.shineFrame = CreateFrame('Frame', 'EasyScrapItemButton'..i..'Shine', frame, 'AutoCastShineTemplate')
     frame.shineFrame:SetPoint('TOPLEFT', 1, -1)
@@ -106,6 +119,9 @@ local function createItemButton(i)
     local perRow = 7
     local x = 8 + (spacing/2) + (i-1)%perRow*(frame:GetWidth()+spacing)
     local y = -4 - math.floor((i-1)/7)*42
+    
+    frame.defaultX = x
+    frame.defaultY = y
 
     frame:SetPoint('TOPLEFT', x, y)   
     
@@ -119,14 +135,13 @@ local function createItemButton(i)
     return frame    
 end
 
-local function displayItemButtons()
-    local itemTable = EasyScrap.eligibleItems
-    if itemFrame.contentState == 3 then
-        itemTable = EasyScrap.ignoredItems
-    elseif itemFrame.contentState == 1 then
-        itemTable = EasyScrap.queueItems
-    end
+local function displayIgnoredItemButtons()
+    itemButtonsVisible = 0
     
+    contentFrame.ignoreHeader:Show()
+    contentFrame.filterHeader:Show()
+    
+    local itemTable = EasyScrap.ignoredItems
     for i = 1, #itemTable do
         if not contentFrame.itemButtons[i] then contentFrame.itemButtons[i] = createItemButton(i) end
         local itemButton = contentFrame.itemButtons[i]
@@ -147,13 +162,104 @@ local function displayItemButtons()
             end       
         end
             
-
-        --itemButton.newitemglowAnim:Play() voor items die nu erin zitten
-        
-        
-        --        AutoCastShine_AutoCastStart(itemButton.shineFrame);
-        --          itemButton.NewActionTexture:Show()
         itemButton.itemRef = itemTable[i]
+        
+        itemButton:ClearAllPoints()
+        itemButton:SetPoint('TOPLEFT', contentFrame.ignoreHeader, 'BOTTOMLEFT', itemButton.defaultX, itemButton.defaultY)       
+
+        itemButton:Show()
+        itemButtonsVisible = itemButtonsVisible + 1
+    end
+    
+    if itemButtonsVisible == 0 then
+        contentFrame.ignoreHeader.subText:Show()
+    else
+        contentFrame.ignoreHeader.subText:Hide()
+    end
+    
+    contentFrame.filterHeader:ClearAllPoints()
+    if itemButtonsVisible > 0 then
+        local _,_,_,x,y = contentFrame.itemButtons[itemButtonsVisible]:GetPoint()
+        contentFrame.filterHeader:SetPoint('TOP', contentFrame.ignoreHeader, 0, y-contentFrame.itemButtons[itemButtonsVisible]:GetHeight()-24)
+    else
+        contentFrame.filterHeader:SetPoint('TOP', contentFrame.ignoreHeader, 0, -48)
+    end
+    
+    local filteredButtonsVisible = 0
+    local index = itemButtonsVisible
+    
+    local itemTable = EasyScrap.filteredItems
+    for i = 1, #itemTable do
+        if not contentFrame.itemButtons[i+index] then contentFrame.itemButtons[i+index] = createItemButton(i+index) end
+        local itemButton = contentFrame.itemButtons[i+index]
+        
+        local scrappableItem = EasyScrap.scrappableItems[itemTable[i]]
+        
+        SetItemButtonTexture(itemButton, scrappableItem.itemTexture)
+        SetItemButtonCount(itemButton, scrappableItem.itemCount);
+        SetItemButtonQuality(itemButton, scrappableItem.itemQuality, scrappableItem.itemLink)
+        
+        if EasyScrap.mainFrame.searchBox.isEmpty then
+            itemButton.searchOverlay:Hide()
+        else
+            if EasyScrap.scrappableItems[itemTable[i]].searchMatch then              
+                itemButton.searchOverlay:Hide()
+            else
+                itemButton.searchOverlay:Show()
+            end       
+        end
+            
+        itemButton.itemRef = itemTable[i]
+        
+        itemButton:ClearAllPoints()
+        itemButton:SetPoint('TOPLEFT', contentFrame.filterHeader, 'BOTTOMLEFT', contentFrame.itemButtons[filteredButtonsVisible+1].defaultX, contentFrame.itemButtons[filteredButtonsVisible+1].defaultY)       
+
+        itemButton:Show()
+        itemButtonsVisible = itemButtonsVisible + 1
+        filteredButtonsVisible = filteredButtonsVisible + 1
+    end   
+    
+    if filteredButtonsVisible == 0 then
+        contentFrame.filterHeader.subText:Show()
+    else
+        contentFrame.filterHeader.subText:Hide()
+    end
+end
+
+local function displayItemButtons()
+    contentFrame.ignoreHeader:Hide()
+    contentFrame.filterHeader:Hide()
+
+    local itemTable = EasyScrap.eligibleItems
+    if itemFrame.contentState == 1 then
+        itemTable = EasyScrap.queueItems
+    end
+    itemButtonsVisible = 0
+      
+    for i = 1, #itemTable do
+        if not contentFrame.itemButtons[i] then contentFrame.itemButtons[i] = createItemButton(i) end
+        local itemButton = contentFrame.itemButtons[i]
+        
+        local scrappableItem = EasyScrap.scrappableItems[itemTable[i]]
+        
+        SetItemButtonTexture(itemButton, scrappableItem.itemTexture)
+        SetItemButtonCount(itemButton, scrappableItem.itemCount);
+        SetItemButtonQuality(itemButton, scrappableItem.itemQuality, scrappableItem.itemLink)
+        
+        if EasyScrap.mainFrame.searchBox.isEmpty then
+            itemButton.searchOverlay:Hide()
+        else
+            if EasyScrap.scrappableItems[itemTable[i]].searchMatch then              
+                itemButton.searchOverlay:Hide()
+            else
+                itemButton.searchOverlay:Show()
+            end       
+        end
+            
+        itemButton.itemRef = itemTable[i]
+        
+        itemButton:ClearAllPoints()
+        itemButton:SetPoint('TOPLEFT', itemButton.defaultX, itemButton.defaultY)
         itemButton:Show()
         
         itemButtonsVisible = itemButtonsVisible + 1
@@ -177,19 +283,22 @@ function EasyScrapItemFrame:displayState()
     contentFrame.tabInfo:Hide()
     itemFrame.contentFrame:Show()
     self:moveQueueTabSparks()
+    EasyScrap.mainFrame.queueAllButton:SetEnabled(false)
     if self.contentState == 1 then
         if #EasyScrap.queueItems == 0 then
-            contentFrame.tabInfo:SetText("此標籤顯示你所有正在佇列等候銷毀的物品。要佇列來銷毀只要簡單的保持加入物品到當銷毀器已滿的時候。")
+            contentFrame.tabInfo:SetText("此標籤顯示你所有正在佇列等候銷毀的物品。要佇列物品銷毀很簡單只要當回收器已滿的時候持續加入物品。")
             contentFrame.tabInfo:Show()
         end
     elseif self.contentState == 2 then
+        EasyScrap.mainFrame.queueAllButton:SetEnabled(true)
     elseif self.contentState == 3 then
-        if #EasyScrap.ignoredItems == 0 then
-            contentFrame.tabInfo:SetText("此標籤顯示你所有當前忽略的物品那些你不想出現在符合標籤中的。右鍵點擊可以(不)忽略物品，如果物品插入珠寶或附魔你可能需要再次的忽略它。")
-            contentFrame.tabInfo:Show()
-        end
     end
-    displayItemButtons()
+    
+    if self.contentState == 3 then
+        displayIgnoredItemButtons()
+    else
+        displayItemButtons()
+    end
     self:highlightItemsForScrapping()
 end
 
@@ -202,13 +311,26 @@ EasyScrapItemFrame.switchContentState = function(newState)
 end
 
 local function updateSlider()
-    itemFrame.scrollFrame.ScrollBar:SetValue(0)
-    if itemButtonsVisible <= 28 then
-        itemFrame.scrollFrame.ScrollBar:SetMinMaxValues(0, 0)
-    else
-        local u = (itemButtonsVisible - 28)%7
-        itemFrame.scrollFrame.ScrollBar:SetMinMaxValues(0, u*40)
+    local maxScroll = 0
+    if itemFrame.contentState == 1 then
+        maxScroll = (math.ceil(#EasyScrap.queueItems / 7)*40)
+    elseif itemFrame.contentState == 2 then
+        maxScroll = (math.ceil(#EasyScrap.eligibleItems / 7)*40)
+    elseif itemFrame.contentState == 3 then
+        maxScroll = 48
+        if contentFrame.ignoreHeader.subText:IsVisible() then maxScroll = maxScroll + 24 end
+        if contentFrame.filterHeader.subText:IsVisible() then maxScroll = maxScroll + 24 end
+        maxScroll = maxScroll + (math.ceil(#EasyScrap.ignoredItems / 7)*40)
+        maxScroll = maxScroll + (math.ceil(#EasyScrap.filteredItems / 7)*40)
     end
+    
+    maxScroll = maxScroll - itemFrame.scrollFrame:GetHeight() + 16
+    if maxScroll < 0 then maxScroll = 0 end
+    
+    if itemFrame.scrollFrame.ScrollBar:GetValue() > maxScroll then itemFrame.scrollFrame.ScrollBar:SetValue(maxScroll) end
+    itemFrame.scrollFrame.ScrollBar:SetMinMaxValues(0, maxScroll)   
+    
+    
 end
 
 function EasyScrapItemFrame:updateContent()
@@ -218,7 +340,7 @@ function EasyScrapItemFrame:updateContent()
     
     self.tabButtons[1]:SetCount(#EasyScrap.queueItems)
     self.tabButtons[2]:SetCount(#EasyScrap.eligibleItems)
-    self.tabButtons[3]:SetCount(#EasyScrap.ignoredItems)
+    self.tabButtons[3]:SetCount(#EasyScrap.ignoredItems+#EasyScrap.filteredItems)
 end
 
 function EasyScrapItemFrame:moveQueueTabSparks()
@@ -256,8 +378,39 @@ function EasyScrapItemFrame:highlightItemsForScrapping()
             contentFrame.itemButtons[i].IconBorder:Show()
         end
     end
+    
+    if itemFrame.contentState == 3 and #EasyScrap.filteredItems > 0 then
+        itemTable = EasyScrap.filteredItems
+        local index = #EasyScrap.ignoredItems
+         for i = 1, #itemTable do
+            if EasyScrap:itemInScrapper(EasyScrap.scrappableItems[itemTable[i]].bag, EasyScrap.scrappableItems[itemTable[i]].slot) then
+                SetItemButtonDesaturated(contentFrame.itemButtons[i+index], true)
+                contentFrame.itemButtons[i+index].IconBorder:Hide()
+                contentFrame.itemButtons[i+index].NewActionTexture:Show()
+            elseif itemInQueue(itemTable[i]) then
+                SetItemButtonDesaturated(contentFrame.itemButtons[i+index], true)
+                contentFrame.itemButtons[i+index].IconBorder:Hide()
+                AutoCastShine_AutoCastStart(contentFrame.itemButtons[i+index].shineFrame)       
+            else
+                SetItemButtonDesaturated(contentFrame.itemButtons[i+index], false)
+                contentFrame.itemButtons[i+index].NewActionTexture:Hide()
+                contentFrame.itemButtons[i+index].IconBorder:Show()
+            end
+        end   
+    end
 end
 
+function EasyScrapItemFrame:queueAllItems()
+    if not EasyScrap.scrapInProgress then
+        for i = 1, itemButtonsVisible do
+            if contentFrame.itemButtons[i].IconBorder:IsVisible() then
+                addItemToQueue(contentFrame.itemButtons[i])
+            end
+        end
+        EasyScrap.addingItems = true
+        EasyScrap:addQueueItems()
+    end
+end
 
 -- contentFrame.itemButtons[i].newitemglowAnim:Play()
 -- contentFrame.itemButtons[i].newitemglowAnim:Stop()

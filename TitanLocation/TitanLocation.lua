@@ -59,6 +59,8 @@ function TitanPanelLocationButton_OnLoad(self)
 	self:RegisterEvent("ZONE_CHANGED_INDOORS");
 	self:RegisterEvent("ZONE_CHANGED_NEW_AREA");
 	self:RegisterEvent("PLAYER_ENTERING_WORLD");
+	
+	TitanPanelLocation_CreateMapFrames();
 end
 
 -- **************************************************************************
@@ -184,7 +186,7 @@ end
 -- **************************************************************************
 function TitanPanelLocationButton_OnEvent(self, event, ...)
 	if event == "PLAYER_ENTERING_WORLD" then
-		if not TitanGetVar(TITAN_LOCATION_ID, "ShowLocOnMiniMap") and MinimapBorderTop and MinimapBorderTop:IsShown() then
+		if TitanGetVar(TITAN_LOCATION_ID, "ShowLocOnMiniMap") and MinimapBorderTop and MinimapBorderTop:IsShown() then
 			TitanPanelLocationButton_LocOnMiniMap()
 		end
 	end
@@ -241,10 +243,6 @@ function TitanPanelLocationButton_OnClick(self, button)
 				activeWindow:Insert(message);
 			end
 		else
-			--WorldMap_ToggleSizeUp();
-			if (not GetCVarBool("miniWorldMap")) then
-				--/; # Deprecated in WoW 8.0.1
-			end
 			ToggleFrame(WorldMapFrame);
 		end
 	end
@@ -452,10 +450,6 @@ function TitanMapFrame_OnUpdate(self, elapsed)
 
 	-- Determine the text to show for player coords
 
---[[
-	if WorldMapFrame:IsVisible() then
-		TitanMapPlayerLocation:SetText("");
-	else
 		self.px, self.py = TitanPanelGetPlayerMapPosition();
 		if self.px == nil then self.px = 0 end
 		if self.py == nil then self.py = 0 end
@@ -471,27 +465,6 @@ function TitanMapFrame_OnUpdate(self, elapsed)
 			end
 		end
 		TitanMapPlayerLocation:SetText(format(L["TITAN_LOCATION_MAP_PLAYER_COORDS_TEXT"], TitanUtils_GetHighlightText(playerLocationText)));
-	end
-]]
-	if WorldMapFrame:IsMaximized() then
-		self.px, self.py = TitanPanelGetPlayerMapPosition();
-		if self.px == nil then self.px = 0 end
-		if self.py == nil then self.py = 0 end
-		if self.px == 0 and self.py == 0 then
-			playerLocationText = L["TITAN_LOCATION_NO_COORDS"]
-		else
-			if (TitanGetVar(TITAN_LOCATION_ID, "CoordsFormat1")) then
-				playerLocationText = format(L["TITAN_LOCATION_FORMAT"], 100 * self.px, 100 * self.py);
-			elseif (TitanGetVar(TITAN_LOCATION_ID, "CoordsFormat2")) then
-				playerLocationText = format(L["TITAN_LOCATION_FORMAT2"], 100 * self.px, 100 * self.py);
-			elseif (TitanGetVar(TITAN_LOCATION_ID, "CoordsFormat3")) then
-				playerLocationText = format(L["TITAN_LOCATION_FORMAT3"], 100 * self.px, 100 * self.py);
-			end
-		end
-		TitanMapPlayerLocation:SetText(format(L["TITAN_LOCATION_MAP_PLAYER_COORDS_TEXT"], TitanUtils_GetHighlightText(playerLocationText)));
-	else
-		TitanMapPlayerLocation:SetText("");
-	end
 
 	-- Determine the text to show for cursor coords
 
@@ -530,22 +503,14 @@ function TitanMapFrame_OnUpdate(self, elapsed)
 
 	-- *
 	TitanMapPlayerLocation:ClearAllPoints()
---[[
-	if ( WorldMapFrame:IsVisible() ) then
-		-- **
-		TitanMapPlayerLocation:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 75, -12)
-	else
-		x_offset = (WorldMapFrame:GetWidth() / 1.6) -- left fifth of map
-			- (TitanMapPlayerLocation:GetWidth() / 1.8) -- center of coords
-		TitanMapPlayerLocation:SetPoint("BOTTOMLEFT", WorldMapFrame, "BOTTOMLEFT", x_offset, 10)
-	end
-]]
+	TitanMapCursorLocation:ClearAllPoints()
+
 	if WorldMapFrame:IsMaximized() then
-		x_offset = (WorldMapFrame:GetWidth() / 1.6) -- left fifth of map
-			- (TitanMapPlayerLocation:GetWidth() / 1.8) -- center of coords
-		TitanMapPlayerLocation:SetPoint("BOTTOMLEFT", WorldMapFrame, "BOTTOMLEFT", x_offset, 10)
+		TitanMapPlayerLocation:SetPoint("TOPRIGHT", WorldMapFrame, "TOPRIGHT", -10, -28)
+		TitanMapCursorLocation:SetPoint("TOPRIGHT", WorldMapFrame, "TOPRIGHT", -10, -43)
 	else
-		TitanMapPlayerLocation:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 75, -12)
+		TitanMapPlayerLocation:SetPoint("TOPRIGHT", WorldMapFrame, "TOPRIGHT", -50, -5)
+		TitanMapCursorLocation:SetPoint("TOPRIGHT", WorldMapFrame, "TOPRIGHT", -200, -5)
 	end
 end
 
@@ -566,4 +531,26 @@ function TitanPanelGetPlayerMapPosition()
     else
     	return position:GetXY()
 	end
+end
+
+
+-- **************************************************************************
+-- NAME : TitanPanelLocation_CreateMapFrames()
+-- DESC : Delays creating frames until the WorldMapFrame is ready
+-- VARS : none
+-- **************************************************************************
+local TPL_CMF_IsFirstTime = true;
+function TitanPanelLocation_CreateMapFrames()
+	WorldMapFrame:HookScript("OnShow", function(self)
+		if (TPL_CMF_IsFirstTime and not _G["CT_MapMod"]) then
+			TPL_CMF_IsFirstTime = false;
+			local frame = CreateFrame("FRAME", "TitanMapFrame", WorldMapFrame.BorderFrame)
+			local playertext = frame:CreateFontString("TitanMapPlayerLocation", "ARTWORK", "GameFontNormal");
+			playertext:SetPoint("TOPRIGHT",WorldMapFrame,"TOPRIGHT",0,0);
+			local cursortext = frame:CreateFontString("TitanMapCursorLocation", "ARTWORK", "GameFontNormal");
+			cursortext:SetPoint("TOPRIGHT",WorldMapFrame,"TOPRIGHT",0,0);
+			frame:HookScript("OnUpdate",TitanMapFrame_OnUpdate);	
+		end
+	end);
+
 end

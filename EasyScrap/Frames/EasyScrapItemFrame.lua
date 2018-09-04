@@ -1,4 +1,4 @@
-local itemFrame = CreateFrame('Frame', 'EasyScrapItemFrame', EasyScrapMainFrame)
+﻿local itemFrame = CreateFrame('Frame', 'EasyScrapItemFrame', EasyScrapMainFrame)
 itemFrame:SetPoint('TOPLEFT', 12, -50)
 --itemFrame:SetPoint('BOTTOMRIGHT', -32, 42)
 itemFrame:SetSize(273, 172)
@@ -10,6 +10,7 @@ itemFrame:SetBackdrop({
 itemFrame:SetBackdropBorderColor(.9, .9, .9, 1)
 itemFrame.contentState = 2
 itemFrame.maxTabWidth = 300
+itemFrame.timeElapsed = 0
 --[[
 itemFrame.bg = itemFrame:CreateTexture(nil, 'BACKGROUND')
 itemFrame.bg:SetPoint('TOPLEFT', 4, -4)
@@ -20,6 +21,18 @@ itemFrame.bg:SetColorTexture(0, 0, 0, 1)
 Scrollframe/ScrollBar
 "UIPanelScrollFrameTemplate"
 --]]
+itemFrame:SetScript('OnUpdate', function(self, dt)
+    self.timeElapsed = self.timeElapsed + dt
+    if self.timeElapsed > 0.25 then
+        self.timeElapsed = 0
+        if EasyScrap.mouseInItem and IsModifiedClick("COMPAREITEMS") then
+            GameTooltip_ShowCompareItem(GameTooltip)
+        elseif EasyScrap.mouseInItem and not IsModifiedClick("COMPAREITEMS") then
+            GameTooltip_HideShoppingTooltips(GameTooltip)
+        end
+    end
+end)
+
 itemFrame.scrollFrame = CreateFrame('ScrollFrame', nil, itemFrame, "UIPanelScrollFrameTemplate")
 itemFrame.scrollFrame:SetPoint('TOPLEFT', 0, -4)
 itemFrame.scrollFrame:SetPoint('BOTTOMRIGHT', 0, 4)
@@ -42,14 +55,17 @@ itemFrame.scrollFrame.ScrollBar.t:SetColorTexture(0, 0, 0, 0.6)
 Frame that holds the item buttons
 --]]
 itemFrame.contentFrame = CreateFrame('Frame', 'EasyScrapItemFrameContent', itemFrame.scrollFrame)
-itemFrame.contentFrame:SetFrameLevel(8)
+itemFrame.contentFrame:SetFrameLevel(9)
 itemFrame.contentFrame:SetWidth(itemFrame:GetWidth())
 itemFrame.contentFrame:SetHeight(itemFrame:GetHeight())
 --print(itemFrame:GetHeight())
 
 itemFrame.contentFrame.bg = itemFrame.contentFrame:CreateTexture(nil, 'BACKGROUND')
-itemFrame.contentFrame.bg:SetPoint('TOPLEFT', 4, -4)
-itemFrame.contentFrame.bg:SetPoint('BOTTOMRIGHT', -4, 4)
+--itemFrame.contentFrame.bg:SetPoint('TOPLEFT', 4, -4)
+--itemFrame.contentFrame.bg:SetPoint('BOTTOMRIGHT', -4, 4)
+itemFrame.contentFrame.bg:SetPoint('TOP')
+itemFrame.contentFrame.bg:SetSize(itemFrame.contentFrame:GetWidth()-8, 1024)
+
 itemFrame.contentFrame.bg:SetColorTexture(0, 0, 0, 1)
 
 itemFrame.scrollFrame:SetScrollChild(itemFrame.contentFrame)
@@ -59,7 +75,7 @@ Frame tab buttons
 button:SetPoint('BOTTOMLEFT', 0+((i-1)*90), -30) --64
 --]]
 itemFrame.tabButtons = {}
-local tabText = {'佇列 (%d)', '符合 (%d)', '忽略 (%d)'}
+local tabText = {'佇列 (%d)', '符合 (%d)', '隱藏 (%d)'}
 
 for i = 1, 3 do
     local button = CreateFrame('Button', 'EasyScrapItemFrameTabButton'..i, itemFrame, 'EasyScrapFrameTabButtonTemplate')
@@ -119,7 +135,7 @@ ignoreItemFrame.itemButton:SetScale(1.4, 1.4)
 
 ignoreItemFrame.ignoreItemText = ignoreItemFrame:CreateFontString()
 ignoreItemFrame.ignoreItemText:SetFontObject("GameFontNormalSmall")
-ignoreItemFrame.ignoreItemText:SetText('忽略此物品以防止它出現在符合標籤。如果此物品做過變動你需要再次忽略它。')
+ignoreItemFrame.ignoreItemText:SetText('忽略此物品將防止它出現在符合標籤。如果此物品有變動過你需要再次忽略它。')
 ignoreItemFrame.ignoreItemText:SetTextColor(1, 1, 1, 1)
 ignoreItemFrame.ignoreItemText:SetWidth(180)
 ignoreItemFrame.ignoreItemText:SetPoint('LEFT', ignoreItemFrame.itemButton, 'RIGHT', 8, 0)
@@ -152,14 +168,14 @@ ignoreItemFrame:SetScript('OnShow', function(self)
         self.itemButton:SetScript('OnEnter', function(self) GameTooltip:SetOwner(self, "ANCHOR_RIGHT") GameTooltip:SetHyperlink(itemToIgnore.itemLink) GameTooltip:Show() end)
         self.itemButton:SetScript('OnLeave', function(self) GameTooltip_Hide() end)
         
-        if not EasyScrap:itemInIgnoreList(itemToIgnore.itemID, itemToIgnore.itemLink) then
+        if not EasyScrap:itemInIgnoreList(itemToIgnore.itemID, itemToIgnore.itemName) then
             ignoreItemFrame.headerText:SetText('Add item to ignore list?')
-            ignoreItemFrame.ignoreItemText:SetText('忽略此物品以防止它出現在符合標籤。如果此物品做過變動你需要再次忽略它。')
-            ignoreItemFrame.okayButton:SetScript('OnClick', function() EasyScrap:addItemToIgnoreList(itemToIgnore.itemID, itemToIgnore.itemLink) EasyScrap:filterScrappableItems() itemFrame:updateContent() end)
+            ignoreItemFrame.ignoreItemText:SetText('忽略此物品以防止所有此名稱的物品出現在符合標籤。')
+            ignoreItemFrame.okayButton:SetScript('OnClick', function() EasyScrap:addItemToIgnoreList(itemToIgnore.itemID, itemToIgnore.itemName) EasyScrap:filterScrappableItems() itemFrame:updateContent() end)
         else
             ignoreItemFrame.headerText:SetText('Remove item from ignore list?')
             ignoreItemFrame.ignoreItemText:SetText('這會將物品從忽略清單移除。')
-            ignoreItemFrame.okayButton:SetScript('OnClick', function() EasyScrap:removeItemFromIgnoreList(itemToIgnore.itemID, itemToIgnore.itemLink) EasyScrap:filterScrappableItems() itemFrame:updateContent() end)
+            ignoreItemFrame.okayButton:SetScript('OnClick', function() EasyScrap:removeItemFromIgnoreList(itemToIgnore.itemID, itemToIgnore.itemName) EasyScrap:filterScrappableItems() itemFrame:updateContent() end)
         end
     end
 end)
@@ -187,9 +203,70 @@ Queued tab unavailable
 --]]
 itemFrame.contentFrame.tabInfo = itemFrame.contentFrame:CreateFontString()
 itemFrame.contentFrame.tabInfo:SetFontObject("GameFontHighlight")
-itemFrame.contentFrame.tabInfo:SetText("This tab shows you all items currently queued for scrapping. To queue items for scrapping simply keep adding items to the scrapper when it's full.")
+itemFrame.contentFrame.tabInfo:SetText("此標籤顯示你當前所有等候要銷毀的物品。當回收器滿的時候持續加入物品就會加入佇列。")
 itemFrame.contentFrame.tabInfo:SetPoint('TOPLEFT', 4, -4)
 itemFrame.contentFrame.tabInfo:SetWidth(itemFrame.contentFrame:GetWidth()-16)
 itemFrame.contentFrame.tabInfo:Hide()
+
+local ignoreHeader = CreateFrame('Frame', nil, itemFrame.contentFrame)
+ignoreHeader:SetSize(itemFrame.contentFrame:GetWidth(), 24)
+ignoreHeader:SetPoint('TOP', 0, -4)
+
+ignoreHeader.text = ignoreHeader:CreateFontString()
+ignoreHeader.text:SetFontObject("GameFontNormalLarge")
+ignoreHeader.text:SetText('已忽略')
+ignoreHeader.text:SetWidth(180)
+ignoreHeader.text:SetPoint('CENTER')
+
+ignoreHeader.subText = ignoreHeader:CreateFontString()
+ignoreHeader.subText:SetFontObject("GameFontNormal")
+ignoreHeader.subText:SetText("目前沒有物品被忽略，要(不)忽略一個物品請右鍵點擊它。")
+ignoreHeader.subText:SetTextColor(1, 1, 1, 1)
+ignoreHeader.subText:SetWidth(itemFrame.contentFrame:GetWidth()-16)
+ignoreHeader.subText:SetPoint('TOP', ignoreHeader, 'BOTTOM', 0, 0)
+
+local r,g,b = ignoreHeader.text:GetTextColor()
+ignoreHeader.l = ignoreHeader:CreateTexture(nil, 'BACKGROUND')
+ignoreHeader.l:SetColorTexture(r,g,b, 0.8)
+ignoreHeader.l:SetSize(85, 2)
+ignoreHeader.l:SetPoint('LEFT', 12, 0)
+
+ignoreHeader.r = ignoreHeader:CreateTexture(nil, 'BACKGROUND')
+ignoreHeader.r:SetColorTexture(r,g,b, 0.8)
+ignoreHeader.r:SetSize(85, 2)
+ignoreHeader.r:SetPoint('RIGHT', -12, -0)
+
+
+
+
+local filterHeader = CreateFrame('Frame', nil, itemFrame.contentFrame)
+filterHeader:SetSize(itemFrame.contentFrame:GetWidth(), 24)
+filterHeader:SetPoint('TOP', 0, -60)
+
+filterHeader.text = filterHeader:CreateFontString()
+filterHeader.text:SetFontObject("GameFontNormalLarge")
+filterHeader.text:SetText('已過濾')
+filterHeader.text:SetWidth(180)
+filterHeader.text:SetPoint('CENTER')
+
+filterHeader.subText = ignoreHeader:CreateFontString()
+filterHeader.subText:SetFontObject("GameFontNormal")
+filterHeader.subText:SetText("目前沒有物品被過濾，調整過濾設置。")
+filterHeader.subText:SetTextColor(1, 1, 1, 1)
+filterHeader.subText:SetWidth(itemFrame.contentFrame:GetWidth()-16)
+filterHeader.subText:SetPoint('TOP', filterHeader, 'BOTTOM', 0, 0)
+
+filterHeader.l = filterHeader:CreateTexture(nil, 'BACKGROUND')
+filterHeader.l:SetColorTexture(r,g,b, 0.8)
+filterHeader.l:SetSize(85, 2)
+filterHeader.l:SetPoint('LEFT', 12, 0)
+
+filterHeader.r = filterHeader:CreateTexture(nil, 'BACKGROUND')
+filterHeader.r:SetColorTexture(r,g,b, 0.8)
+filterHeader.r:SetSize(85, 2)
+filterHeader.r:SetPoint('RIGHT', -12, -0)
+
+itemFrame.contentFrame.ignoreHeader = ignoreHeader
+itemFrame.contentFrame.filterHeader = filterHeader
 
 EasyScrap.itemFrame = itemFrame

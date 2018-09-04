@@ -3,25 +3,29 @@ LoadAddOn("Blizzard_ScrappingMachineUI")
 ScrappingMachineFrame.ScrapButton.SetEnabledBackup = ScrappingMachineFrame.ScrapButton.SetEnabled --To prevent button mashers from scrapping while adding items
 
 EasyScrap = {}
-EasyScrap.addonVersion = 4
+EasyScrap.addonVersion = 9
 EasyScrap.saveData = {}
 
 EasyScrap.itemCache = {}
 EasyScrap.scrappableItems = {}
 EasyScrap.eligibleItems = {}
 EasyScrap.ignoredItems = {}
+EasyScrap.filteredItems = {}
 EasyScrap.queueItems = {}
 EasyScrap.itemsInScrapper = {}
 EasyScrap.failedItems = {}
 EasyScrap.queueItemsToAdd = 0
 EasyScrap.scrapInProgress = false
 EasyScrap.itemIgnoreList = {}
+EasyScrap.mouseInItem = false
 
 EasyScrap.defaultSettings = {}
 
 function EasyScrap:initializeSaveData()
     self.saveData = {}
     self.saveData.addonSettings = EasyScrap.defaultSettings
+    self.saveData.showWhatsNew = nil
+    --self.saveData.addonVersion = EasyScrap.addonVersion
 end
 
 function EasyScrap:updateAddonSettings()
@@ -38,44 +42,6 @@ keybindFrame:SetAttribute('type', 'click')
 keybindFrame:SetAttribute('clickbutton', ScrappingMachineFrame.ScrapButton)
 
 --Interface\HelpFrame\HelpIcon-ReportAbuse
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function DEPREC_getEligibleItems()
    eligibleItems = {}

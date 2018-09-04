@@ -27,33 +27,4 @@
 			</Button>
 		</Frames>
 	</Frame>			
-	<Frame name="TitanMapFrame" parent="WorldMapFrame">
-		<Layers>
-			<Layer level="ARTWORK">
-				<FontString name="TitanMapPlayerLocation" inherits="GameFontNormal" justifyH="LEFT">
-					<Anchors>
-						<Anchor point="BOTTOMLEFT" relativeTo="WorldMapFrame" relativePoint="BOTTOMLEFT">
-							<Offset>
-								<AbsDimension x="10" y="0"/>
-							</Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-				<FontString name="TitanMapCursorLocation" inherits="GameFontNormal" justifyH="LEFT">
-					<Anchors>
-						<Anchor point="LEFT" relativeTo="TitanMapPlayerLocation" relativePoint="RIGHT">
-							<Offset>
-								<AbsDimension x="20" y="0"/>
-							</Offset>
-						</Anchor>
-					</Anchors>
-				</FontString>
-			</Layer>
-		</Layers>
-		<Scripts>
-			<OnUpdate>
-				TitanMapFrame_OnUpdate(self, elapsed);
-			</OnUpdate>
-		</Scripts>
-	</Frame>
 </Ui>

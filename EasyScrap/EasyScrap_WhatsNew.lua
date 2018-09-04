@@ -1,0 +1,4 @@
+EasyScrap.whatsNewText = {}
+
+EasyScrap.whatsNewText[5] = "|cFFFF0000- 忽略清單已經重設。 現在只根據名稱忽略物品，以確保它們不再被遺忘|r\n- 物品現在根據品質與等級排序 \n- 預設過濾器現在將過濾掉塑形套裝中使用的物品 \n- 加入全部佇列按鈕來佇列所有物品到符合標籤 \n- 按住Shift點擊現在可以顯示比較提示 \n|cFF00FF00- If the scrapper gets stuck scrapping items it's not the addon at fault, the addon does not interfere with the actual scrapping process.|r"
+EasyScrap.whatsNewText[6] = "|cFFFF0000- 忽略清單已經重設。 現在只根據名稱忽略物品，以確保它們不再被遺忘|r\n- 物品現在根據品質與等級排序 \n- 預設過濾器現在將過濾掉塑形套裝中使用的物品 \n- 加入全部佇列按鈕來佇列所有物品到符合標籤 \n- 按住Shift點擊現在可以顯示比較提示 \n|cFF00FF00- If the scrapper gets stuck scrapping items it's not the addon at fault, the addon does not interfere with the actual scrapping process.|r"

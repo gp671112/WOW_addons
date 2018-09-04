@@ -1,19 +1,21 @@
-local EasyScrap = EasyScrap
+﻿local EasyScrap = EasyScrap
 
-local mainFrame = CreateFrame('Frame', 'EasyScrapMainFrame', ScrappingMachineFrame)
-mainFrame:SetPoint('TOP', ScrappingMachineFrame, 'BOTTOM', 0, 16)
-mainFrame:SetSize(ScrappingMachineFrame:GetWidth()-16, 264) --264
-mainFrame:EnableMouse(true)
-mainFrame:SetFrameLevel(ScrappingMachineFrame:GetFrameLevel()-1)
-mainFrame:RegisterEvent("PLAYER_LOGOUT")
-mainFrame:RegisterEvent("ADDON_LOADED")
-mainFrame:SetBackdrop({
+local parentFrame = CreateFrame('Frame', 'EasyScrapParentFrame', ScrappingMachineFrame)
+parentFrame:SetPoint('TOP', ScrappingMachineFrame, 'BOTTOM', 0, 16)
+parentFrame:SetSize(ScrappingMachineFrame:GetWidth()-16, 294) --264
+parentFrame:EnableMouse(true)
+parentFrame:SetFrameLevel(ScrappingMachineFrame:GetFrameLevel()-1)
+parentFrame:RegisterEvent("PLAYER_LOGOUT")
+parentFrame:RegisterEvent("ADDON_LOADED")
+parentFrame:SetBackdrop({
       bgFile="Interface\\FrameGeneral\\UI-Background-Marble", 
       edgeFile='Interface/Tooltips/UI-Tooltip-Border', 
       tile = false, tileSize = 16, edgeSize = 16,
       insets = { left = 4, right = 4, top = 4, bottom = 4 }}
 )
 
+local mainFrame = CreateFrame('Frame', 'EasyScrapMainFrame', parentFrame)
+mainFrame:SetAllPoints()
 
 mainFrame.searchBox = CreateFrame('EditBox', nil, mainFrame, 'SearchBoxTemplate')
 mainFrame.searchBox:SetPoint('TOPLEFT', 22, -22)
@@ -92,9 +94,59 @@ filterSelection.text:SetFontObject('GameFontNormal')
 filterSelection.text:SetText('過濾：')
 filterSelection.text:SetPoint('RIGHT', filterSelection, 'LEFT', 16, 4)
 
-UIDropDownMenu_SetText(filterSelection, "Coming Soon")
+UIDropDownMenu_SetText(filterSelection, "塑形裝")
 --filterSelection.Button:SetScript('OnClick', function() EasyMenu(menu, filterSelection, menuFrame, 0, 0) end)
 filterSelection.Button:SetEnabled(false)
 
+
+local queueAllButton = CreateFrame('Button', nil, mainFrame, 'GameMenuButtonTemplate')
+queueAllButton:SetSize(96, 24)
+queueAllButton:SetPoint('BOTTOMLEFT', 16, 12)
+queueAllButton:SetText('全部佇列')
+queueAllButton:SetScript('OnClick', function()
+    EasyScrapItemFrame:queueAllItems()
+end)
+
+mainFrame.queueAllButton = queueAllButton
+
+
+local updateOverlay = CreateFrame('Frame', nil, parentFrame)
+updateOverlay:SetAllPoints()
+
+updateOverlay.header = updateOverlay:CreateFontString()
+updateOverlay.header:SetFontObject('GameFontNormalLarge')
+updateOverlay.header:SetText('快易銷毀 |cFF00FF00'..EasyScrap.addonVersion..'|r')
+updateOverlay.header:SetPoint('TOP', 0, -32)
+
+updateOverlay.subHeader = updateOverlay:CreateFontString()
+updateOverlay.subHeader:SetFontObject('GameFontNormal')
+updateOverlay.subHeader:SetText("更新說明")
+updateOverlay.subHeader:SetTextColor(1, 1, 1, 1)
+updateOverlay.subHeader:SetPoint('TOP', updateOverlay.header, 'BOTTOM', 0, -4)
+
+updateOverlay.content = updateOverlay:CreateFontString()
+updateOverlay.content:SetFontObject('GameFontNormal')
+updateOverlay.content:SetJustifyH("LEFT")
+updateOverlay.content:SetJustifyV("TOP")
+updateOverlay.content:SetText("- Blabla bla \n- Bloeoeoeoe")
+updateOverlay.content:SetWidth(updateOverlay:GetWidth()-16)
+updateOverlay.content:SetHeight(updateOverlay:GetHeight()*0.75)
+updateOverlay.content:SetTextColor(1, 1, 1, 1)
+updateOverlay.content:SetPoint('TOP', updateOverlay, 0, -80)
+
+updateOverlay.dismissButton = CreateFrame('Button', nil, updateOverlay, 'GameMenuButtonTemplate')
+updateOverlay.dismissButton:SetSize(96, 24)
+updateOverlay.dismissButton:SetPoint('BOTTOM', 0, 12)
+updateOverlay.dismissButton:SetText('確定')
+updateOverlay.dismissButton:SetScript('OnClick', function()
+    EasyScrap.saveData.showWhatsNew = nil
+    updateOverlay:Hide()
+    mainFrame:Show()
+end)
+
+updateOverlay:Hide()
+
 EasyScrap.mainFrame = mainFrame
+EasyScrap.parentFrame = parentFrame
+EasyScrap.updateOverlay = updateOverlay
 

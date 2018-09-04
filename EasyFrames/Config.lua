@@ -1,7 +1,7 @@
 --[[
     Appreciate what others people do. (c) Usoltsev
 
-    Copyright (c) <2016-2017>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
+    Copyright (c) <2016-2018>, Usoltsev <alexander.usolcev@gmail.com> All rights reserved.
 
     Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
     Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -411,21 +411,22 @@ local generalOptions = {
                     arg = "general"
                 },
 
---                showOnlyMyDebuff = {
---                    type = "toggle",
---                    order = 9,
---                    name = L["Show only my debuffs"],
---                    desc = L["Show only my debuffs (which the player creates)"],
---                    set = function(info, value)
---                        setOpt(info, value)
---                        EasyFrames:GetModule("General"):TargetFrame_UpdateAuras(TargetFrame)
---                    end,
---                    arg = "general"
---                },
+                showOnlyMyDebuff = {
+                    type = "toggle",
+                    order = 9,
+                    name = L["Show only my debuffs"],
+                    desc = L["When you change this option you need to reload your UI (because it's Blizzard config variable). \n\nCommand /reload"],
+                    set = function(info, value)
+                        setOpt(info, value)
+
+                        SetCVar("noBuffDebuffFilterOnTarget", (value and 0 or 1))
+                    end,
+                    arg = "general"
+                },
 
                 maxBuffCount = {
                     type = "range",
-                    order = 9,
+                    order = 10,
                     name = L["Max buffs count"],
                     desc = L["How many buffs you can see on target/focus frames"],
                     min = 0,
@@ -440,7 +441,7 @@ local generalOptions = {
 
                 maxDebuffCount = {
                     type = "range",
-                    order = 10,
+                    order = 11,
                     name = L["Max debuffs count"],
                     desc = L["How many debuffs you can see on target/focus frames"],
                     min = 0,

@@ -4,26 +4,22 @@
 ------------------------------------------------------
 
 -- List globals here for Mikk's FindGlobals script
--- GLOBALS: UnitIsUnit, UnitGUID, UnitIsFriend, UnitExists, CreateFrame, Mixin, print, pairs
+-- GLOBALS: LibStub, UnitIsUnit, UnitGUID, UnitIsFriend, UnitExists, CreateFrame, Mixin, print, pairs, error
 
-local addon, ns = ...
+local addon, TNI = ...
 
-local TNI = CreateFrame("Frame", "TargetNameplateIndicator")
 local LNR = LibStub("LibNameplateRegistry-1.0")
 
-LNR:Embed(TNI)
+LibStub("AceAddon-3.0"):NewAddon(TNI, addon, "AceConsole-3.0")
+
 
 --[===[@debug@
-local DEBUG = true
+local DEBUG = false
 
 local function debugprint(...)
 	if DEBUG then
 		print("TNI DEBUG:", ...)
 	end
-end
-
-if DEBUG then
-	TNI:LNR_RegisterCallback("LNR_DEBUG", debugprint)
 end
 --@end-debug@]===]
 
@@ -50,12 +46,190 @@ function TNI:OnError_FatalIncompatibility(callback, incompatibilityType)
 	errorPrint(true, "(Error Code: %s) %s", incompatibilityType, detailedMessage)
 end
 
-TNI:LNR_RegisterCallback("LNR_ERROR_FATAL_INCOMPATIBILITY", "OnError_FatalIncompatibility")
+------
+-- Initialisation
+------
+
+local defaults
+
+do
+	local function CreateUnitReactionTypeDefaults()
+		return {
+			enable = true,
+			texture = "Interface\\AddOns\\TargetNameplateIndicator\\Textures\\Reticule",
+			height = 50,
+			width = 50,
+			opacity = 1,
+			texturePoint = "BOTTOM",
+			anchorPoint = "TOP",
+			xOffset = 0,
+			yOffset = 5,
+		}
+	end
+
+	local function CreateUnitDefaults()
+		return {
+			enable = true,
+			self = CreateUnitReactionTypeDefaults(),
+			friendly = CreateUnitReactionTypeDefaults(),
+			hostile = CreateUnitReactionTypeDefaults(),
+		}
+	end
+
+	defaults = {
+		profile = {
+			target = {
+				enable = true,
+				self = {
+					enable = true,
+					texture = "Interface\\AddOns\\TargetNameplateIndicator\\Textures\\NeonWhiteArrow",
+					height = 50,
+					width = 50,
+					opacity = 1,
+					texturePoint = "BOTTOM",
+					anchorPoint = "TOP",
+					xOffset = 0,
+					yOffset = -5,
+				},
+				friendly = {
+					enable = true,
+					texture = "Interface\\AddOns\\TargetNameplateIndicator\\Textures\\NeonGreenArrow",
+					height = 50,
+					width = 50,
+					opacity = 1,
+					texturePoint = "BOTTOM",
+					anchorPoint = "TOP",
+					xOffset = 0,
+					yOffset = -5,
+				},
+				hostile = {
+					enable = true,
+					texture = "Interface\\AddOns\\TargetNameplateIndicator\\Textures\\NeonRedArrow",
+					height = 50,
+					width = 50,
+					opacity = 1,
+					texturePoint = "BOTTOM",
+					anchorPoint = "TOP",
+					xOffset = 0,
+					yOffset = 22,
+				}
+			},
+			mouseover = {
+				enable = true,
+				self = {
+					enable = true,
+					texture = "Interface\\AddOns\\TargetNameplateIndicator\\Textures\\whitearrow1",
+					height = 50,
+					width = 50,
+					opacity = 1,
+					texturePoint = "BOTTOM",
+					anchorPoint = "TOP",
+					xOffset = 0,
+					yOffset = -10,
+				},
+				friendly = {
+					enable = true,
+					texture = "Interface\\AddOns\\TargetNameplateIndicator\\Textures\\greenarrow1",
+					height = 50,
+					width = 50,
+					opacity = 1,
+					texturePoint = "BOTTOM",
+					anchorPoint = "TOP",
+					xOffset = 0,
+					yOffset = -10,
+				},
+				hostile = {
+					enable = true,
+					texture = "Interface\\AddOns\\TargetNameplateIndicator\\Textures\\redarrow1",
+					height = 50,
+					width = 50,
+					opacity = 1,
+					texturePoint = "BOTTOM",
+					anchorPoint = "TOP",
+					xOffset = 0,
+					yOffset = 5,
+				}
+			},
+			focus = {
+				enable = true,
+				self = {
+					enable = true,
+					texture = "Interface\\AddOns\\TargetNameplateIndicator\\Textures\\Q_WhiteTarget",
+					height = 50,
+					width = 50,
+					opacity = 1,
+					texturePoint = "BOTTOM",
+					anchorPoint = "TOP",
+					xOffset = 0,
+					yOffset = -10,
+				},
+				friendly = {
+					enable = true,
+					texture = "Interface\\AddOns\\TargetNameplateIndicator\\Textures\\Q_GreenTarget",
+					height = 50,
+					width = 50,
+					opacity = 1,
+					texturePoint = "BOTTOM",
+					anchorPoint = "TOP",
+					xOffset = 0,
+					yOffset = -12,
+				},
+				hostile = {
+					enable = true,
+					texture = "Interface\\AddOns\\TargetNameplateIndicator\\Textures\\Q_RedTarget",
+					height = 50,
+					width = 50,
+					opacity = 1,
+					texturePoint = "BOTTOM",
+					anchorPoint = "TOP",
+					xOffset = 0,
+					yOffset = 16,
+				}
+			}
+		}
+	}
+end
+
+function TNI:OnInitialize()
+	LNR:Embed(self)
+	self.db = LibStub("AceDB-3.0"):New("TargetNameplateIndicatorDB", defaults, true)
+	self:RegisterOptions() -- Defined in options.lua
+
+	self:LNR_RegisterCallback("LNR_ERROR_FATAL_INCOMPATIBILITY", "OnError_FatalIncompatibility")
+
+	--[===[@debug@
+	if DEBUG then
+		TNI:LNR_RegisterCallback("LNR_DEBUG", debugprint)
+	end
+	--@end-debug@]===]
+end
+
+function TNI:OnEnable()
+	for unit, indicator in pairs(self.Indicators) do
+		indicator:Show()
+	end
+end
+
+function TNI:OnDisable()
+	for unit, indicator in pairs(self.Indicators) do
+		indicator:Hide()
+	end
+end
+
+function TNI:RefreshIndicator(unit)
+	local indicator = self.Indicators[unit]
+
+	if not indicator then
+		error("Invalid unit \"" + unit + "\"")
+	end
+
+	indicator:Refresh()
+end
 
 ------
--- Nameplate callbacks
+-- Indicator functions
 ------
-local Indicators = {}
+TNI.Indicators = {}
 
 local Indicator = {}
 
@@ -63,17 +237,26 @@ function Indicator:Update(nameplate)
 	self.currentNameplate = nameplate
 	self.Texture:ClearAllPoints()
 
-	local config = UnitIsUnit("player", self.unit) and self.config.SELF or UnitIsFriend("player", self.unit) and self.config.FRIENDLY or self.config.HOSTILE
+	local unitConfig = TNI.db.profile[self.unit]
+	-- 暫時修正
+	if not unitConfig then return end
+	local config = UnitIsUnit("player", self.unit) and unitConfig.self or UnitIsFriend("player", self.unit) and unitConfig.friendly or unitConfig.hostile
 
-	if nameplate and config.ENABLED then
+	self:SetShown(unitConfig.enable)
+
+	if nameplate and config.enable then
 		self.Texture:Show()
-		self.Texture:SetTexture(config.TEXTURE_PATH)
-		self.Texture:SetSize(config.TEXTURE_WIDTH, config.TEXTURE_HEIGHT)
-		self.Texture:SetAlpha(config.OPACITY)
-		self.Texture:SetPoint(config.TEXTURE_POINT, nameplate, config.ANCHOR_POINT, config.OFFSET_X, config.OFFSET_Y)
+		self.Texture:SetTexture(config.texture)
+		self.Texture:SetSize(config.width, config.height)
+		self.Texture:SetAlpha(config.opacity)
+		self.Texture:SetPoint(config.texturePoint, nameplate, config.anchorPoint, config.xOffset, config.yOffset)
 	else
 		self.Texture:Hide()
 	end
+end
+
+function Indicator:Refresh()
+	self:Update(self.currentNameplate)
 end
 
 function Indicator:OnRecyclePlate(callback, nameplate, plateData)
@@ -88,22 +271,38 @@ end
 
 -- Are other indicators already displaying on this indicator's unit?
 function Indicator:AreOtherIndicatorsDisplayed()
-	for unit, indicator in pairs(Indicators) do
+	for unit, indicator in pairs(TNI.Indicators) do
 		if self.unit ~= indicator.unit and UnitIsUnit(self.unit, unit) then -- If the indicator is for a different unit token but it's the same unit, return true
 			return true
 		end
 	end
-	
+
 	return false
 end
 
-local function CreateIndicator(unit, config)
+-- Verfies that the current nameplate (if there is one) has a unit token and disables the indicator and throws an error if it doesn't.
+-- Returns true if there's no issue.
+function Indicator:VerifyNameplateUnitToken()
+	if self.currentNameplate and not self.currentNameplate.namePlateUnitToken then
+		TNI.db.profile[self.unit].enable = false
+		self:Hide()
+	
+		error((
+			"TargetNameplateIndicator: %s indicator found a nameplate without a unit token and as such is unable to function." .. 
+			" This is usually caused by AddOns that replace the default nameplates (e.g. ElvUI or EKPlates)." ..
+			" This indicator will now be disabled until it's re-enabled in the options menu."
+		):format(self.unit))
+	end
+	
+	return true
+end
+
+local function CreateIndicator(unit)
 	local indicator = CreateFrame("Frame", "TargetNameplateIndicator_" .. unit)
 	indicator:SetFrameStrata("BACKGROUND")
 	indicator.Texture = indicator:CreateTexture("$parentTexture", "OVERLAY")
 
 	indicator.unit = unit
-	indicator.config = config
 
 	LNR:Embed(indicator)
 	Mixin(indicator, Indicator)
@@ -113,8 +312,8 @@ local function CreateIndicator(unit, config)
 	indicator:SetScript("OnEvent", function(self, event, ...)
 		self[event](self, ...)
 	end)
-	
-	Indicators[unit] = indicator
+
+	TNI.Indicators[unit] = indicator
 
 	return indicator
 end
@@ -123,95 +322,90 @@ end
 -- Target Indicator
 ------
 
-if ns.TARGET_CONFIG.ENABLED then
-	local TargetIndicator = CreateIndicator("target", ns.TARGET_CONFIG)
+local TargetIndicator = CreateIndicator("target")
 
-	function TargetIndicator:PLAYER_TARGET_CHANGED()
-		local nameplate, plateData = self:GetPlateByGUID(UnitGUID("target"))
+function TargetIndicator:PLAYER_TARGET_CHANGED()
+	local nameplate, plateData = self:GetPlateByGUID(UnitGUID("target"))
 
-		--[===[@debug@
-		debugprint("Player target changed", nameplate)
-		--@end-debug@]===]
+	--[===[@debug@
+	debugprint("Player target changed", nameplate)
+	--@end-debug@]===]
 
-		if not nameplate then
-			self:Update()
-		end
+	if not nameplate then
+		self:Update()
 	end
-
-	function TargetIndicator:OnTargetPlateOnScreen(callback, nameplate, plateData)
-		--[===[@debug@
-		debugprint("Callback fired (target found)")
-		--@end-debug@]===]
-
-		self:Update(nameplate)
-	end
-
-	TargetIndicator:RegisterEvent("PLAYER_TARGET_CHANGED")
-	TargetIndicator:LNR_RegisterCallback("LNR_ON_TARGET_PLATE_ON_SCREEN", "OnTargetPlateOnScreen")
 end
+
+function TargetIndicator:OnTargetPlateOnScreen(callback, nameplate, plateData)
+	--[===[@debug@
+	debugprint("Callback fired (target found)")
+	--@end-debug@]===]
+
+	self:Update(nameplate)
+end
+
+TargetIndicator:RegisterEvent("PLAYER_TARGET_CHANGED")
+TargetIndicator:LNR_RegisterCallback("LNR_ON_TARGET_PLATE_ON_SCREEN", "OnTargetPlateOnScreen")
 
 ------
 -- Mouseover Indicator
 ------
 
-if ns.MOUSEOVER_CONFIG.ENABLED then
-	local MouseoverIndicator = CreateIndicator("mouseover", ns.MOUSEOVER_CONFIG)
+local MouseoverIndicator = CreateIndicator("mouseover")
 
-	function MouseoverIndicator:OnUpdate()
-		-- If there's a current nameplate and it's still the mouseover unit, do nothing
-		if self.currentNameplate and UnitIsUnit("mouseover", self.currentNameplate.namePlateUnitToken) then return end
+function MouseoverIndicator:OnUpdate()
+	-- If there's a current nameplate and it's still the mouseover unit, do nothing
+	if self.currentNameplate and self:VerifyNameplateUnitToken() and UnitIsUnit("mouseover", self.currentNameplate.namePlateUnitToken) then return end
 
-		-- If there isn't a current nameplate and there's no mouseover unit, do nothing
-		if not self.currentNameplate and not UnitExists("mouseover") then return end
+	-- If there isn't a current nameplate and there's no mouseover unit, do nothing
+	if not self.currentNameplate and not UnitExists("mouseover") then return end
 
-		local nameplate, plateData = self:GetPlateByGUID(UnitGUID("mouseover"))
+	local nameplate, plateData = self:GetPlateByGUID(UnitGUID("mouseover"))
 
-		local areOtherIndicatorsDisplayed = self:AreOtherIndicatorsDisplayed()
+	local areOtherIndicatorsDisplayed = self:AreOtherIndicatorsDisplayed()
 
-		--[===[@debug@
-		debugprint("Player mouseover changed", nameplate, "areOtherIndicatorsDisplayed?", areOtherIndicatorsDisplayed)
-		--@end-debug@]===]
+	--[===[@debug@
+	debugprint("Player mouseover changed", nameplate, "areOtherIndicatorsDisplayed?", areOtherIndicatorsDisplayed)
+	--@end-debug@]===]
 
-		-- If the player has their mouse over a unit that doesn't already have an indicator displaying on it, update the mouseover indicator; otherwise hide it 
-		if not areOtherIndicatorsDisplayed then
-			self:Update(nameplate)
-		else
-			self:Update(nil)
-		end
+	-- If the player has their mouse over a unit that doesn't already have an indicator displaying on it, update the mouseover indicator; otherwise hide it
+	if not areOtherIndicatorsDisplayed then
+		self:Update(nameplate)
+	else
+		self:Update(nil)
 	end
-
-	MouseoverIndicator:SetScript("OnUpdate", MouseoverIndicator.OnUpdate)
 end
 
+MouseoverIndicator:SetScript("OnUpdate", MouseoverIndicator.OnUpdate)
+
+
 ------
--- Focuus Indicator
+-- Focus Indicator
 ------
 
-if ns.FOCUS_CONFIG.ENABLED then
-	local FocusIndicator = CreateIndicator("focus", ns.FOCUS_CONFIG)
-	
-	function FocusIndicator:OnUpdate()
-		-- If there's a current nameplate and it's still the focus unit, do nothing
-		if self.currentNameplate and UnitIsUnit("focus", self.currentNameplate.namePlateUnitToken) then return end
+local FocusIndicator = CreateIndicator("focus")
 
-		-- If there isn't a current nameplate and there's no focus unit, do nothing
-		if not self.currentNameplate and not UnitExists("focus") then return end
+function FocusIndicator:OnUpdate()
+	-- If there's a current nameplate and it's still the focus unit, do nothing
+	if self.currentNameplate and self:VerifyNameplateUnitToken() and UnitIsUnit("focus", self.currentNameplate.namePlateUnitToken) then return end
 
-		local nameplate, plateData = self:GetPlateByGUID(UnitGUID("focus"))
+	-- If there isn't a current nameplate and there's no focus unit, do nothing
+	if not self.currentNameplate and not UnitExists("focus") then return end
 
-		local areOtherIndicatorsDisplayed = self:AreOtherIndicatorsDisplayed()
+	local nameplate, plateData = self:GetPlateByGUID(UnitGUID("focus"))
 
-		--[===[@debug@
-		debugprint("Player focus changed", nameplate, "areOtherIndicatorsDisplayed?", areOtherIndicatorsDisplayed)
-		--@end-debug@]===]
+	local areOtherIndicatorsDisplayed = self:AreOtherIndicatorsDisplayed()
 
-		-- If the player has their focus set to a unit that doesn't already have an indicator displaying on it, update the focus indicator; otherwise hide it
-		if not areOtherIndicatorsDisplayed then
-			self:Update(nameplate)
-		else
-			self:Update(nil)
-		end
+	--[===[@debug@
+	debugprint("Player focus changed", nameplate, "areOtherIndicatorsDisplayed?", areOtherIndicatorsDisplayed)
+	--@end-debug@]===]
+
+	-- If the player has their focus set to a unit that doesn't already have an indicator displaying on it, update the focus indicator; otherwise hide it
+	if not areOtherIndicatorsDisplayed then
+		self:Update(nameplate)
+	else
+		self:Update(nil)
 	end
-	
-	FocusIndicator:SetScript("OnUpdate", FocusIndicator.OnUpdate)
 end
+
+FocusIndicator:SetScript("OnUpdate", FocusIndicator.OnUpdate)

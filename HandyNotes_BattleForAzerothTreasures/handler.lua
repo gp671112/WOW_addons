@@ -1,4 +1,4 @@
-local myname, ns = ...
+﻿local myname, ns = ...
 
 local HandyNotes = LibStub("AceAddon-3.0"):GetAddon("HandyNotes")
 local HL = LibStub("AceAddon-3.0"):NewAddon(myname, "AceEvent-3.0")
@@ -69,12 +69,19 @@ local function work_out_label(point)
     if point.label then
         return point.label
     end
-    if point.achievement and point.criteria then
-        local criteria = GetAchievementCriteriaInfoByID(point.achievement, point.criteria)
-        if criteria then
-            return criteria
+    if point.achievement then
+        if point.criteria then
+            local criteria = GetAchievementCriteriaInfoByID(point.achievement, point.criteria)
+            if criteria then
+                return criteria
+            end
+            fallback = 'achievement:'..point.achievement..'.'..point.criteria
         end
-        fallback = 'achievement:'..point.achievement..'.'..point.criteria
+        local _, achievement = GetAchievementInfo(point.achievement)
+        if achievement then
+            return achievement
+        end
+        fallback = 'achievement:'..point.achievement
     end
     if point.follower then
         local follower = C_Garrison.GetFollowerInfo(point.follower)
@@ -450,7 +457,7 @@ function HL:OnInitialize()
     ns.db = self.db.profile
     ns.hidden = self.db.char.hidden
     -- Initialize our database with HandyNotes
-    HandyNotes:RegisterPluginDB("決戰艾澤拉斯寶藏", HLHandler, ns.options)
+    HandyNotes:RegisterPluginDB(myname:gsub("HandyNotes_", ""), HLHandler, ns.options)
 
     -- watch for LOOT_CLOSED
     self:RegisterEvent("LOOT_CLOSED", "Refresh")

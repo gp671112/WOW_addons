@@ -1,0 +1,9 @@
+Changes since tag 8.0.6
+
+commit 1dd6d80ae1cc554b98354ec35864d9523f39e99a
+Author: subversion <svn@deadlybossmods.com>
+Date:   Mon Sep 3 11:38:09 2018 +0200
+
+    tandanu via svn r17764:
+    increment alpha version
+

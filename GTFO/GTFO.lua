@@ -23,8 +23,8 @@ GTFO = {
 		TrivialDamagePercent = 2; -- Minimum % of HP lost required for an alert to be trivial
 		SoundOverrides = { }; -- Override table for GTFO sounds
 	};
-	Version = "4.46.4"; -- Version number (text format)
-	VersionNumber = 44604; -- Numeric version number for checking out-of-date clients
+	Version = "4.46.6"; -- Version number (text format)
+	VersionNumber = 44606; -- Numeric version number for checking out-of-date clients
 	DataLogging = nil; -- Indicate whether or not the addon needs to run the datalogging function (for hooking)
 	DataCode = "4"; -- Saved Variable versioning, change this value to force a reset to default
 	CanTank = nil; -- The active character is capable of tanking
@@ -52,10 +52,6 @@ GTFO = {
 	SoundTimes = { .5, .3, .4, .5 }; -- Length of sound files in seconds (for auto-unmute)
 	PartyMembers = 0;
 	RaidMembers = 0;
-	PowerAuras = nil; -- PowerAuras Integration enabled
-	WeakAuras = nil; -- WeakAuras Integration enabled
-	Recount = nil; -- Recount Integration enabled
-	Skada = nil; -- Skada Integration enabled
 	ShowAlert = nil;
 	Settings = { };
 	UIRendered = nil;
@@ -161,7 +157,7 @@ function GTFO_OnEvent(self, event, ...)
 		GTFO_RenderOptions();
 		GTFO_SaveSettings();
 		GTFO_AddEvent("RefreshOptions", .1, function() GTFO_RefreshOptions(); end);
-
+		
 		GTFO.Users[UnitName("player")] = GTFO.VersionNumber;
 		GTFO_GetSounds();
 		GTFO.CanTank = GTFO_CanTankCheck("player");

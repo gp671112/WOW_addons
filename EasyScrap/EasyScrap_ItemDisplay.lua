@@ -98,12 +98,13 @@ local function createItemButton(i)
     frame:SetScript('OnEnter', function(self)
         if self.itemRef > 0 then 
             GameTooltip:SetOwner(self, "ANCHOR_NONE")
-            --GameTooltip:SetHyperlink(EasyScrap.scrappableItems[self.itemRef].itemLink)
             GameTooltip:SetBagItem(EasyScrap.scrappableItems[self.itemRef].bag, EasyScrap.scrappableItems[self.itemRef].slot)
-            if EasyScrap.scrappableItems[self.itemRef].filterReason then GameTooltip:AddLine('|cFFFF0000'..EasyScrap.scrappableItems[self.itemRef].filterReason..'|r') end
+            if EasyScrap.scrappableItems[self.itemRef].filterMessage and not EasyScrap:itemInIgnoreList(self.itemRef) then
+                GameTooltip:AddLine('|cFFFF0000'..EasyScrap.scrappableItems[self.itemRef].filterMessage..'|r') 
+            end
             GameTooltip:SetPoint("BOTTOMLEFT", frame, "TOPRIGHT");
             GameTooltip:Show()
-            if ( (IsModifiedClick("COMPAREITEMS") or GetCVarBool("alwaysCompareItems")) ) then
+            if IsModifiedClick("COMPAREITEMS") then
                 GameTooltip_ShowCompareItem(GameTooltip);
             end
         end
@@ -281,16 +282,21 @@ function EasyScrapItemFrame:displayState()
     hideItemButtons()
     itemFrame.ignoreItemFrame:Hide()
     contentFrame.tabInfo:Hide()
+    contentFrame.noEligibleInfo:Hide()
     itemFrame.contentFrame:Show()
     self:moveQueueTabSparks()
-    EasyScrap.mainFrame.queueAllButton:SetEnabled(false)
+    EasyScrap.mainFrame.queueAllButton:SetEnabled(false)  
     if self.contentState == 1 then
         if #EasyScrap.queueItems == 0 then
             contentFrame.tabInfo:SetText("此標籤顯示你所有正在佇列等候銷毀的物品。要佇列物品銷毀很簡單只要當回收器已滿的時候持續加入物品。")
             contentFrame.tabInfo:Show()
         end
     elseif self.contentState == 2 then
-        EasyScrap.mainFrame.queueAllButton:SetEnabled(true)
+        if #EasyScrap.eligibleItems > 0 then
+            EasyScrap.mainFrame.queueAllButton:SetEnabled(true)
+        else
+            contentFrame.noEligibleInfo:Show()
+        end
     elseif self.contentState == 3 then
     end
     
@@ -329,8 +335,6 @@ local function updateSlider()
     
     if itemFrame.scrollFrame.ScrollBar:GetValue() > maxScroll then itemFrame.scrollFrame.ScrollBar:SetValue(maxScroll) end
     itemFrame.scrollFrame.ScrollBar:SetMinMaxValues(0, maxScroll)   
-    
-    
 end
 
 function EasyScrapItemFrame:updateContent()

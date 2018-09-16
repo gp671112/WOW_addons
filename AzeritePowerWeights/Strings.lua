@@ -76,6 +76,7 @@ do -- enUS / enGB
 	L.ItemToolTip_AzeriteLevel = "Azerite level: %1$d / %2$d" -- %1$d = currentLevel, %2$d = maxLevel
 
 	L.Config_SettingsSavedPerChar = "All these settings here are saved per character.\nCustom scales are shared between all characters."
+
 	L.Config_Scales_Title = "Scales list"
 	L.Config_Scales_Desc = "Following settings only affects the list of Default scales. All Custom scales will be always listed to every class."
 	L.Config_Scales_OwnClassDefaultsOnly = "List own class Default-scales only"
@@ -101,449 +102,18 @@ do -- enUS / enGB
 	L.Config_WeightEditor_ShowProfession_Desc = "Show Profession specific powers in the scale weight editor. These powers can only appear in items created with professions. Currently these can only appear in Engineering headgear."
 	L.Config_WeightEditor_ShowPvP = "Show PvP specific powers"
 	L.Config_WeightEditor_ShowPvP_Desc = "Show PvP specific powers in the scale weight editor. You'll only see your own factions powers, but changes made to them will be mirrored to both factions."
-	L.Config_WeightEditor_ShowPvP_Desc_Import = "When Exporting the resulting export-string will only include your own factions pvp powers but they are interchangeable with opposing factions pvp-powerIDs.\nWhen Importing import-string with pvp powers only from one faction, powers will get their weights mirrored to both factions on Import."
+	L.Config_WeightEditor_ShowPvP_Desc_Import = "When Exporting, the resulting export-string will only include your own factions pvp powers, but they are interchangeable with opposing factions pvp-powerIDs.\nWhen Importing import-string with pvp powers only from one faction, powers will get their weights mirrored to both factions on Import."
+
+	L.Config_Score_Title = "Score"
+	L.Config_Score_AddItemLevelToScore = "Add itemlevel to all scores"
+	L.Config_Score_AddItemLevelToScore_Desc = "Add Azerite items itemlevel to all current score, current potential and maximum score calculations."
 
 	L.Slash_Command = "/azerite" -- If you need localized slash-command, this doesn't replace the existing /azerite
 	L.Slash_RemindConfig = "Check ESC -> Interface -> AddOns -> %s for settings." -- %s = ADDON_NAME
 	L.Slash_Error_Unkown = "ERROR: Something went wrong!"
 end
 
-if LOCALE == "deDE" then -- Sinusquell (47)
-L["Config_Importing_ImportingCanUpdate"] = "Beim Importieren können vorhandene Skalierung aktualisiert werden."
-L["Config_Importing_ImportingCanUpdate_Desc"] = "Wenn Sie eine Skalierung mit demselben Namen, derselben Klasse und Spezialisierung wie eine bereits vorhandene Skalierung importieren, wird die vorhandene Skalierung mit den neuen Gewichtungen aktualisiert, anstatt eine neue Skalierung zu erstellen. "
-L["Config_Importing_ImportingCanUpdate_Desc_Clarification"] = "Es kann mehrere Skalierungen mit demselben Namen geben, solange sie für verschiedene Spezialisierungen oder Klassen gelten. "
-L["Config_Importing_Title"] = "Importieren "
-L["Config_Scales_Desc"] = "Die folgenden Einstellungen betreffen nur die Liste der Standardskalierungen. Alle benutzerdefinierten Skalierungen werden immer für jede Klasse aufgelistet. "
-L["Config_Scales_OwnClassDefaultsOnly"] = "Zeige nur Standartskalierung für die eigene Klasse. "
-L["Config_Scales_OwnClassDefaultsOnly_Desc"] = "Zeige nur Standartskalierung für die eigene Klasse anstelle von allen anderen. "
-L["Config_Scales_Title"] = "Skalierungsliste "
-L["Config_SettingsSavedPerChar"] = [=[Alle Einstellungen sind für den Charakter gespeichert. 
-Benutzerdefinierte Einstellungen werden geteilt zwischen allen Charaktern.]=]
-L["Config_WeightEditor_Desc"] = "Die folgenden Einstellungen wirken sich nur auf die im Editor angezeigten Fähigkeiten aus. Selbst wenn du sie deaktivierst, werden alle Azeritermächtigungen immer noch gewertet, wenn sie auf der aktiven Skala Werte haben."
-L["Config_WeightEditor_ShowDefensive"] = "Zeige defensive Fähigkeiten"
-L["Config_WeightEditor_ShowDefensive_Desc"] = "Zeige gemeinsame und klassenspezifische Defensivfähigkeiten im Editor."
-L["Config_WeightEditor_ShowProfession"] = "Zeige berufsspezifische Fähigkeiten "
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowProfession_Desc"] = ""--]] 
-L["Config_WeightEditor_ShowPvP"] = "Zeige PVP spezifische Fähigkeiten "
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowPvP_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowPvP_Desc_Import"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowRole"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowRole_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowRolesOnlyForOwnSpec"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowRolesOnlyForOwnSpec_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowZone"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowZone_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowZone_Desc_Proc"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_Title"] = ""--]] 
---[[Translation missing --]]
---[[ L["CreatePopup_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["CreatePopup_Error_CreatedNewScale"] = ""--]] 
---[[Translation missing --]]
---[[ L["CreatePopup_Error_UnknownError"] = ""--]] 
---[[Translation missing --]]
---[[ L["CreatePopup_Title"] = ""--]] 
---[[Translation missing --]]
---[[ L["DefaultScaleName_Default"] = ""--]] 
---[[Translation missing --]]
---[[ L["DefaultScaleName_Defensive"] = ""--]] 
---[[Translation missing --]]
---[[ L["DefaultScaleName_Offensive"] = ""--]] 
---[[Translation missing --]]
---[[ L["DeletePopup_DeletedDefaultScale"] = ""--]] 
---[[Translation missing --]]
---[[ L["DeletePopup_DeletedScale"] = ""--]] 
---[[Translation missing --]]
---[[ L["DeletePopup_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["DeletePopup_Title"] = ""--]] 
---[[Translation missing --]]
---[[ L["DeletePopup_Warning"] = ""--]] 
---[[Translation missing --]]
---[[ L["ExportPopup_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["ExportPopup_Title"] = ""--]] 
---[[Translation missing --]]
---[[ L["ImportPopup_CreatedNewScale"] = ""--]] 
---[[Translation missing --]]
---[[ L["ImportPopup_Desc"] = ""--]] 
-L["ImportPopup_Error_MalformedString"] = "ERROR: Fehlerhafter Import-String!"
-L["ImportPopup_Error_OldStringVersion"] = "ERROR: \"Import-String\" -Version ist zu alt oder fehlerhafter Import-String!"
-L["ImportPopup_Title"] = "Importiere Skalierung"
-L["ImportPopup_UpdatedScale"] = "Skalierung \"%s\" wurde aktualisiert"
-L["ItemToolTip_AzeriteLevel"] = "Azeritlevel: %1$d / %2$d"
-L["PowersScoreString"] = [=[Aktuelle Punkte: %1$d/%2$d
-Maximale Punkte: %3$d
-Azeritlevel: %4$d/%5$d]=]
-L["PowersTitles_Class"] = "Klassentalente"
-L["PowersTitles_Defensive"] = "Defensivtalente"
-L["PowersTitles_Profession"] = "Berufstalente"
-L["PowersTitles_PvP"] = "PVPtalente"
-L["PowersTitles_Role"] = "Spezialisierungstalente"
-L["PowersTitles_Zone"] = "Schlatzugs und Zonen Fähigkeiten"
-L["RenamePopup_Desc"] = [=[Benenne Skalierung %1$s um
-Trage neuen Namen in das Editierfeld ein und drücke %2$s]=]
-L["RenamePopup_RenamedScale"] = "Skalierung umbenennen von \"%1$s\" zu  \"%2$s\" "
-L["RenamePopup_Title"] = "Skalierung umbenennen"
-L["ScaleName_Unknown"] = "Unbekannt"
-L["ScaleName_Unnamed"] = "Unbenannt"
-L["ScalesList_CreateImportText"] = "Erstelle Neu / Importieren"
-L["ScalesList_CustomGroupName"] = "Benutzerdefinierte Saklierung"
-L["ScalesList_DefaultGroupName"] = "Standart Skalierungen"
-L["ScaleWeightEditor_Title"] = "%s Editor"
-L["Slash_Command"] = "/azerite"
-L["Slash_Error_Unkown"] = "ERROR: Irgendwas war Fehlerhaft! "
-L["Slash_RemindConfig"] = "Prüfe ESC -> Interface -> Addons -> %s für weiter Einstellungen."
-L["WeightEditor_CreateNewText"] = "Neu erstellen"
-L["WeightEditor_CurrentScale"] = "Aktuelle Skalierung: %s"
-L["WeightEditor_DeleteText"] = "Löschen"
-L["WeightEditor_EnableScaleText"] = "Benutzte diese Skalierung"
-L["WeightEditor_ExportText"] = "Exportieren"
-L["WeightEditor_ImportText"] = "Importieren"
-L["WeightEditor_RenameText"] = "Umbenennen"
-L["WeightEditor_TooltipText"] = "Angezeigt im Tooltip"
-L["WeightEditor_VersionText"] = "Version %s"
-
-
-elseif LOCALE == "frFR" then -- tthegarde (20)
-L["Config_Importing_ImportingCanUpdate"] = "Importer peut modifier les échelles existantes."
-L["Config_Importing_ImportingCanUpdate_Desc"] = "Quand vous importez une échelle avec les mêmes nom, classe et spécialisation qu'une échelle pré-définie, l'échelle pré-définie sera mise à jour avec les nouveaux poids au lieu qu'une nouvelle échelle soit créée."
-L["Config_Importing_ImportingCanUpdate_Desc_Clarification"] = "Il peut y avoir plusieurs échelles avec le même nom tant qu'elles sont pour des classes ou spécialisations différentes."
-L["Config_Importing_Title"] = "Import"
-L["Config_Scales_Desc"] = "Les réglages suivants n'affectent que la liste des échelles par défaut. Toutes les échelles personnalisées seront toujours listées pour toutes les classes."
-L["Config_Scales_OwnClassDefaultsOnly"] = "N'afficher que les échelles par défaut de votre classe"
-L["Config_Scales_OwnClassDefaultsOnly_Desc"] = "Cache les échelles par défaut qui ne correspondent pas à votre classe au lieu de toutes les afficher."
-L["Config_Scales_Title"] = "Liste des échelles"
-L["Config_SettingsSavedPerChar"] = [=[Tous ces réglages sont sauvegardés par personnage.
-Les échelles personnalisées sont partagées entre tous vos personnages.]=]
-L["Config_WeightEditor_Desc"] = "Les réglages suivants ne concernent que les traits affichés dans l'éditeur d'échelle. Même si vous les désactivez, chaque trait d'Azérite sera quand même évalué si il a une valeur associée dans l'échelle active."
-L["Config_WeightEditor_ShowDefensive"] = "Afficher les traits Défensifs"
-L["Config_WeightEditor_ShowDefensive_Desc"] = "Affiche les traits Défensifs communs et spécifiques à une classe dans l'éditeur d'échelle."
-L["Config_WeightEditor_ShowProfession"] = "Afficher les traits de Profession"
-L["Config_WeightEditor_ShowProfession_Desc"] = "Affiche les traits de Profession dans l'éditeur d'échelle. Ces traits n'apparaissent que sur les objets produits par des professions. A l'heure actuelle, ils n'apparaissent que sur les casques d’ingénierie."
-L["Config_WeightEditor_ShowPvP"] = "Afficher les traits JcJ"
-L["Config_WeightEditor_ShowPvP_Desc"] = "Affiche les traits JcJ dans l'éditeur d'échelle. Vous ne verrez que les traits concernant votre propre faction, mais les changements de valeurs affecteront les traits des deux factions."
-L["Config_WeightEditor_ShowPvP_Desc_Import"] = [=[Lors d'un Export, la chaîne de texte n’inclura que les traits de votre propre faction, mais ils sont interchangeables avec les traits JcJ de la faction opposée.
-Lors d'un Import, la valeur des traits JcJ sera appliquée aux deux factions.]=]
-L["Config_WeightEditor_ShowRole"] = "Afficher les traits de Rôle"
-L["Config_WeightEditor_ShowRole_Desc"] = "Affiche les traits de Rôle dans l'éditeur d'échelle."
-L["Config_WeightEditor_ShowRolesOnlyForOwnSpec"] = "Affiche les traits de Rôle uniquement pour votre spécialisation"
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowRolesOnlyForOwnSpec_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowZone"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowZone_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowZone_Desc_Proc"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_Title"] = ""--]] 
---[[Translation missing --]]
---[[ L["CreatePopup_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["CreatePopup_Error_CreatedNewScale"] = ""--]] 
---[[Translation missing --]]
---[[ L["CreatePopup_Error_UnknownError"] = ""--]] 
---[[Translation missing --]]
---[[ L["CreatePopup_Title"] = ""--]] 
---[[Translation missing --]]
---[[ L["DefaultScaleName_Default"] = ""--]] 
---[[Translation missing --]]
---[[ L["DefaultScaleName_Defensive"] = ""--]] 
---[[Translation missing --]]
---[[ L["DefaultScaleName_Offensive"] = ""--]] 
---[[Translation missing --]]
---[[ L["DeletePopup_DeletedDefaultScale"] = ""--]] 
---[[Translation missing --]]
---[[ L["DeletePopup_DeletedScale"] = ""--]] 
---[[Translation missing --]]
---[[ L["DeletePopup_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["DeletePopup_Title"] = ""--]] 
---[[Translation missing --]]
---[[ L["DeletePopup_Warning"] = ""--]] 
---[[Translation missing --]]
---[[ L["ExportPopup_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["ExportPopup_Title"] = ""--]] 
---[[Translation missing --]]
---[[ L["ImportPopup_CreatedNewScale"] = ""--]] 
---[[Translation missing --]]
---[[ L["ImportPopup_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["ImportPopup_Error_MalformedString"] = ""--]] 
---[[Translation missing --]]
---[[ L["ImportPopup_Error_OldStringVersion"] = ""--]] 
---[[Translation missing --]]
---[[ L["ImportPopup_Title"] = ""--]] 
---[[Translation missing --]]
---[[ L["ImportPopup_UpdatedScale"] = ""--]] 
---[[Translation missing --]]
---[[ L["ItemToolTip_AzeriteLevel"] = ""--]] 
---[[Translation missing --]]
---[[ L["PowersScoreString"] = ""--]] 
---[[Translation missing --]]
---[[ L["PowersTitles_Class"] = ""--]] 
---[[Translation missing --]]
---[[ L["PowersTitles_Defensive"] = ""--]] 
---[[Translation missing --]]
---[[ L["PowersTitles_Profession"] = ""--]] 
---[[Translation missing --]]
---[[ L["PowersTitles_PvP"] = ""--]] 
---[[Translation missing --]]
---[[ L["PowersTitles_Role"] = ""--]] 
---[[Translation missing --]]
---[[ L["PowersTitles_Zone"] = ""--]] 
---[[Translation missing --]]
---[[ L["RenamePopup_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["RenamePopup_RenamedScale"] = ""--]] 
---[[Translation missing --]]
---[[ L["RenamePopup_Title"] = ""--]] 
---[[Translation missing --]]
---[[ L["ScaleName_Unknown"] = ""--]] 
---[[Translation missing --]]
---[[ L["ScaleName_Unnamed"] = ""--]] 
---[[Translation missing --]]
---[[ L["ScalesList_CreateImportText"] = ""--]] 
---[[Translation missing --]]
---[[ L["ScalesList_CustomGroupName"] = ""--]] 
---[[Translation missing --]]
---[[ L["ScalesList_DefaultGroupName"] = ""--]] 
---[[Translation missing --]]
---[[ L["ScaleWeightEditor_Title"] = ""--]] 
---[[Translation missing --]]
---[[ L["Slash_Command"] = ""--]] 
---[[Translation missing --]]
---[[ L["Slash_Error_Unkown"] = ""--]] 
---[[Translation missing --]]
---[[ L["Slash_RemindConfig"] = ""--]] 
---[[Translation missing --]]
---[[ L["WeightEditor_CreateNewText"] = ""--]] 
---[[Translation missing --]]
---[[ L["WeightEditor_CurrentScale"] = ""--]] 
---[[Translation missing --]]
---[[ L["WeightEditor_DeleteText"] = ""--]] 
---[[Translation missing --]]
---[[ L["WeightEditor_EnableScaleText"] = ""--]] 
---[[Translation missing --]]
---[[ L["WeightEditor_ExportText"] = ""--]] 
---[[Translation missing --]]
---[[ L["WeightEditor_ImportText"] = ""--]] 
---[[Translation missing --]]
---[[ L["WeightEditor_RenameText"] = ""--]] 
---[[Translation missing --]]
---[[ L["WeightEditor_TooltipText"] = ""--]] 
---[[Translation missing --]]
---[[ L["WeightEditor_VersionText"] = ""--]] 
-
-
-elseif LOCALE == "ruRU" then -- dartraiden (74)
-L["Config_Importing_ImportingCanUpdate"] = "Обновлять уже существующие наборы при импорте"
-L["Config_Importing_ImportingCanUpdate_Desc"] = "При импорте набора, совпадающего с существующим по имени, классу и специализации, вместо создания нового набора будет обновлён уже существующий набор."
-L["Config_Importing_ImportingCanUpdate_Desc_Clarification"] = "Допустимы наборы с одинаковыми названиями, если они предназначены для разных специализаций или классов."
-L["Config_Importing_Title"] = "Импорт"
-L["Config_Scales_Desc"] = "Следующие настройки влияют лишь на наборы по умолчанию. Все созданные вами наборы всегда видны любому классу."
-L["Config_Scales_OwnClassDefaultsOnly"] = "Показывать наборы по умолчанию, предназначенные лишь для моего класса"
-L["Config_Scales_OwnClassDefaultsOnly_Desc"] = "Показывать не все наборы по умолчанию, а только подходящие для вашего класса."
-L["Config_Scales_Title"] = "Список наборов"
-L["Config_SettingsSavedPerChar"] = [=[Все эти настройки сохраняются отдельно для каждого персонажа.
-Созданные вами наборы являются общими для всех персонажей.]=]
-L["Config_WeightEditor_Desc"] = "Следующие настройки влияют лишь на показ талантов в редакторе наборов. Даже если вы отключите их, ценность азеритовых талантов будет учтена, если она у них указана."
-L["Config_WeightEditor_ShowDefensive"] = "Показывать защитные таланты"
-L["Config_WeightEditor_ShowDefensive_Desc"] = "Показывать в редакторе наборов общие и специфичные для класса защитные таланты."
-L["Config_WeightEditor_ShowProfession"] = "Показывать таланты, специфичные для профессий"
-L["Config_WeightEditor_ShowProfession_Desc"] = "Показывать в редакторе наборов таланты, специфичные для профессий. Эти таланты присутствуют только у предметов, созданных с помощью профессий. В настоящий момент они присутствуют только у головных уборов, созданных инженерами."
-L["Config_WeightEditor_ShowPvP"] = "Показывать таланты, специфичные для PvP"
-L["Config_WeightEditor_ShowPvP_Desc"] = "Показывать в редакторе наборов таланты, специфичные для PvP. Будут видны лишь таланты вашей фракции, но внесённые изменения применяются к обеим фракциям."
-L["Config_WeightEditor_ShowPvP_Desc_Import"] = [=[Экспортируемая строка содержит только PvP-таланты вашей фракции, но они соответствуют по ID PvP-талантам вражеской фракции.
-При импорте строки, содержащей PvP-таланты лишь одной фракции, аналогичные таланты противоположной фракции получат такую же ценность.]=]
-L["Config_WeightEditor_ShowRole"] = "Показывать таланты, специфичные для роли"
-L["Config_WeightEditor_ShowRole_Desc"] = "Показывать в редакторе наборов таланты, специфичные для роли."
-L["Config_WeightEditor_ShowRolesOnlyForOwnSpec"] = "Показывать таланты, подходящие только для моей специализации"
-L["Config_WeightEditor_ShowRolesOnlyForOwnSpec_Desc"] = "Показывать в редакторе наборов общие и специфичные для текущей специализации ролевые таланты. Включение этой настройки, например, скрывает таланты лекарей от бойцов и танков."
-L["Config_WeightEditor_ShowZone"] = "Показывать таланты, специфичные для локаций"
-L["Config_WeightEditor_ShowZone_Desc"] = "Показывать в редакторе наборов таланты, специфичные для локаций. Эти таланты присутствуют только у предметов, добытых в определённой локации, связанной с талантом."
-L["Config_WeightEditor_ShowZone_Desc_Proc"] = [=[Обычные таланты работают и срабатывают везде, но рейдовые таланты работают только внутри связанных с ними рейдов (например, таланты Ульдира срабатывают только внутри Ульдира).
-В редакторе наборов рейдовые таланты отмечены звёздочкой (*).]=]
-L["Config_WeightEditor_Title"] = "Редактор наборов"
-L["CreatePopup_Desc"] = "Создание нового набора. Выберите класс и специализацию из выпадающего меню, введите название набора, а затем нажмите %1$s"
-L["CreatePopup_Error_CreatedNewScale"] = "Создан новый набор \"%s\""
-L["CreatePopup_Error_UnknownError"] = "ОШИБКА: при создании нового набора \"%s\" что-то пошло не так!"
-L["CreatePopup_Title"] = "Создать набор"
-L["DefaultScaleName_Default"] = "По умолчанию"
-L["DefaultScaleName_Defensive"] = "Защита"
-L["DefaultScaleName_Offensive"] = "Атака"
-L["DeletePopup_DeletedDefaultScale"] = "Удалённый набор использовался, поэтому возвращаю обратно набор по умолчанию для вашего класса и специализации!"
-L["DeletePopup_DeletedScale"] = "Удалён набор \"%s\""
-L["DeletePopup_Desc"] = [=[Удаление набора %1$s
-Нажмите %2$s для подтверждения.
-Все персонажи, которые использовали этот набор, вернутся к набору по умолчанию.]=]
-L["DeletePopup_Title"] = "Удалить набор"
-L["DeletePopup_Warning"] = "Это действие невозможно отменить!"
-L["ExportPopup_Desc"] = [=[Экспорт набора %1$s
-Нажмите %2$sCtrl+C%3$s, чтобы скопировать строку и %4$sCtrl+V%5$s, чтобы куда-нибудь её вставить]=]
-L["ExportPopup_Title"] = "Экспортировать набор"
-L["ImportPopup_CreatedNewScale"] = "Импортирован новый набор \"%s\""
-L["ImportPopup_Desc"] = [=[Импорт набора из строки
-Нажмите %1$sCtrl+V%2$s, чтобы вставить строку в поле ввода, а затем нажмите %3$s]=]
-L["ImportPopup_Error_MalformedString"] = "ОШИБКА: импортируемая строка некорректна!"
-L["ImportPopup_Error_OldStringVersion"] = "ОШИБКА: импортируемая строка некорректна или импортируется из старой версии!"
-L["ImportPopup_Title"] = "Импортировать набор"
-L["ImportPopup_UpdatedScale"] = "Обновлён существующий набор \"%s\""
-L["ItemToolTip_AzeriteLevel"] = "Уровень Сердца Азерот: %1$d / %2$d"
-L["PowersScoreString"] = [=[Текущий рейтинг: %1$d/%2$d
-Максимальный рейтинг: %3$d
-Уровень Сердца Азерот: %4$d/%5$d]=]
-L["PowersTitles_Class"] = "Классовые таланты"
-L["PowersTitles_Defensive"] = "Защитные таланты"
-L["PowersTitles_Profession"] = "Таланты профессий"
-L["PowersTitles_PvP"] = "PvP-таланты"
-L["PowersTitles_Role"] = "Ролевые таланты"
-L["PowersTitles_Zone"] = "Таланты рейдов и локаций"
-L["RenamePopup_Desc"] = [=[Переименование набора %1$s
-Введите новое название в поле ввода и нажмите %2$s]=]
-L["RenamePopup_RenamedScale"] = "Набор \"%1$s\" переименован в \"%2$s\""
-L["RenamePopup_Title"] = "Переименовать набор"
-L["ScaleName_Unknown"] = "Неизвестный"
-L["ScaleName_Unnamed"] = "Без названия"
-L["ScalesList_CreateImportText"] = "Создать / Импортировать"
-L["ScalesList_CustomGroupName"] = "Ваши наборы"
-L["ScalesList_DefaultGroupName"] = "Наборы по умолчанию"
-L["ScaleWeightEditor_Title"] = "Редактор набора %s"
-L["Slash_Command"] = "/azerite"
-L["Slash_Error_Unkown"] = "ОШИБКА: что-то пошло не так!"
-L["Slash_RemindConfig"] = "Настройки в Esc → Интерфейс → Модификации →%s."
-L["WeightEditor_CreateNewText"] = "Создать новый"
-L["WeightEditor_CurrentScale"] = "Текущий набор: %s"
-L["WeightEditor_DeleteText"] = "Удалить"
-L["WeightEditor_EnableScaleText"] = "Использовать этот"
-L["WeightEditor_ExportText"] = "Экспортировать"
-L["WeightEditor_ImportText"] = "Импортировать"
-L["WeightEditor_RenameText"] = "Переименовать"
-L["WeightEditor_TooltipText"] = "Показывать в подсказке"
-L["WeightEditor_VersionText"] = "Версия %s"
-
-
-elseif LOCALE == "koKR" then -- Killberos (49)
---[[Translation missing --]]
---[[ L["Config_Importing_ImportingCanUpdate"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_Importing_ImportingCanUpdate_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_Importing_ImportingCanUpdate_Desc_Clarification"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_Importing_Title"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_Scales_Desc"] = ""--]] 
-L["Config_Scales_OwnClassDefaultsOnly"] = "자신 직업의 기본값만 표시"
---[[Translation missing --]]
---[[ L["Config_Scales_OwnClassDefaultsOnly_Desc"] = ""--]] 
-L["Config_Scales_Title"] = "값 목록"
-L["Config_SettingsSavedPerChar"] = [=[이 곳에 모든 설정은 캐릭터별로 저장됩니다.
-사용자 값은 모든 캐릭터에게 공유됩니다.]=]
---[[Translation missing --]]
---[[ L["Config_WeightEditor_Desc"] = ""--]] 
-L["Config_WeightEditor_ShowDefensive"] = "방어적 능력들 표시 "
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowDefensive_Desc"] = ""--]] 
-L["Config_WeightEditor_ShowProfession"] = "특정 전문 능력들 표시"
-L["Config_WeightEditor_ShowProfession_Desc"] = [=[가중치 편집기 안에 있는 특정 전문 능력들을 표시합니다. 
-이 능력들은 전문기술로 만들어진 아이템에서만 나타납니다. 현재 기계공학 머리부위에서만
-나타납니다.]=]
-L["Config_WeightEditor_ShowPvP"] = "PvP 전용 능력 보기"
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowPvP_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowPvP_Desc_Import"] = ""--]] 
-L["Config_WeightEditor_ShowRole"] = "직업별 능력들 표시"
-L["Config_WeightEditor_ShowRole_Desc"] = "가중치 편집기 안에 있는 직업별 능력들을 표시합니다."
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowRolesOnlyForOwnSpec"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowRolesOnlyForOwnSpec_Desc"] = ""--]] 
-L["Config_WeightEditor_ShowZone"] = "특정 지역 능력"
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowZone_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_WeightEditor_ShowZone_Desc_Proc"] = ""--]] 
-L["Config_WeightEditor_Title"] = "가중치 편집기"
---[[Translation missing --]]
---[[ L["CreatePopup_Desc"] = ""--]] 
-L["CreatePopup_Error_CreatedNewScale"] = "만들어진 새로운 값 \"%s\""
---[[Translation missing --]]
---[[ L["CreatePopup_Error_UnknownError"] = ""--]] 
-L["CreatePopup_Title"] = "값 만들기"
-L["DefaultScaleName_Default"] = "기본적"
-L["DefaultScaleName_Defensive"] = "방어적"
-L["DefaultScaleName_Offensive"] = "공격적"
---[[Translation missing --]]
---[[ L["DeletePopup_DeletedDefaultScale"] = ""--]] 
-L["DeletePopup_DeletedScale"] = "\"%s\"  값이 삭제 되었습니다."
---[[Translation missing --]]
---[[ L["DeletePopup_Desc"] = ""--]] 
-L["DeletePopup_Title"] = "값 삭제하기 "
---[[Translation missing --]]
---[[ L["DeletePopup_Warning"] = ""--]] 
---[[Translation missing --]]
---[[ L["ExportPopup_Desc"] = ""--]] 
-L["ExportPopup_Title"] = "값 내보내기"
-L["ImportPopup_CreatedNewScale"] = "\"%s\" 새로운 값이 입력되었습니다. "
---[[Translation missing --]]
---[[ L["ImportPopup_Desc"] = ""--]] 
-L["ImportPopup_Error_MalformedString"] = "에러: 형식에 맞지 않아 불러올 수 없습니다!"
---[[Translation missing --]]
---[[ L["ImportPopup_Error_OldStringVersion"] = ""--]] 
-L["ImportPopup_Title"] = "값 불러오기 "
-L["ImportPopup_UpdatedScale"] = "\"%s\" 현재 값이 갱신 되었습니다."
-L["ItemToolTip_AzeriteLevel"] = "아제라이트 레벨: %1$d / %2$d "
-L["PowersScoreString"] = [=[현재 점수: %1$d/%2$d
-최고 점수: %3$d
-아제라이트 레벨: %4$d/%5$d]=]
-L["PowersTitles_Class"] = "직업 능력들"
-L["PowersTitles_Defensive"] = "방어적 능력들"
-L["PowersTitles_Profession"] = "전문기술 능력들"
-L["PowersTitles_PvP"] = "PvP 능력들"
---[[Translation missing --]]
---[[ L["PowersTitles_Role"] = ""--]] 
-L["PowersTitles_Zone"] = "레이드와 지역 능력들 "
---[[Translation missing --]]
---[[ L["RenamePopup_Desc"] = ""--]] 
-L["RenamePopup_RenamedScale"] = "\"%1$s\" 에서 \"%2$s\" 으로 값 이름이 변경되었습니다."
-L["RenamePopup_Title"] = "값 이름바꾸기 "
-L["ScaleName_Unknown"] = "알수없음 "
-L["ScaleName_Unnamed"] = "이름없음"
-L["ScalesList_CreateImportText"] = "새로만들기 / 불러오기"
-L["ScalesList_CustomGroupName"] = "사용자값들"
-L["ScalesList_DefaultGroupName"] = "기본값들 "
-L["ScaleWeightEditor_Title"] = "%s 가중치 편집기 "
-L["Slash_Command"] = "/아제라이트 "
-L["Slash_Error_Unkown"] = "에러: 무언가 잘못되었습니다! "
---[[Translation missing --]]
---[[ L["Slash_RemindConfig"] = ""--]] 
-L["WeightEditor_CreateNewText"] = "새로 만들기  "
-L["WeightEditor_CurrentScale"] = "현재 값: %s "
-L["WeightEditor_DeleteText"] = "삭제 "
-L["WeightEditor_EnableScaleText"] = "이 값을 사용 "
-L["WeightEditor_ExportText"] = "내보내기"
-L["WeightEditor_ImportText"] = "불러오기 "
-L["WeightEditor_RenameText"] = "이름 바꾸기 "
-L["WeightEditor_TooltipText"] = "툴팁에 표시하기 "
-L["WeightEditor_VersionText"] = "버전 %s "
-
-
-elseif LOCALE == "zhCN" then -- plok245 (38), riggzh (36)
+if LOCALE == "zhCN" then -- plok245 (43), riggzh (34)
 L["Config_Importing_ImportingCanUpdate"] = "导入可以更新现有配置"
 L["Config_Importing_ImportingCanUpdate_Desc"] = "当导入配置名称相同并且职业专精一致时，将更新现有配置，而不是建立新配置。"
 L["Config_Importing_ImportingCanUpdate_Desc_Clarification"] = "可以有多个同名配置，只要它们用于不同的专精或职业。"
@@ -552,6 +122,9 @@ L["Config_Scales_Desc"] = "以下设置仅影响默认配置。所有自定义�
 L["Config_Scales_OwnClassDefaultsOnly"] = "只显示自己职业的默认配置"
 L["Config_Scales_OwnClassDefaultsOnly_Desc"] = "只显示你自己职业的默认配置，而不是显示所有的默认配置。"
 L["Config_Scales_Title"] = "配置列表"
+L["Config_Score_AddItemLevelToScore"] = "将物品等级添加到所有分数中"
+L["Config_Score_AddItemLevelToScore_Desc"] = "将艾泽里特护甲的物品等级添加到当前分数，当前可选最高分数，最大分数的计算中。"
+L["Config_Score_Title"] = "分数"
 L["Config_SettingsSavedPerChar"] = [=[这里的所有设置都是每个角色分开保存。
 自定义配置则为所有角色共享。]=]
 L["Config_WeightEditor_Desc"] = [=[以下设置只适用于显示在配置权重编辑器的特质。
@@ -570,7 +143,7 @@ L["Config_WeightEditor_ShowRolesOnlyForOwnSpec"] = "只显示自己专精职责�
 L["Config_WeightEditor_ShowRolesOnlyForOwnSpec_Desc"] = "在配置权重编辑器中显示通用与当前专精相关的角色专有特质。启用此设置的话，例如治疗专有特质将会在DPS与坦克上隐藏等。"
 L["Config_WeightEditor_ShowZone"] = "显示区域专有特质"
 L["Config_WeightEditor_ShowZone_Desc"] = "在配置权重编辑器中显示区域专有特质。这些特质只会出现在与特质相关的特定区域中获得的装备上。"
-L["Config_WeightEditor_ShowZone_Desc_Proc"] = [=[普通特质可以在任何地方生效，但团本特质只能在相应的团本内生效（例如：奥迪尔特质只能在奥迪尔内生效）
+L["Config_WeightEditor_ShowZone_Desc_Proc"] = [=[普通特质可以在任何地方生效，但团本特质的部分效果只能在相应的团本内生效（例如：奥迪尔特质的[重组矩阵]效果只能在奥迪尔内生效）
 团本特质将在配置权重编辑器的名称旁标有星号（*）]=]
 L["Config_WeightEditor_Title"] = "配置权重编辑器"
 L["CreatePopup_Desc"] = "创建新配置。请从下拉列表中选择职业和天赋，然后输入新配置的名称并点击%1$s"
@@ -598,8 +171,8 @@ L["ImportPopup_Error_OldStringVersion"] = "错误：\"导入字符串\" -版本�
 L["ImportPopup_Title"] = "导入配置"
 L["ImportPopup_UpdatedScale"] = "更新现有的配置 \"%s\""
 L["ItemToolTip_AzeriteLevel"] = "艾泽里特等级: %1$d / %2$d"
-L["PowersScoreString"] = [=[当前分数: %1$d/%2$d
-最大分数: %3$d
+L["PowersScoreString"] = [=[当前分数: %1$s/%2$s
+最大分数: %3$s
 艾泽里特等级: %4$d/%5$d]=]
 L["PowersTitles_Class"] = "职业特质"
 L["PowersTitles_Defensive"] = "防御性特质"
@@ -620,7 +193,7 @@ L["ScaleWeightEditor_Title"] = "%s 配置权重编辑器"
 L["Slash_Command"] = "/azerite"
 L["Slash_Error_Unkown"] = "错误：出现一些错误！"
 L["Slash_RemindConfig"] = "到 ESC -> 界面 -> 插件 -> %s 来设置"
-L["WeightEditor_CreateNewText"] = "创建"
+L["WeightEditor_CreateNewText"] = "新建"
 L["WeightEditor_CurrentScale"] = "当前配置：%s"
 L["WeightEditor_DeleteText"] = "删除"
 L["WeightEditor_EnableScaleText"] = "启用配置"
@@ -631,88 +204,90 @@ L["WeightEditor_TooltipText"] = "在鼠标提示中显示"
 L["WeightEditor_VersionText"] = "版本 %s"
 
 
-elseif LOCALE == "zhTW" then -- BNSSNB (73), Sinusquell (1)
-L["Config_Importing_ImportingCanUpdate"] = "導入可以更新現有比例"
-L["Config_Importing_ImportingCanUpdate_Desc"] = "當導入具有相同名稱，職業和專精的比例作為預先存在的比例時，現有比例將使用新權值更新，而不是建立新比例。"
-L["Config_Importing_ImportingCanUpdate_Desc_Clarification"] = "可以有多個具有相同名稱的比例，只要它們用於不同的專精或職業。"
-L["Config_Importing_Title"] = "導入中"
-L["Config_Scales_Desc"] = "以下設置僅影響清單的預設比例。所有自訂比例將在每個職業列出。"
-L["Config_Scales_OwnClassDefaultsOnly"] = "只列出自己職業的預設比例"
-L["Config_Scales_OwnClassDefaultsOnly_Desc"] = "只列出你自己職業的預設比例，而非列出所有。"
-L["Config_Scales_Title"] = "比例清單"
+elseif LOCALE == "zhTW" then -- BNSSNB (76), Sinusquell (1)
+L["Config_Importing_ImportingCanUpdate"] = "導入可以更新現有比重"
+L["Config_Importing_ImportingCanUpdate_Desc"] = "當導入具有相同名稱，職業和專精的比重作為預先存在的比重時，現有比重將使用新權值更新，而不是建立新比重。"
+L["Config_Importing_ImportingCanUpdate_Desc_Clarification"] = "可以有多個具有相同名稱的比重，只要它們用於不同的專精或職業。"
+L["Config_Importing_Title"] = "導入"
+L["Config_Scales_Desc"] = "以下設置僅影響清單的預設比重。所有自訂比重將在每個職業列出。"
+L["Config_Scales_OwnClassDefaultsOnly"] = "只列出自己職業的預設比重"
+L["Config_Scales_OwnClassDefaultsOnly_Desc"] = "只列出你自己職業的預設比重，而非列出所有。"
+L["Config_Scales_Title"] = "比重清單"
+L["Config_Score_AddItemLevelToScore"] = "添加物品等級到所有分數"
+L["Config_Score_AddItemLevelToScore_Desc"] = "添加艾澤萊護甲的物品等級到所有當前分數，當前潛力與最高分數計算。"
+L["Config_Score_Title"] = "分數"
 L["Config_SettingsSavedPerChar"] = [=[這裡所有設置都是每個角色分開儲存。
-自訂比例則為所有角色共享。]=]
-L["Config_WeightEditor_Desc"] = [=[以下設置只適用於顯示在比例權值編輯器的特質。
-即使你停用了它們，如果它們在啟用比例中設置了權值，所有的艾澤萊特質仍會計算分數。]=]
+自訂比重則為所有角色共享。]=]
+L["Config_WeightEditor_Desc"] = [=[以下設置只適用於顯示在比重權值編輯器的特質。
+即使你停用了它們，如果它們在啟用比重中設置了權值，所有的艾澤萊特質仍會計算分數。]=]
 L["Config_WeightEditor_ShowDefensive"] = "顯示防禦性特質"
-L["Config_WeightEditor_ShowDefensive_Desc"] = "在比例權值編輯器中顯示通用與職業特定的防禦性特質。"
+L["Config_WeightEditor_ShowDefensive_Desc"] = "在比重權值編輯器中顯示通用與職業特定的防禦性特質。"
 L["Config_WeightEditor_ShowProfession"] = "顯示專業技能專有特質"
-L["Config_WeightEditor_ShowProfession_Desc"] = "在比例權值編輯器中顯示專業技能專有特質。這些特質只會出現在專業技能製作物品中。目前只有出現在工程學頭部裝備。"
+L["Config_WeightEditor_ShowProfession_Desc"] = "在比重權值編輯器中顯示專業技能專有特質。這些特質只會出現在專業技能製作物品中。目前只有出現在工程學頭部裝備。"
 L["Config_WeightEditor_ShowPvP"] = "顯示PvP專有特質"
-L["Config_WeightEditor_ShowPvP_Desc"] = "在比例權值編輯器中顯示PvP專有特質。你只會看到自己的陣營特質，但對它們做的變動會反映到雙方陣營。"
+L["Config_WeightEditor_ShowPvP_Desc"] = "在比重權值編輯器中顯示PvP專有特質。你只會看到自己的陣營特質，但對它們做的變動會反映到雙方陣營。"
 L["Config_WeightEditor_ShowPvP_Desc_Import"] = [=[當導出生成的字串時，只包含你自己陣營的PvP特質，但它們可以與對立的陣營pvp-powerID互換。
 當從一個陣營導入具有pvp特質的字串時，特質會將其權值鏡像導入到雙方陣營。]=]
 L["Config_WeightEditor_ShowRole"] = "顯示角色類型專有特質"
-L["Config_WeightEditor_ShowRole_Desc"] = "在比例權值編輯器中顯示角色類型專有特質。"
+L["Config_WeightEditor_ShowRole_Desc"] = "在比重權值編輯器中顯示角色類型專有特質。"
 L["Config_WeightEditor_ShowRolesOnlyForOwnSpec"] = "只顯示我自己專精職責的角色類型專有特質"
-L["Config_WeightEditor_ShowRolesOnlyForOwnSpec_Desc"] = "在比例權值編輯器中顯示共通與當前專精相關的角色類型專有特質。啟用此設置的話像是治療專有專精將會在傷害與坦克上隱藏等等。"
+L["Config_WeightEditor_ShowRolesOnlyForOwnSpec_Desc"] = "在比重權值編輯器中顯示共通與當前專精相關的角色類型專有特質。啟用此設置的話像是治療專有專精將會在傷害與坦克上隱藏等等。"
 L["Config_WeightEditor_ShowZone"] = "顯示區域專有特質"
-L["Config_WeightEditor_ShowZone_Desc"] = "在比例權值編輯器中顯示區域專有特質。這些特質只會出現在與特質相關特定區域中獲得的物品上。"
+L["Config_WeightEditor_ShowZone_Desc"] = "在比重權值編輯器中顯示區域專有特質。這些特質只會出現在與特質相關特定區域中獲得的物品上。"
 L["Config_WeightEditor_ShowZone_Desc_Proc"] = [=[正常區域專有特質可以在任何地方啟動/觸發，但團隊特質只會在與它們相關的團隊副本中進行(例如：奧杜爾特質只會在奧杜爾團隊副本中觸發)。
-團隊特質在比例權值編輯器中的名稱旁標有星號(*)。]=]
-L["Config_WeightEditor_Title"] = "比例權值編輯器"
-L["CreatePopup_Desc"] = "建立新的比例。從下拉選單選擇職業與專精並輸入新比例的名稱然後按下 %1$s"
-L["CreatePopup_Error_CreatedNewScale"] = "已建立新比例 \"%s\""
-L["CreatePopup_Error_UnknownError"] = "錯誤：建立新比例“％s”出了點問題！"
-L["CreatePopup_Title"] = "建立比例"
+團隊特質在比重權值編輯器中的名稱旁標有星號(*)。]=]
+L["Config_WeightEditor_Title"] = "比重權值編輯器"
+L["CreatePopup_Desc"] = "建立新的比重。從下拉選單選擇職業與專精並輸入新比重的名稱然後按下 %1$s"
+L["CreatePopup_Error_CreatedNewScale"] = "已建立新比重 \"%s\""
+L["CreatePopup_Error_UnknownError"] = "錯誤：建立新比重“％s”出了點問題！"
+L["CreatePopup_Title"] = "建立比重"
 L["DefaultScaleName_Default"] = "預設"
 L["DefaultScaleName_Defensive"] = "防禦性"
-L["DefaultScaleName_Offensive"] = "傷害性"
-L["DeletePopup_DeletedDefaultScale"] = "刪除的比例正在使用中，恢復為您的職業和專精的預設選項！"
-L["DeletePopup_DeletedScale"] = "已刪除比例 \"%s\""
-L["DeletePopup_Desc"] = [=[正刪除比例 %1$s
+L["DefaultScaleName_Offensive"] = "攻擊性"
+L["DeletePopup_DeletedDefaultScale"] = "刪除的比重正在使用中，恢復為您的職業和專精的預設選項！"
+L["DeletePopup_DeletedScale"] = "已刪除比重 \"%s\""
+L["DeletePopup_Desc"] = [=[正刪除比重 %1$s
 按下 %2$s 以確認。
-所有使用此專精比例的角色將恢復為預設比例。]=]
-L["DeletePopup_Title"] = "刪除比例"
+所有使用此專精比重的角色將恢復為預設比重。]=]
+L["DeletePopup_Title"] = "刪除比重"
 L["DeletePopup_Warning"] = "！ 這個動作是永久性的，無法逆轉！"
-L["ExportPopup_Desc"] = [=[正導出比例 %1$s
+L["ExportPopup_Desc"] = [=[正導出比重 %1$s
 按下 %2$sCtrl+C%3$s 來複製字串並且 %4$sCtrl+V%5$s 來貼上到某處]=]
-L["ExportPopup_Title"] = "導出比例"
-L["ImportPopup_CreatedNewScale"] = "導入新的比例 \"%s\""
-L["ImportPopup_Desc"] = [=[正從字串導入比例
+L["ExportPopup_Title"] = "導出比重"
+L["ImportPopup_CreatedNewScale"] = "導入新的比重 \"%s\""
+L["ImportPopup_Desc"] = [=[正從字串導入比重
 按下 %1$sCtrl+V%2$s 來貼上字串到編輯框並按下 %3$s]=]
 L["ImportPopup_Error_MalformedString"] = "錯誤：導入的字串格式錯誤"
 L["ImportPopup_Error_OldStringVersion"] = "錯誤：\"導入字串\" -版本太舊或是導入字串格式錯誤！"
-L["ImportPopup_Title"] = "導入比例"
-L["ImportPopup_UpdatedScale"] = "更新現有的比例 \"%s\""
+L["ImportPopup_Title"] = "導入比重"
+L["ImportPopup_UpdatedScale"] = "更新現有的比重 \"%s\""
 L["ItemToolTip_AzeriteLevel"] = "艾澤萊等級: %1$d / %2$d"
---L["PowersScoreString"] = [=[當前分數: %1$d/%2$d
---最大分數: %3$d
---艾澤萊等級: %4$d/%5$d]=]
-L["PowersScoreString"] = "當前分數: %1$s/%2$s\n最大分數: %3$s\n艾澤萊等級: %4$d/%5$d"
+L["PowersScoreString"] = [=[當前分數: %1$d/%2$d
+最大分數: %3$d
+艾澤萊等級: %4$d/%5$d]=]
 L["PowersTitles_Class"] = "職業特質"
 L["PowersTitles_Defensive"] = "防禦性特質"
 L["PowersTitles_Profession"] = "專業技能特質"
 L["PowersTitles_PvP"] = "PvP特質"
 L["PowersTitles_Role"] = "角色類型特質"
 L["PowersTitles_Zone"] = "團隊與區域特質"
-L["RenamePopup_Desc"] = [=[正重新命名比例 %1$s
+L["RenamePopup_Desc"] = [=[正重新命名比重 %1$s
 在編輯框中輸入新名稱並按下 %2$s]=]
-L["RenamePopup_RenamedScale"] = "已重命名比例 \"%1$s\" 為 \"%2$s\""
-L["RenamePopup_Title"] = "重命名比例"
+L["RenamePopup_RenamedScale"] = "已重命名比重 \"%1$s\" 為 \"%2$s\""
+L["RenamePopup_Title"] = "重命名比重"
 L["ScaleName_Unknown"] = "未知"
 L["ScaleName_Unnamed"] = "未命名"
 L["ScalesList_CreateImportText"] = "建立新的 / 導入"
-L["ScalesList_CustomGroupName"] = "自訂比例"
-L["ScalesList_DefaultGroupName"] = "預設比例"
-L["ScaleWeightEditor_Title"] = "%s 比例權值編輯器"
+L["ScalesList_CustomGroupName"] = "自訂比重"
+L["ScalesList_DefaultGroupName"] = "預設比重"
+L["ScaleWeightEditor_Title"] = "%s 比重權值編輯器"
 L["Slash_Command"] = "/azerite"
 L["Slash_Error_Unkown"] = "錯誤：出了些問題了！"
 L["Slash_RemindConfig"] = "到ESC -> 介面 -> 插件 -> %s來設置"
 L["WeightEditor_CreateNewText"] = "建立新的"
-L["WeightEditor_CurrentScale"] = "當前比例: %s"
+L["WeightEditor_CurrentScale"] = "當前比重: %s"
 L["WeightEditor_DeleteText"] = "刪除"
-L["WeightEditor_EnableScaleText"] = "使用此比例"
+L["WeightEditor_EnableScaleText"] = "使用此比重"
 L["WeightEditor_ExportText"] = "導出"
 L["WeightEditor_ImportText"] = "導入"
 L["WeightEditor_RenameText"] = "重命名"

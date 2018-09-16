@@ -1712,7 +1712,7 @@ local sourceData = {
 			},
 		}, -- [12]
 	},
-	["defensiveData"] = {
+	["defensive"] = {
 		{
 			{
 				["spellID"] = 280023,

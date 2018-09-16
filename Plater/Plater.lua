@@ -478,6 +478,7 @@ local default_config = {
 		patch_version = 0,
 		
 		health_cutoff = true,
+		health_cutoff_extra_glow = false,
 		
 		update_throttle = 0.15000000,
 		culling_distance = 100,
@@ -491,6 +492,9 @@ local default_config = {
 		
 		height_animation = false,
 		height_animation_speed = 15,
+		
+		healthbar_framelevel = 0,
+		castbar_framelevel = 0,
 		
 		aura_enabled = true,
 		aura_show_tooltip = false,
@@ -536,7 +540,7 @@ local default_config = {
 		
 		debuff_show_cc = true, --extra frame show cc
 		debuff_show_cc_border = {.3, .2, .2, 1},
-		extra_icon_show_purge = true, --extra frame show purge
+		extra_icon_show_purge = false, --extra frame show purge
 		extra_icon_show_purge_border = {0, .925, 1, 1},
 		
 		extra_icon_auras = {},
@@ -564,7 +568,13 @@ local default_config = {
 			debuff_ban_percharacter = {},
 			options = {},
 			track_method = 0x1,
-			buff_banned = {[61574] = true, [61573] = true}, --banner of alliance and horde on training dummies
+			buff_banned = { 
+				--banner of alliance and horde on training dummies
+				[61574] = true, 
+				[61573] = true,
+				--challenger's might on mythic+
+				[206150] = true, 
+			},
 			debuff_banned = {},
 			buff_tracked = {},
 			debuff_tracked = {},
@@ -1377,7 +1387,7 @@ local default_config = {
 		
 		indicator_extra_raidmark = true,
 		indicator_raidmark_scale = 1,
-		indicator_raidmark_anchor = {side = 2, x = 0, y = 0},
+		indicator_raidmark_anchor = {side = 2, x = -1, y = 4},
 		
 		target_indicator = "Silver",
 		
@@ -1652,9 +1662,17 @@ function Plater.GetHealthCutoffValue()
 			--is playing as a Arms warrior?
 			local specID = GetSpecializationInfo (spec)
 			if (specID and specID ~= 0) then
-				if (specID == 71 or specID == 72) then --arms
+				if (specID == 71 or specID == 72) then --arms or fury
 					CONST_USE_HEALTHCUTOFF = true
 					CONST_HEALTHCUTOFF_AT = 0.20
+					
+					if (specID == 71) then --arms
+						local _, _, _, using_Massacre = GetTalentInfo (3, 1, 1)
+						if (using_Massacre) then
+							--if using massacre, execute can be used at 35% health in Arms spec
+							CONST_HEALTHCUTOFF_AT = 0.35
+						end
+					end
 				end
 			end
 			
@@ -4340,7 +4358,8 @@ end
 function Plater.AddExtraIcon (self, spellName, texture, count, debuffType, duration, expirationTime, caster, canStealOrPurge, nameplateShowPersonal, spellId)
 	local _, casterClass = UnitClass (caster or "")
 	local casterName
-	if (casterClass) then
+	if (casterClass and UnitPlayerControlled (caster)) then
+		--adding only the name for players in case the player used a stun
 		casterName = UnitName (caster)
 	end
 	
@@ -4699,10 +4718,17 @@ local EventTickFunction = function (tickFrame, deltaTime)
 					healthBar.executeRange:SetVertexColor (.3, .3, .3)
 					healthBar.executeRange:SetHeight (healthBar:GetHeight())
 					healthBar.executeRange:SetPoint ("right", healthBar.healthCutOff, "left")
+					
+					if (Plater.db.profile.health_cutoff_extra_glow) then
+						healthBar.ExecuteGlowUp.ShowAnimation:Play()
+						healthBar.ExecuteGlowDown.ShowAnimation:Play()
+					end
 				end
 			else
 				healthBar.healthCutOff:Hide()
 				healthBar.executeRange:Hide()
+				healthBar.ExecuteGlowUp:Hide()
+				healthBar.ExecuteGlowDown:Hide()
 			end
 		end
 		
@@ -6773,6 +6799,13 @@ function Plater.UpdatePlateFrame (plateFrame, actorType, forceUpdate, justAdded)
 	local castFrame = unitFrame.castBar
 	local buffFrame = unitFrame.BuffFrame
 	local nameFrame = unitFrame.healthBar.actorName
+
+	if (Plater.db.profile.healthbar_framelevel ~= 0) then
+		healthFrame:SetFrameLevel (healthFrame.DefaultFrameLevel + Plater.db.profile.healthbar_framelevel)
+	end
+	if (Plater.db.profile.castbar_framelevel ~= 0) then
+		castFrame:SetFrameLevel (castFrame.DefaultFrameLevel + Plater.db.profile.castbar_framelevel)
+	end
 	
 	--unitFrame.HighlightFrame.HighlightTexture:SetColorTexture (1, 1, 1, Plater.db.profile.hover_highlight_alpha)
 	unitFrame.HighlightFrame.HighlightTexture:SetTexture (DB_TEXTURE_HEALTHBAR)
@@ -7524,6 +7557,9 @@ Plater ["NAME_PLATE_CREATED"] = function (self, event, plateFrame) -- ~created ~
 	
 	Plater.CreateScaleAnimation (plateFrame)
 	
+	plateFrame.UnitFrame.healthBar.DefaultFrameLevel = plateFrame.UnitFrame.healthBar:GetFrameLevel()
+	plateFrame.UnitFrame.castBar.DefaultFrameLevel = plateFrame.UnitFrame.castBar:GetFrameLevel()
+	
 	--target indicators stored inside the UnitFrame but their parent is the healthBar
 	plateFrame.UnitFrame.TargetTextures2Sides = {}
 	plateFrame.UnitFrame.TargetTextures4Sides = {}
@@ -7595,6 +7631,40 @@ Plater ["NAME_PLATE_CREATED"] = function (self, event, plateFrame) -- ~created ~
 	DF:CreateAnimation (healthCutOffShowAnimation, "Alpha", 1, .2, .2, 1)
 	DF:CreateAnimation (healthCutOffShowAnimation, "Alpha", 2, .2, 1, .5)
 	healthCutOff.ShowAnimation = healthCutOffShowAnimation
+	
+	local executeGlowUp = healthBar:CreateTexture (nil, "overlay")
+	local executeGlowDown = healthBar:CreateTexture (nil, "overlay")
+	executeGlowUp:SetTexture ([[Interface\AddOns\Plater\images\blue_neon]])
+	executeGlowUp:SetTexCoord (0, 1, 0, 0.5)
+	executeGlowUp:SetHeight (32)
+	executeGlowUp:SetPoint ("bottom", healthBar, "top")
+	executeGlowUp:SetBlendMode ("ADD")
+	executeGlowDown:SetTexture ([[Interface\AddOns\Plater\images\blue_neon]])
+	executeGlowDown:SetTexCoord (0, 1, 0.5, 1)
+	executeGlowDown:SetHeight (30)
+	executeGlowDown:SetPoint ("top", healthBar, "bottom")
+	executeGlowDown:SetBlendMode ("ADD")
+	
+	local executeGlowAnimationOnPlay = function (self)
+		self:GetParent():Show()
+	end
+	local executeGlowAnimationOnStop = function()
+		
+	end
+	
+	executeGlowUp.ShowAnimation = DF:CreateAnimationHub (executeGlowUp, executeGlowAnimationOnPlay, executeGlowAnimationOnStop)
+	DF:CreateAnimation (executeGlowUp.ShowAnimation, "Scale", 1, .2, 1, .1, 1, 1.2, "bottom", 0, 0)
+	DF:CreateAnimation (executeGlowUp.ShowAnimation, "Scale", 1, .2, 1, 1, 1, 1)
+	
+	executeGlowDown.ShowAnimation = DF:CreateAnimationHub (executeGlowDown, executeGlowAnimationOnPlay, executeGlowAnimationOnStop)
+	DF:CreateAnimation (executeGlowDown.ShowAnimation, "Scale", 1, .2, 1, .1, 1, 1.2, "top", 0, 0)
+	DF:CreateAnimation (executeGlowDown.ShowAnimation, "Scale", 1, .2, 1, 1.1, 1, 1)
+
+	executeGlowUp:Hide()
+	executeGlowDown:Hide()
+	
+	healthBar.ExecuteGlowUp = executeGlowUp
+	healthBar.ExecuteGlowDown = executeGlowDown
 	
 	--raid target
 	local raidTarget = healthBar:CreateTexture (nil, "overlay")
@@ -7831,6 +7901,8 @@ Plater ["NAME_PLATE_UNIT_ADDED"] = function (self, event, unitBarId) -- ~added ï
 	if (not CONST_USE_HEALTHCUTOFF) then
 		healthBar.healthCutOff:Hide()
 		healthBar.executeRange:Hide()
+		healthBar.ExecuteGlowUp:Hide()
+		healthBar.ExecuteGlowDown:Hide()
 	end
 	
 	local actorType
@@ -10068,7 +10140,6 @@ end)
 		spells_scroll:SetPoint ("topleft", auraLastEventFrame, "topleft", 10, scrollY)
 		
 		spells_scroll:SetScript ("OnShow", function (self)
-		
 			if (self.LastRefresh and self.LastRefresh+0.5 > GetTime()) then
 				return
 			end
@@ -10109,6 +10180,15 @@ end)
 		
 		local open_spell_list_button = DF:CreateButton (auraLastEventFrame, openDetailsSpellList, 160, 20, "Open Full Spell List", -1, nil, nil, nil, nil, nil, DF:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"), DF:GetTemplate ("font", "PLATER_BUTTON"))
 		open_spell_list_button:SetPoint ("bottomright", spells_scroll, "topright", 0, 24)
+
+		--create the clean list button
+			local wipe_spell_list = function()
+				wipe (DB_CAPTURED_SPELLS)
+				spells_scroll:Hide()
+				C_Timer.After (0.016, function() spells_scroll:Show(); spells_scroll:Refresh() end)
+			end
+			local clear_list_button = DF:CreateButton (auraLastEventFrame, wipe_spell_list, 160, 20, "Clear List", -1, nil, nil, nil, nil, nil, DF:GetTemplate ("button", "OPTIONS_BUTTON_TEMPLATE"), DF:GetTemplate ("font", "PLATER_BUTTON"))
+			clear_list_button:SetPoint ("right", open_spell_list_button, "left", -6, 0)
 		
 		--create search box
 			function auraLastEventFrame.OnSearchBoxTextChanged()
@@ -10122,7 +10202,7 @@ end)
 			end
 
 			local aura_search_textentry = DF:CreateTextEntry (auraLastEventFrame, function()end, 160, 20, "AuraSearchTextEntry", _, _, options_dropdown_template)
-			aura_search_textentry:SetPoint ("right", open_spell_list_button, "left", -6, 0)
+			aura_search_textentry:SetPoint ("right", clear_list_button, "left", -6, 0)
 			aura_search_textentry:SetHook ("OnChar",		auraLastEventFrame.OnSearchBoxTextChanged)
 			aura_search_textentry:SetHook ("OnTextChanged", 	auraLastEventFrame.OnSearchBoxTextChanged)
 			aura_search_label = DF:CreateLabel (auraLastEventFrame, "Search:", DF:GetTemplate ("font", "ORANGE_FONT_TEMPLATE"))
@@ -18260,6 +18340,47 @@ end
 			name = "Border Thickness",
 			desc = "How thick the border should be.",
 		},
+		
+		{
+			type = "range",
+			get = function() return Plater.db.profile.healthbar_framelevel end,
+			set = function (self, fixedparam, value) 
+				Plater.db.profile.healthbar_framelevel = value
+				Plater.RefreshDBUpvalues()
+				Plater.UpdateAllPlates()
+			end,
+			min = -5,
+			max = 75,
+			step = 1,
+			name = "HealthBar Frame Level",
+			desc = "Add this to the default frame level of the healthbar",
+		},
+		{
+			type = "range",
+			get = function() return Plater.db.profile.castbar_framelevel end,
+			set = function (self, fixedparam, value) 
+				Plater.db.profile.castbar_framelevel = value
+				Plater.RefreshDBUpvalues()
+				Plater.UpdateAllPlates()
+			end,
+			min = -5,
+			max = 75,
+			step = 1,
+			name = "CastBar Frame Level",
+			desc = "Add this to the default frame level of the castbar",
+		},
+		{
+			type = "toggle",
+			get = function() return Plater.db.profile.health_cutoff_extra_glow end,
+			set = function (self, fixedparam, value) 
+				Plater.db.profile.health_cutoff_extra_glow = value
+				Plater.UpdateAllPlates()
+			end,
+			name = "Add Extra Glow to Execute Range",
+			desc = "Add Extra Glow to Execute Range",
+		},
+		
+		
 		--]=]		
 	}
 	

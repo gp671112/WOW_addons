@@ -1,4 +1,4 @@
-﻿local itemFrame = CreateFrame('Frame', 'EasyScrapItemFrame', EasyScrapMainFrame)
+local itemFrame = CreateFrame('Frame', 'EasyScrapItemFrame', EasyScrapMainFrame)
 itemFrame:SetPoint('TOPLEFT', 12, -50)
 --itemFrame:SetPoint('BOTTOMRIGHT', -32, 42)
 itemFrame:SetSize(273, 172)
@@ -40,10 +40,6 @@ itemFrame.scrollFrame:SetClipsChildren(false)
 itemFrame.scrollFrame:SetScript('OnScrollRangeChanged', ScrollFrame_OnScrollRangeChanged_EasyScrap)
 
 
---itemFrame.scrollFrame.ScrollBar:SetMinMaxValues(0, 0)
---itemFrame.scrollFrame.ScrollBar.SetMinMaxValue = itemFrame.scrollFrame.ScrollBar.SetMinMaxValues
---itemFrame.scrollFrame.ScrollBar.SetMinMaxValues = function () end
---itemFrame.scrollFrame.ScrollBar:SetValue(0)
 itemFrame.scrollFrame.ScrollBar.scrollStep = 25
 
 itemFrame.scrollFrame.ScrollBar.t = itemFrame.scrollFrame.ScrollBar:CreateTexture(nil, 'BACKGROUND')
@@ -168,14 +164,14 @@ ignoreItemFrame:SetScript('OnShow', function(self)
         self.itemButton:SetScript('OnEnter', function(self) GameTooltip:SetOwner(self, "ANCHOR_RIGHT") GameTooltip:SetHyperlink(itemToIgnore.itemLink) GameTooltip:Show() end)
         self.itemButton:SetScript('OnLeave', function(self) GameTooltip_Hide() end)
         
-        if not EasyScrap:itemInIgnoreList(itemToIgnore.itemID, itemToIgnore.itemName) then
+        if not EasyScrap:itemInIgnoreList(self.itemRef) then
             ignoreItemFrame.headerText:SetText('Add item to ignore list?')
             ignoreItemFrame.ignoreItemText:SetText('忽略此物品以防止所有此名稱的物品出現在符合標籤。')
-            ignoreItemFrame.okayButton:SetScript('OnClick', function() EasyScrap:addItemToIgnoreList(itemToIgnore.itemID, itemToIgnore.itemName) EasyScrap:filterScrappableItems() itemFrame:updateContent() end)
+            ignoreItemFrame.okayButton:SetScript('OnClick', function() EasyScrap:addItemToIgnoreList(self.itemRef) EasyScrap:filterScrappableItems() itemFrame:updateContent() end)
         else
             ignoreItemFrame.headerText:SetText('Remove item from ignore list?')
             ignoreItemFrame.ignoreItemText:SetText('這會將物品從忽略清單移除。')
-            ignoreItemFrame.okayButton:SetScript('OnClick', function() EasyScrap:removeItemFromIgnoreList(itemToIgnore.itemID, itemToIgnore.itemName) EasyScrap:filterScrappableItems() itemFrame:updateContent() end)
+            ignoreItemFrame.okayButton:SetScript('OnClick', function() EasyScrap:removeItemFromIgnoreList(self.itemRef) EasyScrap:filterScrappableItems() itemFrame:updateContent() end)
         end
     end
 end)
@@ -207,6 +203,13 @@ itemFrame.contentFrame.tabInfo:SetText("此標籤顯示你當前所有等候要�
 itemFrame.contentFrame.tabInfo:SetPoint('TOPLEFT', 4, -4)
 itemFrame.contentFrame.tabInfo:SetWidth(itemFrame.contentFrame:GetWidth()-16)
 itemFrame.contentFrame.tabInfo:Hide()
+
+itemFrame.contentFrame.noEligibleInfo = itemFrame.contentFrame:CreateFontString()
+itemFrame.contentFrame.noEligibleInfo:SetFontObject("GameFontHighlight")
+itemFrame.contentFrame.noEligibleInfo:SetText("您沒有物品符合當前的過濾 並且/或 可用於銷毀。")
+itemFrame.contentFrame.noEligibleInfo:SetPoint('TOPLEFT', 4, -4)
+itemFrame.contentFrame.noEligibleInfo:SetWidth(itemFrame.contentFrame:GetWidth()-16)
+itemFrame.contentFrame.noEligibleInfo:Hide()
 
 local ignoreHeader = CreateFrame('Frame', nil, itemFrame.contentFrame)
 ignoreHeader:SetSize(itemFrame.contentFrame:GetWidth(), 24)

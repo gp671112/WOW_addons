@@ -51,14 +51,21 @@ L= DBM:GetModLocalization(2194)
 L= DBM:GetModLocalization(2195)
 
 L:SetTimerLocalization({
-	timerCallofCrawgCD		= "下一次克洛格 (%s)",
-	timerCallofHexerCD 		= "下一次血咒師 (%s)",
-	timerCallofCrusherCD		= "下一次粉碎者 (%s)",
+	timerCallofCrawgCD		= "下一次克洛格池 (%s)",
+	timerCallofHexerCD 		= "下一次血咒師池 (%s)",
+	timerCallofCrusherCD		= "下一次粉碎者池 (%s)",
 	timerAddIncoming		= DBM_INCOMING
 })
 
 L:SetOptionLocalization({
-	timerAddIncoming		= "計時條：當小怪可以攻擊時"
+	timerCallofCrawgCD		= "計時條：克洛格池開始生成時",
+	timerCallofHexerCD 		= "計時條：血咒師池開始生成時",
+	timerCallofCrusherCD	= "計時條：粉碎者池開始生成時",
+	timerAddIncoming		= "計時條：當小怪可以攻擊時",
+	TauntBehavior			= "設置換坦嘲諷規則",
+	TwoHardThreeEasy		= "英雄/傳奇模式2層換，其他模式3層換",--Default
+	TwoAlways				= "總是2層換",
+	ThreeAlways				= "總是3層換"
 })
 
 L:SetMiscLocalization({
@@ -71,6 +78,21 @@ L:SetMiscLocalization({
 -- G'huun --
 ------------------
 L= DBM:GetModLocalization(2147)
+
+L:SetWarningLocalization({
+	warnMatrixFail		= "能量矩陣出現了"
+})
+
+L:SetOptionLocalization({
+	warnMatrixFail		= "當能量矩陣出現時顯示警報。"
+})
+
+L:SetMiscLocalization({
+	CurrentMatrix		=	"當前矩陣：",--Mythic
+	NextMatrix			=	"下一次矩陣：",--Mythic
+	CurrentMatrixLong	=	"當前矩陣 (%s):",--Non Mythic
+	NextMatrixLong		=	"下一次矩陣 (%s):"--Non Mythic
+})
 
 -------------
 --  Trash  --

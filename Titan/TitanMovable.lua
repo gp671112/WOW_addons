@@ -79,8 +79,6 @@ local TitanMovableData = {
 		position = TITAN_PANEL_PLACE_TOP, addonAdj = false},
 	MinimapCluster = {frameName = "MinimapCluster", frameArchor = "TOPRIGHT", xArchor = "RIGHT", y = 0, 
 		position = TITAN_PANEL_PLACE_TOP, addonAdj = false},
---	WorldStateAlwaysUpFrame = {frameName = "WorldStateAlwaysUpFrame", frameArchor = "TOP", xArchor = "CENTER", y = -15, 
---		position = TITAN_PANEL_PLACE_TOP, addonAdj = false},
 	MainMenuBar = {frameName = "MainMenuBar", frameArchor = "BOTTOM", xArchor = "CENTER", y = 0, 
 		position = TITAN_PANEL_PLACE_BOTTOM, addonAdj = false},
 	MultiBarRight = {frameName = "MultiBarRight", frameArchor = "BOTTOMRIGHT", xArchor = "RIGHT", y = 98, 
@@ -309,7 +307,7 @@ function TitanMovableFrame_MoveFrames(position)
 				frameArchor = frameData.frameArchor;
 			end
 
-			if (frame and (frame:IsUserPlaced()))
+			if (frame and (frame:IsUserPlaced()) and frameName ~= "MainMenuBar")
 			then
 				-- The user has positioned the frame
 				adj_frame = false
@@ -746,22 +744,20 @@ function TitanMovable_SecureFrames()
 	end
 
 	if not TitanPanelAce:IsHooked(TicketStatusFrame, "Show", Titan_Hook_Adjust_Both) then
-		-- Titan Hooks to Blizzard Frame positioning functions
-		--TitanPanelAce:SecureHook("TicketStatusFrame_OnShow", Titan_Hook_Adjust_Both) -- HelpFrame.xml
-		--TitanPanelAce:SecureHook("TicketStatusFrame_OnHide", Titan_Hook_Adjust_Both) -- HelpFrame.xml
 		TitanPanelAce:SecureHook(TicketStatusFrame, "Show", Titan_Hook_Adjust_Both) -- HelpFrame.xml
 		TitanPanelAce:SecureHook(TicketStatusFrame, "Hide", Titan_Hook_Adjust_Both) -- HelpFrame.xml
 		TitanPanelAce:SecureHook(MainMenuBar, "Show", Titan_Hook_Adjust_Both) -- HelpFrame.xml
 		TitanPanelAce:SecureHook(MainMenuBar, "Hide", Titan_Hook_Adjust_Both) -- HelpFrame.xml
 		TitanPanelAce:SecureHook(OverrideActionBar, "Show", Titan_Hook_Adjust_Both) -- HelpFrame.xml
 		TitanPanelAce:SecureHook(OverrideActionBar, "Hide", Titan_Hook_Adjust_Both) -- HelpFrame.xml
---		TitanPanelAce:SecureHook(OverrideActionBar, "Show", Titan_ManageFramesTest1) -- HelpFrame.xml
---		TitanPanelAce:SecureHook(OverrideActionBar, "Hide", Titan_ManageFramesTest1) -- HelpFrame.xml
 		TitanPanelAce:SecureHook("UpdateContainerFrameAnchors", Titan_ContainerFrames_Relocate) -- ContainerFrame.lua
 		TitanPanelAce:SecureHook(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame.MinimizeButton, "Show", Titan_Hook_Adjust_Both) -- WorldMapFrame.lua
---		TitanPanelAce:SecureHook(WorldMapFrame, "Show", Titan_Hook_Adjust_Both) -- WorldMapFrame.lua
---		TitanPanelAce:SecureHook(WorldMapFrame, "Hide", Titan_Hook_Adjust_Both) -- WorldMapFrame.lua
 		TitanPanelAce:SecureHook("BuffFrame_Update", Titan_Hook_Adjust_Both) -- BuffFrame.lua
+
+		TitanPrint("MainMenuBar:SetUserPlaced", "plain")
+		MainMenuBar:SetMovable(true);
+		MainMenuBar:SetUserPlaced(true);
+		MainMenuBar:SetMovable(false);
 	end
 		
 	if not TitanPanelAce:IsHooked("VideoOptionsFrameOkay_OnClick", Titan_AdjustUIScale) then
@@ -773,6 +769,4 @@ function TitanMovable_SecureFrames()
 		TitanPanelAce:SecureHook("VideoOptionsFrameOkay_OnClick", Titan_AdjustUIScale) -- VideoOptionsFrame.lua
 		TitanPanelAce:SecureHook(VideoOptionsFrame, "Hide", Titan_AdjustUIScale) -- VideoOptionsFrame.xml
 	end
-	
---	TitanPanelAce:SecureHook(OverrideActionBar, "SetPoint", Titan_ManageFramesTest1) -- 
 end

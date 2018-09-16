@@ -1,7 +1,19 @@
-changeset:   117:b7b2056c38ac
-tag:         v8.0.1.117
+changeset:   121:c4b5fa01c552
+tag:         tip
 user:        Tercio
-date:        Sat Sep 01 15:50:10 2018 -0300
-summary:     - Second performance pass, Plater should use less CPU.
+date:        Wed Sep 05 11:25:51 2018 -0300
+summary:     - Dispellable are now default disabled on the buff special.
+
+
+changeset:   120:85fc4d1fbf97
+user:        Tercio
+date:        Tue Sep 04 19:06:30 2018 -0300
+summary:     - Added an option to add extra glow to execute range.
+
+
+changeset:   119:5b5c83a1d7c0
+user:        Tercio
+date:        Tue Sep 04 11:53:39 2018 -0300
+summary:     - Added frame level offsets for castbar and health bar.
 
 

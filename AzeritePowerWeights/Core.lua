@@ -25,6 +25,7 @@ local dbDefaults = {
 }
 local charDefaults = {
 	debug = false,
+	addILvlToScore = false,
 	onlyOwnClassDefaults = true,
 	importingCanUpdate = true,
 	defensivePowers = true,
@@ -1306,6 +1307,13 @@ function f:UpdateValues() -- Update scores
 		end
 	end
 
+	local effectiveILvl = _G.AzeriteEmpoweredItemUI.azeriteItemDataSource:GetItem():GetCurrentItemLevel()
+	if cfg.addILvlToScore and effectiveILvl then
+		currentScore = currentScore + effectiveILvl
+		currentPotential = currentPotential + effectiveILvl
+		maxScore = maxScore + effectiveILvl
+	end
+
 	-- Integer or Float?
 	local cS, cP, mS
 	if _isInteger(currentScore) and _isInteger(currentPotential) and _isInteger(maxScore) then
@@ -1326,6 +1334,12 @@ end
 
 -- Item Tooltip & Hook - Hacked together and probably could be done better
 local azeriteEmpoweredItemLocation = ItemLocation:CreateEmpty()
+local itemEquipLocToSlot = {
+	["INVTYPE_HEAD"] = 1,
+	["INVTYPE_SHOULDER"] = 3,
+	["INVTYPE_CHEST"] = 5,
+	["INVTYPE_ROBE"] = 5
+}
 
 local function _updateTooltip(tooltip, itemLink)
 	local currentLevel, maxLevel = 0, 0
@@ -1403,8 +1417,15 @@ local function _updateTooltip(tooltip, itemLink)
 
 	tooltip:AddLine(" \n"..ADDON_NAME)
 
+	local effectiveILvl = GetDetailedItemLevelInfo(itemLink)
 	for i = 1, #maxScore do
 		if scaleInfo[i].class then
+			if cfg.addILvlToScore and effectiveILvl then
+				currentScore[i] = currentScore[i] + effectiveILvl
+				currentPotential[i] = currentPotential[i] + effectiveILvl
+				maxScore[i] = maxScore[i] + effectiveILvl
+			end
+
 			local _, classTag = GetClassInfo(scaleInfo[i].class)
 			local c = _G.RAID_CLASS_COLORS[classTag]
 
@@ -1441,7 +1462,7 @@ hooksecurefunc(GameTooltip, "SetBagItem", function(self, ...) -- This can be cal
 	if C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItemByID(itemLink) then
 		azeriteEmpoweredItemLocation = ItemLocation:CreateFromBagAndSlot(bag, slot)
 
-		_updateTooltip(_G.GameTooltip, itemLink)
+		_updateTooltip(self, itemLink)
 	end
 end)
 
@@ -1457,7 +1478,7 @@ hooksecurefunc(GameTooltip, "SetInventoryItem", function(self, ...) -- This can 
 	if C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItemByID(itemLink) then
 		azeriteEmpoweredItemLocation = ItemLocation:CreateFromEquipmentSlot(equipLoc)
 
-		_updateTooltip(_G.GameTooltip, itemLink)
+		_updateTooltip(self, itemLink)
 	end
 end)
 
@@ -1470,9 +1491,54 @@ hooksecurefunc(GameTooltip, "SetHyperlink", function(self, ...)
 	if not itemName then return end
 
 	if C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItemByID(itemLink) then
+		_updateTooltip(self, itemLink)
+	end
+end)
+
+-- Vendor item (https://wow.gamepedia.com/Widget_API)
+hooksecurefunc(GameTooltip, "SetMerchantItem", function(self, ...) -- ... = merchantSlot
+	if #cfg.tooltipScales == 0 then return end -- Not tracking any scales for tooltip
+	--if azeriteEmpoweredItemLocation:HasAnyLocation() then return end
+
+	local itemName, itemLink = self:GetItem()
+	if not itemName then return end
+
+	if C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItemByID(itemLink) then
 		azeriteEmpoweredItemLocation = ItemLocation:CreateFromBagAndSlot(bag, slot)
 
-		_updateTooltip(_G.GameTooltip, itemLink)
+		_updateTooltip(self, itemLink)
+	end
+end)
+
+-- Comparison tooltip for Vendor items (https://www.townlong-yak.com/framexml/27602/GameTooltip.lua#490)
+hooksecurefunc(GameTooltip.shoppingTooltips[1], "SetCompareItem", function(self, ...) -- ... = ShoppingTooltip2, GameTooltip
+	if #cfg.tooltipScales == 0 then return end -- Not tracking any scales for tooltip
+	--if azeriteEmpoweredItemLocation:HasAnyLocation() then return end
+
+	local itemName, itemLink = self:GetItem()
+	if not itemName then return end
+
+	if C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItemByID(itemLink) then
+		local _, _, _, _, _, _, _, _, itemEquipLoc = GetItemInfo(itemLink)
+		azeriteEmpoweredItemLocation = ItemLocation:CreateFromEquipmentSlot(itemEquipLocToSlot[itemEquipLoc])
+
+		_updateTooltip(self, itemLink)
+	end
+end)
+
+-- Comparison tooltip for WQ items (https://github.com/phanx-wow/PhanxBorder/blob/master/Blizzard.lua#L205)
+hooksecurefunc(WorldMapCompareTooltip1, "SetCompareItem", function(self, ...) -- ... = WorldMapCompareTooltip2, WorldMapTooltipTooltip
+	if #cfg.tooltipScales == 0 then return end -- Not tracking any scales for tooltip
+	--if azeriteEmpoweredItemLocation:HasAnyLocation() then return end
+
+	local itemName, itemLink = self:GetItem()
+	if not itemName then return end
+
+	if C_AzeriteEmpoweredItem.IsAzeriteEmpoweredItemByID(itemLink) then
+		local _, _, _, _, _, _, _, _, itemEquipLoc = GetItemInfo(itemLink)
+		azeriteEmpoweredItemLocation = ItemLocation:CreateFromEquipmentSlot(itemEquipLocToSlot[itemEquipLoc])
+
+		_updateTooltip(self, itemLink)
 	end
 end)
 
@@ -1481,7 +1547,8 @@ hooksecurefunc("EmbeddedItemTooltip_SetItemByQuestReward", function(self, questL
 	if #cfg.tooltipScales == 0 then return end -- Not tracking any scales for tooltip
 	--if azeriteEmpoweredItemLocation:HasAnyLocation() then return end
 
-	local itemName, itemTexture, quantity, quality, isUsable, itemID = GetQuestLogRewardInfo(questLogIndex, questID)
+	local iName, itemTexture, quantity, quality, isUsable, itemID = GetQuestLogRewardInfo(questLogIndex, questID)
+	if not itemID or type(itemID) ~= "number" then return end
 	local itemName, itemLink = GetItemInfo(itemID)
 	if not itemName then return end
 
@@ -1769,6 +1836,28 @@ function f:CreateOptions()
 						image = "Interface\\DialogFrame\\UI-Dialog-Icon-AlertOther",
 						width = "full",
 						order = 8,
+					},
+				},
+			},
+			spacer4 = {
+				type = "description",
+				name = " ",
+				width = "full",
+				order = 8,
+			},
+			gScore = {
+				type = "group",
+				name = L.Config_Score_Title,
+				inline = true,
+				order = 9,
+				args = {
+					addILvlToScore = {
+						type = "toggle",
+						name = NORMAL_FONT_COLOR_CODE .. L.Config_Score_AddItemLevelToScore .. FONT_COLOR_CODE_CLOSE,
+						desc = L.Config_Score_AddItemLevelToScore_Desc,
+						descStyle = "inline",
+						width = "full",
+						order = 0,
 					},
 				},
 			},

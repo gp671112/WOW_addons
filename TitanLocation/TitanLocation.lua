@@ -186,7 +186,7 @@ end
 -- **************************************************************************
 function TitanPanelLocationButton_OnEvent(self, event, ...)
 	if event == "PLAYER_ENTERING_WORLD" then
-		if TitanGetVar(TITAN_LOCATION_ID, "ShowLocOnMiniMap") and MinimapBorderTop and MinimapBorderTop:IsShown() then
+		if not TitanGetVar(TITAN_LOCATION_ID, "ShowLocOnMiniMap") and MinimapBorderTop and MinimapBorderTop:IsShown() then
 			TitanPanelLocationButton_LocOnMiniMap()
 		end
 	end
@@ -471,12 +471,17 @@ function TitanMapFrame_OnUpdate(self, elapsed)
 		-- calc cursor position on the map
 		local cursorLocationText, playerLocationText;
 		local x, y = GetCursorPosition();
+		--[[if WorldMapFrame:IsMaximized() then
+			x, y = WorldMapFrame:GetNormalizedCursorPosition();
+		else
+			x, y = WorldMapFrame.ScrollContainer:GetNormalizedCursorPosition();
+		end]]	
 		x = x / WorldMapFrame:GetEffectiveScale();
 		y = y / WorldMapFrame:GetEffectiveScale();
 
-		local centerX, centerY = WorldMapFrame:GetCenter();
-		local width = WorldMapFrame:GetWidth();
-		local height = WorldMapFrame:GetHeight();
+		local centerX, centerY = WorldMapFrame.ScrollContainer:GetCenter();
+		local width = WorldMapFrame.ScrollContainer:GetWidth();
+		local height = WorldMapFrame.ScrollContainer:GetHeight();
 		local cx = ((x - (centerX - (width/2))) / width) -- OFFSET_X 
 		local cy = ((centerY + (height/2) - y ) / height) --  OFFSET_Y
 		-- cut off if the cursor coords are beyond the map, show 0,0
@@ -496,6 +501,7 @@ function TitanMapFrame_OnUpdate(self, elapsed)
 			TitanMapCursorLocation:SetText(format(L["TITAN_LOCATION_MAP_CURSOR_COORDS_TEXT"], 
 				TitanUtils_GetHighlightText(cursorLocationText)));
 		else
+			TitanMapPlayerLocation:SetText("");
 			TitanMapCursorLocation:SetText("");
 		end
 
@@ -510,7 +516,7 @@ function TitanMapFrame_OnUpdate(self, elapsed)
 		TitanMapCursorLocation:SetPoint("TOPRIGHT", WorldMapFrame, "TOPRIGHT", -10, -43)
 	else
 		TitanMapPlayerLocation:SetPoint("TOPRIGHT", WorldMapFrame, "TOPRIGHT", -50, -5)
-		TitanMapCursorLocation:SetPoint("TOPRIGHT", WorldMapFrame, "TOPRIGHT", -200, -5)
+		TitanMapCursorLocation:SetPoint("TOPLEFT", WorldMapFrame, "TOPLEFT", 95, -5)
 	end
 end
 

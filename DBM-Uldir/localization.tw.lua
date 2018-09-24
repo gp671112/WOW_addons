@@ -25,6 +25,14 @@ L= DBM:GetModLocalization(2146)
 ---------------------------
 L= DBM:GetModLocalization(2169)
 
+L:SetTimerLocalization({
+	timerOrbLands	= "球(%s) 落地"
+})
+
+L:SetOptionLocalization({
+	timerOrbLands	 =	"顯示腐蝕之球落地時間的計時器"
+})
+
 L:SetMiscLocalization({ --以下為暫譯
 	CThunDisc 		= 	"檢索圓盤成功。正在讀取克蘇恩數據。",
 	YoggDisc 		= 	"檢索圓盤成功。正在讀取尤格-薩倫數據。",
@@ -37,7 +45,12 @@ L:SetMiscLocalization({ --以下為暫譯
 L= DBM:GetModLocalization(2166)
 
 L:SetOptionLocalization({
-	ShowHighestFirst	 =	"將訊息框架中持續感染的層數從高往低顯示(預設從低到高)"
+	ShowHighestFirst2	 =	"將訊息框架中持續感染的層數從高往低顯示(預設從低到高)"
+	ShowOnlyParty		 =	"只顯示你小隊中的動蕩感染"
+})
+
+L:SetMiscLocalization({
+	BWIconMsg			 =	"DBM已經在團隊中將單位標記交給給有權限的BW使用者以避免圖示衝突，確認他們已啟用標記功能或取消他們的權限以啟用DBM標記"
 })
 
 ---------------

@@ -27,6 +27,7 @@ OILVL_L = GetLocale() == "zhCN" and {
 	-- translated by olzenkhaw & BNS
 	["Set the amount of numbers past the decimal place to show"] = "設置小數點後顯示幾位數字",
 	["Show minimap button"]="顯示小地圖按鈕",
+	["Show overall iLevel at the top of the CharacterFrame"]="在角色視窗頂部顯示整體物品等級",
 	["Vanquisher"]="鎮壓者",
 	["Protector"]="保衛者",
 	["Conqueror"]="征服者",

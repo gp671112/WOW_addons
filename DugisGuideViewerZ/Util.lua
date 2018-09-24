@@ -94,10 +94,14 @@ end
 DGV.tPool = Pool
 
 local function Insert(self, value, pos)
-	local n = self.n
-	if not n and value then 
-		if pos then return tinsert(self, pos, value) 
-		else return tinsert(self, value)  end
+	local n = self.n or 0
+	if (not n or n == 0) and value then 
+        self.n = self.n + 1; 
+		if pos then 
+            return tinsert(self, pos, value) 
+		else  
+            return tinsert(self, value)  
+        end
 	end
 	
 	local newN = (n and n+1) or #self+1
@@ -112,6 +116,7 @@ local function Insert(self, value, pos)
 end
 
 local function InsertList(self, ...)
+    self.n = self.n or 0
 	local inputN = select("#", ...)
 	local exisingN = self.n or #self
 	local newN = inputN + exisingN
@@ -142,7 +147,7 @@ local function IPairsIterator(invariant, control)
 end
 
 local function IPairs(self)
-	if not self.n then return ipairs(self) end
+	if not self.n or self.n == 0 then return ipairs(self) end
 	return IPairsIterator, self, 0
 end
 
@@ -157,8 +162,8 @@ end
 DGV.tIndexOfFirst = IndexOfFirst
 
 local function Remove(self, index)
-	local n = self.n
-	if not n then
+	local n = self.n or 0
+	if n == 0 then
 		return tremove(self, index)
 	end
 	local match = self[index]
@@ -170,6 +175,11 @@ local function Remove(self, index)
 	return match
 end
 
+
+local function Length(self)
+	return self.n
+end
+
 local function RemoveFirst(self, item)
 	local matchIndex = IndexOfFirst(self, item)
 	if matchIndex then
@@ -178,7 +188,11 @@ local function RemoveFirst(self, item)
 end
 DGV.tRemoveFirst = RemoveFirst 
 
+
+	
+
 InitTable = function(t)
+    t.Length = Length
 	t.InsertList = InsertList
 	t.PrependList = PrependList
 	t.SetList = SetList
@@ -226,7 +240,7 @@ DGV.GetTicks = GetTicks
 
 local function TakeNext(invariant)
 	if #invariant==0 then return end
-	return tremove(invariant, 1)
+	return invariant:Remove(1)
 end
 
 local function DisposeAutoroutine(autoroutine)
@@ -259,11 +273,11 @@ local function AutoroutinesOnUpdate()
 				DGV.currentAutoroutine = nil
 				status = coroutine.status(autoroutine.coroutine)
 				if status=="dead" then
-					tremove(autoroutines, i)
+					autoroutines:Remove(i)
 					local onCompletion = autoroutine.onCompletion
 					DisposeAutoroutine(autoroutine)
 					if not result  then
-						if #autoroutines==0 then
+						if autoroutines:Length()==0 then
 							Pool(autoroutines)
 							autoroutines = nil
 						end
@@ -281,9 +295,9 @@ local function AutoroutinesOnUpdate()
 					autoroutine:onInterrupt()
 				end
 				DisposeAutoroutine(autoroutine)
-				tremove(autoroutines, i)
+				autoroutines:Remove(i)
 			end
-			if #autoroutines>0 then
+			if autoroutines:Length()>0 then
 				local now = GetTicks()
                 
                 local timeLimit = THEORETICAL_TIME_LIMIT
@@ -328,9 +342,11 @@ DGV.YieldAutoroutine = YieldAutoroutine
 local function GetRunningAutoroutine(key)
 	if autoroutines then
 		for _,autoroutine in IPairs(autoroutines) do
-			if key==autoroutine.key then
-				return autoroutine
-			end
+            if autoroutine then
+                if key==autoroutine.key then
+                    return autoroutine
+                end
+            end
 		end
 	end
 end
@@ -364,7 +380,7 @@ local function BeginAutoroutine(key, func, ...)
 	local autoroutine
 	if autoroutines then
 		for _,iteratedAutoroutine in IPairs(autoroutines) do
-			if key==iteratedAutoroutine.key and not iteratedAutoroutine.interrupt then
+			if iteratedAutoroutine and key==iteratedAutoroutine.key and not iteratedAutoroutine.interrupt then
 				autoroutine = iteratedAutoroutine
 				break
 			end
@@ -625,13 +641,13 @@ local function ClearReaction(reaction)
 					local groupedReaction = reactionOrGroup[i]
 					if groupedReaction.disposed then
 						Pool(groupedReaction)
-						tremove(reactionOrGroup, i)
+						reactionOrGroup:Remove(i)
 						if groupedReaction==reaction then break end
 					else
 						i = i + 1
 					end
 				end
-				if #reactionOrGroup==0 then
+				if reactionOrGroup:Length()==0 then
 					Pool(reactionOrGroup)
 					reactions[event] = nil
 					TryUnsubscribeEvent(event)
@@ -643,7 +659,7 @@ local function ClearReaction(reaction)
 					TryUnsubscribeEvent(event)
 				end
 			end	
-			if (not next(reactions)) and #reactions==0 then
+			if (not next(reactions)) and reactions:Length()==0 then
 				Pool(reactions)
 				reactions = nil
 			end
@@ -706,11 +722,11 @@ local function ReactionTryInvoke(reaction, ...)
 	end
 	if reaction.disposed then
 		local i=1
-		while i<=#reactions do
+		while i<=reactions:Length() do
 			local noEventReaction = reactions[i]
-			if noEventReaction.disposed then
+			if noEventReaction and noEventReaction.disposed then
 				Pool(noEventReaction)
-				tremove(reactions, i)
+				reactions:Remove(i)
 			else
 				i = i + 1
 			end
@@ -789,17 +805,17 @@ local function TryInvokeReactions(event, ...)
 				local i=1
 				while i<=#reactionOrGroup do
 					local groupedReaction = reactionOrGroup[i]
-					if not groupedReaction.disposed then
+					if groupedReaction and not groupedReaction.disposed then
 						TryInvokeReaction(event, groupedReaction, ...)
 					end
-					if groupedReaction.disposed then
+					if groupedReaction and groupedReaction.disposed then
 						Pool(groupedReaction)
-						tremove(reactionOrGroup, i)
+						reactionOrGroup:Remove(i)
 					else
 						i = i + 1
 					end
 				end
-				if #reactionOrGroup==0 then
+				if reactionOrGroup:Length()==0 then
 					Pool(reactionOrGroup)
 					reactions[event] = nil
 					TryUnsubscribeEvent(event)
@@ -814,7 +830,7 @@ local function TryInvokeReactions(event, ...)
 					TryUnsubscribeEvent(event)
 				end
 			end	
-			if (not next(reactions)) and #reactions==0 then
+			if (not next(reactions)) and reactions:Length()==0 then
 				Pool(reactions)
 				reactions = nil
 			end

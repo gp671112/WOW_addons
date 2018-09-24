@@ -162,7 +162,7 @@ function Taxi:Initialize()
 			return selectedX, selectedY, CoordsToAngle(player_m1, nil, player_x1, player_y1, mData, nil, selectedX, selectedY, m2, nil, x2, y2)
 		end
 		local data = GetCreateTable(strsplit("|", pointData))
-		for i=1,#(data) do
+		for i=1,data:Length() do
 			local firstCoords = strmatch(data[i], "([^%-]*)%-?")
 			local selectedX,selectedY = DGV:UnpackXY(firstCoords)
             local dist = DGV:ComputeDistance(player_m1, _, player_x1, player_y1, m2, _, selectedX, selectedY)
@@ -182,6 +182,16 @@ function Taxi:Initialize()
 			local reqType, req = select(i, ...)
 			if reqType=="lvl" then
 				pass = pass and UnitLevel("player")>=tonumber(req)
+			elseif reqType=="notlvl" then
+				local faction
+				for i=requirementsStart,select("#", ...),2 do
+					local arg1, arg2 = select(i, ...)
+					if arg1=="fac" then 
+						faction = arg2
+						break
+					end
+				end
+				pass = UnitLevel("player")<tonumber(req) and UnitFactionGroup("player")==faction					
 			elseif reqType=="passlvl" then
 				local faction
 				for i=requirementsStart,select("#", ...),2 do
@@ -285,7 +295,7 @@ function Taxi:Initialize()
 	local function UnpackBreadCrumb(data)
 		local steps = GetCreateTable(strsplit("-", data))
 		local pointData
-		for i=2,#steps do
+		for i=2,steps:Length() do
 			if not pointData then
 				pointData = GetCreateTable()
 			end
@@ -370,18 +380,17 @@ function Taxi:Initialize()
 						end
 					end
 					if mZone==m2 and fZone==f2 and not destinationFound then --if we find destination transitions, accept no others
-						while(#(distTable) > 0) do
-							tPool(tremove(distTable))
+						while (distTable:Length() > 0) do
+							tPool(distTable:Remove(1))
 						end
 					end
 					if not contains and (AreOldMapsTheSame(mZone, m2) or not destinationFound) then
-						tinsert(distTable, 
-							GetCreateTable(mZone, fZone,
+                        distTable:Insert(GetCreateTable(mZone, fZone,
 							GetSmallestAngle(m1, f1, x1, y1, mTrans, fTrans, data, m2, f2, x2, y2)))
 					end
 				end
 			end
-			if #(distTable)==0 then
+			if distTable:Length()==0 then
 				tPool(distTable)
 				return
 			end
@@ -389,11 +398,16 @@ function Taxi:Initialize()
 --DGV:DebugFormat("BacktrackCharacterPath", "transKey", transKey, "#distTable", #distTable, "last caller", (...) and (...)..":"..select(2,...), "original caller", (...) and (select(select("#", ...) - 1,...)..":"..(select(select("#", ...),...))) , "num callers", (...) and select("#", ...)/4)
 			local recursiveResult
 			local resultX,resultY,resultBreadCrumb
+            
 			for _,dataTbl in ipairs(distTable) do
-				recursiveResult = GetCreateTable(BacktrackCharacterPath(contData, 
+                local backTrackResult = {BacktrackCharacterPath(contData, 
 					mTrans, fTrans, dataTbl[3], dataTbl[4], 
-					dataTbl[1], dataTbl[2], m2, f2, x2, y2, m1, f1 or 0, mTrans, fTrans or 0, ...))
-				if #(recursiveResult)==0 then
+					dataTbl[1], dataTbl[2], m2, f2, x2, y2, m1, f1 or 0, mTrans, fTrans or 0, ...)}
+				recursiveResult = GetCreateTable(unpack(backTrackResult))
+                    
+                --print(#backTrackResult, "VS", #recursiveResult, "VS", recursiveResult:Length())
+                    
+				if recursiveResult:Length()==0 then
 					tPool(recursiveResult)
 					recursiveResult = nil
 				else
@@ -408,7 +422,7 @@ function Taxi:Initialize()
 			end
 			tPool(distTable)
 			if not recursiveResult then return end
-			if not resultY or #(recursiveResult)<4 then
+			if not resultY or recursiveResult:Length()<4 then
 				tPool(recursiveResult)
 				return
 			end
@@ -824,9 +838,9 @@ function Taxi:Initialize()
 	end
 	
 	local function tInsort(t, item, compareFunc)
-		for i=1,#(t)+1 do
+		for i=1,t:Length()+1 do
 			if not t[i] or (compareFunc and compareFunc(item, t[i])) or (not compareFunc and item<t[i]) then
-				tinsert(t, i, item)
+                t:Insert(item, i)
 				return
 			end
 		end
@@ -924,7 +938,7 @@ function Taxi:Initialize()
 		local head, tail
 		local tailRoutes = wipe(GetCreateTable())
 		local flightSpeed = GetFlightPathMultiplier()*baseSpeed
-		for i=1,#headDistances do
+		for i=1,headDistances:Length() do
 			local startDist = headDistances[i]
 			if allowedHeads>=allowHeadCandidates then
 				break 
@@ -949,7 +963,7 @@ function Taxi:Initialize()
 					local data = t[c][startId]
 					local lastAllowedTail
 					local allowedTails = 0
-					for j=1,#tailDistances do
+					for j=1,tailDistances:Length() do
 						local endDist = tailDistances[j]
 						if allowedTails>=allowTailCandidates then
 							allowedTails = 0
@@ -1142,12 +1156,13 @@ end
 		
 		local route = GetCreateRoute(self, best, parentRoute)
 		route.headId = headId
-		tinsert(route, head)
+        route:Insert(head)
 		--DGV:DebugFormat("FlightMaster:Build add head")
 
 		route.tailId = tonumber(select(select("#",...), ...))
 		npcTbl = fullData[c][route.tailId]
-		tinsert(route, tail)
+        route:Insert(tail)
+
 		--DGV:DebugFormat("FlightMaster:Build add tail")
 		route.tailMap = npcTbl.m
 		--DGV:DebugFormat("FlightMaster:Build", "tail", tail, "best", best)
@@ -1160,7 +1175,7 @@ end
 			if hop then
 				--DGV:DebugFormat("FlightMaster:Build add mid")
 				hop.parentRoute = route
-				tinsert(route, #(route), hop)
+                route:Insert(hop, route:Length())
 				route.estimate = nil
 			end
 			if not hop and IsBest(route) then
@@ -1236,12 +1251,12 @@ end
 		end
 			
 		--headRoute.builder:AddWaypoint(headRoute, chDesc)
-		local lastHopRoute = route[#(route)-1]
+		local lastHopRoute = route[route:Length()-1]
 		local headRouteWaypoint = headRoute.builder:AddWaypoint(headRoute, chDesc)
 		headRouteWaypoint.flightMasterID = route.tailId
 		lastHopRoute.builder:AddWaypoint(lastHopRoute, string.format("%s, %s",
 				DGV:GetFlightMasterName(route.tailId) or "?", mapName or "?"))
-		local tailRoute = route[#(route)]
+		local tailRoute = route[route:Length()]
 		return tailRoute.builder:AddWaypoint(tailRoute, description)
 	end
 
@@ -1393,7 +1408,7 @@ end
 			PoolRoute(route)
 			return
 		else
-			tinsert(route, route.tail)
+            route:Insert(route.tail)
 		end
 		return route
 	end
@@ -1516,7 +1531,7 @@ end
 			PoolRoute(route)
 			return
 		else
-			tinsert(route, route.tail)
+            route:Insert(route.tail)
 		end
 		return route
 	end
@@ -1631,7 +1646,7 @@ end
 			PoolRoute(route)
 			return
 		else
-			tinsert(route, route.tail)
+			route:Insert(route.tail)
 		end
 		return route
 	end
@@ -1698,7 +1713,7 @@ end
 			PoolRoute(route)
 			return
 		else
-			tinsert(route, route.tail)
+			route:Insert(route.tail)
 		end
 		return route
 	end
@@ -1786,7 +1801,7 @@ end
 				PoolRoute(route)
 				return
 			else
-				tinsert(route, route.head)
+                route:Insert(route.head)
 			end
 		end
 			
@@ -1797,7 +1812,7 @@ end
 			RouteBuilders.ZenPilgrimageReturn,
 			RouteBuilders.InstanceExit)
 		if route.tail then
-			tinsert(route, route.tail)
+			route:Insert(route.tail)
 		else
 			PoolRoute(route)
 			return
@@ -1861,7 +1876,7 @@ end
 		route.tail = RouteBuilders.Character:Build(nil, route, 0, m2,fPort,xPort,yPort, m2, f2, x2, y2)
 
 		if route.tail then
-			tinsert(route, route.tail)
+            route:Insert(route.tail)
 		end
 		if not route.tail or not IsBest(route)
 		then
@@ -1876,7 +1891,7 @@ end
 			PoolRoute(route)
 			return
 		else
-			tinsert(route, route.head)
+            route:Insert(route.head)
 		end
 		
 		return route
@@ -1988,7 +2003,7 @@ end
 			RouteBuilders.Boats)
 
 		if route.tail then
-			tinsert(route, route.tail)
+            route:Insert(route.tail)
 		end
 		if not route.tail
 			or not IsBest(route)
@@ -2011,7 +2026,7 @@ end
 			PoolRoute(route)
 			return
 		else
-			tinsert(route, route.head)
+            route:Insert(route.head)
 		end
 		
 		route.spell = tonumber(spellIdString)
@@ -2055,7 +2070,7 @@ end
 			RouteBuilders.Boats)
 
 		if route.tail then
-			tinsert(route, route.tail)
+            route:Insert(route.tail)
 		end
 		if not route.tail
 			or not IsBest(route)
@@ -2071,7 +2086,7 @@ end
 			PoolRoute(route)
 			return
 		else
-			tinsert(route, route.head)
+            route:Insert(route.head)
 		end
 		
 		route.spell = tonumber(spellIdString)
@@ -2205,7 +2220,7 @@ end
 			RouteBuilders.InstanceExit,
 			RouteBuilders.Boats)
 		if route.tail then
-			tinsert(route, route.tail)
+            route:Insert(route.tail)
 		end
 		if not route.tail
 			or not IsBest(route)
@@ -2220,7 +2235,7 @@ end
 			PoolRoute(route)
 			return
 		else
-			tinsert(route, route.head)
+            route:Insert(route.head)
 		end
 		
 		return route

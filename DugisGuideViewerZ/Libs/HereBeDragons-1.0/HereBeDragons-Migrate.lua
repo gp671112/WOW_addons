@@ -512,6 +512,7 @@ MapMigrationData = {
 
 function SetupMigrationData()
     mapFileToIdMap = {}
+    HBDMigrate.mapFileToIdMap = mapFileToIdMap
     for id, t in pairs(MapMigrationData) do
         if t.mapFile then
             mapFileToIdMap[t.mapFile] = id

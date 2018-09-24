@@ -83,4 +83,6 @@ _L["options_toggle_show_debug_desc"] = "顯示除錯資訊";
 _L["options_toggle_hideKnowLoot"] = "隱藏戰利品都已收藏的稀有怪";
 _L["options_toggle_hideKnowLoot_desc"] = "如果稀有怪掉落的所有物品都已經收藏，隱藏這些稀有怪。";
 
+_L["HandyNotesArathi"] = "阿拉希高地寶藏";
+
 end

@@ -148,4 +148,5 @@ _L["options_toggle_hideKnowLoot_desc"] = "Hide all rares for which all loot is k
 _L["Shared"] = "Shared";
 _L["Somewhere"] = "Somewhere";
 
+_L["HandyNotesArathi"] = "HandyNotesArathi";
 end

@@ -264,8 +264,8 @@ function GA:Initialize()
 	        ["WARLOCK:1"] = "ARMOR_SPECIALIZATION_STAT,INT:LE_ITEM_CLASS_WEAPON,6,10,14,15,19:LE_ITEM_CLASS_ARMOR,0,1:XP_BONUS,1000:INT,2.13:SPELL_DMG,0:MASTERY_RATING,1.93:SPELL_HASTE_RATING,1.58:SPELL_CRIT_RATING,1.44:VERSATILITY_RATING,1.35:DPS,0.01:STA,0:AGI,0:AP,0:ARMOR,0.01:AVOIDANCE_RATING,0.03:LEECH_RATING,0.01:STR,0",
 	        ["WARLOCK:2"] = "ARMOR_SPECIALIZATION_STAT,INT:LE_ITEM_CLASS_WEAPON,7,10,14,15,19:LE_ITEM_CLASS_ARMOR,0,1:XP_BONUS,1000:INT,2.11:SPELL_DMG,0:MASTERY_RATING,1.50:SPELL_HASTE_RATING,1.42:SPELL_CRIT_RATING,1.41:VERSATILITY_RATING,1.29:DPS,0.01:STA,0:AGI,0:AP,0:ARMOR,0.01:AVOIDANCE_RATING,0.03:LEECH_RATING,0.01:STR,0",
 	        ["WARLOCK:3"] = "ARMOR_SPECIALIZATION_STAT,INT:LE_ITEM_CLASS_WEAPON,7,10,14,15,19:LE_ITEM_CLASS_ARMOR,0,1:XP_BONUS,1000:INT,19.20:SPELL_DMG,0:SPELL_CRIT_RATING,1.94:SPELL_HASTE_RATING,2.18:MASTERY_RATING,1.95:VERSATILITY_RATING,1.74:DPS,0.01:STA,0:AGI,0:AP,0:ARMOR,0.01:AVOIDANCE_RATING,0.03:LEECH_RATING,0.01:STR,0",
-	        ["DEMONHUNTER:1"] = "ARMOR_SPECIALIZATION_STAT,AGI:LE_ITEM_CLASS_WEAPON,9:LE_ITEM_CLASS_ARMOR,0,1,2:XP_BONUS,1000:DPS,5.49:DPS|MAIN,5.49:DPS|OFF,5.49:AGI,1.78:VERSATILITY_RATING,1.09:MASTERY_RATING,0.95:MELEE_HASTE_RATING,1.08:AP,0.01:MELEE_CRIT_RATING,0.99:STA,0:ARMOR,0.01:AVOIDANCE_RATING,0.02:INT,0:LEECH_RATING,0.01:SPELL_DMG,0:STR,0",				
-	        ["DEMONHUNTER:2"] = "ARMOR_SPECIALIZATION_STAT,AGI:LE_ITEM_CLASS_WEAPON,9:LE_ITEM_CLASS_ARMOR,0,1,2:XP_BONUS,1000:DPS,1.44:DPS|MAIN,1.44:DPS|OFF,1.44:AGI,1.35:VERSATILITY_RATING,1.21:MELEE_HASTE_RATING,1.02:MASTERY_RATING,0.68:MELEE_CRIT_RATING,0.94:AP,0:STA,0.56:ARMOR,0.44:AVOIDANCE_RATING,0.10:INT,0:LEECH_RATING,0.08:SPELL_DMG,0:STR,0",	
+	        ["DEMONHUNTER:1"] = "ARMOR_SPECIALIZATION_STAT,AGI:LE_ITEM_CLASS_WEAPON,0,7,9,13:LE_ITEM_CLASS_ARMOR,0,1,2:XP_BONUS,1000:DPS,5.49:DPS|MAIN,5.49:DPS|OFF,5.49:AGI,1.78:VERSATILITY_RATING,1.09:MASTERY_RATING,0.95:MELEE_HASTE_RATING,1.08:AP,0.01:MELEE_CRIT_RATING,0.99:STA,0:ARMOR,0.01:AVOIDANCE_RATING,0.02:INT,0:LEECH_RATING,0.01:SPELL_DMG,0:STR,0",				
+	        ["DEMONHUNTER:2"] = "ARMOR_SPECIALIZATION_STAT,AGI:LE_ITEM_CLASS_WEAPON,0,7,9,13:LE_ITEM_CLASS_ARMOR,0,1,2:XP_BONUS,1000:DPS,1.44:DPS|MAIN,1.44:DPS|OFF,1.44:AGI,1.35:VERSATILITY_RATING,1.21:MELEE_HASTE_RATING,1.02:MASTERY_RATING,0.68:MELEE_CRIT_RATING,0.94:AP,0:STA,0.56:ARMOR,0.44:AVOIDANCE_RATING,0.10:INT,0:LEECH_RATING,0.08:SPELL_DMG,0:STR,0",	
 
 			["tiebreaker"] = {{"ARMOR",1},{"DPS",1},{"STA",2}}
 		}
@@ -2876,7 +2876,7 @@ function GA:Initialize()
 			local uniqueInventorySlot = GetDefaultUniqueInventorySlot(select(9, GetItemInfo(link)))
 			if uniqueInventorySlot ~= "INVTYPE_TRINKET" or DGV:UserSetting(DGV_SUGGESTTRINKET) then
         
-            LuaUtils:CreateThread("StandardTooltipAdorner", function()
+            --LuaUtils:CreateThread("StandardTooltipAdorner", function() --This makes the tooltip blink
 				local currentWinningItem, currentWinningScore, currentAltWinner, currentAltScore = GetCurrentBestInSlot(uniqueInventorySlot, criterion.specNum, criterion.pvp, nil, ITEM_ITERATOR_SKIP_ALL_EXTERNAL)
 				if not currentWinningItem or currentWinningScore==0 or score==0 then return end
 				local upgrade, upgradeOver, upgradeOverAlt
@@ -2895,7 +2895,7 @@ function GA:Initialize()
 				end
 
                 Repaint(tooltip)                    
-            end)
+            --end)
         end
 	end
 
@@ -3527,7 +3527,7 @@ function GA:Initialize()
 				end
 			end
             
-            if #diff == 0 then
+            if diff:Length() == 0 then
                 GA.isDuringEquippingChain = false
             end
             
@@ -3538,7 +3538,7 @@ function GA:Initialize()
                 end)
             end
             
-			local continue, showPrompt, remaining = nil, showPrompt, #diff
+			local continue, showPrompt, remaining = nil, showPrompt, diff:Length()
 			for _,slot in diff:IPairs() do
 				local itemLink = equipmentSetDataTable[slot]
 				continue, showPrompt, remaining = GA:Equip(slot,itemLink,showPrompt,remaining)
@@ -5760,10 +5760,11 @@ function GA:ImportScoresFromText(text)
         pawn2dugisScoreName_map["Versatility"]       = "VERSATILITY_RATING"
         pawn2dugisScoreName_map["Ap"]                = "AP"
         pawn2dugisScoreName_map["Dps"]               = "DPS and DPS|MAIN and DPS|OFF"
-                
-        
+
         text = string.gsub(text, '^.*\:', '')
         text = string.gsub(text, ' [)]', '')
+        text = string.gsub(text, '[)]', '')
+        
         local scores = LuaUtils:split(text, ",")
         
         local specIndex = tonumber(DugisGuideViewer.Modules.GearAdvisor.selectedSpecIndex)

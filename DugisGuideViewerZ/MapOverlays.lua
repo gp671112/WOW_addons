@@ -4124,9 +4124,9 @@ function MapOverlays:Initialize()
 			
 			if not WorldMapFrame:IsMaximized() then
 				MOD.CoordsFrame.Player:SetPoint("TOPLEFT", WorldMapFrame, "BOTTOMLEFT", 4, -5)
-				MOD.CoordsFrame.Cursor:SetPoint("TOPLEFT", WorldMapFrame, "BOTTOMLEFT", 140, -5)
+				MOD.CoordsFrame.Cursor:SetPoint("TOPLEFT", WorldMapFrame, "BOTTOMLEFT", 150, -5)
 	     	else
-				MOD.CoordsFrame.Player:SetPoint("TOPLEFT", WorldMapFrame, "BOTTOM", -120, -30)
+				MOD.CoordsFrame.Player:SetPoint("TOPLEFT", WorldMapFrame, "BOTTOM", -150, -30)
 				MOD.CoordsFrame.Cursor:SetPoint("TOPLEFT", WorldMapFrame, "BOTTOM", 20, -30)
 			end
             

@@ -8,6 +8,8 @@ end
 local MAJOR, MINOR = "HereBeDragons-2.0-Dugis", 6
 assert(LibStub, MAJOR .. " requires LibStub")
 
+local HBDMigrate = LibStub("HereBeDragons-Migrate-Dugis")
+
 local HereBeDragons, oldversion = LibStub:NewLibrary(MAJOR, MINOR)
 if not HereBeDragons then return end
 
@@ -15,7 +17,10 @@ local CBH = LibStub("CallbackHandler-1.0")
 
 HereBeDragons.eventFrame       = HereBeDragons.eventFrame or CreateFrame("Frame")
 
+--Contains associative table with keys as map name and values as id. Map name is a long name.
+--For example it is Stormwind City instead of StormwindCity
 HereBeDragons.mapName2MapId = {}
+
 HereBeDragons.mapData          = HereBeDragons.mapData or {}
 HereBeDragons.worldMapData     = HereBeDragons.worldMapData or {}
 HereBeDragons.transforms       = HereBeDragons.transforms or {}
@@ -144,6 +149,7 @@ if not oldversion or oldversion < 3 then
 		--excluding maps with undefined type for example scenario
 		if data.mapType ~= Enum.UIMapType.Orphan then
 			HereBeDragons.mapName2MapId[data.name] = id
+            local shortMapName = select(3, HBDMigrate:GetLegacyMapInfo(id))
 		end
     end
 

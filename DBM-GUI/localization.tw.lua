@@ -284,7 +284,7 @@ L.PT_Threshold				= "不要顯示高於%d秒以上的休息/開戰/自訂倒數�
 L.Panel_HideBlizzard		= "禁用及隱藏暴雪功能"
 L.Area_HideBlizzard			= "禁用及隱藏暴雪功能選項"
 L.HideBossEmoteFrame		= "首領戰鬥時隱藏團隊首領表情框架"
-L.HideWatchFrame			= "首領戰鬥時隱藏任務目標框架。如果在挑戰模式中，當框架隱藏會在首領戰鬥中建立一個暫時的獎牌計時器。"
+L.HideWatchFrame			= "首領戰鬥時隱藏任務目標框架。如果沒有追蹤中的成就，或是不在傳奇+。"
 L.HideGarrisonUpdates		= "首領戰鬥時隱藏要塞任務完成提示"
 L.HideGuildChallengeUpdates	= "首領戰鬥時隱藏公會挑戰完成提示"
 L.HideQuestTooltips			= "首領戰鬥時隱藏任務目標提示"
@@ -295,6 +295,11 @@ L.AfterFirst				= "在每次動畫播放一次之後"
 L.Always					= ALWAYS
 L.CombatOnly				= "在任何戰鬥中停用"
 L.RaidCombat				= "只在首領戰鬥中停用"
+L.HideBonusHeader			= "隱藏額外戰利品擲骰視窗在..."
+L.TrivialContent			= "非傳奇地城 (<340)"--Basically anything below 340
+L.NormalRaider				= "傳奇+5以下以及隨機團隊 (<355)"--Basically, anything below 355
+L.HeroicRaider				= "傳奇+10以下以及非英雄團隊副本還有非戰爭前線首領 (<370)"--Basically anything below 370
+L.MythicRaider				= "所有低於傳奇難度副本裝等的 (<385)"--Basically anything below 385
 
 L.Panel_ExtraFeatures		= "額外功能"
 --

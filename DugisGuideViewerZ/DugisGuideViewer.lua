@@ -79,10 +79,10 @@ DugisGuideViewer = {
 	UnregisterEvent = function(self, event, method)
 		local existingRegistration = self.events[event]
 		if existingRegistration and type(existingRegistration)=="table" then
-			assert(#existingRegistration>1)
+			assert(existingRegistration:Length()>1)
 			method = method or event
 			existingRegistration:RemoveFirst(method)
-			if #existingRegistration==1 then
+			if existingRegistration:Length()==1 then
 				self.events[event] = existingRegistration[1]
 				existingRegistration:Pool()
 			end
@@ -712,7 +712,7 @@ local function LoadSettings()
 					[DGV_SHOWTOOLTIP]			= { category = "Tooltip",	text = "Auto Tooltip (%.1fs)", checked = 5, module = "SmallFrame", tooltip ="Amount of time the Tooltip will remain in view from the last mouse over on small frame" },
 					[DGV_MAPPREVIEWDURATION]	= {	category = "Maps",	text = "Duration (%.1fs)", checked = 5, tooltip = "Amount of time the Map Preview should remain in view (zero to disable).  Enabling this feature will automatically set the world map to windowed mode on reload." },
 					[DGV_SMALLFRAMEFONTSIZE]	= {	category = "Display",	text = "Small Frame Font Size (%.1f)", checked = 12, module = "SmallFrame", tooltip = "Size of the font in the Small Frame." },
-					[DGV_MOUNT_DELAY]	= {	category = "Auto Mount",	text = "Delay After Spell (%.1f)", checked = 6, tooltip = "" },
+					[DGV_MOUNT_DELAY]	= {	category = "Auto Mount",	text = "Delay After Spell (%.1f)", checked = 1, tooltip = "" },
                     [DGV_DISPLAYGUIDESPROGRESS] 	= { category = "Display",	text = "Show Progress Bar", 	checked = true,	tooltip = "Show Progress Bar", module = "SmallFrame"},
                     [DGV_DISPLAYGUIDESPROGRESSTEXT] 	= { category = "Display",	text = "Show % text", 	checked = true, indent=true,	tooltip = "Show % text", module = "SmallFrame"},
                     [DGV_TARGETBUTTONSCALE]	    = {	category = "Target",	text = "Target Button Size (%.1f)", checked = 1, module = "Target", tooltip = "Size of the target button." },
@@ -746,7 +746,7 @@ local function LoadSettings()
                     [DGV_JOURNALFRAMEBUTTONSCALE]	    = {	category = "Frames",	text = "NPC Journal Button Size (%.1f)", checked = 4, module = "SmallFrame", tooltip = "Size of the NPC Journal Frame button." },
                     [DGV_SMALLFRAME_STEPS]	    = {	category = "Display",	text = "Maximum Multi Step (%.0f)", checked = 4, module = "SmallFrame", tooltip = "Maximum amout of steps in the Small Frame." },
                     [DGV_GPS_BORDER_OPACITY]	    = {	category = "Dugi Zone Map",	text = "Zone Map Border Opacity (%.1f)", checked = 1, default = 1, tooltip = "" },
-                    [DGV_GPS_MAPS_OPACITY]	    = {	category = "Dugi Zone Map",	text = "Zone Map Opacity (%.1f)", checked = 0.4, default = 0.4, tooltip = "" },
+                    [DGV_GPS_MAPS_OPACITY]	    = {	category = "Dugi Zone Map",	text = "Zone Map Opacity (%.1f)", checked = 0.4, default = 0.3, tooltip = "" },
                     [DGV_GPS_MAPS_SIZE]	    = {	category = "Dugi Zone Map",	text = "Zone Map Size (%.1f)", checked = 5, default = 5, tooltip = "" },
                     [DGV_GPS_ARROW_SIZE]	    = {	category = "Dugi Zone Map",	text = "Character Arrow Size (%.1f)", checked = 2, default = 2, tooltip = "" },
 					[DGV_RECORDSIZE]			= { checked = 500 },

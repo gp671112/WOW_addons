@@ -245,6 +245,8 @@ function DGV:GetMapIDFromName(mapName)
 	end 
 end
 
+
+
 --[[function DGV:InitMapping( )
 	DGV:initAnts()
 	DGV.DugisArrow:initArrow()
@@ -2239,4 +2241,15 @@ end
 function DGV:DungeonUsesTerrainMap_dugi(uiMapID)
     local areaID, floor_ = DGV:UiMapID2OldMapId(uiMapID), DGV:UiMapID2DungeonLevel(uiMapID)
     return DungeonUsesTerrainMap_export[(areaID or 0)..","..(floor_ or 0)]
+end
+
+--Returns new map id.
+function DGV:GetMapIDFromShortName(mapName)
+    local oldMapId = HBDMigrate.mapFileToIdMap[mapName]
+    
+    if not oldMapId then
+        return DGV:GetMapIDFromName(mapName)
+    else
+        return oldMapId2UiMapId[oldMapId]
+    end
 end

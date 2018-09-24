@@ -1355,3 +1355,6 @@ Change Log:
 
 4.46.6
 * Added BFA spells for Uldir
+
+4.46.7
+* Added BFA spells for Uldir

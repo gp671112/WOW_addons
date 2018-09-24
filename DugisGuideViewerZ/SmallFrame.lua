@@ -34,7 +34,7 @@ SmallFrame.collapsed = false
 ---BKG
 SmallFrame.SmallFrameBkg = CreateFrame("Frame", "SmallFrameBkg", UIParent)
 SmallFrameBkg:SetFrameStrata("BACKGROUND")
-SmallFrameBkg:SetFrameLevel(8)
+SmallFrameBkg:SetFrameLevel(6)
 SmallFrameBkg:SetWidth(52)
 SmallFrameBkg:SetHeight(52)
 SmallFrameBkg:SetPoint("CENTER", 0, 220)
@@ -199,6 +199,7 @@ function SmallFrame:Initialize()
 			frame:HookScript("OnDragStop", SmallFrame.OnDragStop)
 		end
 		frame:Show()
+		frame:SetFrameLevel(10)
 		StatusFrame_InitPoints(frame)
 		return frame
 	end

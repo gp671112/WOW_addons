@@ -1,20 +1,21 @@
 ## Interface: 80000
 ## Title: O Item Level|cff00ccff(OiLvL)|r
 ## Author: OlzenKhaw, Teece
-## Version: 8.0.1
+## Version: 8.0.2
 ## Notes: Shows Item Level of raiders in party / raid. Shows Item Level and raid progression on tooltips.
 ## Title-zhTW: |cFF00FF80[資訊]|rO Item Level|cFF00CCFF(OiLvL)|r
 ## Notes-zhTW: 顯示隊伍或團隊成員的裝等，在提示上顯示團隊進度。
 ## SavedVariables: Oilvl_Settings
-## X-Curse-Packaged-Version: v8.0.1 BFA Alpha
+## X-Curse-Packaged-Version: v8.0.2 BFA
 ## X-Curse-Project-Name: O Item Level (OiLvL)
 ## X-Curse-Project-ID: o-item-level
 ## X-Curse-Repository-ID: wow/o-item-level/mainline
 ## OptionalDeps: LibStub, LibUIDropDownMenu
 
+embeds.xml
+
 localization.lua
-libs\LibStub\LibStub.lua
-libs\LibUIDropDownMenu\LibUIDropDownMenu.xml
+
 libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
 libs\AceAddon-3.0\AceAddon-3.0.xml
 libs\AceTimer-3.0\AceTimer-3.0.xml

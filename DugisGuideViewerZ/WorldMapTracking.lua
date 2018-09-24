@@ -1163,7 +1163,7 @@ function WMT:Initialize()
                 mapName = mapName:gsub('[0-9]*', "") 
             end
             
-            mapID = DGV:GetMapIDFromName(nsMapName or mapName)
+            mapID = DGV:GetMapIDFromShortName(nsMapName or mapName)
             level = tonumber(level)
         end
         
@@ -1337,7 +1337,7 @@ function WMT:Initialize()
 		end
 	end
     
-	local function GetNearest(button)
+	function GetNearest(button)
 		local shortest, shortestDist
 		--for _,point in ipairs(trackingPoints) do
 		--	local selected

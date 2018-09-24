@@ -278,7 +278,7 @@ if ( GetLocale() == "zhTW" ) then
 	["Account Wide Achievement"] = "帳號共通成就",
 	["Add minimap tracking icons on the world map."] = "在世界地圖上新增小地圖追蹤圖示。",
 	["Alchemy"] = "煉金術",
-	["All Available Quests"] = "所有可用的任務",
+	["All Available Quests"] = "所有可做的任務",
 	["All Tracked Quests"] = "所有已追蹤的任務",
 	["Allow a fixed Anchored Small Frame that will integrate with the Objective Tracker"] = "允許使用固定錨點小框架，會和任務目標清單整合",
 	["Allow status frame to show all currently relevant quests."] = "允許使用狀態框架，來顯示目前所有相關的任務。",

@@ -97,7 +97,7 @@ do -- enUS / enGB
 	L.Config_WeightEditor_ShowRolesOnlyForOwnSpec_Desc = "Show common and current specialization related specific Role specific powers in the scale weight editor. Enabling this setting e.g. hides healer only specific powers from damagers and tanks etc."
 	L.Config_WeightEditor_ShowZone = "Show Zone specific powers"
 	L.Config_WeightEditor_ShowZone_Desc = "Show Zone specific powers in the scale weight editor. These powers can only appear in items acquired in particular zones related to the power."
-	L.Config_WeightEditor_ShowZone_Desc_Proc = "Normal zone specific powers can activate/proc everywhere, but raid powers will do so only while inside their related raid instance (e.g. Uldir powers will only proc while inside Uldir raid instance).\nRaid powers are marked with an asterisk (*) next to their name in the scale weight editor."
+	L.Config_WeightEditor_ShowZone_Desc_Proc = "Zone specific powers can activate/proc everywhere, but raid powers have secondary effect which will activate only while inside their related raid instance (e.g. Uldir powers secondary effect will only proc while inside Uldir raid instance).\nRaid powers are marked with an asterisk (*) next to their name in the scale weight editor."
 	L.Config_WeightEditor_ShowProfession = "Show Profession specific powers"
 	L.Config_WeightEditor_ShowProfession_Desc = "Show Profession specific powers in the scale weight editor. These powers can only appear in items created with professions. Currently these can only appear in Engineering headgear."
 	L.Config_WeightEditor_ShowPvP = "Show PvP specific powers"
@@ -107,23 +107,41 @@ do -- enUS / enGB
 	L.Config_Score_Title = "Score"
 	L.Config_Score_AddItemLevelToScore = "Add itemlevel to all scores"
 	L.Config_Score_AddItemLevelToScore_Desc = "Add Azerite items itemlevel to all current score, current potential and maximum score calculations."
+	L.Config_Score_ScaleByAzeriteEmpowered = "Scale itemlevel score by the weight of %s in the scale" -- %s Name of Azerite Empowered, returned by _G.GetSpellInfo(263978)
+	L.Config_Score_ScaleByAzeriteEmpowered_Desc = "When adding itemlevel to the scores, use the weight of %s of the scale to calculate value of +1 itemlevel instead of using +1 itemlevel = +1 score." -- %s Name of Azerite Empowered, returned by _G.GetSpellInfo(263978)
+	L.Config_Score_RelativeScore = "Show relative values in tooltips instead of absolute values"
+	L.Config_Score_RelativeScore_Desc = "Instead of showing absolute values of scales in tooltips, calculate the relative value compared to currently equiped items and show them in percentages."
+	L.Config_Score_ShowOnlyUpgrades = "Show tooltips only for upgrades"
+	L.Config_Score_ShowOnlyUpgrades_Desc = "Show scales values in tooltips only if it is an upgrade compared to currently equiped item. This works only with relative values enabled."
 
 	L.Slash_Command = "/azerite" -- If you need localized slash-command, this doesn't replace the existing /azerite
 	L.Slash_RemindConfig = "Check ESC -> Interface -> AddOns -> %s for settings." -- %s = ADDON_NAME
 	L.Slash_Error_Unkown = "ERROR: Something went wrong!"
 end
 
-if LOCALE == "zhCN" then -- plok245 (43), riggzh (34)
-L["Config_Importing_ImportingCanUpdate"] = "导入可以更新现有配置"
-L["Config_Importing_ImportingCanUpdate_Desc"] = "当导入配置名称相同并且职业专精一致时，将更新现有配置，而不是建立新配置。"
+if LOCALE == "zhCN" then -- plok245 (41), riggzh (36)
+L["Config_Importing_ImportingCanUpdate"] = "导入覆盖现有配置"
+L["Config_Importing_ImportingCanUpdate_Desc"] = "当导入配置名称相同并且职业专精一致时，将覆盖现有配置，而不是建立新配置。"
 L["Config_Importing_ImportingCanUpdate_Desc_Clarification"] = "可以有多个同名配置，只要它们用于不同的专精或职业。"
-L["Config_Importing_Title"] = "导入中"
+L["Config_Importing_Title"] = "导入"
 L["Config_Scales_Desc"] = "以下设置仅影响默认配置。所有自定义配置将在每个职业显示。"
 L["Config_Scales_OwnClassDefaultsOnly"] = "只显示自己职业的默认配置"
 L["Config_Scales_OwnClassDefaultsOnly_Desc"] = "只显示你自己职业的默认配置，而不是显示所有的默认配置。"
 L["Config_Scales_Title"] = "配置列表"
 L["Config_Score_AddItemLevelToScore"] = "将物品等级添加到所有分数中"
 L["Config_Score_AddItemLevelToScore_Desc"] = "将艾泽里特护甲的物品等级添加到当前分数，当前可选最高分数，最大分数的计算中。"
+--[[Translation missing --]]
+--[[ L["Config_Score_RelativeScore"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["Config_Score_RelativeScore_Desc"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["Config_Score_ScaleByAzeriteEmpowered"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["Config_Score_ScaleByAzeriteEmpowered_Desc"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["Config_Score_ShowOnlyUpgrades"] = ""--]] 
+--[[Translation missing --]]
+--[[ L["Config_Score_ShowOnlyUpgrades_Desc"] = ""--]] 
 L["Config_Score_Title"] = "分数"
 L["Config_SettingsSavedPerChar"] = [=[这里的所有设置都是每个角色分开保存。
 自定义配置则为所有角色共享。]=]
@@ -204,7 +222,7 @@ L["WeightEditor_TooltipText"] = "在鼠标提示中显示"
 L["WeightEditor_VersionText"] = "版本 %s"
 
 
-elseif LOCALE == "zhTW" then -- BNSSNB (76), Sinusquell (1)
+elseif LOCALE == "zhTW" then -- BNSSNB (82), Sinusquell (1)
 L["Config_Importing_ImportingCanUpdate"] = "導入可以更新現有比重"
 L["Config_Importing_ImportingCanUpdate_Desc"] = "當導入具有相同名稱，職業和專精的比重作為預先存在的比重時，現有比重將使用新權值更新，而不是建立新比重。"
 L["Config_Importing_ImportingCanUpdate_Desc_Clarification"] = "可以有多個具有相同名稱的比重，只要它們用於不同的專精或職業。"
@@ -215,6 +233,12 @@ L["Config_Scales_OwnClassDefaultsOnly_Desc"] = "只列出你自己職業的預�
 L["Config_Scales_Title"] = "比重清單"
 L["Config_Score_AddItemLevelToScore"] = "添加物品等級到所有分數"
 L["Config_Score_AddItemLevelToScore_Desc"] = "添加艾澤萊護甲的物品等級到所有當前分數，當前潛力與最高分數計算。"
+L["Config_Score_RelativeScore"] = "在工具提示中顯示相對值而不是絕對值"
+L["Config_Score_RelativeScore_Desc"] = "不是在工具提示中顯示比重的絕對值，而是計算與當前裝備物品相比的相對值，並以百分比顯示差異。"
+L["Config_Score_ScaleByAzeriteEmpowered"] = "按比重中的％s權值縮放物品等級計分"
+L["Config_Score_ScaleByAzeriteEmpowered_Desc"] = "將物品等級計入到分數時，使用比重的％s的權值來計算+1物品等級的值，而不是使用+1物品等級 = +1分數。"
+L["Config_Score_ShowOnlyUpgrades"] = "只顯示有升級的工具提示"
+L["Config_Score_ShowOnlyUpgrades_Desc"] = "只有在與當前裝備的物品相比是升級時，才顯示工具提示中的比重值。 這僅適用於啟用了相對值。"
 L["Config_Score_Title"] = "分數"
 L["Config_SettingsSavedPerChar"] = [=[這裡所有設置都是每個角色分開儲存。
 自訂比重則為所有角色共享。]=]

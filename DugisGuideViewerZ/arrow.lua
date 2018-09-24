@@ -590,14 +590,14 @@ function DugisArrow:Initialize()
 	local recalculationQueue, recalculationPoints
 	local function InterruptRecalculation()
 		if recalculationQueue then
-			while #recalculationQueue>0 do
+			while recalculationQueue:Length()>0 do
 				recalculationQueue:Remove(1):Pool()
 			end
 			recalculationQueue:Pool()
 			recalculationQueue = nil
 		end
 		if recalculationPoints then
-			while #recalculationPoints>0 do
+			while recalculationPoints:Length()>0 do
 				recalculationPoints:Remove(1):Pool()
 			end
 			recalculationPoints:Pool()
@@ -1737,7 +1737,7 @@ function DugisArrow:Initialize()
 	local function InterruptSetSmartWaypoint()
 		InterruptAutoroutine("SetSmartWaypoint")
 		if not waypointInfoQueue then return end
-		while #waypointInfoQueue>0 do
+		while waypointInfoQueue:Length()>0 do
 			waypointInfoQueue:Remove(1):Pool()
 		end
 		waypointInfoQueue:Pool()
@@ -1770,14 +1770,14 @@ function DugisArrow:Initialize()
 	
 	SetQueuedWaypointInfo = function()
 		if waypointInfoQueue then
-			while #waypointInfoQueue>0 do
+			while waypointInfoQueue:Length()>0 do
 				local info = waypointInfoQueue:Remove(1)
 				local complete = SetWaypointInfo(info:Pool())
 				if not complete then
 					break
 				end
 			end
-			if #waypointInfoQueue==0 then
+			if waypointInfoQueue:Length()==0 then
 				waypointInfoQueue:Pool()
 				waypointInfoQueue = nil
 			end
@@ -2609,7 +2609,7 @@ function DugisArrow:Initialize()
 			if not recalculationPoints or not DugisArrow.waypoints then 
 				return 
 			end
-			local diffDetected = #recalculationPoints~=#DugisArrow.waypoints
+			local diffDetected = recalculationPoints:Length()~=#DugisArrow.waypoints
 			if not diffDetected then
 				for index, diff in recalculationPoints:IPairs() do
 					local live = DugisArrow.waypoints[index]
@@ -2630,12 +2630,12 @@ function DugisArrow:Initialize()
 				while #DugisArrow.waypoints>0 do
 					RemoveWaypointAt(1)
 				end
-				while #recalculationPoints>0 do
+				while recalculationPoints:Length()>0 do
 					PlaceWaypoint(recalculationPoints:Remove(1))
 				end
 				DugisArrow:WaypointsChanged()
 			else
-				while #recalculationPoints>0 do
+				while recalculationPoints:Length()>0 do
 					tPool(recalculationPoints:Remove(1))
 				end
 			end

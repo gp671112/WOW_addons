@@ -1,3 +1,19 @@
+### 8.0.22
+
+- Fix visibility of Weight Editor when using addon "Aurora"
+- Updating Russian translations
+
+### 8.0.21
+
+- Updated Default-scales because Blizzard has done some balancing on Azerite powers.
+- Updating Traditional Chinese translations
+
+### 8.0.20
+
+- Added legend for "Current score / Current potential / Maximum score" for the tooltips. This can be disabled in the config.
+- Added also short explanation of different scores to the config.
+- Updating Simplified Chinese translations
+
 ### 8.0.19
 
 - Updating Russian translations

@@ -1,0 +1,37 @@
+## Interface: 80000
+## Title: PersoLootRoll
+## Notes: A loot roll addon for personal loot.
+## Notes-zhTW: 一個用於個人拾取的戰利品分配插件。
+## Version: 15.02
+## SavedVariables: PersoLootRollDB, PersoLootRollIconDB, PersoLootRollML, PersoLootRollDebug
+
+# Libs
+Libs\libs.xml
+
+# Initialization
+Init.lua
+
+# Util, Locale
+Util\Util.lua
+Util\Unit.lua
+Util\Locale.lua
+Locale\enUS.lua
+Locale\zhCN.lua
+Locale\zhTW.lua
+Util\Comm.lua
+Util\Item.lua
+
+# Data
+Data\Items.lua
+Data\Instances.lua
+
+# Application logic
+Addon.lua
+Session.lua
+Roll.lua
+Trade.lua
+Inspect.lua
+GUI\GUI.xml
+Events.lua
+Hooks.lua
+Options.lua

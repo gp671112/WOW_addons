@@ -530,11 +530,11 @@ OUT:  None
 local function Set_Timers(reset) 
 	-- Titan is loaded so set the timers we want to use
 	TitanTimers = {
-		["EnterWorld"] = {obj = "PEW", callback = TitanAdjustBottomFrames, delay = 4,},
-		["DualSpec"] = {obj = "SpecSwitch", callback = Titan_ManageFramesNew, delay = 2,},
+		["EnterWorld"] = {obj = "PEW", callback = TitanPanel_AdjustFrames, delay = 4,},
+		["DualSpec"] = {obj = "SpecSwitch", callback = TitanPanel_AdjustFrames, delay = 2,},
 		["LDBRefresh"] = {obj = "LDB", callback = TitanLDBRefreshButton, delay = 2,},
-		["Adjust"] = {obj = "MoveAdj", callback = Titan_ManageFramesNew, delay = 1,},
-		["Vehicle"] = {obj = "Vehicle", callback = Titan_ManageFramesNew, delay = 1,},
+		["Adjust"] = {obj = "MoveAdj", callback = TitanPanel_AdjustFrames, delay = 1,},
+		["Vehicle"] = {obj = "Vehicle", callback = TitanPanel_AdjustFrames, delay = 1,},
 	}
 	
 	if reset then

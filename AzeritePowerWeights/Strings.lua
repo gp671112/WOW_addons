@@ -74,7 +74,10 @@ do -- enUS / enGB
 
 	L.PowersScoreString = "Current score: %1$s/%2$s\nMaximum score: %3$s\nAzerite level: %4$d/%5$d" -- %1$s = currentScore, %2$s = currentPotential, %3$s = maximumScore, %4$d = currentLevel, %5$d = maxLevel
 	L.ItemToolTip_AzeriteLevel = "Azerite level: %1$d / %2$d" -- %1$d = currentLevel, %2$d = maxLevel
+	L.ItemToolTip_Legend = "Current score / Current potetial / Maximum score"
 
+	L.Config_SettingsAddonExplanation = "This addon calculates \"Current score\", \"Current potetial\" and \"Maximum score\" for Azerite gear based on your selected scale's weights."
+	L.Config_SettingsScoreExplanation = "\"Current score\" is the sum of the currently selected Azerite powers in the item.\n\"Current potetial\" is the sum of the highest weighted Azerite powers from each tier you have access to in the item.\n\"Maximum score\" is the sum of the highest weighted Azerite powers from each tier, including the locked ones, in the item."
 	L.Config_SettingsSavedPerChar = "All these settings here are saved per character.\nCustom scales are shared between all characters."
 
 	L.Config_Scales_Title = "Scales list"
@@ -113,13 +116,15 @@ do -- enUS / enGB
 	L.Config_Score_RelativeScore_Desc = "Instead of showing absolute values of scales in tooltips, calculate the relative value compared to currently equiped items and show them in percentages."
 	L.Config_Score_ShowOnlyUpgrades = "Show tooltips only for upgrades"
 	L.Config_Score_ShowOnlyUpgrades_Desc = "Show scales values in tooltips only if it is an upgrade compared to currently equiped item. This works only with relative values enabled."
+	L.Config_Score_ShowTooltipLegend = "Show legend in tooltips"
+	L.Config_Score_ShowTooltipLegend_Desc = "Show reminder for \"Current score / Current potetial / Maximum score\" in tooltips."
 
 	L.Slash_Command = "/azerite" -- If you need localized slash-command, this doesn't replace the existing /azerite
 	L.Slash_RemindConfig = "Check ESC -> Interface -> AddOns -> %s for settings." -- %s = ADDON_NAME
 	L.Slash_Error_Unkown = "ERROR: Something went wrong!"
 end
 
-if LOCALE == "zhCN" then -- plok245 (41), riggzh (36)
+if LOCALE == "zhCN" then -- plok245 (47), riggzh (36)
 L["Config_Importing_ImportingCanUpdate"] = "导入覆盖现有配置"
 L["Config_Importing_ImportingCanUpdate_Desc"] = "当导入配置名称相同并且职业专精一致时，将覆盖现有配置，而不是建立新配置。"
 L["Config_Importing_ImportingCanUpdate_Desc_Clarification"] = "可以有多个同名配置，只要它们用于不同的专精或职业。"
@@ -130,21 +135,23 @@ L["Config_Scales_OwnClassDefaultsOnly_Desc"] = "只显示你自己职业的默�
 L["Config_Scales_Title"] = "配置列表"
 L["Config_Score_AddItemLevelToScore"] = "将物品等级添加到所有分数中"
 L["Config_Score_AddItemLevelToScore_Desc"] = "将艾泽里特护甲的物品等级添加到当前分数，当前可选最高分数，最大分数的计算中。"
+L["Config_Score_RelativeScore"] = "在鼠标提示中显示相对值而不是绝对值"
+L["Config_Score_RelativeScore_Desc"] = "不在鼠标提示中显示权重的绝对值，而是计算与当前装备相比的相对值，并以百分比显示。"
+L["Config_Score_ScaleByAzeriteEmpowered"] = "按％s的权重计算物品等级分数"
+L["Config_Score_ScaleByAzeriteEmpowered_Desc"] = "将物品等级添加到分数中时，使用％s的权值来计算+1物品等级的分数，而不是使用+1物品等級 = +1分数。"
+L["Config_Score_ShowOnlyUpgrades"] = "只显示有提升的鼠标提示"
+L["Config_Score_ShowOnlyUpgrades_Desc"] = "只有在与当前装备的物品相比有提升时，才显示鼠标提示中的权值。 仅适用于启用了相对值。"
 --[[Translation missing --]]
---[[ L["Config_Score_RelativeScore"] = ""--]] 
+--[[ L["Config_Score_ShowTooltipLegend"] = ""--]] 
 --[[Translation missing --]]
---[[ L["Config_Score_RelativeScore_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_Score_ScaleByAzeriteEmpowered"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_Score_ScaleByAzeriteEmpowered_Desc"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_Score_ShowOnlyUpgrades"] = ""--]] 
---[[Translation missing --]]
---[[ L["Config_Score_ShowOnlyUpgrades_Desc"] = ""--]] 
+--[[ L["Config_Score_ShowTooltipLegend_Desc"] = ""--]] 
 L["Config_Score_Title"] = "分数"
+--[[Translation missing --]]
+--[[ L["Config_SettingsAddonExplanation"] = ""--]] 
 L["Config_SettingsSavedPerChar"] = [=[这里的所有设置都是每个角色分开保存。
 自定义配置则为所有角色共享。]=]
+--[[Translation missing --]]
+--[[ L["Config_SettingsScoreExplanation"] = ""--]] 
 L["Config_WeightEditor_Desc"] = [=[以下设置只适用于显示在配置权重编辑器的特质。
 即使你禁用了它们，如果它们在启用配置中设置了权重，所有的艾泽里特特质仍会计算分数。]=]
 L["Config_WeightEditor_ShowDefensive"] = "显示防御性特质"
@@ -189,6 +196,8 @@ L["ImportPopup_Error_OldStringVersion"] = "错误：\"导入字符串\" -版本�
 L["ImportPopup_Title"] = "导入配置"
 L["ImportPopup_UpdatedScale"] = "更新现有的配置 \"%s\""
 L["ItemToolTip_AzeriteLevel"] = "艾泽里特等级: %1$d / %2$d"
+--[[Translation missing --]]
+--[[ L["ItemToolTip_Legend"] = ""--]] 
 L["PowersScoreString"] = [=[当前分数: %1$s/%2$s
 最大分数: %3$s
 艾泽里特等级: %4$d/%5$d]=]
@@ -222,7 +231,7 @@ L["WeightEditor_TooltipText"] = "在鼠标提示中显示"
 L["WeightEditor_VersionText"] = "版本 %s"
 
 
-elseif LOCALE == "zhTW" then -- BNSSNB (82), Sinusquell (1)
+elseif LOCALE == "zhTW" then -- BNSSNB (87), Sinusquell (1)
 L["Config_Importing_ImportingCanUpdate"] = "導入可以更新現有比重"
 L["Config_Importing_ImportingCanUpdate_Desc"] = "當導入具有相同名稱，職業和專精的比重作為預先存在的比重時，現有比重將使用新權值更新，而不是建立新比重。"
 L["Config_Importing_ImportingCanUpdate_Desc_Clarification"] = "可以有多個具有相同名稱的比重，只要它們用於不同的專精或職業。"
@@ -239,9 +248,15 @@ L["Config_Score_ScaleByAzeriteEmpowered"] = "按比重中的％s權值縮放物�
 L["Config_Score_ScaleByAzeriteEmpowered_Desc"] = "將物品等級計入到分數時，使用比重的％s的權值來計算+1物品等級的值，而不是使用+1物品等級 = +1分數。"
 L["Config_Score_ShowOnlyUpgrades"] = "只顯示有升級的工具提示"
 L["Config_Score_ShowOnlyUpgrades_Desc"] = "只有在與當前裝備的物品相比是升級時，才顯示工具提示中的比重值。 這僅適用於啟用了相對值。"
+L["Config_Score_ShowTooltipLegend"] = "在工具提示中顯示詳細說明"
+L["Config_Score_ShowTooltipLegend_Desc"] = "在工具提示中顯示\"當前分數 / 當前潛力 / 最大分數\"的提醒。"
 L["Config_Score_Title"] = "分數"
+L["Config_SettingsAddonExplanation"] = "此插件根據你選擇的特質比重計算艾澤萊護甲的\"當前分數\"，\"當前潛力\"以及\"最大分數\"。"
 L["Config_SettingsSavedPerChar"] = [=[這裡所有設置都是每個角色分開儲存。
 自訂比重則為所有角色共享。]=]
+L["Config_SettingsScoreExplanation"] = [=["當前分數" 是當前物品所選的艾澤萊晶岩之力分數總計。
+"當前潛力" 是當前物品所可能選擇的最高艾澤萊晶岩之力分數總計。
+"最大分數" 是每個物品中最高比重艾澤萊晶岩之力的總計，包含尚未開鎖的。]=]
 L["Config_WeightEditor_Desc"] = [=[以下設置只適用於顯示在比重權值編輯器的特質。
 即使你停用了它們，如果它們在啟用比重中設置了權值，所有的艾澤萊特質仍會計算分數。]=]
 L["Config_WeightEditor_ShowDefensive"] = "顯示防禦性特質"
@@ -286,6 +301,7 @@ L["ImportPopup_Error_OldStringVersion"] = "錯誤：\"導入字串\" -版本太�
 L["ImportPopup_Title"] = "導入比重"
 L["ImportPopup_UpdatedScale"] = "更新現有的比重 \"%s\""
 L["ItemToolTip_AzeriteLevel"] = "艾澤萊等級: %1$d / %2$d"
+L["ItemToolTip_Legend"] = "當前分數 / 當前潛力 / 最大分數"
 L["PowersScoreString"] = [=[當前分數: %1$d/%2$d
 最大分數: %3$d
 艾澤萊等級: %4$d/%5$d]=]
